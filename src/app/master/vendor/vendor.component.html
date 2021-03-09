@@ -1,0 +1,57 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-1">{{mainservice.title}}</label>
+          <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+  </div>
+  
+  <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+  
+  <app-vendor-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-vendor-header>
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th>CODE</th>
+                <th>NAME</th>
+                <th>FIRM CODE</th>
+                <th>CATEGORY</th>
+                <th>ADDRESS-1</th>
+                <th>STATE</th>
+                <th>COUNTRY</th>      
+                <th>CONTACT</th>
+                <th>TEL</th>
+                <th>FAX</th>          
+                <th>CREATED-BY</th>
+                <th>DATE</th>              
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records$ | async">
+                <td>{{rec.gen_code}}</td>
+                <td>{{rec.gen_short_name}}</td>
+                <td>{{rec.gen_firm_code}}</td>
+                <td>{{rec.gen_type2}}</td>
+                <td>{{rec.gen_address1}}</td>
+                <td>{{rec.gen_state}}</td>
+                <td>{{rec.gen_country_name}}</td>              
+                <td>{{rec.gen_contact}}</td>
+                <td>{{rec.gen_tel}}</td>
+                <td>{{rec.gen_fax}}</td>
+                <td>{{rec.rec_created_by}}</td>
+                <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <br />
+
+ 

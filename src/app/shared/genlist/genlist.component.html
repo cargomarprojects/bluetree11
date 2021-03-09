@@ -1,0 +1,47 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-3"><strong>{{title}}</strong></label>
+    </div>
+</div>
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+<div class="page-body">
+    <div class="row border">
+        <div class="col-md-12  px-0 mx-0">
+            <!-- <div style="height: 400px; overflow-y: scroll;"> -->
+            <div *ngIf="type=='INVOICE-LIST'" class="page-body table-responsive">
+                <table class="table  table-hover table-sm">
+                    <thead class="page-body-thead">
+                        <tr>
+                            <th>INVOICE</th>
+                            <th>DATE</th>
+                            <th>ETA</th>
+                            <th>CUSTOMER</th>
+                            <th class='text-right'>AR</th>
+                            <th class='text-right'>AP</th>
+                            <th class='text-right'>PAID</th>
+                            <th class='text-right'>BALANCE</th>
+                        </tr>
+                    </thead>
+                    <tbody class="page-body-tbody" *ngFor="let rec of InvoiceList">
+                        <tr>
+                            <td class="p-0">{{rec.inv_no}}</td>
+                            <td class="p-0">{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                            <td class="p-0">{{rec.inv_pod_eta | date : gs.FRONTEND_DATEFORMAT}}</td>
+                            <td class="p-0">{{rec.inv_cust_name}}</td>
+                            <td class='text-right'>{{rec.inv_ar_total | number : '1.2-2'}}</td>
+                            <td class='text-right'>{{rec.inv_ap_total | number : '1.2-2'}}</td>
+                            <td class='text-right'>{{rec.inv_paid | number : '1.2-2'}}</td>
+                            <td class='text-right'>{{rec.inv_balance | number : '1.2-2'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- </div> -->
+        </div>
+    </div>
+
+</div>

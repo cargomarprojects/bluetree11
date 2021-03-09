@@ -1,0 +1,109 @@
+<div *ngIf="tab == 'main'">
+
+  <div class="page-header">
+    <div class="col">
+      <label class="mr-1">{{mainservice.title}}</label>
+      <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage$ | async as errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+
+  <acc-payment-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+  </acc-payment-header>
+
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+  <div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>PAYMENT#</th>
+          <th>DOCS</th>
+          <th *ngIf="gs.BRANCH_REGION != 'USA'">RCPT/PMNT</th>
+          <th>DATE</th>
+          <th>CUSTOMER</th>
+          <th>TYPE</th>
+          <th>AR</th>
+          <th>AP</th>
+          <th>BANK</th>
+          <th>AMOUNT</th>
+          <th *ngIf="!gs.IS_SINGLE_CURRENCY" >CHARGES</th>
+          <th *ngIf="!gs.IS_SINGLE_CURRENCY" >EX.DIFF</th>
+          <th>POSTED</th>
+          <th>DEPOSIT#</th>
+          <th>DATE</th>          
+          <th>MODE</th>                    
+          <th>CHECK#</th>                    
+          <th>DATE</th>                    
+          <th *ngIf="gs.RE_PRINT_CHECK == 'Y'" >CHECK PRINT</th>          
+          <th>REMARKS</th>                    
+          <th>CREATED-BY</th>
+          <th>CREATE-DT</th>
+          <th>CLOSED</th>
+          <th>DELETE</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of records$ | async">
+          <td  class='hlink' (click)="Print(rec,'simple')">{{rec.pay_docno}}</td>
+          <td class='hlink' (click)="upload(rec)">{{rec.rec_files_attached_chk}}</td>
+          <td *ngIf="gs.BRANCH_REGION != 'USA'" class='hlink' (click)="Print(rec,'cash')">Print</td>
+          <td>{{rec.pay_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.pay_cust_name}} </td>
+          <td>{{rec.pay_rp}} </td>
+          <td>{{rec.pay_ar_total | number : '1.2-2'}} </td>
+          <td>{{rec.pay_ap_total | number : '1.2-2'}} </td>
+          <td>{{rec.pay_acc_name}} </td>
+          <td>{{rec.pay_diff | number : '1.2-2'}} </td>          
+          <td  *ngIf="!gs.IS_SINGLE_CURRENCY" >{{rec.pay_bank_charges | number : '1.2-2'}} </td>          
+          <td  *ngIf="!gs.IS_SINGLE_CURRENCY" >{{rec.pay_exchange_diff | number : '1.2-2'}} </td>          
+          <td>{{rec.pay_posted}} </td>
+          <td>{{rec.pay_depositno}} </td>
+          <td>{{rec.pay_deposit_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.pay_mode}} </td>
+          <td>{{rec.pay_chqno}} </td>
+          <td>{{rec.pay_chq_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td *ngIf="gs.RE_PRINT_CHECK == 'Y'" class='hlink' (click)="Print(rec,'chq')">Print</td>
+          <td>{{rec.pay_narration}} </td>
+          <td>{{rec.rec_created_by}} </td>
+          <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.rec_closed}} </td>
+          <td *ngIf="mainservice.canDelete" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
+              aria-hidden="true" (click)="mainservice.DeleteRow(rec)"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+</div>
+
+<div *ngIf="tab === 'chq'">
+  <app-report [title]="'Cheque Print'" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid" (callbackevent)="callbackevent($event)"></app-report>
+</div>
+
+<div *ngIf="tab === 'simple'">
+  <app-report [title]="'List'" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid" (callbackevent)="callbackevent($event)"></app-report>
+</div>
+
+<div *ngIf="tab === 'cash'">
+  <app-report [title]="'Cash/Bank Print'" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid" (callbackevent)="callbackevent($event)"></app-report>
+</div>
+
+
+
+<div *ngIf="tab=='attachment'">
+    <app-fileupload [title]="'File Upload Page'" [parentid]="upload_pay_pkid" [subid]="" [type]="'PAYMENT'" [typelist]=""
+        [tablename]="acc_paymenth" [tablepkcolumn]="'pay_pkid'" [refno]="upload_pay_docno" [customername]="" [updatecolumn]="'REC_FILES_ATTACHED_CHK'"
+        [viewonlysource]="" [viewonlyid]="" [filespath]="" [filespath2]="" (callbackevent)="callbackevent($event)">
+    </app-fileupload>
+</div>
+
+
+<br />
+

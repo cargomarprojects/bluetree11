@@ -1,0 +1,48 @@
+<div class="page-list">
+    <div class="page-search">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-6 col-form-label col-form-label-sm">From</label>
+                    <div class="col-6">
+                        <app-date [inputdate]="searchQuery.fromdate" (ValueChanged)="searchQuery.fromdate=$event">
+                        </app-date>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-6 col-form-label col-form-label-sm">To</label>
+                    <div class="col-6">
+                        <app-date [inputdate]="searchQuery.todate" (ValueChanged)="searchQuery.todate=$event">
+                        </app-date>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <!-- <div class="col-6">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchtype">
+                            <option [value]="'Quote To / Quote #'">Quote To / Quote #</option>
+                            <option [value]="'Place Of Delivery'">Place Of Delivery</option>
+                        </select>
+                    </div> -->
+                    <label class="col-6 col-form-label col-form-label-sm">Quote To / Quote #</label>
+                    <div class="col-6">
+                        <input class="form-control form-control-sm" type="text"
+                            [(ngModel)]="searchQuery.searchString" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-6 col-form-label col-form-label-sm"></label>
+                    <div class="col-6">
+                        <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+                        <button (click)="List('PRINT')" *ngIf="mainservice.canPrint" class="btn btn-primary btn-sm">Print</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

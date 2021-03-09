@@ -1,0 +1,174 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-1">{{title}}</label>
+    <button class="btn btn-primary btn-sm mr-1" *ngIf="canAdd" (click)="NewRecord('AR')">Add A/R</button>
+    <button class="btn btn-primary btn-sm mr-1" *ngIf="canAdd" (click)="NewRecord('AP')">Add A/P</button>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    
+  </div>
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{errorMessage}}
+</div>
+
+
+<div class="page-list">
+  <div class="page-search">
+
+    <div class="row">
+
+      <div class="col-md-6 box">
+
+        <div class="col-md-12">
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">REF#</label>
+            <div class="col-3">
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="mbl_refno" />
+            </div>
+
+            <div class="col-3">
+              <input type="checkbox" [(ngModel)]="showdeleted" />
+              <span class="ml-1">Show Deleted</span>
+            </div>
+            <div class="col-3">
+              <button  (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">AR TOTAL</label>
+            <div class="col-3">
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="income" />
+            </div>
+            <label class="col-3 col-form-label col-form-label-sm">AR BALANCE</label>
+            <div class="col-3">
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="ar_bal" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">AP TOTAL</label>
+            <div class="col-3">
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="expense" />
+            </div>
+            <label class="col-3 col-form-label col-form-label-sm">AP BALANCE</label>
+            <div class="col-3">
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="ap_bal" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">REVENUE</label>
+            <div class="col-3">
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="profit" />
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-6 box">
+        <div class="col-md-12">
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">MEMO</label>
+            <div class="col-9">
+              <input class="form-control form-control-sm" type="text" [(ngModel)]="MBL_LOSS_MEMO" maxlength="100" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+              <label class="col-3 col-form-label col-form-label-sm"></label>
+              <div class="col-6">
+                <input type="checkbox" [(ngModel)]="MBL_PROFIT_REQ" />
+                <span  class="ml-1">Profit Requirement Met</span>
+              </div>
+            </div>
+  
+
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm"></label>
+            <div class="col-6">
+              <input type="checkbox" [(ngModel)]="MBL_LOSS_APPROVED" />
+              <span  class="ml-1"> Loss Approved</span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm"></label>
+            <div class="col-6">
+              <button (click)="UpdateStatus()" class="btn btn-primary btn-sm mr-1">Update Status</button>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<div class="page-body table-responsive">
+  <table class="table  table-hover table-sm">
+    <thead class="page-body-thead">
+      <tr>
+        <th>INV.NO</th>
+        <th>INV.DATE</th>
+        <th>CUSTOMER</th>
+        <th>REF#</th>
+        <th>AR/AP</th>
+        <th>AN</th>
+        <th>DELETED</th>
+        <th>HOUSE</th>
+        <th class='text-right'>AR</th>
+        <th class='text-right'>AP</th>
+        <th class='text-right'>PAID</th>
+        <th class='text-right'>BALANCE</th>
+        <th>REMARKS</th>
+        <th>CREATED-BY</th>
+        <th>CREATED-DATE</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody class="page-body-tbody">
+      <tr *ngFor="let rec of records">
+        <td class='hlink'  (click)="edit(rec)">{{rec.inv_no}}</td>
+        <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+        <td>{{rec.inv_cust_name}}</td>
+        <td>{{rec.inv_mbl_refno}}</td>
+        <td>{{rec.inv_arap}}</td>
+        <td>{{rec.inv_arrnotice}}</td>
+        <td>{{rec.rec_deleted}}</td>
+        <td>{{rec.inv_hbl_no}}</td>
+        <td class='text-right'>{{rec.inv_ar_total | number : '1.2-2'}}</td>
+        <td class='text-right'>{{rec.inv_ap_total | number : '1.2-2'}}</td>
+        <td class='text-right'>{{rec.inv_paid | number : '1.2-2'}}</td>
+        <td class='text-right'>{{rec.inv_balance | number : '1.2-2'}}</td>
+        <td>{{rec.inv_remarks}}</td>
+        <td>{{rec.rec_created_by}}</td>
+        <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+        <td class="p-0">
+          <a class="btn btn-sm" (click)="removeRow(rec)">
+              <i class="fa fa-trash-o"></i>
+          </a>
+      </td>        
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+<br />

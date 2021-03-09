@@ -1,0 +1,136 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">Menu Master ({{mode}})</label>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Module</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.menu_module_id">
+                        <option *ngFor="let rec of modulelist" [value]="rec.pkid">{{rec.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Group</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.menu_group_id">
+                        <option *ngFor="let rec of headinglist" [value]="rec.pkid">{{rec.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Menu</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('menu_name')"
+                        [(ngModel)]="record.menu_name" maxlength="60" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Order</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('menu_order')"
+                        [(ngModel)]="record.menu_order" maxlength="5" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Parameter</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('menu_param')"
+                        [(ngModel)]="record.menu_param" maxlength="60" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Xap Name</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('menu_xap_name')"
+                        [(ngModel)]="record.menu_xap_name" maxlength="60" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Xap Dll</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('menu_xap_dll')"
+                        [(ngModel)]="record.menu_xap_dll" maxlength="60" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Xap Class</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('menu_xap_class')"
+                        [(ngModel)]="record.menu_xap_class" maxlength="60" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Locked</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.menu_locked">
+                        <option [value]="'Y'">YES</option>
+                        <option [value]="'N'">NO</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Hiden</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.menu_hiden">
+                        <option [value]="'Y'">YES</option>
+                        <option [value]="'N'">NO</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Order</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('menu_order')"
+                        [(ngModel)]="record.menu_order" maxlength="10" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+        </div>
+    </div>
+</div>
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

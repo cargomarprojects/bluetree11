@@ -1,0 +1,87 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">A/c Settings ({{mode}})</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Code</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('acc_code')"
+                        [(ngModel)]="record.acc_code" maxlength="15" disabled />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Short Name</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('acc_short_name')"
+                        [(ngModel)]="record.acc_short_name" maxlength="15" disabled />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('acc_name')"
+                        [(ngModel)]="record.acc_name" maxlength="60" disabled />
+                </div>
+            </div>
+
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">AR/AP Code</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.acc_is_arap_code">
+                        <option [value]="'N'">NIL</option>
+                        <option [value]="'R'">AR</option>
+                        <option [value]="'P'">AP</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Show In Payment Screen</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.acc_is_payment_code">
+                        <option [value]="'Y'">YES</option>
+                        <option [value]="'N'">NO</option>
+                    </select>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+        </div>
+    </div>
+</div>
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

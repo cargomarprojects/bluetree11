@@ -1,0 +1,117 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">OBL Release ({{mode}})</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">SL#</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('obl_slno')"
+                        [(ngModel)]="record.obl_slno" maxlength="60" disabled />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Date</label>
+                <div class="col-9">
+                    <app-date [inputdate]="record.obl_date" (ValueChanged)="record.obl_date=$event"></app-date>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Ref#</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('obl_refno')"
+                        [(ngModel)]="record.obl_refno" maxlength="60" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">House</label>
+                <div class="col-9">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.obl_houseno" (change)="onItmChange()" >
+                        <option *ngFor="let rec of HouseList" [value]="rec.obl_houseno">
+                            <ul>
+                                <li> {{rec.obl_houseno}} / </li>
+                                <li> {{rec.obl_consignee_name}} </li>
+                            </ul>
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Consignee</label>
+                <div class="col-9">
+                    <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                        [displaydata]="record.obl_consignee_code" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Name</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('obl_consignee_name')"
+                        [(ngModel)]="record.obl_consignee_name" maxlength="50" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Handled By</label>
+                <div class="col-9">
+                    <app-autocomplete2 [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
+                        [displaycolumn]="'NAME'" [displaydata]="record.obl_handled_name"
+                        (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">REMARK</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('obl_remark')"
+                        [(ngModel)]="record.obl_remark" maxlength="100" />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+        </div>
+
+    </div>
+</div>
+
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm" (click)="Save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

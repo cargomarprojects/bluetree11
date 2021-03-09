@@ -1,0 +1,65 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-1">{{mainservice.title}}</label>
+    <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+  </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+  {{errorMessage}}
+</div>
+
+<app-acopen-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+</app-acopen-header>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive">
+  <table class="table  table-hover table-sm">
+    <thead class="page-body-thead">
+      <tr>
+        <th>REFNO</th>
+        <th>DATE</th>
+        <th>LEDGER.NAME</th>
+        <th>F.AMT</th>
+        <th>CURR.CODE</th>
+        <th>DEBIT</th>
+        <th>CREDIT</th>
+        <th>CUSTOMER</th>
+        <th>INVNO</th>
+        <th>INV.DATE</th>
+        <th>SHPMT.REFNO</th>
+        <th>CUST.REFNO</th>
+        <th>CREATED BY</th>
+        <th>DATE</th>
+        <th>CLOSED</th>
+      </tr>
+    </thead>
+    <tbody class="page-body-tbody">
+      <tr *ngFor="let rec of records$ | async">
+        <td class='hlink' (click)="edit(rec)">{{rec.op_docno}}</td>
+        <td>{{rec.op_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+        <td>{{rec.op_acc_name}}</td>
+        <td>{{rec.op_famt}}</td>
+        <td>{{rec.op_curr_code}}</td>
+        <td>{{rec.op_dr}}</td>
+        <td>{{rec.op_cr}}</td>
+
+        <td>{{rec.op_cust_name}}</td>
+        <td>{{rec.op_invno}}</td>
+        <td>{{rec.op_invdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+        <td>{{rec.op_mbl_refno}}</td>
+        <td>{{rec.op_inv_refno}}</td>
+
+        <td>{{rec.rec_created_by}}</td>
+        <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+        <td>{{rec.rec_closed}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />

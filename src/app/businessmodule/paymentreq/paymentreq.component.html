@@ -1,0 +1,144 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-3">Payment Request</label>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    <label class="text-danger" *ngIf="is_locked">LOCKED</label>
+  </div>
+</div>
+
+<div *ngIf="errorMessage">
+  <div class="alert alert-primary">
+    {{errorMessage}}
+  </div>
+</div>
+
+<div class="page-body">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Ref#</label>
+        <div class="col-10">
+          <InputBox [(inputModel)]="cp_ref_no" [disabled]="true" maxlength="25" #ref_no></InputBox>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="page-body">
+  <div class="row border">
+    <div style="padding-top: 4px;padding-bottom: 4px;" class="col-md-6">
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">RequestType</label>
+        <div class="col-10">
+          <select class="form-control form-control-sm" [(ngModel)]="payrecord.cp_paytype_needed" #paytype_needed>
+            <option [value]="'PAYMENT NEEDED ONLY'">PAYMENT NEEDED ONLY</option>
+            <option [value]="'OMBL NEEDED ONLY'">OMBL NEEDED ONLY</option>
+            <option [value]="'PAYMENT & OMBL NEEDED'">PAYMENT & OMBL NEEDED</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Notes</label>
+        <div class="col-10">
+          <InputBox [(inputModel)]="payrecord.cp_spl_notes" [maxlength]="100" [uppercase]="true" #spl_notes></InputBox>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">A/P.No.</label>
+        <div class="col-10">
+          <div class="page-body table-responsive">
+            <table class="table  table-hover table-sm">
+              <thead class="page-body-thead">
+                <tr>
+                  <th>INVOICE-NO</th>
+                  <th>DATE</th>
+                  <th>CUSTOMER</th>
+                </tr>
+              </thead>
+              <tbody class="page-body-tbody">
+                <tr *ngFor="let rec of invrecords">
+                  <td (click)="SelectInvoice(rec)">
+                    <div style="padding-bottom:2px;" class="form-check">
+                      <input type="checkbox" class="form-check-input" [(ngModel)]="rec.cp_selected">
+                    </div><span class="pl-3">&nbsp;{{rec.cp_inv_no}}</span>
+                  </td>
+                  <td>{{rec.cp_payment_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                  <td>{{rec.cp_cust_name}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- <div class="col-2">
+          <button class="btn btn-primary btn-sm mr-1">Select A/P No.</button>
+        </div>
+        <div class="col-2">
+          <InputBox [(inputModel)]="payrecord.cp_inv_no" [maxlength]="100" [uppercase]="true" #inv_no></InputBox>
+        </div> -->
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">Payee</label>
+        <div class="col-10">
+          <app-autocomplete2 [controlname]="'PAYEE'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+            [displaydata]="payrecord.cp_cust_name" (ValueChanged)="LovSelected($event)">
+          </app-autocomplete2>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm">PaymentDate</label>
+        <div class="col-10">
+          <app-date [inputdate]="payrecord.cp_payment_date" (ValueChanged)="payrecord.cp_payment_date=$event"
+            #payment_date>
+          </app-date>
+        </div>
+        <!-- <div class="col-6">
+          <button class="btn btn-primary btn-sm mr-1"  [disabled]="is_locked" (click)="Save()">Save</button>
+          <button class="btn btn-primary btn-sm mr-1" (click)="NewRecord()">New</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="row border">
+    <div style="padding-top: 4px;padding-bottom: 4px;" class="col-md-6">
+      <div class="form-group row">
+        <label class="col-2 col-form-label col-form-label-sm"></label>
+        <div class="col-10">
+          <button class="btn btn-primary btn-sm mr-1" [disabled]="is_locked" (click)="Save()">Save</button>
+          <button class="btn btn-primary btn-sm mr-1" (click)="NewRecord()">New</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-body">
+  <div class="row">
+    <div class="col-md-12 px-0 mx-0 ">
+      <div class="page-body table-responsive">
+        <table class="table  table-hover table-sm">
+          <thead class="page-body-thead">
+            <tr>
+              <th>REQUEST TYPE</th>
+              <th>PAYMENT-NO</th>
+              <th>PAYMENT-DATE</th>
+              <th>PAYMENT-STATUS</th>
+              <th>NOTES</th>
+              <th style="text-align:center">REMOVE</th>
+            </tr>
+          </thead>
+          <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of payrecords">
+              <td class="hlink" (click)="EditRecord(rec)">{{rec.cp_paytype_needed}}</td>
+              <td>{{rec.cp_inv_no}}</td>
+              <td>{{rec.cp_payment_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+              <td>{{rec.cp_pay_status}}</td>
+              <td>{{rec.cp_spl_notes}}</td>
+              <td align='center'><i class="fa fa-trash  fa-lg pointer" aria-hidden="true" (click)="RemoveRow(rec)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

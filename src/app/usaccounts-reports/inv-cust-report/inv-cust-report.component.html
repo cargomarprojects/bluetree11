@@ -1,0 +1,120 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-1">{{title}}</label>
+        <button class="btn btn-primary btn-sm" (click)="Close()">Return</button>
+        <i *ngIf="loading" class="fa fa-spinner"></i>
+    </div>
+</div>
+
+<div *ngIf="currentTab=='LIST'">
+    <div class="page-list">
+        <div class="page-search">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label col-form-label-sm">Customer</label>
+                        <div class="col-4 pr-2">
+                            <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'"
+                                [displaycolumn]="'CODE'" [displaydata]="cust_code" (ValueChanged)="LovSelected($event)">
+                            </app-autocomplete2>
+                        </div>
+                        <div class="col-6 pl-0">
+                            <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="cust_name" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label col-form-label-sm">Sort</label>
+                        <div class="col-10">
+                            <select class="form-control form-control-sm" [(ngModel)]="sortname">
+                                <option [value]="'inv_no'">INV.NO</option>
+                                <option [value]="'inv_date'">INV.DATE</option>
+                                <option [value]="'inv_mbl_refno'">REFNO</option>
+                                <option [value]="'inv_refno'">CUST REFNO</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group row">
+                        <div class="offset-2 col-8">
+                            <button [disabled]="loading" (click)="List('SCREEN')"
+                                class="btn btn-primary btn-sm mr-1">Search</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label col-form-label-sm">BillingCustomer</label>
+                        <div class="col-4 pr-2">
+                            <app-autocomplete2 [controlname]="'CUSTOMER2'" [tabletype]="'MASTER'"
+                                [displaycolumn]="'CODE'" [displaydata]="billcust_code"
+                                (ValueChanged)="LovSelected($event)">
+                            </app-autocomplete2>
+                        </div>
+                        <div class="col-6 pl-0">
+                            <InputBox [(inputModel)]="billcust_name" [maxlength]="60" [uppercase]="true" #bill_cust>
+                            </InputBox>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-2 col-8">
+                            <button [disabled]="loading" (click)="Update()"
+                                class="btn btn-primary btn-sm mr-1">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <App-Page
+        [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+        (PageEvents)="PageEvents($event)"></App-Page>
+
+    <div class="page-body table-responsive">
+        <table class="table  table-hover table-sm">
+            <thead class="page-body-thead">
+                <tr>
+                    <th>CUSTOMER-CODE</th>
+                    <th>CUSTOMER-NAME</th>
+                    <th (click)="SelectDeselect()">
+                        <div class="form-check"> <input type="checkbox" class="form-check-input"
+                                [(ngModel)]="allchecked"><span>INV.NO</span>
+                        </div>
+                    </th>
+                    <th>INV.DATE</th>
+                    <th>REFNO</th>
+                    <th>CUST REFNO</th>
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+                <tr>
+                    <td>{{rec.inv_cust_code}}</td>
+                    <td>{{rec.inv_cust_name}}</td>
+                    <td class='hlink' (click)="editinvoice(rec)">
+                        <div class="form-check"> <input type="checkbox" class="form-check-input"
+                                [(ngModel)]="rec.inv_flag_b"><span>{{rec.inv_no}}</span>
+                        </div>
+                    </td>
+                    <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                    <td class='hlink' (click)="editmaster(rec)">{{rec.inv_mrefno}}</td>
+                    <td>{{rec.inv_refno}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <App-Page
+        [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+        (PageEvents)="PageEvents($event)"></App-Page>
+
+</div>
+
+<br />
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+</div>

@@ -1,0 +1,159 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">Fund Transfer ({{mode}})</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Ref#</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('pay_docno')"
+                        [(ngModel)]="record.pay_docno" maxlength="60" disabled />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Date</label>
+                <div class="col-9">
+                    <app-date [inputdate]="record.pay_date" (ValueChanged)="record.pay_date=$event"></app-date>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">From A/c</label>
+                <div class="col-9">
+                    <app-autocomplete2 [controlname]="'FROM_ACCTM'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'CODE'"
+                        [where]="where" [displaydata]="record.pay_from_acc_code" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm"></label>
+                <label class="col-9 col-form-label col-form-label-sm">{{record.pay_from_acc_name}}</label>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">To A/c</label>
+                <div class="col-9">
+                    <app-autocomplete2 [controlname]="'TO_ACCTM'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'CODE'"
+                        [where]="where" [displaydata]="record.pay_to_acc_code" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm"></label>
+                <label class="col-9 col-form-label col-form-label-sm">{{record.pay_to_acc_name}}</label>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Amount</label>
+                <div class="col-9">
+                    <InputBoxNumber [(inputModel)]="record.pay_amt" [field]="'pay_amt'" [dec]="decplace" [maxlength]="2"
+                        (blur)="onBlur2($event)"></InputBoxNumber>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Remarks</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('pay_narration')"
+                        [(ngModel)]="record.pay_narration" maxlength="100" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Doc Type</label>
+                <div class="col-9">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.pay_mode">
+                        <option [value]="'CHECK'">CHECK</option>
+                        <option [value]="'WIRE TRANSFER'">WIRE TRANSFER</option>
+                        <option [value]="'CASH'">CASH</option>
+                        <option [value]="'ONLINE/ACH PAYMENT'">ONLINE/ACH PAYMENT</option>
+                        <option [value]="'CREDIT CARD'">CREDIT CARD</option>
+                        <option [value]="'OTHERS'">OTEHRS</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+
+                <div class="col-3">
+                    <button class="btn btn-info btn-sm" (click)="getchqno()">LAST CHK / MEMO NO</button>
+                </div>
+
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('next_chqno')"
+                        [(ngModel)]="next_chqno" maxlength="50" disabled />
+                </div>
+            </div>
+
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Check No</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('pay_chqno')"
+                        [(ngModel)]="record.pay_chqno" maxlength="50" />
+                </div>
+            </div>
+
+            <div *ngIf="showchqdt">
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Check Date</label>
+                    <div class="col-9">
+                        <app-date [inputdate]="record.pay_chq_date" (ValueChanged)="record.pay_chq_date=$event">
+                        </app-date>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Bank</label>
+                    <div class="col-9">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('pay_chq_bank')"
+                            [(ngModel)]="record.pay_chq_bank" maxlength="100" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Memo</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('pay_memo')"
+                        [(ngModel)]="record.pay_memo" maxlength="100" />
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm" (click)="Save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

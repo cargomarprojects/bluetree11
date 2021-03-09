@@ -1,0 +1,69 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-1">{{mainservice.title}}</label>
+        <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button> -->
+        <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd"
+            [routerLink]="['/Silver.AirImport.Trans/AirImpMasterEditPage']"
+            [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid,pkid: '',type: this.mainservice.param_type,origin: 'airimp-master-page',mode: 'ADD'}">New</a>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+
+    </div>
+  </div>
+  
+  <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage$ | async}}
+  </div>
+  
+  <app-airimp-master-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-airimp-master-header>
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th (click)="mainservice.sort('mbl_refno')">REF.NO&nbsp;<i [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
+                <th (click)="mainservice.sort('mbl_ref_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_ref_date')"></i></th>
+                <th (click)="mainservice.sort('mbl_no')">MAWB&nbsp;<i [ngClass]="mainservice.getIcon('mbl_no')"></i></th>
+                <th (click)="mainservice.sort('mbl_agent_name')">AGENT&nbsp;<i [ngClass]="mainservice.getIcon('mbl_agent_name')"></i></th>
+                <th (click)="mainservice.sort('mbl_liner_name')">CARRIER&nbsp;<i [ngClass]="mainservice.getIcon('mbl_liner_name')"></i></th>
+                <th (click)="mainservice.sort('mbl_pol_name')">POL&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_name')"></i></th>              
+                <th (click)="mainservice.sort('mbl_pol_etd')">ETD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_etd')"></i></th>
+                <th (click)="mainservice.sort('mbl_pod_name')">POD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_name')"></i></th>
+                <th (click)="mainservice.sort('mbl_pod_eta')">ETA&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_eta')"></i></th>
+                <th (click)="mainservice.sort('mbl_handled_name')">HANDLED-BY&nbsp;<i [ngClass]="mainservice.getIcon('mbl_handled_name')"></i></th>          
+                <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+                <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>            
+                <th *ngIf="mainservice.canDelete" class='text-center'>DELETE</th>          
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+                <td *ngIf="!this.mainservice.canEdit" >{{rec.mbl_refno}}</td>
+                <td *ngIf="this.mainservice.canEdit">
+                  <a class='hlink' [routerLink]="['/Silver.AirImport.Trans/AirImpMasterEditPage']"
+                  [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.mbl_pkid,type: '',origin: 'airimp-master-page',mode: 'EDIT'}">{{rec.mbl_refno}}</a>
+                </td>
+                <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.mbl_no}}</td>
+                <td>{{rec.mbl_agent_name}}</td>
+                <td>{{rec.mbl_liner_name}}</td>
+                <td>{{rec.mbl_pol_name}}</td>              
+                <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.mbl_pod_name}}</td>
+                <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.mbl_handled_name}}</td>
+                <td>{{rec.rec_created_by}}</td>
+                <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td *ngIf="mainservice.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                  (click)="mainservice.DeleteRow(rec)"></i></td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <br />
+  
+  

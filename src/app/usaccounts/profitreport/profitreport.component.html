@@ -1,0 +1,172 @@
+<div *ngIf="tab == 'main'">
+
+  <div class="page-header">
+    <div class="col">
+      <label class="mr-1">{{title}}</label>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+      <i *ngIf="loading" class="fa fa-spinner"></i>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+
+
+  <div class="page-list">
+    <div class="page-search">
+
+      <div class="row">
+
+        <div class="col-md-4 box">
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">REF#</label>
+            <div class="col-9">
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="refno" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">MASTER#</label>
+            <div class="col-9">
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="mblno" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">POL</label>
+            <div class="col-9">
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="pol" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">POD</label>
+            <div class="col-9">
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="pod" />
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="col-md-4 box">
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">WT</label>
+            <div class="col-9">
+              <input disabled class="form-control form-control-sm" type="text" [(ngModel)]="WT" maxlength="100" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">CH.WT</label>
+            <div class="col-9">
+              <input disabled class="form-control form-control-sm" type="text" [(ngModel)]="CHWT" maxlength="100" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">CBM</label>
+            <div class="col-9">
+              <input disabled class="form-control form-control-sm" type="text" [(ngModel)]="CBM" maxlength="100" />
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="col-md-2 box">
+          
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm">TYPE</label>
+            <div class="col-9">
+              <select class="form-control form-control-sm" [(ngModel)]="main_type">
+                <option [value]="'INVOICE'">INVOICE WISE</option>
+                <option [value]="'HOUSE'">HOUSE WISE</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row" *ngIf="main_type=='HOUSE'">
+            <label class="col-3 col-form-label col-form-label-sm"></label>
+            
+            <div class="col-4">
+              <input type="radio" [(ngModel)]="radio_cbm" [value] = "'CBM'" />
+              <span>CBM</span> 
+            </div>
+            <div class="col-4">
+              <input type="radio" [(ngModel)]="radio_cbm" [value] = "'WEIGHT'" />
+              <span>WEIGHT</span> 
+            </div>
+
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label col-form-label-sm"></label>
+            <div class="col-9">
+              <button [disabled]="loading" (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+              <button *ngIf="gs.canPrint(menuid)" [disabled]="loading" (click)="Print()" class="btn btn-primary btn-sm mr-1">Print</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>INV.DATE</th>
+          <th>INV.NO</th>
+          <th>REF#</th>
+          <th>HOUSE</th>
+          <th class='text-right'>WT</th>
+          <th class='text-right'>CBM/CHWT</th>
+          <th>CUSTOMER</th>
+          <th class='text-right'>REVENUE</th>
+          <th class='text-right'>EXPENSE</th>
+          <th class='text-right'>PROFIT</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody" *ngFor="let rec of records">
+        <tr [style.color]="rec.inv_cust_name=='TOTAL'?'Red':'Black'"
+        [style.font-weight]="rec.inv_cust_name=='TOTAL' ?'bold':'normal'" >
+          <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.inv_no}}</td>
+          <td>{{rec.inv_mbl_refno}}</td>
+          <td>{{rec.inv_hbl_no}}</td>
+          <td class='text-right'>{{rec.inv_wt | number : '1.2-3'}}</td>
+          <td class='text-right'>{{rec.inv_cbm | number : '1.2-3'}}</td>
+          <td>{{rec.inv_cust_name}}</td>
+          <td class='text-right'>{{rec.inv_inc_total | number : '1.2-2'}}</td>
+          <td class='text-right'>{{rec.inv_exp_total | number : '1.2-2'}}</td>
+          <td class='text-right'>{{rec.inv_revenue | number : '1.2-2'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+<div *ngIf="tab == 'report'">
+  <app-report 
+  [title]="'Ocean Export Booking'" 
+  [url]="" 
+  [searchdata]=""
+  [menuid]="report_menuid" 
+  [filename]="filename"
+  [filetype]="filetype"
+  [filedisplayname]="filedisplayname"
+  [filename2]="filename2"
+  [filetype2]="filetype2"
+  [filedisplayname2]="filedisplayname2"
+  (callbackevent)="callbackevent($event)"></app-report>
+</div>

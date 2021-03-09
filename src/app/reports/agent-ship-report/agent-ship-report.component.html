@@ -1,0 +1,166 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-1">{{title}}</label>
+    <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+    <i *ngIf="loading" class="fa fa-spinner"></i>
+  </div>
+</div>
+
+<div *ngIf="currentTab=='LIST'">
+
+  <div class="page-list">
+    <div class="page-search">
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">From</label>
+            <div class="col-8">
+              <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event"></app-date>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">To</label>
+            <div class="col-8">
+              <app-date [inputdate]="edate" (ValueChanged)="edate=$event"></app-date>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Group</label>
+            <div class="col-8">
+              <select class="form-control form-control-sm" [(ngModel)]="mode">
+                <option [value]="'OCEAN EXPORT'">OCEAN EXPORT</option>
+                <option [value]="'OCEAN IMPORT'">OCEAN IMPORT</option>
+                <option [value]="'AIR EXPORT'">AIR EXPORT</option>
+                <option [value]="'AIR IMPORT'">AIR IMPORT</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Branch</label>
+            <div class="col-8">
+              <select class="form-control form-control-sm" [(ngModel)]="comp_type">
+                <option *ngFor="let rec of gs.CompanyList" [value]="rec.comp_code">{{rec.comp_name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Parent</label>
+            <div class="col-8">
+              <app-autocomplete2 [controlname]="'PARENT'" [tabletype]="'OVERSEAAGENT'" [displaycolumn]="'NAME'"
+                [displaydata]="cust_parent_name" (ValueChanged)="LovSelected($event)">
+              </app-autocomplete2>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Agent</label>
+            <div class="col-8">
+              <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                [displaydata]="cust_name" (ValueChanged)="LovSelected($event)">
+              </app-autocomplete2>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Shipper</label>
+            <div class="col-8">
+              <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                [displaydata]="shipper_name" (ValueChanged)="LovSelected($event)">
+              </app-autocomplete2>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Consignee</label>
+            <div class="col-8">
+              <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                [displaydata]="consignee_name" (ValueChanged)="LovSelected($event)">
+              </app-autocomplete2>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm"></label>
+            <div class="col-8">
+              <button [disabled]="loading" (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+              <button [disabled]="loading" (click)="Print()" class="btn btn-primary btn-sm">Excel</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <App-Page [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+    (PageEvents)="PageEvents($event)"></App-Page>
+
+  <div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>REFNO</th>
+          <th>REF-DATE</th>
+          <th>SHIPPER</th>
+          <th>CONSIGNEE</th>
+          <th>VESSEL</th>
+          <th>VOYAGE</th>
+          <th>POL</th>
+          <th>POD</th>
+          <th>ETD</th>
+          <th>ETA</th>
+          <th>VOL.</th>
+          <th>CARRIER</th>
+          <th>MBL#</th>
+          <th>CNTR#</th>
+          <th>SEAL</th>
+          <th>HBL#</th>
+          <th>DISCHARGE</th>
+          <th>CUSTOM.CLR</th>
+          <th>PICKUP</th>
+          <th>EMPTY.RET</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+        <tr>
+          <td>{{rec.mbl_refno}}</td>
+          <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.hbl_shipper_name}}</td>
+          <td>{{rec.hbl_consignee_name}}</td>
+          <td>{{rec.mbl_vessel}}</td>
+          <td>{{rec.mbl_voyage}}</td>
+          <td>{{rec.mbl_pol_code}}</td>
+          <td>{{rec.mbl_pod_code}}</td>
+          <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.mbl_cntr_type}}</td>
+          <td>{{rec.mbl_liner_name}}</td>
+          <td>{{rec.mbl_no}}</td>
+          <td>{{rec.mbl_cntr_no}}</td>
+          <td>{{rec.mbl_cntr_seal}}</td>
+          <td>{{rec.hbl_houseno}}</td>
+          <td>{{rec.mbl_cntr_discharge_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.hbl_custom_clear_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.mbl_cntr_pick_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.mbl_cntr_return_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <App-Page [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+    (PageEvents)="PageEvents($event)"></App-Page>
+
+
+</div>
+
+<br />
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{errorMessage}}
+</div>

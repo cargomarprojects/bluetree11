@@ -1,0 +1,48 @@
+<div *ngIf="tab == 'main'">
+<div class="page-header">
+    <div class="col">
+        <label class="mr-1">{{title}}</label>
+        <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button> -->
+        <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" [routerLink]="getRouteDet('L','ADD')" [queryParams]="getRouteDet('P','ADD')">New</a>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Close</button>
+        <!-- <i *ngIf="loading" class="fa fa-spinner"></i> -->
+    </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage$ | async}}
+</div>
+
+<app-param-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-param-header>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th>CODE</th>
+                <th>NAME</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of data$ | async">
+                <!-- <td class='hlink'  (click)="edit(rec)" >{{rec.param_code}}</td> -->
+                <td *ngIf="!gs.canEdit(menuid)" >{{rec.param_code}}</td>
+                <td *ngIf="gs.canEdit(menuid)" >
+                    <a class="hlink" [routerLink]="getRouteDet('L','EDIT',rec)" [queryParams]="getRouteDet('P','EDIT',rec)">{{rec.param_code}}</a> 
+                </td>
+                <td >{{rec.param_name1}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />
+</div>
+<div *ngIf="tab == 'report'">
+    <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"  
+        (callbackevent)="callbackevent($event)"></app-report>
+</div>

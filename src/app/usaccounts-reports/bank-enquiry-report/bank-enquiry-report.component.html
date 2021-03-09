@@ -1,0 +1,124 @@
+<div *ngIf="tab == 'main'">
+    <div class="page-header">
+        <div class="col">
+            <label class="mr-1">{{title}}</label>
+            <button class="btn btn-primary btn-sm" (click)="Close()">Return</button>
+            <i *ngIf="loading" class="fa fa-spinner"></i>
+        </div>
+    </div>
+
+    <div *ngIf="currentTab=='LIST'">
+
+        <div class="page-list">
+            <div class="page-search">
+
+                <div class="row">
+                    <div class="col-md-3">
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">From</label>
+                            <div class="col-8">
+                                <app-date [inputdate]="fdate" (ValueChanged)="fdate=$event"></app-date>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">To</label>
+                            <div class="col-8">
+                                <app-date [inputdate]="edate" (ValueChanged)="edate=$event"></app-date>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Branch</label>
+                            <div class="col-8">
+                                <select class="form-control form-control-sm" [(ngModel)]="comp_code">
+                                    <option *ngFor="let rec of CompList" [value]="rec.comp_code">{{rec.comp_name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Code</label>
+                            <div class="col-8">
+                                <app-autocomplete2 [controlname]="'ACCTM'" [tabletype]="'ACC_ACCTM'"
+                                    [displaycolumn]="'NAME'" [displaydata]="bank_name" [where]="lov_where"  [branchcode]="comp_code"
+                                    (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <!-- <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm"></label>
+                            <div class="col-8">
+                            </div>
+                        </div> -->
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm"></label>
+                            <div class="col-8">
+                                <button [disabled]="loading" (click)="List('SCREEN')"
+                                    class="btn btn-primary btn-sm mr-1">Search</button>
+                                <button [disabled]="loading" (click)="Print()"
+                                    class="btn btn-primary btn-sm">Print</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <App-Page
+            [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+            (PageEvents)="PageEvents($event)"></App-Page>
+
+        <div class="page-body table-responsive">
+            <table class="table  table-hover table-sm">
+                <thead class="page-body-thead">
+                    <tr>
+                        <th>PAY/DEP NO</th>
+                        <th>PARTY</th>
+                        <th>MEMO</th>
+                        <th>DATE</th>
+                        <th>CHECKNO</th>
+                        <th style="text-align:right">RECD</th>
+                        <th style="text-align:right">PAID</th>
+                        <th style="text-align:right">BALANCE</th>
+                    </tr>
+                </thead>
+                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+                    <tr [style.color]="rec.pay_cust_name=='BALANCE'?'Red':'Black'"
+                    [style.font-weight]="rec.pay_cust_name=='BALANCE' ?'bold':'normal'">
+                        <td class='hlink' (click)="PrintPayment(rec)">{{rec.pay_docno}}</td>
+                        <td>{{rec.pay_cust_name}}</td>
+                        <td>{{rec.pay_acc_name}}</td>
+                        <td>{{rec.pay_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <td>{{rec.pay_chqno}}</td>
+                        <td style="text-align:right">{{rec.pay_ar_total | number : '1.2-2'}}</td>
+                        <td style="text-align:right">{{rec.pay_ap_total | number : '1.2-2'}}</td>
+                        <td style="text-align:right">{{rec.pay_diff | number : '1.2-2'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <App-Page
+            [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+            (PageEvents)="PageEvents($event)"></App-Page>
+
+    </div>
+
+    <br />
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{errorMessage}}
+    </div>
+</div>
+<div *ngIf="tab == 'report'">
+    <app-report [title]="report_title"  [url]="report_url" [searchdata]="report_searchdata"  [menuid]="report_menuid"  
+    [filename]="filename"    [filetype]="filetype" [filedisplayname]="filedisplayname" [filename2]="filename2"    [filetype2]="filetype2" [filedisplayname2]="filedisplayname2" (callbackevent)="callbackevent($event)"></app-report>
+</div>

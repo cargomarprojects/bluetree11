@@ -1,0 +1,39 @@
+<div class="page-header">
+    <div class="col-sm">
+        <label class="mr-1">Assign Master Data</label>
+    </div>
+</div>
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage$ | async}}
+</div>
+<app-linkpage-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+</app-linkpage-header>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th>CODE</th>
+                <th>NAME</th>
+                <th>ADD1</th>
+                <th>ADD2</th>
+                <th>ADD3</th>
+                <th>ADD4</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of  records$ | async">
+                <td>{{rec.link_target_code}}</td>
+                <td class='hlink' (click)="LinkData(rec)">{{rec.link_target_name}}</td>
+                <td>{{rec.link_target_add1}}</td>
+                <td>{{rec.link_target_add2}}</td>
+                <td>{{rec.link_target_add3}}</td>
+                <td>{{rec.link_target_add4}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>

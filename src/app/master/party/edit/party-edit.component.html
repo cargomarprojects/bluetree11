@@ -1,0 +1,904 @@
+<div *ngIf="tab=='main'">
+    <div class="page-header">
+        <div class="col">
+            <label class="mr-3">{{title}} ({{mode}})</label>
+            <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+            <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage">
+        <div class="alert alert-primary">
+            {{errorMessage}}
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-10  p-1">
+                <div class="row">
+
+                    <!-- First row -->
+                    <div class="col-md-12 px-0 mx-0">
+                        <div class="row border">
+                            <div class="col-md-6 testbox  px-0 mx-0">
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Code</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_code" maxlength="6" [uppercase]="true" [disabled]="(mode=='ADD'||(mode=='EDIT' && !isAdmin))"
+                                            #_gen_code>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Name</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_short_name" maxlength="60" (blur)="onBlur('gen_short_name')"
+                                            [uppercase]="true" #_gen_short_name>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">OfficialName</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_name" maxlength="60" [uppercase]="true"
+                                            #_gen_name>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Parent</label>
+                                    <div class="col-10">
+                                        <app-autocomplete2 [controlname]="'PARENT'" [tabletype]="'OVERSEAAGENT'"
+                                            [displaycolumn]="'NAME'" [displaydata]="record.gen_parent_name"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Address</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_address1" maxlength="60" [uppercase]="true"
+                                            #_gen_address1>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_address2" maxlength="60" [uppercase]="true"
+                                            #_gen_address2>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_address3" maxlength="60" [uppercase]="true"
+                                            #_gen_address3>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">City</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_location" maxlength="60" [uppercase]="true"
+                                            #_gen_location>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">State</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_state" maxlength="60" [uppercase]="true"
+                                            #_gen_state>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Country</label>
+                                    <div class="col-10">
+                                        <app-autocomplete2 [controlname]="'COUNTRY'" [tabletype]="'PARAM'"
+                                            [subtype]="'COUNTRY'" [displaycolumn]="'NAME'"
+                                            [displaydata]="record.gen_country_name"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">ZipCode</label>
+                                    <div class="col-10  input-group input-group-sm">
+                                        <!-- <InputBox [(inputModel)]="record.gen_pincode" maxlength="30" [uppercase]="true"
+                                            #_gen_pincode>
+                                        </InputBox> -->
+                                        <input class="form-control form-control-sm" type="text"
+                                            [(ngModel)]="record.gen_pincode" (blur)="onBlur('gen_pincode')"
+                                            maxlength="30" />
+                                        <button (click)="SetAddress()" class="btn btn-info btn-sm mr-1">Set
+                                            Address</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Contact</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_contact" maxlength="60" [uppercase]="true"
+                                            #_gen_contact>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Title</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_title" maxlength="60" [uppercase]="true"
+                                            #_gen_location>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Tel</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_tel" maxlength="60" [uppercase]="true"
+                                            #_gen_location>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Fax</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_fax" maxlength="30" [uppercase]="true"
+                                            #_gen_location>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Mobile</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_mobile" maxlength="60" [uppercase]="true"
+                                            #_gen_location>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">web</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_web" maxlength="100" [uppercase]="true"
+                                            #_gen_location>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Email</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_email" maxlength="60" [uppercase]="true"
+                                            #_gen_location>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Refer BY</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_refer_by" maxlength="60" [uppercase]="true"
+                                            #_gen_location>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Sales.Rep</label>
+                                    <div class="col-10">
+                                        <app-autocomplete2 [controlname]="'SALESMAN'" [tabletype]="'PARAM'"
+                                            [subtype]="'SALESMAN'" [displaycolumn]="'NAME'"
+                                            [displaydata]="record.gen_salesman_name"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Handled.By</label>
+                                    <div class="col-10">
+
+                                        <app-autocomplete2 [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'"
+                                            [subtype]="'SALESMAN'" [displaycolumn]="'NAME'"
+                                            [displaydata]="record.gen_handled_name"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Location</label>
+                                    <div class="col-10">
+                                        <select class="form-control form-control-sm"
+                                            [(ngModel)]="record.gen_handled_loc_id">
+                                            <option *ngFor="let rec of locationList" [value]="rec.comp_pkid">
+                                                {{rec.comp_name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 px-0 mx-0 border">
+                        <div class="row">
+                            <label
+                                class="col-12  pr-0 col-form-label col-form-label-sm"><strong>Category</strong></label>
+                            <div class="col-md-3 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_shipper_b"><span>Shipper (S)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_consignee_b"><span>Consignee (C)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_importer_b"><span>Importer (I)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_exporter_b"><span>Exporter (X)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_cha_b"><span>Customs Broker
+                                                (B)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_forwarder_b"><span>Domestic Forwarder
+                                                (F)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_agent_b"><span>Overseas Agent
+                                                (A)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_carrier_b"><span>Air Carrier (L)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_carrier2_sea_b"><span>Sea Carrier (R)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_trucker_b"><span>Trucker (T)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-3 testbox  px-0 mx-0">
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_warehouse_b"><span>Warehouse (W)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_terminal_b"><span>Terminal Sea / Rail
+                                                (N)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_terminal2_b"><span>Terminal Air (P)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_shipper_vendor_b"><span>Shipping Vendor
+                                                (H)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_vendor_b"><span>General Vendor
+                                                (G)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" [disabled]="!(isAdmin||isCompany)"
+                                                [(ngModel)]="record.gen_is_employees_b"><span>Employees (E)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" [disabled]="!(isAdmin||isCompany)"
+                                                [(ngModel)]="record.gen_is_contractor_b"><span>Contractor (O)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_miscellaneous_b"><span>Miscellaneous (M)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_tbd_b"><span>TBD (D)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_bank_b"><span>Bank / Financial
+                                                Institue (K)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label col-form-label-sm">ClientType</label>
+                                    <div class="col-8">
+                                        <select class="form-control form-control-sm mr-1" [(ngModel)]="record.gen_nomination">
+                                            <option [value]="'N/A'">N/A</option>
+                                            <option [value]="'PROSPECT'">PROSPECT</option>
+                                            <option [value]="'NOMINATION'">NOMINATION</option>
+                                            <option [value]="'MUTUAL'">MUTUAL</option>
+                                            <option [value]="'FREEHAND'">FREEHAND</option>
+                                            <option [value]="'AGENT'">AGENT</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label col-form-label-sm">VendorPriority</label>
+                                    <div class="col-8">
+                                        <select class="form-control form-control-sm mr-1" [(ngModel)]="record.gen_priority">
+                                            <option [value]="0">N/A</option>
+                                            <option [value]="1">1</option>
+                                            <option [value]="2">2</option>
+                                            <option [value]="3">3</option>
+                                            <option [value]="4">4</option>
+                                            <option [value]="5">5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Criteria/Min.Profit</label>
+                                    <div class="col-10 input-group input-group-sm">
+                                        <select class="form-control form-control-sm mr-1" [(ngModel)]="record.gen_criteria">
+                                            <option [value]="'NIL'">NIL</option>
+                                            <option [value]="'PROFIT EQUAL'">PROFIT = </option>
+                                            <option [value]="'PROFIT LESS'">PROFIT &lt;  </option>
+                                            <option [value]="'PROFIT GREATER'">PROFIT &gt; </option>
+                                            <option [value]="'PROFIT PER EQUAL'">PROFIT PER = </option>
+                                            <option [value]="'PROFIT PER LESS'">PROFIT PER &lt; </option>
+                                            <option [value]="'PROFIT PER GREATER'">PROFIT PER &gt; </option>
+                                          </select>
+                                        <input class="form-control form-control-sm" type="number"
+                                            [(ngModel)]="record.gen_min_profit" (blur)="onBlur('gen_min_profit')"
+                                            maxlength="15" />
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12 px-0 mx-0 border">
+                        <div class="row">
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">FirmCode</label>
+                                    <div class="col-4">
+                                        <InputBox [(inputModel)]="record.gen_firm_code" maxlength="4" [uppercase]="true"
+                                            #_gen_firm_code>
+                                        </InputBox>
+                                    </div>
+                                    <label class="col-2 col-form-label col-form-label-sm">EIN/IRS/SS#</label>
+                                    <div class="col-4">
+                                        <InputBox [(inputModel)]="record.gen_einirsno" maxlength="25" [uppercase]="true"
+                                            #_gen_einirsno>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">CreditDays</label>
+                                    <div class="col-4">
+                                            <InputBoxNumber [(inputModel)]="record.gen_days" [maxlength]="15" [dec]="0" #_gen_days></InputBoxNumber>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_splac_b"><span>Credit/Special
+                                                Account</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div *ngIf="gs.company_code == 'MNYC'" class="col-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" [disabled]="!isAdmin"
+                                                [(ngModel)]="record.gen_is_actual_vendor_b"><span>Vendor</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_blackac_b"><span>Black Account</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <div class="col-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_is_ctpat_b"><span>C-TPAT Certified</span>
+                                        </div>
+                                    </div>
+                                    <label class="col-2 col-form-label col-form-label-sm">C-TPAT#</label>
+                                    <div class="col-4">
+                                        <InputBox [(inputModel)]="record.gen_ctpat_no" maxlength="100" [uppercase]="true"
+                                            #_gen_ctpat_no>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <label class="col-2 col-form-label col-form-label-sm">Memo</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_splac_memo" maxlength="50" [uppercase]="true"
+                                            #_gen_splac_memo>
+                                        </InputBox>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 px-0 mx-0">
+                        <div class="row border">
+                            <div class="col-md-6 testbox  px-0 mx-0">
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">CHB</label>
+                                    <div class="col-10">
+                                        <app-autocomplete2 [controlname]="'CHB'" [tabletype]="'MASTER'"
+                                            [displaycolumn]="'CODE'" [displaydata]="record.gen_cha_code"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Name</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_chb_name" maxlength="60" [uppercase]="true"
+                                            #_gen_chb_name>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Address</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_chb_add1" maxlength="60" [uppercase]="true"
+                                            #_gen_chb_add1>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_chb_add2" maxlength="60" [uppercase]="true"
+                                            #_gen_chb_add2>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_chb_add3" maxlength="60" [uppercase]="true"
+                                            #_gen_chb_add3>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Group</label>
+                                    <div class="col-10">
+                                        <select class="form-control form-control-sm"
+                                            [(ngModel)]="record.gen_cust_group_id">
+                                            <option *ngFor="let rec of gs.PARAM_CUSTOMER_GROUP" [value]="rec.code">{{rec.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Contact</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_chb_contact" maxlength="60" [uppercase]="true"
+                                            #_gen_chb_contact>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Tel</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_chb_tel" maxlength="60" [uppercase]="true"
+                                            #_gen_chb_tel>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Fax</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_chb_fax" maxlength="60" [uppercase]="true"
+                                            #_gen_chb_fax>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Email</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_chb_email" maxlength="60" [uppercase]="true"
+                                            #_gen_chb_email>
+                                        </InputBox>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 px-0 mx-0 border">
+                        <div class="row">
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                                    <div class="col-10">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_poa_customs_yn_b"><span>POA For Customs On
+                                                File</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Brokers</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_brokers" maxlength="60" [uppercase]="true"
+                                            #_gen_code2>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                                    <div class="col-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_poa_isf_yn_b"><span>POA For ISF On File</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_bond_yn_b"><span>Annual Bond</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">Purch/From</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_purch_from" maxlength="60" [uppercase]="true"
+                                            #_gen_purch_from>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">BondNo</label>
+                                    <div class="col-10">
+                                        <InputBox [(inputModel)]="record.gen_bondno" maxlength="60" [uppercase]="true"
+                                            #_gen_bondno>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">BondExp/Date</label>
+                                    <div class="col-4">
+                                        <app-date [inputdate]="record.gen_bond_expdt"
+                                            (ValueChanged)="record.gen_bond_expdt=$event"></app-date>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 px-0 mx-0 border">
+                        <div class="row">
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <div class="col-2">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="gen_branch_b"><span>Branch</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-10">
+                                        <select class="form-control form-control-sm" [disabled]="!gen_branch_b"
+                                            [(ngModel)]="record.gen_branch">
+                                            <option *ngFor="let rec of locationList" [value]="rec.comp_code">
+                                                {{rec.comp_name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <!-- <label class="col-2 col-form-label col-form-label-sm"></label> -->
+                                    <div *ngIf="isAdmin||isCompany" class="col-6">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_protected_b"><span>Protected Record</span>
+                                        </div>
+                                    </div>
+                                    <label class="col-2 col-form-label col-form-label-sm">CurrencyCode</label>
+                                    <div class="col-4">
+                                        <InputBox [(inputModel)]="record.gen_curr_code" maxlength="3" [uppercase]="true"
+                                            #_gen_curr_code>
+                                        </InputBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12  px-0 mx-0">
+                        <div class="page-body table-responsive">
+                            <div class="form-group row">
+                                <label
+                                    class="col-12  pr-0 col-form-label col-form-label-sm"><strong>Other Contacts</strong></label>
+                            </div>
+                            <table class="table  table-hover table-sm">
+                                <thead class="page-body-thead">
+                                    <tr>
+                                        <th>NAME</th>
+                                        <th>TITLE</th>
+                                        <th>EMAIL</th>
+                                        <th>REMARKS</th>
+                                        <th>TEL</th>
+                                        <th>MOBILE</th>
+                                        <th>MESSENGER</th>
+                                        <th style="text-align:center">DELETE</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="page-body-tbody">
+                                    <tr *ngFor="let rec of records">
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_name" [field]="'cont_name'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_title" [field]="'cont_title'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_email" [field]="'cont_email'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_remarks" [field]="'cont_remarks'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_tel" [field]="'cont_tel'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_mobile" [field]="'cont_mobile'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_oth_messenger" [field]="'cont_oth_messenger'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0" style="text-align:center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                                            (click)="RemoveRow(rec)"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <button class="btn btn-info btn-sm mr-1" (click)="AddRow()">Add Row</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div *ngIf="mode=='EDIT'" class="col-md-2 p-1 testbox">
+
+                <div class="col-md-12 p-2 border">
+
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm" 
+                            (click)="BtnNavigation('ATTACHMENT')">Attachments</button>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('MEMO')">Memo</button>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('SOP-MEMO')">SOP</button>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('QUOTN-MEMO')">Quotation
+                            Memo</button>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('ACC-ALERT')">Accounting
+                            Alert</button>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('DELIVERY-ADDRESS')">Delivery
+                            Address</button>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('BUSSINESS-INFO')">Business
+                            Info</button>
+                    </div>
+
+                    <div *ngIf="gs.company_code == 'MNYC'" class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('PARTY-LOGIN')">Login
+                            Details</button>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm"
+                            (click)="BtnNavigation('PARTY-ADDRESS')">Addresses</button>
+                    </div>
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('BANK-INFO')">Bank
+                            Information</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <div class="row justify-content-center p-1">
+            <button class="btn btn-primary btn-md" *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
+        </div>
+    </div>
+
+    <div>
+        <label class="col-form-label col-form-label-sm" *ngIf="record.rec_created_by"> CREATED BY:
+            {{record.rec_created_by}}
+            /
+            {{record.rec_created_date}} </label>
+    </div>
+</div>
+<div *ngIf="tab=='report'">
+    <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+        (callbackevent)="callbackevent($event)"></app-report>
+</div>
+<div *ngIf="tab=='attachment'">
+    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid" [type]="attach_type"
+        [typelist]="attach_typelist" [tablename]="attach_tablename" [tablepkcolumn]="attach_tablepkcolumn"
+        [refno]="attach_refno" [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+        [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid" [filespath]="attach_filespath"
+        [filespath2]="attach_filespath2" (callbackevent)="callbackevent($event)"></app-fileupload>
+</div>

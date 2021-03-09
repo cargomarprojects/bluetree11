@@ -1,0 +1,42 @@
+<div class="page-header">
+    <div class="col">
+      <!-- {{mainservice.title}} -->
+      <label class="mr-1">Settings</label>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+  </div>
+  <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage$ | async}}
+  </div>
+  <app-settingpage-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+  </app-settingpage-header>
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>SENDER</th>
+          <th>CATEGORY</th>
+          <th>CODE</th>
+          <th>DESC</th>
+          <th>LINKED-DESC</th>
+          <th>REMOVE</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of  records$ | async">
+          <td>{{rec.link_messagesender}}</td>
+          <td>{{rec.link_subcategory}}</td>
+          <td>{{rec.link_source_code}}</td>
+          <td>{{rec.link_source_name}}</td>
+          <td>{{rec.link_target_name}}</td>
+          <td class='hlink' (click)="mainservice.RemoveRow(rec)">Remove</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  

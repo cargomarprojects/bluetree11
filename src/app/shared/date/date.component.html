@@ -1,0 +1,9 @@
+<div class="input-group input-group-sm" >
+   <input class="form-control form-control-sm" placeholder="{{localdateFormat}}" name="d2" #c2="ngModel" [(ngModel)]="inputdate" ngbDatepicker
+      #d2="ngbDatepicker" (blur)="OnBlur1()" #inputbox [disabled]="disabled"  autocomplete="off" >
+   <div class="input-group-append">
+      <button [disabled]="disabled" [ngStyle]="setMyStyles()"   class="btn btn-default btn-sm calender" (click)="d2.toggle()" (blur)="OnBlur1()">...</button>      
+   </div>
+
+</div>
+

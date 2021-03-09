@@ -1,0 +1,224 @@
+<div *ngIf="tab == 'main'">
+  <div class="page-header">
+    <div class="col">
+      <label class="mr-3">Request for Approval ({{mode}})</label>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+      <label class="text-danger" *ngIf="is_locked">LOCKED</label>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+      {{errorMessage}}
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-md-6 testbox  px-0 mx-0 border">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Req#</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.ca_req_no_str" [disabled]="true" maxlength="60" #req_no_str></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Type</label>
+          <div class="col-8">
+            <select #_ca_type class="form-control form-control-sm" [(ngModel)]="record.ca_type">
+              <option [value]="'RELEASE WITHOUT OBL'">RELEASE WITHOUT OBL</option>
+              <option [value]="'RELEASE WITHOUT PAYMENT'">RELEASE WITHOUT PAYMENT</option>
+              <option [value]="'RELEASE WITHOUT OBL & PAYMENT'">RELEASE WITHOUT OBL & PAYMENT</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Ref#</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.ca_ref_no" maxlength="50" [uppercase]="true" #ref_no></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">House#</label>
+          <div class="col-8">
+            <div class="page-body table-responsive">
+              <table class="table  table-hover table-sm">
+                <thead class="page-body-thead">
+                  <tr>
+                    <th>HOUSE-NO</th>
+                    <th>CONSIGNEE</th>
+                  </tr>
+                </thead>
+                <tbody class="page-body-tbody">
+                  <tr *ngFor="let rec of hblrecords">
+                    <td (click)="SelectHouse(rec)">
+                      <div class="form-check"> <input type="checkbox" class="form-check-input"
+                          [(ngModel)]="rec.ca_hbl_selected"><span>{{rec.ca_hbl_no}}</span></div>
+                    </td>
+                    <td>{{rec.ca_consignee_name}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Consignee</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.ca_consignee_name" maxlength="60" [uppercase]="true" #consignee_name>
+            </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Invoice#</label>
+          <div class="col-8">
+            <div class="page-body table-responsive">
+              <table class="table  table-hover table-sm">
+                <thead class="page-body-thead">
+                  <tr>
+                    <th>INVOICE-NO</th>
+                    <th>CUSTOMER</th>
+                    <th class='text-center'>AMT</th>
+                  </tr>
+                </thead>
+                <tbody class="page-body-tbody">
+                  <tr *ngFor="let rec of invrecords">
+                    <td (click)="SelectInvoice(rec)">
+                      <div class="form-check"> <input type="checkbox" class="form-check-input"
+                          [(ngModel)]="rec.ca_inv_selected"><span>{{rec.ca_inv_no}}</span></div>
+                    </td>
+                    <td>{{rec.ca_customer_name}}</td>
+                    <td class='text-center'>{{rec.ca_inv_amt | number : '1.2-2'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.ca_is_ar_issued_bool"><span>A/R has
+                not
+                been issued
+                yet.</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Remarks</label>
+          <div class="col-8">
+            <textarea rows="3" class="form-control form-control-sm" [(ngModel)]="record.ca_remarks"
+              (blur)="onBlur('ca_remarks')" required maxlength="100"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">OBL Received Date</label>
+          <div class="col-8">
+            <app-date [inputdate]="record.ca_obl_recvd_date" (ValueChanged)="record.ca_obl_recvd_date=$event"
+              #obl_recvd_date>
+            </app-date>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Payment Received Date</label>
+          <div class="col-8">
+            <app-date [inputdate]="record.ca_payment_recvd_date" (ValueChanged)="record.ca_payment_recvd_date=$event"
+              #payment_recvd_date>
+            </app-date>
+          </div>
+        </div>
+
+        <!-- <div *ngIf="req_type=='REQUEST'" class="form-group row border">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canSave(menuid,mode) && !is_locked"
+              (click)="Save()">Save</button>
+            <button [style.color]="Foregroundcolor_edit" *ngIf="mode=='EDIT'" class="btn btn-primary btn-sm mr-1"
+              (click)="BtnNavigation('ATTACHMENT')">Attachments</button>
+          </div>
+        </div> -->
+        <div *ngIf="req_type=='REQUEST'" class="page-footer">
+          <div class="row justify-content-center p-1">
+            <button class="btn btn-primary btn-md mr-1" [disabled]="is_locked" *ngIf="gs.canSave(menuid,mode)"
+              (click)="Save()">Save</button>
+            <button [style.color]="Foregroundcolor_edit" *ngIf="mode=='EDIT'" class="btn btn-primary btn-md mr-1"
+              (click)="BtnNavigation('ATTACHMENT')">Attachments</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="req_type=='APPROVED'" class="col-md-6 testbox  px-0 mx-0 border">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Approved Status</label>
+          <div class="col-8">
+            <div class="page-body table-responsive">
+              <table class="table  table-hover table-sm">
+                <thead class="page-body-thead">
+                  <tr>
+                    <th>APPROVED BY</th>
+                    <th>DATE</th>
+                    <th>STATUS</th>
+                  </tr>
+                </thead>
+                <tbody class="page-body-tbody">
+                  <tr *ngFor="let rec of detrecords">
+                    <td>{{rec.cad_approvedby_name}}</td>
+                    <td>{{rec.cad_approved_date | date : gs.date_display_fmt_with_time }}</td>
+                    <td>{{rec.cad_is_approved}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <div class="form-check">
+              <input type="radio" class="form-check-input" name="rdAproved" value="Approved"
+                (click)="rdBtnChecked('APPROVED')"><span>Approved</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <div class="form-check">
+              <input type="radio" class="form-check-input" name="rdAproved" value="NotApproved"
+                (click)="rdBtnChecked('NOT APPROVED')"><span>Not Approved</span>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- <div *ngIf="req_type=='APPROVED'" class="form-group row border">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <button class="btn btn-primary btn-md mr-1" *ngIf="gs.canSave(menuid,mode) && !is_locked"
+              (click)="SaveApproved()">Save</button>
+          </div>
+        </div> -->
+
+        <div *ngIf="req_type=='APPROVED'" class="page-footer">
+          <div class="row justify-content-center p-1">
+            <button class="btn btn-primary btn-md mr-1"  [disabled]="is_locked"   *ngIf="gs.canSave(menuid,mode)"
+              (click)="SaveApproved()">Save</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="tab=='attachment'">
+  <app-fileupload [title]="'File Upload Page'" [parentid]="attach_pkid" [subid]="" [type]="attach_type"
+    [typelist]="attach_typelist" [tablename]="attach_tablename" [tablepkcolumn]="attach_tablepkcolumn"
+    [refno]="attach_refno" [customername]="" [updatecolumn]="'rec_files_attached'" [viewonlysource]="" [viewonlyid]=""
+    [filespath]="" [filespath2]="" (callbackevent)="callbackevent($event)">
+  </app-fileupload>
+</div>

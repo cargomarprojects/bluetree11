@@ -1,0 +1,907 @@
+<div *ngIf="tab=='main'">
+  <div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+      <label class="mr-3">{{title}} ({{mode}}) </label>
+      <button #_btnret class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+      <label class="text-danger" *ngIf="is_locked">LOCKED</label>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage.length >0">
+    <div class="alert alert-success">
+      <a (click)="errorMessage=[]" class="close" aria-label="close">&times;</a>
+      <ul>
+        <li *ngFor="let str of errorMessage">
+          <p class="h4"> {{str}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-md-4  px-0 mx-0">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Ref#</label>
+          <div class="col-8">
+            <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbld_refno')" [disabled]="true"
+              [(ngModel)]="record.mbld_refno" maxlength="60" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Shipper</label>
+          <div class="col-8">
+            <app-autocomplete2 #_mbld_shipper_code [controlname]="'SHIPPER'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+              [displaydata]="record.mbld_shipper_code" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Name</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_shipper_name" [maxlength]="60" [uppercase]="true" #_mbld_shipper_name>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_shipper_add1" [maxlength]="60" [uppercase]="true" #shipper_add1>
+            </InputBox>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_shipper_add2" [maxlength]="60" [uppercase]="true">
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.mbld_shipper_add3" [maxlength]="60" [uppercase]="true" #shipper_add3>
+            </InputBox>
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_shipper_add4" [maxlength]="120" [uppercase]="true" #shipper_add4>
+            </InputBox>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Consignee</label>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+              [displaydata]="record.mbld_consignee_code" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Name</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_consigned_to1" [maxlength]="60" [uppercase]="true" #_mbld_consigned_to1>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_consigned_to2" [maxlength]="60" [uppercase]="true" #consigned_to2>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_consigned_to3" [maxlength]="60" [uppercase]="true" #consigned_to3>
+            </InputBox>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_consigned_to4" [maxlength]="60" [uppercase]="true" #consigned_to4>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_consigned_to6" [maxlength]="60" [uppercase]="true" #consigned_to4>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_consigned_to5" [maxlength]="120" [uppercase]="true" #consigned_to5>
+            </InputBox>
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <div class="col-md-4  px-0 mx-0">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Accounting</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_notify_name" [maxlength]="60" [uppercase]="true" #notify_name>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Information</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_notify_add1" [maxlength]="60" [uppercase]="true" #notify_add1>
+            </InputBox>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_notify_add2" [maxlength]="60" [uppercase]="true" #notify_add2>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_notify_add3" [maxlength]="60" [uppercase]="true" #notify_add3>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Issued By</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_exp_ref1" [maxlength]="60" [uppercase]="true" #exp_ref1>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_exp_ref2" [maxlength]="60" [uppercase]="true" #exp_ref2>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_exp_ref3" [maxlength]="60" [uppercase]="true" #exp_ref3>
+            </InputBox>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Issuing Agent</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_agent_name" [maxlength]="60" [uppercase]="true" #agent_name>
+            </InputBox>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_agent_city" [maxlength]="60" [uppercase]="true" #agent_city>
+            </InputBox>
+          </div>
+        </div>
+
+
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">IATA</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_iata" [maxlength]="30" [uppercase]="true" #iata>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Account#</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_accno" [maxlength]="30" [uppercase]="true" #accno>
+            </InputBox>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Frt/PC</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_frt_status" [maxlength]="1" [uppercase]="true" #oc_status>
+            </InputBox>
+          </div>
+
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Other/PC</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_oc_status" [maxlength]="1" [uppercase]="true" #oc_status>
+            </InputBox>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="col-md-4  px-0 mx-0">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Value For Carriage</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_carriage_value" [maxlength]="3" [uppercase]="true" #carriage_value>
+            </InputBox>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Value For Customs</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_customs_value" [maxlength]="3" [uppercase]="true" #customs_value>
+            </InputBox>
+          </div>
+        </div>
+       
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">AES#</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_aesno" [maxlength]="30" [uppercase]="true" #aesno>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Commodity</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_commodity" [maxlength]="60" [uppercase]="true" #commodity7>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Insurance Amt</label>
+            <div class="col-8">
+              <InputBox [(inputModel)]="record.mbld_ins_amt" [maxlength]="30" [uppercase]="true" #ins_amt>
+              </InputBox>
+            </div>
+          </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Handling Info</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_rout1" [maxlength]="60" [uppercase]="true" #rout1>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_rout2" [maxlength]="60" [uppercase]="true" #rout2>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_rout3" [maxlength]="60" [uppercase]="true" #rout3>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Departure</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_pol_name" [maxlength]="60" [uppercase]="true" #pol_name>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Destination</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_pod_name" [maxlength]="60" [uppercase]="true" #pod_name>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8 ">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_asarranged_shipper_b" />
+              <span>As Arranged (SHIPPER)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8 ">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_asarranged_consignee_b" />
+              <span>As Arranged (CONSIGNEE)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-md-12  px-0 mx-0">
+
+
+        <div class="form-group row">
+          <label class="col-2  pr-0 col-form-label col-form-label-sm">PCS</label>
+          <label class="col-2 pl-0  pr-0 col-form-label col-form-label-sm">GR.WT</label>
+          <label class="col-1 pl-0  pr-0 col-form-label col-form-label-sm">KG/LB</label>
+          <label class="col-1 pl-0  pr-0 col-form-label col-form-label-sm">CLASS</label>
+          <label class="col-1 pl-0  pr-0 col-form-label col-form-label-sm">COMM</label>
+          <label class="col-2 pl-0  pr-0 col-form-label col-form-label-sm">CH.WT</label>
+          <label class="col-1 pl-0  pr-0 col-form-label col-form-label-sm">RATE</label>
+          <label class="col-2 pl-0   col-form-label col-form-label-sm">TOTAL</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-2    pr-0">
+            <InputBoxNumber [(inputModel)]="record.mbld_pcs" [maxlength]="15" [dec]="0" #packages></InputBoxNumber>
+          </div>
+          <div class="col-2 pl-0  pr-0">
+            <InputBoxNumber [(inputModel)]="record.mbld_weight" [maxlength]="15" [dec]="3" #weight></InputBoxNumber>
+          </div>
+          <div class="col-1 pl-0  pr-0">
+            <InputBox [(inputModel)]="record.mbld_weight_unit" [maxlength]="2" [uppercase]="true" #weight_unit>
+            </InputBox>
+          </div>
+          <div class="col-1 pl-0  pr-0">
+            <InputBox [(inputModel)]="record.mbld_class" [maxlength]="1" [uppercase]="true" #class></InputBox>
+          </div>
+          <div class="col-1 pl-0  pr-0">
+            <InputBox [(inputModel)]="record.mbld_comm" [maxlength]="4" [uppercase]="true" #comm></InputBox>
+          </div>
+          <div class="col-2 pl-0  pr-0">
+            <!-- <InputBoxNumber [(inputModel)]="record.mbld_chwt" [maxlength]="15" [dec]="3" #chwt></InputBoxNumber> -->
+            <input type="number" class="form-control form-control-sm" [(ngModel)]="record.mbld_chwt"
+                    (blur)="onBlur('mbld_chwt')" (change)="onChange('mbld_chwt')"  (focus)="onFocus('mbld_chwt')"  required maxlength="15" />
+          </div>
+          <div class="col-1 pl-0  pr-0">
+            <!-- <InputBoxNumber [(inputModel)]="record.mbld_rate" [maxlength]="15" [dec]="2" #rate></InputBoxNumber> -->
+            <input type="number" class="form-control form-control-sm" [(ngModel)]="record.mbld_rate"
+                    (blur)="onBlur('mbld_rate')" (change)="onChange('mbld_rate')"  (focus)="onFocus('mbld_rate')"  required maxlength="15" />
+          </div>
+          <div class="col-2 pl-0  ">
+            <InputBoxNumber [(inputModel)]="record.mbld_total" [maxlength]="15" [dec]="2" #total></InputBoxNumber>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-md-8  px-0 mx-0">
+        <div class="form-group row">
+          <label class="col-12  pr-0 col-form-label col-form-label-sm">Descriptions</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.mark1" [maxlength]="50" [uppercase]="true" #mark1> </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.mark2" [maxlength]="50" [uppercase]="true" #mark2> </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.mark3" [maxlength]="50" [uppercase]="true" #mark3> </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.mark4" [maxlength]="50" [uppercase]="true" #mark4> </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.mark5" [maxlength]="50" [uppercase]="true" #mark5> </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.mark6" [maxlength]="50" [uppercase]="true" #mark6> </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.mark7" [maxlength]="50" [uppercase]="true" #mark7> </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.mark8" [maxlength]="50" [uppercase]="true" #mark8> </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.mark9" [maxlength]="50" [uppercase]="true" #mark9> </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.mark10" [maxlength]="50" [uppercase]="true" #mark10> </InputBox>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-6  pr-0 col-form-label col-form-label-sm">Other Charges To Agent</label>
+          <label class="col-2 pl-0  pr-0 col-form-label col-form-label-sm">Rate</label>
+          <label class="col-2 pl-0  pr-0 col-form-label col-form-label-sm">Total</label>
+          <label class="col-2 pl-0   col-form-label col-form-label-sm">Print.S/C</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-6    pr-0">
+            <InputBox [(inputModel)]="record.mbld_charges1" [maxlength]="25" [uppercase]="true" #charges1>
+            </InputBox>
+          </div>
+          <div class="col-2 pl-0  pr-0">
+            <!-- <InputBoxNumber [(inputModel)]="record.mbld_rate1" [maxlength]="15" [dec]="2" #rate1></InputBoxNumber> -->
+            <input type="number" class="form-control form-control-sm" [(ngModel)]="record.mbld_rate1"
+            (blur)="onBlur('mbld_rate1')" (change)="onChange('mbld_rate1')"  (focus)="onFocus('mbld_rate1')"  required maxlength="15" />
+          </div>
+          <div class="col-2 pl-0">
+            <InputBoxNumber [(inputModel)]="record.mbld_total1" [maxlength]="15" [dec]="2" #total1></InputBoxNumber>
+          </div>
+          <div class="col-2 pl-0">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_shpr1_b" />
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_cons1_b" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-6    pr-0">
+            <InputBox [(inputModel)]="record.mbld_charges2" [maxlength]="25" [uppercase]="true" #charges2>
+            </InputBox>
+          </div>
+          <div class="col-2 pl-0  pr-0">
+            <!-- <InputBoxNumber [(inputModel)]="record.mbld_rate2" [maxlength]="15" [dec]="2" #rate2></InputBoxNumber> -->
+            <input type="number" class="form-control form-control-sm" [(ngModel)]="record.mbld_rate2"
+            (blur)="onBlur('mbld_rate2')" (change)="onChange('mbld_rate2')"  (focus)="onFocus('mbld_rate2')"  required maxlength="15" />
+          </div>
+          <div class="col-2 pl-0">
+            <InputBoxNumber [(inputModel)]="record.mbld_total2" [maxlength]="15" [dec]="2" #total2></InputBoxNumber>
+          </div>
+          <div class="col-2 pl-0">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_shpr2_b" />
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_cons2_b" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-6    pr-0">
+            <InputBox [(inputModel)]="record.mbld_charges3" [maxlength]="25" [uppercase]="true" #charges3>
+            </InputBox>
+          </div>
+          <div class="col-2 pl-0  pr-0">
+            <!-- <InputBoxNumber [(inputModel)]="record.mbld_rate3" [maxlength]="15" [dec]="2" #rate3></InputBoxNumber> -->
+            <input type="number" class="form-control form-control-sm" [(ngModel)]="record.mbld_rate3"
+            (blur)="onBlur('mbld_rate3')" (change)="onChange('mbld_rate3')"  (focus)="onFocus('mbld_rate3')"  required maxlength="15" />
+          </div>
+          <div class="col-2 pl-0">
+            <InputBoxNumber [(inputModel)]="record.mbld_total3" [maxlength]="15" [dec]="2" #total3></InputBoxNumber>
+          </div>
+          <div class="col-2 pl-0">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_shpr3_b" />
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_cons3_b" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-6    pr-0">
+            <InputBox [(inputModel)]="record.mbld_charges4" [maxlength]="25" [uppercase]="true" #charges4>
+            </InputBox>
+          </div>
+          <div class="col-2 pl-0  pr-0">
+            <!-- <InputBoxNumber [(inputModel)]="record.mbld_rate4" [maxlength]="15" [dec]="2" #rate4></InputBoxNumber> -->
+            <input type="number" class="form-control form-control-sm" [(ngModel)]="record.mbld_rate4"
+            (blur)="onBlur('mbld_rate4')" (change)="onChange('mbld_rate4')"  (focus)="onFocus('mbld_rate4')"  required maxlength="15" />
+          </div>
+          <div class="col-2 pl-0">
+            <InputBoxNumber [(inputModel)]="record.mbld_total4" [maxlength]="15" [dec]="2" #total4></InputBoxNumber>
+          </div>
+          <div class="col-2 pl-0">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_shpr4_b" />
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_cons4_b" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-6    pr-0">
+            <InputBox [(inputModel)]="record.mbld_charges5" [maxlength]="25" [uppercase]="true" #charges5>
+            </InputBox>
+          </div>
+          <div class="col-2 pl-0  pr-0">
+            <!-- <InputBoxNumber [(inputModel)]="record.mbld_rate5" [maxlength]="15" [dec]="2" #rate5></InputBoxNumber> -->
+            <input type="number" class="form-control form-control-sm" [(ngModel)]="record.mbld_rate5"
+            (blur)="onBlur('mbld_rate5')" (change)="onChange('mbld_rate5')"  (focus)="onFocus('mbld_rate5')"  required maxlength="15" />
+          </div>
+          <div class="col-2 pl-0">
+            <InputBoxNumber [(inputModel)]="record.mbld_total5" [maxlength]="15" [dec]="2" #total5></InputBoxNumber>
+          </div>
+          <div class="col-2 pl-0">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_shpr5_b" />
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_cons5_b" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-6  pr-0 col-form-label col-form-label-sm">Other Charges To Carrier</label>
+          <label class="col-2 pl-0  pr-0 col-form-label col-form-label-sm">Rate</label>
+          <label class="col-2 pl-0  pr-0 col-form-label col-form-label-sm">Total</label>
+          <label class="col-2 pl-0   col-form-label col-form-label-sm">Print.S/C</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-6    pr-0">
+            <InputBox [(inputModel)]="record.mbld_charges1_carrier" [maxlength]="25" [uppercase]="true"
+              #charges1_carrier>
+            </InputBox>
+          </div>
+          <div class="col-2 pl-0  pr-0">
+            <!-- <InputBoxNumber [(inputModel)]="record.mbld_rate1_carrier" [maxlength]="15" [dec]="2" #rate1_carrier>
+            </InputBoxNumber> -->
+            <input type="number" class="form-control form-control-sm" [(ngModel)]="record.mbld_rate1_carrier"
+            (blur)="onBlur('mbld_rate1_carrier')" (change)="onChange('mbld_rate1_carrier')"  (focus)="onFocus('mbld_rate1_carrier')"  required maxlength="15" />
+          </div>
+          <div class="col-2 pl-0">
+            <InputBoxNumber [(inputModel)]="record.mbld_total1_carrier" [maxlength]="15" [dec]="2" #total1_carrier>
+            </InputBoxNumber>
+          </div>
+          <div class="col-2 pl-0">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_shpr1_carrier_b" />
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_cons1_carrier_b" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-6    pr-0">
+            <InputBox [(inputModel)]="record.mbld_charges2_carrier" [maxlength]="25" [uppercase]="true"
+              #charges2_carrier>
+            </InputBox>
+          </div>
+          <div class="col-2 pl-0  pr-0">
+            <!-- <InputBoxNumber [(inputModel)]="record.mbld_rate2_carrier" [maxlength]="15" [dec]="2" #rate2_carrier>
+            </InputBoxNumber> -->
+            <input type="number" class="form-control form-control-sm" [(ngModel)]="record.mbld_rate2_carrier"
+            (blur)="onBlur('mbld_rate2_carrier')" (change)="onChange('mbld_rate2_carrier')"  (focus)="onFocus('mbld_rate2_carrier')"  required maxlength="15" />
+          </div>
+          <div class="col-2 pl-0">
+            <InputBoxNumber [(inputModel)]="record.mbld_total2_carrier" [maxlength]="15" [dec]="2" #total2_carrier>
+            </InputBoxNumber>
+          </div>
+          <div class="col-2 pl-0">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_shpr2_carrier_b" />
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_cons2_carrier_b" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-6    pr-0">
+            <InputBox [(inputModel)]="record.mbld_charges3_carrier" [maxlength]="25" [uppercase]="true"
+              #charges3_carrier>
+            </InputBox>
+          </div>
+          <div class="col-2 pl-0  pr-0">
+            <!-- <InputBoxNumber [(inputModel)]="record.mbld_rate3_carrier" [maxlength]="15" [dec]="2" #rate3_carrier>
+            </InputBoxNumber> -->
+            <input type="number" class="form-control form-control-sm" [(ngModel)]="record.mbld_rate3_carrier"
+            (blur)="onBlur('mbld_rate3_carrier')" (change)="onChange('mbld_rate3_carrier')"  (focus)="onFocus('mbld_rate3_carrier')"  required maxlength="15" />
+          </div>
+          <div class="col-2 pl-0">
+            <InputBoxNumber [(inputModel)]="record.mbld_total3_carrier" [maxlength]="15" [dec]="2" #total3_carrier>
+            </InputBoxNumber>
+          </div>
+          <div class="col-2 pl-0">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_shpr3_carrier_b" />
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_cons3_carrier_b" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-6    pr-0">
+            <InputBox [(inputModel)]="record.mbld_charges4_carrier" [maxlength]="25" [uppercase]="true"
+              #charges4_carrier>
+            </InputBox>
+          </div>
+          <div class="col-2 pl-0  pr-0">
+            <!-- <InputBoxNumber [(inputModel)]="record.mbld_rate4_carrier" [maxlength]="15" [dec]="2" #rate4_carrier>
+            </InputBoxNumber> -->
+            <input type="number" class="form-control form-control-sm" [(ngModel)]="record.mbld_rate4_carrier"
+            (blur)="onBlur('mbld_rate4_carrier')" (change)="onChange('mbld_rate4_carrier')"  (focus)="onFocus('mbld_rate4_carrier')"  required maxlength="15" />
+          </div>
+          <div class="col-2 pl-0">
+            <InputBoxNumber [(inputModel)]="record.mbld_total4_carrier" [maxlength]="15" [dec]="2" #total4_carrier>
+            </InputBoxNumber>
+          </div>
+          <div class="col-2 pl-0">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_shpr4_carrier_b" />
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.mbld_print_cons4_carrier_b" />
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="col-md-4  px-0 mx-0">
+
+        <div class="form-group row">
+          <label class="col-12  pr-0 col-form-label col-form-label-sm">Nature And Quantity Of Goods (Incl. Dimensions or
+            Volume)</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc1" [maxlength]="30" [uppercase]="true" #desc1></InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc2" [maxlength]="30" [uppercase]="true" #desc2></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc3" [maxlength]="30" [uppercase]="true" #desc3></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc4" [maxlength]="30" [uppercase]="true" #desc4></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc5" [maxlength]="30" [uppercase]="true" #desc5></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc6" [maxlength]="30" [uppercase]="true" #desc6></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc7" [maxlength]="30" [uppercase]="true" #desc7></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc8" [maxlength]="30" [uppercase]="true" #desc8></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc9" [maxlength]="30" [uppercase]="true" #desc9></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc10" [maxlength]="30" [uppercase]="true" #desc10></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc11" [maxlength]="30" [uppercase]="true" #desc11></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc12" [maxlength]="30" [uppercase]="true" #desc12></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc13" [maxlength]="30" [uppercase]="true" #desc13></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc14" [maxlength]="30" [uppercase]="true" #desc14></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc15" [maxlength]="30" [uppercase]="true" #desc15></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc16" [maxlength]="30" [uppercase]="true" #desc16></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-12">
+            <InputBox [(inputModel)]="recorddet.desc17" [maxlength]="30" [uppercase]="true" #desc17></InputBox>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-md-4  px-0 mx-0">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Remarks</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_remark1" [maxlength]="60" [uppercase]="true" #remark1>
+            </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_remark2" [maxlength]="60" [uppercase]="true" #remark2>
+            </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_remark3" [maxlength]="60" [uppercase]="true" #remark3>
+            </InputBox>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4  px-0 mx-0">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Agent For Shipper</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_by1" [maxlength]="60" [uppercase]="true" #by1>
+            </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_by2" [maxlength]="60" [uppercase]="true" #by2>
+            </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Agent For Carrier</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_by1_carrier" [maxlength]="60" [uppercase]="true" #by1_carrier>
+            </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_by2_carrier" [maxlength]="60" [uppercase]="true" #by2_carrier>
+            </InputBox>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4  px-0 mx-0">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Issued Date</label>
+          <div class="col-8">
+            <app-date [inputdate]="record.mbld_issued_date" (ValueChanged)="record.hbl_issued_date=$event"></app-date>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Issued By</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.mbld_issued_by" [maxlength]="20" [uppercase]="true" #issued_by>
+            </InputBox>
+          </div>
+        </div>
+
+        <div *ngIf="mode=='EDIT'" class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Print Type</label>
+          <div class="col-8 input-group input-group-sm">
+            <select class="form-control form-control-sm mr-1" [(ngModel)]="Client_Category">
+              <option [value]="'CNEE'">CONSIGNEE</option>
+              <option [value]="'CNOR'">CONSIGNOR</option>
+              <option [value]="'SHPR'">SHIPPER</option>
+            </select>
+            <button class="btn btn-info btn-sm mr-1" *ngIf="gs.canPrint(this.menuid)" (click)="BtnNavigation('FULL-FORMAT')">Print</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="row align-items-center justify-content-center p-1">
+      <button class="btn btn-primary btn-md mr-1" [disabled]="is_locked" *ngIf="canSave" (click)="Save()">Save</button>
+    </div>
+  </div>
+  <div>
+    <label class="col-form-label col-form-label-sm" *ngIf="record.rec_created_by"> CREATED BY: {{record.rec_created_by}}
+      /
+      {{record.rec_created_date}} </label>
+  </div>
+</div>
+<div *ngIf="tab=='report'">
+  <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+    (callbackevent)="callbackevent($event)"></app-report>
+</div>

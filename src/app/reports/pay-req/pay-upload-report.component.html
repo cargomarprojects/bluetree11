@@ -1,0 +1,84 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-3"><strong>{{title}}</strong></label>
+    </div>
+</div>
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+<div class="page-body">
+    <div class="row border">
+        <div class="col-md-12  px-0 mx-0">
+            <!-- <div style="height: 400px; overflow-y: scroll;"> -->
+                <div *ngIf="type=='HOUSE-LIST'" class="page-body table-responsive">
+                    <table class="table  table-hover table-sm">
+                        <thead class="page-body-thead">
+                            <tr>
+                                <th>HOUSE</th>
+                                <th>CONSIGNEE</th>
+                                <th class='text-center'>OHBL OR TELEX RLS COPY</th>
+                            </tr>
+                        </thead>
+                        <tbody class="page-body-tbody" *ngFor="let rec of HouseList">
+                            <tr>
+                                <td class="p-0">{{rec.hbl_houseno}}</td>
+                                <td class="p-0">{{rec.hbl_consignee_name}}</td>
+                                <td class='text-center'><i class="fa fa-paperclip  fa-lg pointer" style="font-size:24px"
+                                        [style.color]="'black'" aria-hidden="true"
+                                        (click)="AttachRowHouse(rec,payattachmodal)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div *ngIf="type=='INVOICE-LIST'" class="page-body table-responsive">
+                    <table class="table  table-hover table-sm">
+                        <thead class="page-body-thead">
+                            <tr>
+                                <th>INVOICE</th>
+                                <th>DATE</th>
+                                <th>CUSTOMER</th>
+                                <th class='text-center'>CHECK COPY</th>
+                            </tr>
+                        </thead>
+                        <tbody class="page-body-tbody" *ngFor="let rec of InvoiceList">
+                            <tr>
+                                <td class="p-0">{{rec.inv_no}}</td>
+                                <td class="p-0">{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                                <td class="p-0">{{rec.inv_name}}</td>
+                                <td class='text-center'><i class="fa fa-paperclip  fa-lg pointer" style="font-size:24px"
+                                        [style.color]="'black'" aria-hidden="true"
+                                        (click)="AttachRowInvoice(rec,payattachmodal)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            <!-- </div> -->
+        </div>
+    </div>
+
+</div>
+<ng-template #payattachmodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="" [type]="attach_type"
+                        [typelist]="attach_typelist" [tablename]="attach_tablename"
+                        [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno" [uploadfiles]="flase"
+                        [customername]="attach_customername" [updatecolumn]="" [viewonlysource]="" [viewonlyid]=""
+                        [filespath]="" [filespath2]="" [modalview]="true" (callbackevent)="callbackevent($event)">
+                    </app-fileupload>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

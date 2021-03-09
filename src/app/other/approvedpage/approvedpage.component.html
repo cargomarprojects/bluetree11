@@ -1,0 +1,105 @@
+<div *ngIf="tab == 'main'">
+    <div class="page-header">
+        <div class="col">
+            <label class="mr-3">{{mainservice.title}}</label>
+            <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+        {{errorMessage}}
+    </div>
+
+    <app-approvedpage-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+    </app-approvedpage-header>
+
+    <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+    <div class="page-body table-responsive">
+        <table class="table  table-hover table-sm">
+            <thead class="page-body-thead">
+                <tr>
+                    <th>REQUEST#</th>
+                    <th>REQUEST-BY</th>
+                    <th>REQUEST-DATE</th>
+                    <th>TYPE</th>
+                    <th>REF#</th>
+                    <th>HOUSE#</th>
+                    <th>CONSIGNEE</th>
+                    <th>INVOICE#</th>
+                    <th>CUSOMER</th>
+                    <th class='text-right'>INV.AMT</th>
+                    <th>APRVD.BY</th>
+                    <th>APRVD.DATE</th>
+                    <th>STATUS</th>
+                    <th>REMARKS</th>
+                    <th>OBL.RECVD.DATE</th>
+                    <th>PAY.RECVD.DATE</th>
+                    <th class='text-center'>ATTACHMENTS</th>
+                    <th *ngIf="((mainservice.param_type=='APPROVED' && mainservice.isAdmin)||mainservice.param_type=='APPROVED REPORT'||mainservice.param_type=='REQUEST REPORT')"
+                        class='text-center'>SHOW/HIDE</th>
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+                <tr *ngFor="let rec of records$ | async">
+
+                    <!-- <td [class]="mainservice.param_type=='APPROVED'?'hlink':'text-left'" (click)="edit(rec)">{{rec.ca_reqno}}</td> -->
+
+                    <td *ngIf="!(this.mainservice.canEdit && mainservice.param_type=='APPROVED')">{{rec.ca_reqno}}</td>
+                    <td *ngIf="(this.mainservice.canEdit && mainservice.param_type=='APPROVED')">
+                        <a class='hlink' [routerLink]="['/Silver.Other.Trans/ApprovedPageEdit']"
+                            [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.ca_pkid,mbl_pkid: rec.ca_ref_id, mbl_refno: rec.ca_ref_no, doc_type: rec.ca_doc_type, req_type: this.mainservice.param_type ,mode: 'EDIT'}">{{rec.ca_reqno}}</a>
+                    </td>
+                    <td>{{rec.ca_user_name}}</td>
+                    <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                    <td>{{rec.ca_type}}</td>
+                    <!--               
+                <td class='hlink' (click)="editmaster(rec)">{{rec.ca_ref_no}}</td> -->
+
+                    <td>
+                        <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.ca_mode, rec.ca_ref_no, rec.ca_ref_id,rec.ca_hbl_id,rec.ca_inv_id, 'L')"
+                            [queryParams]="gs.Link2Page('REFNO', rec.ca_mode, rec.ca_ref_no, rec.ca_ref_id,rec.ca_hbl_id,rec.ca_inv_id, 'P')">{{rec.ca_ref_no}}</a>
+                    </td>
+                    <!-- <td class='hlink' (click)="edithouse(rec)">{{rec.ca_hbl_no}}</td> -->
+                    <td>
+                        <a class="hlink" [routerLink]="gs.Link2Page('HOUSE', rec.ca_mode, rec.ca_ref_no, rec.ca_ref_id,rec.ca_hbl_id,rec.ca_inv_id, 'L')"
+                            [queryParams]="gs.Link2Page('HOUSE', rec.ca_mode, rec.ca_ref_no, rec.ca_ref_id,rec.ca_hbl_id,rec.ca_inv_id, 'P')">{{rec.ca_hbl_no}}</a>
+                    </td>
+                    <td>{{rec.ca_consignee_name}}</td>
+                    <!-- <td class='hlink' (click)="editinvoice(rec)">{{rec.ca_inv_no}}</td> -->
+                    <td>
+                        <a class="hlink" [routerLink]="gs.Link2Page('INVNO', rec.ca_mode, rec.ca_ref_no, rec.ca_ref_id,rec.ca_hbl_id,rec.ca_inv_id, 'L')"
+                            [queryParams]="gs.Link2Page('INVNO', rec.ca_mode, rec.ca_ref_no, rec.ca_ref_id,rec.ca_hbl_id,rec.ca_inv_id, 'P')">{{rec.ca_inv_no}}</a>
+                    </td>
+                    <td>{{rec.ca_customer_name}}</td>
+                    <td class='text-right'>{{rec.ca_inv_amt | number : '1.2-2'}}</td>
+                    <td>{{rec.ca_approvedby_name}}</td>
+                    <td>{{rec.ca_approved_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                    <td>{{rec.ca_is_approved}}</td>
+                    <td>{{rec.ca_remarks}}</td>
+                    <td>{{rec.ca_obl_recvd_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                    <td>{{rec.ca_payment_recvd_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                    <td class='text-center'><i class="fa fa-paperclip  fa-lg pointer" style="font-size:24px"
+                            [style.color]="rec.rec_files_attached=='Y'?'red':'black'" aria-hidden="true"
+                            (click)="AttachRow(rec)"></i>
+                    </td>
+                    <td *ngIf="((mainservice.param_type=='APPROVED' && mainservice.isAdmin)||mainservice.param_type=='APPROVED REPORT'||mainservice.param_type=='REQUEST REPORT')"
+                        class='hlink' (click)="mainservice.ShowHide(rec)">{{rec.ca_hide_status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+    <br />
+</div>
+<div *ngIf="tab=='attachment'">
+    <app-fileupload [title]="'File Upload Page'" [parentid]="attach_pkid" [subid]="" [type]="attach_type"
+        [typelist]="attach_typelist" [tablename]="'cargo_approved'" [tablepkcolumn]="'ca_pkid'" [refno]=""
+        [uploadfiles]="flase" [customername]="" [updatecolumn]="'rec_files_attached'" [viewonlysource]=""
+        [viewonlyid]="" [filespath]="" [filespath2]="" (callbackevent)="callbackevent($event)">
+    </app-fileupload>
+</div>

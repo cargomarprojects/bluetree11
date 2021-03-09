@@ -1,0 +1,76 @@
+<div *ngIf="tab == 'main'">
+
+  <div class="page-header">
+    <div class="col">
+      <label class="mr-1">{{mainservice.title}}</label>
+      <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage$ | async as errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+
+  <acc-deposit-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+  </acc-deposit-header>
+
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+  <div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>DEPOSIT#</th>
+          <th>DATE</th>
+          <th>BANK</th>
+          <th>AMOUNT</th>
+          <th>TOT-CHQ</th>
+          <th>POSTED</th>
+          <th>REMARKS</th>
+
+          <th>PRINT</th>
+          <th>DETAIL-PRINT</th>
+
+          <th>CREATED-BY</th>
+          <th>CREATE-DT</th>
+          <th>DELETE</th>
+
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of records$ | async">
+          <td>{{rec.pay_docno}}</td>
+          <td>{{rec.pay_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.pay_acc_name}} </td>
+          <td>{{rec.pay_diff | number : '1.2-2'}} </td>
+          <td>{{rec.pay_tot_chq}} </td>
+          <td>{{rec.pay_posted}} </td>
+          <td>{{rec.pay_narration}} </td>
+          <td class='hlink' (click)="Print(rec,'simple')">Print</td>
+          <td class='hlink' (click)="Print(rec,'detail')">Detail-Print</td>
+          <td>{{rec.rec_created_by}} </td>
+          <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td *ngIf="mainservice.canDelete" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
+              aria-hidden="true" (click)="mainservice.DeleteRow(rec)"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+</div>
+
+<div *ngIf="tab === 'report1'">
+  <app-report [title]="'Bank Deposit List'" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid" (callbackevent)="callbackevent($event)"></app-report>
+</div>
+
+<div *ngIf="tab === 'report2'">
+  <app-report [title]="'Bank Deposit List'" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid" (callbackevent)="callbackevent($event)"></app-report>
+</div>
+
+
+
+<br />
+

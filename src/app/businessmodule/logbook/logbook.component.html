@@ -1,0 +1,85 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-3">{{title}}</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div *ngIf="report_format=='INVOICE'" class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th>ACTION</th>
+                <th>DATE</th>
+                <th>USER</th>
+                <th>CUSTOMER</th>
+                <th>INV.DATE</th>
+                <th>FROM.AMT</th>
+                <th>TO.AMT</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records">
+                <td>{{rec.log_type}}</td>
+                <td>{{rec.log_date | date : gs.date_display_fmt_with_time}}</td>
+                <td>{{rec.log_user_code}}</td>
+                <td>{{rec.log_cust_name}}</td>
+                <td>{{rec.log_doc_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                <td>{{rec.log_from_amt | number : '1.2-2'}}</td>
+                <td>{{rec.log_to_amt | number : '1.2-2'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="report_format=='QUOTATION-LCL-RATE'" class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th>ACTION</th>
+                <th>DATE</th>
+                <th>USER</th>
+                <th>DESCRIPTION</th>
+                <th>FROM.AMT</th>
+                <th>TO.AMT</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records">
+                <td>{{rec.log_type}}</td>
+                <td>{{rec.log_date | date : gs.date_display_fmt_with_time}}</td>
+                <td>{{rec.log_user_code}}</td>
+                <td>{{rec.log_details}}</td>
+                <td>{{rec.log_from_amt | number : '1.2-2'}}</td>
+                <td>{{rec.log_to_amt | number : '1.2-2'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="report_format=='LOGBOOK'" class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th>ACTION</th>
+                <th>DATE</th>
+                <th>USER</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records">
+                <td>{{rec.log_type}}</td>
+                <td>{{rec.log_date | date : gs.date_display_fmt_with_time}}</td>
+                <td>{{rec.log_user_code}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+ 

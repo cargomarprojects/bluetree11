@@ -1,0 +1,161 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">A/c Master ({{mode}})</label>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Code</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('acc_code')"
+                        [(ngModel)]="record.acc_code" maxlength="15" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Short Name</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('acc_short_name')"
+                        [(ngModel)]="record.acc_short_name" maxlength="15" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('acc_name')"
+                        [(ngModel)]="record.acc_name" maxlength="60" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Group</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.acc_group_id">
+                        <option *ngFor="let rec of gs.AccGroupList" [value]="rec.id">{{rec.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Type</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.acc_type">
+                        <option [value]="'OTHERS'">OTHERS</option>
+                        <option [value]="'ASSET'">ASSET</option>
+                        <option [value]="'BANK'">BANK</option>
+                        <option [value]="'CASH'">CASH</option>
+                        <option [value]="'CAPITAL'">CAPITAL</option>
+                        <option [value]="'FIXED ASSET'">FIXED ASSET</option>
+                        <option [value]="'RETAINED-PROFIT'">RETAINED-PROFIT</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Budget Category</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.acc_budget_id">
+                        <option *ngFor="let rec of gs.BUDGET_TYPE" [value]="rec.code">{{rec.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Branch</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.acc_branch">
+                        <option *ngFor="let rec of gs.CompanyList" [value]="rec.comp_code">{{rec.comp_name}}</option>
+                    </select>
+                </div>
+            </div>
+
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>                
+                <label class="col-8 col-form-label col-form-label-sm">Bank Information</label>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Bank Name</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('acc_address1')"
+                        [(ngModel)]="record.acc_address1" maxlength="60" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Address</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('acc_address2')"
+                        [(ngModel)]="record.acc_address2" maxlength="60" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('acc_address3')"
+                        [(ngModel)]="record.acc_address3" maxlength="60" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('acc_address4')"
+                        [(ngModel)]="record.acc_address4" maxlength="60" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('acc_address5')"
+                        [(ngModel)]="record.acc_address5" maxlength="60" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Check Format</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.acc_chq_format_id">
+                        <option *ngFor="let rec of gs.CHQ_FORMAT" [value]="rec.code">{{rec.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+        </div>
+    </div>
+</div>
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

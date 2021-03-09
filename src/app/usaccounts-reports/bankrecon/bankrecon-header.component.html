@@ -1,0 +1,96 @@
+  <div class="page-list">
+    <div class="page-search">
+      <div class="row">
+        <div class="col-md-5 border mx-0 px-0">
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">From</label>
+                <div class="col-10">
+                  <app-date [inputdate]="searchQuery.sdate" (ValueChanged)="searchQuery.sdate=$event"></app-date>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">To</label>
+                <div class="col-10">
+                  <app-date [inputdate]="searchQuery.edate" (ValueChanged)="searchQuery.edate=$event"></app-date>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Code</label>
+                <div class="col-4">
+                  <app-autocomplete2 [controlname]="'ACCTM'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'CODE'"
+                    [displaydata]="searchQuery.accCode" (ValueChanged)="LovSelected($event)">
+                  </app-autocomplete2>
+                </div>
+                <div class="col-6" style="padding-left:0">
+                  <input type="text" disabled class="form-control form-control-sm" [(ngModel)]="searchQuery.accName" />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm"></label>
+                <div class="col-10">
+                  <button (click)="List('PASSBOOK-BAL')" class="btn btn-primary btn-sm mr-1">Search</button>
+                  <button (click)="List('PRINT')" *ngIf="mainservice.canPrint" class="btn btn-primary btn-sm">Print</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7 border mx-0 px-0">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">From</label>
+                <div class="col-10">
+                  <app-date [inputdate]="searchQuery.sdate2" (ValueChanged)="searchQuery.sdate2=$event"></app-date>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">To</label>
+                <div class="col-10">
+                  <app-date [inputdate]="searchQuery.edate2" (ValueChanged)="searchQuery.edate2=$event"></app-date>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group row">
+                <div class="offset-2 col-sm-4">
+                  <div class="form-check"> <input type="checkbox" class="form-check-input"
+                      [(ngModel)]="searchQuery.chkreconciled"><span>Reconciled</span>
+                  </div>
+                </div>
+                <div class="offset-2 col-sm-4">
+                  <div class="form-check"> <input type="checkbox" class="form-check-input"
+                      [(ngModel)]="searchQuery.chkunreconciled"><span>UnReconciled</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm"></label>
+                <div class="col-10">
+                  <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label
+                  class="col-6 col-form-label col-form-label-sm"><strong>OpeningBalance:</strong>{{searchQuery.lbl_op}}</label>
+                <label
+                  class="col-6 col-form-label col-form-label-sm"><strong>ClosingBalance:</strong>{{searchQuery.lbl_balance}}</label>
+              </div>
+              <div class="form-group row">
+                <label
+                  class="col-12 col-form-label col-form-label-sm"><strong>PeriodBalance:</strong>{{searchQuery.lbl_trans_dr}}&nbsp;&nbsp;{{searchQuery.lbl_trans_cr}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 

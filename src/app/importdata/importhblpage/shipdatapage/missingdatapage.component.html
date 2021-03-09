@@ -1,0 +1,90 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">Missing Data</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+<div class="page-list">
+    <div class="page-search">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Sender</label>
+                    <div class="col-8">
+                            <InputBox [(inputModel)]="searchString" [maxlength]="600" [uppercase]="true" #_searchstring>
+                            </InputBox>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <button (click)="List('VALIDATE')" class="btn btn-primary btn-sm mr-1">Find</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-body">
+    <div class="row">
+        <div class="col-md-12  px-0 mx-0">
+            <div class="page-body table-responsive">
+                <table class="table  table-hover table-sm">
+                    <thead class="page-body-thead">
+                        <tr>
+                            <th>SENDER</th>
+                            <th>CATEGORY</th>
+                            <th>NAME</th>
+                            <th>ADD1</th>
+                            <th>ADD2</th>
+                            <th>ADD3</th>
+                            <th>ADD4</th>
+                            <th>ADD5</th>
+                            <th>ASSIGNED</th>
+                            <th>LINK</th>
+                        </tr>
+                    </thead>
+                    <tbody class="page-body-tbody">
+                        <tr *ngFor="let rec of records">
+                            <td>{{rec.link_messagesender}}</td>
+                            <td>{{rec.link_subcategory}}</td>
+                            <td class='hlink' (click)="linkmaster(rec,linkmodal)">{{rec.link_source_name}}</td>
+                            <td>{{rec.link_source_add1}}</td>
+                            <td>{{rec.link_source_add2}}</td>
+                            <td>{{rec.link_source_add3}}</td>
+                            <td>{{rec.link_source_add4}}</td>
+                            <td>{{rec.link_source_add5}}</td>
+                            <td>{{rec.link_status}}</td>
+                            <td class="hlink" (click)="addtomaster(rec)" >Add To Master</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #linkmodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-linkpage [mrecord]="mrecord" (ModifiedRecords)="ModifiedRecords($event)"></app-linkpage>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

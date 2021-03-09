@@ -1,0 +1,843 @@
+<div *ngIf="tab == 'main'">
+
+    <div class="page-header">
+        <div class="col">
+            <label class="pr-1">{{title}} ({{mode}}) </label>
+            <button _btnretcert class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+            <label class="text-danger" *ngIf="is_locked">LOCKED</label>
+        </div>
+
+    </div>
+
+    <div *ngIf="errorMessage.length >0">
+        <div class="alert alert-success">
+            <a (click)="errorMessage=[]" class="close" aria-label="close">&times;</a>
+            <ul>
+                <li *ngFor="let str of errorMessage">
+                    <p class="h4"> {{str}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="page-body">
+
+        <div class="row">
+
+
+            <div class="col-md-4">
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Ref#</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('book_refno')"
+                            [disabled]="true" [(ngModel)]="record.mbld_refno" [disabled]="true" maxlength="15" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Shipper</label>
+                    <div class="col-8">
+                        <app-autocomplete2 #_mbld_shipper_code [controlname]="'SHIPPER'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                            [displaydata]="record.mbld_shipper_code" (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_shipper_name" [maxlength]="60" [uppercase]="true"
+                            #_mbld_shipper_name>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_shipper_add1" [maxlength]="60" [uppercase]="true"
+                            #shipper_add1>
+                        </InputBox>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_shipper_add2" [maxlength]="60" [uppercase]="true">
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+
+                        <InputBox [(inputModel)]="record.mbld_shipper_add3" [maxlength]="60" [uppercase]="true"
+                            #shipper_add3>
+                        </InputBox>
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_shipper_add4" [maxlength]="120" [uppercase]="true"
+                            #shipper_add4>
+                        </InputBox>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Consignee</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                            [displaydata]="record.mbld_consignee_code" (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_consigned_to1" [maxlength]="60" [uppercase]="true"
+                            #_mbld_consigned_to1>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_consigned_to2" [maxlength]="60" [uppercase]="true"
+                            #consigned_to2>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_consigned_to3" [maxlength]="60" [uppercase]="true"
+                            #consigned_to3>
+                        </InputBox>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_consigned_to4" [maxlength]="120" [uppercase]="true"
+                            #consigned_to4>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_consigned_to5" [maxlength]="120" [uppercase]="true"
+                            #consigned_to5>
+                        </InputBox>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Notify</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'NOTIFY'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                            [displaydata]="record.mbld_notify_code" (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_notify_name" [maxlength]="60" [uppercase]="true"
+                            #_mbld_notify_name>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_notify_add1" [maxlength]="60" [uppercase]="true"
+                            #notify_add1>
+                        </InputBox>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_notify_add2" [maxlength]="60" [uppercase]="true"
+                            #notify_add2>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_notify_add3" [maxlength]="60" [uppercase]="true"
+                            #notify_add3>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_notify_add4" [maxlength]="120" [uppercase]="true"
+                            #notify_add4>
+                        </InputBox>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <div class="col-md-4">
+
+
+                <!-- <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Export Ref.</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_exp_ref1" [maxlength]="60" [uppercase]="true" #exp_ref1>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_exp_ref2" [maxlength]="60" [uppercase]="true" #exp_ref2>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_exp_ref3" [maxlength]="60" [uppercase]="true" #exp_ref3>
+                        </InputBox>
+                    </div>
+                </div> -->
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Agent</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                            [displaydata]="record.mbld_agent_name" (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+
+
+
+                <!-- <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Origin State</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_origin" [maxlength]="60" [uppercase]="true" #origin>
+                        </InputBox>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Routing</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_rout1" [maxlength]="60" [uppercase]="true" #rout1>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_rout2" [maxlength]="60" [uppercase]="true" #rout2>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_rout3" [maxlength]="60" [uppercase]="true" #rout3>
+                        </InputBox>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_rout4" [maxlength]="60" [uppercase]="true" #rout4>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Pre Carriage</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_pre_carriage" [maxlength]="60" [uppercase]="true"
+                            #pre_carriage>
+                        </InputBox>
+                    </div>
+                </div> -->
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Place Receipt</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_place_receipt" [maxlength]="60" [uppercase]="true"
+                            #_mbld_place_receipt>
+                        </InputBox>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Pol</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_pol_name" [maxlength]="60" [uppercase]="true" #pol>
+                        </InputBox>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Pod</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_pod_name" [maxlength]="60" [uppercase]="true" #pod>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Place Delivery</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_place_delivery" [maxlength]="60" [uppercase]="true"
+                            #place_delivery>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Move Type</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_type_move" [maxlength]="60" [uppercase]="true" #type_move>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8 ">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" [(ngModel)]="record._mbld_is_cntrized" />
+                            <span>Is Containerized</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Handled.By</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
+                            [displaycolumn]="'NAME'" [displaydata]="record.mbld_handled_name"
+                            (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="col-md-4">
+
+
+                <!-- <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Load Terminal</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_terminal" [maxlength]="60" [uppercase]="true" #terminal>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Commodity</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_commodity" [maxlength]="100" [uppercase]="true"
+                            #commodity>
+                        </InputBox>
+                    </div>
+                </div> -->
+
+
+
+                <!-- <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Send To</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'SENDTO'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                            [displaydata]="record.mbld_sendto_Code" (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_sendto_name" [maxlength]="60" [uppercase]="true"
+                            #sendto_name>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Address</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_sendto_add1" [maxlength]="60" [uppercase]="true"
+                            #sendto_add1>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_sendto_add2" [maxlength]="60" [uppercase]="true"
+                            #sendto_add2>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_sendto_add3" [maxlength]="60" [uppercase]="true"
+                            #sendto_add3>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_sendto_add4" [maxlength]="60" [uppercase]="true"
+                            #sendto_add4>
+                        </InputBox>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Remarks</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_remark1" [maxlength]="60" [uppercase]="true" #remark1>
+                        </InputBox>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_remark2" [maxlength]="60" [uppercase]="true" #remark2>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="record.mbld_remark3" [maxlength]="60" [uppercase]="true" #remark3>
+                        </InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Issue Date</label>
+                    <div class="col-8">
+                        <app-date [inputdate]="record.mbld_issued_date" (ValueChanged)="record.mbld_issues_date=$event">
+                        </app-date>
+                    </div>
+                </div> -->
+
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Detail -->
+
+    <div class="page-body">
+
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="form-group row">
+                    <div class="col-8 px-0">
+                        <label class="col-4 pr-0 col-form-label col-form-label-sm">Marks & Nos</label>
+                        <button class="col-4 btn btn-info btn-sm" (click)="LoadContainer()">Load Cntr</button>
+                    </div>
+                    <div class="col-4 pl-0">
+                        <label class="col-5 pl-0 col-form-label col-form-label-sm">Pkgs</label>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8 pr-0">
+                        <InputBox [(inputModel)]="record.mark1" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                    <div class="col-4 pl-0">
+                        <InputBox [(inputModel)]="record.pkg1" [maxlength]="12" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8 pr-0">
+                        <InputBox [(inputModel)]="record.mark2" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                    <div class="col-4 pl-0">
+                        <InputBox [(inputModel)]="record.pkg2" [maxlength]="12" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8 pr-0">
+                        <InputBox [(inputModel)]="record.mark3" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                    <div class="col-4 pl-0">
+                        <InputBox [(inputModel)]="record.pkg3" [maxlength]="12" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark4" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark5" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark6" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark7" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark8" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark9" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark10" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark11" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark12" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark13" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark14" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark15" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark16" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.mark17" [maxlength]="15" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group row">
+                    <label class="col-12 col-form-label col-form-label-sm">Description</label>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc1" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc2" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc3" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc4" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc5" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc6" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc7" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc8" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc9" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc10" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc11" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc12" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc13" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc14" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc15" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc16" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <InputBox [(inputModel)]="record.desc17" [maxlength]="40" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8 px-0">
+                        <label class="col-8 col-form-label col-form-label-sm">Weight/Measurement</label>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Lbs</label>
+                    <div class="col-6">
+                        <InputBoxNumber [(inputModel)]="record.mbld_lbs" [maxlength]="15" [dec]="3"></InputBoxNumber>
+                    </div>
+                    <div class="col-2">
+                        <span style="cursor:pointer" (click)="FindWeight('Lbs2Kgs')"> <i class="fa fa-arrow-down"> </i>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Kgs</label>
+                    <div class="col-6">
+                        <InputBoxNumber [(inputModel)]="record.mbld_weight" [maxlength]="15" [dec]="3"></InputBoxNumber>
+                    </div>
+                    <div class="col-2">
+                        <span style="cursor:pointer" (click)="FindWeight('Kgs2Lbs')"> <i class="fa fa-arrow-up"> </i>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Cft</label>
+                    <div class="col-6">
+                        <InputBoxNumber [(inputModel)]="record.mbld_cft" [maxlength]="15" [dec]="3"></InputBoxNumber>
+                    </div>
+                    <div class="col-2">
+                        <span style="cursor:pointer" (click)="FindWeight('Cft2Cbm')"> <i class="fa fa-arrow-down"> </i>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Cbm</label>
+                    <div class="col-6">
+                        <InputBoxNumber [(inputModel)]="record.mbld_cbm" [maxlength]="15" [dec]="3"></InputBoxNumber>
+                    </div>
+                    <div class="col-2">
+                        <span style="cursor:pointer" (click)="FindWeight('Cbm2Cft')"> <i class="fa fa-arrow-up"> </i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" [(ngModel)]="record._mbld_print_kgs" />
+                            <span>Print KGS</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" [(ngModel)]="record._mbld_print_lbs" />
+                            <span>Print LBS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Clean On Board</label>
+                    <div class="col-6">
+                        <InputBox [(inputModel)]="record.mbld_clean" [maxlength]="10" [uppercase]="true" #notify_add4>
+                        </InputBox>
+                    </div>
+                </div> -->
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="page-footer">
+        <div class="row align-items-center justify-content-center p-1">
+            <button class="btn btn-primary btn-md mr-1" [disabled]="is_locked" *ngIf="canSave" (click)="Save()">Save</button>
+            <button class="btn btn-primary btn-md mr-1" *ngIf="canPrint && mode =='EDIT'"  (click)="Print()">Print</button>
+        </div>
+    </div>
+
+
+    <div class="page-footer">
+        <label class="col-form-label col-form-label-sm" *ngIf="record.rec_created_by"> CREATED BY:
+            {{record.rec_created_by}}
+            /
+            {{record.rec_created_date}} </label>
+    </div>
+
+</div>
+
+<div *ngIf="tab == 'report'">
+    <app-report [title]="'Ocean Export Certificate Of Origin'" [url]="report_url" [searchdata]="report_searchdata"
+        [menuid]="report_menuid" (callbackevent)="callbackevent($event)"></app-report>
+</div>

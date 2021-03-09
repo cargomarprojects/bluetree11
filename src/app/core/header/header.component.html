@@ -1,0 +1,66 @@
+
+
+<nav class="navbar fixed-top navbar-expand-lg shadow-sm steelblue text-white" >
+
+    <a class="navbar-brand" >
+      <img src="./assets/images/logo.png" alt="Logo" width="100%" height="50" (click)="home()">
+    </a>
+  
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+  
+      <ul class="navbar-nav mr-auto">
+  
+        <!--
+        <li class="nav-item">
+          <a class="nav-link h6" (click)="home()">Home</a>
+        </li> 
+        -->
+        
+        <div *ngFor="let rech of gs.Modules" >
+          <li class="nav-item dropdown" *ngIf="gs.IsAuthenticated">
+            <a class="nav-link dropdown-toggle text-white h6" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{rech.module_name}}
+            </a>
+            <div class="dropdown-menu py-0 border-1 rounded-3 shadow-lg" aria-labelledby="navbarDropdown">
+              <div *ngFor="let rec of gs.MenuList" class="menulist">
+                <div class="" *ngIf="rech.module_name == rec.module_name && rec.menu_hiden==='N' && rec.menu_group_name">
+                  <a class="dropdown-item border-bottom menu-group-name">{{rec.menu_group_name}}</a>
+                </div>
+                <div  *ngIf="rech.module_name == rec.module_name && rec.menu_hiden==='N'">
+                  <!-- <a class="dropdown-item border-bottom" (click)="LoadPage(rec)">{{rec.menu_name}}</a> -->
+                  <!-- <a class="dropdown-item border-bottom"  routerLink="{{getMenu(rec)}}" [queryParams]="{ appid : gs.appid, id: rec.menu_pkid, menuid: rec.menu_pkid, menu_param: rec.menu_param}">{{rec.menu_name}}</a> -->
+                  <a class="dropdown-item border-bottom"  [routerLink]="getLink(rec)" [queryParams]="getParam(rec)">{{rec.menu_name}}</a>
+                </div>
+
+              </div>
+            </div>
+          </li>
+        </div>
+      
+
+  
+        <li class="nav-item">
+          <a class="nav-link h6 text-white" *ngIf="gs.IsAuthenticated" (click)="changeBranch()" >Change Branch</a>
+        </li>      
+
+        <li class="nav-item">
+          <label class="nav-link h6 text-warning" *ngIf="gs.IsAuthenticated" >{{gs.user_name}}/{{gs.branch_name}}</label>
+        </li>      
+      </ul>
+  
+      <form class="form-inline my-2 my-lg-0">
+        <button class="btn border border-info rounded  ml-1 text-white h6" (click)="login()" *ngIf="!gs.IsAuthenticated">Login</button>
+        <button class="btn border border-info rounded bg-primary text-white ml-1 h6" *ngIf="gs.IsAuthenticated" (click)="Logout()">Logout</button>
+      </form>
+  
+    </div>
+  </nav>
+
+
+

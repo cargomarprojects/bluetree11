@@ -1,0 +1,170 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-1">{{title}}</label>
+    <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+    <i *ngIf="loading" class="fa fa-spinner"></i>
+  </div>
+</div>
+
+<div *ngIf="currentTab=='LIST'">
+
+  <div class="page-list">
+    <div class="page-search">
+
+      <div class="row">
+
+        <div class="col-md-3">
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Sort</label>
+            <div class="col-8">
+              <select class="form-control form-control-sm" [(ngModel)]="sort">
+                <option [value]="'inv_mbl_refno'">REF#</option>
+                <option [value]="'inv_houseno'">HOUSE#</option>
+                <option [value]="'inv_name'">CUSTOMER</option>
+                <option [value]="'inv_no'">INVOICE#</option>
+                <option [value]="'inv_date'">INVOICE DATE</option>
+                <option [value]="'inv_payment_date'">PAYMENT DATE</option>
+                <option [value]="'inv_total'">INVOICE AMOUNT</option>
+                <option [value]="'inv_bal_amt'">BALANCE</option>
+
+              </select>
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">From</label>
+            <div class="col-8">
+              <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event"></app-date>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">To</label>
+            <div class="col-8">
+              <app-date [inputdate]="edate" (ValueChanged)="edate=$event"></app-date>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm"></label>
+            <div class="col-8">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="chk_air_import">
+              <label class="form-check-label">AIR IMPORT</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm"></label>
+            <div class="col-8">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="chk_air_export">
+              <label class="form-check-label">AIR EXPORT</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm"></label>
+            <div class="col-8">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="chk_sea_import">
+              <label class="form-check-label">OCEAN IMPORT</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm"></label>
+            <div class="col-8">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="chk_sea_export">
+              <label class="form-check-label">OCEAN EXPORT</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm"></label>
+            <div class="col-8">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="chk_others">
+              <label class="form-check-label">OTHERS</label>
+            </div>
+          </div>
+          <div *ngIf="gs.user_isadmin=='Y'||gs.IsAdmin(this.menuid)" class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm"></label>
+            <div class="col-8">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="chk_admin_expense">
+              <label class="form-check-label">ADMIN EXPENSE</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">CUSTOMER</label>
+            <div class="col-8">
+              <app-autocomplete [inputdata]="CUSTRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Ref No.</label>
+            <div class="col-8">
+              <InputBox [(inputModel)]="sdata" [field]="'sdata'" [maxlength]="100"
+                        [uppercase]="true" (blur)="onBlur($event)"></InputBox>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm"></label>
+            <div class="col-8">
+              <button [disabled]="loading" (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <App-Page [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+    (PageEvents)="PageEvents($event)"></App-Page>
+
+  <div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+
+          <th>REF#</th>
+          <th>HOUSE#</th>
+          <th>CUSTOMER</th>
+          <th>INVOICE#</th>
+          <th>INVOICE DATE</th>
+          <th>PAYMENT DATE</th>
+          <th>INVOICE AMOUNT</th>
+          <th>BALANCE</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+        <tr>
+          <td class='hlink' (click)="editmaster(rec)">{{rec.inv_mbl_refno}}</td>
+          <td class='hlink' (click)="edithouse(rec)">{{rec.inv_houseno}}</td>
+          <td>{{rec.inv_name}}</td>
+          <td class='hlink' (click)="editinvoice(rec)">{{rec.inv_no}}</td>
+          <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.inv_payment_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.inv_amt}}</td>
+          <td>{{rec.inv_bal_amt}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <App-Page [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+    (PageEvents)="PageEvents($event)"></App-Page>
+
+
+</div>
+
+<br />
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{errorMessage}}
+</div>

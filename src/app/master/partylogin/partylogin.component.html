@@ -1,0 +1,127 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-3">Login Details</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6 testbox  px-0 mx-0 border">
+                <div class="form-group row">
+                    <div class="col-2 pr-0">
+                        <input class="form-control form-control-sm text-danger" type="text" [(ngModel)]="partyCode"
+                            [disabled]="true" />
+                    </div>
+                    <div class="col-10">
+                        <input class="form-control form-control-sm text-danger" type="text" [(ngModel)]="partyName"
+                            [disabled]="true" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 testbox  px-0 mx-0  border">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">LoginID</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.plogin_code" [maxlength]="15" [uppercase]="true" #_plogin_code>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.plogin_name" [maxlength]="60" [uppercase]="true" #_plogin_name>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Password</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.plogin_pwd" [maxlength]="15" #_plogin_pwd>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Email</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.plogin_email" [maxlength]="100" [uppercase]="true" #_plogin_email>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Category</label>
+                    <div class="col-10">
+                        <select class="form-control form-control-sm mr-1" [(ngModel)]="record.plogin_category">
+                            <option [value]="'AGENT'">AGENT</option>
+                            <option [value]="'SHIPPER'">SHIPPER</option>
+                            <option [value]="'CONSIGNEE'">CONSIGNEE </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input"
+                                [(ngModel)]="record.plogin_isparent_b"><span>Search Based On Parent</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input"
+                                [(ngModel)]="record.plogin_locked_b"><span>Locked</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 page-footer">
+                        <div class="row justify-content-center p-1">
+                            <button class="btn btn-primary btn-sm mr-1" (click)="Save()">{{lblSave}}</button>
+                            <button class="btn btn-primary btn-sm mr-1" (click)="NewRecord()">New</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 px-0 mx-0">
+                <div class="row">
+                    <div class="col-md-6 testbox  px-0 mx-0">
+                        <div class="page-list">
+                            <div class="page-body table-responsive">
+                                <table class="table  table-hover table-sm">
+                                    <thead class="page-body-thead">
+                                        <tr>
+                                            <th>CODE</th>
+                                            <th>NAME</th>
+                                            <th>LOCKED</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="page-body-tbody">
+                                        <tr *ngFor="let rec of records; let i = index"
+                                            [class.active]="i == selectedRowIndex" (click)="SetRowIndex(i)">
+                                            <td class='hlink' (click)="EditRow(rec)">{{rec.plogin_code}} </td>
+                                            <td>{{rec.plogin_name}}</td>
+                                            <td>{{rec.plogin_locked}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

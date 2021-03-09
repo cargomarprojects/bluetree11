@@ -1,0 +1,55 @@
+<div class="page-header">
+    <div class="row  align-items-center justify-content-left p-1">
+        <label class="mr-1">{{mainservice.title}}</label>
+        <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button> -->
+        <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd"
+            [routerLink]="['/Silver.Other.Trans/DeliveryOrderEdit']"
+            [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid, pkid: '', parentid:'', pickCategory:'GENERAL', origin: 'oth-deliveryorder-page', mode: 'ADD'}">New</a>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage}}
+</div>
+
+<app-deliveryorder-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+</app-deliveryorder-header>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th>REFNO</th>
+                <th>REFDATE</th>
+                <th>TRUKER</th>
+                <th>FROM</th>
+                <th>TO</th>
+                <th>CREATED-BY</th>
+                <th>CREATED-DT</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records$ | async">
+                <!-- <td class='hlink' (click)="edit(rec)">{{rec.pick_orderno}}</td> -->
+                <td *ngIf="!this.mainservice.canEdit">{{rec.pick_orderno}}</td>
+                <td *ngIf="this.mainservice.canEdit">
+                    <a class='hlink' [routerLink]="['/Silver.Other.Trans/DeliveryOrderEdit']" [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.pick_pkid,parentid: rec.pick_parentid,pickCategory: 'GENERAL',origin: 'oth-deliveryorder-page',mode: 'EDIT'}">{{rec.pick_orderno}}</a>
+                </td>
+                <td>{{rec.pick_order_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.pick_truk_name}}</td>
+                <td>{{rec.pick_fromname}}</td>
+                <td>{{rec.pick_toname}}</td>
+                <td>{{rec.rec_created_by}}</td>
+                <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />

@@ -1,0 +1,18 @@
+<div class="page-pager" *ngIf='pageQuery'>
+      <ul class="pagination pagination-sm">
+            <li class="page-item">
+                  <a class="page-link">
+                        Page {{pageQuery.page_current}}/{{pageQuery.page_count}} (Records-{{pageQuery.page_rows}})
+                  </a>
+            </li>
+            <li class="page-item"><a class="page-link" (click)="List('SCREEN','FIRST')"><span
+                              class="fa fa-backward"></span></a></li>
+            <li class="page-item"><a class="page-link" (click)="List('SCREEN','PREV')"><span
+                              class="fa fa-arrow-left"></span></a></li>
+            <li class="page-item"><a class="page-link" (click)="List('SCREEN','NEXT')"><span
+                              class="fa fa-arrow-right"></span></a></li>
+            <li class="page-item"><a class="page-link" (click)="List('SCREEN','LAST')"><span
+                              class="fa fa-forward"></span></a>
+            </li>
+      </ul>
+</div>

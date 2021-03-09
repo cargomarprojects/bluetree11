@@ -1,0 +1,84 @@
+<div class="input-group input-group-sm">
+  <input [disabled]="disabled" type="text" class="form-control form-control-sm" (focus)="onfocus()" (blur)="onBlur()"
+    [(ngModel)]="_displaydata" #inputbox />
+
+  <button [disabled]="showDiv || disabled" [ngStyle]="setMyStyles()" class="btn btn-default btn-sm"
+    (click)="List()">...</button>
+
+</div>
+<!-- 
+<div [ngClass]="{'my-class': showDiv}">
+  <div *ngIf="showDiv">
+    <button type="button" class="close" aria-label="Close" (click)="Cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <ul *ngFor="let item of RecList">
+      <li><a (click)="SelectedItem('LIST',item)">{{item.code}}</a></li>
+      <li style="border-bottom: 1px solid black;"><a (click)="SelectedItem('LIST',item)">{{item.name}}</a></li>
+    </ul>
+    <ul *ngIf="bShowMore">
+      <li><a (click)="More()">More...</a></li>
+    </ul>
+  </div>
+</div> -->
+
+
+<!-- <div [ngClass]="{'my-class': showDiv}">
+  <div *ngIf="showDiv">
+    <button type="button" class="close" aria-label="Close" (click)="Cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <table style="width:100%">
+      <tr *ngFor="let item of RecList">
+        <td style="padding:0in;" (click)="SelectedItem('LIST',item)">
+          <input #_cntr_no class="form-control form-control-sm" readonly type="text"
+            style="background-color:white; border: 0in;" [(ngModel)]="item.name" maxlength="1000" />
+        </td>
+      </tr>
+      <tr *ngIf="bShowMore">
+        <td style="padding:0in;" (click)="More()">
+          <input #_cntr_no2 class="form-control form-control-sm" readonly type="text"
+            style="background-color:white; border: 0in;" [(ngModel)]="btnMore" maxlength="1000" />
+        </td>
+      </tr>
+    </table>
+  </div>
+</div> -->
+
+
+
+<!-- <div [ngClass]="{'my-class': showDiv}">
+  <div *ngIf="showDiv">
+    <button type="button" class="close" aria-label="Close" (click)="Cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <ul tabindex="0" *ngFor="let item of RecList" (keydown)="ListKeydown($event,item)">
+      <li><a (click)="SelectedItem('LIST',item)">{{item.code}}</a></li>
+      <li style="border-bottom: 1px solid black;"><a (click)="SelectedItem('LIST',item)">{{item.name}}</a></li>
+    </ul>
+    <ul tabindex="0" *ngIf="bShowMore" (keydown)="MoreKeydown($event)">
+      <li><a (click)="More()">More...</a></li>
+    </ul>
+  </div>
+</div> -->
+
+
+<div [ngClass]="{'my-class': showDiv}">
+
+  <div *ngIf="showDiv">
+    <button tabindex="0" type="button" class="close" aria-label="Close" (click)="Cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <ul class="dropdown-menu" style="padding-top: 0%;padding-bottom: 0%;" *ngFor="let item of RecList ;let i = index" (keydown)="ListKeydown($event,item)" >
+      <li #_itms style="border-bottom: 1px solid black;" tabindex="0"><a (click)="SelectedItem('LIST',item)">{{item.code}}<br>{{item.name}}</a></li>
+      <!-- <li style="padding:0in;" style="border-bottom: 1px solid black;"></li> -->
+      <!-- <li style="border-bottom: 1px solid black;"><a (click)="SelectedItem('LIST',item)">{{item.name}}</a></li> -->
+    </ul>
+    <ul tabindex="0" *ngIf="bShowMore" (keydown)="MoreKeydown($event)">
+      <li><a (click)="More()">More...</a></li>
+    </ul>
+
+  </div>
+
+</div>
+

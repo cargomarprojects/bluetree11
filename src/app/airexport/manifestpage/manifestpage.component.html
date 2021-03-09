@@ -1,0 +1,86 @@
+<div *ngIf="tab=='main'">
+<div class="page-header">
+    <div class="col">
+        <label class="mr-3">Manifest</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage.length >0">
+    <div class="alert alert-success">
+        <a (click)="errorMessage=[]" class="close" aria-label="close">&times;</a>
+        <ul>
+            <li *ngFor="let str of errorMessage">
+                <p class="h4"> {{str}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row border">
+        <div class="col-md-4">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Ref#</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_no')" [disabled]="true"
+            [(ngModel)]="mbl_no" [disabled]="true" maxlength="50" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Mawb#</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_refno')" [disabled]="true"
+                    [(ngModel)]="mbl_refno" [disabled]="true" maxlength="50" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row border">
+        <div class="col-md-4">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Consolidator</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'CONSOLIDATOR'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                    [displaydata]="FM_NAME" (ValueChanged)="LovSelected($event)">
+                  </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Deconsolidator</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'DECONSOLIDATOR'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                    [displaydata]="TO_NAME" (ValueChanged)="LovSelected($event)">
+                  </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8 ">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" [(ngModel)]="IsMaster" />
+                    <span>Manifest(Master Only)</span>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canPrint(this.menuid)" (click)="BtnNavigation('MANIFEST')">Print</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div *ngIf="tab=='report'">
+    <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+      (callbackevent)="callbackevent($event)"></app-report>
+  </div>

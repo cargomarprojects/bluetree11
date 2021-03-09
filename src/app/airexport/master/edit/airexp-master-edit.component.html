@@ -1,0 +1,447 @@
+<div *ngIf="tab=='main'">
+  <div class="page-header">
+    <div class="col">
+      <label class="mr-3">{{title}} ({{mode}})</label>
+      <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)"
+      [routerLink]="['/Silver.AirExport.Trans/AirExpMasterEditPage']"
+      [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.mainService.param_type,origin: 'airexp-master-edit-page',mode: 'ADD'}">New</a>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+      <label class="text-danger" *ngIf="is_locked">LOCKED</label>
+    </div>
+  </div>
+
+  <!-- <div *ngIf="errorMessage">
+  <div class="alert alert-primary">
+    {{errorMessage}}
+  </div>
+</div> -->
+  <div *ngIf="errorMessage.length >0">
+    <div class="alert alert-success">
+      <a (click)="errorMessage=[]" class="close" aria-label="close">&times;</a>
+      <ul>
+        <li *ngFor="let str of errorMessage">
+          <p class="h4"> {{str}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="row">
+
+      <div class="col-md-10 p-1">
+
+        <div class="row">
+
+          <!-- First row -->
+          <div class="col-md-12 px-0 mx-0">
+            <div class="row border">
+              <div class="col-md-6 testbox  px-0 mx-0">
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Ref#</label>
+                  <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_refno')"
+                      [(ngModel)]="record.mbl_refno" [disabled]="true" maxlength="15" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Ref Date</label>
+                  <div class="col-9">
+                    <app-date #_mbl_ref_date [inputdate]="record.mbl_ref_date" (ValueChanged)="record.mbl_ref_date=$event"></app-date>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 testbox  px-0 mx-0">
+                <div *ngIf="gs.JOB_TYPE_AE.length>0" class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Job Type</label>
+                  <div class="col-9">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.mbl_jobtype_id">
+                      <option *ngFor="let rec of gs.JOB_TYPE_AE" [value]="rec.code">{{rec.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Stage</label>
+                  <div class="col-9">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.mbl_shipment_stage">
+                      <option *ngFor="let rec of gs.SHIPMENT_STAGE_AE" [value]="rec.code">{{rec.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Second row -->
+          <div class="col-md-12 px-0 mx-0">
+            <div class="row border">
+              <div class="col-md-6 testbox  px-0 mx-0">
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Mawb#</label>
+                  <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_no')" #mbl_no
+                      (focusout)="onFocusout('mbl_no')" [(ngModel)]="record.mbl_no" maxlength="11" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Master Agent</label>
+                  <div class="col-9">
+
+                    <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                      [displaydata]="record.mbl_agent_name" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Frt.Status</label>
+                  <div class="col-9">
+                    <select #_mbl_frt_status class="form-control form-control-sm" [(ngModel)]="record.mbl_frt_status">
+                      <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.name">{{rec.name}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Pol</label>
+                  <div class="col-9">
+
+                    <app-autocomplete2 [controlname]="'POL'" [tabletype]="'AIR PORT'" [displaycolumn]="'NAME'"
+                      [displaydata]="record.mbl_pol_name" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Pol.ETD</label>
+                  <div class="col-9">
+                    <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd" (ValueChanged)="record.mbl_pol_etd=$event"></app-date>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Port.Discharge</label>
+                  <div class="col-9">
+
+                    <app-autocomplete2 [controlname]="'POD'" [tabletype]="'AIR PORT'" [displaycolumn]="'NAME'"
+                      [displaydata]="record.mbl_pod_name" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+
+
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Pod.ETA</label>
+                  <div class="col-9">
+                    <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta" (ValueChanged)="record.mbl_pod_eta=$event"></app-date>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Dest.Country</label>
+                  <div class="col-9">
+
+                    <app-autocomplete2 [controlname]="'COUNTRY'" [tabletype]="'PARAM'" [subtype]="'COUNTRY'"
+                      [displaycolumn]="'NAME'" [displaydata]="record.mbl_country_name"
+                      (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Carrier</label>
+                  <div class="col-9">
+
+                    <app-autocomplete2 #_mbl_liner_name [controlname]="'CARRIER'" [tabletype]="'AIR CARRIER'" [displaycolumn]="'NAME'"
+                      [displaydata]="record.mbl_liner_name" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-6 testbox  px-0 mx-0">
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">To</label>
+                  <div class="col-3 pr-0">
+                    <input #_mbl_to_port1 class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_to_port1')"
+                      [(ngModel)]="record.mbl_to_port1" maxlength="3" />
+                  </div>
+                  <label class="col-2 col-form-label col-form-label-sm pr-0">By</label>
+                  <div class="col-4 pl-0">
+                    <input class="form-control form-control-sm " type="text" (blur)="onBlur('mbl_by_carrier1')"
+                      [(ngModel)]="record.mbl_by_carrier1" maxlength="60" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">To</label>
+                  <div class="col-3 pr-0">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_to_port2')"
+                      [(ngModel)]="record.mbl_to_port2" maxlength="3" />
+                  </div>
+                  <label class="col-2 col-form-label col-form-label-sm pr-0">By</label>
+                  <div class="col-4 pl-0">
+                    <input class="form-control form-control-sm " type="text" (blur)="onBlur('mbl_by_carrier2')"
+                      [(ngModel)]="record.mbl_by_carrier2" maxlength="3" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">To</label>
+                  <div class="col-3 pr-0">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_to_port3')"
+                      [(ngModel)]="record.mbl_to_port3" maxlength="3" />
+                  </div>
+                  <label class="col-2 col-form-label col-form-label-sm pr-0">By</label>
+                  <div class="col-4 pl-0">
+                    <input class="form-control form-control-sm " type="text" (blur)="onBlur('mbl_by_carrier3')"
+                      [(ngModel)]="record.mbl_by_carrier3" maxlength="3" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Flight No</label>
+                  <div class="col-3 pr-0">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_vessel')"
+                      [(ngModel)]="record.mbl_vessel" maxlength="15" />
+                  </div>
+                  <label class="col-2 col-form-label col-form-label-sm pr-0">Flight No</label>
+                  <div class="col-4 pl-0">
+                    <input class="form-control form-control-sm " type="text" (blur)="onBlur('mbl_voyage')"
+                      [(ngModel)]="record.mbl_voyage" maxlength="15" />
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Currency</label>
+                  <div class="col-3 pr-0">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_currency')"
+                      [(ngModel)]="record.mbl_currency" maxlength="3" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Handled.By</label>
+                  <div class="col-9">
+
+                    <app-autocomplete2 [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
+                      [displaycolumn]="'NAME'" [displaydata]="record.mbl_handled_name"
+                      (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Sales.Rep</label>
+                  <div class="col-9">
+                    <app-autocomplete2 #_mbl_salesman_name [controlname]="'SALESMAN'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
+                      [displaycolumn]="'NAME'" [displaydata]="record.mbl_salesman_name"
+                      (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Mawb GrWt</label>
+                  <div class="col-3 pr-0">
+                    <input #_mbl_mawb_weight class="form-control form-control-sm" type="number" (blur)="onBlur('mbl_mawb_weight')"
+                      [(ngModel)]="record.mbl_mawb_weight" maxlength="15" />
+                  </div>
+                  <label class="col-2 col-form-label col-form-label-sm pr-0">Mawb ChWt</label>
+                  <div class="col-4 pl-0">
+                    <input class="form-control form-control-sm " type="number" (blur)="onBlur('mbl_mawb_chwt')"
+                      [(ngModel)]="record.mbl_mawb_chwt" maxlength="15" />
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm"></label>
+                  <div class="col-9">
+                    <input type="checkbox" [(ngModel)]="record.mbl_3rdparty_bool" />
+                    <span>3rd Party Booking</span>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm"></label>
+                  <div class="col-9">
+                    <input type="checkbox" [(ngModel)]="record.mbl_direct_bool" />
+                    <span>Direct Shipment</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="mode=='EDIT'" class="row">
+
+          <div class="col-md-12 px-0 mx-0">
+            <div class="page-body table-responsive">
+              <table class="table  table-hover table-sm">
+                <thead class="page-body-thead">
+                  <tr>
+                    <th>HOUSE</th>
+                    <th>SHIPPER</th>
+                    <th>CONSIGNEE</th>
+                    <th>PCS</th>
+                    <th>HANDLED-BY</th>
+                    <th>ETD</th>
+                    <th>ETA</th>
+                    <th>CREATED-BY</th>
+                    <th>DATE</th>
+                  </tr>
+                </thead>
+                <tbody class="page-body-tbody">
+                  <tr *ngFor="let rec of hrecords">
+                    <!-- <td class='hlink' (click)="EditHouse(rec)">{{rec.hbl_houseno}}</td> -->
+                    <td *ngIf="!gs.canEdit(this.gs.MENU_AE_HOUSE)">{{rec.hbl_houseno}}</td>
+                    <td *ngIf="gs.canEdit(this.gs.MENU_AE_HOUSE)">
+                      <a class='hlink' [routerLink]="['/Silver.AirExport.Trans/AirExpHouseEditPage']"
+                      [queryParams]="{appid : this.gs.appid ,menuid: this.gs.MENU_AE_HOUSE,parentid:this.pkid,pkid: rec.hbl_pkid,refno: this.record.mbl_refno ,type: 'AIR EXPORT',origin: 'airexp-master-page',mode: 'EDIT'}">{{rec.hbl_houseno}}</a>
+                    </td>
+                    <td>{{rec.hbl_shipper_name}}</td>
+                    <td>{{rec.hbl_consignee_name}}</td>
+                    <td>{{rec.hbl_packages}}</td>
+                    <td>{{rec.hbl_handled_name}}</td>
+                    <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
+                    <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+                    <td>{{rec.rec_created_by}}</td>
+                    <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="form-group row">
+                <div class="col-12">
+                  <!-- <button class="btn btn-info btn-sm mr-1" *ngIf="!is_locked && gs.screenExists(gs.MENU_AE_HOUSE)"
+                    (click)="AddHouse()">Add House</button> -->
+                    <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_AE_HOUSE)" disabled="is_locked"
+                    [routerLink]="['/Silver.AirExport.Trans/AirExpHouseEditPage']"
+                    [queryParams]="{appid : gs.appid, menuid: this.gs.MENU_AE_HOUSE, parentid:this.pkid, pkid: '',refno: this.record.mbl_refno ,type: 'AIR EXPORT',origin: 'airexp-master-page',mode: 'ADD'}">Add
+                    House</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div *ngIf="mode=='EDIT'" class="col-md-2 p-1 testbox">
+
+        <div class="col-md-12 p-2 border">
+
+          <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_PRINT_MAWB)"
+              (click)="BtnNavigation('MAWBPAGE')">Print MAWB</button>
+          </div>
+
+          <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_MANIFEST)"
+              (click)="BtnNavigation('MANIFESTPAGE')">Manifest</button>
+          </div>
+
+          <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_ARAP)"
+              (click)="BtnNavigation('ARAP')">AR & AP</button>
+          </div>
+
+          <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_PROFIT_REPORT)"
+              (click)="BtnNavigation('PROFITREPORT')">Profit Report</button>
+          </div>
+
+          <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SHIPMENT_LABEL)"
+              (click)="BtnNavigation('SHIP-LABEL-PRINT')">Shipment Label</button>
+          </div>
+
+          <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MESSENGER_SLIP)"
+              (click)="BtnNavigation('MESSENGER-SLIP')">Messenger Slip</button>
+          </div>
+
+
+          <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_PAYMENT_REQUEST)"
+              (click)="BtnNavigation('PAYMENT-REQUEST')">Payment Request</button>
+          </div>
+
+          <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_ATTACHMENTS)"
+              [style.color]="record.rec_files_attached=='Y'?'red':black"
+              (click)="BtnNavigation('ATTACHMENT',attachmodal)">Attachments</button>
+          </div>
+
+          <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER)"
+              (click)="BtnNavigation('FOLLOWUP')">Add To Follow Up</button>
+          </div>
+          <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_INTERNAL_MEMO)"
+              [style.color]="record.mbl_ismemo_attached=='Y'?'red':black"
+              (click)="BtnNavigation('INERNALMEMO')">Internal Memo</button>
+          </div>
+          <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_REQUEST_APPROVAL)"
+              (click)="BtnNavigation('REQUEST-APPROVAL')">Request For Approval</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="row justify-content-center p-1">
+      <button class="btn btn-primary btn-md" [disabled]="is_locked" *ngIf="gs.canSave(menuid,mode)"
+        (click)="Save()">Save</button>
+    </div>
+  </div>
+
+
+  <div  class="page-footer">
+    <label class="col-form-label col-form-label-sm" *ngIf="record.rec_created_by"> CREATED BY: {{record.rec_created_by}}
+      /
+      {{record.rec_created_date}} </label>
+  </div>
+</div>
+<div *ngIf="tab=='report'">
+  <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+    (callbackevent)="callbackevent($event)"></app-report>
+</div>
+
+<ng-template #attachmodal let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <div class="page-body">
+      <div class="row">
+        <div class="col-md-12 testbox  px-0 mx-0">
+          <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+            [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+            [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno" [customername]="attach_customername"
+            [updatecolumn]="attach_updatecolumn" [viewonlysource]="attach_viewonlysource"
+            [viewonlyid]="attach_viewonlyid" [filespath]="attach_filespath" [filespath2]="attach_filespath2"
+            [modalview]="true" (callbackevent)="callbackevent($event)"></app-fileupload>
+        </div>
+      </div>
+      <div class="page-footer">
+        <div class="row justify-content-center p-1">
+          <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

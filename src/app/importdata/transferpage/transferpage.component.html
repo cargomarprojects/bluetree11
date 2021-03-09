@@ -1,0 +1,117 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">Transfer Data</label>
+    </div>
+</div>
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+<div class="page-list">
+    <div class="page-search">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Sender</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" disabled type="text"
+                            [(ngModel)]="mrecord.messagesender" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Mbl#</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" disabled type="text" [(ngModel)]="mrecord.mblno" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Find</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-body">
+    <div class="row">
+        <div class="col-md-12  px-0 mx-0">
+            <div class="page-body table-responsive">
+                <div [style.height]="records.length>8?'250px':'auto'"
+                    [style.overflow-y]="records.length>8?'scroll':'auto'">
+                    <table class="table  table-hover table-sm">
+                        <thead class="page-body-thead">
+                            <tr>
+                                <th>HOUSE</th>
+                                <th>SHIPPER</th>
+                                <th>CONSIGNEE</th>
+                                <th>COMMODITY</th>
+                                <th>FREIGHT</th>
+                                <th>SHIPMENT-TYPE</th>
+                                <th>AMS#</th>
+                                <th class='text-center'>DELETE</th>          
+                            </tr>
+                        </thead>
+                        <tbody class="page-body-tbody" *ngFor="let rec of records">
+                            <tr [style.color]="(rec.deleted=='Y')?'Red':'Black'">
+                                <td>{{rec.houseno}}</td>
+                                <td>{{rec.shipper_name}}</td>
+                                <td>{{rec.consignee_name}}</td>
+                                <td>{{rec.commodity}}</td>
+                                <td>{{rec.freight_status}}</td>
+                                <td>{{rec.shipment_type}}</td>
+                                <td>{{rec.ams_fileno}}</td>
+                                <td class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                                    (click)="DeleteRow(rec)"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">RefDate</label>
+                <div class="col-8">
+                    <app-date #_ref_date [inputdate]="ref_date" (ValueChanged)="ref_date=$event"></app-date>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Branch</label>
+                <div class="col-8">
+                    <select #_branch_code class="form-control form-control-sm" [(ngModel)]="branch_code">
+                        <option *ngFor="let rec of CompList" [value]="rec.comp_code">{{rec.comp_name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">A/N.Handled.By</label>
+                <div class="col-8">
+                    <app-autocomplete2 #_handled_lov [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'"
+                        [subtype]="'SALESMAN'" [displaycolumn]="'NAME'" [displaydata]="handled_name"
+                        (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="page-footer">
+    <div class="row justify-content-center p-1">
+        <button (click)="ImportMaster()" class="btn btn-primary btn-md mr-1">Import Data</button>
+        <button class="btn btn-primary btn-md" (click)="Close()">Close</button>
+    </div>
+</div>

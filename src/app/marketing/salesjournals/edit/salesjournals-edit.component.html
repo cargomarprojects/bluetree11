@@ -1,0 +1,329 @@
+<div *ngIf="tab=='main'">
+    <div class="page-header">
+        <div class="row align-items-center justify-content-left p-1">
+            <label class="mr-3">Sales Journals ({{mode}})</label>
+            <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage">
+        <div class="alert alert-primary">
+            {{errorMessage}}
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-8  p-1 testbox">
+                <div class="col-md-12 p-2 border">
+                    <div class="row">
+                        <div class="col-md-6 px-0 mx-0">
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Customer</label>
+                                <div class="col-8">
+                                    <app-autocomplete2 [controlname]="'CUSTOMER'" [disabled]="mode == 'EDIT'"
+                                        [tabletype]="'MASTER'" [displaycolumn]="'NAME'" [displaydata]="customer_name"
+                                        (ValueChanged)="LovSelected($event)" #customer>
+                                    </app-autocomplete2>
+                                </div>
+                                <div class="col-2">
+                                    <button [disabled]="mode == 'EDIT'" (click)="getCustomer()"
+                                        class="btn btn-primary btn-sm mr-1">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 p-2 border">
+                    <div class="row">
+                        <div class="col-md-6  px-0 mx-0">
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Code</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_code" [maxlength]="60" [uppercase]="true"
+                                        [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Name</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_name" [maxlength]="60" [uppercase]="true"
+                                        [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">OfficialName</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_short_name" [maxlength]="60"
+                                        [uppercase]="true" [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Parent</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_parent_name" [maxlength]="60"
+                                        [uppercase]="true" [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Address</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_address1" [maxlength]="60"
+                                        [uppercase]="true" [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm"></label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_address2" [maxlength]="60"
+                                        [uppercase]="true" [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm"></label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_address3" [maxlength]="60"
+                                        [uppercase]="true" [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">City</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_location" [maxlength]="60"
+                                        [uppercase]="true" [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">State</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_state" [maxlength]="60" [uppercase]="true"
+                                        [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Country</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_country_name" [maxlength]="60"
+                                        [uppercase]="true" [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6  px-0 mx-0">
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Zip.Code</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_pincode" [maxlength]="60"
+                                        [uppercase]="true" [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Contact</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_contact" [maxlength]="60"
+                                        [uppercase]="true" [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Title</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_title" [maxlength]="60" [uppercase]="true"
+                                        [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Tel</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_tel" [maxlength]="60" [uppercase]="true"
+                                        [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Mobile</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_mobile" [maxlength]="60" [uppercase]="true"
+                                        [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Fax</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_fax" [maxlength]="60" [uppercase]="true"
+                                        [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Web</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_web" [maxlength]="60" [uppercase]="true"
+                                        [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Email</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_email" [maxlength]="60" [uppercase]="true"
+                                        [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Sales.Rep.</label>
+                                <div class="col-10">
+                                    <InputBox [(inputModel)]="custrecord.gen_salesman_name" [maxlength]="60"
+                                        [uppercase]="true" [disabled]="true">
+                                    </InputBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 p-2 border">
+                    <div class="row">
+                        <div class="col-md-12 px-0 mx-0">
+                            <div class="page-body table-responsive">
+                                <div class="form-group row">
+                                    <label class="col-8 col-form-label col-form-label-sm">Other Contacts</label>
+                                </div>
+                                <table class="table  table-hover table-sm">
+                                    <thead class="page-body-thead">
+                                        <tr>
+                                            <th>NAME</th>
+                                            <th>TITLE</th>
+                                            <th>EMAIL</th>
+                                            <th>MESSENGER</th>
+                                            <th>TEL</th>
+                                            <th>MOBILE</th>
+                                            <th>REMARKS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="page-body-tbody">
+                                        <tr *ngFor="let rec of custdetrecords">
+                                            <td>{{rec.cont_name}}</td>
+                                            <td>{{rec.cont_title}}</td>
+                                            <td>{{rec.cont_email}}</td>
+                                            <td>{{rec.cont_oth_messenger}}</td>
+                                            <td>{{rec.cont_tel}}</td>
+                                            <td>{{rec.cont_mobile}}</td>
+                                            <td>{{rec.cont_remarks}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="mode=='EDIT'" class="col-md-2  p-1 testbox">
+                <div class="col-md-12 p-2 border">
+                    <div class="form-group row">
+                        <button [style.color]="Foregroundcolor" class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('ATTACHMENT')">Attachments</button>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('MEMO')">Memo</button>
+                    </div>
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm">Journal</button>
+                    </div>
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm">Business Info</button>
+                    </div>
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm">Sales Lead</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="col-md-4 testbox  px-0 mx-0">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">SL#</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm text-danger" type="text"
+                            [(ngModel)]="record.qtnr_slno" [disabled]="true" maxlength="25" #refno />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Agent</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                            [displaydata]="record.qtnr_agent_name" (ValueChanged)="LovSelected($event)" #agent>
+                        </app-autocomplete2>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Country Of POL</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'POL-COUNTRY'" [tabletype]="'PARAM'" [subtype]="'COUNTRY'"
+                            [displaycolumn]="'NAME'" [displaydata]="record.qtnr_pol_cntry_name"
+                            (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Country Of POD</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'POD-COUNTRY'" [tabletype]="'PARAM'" [subtype]="'COUNTRY'"
+                            [displaycolumn]="'NAME'" [displaydata]="record.qtnr_pod_cntry_name"
+                            (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Mode</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="record.qtnr_mode">
+                            <option [value]="'AIR'">AIR</option>
+                            <option [value]="'FCL'">FCL</option>
+                            <option [value]="'LCL'">LCL</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Validity</label>
+                    <div class="col-8">
+                        <app-date [inputdate]="record.qtnr_validity" (ValueChanged)="record.qtnr_validity=$event">
+                        </app-date>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 testbox  px-0 mx-0">
+            </div> -->
+
+        </div>
+    </div>
+
+
+    <div class="page-footer">
+        <div class="row justify-content-center p-1">
+            <button class="btn btn-primary btn-md" *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
+
+        </div>
+    </div>
+</div>
+<div *ngIf="tab=='attachment'">
+    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid" [type]="attach_type"
+        [typelist]="attach_typelist" [tablename]="attach_tablename" [tablepkcolumn]="attach_tablepkcolumn"
+        [refno]="attach_refno" [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+        [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid" [filespath]="attach_filespath"
+        [filespath2]="attach_filespath2" (callbackevent)="callbackevent($event)"></app-fileupload>
+</div>

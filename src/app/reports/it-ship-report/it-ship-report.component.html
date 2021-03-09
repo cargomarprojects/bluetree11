@@ -1,0 +1,103 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-1">{{title}}</label>
+    <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+    <i *ngIf="loading" class="fa fa-spinner"></i>
+  </div>
+</div>
+
+<div *ngIf="currentTab=='LIST'">
+
+  <div class="page-list">
+    <div class="page-search">
+
+      <div class="row">
+        <div class="col-md-3">
+
+
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">From</label>
+            <div class="col-8">
+              <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event"></app-date>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">To</label>
+            <div class="col-8">
+              <app-date [inputdate]="edate" (ValueChanged)="edate=$event"></app-date>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Branch</label>
+            <div class="col-8">
+              <select class="form-control form-control-sm" [(ngModel)]="comp_type">
+                <option *ngFor="let rec of gs.CompanyList" [value]="rec.comp_code">{{rec.comp_name}}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-3">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm"></label>
+            <div class="col-8">
+              <button [disabled]="loading" (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <App-Page [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+    (PageEvents)="PageEvents($event)"></App-Page>
+
+  <div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>BRANCH</th>
+          <th>REF#</th>
+          <th>REF-DATE</th>
+          <th>HOUSE</th>
+          <th>CONSIGNEE</th>
+          <th>POD ETA</th>
+          <th>FINAL-DESTINATION</th>
+          <th>SHIPMENT MODE</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+        <tr>
+          <td>{{rec.mbl_branch}}</td>
+          <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+          <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td class='hlink' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td>
+          <td>{{rec.hbl_consignee_name}}</td>
+          <td>{{rec.mbl_pod_eta  | date : gs.FRONTEND_DATEFORMAT }}</td>          
+          <td>{{rec.hbl_place_final}}</td>
+          <td>{{rec.mbl_cntr_type}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <App-Page [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+    (PageEvents)="PageEvents($event)"></App-Page>
+
+
+</div>
+
+<br />
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{errorMessage}}
+</div>

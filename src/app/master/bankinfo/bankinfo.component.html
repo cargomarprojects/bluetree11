@@ -1,0 +1,197 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-3">Bank Details</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6 testbox  px-0 mx-0 border">
+                <div class="form-group row">
+                    <div class="col-4 pr-0">
+                        <input class="form-control form-control-sm text-danger" type="text" [(ngModel)]="partyCode"
+                            [disabled]="true" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm text-danger" type="text" [(ngModel)]="partyName"
+                            [disabled]="true" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 testbox  px-0 mx-0  border">
+                <div class="border">
+                    <label class="col-12 col-form-label col-form-label-sm"><strong>BENEFICIARY DETAILS</strong></label>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                        <div class="col-8">
+                            <InputBox [(inputModel)]="record.pb_benefi_name" [maxlength]="60" [uppercase]="true"
+                                #_pb_benefi_name>
+                            </InputBox>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm">Address</label>
+                        <div class="col-8">
+                            <InputBox [(inputModel)]="record.pb_benefi_address1" [maxlength]="60" [uppercase]="true"
+                                #_pb_benefi_address1>
+                            </InputBox>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm"></label>
+                        <div class="col-8">
+                            <InputBox [(inputModel)]="record.pb_benefi_address2" [maxlength]="60" #_pb_benefi_address2>
+                            </InputBox>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm"></label>
+                        <div class="col-8">
+                            <InputBox [(inputModel)]="record.pb_benefi_address3" [maxlength]="60" [uppercase]="true"
+                                #_pb_benefi_address3>
+                            </InputBox>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm">A/c No.</label>
+                        <div class="col-8">
+                            <InputBox [(inputModel)]="record.pb_benefi_acc_no" [maxlength]="60" [uppercase]="true"
+                                #_pb_benefi_acc_no>
+                            </InputBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="border">
+                    <label class="col-12 col-form-label col-form-label-sm"><strong>BANK DETAILS</strong></label>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                        <div class="col-8">
+                            <InputBox [(inputModel)]="record.pb_bank_name" [maxlength]="60" [uppercase]="true"
+                                #_pb_bank_name>
+                            </InputBox>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm">Address</label>
+                        <div class="col-8">
+                            <InputBox [(inputModel)]="record.pb_bank_address1" [maxlength]="60" [uppercase]="true"
+                                #_pb_bank_address1>
+                            </InputBox>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm"></label>
+                        <div class="col-8">
+                            <InputBox [(inputModel)]="record.pb_bank_address2" [maxlength]="60" #_pb_bank_address2>
+                            </InputBox>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm"></label>
+                        <div class="col-8">
+                            <InputBox [(inputModel)]="record.pb_bank_address3" [maxlength]="60" [uppercase]="true"
+                                #_pb_bank_address3>
+                            </InputBox>
+                        </div>
+                    </div>
+
+                    <div class="border m-2">
+                        <label class="col-12 col-form-label col-form-label-sm"><strong>For International
+                                Customer/Vendor/Agent</strong></label>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Swift Code</label>
+                            <div class="col-8">
+                                <InputBox [(inputModel)]="record.pb_swift_code" [maxlength]="60" [uppercase]="true"
+                                    #_pb_swift_code>
+                                </InputBox>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">IBAN</label>
+                            <div class="col-8">
+                                <InputBox [(inputModel)]="record.pb_iban" [maxlength]="60" [uppercase]="true" #_pb_iban>
+                                </InputBox>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border m-2">
+                        <label class="col-12 col-form-label col-form-label-sm"><strong>For Domestic
+                                Customer/Vendor/Agent</strong></label>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Routing No.</label>
+                            <div class="col-8">
+                                <InputBox [(inputModel)]="record.pb_routing_no" [maxlength]="60" [uppercase]="true"
+                                    #_pb_routing_no>
+                                </InputBox>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm">Further Credit To</label>
+                        <div class="col-8">
+                            <InputBox [(inputModel)]="record.pb_further_credit_to" [maxlength]="60"
+                                #_pb_further_credit_to>
+                            </InputBox>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm">Swift Code/ Routing No.</label>
+                        <div class="col-8">
+                            <InputBox [(inputModel)]="record.pb_further_routing_code" [maxlength]="60"
+                                [uppercase]="true" #_pb_further_routing_code>
+                            </InputBox>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 page-footer">
+                        <div class="row justify-content-center p-1">
+                            <button class="btn btn-primary btn-sm mr-1" (click)="Save()">{{lblSave}}</button>
+                            <button class="btn btn-primary btn-sm mr-1" (click)="NewRecord()">New</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 px-0 mx-0">
+                <div class="row">
+                    <div class="col-md-6 testbox  px-0 mx-0">
+                        <div class="page-list">
+                            <div class="page-body table-responsive">
+                                <table class="table  table-hover table-sm">
+                                    <thead class="page-body-thead">
+                                        <tr>
+                                            <th>BENEFICIARY</th>
+                                            <th>ADDRESS</th>
+                                            <th>BANK</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="page-body-tbody">
+                                        <tr *ngFor="let rec of records; let i = index"
+                                            [class.active]="i == selectedRowIndex" (click)="SetRowIndex(i)">
+                                            <td (click)="EditRow(rec)">{{rec.pb_benefi_name}} </td>
+                                            <td>{{rec.pb_benefi_address1}}</td>
+                                            <td>{{rec.pb_bank_name}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 

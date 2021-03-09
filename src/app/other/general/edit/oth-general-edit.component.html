@@ -1,0 +1,753 @@
+<div *ngIf="tab=='main'">
+    <div class="page-header">
+        <div class="row  align-items-center justify-content-left p-1">
+            <label class="mr-3">{{title}} ({{mode}})</label>
+            <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button> -->
+            <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" [routerLink]="['/Silver.Other.Trans/OthGeneralEditPage']" [queryParams]="{appid : gs.appid, menuid: this.menuid, pkid: '', type: this.OPERATION_MODE,origin: 'oth-general-edit-page',mode: 'ADD'}">New</a>
+            <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+            <label class="text-danger" *ngIf="is_locked">LOCKED</label>
+        </div>
+    </div>
+
+    <!-- <div *ngIf="errorMessage">
+        <div class="alert alert-primary">
+            {{errorMessage}}
+        </div>
+    </div> -->
+    <div *ngIf="errorMessage.length >0">
+        <div class="alert alert-success">
+            <a (click)="errorMessage=[]" class="close" aria-label="close">&times;</a>
+            <ul>
+                <li *ngFor="let str of errorMessage">
+                    <p class="h4"> {{str}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="page-body">
+
+        <div class="row">
+
+            <div class="col-md-10  p-1">
+
+                <div class="row border">
+
+                    <!-- First row -->
+                    <div class="col-md-12 px-0 mx-0">
+                        <div class="row">
+                            <div class="col-md-6 testbox  px-0 mx-0">
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Ref#</label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('mbl_refno')" [(ngModel)]="record.mbl_refno"
+                                            [disabled]="true" maxlength="15" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Ref Date</label>
+                                    <div class="col-9">
+                                        <app-date #_mbl_ref_date [inputdate]="record.mbl_ref_date"
+                                            (ValueChanged)="sdate=$event">
+                                        </app-date>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div *ngIf="gs.JOB_TYPE_OT.length>0" class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Job Type</label>
+                                    <div class="col-9">
+                                        <select class="form-control form-control-sm"
+                                            [(ngModel)]="record.mbl_jobtype_id">
+                                            <option *ngFor="let rec of gs.JOB_TYPE_OT" [value]="rec.code">{{rec.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Stage</label>
+                                    <div class="col-9">
+                                        <select class="form-control form-control-sm"
+                                            [(ngModel)]="record.mbl_shipment_stage">
+                                            <option *ngFor="let rec of gs.SHIPMENT_STAGE_OT" [value]="rec.code">
+                                                {{rec.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Second row -->
+                    <div class="col-md-12 px-0 mx-0">
+                        <div class="row border">
+                            <div class="col-md-6 testbox  px-0 mx-0">
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Mbl#</label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('mbl_no')" #mbl_no (focusout)="onFocusout('mbl_no')"
+                                            [(ngModel)]="record.mbl_no" maxlength="60" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Agent</label>
+                                    <div class="col-9">
+
+                                        <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'MASTER'"
+                                            [displaycolumn]="'NAME'" [displaydata]="record.mbl_agent_name"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Carrier</label>
+                                    <div class="col-9">
+
+                                        <app-autocomplete2 #_mbl_liner_name [controlname]="'CARRIER'"
+                                            [tabletype]="'CARRIER'" [displaycolumn]="'NAME'"
+                                            [displaydata]="record.mbl_liner_name" (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">A/N.Handled.By</label>
+                                    <div class="col-9">
+
+                                        <app-autocomplete2 #_mbl_handled_name [controlname]="'HANDLEDBY'"
+                                            [tabletype]="'PARAM'" [subtype]="'SALESMAN'" [displaycolumn]="'NAME'"
+                                            [displaydata]="record.mbl_handled_name"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Sales.Rep</label>
+                                    <div class="col-9">
+
+                                        <app-autocomplete2 #_mbl_salesman_name [controlname]="'SALESMAN'"
+                                            [tabletype]="'PARAM'" [subtype]="'SALESMAN'" [displaycolumn]="'NAME'"
+                                            [displaydata]="record.mbl_salesman_name"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+
+
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Frt.Status</label>
+                                    <div class="col-9">
+                                        <select #_mbl_frt_status class="form-control form-control-sm"
+                                            [(ngModel)]="record.mbl_frt_status">
+                                            <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.name">
+                                                {{rec.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                    <div class="col-9">
+                      <input type="checkbox" [(ngModel)]="record.mbl_direct_bool" />
+                      <span>Direct Shipment</span>
+                    </div>
+                  </div> -->
+
+
+                            </div>
+                            <div class="col-md-6 testbox  px-0 mx-0">
+
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Pol</label>
+                                    <div class="col-9">
+
+                                        <app-autocomplete2 [controlname]="'POL'" [tabletype]="'PORT'"
+                                            [displaycolumn]="'NAME'" [displaydata]="record.mbl_pol_name"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Pol.ETD</label>
+                                    <div class="col-9">
+                                        <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd"
+                                            (ValueChanged)="record.mbl_pol_etd=$event"></app-date>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Port.Discharge</label>
+                                    <div class="col-9">
+
+                                        <app-autocomplete2 [controlname]="'POD'" [tabletype]="'PORT'"
+                                            [displaycolumn]="'NAME'" [displaydata]="record.mbl_pod_name"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Pod.ETA</label>
+                                    <div class="col-9">
+                                        <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta"
+                                            (ValueChanged)="record.mbl_pod_eta=$event"></app-date>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Destination</label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('mbl_place_delivery')"
+                                            [(ngModel)]="record.mbl_place_delivery" maxlength="60" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Country</label>
+                                    <div class="col-9">
+
+                                        <app-autocomplete2 [controlname]="'COUNTRY'" [tabletype]="'PARAM'"
+                                            [subtype]="'COUNTRY'" [displaycolumn]="'NAME'"
+                                            [displaydata]="record.mbl_country_name"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Vessel/Flight.No</label>
+                                    <div class="col-4 pr-0">
+                                        <input #_mbl_vessel class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('mbl_vessel')" [(ngModel)]="record.mbl_vessel"
+                                            maxlength="60" />
+                                    </div>
+                                    <label class="col-2 col-form-label col-form-label-sm pr-0">Voyage</label>
+                                    <div class="col-3 pl-0">
+                                        <input class="form-control form-control-sm " type="text"
+                                            (blur)="onBlur('mbl_voyage')" [(ngModel)]="record.mbl_voyage"
+                                            maxlength="15" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row border">
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Hbl#</label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_houseno')" #mbl_no
+                                            (focusout)="onFocusout('hbl_houseno')" [(ngModel)]="record.hbl_houseno"
+                                            maxlength="60" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Shipper</label>
+                                    <div class="col-9">
+                                        <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'MASTER'"
+                                            [subtype]="'SHIPPER'" [displaycolumn]="'CODE'"
+                                            [displaydata]="record.hbl_shipper_code"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Name</label>
+                                    <div class="col-9">
+                                        <input #_hbl_shipper_name class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_shipper_name')" [(ngModel)]="record.hbl_shipper_name"
+                                            maxlength="60" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Address</label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_shipper_add1')" [(ngModel)]="record.hbl_shipper_add1"
+                                            maxlength="60" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_shipper_add2')" [(ngModel)]="record.hbl_shipper_add2"
+                                            maxlength="60" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_shipper_add3')" [(ngModel)]="record.hbl_shipper_add3"
+                                            maxlength="60" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_shipper_add4')" [(ngModel)]="record.hbl_shipper_add4"
+                                            maxlength="60" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Consignee</label>
+                                    <div class="col-9">
+                                        <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'MASTER'"
+                                            [subtype]="'CONSIGNEE'" [displaycolumn]="'CODE'"
+                                            [displaydata]="record.hbl_consignee_code"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Name</label>
+                                    <div class="col-9">
+                                        <input #_hbl_consignee_name class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_consignee_name')"
+                                            [(ngModel)]="record.hbl_consignee_name" maxlength="60" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Address</label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_consignee_add1')"
+                                            [(ngModel)]="record.hbl_consignee_add1" maxlength="60" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_consignee_add2')"
+                                            [(ngModel)]="record.hbl_consignee_add2" maxlength="60" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_consignee_add3')"
+                                            [(ngModel)]="record.hbl_consignee_add3" maxlength="60" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_consignee_add4')"
+                                            [(ngModel)]="record.hbl_consignee_add4" maxlength="60" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Frt.Status</label>
+                                    <div class="col-9">
+                                        <select class="form-control form-control-sm"
+                                            [(ngModel)]="record.hbl_frt_status">
+                                            <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.name">
+                                                {{rec.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Description</label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_commodity')" [(ngModel)]="record.hbl_commodity"
+                                            maxlength="100" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">ISF No.</label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_isf_no')" [(ngModel)]="record.hbl_isf_no"
+                                            maxlength="20" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">PCS</label>
+                                    <div class="col-3 ">
+                                        <input class="form-control form-control-sm" type="number"
+                                            (blur)="onBlur('hbl_packages')" [(ngModel)]="record.hbl_packages"
+                                            maxlength="15" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Weight</label>
+                                    <div class="col-3 input-group input-group-sm">
+                                        <input class="form-control form-control-sm" type="number"
+                                            (blur)="onBlur('hbl_weight')" [(ngModel)]="record.hbl_weight"
+                                            maxlength="15" />
+                                        <button class="btn btn-info btn-sm"
+                                            (click)="FindWeight('Kgs2Lbs')"><span>&gt;</span></button>
+                                    </div>
+                                    <label class="col-3 col-form-label col-form-label-sm">LBS</label>
+                                    <div class="col-3 input-group input-group-sm">
+                                        <input class="form-control form-control-sm" type="number"
+                                            (blur)="onBlur('hbl_lbs')" [(ngModel)]="record.hbl_lbs" maxlength="15" />
+                                        <button class="btn btn-info btn-sm"
+                                            (click)="FindWeight('Lbs2Kgs')"><span>&lt;</span> </button>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">CBM</label>
+                                    <div class="col-3 input-group input-group-sm">
+                                        <input class="form-control form-control-sm" type="number"
+                                            (blur)="onBlur('hbl_cbm')" [(ngModel)]="record.hbl_cbm" maxlength="15" />
+                                        <button class="btn btn-info btn-sm"
+                                            (click)="FindWeight('Cbm2Cft')"><span>&gt;</span></button>
+                                    </div>
+                                    <label class="col-3 col-form-label col-form-label-sm">CFT</label>
+                                    <div class="col-3 input-group input-group-sm">
+                                        <input class="form-control form-control-sm" type="number"
+                                            (blur)="onBlur('hbl_cft')" [(ngModel)]="record.hbl_cft" maxlength="15" />
+                                        <button class="btn btn-info btn-sm"
+                                            (click)="FindWeight('Cft2Cbm')"><span>&lt;</span> </button>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">CH.Weight</label>
+                                    <div class="col-3 input-group input-group-sm">
+                                        <input class="form-control form-control-sm" type="number"
+                                            (blur)="onBlur('hbl_chwt')" [(ngModel)]="record.hbl_chwt" maxlength="15" />
+                                        <button class="btn btn-info btn-sm"
+                                            (click)="FindWeight('Chwt2Lbs')"><span>&gt;</span></button>
+                                    </div>
+                                    <label class="col-3 col-form-label col-form-label-sm">LBS</label>
+                                    <div class="col-3 input-group input-group-sm">
+                                        <input class="form-control form-control-sm" type="number"
+                                            (blur)="onBlur('hbl_chwt_lbs')" [(ngModel)]="record.hbl_chwt_lbs"
+                                            maxlength="15" />
+                                        <button class="btn btn-info btn-sm" (click)="FindWeight('Lbs2Chwt')"><span>
+                                                &lt;</span> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row border">
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <input type="checkbox" [(ngModel)]="record.hbl_is_pl_bool" />
+                                        <span>Packing List</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <input type="checkbox" [(ngModel)]="record.hbl_is_ci_bool" />
+                                        <span>Commercial Invoice</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <input type="checkbox" [(ngModel)]="record.hbl_is_carr_an_bool" />
+                                        <span>Carrier AN</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Customs
+                                        Release Status</label>
+                                    <div class="col-9">
+                                        <select class="form-control form-control-sm"
+                                            [(ngModel)]="record.hbl_custom_reles_status">
+                                            <option [value]="'NA'">NA</option>
+                                            <option [value]="'PENDING'">PENDING</option>
+                                            <option [value]="'EXAM'">EXAM</option>
+                                            <option [value]="'COMPLETE'">COMPLETE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Delivery
+                                        Status</label>
+                                    <div class="col-9">
+                                        <select class="form-control form-control-sm"
+                                            [(ngModel)]="record.hbl_is_delivery">
+                                            <option [value]="'NA'">NA</option>
+                                            <option [value]="'YES'">YES</option>
+                                            <option [value]="'NO'">NO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Last
+                                        Free Date</label>
+                                    <div class="col-9">
+                                        <app-date [inputdate]="record.hbl_lfd_date"
+                                            (ValueChanged)="record.hbl_lfd_date=$event">
+                                        </app-date>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">IT
+                                        No.</label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_it_no')" [(ngModel)]="record.hbl_it_no"
+                                            maxlength="60" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">IT
+                                        Date</label>
+                                    <div class="col-9">
+                                        <app-date [inputdate]="record.hbl_it_date" (ValueChanged)="hbl_it_date=$event">
+                                        </app-date>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">IT
+                                        Port</label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('hbl_it_port')" [(ngModel)]="record.hbl_it_port"
+                                            maxlength="60" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+
+                            <div class="col-md-12 px-0 mx-0">
+                                <div class="page-body table-responsive">
+                                    <table class="table  table-hover table-sm">
+                                        <thead class="page-body-thead">
+                                            <tr>
+                                                <th>CNTR.NO</th>
+                                                <th>TYPE</th>
+                                                <th>SEAL NO</th>
+                                                <th>PCS</th>
+                                                <th>UNIT</th>
+                                                <th>WEIGHT</th>
+                                                <th>CBM</th>
+                                                <th class='text-center'>DELETE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="page-body-tbody">
+                                            <tr *ngFor="let rec of records; let i = index">
+                                                <td class="p-0">
+                                                    <input #_cntr_no class="form-control form-control-sm" type="text"
+                                                        [(ngModel)]="rec.cntr_no" maxlength="11"
+                                                        (blur)="onBlur('cntr_no',rec)" />
+                                                </td>
+                                                <td class="p-0">
+                                                    <app-autocomplete2 [controlname]="'CONTAINER TYPE'"
+                                                        [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                                                        [subtype]="'CONTAINER TYPE'" [uid]="rec.cntr_pkid"
+                                                        [displaydata]="rec.cntr_type"
+                                                        (ValueChanged)="LovSelected($event,i)">
+                                                    </app-autocomplete2>
+                                                </td>
+                                                <td class="p-0">
+                                                    <input #_cntr_sealno class="form-control form-control-sm"
+                                                        type="text" [(ngModel)]="rec.cntr_sealno" maxlength="25"
+                                                        (blur)="onBlur('cntr_sealno',rec)" />
+                                                </td>
+                                                <td class="p-0">
+                                                    <input class="form-control form-control-sm" type="number"
+                                                        [(ngModel)]="rec.cntr_pieces"
+                                                        (blur)="onBlur('cntr_pieces',rec)" />
+                                                </td>
+                                                <td class="p-0">
+                                                    <input class="form-control form-control-sm" type="text"
+                                                        [(ngModel)]="rec.cntr_packages_uom" maxlength="4"
+                                                        (blur)="onBlur('cntr_packages_uom',rec)" />
+                                                </td>
+                                                <td class="p-0">
+                                                    <input class="form-control form-control-sm" type="number"
+                                                        [(ngModel)]="rec.cntr_weight"
+                                                        (blur)="onBlur('cntr_weight',rec)" />
+                                                </td>
+
+                                                <td class="p-0">
+                                                    <input class="form-control form-control-sm" type="number"
+                                                        [(ngModel)]="rec.cntr_cbm" (blur)="onBlur('cntr_cbm',rec)" />
+                                                </td>
+                                                <td class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
+                                                        aria-hidden="true" (click)="RemoveRow(rec)"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="form-group row">
+                                        <div class="col-12 pl-1 pb-1">
+                                            <button class="btn btn-info btn-sm mr-1" [disabled]="is_locked"
+                                                (click)="AddRow()">Add
+                                                Cntr</button>
+                                            <button class="btn btn-info btn-sm mr-1" (click)="CopyCntrClipboard()">Copy
+                                                Containers</button>
+                                            <!-- *ngIf="!is_locked" -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div *ngIf="mode=='EDIT'" class="col-md-2  p-1 testbox">
+
+                <div class="col-md-12  p-2 border">
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_OT_OPERATION_DELIVERY_ORDER)"
+                            (click)="BtnNavigation('DELIVERY-ORDER')">Delivery
+                            Order</button>
+                    </div>
+
+
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_OT_OPERATION_ARAP)" (click)="BtnNavigation('ARAP')">AR &
+                            AP</button>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_OT_OPERATION_PROFIT_REPORT)"
+                            (click)="BtnNavigation('PROFITREPORT')">Profit Report</button>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_SHIPMENT_LABEL)"
+                            (click)="BtnNavigation('SHIP-LABEL-PRINT')">Shipment Label</button>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_OT_MESSENGER_SLIP)"
+                            (click)="BtnNavigation('MESSENGER-SLIP')">Messenger
+                            Slip</button>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_OT_PAYMENT_REQUEST)"
+                            (click)="BtnNavigation('PAYMENT-REQUEST')">Payment
+                            Request</button>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_OT_ATTACHMENTS)"
+                            [style.color]="record.rec_files_attached=='Y'?'red':black"
+                            (click)="BtnNavigation('ATTACHMENT',attachmodal)">Attachments</button>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_OT_OPERATION)" (click)="BtnNavigation('FOLLOWUP')">Add To
+                            Follow
+                            Up</button>
+                    </div>
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_OT_MASTER_INTERNAL_MEMO)"
+                            [style.color]="record.mbl_ismemo_attached=='Y'?'red':black"
+                            (click)="BtnNavigation('INERNALMEMO')">Internal
+                            Memo</button>
+                    </div>
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_OT_MASTER_REQUEST_APPROVAL)"
+                            (click)="BtnNavigation('REQUEST-APPROVAL')">Request
+                            For Approval</button>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <div class="row justify-content-center p-1">
+            <button class="btn btn-primary btn-md" [disabled]="is_locked" *ngIf="gs.canSave(menuid,mode)"
+                (click)="Save()">Save</button>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <label class="col-form-label col-form-label-sm" *ngIf="record.rec_created_by"> CREATED BY:
+            {{record.rec_created_by}}
+            /
+            {{record.rec_created_date}} </label>
+    </div>
+</div>
+<div *ngIf="tab=='report'">
+    <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+        (callbackevent)="callbackevent($event)"></app-report>
+</div>
+<ng-template #attachmodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+                        [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+                        [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
+                        [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+                        [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
+                        [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
+                        (callbackevent)="callbackevent($event)"></app-fileupload>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,254 @@
+
+<!-- <div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">Payment</label>
+    </div>
+</div>
+ -->
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-4 testbox  px-0 mx-0">
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Date</label>
+                <div class="col-8">
+                    <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event">
+                    </app-date>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Bank</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'ACCTM'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'CODE'"
+                        [where]="where" [displaydata]="Txt_Bank_Code" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('txt_bank_name')"
+                        [(ngModel)]="Txt_Bank_Name" maxlength="100" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Address</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('Txt_Address1')"
+                        [(ngModel)]="Txt_Address1" maxlength="100" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('Txt_Address2')"
+                        [(ngModel)]="Txt_Address2" maxlength="100" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('Txt_Address3')"
+                        [(ngModel)]="Txt_Address3" maxlength="100" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('Txt_Address4')"
+                        [(ngModel)]="Txt_Address4" maxlength="100" />
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="paymode_enabled">
+                <label class="col-4 col-form-label col-form-label-sm">Pay/Mode</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="paymode">
+                        <option [value]="'CHECK'">CHECK</option>
+                        <option [value]="'WIRE TRANSFER'">WIRE TRANSFER</option>
+                        <option [value]="'CASH'">CASH</option>
+                        <option [value]="'ONLINE/ACH PAYMENT'">ONLINE/ACH PAYMENT</option>
+                        <option [value]="'CREDIT CARD'">CREDIT CARD</option>
+                        <option [value]="'CARGO SPRINT'" *ngIf="gs.GENERAL_BRANCH_CODE == 'MFDR'">CARGO SPRINT</option>
+                        <option [value]="'PAY CARGO'" *ngIf="gs.GENERAL_BRANCH_CODE == 'MFDR'">PAY CARGO</option>
+                        <option [value]="'OTHERS'">OTHERS</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="next_chqno_enabled">
+                <div class="col-4">
+                    <button class="btn btn-info btn-sm" (click)="LoadNextChqNo()">LAST CHK/MEMO#</button>
+                </div>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('Txt_Next_ChqNo')"
+                        [(ngModel)]="Txt_Next_ChqNo" maxlength="50" disabled />
+                </div>
+            </div>
+
+
+            <div class="form-group row" *ngIf="chqno_enabled">
+                <label class="col-4 col-form-label col-form-label-sm">Check No</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('Txt_ChqNo')"
+                        [(ngModel)]="Txt_ChqNo" maxlength="50" />
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="chqdt_enabled">
+                <label class="col-3 col-form-label col-form-label-sm">Check Date</label>
+                <div class="col-8">
+                    <app-date [inputdate]="Dt_ChqDt" (ValueChanged)="Dt_ChqDt=$event">
+                    </app-date>
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="chqdt_enabled">
+                <label class="col-4 col-form-label col-form-label-sm">Bank</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('Txt_Chq_Bank')"
+                        [(ngModel)]="Txt_Chq_Bank" maxlength="100" />
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="memo_enabled">
+                <label class="col-4 col-form-label col-form-label-sm">Memo</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('Txt_Memo')"
+                        [(ngModel)]="Txt_Memo" maxlength="100" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4 testbox  px-0 mx-0">
+
+
+            <div class="form-group row" *ngIf="amt_enabled">
+                <label class="col-4 col-form-label col-form-label-sm">{{LBL_AMT}}</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('Txt_Amt')"
+                        [(ngModel)]="TXT_AMT" maxlength="100"  disabled/>
+                </div>
+            </div>
+
+
+            <div class="form-group row" *ngIf="amt_base_enabled">
+                <label class="col-4 col-form-label col-form-label-sm">{{LBL_BASE_CURR_AMT}}</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('Txt_Amt_Base')"
+                        [(ngModel)]="Txt_Amt_Base" maxlength="100" disabled />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+            </div>
+
+
+            <div class="form-group row" *ngIf="currency_enabled">
+                <label class="col-4 col-form-label col-form-label-sm">Currency</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('Txt_Currency')"
+                        [(ngModel)]="Txt_Currency" maxlength="100" disabled />
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="currency_enabled">
+                <label class="col-4 col-form-label col-form-label-sm">Ex.Rate</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('Txt_ExRate')"
+                        [(ngModel)]="Txt_ExRate" maxlength="100" disabled />
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="bank_paid_enabled">
+                <label class="col-4 col-form-label col-form-label-sm">{{LLB_BANK_PAID}}</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('TxT_Bank_Paid')"
+                        [(ngModel)]="TxT_Bank_Paid" maxlength="100" />
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="bank_charges_enabled">
+                <label class="col-4 col-form-label col-form-label-sm">{{LBL_BANK_CHARGES}}</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('Txt_Bank_Charges')"
+                        [(ngModel)]="Txt_Bank_Charges" maxlength="100" />
+                </div>
+            </div>
+
+            <div *ngIf="posting_enabled">
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">A/c Posting</label>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Type</label>
+                    <label class="col-4 col-form-label col-form-label-sm">Dr</label>
+                    <label class="col-4 col-form-label col-form-label-sm">Cr</label>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Bank</label>
+                    <label class="col-4 col-form-label col-form-label-sm">{{LBL_BANK_DR}}</label>
+                    <label class="col-4 col-form-label col-form-label-sm">{{LBL_BANK_CR}}</label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Charges</label>
+                    <label class="col-4 col-form-label col-form-label-sm">{{LBL_CHARGES_DR}}</label>
+                    <label class="col-4 col-form-label col-form-label-sm">{{LBL_CHARGES_CR}}</label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Party</label>
+                    <label class="col-4 col-form-label col-form-label-sm">{{LBL_PARTY_DR}}</label>
+                    <label class="col-4 col-form-label col-form-label-sm">{{LBL_PARTY_CR}}</label>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Ex.Diff</label>
+                    <label class="col-4 col-form-label col-form-label-sm">{{LBL_EX_DIFF_DR}}</label>
+                    <label class="col-4 col-form-label col-form-label-sm">{{LBL_EX_DIFF_CR}}</label>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">TOTAL </label>
+                    <label class="col-4 col-form-label col-form-label-sm">{{LBL_TOTAL_DR}}</label>
+                    <label class="col-4 col-form-label col-form-label-sm">{{LBL_TOTAL_CR}}</label>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="page-footer">
+    <div class="row" *ngIf="canSave">
+        <div class="col-md-8">
+            <div class="form-group row">
+                <label class="col-6 col-form-label col-form-label-sm"></label>
+                <div class="col-6">
+                    <button class="btn btn-primary btn-sm" (click)="AllValid()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

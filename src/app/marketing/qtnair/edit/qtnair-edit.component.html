@@ -1,0 +1,479 @@
+<div *ngIf="tab=='main'">
+    <div class="page-header">
+        <div class="row align-items-center justify-content-left p-1">
+            <label class="mr-3">{{title}}({{mode}})</label>
+            <button *ngIf="mode=='EDIT'" class="btn btn-primary btn-sm mr-1" (click)="Copy()">Copy</button>
+            <button  #_btnretair class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage.length >0">
+        <div class="alert alert-success">
+            <a (click)="errorMessage=[]" class="close" aria-label="close">&times;</a>
+            <ul>
+                <li *ngFor="let str of errorMessage">
+                    <p class="h4"> {{str}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="page-body">
+        <div class="row border">
+            <div class="col-md-4 testbox  px-0 mx-0">
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Quote#</label>
+                    <div class="col-9">
+                        <input class="form-control form-control-sm text-danger" type="text" [(ngModel)]="record.qtnm_no"
+                            [disabled]="true" maxlength="25" #refno />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 testbox  px-0 mx-0">
+            </div>
+        </div>
+        <div class="row border">
+            <div class="col-md-4 testbox  px-0 mx-0">
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Quote To</label>
+                    <div class="col-9">
+                        <app-autocomplete2 [controlname]="'QUOTE-TO'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                            [displaydata]="record.qtnm_to_code" (ValueChanged)="LovSelected($event)" #_qtnm_to_code>
+                        </app-autocomplete2>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-9">
+                        <InputBox [(inputModel)]="record.qtnm_to_name" [maxlength]="60" [uppercase]="true" #_qtnm_to_name>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Address</label>
+                    <div class="col-9">
+                        <InputBox [(inputModel)]="record.qtnm_to_addr1" [maxlength]="60" [uppercase]="true" #to_addr1>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                    <div class="col-9">
+                        <InputBox [(inputModel)]="record.qtnm_to_addr2" [maxlength]="60" [uppercase]="true" #to_addr2>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                    <div class="col-9">
+                        <InputBox [(inputModel)]="record.qtnm_to_addr3" [maxlength]="60" [uppercase]="true" #to_addr3>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                    <div class="col-9">
+                        <InputBox [(inputModel)]="record.qtnm_to_addr4" [maxlength]="60" [uppercase]="true" #to_addr4>
+                        </InputBox>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 testbox  px-0 mx-0">
+
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Quote Date</label>
+                    <div class="col-9">
+                        <app-date [inputdate]="record.qtnm_date" (ValueChanged)="record.qtnm_date=$event">
+                        </app-date>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Quote By</label>
+                    <div class="col-9">
+                        <InputBox [(inputModel)]="record.qtnm_quot_by" [maxlength]="60" [uppercase]="true" #quot_by>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Validity</label>
+                    <div class="col-9">
+                        <app-date [inputdate]="record.qtnm_valid_date" (ValueChanged)="record.qtnm_valid_date=$event">
+                        </app-date>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Sales Rep.</label>
+                    <div class="col-9">
+                        <app-autocomplete2 [controlname]="'SALESMAN'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
+                            [displaycolumn]="'NAME'" [displaydata]="record.qtnm_salesman_name"
+                            (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Move Type</label>
+                    <div class="col-9">
+                        <InputBox [(inputModel)]="record.qtnm_move_type" [maxlength]="25" [uppercase]="true" #_qtnm_move_type>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Commodity</label>
+                    <div class="col-9">
+                        <InputBox [(inputModel)]="record.qtnm_commodity" [maxlength]="60" [uppercase]="true" #Commodity>
+                        </InputBox>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4 testbox  px-0 mx-0">
+
+                <div class="form-group row" *ngIf="gs.BRANCH_REGION != 'USA'">
+                    <label class="col-3 col-form-label col-form-label-sm">Currency</label>
+                    <div class="col-9">
+                        <app-autocomplete2 [controlname]="'CURR'" [tabletype]="'PARAM'" [subtype]="'CURRENCY'"
+                            [displaycolumn]="'CODE'" [displaydata]="record.qtnm_curr_code"
+                            (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border">
+            <div class="col-md-12  px-0 mx-0">
+                <div class="row p-1">
+                    <div class="col-md-4 testbox  px-0 mx-0">
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label col-form-label-sm">POL</label>
+                            <div class="col-9">
+                                <app-autocomplete2 #_pol_code [controlname]="'POL'" [displaycolumn]="'CODE'"
+                                    [tabletype]="'PARAMDET'" [subtype]="'AIR PORT'" [displaydata]="polCode"
+                                    (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label col-form-label-sm"></label>
+                            <div class="col-9">
+                                <InputBox [(inputModel)]="polName" [maxlength]="60" [uppercase]="true" #_pol_name>
+                                </InputBox>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label col-form-label-sm">POD</label>
+                            <div class="col-9">
+                                <app-autocomplete2 #_pod_code [controlname]="'POD'" [displaycolumn]="'CODE'"
+                                    [tabletype]="'PARAMDET'" [subtype]="'AIR PORT'" [displaydata]="podCode"
+                                    (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label col-form-label-sm"></label>
+                            <div class="col-9">
+                                <InputBox [(inputModel)]="podName" [maxlength]="60" [uppercase]="true" #_pod_name>
+                                </InputBox>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-4 testbox  px-0 mx-0">
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label col-form-label-sm">CARRIER</label>
+                            <div class="col-9">
+                                <app-autocomplete2 #_carr_code [controlname]="'CARR'" [displaycolumn]="'CODE'"
+                                    [tabletype]="'AIR CARRIER'" [subtype]="'AIR CARRIER'" [displaydata]="carrCode"
+                                    (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label col-form-label-sm"></label>
+                            <div class="col-9">
+                                <InputBox [(inputModel)]="carrName" [maxlength]="60" [uppercase]="true" #_carr_name>
+                                </InputBox>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-4  pr-0">
+                                <label class="col-form-label col-form-label-sm">T/T</label>
+                            </div>
+                            <div class="col-4 pl-0  pr-0">
+                                <label class="col-form-label col-form-label-sm">ROUTING</label>
+                            </div>
+
+                            <div class="col-4 pl-0  ">
+                                <label class="col-form-label col-form-label-sm">ETD</label>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4    pr-0">
+                                <InputBox [(inputModel)]="transitTime" [maxlength]="15" [uppercase]="true"
+                                    #transit_time>
+                                </InputBox>
+                            </div>
+                            <div class="col-4 pl-0  pr-0">
+                                <InputBox [(inputModel)]="routing" [maxlength]="60" [uppercase]="true" #routing1>
+                                </InputBox>
+                            </div>
+                            <div class="col-4 pl-0  ">
+                                <InputBox [(inputModel)]="etd" [maxlength]="25" [uppercase]="true" #etd1></InputBox>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 testbox  px-0 mx-0">
+                        <!-- <div class="form-group row">
+                            <label class="col-3 col-form-label col-form-label-sm">CARRIER</label>
+                            <div class="col-9">
+                                <app-autocomplete2 [controlname]="'CARR'" [displaycolumn]="'CODE'"
+                                    [tabletype]="'SEA CARRIER'" [subtype]="'SEA CARRIER'" [displaydata]="carrCode"
+                                    (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label col-form-label-sm"></label>
+                            <div class="col-9">
+                                <InputBox [(inputModel)]="carrName" [maxlength]="60" [uppercase]="true" #carr_name>
+                                </InputBox>
+                            </div>
+                        </div> -->
+
+
+                        <div class="form-group row">
+                            <div class="col-2  pl-0  pr-0">
+                                <label class="col-form-label col-form-label-sm">MINIMUM</label>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <label class="col-form-label col-form-label-sm">+45K</label>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <label class="col-form-label col-form-label-sm">+100K</label>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <label class="col-form-label col-form-label-sm">+300K</label>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <label class="col-form-label col-form-label-sm">+500K</label>
+                            </div>
+                            <div class="col-2 pl-0">
+                                <label class="col-form-label col-form-label-sm">+1000K</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-2  pl-0  pr-0">
+                                <InputBox [(inputModel)]="kmin" [maxlength]="25" [uppercase]="true" #k_min>
+                                </InputBox>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <InputBox [(inputModel)]="k45" [maxlength]="15" [uppercase]="true" #k_45>
+                                </InputBox>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <InputBox [(inputModel)]="k100" [maxlength]="15" [uppercase]="true" #k_100>
+                                </InputBox>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <InputBox [(inputModel)]="k300" [maxlength]="15" [uppercase]="true" #k_300>
+                                </InputBox>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <InputBox [(inputModel)]="k500" [maxlength]="15" [uppercase]="true" #k_500></InputBox>
+                            </div>
+
+                            <div class="col-2 pl-0  ">
+                                <InputBox [(inputModel)]="k1000" [maxlength]="15" [uppercase]="true" #k_1000>
+                                </InputBox>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-2  pl-0  pr-0">
+                                <label class="col-form-label col-form-label-sm">FSC</label>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <label class="col-form-label col-form-label-sm">WAR</label>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <label class="col-form-label col-form-label-sm">SFC</label>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <label class="col-form-label col-form-label-sm">HAC</label>
+                            </div>
+                            <div class="col-2">
+                                <label class="col-form-label col-form-label-sm"></label>
+                            </div>
+                            <div class="col-2">
+                                <label class="col-form-label col-form-label-sm"></label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-2  pl-0  pr-0">
+                                <InputBox [(inputModel)]="fsc" [maxlength]="15" [uppercase]="true" #k_fsc>
+                                </InputBox>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <InputBox [(inputModel)]="war" [maxlength]="15" [uppercase]="true" #k_war>
+                                </InputBox>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <InputBox [(inputModel)]="sfc" [maxlength]="15" [uppercase]="true" #k_sfc>
+                                </InputBox>
+                            </div>
+                            <div class="col-2 pl-0  pr-0">
+                                <InputBox [(inputModel)]="hac" [maxlength]="15" [uppercase]="true" #k_hac>
+                                </InputBox>
+                            </div>
+                            <div class="col-4">
+                                <button class="btn btn-info btn-sm mr-1" (click)="AddRow()">{{lblSave}}</button>
+                                <button class="btn btn-info btn-sm mr-1" (click)="NewRow()">New</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="page-body table-responsive">
+                    <table class="table  table-hover table-sm">
+                        <thead class="page-body-thead">
+                            <tr>
+                                <th>POL</th>
+                                <th>POD</th>
+                                <th>CARRIER</th>
+                                <th>ETD</th>
+                                <th>T/T</th>
+                                <th>ROUTING</th>
+                                <th>MINIMUM</th>
+                                <th>+45K</th>
+                                <th>+100K</th>
+                                <th>+300K</th>
+                                <th>+500K</th>
+                                <th>+1000K</th>
+                                <th>FSC</th>
+                                <th>WAR</th>
+                                <th>SFC</th>
+                                <th>HAC</th>
+                                <th style="text-align:center">DELETE</th>
+                            </tr>
+                        </thead>
+                        <tbody class="page-body-tbody">
+                            <tr *ngFor="let rec of records">
+                                <td class='hlink' (click)="EditRow(rec)">{{rec.qtnd_pol_name}} </td>
+                                <td class="p-0">{{rec.qtnd_pod_name}} </td>
+                                <td class="p-0">{{rec.qtnd_carrier_name}} </td>
+                                <td class="p-0">{{rec.qtnd_etd}}</td>
+                                <td class="p-0">{{rec.qtnd_transtime}}</td>
+                                <td class="p-0">{{rec.qtnd_routing}}</td>
+                                <td class="p-0">{{rec.qtnd_min}}</td>
+                                <td class="p-0">{{rec.qtnd_45k}}</td>
+                                <td class="p-0">{{rec.qtnd_100k}}</td>
+                                <td class="p-0">{{rec.qtnd_300k}}</td>
+                                <td class="p-0">{{rec.qtnd_500k}}</td>
+                                <td class="p-0">{{rec.qtnd_1000k}}</td>
+                                <td class="p-0">{{rec.qtnd_fsc}}</td>
+                                <td class="p-0">{{rec.qtnd_war}}</td>
+                                <td class="p-0">{{rec.qtnd_sfc}}</td>
+                                <td class="p-0">{{rec.qtnd_hac}}</td>
+                                <td class="p-0" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
+                                        aria-hidden="true" (click)="RemoveRow(rec)"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row border">
+            <div class="col-md-8  px-0 mx-0">
+                <div class="row">
+                    <div class="col-12 px-0 mx-0">
+                        <div class="form-group row">
+                            <div class="offset-1 col-11">
+                                <button class="btn btn-info btn-sm mr-1" (click)="GetMessage('AIRMSG1')">Msg 1
+                                    (C-Imp)</button>
+                                <button class="btn btn-info btn-sm mr-1" (click)="GetMessage('AIRMSG2')">Msg 2
+                                    (C-Exp)</button>
+                                <button class="btn btn-info btn-sm mr-1" (click)="GetMessage('AIRMSG3')">Msg 3
+                                    (A-Exp)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 px-0 mx-0">
+                        <div class="form-group row">
+                            <label class="col-1 col-form-label col-form-label-sm">Subject</label>
+                            <div class="col-11">
+                                <textarea #_qtnm_subjects rows="6" class="form-control form-control-sm"
+                                    [(ngModel)]="record.qtnm_subjects"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-1 col-form-label col-form-label-sm">Remarks</label>
+                            <div class="col-11">
+                                <textarea rows="6" class="form-control form-control-sm"
+                                    [(ngModel)]="record.qtnm_remarks"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-1 col-form-label col-form-label-sm">Office Use Only</label>
+                            <div class="col-11">
+                                <textarea rows="6" class="form-control form-control-sm"
+                                    [(ngModel)]="record.qtnm_office_use"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-footer">
+            <div class="row justify-content-center p-1">
+                <button class="btn btn-primary btn-md mr-1" *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
+                <button *ngIf="mode=='EDIT'" class="btn btn-primary btn-md mr-1"
+                    (click)="BtnNavigation('PRINT')">Print</button>
+                <button [style.color]="Foregroundcolor" *ngIf="mode=='EDIT'" class="btn btn-primary btn-md mr-1"
+                    (click)="BtnNavigation('ATTACHMENT',attachmodal)">Supporting
+                    Documents</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="tab=='report'">
+    <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+        (callbackevent)="callbackevent($event)"></app-report>
+</div>
+
+<ng-template #attachmodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+                        [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+                        [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
+                        [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+                        [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
+                        [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
+                        (callbackevent)="callbackevent($event)"></app-fileupload>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

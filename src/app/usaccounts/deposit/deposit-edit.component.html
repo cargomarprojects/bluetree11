@@ -1,0 +1,112 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">A/R Deposit ({{mode}})</label>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+            <div class="form-group row">
+
+                <label class="col-2 col-form-label col-form-label-sm">Date</label>
+                <div class="col-4">
+                    <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event">
+                    </app-date>
+                </div>
+
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Bank</label>
+                <div class="col-4">
+                    <app-autocomplete2 [controlname]="'ACCTM'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'CODE'"
+                        [where]="where" [displaydata]="code" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+                <label class="col-6 col-form-label col-form-label-sm">{{name}}</label>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Remarks</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('remarks')"
+                        [(ngModel)]="remarks" maxlength="100" />
+                </div>
+                <div class="col-6">
+                    <button (click)="pendingList()" class="btn btn-primary btn-sm mr-1">Search</button>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="col-md-4 testbox  px-0 mx-0">
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Total</label>
+                <label class="col-8 col-form-label col-form-label-sm">{{total_amount}}</label>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th>SELECT</th>
+                <th>PAYMENT#</th>
+                <th>DATE</th>
+                <th>PAY-AMT</th>
+                <th>CHECK#</th>
+                <th>BANK</th>
+                <th>CUSTOMER</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of arPendingList">
+                <td>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" (click)="swapSelection(rec)" #chkbox
+                            [(ngModel)]="rec.pay_flag2"></div>
+                </td>
+                <td>{{rec.pay_docno}}</td>
+                <td>{{rec.pay_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.pay_total | number : '1.2-2'}} </td>
+                <td>{{rec.pay_chqno}} </td>
+                <td>{{rec.pay_acc_name}} </td>
+                <td>{{rec.pay_cust_name}} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm" (click)="Save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

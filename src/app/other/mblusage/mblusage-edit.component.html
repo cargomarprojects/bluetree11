@@ -1,0 +1,129 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">MBL Usage -Agents  ({{mode}})</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Agent</label>
+                <div class="col-9">
+                    <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                        [displaydata]="record.mu_agent_code" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Name</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mu_agent_name')"
+                    [disabled]=true 
+                    [(ngModel)]="record.mu_agent_name" maxlength="50" />
+                </div>
+            </div>            
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">BL-From</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('mu_bl_start_no')"
+                        [(ngModel)]="record.mu_bl_start_no" maxlength="60" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">BL-To</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('mu_bl_end_no')"
+                        [(ngModel)]="record.mu_bl_end_no" maxlength="60" />
+                </div>
+            </div>  
+            
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Number Of B/L</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('mu_bl_tot')"
+                        [(ngModel)]="record.mu_bl_tot" maxlength="60" />
+                </div>
+            </div>            
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Courier Origin</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mu_origin')"
+                        [(ngModel)]="record.mu_origin" maxlength="60" />
+                </div>
+            </div>            
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Courier Name</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mu_courier_name')"
+                        [(ngModel)]="record.mu_courier_name" maxlength="60" />
+                </div>
+            </div>                        
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Tracking#</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mu_tracking_no')"
+                        [(ngModel)]="record.mu_tracking_no" maxlength="60" />
+                </div>
+            </div>                        
+
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Courier Sent On</label>
+                <div class="col-9">
+                    <app-date [inputdate]="record.mu_sent_on" (ValueChanged)="record.mu_sent_on=$event"></app-date>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Rermarks</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mu_remarks')"
+                        [(ngModel)]="record.mu_remarks" maxlength="100" />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+        </div>
+
+    </div>
+</div>
+
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm" (click)="Save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

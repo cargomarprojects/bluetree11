@@ -1,0 +1,45 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-1">{{mainservice.title}}</label>
+    <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+  </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+  {{errorMessage}}
+</div>
+
+<app-menu-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-menu-header>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive">
+  <table class="table  table-hover table-sm">
+    <thead class="page-body-thead">
+      <tr>
+        <th>MODULE</th>
+        <th>GROUP</th>
+        <th>MENU</th>
+        <th>LOCKED</th>        
+        <th>ORDER</th>        
+        <th>HIDEN</th>        
+      </tr>
+    </thead>
+    <tbody class="page-body-tbody">
+      <tr *ngFor="let rec of records$ | async">
+        <td (click)="edit(rec)">{{rec.module_name}}</td>
+        <td>{{rec.menu_group_name}}</td>
+        <td>{{rec.menu_name}}</td>
+        <td>{{rec.menu_locked}}</td>
+        <td>{{rec.menu_order}}</td>
+        <td>{{rec.menu_hiden}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />

@@ -1,0 +1,64 @@
+    <div class="page-header">
+        <div class="row  align-items-center justify-content-left p-1">
+            <label class="mr-3">Delivery Address</label>
+            <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        </div>
+    </div>
+    
+    <div *ngIf="errorMessage">
+        <div class="alert alert-primary">
+            {{errorMessage}}
+        </div>
+    </div>
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-6">
+    
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Address</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.add_address1" [maxlength]="60" [uppercase]="true" #_add_address1>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.add_address2" [maxlength]="60" [uppercase]="true" #_add_address2>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.add_address3" [maxlength]="60" [uppercase]="true" #_add_address3>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Contact</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.add_contact" [maxlength]="60" [uppercase]="true" #_add_contact>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Telephone</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.add_tel" [maxlength]="60" [uppercase]="true" #_add_tel>
+                        </InputBox>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="page-footer">
+        <div class="row row justify-content-center p-1">
+            <button class="btn btn-primary btn-md mr-1" (click)="Save()">Save</button>
+        </div>
+    </div>
+    
+      
+     

@@ -1,0 +1,45 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-1">{{mainservice.title}}</label>
+    <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(mainservice.menuid)" (click)="NewRecord()">New</button>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+  </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+  {{errorMessage}}
+</div>
+
+<app-user-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-user-header>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive">
+  <table class="table  table-hover table-sm">
+    <thead class="page-body-thead">
+      <tr>
+        <th>CODE</th>
+        <th>NAME</th>
+        <th>LOCKED</th>
+        <th>TEL</th>
+        <th>MOBILE</th>
+        <th>EMAIL</th>        
+      </tr>
+    </thead>
+    <tbody class="page-body-tbody">
+      <tr *ngFor="let rec of records$ | async">
+        <td (click)="edit(rec)">{{rec.usr_code}}</td>
+        <td>{{rec.usr_name}}</td>
+        <td>{{rec.usr_islocked}}</td>
+        <td>{{rec.usr_tel}}</td>        
+        <td>{{rec.usr_mobile}}</td>
+        <td>{{rec.usr_email}}</td>                
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />

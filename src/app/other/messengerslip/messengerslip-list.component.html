@@ -1,0 +1,46 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">{{title}}</label>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+<div class="page-body">
+    <div class="row">
+        <div class="col-md-12  px-0 mx-0">
+            <div class="page-body table-responsive">
+                <table class="table  table-hover table-sm">
+                    <thead class="page-body-thead">
+                        <tr>
+                            <th>REFNO</th>
+                            <th>DATE</th>
+                            <th>TO</th>
+                            <th>TEL</th>
+                            <th>FAX</th>
+                            <th>CREATED-BY</th>
+                            <th>CREATED-DT</th>
+                        </tr>
+                    </thead>
+                    <tbody class="page-body-tbody">
+                        <tr *ngFor="let rec of records">
+                            <td class="hlink" (click)="edit(rec)">{{rec.cs_refno}}</td>
+                            <td>{{rec.cs_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                            <td>{{rec.cs_to_name}}</td>
+                            <td>{{rec.cs_to_tel}}</td>
+                            <td>{{rec.cs_to_fax}}</td>
+                            <td>{{rec.rec_created_by}}</td>
+                            <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,259 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">User Master ({{mode}})</label>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Code</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_code')"
+                        [(ngModel)]="record.usr_code" maxlength="15" [disabled]="mode!='ADD'" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_name')"
+                        [(ngModel)]="record.usr_name" maxlength="60" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Password</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="password" (blur)="onBlur('usr_pwd')"
+                        [(ngModel)]="record.usr_pwd" maxlength="15" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Email</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_email')"
+                        [(ngModel)]="record.usr_email" maxlength="100" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Email-Password</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="password" (blur)="onBlur('usr_email_pwd')"
+                        [(ngModel)]="record.usr_email_pwd" maxlength="100" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Display Name</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_email_display_name')"
+                        [(ngModel)]="record.usr_email_display_name" maxlength="100" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">CC-Ids</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_email_cc')"
+                        [(ngModel)]="record.usr_email_cc" maxlength="500" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Auto Bcc</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.usr_email_auto_bcc">
+                        <option [value]="'Y'">YES</option>
+                        <option [value]="'N'">NO</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Tel</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_tel')"
+                        [(ngModel)]="record.usr_tel" maxlength="60" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Mobile</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_mobile')"
+                        [(ngModel)]="record.usr_mobile" maxlength="60" />
+                </div>
+            </div>
+
+            <div *ngIf="gs.IsAdmin(menuid)" class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Is Locked</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.usr_islocked">
+                        <option [value]="'Y'">YES</option>
+                        <option [value]="'N'">NO</option>
+                    </select>
+                </div>
+            </div>
+
+            <div *ngIf="gs.IsAdmin(menuid)" class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Is Admin</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.usr_isadmin">
+                        <option [value]="'Y'">YES</option>
+                        <option [value]="'N'">NO</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Confirm Page Close</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.usr_confirm">
+                        <option [value]="'Y'">YES</option>
+                        <option [value]="'N'">NO</option>
+                    </select>
+                </div>
+            </div>
+
+            <div *ngIf="gs.IsAdmin(menuid)" class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Hide Payroll</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.usr_hide_payroll">
+                        <option [value]="'Y'">YES</option>
+                        <option [value]="'N'">NO</option>
+                    </select>
+                </div>
+            </div>
+
+            <div *ngIf="gs.IsAdmin(menuid)" class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Disable MBL Status-OI</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.usr_disable_edit_si_mblstatus">
+                        <option [value]="'Y'">YES</option>
+                        <option [value]="'N'">NO</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Font</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.usr_sign_font">
+                        <option [value]="'Arial'">Arial</option>
+                        <option [value]="'Calibri'">Calibri</option>
+                        <option [value]="'Cambria'">Cambria</option>
+                        <option [value]="'Courier New'">Courier New</option>
+                        <option [value]="'Georgia'">Georgia</option>
+                        <option [value]="'Lucida Sans Unicode'">Lucida Sans Unicode</option>
+                        <option [value]="'Magneto'">Magneto</option>
+                        <option [value]="'Times New Roman'">Times New Roman</option>
+                        <option [value]="'Trebuchet MS'">Trebuchet MS</option>
+                    </select>
+
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Size</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.usr_sign_size">
+                        <option [value]="'8'">8</option>
+                        <option [value]="'10'">10</option>
+                        <option [value]="'12'">12</option>
+                        <option [value]="'14'">14</option>
+                        <option [value]="'16'">16</option>
+                        <option [value]="'18'">18</option>
+                        <option [value]="'20'">20</option>
+                        <option [value]="'22'">22</option>
+                        <option [value]="'24'">24</option>
+                        <option [value]="'26'">26</option>
+                        <option [value]="'28'">27</option>
+                        <option [value]="'30'">30</option>
+
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Color</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.usr_sign_color">
+                        <option [value]="'BLACK'">BLACK</option>
+                        <option [value]="'BLUE'">BLUE</option>
+                        <option [value]="'BROWN'">BROWN</option>
+                        <option [value]="'CYAN'">CYAN</option>
+                        <option [value]="'DARK GRAY'">DARK GRAY</option>
+                        <option [value]="'GRAY'">GRAY</option>
+                        <option [value]="'GREEN'">GREEN</option>
+                        <option [value]="'LIGHT GRAY'">LIGHT GRAY</option>
+                        <option [value]="'MAGENTA'">MAGENTA</option>
+                        <option [value]="'ORANGE'">ORANGE</option>
+                        <option [value]="'PURPLE'">PURPLE</option>
+                        <option [value]="'RED'">RED</option>
+                        <option [value]="'TRANSPARENT'">TRANSPARENT</option>
+                        <option [value]="'WHITE'">WHITE</option>
+                        <option [value]="'YELLOW'">YELLOW</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Bold</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.usr_sign_bold">
+                        <option [value]="'Y'">YES</option>
+                        <option [value]="'N'">NO</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Singature</label>
+                <div class="col-8">
+                    <textarea rows="15" cols="50" class="form-control form-control-sm" 
+                        (blur)="onBlur('usr_email_signature')" [(ngModel)]="record.usr_email_signature"
+                        maxlength="500"> </textarea>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

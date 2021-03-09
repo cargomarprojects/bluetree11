@@ -1,0 +1,23 @@
+<div class="page-list">
+    <div class="page-search">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Code/Name</label>
+            <div class="col-8">
+              <input class="form-control form-control-sm" type="text" [(ngModel)]="searchQuery.searchString" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm"></label>
+            <div class="col-8">
+              <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+              <!-- <button [disabled]="loading" (click)="List('EXCEL')" class="btn btn-primary btn-sm">Excel</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

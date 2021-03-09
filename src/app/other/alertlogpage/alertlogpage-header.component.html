@@ -1,0 +1,47 @@
+<div class="page-list">
+    <div class="page-search">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Shipment Type</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchString">
+                            <option [value]="'ALL'">ALL</option>
+                            <option [value]="'FREEHAND'">FREEHAND</option>
+                            <option [value]="'NOMINATION'">NOMINATION</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Handled-By</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'SALESMAN'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
+                            [displaycolumn]="'NAME'" [displaydata]="searchQuery.handled_name"
+                            (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <div class="form-check"> <input type="checkbox" class="form-check-input"
+                                [(ngModel)]="searchQuery.show_hide"><span>Show Hidden Records</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8 input-group input-group-sm">
+                        <button  (click)="List('SCREEN')"
+                            class="btn btn-primary btn-sm mr-1">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

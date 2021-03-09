@@ -1,0 +1,188 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-1">{{title}}</label>
+    <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+    <i *ngIf="loading" class="fa fa-spinner"></i>
+  </div>
+</div>
+
+<div *ngIf="currentTab=='LIST'">
+
+  <div class="page-list">
+    <div class="page-search">
+
+      <div class="row">
+        <div class="col-md-3">
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">From</label>
+            <div class="col-8">
+              <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event"></app-date>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">To</label>
+            <div class="col-8">
+              <app-date [inputdate]="edate" (ValueChanged)="edate=$event"></app-date>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Group</label>
+            <div class="col-8">
+              <select class="form-control form-control-sm" [(ngModel)]="mode">
+                <option [value]="'OCEAN EXPORT'">OCEAN EXPORT</option>
+                <option [value]="'OCEAN IMPORT'">OCEAN IMPORT</option>
+                <option [value]="'AIR EXPORT'">AIR EXPORT</option>
+                <option [value]="'AIR IMPORT'">AIR IMPORT</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Branch</label>
+            <div class="col-8">
+              <select class="form-control form-control-sm" [(ngModel)]="comp_type">
+                <option *ngFor="let rec of gs.CompanyList" [value]="rec.comp_code">{{rec.comp_name}}</option>
+              </select>
+            </div>
+          </div>
+
+
+
+        </div>
+        <div class="col-md-3">
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Consignee</label>
+            <div class="col-8">
+              <app-autocomplete [inputdata]="CONSRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Format</label>
+            <div class="col-8">
+              <select class="form-control form-control-sm" [(ngModel)]="report_category">
+                <option [value]="'CONSIGNEE SHIPMENT REPORT'">CONSIGNEE SHIPMENT REPORT</option>
+                <option [value]="'SHIPMENT STATUS REPORT'">SHIPMENT STATUS REPORT</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-3">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm"></label>
+            <div class="col-8">
+              <button [disabled]="loading" (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+              <button [disabled]="loading" (click)="Print()" class="btn btn-primary btn-sm">Excel</button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <App-Page [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+    (PageEvents)="PageEvents($event)"></App-Page>
+
+
+
+  <div *ngIf="report_category=='CONSIGNEE SHIPMENT REPORT'" class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>BRANCH</th>
+          <th>REF#</th>
+          <th>REF-DATE</th>
+          <th>B/LNO</th>
+          <th>CONTAINER#</th>
+          <th>SHIPPER</th>
+          <th align='right'>WEIGHT</th>
+          <th>POL</th>
+          <th>ETD</th>
+          <th>POD</th>
+          <th>ETA</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+        <tr>
+          <td>{{rec.mbl_branch}}</td>
+          <td>{{rec.mbl_refno}}</td>
+          <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.hbl_houseno}}</td>
+          <td>{{rec.hbl_cntr_no}}</td>
+          <td>{{rec.hbl_shipper_name}}</td>
+          <td align='right'>{{rec.hbl_weight | number : '1.3-3'}}</td>
+          <td>{{rec.mbl_pol_name}}</td>
+          <td>{{rec.mbl_pol_etd  | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.mbl_pod_name}}</td>
+          <td>{{rec.mbl_pod_eta  | date : gs.FRONTEND_DATEFORMAT }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div *ngIf="report_category=='SHIPMENT STATUS REPORT'" class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>BRANCH</th>
+          <th>REF#</th>
+          <th>ORIGIN</th>
+          <th>DESTINATION</th>
+          <th>B/LNO</th>
+          <th>CONTAINER#</th>
+          <th>MASTER#</th>
+          <th>PO#</th>
+          <th>ETD</th>
+          <th>ETA</th>
+          <th>DELIVERY.DATE</th>
+          <th>LFD</th>
+          <th>REMARKS</th>
+
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+        <tr>
+          <td>{{rec.mbl_branch}}</td>
+          <td>{{rec.mbl_refno}}</td>
+          <td>{{rec.mbl_pol_code}}</td>
+          <td>{{rec.mbl_pod_code}}</td>
+          <td>{{rec.hbl_houseno}}</td>
+          <td>{{rec.hbl_cntr_no}}</td>
+          <td>{{rec.mbl_no}}</td>
+          <td>{{rec.hbl_pono}}</td>
+          <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.mbl_pol_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.hbl_delivery_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.hbl_lfd_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.hbl_remarks}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+  <App-Page [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+    (PageEvents)="PageEvents($event)"></App-Page>
+
+
+</div>
+
+<br />
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{errorMessage}}
+</div>

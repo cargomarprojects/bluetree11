@@ -1,0 +1,181 @@
+<div *ngIf="tab=='main'">
+    <div class="page-header">
+        <div class="row  align-items-center justify-content-left p-1">
+            <label class="mr-3">Devanning Instruction</label>
+            <button #_btnretdev class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+            <label class="text-danger" *ngIf="IsLocked">LOCKED</label>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage">
+        <div class="alert alert-primary">
+            {{errorMessage}}
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Ref#</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="mbl_refno" [disabled]="true" maxlength="25"></InputBox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Request To.</label>
+                    <div class="col-10">
+                        <app-autocomplete2 #request_to_code [controlname]="'REQUEST-TO'" [tabletype]="'MASTER'"
+                            [displaycolumn]="'CODE'" [displaydata]="record.di_request_to_code"
+                            (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_request_to_name" [maxlength]="60" [uppercase]="true"
+                            #request_to_name></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_request_to_addr1" [maxlength]="60" [uppercase]="true"
+                            #request_to_addr1></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_request_to_addr2" [maxlength]="60" [uppercase]="true"
+                            #request_to_addr2></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_request_to_addr3" [maxlength]="60" [uppercase]="true"
+                            #request_to_addr3></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_request_to_addr4" [maxlength]="60" [uppercase]="true"
+                            #request_to_addr4></InputBox>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Cargo Location</label>
+                    <div class="col-10">
+                        <app-autocomplete2 [controlname]="'CARGO-LOC'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                            [displaydata]="record.di_cargo_loc_code" (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_cargo_loc_name" [maxlength]="60" [uppercase]="true"
+                            #cargo_loc_name></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_cargo_loc_addr1" [maxlength]="60" [uppercase]="true"
+                            #cargo_loc_addr1></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_cargo_loc_addr2" [maxlength]="60" [uppercase]="true"
+                            #cargo_loc_addr2></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_cargo_loc_addr3" [maxlength]="60" [uppercase]="true"
+                            #cargo_loc_addr3></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_cargo_loc_addr4" [maxlength]="60" [uppercase]="true"
+                            #cargo_loc_addr4></InputBox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Remarks</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_remark1" [maxlength]="500" [uppercase]="true" #remark1>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_remark2" [maxlength]="500" [uppercase]="true" #remark2>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.di_remark3" [maxlength]="500" [uppercase]="true" #remark3>
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <input type="checkbox" [(ngModel)]="record.di_is_devan_sent" />
+                        <span class="pl-1">Devanning Instruction Sent</span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Date</label>
+                    <div class="col-4">
+                        <app-date [inputdate]="record.di_devan_date" (ValueChanged)="record.di_devan_date=$event">
+                        </app-date>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <div class="row row justify-content-center p-1">
+            <button class="btn btn-primary btn-md mr-1" [disabled]="IsLocked"  (click)="Save()">Save</button>
+            <button class="btn btn-primary btn-md mr-1" (click)="printDevan()">Print</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="tab=='report'">
+    <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+        (callbackevent)="callbackevent($event)"></app-report>
+</div>
+ 

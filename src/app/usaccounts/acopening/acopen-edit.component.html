@@ -1,0 +1,180 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">A/c Master ({{mode}})</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>        
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-5 testbox  px-0 mx-0">
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Ref#</label>
+                <div class="col-9">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('op_docno')"
+                        [(ngModel)]="record.op_docno" maxlength="60" disabled />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Date</label>
+                <div class="col-9">
+                    <app-date [inputdate]="record.op_date" (ValueChanged)="record.op_date=$event"></app-date>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">A/c</label>
+                <div class="col-9">
+                    <app-autocomplete2 [controlname]="'ACCTM'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'CODE'"
+
+                        [displaydata]="record.op_acc_code" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm"></label>
+                <label class="col-9 col-form-label col-form-label-sm">{{record.op_acc_name}}</label>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Amount</label>
+                <div class="col-9">
+                    <InputBoxNumber [(inputModel)]="record.op_famt" [field]="'op_famt'" [dec]="decplace"
+                        [maxlength]="15" (blur)="onBlur2($event)"></InputBoxNumber>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Currency</label>
+                <div class="col-9">
+                    <app-autocomplete2 [controlname]="'PARAM'" [tabletype]="'PARAM'" [subtype]="'CURRENCY'"
+                        [displaycolumn]="'CODE'" [displaydata]="record.op_curr_code"
+                        (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Ex.Rate</label>
+                <div class="col-9">
+                    <InputBoxNumber [(inputModel)]="record.op_ex_rate" [field]="'op_ex_rate'" [dec]="5" [maxlength]="15"
+                        (blur)="onBlur2($event)"></InputBoxNumber>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Amount</label>
+                <div class="col-9">
+                    <InputBoxNumber [(inputModel)]="record.op_amt" [field]="'op_amt'" [dec]="decplace" [maxlength]="2"
+                        [disabled]=true (blur)="onBlur2($event)"></InputBoxNumber>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Type</label>
+                <div class="col-9">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.op_drcr">
+                        <option [value]="'DR'">DR</option>
+                        <option [value]="'CR'">CR</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7 testbox  px-0 mx-0">
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="form-group row">
+            <label class="col-12 col-form-label col-form-label-sm">Below data is needed only for AR/AP Balance</label>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-5 testbox  px-0 mx-0">
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Customer</label>
+                <div class="col-9">
+                    <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                        [displaydata]="record.op_cust_code" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm"></label>
+                <label class="col-9 col-form-label col-form-label-sm">{{record.op_cust_name}}</label>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Inv.No</label>
+                <div class="col-9">
+                    <InputBox [(inputModel)]="record.op_invno" [field]="'op_invno'" [maxlength]="15" [uppercase]="true"
+                        (blur)="onBlur2($event)"></InputBox>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Inv.Date</label>
+                <div class="col-9">
+                    <app-date [inputdate]="record.op_invdate" (ValueChanged)="record.op_invdate=$event"></app-date>
+
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Shipmnt Ref.</label>
+                <div class="col-9">
+                    <InputBox [(inputModel)]="record.op_mbl_refno" [field]="'op_mbl_refno'" [maxlength]="15"
+                        [uppercase]="true" (blur)="onBlur2($event)"></InputBox>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label-sm">Customer Ref</label>
+                <div class="col-9">
+                    <InputBox [(inputModel)]="record.op_inv_refno" [field]="'op_inv_refno'" [maxlength]="100"
+                        [uppercase]="true" (blur)="onBlur2($event)"></InputBox>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+
+</div>
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

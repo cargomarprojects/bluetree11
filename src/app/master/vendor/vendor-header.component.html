@@ -1,0 +1,40 @@
+<div class="page-list">
+    <div class="page-search">
+        <div  class="row">
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Vendors</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchString">
+                            <option [value]="'ALL'">ALL</option>
+                            <option [value]="'AIR CARRIER'">AIR CARRIER</option>
+                            <option [value]="'CUSTOMS BROKER'">CUSTOMS BROKER</option>
+                            <option [value]="'DOMESTIC FORWARDER'">DOMESTIC FORWARDER</option>
+                            <option [value]="'OVERSEAS AGENT'">OVERSEAS AGENT</option>
+                            <option [value]="'SEA CARRIER'">SEA CARRIER</option>
+                            <option [value]="'TRUCKER'">TRUCKER</option>
+                            <option [value]="'WAREHOUSE'">WAREHOUSE</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">State</label>
+                    <div class="col-8">
+                      <InputBox [(inputModel)]="searchQuery.searchState" maxlength="1000"  [uppercase]="true" ></InputBox>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8 input-group input-group-sm">
+                        <button  (click)="List('SCREEN')"
+                            class="btn btn-primary btn-sm mr-1">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

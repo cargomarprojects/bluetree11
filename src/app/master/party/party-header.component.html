@@ -1,0 +1,118 @@
+<div class="page-list">
+    <div class="page-search">
+        <div  *ngIf="searchQuery.menuType == 'PARTYS'"  class="row">
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Sort Order</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchSort">
+                            <option [value]="'gen_code'">CODE</option>
+                            <option [value]="'gen_short_name'">NAME</option>
+                            <option [value]="'gen_firm_code'">FIRM CODE</option>
+                            <option [value]="'gen_type2'">CATEGORY</option>
+                            <option [value]="'gen_address1'">ADDRESS-1</option>
+                            <option [value]="'c.param_name1'">COUNTRY</option>
+                            <option [value]="'gen_contact'">CONTACT</option>
+                            <option [value]="'gen_tel'">TEL</option>
+                            <option [value]="'gen_fax'">FAX</option>
+                            <option [value]="'a.rec_created_by'">CREATED BY</option>
+                            <option [value]="'a.rec_created_date'">CREATED DT</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Code/Name/FirmCode</label>
+                    <div class="col-8">
+                      <InputBox [(inputModel)]="searchQuery.searchString" maxlength="1000" [uppercase]="true" ></InputBox>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">State</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="searchQuery.searchState" maxlength="1000" [uppercase]="true" ></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">City</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="searchQuery.searchCity" maxlength="1000" [uppercase]="true" ></InputBox>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="col-md-3">
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Telephone</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="searchQuery.searchTel" maxlength="1000" [uppercase]="true" ></InputBox>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Zip</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="searchQuery.searchZip" maxlength="1000" [uppercase]="true" ></InputBox>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Fax</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="searchQuery.searchFax" maxlength="1000" [uppercase]="true" ></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8 input-group input-group-sm">
+                        <div class="form-check mr-1">
+                            <input type="checkbox" class="form-check-input"   [(ngModel)]="searchQuery.searchBlackAc"><span>Black Account</span>
+                        </div>
+                        <button [disabled]="loading" (click)="List('SCREEN')"
+                            class="btn btn-primary btn-sm mr-1">Search</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div  *ngIf="searchQuery.menuType == 'OVERSEAAGENT'"  class="row">
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Sort Order</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchSort">
+                            <option [value]="'gen_code'">CODE</option>
+                            <option [value]="'gen_short_name'">NAME</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Code/Name</label>
+                    <div class="col-8">
+                      <InputBox [(inputModel)]="searchQuery.searchString" maxlength="1000" [uppercase]="true" ></InputBox>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8 input-group input-group-sm">
+                        <button [disabled]="loading" (click)="List('SCREEN')"
+                            class="btn btn-primary btn-sm mr-1">Search</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

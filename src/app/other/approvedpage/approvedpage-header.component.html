@@ -1,0 +1,100 @@
+<div class="page-list">
+    <div class="page-search">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">From</label>
+                    <div class="col-8">
+                        <app-date [inputdate]="searchQuery.fromDate" (ValueChanged)="searchQuery.fromDate=$event">
+                        </app-date>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">To</label>
+                    <div class="col-8">
+                        <app-date [inputdate]="searchQuery.toDate" (ValueChanged)="searchQuery.toDate=$event">
+                        </app-date>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Sort By</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.sortParameter">
+                            <option [value]="'ca_req_no'">REQUEST NO</option>
+                            <option [value]="'u.usr_name'">REQUEST-BY</option>
+                            <option [value]="'a.rec_created_date'">REQUEST-DATE</option>
+                            <option [value]="'ca_type'">TYPE</option>
+                            <option [value]="'ca_ref_no'">REF#</option>
+                            <option [value]="'b.hbl_houseno'">HOUSE#</option>
+                            <option [value]="'c.gen_name'">CONSIGNEE</option>
+                            <option [value]="'d.inv_no'">INVOICE#</option>
+                            <option [value]="'inv_name'">CUSTOMER</option>
+                            <option [value]="'f.usr_name'">APPROVED-BY</option>
+                            <option [value]="'cad_approved_date'">APPROVED-DATE</option>
+                            <option [value]="'ca_is_approved'">STATUS</option>
+                            <option [value]="'ca_remarks'">REMARKS</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input"
+                                [(ngModel)]="searchQuery.isHidden"><span>Show Hidden Records</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Type</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.caType">
+                            <option [value]="'ALL'">ALL</option>
+                            <option [value]="'RELEASE WITHOUT OBL'">RELEASE WITHOUT OBL</option>
+                            <option [value]="'RELEASE WITHOUT PAYMENT'">RELEASE WITHOUT PAYMENT</option>
+                            <option [value]="'RELEASE WITHOUT OBL & PAYMENT'">RELEASE WITHOUT OBL & PAYMENT</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Reference#:</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="searchQuery.searchString" maxlength="500" [uppercase]="true"
+                            #searchstr></InputBox>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">{{searchQuery.userLovCaption}}</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'USER'" [tabletype]="'USER'" [displaycolumn]="'NAME'"
+                            [displaydata]="searchQuery.userName" (ValueChanged)="LovSelected($event)" [disabled]="searchQuery.userLovDisabled">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <button  (click)="List('SCREEN')"
+                            class="btn btn-primary btn-sm mr-1">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

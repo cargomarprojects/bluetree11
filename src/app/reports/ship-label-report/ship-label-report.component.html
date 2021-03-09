@@ -1,0 +1,115 @@
+<div *ngIf="tab=='main'">
+<div class="page-header">
+  <div class="row  align-items-center justify-content-left p-1">
+    <label class="mr-3">{{title}}</label>
+      <button class="btn btn-primary btn-sm" (click)="Close()">Return</button>
+      <i *ngIf="loading" class="fa fa-spinner"></i>
+    </div>
+  </div>
+  
+  <div *ngIf="currentTab=='LIST'">
+  
+    <div class="page-list">
+      <div class="page-search">
+  
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm">From</label>
+              <div class="col-8">
+                <app-date [inputdate]="from_date" (ValueChanged)="from_date=$event"></app-date>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm">To</label>
+              <div class="col-8">
+                <app-date [inputdate]="to_date" (ValueChanged)="to_date=$event"></app-date>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm">OprGroup</label>
+              <div class="col-8">
+                <select class="form-control form-control-sm" [(ngModel)]="group">
+                  <option [value]="'OCEAN EXPORT'">OCEAN EXPORT</option>
+                  <option [value]="'OCEAN IMPORT'">OCEAN IMPORT</option>
+                  <option [value]="'AIR EXPORT'">AIR EXPORT</option>
+                  <option [value]="'AIR IMPORT'">AIR IMPORT</option>
+                  <option [value]="'OTHER OPERATION'">OTHER OPERATION</option>
+                </select>
+              </div>
+            </div>
+   
+          </div>
+          
+          <div class="col-md-3">
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm"></label>
+              <div class="col-8">
+                <button [disabled]="loading" (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+                <button [disabled]="loading" (click)="printShipLabels()" class="btn btn-primary btn-sm">Print</button>
+              </div>
+            </div>
+          </div>
+        
+  
+        </div>
+  
+      </div>
+      
+    </div>
+  
+    <App-Page [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount} (PageEvents)="PageEvents($event)"></App-Page>
+  
+  
+  
+    <div class="page-body table-responsive">
+      <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+          <tr>
+            <!-- <th>REF#</th> -->
+            <th><div class="form-check"> <input type="checkbox" (click)="SelectDeselect()"
+              class="form-check-input" [(ngModel)]="chkallselected"><span>REF#</span>
+      </div></th>
+            <th>MBLNO</th>
+            <th>AGENT</th>
+            <th>CARRIER</th>
+            <th>POL</th>
+            <th>POD</th>
+            <th>HANDLED-BY</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+          <tr>
+            <!-- <td>{{rec.lblm_refno}}</td> -->
+            <td> <div class="form-check"> <input type="checkbox" class="form-check-input" (click)="SelectDeselect2(rec)" #chkbox
+              [(ngModel)]="rec.lblm_yn_b"><span>{{rec.lblm_refno}}</span></div></td>
+            <td>{{rec.lblm_mbl_no}}</td>
+            <td>{{rec.lblm_agent}}</td>
+            <td>{{rec.lblm_carrier}}</td>
+            <td>{{rec.lblm_origin}}</td>
+            <td>{{rec.lblm_pod}}</td>
+            <td>{{rec.lblm_handled_by}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+   
+    <App-Page [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount} (PageEvents)="PageEvents($event)"></App-Page>
+  
+  
+  </div>
+  
+  <br />
+  
+  <div *ngIf="ErrorMessage" class="alert alert-danger">
+    {{ErrorMessage}}
+  </div>
+</div>
+<div *ngIf="tab=='report'">
+  <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+    (callbackevent)="callbackevent($event)"></app-report>
+</div>

@@ -1,0 +1,449 @@
+<div *ngIf="tab == 'main'">
+  <div class="page-header">
+    <div class="col">
+      <label class="mr-1">{{title}}</label>
+      <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+      <i *ngIf="loading" class="fa fa-spinner"></i>
+    </div>
+  </div>
+
+  <div *ngIf="currentTab=='LIST'">
+
+    <div class="page-list">
+      <div class="page-search">
+
+        <div class="row">
+
+          <div class="col-md-2">
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Format</label>
+              <div class="col-10">
+                <select class="form-control form-control-sm" [(ngModel)]="report_category">
+                  <option [value]="'GENERAL'">GENERAL</option>
+                  <option [value]="'AGENT'">AGENT</option>
+                  <option [value]="'OPERATION GROUP'">OPERATION GROUP</option>
+                  <option [value]="'PARTY'">PARTY</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">From</label>
+              <div class="col-10">
+                <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event"></app-date>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">To</label>
+              <div class="col-10">
+                <app-date [inputdate]="edate" (ValueChanged)="edate=$event"></app-date>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Group</label>
+              <div class="col-10">
+                <select class="form-control form-control-sm" [(ngModel)]="mode" (change)="onChange('mode')">
+                  <option [value]="'ALL'">ALL</option>
+                  <option [value]="'OCEAN EXPORT'">OCEAN EXPORT</option>
+                  <option [value]="'OCEAN IMPORT'">OCEAN IMPORT</option>
+                  <option [value]="'AIR EXPORT'">AIR EXPORT</option>
+                  <option [value]="'AIR IMPORT'">AIR IMPORT</option>
+                  <option [value]="'OTHERS'">OTHERS</option>
+                  <option [value]="'EXTRA'" *ngIf="this.gs.SHOW_EXTRA_OPERATION == 'Y'">EXTRA</option>
+                  <option [value]="'ADMIN EXPENSE'" *ngIf="isAdmin && report_type != 'MASTER'">ADMIN EXPENSE</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Branch</label>
+              <div class="col-10">
+                <select class="form-control form-control-sm" [(ngModel)]="comp_type">
+                  <option *ngFor="let rec of gs.CompanyList" [value]="rec.comp_code">{{rec.comp_name}}</option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Type</label>
+              <div class="col-10">
+                <select class="form-control form-control-sm" [(ngModel)]="report_type">
+                  <option [value]="'MASTER'">MASTER</option>
+                  <option [value]="'SUMMARY'">SUMMARY</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+          <div *ngIf="showstages" class="col-md-2">
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Stages</label>
+              <div class="col-10">
+                <div style="height: 80px; overflow-y: scroll;">
+                  <div class="page-body table-responsive" style="background-color:white">
+                    <table class="table  table-hover table-sm table-borderless">
+                      <tbody class="page-body-tbody">
+                        <tr *ngFor="let rec of stagerecords">
+                          <td style="padding:0%;" (click)="SelectStage(rec)">
+                            <div class="form-check"> <input type="checkbox" class="form-check-input"
+                                [(ngModel)]="rec.ss_checked"><span>{{rec.ss_desc}}</span>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-2">
+
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Salesman</label>
+              <div class="col-10">
+                <app-autocomplete [inputdata]="SMANRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+              </div>
+            </div>
+
+            <div *ngIf="report_category=='AGENT'" class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Parent</label>
+              <div class="col-10">
+                <app-autocomplete2 [controlname]="'PARENT'" [tabletype]="'OVERSEAAGENT'" [displaycolumn]="'NAME'"
+                  [displaydata]="cust_parent_name" (ValueChanged)="LovSelected($event)">
+                </app-autocomplete2>
+              </div>
+            </div>
+
+            <div *ngIf="report_category=='AGENT'" class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Agent</label>
+              <div class="col-10">
+                <app-autocomplete [inputdata]="CUSTRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-4">
+
+            <div *ngIf="report_type=='MASTER'">
+
+              <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Criteria</label>
+                <div class="col-6">
+                  <select class="form-control form-control-sm" [(ngModel)]="report_criteria">
+                    <option [value]="'NIL'">NIL</option>
+                    <option [value]="'PROFIT ='">PROFIT =</option>
+                    <option [value]="'PROFIT <'">PROFIT < </option>
+                    <option [value]="'PROFIT >'">PROFIT ></option>
+                    <option [value]="'PROFIT PER ='">PROFIT PER =</option>
+                    <option [value]="'PROFIT PER <'">PROFIT PER << /option>
+                    <option [value]="'PROFIT PER >'">PROFIT PER >
+                    </option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <input class="form-control form-control-sm" type="text" [(ngModel)]="report_amount" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Hide</label>
+                <div class="col-5">
+                  <div class="form-check mr-0 pr-0">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="report_profit_met">
+                    <label class="form-check-label">Profit Met</label>
+                  </div>
+                </div>
+                <div class="col-5">
+                  <div class="form-check mx-0 px-0">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="report_loss_approved">
+                    <label class="form-check-label">Loss Approved</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm"></label>
+              <div class="col-10">
+                <button [disabled]="loading" (click)="List('SCREEN')"
+                  class="btn btn-primary btn-sm mr-1">Search</button>
+                <button [disabled]="loading" (click)="Print()" class="btn btn-primary btn-sm">Print</button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <App-Page
+      [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+      (PageEvents)="PageEvents($event)"></App-Page>
+
+    <div *ngIf="_report_type=='MASTER' && _report_category=='GENERAL' " class="page-body table-responsive">
+      <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+          <tr>
+            <th>BRANCH</th>
+            <th>REF#</th>
+            <th>ARAP</th>
+            <th>MBL#</th>
+            <th *ngIf="showstages">STAGE</th>
+            <th>REF-DATE</th>
+            <th>AGENT</th>
+            <th>CARRIER</th>
+            <th>REF.COUNT</th>
+            <th>HOUSE.COUNT</th>
+            <th class="text-right">REVENUE</th>
+            <th class="text-right">EXPENSE</th>
+            <th class="text-right">PORFIT</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+          <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+            [style.font-weight]="rec.ROW_TYPE=='TOTAL'?'bold':'normal'">
+            <td>{{rec.mbl_branch}}</td>
+            <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+            <td class='hlink' (click)="editarap(rec)">{{rec.ROW_TYPE=='DETAIL'?'ARAP':''}}</td>
+            <td>{{rec.mbl_no}}</td>
+            <td *ngIf="showstages">{{rec.shipment_stage}}</td>
+            <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+            <td>{{rec.mbl_agent_name}}</td>
+            <td>{{rec.mbl_liner_name}}</td>
+            <td>{{rec.mbl_refno_tot}}</td>
+            <td>{{rec.mbl_house_tot}}</td>
+            <td align='right'>{{rec.hbl_income | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_expense | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_profit | number : '1.2-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div *ngIf="_report_type=='MASTER' && (_report_category=='AGENT' || _report_category=='OPERATION GROUP')"
+      class="page-body table-responsive">
+      <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+          <tr>
+            <th>BRANCH</th>
+            <th>REF#</th>
+            <th>ARAP</th>
+            <th>MBL#</th>
+            <th *ngIf="showstages">STAGE</th>
+            <th>REF-DATE</th>
+
+            <th>AGENT</th>
+            <th>CARRIER</th>
+
+            <th>REF.COUNT</th>
+            <th>HOUSE.COUNT</th>
+            <th class="text-right">REVENUE</th>
+            <th class="text-right">EXPENSE</th>
+            <th class="text-right">PORFIT</th>
+            <th class="text-right">%</th>
+
+            <th>F/L</th>
+            <th class="text-right">20</th>
+            <th class="text-right">40</th>
+            <th class="text-right">40HC</th>
+            <th class="text-right">45</th>
+            <th class="text-right">TEU</th>
+            <th class="text-right">CBM</th>
+            <th class="text-right">KGS</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+          <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+            [style.font-weight]="rec.ROW_TYPE=='TOTAL'?'bold':'normal'">
+            <td>{{rec.mbl_branch}}</td>
+            <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+            <td class='hlink' (click)="editarap(rec)">{{rec.ROW_TYPE=='DETAIL'?'ARAP':''}}</td>
+            <td>{{rec.mbl_no}}</td>
+            <td *ngIf="showstages">{{rec.shipment_stage}}</td>
+            <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+            <td>{{rec.mbl_agent_name}}</td>
+            <td>{{rec.mbl_liner_name}}</td>
+            <td>{{rec.mbl_refno_tot}}</td>
+            <td>{{rec.mbl_house_tot}}</td>
+            <td align='right'>{{rec.hbl_income | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_expense | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_profit | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_profit_per | number : '1.2-2'}}</td>
+            <td>{{rec.mbl_cntr_type}}</td>
+            <td align='right'>{{rec.mbl_20 | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_40 | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_40HQ | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_45 | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_teu | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_cntr_cbm | number : '1.3-3'}}</td>
+            <td align='right'>{{rec.mbl_weight | number : '1.3-3'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="_report_type=='MASTER' && _report_category=='PARTY'" class="page-body table-responsive">
+      <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+          <tr>
+            <th>BRANCH</th>
+            <th>REF#</th>
+            <th>ARAP</th>
+            <th *ngIf="showstages">STAGE</th>
+            <th>REF-DATE</th>
+            <th>AGENT</th>
+            <th>SHIPPER</th>
+            <th>CONSIGNEE</th>
+            <th>BL#</th>
+            <th class="text-right">REVENUE</th>
+            <th class="text-right">EXPENSE</th>
+            <th class="text-right">PORFIT</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+          <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+            [style.font-weight]="rec.ROW_TYPE=='TOTAL'?'bold':'normal'">
+            <td>{{rec.mbl_branch}}</td>
+            <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+            <td class='hlink' (click)="editarap(rec)">{{rec.ROW_TYPE=='DETAIL'?'ARAP':''}}</td>
+            <td *ngIf="showstages">{{rec.shipment_stage}}</td>
+            <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+            <td>{{rec.mbl_agent_name}}</td>
+            <td>{{rec.hbl_shipper_name}}</td>
+            <td>{{rec.hbl_consignee_name}}</td>
+            <td>{{rec.mbl_house_tot}}</td>
+            <td align='right'>{{rec.hbl_income | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_expense | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_profit | number : '1.2-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <div *ngIf="_report_type=='SUMMARY' && (_report_category=='GENERAL')" class="page-body table-responsive">
+      <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+          <tr>
+            <th>BRANCH</th>
+            <th>TYPE</th>
+            <th>REF.COUNT</th>
+            <th>HOUSE.COUNT</th>
+            <th class="text-right">REVENUE</th>
+            <th class="text-right">EXPENSE</th>
+            <th class="text-right">PORFIT</th>
+            <th class="text-right">%</th>
+            <th>F/L</th>
+            <th class="text-right">20</th>
+            <th class="text-right">40</th>
+            <th class="text-right">40HC</th>
+            <th class="text-right">45</th>
+            <th class="text-right">TEU</th>
+            <th class="text-right">CBM</th>
+            <th class="text-right">KGS</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+          <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+            [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'">
+            <td>{{rec.mbl_branch}}</td>
+            <td>{{rec.mbl_refno}}</td>
+            <td>{{rec.mbl_refno_tot}}</td>
+            <td>{{rec.mbl_house_tot}}</td>
+            <td align='right'>{{rec.hbl_income | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_expense | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_profit | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_profit_per | number : '1.2-2'}}</td>
+            <td>{{rec.mbl_cntr_type}}</td>
+            <td align='right'>{{rec.mbl_20 | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_40 | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_40HQ | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_45 | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_teu | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_cntr_cbm | number : '1.3-3'}}</td>
+            <td align='right'>{{rec.mbl_weight | number : '1.3-3'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div
+      *ngIf="_report_type=='SUMMARY' && (_report_category=='AGENT' || _report_category=='OPERATION GROUP' || _report_category=='PARTY' )"
+      class="page-body table-responsive">
+      <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+          <tr>
+            <th *ngIf="_report_category == 'OPERATION GROUP'">TYPE</th>
+            <th *ngIf="_report_category == 'AGENT'">AGENT</th>
+            <th>REF.COUNT</th>
+            <th>HOUSE.COUNT</th>
+            <th class="text-right">REVENUE</th>
+            <th class="text-right">EXPENSE</th>
+            <th class="text-right">PORFIT</th>
+            <th class="text-right">%</th>
+            <th>F/L</th>
+            <th class="text-right">20</th>
+            <th class="text-right">40</th>
+            <th class="text-right">40HC</th>
+            <th class="text-right">45</th>
+            <th class="text-right">TEU</th>
+            <th class="text-right">CBM</th>
+            <th class="text-right">KGS</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+          <tr>
+            <td *ngIf="_report_category == 'OPERATION GROUP'">{{rec.mbl_refno}}</td>
+            <td *ngIf="_report_category == 'AGENT'">{{rec.mbl_agent_name}}</td>
+            <td>{{rec.mbl_refno_tot}}</td>
+            <td>{{rec.mbl_house_tot}}</td>
+            <td align='right'>{{rec.hbl_income | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_expense | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_profit | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.hbl_profit_per | number : '1.2-2'}}</td>
+            <td>{{rec.mbl_cntr_type}}</td>
+            <td align='right'>{{rec.mbl_20 | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_40 | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_40HQ | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_45 | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_teu | number : '1.2-2'}}</td>
+            <td align='right'>{{rec.mbl_cntr_cbm | number : '1.3-3'}}</td>
+            <td align='right'>{{rec.mbl_weight | number : '1.3-3'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <App-Page
+      [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+      (PageEvents)="PageEvents($event)"></App-Page>
+
+
+  </div>
+
+  <br />
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+</div>
+<div *ngIf="tab == 'report'">
+  <app-report [title]="title" [url]="" [searchdata]="" [menuid]="report_menuid" [filename]="filename"
+    [filetype]="filetype" [filedisplayname]="filedisplayname" [filename2]="filename2" [filetype2]="filetype2"
+    [filedisplayname2]="filedisplayname2" (callbackevent)="callbackevent($event)"></app-report>
+</div>

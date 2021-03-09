@@ -1,0 +1,78 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">{{title}}</label>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-list">
+    <div class="page-search">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-10">
+                        <input class="form-control form-control-sm" type="text" disabled [(ngModel)]="party_name" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+        <div class="col-md-12  px-0 mx-0">
+            <div class="page-body table-responsive">
+                <table class="table  table-hover table-sm">
+                    <thead class="page-body-thead">
+                        <tr>
+                            <th>ADDRESS-1</th>
+                            <th>ADDRESS-2</th>
+                            <th>ADDRESS-3</th>
+                            <th>CITY</th>
+                            <th>ZIP CODE</th>
+                            <th>COUNTRY</th>
+                            <th>CONTACT</th>
+                            <th>TEL</th>
+                            <th>FAX</th>
+                            <th>CREATED-BY</th>
+                            <th>CREATED-DT</th>
+                        </tr>
+                    </thead>
+                    <tbody class="page-body-tbody">
+                        <tr *ngFor="let rec of records">
+                            <td (click)="edit(rec)">{{rec.add_address1}}</td>
+                            <td>{{rec.add_address2}}</td>
+                            <td>{{rec.add_address3}}</td>
+                            <td>{{rec.add_location}}</td>
+                            <td>{{rec.add_pincode}}</td>
+                            <td>{{rec.add_country_name}}</td>
+                            <td>{{rec.add_contact}}</td>
+                            <td>{{rec.add_tel}}</td>
+                            <td>{{rec.add_fax}}</td>
+                            <td>{{rec.rec_created_by}}</td>
+                            <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

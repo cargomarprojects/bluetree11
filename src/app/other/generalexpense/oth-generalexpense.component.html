@@ -1,0 +1,59 @@
+<div class="page-header">
+    <div class="row  align-items-center justify-content-left p-1">
+        <label class="mr-3">{{mainservice.title}}</label>
+        <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button> -->
+        <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" [routerLink]="['/Silver.Other.Trans/OthGeneralExpenseEditPage']" [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid, pkid: '', exptype: this.mainservice.param_type,origin: 'oth-generalexp-page',mode: 'ADD'}">New</a>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+
+    </div>
+  </div>
+  
+  <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+  
+  <app-oth-generalexpense-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-oth-generalexpense-header>
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th (click)="mainservice.sort('mbl_refno')">REF.NO&nbsp;<i [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
+                <th (click)="mainservice.sort('mbl_ref_date')">REF.DATE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_ref_date')"></i></th>
+                <th (click)="mainservice.sort('mbl_cargo_loc_name')" *ngIf="mainservice.param_type=='FA'">ORG.REF#&nbsp;<i [ngClass]="mainservice.getIcon('mbl_cargo_loc_name')"></i></th>
+                <th (click)="mainservice.sort('mbl_devan_loc_name')" *ngIf="mainservice.param_type=='FA'">HOUSE#&nbsp;<i [ngClass]="mainservice.getIcon('mbl_devan_loc_name')"></i></th>
+                <th (click)="mainservice.sort('mbl_remarks')">REMARKS&nbsp;<i [ngClass]="mainservice.getIcon('mbl_remarks')"></i></th>
+                <th (click)="mainservice.sort('mbl_ar_total')">AR-TOTAL&nbsp;<i [ngClass]="mainservice.getIcon('mbl_ar_total')"></i></th>              
+                <th (click)="mainservice.sort('mbl_ap_total')">AP-TOTAL&nbsp;<i [ngClass]="mainservice.getIcon('mbl_ap_total')"></i></th>     
+                <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+                <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>              
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+               
+                <td  *ngIf="!this.mainservice.canEdit" >{{rec.mbl_refno}}</td>
+                <td  *ngIf="this.mainservice.canEdit" >
+                    <a class='hlink' [routerLink]="['/Silver.Other.Trans/OthGeneralExpenseEditPage']" [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.mbl_pkid,exptype: this.mainservice.param_type,origin: 'oth-generalexp-page',mode: 'EDIT'}">{{rec.mbl_refno}}</a>
+                </td>
+                <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td *ngIf="mainservice.param_type=='FA'">{{rec.mbl_cargo_loc_name}}</td>
+                <td *ngIf="mainservice.param_type=='FA'">{{rec.mbl_devan_loc_name}}</td>
+                <td>{{rec.mbl_remarks}}</td>
+                <td>{{rec.mbl_ar_total}}</td>              
+                <td>{{rec.mbl_ap_total}}</td>
+                <td>{{rec.rec_created_by}}</td>
+                <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <br />
+  
+  

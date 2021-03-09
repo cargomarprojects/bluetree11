@@ -1,0 +1,27 @@
+
+
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+    background-color:gainsboro;
+}
+ 
+mat-sidenav {
+    width: 250px;
+}
+
+
+.toolbar{
+    
+    min-height :50px;
+}
+
+
+/* mat-sidenav-container {
+    border : 1px solid black;
+}
+.toolbar{
+    border : 1px solid white;
+}
+.main {
+    border : 1px solid mediumorchid;
+}
+ */ 

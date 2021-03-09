@@ -1,0 +1,71 @@
+<div class="page-list">
+  <div class="page-search">
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">From Date</label>
+          <div class="col-8">
+            <app-date [inputdate]="searchQuery.sdate" (ValueChanged)="searchQuery.sdate=$event">
+            </app-date>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">To Date</label>
+          <div class="col-8">
+            <app-date [inputdate]="searchQuery.edate" (ValueChanged)="searchQuery.edate=$event">
+            </app-date>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group row">
+          <div class="col-4">
+            <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchCustType" (change)="onChange('searchCustType')">
+              <option [value]="'CUSTOMER'">CUSTOMER</option>
+              <option [value]="'PARENT'">PARENT</option>
+            </select>
+          </div>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="custLovType"
+            [displaycolumn]="'NAME'" [displaydata]="searchQuery.customerName" 
+            (ValueChanged)="LovSelected($event)">
+        </app-autocomplete2>
+
+        <!-- <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+        [displaydata]="cust_code" (ValueChanged)="LovSelected($event)">
+    </app-autocomplete2> -->
+
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-4">
+            <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchType">
+              <option [value]="'CHECK NO'">CHECK NO</option>
+              <option [value]="'BANK'">BANK</option>
+              <option [value]="'INVOICE NO'">INVOICE NO</option>
+              <option [value]="'MODE'">MODE</option>
+            </select>
+          </div>
+          <div class="col-8">
+            <input class="form-control form-control-sm" type="text" [(ngModel)]="searchQuery.searchString" />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group row">
+          <div class="col-4">
+            <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+            <!-- <button [disabled]="loading" (click)="List('EXCEL')" class="btn btn-primary btn-sm">Excel</button> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

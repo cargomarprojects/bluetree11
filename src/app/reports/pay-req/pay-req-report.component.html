@@ -1,0 +1,225 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-1">{{title}}</label>
+    <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+    <i *ngIf="loading" class="fa fa-spinner"></i>
+  </div>
+</div>
+
+<div *ngIf="currentTab=='LIST'">
+
+  <div class="page-list">
+    <div class="page-search">
+
+      <div class="row">
+        <div class="col-md-3">
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">From</label>
+            <div class="col-8">
+              <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event"></app-date>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">To</label>
+            <div class="col-8">
+              <app-date [inputdate]="edate" (ValueChanged)="edate=$event"></app-date>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Group</label>
+            <div class="col-8">
+              <select class="form-control form-control-sm" [(ngModel)]="mode">
+                <option [value]="'PENDING'">PENDING</option>
+                <option [value]="'PAID'">PAID</option>
+                <option [value]="'CANCELLED'">CANCELLED</option>
+                <option [value]="'DELETED'">DELETED</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Req.By</label>
+            <div class="col-8">
+              <!-- <app-autocomplete [inputdata]="USERRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete> -->
+              <app-autocomplete2 [controlname]="'USER'" [tabletype]="'USER'" [displaycolumn]="'NAME'"
+                [displaydata]="user_name" (ValueChanged)="LovSelected($event)">
+              </app-autocomplete2>
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm"></label>
+            <div class="col-8">
+              <button [disabled]="loading" (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <App-Page [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+    (PageEvents)="PageEvents($event)"></App-Page>
+
+  <div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>REQUESTED-BY</th>
+          <th>REQ.DATE</th>
+          <th>REF#</th>
+          <th>REQ.TYPE</th>
+          <th>PAYEE</th>
+          <th>A/P NO</th>
+          <th>PAYMENT DATE</th>
+          <th>STATUS</th>
+          <th>NOTES</th>
+          <th>OHBL/TELEX RLS COPY</th>
+          <th>CHECK COPY</th>
+          <th>APPROVAL</th>
+          <th>ARAP</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+        <tr>
+          <td>{{rec.rec_created_by}}</td>
+          <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td class='hlink' (click)="editmaster(rec)">{{rec.cp_master_refno}}</td>
+          <td>{{rec.cp_paytype_needed}}</td>
+          <td>{{rec.cp_cust_name}}</td>
+          <td class='hlink' (click)="editinvoice(rec)">{{rec.cp_inv_no}}</td>
+          <td>{{rec.cp_payment_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td class='hlink' (click)="UpdatePayStatus(rec,paymodal)">{{rec.cp_pay_status}}</td>
+          <td>{{rec.cp_spl_notes}}</td>
+          <td class='hlink' (click)="AttachedOhblFiles(rec,payuploadmodal,payattachmodal)">ATTACHMENTS</td>
+          <td class='hlink' (click)="AttachedCheckFiles(rec,payuploadmodal,payattachmodal)">CHECK COPY</td>
+          <td class='hlink' (click)="editapproval(rec)">APPROVAL</td>
+          <td class='hlink' (click)="ArApList(rec,payarapmodal)">ARAP</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <App-Page [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+    (PageEvents)="PageEvents($event)"></App-Page>
+
+
+</div>
+
+<br />
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{errorMessage}}
+</div>
+
+<ng-template #paymodal let-c="close" let-d="dismiss">
+  <!-- <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> -->
+  <div class="modal-body">
+    <div class="page-body">
+      <div class="row">
+        <div class="col-md-6 testbox  px-0 mx-0">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Reference#</label>
+            <div class="col-8">
+              <input class="form-control form-control-sm" type="text" [(ngModel)]="payrefno" [disabled]="'true'"
+                maxlength="15" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">Payment Status</label>
+            <div class="col-8">
+              <select class="form-control form-control-sm" [(ngModel)]="paystatus">
+                <option [value]="'PENDING'">PENDING</option>
+                <option [value]="'PAID'">PAID</option>
+                <option [value]="'CANCELLED'">CANCELLED</option>
+                <option [value]="'DELETED'">DELETED</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <div class="row justify-content-center p-1">
+        <button class="btn btn-primary btn-md mr-1" (click)="UpdatePayment()">Update</button>
+        <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+      </div>
+    </div>
+
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Update</button>
+  </div> -->
+</ng-template>
+
+<ng-template #payuploadmodal let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <div class="page-body">
+      <div class="row">
+        <div class="col-md-12 testbox  px-0 mx-0">
+          <app-pay-upload-report [title]="Invoketitle" [type]="Invoketype" [HouseList]="HouseList" [InvoiceList]="InvoiceList">
+          </app-pay-upload-report>
+        </div>
+      </div>
+      <div class="page-footer">
+        <div class="row justify-content-center p-1">
+          <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #payattachmodal let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <div class="page-body">
+      <div class="row">
+        <div class="col-md-12 testbox  px-0 mx-0">
+          <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="" [type]="attach_type"
+            [typelist]="attach_typelist" [tablename]="attach_tablename" [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
+            [uploadfiles]="flase" [customername]="attach_customername" [updatecolumn]="" [viewonlysource]=""
+            [viewonlyid]="" [filespath]="" [filespath2]="" [modalview]="true" (callbackevent)="callbackevent($event)">
+          </app-fileupload>
+        </div>
+      </div>
+      <div class="page-footer">
+        <div class="row justify-content-center p-1">
+          <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #payarapmodal let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <div class="page-body">
+      <div class="row">
+        <div class="col-md-12 testbox  px-0 mx-0">
+          <app-genlist [title]="'A/R & A/P List'" [type]="'INVOICE-LIST'" [InvoiceList]="InvoiceList"></app-genlist>
+        </div>
+      </div>
+      <div class="page-footer">
+        <div class="row justify-content-center p-1">
+          <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

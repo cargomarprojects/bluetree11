@@ -1,0 +1,677 @@
+<div *ngIf="tab == 'main'">
+
+  <div class="page-header">
+    <div class="col">
+      <label class="pr-1">{{title}} ({{mode}}) </label>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+      <label class="text-danger" *ngIf="is_locked">LOCKED</label>
+    </div>
+
+  </div>
+
+  <!-- <div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+      {{errorMessage}}
+    </div>
+  </div> -->
+
+  <div *ngIf="errorMessage.length >0">
+    <div class="alert alert-success">
+      <a (click)="errorMessage=[]" class="close" aria-label="close">&times;</a>
+      <ul>
+        <li *ngFor="let str of errorMessage">
+          <p class="h4"> {{str}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="row">
+
+
+      <div class="col-md-6">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Ref#</label>
+          <div class="col-8">
+            <input class="form-control form-control-sm" type="text" (blur)="onBlur('book_refno')" [disabled]="true"
+              [(ngModel)]="record.book_refno" [disabled]="true" maxlength="15" />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Booking#</label>
+          <div class="col-8">
+            <input class="form-control form-control-sm" type="text" (blur)="onBlur('book_no')" [disabled]="true"
+              [(ngModel)]="record.book_no" [disabled]="true" maxlength="15" />
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Date</label>
+          <div class="col-8">
+            <app-date #_book_date [inputdate]="record.book_date" (ValueChanged)="record.book_date=$event"></app-date>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Shipper</label>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+              [displaydata]="record.book_shipper_code" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Name</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_shipper_name" [maxlength]="60" [uppercase]="true" #_book_shipper_name>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Address</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_shipper_add1" [maxlength]="60" [uppercase]="true" #book_shipper_add1>
+            </InputBox>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_shipper_add2" [maxlength]="60" [uppercase]="true" #book_shipper_add2>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_shipper_add3" [maxlength]="60" [uppercase]="true" #book_shipper_add3>
+            </InputBox>
+
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+
+            <InputBox [(inputModel)]="record.book_shipper_add4" [maxlength]="120" [uppercase]="true" #book_shipper_add4>
+            </InputBox>
+
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_shipper_add5" [maxlength]="120" [uppercase]="true" #book_shipper_add5>
+            </InputBox>
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="col-md-6">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Forwarder</label>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'FORWARDER'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+              [displaydata]="record.book_forwarder_name" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Trucker</label>
+          <div class="col-8">
+            <app-autocomplete2 #_book_trucker_name [controlname]="'TRUCKER'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+              [displaydata]="record.book_trucker_name" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Vessel</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_vessel" [maxlength]="60" [uppercase]="true" #book_vessel></InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Voyage</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_voyage" [maxlength]="30" [uppercase]="true" #book_voyage></InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Shippers Ref.</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_exp_refno" [maxlength]="30" [uppercase]="true" #book_exp_refno>
+            </InputBox>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Commodity</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_commodity" [maxlength]="100" [uppercase]="true" #book_commodity>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">No.Of.Cntr</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_cntrs" [maxlength]="100" [uppercase]="true" #book_cntrs></InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">No.Of.Pkgs</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_package" [maxlength]="100" [uppercase]="true" #book_package>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Weight</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_weight" [maxlength]="100" [uppercase]="true" #book_weight></InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"> Measurement </label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_cbm" [maxlength]="100" [uppercase]="true" #book_cbm></InputBox>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="page-body">
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Place.Receipt</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_por_place" [maxlength]="60" [uppercase]="true" #book_por_place>
+            </InputBox>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Pickup Time</label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_pickuptime" [maxlength]="60" [uppercase]="true" #book_pickuptime>
+            </InputBox>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row">
+
+          <label class="col-4 col-form-label col-form-label-sm">Pol</label>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'POL'" [tabletype]="'SEA PORT'" [displaycolumn]="'NAME'"
+              [displaydata]="record.book_pol_name" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row">
+
+          <label class="col-4 col-form-label col-form-label-sm">Pol-Etd</label>
+          <div class="col-8">
+            <app-date #_book_pol_etd [inputdate]="record.book_pol_etd" (ValueChanged)="record.book_pol_etd=$event"></app-date>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row">
+
+          <label class="col-4 col-form-label col-form-label-sm">Pod</label>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'POD'" [tabletype]="'SEA PORT'" [displaycolumn]="'NAME'"
+              [displaydata]="record.book_pod_name" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row">
+
+          <label class="col-4 col-form-label col-form-label-sm">Pod-Eta</label>
+          <div class="col-8">
+            <app-date #_book_pod_eta [inputdate]="record.book_pod_eta" (ValueChanged)="record.book_pod_eta=$event"></app-date>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="page-body">
+
+
+    <div class="row">
+
+      <div class="col-md-6">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Place.Delivery</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_pod_place" [maxlength]="60" [uppercase]="true" #book_pod_place>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Inland Routing</label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_routing1" [maxlength]="60" [uppercase]="true" #book_routing1>
+            </InputBox>
+
+
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_routing2" [maxlength]="60" [uppercase]="true" #book_routing2>
+            </InputBox>
+
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_routing3" [maxlength]="60" [uppercase]="true" #book_routing3>
+            </InputBox>
+
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-6">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Cargo Cut-Off</label>
+          <div class="col-3">
+            <app-date [inputdate]="record.book_cutoff" (ValueChanged)="record.book_cutoff=$event"></app-date>
+          </div>
+          <label class="col-2 col-form-label col-form-label-sm">Time</label>
+          <div class="col-3">
+            <InputBox [(inputModel)]="record.book_cuttime" [maxlength]="10" [uppercase]="true" #book_cuttime></InputBox>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Doc Cut-Off</label>
+          <div class="col-3">
+            <app-date [inputdate]="record.book_doc_cutoff" (ValueChanged)="record.book_doc_cutoff=$event"></app-date>
+          </div>
+          <label class="col-2 col-form-label col-form-label-sm">Time</label>
+          <div class="col-3">
+
+            <InputBox [(inputModel)]="record.book_doc_cuttime" [maxlength]="10" [uppercase]="true" #book_doc_cuttime>
+            </InputBox>
+
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+
+      <div class="col-md-6">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Cntr Pickup At</label>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'PICKUPAT'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+              [displaydata]="record.book_cntr_pickupat_code" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_cntr_pickupat1" [maxlength]="60" [uppercase]="true"
+              #_book_cntr_pickupat1 ></InputBox>
+
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_cntr_pickupat2" [maxlength]="60" [uppercase]="true"
+              #book_cntr_pickupat2></InputBox>
+
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_cntr_pickupat3" [maxlength]="60" [uppercase]="true"
+              #book_cntr_pickupat3></InputBox>
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_cntr_pickupat4" [maxlength]="60" [uppercase]="true"
+              #book_cntr_pickupat4></InputBox>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Loading Location</label>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'LOCATION'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+              [displaydata]="record.book_location_code" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_location_name" [maxlength]="60" [uppercase]="true"
+              #_book_location_name></InputBox>
+
+
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_location_addr1" [maxlength]="60" [uppercase]="true"
+              #book_location_addr1></InputBox>
+
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_location_addr2" [maxlength]="60" [uppercase]="true"
+              #book_location_addr2></InputBox>
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_location_addr3" [maxlength]="60" [uppercase]="true"
+              #book_location_addr3></InputBox>
+
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_location_addr4" [maxlength]="60" [uppercase]="true"
+              #book_location_addr4></InputBox>
+
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+  <div class="page-body">
+    <div class="row">
+
+      <div class="col-md-6">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Cntr Return At</label>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'RETURNAT'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+              [displaydata]="record.book_cntr_returnat_code" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_cntr_returnat1" [maxlength]="60" [uppercase]="true"
+              #_book_cntr_returnat1></InputBox>
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_cntr_returnat2" [maxlength]="60" [uppercase]="true"
+              #book_cntr_returnat2></InputBox>
+
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_cntr_returnat3" [maxlength]="60" [uppercase]="true"
+              #book_cntr_returnat3></InputBox>
+
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_cntr_returnat4" [maxlength]="60" [uppercase]="true"
+              #book_cntr_returnat4></InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Cntr. Return Period From</label>
+          <div class="col-3">
+            <app-date [inputdate]="record.book_cntr_retdate_frm" (ValueChanged)="record.book_cntr_retdate_frm=$event">
+            </app-date>
+          </div>
+          <label class="col-2 col-form-label col-form-label-sm">To</label>
+          <div class="col-3">
+            <app-date [inputdate]="record.book_cntr_retdate_to" (ValueChanged)="record.book_cntr_retdate_to=$event">
+            </app-date>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="col-md-6">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Remarks</label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_remarks1" [maxlength]="60" [uppercase]="true" #book_cntr_remarks1>
+            </InputBox>
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.book_remarks2" [maxlength]="60" [uppercase]="true" #book_cntr_remarks2>
+            </InputBox>
+
+
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+
+            <InputBox [(inputModel)]="record.book_remarks3" [maxlength]="60" [uppercase]="true" #book_cntr_remarks3>
+            </InputBox>
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Handled.By</label>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
+              [displaycolumn]="'NAME'" [displaydata]="record.book_handled_name" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Sales.Rep</label>
+          <div class="col-8">
+            <app-autocomplete2 #_book_salesman_name [controlname]="'SALESMAN'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
+              [displaycolumn]="'NAME'" [displaydata]="record.book_salesman_name" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- <div class="page-footer">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canSave(menuid,mode) && !is_locked"
+              (click)="Save()">Save</button>
+            <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canPrint(menuid,mode) && mode =='EDIT'"
+              (click)="Print()">Print</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="page-footer">
+    <div class="row justify-content-center p-1">
+      <button class="btn btn-primary btn-md  mr-1"  [disabled]="is_locked"  *ngIf="gs.canSave(menuid,mode)"
+        (click)="Save()">Save</button>
+      <button class="btn btn-primary btn-md mr-1" *ngIf="gs.canPrint(menuid,mode) && mode =='EDIT'"
+        (click)="Print()">Print</button>
+    </div>
+  </div>
+
+  <div>
+    <label class="col-form-label col-form-label-sm" *ngIf="record.rec_created_by"> CREATED BY: {{record.rec_created_by}}
+      /
+      {{record.rec_created_date}} </label>
+  </div>
+
+</div>
+
+<div *ngIf="tab == 'report'">
+  <app-report [title]="'Ocean Export Booking'" [url]="report_url" [searchdata]="report_searchdata"
+    [menuid]="report_menuid" (callbackevent)="callbackevent($event)"></app-report>
+</div>

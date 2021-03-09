@@ -1,0 +1,125 @@
+<div *ngIf="tab == 'main'">
+  <div class="page-header">
+    <div class="col">
+      <label class="mr-1">{{title}}</label>
+      <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+      <i *ngIf="loading" class="fa fa-spinner"></i>
+    </div>
+  </div>
+
+  <div *ngIf="currentTab=='LIST'">
+
+    <div class="page-list">
+      <div class="page-search">
+
+        <div class="row">
+          <div class="col-md-3">
+
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm">From</label>
+              <div class="col-8">
+                <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event"></app-date>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm">To</label>
+              <div class="col-8">
+                <app-date [inputdate]="edate" (ValueChanged)="edate=$event"></app-date>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm">Group</label>
+              <div class="col-8">
+                <select class="form-control form-control-sm" [(ngModel)]="mode">
+                  <option [value]="'OCEAN EXPORT'">OCEAN EXPORT</option>
+                  <option [value]="'OCEAN IMPORT'">OCEAN IMPORT</option>
+                  <option [value]="'AIR EXPORT'">AIR EXPORT</option>
+                  <option [value]="'AIR IMPORT'">AIR IMPORT</option>
+                  <option [value]="'OTEHRS'">OTHERS</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm"></label>
+              <div class="col-8">
+                <button [disabled]="loading" (click)="List('SCREEN')"
+                  class="btn btn-primary btn-sm mr-1">Search</button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <App-Page
+      [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+      (PageEvents)="PageEvents($event)"></App-Page>
+
+    <div class="page-body table-responsive">
+      <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+          <tr>
+            <th>REF#</th>
+            <th>REF-DATE</th>
+            <th>LOCK</th>
+            <th *ngIf="mode=='OCEAN IMPORT'">BL-STATUS</th>
+            <th *ngIf="mode=='OCEAN IMPORT'">SHIPMENT</th>
+            <th *ngIf="mode=='OCEAN IMPORT'">E.RET-DATE</th>
+            <th *ngIf="mode=='OCEAN IMPORT'">PICKUP-DATE</th>
+            <th>PROFIT-MET</th>
+            <th>LOSS-APPROVED</th>
+            <th>MEMO</th>
+            <th>PROFIT</th>
+            <th class='text-center'>ATTACHMENTS</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+          <tr [style.color]="rec.sc_mbl_lock=='L'?'green':'blue'" >
+            <td class='hlink' (click)="editmaster(rec)">{{rec.sc_mbl_refno}}</td>
+            <td>{{rec.sc_mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+            <td>{{rec.sc_mbl_lock}}</td>
+            <td *ngIf="mode=='OCEAN IMPORT'">{{rec.sc_bl_status}}</td>
+            <td *ngIf="mode=='OCEAN IMPORT'">{{rec.sc_shipment_type}}</td>
+            <td *ngIf="mode=='OCEAN IMPORT'">{{rec.sc_emptyret_date  | date : gs.FRONTEND_DATEFORMAT }}</td>
+            <td *ngIf="mode=='OCEAN IMPORT'">{{rec.sc_pickup_date  | date : gs.FRONTEND_DATEFORMAT }}</td>
+            <td>{{rec.sc_profit_met}}</td>
+            <td>{{rec.sc_loss_approved}}</td>
+            <td>{{rec.sc_memo}}</td>
+            <td>{{rec.sc_profit}}</td>
+            <!-- <td>Attachments</td> [style.color]="'red'"-->
+            <td class='text-center'><i class="fa fa-paperclip fa-lg pointer" style="font-size:24px"  aria-hidden="true"
+                (click)="AttachRow(rec)"></i>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <App-Page
+      [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+      (PageEvents)="PageEvents($event)"></App-Page>
+
+  </div>
+
+  <br />
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+</div>
+<div *ngIf="tab=='attachment'">
+  <app-fileupload [title]="attach_title" [parentid]="attach_pkid" [subid]="" [type]="attach_type"
+    [typelist]="attach_typelist" [tablename]="'cargo_masterm'" [tablepkcolumn]="'mbl_pkid'" [refno]="" [uploadfiles]="false" 
+    [customername]="" [updatecolumn]="'rec_files_attached'" [viewonlysource]="" [viewonlyid]="" [filespath]=""
+    [filespath2]="" (callbackevent)="callbackevent($event)">
+  </app-fileupload>
+</div>

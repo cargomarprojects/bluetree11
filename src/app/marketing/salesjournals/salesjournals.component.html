@@ -1,0 +1,64 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-3">{{mainservice.title}}</label>
+        <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button> -->
+        <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd"
+        [routerLink]="['/Silver.Marketing.Master/SalesJournalsEditPage']"
+        [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid,pkid: '',custid: '',origin: 'salesjournals-page',mode: 'ADD'}">New</a>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage}}
+</div>
+
+<app-salesjournals-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+</app-salesjournals-header>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th>CODE</th>
+                <th>NAME</th>
+                <th>SALES REP.</th>
+                <th>CITY</th>
+                <th>STATE</th>
+                <th>ZIP</th>
+                <th>CREATED-BY</th>
+                <th>DATE</th>
+                <th style="text-align:center">MEMO</th>
+                <th *ngIf="mainservice.canDelete" style="text-align:center">DELETE</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records$ | async">
+                <!-- <td class='hlink' (click)="edit(rec)">{{rec.cjm_customer_code}}</td> -->
+                <td *ngIf="!this.mainservice.canEdit">{{rec.cjm_customer_code}}</td>
+                <td *ngIf="this.mainservice.canEdit">
+                    <a class='hlink' [routerLink]="['/Silver.Marketing.Master/SalesJournalsEditPage']"
+                    [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.cjm_pkid, custid: rec.cjm_customer_id, origin: 'salesjournals-page',mode: 'EDIT'}">{{rec.cjm_customer_code}}</a>
+                </td>
+                <td>{{rec.cjm_customer_name}}</td>
+                <td>{{rec.cjm_salesman_name}}</td>
+                <td>{{rec.cjm_city}}</td>
+                <td>{{rec.cjm_state}}</td>
+                <td>{{rec.cjm_pincode}}</td>
+                <td>{{rec.rec_created_by}}</td>
+                <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td style="text-align:center"><i class="fa fa-sticky-note-o  fa-lg pointer"
+                    aria-hidden="true" (click)="ShowMemo(rec)"></i></td>
+                <td *ngIf="mainservice.canDelete" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
+                    aria-hidden="true" (click)="mainservice.DeleteRow(rec)"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />

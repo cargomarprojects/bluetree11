@@ -1,0 +1,197 @@
+<div *ngIf="tab == 'main'">
+  <div class="page-header">
+    <div class="col">
+      <label class="mr-1">{{title}}</label>
+      <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+      <i *ngIf="loading" class="fa fa-spinner"></i>
+    </div>
+  </div>
+
+  <div *ngIf="currentTab=='LIST'">
+
+    <div class="page-list">
+      <div class="page-search">
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm">From</label>
+              <div class="col-8">
+                <app-date [inputdate]="from_date" (ValueChanged)="from_date=$event"></app-date>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm">To</label>
+              <div class="col-8">
+                <app-date [inputdate]="to_date" (ValueChanged)="to_date=$event"></app-date>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm">Type</label>
+              <div class="col-8">
+                <select class="form-control form-control-sm" [(ngModel)]="job_type">
+                  <option [value]="'ALL'">ALL</option>
+                  <option [value]="'OCEAN EXPORT'">OCEAN EXPORT</option>
+                  <option [value]="'OCEAN IMPORT'">OCEAN IMPORT</option>
+                  <option [value]="'AIR EXPORT'">AIR EXPORT</option>
+                  <option [value]="'AIR IMPORT'">AIR IMPORT</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm">Group</label>
+              <div class="col-8">
+                <select class="form-control form-control-sm" [(ngModel)]="group">
+                  <option [value]="'MASTER DETAILS'">MASTER</option>
+                  <option [value]="'HOUSE DETAILS'">HOUSE</option>
+                  <option [value]="'SUMMARY'">SUMMARY</option>
+                </select>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col-md-3">
+
+
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm">Branch</label>
+              <div class="col-8">
+                <select class="form-control form-control-sm" [(ngModel)]="branch">
+                  <option *ngFor="let rec of gs.CompanyList" [value]="rec.comp_code">{{rec.comp_name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm">Handled-By</label>
+              <div class="col-8">
+                <app-autocomplete [inputdata]="USERRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col-md-3">
+            <div class="form-group row">
+              <label class="col-4 col-form-label col-form-label-sm"></label>
+              <div class="col-8">
+                <button [disabled]="loading" (click)="List('SCREEN')"
+                  class="btn btn-primary btn-sm mr-1">Search</button>
+                <button [disabled]="loading" (click)="Print()" class="btn btn-primary btn-sm">Print</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <App-Page
+      [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+      (PageEvents)="PageEvents($event)"></App-Page>
+
+    <div *ngIf="reporttype=='MASTER DETAILS'" class="page-body table-responsive">
+      <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+          <tr>
+            <th>BRANCH</th>
+            <th>REF#</th>
+            <th>REF-DATE</th>
+            <th>HANDLED-BY</th>
+            <th>AGENT</th>
+            <th>POL</th>
+            <th>POD</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+          <tr>
+            <td>{{rec.mbl_branch}}</td>
+            <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+            <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+            <td>{{rec.hbl_hand_name}}</td>
+            <td>{{rec.mbl_agent_name}}</td>
+            <td>{{rec.mbl_pol_name}}</td>
+            <td>{{rec.mbl_pod_name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div *ngIf="reporttype=='HOUSE DETAILS'" class="page-body table-responsive">
+      <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+          <tr>
+            <th>BRANCH</th>
+            <th>REF#</th>
+            <th>REF-DATE</th>
+            <th>HANDLED-BY</th>
+            <th>AGENT</th>
+            <th>POL</th>
+            <th>POD</th>
+            <th>HOUSE</th>
+            <th>SHIPPER</th>
+            <th>CONSIGNEE</th>
+            <th>H-TERMS</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+          <tr>
+            <td>{{rec.mbl_branch}}</td>
+            <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+            <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+            <td>{{rec.hbl_hand_name}}</td>
+            <td>{{rec.mbl_agent_name}}</td>
+            <td>{{rec.mbl_pol_name}}</td>
+            <td>{{rec.mbl_pod_name}}</td>
+            <td class='hlink' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td>
+            <td>{{rec.hbl_shipper_name}}</td>
+            <td>{{rec.hbl_consignee_name}}</td>
+            <td>{{rec.hbl_movement}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div *ngIf="reporttype=='SUMMARY'" class="page-body table-responsive">
+      <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+          <tr>
+            <th>BRANCH</th>
+            <th>HANDLED-BY</th>
+            <th>MASTER</th>
+            <th>HOUSE</th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+          <tr>
+            <td>{{rec.mbl_branch}}</td>
+            <td>{{rec.hbl_hand_name}}</td>
+            <td>{{rec.mbl_agent_name}}</td>
+            <td>{{rec.mbl_pol_name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <App-Page
+      [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+      (PageEvents)="PageEvents($event)"></App-Page>
+
+
+  </div>
+
+  <br />
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+</div>
+<div *ngIf="tab == 'report'">
+  <app-report [title]="'Top Customer Report'" [url]="" [searchdata]="" [menuid]="report_menuid" [filename]="filename"
+    [filetype]="filetype" [filedisplayname]="filedisplayname" (callbackevent)="callbackevent($event)"></app-report>
+</div>

@@ -1,0 +1,106 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">Company Master ({{mode}})</label>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.user_isadmin == 'Y'" (click)="NewRecord()">New</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Code</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('comp_code')"
+                        [(ngModel)]="record.comp_code" maxlength="4" [disabled]="mode!='ADD'" />
+                </div>
+            </div>            
+
+            
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('comp_name')"
+                        [(ngModel)]="record.comp_name" maxlength="60" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Address</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('comp_add1')"
+                        [(ngModel)]="record.comp_add1" maxlength="60" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('comp_add2')"
+                        [(ngModel)]="record.comp_add2" maxlength="60" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('comp_add3')"
+                        [(ngModel)]="record.comp_add3" maxlength="60" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('comp_add4')"
+                        [(ngModel)]="record.comp_add4" maxlength="60" />
+                </div>
+            </div>                        
+
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Order</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('comp_order')"
+                        [(ngModel)]="record.comp_order" maxlength="10" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Defualt Bank</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'ACCTM'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [where]="where" [displaydata]="record.comp_bank_name" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+        </div>
+    </div>
+</div>
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

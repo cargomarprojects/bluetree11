@@ -1,0 +1,41 @@
+<div *ngIf="tab=='main'">
+  <div class="page-header">
+    <div class="row  align-items-center justify-content-left p-1">
+      <label class="mr-3">{{_title}}</label>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+      <button *ngIf="canDownload" class="btn btn-primary btn-sm mr-1" (click)="report('download')">Download</button>
+      <button *ngIf="canExcel" class="btn btn-primary btn-sm mr-1" (click)="report('excel')">Excel</button>
+      <button *ngIf="canEmail" class="btn btn-primary btn-sm mr-1" (click)="report('email',emailmodal)">Email</button>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+      {{errorMessage}}
+    </div>
+  </div>
+
+
+  <div class="page-body" style="height:99vh">
+
+    <ng2-pdfjs-viewer [showSpinner]="true" [print]="canPrint" [download]="canDownload" [openFile]="false" [zoom]="100"
+      [cursor]="'HAND'" [scroll]="'H'" #pdfViewerAutoLoad></ng2-pdfjs-viewer>
+
+  </div>
+
+</div>
+<!-- <div *ngIf="tab=='email'">
+  <app-mail [pkid]="''" [AttachList]="AttachList" (mailcallbackevent)="mailcallbackevent($event)"></app-mail>
+</div> -->
+<ng-template #emailmodal let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <div class="page-body">
+      <div class="row">
+        <div class="col-md-12 testbox  px-0 mx-0">
+          <app-mail [pkid]="Mail_Pkid" [AttachList]="AttachList" [modalview]="true"
+            (mailcallbackevent)="mailcallbackevent($event)"></app-mail>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

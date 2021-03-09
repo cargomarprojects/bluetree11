@@ -1,0 +1,47 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-1">{{mainservice.title}}</label>
+    <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.user_isadmin == 'Y'" (click)="NewRecord()">New</button>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+  </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+  {{errorMessage}}
+</div>
+
+<app-company-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-company-header>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive">
+  <table class="table  table-hover table-sm">
+    <thead class="page-body-thead">
+      <tr>
+        <th>CODE</th>
+        <th>NAME</th>
+        <th>ADDRESS1</th>
+        <th>ADDRESS2</th>
+        <th>ADDRESS3</th>
+        <th>ADDRESS4</th>
+        <th>ORDER</th>        
+      </tr>
+    </thead>
+    <tbody class="page-body-tbody">
+      <tr *ngFor="let rec of records$ | async">
+        <td (click)="edit(rec)">{{rec.comp_code}}</td>
+        <td>{{rec.comp_name}}</td>
+        <td>{{rec.comp_add1}}</td>
+        <td>{{rec.comp_add2}}</td>
+        <td>{{rec.comp_add3}}</td>
+        <td>{{rec.comp_add4}}</td>
+        <td>{{rec.comp_order}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />

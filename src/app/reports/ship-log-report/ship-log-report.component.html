@@ -1,0 +1,502 @@
+<div *ngIf="tab == 'main'">
+    <div class="page-header">
+        <div class="col">
+            <label class="mr-1">{{title}}</label>
+            <button class="btn btn-primary btn-sm" (click)="Close()">Return</button>
+            <i *ngIf="loading" class="fa fa-spinner"></i>
+        </div>
+    </div>
+
+    <div *ngIf="currentTab=='LIST'">
+
+        <div class="page-list">
+            <div class="page-search">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Mode</label>
+                            <div class="col-8">
+                                <select class="form-control form-control-sm" [(ngModel)]="job_mode"
+                                    (change)="OnChange('job_mode')">
+                                    <option [value]="'OCEAN EXPORT'">OCEAN EXPORT</option>
+                                    <option [value]="'OCEAN IMPORT'">OCEAN IMPORT</option>
+                                    <option [value]="'AIR EXPORT'">AIR EXPORT</option>
+                                    <option [value]="'AIR IMPORT'">AIR IMPORT</option>
+                                    <option [value]="'OTHER OPERATION'">OTHER OPERATION</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <select class="form-control form-control-sm" [(ngModel)]="date_basedon">
+                                    <option [value]="'REF. DATE'">Ref. Date</option>
+                                    <option [value]="'ETD'">ETD</option>
+                                    <option [value]="'ETA'">ETA</option>
+                                </select>
+                            </div>
+                            <div class="col-8">
+                                <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event"></app-date>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">To</label>
+                            <div class="col-8">
+                                <app-date [inputdate]="edate" (ValueChanged)="edate=$event"></app-date>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Shipper</label>
+                            <div class="col-8">
+                                <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'MASTER'"
+                                    [subtype]="'SHIPPER'" [displaycolumn]="'NAME'" [displaydata]="shipper_name"
+                                    (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Consignee</label>
+                            <div class="col-8">
+                                <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'MASTER'"
+                                    [subtype]="'CONSIGNEE'" [displaycolumn]="'NAME'" [displaydata]="consignee_name"
+                                    (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Agent</label>
+                            <div class="col-8">
+
+                                <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'MASTER'"
+                                    [displaycolumn]="'NAME'" [displaydata]="agent_name"
+                                    (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <select class="form-control form-control-sm" [(ngModel)]="handled_basedon">
+                                    <option [value]="'HANDLED BY'">Handled By</option>
+                                    <option [value]="'SALES REP.'">Sales Rep.</option>
+                                </select>
+                            </div>
+                            <div class="col-8">
+                                <app-autocomplete2 [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'"
+                                    [subtype]="'SALESMAN'" [displaycolumn]="'NAME'" [displaydata]="handled_name"
+                                    (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Based On</label>
+                            <div class="col-8">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                        [(ngModel)]="report_masterwise">
+                                    <label class="form-check-label" for="inlineCheckbox1">Master</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
+                                        [(ngModel)]="report_housewise">
+                                    <label class="form-check-label" for="inlineCheckbox2">House</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <button class="btn btn-success btn-sm mr-1" (click)="SelectDeselect('SELECT')">Select
+                                    All</button>
+                                <button class="btn btn-success btn-sm mr-1"
+                                    (click)="SelectDeselect('DESELECT')">Deselect All </button>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[0].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[0].ischecked"
+                                        (click)="SelectDeselect2(checkList[0].code,0)" #chkbox0><span>{{checkList[0].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[1].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[1].ischecked"
+                                    (click)="SelectDeselect2(checkList[1].code,1)" #chkbox1 ><span>{{checkList[1].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[2].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[2].ischecked" (click)="SelectDeselect2(checkList[2].code,2)" #chkbox2><span>{{checkList[2].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[3].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[3].ischecked" (click)="SelectDeselect2(checkList[3].code,3)" #chkbox3><span>{{checkList[3].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[4].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[4].ischecked" (click)="SelectDeselect2(checkList[4].code,4)" #chkbox4><span>{{checkList[4].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[5].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[5].ischecked" (click)="SelectDeselect2(checkList[5].code,5)" #chkbox5><span>{{checkList[5].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[6].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[6].ischecked" (click)="SelectDeselect2(checkList[6].code,6)" #chkbox6><span>{{checkList[6].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[7].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[7].ischecked" (click)="SelectDeselect2(checkList[7].code,7)" #chkbox7><span>{{checkList[7].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="chklstCol2Visible" class="col-md-3">
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[8].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[8].ischecked" (click)="SelectDeselect2(checkList[8].code,8)" #chkbox8><span>{{checkList[8].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[9].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[9].ischecked" (click)="SelectDeselect2(checkList[9].code,9)" #chkbox9><span>{{checkList[9].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[10].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[10].ischecked" (click)="SelectDeselect2(checkList[10].code,10)" #chkbox10><span>{{checkList[10].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[11].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[11].ischecked" (click)="SelectDeselect2(checkList[11].code,11)" #chkbox11><span>{{checkList[11].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[12].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[12].ischecked" (click)="SelectDeselect2(checkList[12].code,12)" #chkbox12><span>{{checkList[12].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[13].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[13].ischecked" (click)="SelectDeselect2(checkList[13].code,13)" #chkbox13><span>{{checkList[13].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[14].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[14].ischecked" (click)="SelectDeselect2(checkList[14].code,14)" #chkbox14><span>{{checkList[14].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <div *ngIf="checkList[15].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[15].ischecked" (click)="SelectDeselect2(checkList[15].code,15)" #chkbox15><span>{{checkList[15].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Sort Order</label>
+                            <div class="col-8">
+                                <select class="form-control form-control-sm" [(ngModel)]="sort_order">
+                                    <option [value]="'mbl_refno'">REFNO</option>
+                                    <option [value]="'mbl_no'">MASTER</option>
+                                    <option [value]="'hbl_houseno'">HOUSE</option>
+                                    <option [value]="'shipment_stage'">SHIPMENT STAGE</option>
+                                    <option [value]="'mbl_liner_name'">CARRIER</option>
+                                    <option [value]="'hbl_consignee_name'">CONSIGNEE</option>
+                                    <option [value]="'mbl_pod_eta'">ETA</option>
+                                    <option [value]="'hbl_paid_status'">CLIENT PAID</option>
+                                    <option [value]="'hbl_place_final'">FINAL DESTINATION</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Formats</label>
+                            <div class="col-4">
+                                <select class="form-control form-control-sm" [(ngModel)]="format_type">
+                                    <option [value]="'FORMAT-1'">FORMAT-1</option>
+                                    <option [value]="'FORMAT-2'">FORMAT-2</option>
+                                    <option [value]="'FORMAT-3'">FORMAT-3</option>
+                                </select>
+                            </div>
+                            <div class="col-4 form-check">
+                                <input type="checkbox" class="form-check-input" [(ngModel)]="printer_friendly" />
+                                <span>Printer Friendly</span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm"></label>
+                            <div class="col-8">
+                                <button [disabled]="loading" (click)="List('SCREEN')"
+                                    class="btn btn-primary btn-sm mr-1">Search</button>
+                                <button [disabled]="loading" (click)="Print()"
+                                    class="btn btn-primary btn-sm">Print</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <App-Page
+            [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+            (PageEvents)="PageEvents($event)"></App-Page>
+
+
+
+        <div  *ngIf="reportformat=='FORMAT-1'" class="page-body table-responsive">
+            <table  class="table  table-hover table-sm">
+                <thead class="page-body-thead">
+                    <tr>
+                        <th> REFNO </th>                         
+                        <th> HOUSE# </th>
+                        <th> SHIPMENT STAGE </th>
+                        <th> CARRIER </th>
+                        <th  *ngIf="job_mode=='OCEAN EXPORT'"> BOOKING# </th>
+                        <th> CONSIGNEE </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'"> TYPE </th>                        
+                        <th> ETA </th>         
+                        <th> FIRM.CODE </th>     
+                        <th> IT.SHIPMENT </th>                   
+                        <!-- <th> A </th>
+                        <th> B </th>
+                        <th> C </th>
+                        <th> D </th> -->
+                    </tr>
+                </thead>
+                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+                    <tr>
+                        <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>                         
+                        <td class='hlink' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td>
+                        <td>{{rec.hbl_shipment_stage}}</td>
+                        <td>{{rec.mbl_liner_name}}</td>
+                        <td  *ngIf="job_mode=='OCEAN EXPORT'">{{rec.mbl_liner_bookingno}}</td>                        
+                        <td>{{rec.hbl_consignee_name}}</td>
+                        <td *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'">{{rec.mbl_cntr_type}}</td>                        
+                        <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>       
+                        <td>{{rec.mbl_cargo_loc_firmcode}}</td>
+                        <td>{{rec.hbl_is_itshipment}}</td>              
+                        <!-- <td>{{rec.mbl_inv_stage_a}}</td>
+                        <td>{{rec.mbl_inv_stage_b}}</td>
+                        <td>{{rec.mbl_inv_stage_c}}</td>
+                        <td>{{rec.mbl_inv_stage_d}}</td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div  *ngIf="reportformat=='FORMAT-2'" class="page-body table-responsive">
+            <table  class="table  table-hover table-sm">
+                <thead class="page-body-thead">
+                    <tr>
+                        <th> REFNO </th>
+                        <!-- <th> REF-DATE </th> -->
+                        <th> HOUSE# </th>
+                        <th> SHIPMENT STAGE </th>
+                        <th> CARRIER </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT'"> BOOKING# </th>
+                        <!-- <th> SHIPPER </th> -->
+                        <th> CONSIGNEE </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'"> TYPE </th>
+                        <!-- <th> PACKAGES </th>
+                        <th> FINAL DESTINATION </th> -->
+                        <th> ETD </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='OTHER OPERATION'"> ISF </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'"> M RLS </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'"> H RLS </th>
+                        <th> PL </th>
+                        <th> CI </th>
+                        <th> CARRIER AN </th>
+                        <th> CUSTOM RELEASE STATUS </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='AIR IMPORT'"> FREIGHT RELEASE STATUS </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='AIR IMPORT'"> CLIENT PAID </th>
+                        <th> ETA </th>
+                        <th *ngIf="job_mode=='OTHER OPERATION' || job_mode=='OCEAN IMPORT' || job_mode=='AIR IMPORT'"> LAST FREE DATE </th>
+                        <th> DELIVERY </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='AIR EXPORT'"> DELIVERY DATE </th>
+                        <!-- <th> REMARKS </th> -->
+                        <!-- <th> A </th>
+                        <th> B </th>
+                        <th> C </th>
+                        <th> D </th> -->
+                    </tr>
+                </thead>
+                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+                    <tr>
+                        <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+                        <!-- <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td> -->
+                        <td class='hlink' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td>
+                        <td>{{rec.hbl_shipment_stage}}</td>
+                        <td>{{rec.mbl_liner_name}}</td>
+                        <td *ngIf="job_mode=='OCEAN EXPORT'">{{rec.mbl_liner_bookingno}}</td>
+                        <!-- <td>{{rec.hbl_shipper_name}}</td> -->
+                        <td>{{rec.hbl_consignee_name}}</td>
+                        <td *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'">{{rec.mbl_cntr_type}}</td>
+                        <!-- <td>{{rec.hbl_packages}}</td>
+                        <td>{{rec.hbl_place_final}}</td> -->
+                        <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <td *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='OTHER OPERATION'">{{rec.hbl_isf_no}}</td>
+                        <td *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'">{{rec.mbl_is_sea_waybill}}</td>
+                        <td *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'">{{rec.hbl_bl_status}}</td>
+                        <td>{{rec.hbl_is_pl}}</td>
+                        <td>{{rec.hbl_is_ci}}</td>
+                        <td>{{rec.hbl_is_carr_an}}</td>
+                        <td>{{rec.hbl_custom_reles_status}}</td>
+                        <td *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='AIR IMPORT'">{{rec.hbl_cargo_release_status}}</td>
+                        <td *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='AIR IMPORT'">{{rec.hbl_paid_status}}</td>
+                        <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <td *ngIf="job_mode=='OTHER OPERATION' || job_mode=='OCEAN IMPORT' || job_mode=='AIR IMPORT'">{{rec.hbl_lfd_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <td >{{rec.hbl_is_delivery}}</td>
+                        <td *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='AIR EXPORT'">{{rec.hbl_pld_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <!-- <td>{{rec.hbl_remark3}}</td> -->
+                        <!-- <td>{{rec.mbl_inv_stage_a}}</td>
+                        <td>{{rec.mbl_inv_stage_b}}</td>
+                        <td>{{rec.mbl_inv_stage_c}}</td>
+                        <td>{{rec.mbl_inv_stage_d}}</td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div  *ngIf="reportformat=='FORMAT-3'" class="page-body table-responsive">
+            <table  class="table  table-hover table-sm">
+                <thead class="page-body-thead">
+                    <tr>
+                        <th> REFNO </th>
+                        <!-- <th> REF-DATE </th> -->
+                        <th> HOUSE# </th>
+                        <!-- <th> SHIPMENT STAGE </th> -->
+                        <!-- <th> CARRIER </th>
+                        <th> BOOKING# </th> -->
+                        <th> SHIPPER </th>
+                        <th> CONSIGNEE </th>
+                        <th> TYPE </th>
+                        <th> PACKAGES </th>
+                        <th> FINAL DESTINATION </th>
+                        <th> ETD </th>
+                        <!-- <th> ISF </th>
+                        <th> M RLS </th>
+                        <th> H RLS </th>
+                        <th> PL </th>
+                        <th> CI </th>
+                        <th> CARRIER AN </th>
+                        <th> CUSTOM RELEASE STATUS </th>
+                        <th> FREIGHT RELEASE STATUS </th> -->
+                        <th> CLIENT PAID </th>
+                        <th> ETA </th>
+                        <th> LAST FREE DATE </th>
+                        <!-- <th> DELIVERY </th>
+                        <th> DELIVERY DATE </th>
+                        <th> REMARKS </th> -->
+                        <!-- <th> A </th>
+                        <th> B </th>
+                        <th> C </th>
+                        <th> D </th> -->
+                    </tr>
+                </thead>
+                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+                    <tr>
+                        <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+                        <!-- <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td> -->
+                        <td class='hlink' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td>
+                        <!-- <td>{{rec.hbl_shipment_stage}}</td>
+                        <td>{{rec.mbl_liner_name}}</td>
+                        <td>{{rec.mbl_liner_bookingno}}</td> -->
+                        <td>{{rec.hbl_shipper_name}}</td>
+                        <td>{{rec.hbl_consignee_name}}</td>
+                        <td>{{rec.mbl_cntr_type}}</td>
+                        <td>{{rec.hbl_packages}}</td>
+                        <td>{{rec.hbl_place_final}}</td>
+                        <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <!-- <td>{{rec.hbl_isf_no}}</td>
+                        <td>{{rec.mbl_is_sea_waybill}}</td>
+                        <td>{{rec.hbl_bl_status}}</td>
+                        <td>{{rec.hbl_is_pl}}</td>
+                        <td>{{rec.hbl_is_ci}}</td>
+                        <td>{{rec.hbl_is_carr_an}}</td>
+                        <td>{{rec.hbl_custom_reles_status}}</td>
+                        <td>{{rec.hbl_cargo_release_status}}</td> -->
+                        <td>{{rec.hbl_paid_status}}</td>
+                        <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <td>{{rec.hbl_lfd_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <!-- <td>{{rec.hbl_is_delivery}}</td>
+                        <td>{{rec.hbl_pld_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <td>{{rec.hbl_remark3}}</td> -->
+                        <!-- <td>{{rec.mbl_inv_stage_a}}</td>
+                        <td>{{rec.mbl_inv_stage_b}}</td>
+                        <td>{{rec.mbl_inv_stage_c}}</td>
+                        <td>{{rec.mbl_inv_stage_d}}</td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <App-Page
+            [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+            (PageEvents)="PageEvents($event)"></App-Page>
+
+
+    </div>
+
+    <br />
+
+    <div *ngIf="ErrorMessage" class="alert alert-danger">
+        {{ErrorMessage}}
+    </div>
+
+</div>
+
+<div *ngIf="tab == 'report'">
+    <app-report [title]="'Shipment Log Report'" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"  
+        (callbackevent)="callbackevent($event)"></app-report>
+</div>

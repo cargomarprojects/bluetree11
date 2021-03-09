@@ -1,0 +1,104 @@
+<div class="page-header">
+  <div class="col">
+    <label>{{title}} ({{mode}})</label>
+  </div>
+</div>
+
+<div *ngIf="errorMessage">
+  <div class="alert alert-primary">
+    {{errorMessage}}
+  </div>
+</div>
+
+
+<div class="page-body">
+
+  <div class="row">
+
+    <div class="col-md-4">
+
+      <div class="form-group row" *ngIf="bcode">
+        <label class="col-4 col-form-label col-form-label-sm">{{code}}</label>
+        <div class="col-8">
+          <input class="form-control form-control-sm" type="text" (blur)="onBlur('param_code')"
+            [(ngModel)]="record.param_code" [disabled]="!bcodeenabled" maxlength="15" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-4 col-form-label col-form-label-sm">{{name1}}</label>
+        <div class="col-8">
+          <input class="form-control form-control-sm" type="text" (blur)="onBlur('param_name1')"
+            [(ngModel)]="record.param_name1" maxlength="100" />
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="bname2">
+        <label class="col-4 col-form-label col-form-label-sm">{{name2}}</label>
+        <div class="col-8">
+          <input class="form-control form-control-sm" type="text" (blur)="onBlur('param_name2')"
+            [(ngModel)]="record.param_name2" maxlength="100" />
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="bname3">
+        <label class="col-4 col-form-label col-form-label-sm">{{name3}}</label>
+        <div class="col-8">
+          <input class="form-control form-control-sm" type="text" (blur)="onBlur('param_name3')"
+            [(ngModel)]="record.param_name3" maxlength="100" />
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="bname4">
+        <label class="col-4 col-form-label col-form-label-sm">{{name4}}</label>
+        <div class="col-8">
+          <input class="form-control form-control-sm" type="text" (blur)="onBlur('param_name4')"
+            [(ngModel)]="record.param_name4" maxlength="100" />
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="bname5">
+        <label class="col-4 col-form-label col-form-label-sm">{{name5}}</label>
+        <div class="col-8">
+          <input class="form-control form-control-sm" type="text" (blur)="onBlur('param_name5')"
+            [(ngModel)]="record.param_name5" maxlength="100" />
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="bname6">
+        <label class="col-4 col-form-label col-form-label-sm">{{name6}}</label>
+        <div class="col-8">
+          <select class="form-control form-control-sm" [(ngModel)]="record.param_name6">
+            <option *ngFor="let rec of cmbList" [value]="rec">{{rec}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="blovName">
+        <label class="col-4 col-form-label col-form-label-sm">User</label>
+        <div class="col-8">
+          <app-autocomplete [inputdata]="USERRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group row">
+        <label class="col-4 col-form-label col-form-label-sm"></label>
+        <div class="col-8">
+          <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
+          <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>           -->
+          <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" [routerLink]="['/Silver.Master/ParamEdit']"
+            [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.menu_param,origin: 'param-page',mode: 'ADD'}">New</a>
+          <button class="btn btn-primary btn-sm mr-1" (click)="Close()">{{closeCaption}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

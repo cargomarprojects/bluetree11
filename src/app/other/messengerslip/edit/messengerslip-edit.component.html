@@ -1,0 +1,255 @@
+<div *ngIf="tab=='main'">
+  <div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+      <label class="mr-3">Messenger Slip ({{mode}})</label>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+      <label class="text-danger" *ngIf="is_locked">LOCKED</label>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+      {{errorMessage}}
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-md-4 testbox  px-0 mx-0">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Ref#</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.cs_refno" [disabled]="true" maxlength="25" #refno></InputBox>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 testbox  px-0 mx-0">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Date</label>
+          <div class="col-8  input-group input-group-sm">
+            <app-date [inputdate]="record.cs_date" (ValueChanged)="record.cs_date=$event" #_cs_date></app-date>
+            <select class="form-control form-control-sm" [(ngModel)]="record.cs_ampm">
+              <option [value]="'AM'">AM</option>
+              <option [value]="'PM'">PM</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="row">
+
+      <div class="col-md-4 testbox  px-0 mx-0">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">To</label>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'TO-CODE'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+              [displaydata]="record.cs_to_code" (ValueChanged)="LovSelected($event)" #to_code>
+            </app-autocomplete2>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Name</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.cs_to_name" [maxlength]="60" [uppercase]="true" #to_name>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Tel.No.</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.cs_to_tel" [maxlength]="60" [uppercase]="true" #to_tel>
+            </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Fax.</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.cs_to_fax" [maxlength]="60" [uppercase]="true" #to_fax>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">From</label>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'FROM-CODE'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+              [displaydata]="record.cs_from_name" (ValueChanged)="LovSelected($event)" #from_name>
+            </app-autocomplete2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 testbox  px-0 mx-0">
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.cs_is_drop_bool" #is_drop />
+              <span>Drop</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.cs_is_pick_bool" />
+              <span>Pick Up</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.cs_is_receipt_bool" />
+              <span>Get Receipt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="row">
+      <div class="col-md-4 testbox  px-0 mx-0">
+        <label class="offset-4 col-8 col-form-label col-form-label-sm"><strong>This is for DROP only (CHECK / BL /
+            OTHERS)</strong></label>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-2">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.cs_is_check_bool" /><span>Check</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <InputBox [(inputModel)]="record.cs_check_det" [maxlength]="60" [uppercase]="true" #check_det> </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-2">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.cs_is_bl_bool"
+                (click)="ChkBLClick()" /><span>BL</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <InputBox [(inputModel)]="record.cs_bl_det" [maxlength]="60" [uppercase]="true" #bl_det> </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-2">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.cs_is_oth_bool" /><span>Others</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <InputBox [(inputModel)]="record.cs_oth_det" [maxlength]="60" [uppercase]="true" #oth_det> </InputBox>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-4 testbox  px-0 mx-0">
+
+      </div>
+
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="row">
+      <div class="col-md-4 testbox  px-0 mx-0">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">DelivrTo/Pickup From</label>
+          <div class="col-8">
+            <app-autocomplete2 [controlname]="'DELIVER-TO'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+              [displaydata]="record.cs_deliver_to_code" (ValueChanged)="LovSelected($event)" #deliver_to_code>
+            </app-autocomplete2>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.cs_deliver_to_name" [maxlength]="60" [uppercase]="true" #deliver_to_name>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Address</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.cs_deliver_to_add1" [maxlength]="60" [uppercase]="true" #deliver_to_add1>
+            </InputBox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.cs_deliver_to_add2" [maxlength]="60" [uppercase]="true" #deliver_to_add2>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.cs_deliver_to_add3" [maxlength]="60" [uppercase]="true" #deliver_to_add3>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Tel.No.</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.cs_deliver_to_tel" [maxlength]="60" [uppercase]="true" #deliver_to_tel>
+            </InputBox>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Attention</label>
+          <div class="col-8">
+            <InputBox [(inputModel)]="record.cs_deliver_to_attn" [maxlength]="60" [uppercase]="true" #deliver_to_attn>
+            </InputBox>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 testbox  px-0 mx-0">
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-md-8 testbox  px-0 mx-0">
+        <div class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm">Remark</label>
+          <div class="col-10">
+            <textarea rows="5" class="form-control form-control-sm" [(ngModel)]="record.cs_remark"
+              (blur)="onBlur('cs_remark')" required maxlength="100"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="row align-items-center justify-content-center p-1">
+      <button class="btn btn-primary btn-md mr-1" [disabled]="is_locked" *ngIf="gs.canSave(menuid,mode)"
+        (click)="Save()">Save</button>
+      <button *ngIf="mode=='EDIT'" class="btn btn-primary btn-md mr-1" (click)="MessengerRptPrint()">Print</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="tab=='report'">
+  <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+    (callbackevent)="callbackevent($event)"></app-report>
+</div>

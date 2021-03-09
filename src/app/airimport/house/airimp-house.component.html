@@ -1,0 +1,71 @@
+<div class="page-header">
+        <div class="col">
+            <label class="mr-3">{{mainservice.title}}</label>
+            <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button> -->
+    
+            <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+
+        </div>
+    </div>
+    
+    <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+        {{errorMessage$ | async}}
+    </div>
+    
+    <app-airimp-house-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+    </app-airimp-house-header>
+    
+    <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+    
+    <div class="page-body table-responsive table-bordered">
+        <table class="table  table-hover table-sm">
+            <thead class="page-body-thead">
+                <tr>
+                    <th (click)="mainservice.sort('mbl_refno')">REF.NO&nbsp;<i [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
+                    <th (click)="mainservice.sort('mbl_no')">MAWB&nbsp;<i [ngClass]="mainservice.getIcon('mbl_no')"></i></th>
+                    <th (click)="mainservice.sort('hbl_houseno')">HOUSE&nbsp;<i [ngClass]="mainservice.getIcon('hbl_houseno')"></i></th>
+                    <th (click)="mainservice.sort('hbl_shipper_name')">SHIPPER&nbsp;<i [ngClass]="mainservice.getIcon('hbl_shipper_name')"></i></th>
+                    <th (click)="mainservice.sort('hbl_consignee_name')">CONSIGNEE&nbsp;<i [ngClass]="mainservice.getIcon('hbl_consignee_name')"></i></th>
+                    <th (click)="mainservice.sort('hbl_packages')">PCS&nbsp;<i [ngClass]="mainservice.getIcon('hbl_packages')"></i></th>
+                    <!-- <th>TELEX RELEASED</th> -->
+                    <th (click)="mainservice.sort('hbl_handled_name')">HANDLED-BY&nbsp;<i [ngClass]="mainservice.getIcon('hbl_handled_name')"></i></th>
+                    <th (click)="mainservice.sort('mbl_pol_etd')">ETD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_etd')"></i></th>
+                    <th (click)="mainservice.sort('mbl_pod_eta')">ETA&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_eta')"></i></th>
+                    <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+                    <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
+                    <th *ngIf="mainservice.canDelete" class='text-center'>DELETE</th>     
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+                <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+                    <td *ngIf="!(this.gs.canEdit(this.gs.MENU_AI_MASTER) || this.gs.canView(this.gs.MENU_AI_MASTER))">{{rec.mbl_refno}}</td>
+                    <td *ngIf="(this.gs.canEdit(this.gs.MENU_AI_MASTER) || this.gs.canView(this.gs.MENU_AI_MASTER))">
+                        <a class='hlink' [routerLink]="['/Silver.AirImport.Trans/AirImpMasterEditPage']"
+                    [queryParams]="{appid : this.gs.appid ,menuid: this.gs.MENU_AI_MASTER,pkid: rec.hbl_mbl_id,type: 'AI',origin: 'REFNO',mode: 'EDIT'}">{{rec.mbl_refno}}</a>
+                    </td>
+                    <td>{{rec.mbl_no}}</td>
+                    <td *ngIf="!this.gs.canEdit(this.gs.MENU_AI_HOUSE)">{{rec.hbl_houseno}}</td>
+                    <td *ngIf="this.gs.canEdit(this.gs.MENU_AI_HOUSE)">
+                        <a class='hlink' [routerLink]="['/Silver.AirImport.Trans/AirImpHouseEditPage']"
+                        [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.hbl_pkid,parentid: rec.hbl_mbl_id,type: '',origin: 'airimp-house-page',mode: 'EDIT'}">{{rec.hbl_houseno}}</a>
+                    </td>
+                    <td>{{rec.hbl_shipper_name}}</td>
+                    <td>{{rec.hbl_consignee_name}}</td>
+                    <td class='text-right'>{{rec.hbl_packages}}</td>
+                    <!-- <td>{{rec.hbl_telex_released}}</td> -->
+                    <td>{{rec.hbl_handled_name}}</td>
+                    <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
+                    <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+                    <td>{{rec.rec_created_by}}</td>
+                    <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                    <td *ngIf="mainservice.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                        (click)="mainservice.DeleteRow(rec)"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    
+    <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+    
+    <br />

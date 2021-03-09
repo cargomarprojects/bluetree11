@@ -1,0 +1,55 @@
+<div class="page-list">
+  <div class="page-search">
+    <div class="row">
+
+      <div class="col-md-3">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">From Date</label>
+          <div class="col-8">
+            <app-date [inputdate]="searchQuery.sdate" (ValueChanged)="searchQuery.sdate=$event">
+            </app-date>
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">To Date</label>
+          <div class="col-8">
+            <app-date [inputdate]="searchQuery.edate" (ValueChanged)="searchQuery.edate=$event">
+            </app-date>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Search Type</label>
+          <div class="col-8">
+            <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchString">
+              <option [value]="'pay_docno'">DEPOSIT#</option>
+              <option [value]="'pay_date'">DATE</option>
+              <option [value]="'b.acc_name'">BANK</option>
+              <option [value]="'pay_amt'">AMOUNT</option>              
+              <option [value]="'pay_posted'">POSTED</option>
+              <option [value]="'pay_narration'">REMARKS</option>              
+              <option [value]="'a.created_by'">CREATED-BY</option>              
+              <option [value]="'a.created_date'">CREATED-DATE</option>              
+              <option [value]="'a.rec_closed'">CLOSED</option>              
+            </select>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+      <div class="col-md-6">
+        <div class="form-group row">
+          <div class="col-4">
+            <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+            <!-- <button [disabled]="loading" (click)="List('EXCEL')" class="btn btn-primary btn-sm">Excel</button> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

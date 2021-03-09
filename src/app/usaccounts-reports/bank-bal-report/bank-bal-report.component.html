@@ -1,0 +1,105 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-1">{{title}}</label>
+        <button class="btn btn-primary btn-sm" (click)="Close()">Return</button>
+        <i *ngIf="loading" class="fa fa-spinner"></i>
+    </div>
+</div>
+
+<div *ngIf="currentTab=='LIST'">
+
+    <div class="page-list">
+        <div class="page-search">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm">Branch</label>
+                        <div class="col-8">
+                            <select class="form-control form-control-sm" [(ngModel)]="comp_type" (change)="onChange('comp_type')">
+                                <option *ngFor="let rec of gs.CompanyList" [value]="rec.comp_code">{{rec.comp_name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label col-form-label-sm">AsOn</label>
+                        <div class="col-8">
+                            <app-date [inputdate]="tdate" (ValueChanged)="tdate=$event"></app-date>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div style="height: 150px; overflow-y: scroll;">
+                        <div class="page-body table-responsive"  style="background-color:white">
+                            <table class="table  table-hover table-sm table-borderless">
+                                <!-- <thead class="page-body-thead">
+                                <tr>
+                                    <th>BANK</th>
+                                </tr>
+                            </thead> -->
+                                <tbody class="page-body-tbody">
+                                    <tr *ngFor="let rec of bankrecords">
+                                        <td style="padding:0%;" (click)="SelectBank(rec)">
+                                            <div class="form-check"> <input type="checkbox" class="form-check-input"
+                                                    [(ngModel)]="rec.bnk_checked"><span>{{rec.bnk_display_name}}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <div (click)="SelectDeselect()" class="form-check"> <input type="checkbox" class="form-check-input"
+                                    [(ngModel)]="allbankchecked"><span>Select All Bank / None</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <button [disabled]="loading" (click)="List('SCREEN')"
+                                class="btn btn-primary btn-sm mr-1">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <App-Page
+        [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+        (PageEvents)="PageEvents($event)"></App-Page>
+
+    <div class="page-body table-responsive">
+        <table class="table  table-hover table-sm">
+            <thead class="page-body-thead">
+                <tr>
+                    <th width="30%">BANK</th>
+                    <th width="10%" style="text-align:right">BALANCE</th>
+                    <th width="60%"></th>
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+                <tr [style.color]="rec.acc_name=='BALANCE'?'Red':'Black'"
+                [style.font-weight]="rec.acc_name=='BALANCE' ?'bold':'normal'">
+                    <td>{{rec.acc_name}}</td>
+                    <td style="text-align:right">{{rec.jv_balance | number : '1.2-2'}}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <App-Page
+        [PageData]={page_count:page_count,page_current:page_current,page_rows:page_rows,page_rowcount:page_rowcount}
+        (PageEvents)="PageEvents($event)"></App-Page>
+
+</div>
+
+<br />
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+</div>

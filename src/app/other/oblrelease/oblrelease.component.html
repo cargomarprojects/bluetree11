@@ -1,0 +1,54 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-1">{{mainservice.title}}</label>
+    <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+  </div>
+</div>
+
+<div *ngIf="errorMessage$ | async as errorMessage" class="alert alert-danger">
+  {{errorMessage}}
+</div>
+
+<acc-oblrelease-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+</acc-oblrelease-header>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive">
+  <table class="table  table-hover table-sm">
+    <thead class="page-body-thead">
+      <tr>
+        <th>SL#</th>
+        <th>DATE</th>
+        <th>REF#</th>
+        <th>HBL#</th>
+        <th>CONSIGNEE</th>
+        <th>HANDLED-BY</th>
+        <th>REMARK</th>
+        <th>CREATED-BY</th>
+        <th>CREATE-DT</th>
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody class="page-body-tbody">
+      <tr *ngFor="let rec of records$ | async">
+        <td class='hlink' (click)="edit(rec)">{{rec.obl_slno}}</td>
+        <td>{{rec.obl_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+        <td>{{rec.obl_refno}} </td>
+        <td>{{rec.obl_houseno}} </td>
+        <td>{{rec.obl_consignee_name}} </td>
+        <td>{{rec.obl_handled_name}} </td>
+        <td>{{rec.obl_remark}} </td>
+        <td>{{rec.rec_created_by}} </td>
+        <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+        <td *ngIf="mainservice.canDelete" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
+          aria-hidden="true" (click)="mainservice.DeleteRow(rec)"></i></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />
