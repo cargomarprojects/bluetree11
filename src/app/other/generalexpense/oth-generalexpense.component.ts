@@ -20,6 +20,7 @@ import { OthGeneralExpenseService } from '../services/oth-generalexpense.service
 export class OthGeneralExpenseComponent implements OnInit {
 
   // 24-05-2019 Created By Joy  
+  //comment by ajith 09032021
   sub: any;
 
   errorMessage$ : Observable<string> ;
