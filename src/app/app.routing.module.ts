@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'Silver.SeaImport', loadChildren: () => import('./seaimport/seaimport.module').then( m =>m.SeaImportModule) }, 
   { path: 'Silver.AirImport.Trans', loadChildren:  () => import('./airimport/airimport.module').then(m => m.AirImportModule) }, 
   { path: 'Silver.Other.Trans', loadChildren: () => import('./other/other.module').then( m => m.OtherModule) }, 
-  { path: 'Silver.USAccounts.Trans', loadChildren: () => import('./usaccounts/usaccounts.module').then( m => m) }, 
+  { path: 'Silver.USAccounts.Trans', loadChildren: () => import('./usaccounts/usaccounts.module').then( m => m.USAccountsModule) }, 
   { path: 'Silver.USAccounts.Master', loadChildren: () => import('./usaccounts/usaccounts.module').then( m => m.USAccountsModule) }, 
   { path: 'Silver.USAccounts.Reports', loadChildren: () => import('./usaccounts-reports/usaccounts-reports.module').then( m => m.UsAccountsReportsModule) }, 
   { path: 'Silver.Library', loadChildren: () => import('./shared/shared.module').then( m => m.SharedModule) }, 
