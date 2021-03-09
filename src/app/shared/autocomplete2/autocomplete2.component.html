@@ -69,7 +69,7 @@
     <button tabindex="0" type="button" class="close" aria-label="Close" (click)="Cancel()">
       <span aria-hidden="true">&times;</span>
     </button>
-    <ul class="dropdown-menu" style="padding-top: 0%;padding-bottom: 0%;" *ngFor="let item of RecList ;let i = index" (keydown)="ListKeydown($event,item)" >
+    <ul  style="padding-top: 0%;padding-bottom: 0%;" *ngFor="let item of RecList ;let i = index" (keydown)="ListKeydown($event,item)" >
       <li #_itms style="border-bottom: 1px solid black;" tabindex="0"><a (click)="SelectedItem('LIST',item)">{{item.code}}<br>{{item.name}}</a></li>
       <!-- <li style="padding:0in;" style="border-bottom: 1px solid black;"></li> -->
       <!-- <li style="border-bottom: 1px solid black;"><a (click)="SelectedItem('LIST',item)">{{item.name}}</a></li> -->
