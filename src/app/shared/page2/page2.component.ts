@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDet
 import { PageQuery } from '../models/pageQuery';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { bloomAdd } from '@angular/core/src/render3/di';
+
 
 @Component({
   selector: 'App-Page2',

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
-import { bloomAdd } from '@angular/core/src/render3/di';
+
 
 @Component({
   selector: 'app-rateupdate',
