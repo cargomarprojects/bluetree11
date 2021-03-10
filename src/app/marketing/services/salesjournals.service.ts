@@ -37,8 +37,39 @@ export class SalesJournalService {
         private gs: GlobalService
     ) { }
 
+    
+    public getSortCol(){
+        return this.record.sortcol;
+    }
+    public getSortOrder(){
+        return this.record.sortorder;
+    }
+
+    public getIcon(col : string){
+        if ( col == this.record.sortcol){
+          if ( this.record.sortorder )
+            return 'fa fa-arrow-down';
+          else 
+            return 'fa fa-arrow-up';
+        }
+        else 
+          return null;
+    }
+    
+    public  sort(col : string){
+        if ( col == this.record.sortcol){
+          this.record.sortorder = !this.record.sortorder;
+        }
+        else 
+        {
+          this.record.sortcol = col;
+          this.record.sortorder = true;
+        }
+    }
     public ClearInit() {
         this.record = <SalesJournalModel>{
+            sortcol : 'cjm_customer_code',
+            sortorder : true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '' },
@@ -58,6 +89,8 @@ export class SalesJournalService {
         this.menuid = params.id;
         this.param_type = "MARKETING";  //params.menu_param;
         this.record = <SalesJournalModel>{
+            sortcol : 'cjm_customer_code',
+            sortorder : true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '' },

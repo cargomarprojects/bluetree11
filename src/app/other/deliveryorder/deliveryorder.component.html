@@ -18,21 +18,21 @@
 
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
-<div class="page-body table-responsive">
+<div class="page-body table-responsive table-bordered">
     <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
-                <th>REFNO</th>
-                <th>REFDATE</th>
-                <th>TRUKER</th>
-                <th>FROM</th>
-                <th>TO</th>
-                <th>CREATED-BY</th>
-                <th>CREATED-DT</th>
+                <th (click)="mainservice.sort('pick_orderno')">REFNO&nbsp;<i [ngClass]="mainservice.getIcon('pick_orderno')"></i></th>
+                <th (click)="mainservice.sort('pick_order_date')">REFDATE&nbsp;<i [ngClass]="mainservice.getIcon('pick_order_date')"></i></th>
+                <th (click)="mainservice.sort('pick_truk_name')">TRUKER&nbsp;<i [ngClass]="mainservice.getIcon('pick_truk_name')"></i></th>
+                <th (click)="mainservice.sort('pick_fromname')">FROM&nbsp;<i [ngClass]="mainservice.getIcon('pick_fromname')"></i></th>
+                <th (click)="mainservice.sort('pick_toname')">TO&nbsp;<i [ngClass]="mainservice.getIcon('pick_toname')"></i></th>
+                <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+                <th (click)="mainservice.sort('rec_created_date')">CREATED-DT&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of records$ | async">
+            <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
                 <!-- <td class='hlink' (click)="edit(rec)">{{rec.pick_orderno}}</td> -->
                 <td *ngIf="!this.mainservice.canEdit">{{rec.pick_orderno}}</td>
                 <td *ngIf="this.mainservice.canEdit">

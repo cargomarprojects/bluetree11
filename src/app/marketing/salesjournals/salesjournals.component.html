@@ -18,24 +18,24 @@
 
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
-<div class="page-body table-responsive">
+<div class="page-body table-responsive table-bordered">
     <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
-                <th>CODE</th>
-                <th>NAME</th>
-                <th>SALES REP.</th>
-                <th>CITY</th>
-                <th>STATE</th>
-                <th>ZIP</th>
-                <th>CREATED-BY</th>
-                <th>DATE</th>
-                <th style="text-align:center">MEMO</th>
+                <th (click)="mainservice.sort('cjm_customer_code')">CODE&nbsp;<i [ngClass]="mainservice.getIcon('cjm_customer_code')"></i></th>
+                <th (click)="mainservice.sort('cjm_customer_name')">NAME&nbsp;<i [ngClass]="mainservice.getIcon('cjm_customer_name')"></i></th>
+                <th (click)="mainservice.sort('cjm_salesman_name')">SALES REP.&nbsp;<i [ngClass]="mainservice.getIcon('cjm_salesman_name')"></i></th>
+                <th (click)="mainservice.sort('cjm_city')">CITY&nbsp;<i [ngClass]="mainservice.getIcon('cjm_city')"></i></th>
+                <th (click)="mainservice.sort('cjm_state')">STATE&nbsp;<i [ngClass]="mainservice.getIcon('cjm_state')"></i></th>
+                <th (click)="mainservice.sort('cjm_pincode')">ZIP&nbsp;<i [ngClass]="mainservice.getIcon('cjm_pincode')"></i></th>
+                <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+                <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
+                <th  style="text-align:center">MEMO</th>
                 <th *ngIf="mainservice.canDelete" style="text-align:center">DELETE</th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of records$ | async">
+            <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
                 <!-- <td class='hlink' (click)="edit(rec)">{{rec.cjm_customer_code}}</td> -->
                 <td *ngIf="!this.mainservice.canEdit">{{rec.cjm_customer_code}}</td>
                 <td *ngIf="this.mainservice.canEdit">

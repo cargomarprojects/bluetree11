@@ -67,6 +67,8 @@ export interface SearchQuery {
 }
 
 export interface MessengerSlipModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

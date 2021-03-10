@@ -19,26 +19,26 @@
 
     <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
-    <div class="page-body table-responsive">
+    <div class="page-body table-responsive table-bordered">
         <table class="table  table-hover table-sm">
             <thead class="page-body-thead">
                 <tr>
-                    <th>QUOTE#</th>
-                    <th>DATE</th>
-                    <th>QUOTE TO</th>
-                    <th>QUOTE BY</th>
-                    <th>POL</th>
-                    <th>POD</th>
-                    <th>DELIVERY</th>
-                    <th>MOVE</th>
-                    <th>KGS</th>
-                    <th>CBM</th>
+                    <th (click)="mainservice.sort('qtnm_no')">QUOTE#&nbsp;<i [ngClass]="mainservice.getIcon('qtnm_no')"></i></th>
+                    <th (click)="mainservice.sort('qtnm_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('qtnm_date')"></i></th>
+                    <th (click)="mainservice.sort('qtnm_to_name')">QUOTE TO&nbsp;<i [ngClass]="mainservice.getIcon('qtnm_to_name')"></i></th>
+                    <th (click)="mainservice.sort('qtnm_quot_by')">QUOTE BY&nbsp;<i [ngClass]="mainservice.getIcon('qtnm_quot_by')"></i></th>
+                    <th (click)="mainservice.sort('qtnm_pol_name')">POL&nbsp;<i [ngClass]="mainservice.getIcon('qtnm_pol_name')"></i></th>
+                    <th (click)="mainservice.sort('qtnm_pod_name')">POD&nbsp;<i [ngClass]="mainservice.getIcon('qtnm_pod_name')"></i></th>
+                    <th (click)="mainservice.sort('qtnm_pld_name')">DELIVERY&nbsp;<i [ngClass]="mainservice.getIcon('qtnm_pld_name')"></i></th>
+                    <th (click)="mainservice.sort('qtnm_move_type')">MOVE&nbsp;<i [ngClass]="mainservice.getIcon('qtnm_move_type')"></i></th>
+                    <th (click)="mainservice.sort('qtnm_kgs')">KGS&nbsp;<i [ngClass]="mainservice.getIcon('qtnm_kgs')"></i></th>
+                    <th (click)="mainservice.sort('qtnm_cbm')">CBM&nbsp;<i [ngClass]="mainservice.getIcon('qtnm_cbm')"></i></th>
                     <th style="text-align:center">COPY</th>
                     <th *ngIf="mainservice.canDelete" style="text-align:center">DELETE</th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
-                <tr *ngFor="let rec of records$ | async">
+                <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
                     <!-- <td class='hlink' (click)="edit(rec)">{{rec.qtnm_no}}</td> -->
                     <td *ngIf="!this.mainservice.canEdit">{{rec.qtnm_no}}</td>
                     <td *ngIf="this.mainservice.canEdit">

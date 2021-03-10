@@ -30,6 +30,8 @@ export interface SearchQuery {
 }
 
 export interface SalesJournalModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

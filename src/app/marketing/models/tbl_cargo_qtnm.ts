@@ -155,6 +155,8 @@ export interface SearchQuery {
 }
 
 export interface QtnmModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

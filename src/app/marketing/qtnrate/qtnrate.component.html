@@ -18,7 +18,7 @@
     
     <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
     
-    <div class="page-body table-responsive">
+    <div class="page-body table-responsive table-bordered">
         <table class="table  table-hover table-sm">
             <thead class="page-body-thead">
                 <tr>
@@ -31,10 +31,21 @@
                     <th>FILE</th>
                     <th>CREATED-BY</th>
                     <th>DATE</th>
+                    <!-- <th (click)="mainservice.sort('qtnr_slno')">SL#&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_slno')"></i></th>
+                    <th (click)="mainservice.sort('qtnr_agent_name')">AGENT&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_agent_name')"></i></th>
+                    <th (click)="mainservice.sort('qtnr_pol_cntry_name')">COUNTRY OF POL&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_pol_cntry_name')"></i></th>
+                    <th (click)="mainservice.sort('qtnr_pod_cntry_name')">COUNTRY OF POD&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_pod_cntry_name')"></i></th>
+                    <th (click)="mainservice.sort('qtnr_mode')">MODE&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_mode')"></i></th>
+                    <th (click)="mainservice.sort('qtnr_validity')">VALIDITY&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_validity')"></i></th>
+                    <th (click)="mainservice.sort('qtnr_file_name')">FILE&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_file_name')"></i></th>
+                    <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+                    <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th> -->
+
                     <th *ngIf="mainservice.canDelete" style="text-align:center">DELETE</th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
+                <!-- | sortBy: mainservice.getSortCol() : mainservice.getSortOrder() -->
                 <tr *ngFor="let rec of records$ | async">
                     <!-- <td class='hlink' (click)="edit(rec)">{{rec.qtnr_slno}}</td> -->
                     <td *ngIf="!(this.mainservice.canEdit && rec.qtnr_slno)">{{rec.qtnr_slno}}</td>

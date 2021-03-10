@@ -156,6 +156,8 @@ export interface SearchQuery {
 }
 
 export interface PartyModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
