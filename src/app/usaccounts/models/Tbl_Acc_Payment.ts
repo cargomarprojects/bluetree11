@@ -84,6 +84,8 @@ export interface Tbl_Acc_Payment {
 }
 
 export interface AccPaymentModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
