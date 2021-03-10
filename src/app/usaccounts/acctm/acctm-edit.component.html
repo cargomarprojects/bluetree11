@@ -1,7 +1,10 @@
 <div class="page-header">
     <div class="row align-items-center justify-content-left p-1">
         <label class="mr-3">A/c Master ({{mode}})</label>
-        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+        <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button> -->
+        <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)"
+      [routerLink]="['/Silver.USAccounts.Master/AcctmEditPage']"
+      [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.mainService.param_type,origin: 'acctm-edit-page',mode: 'ADD'}">New</a>
         <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
     </div>
 </div>

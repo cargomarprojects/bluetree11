@@ -21,75 +21,110 @@ export class AcctmComponent implements OnInit {
    Joy
  */
 
-errorMessage$ : Observable<string> ;
-records$ :  Observable<Tbl_acc_acctm[]>;
-pageQuery$ : Observable<PageQuery>;
-searchQuery$ : Observable<SearchQuery>;
+  errorMessage$: Observable<string>;
+  records$: Observable<Tbl_acc_acctm[]>;
+  pageQuery$: Observable<PageQuery>;
+  searchQuery$: Observable<SearchQuery>;
 
-constructor(
-  private route: ActivatedRoute,
-  private location: Location,
-  public gs: GlobalService,
-  public mainservice: AcctmService
-) { }
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    public gs: GlobalService,
+    public mainservice: AcctmService
+  ) { }
 
-ngOnInit() {
-  this.mainservice.init(this.route.snapshot.queryParams);
-  this.initPage();
-}
-
-initPage() {
-  
-  this.records$ = this.mainservice.data$.pipe(map(res => res.records));
-  this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
-  this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));    
-  this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errormessage));
-
-}
-
-searchEvents(actions: any) {
-  this.mainservice.Search(actions,  'SEARCH');
-}
-
-pageEvents(actions: any) {
-  this.mainservice.Search(actions,'PAGE');
-}
-
-NewRecord() {
-  if (!this.mainservice.canAdd) {
-    alert('Insufficient User Rights')
-    return;
+  ngOnInit() {
+    this.mainservice.init(this.route.snapshot.queryParams);
+    this.initPage();
   }
 
-  let parameter = {
-    menuid: this.mainservice.menuid,
-    pkid: '',
-    type: this.mainservice.param_type,
-    origin: 'acctm-page',
-    mode: 'ADD'
-  };
-  this.gs.Naviagete('Silver.USAccounts.Master/AcctmEditPage', JSON.stringify(parameter));
+  initPage() {
 
-}
-edit(_record: Tbl_acc_acctm) {
-  if (!this.mainservice.canEdit) {
-    alert('Insufficient User Rights')
-    return;
+    this.records$ = this.mainservice.data$.pipe(map(res => res.records));
+    this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
+    this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
+    this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errormessage));
+
   }
 
-  let parameter = {
-    menuid: this.mainservice.menuid,
-    pkid: _record.acc_pkid,
-    type: '',
-    origin: 'acctm-page',
-    mode: 'EDIT'
-  };
-  this.gs.Naviagete('Silver.USAccounts.Master/AcctmEditPage', JSON.stringify(parameter));
-}
+  searchEvents(actions: any) {
+    this.mainservice.Search(actions, 'SEARCH');
+  }
 
-Close() {
-  this.location.back();
-}
+  pageEvents(actions: any) {
+    this.mainservice.Search(actions, 'PAGE');
+  }
+
+  NewRecord() {
+    if (!this.mainservice.canAdd) {
+      alert('Insufficient User Rights')
+      return;
+    }
+
+    let parameter = {
+      menuid: this.mainservice.menuid,
+      pkid: '',
+      type: this.mainservice.param_type,
+      origin: 'acctm-page',
+      mode: 'ADD'
+    };
+    this.gs.Naviagete('Silver.USAccounts.Master/AcctmEditPage', JSON.stringify(parameter));
+
+  }
+  edit(_record: Tbl_acc_acctm) {
+    if (!this.mainservice.canEdit) {
+      alert('Insufficient User Rights')
+      return;
+    }
+
+    let parameter = {
+      menuid: this.mainservice.menuid,
+      pkid: _record.acc_pkid,
+      type: '',
+      origin: 'acctm-page',
+      mode: 'EDIT'
+    };
+    this.gs.Naviagete('Silver.USAccounts.Master/AcctmEditPage', JSON.stringify(parameter));
+  }
+
+  getRouteDet(_type: string, _mode: string, _record: Tbl_acc_acctm = null) {
+
+    if (_type == "L") {
+      if ((_mode == "ADD" && this.mainservice.canAdd) || (_mode == "EDIT" && this.mainservice.canEdit))
+        return "/Silver.USAccounts.Master/AcctmEditPage";
+      else
+        return null;
+    } else if (_type == "P") {
+
+      if (_record == null) {
+        if (!this.mainservice.canAdd)
+          return null;
+        return {
+          appid: this.gs.appid,
+          menuid: this.mainservice.menuid,
+          pkid: '',
+          type: this.mainservice.param_type,
+          origin: 'acctm-page',
+          mode: 'ADD'
+        };
+      }
+      if (!this.mainservice.canEdit)
+        return null;
+      return {
+        appid: this.gs.appid,
+        menuid: this.mainservice.menuid,
+        pkid: _record.acc_pkid,
+        type: '',
+        origin: 'acctm-page',
+        mode: 'EDIT'
+      };
+    } else
+      return null;
+  }
+
+  Close() {
+    this.location.back();
+  }
 
 
 }

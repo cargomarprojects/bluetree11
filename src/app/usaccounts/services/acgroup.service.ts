@@ -38,6 +38,34 @@ export class AcGroupService {
         private gs: GlobalService
     ) { }
 
+    public getSortCol(){
+        return this.record.sortcol;
+    }
+    public getSortOrder(){
+        return this.record.sortorder;
+    }
+
+    public getIcon(col : string){
+        if ( col == this.record.sortcol){
+          if ( this.record.sortorder )
+            return 'fa fa-arrow-down';
+          else 
+            return 'fa fa-arrow-up';
+        }
+        else 
+          return null;
+    }
+    
+    public  sort(col : string){
+        if ( col == this.record.sortcol){
+          this.record.sortorder = !this.record.sortorder;
+        }
+        else 
+        {
+          this.record.sortcol = col;
+          this.record.sortorder = true;
+        }
+    }
     public init(params: any) {
         if (this.LSESSION < this.gs.GSESSION)
         {
@@ -52,6 +80,8 @@ export class AcGroupService {
         this.param_type = params.param_type;
 
         this.record = <AccGroupModel>{
+            sortcol : 'acc_parent_code',
+            sortorder : true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: ''},

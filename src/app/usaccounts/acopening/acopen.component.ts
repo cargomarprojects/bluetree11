@@ -86,6 +86,41 @@ export class AcopenComponent implements OnInit {
     this.gs.Naviagete('Silver.USAccounts.Master/OpenEditPage', JSON.stringify(parameter));
   }
 
+  getRouteDet(_type: string, _mode: string, _record: Tbl_Acc_Opening = null) {
+
+    if (_type == "L") {
+      if ((_mode == "ADD" && this.mainservice.canAdd) || (_mode == "EDIT" && this.mainservice.canEdit))
+        return "/Silver.USAccounts.Master/OpenEditPage";
+      else
+        return null;
+    } else if (_type == "P") {
+
+      if (_record == null) {
+        if (!this.mainservice.canAdd)
+          return null;
+        return {
+          appid: this.gs.appid,
+          menuid: this.mainservice.menuid,
+          pkid: '',
+          type: this.mainservice.param_type,
+          origin: 'acopen-page',
+          mode: 'ADD'
+        };
+      }
+      if (!this.mainservice.canEdit)
+        return null;
+      return {
+        appid: this.gs.appid,
+        menuid: this.mainservice.menuid,
+        pkid: _record.op_pkid,
+        type: '',
+        origin: 'acopen-page',
+        mode: 'EDIT'
+      };
+    } else
+      return null;
+  }
+
   Close() {
     this.location.back();
   }

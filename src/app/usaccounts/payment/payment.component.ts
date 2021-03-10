@@ -48,7 +48,7 @@ export class PaymentComponent implements OnInit {
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
 
-    
+
   }
 
   initPage() {
@@ -101,6 +101,41 @@ export class PaymentComponent implements OnInit {
     this.gs.Naviagete('Silver.USaccounts.Trans/PaymentEditPage', JSON.stringify(parameter));
   }
 
+  getRouteDet(_type: string, _mode: string, _record: Tbl_Acc_Payment = null) {
+
+    if (_type == "L") {
+      if ((_mode == "ADD" && this.mainservice.canAdd) || (_mode == "EDIT" && this.mainservice.canEdit))
+        return "/Silver.USaccounts.Trans/PaymentEditPage";
+      else
+        return null;
+    } else if (_type == "P") {
+
+      if (_record == null) {
+        if (!this.mainservice.canAdd)
+          return null;
+        return {
+          appid: this.gs.appid,
+          menuid: this.mainservice.menuid,
+          pkid: '',
+          type: this.mainservice.param_type,
+          origin: 'payment-page',
+          mode: 'ADD'
+        };
+      }
+      if (!this.mainservice.canEdit)
+        return null;
+      return {
+        appid: this.gs.appid,
+        menuid: this.mainservice.menuid,
+        pkid: _record.pay_pkid,
+        type: '',
+        origin: 'payment-page',
+        mode: 'EDIT'
+      };
+    } else
+      return null;
+  }
+
   Close() {
     this.location.back();
   }
@@ -137,7 +172,7 @@ export class PaymentComponent implements OnInit {
         this.report_searchdata.REPORT_CAPTION = "CASH " + rec.pay_rp;
       else
         this.report_searchdata.REPORT_CAPTION = "BANK " + rec.pay_rp;
-      
+
 
       this.report_menuid = this.gs.MENU_ACC_ARAP_SETTLMENT;
       this.tab = 'simple';

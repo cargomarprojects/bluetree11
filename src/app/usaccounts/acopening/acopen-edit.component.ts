@@ -50,13 +50,16 @@ export class AcopenEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-
-
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+        }
         this.initPage();
         this.actionHandler();
     }
@@ -145,13 +148,13 @@ export class AcopenEditComponent implements OnInit {
                 this.record = <Tbl_Acc_Opening>response.record;
                 this.mode = 'EDIT';
 
-                this.errorMessage  ="";
+                this.errorMessage = "";
                 if (this.record.op_is_paid == "Y") {
-                    this.errorMessage  ="Invoice Settled, Cannot Edit";
+                    this.errorMessage = "Invoice Settled, Cannot Edit";
                 }
                 else if (this.gs.IsDateLocked(this.record.op_date)) {
                     this.isAccLocked = true;
-                    this.errorMessage  ="Accoutning Period Locked";
+                    this.errorMessage = "Accoutning Period Locked";
                 }
 
             }, error => {
@@ -284,7 +287,7 @@ export class AcopenEditComponent implements OnInit {
             this.errorMessage = "Invalid Currency";
             alert(this.errorMessage);
             return bRet;
-        }        
+        }
 
         if (this.gs.isZero(this.record.op_ex_rate)) {
             bRet = false;
@@ -298,7 +301,7 @@ export class AcopenEditComponent implements OnInit {
             this.errorMessage = "Invalid Amount";
             alert(this.errorMessage);
             return bRet;
-        }        
+        }
 
 
         if (this.gs.isBlank(this.record.op_drcr)) {
@@ -308,8 +311,7 @@ export class AcopenEditComponent implements OnInit {
             return bRet;
         }
 
-        if ( this.record.op_arap === 'AR' ||  this.record.op_arap === 'AP')
-        {
+        if (this.record.op_arap === 'AR' || this.record.op_arap === 'AP') {
             if (this.gs.isBlank(this.record.op_cust_id)) {
                 bRet = false;
                 this.errorMessage = "Invalid Party";
@@ -330,16 +332,16 @@ export class AcopenEditComponent implements OnInit {
             }
         }
 
-        if ( this.record.op_arap === 'AR' ){
-            if ( this.record.op_drcr == 'CR'){
+        if (this.record.op_arap === 'AR') {
+            if (this.record.op_drcr == 'CR') {
                 bRet = false;
                 this.errorMessage = "A/c Type need to be DR";
                 alert(this.errorMessage);
                 return bRet;
             }
         }
-        if ( this.record.op_arap === 'AP' ){
-            if ( this.record.op_drcr == 'DR'){
+        if (this.record.op_arap === 'AP') {
+            if (this.record.op_drcr == 'DR') {
                 bRet = false;
                 this.errorMessage = "A/c Type need to be CR";
                 alert(this.errorMessage);
@@ -384,11 +386,11 @@ export class AcopenEditComponent implements OnInit {
 
     onFocusout(field: string) {
     }
-    
+
     onBlur(field: string) {
     }
 
-    onBlur2( cb : any) {
+    onBlur2(cb: any) {
         /*
         if (field === 'group_name')
             this.record.acc_group_name = this.record.acc_group_name.toUpperCase();
