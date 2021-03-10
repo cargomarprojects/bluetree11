@@ -6,7 +6,6 @@
             [routerLink]="[mainservice.param_type=='PARTYS'?'/Silver.Master/PartyEditPage':'/Silver.Master/PartyParentEditPage']"
             [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid,pkid: '',type: this.mainservice.param_type,origin: 'partymaster-page',mode: 'ADD'}">New</a>
           <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-
     </div>
   </div>
   
@@ -18,26 +17,26 @@
   
   <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
   
-  <div *ngIf="mainservice.param_type=='PARTYS'" class="page-body table-responsive">
+  <div *ngIf="mainservice.param_type=='PARTYS'" class="page-body table-responsive  table-bordered">
     <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
-                <th>CODE</th>
-                <th>NAME</th>
-                <th>FIRM CODE</th>
-                <th>CATEGORY</th>
-                <th>ADDRESS-1</th>
-                <th>COUNTRY</th>              
-                <th>STATE</th>
-                <th>CONTACT</th>
-                <th>TEL</th>
-                <th>FAX</th>          
-                <th>CREATED-BY</th>
-                <th>DATE</th>              
+                <th (click)="mainservice.sort('gen_code')">CODE&nbsp;<i [ngClass]="mainservice.getIcon('gen_code')"></i></th>
+                <th (click)="mainservice.sort('gen_short_name')">NAME&nbsp;<i [ngClass]="mainservice.getIcon('gen_short_name')"></i></th>
+                <th (click)="mainservice.sort('gen_firm_code')">FIRM CODE&nbsp;<i [ngClass]="mainservice.getIcon('gen_firm_code')"></i></th>
+                <th (click)="mainservice.sort('gen_type2')">CATEGORY&nbsp;<i [ngClass]="mainservice.getIcon('gen_type2')"></i></th>
+                <th (click)="mainservice.sort('gen_address1')">ADDRESS-1&nbsp;<i [ngClass]="mainservice.getIcon('gen_address1')"></i></th>
+                <th (click)="mainservice.sort('gen_country_name')">COUNTRY&nbsp;<i [ngClass]="mainservice.getIcon('gen_country_name')"></i></th>              
+                <th (click)="mainservice.sort('gen_state')">STATE&nbsp;<i [ngClass]="mainservice.getIcon('gen_state')"></i></th>
+                <th (click)="mainservice.sort('gen_contact')">CONTACT&nbsp;<i [ngClass]="mainservice.getIcon('gen_contact')"></i></th>
+                <th (click)="mainservice.sort('gen_tel')">TEL&nbsp;<i [ngClass]="mainservice.getIcon('gen_tel')"></i></th>
+                <th (click)="mainservice.sort('gen_fax')">FAX&nbsp;<i [ngClass]="mainservice.getIcon('gen_fax')"></i></th>          
+                <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+                <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>              
             </tr>
         </thead>
         <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of records$ | async">
+            <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
                 <!-- <td class='hlink' (click)="edit(rec)" >{{rec.gen_code}}</td> -->
                 <td *ngIf="!this.mainservice.canEdit" >{{rec.gen_code}}</td>
                 <td *ngIf="this.mainservice.canEdit" >
@@ -59,16 +58,16 @@
         </tbody>
     </table>
   </div>
-  <div *ngIf="mainservice.param_type=='OVERSEAAGENT' && gs.PARENT_ADDRESS_REQUIRED !='Y'" class="page-body table-responsive">
+  <div *ngIf="mainservice.param_type=='OVERSEAAGENT' && gs.PARENT_ADDRESS_REQUIRED !='Y'" class="page-body table-responsive  table-bordered">
     <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
-                <th>CODE</th>
-                <th>NAME</th>
+                <th (click)="mainservice.sort('gen_code')">CODE&nbsp;<i [ngClass]="mainservice.getIcon('gen_code')"></i></th>
+                <th (click)="mainservice.sort('gen_short_name')">NAME&nbsp;<i [ngClass]="mainservice.getIcon('gen_short_name')"></i></th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of records$ | async">
+            <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
                 <!-- <td (click)="edit(rec)" >{{rec.gen_code}}</td> -->
                 <td *ngIf="!this.mainservice.canEdit" >{{rec.gen_code}}</td>
                 <td *ngIf="this.mainservice.canEdit" >
