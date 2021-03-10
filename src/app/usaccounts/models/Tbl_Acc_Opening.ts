@@ -38,6 +38,8 @@ export interface Tbl_Acc_Opening {
 }
 
 export interface AccOpeningModel {
+    sortcol : string ;
+     sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
