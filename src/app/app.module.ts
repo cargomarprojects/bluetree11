@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import { NgModule } from '@angular/core';
@@ -10,7 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
 import { StoreModule  } from '@ngrx/store';
-import { EffectsModule, Effect } from '@ngrx/effects';
+import { EffectsModule } from '@ngrx/effects';
 
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
@@ -40,7 +41,7 @@ import { CustomRouteReuseStrategy } from './customReuseRouteStrategy';
     LoginComponent,
     Login2Component,
     HomeComponent,
-    HeaderComponent,
+      HeaderComponent,
     ReloadComponent
   ],
   imports: [

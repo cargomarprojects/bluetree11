@@ -1,4 +1,5 @@
 
+
 import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, OnChanges, SimpleChange, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -7,11 +8,12 @@ import { LoginService } from '../../core/services/login.service';
 import { GlobalService } from '../../core/services/global.service';
 
 
+
 @Component({
   selector: 'app-autocomplete2',
   templateUrl: './autocomplete2.component.html',
   styles: [
-   `
+    `
             .my-class {
                 cursor: pointer;
                 border-style: solid;
@@ -31,6 +33,8 @@ import { GlobalService } from '../../core/services/global.service';
 
 export class AutoComplete2Component {
 
+  //@ViewChild('_cbtn') cbtn_field: ElementRef;
+  //@ViewChildren('_itms') itms_field: QueryList<ElementRef>;
 
   private _controlname: string;
   @Input() set controlname(value: string) {
@@ -215,6 +219,28 @@ export class AutoComplete2Component {
         }
         else {
           this.showDiv = true;
+          // this.itms_field.changes
+          //   .subscribe((queryChanges) => {
+          //     this.itms_field.first.nativeElement.focus();
+          //   });
+          // if (!this.gs.isBlank(this.cbtn_field))
+          //   this.cbtn_field.nativeElement.focus();
+          // if (_action == "NEXT") {
+            // this.indx=-1;
+            // this.indx2=-1;
+            // this.indx=0;
+            // if (!this.gs.isBlank(this.cbtn_field))
+            // this.cbtn_field.nativeElement.focus();
+            //this.itms_field.nativeElement.children[0].children[0].focus();
+            //this.itms_field.toArray()[4].nativeElement.focus();
+            //this.focuselement=0;
+          // }
+
+          //  this.itms_field.changes
+          // .subscribe((queryChanges) => {
+          //   this.itms_field.first.nativeElement.focus();
+          //});
+
         }
       },
         error => {
@@ -342,6 +368,8 @@ export class AutoComplete2Component {
     if (event.key === 'Escape') {
      this.Cancel();
     }
+    // if (event.key === 'ArrowDown'||event.key === 'Tab') {
+    // }
   }
   MoreKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
@@ -349,3 +377,4 @@ export class AutoComplete2Component {
     }
   }
 }
+

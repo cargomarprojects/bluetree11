@@ -5,16 +5,26 @@
   <button [disabled]="showDiv || disabled" [ngStyle]="setMyStyles()" class="btn btn-default btn-sm"
     (click)="List()">...</button>
 
-    <div class="" [ngClass]="{'dropdown-menu show focus': showDiv}" >
-      <a *ngFor="let item of RecList ;let i = index" 
-        class="dropdown-item"  tabindex="1"
-        (click)="SelectedItem('LIST',item)">{{item.code}}<br>{{item.name}}
-      </a>
-  </div>
-
-
-
 </div>
 
+<div [ngClass]="{'my-class': showDiv}">
 
+  <div *ngIf="showDiv">
+    
+    <button tabindex="0" type="button" class="close" aria-label="Close" (click)="Cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    
+    <ul style="padding-top: 0%;padding-bottom: 0%;" *ngFor="let item of RecList ;let i = index" (keydown)="ListKeydown($event,item)" >
+      <li style="border-bottom: 1px solid black;" ><a (click)="SelectedItem('LIST',item)">{{item.code}}<br>{{item.name}}</a></li>
+    </ul>
+
+    <ul *ngIf="bShowMore" (keydown)="MoreKeydown($event)">
+      <li><a (click)="More()">More...</a></li>
+    </ul>
+
+
+  </div>
+
+</div>
 
