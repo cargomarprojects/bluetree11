@@ -258,6 +258,7 @@ export class AgentShipReportComponent implements OnInit {
             filedisplayname: this.SearchData.filedisplayname
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
+
         }
 
         this.loading = false;

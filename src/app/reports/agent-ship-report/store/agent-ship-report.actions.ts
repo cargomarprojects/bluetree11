@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { TBL_MBL_REPORT} from '../../models/tbl_mbl_report'
+
 import { ReportState } from './agent-ship-report.models';
 
 export enum ActionTypes {
@@ -23,4 +23,6 @@ export class Delete implements Action {
   constructor(public payload : { id: string}) { }
 }
 
-export type Actions = Add | Update | Delete;
+
+
+export type Actions = Add | Update | Delete ;
