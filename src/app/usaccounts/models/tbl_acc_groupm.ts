@@ -19,6 +19,8 @@ export class Tbl_acc_groupm {
 }
 
 export interface AccGroupModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

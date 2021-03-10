@@ -1,7 +1,8 @@
 <div class="page-header">
   <div class="col">
     <label class="mr-1">{{mainservice.title}}</label>
-    <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button>
+    <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button> -->
+    <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" [routerLink]="getRouteDet('L','ADD')" [queryParams]="getRouteDet('P','ADD')">New</a>
     <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
   </div>
 </div>
@@ -15,23 +16,26 @@
 
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
-<div class="page-body table-responsive">
+<div class="page-body table-responsive table-bordered">
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <th>PARENT CODE</th>
-        <th>LEVEL1</th>
-        <th>LEVEL2</th>
-        <th>LEVEL3</th>
-        <th>ORDER</th>
-        <th>CREATED BY</th>
-        <th>DATE</th>
-        <th>CLOSED</th>
+        <th (click)="mainservice.sort('acc_parent_code')">PARENT CODE&nbsp;<i [ngClass]="mainservice.getIcon('acc_parent_code')"></i></th>
+        <th (click)="mainservice.sort('acc_parent_name')">LEVEL1&nbsp;<i [ngClass]="mainservice.getIcon('acc_parent_name')"></i></th>
+        <th (click)="mainservice.sort('acc_group_name')">LEVEL2&nbsp;<i [ngClass]="mainservice.getIcon('acc_group_name')"></i></th>
+        <th (click)="mainservice.sort('acc_sub_group_name')">LEVEL3&nbsp;<i [ngClass]="mainservice.getIcon('acc_sub_group_name')"></i></th>
+        <th (click)="mainservice.sort('acc_order')">ORDER&nbsp;<i [ngClass]="mainservice.getIcon('acc_order')"></i></th>
+        <th (click)="mainservice.sort('rec_created_by')">CREATED BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+        <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
+        <th (click)="mainservice.sort('rec_closed')">CLOSED&nbsp;<i [ngClass]="mainservice.getIcon('rec_closed')"></i></th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async">
-        <td class='hlink' (click)="edit(rec)">{{rec.acc_parent_code}}</td>
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+        <td  *ngIf="!this.mainservice.canEdit">{{rec.acc_parent_code}}</td>
+        <td  *ngIf="this.mainservice.canEdit">
+          <a class="hlink" [routerLink]="getRouteDet('L','EDIT',rec)" [queryParams]="getRouteDet('P','EDIT',rec)">{{rec.acc_parent_code}}</a>
+        </td>
         <td>{{rec.acc_parent_name}}</td>
         <td>{{rec.acc_group_name}}</td>
         <td>{{rec.acc_sub_group_name}}</td>
