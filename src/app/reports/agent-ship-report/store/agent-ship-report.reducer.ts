@@ -10,6 +10,7 @@ export interface AppState extends thisState {
 }
 
 export const initialState: ReportState = {
+    appid : '',
     pkid: '',
     urlid: '',
     menuid: '',
@@ -44,6 +45,8 @@ export function AgentShipReportReducer(state: ReportState[] = [initialState], ac
             return [...state.filter(rec => rec.urlid != action.payload.id), action.payload.changes];
         case myActions.ActionTypes.DELETE:
             return [...state.filter(rec => rec.urlid != action.payload.id)];
+        case myActions.ActionTypes.DELETEALL:
+                return [];
         default:
             return state;
     }

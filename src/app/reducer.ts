@@ -1,8 +1,9 @@
-import { ActionReducerMap, createFeatureSelector, createSelector, MetaReducer } from '@ngrx/store';
+import { Action, ActionReducerMap, createFeatureSelector, createSelector, MetaReducer } from '@ngrx/store';
 import { RouterStateSerializer, routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { Params, RouterStateSnapshot } from '@angular/router';
 import { environment } from '../environments/environment';
 import { storeFreeze } from 'ngrx-store-freeze';
+
 
 export interface AppState {
 }
@@ -10,6 +11,7 @@ export interface AppState {
 export const reducers: ActionReducerMap<AppState> = {
     router: routerReducer
 };
+ 
 
 export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [storeFreeze]: [];
 
