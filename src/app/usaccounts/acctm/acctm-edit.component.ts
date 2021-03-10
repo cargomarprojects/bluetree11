@@ -37,16 +37,19 @@ export class AcctmEditComponent implements OnInit {
         private location: Location,
         public gs: GlobalService,
         public mainService: AcctmService,
-    ){}
+    ) { }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-
-
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+        }
         this.initPage();
         this.actionHandler();
     }
@@ -84,19 +87,19 @@ export class AcctmEditComponent implements OnInit {
         this.record.acc_pkid = this.pkid;
         this.record.acc_code = '';
         this.record.acc_name = '';
-        this.record.acc_short_name = '';        
-        
-        this.record.acc_branch = '';        
+        this.record.acc_short_name = '';
 
-        this.record.acc_type = 'OTHERS';        
+        this.record.acc_branch = '';
+
+        this.record.acc_type = 'OTHERS';
 
         this.record.acc_budget_id = '';
 
-        this.record.acc_address1 = '';        
-        this.record.acc_address2 = '';        
-        this.record.acc_address3 = '';        
-        this.record.acc_address4 = '';        
-        this.record.acc_address5 = '';        
+        this.record.acc_address1 = '';
+        this.record.acc_address2 = '';
+        this.record.acc_address3 = '';
+        this.record.acc_address4 = '';
+        this.record.acc_address5 = '';
 
         this.record.acc_chq_format_id = 'NIL';
 
@@ -170,7 +173,7 @@ export class AcctmEditComponent implements OnInit {
             alert(this.errorMessage);
             return bRet;
         }
-        
+
         if (this.gs.isBlank(this.record.acc_group_id)) {
             bRet = false;
             this.errorMessage = "Group Cannot be blank";

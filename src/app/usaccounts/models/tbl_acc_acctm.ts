@@ -51,6 +51,8 @@ export interface Tbl_acc_acctm {
 
 
 export interface AcctmModel {
+     sortcol : string ;
+     sortorder : boolean;
      errormessage: string;
      searchQuery: SearchQuery;
      pageQuery: PageQuery;
