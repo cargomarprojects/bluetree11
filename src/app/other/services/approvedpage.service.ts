@@ -37,12 +37,42 @@ export class ApprovedPageService {
         private gs: GlobalService
     ) { }
 
+    public getSortCol(){
+        return this.record.sortcol;
+    }
+    public getSortOrder(){
+        return this.record.sortorder;
+    }
+
+    public getIcon(col : string){
+        if ( col == this.record.sortcol){
+          if ( this.record.sortorder )
+            return 'fa fa-arrow-down';
+          else 
+            return 'fa fa-arrow-up';
+        }
+        else 
+          return null;
+    }
+    
+    public  sort(col : string){
+        if ( col == this.record.sortcol){
+          this.record.sortorder = !this.record.sortorder;
+        }
+        else 
+        {
+          this.record.sortcol = col;
+          this.record.sortorder = true;
+        }
+    }
     public ClearInit() {
         this.menutype = '';
         this.gs.APPROVEDPAGE_INIT_APPROVED = null;
         this.gs.APPROVEDPAGE_INIT_APPROVEDREPORT = null;
         this.gs.APPROVEDPAGE_INIT_REQUESTREPORT = null;
         this.record = <ApprovedPageModel><unknown>{
+            sortcol : 'ca_reqno',
+            sortorder : true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery><unknown>{ searchString: '', fromDate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), toDate: this.gs.defaultValues.today, sortParameter: 'a.rec_created_date', isHidden: false, caType: 'ALL', userName: '', userId: '', userLovDisabled: true, userLovCaption: 'Request./Aprvd.By' },
@@ -84,6 +114,8 @@ export class ApprovedPageService {
                 this.record = this.gs.APPROVEDPAGE_INIT_REQUESTREPORT;
             else
                 this.record = <ApprovedPageModel><unknown>{
+                    sortcol : 'ca_reqno',
+                    sortorder : true,
                     errormessage: '',
                     records: [],
                     searchQuery: <SearchQuery><unknown>{ searchString: '', fromDate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), toDate: this.gs.defaultValues.today, sortParameter: 'a.rec_created_date', isHidden: false, caType: 'ALL', userName: usrname, userId: usrid, userLovDisabled: true, userLovCaption: 'Request./Aprvd.By' },

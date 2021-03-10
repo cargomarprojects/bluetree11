@@ -16,33 +16,33 @@
 
     <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
-    <div class="page-body table-responsive">
+    <div class="page-body table-responsive table-bordered">
         <table class="table  table-hover table-sm">
             <thead class="page-body-thead">
                 <tr>
-                    <th>REQUEST#</th>
-                    <th>REQUEST-BY</th>
-                    <th>REQUEST-DATE</th>
-                    <th>TYPE</th>
-                    <th>REF#</th>
-                    <th>HOUSE#</th>
-                    <th>CONSIGNEE</th>
-                    <th>INVOICE#</th>
-                    <th>CUSOMER</th>
-                    <th class='text-right'>INV.AMT</th>
-                    <th>APRVD.BY</th>
-                    <th>APRVD.DATE</th>
-                    <th>STATUS</th>
-                    <th>REMARKS</th>
-                    <th>OBL.RECVD.DATE</th>
-                    <th>PAY.RECVD.DATE</th>
+                    <th (click)="mainservice.sort('ca_reqno')">REQUEST#&nbsp;<i [ngClass]="mainservice.getIcon('ca_reqno')"></i></th>
+                    <th (click)="mainservice.sort('ca_user_name')">REQUEST-BY&nbsp;<i [ngClass]="mainservice.getIcon('ca_user_name')"></i></th>
+                    <th (click)="mainservice.sort('rec_created_date')">REQUEST-DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
+                    <th (click)="mainservice.sort('ca_type')">TYPE&nbsp;<i [ngClass]="mainservice.getIcon('ca_type')"></i></th>
+                    <th (click)="mainservice.sort('ca_ref_no')">REF#&nbsp;<i [ngClass]="mainservice.getIcon('ca_ref_no')"></i></th>
+                    <th (click)="mainservice.sort('ca_hbl_no')">HOUSE#&nbsp;<i [ngClass]="mainservice.getIcon('ca_hbl_no')"></i></th>
+                    <th (click)="mainservice.sort('ca_consignee_name')">CONSIGNEE&nbsp;<i [ngClass]="mainservice.getIcon('ca_consignee_name')"></i></th>
+                    <th (click)="mainservice.sort('ca_inv_no')">INVOICE#&nbsp;<i [ngClass]="mainservice.getIcon('ca_inv_no')"></i></th>
+                    <th (click)="mainservice.sort('ca_customer_name')">CUSOMER&nbsp;<i [ngClass]="mainservice.getIcon('ca_customer_name')"></i></th>
+                    <th (click)="mainservice.sort('ca_inv_amt')" class='text-right'>INV.AMT&nbsp;<i [ngClass]="mainservice.getIcon('ca_inv_amt')"></i></th>
+                    <th (click)="mainservice.sort('ca_approvedby_name')">APRVD.BY&nbsp;<i [ngClass]="mainservice.getIcon('ca_approvedby_name')"></i></th>
+                    <th (click)="mainservice.sort('ca_approved_date')">APRVD.DATE&nbsp;<i [ngClass]="mainservice.getIcon('ca_approved_date')"></i></th>
+                    <th (click)="mainservice.sort('ca_is_approved')">STATUS&nbsp;<i [ngClass]="mainservice.getIcon('ca_is_approved')"></i></th>
+                    <th (click)="mainservice.sort('ca_remarks')">REMARKS&nbsp;<i [ngClass]="mainservice.getIcon('ca_remarks')"></i></th>
+                    <th (click)="mainservice.sort('ca_obl_recvd_date')">OBL.RECVD.DATE&nbsp;<i [ngClass]="mainservice.getIcon('ca_obl_recvd_date')"></i></th>
+                    <th (click)="mainservice.sort('ca_payment_recvd_date')">PAY.RECVD.DATE&nbsp;<i [ngClass]="mainservice.getIcon('ca_payment_recvd_date')"></i></th>
                     <th class='text-center'>ATTACHMENTS</th>
                     <th *ngIf="((mainservice.param_type=='APPROVED' && mainservice.isAdmin)||mainservice.param_type=='APPROVED REPORT'||mainservice.param_type=='REQUEST REPORT')"
                         class='text-center'>SHOW/HIDE</th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
-                <tr *ngFor="let rec of records$ | async">
+                <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
 
                     <!-- <td [class]="mainservice.param_type=='APPROVED'?'hlink':'text-left'" (click)="edit(rec)">{{rec.ca_reqno}}</td> -->
 
