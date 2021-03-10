@@ -126,6 +126,8 @@ export interface SearchQuery {
 }
 
 export interface DeliveryOrderModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
