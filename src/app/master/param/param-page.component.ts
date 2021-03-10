@@ -24,7 +24,7 @@ import * as fromparamreducer from '../store/param/param-page.reducer';
 export class ParamPageComponent implements OnInit, OnDestroy {
 
   // 24-05-2019 Created By Joy  
-
+  appid: string;
   id: string;
   menuid: string;
   menu_param: string;
@@ -59,6 +59,7 @@ export class ParamPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.route.queryParams.subscribe(params => {
+      this.appid = params.appid;
       this.id = params.id;
       this.menuid = params.id;
       this.menu_param = params.menu_param;
@@ -77,6 +78,8 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     this.pageQuery$ = this.store.pipe(select(fromparamreducer.SelectPageData));
     this.searchQuery$ = this.store.pipe(select(fromparamreducer.SelectSearchData));
     this.errorMessage$ = this.store.pipe(select(fromparamreducer.getErrorMessage));
+
+    
 
   }
 

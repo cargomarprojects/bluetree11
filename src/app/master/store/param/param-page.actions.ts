@@ -16,7 +16,7 @@ export class LoadParamRequest implements Action {
 }
 export class UpdateSearch implements Action {
     readonly type = ParamActionTypes.UPDATE_SEARCH;
-    constructor(public payload: { id : string, menuid : string, param_type : string ,  searchQuery : any} ) {}
+    constructor(public payload: { appid : string, id : string, menuid : string, param_type : string ,  searchQuery : any} ) {}
 }
 
 export class LoadParamSucces implements Action {

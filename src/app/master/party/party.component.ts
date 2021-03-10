@@ -36,13 +36,14 @@ export class PartyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  //  this.mainservice.init(this.route.snapshot.queryParams);
-    this.sub = this.route.queryParams.subscribe(params => {
+   this.mainservice.init(this.route.snapshot.queryParams);
+    
+/*    this.sub = this.route.queryParams.subscribe(params => {
       if (params["parameter"] != "") {
         this.mainservice.init(params);
-        // this.mainservice.Search('SCREEN');
       }
-    });
+    }); */
+
     this.initPage();
   }
 
@@ -107,7 +108,7 @@ export class PartyComponent implements OnInit {
   }
 
   ngOnDestroy() {
-     this.sub.unsubscribe();
+   //  this.sub.unsubscribe();
   }
 
 }

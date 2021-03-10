@@ -50,6 +50,7 @@ export class ParamEffects {
                     SearchData.page_current = -1;
                     this.store.dispatch(
                         new fromparamsactions.UpdateSearch({
+                            appid : router.state.queryParams.appid,
                             id: router.state.queryParams.id,
                             menuid: router.state.queryParams.menuid,
                             param_type: router.state.queryParams.menu_param,
