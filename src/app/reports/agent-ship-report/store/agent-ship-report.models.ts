@@ -1,6 +1,6 @@
 import { TBL_MBL_REPORT } from '../../models/TBL_MBL_REPORT';
 export interface ReportState{ 
-
+    appid : string,
     pkid : string,    
     urlid : string,
     menuid : string;

@@ -14,6 +14,7 @@ import { ReportState } from './store/agent-ship-report.models'
 import { Observable } from 'rxjs';
 import { map, tap, filter } from 'rxjs/operators';
 
+
 @Component({
   selector: 'app-agent-ship-report',
   templateUrl: './agent-ship-report.component.html'
@@ -22,6 +23,7 @@ export class AgentShipReportComponent implements OnInit {
 
   title = 'Agent Shipment Report';
 
+  appid: string;
   pkid: string;
   urlid: string;
   url: string;
@@ -76,9 +78,12 @@ export class AgentShipReportComponent implements OnInit {
   ) {
 
     this.sub = this.activatedroute.queryParams.subscribe(params => {
+      this.appid = params.appid;
       this.urlid = params.id;
       this.menuid = params.menuid;
+
       this.InitPage();
+      
     });
 
   }
@@ -232,6 +237,7 @@ export class AgentShipReportComponent implements OnInit {
 
 
           const state: ReportState = {
+            appid : this.gs.appid,
             pkid: this.pkid,
             urlid: this.urlid,
             menuid: this.menuid,
@@ -258,6 +264,7 @@ export class AgentShipReportComponent implements OnInit {
             filedisplayname: this.SearchData.filedisplayname
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
+
         }
 
         this.loading = false;
