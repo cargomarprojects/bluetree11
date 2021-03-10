@@ -17,29 +17,29 @@
 
   <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
-  <div class="page-body table-responsive">
+  <div class="page-body table-responsive table-bordered">
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>DEPOSIT#</th>
-          <th>DATE</th>
-          <th>BANK</th>
-          <th>AMOUNT</th>
-          <th>TOT-CHQ</th>
-          <th>POSTED</th>
-          <th>REMARKS</th>
+          <th (click)="mainservice.sort('pay_docno')">DEPOSIT#&nbsp;<i [ngClass]="mainservice.getIcon('pay_docno')"></i></th>
+          <th (click)="mainservice.sort('pay_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('pay_date')"></i></th>
+          <th (click)="mainservice.sort('pay_acc_name')">BANK&nbsp;<i [ngClass]="mainservice.getIcon('pay_acc_name')"></i></th>
+          <th (click)="mainservice.sort('pay_diff')">AMOUNT&nbsp;<i [ngClass]="mainservice.getIcon('pay_diff')"></i></th>
+          <th (click)="mainservice.sort('pay_tot_chq')">TOT-CHQ&nbsp;<i [ngClass]="mainservice.getIcon('pay_tot_chq')"></i></th>
+          <th (click)="mainservice.sort('pay_posted')">POSTED&nbsp;<i [ngClass]="mainservice.getIcon('pay_posted')"></i></th>
+          <th (click)="mainservice.sort('pay_narration')">REMARKS&nbsp;<i [ngClass]="mainservice.getIcon('pay_narration')"></i></th>
 
           <th>PRINT</th>
           <th>DETAIL-PRINT</th>
 
-          <th>CREATED-BY</th>
-          <th>CREATE-DT</th>
+          <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+          <th (click)="mainservice.sort('rec_created_date')">CREATE-DT&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
           <th>DELETE</th>
 
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of records$ | async">
+        <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
           <td>{{rec.pay_docno}}</td>
           <td>{{rec.pay_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.pay_acc_name}} </td>
