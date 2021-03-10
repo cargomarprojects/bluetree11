@@ -75,13 +75,16 @@ export class DepositEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-
-
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+        }
 
         this.setup();
 
@@ -144,7 +147,7 @@ export class DepositEditComponent implements OnInit {
     }
 
     SaveParent() {
-        
+
         this.record = <Tbl_Acc_Payment>{};
         this.record.pay_pkid = this.pkid;
         this.record.pay_cust_id = "";
@@ -153,7 +156,7 @@ export class DepositEditComponent implements OnInit {
         this.record.pay_narration = this.remarks;
         this.record.pay_type = "DEPOSIT";
         this.record.pay_year = +this.gs.year_code;
-        this.record.pay_total = this.total_amount ;
+        this.record.pay_total = this.total_amount;
         this.record.pay_status = "POSTED";
         this.record.pay_posted = "Y";
         this.record.pay_memo = "";
@@ -188,13 +191,13 @@ export class DepositEditComponent implements OnInit {
                 }
                 else {
 
-                    this.record.pay_docno =  response.DOCNO;
-                    this.record.pay_date = this.sdate ;
-                    this.record.pay_acc_name = this.name ;
-                    this.record.pay_diff = this.total_amount ;
-                    this.record.pay_tot_chq = this.iTotChq ;
-                    this.record.pay_posted = "Y" ;
-                    this.record.pay_narration = this.remarks ;
+                    this.record.pay_docno = response.DOCNO;
+                    this.record.pay_date = this.sdate;
+                    this.record.pay_acc_name = this.name;
+                    this.record.pay_diff = this.total_amount;
+                    this.record.pay_tot_chq = this.iTotChq;
+                    this.record.pay_posted = "Y";
+                    this.record.pay_narration = this.remarks;
                     this.mainService.RefreshList(this.record);
                     this.errorMessage = 'Save Complete';
                     alert(this.errorMessage);
@@ -221,7 +224,7 @@ export class DepositEditComponent implements OnInit {
             return bRet;
         }
 
-        
+
         if (this.gs.isBlank(this.id) || this.gs.isBlank(this.code) || this.gs.isBlank(this.name)) {
             bRet = false;
             this.errorMessage = "Invalid Bank";
@@ -230,7 +233,7 @@ export class DepositEditComponent implements OnInit {
         }
 
 
-        if (this.gs.isZero( this.total_amount) ) {
+        if (this.gs.isZero(this.total_amount)) {
             bRet = false;
             this.errorMessage = "No Rows Selected";
             alert(this.errorMessage);
@@ -262,7 +265,7 @@ export class DepositEditComponent implements OnInit {
                 DetailRow.pay_pkid = Record.pay_pkid;
                 DetailRow.pay_total = Record.pay_total;
                 nAmt += Record.pay_total;
-                nAmt =  this.gs.roundNumber( nAmt ,2);                
+                nAmt = this.gs.roundNumber(nAmt, 2);
                 this.iTotChq++;
                 this.DetailList.push(DetailRow);
             }
@@ -296,10 +299,10 @@ export class DepositEditComponent implements OnInit {
         this.arPendingList.forEach(Record => {
             if (Record.pay_flag2) {
                 this.total_amount += Record.pay_total;
-                this.total_amount =  this.gs.roundNumber( this.total_amount,2);                
+                this.total_amount = this.gs.roundNumber(this.total_amount, 2);
             }
         })
-        
+
     }
 
 

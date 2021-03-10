@@ -94,6 +94,41 @@ export class DepositComponent implements OnInit {
     this.gs.Naviagete('Silver.USaccounts.Trans/DepositEditPage', JSON.stringify(parameter));
   }
 
+  getRouteDet(_type: string, _mode: string, _record: Tbl_Acc_Payment = null) {
+
+    if (_type == "L") {
+      if ((_mode == "ADD" && this.mainservice.canAdd) || (_mode == "EDIT" && this.mainservice.canEdit))
+        return "/Silver.USAccounts.Trans/DepositEditPage";
+      else
+        return null;
+    } else if (_type == "P") {
+
+      if (_record == null) {
+        if (!this.mainservice.canAdd)
+          return null;
+        return {
+          appid: this.gs.appid,
+          menuid: this.mainservice.menuid,
+          pkid: '',
+          type: this.mainservice.param_type,
+          origin: 'deposit-page',
+          mode: 'ADD'
+        };
+      }
+      if (!this.mainservice.canEdit)
+        return null;
+      return {
+        appid: this.gs.appid,
+        menuid: this.mainservice.menuid,
+        pkid: _record.pay_pkid,
+        type: '',
+        origin: 'deposit-page',
+        mode: 'EDIT'
+      };
+    } else
+      return null;
+  }
+
   Close() {
     this.location.back();
   }
