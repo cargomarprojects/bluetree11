@@ -7,7 +7,8 @@ export enum ParamActionTypes {
     LOAD_PARAM_REQUEST = '[PARAM PAGE DET] LOAD RECORDS REQUEST',
     LOAD_PARAM_SUCCESS = '[PARAM PAGE DET] LOAD RECORDS SUCCESS',
     LOAD_PARAM_FAIL = '[PARAM PAGE DET] LOAD RECORDS FAIL',
-    UPDATE_SEARCH = '[PARAM PAGE DET] UPDATE SEARCH'
+    UPDATE_SEARCH = '[PARAM PAGE DET] UPDATE SEARCH',
+    SORT_DATA = '[PARAM PAGE DET] SORT DATA'
 }
 
 export class LoadParamRequest implements Action {
@@ -17,6 +18,11 @@ export class LoadParamRequest implements Action {
 export class UpdateSearch implements Action {
     readonly type = ParamActionTypes.UPDATE_SEARCH;
     constructor(public payload: {appid : string, id : string, menuid : string, param_type : string ,  searchQuery : any} ) {}
+}
+
+export class Sort implements Action {
+    readonly type = ParamActionTypes.SORT_DATA;
+    constructor(public payload: {id : string, sortcol : string } ) {}
 }
 
 export class LoadParamSucces implements Action {
@@ -31,4 +37,4 @@ export class LoadParamFail implements Action {
 
 
 
-export type ParamActions = LoadParamRequest | UpdateSearch | LoadParamSucces | LoadParamFail   ;
+export type ParamActions = LoadParamRequest | UpdateSearch | LoadParamSucces | LoadParamFail  | Sort ;

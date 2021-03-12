@@ -31,6 +31,9 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
   menu_param: string;
   sub: any;
 
+  sortCol  = '';
+  sortOrder = true;  
+
   title: string;
   isAdmin: boolean;
   tab: string = 'main';
@@ -42,6 +45,8 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
 
   loading: boolean;
 
+  sub1 : any ;
+  sub2 : any;
 
   SearchData: any;
 
@@ -49,6 +54,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
   pageQuery$: Observable<PageQuery>;
   searchQuery$: Observable<SearchQuery>;
   errorMessage$: Observable<string>;
+
 
   constructor(
     private router: Router,
@@ -80,6 +86,26 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
     this.searchQuery$ = this.store.pipe(select(fromparamreducer.SelectSearchData));
     this.errorMessage$ = this.store.pipe(select(fromparamreducer.getErrorMessage));
 
+
+    this.sub1 = this.store.select(fromparamreducer.getSortCol).subscribe ( data => { this.sortCol = data});
+    this.sub2 = this.store.select(fromparamreducer.getSortOrder).subscribe ( data => { this.sortOrder = data});
+
+  
+  }
+
+  private sort(sortcol : string){
+    this.store.dispatch(new fromparamactions.Sort({ id : this.id, sortcol : sortcol }))
+  }
+
+   public getIcon(col : string){
+    if ( col == this.sortCol){
+      if ( this.sortOrder )
+        return 'fa fa-arrow-down';
+      else 
+        return 'fa fa-arrow-up';
+    }
+    else 
+      return null;
   }
 
   searchEvents(actions: any) {
@@ -172,6 +198,8 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe;
+    this.sub1.unsubscribe;
+    this.sub2.unsubscribe;
   }
   Print(_code: string) {
     if (!this.gs.canPrint(this.menuid)) {

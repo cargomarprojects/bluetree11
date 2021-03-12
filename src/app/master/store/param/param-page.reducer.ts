@@ -12,7 +12,7 @@ import { PageQuery } from '../../../shared/models/pageQuery';
 import { getRouterState } from '../../../reducer';
 
 
-
+import * as _ from 'lodash';
 
 
 export interface ParamState extends EntityState<ParamModel> {
@@ -32,7 +32,7 @@ export function ParamReducer(state: ParamState = initialParamState, action: Para
                 menuid :action.payload.menuid,
                 param_type :action.payload.param_type,
                 errormessage : '',
-                sortcol : 'parma_name1',
+                sortcol : '',
                 sortorder: true,                
                 pageQuery: <PageQuery>{ action: 'NEW', page_rows: 0, page_count: 0, page_current: -1, page_rowcount: 0 },
                 searchQuery: action.payload.searchQuery,
@@ -47,6 +47,22 @@ export function ParamReducer(state: ParamState = initialParamState, action: Para
             st.errormessage = '';
             return adapter.upsertOne( st, state);
         }
+        case ParamActionTypes.SORT_DATA: {
+            const st = Object.assign({}, state.entities[action.payload.id]);
+            if (st.sortcol != action.payload.sortcol) {
+                st.sortcol = action.payload.sortcol;
+                st.sortorder = true;
+            }
+            else
+                st.sortorder = !st.sortorder;
+            if (st.sortorder)
+                st.records = _.sortBy(st.records, st.sortcol);
+            else
+                st.records = _.sortBy(st.records, st.sortcol).reverse();
+            st.errormessage = '';
+            return adapter.upsertOne(st, state);
+        }
+
         case ParamActionTypes.LOAD_PARAM_FAIL: {
             const st =  Object.assign({}, 
                 state.entities[action.payload.id], 
@@ -130,6 +146,38 @@ export const getErrorMessage = createSelector(
                 return state.entities[router.state.queryParams.id].errormessage;
             else
                 return null;
+        }
+    }
+);
+
+
+export const getSortCol = createSelector(
+    SelectParamsState,
+    getRouterState,
+    (state: ParamState, router) => {
+        if (state && router) {
+            if (router.state) {
+                if (state.entities[router.state.queryParams.id])
+                    return state.entities[router.state.queryParams.id].sortcol;
+                else
+                    return null;
+            }
+        }
+    }
+);
+
+
+export const getSortOrder = createSelector(
+    SelectParamsState,
+    getRouterState,
+    (state: ParamState, router) => {
+        if (state && router) {
+            if (state && router.state) {
+                if (state.entities[router.state.queryParams.id])
+                    return state.entities[router.state.queryParams.id].sortorder;
+                else
+                    return null;
+            }
         }
     }
 );

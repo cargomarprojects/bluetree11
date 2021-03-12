@@ -17,16 +17,16 @@
 
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
-<div class="page-body table-responsive">
+<div class="page-body table-responsive table-bordered">
     <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
-                <th>CODE</th>
-                <th>NAME</th>
+                <th (click) ="sort('param_code')" >CODE&nbsp;<i [ngClass]="getIcon('param_code')"></i></th>
+                <th (click) ="sort('param_name1')" >NAME&nbsp;<i [ngClass]="getIcon('param_name1')"></i></th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of data$ | async">
+            <tr *ngFor="let rec of data$ | async ">
                 <!-- <td class='hlink'  (click)="edit(rec)" >{{rec.param_code}}</td> -->
                 <td *ngIf="!gs.canEdit(menuid)" >{{rec.param_code}}</td>
                 <td *ngIf="gs.canEdit(menuid)" >

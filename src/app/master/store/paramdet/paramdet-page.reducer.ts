@@ -11,6 +11,10 @@ import { PageQuery } from '../../../shared/models/pageQuery';
 
 import { getRouterState } from '../../../reducer';
 
+import * as _ from 'lodash';
+
+
+
 
 
 export interface ParamDetState extends EntityState<ParamModel> {
@@ -24,34 +28,46 @@ export const initialParamState: ParamDetState = adapter.getInitialState();
 export function ParamDetReducer(state: ParamDetState = initialParamState, action: ParamActions): ParamDetState {
     switch (action.type) {
         case ParamActionTypes.UPDATE_SEARCH: {
-            
+
             const record: ParamModel = {
-                appid : action.payload.appid,                
+                appid: action.payload.appid,
                 id: action.payload.id,
-                menuid :action.payload.menuid,
-                param_type :action.payload.param_type,
-                errormessage : '',
-                sortcol : 'parma_name1',
-                sortorder: true,                        
+                menuid: action.payload.menuid,
+                param_type: action.payload.param_type,
+                errormessage: '',
+                sortcol: '',
+                sortorder: true,
                 pageQuery: <PageQuery>{ action: 'NEW', page_rows: 0, page_count: 0, page_current: -1, page_rowcount: 0 },
                 searchQuery: action.payload.searchQuery,
                 records: []
             }
             return adapter.upsertOne(record, state);
         }
-        case ParamActionTypes.LOAD_PARAM_SUCCESS : {
+        case ParamActionTypes.LOAD_PARAM_SUCCESS: {
             const st = Object.assign({}, state.entities[action.payload.id]);
             st.pageQuery = action.payload.pageQuery;
             st.records = action.payload.records;
             st.errormessage = '';
-            return adapter.upsertOne( st, state);
+            return adapter.upsertOne(st, state);
+        }
+        case ParamActionTypes.SORT_DATA: {
+            const st = Object.assign({}, state.entities[action.payload.id]);
+            if (st.sortcol != action.payload.sortcol) {
+                st.sortcol = action.payload.sortcol;
+                st.sortorder = true;
+            }
+            else
+                st.sortorder = !st.sortorder;
+            if (st.sortorder)
+                st.records = _.sortBy(st.records, st.sortcol);
+            else
+                st.records = _.sortBy(st.records, st.sortcol).reverse();
+            st.errormessage = '';
+            return adapter.upsertOne(st, state);
         }
         case ParamActionTypes.LOAD_PARAM_FAIL: {
-            const st =  Object.assign({}, 
-                state.entities[action.payload.id], 
-                { errormessage : action.payload.errormessage }
-            );
-            return adapter.upsertOne( st , state);
+            const st = Object.assign({}, state.entities[action.payload.id], { errormessage: action.payload.errormessage });
+            return adapter.upsertOne(st, state);
         }
 
         default: {
@@ -71,7 +87,7 @@ export const SelectEntity = createSelector(
     SelectParamsState,
     getRouterState,
     (state: ParamDetState, router) => {
-        if ( state == null || router == null)
+        if (state == null || router == null)
             return null;
         if (state.entities[router.state.queryParams.id])
             return state.entities[router.state.queryParams.id];
@@ -88,7 +104,7 @@ export const SelectPageData = createSelector(
             if (state.entities[router.state.queryParams.id])
                 return state.entities[router.state.queryParams.id].pageQuery;
             else
-                return <PageQuery>{action :'NEW', page_count: 0, page_rows: 0, page_current: 0, page_rowcount: 0 };
+                return <PageQuery>{ action: 'NEW', page_count: 0, page_rows: 0, page_current: 0, page_rowcount: 0 };
         }
     }
 );
@@ -129,6 +145,37 @@ export const getErrorMessage = createSelector(
                 return state.entities[router.state.queryParams.id].errormessage;
             else
                 return null;
+        }
+    }
+);
+
+export const getSortCol = createSelector(
+    SelectParamsState,
+    getRouterState,
+    (state: ParamDetState, router) => {
+        if (state && router) {
+            if (router.state) {
+                if (state.entities[router.state.queryParams.id])
+                    return state.entities[router.state.queryParams.id].sortcol;
+                else
+                    return null;
+            }
+        }
+    }
+);
+
+
+export const getSortOrder = createSelector(
+    SelectParamsState,
+    getRouterState,
+    (state: ParamDetState, router) => {
+        if (state && router) {
+            if (state && router.state) {
+                if (state.entities[router.state.queryParams.id])
+                    return state.entities[router.state.queryParams.id].sortorder;
+                else
+                    return null;
+            }
         }
     }
 );
