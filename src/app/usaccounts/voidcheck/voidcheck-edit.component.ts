@@ -8,7 +8,7 @@ import { InputBoxComponent } from '../../shared/input/inputbox.component';
 
 import { VoidCheckService } from '../services/voidcheck.service';
 import { User_Menu } from '../../core/models/menum';
-import { vm_tbl_VoidCheck  , Tbl_VoidCheck } from '../models/Tbl_VoidCheck';
+import { vm_tbl_VoidCheck, Tbl_VoidCheck } from '../models/Tbl_VoidCheck';
 import { SearchTable } from '../../shared/models/searchtable';
 
 @Component({
@@ -54,13 +54,17 @@ export class VoidCheckEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
-
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+        }
 
         this.setup();
 
@@ -111,7 +115,7 @@ export class VoidCheckEditComponent implements OnInit {
 
         this.record.void_pkid = this.pkid;
         this.record.void_date = this.gs.defaultValues.today;
-        this.record.void_year=  +this.gs.year_code;
+        this.record.void_year = +this.gs.year_code;
         this.record.void_vrno = '';
         this.record.void_bank_id = '';
         this.record.void_bank_code = '';
@@ -158,7 +162,7 @@ export class VoidCheckEditComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
-                    
+
                     this.record.void_vrno = response.CFNO;
                     this.mode = 'EDIT';
                     this.mainService.RefreshList(this.record);
@@ -191,7 +195,7 @@ export class VoidCheckEditComponent implements OnInit {
             return bRet;
         }
 
-        if ( this.gs.isBlank(this.record.void_bank_id) || this.gs.isBlank(this.record.void_bank_code) ) {
+        if (this.gs.isBlank(this.record.void_bank_id) || this.gs.isBlank(this.record.void_bank_code)) {
             bRet = false;
             this.errorMessage = "Invalid Bank";
             alert(this.errorMessage);
@@ -262,7 +266,40 @@ export class VoidCheckEditComponent implements OnInit {
         */
     }
 
+    getRouteDet(_type: string, _mode: string, _record: Tbl_VoidCheck = null) {
 
+        if (_type == "L") {
+            if ((_mode == "ADD" && this.gs.canAdd(this.menuid)) || (_mode == "EDIT" && this.gs.canEdit(this.menuid)))
+                return "/Silver.USAccounts.Trans/VoidCheckEditPage";
+            else
+                return null;
+        } else if (_type == "P") {
+
+            if (_record == null) {
+                if (!this.gs.canAdd(this.menuid))
+                    return null;
+                return {
+                    appid: this.gs.appid,
+                    menuid: this.menuid,
+                    pkid: '',
+                    type: this.mainService.param_type,
+                    origin: 'voidcheck-page',
+                    mode: 'ADD'
+                };
+            }
+            if (!this.gs.canEdit(this.menuid))
+                return null;
+            return {
+                appid: this.gs.appid,
+                menuid: this.menuid,
+                pkid: _record.void_pkid,
+                type: '',
+                origin: 'voidcheck-page',
+                mode: 'EDIT'
+            };
+        } else
+            return null;
+    }
 
 
 

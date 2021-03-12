@@ -24,6 +24,8 @@ export interface Tbl_VoidCheck {
 }
 
 export interface VoidCheckModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
