@@ -1,7 +1,8 @@
 <div class="page-header">
   <div class="col">
     <label class="mr-1">{{mainservice.title}}</label>
-    <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button>
+    <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button> -->
+    <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" [routerLink]="getRouteDet('L','ADD')" [queryParams]="getRouteDet('P','ADD')">New</a>
     <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
   </div>
 </div>
@@ -15,27 +16,30 @@
 
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
-<div class="page-body table-responsive">
+<div class="page-body table-responsive table-bordered">
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <th>VRNO</th>
-        <th>DATE</th>
-        <th>FROM</th>
-        <th>TO</th>
-        <th>AMT</th>
-        <th>TO</th>
-        <th>MODE</th>
-        <th>CHQ#</th>
-        <th>CHQDT</th>
-        <th>CREATED-BY</th>
-        <th>CREATE-DT</th>
+        <th (click)="mainservice.sort('pay_docno')">VRNO&nbsp;<i [ngClass]="mainservice.getIcon('pay_docno')"></i></th>
+        <th (click)="mainservice.sort('pay_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('pay_date')"></i></th>
+        <th (click)="mainservice.sort('pay_from_acc_name')">FROM&nbsp;<i [ngClass]="mainservice.getIcon('pay_from_acc_name')"></i></th>
+        <th (click)="mainservice.sort('pay_to_acc_name')">TO&nbsp;<i [ngClass]="mainservice.getIcon('pay_to_acc_name')"></i></th>
+        <th (click)="mainservice.sort('pay_amt')">AMT&nbsp;<i [ngClass]="mainservice.getIcon('pay_amt')"></i></th>
+        <th (click)="mainservice.sort('pay_narration')">TO&nbsp;<i [ngClass]="mainservice.getIcon('pay_narration')"></i></th>
+        <th (click)="mainservice.sort('pay_mode')">MODE&nbsp;<i [ngClass]="mainservice.getIcon('pay_mode')"></i></th>
+        <th (click)="mainservice.sort('pay_chqno')">CHQ#&nbsp;<i [ngClass]="mainservice.getIcon('pay_chqno')"></i></th>
+        <th (click)="mainservice.sort('pay_chq_date')">CHQDT&nbsp;<i [ngClass]="mainservice.getIcon('pay_chq_date')"></i></th>
+        <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+        <th (click)="mainservice.sort('rec_created_date')">CREATE-DT&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
         <th>DELETE</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async">
-        <td class='hlink' (click)="edit(rec)">{{rec.pay_docno}}</td>
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+        <td *ngIf="!this.mainservice.canEdit">{{rec.pay_docno}}</td>
+        <td *ngIf="this.mainservice.canEdit">
+          <a class="hlink" [routerLink]="getRouteDet('L','EDIT',rec)" [queryParams]="getRouteDet('P','EDIT',rec)">{{rec.pay_docno}}</a>  
+        </td>
         <td>{{rec.pay_date | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td>{{rec.pay_from_acc_name}} </td>
         <td>{{rec.pay_to_acc_name}} </td>
