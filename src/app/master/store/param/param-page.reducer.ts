@@ -163,6 +163,7 @@ export const getSortCol = createSelector(
                     return null;
             }
         }
+        return null;
     }
 );
 
@@ -179,5 +180,6 @@ export const getSortOrder = createSelector(
                     return null;
             }
         }
+        return null;
     }
 );

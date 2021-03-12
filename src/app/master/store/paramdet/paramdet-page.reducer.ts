@@ -17,6 +17,7 @@ import * as _ from 'lodash';
 
 
 
+
 export interface ParamDetState extends EntityState<ParamModel> {
 }
 
@@ -161,6 +162,7 @@ export const getSortCol = createSelector(
                     return null;
             }
         }
+        return null;
     }
 );
 
@@ -177,5 +179,6 @@ export const getSortOrder = createSelector(
                     return null;
             }
         }
+        return null;
     }
 );
