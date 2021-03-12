@@ -7,8 +7,7 @@ export enum ParamActionTypes {
     LOAD_PARAM_REQUEST = '[PARAM PAGE DET] LOAD RECORDS REQUEST',
     LOAD_PARAM_SUCCESS = '[PARAM PAGE DET] LOAD RECORDS SUCCESS',
     LOAD_PARAM_FAIL = '[PARAM PAGE DET] LOAD RECORDS FAIL',
-    UPDATE_SEARCH = '[PARAM PAGE DET] UPDATE SEARCH',
-    DELETEALL = '[PARAM PAGE ] DELETEALL ',    
+    UPDATE_SEARCH = '[PARAM PAGE DET] UPDATE SEARCH'
 }
 
 export class LoadParamRequest implements Action {
@@ -30,8 +29,6 @@ export class LoadParamFail implements Action {
     constructor(public payload: { id: string, errormessage : string} ) {}
 }
 
-export class DeleteAll implements Action {
-    readonly type = ParamActionTypes.DELETEALL;
-}
 
-export type ParamActions = LoadParamRequest | UpdateSearch | LoadParamSucces | LoadParamFail   | DeleteAll;;
+
+export type ParamActions = LoadParamRequest | UpdateSearch | LoadParamSucces | LoadParamFail   ;
