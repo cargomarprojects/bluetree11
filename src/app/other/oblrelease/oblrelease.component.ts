@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { GlobalService } from '../../core/services/global.service';
-import { Tbl_cargo_obl_released  } from '../models/tbl_cargo_obl_released';
+import { Tbl_cargo_obl_released } from '../models/tbl_cargo_obl_released';
 import { SearchQuery } from '../models/tbl_cargo_obl_released';
 import { PageQuery } from '../../shared/models/pageQuery';
 import { OblReleaseService } from '../services/oblrelease.service';
@@ -86,7 +86,42 @@ export class OblReleaseComponent implements OnInit {
     this.gs.Naviagete('Silver.Other.Trans/OBLReleasedEditPage', JSON.stringify(parameter));
   }
 
-  Close() {    
+  getRouteDet(_type: string, _mode: string, _record: Tbl_cargo_obl_released = null) {
+
+    if (_type == "L") {
+      if ((_mode == "ADD" && this.mainservice.canAdd) || (_mode == "EDIT" && this.mainservice.canEdit))
+        return "/Silver.Other.Trans/OBLReleasedEditPage";
+      else
+        return null;
+    } else if (_type == "P") {
+
+      if (_record == null) {
+        if (!this.mainservice.canAdd)
+          return null;
+        return {
+          appid: this.gs.appid,
+          menuid: this.mainservice.menuid,
+          pkid: '',
+          type: this.mainservice.param_type,
+          origin: 'oblrelease-page',
+          mode: 'ADD'
+        };
+      }
+      if (!this.mainservice.canEdit)
+        return null;
+      return {
+        appid: this.gs.appid,
+        menuid: this.mainservice.menuid,
+        pkid: _record.obl_pkid,
+        type: '',
+        origin: 'oblrelease-page',
+        mode: 'EDIT'
+      };
+    } else
+      return null;
+  }
+
+  Close() {
     this.location.back();
   }
 

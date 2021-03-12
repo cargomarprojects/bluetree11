@@ -59,16 +59,19 @@ export class OblReleaseEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
-
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+        }
 
         this.setup();
-
         this.initPage();
         this.actionHandler();
     }
@@ -125,10 +128,10 @@ export class OblReleaseEditComponent implements OnInit {
         this.record.obl_handled_id = '';
         this.record.obl_handled_code = '';
         this.record.obl_handled_name = '';
-        this.record.obl_remark   = '';
+        this.record.obl_remark = '';
 
         this.oldrefno = this.record.obl_refno;
-        
+
         this.HouseList = [];
 
         this.record.rec_created_by = this.gs.user_code;
@@ -142,8 +145,8 @@ export class OblReleaseEditComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_cargo_obl_released>response.record;
-                this.oldrefno = this.record.obl_refno;                
-                this.GetHouseDetails();                
+                this.oldrefno = this.record.obl_refno;
+                this.GetHouseDetails();
                 this.mode = 'EDIT';
                 this.errorMessage = "";
             }, error => {
@@ -154,7 +157,7 @@ export class OblReleaseEditComponent implements OnInit {
     GetHouseDetails() {
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
-        SearchData = { ...SearchData, "refno" : this.record.obl_refno ,  "comp_code": this.gs.company_code, "br_code": this.gs.branch_code };
+        SearchData = { ...SearchData, "refno": this.record.obl_refno, "comp_code": this.gs.company_code, "br_code": this.gs.branch_code };
         this.mainService.GetHouseList(SearchData)
             .subscribe(response => {
                 this.HouseList = response.list;
@@ -185,12 +188,12 @@ export class OblReleaseEditComponent implements OnInit {
                 }
                 else {
 
-                    if ( this.mode == 'ADD')
+                    if (this.mode == 'ADD')
                         this.record.obl_slno = response.slno;
                     this.mode = 'EDIT';
                     this.mainService.RefreshList(this.record);
                     this.errorMessage = 'Save Complete';
-                   // alert(this.errorMessage);
+                    // alert(this.errorMessage);
                 }
 
             }, error => {
@@ -231,7 +234,7 @@ export class OblReleaseEditComponent implements OnInit {
             this.errorMessage = "Invalid House";
             alert(this.errorMessage);
             return bRet;
-        }        
+        }
 
         return bRet;
     }
@@ -261,28 +264,28 @@ export class OblReleaseEditComponent implements OnInit {
 
     onItmChange() {
 
-        this.record.obl_consignee_id= '';
+        this.record.obl_consignee_id = '';
         this.record.obl_consignee_code = '';
         this.record.obl_consignee_name = '';
-        this.record.obl_handled_id='';
-        this.record.obl_handled_code ='';
+        this.record.obl_handled_id = '';
+        this.record.obl_handled_code = '';
         this.record.obl_handled_name = '';
 
         this.HouseList.forEach(rec => {
-          if (rec.obl_houseno == this.record.obl_houseno) {
-            this.record.obl_consignee_id= rec.obl_consignee_id;
-            this.record.obl_consignee_code = rec.obl_consignee_code;
-            this.record.obl_consignee_name = rec.obl_consignee_name;
-            
-            this.record.obl_handled_id= rec.obl_handled_id;
-            this.record.obl_handled_code = rec.obl_handled_code;
-            this.record.obl_handled_name = rec.obl_handled_name;
-            
-          }
-        });
-      }
+            if (rec.obl_houseno == this.record.obl_houseno) {
+                this.record.obl_consignee_id = rec.obl_consignee_id;
+                this.record.obl_consignee_code = rec.obl_consignee_code;
+                this.record.obl_consignee_name = rec.obl_consignee_name;
 
-      
+                this.record.obl_handled_id = rec.obl_handled_id;
+                this.record.obl_handled_code = rec.obl_handled_code;
+                this.record.obl_handled_name = rec.obl_handled_name;
+
+            }
+        });
+    }
+
+
 
 
     OnChange(field: string) {
@@ -330,7 +333,39 @@ export class OblReleaseEditComponent implements OnInit {
     }
 
 
+    getRouteDet(_type: string, _mode: string, _record: Tbl_cargo_obl_released = null) {
+        if (_type == "L") {
+            if ((_mode == "ADD" && this.gs.canAdd(this.menuid)) || (_mode == "EDIT" && this.gs.canEdit(this.menuid)))
+                return "/Silver.Other.Trans/OBLReleasedEditPage";
+            else
+                return null;
+        } else if (_type == "P") {
 
+            if (_record == null) {
+                if (!this.gs.canAdd(this.menuid))
+                    return null;
+                return {
+                    appid: this.gs.appid,
+                    menuid: this.menuid,
+                    pkid: '',
+                    type: this.mainService.param_type,
+                    origin: 'oblrelease-page',
+                    mode: 'ADD'
+                };
+            }
+            if (!this.gs.canEdit(this.menuid))
+                return null;
+            return {
+                appid: this.gs.appid,
+                menuid: this.menuid,
+                pkid: _record.obl_pkid,
+                type: '',
+                origin: 'oblrelease-page',
+                mode: 'EDIT'
+            };
+        } else
+            return null;
+    }
 
 
 

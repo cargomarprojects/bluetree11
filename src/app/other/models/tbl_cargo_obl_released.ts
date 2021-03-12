@@ -29,6 +29,8 @@ export interface Tbl_cargo_obl_released {
 
 
 export interface OblReleaseModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
