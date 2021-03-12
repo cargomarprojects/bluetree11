@@ -1,7 +1,8 @@
 <div class="page-header">
   <div class="col">
     <label class="mr-1">{{mainservice.title}}</label>
-    <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button>
+    <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button> -->
+    <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" [routerLink]="getRouteDet('L','ADD')" [queryParams]="getRouteDet('P','ADD')">New</a>
     <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
   </div>
 </div>
@@ -15,27 +16,30 @@
 
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
-<div class="page-body table-responsive">
+<div class="page-body table-responsive table-bordered">
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <th>AGENT</th>
-        <th>B/L FROM</th>
-        <th>B/L TO</th>
-        <th>TOT-BLs</th>
-        <th>ORIGIN</th>
-        <th>COURIER</th>
-        <th>TRACKING#</th>
-        <th>SENTON</th>
-        <th>REMARK</th>
-        <th>CREATED-BY</th>
-        <th>CREATE-DT</th>
+        <th (click)="mainservice.sort('mu_agent_name')">AGENT&nbsp;<i [ngClass]="mainservice.getIcon('mu_agent_name')"></i></th>
+        <th (click)="mainservice.sort('mu_bl_start_no')">B/L FROM&nbsp;<i [ngClass]="mainservice.getIcon('mu_bl_start_no')"></i></th>
+        <th (click)="mainservice.sort('mu_bl_end_no')">B/L TO&nbsp;<i [ngClass]="mainservice.getIcon('mu_bl_end_no')"></i></th>
+        <th (click)="mainservice.sort('mu_bl_tot')">TOT-BLs&nbsp;<i [ngClass]="mainservice.getIcon('mu_bl_tot')"></i></th>
+        <th (click)="mainservice.sort('mu_origin')">ORIGIN&nbsp;<i [ngClass]="mainservice.getIcon('mu_origin')"></i></th>
+        <th (click)="mainservice.sort('mu_courier_name')">COURIER&nbsp;<i [ngClass]="mainservice.getIcon('mu_courier_name')"></i></th>
+        <th (click)="mainservice.sort('mu_tracking_no')">TRACKING#&nbsp;<i [ngClass]="mainservice.getIcon('mu_tracking_no')"></i></th>
+        <th (click)="mainservice.sort('mu_sent_on')">SENTON&nbsp;<i [ngClass]="mainservice.getIcon('mu_sent_on')"></i></th>
+        <th (click)="mainservice.sort('mu_remarks')">REMARK&nbsp;<i [ngClass]="mainservice.getIcon('mu_remarks')"></i></th>
+        <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+        <th (click)="mainservice.sort('rec_created_date')">CREATE-DT&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
         <th>DELETE</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async">
-        <td class='hlink' (click)="edit(rec)">{{rec.mu_agent_name}}</td>
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+        <td  *ngIf="!this.mainservice.canEdit">{{rec.mu_agent_name}}</td>
+        <td  *ngIf="this.mainservice.canEdit">
+          <a class="hlink" [routerLink]="getRouteDet('L','EDIT',rec)" [queryParams]="getRouteDet('P','EDIT',rec)">{{rec.mu_agent_name}}</a>  
+        </td>
         <td>{{rec.mu_bl_start_no}} </td>
         <td>{{rec.mu_bl_end_no}} </td>
         <td>{{rec.mu_bl_tot}} </td>

@@ -6,7 +6,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
 
-import { MblUsageService} from '../services/mblusage.service';
+import { MblUsageService } from '../services/mblusage.service';
 import { User_Menu } from '../../core/models/menum';
 import { vm_Tbl_cargo_mblusage, Tbl_cargo_mblusage } from '../models/Tbl_cargo_mblusage';
 import { SearchTable } from '../../shared/models/searchtable';
@@ -18,7 +18,7 @@ import { SearchTable } from '../../shared/models/searchtable';
 })
 export class MlbUsageEditComponent implements OnInit {
 
-    record: Tbl_cargo_mblusage  = <Tbl_cargo_mblusage>{};
+    record: Tbl_cargo_mblusage = <Tbl_cargo_mblusage>{};
 
     tab: string = 'main';
 
@@ -46,7 +46,7 @@ export class MlbUsageEditComponent implements OnInit {
 
     oldrefno = '';
 
-    HouseList: Tbl_cargo_mblusage [] = [];
+    HouseList: Tbl_cargo_mblusage[] = [];
 
     constructor(
         private router: Router,
@@ -59,13 +59,17 @@ export class MlbUsageEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
-
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+        }
 
         this.setup();
 
@@ -117,7 +121,7 @@ export class MlbUsageEditComponent implements OnInit {
         this.record.mu_pkid = this.pkid;
         this.record.mu_sent_on = this.gs.defaultValues.today;
 
-        
+
         this.HouseList = [];
 
         this.record.rec_created_by = this.gs.user_code;
@@ -164,7 +168,7 @@ export class MlbUsageEditComponent implements OnInit {
                     this.mode = 'EDIT';
                     this.mainService.RefreshList(this.record);
                     this.errorMessage = 'Save Complete';
-                   // alert(this.errorMessage);
+                    // alert(this.errorMessage);
                 }
 
             }, error => {
@@ -192,7 +196,7 @@ export class MlbUsageEditComponent implements OnInit {
             this.errorMessage = "Invalid House";
             alert(this.errorMessage);
             return bRet;
-        }        
+        }
 
         return bRet;
     }
@@ -214,7 +218,7 @@ export class MlbUsageEditComponent implements OnInit {
 
     }
 
-      
+
 
 
     OnChange(field: string) {
@@ -255,6 +259,39 @@ export class MlbUsageEditComponent implements OnInit {
         */
     }
 
+    getRouteDet(_type: string, _mode: string, _record: Tbl_cargo_mblusage = null) {
+        if (_type == "L") {
+            if ((_mode == "ADD" && this.gs.canAdd(this.menuid)) || (_mode == "EDIT" && this.gs.canEdit(this.menuid)))
+                return "/Silver.Other.Trans/MblUsageEditPage";
+            else
+                return null;
+        } else if (_type == "P") {
+
+            if (_record == null) {
+                if (!this.gs.canAdd(this.menuid))
+                    return null;
+                return {
+                    appid: this.gs.appid,
+                    menuid: this.menuid,
+                    pkid: '',
+                    type: this.mainService.param_type,
+                    origin: 'mblusage-page',
+                    mode: 'ADD'
+                };
+            }
+            if (!this.gs.canEdit(this.menuid))
+                return null;
+            return {
+                appid: this.gs.appid,
+                menuid: this.menuid,
+                pkid: _record.mu_pkid,
+                type: '',
+                origin: 'mblusage-page',
+                mode: 'EDIT'
+            };
+        } else
+            return null;
+    }
 
 
 

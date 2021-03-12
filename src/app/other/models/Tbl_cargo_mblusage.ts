@@ -27,6 +27,8 @@ export interface Tbl_cargo_mblusage {
 
 
 export interface Tbl_cargo_mblusageModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
