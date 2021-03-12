@@ -45,9 +45,15 @@ export function ParamReducer(state: ParamState = initialParamState, action: Para
             st.pageQuery = action.payload.pageQuery;
             st.records = action.payload.records;
             st.errormessage = '';
+            st.sortcol = '';
+            st.sortorder = true;            
             return adapter.upsertOne( st, state);
         }
         case ParamActionTypes.SORT_DATA: {
+
+            if ( state.entities[action.payload.id] == null )
+                return state;
+
             const st = Object.assign({}, state.entities[action.payload.id]);
             if (st.sortcol != action.payload.sortcol) {
                 st.sortcol = action.payload.sortcol;

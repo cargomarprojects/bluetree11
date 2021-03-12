@@ -9,7 +9,7 @@ export enum ParamActionTypes {
     LOAD_PARAM_SUCCESS = '[PARAM PAGE] LOAD RECORDS SUCCESS',
     LOAD_PARAM_FAIL = '[PARAM PAGE] LOAD RECORDS FAIL',
     UPDATE_SEARCH = '[PARAM PAGE ] UPDATE SEARCH',
-    SORT_DATA = '[PARAM PAGE DET] SORT DATA'
+    SORT_DATA = '[PARAM PAGE] SORT DATA'
 }
 
 export class LoadParamRequest implements Action {
