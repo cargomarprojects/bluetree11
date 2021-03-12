@@ -80,6 +80,7 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     this.errorMessage$ = this.store.pipe(select(fromparamreducer.getErrorMessage));
 
     
+    
 
   }
 
@@ -95,6 +96,9 @@ export class ParamPageComponent implements OnInit, OnDestroy {
 
   pageEvents(actions: any) {
     this.store.dispatch(new fromparamactions.LoadParamRequest({ type: "PAGE", Query: actions.pageQuery }))
+
+    
+
   }
 
 

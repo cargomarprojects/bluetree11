@@ -1,8 +1,12 @@
-import { Action, ActionReducerMap, createFeatureSelector, createSelector, MetaReducer } from '@ngrx/store';
+import { Action, ActionReducerMap, createFeatureSelector, createSelector, MetaReducer, createAction, ActionReducer } from '@ngrx/store';
+
 import { RouterStateSerializer, routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { Params, RouterStateSnapshot } from '@angular/router';
 import { environment } from '../environments/environment';
 import { storeFreeze } from 'ngrx-store-freeze';
+
+export const LOGOUT = '[App] Logout';
+export const logoutAction = createAction('[App] Logout');
 
 
 export interface AppState {
@@ -11,9 +15,22 @@ export interface AppState {
 export const reducers: ActionReducerMap<AppState> = {
     router: routerReducer
 };
- 
 
-export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [storeFreeze]: [];
+
+export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [storeFreeze] : [];
+
+  
+export function clearStateMetaReducer<State extends {}>(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
+    return function clearStateFn(state: State, action: Action) {
+        if (action.type === LOGOUT) {
+            state = undefined;
+            console.log('logout', state);
+        }
+        return reducer(state, action);
+    };
+}
+
+
 
 export const getRouterState = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');
 
@@ -25,7 +42,7 @@ export const SelectRouterParam = createSelector(
         if (router.state) {
             return router.state.queryParams;
         }
-        else 
+        else
             return null;
     }
 );
@@ -37,7 +54,7 @@ export const SelectID = createSelector(
         if (router.state) {
             return router.state.queryParams.id;
         }
-        else 
+        else
             return null;
     }
 );
@@ -48,7 +65,7 @@ export const SelectMenuID = createSelector(
         if (router.state) {
             return router.state.queryParams.menu_id;
         }
-        else 
+        else
             return null;
     }
 );
@@ -59,7 +76,7 @@ export const SelectMenuParam = createSelector(
         if (router.state) {
             return router.state.queryParams.menu_param;
         }
-        else 
+        else
             return null;
     }
 );

@@ -50,6 +50,10 @@ export function ParamDetReducer(state: ParamDetState = initialParamState, action
             );
             return adapter.upsertOne( st , state);
         }
+        case ParamActionTypes.DELETEALL: {
+            console.log('delete all',state);
+            return adapter.removeAll(state);
+        }        
         default: {
             return state;
         }

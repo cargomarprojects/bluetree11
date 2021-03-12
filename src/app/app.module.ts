@@ -17,7 +17,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducers, metaReducers, CustomSerializer } from './reducer';
+import { reducers, metaReducers, CustomSerializer, clearStateMetaReducer } from './reducer';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app.routing.module';
@@ -51,7 +51,7 @@ import { CustomRouteReuseStrategy } from './customReuseRouteStrategy';
     NgbModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, { metaReducers :[clearStateMetaReducer]}),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot({serializer: CustomSerializer}),    
     environment.production ? [] : StoreDevtoolsModule.instrument(), 

@@ -26,7 +26,6 @@ export const initialParamState: ParamState = adapter.getInitialState();
 export function ParamReducer(state: ParamState = initialParamState, action: ParamActions): ParamState {
     switch (action.type) {
         case ParamActionTypes.UPDATE_SEARCH: {
-            
             const record: ParamModel = {
                 appid : action.payload.appid,
                 id: action.payload.id,
@@ -54,6 +53,10 @@ export function ParamReducer(state: ParamState = initialParamState, action: Para
                 { errormessage : action.payload.errormessage }
             );
             return adapter.upsertOne( st , state);
+        }
+        case ParamActionTypes.DELETEALL: {
+            console.log('delete all',state);
+            return adapter.removeAll(state);
         }
         default: {
             return state;

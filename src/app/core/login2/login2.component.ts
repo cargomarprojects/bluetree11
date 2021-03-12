@@ -12,6 +12,8 @@ import { Companym } from '../models/company';
 import { Yearm } from '../models/yearm';
 import { ClearService } from '../services/clear.service';
 
+import { logoutAction } from 'src/app/reducer';
+
 @Component({
     selector: 'app-login2',
     templateUrl: './login2.component.html',
@@ -46,7 +48,8 @@ export class Login2Component implements OnInit {
         private mainservice: LoginService,
         public GLOBALCONTANTS: GlobalService,
         public clrservice: ClearService,
-        private router: Router
+        private router: Router,
+        private store: Store<fromparamreducer.ParamState>,
     ) {
 
         this.GLOBALCONTANTS.Modules = null;
@@ -57,6 +60,7 @@ export class Login2Component implements OnInit {
     }
 
     ngOnInit() {
+        this.store.dispatch ( logoutAction() );
     }
 
     LoadCombo() {
@@ -100,6 +104,8 @@ export class Login2Component implements OnInit {
     }
 
     async Login() {
+
+        
 
         const rid = this.GLOBALCONTANTS.getRandomInt();
         this.GLOBALCONTANTS.appid = rid.toString();
