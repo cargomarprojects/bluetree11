@@ -21,15 +21,14 @@ export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [
 
   
 export function clearStateMetaReducer<State extends {}>(reducer: ActionReducer<AppState>): ActionReducer<AppState> {
-    return function clearStateFn(state: State, action: Action) {
+    return function clearStateFn(state: AppState, action: Action) {
         if (action.type === LOGOUT) {
-            state = undefined;
             console.log('logout', state);
+            state = {};
         }
         return reducer(state, action);
     };
 }
-
 
 
 export const getRouterState = createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');

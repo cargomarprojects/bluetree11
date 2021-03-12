@@ -12,7 +12,8 @@ import { Companym } from '../models/company';
 import { Yearm } from '../models/yearm';
 import { ClearService } from '../services/clear.service';
 
-import { logoutAction } from 'src/app/reducer';
+import { logoutAction, AppState } from 'src/app/reducer';
+import { Store } from '@ngrx/store';
 
 @Component({
     selector: 'app-login2',
@@ -49,7 +50,7 @@ export class Login2Component implements OnInit {
         public GLOBALCONTANTS: GlobalService,
         public clrservice: ClearService,
         private router: Router,
-        private store: Store<fromparamreducer.ParamState>,
+        private store : Store<AppState>
     ) {
 
         this.GLOBALCONTANTS.Modules = null;
