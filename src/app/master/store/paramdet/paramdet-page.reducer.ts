@@ -71,6 +71,8 @@ export const SelectEntity = createSelector(
     SelectParamsState,
     getRouterState,
     (state: ParamDetState, router) => {
+        if ( state == null || router == null)
+            return null;
         if (state.entities[router.state.queryParams.id])
             return state.entities[router.state.queryParams.id];
         else

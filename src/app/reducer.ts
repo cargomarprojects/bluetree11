@@ -5,6 +5,7 @@ import { Params, RouterStateSnapshot } from '@angular/router';
 import { environment } from '../environments/environment';
 import { storeFreeze } from 'ngrx-store-freeze';
 
+
 export const LOGOUT = '[App] Logout';
 export const logoutAction = createAction('[App] Logout');
 
@@ -24,7 +25,7 @@ export function clearStateMetaReducer<State extends {}>(reducer: ActionReducer<A
     return function clearStateFn(state: AppState, action: Action) {
         if (action.type === LOGOUT) {
             console.log('logout', state);
-            state = {};
+            state = {} as AppState;
         }
         return reducer(state, action);
     };

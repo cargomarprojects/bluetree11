@@ -62,7 +62,6 @@ import { PayrollMasterEditComponent } from './payrollmaster/payrollmaster-edit.c
     MasterRoutingModule,
     StoreModule.forFeature('param', ParamReducer ),
     StoreModule.forFeature('paramdet', ParamDetReducer ),
-
     EffectsModule.forFeature([ParamEffects, ParamDetEffects])
     
   ]
