@@ -54,13 +54,17 @@ export class FundTransferEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
-
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+        }
 
         this.setup();
 
@@ -118,15 +122,15 @@ export class FundTransferEditComponent implements OnInit {
         this.record.pay_year = +this.gs.year_code;
 
 
-        this.record.pay_from_id=  '';
-        this.record.pay_from_acc_code=  '';
+        this.record.pay_from_id = '';
+        this.record.pay_from_acc_code = '';
         this.record.pay_from_acc_name = '';
 
-        this.record.pay_to_id=  '';
-        this.record.pay_to_acc_code=  '';
+        this.record.pay_to_id = '';
+        this.record.pay_to_acc_code = '';
         this.record.pay_to_acc_name = '';
 
-        this.record.pay_amt =0;
+        this.record.pay_amt = 0;
         this.record.pay_narration = '';
 
         this.record.pay_mode = 'CHECK';
@@ -176,7 +180,7 @@ export class FundTransferEditComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
-                    
+
                     this.record.pay_vrno = response.CFNO;
                     this.record.pay_docno = response.DOCNO;
 
@@ -344,7 +348,7 @@ export class FundTransferEditComponent implements OnInit {
         var sType = "PAYMENT";
         var sMode = "";
         this.errorMessage = '';
-        if ( this.gs.isBlank(this.record.pay_mode)) {
+        if (this.gs.isBlank(this.record.pay_mode)) {
             alert('Pay mode Has to be selected');
             return;
         }
@@ -445,6 +449,40 @@ export class FundTransferEditComponent implements OnInit {
     }
 
 
+getRouteDet(_type: string, _mode: string, _record: Tbl_Acc_Payment = null) {
+
+    if (_type == "L") {
+      if ((_mode == "ADD" && this.gs.canAdd(this.menuid)) || (_mode == "EDIT" && this.gs.canEdit(this.menuid)))
+        return "/Silver.USAccounts.Trans/FundTransEditPage";
+      else
+        return null;
+    } else if (_type == "P") {
+
+      if (_record == null) {
+        if (!this.gs.canAdd(this.menuid))
+          return null;
+        return {
+          appid: this.gs.appid,
+          menuid: this.menuid,
+          pkid: '',
+          type: this.mainService.param_type,
+          origin: 'accpayment-page',
+          mode: 'ADD'
+        };
+      }
+      if (!this.gs.canEdit(this.menuid))
+        return null;
+      return {
+        appid: this.gs.appid,
+        menuid: this.menuid,
+        pkid: _record.pay_pkid,
+        type: '',
+        origin: 'acopen-page',
+        mode: 'EDIT'
+      };
+    } else
+      return null;
+  }
 
 
 
