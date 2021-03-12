@@ -456,7 +456,11 @@ a {
     cursor:pointer;
 }
 
-
+.hlink2 {
+    text-decoration: underline;
+    color: #007ee9;
+    cursor:pointer;
+}
 
   
 .alias {
