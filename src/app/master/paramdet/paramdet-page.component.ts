@@ -25,7 +25,7 @@ import * as fromparamreducer from '../store/paramdet/paramdet-page.reducer';
 export class ParamDetPageComponent implements OnInit, OnDestroy {
 
   // 24-05-2019 Created By Joy  
-
+  appid: string;
   id: string;
   menuid: string;
   menu_param: string;
@@ -60,6 +60,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.route.queryParams.subscribe(params => {
+      this.appid = params.appid;      
       this.id = params.id;
       this.menuid = params.id;
       this.menu_param = params.menu_param;

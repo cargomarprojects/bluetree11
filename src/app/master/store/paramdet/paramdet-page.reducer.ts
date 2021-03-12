@@ -26,10 +26,13 @@ export function ParamDetReducer(state: ParamDetState = initialParamState, action
         case ParamActionTypes.UPDATE_SEARCH: {
             
             const record: ParamModel = {
+                appid : action.payload.appid,                
                 id: action.payload.id,
                 menuid :action.payload.menuid,
                 param_type :action.payload.param_type,
                 errormessage : '',
+                sortcol : 'parma_name1',
+                sortorder: true,                        
                 pageQuery: <PageQuery>{ action: 'NEW', page_rows: 0, page_count: 0, page_current: -1, page_rowcount: 0 },
                 searchQuery: action.payload.searchQuery,
                 records: []
