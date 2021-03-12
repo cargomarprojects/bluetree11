@@ -29,6 +29,11 @@ export class ParamPageComponent implements OnInit, OnDestroy {
   menuid: string;
   menu_param: string;
   sub: any;
+  sub1: any;
+  sub2: any;
+
+  sortCol  = '';
+  sortOrder = true;  
 
   title: string;
   isAdmin: boolean;
@@ -80,9 +85,27 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     this.errorMessage$ = this.store.pipe(select(fromparamreducer.getErrorMessage));
 
     
-    
+    this.sub1 = this.store.select(fromparamreducer.getSortCol).subscribe ( data => { this.sortCol = data});
+    this.sub2 = this.store.select(fromparamreducer.getSortOrder).subscribe ( data => { this.sortOrder = data});    
 
   }
+
+  private sort(sortcol : string){
+    this.store.dispatch(new fromparamactions.Sort({ id : this.id, sortcol : sortcol }))
+  }
+
+   public getIcon(col : string){
+    if ( col == this.sortCol){
+      if ( this.sortOrder )
+        return 'fa fa-arrow-down';
+      else 
+        return 'fa fa-arrow-up';
+    }
+    else 
+      return null;
+  }
+
+
 
   searchEvents(actions: any) {
     if (actions.outputformat == 'EXCEL') {
@@ -143,6 +166,8 @@ export class ParamPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe;
+    this.sub1.unsubscribe;
+    this.sub2.unsubscribe;    
   }
 
   Print(_code: string) {

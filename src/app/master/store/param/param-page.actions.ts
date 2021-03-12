@@ -9,7 +9,7 @@ export enum ParamActionTypes {
     LOAD_PARAM_SUCCESS = '[PARAM PAGE] LOAD RECORDS SUCCESS',
     LOAD_PARAM_FAIL = '[PARAM PAGE] LOAD RECORDS FAIL',
     UPDATE_SEARCH = '[PARAM PAGE ] UPDATE SEARCH',
-    DELETEALL = '[PARAM PAGE ] DELETEALL ',
+    SORT_DATA = '[PARAM PAGE] SORT DATA'
 }
 
 export class LoadParamRequest implements Action {
@@ -26,14 +26,15 @@ export class LoadParamSucces implements Action {
     constructor(public payload: { id : string,  pageQuery : PageQuery,  records : TBL_MAST_PARAM[]} ) {}
 }
 
+export class Sort implements Action {
+    readonly type = ParamActionTypes.SORT_DATA;
+    constructor(public payload: {id : string, sortcol : string } ) {}
+}
+
 export class LoadParamFail implements Action {
     readonly type = ParamActionTypes.LOAD_PARAM_FAIL;
     constructor(public payload: { id: string, errormessage : string} ) {}
 }
 
-export class DeleteAll implements Action {
-    readonly type = ParamActionTypes.DELETEALL;
-}
 
-
-export type ParamActions = LoadParamRequest | UpdateSearch | LoadParamSucces | LoadParamFail  | DeleteAll;
+export type ParamActions = LoadParamRequest | UpdateSearch | LoadParamSucces | LoadParamFail  | Sort ;

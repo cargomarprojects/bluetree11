@@ -25,11 +25,14 @@ import * as fromparamreducer from '../store/paramdet/paramdet-page.reducer';
 export class ParamDetPageComponent implements OnInit, OnDestroy {
 
   // 24-05-2019 Created By Joy  
-
+  appid: string;
   id: string;
   menuid: string;
   menu_param: string;
   sub: any;
+
+  sortCol  = '';
+  sortOrder = true;  
 
   title: string;
   isAdmin: boolean;
@@ -42,6 +45,8 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
 
   loading: boolean;
 
+  sub1 : any ;
+  sub2 : any;
 
   SearchData: any;
 
@@ -49,6 +54,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
   pageQuery$: Observable<PageQuery>;
   searchQuery$: Observable<SearchQuery>;
   errorMessage$: Observable<string>;
+
 
   constructor(
     private router: Router,
@@ -60,6 +66,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.route.queryParams.subscribe(params => {
+      this.appid = params.appid;      
       this.id = params.id;
       this.menuid = params.id;
       this.menu_param = params.menu_param;
@@ -79,6 +86,24 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
     this.searchQuery$ = this.store.pipe(select(fromparamreducer.SelectSearchData));
     this.errorMessage$ = this.store.pipe(select(fromparamreducer.getErrorMessage));
 
+    this.sub1 = this.store.select(fromparamreducer.getSortCol).subscribe ( data => { this.sortCol = data});
+    this.sub2 = this.store.select(fromparamreducer.getSortOrder).subscribe ( data => { this.sortOrder = data});
+  
+  }
+
+  private sort(sortcol : string){
+    this.store.dispatch(new fromparamactions.SortData({ id : this.id, sortcol : sortcol }))
+  }
+
+   public getIcon(col : string){
+    if ( col == this.sortCol){
+      if ( this.sortOrder )
+        return 'fa fa-arrow-down';
+      else 
+        return 'fa fa-arrow-up';
+    }
+    else 
+      return null;
   }
 
   searchEvents(actions: any) {
@@ -171,6 +196,8 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe;
+    this.sub1.unsubscribe;
+    this.sub2.unsubscribe;
   }
   Print(_code: string) {
     if (!this.gs.canPrint(this.menuid)) {

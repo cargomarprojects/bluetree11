@@ -16,12 +16,12 @@
 
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
-<div class="page-body table-responsive">
+<div class="page-body table-responsive table-bordered">
     <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
-                <th>CODE</th>
-                <th>NAME</th>
+                <th (click) ="sort('param_code')" >CODE&nbsp;<i [ngClass]="getIcon('param_code')"></i></th>
+                <th (click) ="sort('param_name1')" >NAME&nbsp;<i [ngClass]="getIcon('param_name1')"></i></th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">

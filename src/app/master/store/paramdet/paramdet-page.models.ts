@@ -6,11 +6,14 @@ export interface SearchQuery {
 }
 
 export interface ParamModel {
-
+    appid : string,
     id: string,
     menuid: string;
     param_type : string ;
     errormessage : string;
+
+    sortcol : string ;
+    sortorder : boolean;    
 
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

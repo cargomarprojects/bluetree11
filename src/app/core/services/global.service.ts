@@ -1899,6 +1899,48 @@ export class GlobalService {
 
 
 
+  public sortList(value: any[], key?: any, order?: boolean): any[] {
+
+    const isInside = key && key.indexOf('.') !== -1;
+
+    if (isInside) {
+        key = key.split('.');
+    }
+
+    const array: any[] = value.sort((a: any, b: any): number => {
+        if (!key) {
+            return a > b ? 1 : -1;
+        }
+
+        if (!isInside) {
+            return a[key] > b[key] ? 1 : -1;
+        }
+
+        return this.getValue(a, key) > this.getValue(b, key) ? 1 : -1;
+    });
+
+    if (!order) {
+        return array.reverse();
+    }
+
+    return array;
+}
+
+public getValue(object: any, key: string[]) {
+    for (let i = 0, n = key.length; i < n; ++i) {
+        const k = key[i];
+        if (!(k in object)) {
+            return;
+        }
+
+        object = object[k];
+    }
+
+    return object;
+}
+
+
+
   public roundNumber(_number: number, _precision: number) {
     var factor = Math.pow(10, _precision);
     var tempNumber = _number * factor;
