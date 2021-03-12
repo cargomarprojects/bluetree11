@@ -20,7 +20,7 @@ export class UpdateSearch implements Action {
     constructor(public payload: {appid : string, id : string, menuid : string, param_type : string ,  searchQuery : any} ) {}
 }
 
-export class Sort implements Action {
+export class SortData implements Action {
     readonly type = ParamActionTypes.SORT_DATA;
     constructor(public payload: {id : string, sortcol : string } ) {}
 }
@@ -37,4 +37,4 @@ export class LoadParamFail implements Action {
 
 
 
-export type ParamActions = LoadParamRequest | UpdateSearch | LoadParamSucces | LoadParamFail  | Sort ;
+export type ParamActions = LoadParamRequest | UpdateSearch | LoadParamSucces | LoadParamFail  | SortData ;

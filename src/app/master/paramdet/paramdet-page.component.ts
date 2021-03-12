@@ -94,7 +94,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
   }
 
   private sort(sortcol : string){
-    this.store.dispatch(new fromparamactions.Sort({ id : this.id, sortcol : sortcol }))
+    this.store.dispatch(new fromparamactions.SortData({ id : this.id, sortcol : sortcol }))
   }
 
    public getIcon(col : string){
