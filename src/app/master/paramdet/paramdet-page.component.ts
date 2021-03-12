@@ -86,10 +86,8 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
     this.searchQuery$ = this.store.pipe(select(fromparamreducer.SelectSearchData));
     this.errorMessage$ = this.store.pipe(select(fromparamreducer.getErrorMessage));
 
-
     this.sub1 = this.store.select(fromparamreducer.getSortCol).subscribe ( data => { this.sortCol = data});
     this.sub2 = this.store.select(fromparamreducer.getSortOrder).subscribe ( data => { this.sortOrder = data});
-
   
   }
 
