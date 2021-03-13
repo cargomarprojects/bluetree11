@@ -462,6 +462,11 @@ a {
     cursor:pointer;
 }
 
+select option:checked,
+select option:hover {
+    box-shadow: 0 0 10px 100px #89c4f8e0 inset;
+}
+
   
 .alias {
     cursor: alias;

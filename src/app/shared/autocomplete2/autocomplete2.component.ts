@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, OnChanges, SimpleChange, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild,  ElementRef, EventEmitter, OnChanges, SimpleChange, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { SearchTable } from '../models/searchtable';
@@ -18,14 +18,23 @@ import { GlobalService } from '../../core/services/global.service';
                 cursor: pointer;
                 border-style: solid;
                 border-width: 1px;
-                overflow-y: scroll; 
                 position: absolute;     
-                height:300px;
                 width:auto;
-                min-width:300px;
+                min-width:200px;
                 z-index: 2000;
                 background: #fff;
                 display: block;
+            }
+
+            .dispdiv {
+              position: absolute;     
+              width:auto;
+              min-width:200px;
+              z-index: 2000;
+              display: block;
+            }
+            .hidediv {
+              display :none;
             }
     `
   ]
@@ -35,6 +44,8 @@ export class AutoComplete2Component {
 
   //@ViewChild('_cbtn') cbtn_field: ElementRef;
   //@ViewChildren('_itms') itms_field: QueryList<ElementRef>;
+
+  _selectedItem : string ;
 
   private _controlname: string;
   @Input() set controlname(value: string) {
@@ -96,6 +107,8 @@ export class AutoComplete2Component {
 
   @ViewChild('inputbox') private inputbox: ElementRef;
 
+  @ViewChild("LOV") private lov: ElementRef;
+
   focuselement: number = 0;
   rows_to_display: number = 0;
   rows_total: number = 0;
@@ -124,7 +137,8 @@ export class AutoComplete2Component {
     private route: ActivatedRoute,
     private router: Router,
     private loginservice: LoginService,
-    private gs: GlobalService
+    private gs: GlobalService,
+    
   ) {
 
   }
@@ -135,23 +149,19 @@ export class AutoComplete2Component {
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
 
   }
-  // ngAfterViewInit() {
-  //   // this.itms_field.changes
-  //   // .subscribe((queryChanges) => {
-  //   //   this.itms_field.first.nativeElement.focus();
-  //   // });
-  //   // if (!this.gs.isBlank(this.cbtn_field))
-  //   //   this.cbtn_field.nativeElement.focus();
-  // }
+  
   Focus() {
+    /*
     if (!this.disabled)
       this.inputbox.nativeElement.focus();
+      */
   }
+  /*
 
   eventHandler(KeyCode: any) {
     this.List();
   }
-
+  */
   More() {
     // if (this.rows_ending_number < this.rows_total)
     // {
@@ -218,30 +228,13 @@ export class AutoComplete2Component {
           this.showDiv = false;
         }
         else {
+          this._selectedItem =  this.RecList[0].id;
           this.showDiv = true;
-          // this.itms_field.changes
-          //   .subscribe((queryChanges) => {
-          //     this.itms_field.first.nativeElement.focus();
-          //   });
-          // if (!this.gs.isBlank(this.cbtn_field))
-          //   this.cbtn_field.nativeElement.focus();
-          // if (_action == "NEXT") {
-            // this.indx=-1;
-            // this.indx2=-1;
-            // this.indx=0;
-            // if (!this.gs.isBlank(this.cbtn_field))
-            // this.cbtn_field.nativeElement.focus();
-            //this.itms_field.nativeElement.children[0].children[0].focus();
-            //this.itms_field.toArray()[4].nativeElement.focus();
-            //this.focuselement=0;
-          // }
-
-          //  this.itms_field.changes
-          // .subscribe((queryChanges) => {
-          //   this.itms_field.first.nativeElement.focus();
-          //});
-
+          setTimeout( () => {
+          this.lov.nativeElement.focus();
+          },0);
         }
+        
       },
         error => {
           this.loading = false;
@@ -307,7 +300,6 @@ export class AutoComplete2Component {
       this.inputdata.col9 = _Record.col9;
     }
 
-
     this.showDiv = false;
     this.ValueChanged.emit(this.inputdata);
     this.RecList = [];
@@ -339,6 +331,10 @@ export class AutoComplete2Component {
   }
 
   Cancel() {
+
+
+    if(!this.showDiv)
+     return ;
     let localdata: string = "";
     if (this._displaydata === null)
       localdata = '';
@@ -359,6 +355,30 @@ export class AutoComplete2Component {
       'border-radius': '0px',
     };
     return styles;
+  }
+
+  ListKeyDown2(event: KeyboardEvent) {
+    if ( this._selectedItem == "---MORE_ITEM---"){
+      this.More();
+      return;
+    }
+    if (event.key === 'Enter') {
+      this.SelectedItem('LIST', this.RecList.find( rec => rec.id  == this._selectedItem));
+    }
+    if (event.key === 'Escape') {
+     this.Cancel();
+    }
+  }
+
+  ListMouseDown2(event: KeyboardEvent) {
+
+    if ( this._selectedItem == "---MORE_ITEM---") {
+      this.More();
+      return;
+    }
+ 
+    
+    this.SelectedItem('LIST', this.RecList.find( rec => rec.id  == this._selectedItem));
   }
 
   ListKeydown(event: KeyboardEvent, _rec: SearchTable) {
