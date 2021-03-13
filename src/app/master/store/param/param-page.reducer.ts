@@ -12,7 +12,7 @@ import { PageQuery } from '../../../shared/models/pageQuery';
 import { getRouterState } from '../../../reducer';
 
 
-import * as _ from 'lodash';
+import * as _ from 'lodash-es';
 
 
 export interface ParamState extends EntityState<ParamModel> {
