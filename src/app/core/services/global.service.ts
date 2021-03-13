@@ -231,9 +231,7 @@ export class GlobalService {
   public RE_PRINT_CHECK = "N";
 
 
-  public FY_MONTHS: any = [];
-  public BUDGET_TYPE: any = [];
-  public CHQ_FORMAT: any = [];
+  
 
   public INVOICE_STAGE: any;
   public SHIPMENT_STAGE_OI: any;
@@ -651,11 +649,16 @@ export class GlobalService {
   public PARAM_NOMINATION: any = [];
   public PARAM_COUNTRY: any = [];
   public PARAM_CURRENCY: any = [];
+  public PARAM_UNIT: any = [];
   public PARAM_HBL_FORMAT: any = [];
   public PARAM_HBL_FORMAT_BLANK: any = [];
   public PARAM_HBL_FORMAT_DRAFT: any = [];
   public PARAM_HAWB_FORMAT: any = [];
-  public PARAM_UNIT: any = [];
+  
+  public FY_MONTHS: any = [];
+  public BUDGET_TYPE: any = [];
+  public CHQ_FORMAT: any = [];
+
   public PARAM_CUSTOMER_GROUP: any = [];
   public PARAM_FORM_CATEGORIES: any = [];
   public PARAM_COO_FORMAT_BLANK: any = [];
@@ -869,6 +872,9 @@ export class GlobalService {
 
 
   public InitData() {
+
+
+
     this.MainList.forEach(Rec => {
       if (Rec.param_type == "BRANCH SETTINGS") {
         if (Rec.param_name1 == "A/C RECEIVABLE") {
@@ -1210,146 +1216,152 @@ export class GlobalService {
 
 
     this.SHIPMENT_STAGE_OI = [{ "code": "NIL", "name": "NIL" }];
-    this.SHIPMENT_STAGE_OE = [{ "code": "NIL", "name": "NIL" }];
-    this.SHIPMENT_STAGE_AI = [{ "code": "NIL", "name": "NIL" }];
-    this.SHIPMENT_STAGE_AE = [{ "code": "NIL", "name": "NIL" }];
-    this.SHIPMENT_STAGE_OT = [{ "code": "NIL", "name": "NIL" }];
-
-
-
     this.MainList.filter(a => a.param_code == 'OI').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
     }).forEach(a => {
       this.SHIPMENT_STAGE_OI.push({ "code": a.param_name4, "name": a.param_name3 })
     });
 
-
+    this.SHIPMENT_STAGE_OE = [{ "code": "NIL", "name": "NIL" }];
     this.MainList.filter(a => a.param_code == 'OE').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
     }).forEach(a => {
       this.SHIPMENT_STAGE_OE.push({ "code": a.param_name4, "name": a.param_name3 })
     });
 
+    this.SHIPMENT_STAGE_AI = [{ "code": "NIL", "name": "NIL" }];
     this.MainList.filter(a => a.param_code == 'AI').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
     }).forEach(a => {
       this.SHIPMENT_STAGE_AI.push({ "code": a.param_name4, "name": a.param_name3 })
     });
 
+    this.SHIPMENT_STAGE_AE = [{ "code": "NIL", "name": "NIL" }];
     this.MainList.filter(a => a.param_code == 'AE').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
     }).forEach(a => {
       this.SHIPMENT_STAGE_AE.push({ "code": a.param_name4, "name": a.param_name3 })
     });
-
-
+    this.SHIPMENT_STAGE_OT = [{ "code": "NIL", "name": "NIL" }];
     this.MainList.filter(a => a.param_code == 'OT').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
     }).forEach(a => {
       this.SHIPMENT_STAGE_OT.push({ "code": a.param_name4, "name": a.param_name3 })
     });
 
-
+    this.INVOICE_STAGE = [];
     this.MainList.filter(a => a.param_type == 'GLOBAL SETTINGS' && a.param_name1 == 'INVOICE_STAGE').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
     }).forEach(a => {
       this.INVOICE_STAGE.push({ "code": a.param_code, "name": a.param_name2 + "," + a.param_name3 })
     });
 
-
+    this.JOB_TYPE_OI = [];
     this.MainList.filter(a => a.param_type == 'JOB-TYPE' && a.param_name2 == 'SEA IMPORT').sort(function (a, b) {
       return b.param_name3 < a.param_name3 ? 1 : -1;
     }).forEach(a => {
       this.JOB_TYPE_OI.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
-
+    this.JOB_TYPE_OE = [];
     this.MainList.filter(a => a.param_type == 'JOB-TYPE' && a.param_name2 == 'SEA EXPORT').sort(function (a, b) {
       return b.param_name3 < a.param_name3 ? 1 : -1;
     }).forEach(a => {
       this.JOB_TYPE_OE.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
-
+    this.JOB_TYPE_AE = [];
     this.MainList.filter(a => a.param_type == 'JOB-TYPE' && a.param_name2 == 'AIR EXPORT').sort(function (a, b) {
       return b.param_name3 < a.param_name3 ? 1 : -1;
     }).forEach(a => {
       this.JOB_TYPE_AE.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
-
+    
+    this.JOB_TYPE_AI = [];
     this.MainList.filter(a => a.param_type == 'JOB-TYPE' && a.param_name2 == 'AIR IMPORT').sort(function (a, b) {
       return b.param_name3 < a.param_name3 ? 1 : -1;
     }).forEach(a => {
       this.JOB_TYPE_AI.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
-
+    
+    this.JOB_TYPE_OT = [];
     this.MainList.filter(a => a.param_type == 'JOB-TYPE' && a.param_name2 == 'OTHERS').sort(function (a, b) {
       return b.param_name3 < a.param_name3 ? 1 : -1;
     }).forEach(a => {
       this.JOB_TYPE_OT.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
-
+    this.PARAM_FREIGHT_STATUS = [];
     this.MainList.filter(a => a.param_type == 'FREIGHT STATUS').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_FREIGHT_STATUS.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
+    this.PARAM_CARGO_MOVEMENT = [];
     this.MainList.filter(a => a.param_type == 'CARGO MOVEMENT').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_CARGO_MOVEMENT.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
-
+    
+    this.PARAM_CONTAINER_TYPE = [];
     this.MainList.filter(a => a.param_type == 'CONTAINER TYPE').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_CONTAINER_TYPE.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
+    this.PARAM_NOMINATION = [];
     this.MainList.filter(a => a.param_type == 'NOMINATION').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_NOMINATION.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
+    this.PARAM_COUNTRY = [];
     this.MainList.filter(a => a.param_type == 'COUNTRY').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_COUNTRY.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
+    this.PARAM_CURRENCY = [];
     this.MainList.filter(a => a.param_type == 'CURRENCY').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_CURRENCY.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
+    this.PARAM_UNIT = [];
     this.MainList.filter(a => a.param_type == 'UNIT').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_UNIT.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
+    this.PARAM_HBL_FORMAT = [];
     this.MainList.filter(a => a.param_type == 'HBL-FORMAT').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_HBL_FORMAT.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
+    this.PARAM_HBL_FORMAT_BLANK = [];
     this.MainList.filter(a => a.param_type == 'HBL-FORMAT' && a.param_name6 == 'BLANK').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_HBL_FORMAT_BLANK.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
+    this.PARAM_HBL_FORMAT_DRAFT = [];
     this.MainList.filter(a => a.param_type == 'HBL-FORMAT' && a.param_name6 == 'DRAFT').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_HBL_FORMAT_DRAFT.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
+    this.PARAM_HAWB_FORMAT = [];
     this.MainList.filter(a => a.param_type == 'HAWB-FORMAT').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
@@ -1357,6 +1369,7 @@ export class GlobalService {
     });
 
 
+    this.BUDGET_TYPE = [];
     this.MainList.filter(a => a.param_type == 'BUDGET-TYPE').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
@@ -1364,7 +1377,7 @@ export class GlobalService {
     });
     this.BUDGET_TYPE.push({ "code": '', "name": 'NIL' })
 
-
+    this.CHQ_FORMAT =[];
     this.MainList.filter(a => a.param_type == 'CHQ-FORMAT').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
@@ -1372,13 +1385,14 @@ export class GlobalService {
     });
     this.CHQ_FORMAT.push({ "code": 'NIL', "name": 'NIL' })
 
-
+    this.PARAM_CUSTOMER_GROUP = [];
     this.MainList.filter(a => a.param_type == 'CUSTOMER GROUP').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_CUSTOMER_GROUP.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
+    this.PARAM_COO_FORMAT_BLANK =[];
     this.MainList.filter(a => a.param_type == 'COO-FORMAT').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
@@ -1402,7 +1416,6 @@ export class GlobalService {
       this.FY_MONTHS.push(rec);
     }
     else {
-
       var Mon = this.FY_START_MONTH.toString().split(',');
       for (let str of Object.values(Mon)) {
         var rec = <any>{};
@@ -1412,22 +1425,8 @@ export class GlobalService {
       }
     }
 
-    /*      public PARAM_FREIGHT_STATUS : any = [];
-            public PARAM_CARGO_MOVEMENT : any = [];
-            public PARAM_CONTAINER_TYPE : any = [];
-            public PARAM_NOMINATION : any = [];
-            public PARAM_COUNTRY : any = [];
-            public PARAM_CURRENCY : any = [];
-            public PARAM_HBL_FORMAT : any = [];
-            public PARAM_HBL_FORMAT_DRAFT : any = [];
-            public PARAM_HAWB_FORMAT : any = [];
-            public PARAM_UNIT : any = [];
-            public PARAM_CUSTOMER_GROUP : any = [];
-            public PARAM_FORM_CATEGORIES : any = [];
-     */
-
-
   }
+
 
 
   getLocalStorageSize = function () {

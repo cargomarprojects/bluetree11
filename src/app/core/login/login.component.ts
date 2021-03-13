@@ -6,6 +6,9 @@ import { GlobalService } from '../services/global.service';
 import { ClearService } from '../services/clear.service';
 import { Companym } from '../models/company';
 
+import { logoutAction, AppState } from 'src/app/reducer';
+import { Store } from '@ngrx/store';
+
 
 @Component({
   selector: 'app-login',
@@ -39,7 +42,8 @@ export class LoginComponent implements OnInit {
     private mainservice: LoginService,
     public gs: GlobalService,
     public clrservice: ClearService,
-    private router: Router
+    private router: Router,
+    private store : Store<AppState>    
   ) {
 
     this.gs.UserRecord = null;
@@ -59,6 +63,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch ( logoutAction() );
   }
 
 
