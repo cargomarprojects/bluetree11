@@ -250,6 +250,7 @@ export class AutoComplete2Component {
           this.showDiv = true;
           setTimeout(() => {
             this.lov.nativeElement.focus();
+            this.lov.nativeElement.scrollTop = this.lov.nativeElement.scrollHeight;
           }, 0);
         }
 
