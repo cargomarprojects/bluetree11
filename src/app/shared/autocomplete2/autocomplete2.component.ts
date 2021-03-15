@@ -1,6 +1,6 @@
 
 
-import { Component, OnInit, Input, Output, ViewChild,  ElementRef, EventEmitter, OnChanges, SimpleChange, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, OnChanges, SimpleChange, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { SearchTable } from '../models/searchtable';
@@ -45,7 +45,9 @@ export class AutoComplete2Component {
   //@ViewChild('_cbtn') cbtn_field: ElementRef;
   //@ViewChildren('_itms') itms_field: QueryList<ElementRef>;
 
-  _selectedItem : string ;
+  _selectedItem = '';
+
+  _lastItem = '';
 
   private _controlname: string;
   @Input() set controlname(value: string) {
@@ -138,7 +140,7 @@ export class AutoComplete2Component {
     private router: Router,
     private loginservice: LoginService,
     private gs: GlobalService,
-    
+
   ) {
 
   }
@@ -149,7 +151,7 @@ export class AutoComplete2Component {
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
 
   }
-  
+
   Focus() {
     /*
     if (!this.disabled)
@@ -212,10 +214,20 @@ export class AutoComplete2Component {
         // if (this.rows_ending_number >= this.rows_total)
         //     this.bShowMore = false;
 
-        if (response.list == null)
+        if (response.list == null) {
           this.bShowMore = false;
+        }
+        else {
+          if (_action == "NEW") {
+            this._lastItem = response.list[0].id;
+            console.log( 'new',response.list[0].name);
+          }
+        }
+        this._selectedItem = this._lastItem;
+       
 
-        this.RecList.push(...response.list);
+        if(response.list)
+          this.RecList.push(...response.list);
 
         this.loading = false;
 
@@ -228,13 +240,19 @@ export class AutoComplete2Component {
           this.showDiv = false;
         }
         else {
-          this._selectedItem =  this.RecList[0].id;
+          /*
+          if (_action == "NEW")
+            this._selectedItem =  this.RecList[0].id;
+          */
+          if (response.list)
+            this._lastItem = response.list[response.list.length - 1].id;
+
           this.showDiv = true;
-          setTimeout( () => {
-          this.lov.nativeElement.focus();
-          },0);
+          setTimeout(() => {
+            this.lov.nativeElement.focus();
+          }, 0);
         }
-        
+
       },
         error => {
           this.loading = false;
@@ -333,8 +351,8 @@ export class AutoComplete2Component {
   Cancel() {
 
 
-    if(!this.showDiv)
-     return ;
+    if (!this.showDiv)
+      return;
     let localdata: string = "";
     if (this._displaydata === null)
       localdata = '';
@@ -358,27 +376,29 @@ export class AutoComplete2Component {
   }
 
   ListKeyDown2(event: KeyboardEvent) {
-    if ( this._selectedItem == "---MORE_ITEM---"){
-      this.More();
-      return;
+    if (this._selectedItem == "-*-*-*-MORE_ITEM-*-*-*-") {
+      if (event.key === 'ArrowDown') {
+        this.More();
+        return;
+      }
     }
     if (event.key === 'Enter') {
-      this.SelectedItem('LIST', this.RecList.find( rec => rec.id  == this._selectedItem));
+      this.SelectedItem('LIST', this.RecList.find(rec => rec.id == this._selectedItem));
     }
     if (event.key === 'Escape') {
-     this.Cancel();
+      this.Cancel();
     }
   }
 
   ListMouseDown2(event: KeyboardEvent) {
 
-    if ( this._selectedItem == "---MORE_ITEM---") {
+    if (this._selectedItem == "-*-*-*-MORE_ITEM-*-*-*-") {
       this.More();
       return;
     }
- 
-    
-    this.SelectedItem('LIST', this.RecList.find( rec => rec.id  == this._selectedItem));
+
+
+    this.SelectedItem('LIST', this.RecList.find(rec => rec.id == this._selectedItem));
   }
 
   ListKeydown(event: KeyboardEvent, _rec: SearchTable) {
@@ -386,7 +406,7 @@ export class AutoComplete2Component {
       this.SelectedItem('LIST', _rec)
     }
     if (event.key === 'Escape') {
-     this.Cancel();
+      this.Cancel();
     }
     // if (event.key === 'ArrowDown'||event.key === 'Tab') {
     // }

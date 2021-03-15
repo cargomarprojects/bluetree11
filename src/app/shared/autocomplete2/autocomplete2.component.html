@@ -17,12 +17,14 @@
     (blur)="Cancel()"
     [(ngModel)]="_selectedItem"
     >
-      <option  *ngFor="let item of RecList ;let i = index" 
+      <option  style ="cursor: pointer;"
+        *ngFor="let item of RecList ;let i = index" 
+        [selected]="item.id == _selectedItem"
         [value] = "item.id"
       >[{{item.code}}]&nbsp;{{item.name}}</option>
 
-      <option value ="---MORE_ITEM---" >
-          MORE....
+      <option value ="-*-*-*-MORE_ITEM-*-*-*-"  style=" cursor:pointer"  *ngIf="bShowMore">
+        MORE...
       </option>
 
     </select>
