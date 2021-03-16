@@ -11,6 +11,7 @@ import { SearchTable } from '../../shared/models/searchtable';
 export class PaymentHeaderComponent implements OnInit {
     // Call By Value using Input Parameters
     searchQuery: SearchQuery;
+
     custLovType: string = 'MASTER';
 
     @Input() set _query(value: SearchQuery) {
@@ -35,6 +36,7 @@ export class PaymentHeaderComponent implements OnInit {
     }
 
     ngOnChanges(changes: SimpleChange) {
+
     }
 
     List(outputformat: string) {

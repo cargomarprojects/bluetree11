@@ -38,6 +38,9 @@ export class PaymentEditComponent implements OnInit {
     errorMessage: string;
     Foregroundcolor: string;
 
+    custType  ='CUSTOMER';
+    custLovType = 'MASTER';
+
     title: string;
     isAdmin: boolean;
 
@@ -619,7 +622,13 @@ export class PaymentEditComponent implements OnInit {
     }
 
 
-    OnChange(field: string) {
+    onChange(field: string) {
+        if ( field == "CustType") {
+            if ( this.custType == 'CUSTOMER')
+                this.custLovType = 'MASTER' ;
+            if ( this.custType == 'PARENT')
+                this.custLovType = 'OVERSEAAGENT'  ;
+        }
     }
 
     onFocusout(field: string) {
