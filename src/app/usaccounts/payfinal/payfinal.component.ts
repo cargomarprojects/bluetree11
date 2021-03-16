@@ -29,14 +29,7 @@ export class PayFinalComponent implements OnInit {
     // @ViewChild('content') contentRef: ElementRef;
 
 
-    private payrecord: any;
-    @Input() set mpayrecrod(value: any) {
-        this.payrecord = value;
-        if (value != null) {
-            this.initdata();
-            this.Process();
-        }
-    }
+
 
     canSave = true;
 
@@ -164,6 +157,16 @@ export class PayFinalComponent implements OnInit {
     is_exrate_Changed = true;
 
 
+    private payrecord: any;
+    @Input() set mpayrecrod(value: any) {
+        this.payrecord = value;
+        if (value != null) {
+            this.initdata();
+            this.Process();
+        }
+    }
+
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -177,6 +180,8 @@ export class PayFinalComponent implements OnInit {
     }
 
     ngOnInit() {
+        
+        /*
         const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
         this.menuid = options.menuid;
@@ -187,23 +192,8 @@ export class PayFinalComponent implements OnInit {
 
         this.initPage();
         this.actionHandler();
-    }
+        */
 
-    initdata() {
-        this.TOT_AR = this.payrecord.TOT_AR;
-        this.TOT_AP = this.payrecord.TOT_AP;
-        this.TOT_DIFF = this.payrecord.TOT_DIFF;
-        this.TOT_AR_BASE = this.payrecord.TOT_AR_BASE;
-        this.TOT_AP_BASE = this.payrecord.TOT_AP_BASE;
-        this.TOT_DIFF_BASE = this.payrecord.TOT_DIFF_BASE;
-        this.FCURR_CODE = this.payrecord.FCURR_CODE;
-        this.IsMultiCurrency = this.payrecord.IsMultiCurrency;
-        this.IS_PAYROLL_RECORD = this.payrecord.IS_PAYROLL_RECORD;
-        this.IsAdmin = this.payrecord.IsAdmin;
-        this.Customer_ID = this.payrecord.Customer_ID;
-        this.Customer_Name = this.payrecord.Customer_Name;
-        this.Customer_Type = this.payrecord.Customer_Type;
-        this.DetailList = this.payrecord.DetailList;
     }
 
     setup() {
@@ -217,13 +207,7 @@ export class PayFinalComponent implements OnInit {
     private initPage() {
         //this.title = this.gs.getTitle(this.menuid);
         this.title = 'Payment';
-
         this.errorMessage = '';
-        this.LoadCombo();
-    }
-
-    LoadCombo() {
-
     }
 
     NewRecord() {
@@ -242,14 +226,31 @@ export class PayFinalComponent implements OnInit {
     }
 
     init() {
-
         this.record.pay_pkid = this.pkid;
         this.record.pay_vrno = '';
-
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
     }
 
+
+
+
+    initdata() {
+        this.TOT_AR = this.payrecord.TOT_AR;
+        this.TOT_AP = this.payrecord.TOT_AP;
+        this.TOT_DIFF = this.payrecord.TOT_DIFF;
+        this.TOT_AR_BASE = this.payrecord.TOT_AR_BASE;
+        this.TOT_AP_BASE = this.payrecord.TOT_AP_BASE;
+        this.TOT_DIFF_BASE = this.payrecord.TOT_DIFF_BASE;
+        this.FCURR_CODE = this.payrecord.FCURR_CODE;
+        this.IsMultiCurrency = this.payrecord.IsMultiCurrency;
+        this.IS_PAYROLL_RECORD = this.payrecord.IS_PAYROLL_RECORD;
+        this.IsAdmin = this.payrecord.IsAdmin;
+        this.Customer_ID = this.payrecord.Customer_ID;
+        this.Customer_Name = this.payrecord.Customer_Name;
+        this.Customer_Type = this.payrecord.Customer_Type;
+        this.DetailList = this.payrecord.DetailList;
+    }
 
 
     Process() {
@@ -343,7 +344,6 @@ export class PayFinalComponent implements OnInit {
 
 
     }
-
 
 
 

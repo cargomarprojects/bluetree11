@@ -296,8 +296,8 @@ export class PaymentEditComponent implements OnInit {
 
     Save(paymentModalContent) {
         this.FindTotal();
-        this.Allvalid();
-        this.modal = this.modalservice.open(paymentModalContent, { centered: true });
+        if (this.Allvalid())
+            this.modal = this.modalservice.open(paymentModalContent, { centered: true });
     }
 
     Allvalid() {
