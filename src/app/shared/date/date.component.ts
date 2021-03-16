@@ -87,7 +87,7 @@ export class DateComponent {
     @Input() public inputdate: string;
 
     @Output() ValueChanged = new EventEmitter<string>();
-    @Output() lostFocus = new EventEmitter<string>();
+    
 
     @Input() disabled: boolean = false;
 
@@ -138,15 +138,11 @@ export class DateComponent {
 
             this.inputdate = this.yy + "-" + this.mm + "-" + this.dd;
             this.ValueChanged.emit(this.inputdate);
-            if ( this.lostFocus != null)
-                this.lostFocus.emit(this.colName);
             return true;
         }
         else {
             this.inputdate = '';
             this.ValueChanged.emit(this.inputdate);
-            if ( this.lostFocus != null)
-                this.lostFocus.emit(this.colName);
             return false;
         }
     }

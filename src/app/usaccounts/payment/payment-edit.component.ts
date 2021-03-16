@@ -760,6 +760,7 @@ export class PaymentEditComponent implements OnInit {
             alert('Invalid Record Selected');
             return;
         }
+        
         this.gs.LinkPage("INVNO", sMode, REFNO, sID, "", INVID);
     }
 

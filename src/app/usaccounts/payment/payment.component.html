@@ -50,9 +50,9 @@
       </thead>
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
-          <td  class='hlink' (click)="Print(rec,'simple')">{{rec.pay_docno}}</td>
-          <td class='hlink' (click)="upload(rec)">{{rec.rec_files_attached_chk}}</td>
-          <td *ngIf="gs.BRANCH_REGION != 'USA'" class='hlink' (click)="Print(rec,'cash')">Print</td>
+          <td  class='hlink2' (click)="Print(rec,'simple')">{{rec.pay_docno}}</td>
+          <td class='hlink2' (click)="upload(rec)">{{rec.rec_files_attached_chk}}</td>
+          <td *ngIf="gs.BRANCH_REGION != 'USA'" class='hlink2' (click)="Print(rec,'cash')">Print</td>
           <td>{{rec.pay_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.pay_cust_name}} </td>
           <td>{{rec.pay_rp}} </td>
@@ -68,7 +68,7 @@
           <td>{{rec.pay_mode}} </td>
           <td>{{rec.pay_chqno}} </td>
           <td>{{rec.pay_chq_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td *ngIf="gs.RE_PRINT_CHECK == 'Y'" class='hlink' (click)="Print(rec,'chq')">Print</td>
+          <td *ngIf="gs.RE_PRINT_CHECK == 'Y'" class='hlink2' (click)="Print(rec,'chq')">Print</td>
           <td>{{rec.pay_narration}} </td>
           <td>{{rec.rec_created_by}} </td>
           <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>

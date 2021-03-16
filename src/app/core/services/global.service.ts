@@ -2095,6 +2095,9 @@ public getValue(object: any, key: string[]) {
 
   Naviagete(menu_route: string, jsonstring: string, _replaceurl: boolean = false) {
     this.router.navigate([menu_route], { queryParams: { parameter: jsonstring }, replaceUrl: _replaceurl });
+
+    
+
   }
 
   public GetAttention(Attention: string) {
@@ -2325,6 +2328,8 @@ public getValue(object: any, key: string[]) {
             origin: INVOKETYPE
           };
           this.Naviagete('Silver.USAccounts.Trans/InvoiceEditPage', JSON.stringify(prm));
+          let p ='Silver.USAccounts.Trans/InvoiceEditPage${prm}';
+          this.router.navigate([]).then( result =>{  window.open(p),  '_balnk'  });
           // InvokePage("A/R & A/P", "Silver.USAccounts.Trans.xap", "Silver.USAccounts.Trans", "InvoicePage", SMENU_ID + "~" + MBLID + "~" + REFNO + "~" + sType + "~SEARCH~" + INVID);
         }
         else

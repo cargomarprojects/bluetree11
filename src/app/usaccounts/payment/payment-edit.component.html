@@ -134,10 +134,10 @@
             </thead>
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of pendingList">
-                    <td class='hlink' (click)="editinvoice(rec)">{{rec.inv_no}}</td>
+                    <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td>
                     <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-                    <td class='hlink' (click)="editmaster(rec)">{{rec.inv_mbl_refno}} </td>
-                    <td class='hlink' (click)="ArApList(rec,arapModalContent)">LIST</td>
+                    <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mbl_refno}} </td>
+                    <td class='hlink2' (click)="ArApList(rec,arapModalContent)">LIST</td>
                     <td>{{rec.inv_refno}} </td>
                     <td>{{rec.inv_total | number : '1.2-2'}} </td>
                     <td>{{rec.inv_ar_total | number : '1.2-2'}} </td>
