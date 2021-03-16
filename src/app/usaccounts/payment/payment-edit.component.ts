@@ -140,10 +140,8 @@ export class PaymentEditComponent implements OnInit {
         this.errorMessage = '';
 
         if (this.mode == 'ADD') {
-
             this.record = <Tbl_cargo_invoicem>{};
             this.pendingList = <Tbl_cargo_invoicem[]>[];
-
             this.pkid = this.gs.getGuid();
             this.init();
         }
@@ -607,6 +605,9 @@ export class PaymentEditComponent implements OnInit {
             this.cust_id = _Record.id;
             this.cust_code = _Record.code;
             this.cust_name = _Record.name;
+
+            this.NewRecord();
+
         }
         if (_Record.controlname == "CURRENCY") {
             this.curr_code = _Record.code;
