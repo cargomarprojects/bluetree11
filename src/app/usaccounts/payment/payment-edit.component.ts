@@ -341,7 +341,8 @@ export class PaymentEditComponent implements OnInit {
 
         if (sErrMsg.length > 0) {
             alert(sErrMsg);
-            return bRet;
+            bRet = false;
+            return false;
         }
 
         let mID = "";
@@ -418,6 +419,7 @@ export class PaymentEditComponent implements OnInit {
                 //Customer_ID = "";
                 //Customer_Type = "MULTIPLE";
                 alert("Settlement with multiple customers not allowed");
+                bRet= false;
                 return false;
             }
         }
@@ -429,19 +431,23 @@ export class PaymentEditComponent implements OnInit {
 
         if (nAr != this.txt_tot_AR) {
             alert("Mismatch in Total A/R");
+            bRet= false;
             return false;
         }
         if (nAp != this.txt_tot_AP) {
             alert("Mismatch in Total A/P");
+            bRet= false;
             return false;
         }
         if (nDiff != this.txt_tot_diff) {
             alert("Mismatch in Difference Amt");
+            bRet= false;
             return false;
         }
 
         if (this.Customer_ID == "") {
             alert("Invalid Customer");
+            bRet= false;
             return false;
         }
 
@@ -460,6 +466,7 @@ export class PaymentEditComponent implements OnInit {
                 if (Math.sign(nDiff) != Math.sign(nDiff_Base)) {
                     bRet = false;
                     alert("Mismatch in Foreign Currency And Local Currency due to huge variation in Exchange Rate");
+                    bRet= false;
                     return false;
                 }
             }
@@ -490,8 +497,6 @@ export class PaymentEditComponent implements OnInit {
 
 
         //this.tab = 'payment';
-
-
 
 
         return bRet;
