@@ -151,6 +151,7 @@ export interface Tbl_cargo_imp_housem {
     hbl_checked:boolean;
     hbl_delivery_date:string;
     hbl_custom_clear_date:string;
+    hbl_incoterm:string;
 }
 export interface Tbl_desc {
    

@@ -307,6 +307,7 @@ export class SeaImpHouseEditComponent implements OnInit {
     this.record.rec_created_date = this.gs.defaultValues.today;
     this.record.hbl_delivery_date = '';
     this.record.hbl_custom_clear_date = '';
+    this.record.hbl_incoterm = 'NA';
   }
 
   LoadData() {
@@ -324,6 +325,7 @@ export class SeaImpHouseEditComponent implements OnInit {
     this.record.hbl_is_itshipment = false;
     this.record.hbl_custom_reles_status = 'NA';
     this.record.hbl_is_delivery = 'NA';
+    this.record.hbl_incoterm = 'NA';
     this.recorddet.hbl_cargo_description9 = "QUANTITY/QUALITY AS PER SHIPPER'S DECLARATION";
     this.recorddet.hbl_cargo_description10 = "CARRIER NOT RESPONSIBLE FOR PACKING OF CARGO";
     this.record.rec_created_by = this.gs.user_code;
