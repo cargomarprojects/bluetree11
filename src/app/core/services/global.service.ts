@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, JsonpClientBackend } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 
@@ -2328,7 +2328,7 @@ public getValue(object: any, key: string[]) {
             origin: INVOKETYPE
           };
           this.Naviagete('Silver.USAccounts.Trans/InvoiceEditPage', JSON.stringify(prm));
-          let p ='Silver.USAccounts.Trans/InvoiceEditPage${prm}';
+          let p ='Silver.USAccounts.Trans/InvoiceEditPage?parameter='+ JSON.stringify(prm)  +"" ;
           this.router.navigate([]).then( result =>{  window.open(p),  '_balnk'  });
           // InvokePage("A/R & A/P", "Silver.USAccounts.Trans.xap", "Silver.USAccounts.Trans", "InvoicePage", SMENU_ID + "~" + MBLID + "~" + REFNO + "~" + sType + "~SEARCH~" + INVID);
         }
