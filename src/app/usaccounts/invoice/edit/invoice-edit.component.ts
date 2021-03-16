@@ -13,6 +13,7 @@ import { Tbl_House } from '../../models/tbl_house';
 import { invoiceService } from '../../services/invoice.service';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
+import { extendWith } from 'lodash';
 
 
 @Component({
@@ -71,6 +72,10 @@ export class InvoiceEditComponent implements OnInit {
 
   inv_house_id: string = "";
   old_amt: number = 0;
+  old_inv_date: string = '';
+
+  hbl_consignee_id: string = "";
+  hbl_incoterm: string = "";
 
   enable_customer_control: boolean = false;
   enable_arap_control: boolean = false;
@@ -86,6 +91,7 @@ export class InvoiceEditComponent implements OnInit {
 
   isVat: boolean = false;
   isConfirmed: boolean = true;
+
 
   public record: Tbl_cargo_invoicem = <Tbl_cargo_invoicem>{};
   public records: Tbl_Cargo_Invoiced[] = [];
@@ -133,6 +139,7 @@ export class InvoiceEditComponent implements OnInit {
 
   initpage() {
     this.old_amt = 0;
+    this.old_inv_date = '';
     this.showdeleted = false;
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
@@ -461,6 +468,7 @@ export class InvoiceEditComponent implements OnInit {
   GetRecord() {
 
     this.old_amt = 0;
+    this.old_inv_date = '';
     var SearchData = this.gs.UserInfo;
     SearchData.pkid = this.pkid;
     SearchData.INV_TYPE = this.mbl_type;
@@ -478,12 +486,16 @@ export class InvoiceEditComponent implements OnInit {
       this.inv_arap = this.record.inv_arap;
       this.mbl_pkid = this.record.inv_mbl_id;
       this.hbl_pkid = this.record.inv_hbl_id;
+      this.hbl_consignee_id = this.record.inv_hbl_consignee_id;
+      this.hbl_incoterm = this.record.inv_hbl_incoterm;
 
       this.inv_house_id = this.record.inv_hbl_id;
       if (this.record.inv_hbl_id == null || this.record.inv_hbl_id == '')
         this.inv_house_id = this.record.inv_mbl_id;
 
       this.old_amt = this.record.inv_total;
+      this.old_inv_date = this.record.inv_date;
+
 
       this.InitCommonValues();
 
@@ -570,6 +582,7 @@ export class InvoiceEditComponent implements OnInit {
         }
         this.mode = 'EDIT';
         this.old_amt = this.record.inv_total;
+        this.old_inv_date = this.record.inv_date;
       }
       else {
         alert(this.errorMessage);
@@ -734,6 +747,9 @@ export class InvoiceEditComponent implements OnInit {
         this.record.inv_hbl_weight = +rec.wt;
         this.record.inv_hbl_cbm = +rec.cbm;
         this.record.inv_hbl_cft = +rec.cft;
+        this.hbl_consignee_id = rec.consignee_id;
+        this.hbl_incoterm =  rec.incoterm;
+        this.showAlertMsgDDP();
       }
     });
   }
@@ -843,7 +859,8 @@ export class InvoiceEditComponent implements OnInit {
       case 'mbl_refno': {
         break;
       }
-      case 'invoice_code': {
+      case 'inv_date': {
+        this.InvoiceDateValidation();
         break;
       }
       case 'inv_cust_name': {
@@ -940,6 +957,7 @@ export class InvoiceEditComponent implements OnInit {
     }
   }
 
+
   findRowTotal(field: string, rec: Tbl_Cargo_Invoiced) {
 
     let nQty = rec.invd_qty;
@@ -1014,6 +1032,7 @@ export class InvoiceEditComponent implements OnInit {
       this.record.inv_cust_code = _Record.code;
       this.record.inv_cust_name = _Record.name;
       this.inv_refno_ctrl.nativeElement.focus();
+      this.showAlertMsgDDP();
     }
 
     if (_Record.controlname == "ARAP") {
@@ -1124,4 +1143,81 @@ export class InvoiceEditComponent implements OnInit {
     this.location.back();
   }
 
+  InvoiceDateValidation() {
+    if (this.gs.isBlank(this.record.inv_date))
+      return;
+
+    if (this.IsInvoiceDateChanged()) {
+
+      let days = 0;
+      let ErrorMsg = "";
+      let DayDiff = 30; //date period set for 1 Months 
+
+      var tempdt = this.record.inv_date.split('-');
+      let dtyr: number = +tempdt[0];
+      let dtmn: number = +tempdt[1];
+      let dtdy: number = +tempdt[2];
+
+      let TransDate = new Date(dtyr, dtmn - 1, dtdy);
+
+      let FutureDate = new Date();
+      FutureDate.setDate(FutureDate.getDate() + DayDiff);
+
+      let PreviousDate = new Date();
+      PreviousDate.setDate(PreviousDate.getDate() - DayDiff);
+
+      if (TransDate > FutureDate) {
+        days = TransDate.getTime() - FutureDate.getTime();
+        days = Math.floor(days / (1000 * 3600 * 24));
+        days += DayDiff;
+        ErrorMsg = "Invoice Date is " + days.toString() + " days above, Please check.....";
+      }
+
+      if (TransDate < PreviousDate) {
+        days = PreviousDate.getTime() - TransDate.getTime();
+        days = Math.floor(days / (1000 * 3600 * 24));
+        days += DayDiff;
+        ErrorMsg = "Invoice Date is " + days.toString() + " days older, Please check.....";
+      }
+
+      if (ErrorMsg != "")
+        alert(ErrorMsg);
+    }
+  }
+
+  IsInvoiceDateChanged() {
+    let bRet = true;
+    try {
+      if (this.mode == "EDIT") {
+        if (!this.gs.isBlank(this.record.inv_date) && !this.gs.isBlank(this.old_inv_date)) {
+          var tempdt = this.record.inv_date.split('-');
+          let invdtyr: number = +tempdt[0];
+          let invdtmn: number = +tempdt[1];
+          let invdtdy: number = +tempdt[2];
+
+          var tempdt2 = this.old_inv_date.split('-');
+          let oldinvdtyr: number = +tempdt2[0];
+          let oldinvdtmn: number = +tempdt2[1];
+          let oldinvdtdy: number = +tempdt2[2];
+          if (invdtdy == oldinvdtdy && invdtmn == oldinvdtmn && invdtdy == oldinvdtdy)
+            bRet = false;
+        }
+      }
+
+    }
+    catch (Exception) {
+
+    }
+    return bRet;
+  }
+
+  showAlertMsgDDP() {
+    if (this.gs.GENERAL_BRANCH_CODE == "MFDR") {
+      if (this.inv_arap == "AR" && this.record.inv_cust_id != "" && this.hbl_consignee_id != "") {
+        if (this.record.inv_cust_id == this.hbl_consignee_id && this.hbl_incoterm == "DDP") {
+          alert("This is a DDP Shipment, Consignee Invoicing is Optional");
+        }
+      }
+    }
+  }
 }

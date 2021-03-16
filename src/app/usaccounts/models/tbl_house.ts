@@ -11,5 +11,7 @@ export interface Tbl_House {
     wt: string;
     cbm: string;
     cft: string;
+    consignee_id:string;
+    incoterm:string;
 }
 

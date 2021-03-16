@@ -184,6 +184,8 @@ export interface Tbl_cargo_invoicem {
     inv_confirmed: string;
 
     inv_stage: string;
+    inv_hbl_consignee_id:string;
+    inv_hbl_incoterm:string;
 }
 
 

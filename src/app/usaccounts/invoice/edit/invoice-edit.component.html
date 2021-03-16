@@ -37,7 +37,7 @@
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Date</label>
                     <div class="col-8">
-                        <app-date #_inv_date [inputdate]="record.inv_date" (ValueChanged)="record.inv_date=$event">
+                        <app-date #_inv_date [inputdate]="record.inv_date" (ValueChanged)="record.inv_date=$event" (blur)="onBlur('inv_date')">
                         </app-date>
                     </div>
                 </div>
