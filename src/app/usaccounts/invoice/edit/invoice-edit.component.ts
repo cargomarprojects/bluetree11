@@ -56,7 +56,7 @@ export class InvoiceEditComponent implements OnInit {
   canEdit: boolean;
   canSave: boolean;
 
-  inv_verson: string = "7";
+  inv_verson: string = "9";
   tab: string = 'main';
   report_title: string = '';
   report_url: string = '';
