@@ -860,7 +860,7 @@ export class InvoiceEditComponent implements OnInit {
         break;
       }
       case 'inv_date': {
-        this.InvoiceDateValidation();
+        // this.InvoiceDateValidation();
         break;
       }
       case 'inv_cust_name': {
