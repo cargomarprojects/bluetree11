@@ -38,7 +38,7 @@ export class PaymentEditComponent implements OnInit {
     errorMessage: string;
     Foregroundcolor: string;
 
-    custType  ='CUSTOMER';
+    custType = 'CUSTOMER';
     custLovType = 'MASTER';
 
     title: string;
@@ -191,8 +191,7 @@ export class PaymentEditComponent implements OnInit {
         if (this.cust_id != '') {
             this.Customer_ID = this.cust_id;
             this.str_id = this.cust_id;
-            this.Search_Mode = "CUSTOMER";
-            //this.Search_Mode = "GROUP";
+            this.Search_Mode = (this.custType == "CUSTOMER") ? "CUSTOMER" : "GROUP";
         }
         else if (this.refno != '') {
             this.str_id = this.refno;
@@ -422,7 +421,7 @@ export class PaymentEditComponent implements OnInit {
                 //Customer_ID = "";
                 //Customer_Type = "MULTIPLE";
                 alert("Settlement with multiple customers not allowed");
-                bRet= false;
+                bRet = false;
                 return false;
             }
         }
@@ -434,23 +433,23 @@ export class PaymentEditComponent implements OnInit {
 
         if (nAr != this.txt_tot_AR) {
             alert("Mismatch in Total A/R");
-            bRet= false;
+            bRet = false;
             return false;
         }
         if (nAp != this.txt_tot_AP) {
             alert("Mismatch in Total A/P");
-            bRet= false;
+            bRet = false;
             return false;
         }
         if (nDiff != this.txt_tot_diff) {
             alert("Mismatch in Difference Amt");
-            bRet= false;
+            bRet = false;
             return false;
         }
 
         if (this.Customer_ID == "") {
             alert("Invalid Customer");
-            bRet= false;
+            bRet = false;
             return false;
         }
 
@@ -469,7 +468,7 @@ export class PaymentEditComponent implements OnInit {
                 if (Math.sign(nDiff) != Math.sign(nDiff_Base)) {
                     bRet = false;
                     alert("Mismatch in Foreign Currency And Local Currency due to huge variation in Exchange Rate");
-                    bRet= false;
+                    bRet = false;
                     return false;
                 }
             }
@@ -612,9 +611,7 @@ export class PaymentEditComponent implements OnInit {
             this.cust_id = _Record.id;
             this.cust_code = _Record.code;
             this.cust_name = _Record.name;
-
             this.NewRecord();
-
         }
         if (_Record.controlname == "CURRENCY") {
             this.curr_code = _Record.code;
@@ -623,11 +620,17 @@ export class PaymentEditComponent implements OnInit {
 
 
     onChange(field: string) {
-        if ( field == "CustType") {
-            if ( this.custType == 'CUSTOMER')
-                this.custLovType = 'MASTER' ;
-            if ( this.custType == 'PARENT')
-                this.custLovType = 'OVERSEAAGENT'  ;
+        if (field == "CUSTOMER") {
+            if (this.custType == 'CUSTOMER')
+                this.custLovType = 'MASTER';
+            if (this.custType == 'PARENT')
+                this.custLovType = 'OVERSEAAGENT';
+
+            this.cust_id = '';
+            this.cust_code = '';
+            this.cust_name = '';
+
+            this.NewRecord();
         }
     }
 
@@ -774,7 +777,7 @@ export class PaymentEditComponent implements OnInit {
             alert('Invalid Record Selected');
             return;
         }
-        
+
         this.gs.LinkPage("INVNO", sMode, REFNO, sID, "", INVID);
     }
 
