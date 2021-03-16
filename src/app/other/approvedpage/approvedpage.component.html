@@ -85,7 +85,7 @@
                             (click)="AttachRow(rec)"></i>
                     </td>
                     <td *ngIf="((mainservice.param_type=='APPROVED' && mainservice.isAdmin)||mainservice.param_type=='APPROVED REPORT'||mainservice.param_type=='REQUEST REPORT')"
-                        class='hlink' (click)="mainservice.ShowHide(rec)">{{rec.ca_hide_status}}</td>
+                        class='hlink2' (click)="mainservice.ShowHide(rec)">{{rec.ca_hide_status}}</td>
                 </tr>
             </tbody>
         </table>
