@@ -748,7 +748,7 @@ export class InvoiceEditComponent implements OnInit {
         this.record.inv_hbl_cbm = +rec.cbm;
         this.record.inv_hbl_cft = +rec.cft;
         this.hbl_consignee_id = rec.consignee_id;
-        this.hbl_incoterm =  rec.incoterm;
+        this.hbl_incoterm = rec.incoterm;
         this.showAlertMsgDDP();
       }
     });
@@ -1189,19 +1189,8 @@ export class InvoiceEditComponent implements OnInit {
     let bRet = true;
     try {
       if (this.mode == "EDIT") {
-        if (!this.gs.isBlank(this.record.inv_date) && !this.gs.isBlank(this.old_inv_date)) {
-          var tempdt = this.record.inv_date.split('-');
-          let invdtyr: number = +tempdt[0];
-          let invdtmn: number = +tempdt[1];
-          let invdtdy: number = +tempdt[2];
-
-          var tempdt2 = this.old_inv_date.split('-');
-          let oldinvdtyr: number = +tempdt2[0];
-          let oldinvdtmn: number = +tempdt2[1];
-          let oldinvdtdy: number = +tempdt2[2];
-          if (invdtdy == oldinvdtdy && invdtmn == oldinvdtmn && invdtdy == oldinvdtdy)
-            bRet = false;
-        }
+        if (this.gs.CompareDate(this.record.inv_date, this.old_inv_date) == "=")
+          bRet = false;
       }
 
     }

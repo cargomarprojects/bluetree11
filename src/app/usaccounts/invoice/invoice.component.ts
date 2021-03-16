@@ -39,7 +39,7 @@ export class InvoiceComponent implements OnInit {
   MBL_LOSS_APPROVED: boolean = false;
   MBL_PROFIT_REQ: boolean = false;
   MBL_LOSS_MEMO: string = '';
-
+  inv_verson: string = "9";
 
   records: Tbl_cargo_invoicem[]
 
@@ -87,7 +87,7 @@ export class InvoiceComponent implements OnInit {
     SearchData.ISADMIN = (this.isAdmin) ? 'Y' : 'N';
     SearchData.SHOWDELETED = (this.showdeleted) ? 'Y' : 'N';
     SearchData.BR_REGION = this.gs.BRANCH_REGION;
-
+    SearchData.VERSION = this.inv_verson;
     SearchData.page_count = 0;
     SearchData.page_rows = 0;
     SearchData.page_current = -1;
