@@ -107,9 +107,9 @@
                     <div class="col-md-3">
                         <div class="form-group row">
                             <div class="col-12">
-                                <button class="btn btn-success btn-sm mr-1" (click)="SelectDeselect('SELECT')">Select
+                                <button class="btn btn-info btn-sm mr-1" (click)="SelectDeselect('SELECT')">Select
                                     All</button>
-                                <button class="btn btn-success btn-sm mr-1"
+                                <button class="btn btn-info btn-sm mr-1"
                                     (click)="SelectDeselect('DESELECT')">Deselect All </button>
                             </div>
                         </div>
@@ -268,6 +268,7 @@
                                     <option [value]="'FORMAT-1'">FORMAT-1</option>
                                     <option [value]="'FORMAT-2'">FORMAT-2</option>
                                     <option [value]="'FORMAT-3'">FORMAT-3</option>
+                                    <option *ngIf="this.gs.GENERAL_BRANCH_CODE != 'MFDR'" [value]="'FORMAT-4'">FORMAT-4</option>
                                 </select>
                             </div>
                             <div class="col-4 form-check">
@@ -477,6 +478,42 @@
                         <td>{{rec.mbl_inv_stage_b}}</td>
                         <td>{{rec.mbl_inv_stage_c}}</td>
                         <td>{{rec.mbl_inv_stage_d}}</td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div  *ngIf="reportformat=='FORMAT-4'" class="page-body table-responsive">
+            <table  class="table  table-hover table-sm">
+                <thead class="page-body-thead">
+                    <tr>
+                        <th> REFNO </th>
+                        <th> ETA </th>
+                        <th> CI </th>
+                        <th> PL </th>
+                        <th> CARRIER AN </th>
+                        <th> CUSTOM CLR STATUS </th>
+                        <th> CUSTOM CLR DATE </th>
+                        <th> CARGO LOCATION </th>
+                        <th> COLOADER </th>
+                        <th> DLVRY STATUS </th>
+                        <th> DLVRY ORD SENT </th>
+                        <th> DLVRY ORD DATE </th>
+                    </tr>
+                </thead>
+                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+                    <tr>
+                        <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+                        <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <td>{{rec.hbl_is_ci}}</td>
+                        <td>{{rec.hbl_is_pl}}</td>
+                        <td>{{rec.hbl_is_carr_an}}</td>
+                        <td>{{rec.hbl_custom_reles_status}}</td>
+                        <td>{{rec.hbl_custom_clear_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <td>{{rec.hbl_location_name}}</td>
+                        <td>{{rec.mbl_coloader_name}}</td>
+                        <td>{{rec.hbl_is_delivery}}</td>
+                        <td>{{rec.pick_is_delivery_sent}}</td>
+                        <td>{{rec.pick_delivery_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                     </tr>
                 </tbody>
             </table>

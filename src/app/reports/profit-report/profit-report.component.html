@@ -121,8 +121,8 @@
               </div>
             </div>
 
-            <div *ngIf="report_category=='AGENT'" class="form-group row">
-              <label class="col-2 col-form-label col-form-label-sm">Agent</label>
+            <div *ngIf="report_category=='AGENT'||report_category=='PARTY'" class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm"><span *ngIf="report_category=='AGENT'">Agent</span><span *ngIf="report_category=='PARTY'">Billing Party</span></label>
               <div class="col-10">
                 <app-autocomplete [inputdata]="CUSTRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
               </div>
@@ -307,6 +307,7 @@
             <th>AGENT</th>
             <th>SHIPPER</th>
             <th>CONSIGNEE</th>
+            <th>BILLING-PARTY</th>
             <th>BL#</th>
             <th class="text-right">REVENUE</th>
             <th class="text-right">EXPENSE</th>
@@ -324,6 +325,7 @@
             <td>{{rec.mbl_agent_name}}</td>
             <td>{{rec.hbl_shipper_name}}</td>
             <td>{{rec.hbl_consignee_name}}</td>
+            <td>{{rec.mbl_customer_name}}</td>
             <td>{{rec.mbl_house_tot}}</td>
             <td align='right'>{{rec.hbl_income | number : '1.2-2'}}</td>
             <td align='right'>{{rec.hbl_expense | number : '1.2-2'}}</td>

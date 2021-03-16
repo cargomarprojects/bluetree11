@@ -139,6 +139,13 @@ export interface Tbl_cargo_general {
     mbl_inv_stage_e: string;
     mbl_cargo_loc_firmcode: string;
     hbl_is_itshipment: string;
+
+    mbl_container_tot_old: number;
+    mbl_coloader_name: string;
+    hbl_custom_clear_date: string;
+    hbl_location_name: string;
+    pick_is_delivery_sent: string;
+    pick_delivery_date: string;
 }
 
 export interface Tbl_cargo_container {
@@ -181,14 +188,14 @@ export interface SearchQuery {
     cust_name: string;
     branch: string;
     lock_type: string;
-    show_hide:boolean;
+    show_hide: boolean;
     handled_id: string;
     handled_name: string;
 }
 
 export interface OthGeneralModel {
-    sortcol : string ;
-    sortorder : boolean;
+    sortcol: string;
+    sortorder: boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
