@@ -81,9 +81,14 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 })
 
 export class DateComponent {
+
+    @Input() public colName: string;
+
     @Input() public inputdate: string;
 
     @Output() ValueChanged = new EventEmitter<string>();
+    @Output() lostFocus = new EventEmitter<string>();
+
     @Input() disabled: boolean = false;
 
     @ViewChild('inputbox') private inputbox: ElementRef;
@@ -133,11 +138,15 @@ export class DateComponent {
 
             this.inputdate = this.yy + "-" + this.mm + "-" + this.dd;
             this.ValueChanged.emit(this.inputdate);
+            if ( this.lostFocus != null)
+                this.lostFocus.emit(this.colName);
             return true;
         }
         else {
             this.inputdate = '';
             this.ValueChanged.emit(this.inputdate);
+            if ( this.lostFocus != null)
+                this.lostFocus.emit(this.colName);
             return false;
         }
     }
