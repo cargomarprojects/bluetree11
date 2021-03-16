@@ -153,10 +153,8 @@ export class AutoComplete2Component {
   }
 
   Focus() {
-    /*
     if (!this.disabled)
       this.inputbox.nativeElement.focus();
-      */
   }
   /*
 
