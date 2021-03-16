@@ -178,6 +178,13 @@ export class PaymentEditComponent implements OnInit {
     }
 
     FindInvoice() {
+
+        if ( this.gs.isBlank( this.cust_id) )
+        {
+            alert("No Customer/Parent Selected");
+            return;
+        }
+
         if (this.gs.IS_SINGLE_CURRENCY == false) {
             if (this.curr_code.length <= 0) {
                 alert("Currency Code Has to be entered");
@@ -618,7 +625,6 @@ export class PaymentEditComponent implements OnInit {
         }
     }
 
-
     onChange(field: string) {
         if (field == "CUSTOMER") {
             if (this.custType == 'CUSTOMER')
@@ -633,6 +639,9 @@ export class PaymentEditComponent implements OnInit {
             this.NewRecord();
         }
     }
+
+
+
 
     onFocusout(field: string) {
     }
