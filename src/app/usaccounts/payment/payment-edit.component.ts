@@ -149,7 +149,6 @@ export class PaymentEditComponent implements OnInit {
 
     init() {
 
-
         this.Pay_RP = "";
 
         this.txt_Bal_AP = 0;
