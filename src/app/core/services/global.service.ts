@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, JsonpClientBackend } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, JsonpClientBackend } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 
@@ -36,7 +36,7 @@ export class GlobalService {
   public globalVariables: GlobalVariables;
   public defaultValues: DefaultValues;
 
-  public reload_url  ='';
+  public reload_url = '';
 
   mRec: Modulem = null;
 
@@ -231,7 +231,7 @@ export class GlobalService {
   public RE_PRINT_CHECK = "N";
 
 
-  
+
 
   public INVOICE_STAGE: any;
   public SHIPMENT_STAGE_OI: any;
@@ -654,7 +654,7 @@ export class GlobalService {
   public PARAM_HBL_FORMAT_BLANK: any = [];
   public PARAM_HBL_FORMAT_DRAFT: any = [];
   public PARAM_HAWB_FORMAT: any = [];
-  
+
   public FY_MONTHS: any = [];
   public BUDGET_TYPE: any = [];
   public CHQ_FORMAT: any = [];
@@ -803,7 +803,7 @@ export class GlobalService {
   }
 
 
-  public async LoadSettings() : Promise<number> {
+  public async LoadSettings(): Promise<number> {
     let bRet = -1;
     var SearchData: any = {};
     SearchData = this.UserInfo;
@@ -843,7 +843,7 @@ export class GlobalService {
       console.log('Menu Loaded 2');
       this.MenuList = response.list;
       this.Modules = [];
-      
+
       this.MenuList.forEach(element => {
         if (module_name != element.module_name) {
           this.mRec = new Modulem();
@@ -851,11 +851,11 @@ export class GlobalService {
           this.Modules.push(this.mRec);
           module_name = element.module_name;
         }
-        if ( element.menu_hiden==='N') {
-        if ( grpname != element.menu_group_name) 
-            grpname =  element.menu_group_name;
-        else 
-          element.menu_group_name = null;
+        if (element.menu_hiden === 'N') {
+          if (grpname != element.menu_group_name)
+            grpname = element.menu_group_name;
+          else
+            element.menu_group_name = null;
         }
       });
       bRet = 0;
@@ -1276,14 +1276,14 @@ export class GlobalService {
     }).forEach(a => {
       this.JOB_TYPE_AE.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
-    
+
     this.JOB_TYPE_AI = [];
     this.MainList.filter(a => a.param_type == 'JOB-TYPE' && a.param_name2 == 'AIR IMPORT').sort(function (a, b) {
       return b.param_name3 < a.param_name3 ? 1 : -1;
     }).forEach(a => {
       this.JOB_TYPE_AI.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
-    
+
     this.JOB_TYPE_OT = [];
     this.MainList.filter(a => a.param_type == 'JOB-TYPE' && a.param_name2 == 'OTHERS').sort(function (a, b) {
       return b.param_name3 < a.param_name3 ? 1 : -1;
@@ -1304,7 +1304,7 @@ export class GlobalService {
     }).forEach(a => {
       this.PARAM_CARGO_MOVEMENT.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
-    
+
     this.PARAM_CONTAINER_TYPE = [];
     this.MainList.filter(a => a.param_type == 'CONTAINER TYPE').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
@@ -1377,7 +1377,7 @@ export class GlobalService {
     });
     this.BUDGET_TYPE.push({ "code": '', "name": 'NIL' })
 
-    this.CHQ_FORMAT =[];
+    this.CHQ_FORMAT = [];
     this.MainList.filter(a => a.param_type == 'CHQ-FORMAT').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
@@ -1392,7 +1392,7 @@ export class GlobalService {
       this.PARAM_CUSTOMER_GROUP.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
-    this.PARAM_COO_FORMAT_BLANK =[];
+    this.PARAM_COO_FORMAT_BLANK = [];
     this.MainList.filter(a => a.param_type == 'COO-FORMAT').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
@@ -1507,7 +1507,7 @@ export class GlobalService {
     this.appid = bts_settings.appid;
     this.GSESSION = bts_settings.GSession;
     this.Access_Token = bts_settings.access_token;
- 
+
     this.user_ua_pkid = bts_settings.user_ua_pkid;
     this.branch_pkid = bts_settings.branch_pkid;
     this.branch_code = bts_settings.branch_code;
@@ -1580,7 +1580,9 @@ export class GlobalService {
   constructor(
     private http2: HttpClient,
     private location: Location,
-    private router: Router) {
+    private router: Router
+
+  ) {
     this.globalVariables = new GlobalVariables;
     this.globalData = new GlobalData;
     this.InitdefaultValues();
@@ -1903,40 +1905,40 @@ export class GlobalService {
     const isInside = key && key.indexOf('.') !== -1;
 
     if (isInside) {
-        key = key.split('.');
+      key = key.split('.');
     }
 
     const array: any[] = value.sort((a: any, b: any): number => {
-        if (!key) {
-            return a > b ? 1 : -1;
-        }
+      if (!key) {
+        return a > b ? 1 : -1;
+      }
 
-        if (!isInside) {
-            return a[key] > b[key] ? 1 : -1;
-        }
+      if (!isInside) {
+        return a[key] > b[key] ? 1 : -1;
+      }
 
-        return this.getValue(a, key) > this.getValue(b, key) ? 1 : -1;
+      return this.getValue(a, key) > this.getValue(b, key) ? 1 : -1;
     });
 
     if (!order) {
-        return array.reverse();
+      return array.reverse();
     }
 
     return array;
-}
+  }
 
-public getValue(object: any, key: string[]) {
+  public getValue(object: any, key: string[]) {
     for (let i = 0, n = key.length; i < n; ++i) {
-        const k = key[i];
-        if (!(k in object)) {
-            return;
-        }
+      const k = key[i];
+      if (!(k in object)) {
+        return;
+      }
 
-        object = object[k];
+      object = object[k];
     }
 
     return object;
-}
+  }
 
 
 
@@ -2095,10 +2097,8 @@ public getValue(object: any, key: string[]) {
 
   Naviagete(menu_route: string, jsonstring: string, _replaceurl: boolean = false) {
     this.router.navigate([menu_route], { queryParams: { parameter: jsonstring }, replaceUrl: _replaceurl });
-
-    
-
   }
+
 
   public GetAttention(Attention: string) {
     let str: string = "";
@@ -2266,9 +2266,7 @@ public getValue(object: any, key: string[]) {
     let sType: string = "";
     let SMENU_ID: string = "";
     try {
-
       MBLMODE = MBLMODE.replace("OCEAN", "SEA");
-
       if (MBLMODE == "SEA EXPORT" || MBLMODE == "SEA IMPORT" || MBLMODE == "AIR EXPORT" || MBLMODE == "AIR IMPORT" || MBLMODE == "OTHERS" || MBLMODE == "EXTRA") {
         if (REFNO.length >= 2 && MBLID.trim().length > 0)
           sType = REFNO.substring(0, 2);
@@ -2314,322 +2312,162 @@ public getValue(object: any, key: string[]) {
           alert("Cannot Load Invoice");
           return;
         }
-
         if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-          let prm = {
-            menuid: SMENU_ID,
-            pkid: INVID,
-            mode: 'EDIT',
-            mbl_pkid: MBLID,
-            mbl_refno: REFNO,
-            mbl_type: sType,
-            inv_arap: '',
-            arrival_notice: '',
-            origin: INVOKETYPE
-          };
-          this.Naviagete('Silver.USAccounts.Trans/InvoiceEditPage', JSON.stringify(prm));
-          //let p ='Silver.USAccounts.Trans/InvoiceEditPage?parameter='+ JSON.stringify(prm)  +"" ;
-          //this.router.navigate([]).then( result =>{  window.open(p),  '_balnk'  });
-          // InvokePage("A/R & A/P", "Silver.USAccounts.Trans.xap", "Silver.USAccounts.Trans", "InvoicePage", SMENU_ID + "~" + MBLID + "~" + REFNO + "~" + sType + "~SEARCH~" + INVID);
+          let params = new HttpParams();
+          params = params.set('appid', this.appid);
+          params = params.set('menuid', SMENU_ID);
+          params = params.set('pkid', INVID);
+          params = params.set('mode', 'EDIT');
+          params = params.set('mbl_pkid', MBLID);
+          params = params.set('mbl_refno', REFNO);
+          params = params.set('mbl_type', sType);
+          params = params.set('inv_arap', '');
+          params = params.set('arrival_notice', '');
+          params = params.set('origin', INVOKETYPE);
+          let url = 'Silver.USAccounts.Trans/InvoiceEditPage?' + params.toString();
+          window.open(url, '_balnk');
         }
         else
           alert("Insufficient Rights");
-
       }
       else if (INVOKETYPE == "REFNO") {
+        let url = '';
+        let menuid = '';
         if (sType == "AE") {
-          SMENU_ID = this.MENU_AE_MASTER;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              type: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.AirExport.Trans/AirExpMasterEditPage', JSON.stringify(prm));
-            // InvokePage("Air Export Master", "Silver.AirExport.Trans.xap", "Silver.AirExport.Trans", "AirExpMasterPage", SMENU_ID + "~" + MBLID);
-          }
-          else
-            alert("Insufficient Rights");
+          menuid = this.MENU_AE_MASTER;
+          url = 'Silver.AirExport.Trans/AirExpMasterEditPage';
         }
         else if (sType == "AI") {
-          SMENU_ID = this.MENU_AI_MASTER;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              type: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.AirImport.Trans/AirImpMasterEditPage', JSON.stringify(prm));
-            // InvokePage("Air Import Master", "Silver.AirImport.Trans.xap", "Silver.AirImport.Trans", "AirImpMasterPage", SMENU_ID + "~" + MBLID);
-          }
-          else
-            alert("Insufficient Rights");
+          menuid = this.MENU_AI_MASTER;
+          url = 'Silver.AirImport.Trans/AirImpMasterEditPage';
         }
         else if (sType == "OE") {
-          SMENU_ID = this.MENU_SE_MASTER;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              type: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.SeaExport.Trans/SeaExpMasterEditPage', JSON.stringify(prm));
-            // InvokePage("Ocean Export Master", "Silver.SeaExport.Trans.xap", "Silver.SeaExport.Trans", "SeaExpMasterPage", SMENU_ID + "~" + MBLID);
-          }
-          else
-            alert("Insufficient Rights");
+          menuid = this.MENU_SE_MASTER;
+          url = 'Silver.SeaExport.Trans/SeaExpMasterEditPage';
         }
         else if (sType == "OI") {
-          SMENU_ID = this.MENU_SI_MASTER;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              type: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.SeaImport/SeaImpMasterEditPage', JSON.stringify(prm));
-            // InvokePage("Ocean Import Master", "Silver.SeaImport.xap", "Silver.SeaImport", "SeaImpMasterPage", SMENU_ID + "~" + MBLID);
-          }
-          else
-            alert("Insufficient Rights");
+          menuid = this.MENU_SI_MASTER;
+          url = 'Silver.SeaImport/SeaImpMasterEditPage';
         }
         else if (sType == "OT") {
-          SMENU_ID = this.MENU_OT_OPERATION;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              type: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.Other.Trans/OthGeneralEditPage', JSON.stringify(prm));
-            //InvokePage("Other Operations", "Silver.Other.Trans.xap", "Silver.Other.Trans", "GeneralPage", SMENU_ID + "~" + MBLID + "~OTHERS");
-          }
-          else
-            alert("Insufficient Rights");
+          menuid = this.MENU_OT_OPERATION;
+          url = 'Silver.Other.Trans/OthGeneralEditPage'
         }
         else if (sType == "EX") {
-          SMENU_ID = this.MENU_EX_OPERATION;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              type: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.Other.Trans/OthGeneralEditPage', JSON.stringify(prm));
-            // InvokePage("Extra Operations", "Silver.Other.Trans.xap", "Silver.Other.Trans", "GeneralPage", SMENU_ID + "~" + MBLID + "~EXTRA");
-          }
-          else
-            alert("Insufficient Rights");
+          menuid = this.MENU_EX_OPERATION;
+          menuid = 'Silver.Other.Trans/OthGeneralEditPage';
         }
         else if (sType == "GE") {
-          SMENU_ID = this.MENU_GENERAL_EXPENSE;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              exptype: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.Other.Trans/OthGeneralExpenseEditPage', JSON.stringify(prm));
-            //InvokePage("Other Operations", "Silver.Other.Trans.xap", "Silver.Other.Trans", "GeneralExpensePage", SMENU_ID + "~" + MBLID + "~GE");
-          }
-          else
-            alert("Insufficient Rights");
+          menuid = this.MENU_GENERAL_EXPENSE;
+          url = 'Silver.Other.Trans/OthGeneralExpenseEditPage';
         }
         else if (sType == "CM") {
-          SMENU_ID = this.MENU_1099_EXPENSE;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              exptype: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.Other.Trans/OthGeneralExpenseEditPage', JSON.stringify(prm));
-            // InvokePage("Other Operations", "Silver.Other.Trans.xap", "Silver.Other.Trans", "GeneralExpensePage", SMENU_ID + "~" + MBLID + "~CM");
-          }
-          else
-            alert("Insufficient Rights");
+          menuid = this.MENU_1099_EXPENSE;
+          url = 'Silver.Other.Trans/OthGeneralExpenseEditPage';
         }
         else if (sType == "PR") {
-          SMENU_ID = this.MENU_PAYROLL_EXPENSE;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              exptype: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.Other.Trans/OthGeneralExpenseEditPage', JSON.stringify(prm));
-            // InvokePage("Other Operations", "Silver.Other.Trans.xap", "Silver.Other.Trans", "GeneralExpensePage", SMENU_ID + "~" + MBLID + "~PR");
-          }
-          else
-            alert("Insufficient Rights");
+          menuid = this.MENU_PAYROLL_EXPENSE;
+          url = 'Silver.Other.Trans/OthGeneralExpenseEditPage';
         }
         else if (sType == "FA") {
-          SMENU_ID = this.MENU_FILE_ADJUSTMENT;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              exptype: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.Other.Trans/OthGeneralExpenseEditPage', JSON.stringify(prm));
-            // InvokePage("Other Operations", "Silver.Other.Trans.xap", "Silver.Other.Trans", "GeneralExpensePage", SMENU_ID + "~" + MBLID + "~FA");
-          }
-          else
-            alert("Insufficient Rights");
+          menuid = this.MENU_FILE_ADJUSTMENT;
+          url = 'Silver.Other.Trans/OthGeneralExpenseEditPage';
         }
         else if (sType == "PS") {
-          SMENU_ID = this.MENU_INTERNAL_PAYMENT_SETTLEMENT;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              exptype: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.Other.Trans/OthGeneralExpenseEditPage', JSON.stringify(prm));
-            // InvokePage("Other Operations", "Silver.Other.Trans.xap", "Silver.Other.Trans", "GeneralExpensePage", SMENU_ID + "~" + MBLID + "~PS");
-          }
-          else
-            alert("Insufficient Rights");
+          menuid = this.MENU_INTERNAL_PAYMENT_SETTLEMENT;
+          url = 'Silver.Other.Trans/OthGeneralExpenseEditPage';
         }
         else {
           alert("Cannot Load Details");
+          return;
+        }
+
+        if (this.canEdit(menuid) || this.canView(menuid)) {
+          let params = new HttpParams();
+          params = params.set('appid', this.appid);
+          params = params.set('menuid', menuid);
+          params = params.set('mode', 'EDIT');
+          params = params.set('pkid', MBLID);
+          params = params.set('exptype', sType);
+          params = params.set('origin', INVOKETYPE);
+          url += '?' + params.toString();
+          window.open(url, '_balnk');
+        }
+        else {
+          alert("Insufficient Rights");
         }
       }
       else if (INVOKETYPE == "HOUSE") {
+        let prm = {
+          url  : '',
+          menuid: SMENU_ID,
+          mode: 'EDIT',
+          pkid: HBLID,
+          parentid: MBLID,
+          type: sType,
+          refno: '',
+          origin: INVOKETYPE
+        };
         if (HBLID.trim() == "")
           alert("Cannot Load Details");
         else if (sType == "AE") {
-          SMENU_ID = this.MENU_AE_HOUSE;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: HBLID,
-              parentid: MBLID,
-              type: sType,
-              refno: '',
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.AirExport.Trans/AirExpHouseEditPage', JSON.stringify(prm));
-            //   InvokePage("Air Export House", "Silver.AirExport.Trans.xap", "Silver.AirExport.Trans", "AirExpHousePage", SMENU_ID + "~" + MBLID + "~" + REFNO + "~SEARCH~" + HBLID);
-          }
-          else
-            alert("Insufficient Rights");
+          prm.menuid = this.MENU_AE_HOUSE;
+          prm.url = 'Silver.AirExport.Trans/AirExpHouseEditPage';
         }
         else if (sType == "AI") {
-          SMENU_ID = this.MENU_AI_HOUSE;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: HBLID,
-              parentid: MBLID,
-              type: sType,
-              refno: REFNO,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.AirImport.Trans/AirImpHouseEditPage', JSON.stringify(prm));
-            // InvokePage("Air Import House", "Silver.AirImport.Trans.xap", "Silver.AirImport.Trans", "AirImpHousePage", SMENU_ID + "~" + MBLID + "~" + REFNO + "~SEARCH~" + HBLID);
-          }
-          else
-            alert("Insufficient Rights");
+          prm.menuid = this.MENU_AI_HOUSE;
+          prm.url = 'Silver.AirImport.Trans/AirImpHouseEditPage';
+          prm.refno = REFNO;
         }
         else if (sType == "OE") {
-          SMENU_ID = this.MENU_SE_HOUSE;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: HBLID,
-              parentid: MBLID,
-              type: sType,
-              refno: REFNO,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.SeaExport.Trans/SeaExpHouseEditPage', JSON.stringify(prm));
-            //InvokePage("Sea Export House", "Silver.SeaExport.Trans.xap", "Silver.SeaExport.Trans", "SeaExpHousePage", SMENU_ID + "~" + MBLID + "~" + REFNO + "~SEARCH~" + HBLID);
-          }
-          else
-            alert("Insufficient Rights");
+          prm.menuid = this.MENU_SE_HOUSE;
+          prm.url = 'Silver.SeaExport.Trans/SeaExpHouseEditPage';
+          prm.refno = REFNO;
         }
         else if (sType == "OI") {
-          SMENU_ID = this.MENU_SI_HOUSE;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: HBLID,
-              parentid: MBLID,
-              type: sType,
-              refno: REFNO,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.SeaImport/SeaImpHouseEditPage', JSON.stringify(prm));
-            //  InvokePage("Sea Import House", "Silver.SeaImport.xap", "Silver.SeaImport", "SeaImpHousePage", SMENU_ID + "~" + MBLID + "~" + REFNO + "~SEARCH~" + HBLID);
-          }
-          else
-            alert("Insufficient Rights");
+         prm.menuid = this.MENU_SI_HOUSE;
+          prm.url = 'Silver.SeaImport/SeaImpHouseEditPage';
+          prm.refno = REFNO;
         }
         else if (sType == "OT") {
-          SMENU_ID = this.MENU_OT_OPERATION;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              type: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.Other.Trans/OthGeneralEditPage', JSON.stringify(prm));
-            //   InvokePage("Other Operations", "Silver.Other.Trans.xap", "Silver.Other.Trans", "GeneralPage", SMENU_ID + "~" + MBLID + "~OTHERS");
-          }
-          else
-            alert("Insufficient Rights");
+          prm.menuid = this.MENU_OT_OPERATION;
+          prm.url = 'Silver.Other.Trans/OthGeneralEditPage';
+          prm.refno = '';
+          prm.pkid = MBLID;
+          prm.parentid = '';
         }
         else if (sType == "EX") {
-          SMENU_ID = this.MENU_EX_OPERATION;
-          if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-            let prm = {
-              menuid: SMENU_ID,
-              mode: 'EDIT',
-              pkid: MBLID,
-              type: sType,
-              origin: INVOKETYPE
-            };
-            this.Naviagete('Silver.Other.Trans/OthGeneralEditPage', JSON.stringify(prm));
-            //   InvokePage("Extra Operations", "Silver.Other.Trans.xap", "Silver.Other.Trans", "GeneralPage", SMENU_ID + "~" + MBLID + "~EXTRA");
-          }
-          else
-            alert("Insufficient Rights");
+          prm.menuid = this.MENU_EX_OPERATION;
+          prm.url = 'Silver.Other.Trans/OthGeneralEditPage';
+          prm.refno = '';
+          prm.pkid = MBLID;
+          prm.parentid = '';
         }
         else {
           alert("Cannot Load Details");
+          return;
         }
-      } else if (INVOKETYPE == "ARAP") {
+        if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
 
+        let params = new HttpParams();
+        params = params.set('appid', this.appid);
+        params = params.set('menuid', prm.menuid);
+        params = params.set('mode', 'EDIT');
+        params = params.set('pkid', prm.pkid );
+        params = params.set('parentid', prm.parentid);
+        params = params.set('type', sType);
+        params = params.set('refno', prm.refno);
+        params = params.set('origin', INVOKETYPE);
+        let url = prm.url + '?' + params.toString();
+        window.open(url, '_balnk');
+        }
+        else 
+        {
+          alert("Cannot Load Details");
+          return;
+        }
+      } 
+      else if (INVOKETYPE == "ARAP") {
         if (MBLID.trim() == "")
           alert("Cannot Load ARAP List");
         else if (sType == "OI")
@@ -2658,17 +2496,16 @@ public getValue(object: any, key: string[]) {
           alert("Cannot Load ARAP ");
           return;
         }
-
         if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
-          let prm = {
-            menuid: SMENU_ID,
-            mbl_pkid: MBLID,
-            mbl_refno: REFNO,
-            mbl_type: sType,
-            origin: INVOKETYPE
-          };
-          this.Naviagete('Silver.USAccounts.Trans/InvoicePage', JSON.stringify(prm));
-          //InvokePage("A/R & A/P", "Silver.USAccounts.Trans.xap", "Silver.USAccounts.Trans", "InvoicePage", SMENU_ID + "~" + MBLID + "~" + REFNO + "~" + sType + "~MASTER~" + MBLID);
+          let params = new HttpParams();
+          params = params.set('appid', this.appid);
+          params = params.set('menuid', SMENU_ID);
+          params = params.set('mbl_pkid', MBLID);
+          params = params.set('mbl_refno', REFNO);
+          params = params.set('mbl_type', sType);
+          params = params.set('origin', INVOKETYPE);
+          let url = 'Silver.USAccounts.Trans/InvoicePage?' + params.toString();
+          window.open(url, '_balnk');
         }
         else
           alert("Insufficient Rights");
