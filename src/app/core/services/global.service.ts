@@ -2399,7 +2399,7 @@ export class GlobalService {
       }
       else if (INVOKETYPE == "HOUSE") {
         let prm = {
-          url  : '',
+          url: '',
           menuid: SMENU_ID,
           mode: 'EDIT',
           pkid: HBLID,
@@ -2425,7 +2425,7 @@ export class GlobalService {
           prm.refno = REFNO;
         }
         else if (sType == "OI") {
-         prm.menuid = this.MENU_SI_HOUSE;
+          prm.menuid = this.MENU_SI_HOUSE;
           prm.url = 'Silver.SeaImport/SeaImpHouseEditPage';
           prm.refno = REFNO;
         }
@@ -2449,24 +2449,23 @@ export class GlobalService {
         }
         if (this.canEdit(SMENU_ID) || this.canView(SMENU_ID)) {
 
-        let params = new HttpParams();
-        params = params.set('appid', this.appid);
-        params = params.set('menuid', prm.menuid);
-        params = params.set('mode', 'EDIT');
-        params = params.set('pkid', prm.pkid );
-        params = params.set('parentid', prm.parentid);
-        params = params.set('type', sType);
-        params = params.set('refno', prm.refno);
-        params = params.set('origin', INVOKETYPE);
-        let url = prm.url + '?' + params.toString();
-        window.open(url, '_balnk');
+          let params = new HttpParams();
+          params = params.set('appid', this.appid);
+          params = params.set('menuid', prm.menuid);
+          params = params.set('mode', 'EDIT');
+          params = params.set('pkid', prm.pkid);
+          params = params.set('parentid', prm.parentid);
+          params = params.set('type', sType);
+          params = params.set('refno', prm.refno);
+          params = params.set('origin', INVOKETYPE);
+          let url = prm.url + '?' + params.toString();
+          window.open(url, '_balnk');
         }
-        else 
-        {
+        else {
           alert("Cannot Load Details");
           return;
         }
-      } 
+      }
       else if (INVOKETYPE == "ARAP") {
         if (MBLID.trim() == "")
           alert("Cannot Load ARAP List");
@@ -2516,10 +2515,19 @@ export class GlobalService {
     }
   }
 
-  public Link2Page(INVOKETYPE: string = "", MBLMODE: string = "", REFNO: string = "", MBLID: string = "", HBLID: string = "", INVID: string = "", FORMATTYPE: string = "") {
+  public Link2Page(INVOKETYPE: string = "", MBLMODE: string = "", REFNO: string = "", MBLID: string = "", HBLID: string = "", INVID: string = "", FORMATTYPE: string = "", BRANCHCODE: string = "", BRANCHNAME: string = "") {
     let sType: string = "";
     let SMENU_ID: string = "";
     try {
+
+      if (BRANCHCODE != "") {
+        if (BRANCHCODE != this.branch_code)
+          return null;
+      }
+      if (BRANCHNAME != "") {
+        if (BRANCHNAME != this.branch_name)
+          return null;
+      }
 
       MBLMODE = MBLMODE.replace("OCEAN", "SEA");
 
