@@ -2328,8 +2328,8 @@ public getValue(object: any, key: string[]) {
             origin: INVOKETYPE
           };
           this.Naviagete('Silver.USAccounts.Trans/InvoiceEditPage', JSON.stringify(prm));
-          let p ='Silver.USAccounts.Trans/InvoiceEditPage?parameter='+ JSON.stringify(prm)  +"" ;
-          this.router.navigate([]).then( result =>{  window.open(p),  '_balnk'  });
+          //let p ='Silver.USAccounts.Trans/InvoiceEditPage?parameter='+ JSON.stringify(prm)  +"" ;
+          //this.router.navigate([]).then( result =>{  window.open(p),  '_balnk'  });
           // InvokePage("A/R & A/P", "Silver.USAccounts.Trans.xap", "Silver.USAccounts.Trans", "InvoicePage", SMENU_ID + "~" + MBLID + "~" + REFNO + "~" + sType + "~SEARCH~" + INVID);
         }
         else
