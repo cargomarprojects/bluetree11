@@ -89,7 +89,7 @@ export class AcctmEditComponent implements OnInit {
         this.record.acc_name = '';
         this.record.acc_short_name = '';
 
-        this.record.acc_branch = '';
+        this.record.acc_branch = 'ALL';
 
         this.record.acc_type = 'OTHERS';
 
@@ -184,6 +184,13 @@ export class AcctmEditComponent implements OnInit {
         if (this.gs.isBlank(this.record.acc_type)) {
             bRet = false;
             this.errorMessage = "Type Cannot be blank";
+            alert(this.errorMessage);
+            return bRet;
+        }
+
+        if (this.gs.isBlank(this.record.acc_branch)) {
+            bRet = false;
+            this.errorMessage = "Branch Invalid";
             alert(this.errorMessage);
             return bRet;
         }
