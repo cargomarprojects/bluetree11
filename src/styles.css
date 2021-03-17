@@ -654,20 +654,20 @@ select option:hover {
 }
   
   
+.fixed_header thead tr{
+    display:block;
+}
+
+.fixed_header thead tr th td {
+    width:auto;    
+}
+
 .fixed_header tbody{
     display:block;
     overflow:auto;
     height:200px;
     width:100%;
 }
-.fixed_header thead tr{
-    display:block;
-}
-  
-.fixed_header thead tr th td {
-    width:auto;
-}
-
 
 
 input[type=number]::-webkit-inner-spin-button, 
