@@ -54,12 +54,11 @@ export class AppComponent {
     console.log('Application Started');
     console.log('Production ' ,environment.production);
 
+
     const appid = this.gs.getURLParam('appid');
 
     this.gs.appid = appid;
     console.log('appid ', appid);
-
-    
 
     if (this.gs.isBlank(appid)) {
       this.router.navigate(['login'], { replaceUrl: true }); 
@@ -75,6 +74,7 @@ export class AppComponent {
       return;
     }
     console.log('ngOnInit App completed');
+
   }
  
 
