@@ -105,7 +105,7 @@
                                     <tr  *ngFor="let rec of records; let i = index"
                                         [class.active]="i == selectedRowIndex" (click)="SetRowIndex(i)">
                                         <!-- <td tabindex="0" class='hlink' (click)="EditRow(rec)"  (keydown)="tableKeydown($event,rec)">{{rec.rec_created_by}} </td> -->
-                                        <td class='hlink' (click)="EditRow(rec)" >{{rec.rec_created_by}} </td>
+                                        <td class='hlink2' (click)="EditRow(rec)" >{{rec.rec_created_by}} </td>
                                         <td class="p-0">{{rec.cf_assigned_code}}</td>
                                         <td class="p-0">{{rec.cf_followup_date | date : gs.FRONTEND_DATEFORMAT}}
                                         </td>

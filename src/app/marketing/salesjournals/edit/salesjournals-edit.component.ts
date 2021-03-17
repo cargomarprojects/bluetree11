@@ -296,6 +296,18 @@ export class SalesJournalsEditComponent implements OnInit {
                 this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
                 break;
             }
+            case 'FOLLOWUP': {
+                let prm = {
+                    menuid: this.menuid,
+                    master_id: this.customer_id,
+                    master_refno: this.customer_name,
+                    master_refdate: this.custrecord.rec_created_date,
+                    is_locked: false,
+                    origin: 'sales-journal-page'
+                };
+                this.gs.Naviagete('Silver.BusinessModule/FollowUpPage', JSON.stringify(prm));
+                break;
+            }
         }
     }
     callbackevent(event: any) {

@@ -17,7 +17,7 @@ import { DateComponent } from '../../shared/date/date.component';
 export class FollowupComponent implements OnInit {
 
   @ViewChild('cmb_note') cmb_note_field: ElementRef;
-  @ViewChild('_cf_followup_date') cf_followup_date_field: DateComponent; 
+  @ViewChild('_cf_followup_date') cf_followup_date_field: DateComponent;
   records: Table_Cargo_Followup[] = [];
   record: Table_Cargo_Followup = <Table_Cargo_Followup>{};
   // 15-07-2019 Created By Ajith  
@@ -38,6 +38,8 @@ export class FollowupComponent implements OnInit {
   FollowupList: any[] = [];
   UserList: any[] = [];
   UsrDeleteId = '';
+  origin: string = '';
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -53,6 +55,8 @@ export class FollowupComponent implements OnInit {
     this.cf_refno = options.master_refno;
     this.cf_refdate = options.master_refdate;
     this.is_locked = options.is_locked;
+    this.origin = options.origin;
+
     this.initPage();
     this.actionHandler();
   }
@@ -294,17 +298,22 @@ export class FollowupComponent implements OnInit {
     let SearchData = {
       table: '',
       pkid: '',
+      source: ''
     };
 
     if (controlname == "loadcombo") {
       SearchData.table = 'LOAD_COMBO_FOLLOWUP_PAGE';
       SearchData.pkid = '';
+      if (this.origin == "sales-journal-page")
+        SearchData.source = 'SALES JOURNALS';
+      else
+        SearchData.source = '';
     }
     this.gs.SearchRecord(SearchData)
       .subscribe(response => {
         this.FollowupList = response.followuplist;
         this.UserList = response.userlist;
-       // this.cmb_note_field.nativeElement.focus();
+        // this.cmb_note_field.nativeElement.focus();
         this.cf_followup_date_field.Focus();
       },
         error => {
@@ -313,10 +322,10 @@ export class FollowupComponent implements OnInit {
         });
   }
 
-  tableKeydown(event: KeyboardEvent,_rec:Table_Cargo_Followup) {
-      if (event.key === 'Enter') {
-       this.EditRow(_rec);
-      }  
+  tableKeydown(event: KeyboardEvent, _rec: Table_Cargo_Followup) {
+    if (event.key === 'Enter') {
+      this.EditRow(_rec);
+    }
   }
 }
 
