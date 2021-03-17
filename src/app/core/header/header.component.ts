@@ -73,7 +73,6 @@ export class HeaderComponent {
         this.loginservice.Logout();
         this.gs.MenuList = null;
         this.gs.Modules = null;
-        this.gs.RemoveLocalStorage();
         this.router.navigate(['home'], { replaceUrl: true });
     }
 

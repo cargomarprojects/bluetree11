@@ -31,8 +31,8 @@ export class AppComponent {
 
     let itot  =  +this.gs.getLocalStorageSize() ;
     console.log('LocalStorage Size ', itot);
-    if ( itot > 9)
-      localStorage.clear();
+
+    this.gs.RemoveLocalStorage();
     
     this.sub = this.router.events.subscribe((event) => {
       if (this.gs.IsAuthenticated) {
@@ -55,14 +55,19 @@ export class AppComponent {
     console.log('Production ' ,environment.production);
 
     const appid = this.gs.getURLParam('appid');
+
+    this.gs.appid = appid;
     console.log('appid ', appid);
+
+    
+
     if (this.gs.isBlank(appid)) {
       this.router.navigate(['login'], { replaceUrl: true }); 
       return;
     }
     
-    if (localStorage.getItem(appid)) {
-      this.gs.ReadLocalStorage(appid);
+    if (localStorage.getItem(this.gs.getlocalStorageFileName())) {
+      this.gs.ReadLocalStorage(this.gs.getlocalStorageFileName());
       this.gs.reload_url =  window.location.pathname + window.location.search;
       this.router.navigate(['/reload']);
     } else {

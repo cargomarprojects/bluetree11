@@ -39,7 +39,7 @@ export class PaymentEditComponent implements OnInit {
     Foregroundcolor: string;
 
     custType = 'MASTER';
-    
+
 
     title: string;
     isAdmin: boolean;
@@ -179,8 +179,7 @@ export class PaymentEditComponent implements OnInit {
 
     FindInvoice() {
 
-        if ( this.gs.isBlank( this.cust_id) )
-        {
+        if (this.gs.isBlank(this.cust_id)) {
             alert("No Customer/Parent Selected");
             return;
         }
@@ -264,12 +263,14 @@ export class PaymentEditComponent implements OnInit {
         nAR = 0;
         nAP = 0;
         nDiff = 0;
-        this.pendingList.forEach(mRec => {
-            nAR += mRec.inv_ar_total;
-            nAP += mRec.inv_ap_total;
-            nAR = this.gs.roundNumber(nAR, 2);
-            nAP = this.gs.roundNumber(nAP, 2);
-        });
+        if (this.pendingList) {
+            this.pendingList.forEach(mRec => {
+                nAR += mRec.inv_ar_total;
+                nAP += mRec.inv_ap_total;
+                nAR = this.gs.roundNumber(nAR, 2);
+                nAP = this.gs.roundNumber(nAP, 2);
+            });
+        }
         nDiff = nAR - nAP;
         nDiff = this.gs.roundNumber(nDiff, 2);
         this.txt_Bal_AR = nAR;
@@ -693,22 +694,24 @@ export class PaymentEditComponent implements OnInit {
             nDiff = 0;
         }
 
-        this.pendingList.forEach(mRec => {
-            if (mRec.inv_flag == "Y") {
-                iCount++;
-                if (mRec.inv_ar_total > 0) {
-                    nAR += mRec.inv_pay_amt;
-                    nAR = this.gs.roundNumber(nAR, 2);
+        if (this.pendingList) {
+            this.pendingList.forEach(mRec => {
+                if (mRec.inv_flag == "Y") {
+                    iCount++;
+                    if (mRec.inv_ar_total > 0) {
+                        nAR += mRec.inv_pay_amt;
+                        nAR = this.gs.roundNumber(nAR, 2);
+                    }
+                    else {
+                        nAP += mRec.inv_pay_amt;
+                        nAP = this.gs.roundNumber(nAP, 2);
+                    }
                 }
                 else {
-                    nAP += mRec.inv_pay_amt;
-                    nAP = this.gs.roundNumber(nAP, 2);
+                    mRec.inv_pay_amt = null;
                 }
-            }
-            else {
-                mRec.inv_pay_amt = null;
-            }
-        })
+            });
+        }
 
         nDiff = nAR - nAP;
 

@@ -16,7 +16,7 @@
 
     <div class="page-body">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-5">
 
                 <div class="form-group row">
                     <div class="col-3 pl-0">
@@ -86,7 +86,7 @@
 
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
 
 
                 <div class="form-group row">
@@ -120,18 +120,12 @@
                     <label class="col-3 form-control form-control-sm"></label>
                     <label class="col-3 form-control form-control-sm">{{LBL_STATUS}}</label>
                 </div>
-
-
-
-
             </div>
-
         </div>
     </div>
 
-
-    <div class="page-body table-responsive ">
-        <table class="table table-hover table-sm fixed_header table-bordered">
+    <div class="page-body table-responsive">
+        <table class="table table-hover table-sm table-bordered fixed_header">
             <thead class="page-body-thead">
                 <tr>
                     <th>INV-NO</th>
@@ -139,12 +133,11 @@
                     <th>REFNO</th>
                     <th>ARAP</th>
                     <th>CUST-REFNO</th>
-                    <th>INV-AMT</th>
-                    <th>A/R</th>
-                    <th>A/P</th>
-                    <th>SELECT</th>
-                    <th>PAY-AMT</th>
-
+                    <th style="text-align:right">INV-AMT</th>
+                    <th style="text-align:right">A/R</th>
+                    <th style="text-align:right">A/P</th>
+                    <th style="text-align:center">SELECT</th>
+                    <th style="text-align:right">PAY-AMT</th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
@@ -154,16 +147,16 @@
                     <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mbl_refno}} </td>
                     <td class='hlink2' (click)="ArApList(rec,arapModalContent)">LIST</td>
                     <td>{{rec.inv_refno}} </td>
-                    <td>{{rec.inv_total | number : '1.2-2'}} </td>
-                    <td>{{rec.inv_ar_total | number : '1.2-2'}} </td>
-                    <td>{{rec.inv_ap_total | number : '1.2-2'}} </td>
-                    <td>
+                    <td style="text-align:right">{{rec.inv_total | number : '1.2-2'}} </td>
+                    <td style="text-align:right">{{rec.inv_ar_total | number : '1.2-2'}} </td>
+                    <td style="text-align:right">{{rec.inv_ap_total | number : '1.2-2'}} </td>
+                    <td style="text-align:center">
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" (click)="swapSelection(rec)" #chkbox
                                 [(ngModel)]="rec.inv_flag2">
                         </div>
                     </td>
-                    <td>{{rec.inv_pay_amt | number : '1.2-2'}} </td>
+                    <td style="text-align:right">{{rec.inv_pay_amt | number : '1.2-2'}} </td>
 
                 </tr>
             </tbody>

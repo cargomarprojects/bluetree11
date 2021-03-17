@@ -1492,9 +1492,28 @@ export class GlobalService {
     //bts_settings.menulist = this.MenuList;
     bts_settings.companylist = this.CompanyList
     bts_settings.yearlist = this.YearList;
-    localStorage.setItem(this.appid, JSON.stringify(bts_settings));
+
+    localStorage.setItem(this.getlocalStorageFileName() , JSON.stringify(bts_settings));
+    console.log('Save Local Storage : ' , this.defaultValues.today);
 
   }
+
+  getlocalStorageFileName(){
+    return this.defaultValues.today +"-"+ this.appid;
+  
+  }
+
+
+  RemoveLocalStorage() {
+    for (var i = 0; i < localStorage.length; i++){
+       if (!localStorage.key(i).startsWith( this.defaultValues.today)){
+          localStorage.removeItem(localStorage.key(i));
+          console.log('removed local storage ',localStorage.key(i) );
+       }
+     }
+  }
+  
+
 
   ReadLocalStorage(_appid: string) {
 
@@ -1550,10 +1569,7 @@ export class GlobalService {
   }
 
 
-  RemoveLocalStorage() {
-    if (localStorage.getItem(this.appid))
-      localStorage.removeItem(this.appid);
-  }
+  
 
 
 
@@ -1978,6 +1994,9 @@ export class GlobalService {
     });
   }
 
+  
+
+
   public InitdefaultValues() {
 
     var dt = new Date();
@@ -1993,25 +2012,8 @@ export class GlobalService {
     this.defaultValues.lastmonthdate = this.getNewdate(30);//get today -30 days
     this.defaultValues.print_cheque_only_after_ho_approved = 'N';
 
-    /*
-    this.globalData.cost_sea_fromdate = this.defaultValues.monthbegindate;
-    this.globalData.cost_sea_todate = this.defaultValues.today;
-    this.globalData.cost_air_fromdate = this.defaultValues.monthbegindate;
-    this.globalData.cost_air_todate = this.defaultValues.today;
-    this.globalData.cost_drcr_fromdate = this.defaultValues.monthbegindate;
-    this.globalData.cost_drcr_todate = this.defaultValues.today;
-    this.globalData.cost_agentinvoice_fromdate = this.defaultValues.monthbegindate;
-    this.globalData.cost_agentinvoice_todate = this.defaultValues.today;
-
-    this.globalData.job_fromdate = this.defaultValues.lastmonthdate;
-    this.globalData.job_todate = this.defaultValues.today;
-    this.globalData.hbl_fromdate = this.defaultValues.lastmonthdate;
-    this.globalData.hbl_todate = this.defaultValues.today;
-    this.globalData.mbl_fromdate = this.defaultValues.lastmonthdate;
-    this.globalData.mbl_todate = this.defaultValues.today;
-    this.globalData.ledger_fromdate = this.defaultValues.lastmonthdate;
-    this.globalData.ledger_todate = this.defaultValues.today;
-    */
+    console.log( 'To Date : ',this.defaultValues.today);
+   
   }
 
   public getNewdate(_days: number) {

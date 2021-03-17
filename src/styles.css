@@ -7,8 +7,8 @@
 html {
     font-family: 'roboto' ;
     font-size : 14px;    
-    margin: 0px;
-    padding-top :36px;
+    margin: 2px;
+    padding-top :37px;
     background-color: var(--custom-bg-color);
 }
 
