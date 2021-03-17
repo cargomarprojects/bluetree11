@@ -1493,26 +1493,29 @@ export class GlobalService {
     bts_settings.companylist = this.CompanyList
     bts_settings.yearlist = this.YearList;
 
-    localStorage.setItem(this.getlocalStorageFileName() , JSON.stringify(bts_settings));
-    console.log('Save Local Storage : ' , this.defaultValues.today);
+    localStorage.setItem(this.getlocalStorageFileName(), JSON.stringify(bts_settings));
+    console.log('Save Local Storage : ', this.defaultValues.today);
 
   }
 
-  getlocalStorageFileName(){
-    return this.defaultValues.today +"-"+ this.appid;
-  
+  getlocalStorageFileName() {
+    return this.defaultValues.today + "-" + this.appid;
+
   }
 
 
   RemoveLocalStorage() {
-    for (var i = 0; i < localStorage.length; i++){
-       if (!localStorage.key(i).startsWith( this.defaultValues.today)){
-          localStorage.removeItem(localStorage.key(i));
-          console.log('removed local storage ',localStorage.key(i) );
-       }
-     }
+    console.log('removing local storage : ', this.defaultValues.today);
+    for (var key in localStorage) {
+      if (localStorage.getItem(key)) {
+        if (!key.startsWith(this.defaultValues.today)) {
+          localStorage.removeItem(key);
+          console.log('removed local storage ', key);
+        }
+      }
+    }
   }
-  
+
 
 
   ReadLocalStorage(_appid: string) {
@@ -1569,7 +1572,7 @@ export class GlobalService {
   }
 
 
-  
+
 
 
 
@@ -1994,7 +1997,7 @@ export class GlobalService {
     });
   }
 
-  
+
 
 
   public InitdefaultValues() {
@@ -2012,8 +2015,8 @@ export class GlobalService {
     this.defaultValues.lastmonthdate = this.getNewdate(30);//get today -30 days
     this.defaultValues.print_cheque_only_after_ho_approved = 'N';
 
-    console.log( 'To Date : ',this.defaultValues.today);
-   
+    console.log('To Date : ', this.defaultValues.today);
+
   }
 
   public getNewdate(_days: number) {
