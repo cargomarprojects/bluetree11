@@ -143,10 +143,10 @@
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of MainList">
         <tr>
-          <td class='hlink' (click)="editmaster(rec)">{{rec.inv_mbl_refno}}</td>
-          <td class='hlink' (click)="edithouse(rec)">{{rec.inv_houseno}}</td>
+          <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mbl_refno}}</td>
+          <td class='hlink2' (click)="edithouse(rec)">{{rec.inv_houseno}}</td>
           <td>{{rec.inv_name}}</td>
-          <td class='hlink' (click)="editinvoice(rec)">{{rec.inv_no}}</td>
+          <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td>
           <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.inv_payment_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.inv_amt}}</td>

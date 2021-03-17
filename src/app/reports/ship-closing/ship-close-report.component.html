@@ -85,7 +85,7 @@
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
           <tr [style.color]="rec.sc_mbl_lock=='L'?'green':'blue'" >
-            <td class='hlink' (click)="editmaster(rec)">{{rec.sc_mbl_refno}}</td>
+            <td class='hlink2' (click)="editmaster(rec)">{{rec.sc_mbl_refno}}</td>
             <td>{{rec.sc_mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
             <td>{{rec.sc_mbl_lock}}</td>
             <td *ngIf="mode=='OCEAN IMPORT'">{{rec.sc_bl_status}}</td>

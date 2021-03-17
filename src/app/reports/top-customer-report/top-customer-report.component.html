@@ -162,9 +162,9 @@
                 <tbody class="page-body-tbody" *ngFor="let rec of MainList">
                     <tr [style.color]="rec.mbl_customer_name=='TOTAL'?'Red':'Black'"
                         [style.font-weight]="rec.mbl_customer_name=='TOTAL'?'bold':'normal'">
-                        <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+                        <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
                         <td *ngIf="!(report_category == 'OVERSEAS AGENT' || report_category == 'POL' || report_category == 'POD')"
-                            class='hlink' (click)="edithouse(rec)">
+                            class='hlink2' (click)="edithouse(rec)">
                             {{rec.hbl_houseno}}</td>
                         <td>{{rec.mbl_customer_name}}</td>
                         <td align='right'>{{rec.mbl_customer_amt | number : '1.2-2'}}</td>

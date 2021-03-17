@@ -96,17 +96,17 @@
         <tr>
           <td>{{rec.rec_created_by}}</td>
           <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td class='hlink' (click)="editmaster(rec)">{{rec.cp_master_refno}}</td>
+          <td class='hlink2' (click)="editmaster(rec)">{{rec.cp_master_refno}}</td>
           <td>{{rec.cp_paytype_needed}}</td>
           <td>{{rec.cp_cust_name}}</td>
-          <td class='hlink' (click)="editinvoice(rec)">{{rec.cp_inv_no}}</td>
+          <td class='hlink2' (click)="editinvoice(rec)">{{rec.cp_inv_no}}</td>
           <td>{{rec.cp_payment_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td class='hlink' (click)="UpdatePayStatus(rec,paymodal)">{{rec.cp_pay_status}}</td>
+          <td class='hlink2' (click)="UpdatePayStatus(rec,paymodal)">{{rec.cp_pay_status}}</td>
           <td>{{rec.cp_spl_notes}}</td>
-          <td class='hlink' (click)="AttachedOhblFiles(rec,payuploadmodal,payattachmodal)">ATTACHMENTS</td>
-          <td class='hlink' (click)="AttachedCheckFiles(rec,payuploadmodal,payattachmodal)">CHECK COPY</td>
-          <td class='hlink' (click)="editapproval(rec)">APPROVAL</td>
-          <td class='hlink' (click)="ArApList(rec,payarapmodal)">ARAP</td>
+          <td class='hlink2' (click)="AttachedOhblFiles(rec,payuploadmodal,payattachmodal)">ATTACHMENTS</td>
+          <td class='hlink2' (click)="AttachedCheckFiles(rec,payuploadmodal,payattachmodal)">CHECK COPY</td>
+          <td class='hlink2' (click)="editapproval(rec)">APPROVAL</td>
+          <td class='hlink2' (click)="ArApList(rec,payarapmodal)">ARAP</td>
         </tr>
       </tbody>
     </table>
