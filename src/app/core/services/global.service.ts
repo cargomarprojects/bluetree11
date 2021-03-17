@@ -1505,7 +1505,7 @@ export class GlobalService {
 
 
   RemoveLocalStorage() {
-    console.log('removing local storage : ', this.defaultValues.today);
+    console.log('removing local storage Started : ', this.defaultValues.today);
     for (var key in localStorage) {
       if (localStorage.getItem(key)) {
         if (!key.startsWith(this.defaultValues.today)) {
@@ -1514,6 +1514,7 @@ export class GlobalService {
         }
       }
     }
+    console.log('removing local storage Completed : ', this.defaultValues.today);
   }
 
 
