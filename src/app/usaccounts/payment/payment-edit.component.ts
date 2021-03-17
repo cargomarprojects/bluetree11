@@ -38,8 +38,8 @@ export class PaymentEditComponent implements OnInit {
     errorMessage: string;
     Foregroundcolor: string;
 
-    custType = 'CUSTOMER';
-    custLovType = 'MASTER';
+    custType = 'MASTER';
+    
 
     title: string;
     isAdmin: boolean;
@@ -198,7 +198,7 @@ export class PaymentEditComponent implements OnInit {
         if (this.cust_id != '') {
             this.Customer_ID = this.cust_id;
             this.str_id = this.cust_id;
-            this.Search_Mode = (this.custType == "CUSTOMER") ? "CUSTOMER" : "GROUP";
+            this.Search_Mode = (this.custType == "MASTER") ? "CUSTOMER" : "GROUP";
         }
         else if (this.refno != '') {
             this.str_id = this.refno;
@@ -627,10 +627,6 @@ export class PaymentEditComponent implements OnInit {
 
     onChange(field: string) {
         if (field == "CUSTOMER") {
-            if (this.custType == 'CUSTOMER')
-                this.custLovType = 'MASTER';
-            if (this.custType == 'PARENT')
-                this.custLovType = 'OVERSEAAGENT';
 
             this.cust_id = '';
             this.cust_code = '';

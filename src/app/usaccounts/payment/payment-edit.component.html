@@ -16,70 +16,77 @@
 
     <div class="page-body">
         <div class="row">
-            <div class="col-md-6 px-0 mx-0">
+            <div class="col-md-4">
 
                 <div class="form-group row">
-                    <!-- <label class="col-2 col-form-label col-form-label-sm">CUSTOMER</label> -->
-                    <div class="col-2">
-                    <select class="form-control form-control-sm" [(ngModel)]="custType" (change)="onChange('CUSTOMER')">
-                        <option [value]="'CUSTOMER'">CUSTOMER</option>
-                        <option [value]="'PARENT'">PARENT</option>
-                      </select>
+                    <div class="col-3 pl-0">
+                        <select class="form-control form-control-sm pl-0" [(ngModel)]="custType"
+                            (change)="onChange('CUSTOMER')">
+                            <option [value]="'MASTER'">CUSTOMER</option>
+                            <option [value]="'OVERSEAAGENT'">PARENT</option>
+                        </select>
                     </div>
 
-                    <div class="col-5">
-                        <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="custLovType" [displaycolumn]="'CODE'"
+                    <div class="col-9">
+                        <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="custType" [displaycolumn]="'CODE'"
                             [displaydata]="cust_code" (ValueChanged)="LovSelected($event)">
                         </app-autocomplete2>
                     </div>
-                    <label class="col-5 col-form-label col-form-label-sm">{{cust_name}}</label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">NAME</label>
+                    <div class="col-9">
+                        <input class="form-control form-control-sm" type="text"  disabled
+                            [(ngModel)]="cust_name" />
+                    </div>
+
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">REF#</label>
-                    <div class="col-5">
+                    <label class="col-3 col-form-label col-form-label-sm">REF#</label>
+                    <div class="col-9">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('refno')"
                             [(ngModel)]="refno" maxlength="100" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">INVOICE#</label>
-                    <div class="col-5">
+                    <label class="col-3 col-form-label col-form-label-sm">INVOICE#</label>
+                    <div class="col-9">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('invno')"
                             [(ngModel)]="invno" maxlength="100" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">CUST REF#</label>
-                    <div class="col-5">
+                    <label class="col-3 col-form-label col-form-label-sm">CUST REF#</label>
+                    <div class="col-9">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('custrefno')"
                             [(ngModel)]="custrefno" maxlength="100" />
                     </div>
                 </div>
 
                 <div class="form-group row" *ngIf="!gs.IS_SINGLE_CURRENCY">
-                    <label class="col-2 col-form-label col-form-label-sm">CURRENCY</label>
-                    <div class="col-5">
+                    <label class="col-3 col-form-label col-form-label-sm">CURRENCY</label>
+                    <div class="col-9">
                         <app-autocomplete2 [controlname]="'CURRENCY'" [tabletype]="'PARAM'" [subtype]="'CURRENCY'"
                             [displaycolumn]="'CODE'" [displaydata]="curr_code" (ValueChanged)="LovSelected($event)">
                         </app-autocomplete2>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-2">
+                <div class="form-group row pt-1">
+                    <div class="col-3">
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" [(ngModel)]="showall"><span>Show All</span>
                         </div>
                     </div>
-                    <div class="col-5">
+                    <div class="col-9">
                         <button (click)="FindInvoice()" class="btn btn-primary btn-sm mr-1">Search</button>
                     </div>
                 </div>
 
             </div>
 
-            <div class="col-md-6  px-0 mx-0">
+            <div class="col-md-4">
 
 
                 <div class="form-group row">
@@ -91,27 +98,27 @@
 
                 <div class="form-group row">
                     <label class="col-3 col-form-label col-form-label-sm">BALANCE</label>
-                    <label class="col-3 col-form-label col-form-label-sm">{{txt_Bal_AR}}</label>
-                    <label class="col-3 col-form-label col-form-label-sm">{{txt_Bal_AP}}</label>
-                    <label class="col-3 col-form-label col-form-label-sm">{{txt_Bal_diff}}</label>
+                    <label class="col-3 form-control form-control-sm">{{txt_Bal_AR}}</label>
+                    <label class="col-3 form-control form-control-sm">{{txt_Bal_AP}}</label>
+                    <label class="col-3 form-control form-control-sm">{{txt_Bal_diff}}</label>
                 </div>
                 <div class="form-group row">
                     <label class="col-3 col-form-label col-form-label-sm">SELECTED</label>
-                    <label class="col-3 col-form-label col-form-label-sm">{{txt_tot_AR}}</label>
-                    <label class="col-3 col-form-label col-form-label-sm">{{txt_tot_AP}}</label>
-                    <label class="col-3 col-form-label col-form-label-sm">{{txt_tot_diff}}</label>
+                    <label class="col-3 form-control form-control-sm">{{txt_tot_AR}}</label>
+                    <label class="col-3 form-control form-control-sm">{{txt_tot_AP}}</label>
+                    <label class="col-3 form-control form-control-sm">{{txt_tot_diff}}</label>
                 </div>
                 <div class="form-group row">
                     <label class="col-3 col-form-label col-form-label-sm">BALANCE LEFT</label>
-                    <label class="col-3 col-form-label col-form-label-sm"></label>
-                    <label class="col-3 col-form-label col-form-label-sm"></label>
-                    <label class="col-3 col-form-label col-form-label-sm">{{txt_diff}}</label>
+                    <label class="col-3 form-control form-control-sm"></label>
+                    <label class="col-3 form-control form-control-sm"></label>
+                    <label class="col-3 form-control form-control-sm">{{txt_diff}}</label>
                 </div>
                 <div class="form-group row">
                     <label class="col-3 col-form-label col-form-label-sm">COUNT</label>
-                    <label class="col-3 col-form-label col-form-label-sm">{{LBL_COUNT}}</label>
-                    <label class="col-3 col-form-label col-form-label-sm"></label>
-                    <label class="col-3 col-form-label col-form-label-sm">{{LBL_STATUS}}</label>
+                    <label class="col-3 form-control form-control-sm">{{LBL_COUNT}}</label>
+                    <label class="col-3 form-control form-control-sm"></label>
+                    <label class="col-3 form-control form-control-sm">{{LBL_STATUS}}</label>
                 </div>
 
 
@@ -226,7 +233,7 @@
         <div class="page-body">
             <div class="row">
                 <div class="col-md-12 testbox  px-0 mx-0">
-                    
+
                     <app-pay-final ngbAutofocus [mpayrecrod]="mPayRecord" (callbackevent)="callbackevent($event)">
                     </app-pay-final>
 
