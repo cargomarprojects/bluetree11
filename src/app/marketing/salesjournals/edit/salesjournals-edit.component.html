@@ -233,20 +233,25 @@
             <div *ngIf="mode=='EDIT'" class="col-md-2  p-1 testbox">
                 <div class="col-md-12 p-2 border">
                     <div class="form-group row">
-                        <button [style.color]="Foregroundcolor" class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('ATTACHMENT')">Attachments</button>
+                        <button [style.color]="Foregroundcolor" class=" col-12 btn btn-info btn-sm"
+                            (click)="BtnNavigation('ATTACHMENT',attachmodal)">ATTACHMENTS</button>
                     </div>
 
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('MEMO')">Memo</button>
+                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('MEMO')">MEMO</button>
                     </div>
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm">Journal</button>
+                        <button disabled class=" col-12 btn btn-info btn-sm">JOURNAL</button>
                     </div>
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm">Business Info</button>
+                        <button disabled class=" col-12 btn btn-info btn-sm">BUSINESS INFO</button>
                     </div>
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm">Sales Lead</button>
+                        <button disabled class=" col-12 btn btn-info btn-sm">SALES LEAD</button>
+                    </div>
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm  text-uppercase"
+                            (click)="BtnNavigation('FOLLOWUP')">ADD TO FOLLOW UP</button>
                     </div>
                 </div>
             </div>
@@ -320,10 +325,32 @@
         </div>
     </div>
 </div>
-<div *ngIf="tab=='attachment'">
+<!-- <div *ngIf="tab=='attachment'">
     <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid" [type]="attach_type"
         [typelist]="attach_typelist" [tablename]="attach_tablename" [tablepkcolumn]="attach_tablepkcolumn"
         [refno]="attach_refno" [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
         [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid" [filespath]="attach_filespath"
-        [filespath2]="attach_filespath2" (callbackevent)="callbackevent($event)"></app-fileupload>
-</div>
+        [filespath2]="attach_filespath2" [modalview]="true" (callbackevent)="callbackevent($event)"></app-fileupload>
+</div> -->
+<ng-template #attachmodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+                        [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+                        [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
+                        [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+                        [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
+                        [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
+                        (callbackevent)="callbackevent($event)"></app-fileupload>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

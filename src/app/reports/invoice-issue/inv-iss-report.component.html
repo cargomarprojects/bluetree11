@@ -133,9 +133,9 @@
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of MainList">
         <tr>
-          <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+          <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
           <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td class='hlink' (click)="editinvoice(rec)">{{rec.inv_no}}</td>
+          <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td>
           <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.vendor_name}}</td>
           <td>{{rec.customer_name}}</td>

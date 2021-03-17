@@ -172,9 +172,9 @@
           <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red': rec.ROW_TYPE=='SUB TOTAL'?'Blue' :'Black'"
             [style.font-weight]="rec.ROW_TYPE=='HEADING'||rec.ROW_TYPE=='TOTAL'||rec.ROW_TYPE=='SUB TOTAL'?'bold':'normal'">
             <td>{{rec.mbl_branch}}</td>
-            <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+            <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
             <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
-            <td class='hlink' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td>
+            <td class='hlink2' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td>
             <td *ngIf="showstages">{{rec.shipment_stage}}</td>
 
             <td align='right'>{{rec.hbl_income  | number : '1.2-2'}}</td>

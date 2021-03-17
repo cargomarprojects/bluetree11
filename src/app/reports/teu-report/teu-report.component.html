@@ -143,7 +143,7 @@
           <tr  [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
           [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'">
             <td>{{rec.mbl_branch}}</td>
-            <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+            <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
             <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
             <td>{{rec.mbl_agent_name}}</td>
             <td>{{rec.mbl_liner_name}}</td>

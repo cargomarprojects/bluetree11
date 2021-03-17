@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalService } from '../../../core/services/global.service';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
 import { InputBoxComponent } from '../../../shared/input/inputbox.component';
@@ -45,17 +46,23 @@ export class SalesJournalsEditComponent implements OnInit {
     mode: string;
     errorMessage: string;
     Foregroundcolor: string;
+    modal: any;
 
     title: string;
     isAdmin: boolean;
 
     constructor(
+        private modalconfig: NgbModalConfig,
+        private modalservice: NgbModal,
         private router: Router,
         private route: ActivatedRoute,
         private location: Location,
         public gs: GlobalService,
         private mainService: SalesJournalService,
-    ) { }
+    ) {
+        modalconfig.backdrop = 'static'; //true/false/static
+        modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
+    }
 
     ngOnInit() {
         if (this.route.snapshot.queryParams.parameter == null) {
@@ -265,7 +272,7 @@ export class SalesJournalsEditComponent implements OnInit {
     }
 
 
-    BtnNavigation(action: string) {
+    BtnNavigation(action: string, attachmodal: any = null) {
         switch (action) {
             case 'ATTACHMENT': {
                 this.attach_title = 'Documents';
@@ -282,7 +289,8 @@ export class SalesJournalsEditComponent implements OnInit {
                 this.attach_viewonlyid = '';
                 this.attach_filespath = '';
                 this.attach_filespath2 = '';
-                this.tab = 'attachment';
+               // this.tab = 'attachment';
+                this.modal = this.modalservice.open(attachmodal, { centered: true });
                 break;
             }
             case 'MEMO': {
@@ -296,9 +304,24 @@ export class SalesJournalsEditComponent implements OnInit {
                 this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
                 break;
             }
+            case 'FOLLOWUP': {
+                let prm = {
+                    menuid: this.menuid,
+                    master_id: this.customer_id,
+                    master_refno: this.customer_name,
+                    master_refdate: this.custrecord.rec_created_date,
+                    is_locked: false,
+                    origin: 'sales-journal-page'
+                };
+                this.gs.Naviagete('Silver.BusinessModule/FollowUpPage', JSON.stringify(prm));
+                break;
+            }
         }
     }
     callbackevent(event: any) {
         this.tab = 'main';
+    }
+    CloseModal() {
+        this.modal.close();
     }
 }

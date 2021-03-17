@@ -167,7 +167,7 @@ export class AlertLogPageComponent implements OnInit {
             master_refno: _record.cf_refno,
             master_refdate: _record.cf_ref_date,
             is_locked: IsLocked,
-            origin: 'alert-log-page'
+            origin: _record.cf_mbl_lock == "J" ? 'sales-journal-page' : 'alert-log-page'
         };
         if (branch_code == this.gs.branch_code) {
             this.gs.Naviagete('Silver.BusinessModule/FollowUpPage', JSON.stringify(prm));
