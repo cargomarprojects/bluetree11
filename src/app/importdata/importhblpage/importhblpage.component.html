@@ -29,7 +29,7 @@
     </thead>
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of  records$ | async">
-        <td class='hlink' (click)="XmlImportData(rec)">{{rec.files_desc}}</td>
+        <td class='hlink2' (click)="XmlImportData(rec)">{{rec.files_desc}}</td>
         <td>{{rec.files_processed}}</td>
         <td>{{rec.files_ref_no}}</td>
         <td>{{rec.files_uploaded_date | date : gs.FRONTEND_DATEFORMAT}}</td>

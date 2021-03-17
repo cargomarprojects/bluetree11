@@ -56,7 +56,7 @@
                 <td>{{rec.messagesender}}</td>
                 <td>{{rec.messagenumber}}</td>
                 <td>{{rec.messagedate | date : gs.FRONTEND_DATEFORMAT}}</td>
-                <td class='hlink' (click)="CheckMaster(rec)">CHECK</td>
+                <td class='hlink2' (click)="CheckMaster(rec)">CHECK</td>
                 <td>{{rec.mshipper_name}}</td>
                 <td>{{rec.consignee_name}}</td>
                 <td>{{rec.pol_name}}</td>
@@ -64,9 +64,9 @@
                 <td>{{rec.pod_name}}</td>
                 <td>{{rec.pod_eta | date : gs.FRONTEND_DATEFORMAT}}</td>
                 <td>{{rec.place_delivery}}</td>
-                <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+                <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
                 <td>{{rec.mbl_branch_code}}</td>
-                <td class='hlink' (click)="transferdata(rec,transfermodal)">{{rec.mblno}}</td>
+                <td class='hlink2' (click)="transferdata(rec,transfermodal)">{{rec.mblno}}</td>
                 <td>{{rec.house_nos}}</td>
                 <td>{{rec.refno}}</td>
                 <td>{{rec.agent_name}}</td>
