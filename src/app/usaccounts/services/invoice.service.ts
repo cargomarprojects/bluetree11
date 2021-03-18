@@ -47,5 +47,9 @@ export class invoiceService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/USAccounts/Invoice/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    PendingList(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Payment/PendingList', SearchData, this.gs.headerparam2('authorized'));
+    }
+    
 
 }

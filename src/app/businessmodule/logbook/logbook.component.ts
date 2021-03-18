@@ -17,33 +17,33 @@ export class LogBookComponent implements OnInit {
 
     // 15-07-2019 Created By Ajith  
 
-    public ismodal: boolean = false;
+    public ismodal = false;
     @Input() set modalview(value: boolean) {
         this.ismodal = value;
     }
-    menuid: string;
+    menuid = '';
     @Input() set setmenuid(value: string) {
         this.menuid = value;
     }
-    pkid: string;
+    pkid = '';
     @Input() set setpkid(value: string) {
         this.pkid = value;
     }
-    source: string;
+    source = '';
     @Input() set setsource(value: string) {
         this.source = value;
     }
-    title: string = '';
+    title = '';
     @Input() set settitle(value: string) {
         this.title = value;
     }
 
     records: Table_User_Logbook[] = [];
-    mode: string;
-    isAdmin: boolean;
-    errorMessage: string;
-    is_locked: boolean = false;
-    report_format: string = 'LOGBOOK';
+    mode = '';
+    isAdmin = false;
+    errorMessage = '';
+    is_locked = false;
+    report_format = 'LOGBOOK';
 
     constructor(
         private router: Router,
@@ -54,6 +54,7 @@ export class LogBookComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+
         if (!this.ismodal) {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
             this.menuid = options.menuid;
@@ -93,12 +94,11 @@ export class LogBookComponent implements OnInit {
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = this.pkid;
         SearchData.source = this.source;
-        this.mainService.List(SearchData)
-            .subscribe(response => {
-                this.records = <Table_User_Logbook[]>response.records;
-            }, error => {
-                this.errorMessage = this.gs.getError(error);
-            });
+        this.mainService.List(SearchData).subscribe(response => {
+            this.records = <Table_User_Logbook[]>response.records;
+        }, error => {
+            this.errorMessage = this.gs.getError(error);
+        });
     }
 
 

@@ -484,6 +484,8 @@
                             (click)="BtnNavigation('INVOICE-PRINT')">Print</button>
                         <button class="btn btn-primary btn-sm mr-1"
                             (click)="BtnNavigation('HISTORY',historymodal)">History</button>
+                        <button class="btn btn-primary btn-sm mr-1"
+                            (click)="instantPayment(paymentModalContent)">Instant Payment</button>                            
 
                     </div>
                 </div>
@@ -498,10 +500,23 @@
             {{record.rec_created_date}} </label>
     </div>
 </div>
+
 <div *ngIf="tab=='report'">
     <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
         (callbackevent)="callbackevent($event)"></app-report>
 </div>
+
+<div *ngIf="tab === 'chq'">
+    <app-report [title]="'Cheque Print'" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+        (callbackevent)="callbackevent($event)"></app-report>
+</div>
+
+<div *ngIf="tab === 'cash'">
+    <app-report [title]="'Cash/Bank Print'" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+        (callbackevent)="callbackevent($event)"></app-report>
+</div>
+
+
 
 <ng-template #historymodal let-c="close" let-d="dismiss">
     <div class="modal-body">
@@ -515,6 +530,28 @@
             <div class="page-footer">
                 <div class="row justify-content-center p-1">
                     <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #paymentModalContent let-c="close" let-d="dismiss">
+
+    <div class="modal-header">
+        <h4 class="modal-title">Instant Payment</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+
+                    <app-pay-final ngbAutofocus [mpayrecrod]="mPayRecord" (callbackevent)="paymentcallbackevent($event)">
+                    </app-pay-final>
+
                 </div>
             </div>
         </div>

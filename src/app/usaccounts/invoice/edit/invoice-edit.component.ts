@@ -14,7 +14,7 @@ import { Tbl_House } from '../../models/tbl_house';
 import { invoiceService } from '../../services/invoice.service';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
-import { extendWith } from 'lodash';
+
 
 
 @Component({
@@ -41,6 +41,8 @@ export class InvoiceEditComponent implements OnInit {
   showdeleted: boolean;
   paid_amt: number;
   bal_amt: number;
+
+  mPayRecord = {};
 
   inv_arap: string; // AR OR AP
   arrival_notice: string = '';
@@ -97,6 +99,9 @@ export class InvoiceEditComponent implements OnInit {
   public record: Tbl_cargo_invoicem = <Tbl_cargo_invoicem>{};
   public records: Tbl_Cargo_Invoiced[] = [];
   history: Tbl_PayHistory[] = [];
+
+  PaymentList: Tbl_cargo_invoicem[] = [];
+
 
   HouseList: Tbl_House[] = [];
 
@@ -1139,13 +1144,57 @@ export class InvoiceEditComponent implements OnInit {
         this.tab = 'report';
         break;
       }
+      case 'INSTANT PAYMENT': {
 
+      }
     }
   }
 
   callbackevent(event: any) {
     this.tab = 'main';
+
   }
+
+  paymentcallbackevent(data: any) {
+    if (data.action == 'CLOSE') {
+      this.tab = 'main';
+      this.CloseModal();
+  }
+  if (data.action == 'PRINTCHECK') {
+
+      this.CloseModal();
+
+      if (this.gs.BRANCH_REGION == "USA") {
+          if (data.printchq == 'Y') {
+              this.report_url = '/api/Payment/PrintCheque';
+              this.report_searchdata = this.gs.UserInfo;
+              this.report_searchdata.PKID = data.pkid;
+              this.report_searchdata.BANKID = data.bankid;
+              this.report_searchdata.PRINT_SIGNATURE = "N";
+              this.report_menuid = this.gs.MENU_ACC_ARAP_SETTLMENT;
+              this.tab = 'chq';
+          }
+          else {
+              this.tab = 'main';
+          }
+
+      } else {
+          this.report_url = '/api/Payment/PrintCash';
+          this.report_searchdata = this.gs.UserInfo;
+          this.report_searchdata.PKID = data.pkid;
+          this.report_searchdata.PAY_RP = data.payrp;
+          this.report_searchdata.TYPE = "PAYMENT" //this.pay_type;
+          if (data.printcash == "Y")
+              this.report_searchdata.REPORT_CAPTION = "CASH " + data.payrp;
+          else
+              this.report_searchdata.REPORT_CAPTION = "BANK " + data.payrp;
+          this.report_menuid = this.gs.MENU_ACC_ARAP_SETTLMENT;
+          this.tab = 'cash';
+      }
+    }
+  }
+
+
 
   Close() {
     this.location.back();
@@ -1219,4 +1268,115 @@ export class InvoiceEditComponent implements OnInit {
       }
     }
   }
+
+  instantPayment(paymentModalContent) {
+    if (this.mode != "EDIT")
+      return;
+    if (this.gs.isBlank(this.pkid))
+      return;
+    if (this.gs.IS_SINGLE_CURRENCY == false) {
+      if (this.gs.isBlank(this.record.inv_curr_code)) {
+        alert('invalid currency')
+        return;
+      }
+      if (this.record.inv_curr_code != this.gs.base_cur_code) {
+        alert("Instant Payment cannot be used for foreign Currency");
+        return;
+      }
+    }
+
+    var SearchData = this.gs.UserInfo;
+    SearchData.MODE = "ADD";
+    SearchData.SHOWALL = "N";
+    if (this.gs.IS_SINGLE_CURRENCY == true) {
+      SearchData.CURRENCY = "";
+      SearchData.ISBASECURRENCY = "Y"
+    }
+    else {
+      SearchData.CURRENCY = this.record.inv_curr_code;
+      if (this.record.inv_curr_code != this.gs.base_cur_code) {
+        SearchData.ISBASECURRENCY = "Y";
+      }
+      SearchData.HIDE_PAYROLL = "N";
+    }
+
+    this.mainservice.PendingList(SearchData).subscribe(res => {
+      this.PaymentList = res.list;
+      this.makePayment(paymentModalContent);
+    },
+      err => {
+        this.errorMessage = this.gs.getError(err);
+        alert(this.errorMessage);
+      });
+  }
+
+  makePayment(paymentModalContent) {
+
+    let nAR = 0;
+    let nAP = 0;
+    let nDiff = 0;
+
+
+    if (this.PaymentList == null) {
+      alert("No Balance Payment Found");
+      return;
+    }
+    if (this.PaymentList.length > 1) {
+      alert("Multiple Payment Invoice Found");
+      return;
+    }
+
+    let Rec = this.PaymentList[0];
+    if (this.gs.isBlank(Rec.inv_ar_total) && this.gs.isBlank(Rec.inv_ap_total)) {
+      alert("No Balance Payment Found");
+      return;
+    }
+    if (Rec.inv_ar_total <= 0 && Rec.inv_ap_total <= 0) {
+      alert("No Balance Payment Found");
+      return;
+    }
+
+    Rec.inv_flag = "Y";
+    Rec.inv_pay_amt = Rec.inv_balance;
+    if (Rec.inv_ar_total > 0)
+      nAR = Rec.inv_pay_amt;
+    else
+      nAP = Rec.inv_pay_amt;
+    nDiff = nAR - nAP;
+
+
+    let _curcode = '';
+    if (this.gs.IS_SINGLE_CURRENCY == false) {
+      _curcode = (this.record.inv_curr_code = this.gs.base_cur_code) ? this.record.inv_curr_code : '';
+      if (this.record.inv_curr_code != this.gs.base_cur_code) {
+        alert("Invalid Currency");
+        return;
+      }
+    }
+
+
+    this.mPayRecord = {
+      TOT_AR: nAR,
+      TOT_AP: nAP,
+      TOT_DIFF: nDiff,
+      TOT_AR_BASE: nAR,
+      TOT_AP_BASE: nAP,
+      TOT_DIFF_BASE: nDiff,
+      IS_PAYROLL_RECORD: (this.mbl_type == "PR" || this.mbl_type == "CM") ? "Y" : "N",
+      // for single currency always currency code will be blank.
+      // for multi currency if the settlement is in base    currency, currency code will be base    currency code.
+      // for multi currency if the settlement is in foreign currency, currency code will be foreign currency code.      
+      FCURR_CODE: _curcode,
+      IsMultiCurrency: "N",
+      DetailList: this.PaymentList,
+      IsAdmin: this.gs.IsAdmin(this.gs.MENU_ACC_ARAP_SETTLMENT) ? true : false,
+      Customer_ID: this.record.inv_cust_id,
+      Customer_Name: this.record.inv_cust_name,
+      Customer_Type: "CUSTOMER",
+    };
+
+    this.modal = this.modalservice.open(paymentModalContent, { centered: true });
+
+  }
+
 }
