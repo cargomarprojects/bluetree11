@@ -465,6 +465,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
         return '/Silver.USAccounts.Trans/InvoicePage';
       if (_type == 'P')
         return {
+          appid: this.gs.appid,
           menuid: sid,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,

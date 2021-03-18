@@ -1,7 +1,11 @@
 <div class="page-header">
     <div class="row  align-items-center justify-content-left p-1">
         <label class="mr-3">{{title}} ({{mode}})</label>
+
         <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+
+
+
         <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
         <label class="text-danger" *ngIf="is_locked">LOCKED</label>
     </div>
