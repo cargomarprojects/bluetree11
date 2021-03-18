@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { GlobalService } from '../../../core/services/global.service';
 import { SearchTable } from '../../../shared/models/searchtable';
@@ -91,7 +92,7 @@ export class InvoiceEditComponent implements OnInit {
 
   isVat: boolean = false;
   isConfirmed: boolean = true;
-
+  modal: any;
 
   public record: Tbl_cargo_invoicem = <Tbl_cargo_invoicem>{};
   public records: Tbl_Cargo_Invoiced[] = [];
@@ -100,11 +101,16 @@ export class InvoiceEditComponent implements OnInit {
   HouseList: Tbl_House[] = [];
 
   constructor(
+    private modalconfig: NgbModalConfig,
+    private modalservice: NgbModal,
     private route: ActivatedRoute,
     private location: Location,
     public gs: GlobalService,
     public mainservice: invoiceService
-  ) { }
+  ) {
+    modalconfig.backdrop = 'static'; //true/false/static
+    modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
+  }
 
   ngOnInit() {
     if (this.route.snapshot.queryParams.parameter == null) {
@@ -1104,17 +1110,18 @@ export class InvoiceEditComponent implements OnInit {
 
   }
 
-  BtnNavigation(action: string) {
+  BtnNavigation(action: string, historymodal: any = null) {
     switch (action) {
       case 'HISTORY': {
-        let prm = {
-          menuid: this.menuid,
-          pkid: this.pkid,
-          source: "INVOICE",
-          title: "History [INVOICE NO : " + this.record.inv_no + "]",
-          origin: 'invoice-page'
-        };
-        this.gs.Naviagete('Silver.BusinessModule/LogBookPage', JSON.stringify(prm));
+        // let prm = {
+        //   menuid: this.menuid,
+        //   pkid: this.pkid,
+        //   source: "INVOICE",
+        //   title: "History [INVOICE NO : " + this.record.inv_no + "]",
+        //   origin: 'invoice-page'
+        // };
+        // this.gs.Naviagete('Silver.BusinessModule/LogBookPage', JSON.stringify(prm));
+        this.modal = this.modalservice.open(historymodal, { centered: true });
         break;
       }
       case 'INVOICE-PRINT': {
@@ -1142,7 +1149,9 @@ export class InvoiceEditComponent implements OnInit {
   Close() {
     this.location.back();
   }
-
+  CloseModal() {
+    this.modal.close();
+  }
   InvoiceDateValidation() {
     if (this.gs.isBlank(this.record.inv_date))
       return;

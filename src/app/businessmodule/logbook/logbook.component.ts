@@ -21,12 +21,25 @@ export class LogBookComponent implements OnInit {
     @Input() set modalview(value: boolean) {
         this.ismodal = value;
     }
-    records: Table_User_Logbook[] = [];
     menuid: string;
+    @Input() set setmenuid(value:string) {
+        this.menuid = value;
+    }
     pkid: string;
+    @Input() set setpkid(value:string) {
+        this.pkid = value;
+    }
     source: string;
-    mode: string;
+    @Input() set setsource(value:string) {
+        this.source = value;
+    }
     title: string = '';
+    @Input() set settitle(value:string) {
+        this.title = value;
+    }
+
+    records: Table_User_Logbook[] = [];
+    mode: string;
     isAdmin: boolean;
     errorMessage: string;
     is_locked: boolean = false;

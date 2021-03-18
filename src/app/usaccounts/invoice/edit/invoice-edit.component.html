@@ -37,7 +37,8 @@
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Date</label>
                     <div class="col-8">
-                        <app-date #_inv_date [colName]="inv_date" [inputdate]="record.inv_date" (ValueChanged)="record.inv_date=$event;onBlur('inv_date')" >
+                        <app-date #_inv_date [colName]="inv_date" [inputdate]="record.inv_date"
+                            (ValueChanged)="record.inv_date=$event;onBlur('inv_date')">
                         </app-date>
                     </div>
                 </div>
@@ -325,8 +326,9 @@
                                     </app-autocomplete2>
                                 </td>
                                 <td class="p-0" *ngIf="show_currency">
-                                    <input  #_invd_exrate class="form-control form-control-sm" type="number" style="text-align:right;"
-                                        [(ngModel)]="rec.invd_exrate" (blur)="onBlur('invd_exrate',rec)" />
+                                    <input #_invd_exrate class="form-control form-control-sm" type="number"
+                                        style="text-align:right;" [(ngModel)]="rec.invd_exrate"
+                                        (blur)="onBlur('invd_exrate',rec)" />
                                 </td>
                                 <td class="p-0" *ngIf="show_currency">
                                     <input class="form-control form-control-sm" type="number" [disabled]="true"
@@ -480,7 +482,8 @@
                             (click)="Save()">Save</button>
                         <button class="btn btn-primary btn-sm mr-1"
                             (click)="BtnNavigation('INVOICE-PRINT')">Print</button>
-                        <button class="btn btn-primary btn-sm mr-1" (click)="BtnNavigation('HISTORY')">History</button>
+                        <button class="btn btn-primary btn-sm mr-1"
+                            (click)="BtnNavigation('HISTORY',historymodal)">History</button>
 
                     </div>
                 </div>
@@ -499,3 +502,21 @@
     <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
         (callbackevent)="callbackevent($event)"></app-report>
 </div>
+
+<ng-template #historymodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-logbook [setmenuid]="menuid" [setpkid]="pkid" [setsource]="'INVOICE'"
+                        [settitle]="'History [INVOICE NO : ]'" [modalview]="true"></app-logbook>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -18,6 +18,12 @@ import { LogBookComponent } from './logbook/logbook.component';
   imports: [
     SharedModule,    
     businessmoduleRoutingModule
+  ] ,
+  exports: [
+    PaymentReqComponent,
+    FollowupComponent,
+    XmlRemarksComponent,
+    LogBookComponent
   ]
 })
 export class BusinessmoduleModule { }
