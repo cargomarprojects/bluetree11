@@ -278,13 +278,13 @@ export class DepositEditComponent implements OnInit {
         return bRet;
     }
 
+   
     pendingList() {
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = this.pkid;
         this.mainService.DepositPendingList(SearchData).subscribe(
             res => {
                 this.arPendingList = res.list;
-
             },
             err => {
                 this.errorMessage = this.gs.getError(err);
@@ -292,7 +292,6 @@ export class DepositEditComponent implements OnInit {
             });
 
     }
-
     swapSelection(rec: Tbl_Acc_Payment) {
         rec.pay_flag2 = !rec.pay_flag2;
         this.total_amount = 0;
@@ -304,7 +303,7 @@ export class DepositEditComponent implements OnInit {
         })
 
     }
-
+   
 
     Close() {
         this.location.back();
