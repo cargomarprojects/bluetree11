@@ -378,7 +378,7 @@ export class FundTransferEditComponent implements OnInit {
 
         this.mainService.GetNextChqNo(searchData).subscribe(
             res => {
-                this.next_chqno = res.chqno;
+                this.next_chqno  =  +res.chqno;
                 this.SetNextChqNo();
             },
             err => {
