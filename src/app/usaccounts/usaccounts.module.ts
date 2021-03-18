@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { BusinessmoduleModule } from '../BusinessModule/businessmodule.module';
+
+import { BusinessModule } from '../business/business.module';
 
 import { USAccountsRoutingModule } from './usaccounts-routing.module';
 
@@ -69,7 +70,7 @@ import { AccSettingsHeaderComponent } from './accsettings/accsettings-header.com
 ],
   imports: [
     SharedModule,
-    BusinessmoduleModule,
+    BusinessModule ,
     USAccountsRoutingModule
   ]
 })

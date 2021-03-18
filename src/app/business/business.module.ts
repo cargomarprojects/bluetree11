@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-import { businessmoduleRoutingModule } from './businessmodule-routing.module';
+import { BusinessRoutingModule } from './business-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { PaymentReqComponent } from './paymentreq/paymentreq.component';
@@ -17,7 +17,7 @@ import { LogBookComponent } from './logbook/logbook.component';
   ],
   imports: [
     SharedModule,    
-    businessmoduleRoutingModule
+    BusinessRoutingModule
   ] ,
   exports: [
     PaymentReqComponent,
@@ -26,4 +26,4 @@ import { LogBookComponent } from './logbook/logbook.component';
     LogBookComponent
   ]
 })
-export class BusinessmoduleModule { }
+export class BusinessModule { }

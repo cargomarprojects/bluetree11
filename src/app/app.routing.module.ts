@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'Silver.USAccounts.Master', loadChildren: () => import('./usaccounts/usaccounts.module').then( m => m.USAccountsModule) }, 
   { path: 'Silver.USAccounts.Reports', loadChildren: () => import('./usaccounts-reports/usaccounts-reports.module').then( m => m.UsAccountsReportsModule) }, 
   { path: 'Silver.Library', loadChildren: () => import('./shared/shared.module').then( m => m.SharedModule) }, 
-  { path: 'Silver.BusinessModule', loadChildren: () => import('./businessmodule/businessmodule.module').then( m => m.BusinessmoduleModule) }, 
+  { path: 'Silver.BusinessModule', loadChildren: () => import('./business/business.module').then( m => m.BusinessModule) }, 
   { path: 'Silver.Marketing.Quotation', loadChildren: () => import('./marketing/marketing.module').then( m => m.MarketingModule) }, 
   { path: 'Silver.Marketing.Master', loadChildren: () => import('./marketing/marketing.module').then( m => m.MarketingModule) }, 
   { path: 'Silver.UserAdmin', loadChildren: () => import('./useradmin/useradmin.module').then( m => m.UserAdminModule) },  

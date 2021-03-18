@@ -9,7 +9,7 @@ import { User_Menu } from '../../../core/models/menum';
 import { vm_tbl_cargo_approved, Tbl_Cargo_Approved, Tbl_Cargo_Approvedd } from '../../../other/models/tbl_cargo_approved';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { strictEqual } from 'assert';
-import { Table_Cargo_Payrequest } from 'src/app/businessmodule/models/table_cargo_payrequest';
+import { Table_Cargo_Payrequest } from 'src/app/business/models/table_cargo_payrequest';
 import { DateComponent } from '../../../shared/date/date.component';
 
 @Component({
