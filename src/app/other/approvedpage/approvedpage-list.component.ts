@@ -32,10 +32,10 @@ export class ApprovedPageListComponent implements OnInit {
   attach_pkid: string = "";
   attach_typelist: any = {};
   attach_type: string = "";
-  
+
   records: Tbl_Cargo_Approved[]
   is_locked: boolean = false;
-
+  
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -89,7 +89,7 @@ export class ApprovedPageListComponent implements OnInit {
       mbl_refno: this.mbl_refno,
       doc_type: this.doc_type,
       req_type: this.req_type,
-      is_locked:this.is_locked
+      is_locked: this.is_locked
     };
     this.gs.Naviagete('Silver.Other.Trans/ApprovedPageEdit', JSON.stringify(parameter));
 
@@ -109,7 +109,7 @@ export class ApprovedPageListComponent implements OnInit {
       mbl_refno: this.mbl_refno,
       doc_type: this.doc_type,
       req_type: this.req_type,
-      is_locked:this.is_locked
+      is_locked: this.is_locked
     };
     this.gs.Naviagete('Silver.Other.Trans/ApprovedPageEdit', JSON.stringify(parameter));
   }
@@ -118,16 +118,57 @@ export class ApprovedPageListComponent implements OnInit {
     this.location.back();
   }
 
- AttachRow(_rec: Tbl_Cargo_Approved) {
+  AttachRow(_rec: Tbl_Cargo_Approved) {
     let TypeList: any[] = [];
     TypeList = [{ "code": "APPROVAL REQUEST", "name": "APPROVAL REQUEST" }];
-     this.attach_pkid = _rec.ca_pkid;
-     this.attach_typelist = TypeList;
-     this.attach_type = 'APPROVAL REQUEST'
+    this.attach_pkid = _rec.ca_pkid;
+    this.attach_typelist = TypeList;
+    this.attach_type = 'APPROVAL REQUEST'
     this.tab = 'attachment';
   }
   callbackevent() {
     this.tab = 'main';
+  }
+
+  getRouteDet(_type: string, _mode: string, _record: Tbl_Cargo_Approved = null) {
+
+    if (_type == "L") {
+      if ((_mode == "ADD" && this.canAdd) || (_mode == "EDIT" && this.canEdit))
+        return "/Silver.Other.Trans/ApprovedPageEdit";
+      else
+        return null;
+    } else if (_type == "P") {
+
+      if (_record == null) {
+        if (!this.canAdd)
+          return null;
+        return {
+          appid: this.gs.appid,
+          menuid: this.menuid,
+          pkid: '',
+          mode: 'ADD',
+          mbl_pkid: this.mbl_pkid,
+          mbl_refno: this.mbl_refno,
+          doc_type: this.doc_type,
+          req_type: this.req_type,
+          is_locked: this.is_locked
+        };
+      }
+      if (!this.canEdit)
+        return null;
+      return {
+        appid: this.gs.appid,
+        menuid: this.menuid,
+        pkid: _record.ca_pkid,
+        mode: 'EDIT',
+        mbl_pkid: this.mbl_pkid,
+        mbl_refno: this.mbl_refno,
+        doc_type: this.doc_type,
+        req_type: this.req_type,
+        is_locked: this.is_locked
+      };
+    } else
+      return null;
   }
 
 }
