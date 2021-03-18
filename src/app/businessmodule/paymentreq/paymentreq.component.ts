@@ -96,8 +96,9 @@ export class PaymentReqComponent implements OnInit {
       else
         Rec.cp_selected = false;
     })
-this.paytype_needed_field.nativeElement.focus();
-  } 
+    if (!this.gs.isBlank(this.paytype_needed_field))
+      this.paytype_needed_field.nativeElement.focus();
+  }
 
   actionHandler() {
     this.errorMessage = '';
@@ -120,9 +121,10 @@ this.paytype_needed_field.nativeElement.focus();
     this.payrecord.cp_inv_no = '';
     this.payrecord.cp_inv_id = '';
     this.invrecords.forEach(Rec => {
-      Rec.cp_selected = false;      
+      Rec.cp_selected = false;
     })
-    this.paytype_needed_field.nativeElement.focus();
+    if (!this.gs.isBlank(this.paytype_needed_field))
+      this.paytype_needed_field.nativeElement.focus();
   }
 
 
@@ -136,7 +138,8 @@ this.paytype_needed_field.nativeElement.focus();
       .subscribe(response => {
         this.payrecords = <Table_Cargo_Payrequest[]>response.records;
         this.invrecords = <Table_Cargo_Payrequest[]>response.invrecords;
-        this.paytype_needed_field.nativeElement.focus();
+        if (!this.gs.isBlank(this.paytype_needed_field))
+          this.paytype_needed_field.nativeElement.focus();
       },
         error => {
           this.errorMessage = this.gs.getError(error);
@@ -209,7 +212,8 @@ this.paytype_needed_field.nativeElement.focus();
       bRet = false;
       this.errorMessage = "Request Type cannot be blank";
       alert(this.errorMessage);
-      this.paytype_needed_field.nativeElement.Focus();
+      if (!this.gs.isBlank(this.paytype_needed_field))
+        this.paytype_needed_field.nativeElement.Focus();
       return bRet;
     }
 

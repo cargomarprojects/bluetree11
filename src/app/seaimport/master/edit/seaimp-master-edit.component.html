@@ -564,7 +564,7 @@
                   </table>
                   <div class="form-group row">
                     <div class="col-12">
-                      <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE)" disabled="is_locked"
+                      <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE)" [class.disabled]="is_locked"
                       [routerLink]="['/Silver.SeaImport/SeaImpHouseEditPage']"
                       [queryParams]="{appid : gs.appid, menuid: this.gs.MENU_SI_HOUSE, parentid:this.pkid, pkid: '',refno: this.record.mbl_refno ,type: 'OI',origin: 'seaimp-master-page',mode: 'ADD'}">Add
                       House</a>

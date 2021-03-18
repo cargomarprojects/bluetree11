@@ -1795,7 +1795,7 @@ export class SeaImpHouseEditComponent implements OnInit {
         charecord = <Table_Address>response.record;
 
         if (charecord != null) {
-          this.record.hbl_agent_id = charecord.pkid;
+          this.record.hbl_cha_id = charecord.pkid;
           this.record.hbl_cha_code = charecord.code;
           this.record.hbl_cha_name = charecord.name;
           this.record.hbl_cha_attn = charecord.attention;
