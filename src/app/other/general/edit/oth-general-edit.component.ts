@@ -837,6 +837,24 @@ export class OthGeneralEditComponent implements OnInit {
       this.record.hbl_chwt = this.gs.Convert_Weight("LBS2KG", this.record.hbl_chwt_lbs, 3);
   }
 
+  BtnNavigation2(action: string, _type : string ,  attachmodal: any = null) {
+    if ( action == "ARAP") {
+        if (_type == "L")
+          return '/Silver.USAccounts.Trans/InvoicePage';
+        if (_type == 'P' )
+          return  {
+            appid: this.gs.appid,
+            menuid: this.gs.MENU_OT_OPERATION_ARAP,
+            mbl_pkid: this.pkid,
+            mbl_refno: this.record.mbl_refno,
+            mbl_type: 'OT',
+            origin: 'other-general-page',
+          };
+	}
+}
+
+
+
   BtnNavigation(action: string, attachmodal: any = null) {
 
     switch (action) {
