@@ -66,11 +66,10 @@ import { AccSettingsHeaderComponent } from './accsettings/accsettings-header.com
   AccSettingsComponent,
   AccSettingsEditComponent,
   AccSettingsHeaderComponent
-  
-
 ],
   imports: [
     SharedModule,
+    BusinessmoduleModule,
     USAccountsRoutingModule
   ]
 })
