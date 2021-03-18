@@ -1121,6 +1121,7 @@ export class InvoiceEditComponent implements OnInit {
         //   origin: 'invoice-page'
         // };
         // this.gs.Naviagete('Silver.BusinessModule/LogBookPage', JSON.stringify(prm));
+        this.report_title = "History [INVOICE NO : " + this.record.inv_no + "]";
         this.modal = this.modalservice.open(historymodal, { centered: true });
         break;
       }
