@@ -79,7 +79,7 @@ export class ApprovedPageEditComponent implements OnInit {
       this.doc_type = this.route.snapshot.queryParams.doc_type;
       this.req_type = this.route.snapshot.queryParams.req_type;
       this.mode = this.route.snapshot.queryParams.mode;
-      this.is_locked = this.route.snapshot.queryParams.is_locked;
+      this.is_locked = this.route.snapshot.queryParams.is_locked == 'Y' ? true : false;
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.menuid = options.menuid;

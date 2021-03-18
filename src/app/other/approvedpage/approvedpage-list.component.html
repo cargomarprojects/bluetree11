@@ -41,7 +41,11 @@
                     </thead>
                     <tbody class="page-body-tbody">
                         <tr *ngFor="let rec of records">
-                            <td class="hlink2" (click)="edit(rec)">{{rec.ca_reqno}}</td>
+                            <!-- <td class="hlink2" (click)="edit(rec)">{{rec.ca_reqno}}</td> -->
+                            <td *ngIf="!this.canEdit">{{rec.ca_reqno}}</td>
+                            <td *ngIf="this.canEdit">
+                               <a class="hlink" [routerLink]="getRouteDet('L','EDIT',rec)" [queryParams]="getRouteDet('P','EDIT',rec)">{{rec.ca_reqno}}</a>
+                            </td>
                             <td>{{rec.ca_user_name}}</td>
                             <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT}}</td>
                             <td>{{rec.ca_type}}</td>
