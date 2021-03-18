@@ -22,19 +22,19 @@ export class LogBookComponent implements OnInit {
         this.ismodal = value;
     }
     menuid: string;
-    @Input() set setmenuid(value:string) {
+    @Input() set setmenuid(value: string) {
         this.menuid = value;
     }
     pkid: string;
-    @Input() set setpkid(value:string) {
+    @Input() set setpkid(value: string) {
         this.pkid = value;
     }
     source: string;
-    @Input() set setsource(value:string) {
+    @Input() set setsource(value: string) {
         this.source = value;
     }
     title: string = '';
-    @Input() set settitle(value:string) {
+    @Input() set settitle(value: string) {
         this.title = value;
     }
 
@@ -54,11 +54,13 @@ export class LogBookComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.source = options.source;
-        this.title = options.title;
+        if (!this.ismodal) {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.source = options.source;
+            this.title = options.title;
+        }
         this.initPage();
         this.actionHandler();
     }
