@@ -61,12 +61,12 @@
 
 <div class="row border">
   <div class="col-md-12  px-0 mx-0">
-    <div class="page-body table-responsive">
+    <div class="page-body table-responsive table-bordered">
       <!-- <div style="height: 400px; overflow-y: scroll;"> -->
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
-            <th>OPEN</th>
+            <th class="text-center">OPEN</th>
             <th *ngIf="Files_TypeList.length>1">DOC.TYPE</th>
             <th>FILE NAME</th>
             <th>SIZE</th>
@@ -78,10 +78,10 @@
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of RecordList">
           <tr>
-            <td class="p-0"><i class="fa fa-download fa-lg pointer" aria-hidden="true" (click)="ShowFile(rec)"></i>
+            <td  class="p-0 text-center"><i class="fa fa-download fa-lg pointer" aria-hidden="true" (click)="ShowFile(rec)"></i>
             </td>
             <td *ngIf="Files_TypeList.length>1" class="p-0">{{rec.files_type}}</td>
-            <td (click)="editrow(rec)" class="p-0">{{rec.file_desc}}</td>
+            <td class="p-0 hlink2" (click)="editrow(rec)" >{{rec.file_desc}}</td>
             <td class="p-0">{{rec.files_sizewithunit}}</td>
             <td class="p-0">{{rec.files_ref_no}}</td>
             <td class="p-0">{{rec.files_created_date | date : gs.date_display_fmt_with_time}}</td>

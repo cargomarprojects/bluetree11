@@ -14,7 +14,7 @@
 <div class="page-body">
     <div class="row">
         <div class="col-md-12  px-0 mx-0">
-            <div class="page-body table-responsive">
+            <div class="page-body table-responsive table-bordered">
                 <table class="table  table-hover table-sm">
                     <thead class="page-body-thead">
                         <tr>
@@ -29,7 +29,7 @@
                     </thead>
                     <tbody class="page-body-tbody">
                         <tr *ngFor="let rec of records">
-                            <td class="hlink" (click)="edit(rec)">{{rec.cs_refno}}</td>
+                            <td class="hlink2" (click)="edit(rec)">{{rec.cs_refno}}</td>
                             <td>{{rec.cs_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                             <td>{{rec.cs_to_name}}</td>
                             <td>{{rec.cs_to_tel}}</td>
