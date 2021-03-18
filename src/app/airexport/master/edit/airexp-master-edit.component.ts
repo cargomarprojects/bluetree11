@@ -588,7 +588,7 @@ export class AirExpMasterEditComponent implements OnInit {
           menuid: this.gs.MENU_AE_MASTER_ARAP,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
-          mbl_type: 'AI',
+          mbl_type: 'AE',
           origin: 'airexp-master-page',
         };
         this.gs.Naviagete('Silver.USAccounts.Trans/InvoicePage', JSON.stringify(prm));
