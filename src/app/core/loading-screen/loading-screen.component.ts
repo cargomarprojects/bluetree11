@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingScreenService } from '../services/loadingscreen.service';
 
-
-
 import { Subscription } from "rxjs";
-import { debounceTime } from 'rxjs/operators';
+
 
 
 @Component({
@@ -17,6 +15,8 @@ export class LoadingScreenComponent implements OnInit {
   loading: boolean = false;
   loadingSubscription: Subscription;
 
+  
+
   constructor(
     private loadingScreenService: LoadingScreenService
     ) {}
@@ -24,9 +24,7 @@ export class LoadingScreenComponent implements OnInit {
   ngOnInit() {
 
     this.loadingSubscription = this.loadingScreenService.loadingStatus.subscribe((value) => {
-      
       this.loading = value;
-
     });
 
   }

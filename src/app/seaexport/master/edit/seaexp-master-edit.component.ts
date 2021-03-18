@@ -728,6 +728,15 @@ export class SeaexpMasterEditComponent implements OnInit {
   }
 
 
+  BtnNavigation2(action: string, _type : string ,  attachmodal: any = null) {
+    if ( action == "ARAP") {
+        if (_type == "L")
+          return '/Silver.USAccounts.Trans/InvoicePage';
+        if (_type == 'P' )
+          return  { appid : this.gs.appid, menuid: this.gs.MENU_SE_MASTER_ARAP,mbl_pkid: this.pkid,mbl_refno: this.record.mbl_refno,mbl_type: 'OE',origin: 'seaexp-master-page'};
+    }
+  }
+
   BtnNavigation(action: string, attachmodal: any = null) {
 
     switch (action) {

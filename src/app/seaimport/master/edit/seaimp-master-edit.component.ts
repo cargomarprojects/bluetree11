@@ -762,6 +762,21 @@ export class SeaImpMasterEditComponent implements OnInit {
     this.BtnNavigation('HOUSE')
   }
 
+  BtnNavigation2(action: string, _type : string ,  attachmodal: any = null) {
+    if ( action == "ARAP") {
+        if (_type == "L")
+          return '/Silver.USAccounts.Trans/InvoicePage';
+        if (_type == 'P' )
+          return  {
+            appid : this.gs.appid,
+            menuid: this.gs.MENU_SI_MASTER_ARAP,
+            mbl_pkid: this.pkid,
+            mbl_refno: this.record.mbl_refno,
+            mbl_type: 'OI',
+            origin: 'seaimp-master-page',
+          };
+	  }
+  }
 
   BtnNavigation(action: string, attachmodal: any = null) {
 

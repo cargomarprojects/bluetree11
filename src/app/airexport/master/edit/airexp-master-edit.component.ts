@@ -562,6 +562,25 @@ export class AirExpMasterEditComponent implements OnInit {
     this.BtnNavigation('HOUSE')
   }
 
+
+  BtnNavigation2(action: string, _type : string ,  attachmodal: any = null) {
+    if ( action == "ARAP") {
+        if (_type == "L")
+          return '/Silver.USAccounts.Trans/InvoicePage';
+        if (_type == 'P' )
+          return  {
+            appid : this.gs.appid,            
+            menuid: this.gs.MENU_AE_MASTER_ARAP,
+            mbl_pkid: this.pkid,
+            mbl_refno: this.record.mbl_refno,
+            mbl_type: 'AE',
+            origin: 'airexp-master-page',
+          }
+	  }
+}
+
+
+
   BtnNavigation(action: string, attachmodal: any = null) {
 
     switch (action) {
@@ -570,7 +589,7 @@ export class AirExpMasterEditComponent implements OnInit {
           menuid: this.gs.MENU_AE_MASTER_ARAP,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
-          mbl_type: 'AI',
+          mbl_type: 'AE',
           origin: 'airexp-master-page',
         };
         this.gs.Naviagete('Silver.USAccounts.Trans/InvoicePage', JSON.stringify(prm));

@@ -45,20 +45,26 @@ export class InvoiceComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router : Router,
     private location: Location,
     public gs: GlobalService,
     public mainservice: invoiceService
   ) { }
 
   ngOnInit() {
-    this.init(this.route.snapshot.queryParams.parameter);
+    if ( this.route.snapshot.queryParams.parameter == null)
+      this.init(this.route.snapshot.queryParams);
+    else   
+      this.init(this.route.snapshot.queryParams.parameter);
+
     this.List('SCREEN');
   }
 
 
   public init(params: any) {
 
-    const options = JSON.parse(params);
+    //const options = JSON.parse(params);
+    const options = params;
 
 
     this.menuid = options.menuid;
@@ -169,6 +175,7 @@ export class InvoiceComponent implements OnInit {
     }
 
     let parameter = {
+      appid : this.gs.appid,
       menuid: this.menuid,
       pkid: '',
       mode: 'ADD',
@@ -179,8 +186,7 @@ export class InvoiceComponent implements OnInit {
       arrival_notice: '',
       origin: 'invoice-list-page',
     };
-    this.gs.Naviagete('Silver.USAccounts.Trans/InvoiceEditPage', JSON.stringify(parameter));
-
+    this.router.navigate(['Silver.USAccounts.Trans/InvoiceEditPage'], { queryParams: parameter});
   }
   edit(_record: Tbl_cargo_invoicem) {
     if (!this.canEdit) {
@@ -196,6 +202,7 @@ export class InvoiceComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.menuid,
       pkid: _record.inv_pkid,
       mode: 'EDIT',
@@ -206,15 +213,12 @@ export class InvoiceComponent implements OnInit {
       arrival_notice: '',
       origin: 'invoice-list-page',
     };
-    this.gs.Naviagete('Silver.USAccounts.Trans/InvoiceEditPage', JSON.stringify(parameter));
+    this.router.navigate(['Silver.USAccounts.Trans/InvoiceEditPage'], { queryParams: parameter});
   }
-
 
 
   removeRow(rec : Tbl_cargo_invoicem ){
     
-
-
     var remarks = "Delete Invoice " +  rec.inv_no;
     if ( rec.rec_deleted  == "Y" && this.isAdmin)
       remarks += " Permanently."
