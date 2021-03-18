@@ -16,6 +16,11 @@ export class LogBookComponent implements OnInit {
     //@ViewChild('mbl_no') mbl_no_field: ElementRef;
 
     // 15-07-2019 Created By Ajith  
+
+    public ismodal: boolean = false;
+    @Input() set modalview(value: boolean) {
+        this.ismodal = value;
+    }
     records: Table_User_Logbook[] = [];
     menuid: string;
     pkid: string;
