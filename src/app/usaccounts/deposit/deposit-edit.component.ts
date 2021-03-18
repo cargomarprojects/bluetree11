@@ -53,7 +53,8 @@ export class DepositEditComponent implements OnInit {
 
     showchqdt = true;
 
-    where = " ACC_TYPE = 'BANK' ";
+    where = " ACC_IS_PAYMENT_CODE = 'Y' AND ACC_BRANCH IN ('ALL','" + this.gs.branch_code + "')";
+    
 
     oldrefno = '';
 
