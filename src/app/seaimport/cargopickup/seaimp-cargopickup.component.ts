@@ -86,6 +86,10 @@ export class SeaImpCargoPickupComponent implements OnInit {
     if (this.mode == 'ADD') {
       this.record = <Tbl_cargo_imp_pickup>{};
       //this.cntrrecords = <Tbl_cargo_imp_container[]>[];
+      if(!this.gs.isBlank(this.cntrrecords))
+      {
+        this.SelectDeselect();//To set Deafault Tick in cntrlist
+      }
       this.init();
       this.LoadDefault();
     }
@@ -233,7 +237,8 @@ export class SeaImpCargoPickupComponent implements OnInit {
       });
   }
   private LoadDefault() {
-    this.pick_order_date_field.Focus();
+    if (!this.gs.isBlank(this.pick_order_date_field))
+      this.pick_order_date_field.Focus();
     if (this.defaultrecord == null)
       return;
 
@@ -344,7 +349,7 @@ export class SeaImpCargoPickupComponent implements OnInit {
           alert(this.errorMessage);
         }
         else {
-           this.errorMessage = 'Save Complete';
+          this.errorMessage = 'Save Complete';
           // alert(this.errorMessage);
         }
       }, error => {
