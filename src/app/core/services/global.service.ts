@@ -50,7 +50,7 @@ export class GlobalService {
 
   public MainList: any[];
   public UserRecord: any;
-  public UserInfo: any;
+  public UserInfoData: any;
   public Modules: Modulem[] = [];
   public MenuList: User_Menu[] = [];
   public CompanyList: Companym[] = [];
@@ -733,9 +733,13 @@ export class GlobalService {
     this.InitUserInfo();
   }
 
+   public get UserInfo(){
+     return this.UserInfoData;
+   }
+
   public InitUserInfo() {
 
-    this.UserInfo = {
+    this.UserInfoData = {
       "~USR_PKID": this.user_pkid,
       "~USR_CODE": this.user_code,
       "~USR_NAME": this.user_name,
@@ -1495,7 +1499,7 @@ export class GlobalService {
 
     //bts_settings.mainlist = this.MainList;
     bts_settings.userrecord = this.UserRecord;
-    bts_settings.userinfo = this.UserInfo;
+    bts_settings.userinfo = this.UserInfoData;
     //bts_settings.modules = this.Modules;
     //bts_settings.menulist = this.MenuList;
     bts_settings.companylist = this.CompanyList
@@ -1570,7 +1574,7 @@ export class GlobalService {
 
     //this.MainList = bts_settings.mainlist;
 
-    this.UserInfo = bts_settings.userinfo;
+    this.UserInfoData = bts_settings.userinfoData;
     //this.Modules = bts_settings.modules;
     //this.MenuList = bts_settings.menulist;
     this.CompanyList = bts_settings.companylist

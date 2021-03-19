@@ -38,7 +38,7 @@ export class gsdata {
     software_start_year: number;
     mainlist: any[];
     userrecord: any;
-    userinfo: any;
+    userinfoData: any;
     modules: any[];
     menulist : any[];
     companylist : any[];
