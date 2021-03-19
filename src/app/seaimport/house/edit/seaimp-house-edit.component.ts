@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalService } from '../../../core/services/global.service';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
 import { SeaImpHouseService } from '../../services/seaimp-house.service';
@@ -69,7 +70,7 @@ export class SeaImpHouseEditComponent implements OnInit {
   ISFBtnForegroundcolor: string;
   OHBLBtnForegroundcolor: string;
 
-
+  modal: any;
   private parentid: string;
   private pkid: string;
   private menuid: string;
@@ -93,12 +94,17 @@ export class SeaImpHouseEditComponent implements OnInit {
   is_locked: boolean = false;
 
   constructor(
+    private modalconfig: NgbModalConfig,
+    private modalservice: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     public gs: GlobalService,
     private mainService: SeaImpHouseService,
-  ) { }
+  ) {
+    modalconfig.backdrop = 'static'; //true/false/static
+    modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
+  }
 
   ngOnInit() {
     if (this.route.snapshot.queryParams.parameter == null) {
@@ -1596,7 +1602,7 @@ export class SeaImpHouseEditComponent implements OnInit {
   }
 
 
-  BtnNavigation(action: string) {
+  BtnNavigation(action: string, attachmodal: any = null) {
 
     switch (action) {
       case 'CUSTOMSHOLD': {
@@ -1691,7 +1697,8 @@ export class SeaImpHouseEditComponent implements OnInit {
         this.attach_pk_column = 'hbl_pkid';
         this.attach_refno = this.record.hbl_houseno;
         this.attach_update_column = 'HBL_ISF_ATTACHED';
-        this.tab = 'attachment';
+        // this.tab = 'attachment';
+        this.modal = this.modalservice.open(attachmodal, { centered: true });
         break;
       }
       case 'ATTACH-OHBL': {
@@ -1701,7 +1708,8 @@ export class SeaImpHouseEditComponent implements OnInit {
         this.attach_pk_column = 'hbl_pkid';
         this.attach_refno = this.record.hbl_houseno;
         this.attach_update_column = '';
-        this.tab = 'attachment';
+        // this.tab = 'attachment';
+        this.modal = this.modalservice.open(attachmodal, { centered: true });
         break;
       }
       case 'HOUSE-DEVAN': {
@@ -1852,7 +1860,9 @@ export class SeaImpHouseEditComponent implements OnInit {
         this.errorMessage.push(this.gs.getError(error));
       });
   }
-
+  CloseModal() {
+    this.modal.close();
+  }
   /*
     GetArrivalNotice(_type:string) {
       this.errorMessage = '';
