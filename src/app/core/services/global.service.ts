@@ -734,7 +734,7 @@ export class GlobalService {
   }
 
    public get UserInfo(){
-     return this.UserInfoData;
+     return {...this.UserInfoData};
    }
 
   public InitUserInfo() {
