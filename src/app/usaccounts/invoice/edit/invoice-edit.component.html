@@ -23,458 +23,495 @@
     <div class="page-body">
 
 
-
         <div class="row">
+            <div class="col-md-10">
 
-            <div class="col-md-6">
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Inv#</label>
-                    <div class="col-8">
-                        <input class="form-control form-control-sm" type="text" [(ngModel)]="record.inv_no"
-                            [disabled]="true" maxlength="15" />
+                <div class="row border p-1">
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Inv#</label>
+                            <div class="col-8">
+                                <input class="form-control form-control-sm" type="text" [(ngModel)]="record.inv_no"
+                                    [disabled]="true" maxlength="15" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Date</label>
+                            <div class="col-8">
+                                <app-date #_inv_date [colName]="inv_date" [inputdate]="record.inv_date"
+                                    (ValueChanged)="record.inv_date=$event;onBlur('inv_date')">
+                                </app-date>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Customer</label>
+                            <div class="col-8">
+                                <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'"
+                                    [displaycolumn]="'CODE'" [disabled]="!enable_customer_control"
+                                    [displaydata]="record.inv_cust_code" (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm"></label>
+                            <div class="col-8">
+                                <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_cust_name')"
+                                    [(ngModel)]="record.inv_cust_name" [disabled]="!enable_customer_control"
+                                    maxlength="100" />
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">AR/AP Code</label>
+                            <div class="col-8">
+                                <app-autocomplete2 [controlname]="'ARAP'" [tabletype]="'ACC_ACCTM'"
+                                    [displaycolumn]="'NAME'" [disabled]="!enable_arap_control"
+                                    [displaydata]="record.inv_acc_name" [where]="ArAp_Where_Condition"
+                                    (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Ref#</label>
+                            <div class="col-4">
+                                <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_refno')"
+                                    [(ngModel)]="mbl_refno" [disabled]="true" maxlength="15" />
+                            </div>
+                            <label class="col-2 col-form-label col-form-label-sm">Arrival Notice</label>
+                            <div class="col-2">
+                                <select class="form-control form-control-sm" [(ngModel)]="record.inv_arrnotice">
+                                    <option [value]="'N'">No</option>
+                                    <option [value]="'Y'">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Cust.Ref#</label>
+                            <div class="col-4">
+                                <input #_inv_refno class="form-control form-control-sm" type="text"
+                                    (blur)="onBlur('inv_refno')" [(ngModel)]="record.inv_refno" [disabled]="false"
+                                    maxlength="50" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row" *ngIf="show_currency">
+                            <label class="col-4 col-form-label col-form-label-sm">Currency</label>
+                            <div class="col-4">
+                                <app-autocomplete2 [controlname]="'CURR'" [tabletype]="'PARAM'" [subtype]="'CURRENCY'"
+                                    [displaycolumn]="'CODE'" [displaydata]="record.inv_curr_code"
+                                    [disabled]="!enable_currency" (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+                            </div>
+                            <label class="col-2 col-form-label col-form-label-sm">Ex.Rate</label>
+                            <div class="col-2">
+                                <input class="form-control form-control-sm" type="number" style="text-align:right;"
+                                    [(ngModel)]="record.inv_exrate" (blur)="onBlur('inv_exrate',rec)" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm" *ngIf='show_vat'></label>
+                            <div class="col-4" *ngIf='show_vat'>
+                                <input type="checkbox" [(ngModel)]="isVat" />
+                                <span class="ml-1">Vat Applicable</span>
+                            </div>
+                            <div class="col-4" *ngIf='show_confirm'>
+                                <input type="checkbox" [(ngModel)]="isConfirmed" />
+                                <span class="ml-1">Confirmed</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Quote#</label>
+                            <div class="col-3">
+                                <input class="form-control form-control-sm" type="text" (blur)="onBlur('quoteno')"
+                                    [(ngModel)]="qtnno" [disabled]="false" maxlength="50" />
+
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-info btn-sm"><span>Fill</span></button>
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+               
+
+                <div class="row border p-1">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Master/House</label>
+
+                            <div class="col-8">
+                                <select class="form-control form-control-sm" [(ngModel)]="inv_house_id"
+                                    (change)="onItmChange()">
+                                    <option *ngFor="let rec of HouseList" [value]="rec.pkid">
+                                        <ul>
+                                            <li> {{rec.houseno}} / </li>
+                                            <li> {{rec.shipper}} / </li>
+                                            <li> {{rec.consignee}} </li>
+                                        </ul>
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">House No</label>
+                            <div class="col-8">
+                                <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_hbl_no')"
+                                    [(ngModel)]="record.inv_hbl_no" [disabled]="true" maxlength="50" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Shipper</label>
+                            <div class="col-8">
+                                <input class="form-control form-control-sm" type="text"
+                                    (blur)="onBlur('inv_hbl_shipper_name')" [(ngModel)]="record.inv_hbl_shipper_name"
+                                    [disabled]="false" maxlength="60" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Consignee</label>
+                            <div class="col-8">
+                                <input class="form-control form-control-sm" type="text"
+                                    (blur)="onBlur('inv_hbl_consignee_name')"
+                                    [(ngModel)]="record.inv_hbl_consignee_name" [disabled]="false" maxlength="60" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Pcs</label>
+                            <div class="col-3">
+                                <input class="form-control form-control-sm" type="number"
+                                    (blur)="onBlur('inv_hbl_packages')" [(ngModel)]="record.inv_hbl_packages"
+                                    [disabled]="false" maxlength="60" />
+                            </div>
+                            <label class="col-2 col-form-label col-form-label-sm">Unit</label>
+                            <div class="col-3">
+                                <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_hbl_uom')"
+                                    [(ngModel)]="record.inv_hbl_uom" [disabled]="false" maxlength="4" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Lbs</label>
+                            <div class="col-3 input-group input-group-sm">
+                                <input class="form-control form-control-sm" type="number" (blur)="onBlur('inv_hbl_lbs')"
+                                    [(ngModel)]="record.inv_hbl_lbs" [disabled]="false" maxlength="60" />
+                                <button class="btn btn-info btn-sm"
+                                    (click)="FindWeight('Lbs2Kgs')"><span>&gt;</span></button>
+                            </div>
+                            <label class="col-2 col-form-label col-form-label-sm">Kgs</label>
+                            <div class="col-3 input-group input-group-sm">
+                                <input class="form-control form-control-sm" type="number"
+                                    (blur)="onBlur('inv_hbl_weight')" [(ngModel)]="record.inv_hbl_weight"
+                                    [disabled]="false" maxlength="4" />
+                                <button class="btn btn-info btn-sm"
+                                    (click)="FindWeight('Kgs2Lbs')"><span>&lt;</span></button>
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <label class="col-4 col-form-label col-form-label-sm">Cbm</label>
+                            <div class="col-3 input-group input-group-sm">
+                                <input class="form-control form-control-sm" type="number" (blur)="onBlur('inv_hbl_cbm')"
+                                    [(ngModel)]="record.inv_hbl_cbm" [disabled]="false" maxlength="60" />
+                                <button class="btn btn-info btn-sm"
+                                    (click)="FindWeight('Cbm2Cft')"><span>&gt;</span></button>
+                            </div>
+                            <label class="col-2 col-form-label col-form-label-sm">Cft</label>
+                            <div class="col-3 input-group input-group-sm">
+                                <input class="form-control form-control-sm" type="number" (blur)="onBlur('inv_hbl_cft')"
+                                    [(ngModel)]="record.inv_hbl_cft" [disabled]="false" maxlength="4" />
+                                <button class="btn btn-info btn-sm"
+                                    (click)="FindWeight('Cft2Cbm')"><span>&lt;</span></button>
+                            </div>
+
+
+                        </div>
+
+
+
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Date</label>
-                    <div class="col-8">
-                        <app-date #_inv_date [colName]="inv_date" [inputdate]="record.inv_date"
-                            (ValueChanged)="record.inv_date=$event;onBlur('inv_date')">
-                        </app-date>
+
+
+                <div class="row border p-1">
+                    <div class="col-md-12">
+                        <div class="page-body table-responsive">
+                            <table class="table  table-hover table-sm">
+                                <thead class="page-body-thead">
+                                    <tr>
+                                        <th width='8%'>CODE</th>
+                                        <th width='12%'>DESCRIPTION</th>
+                                        <th width='15%'>REMARKS</th>
+                                        <th width='10%'>A/C</th>
+                                        <th width='5%'>QTY</th>
+                                        <th width='5%'>RATE</th>
+                                        <th width='8%'>AMOUNT</th>
+
+                                        <th width='8%' *ngIf="show_currency">CURRENCY</th>
+                                        <th width='5%' *ngIf="show_currency">EX.RATE</th>
+                                        <th width='8%' *ngIf="show_currency">TOTAL</th>
+                                        <th width='5%' *ngIf="show_vat">VAT%</th>
+                                        <th width='5%' *ngIf="show_vat">VAT</th>
+                                        <th width='5%' *ngIf="show_cc_control">BRANCH</th>
+                                        <th width='2%'></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="page-body-tbody" *ngFor="let rec of records; let i = index">
+                                    <tr>
+                                        <td class="p-0">
+
+                                            <app-autocomplete2 #_invd_desc_code [controlname]="'INVOICED-CODE'"
+                                                [tabletype]="'PARAM'" [uid]="rec.invd_pkid"
+                                                [subtype]="'INVOICE-DESCRIPTION'" [displaycolumn]="'CODE'"
+                                                [displaydata]="rec.invd_desc_code"
+                                                (ValueChanged)="LovSelected($event,i)">
+                                            </app-autocomplete2>
+
+                                        </td>
+                                        <td class="p-0">
+                                            <input #_invd_desc_name class="form-control form-control-sm" type="text"
+                                                [(ngModel)]="rec.invd_desc_name"
+                                                (blur)="onBlur('invd_desc_name',rec)" />
+                                        </td>
+
+                                        <td class="p-0">
+                                            <input class="form-control form-control-sm" type="text"
+                                                [(ngModel)]="rec.invd_remarks" (blur)="onBlur('invd_remarks',rec)" />
+                                        </td>
+                                        <td class="p-0">
+                                            <app-autocomplete2 [controlname]="'INVOICED-ACCTM'"
+                                                [tabletype]="'ACC_ACCTM'" [subtype]="" [displaycolumn]="'CODE'"
+                                                [displaydata]="rec.invd_acc_code" [where]="acc_code_Where_Condition"
+                                                [uid]="rec.invd_pkid" [disabled]="!enable_acc_control"
+                                                (ValueChanged)="LovSelected($event,i)">
+                                            </app-autocomplete2>
+
+                                        </td>
+                                        <td class="p-0">
+                                            <input #_invd_qty class="form-control form-control-sm" type="number"
+                                                style="text-align:right;" [(ngModel)]="rec.invd_qty"
+                                                (blur)="onBlur('invd_qty',rec)" />
+                                        </td>
+                                        <td class="p-0">
+                                            <input class="form-control form-control-sm" type="number"
+                                                style="text-align:right;" [(ngModel)]="rec.invd_rate"
+                                                (blur)="onBlur('invd_rate',rec)" />
+                                        </td>
+                                        <td class="p-0">
+                                            <input disabled class="form-control form-control-sm" type="number"
+                                                style="text-align:right;" [(ngModel)]="rec.invd_ftotal"
+                                                (blur)="onBlur('invd_ftotal',rec)" />
+                                        </td>
+
+                                        <td class="p-0" *ngIf="show_currency">
+                                            <app-autocomplete2 [controlname]="'INVOICED-CURR'" [tabletype]="'PARAM'"
+                                                [subtype]="'CURRENCY'" [displaycolumn]="'CODE'" [uid]="rec.invd_pkid"
+                                                [displaydata]="rec.invd_curr_code"
+                                                (ValueChanged)="LovSelected($event,i)">
+                                            </app-autocomplete2>
+                                        </td>
+                                        <td class="p-0" *ngIf="show_currency">
+                                            <input #_invd_exrate class="form-control form-control-sm" type="number"
+                                                style="text-align:right;" [(ngModel)]="rec.invd_exrate"
+                                                (blur)="onBlur('invd_exrate',rec)" />
+                                        </td>
+                                        <td class="p-0" *ngIf="show_currency">
+                                            <input class="form-control form-control-sm" type="number" [disabled]="true"
+                                                style="text-align:right;" [(ngModel)]="rec.invd_total"
+                                                (blur)="onBlur('invd_total',rec)" />
+                                        </td>
+
+                                        <td class="p-0" *ngIf="show_vat">
+                                            <input class="form-control form-control-sm" type="number"
+                                                style="text-align:right;" [(ngModel)]="rec.invd_vat_per"
+                                                (blur)="onBlur('invd_vat_per',rec)" />
+                                        </td>
+
+                                        <td class="p-0" *ngIf="show_vat">
+                                            <input class="form-control form-control-sm" type="number"
+                                                style="text-align:right;" [disabled]="true"
+                                                [(ngModel)]="rec.invd_vat_amt" (blur)="onBlur('invd_vat_amt',rec)" />
+                                        </td>
+
+
+                                        <td class="p-0" *ngIf="show_cc_control">
+                                            <app-autocomplete2 [controlname]="'INVOICED-BRANCH'" [tabletype]="'BRANCH'"
+                                                [displaycolumn]="'CODE'" [uid]="rec.invd_pkid"
+                                                [displaydata]="rec.invd_cc_code" (ValueChanged)="LovSelected($event,i)">
+                                            </app-autocomplete2>
+                                        </td>
+
+                                        <td class="p-0">
+                                            <a class="btn btn-sm" (click)="removeRow(rec)">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                        </td>
+
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <button class="btn btn-info btn-sm" (click)="AddRow()">Add Line Item</button>
+
+
+                        </div>
+
+
+
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Customer</label>
-                    <div class="col-8">
-                        <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
-                            [disabled]="!enable_customer_control" [displaydata]="record.inv_cust_code"
-                            (ValueChanged)="LovSelected($event)">
-                        </app-autocomplete2>
+                </div>
+                
+
+                <div class="row border p-1">
+                    <div class="col-md-12">
+                        Payment History
                     </div>
-                </div>
+                    <div class="col-md-6">
 
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm"></label>
-                    <div class="col-8">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_cust_name')"
-                            [(ngModel)]="record.inv_cust_name" [disabled]="!enable_customer_control" maxlength="100" />
+                        <div class="page-body table-responsive">
+                            <table class="table  table-hover table-sm">
+                                <thead class="page-body-thead">
+                                    <tr>
+                                        <th>PAY/DEP#</th>
+                                        <th>DATE</th>
+                                        <th>AMT</th>
+                                        <th>CHQ#</th>
+                                        <th>BY</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="page-body-tbody">
+                                    <tr *ngFor="let rec of history"
+                                        [ngStyle]="{'color':rec.deleted === 'Y' ? 'red' : 'black' }">
+                                        <td>{{rec.docno}}</td>
+                                        <td>{{rec.doc_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                                        <td>{{rec.amt | number : '1.2-2'}}</td>
+                                        <td>{{rec.chqno}}</td>
+                                        <td>{{rec.by}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                    <div class="col-md-6">
 
+                        <div class="form-group row" *ngIf="show_currency">
+                            <label class="col-6 col-form-label col-form-label-sm">Total(F.CURR)</label>
+                            <div class="col-6">
+                                <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_ftotal')"
+                                    [(ngModel)]="record.inv_ftotal" [disabled]="true" maxlength="60" />
+                            </div>
+                        </div>
 
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">AR/AP Code</label>
-                    <div class="col-8">
-                        <app-autocomplete2 [controlname]="'ARAP'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
-                            [disabled]="!enable_arap_control" [displaydata]="record.inv_acc_name"
-                            [where]="ArAp_Where_Condition" (ValueChanged)="LovSelected($event)">
-                        </app-autocomplete2>
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label col-form-label-sm">Total</label>
+                            <div class="col-6">
+                                <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_total')"
+                                    [(ngModel)]="record.inv_total" [disabled]="true" maxlength="60" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label col-form-label-sm">Paid</label>
+                            <div class="col-6">
+                                <input class="form-control form-control-sm" type="text" (blur)="onBlur('paid_amt')"
+                                    [(ngModel)]="paid_amt" [disabled]="true" maxlength="60" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label col-form-label-sm">Balance</label>
+                            <div class="col-6">
+                                <input class="form-control form-control-sm" type="text" (blur)="onBlur('bal_amt')"
+                                    [(ngModel)]="bal_amt" [disabled]="true" maxlength="60" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label col-form-label-sm">Remarks</label>
+                            <div class="col-6">
+                                <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_remarks')"
+                                    [(ngModel)]="record.inv_remarks" [disabled]="false" maxlength="60" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label col-form-label-sm"></label>
+                            <div class="col-6">
+                                <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_remarks2')"
+                                    [(ngModel)]="record.inv_remarks2" [disabled]="false" maxlength="60" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-6 col-form-label col-form-label-sm"></label>
+                            <div class="col-6">
+                                <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_remarks3')"
+                                    [(ngModel)]="record.inv_remarks3" [disabled]="false" maxlength="60" />
+                            </div>
+                        </div>
                     </div>
 
+
                 </div>
-
-                <hr>
-
-
-
 
             </div>
+            <div class="col-md-2 p-1">
+                <div class="col-md-12 p-2 border" *ngIf="mode=='EDIT'" >
+                    <div class="form-group row">
+                        <button class="col-12 btn  btn-info btn-sm text-uppercase"
+                            (click)="BtnNavigation('HISTORY',historymodal)">History</button>
+                    </div>
+                    <div class="form-group row">
+                        <button class="col-12 btn  btn-info btn-sm text-uppercase"
+                            (click)="instantPayment(paymentModalContent)">Instant Payment</button>
+                    </div>
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase" 
+                          [style.color]="record.rec_subfiles_attached=='Y'?'red':'white'"
+                          (click)="BtnNavigation('ATTACHMENT',attachmodal)">Attachments</button>
+                    </div>
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase" 
+                          [style.color]="record.rec_files_attached=='Y'?'red':'white'"
+                          (click)="BtnNavigation('CHECKCOPY',attachmodal)">Check Copy</button>
+                    </div>
 
-            <div class="col-md-6">
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Ref#</label>
-                    <div class="col-4">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_refno')"
-                            [(ngModel)]="mbl_refno" [disabled]="true" maxlength="15" />
-                    </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Arrival Notice</label>
-                    <div class="col-2">
-                        <select class="form-control form-control-sm" [(ngModel)]="record.inv_arrnotice">
-                            <option [value]="'N'">No</option>
-                            <option [value]="'Y'">Yes</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Cust.Ref#</label>
-                    <div class="col-4">
-                        <input #_inv_refno class="form-control form-control-sm" type="text" (blur)="onBlur('inv_refno')"
-                            [(ngModel)]="record.inv_refno" [disabled]="false" maxlength="50" />
-                    </div>
-                </div>
-
-                <div class="form-group row" *ngIf="show_currency">
-                    <label class="col-4 col-form-label col-form-label-sm">Currency</label>
-                    <div class="col-4">
-                        <app-autocomplete2 [controlname]="'CURR'" [tabletype]="'PARAM'" [subtype]="'CURRENCY'"
-                            [displaycolumn]="'CODE'" [displaydata]="record.inv_curr_code" [disabled]="!enable_currency"
-                            (ValueChanged)="LovSelected($event)">
-                        </app-autocomplete2>
-                    </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Ex.Rate</label>
-                    <div class="col-2">
-                        <input class="form-control form-control-sm" type="number" style="text-align:right;"
-                            [(ngModel)]="record.inv_exrate" (blur)="onBlur('inv_exrate',rec)" />
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm" *ngIf='show_vat'></label>
-                    <div class="col-4" *ngIf='show_vat'>
-                        <input type="checkbox" [(ngModel)]="isVat" />
-                        <span class="ml-1">Vat Applicable</span>
-                    </div>
-                    <div class="col-4" *ngIf='show_confirm'>
-                        <input type="checkbox" [(ngModel)]="isConfirmed" />
-                        <span class="ml-1">Confirmed</span>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Quote#</label>
-                    <div class="col-3">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('quoteno')"
-                            [(ngModel)]="qtnno" [disabled]="false" maxlength="50" />
-
-                    </div>
-                    <div class="col-1">
-                        <button class="btn btn-info btn-sm"><span>Fill</span></button>
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase" 
+                          [style.color]="record.rec_files_attached_chk=='Y'?'red':'white'"
+                          (click)="BtnNavigation('CHECKCOPYAP',attachmodal)">Check Copy(A/P)</button>
                     </div>
 
 
                 </div>
-
-
-
             </div>
-
-
         </div>
-
-        <hr>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Master/House</label>
-
-                    <div class="col-8">
-                        <select class="form-control form-control-sm" [(ngModel)]="inv_house_id"
-                            (change)="onItmChange()">
-                            <option *ngFor="let rec of HouseList" [value]="rec.pkid">
-                                <ul>
-                                    <li> {{rec.houseno}} / </li>
-                                    <li> {{rec.shipper}} / </li>
-                                    <li> {{rec.consignee}} </li>
-                                </ul>
-                            </option>
-                        </select>
-                    </div>
-
-                </div>
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">House No</label>
-                    <div class="col-8">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_hbl_no')"
-                            [(ngModel)]="record.inv_hbl_no" [disabled]="true" maxlength="50" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Shipper</label>
-                    <div class="col-8">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_hbl_shipper_name')"
-                            [(ngModel)]="record.inv_hbl_shipper_name" [disabled]="false" maxlength="60" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Consignee</label>
-                    <div class="col-8">
-                        <input class="form-control form-control-sm" type="text"
-                            (blur)="onBlur('inv_hbl_consignee_name')" [(ngModel)]="record.inv_hbl_consignee_name"
-                            [disabled]="false" maxlength="60" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Pcs</label>
-                    <div class="col-3">
-                        <input class="form-control form-control-sm" type="number" (blur)="onBlur('inv_hbl_packages')"
-                            [(ngModel)]="record.inv_hbl_packages" [disabled]="false" maxlength="60" />
-                    </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Unit</label>
-                    <div class="col-3">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_hbl_uom')"
-                            [(ngModel)]="record.inv_hbl_uom" [disabled]="false" maxlength="4" />
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Lbs</label>
-                    <div class="col-3 input-group input-group-sm">
-                        <input class="form-control form-control-sm" type="number" (blur)="onBlur('inv_hbl_lbs')"
-                            [(ngModel)]="record.inv_hbl_lbs" [disabled]="false" maxlength="60" />
-                        <button class="btn btn-info btn-sm" (click)="FindWeight('Lbs2Kgs')"><span>&gt;</span></button>
-                    </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Kgs</label>
-                    <div class="col-3 input-group input-group-sm">
-                        <input class="form-control form-control-sm" type="number" (blur)="onBlur('inv_hbl_weight')"
-                            [(ngModel)]="record.inv_hbl_weight" [disabled]="false" maxlength="4" />
-                        <button class="btn btn-info btn-sm" (click)="FindWeight('Kgs2Lbs')"><span>&lt;</span></button>
-                    </div>
-
-
-                </div>
-
-                <div class="form-group row">
-
-                    <label class="col-4 col-form-label col-form-label-sm">Cbm</label>
-                    <div class="col-3 input-group input-group-sm">
-                        <input class="form-control form-control-sm" type="number" (blur)="onBlur('inv_hbl_cbm')"
-                            [(ngModel)]="record.inv_hbl_cbm" [disabled]="false" maxlength="60" />
-                        <button class="btn btn-info btn-sm" (click)="FindWeight('Cbm2Cft')"><span>&gt;</span></button>
-                    </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Cft</label>
-                    <div class="col-3 input-group input-group-sm">
-                        <input class="form-control form-control-sm" type="number" (blur)="onBlur('inv_hbl_cft')"
-                            [(ngModel)]="record.inv_hbl_cft" [disabled]="false" maxlength="4" />
-                        <button class="btn btn-info btn-sm" (click)="FindWeight('Cft2Cbm')"><span>&lt;</span></button>
-                    </div>
-
-
-                </div>
-
-
-
-            </div>
-        </div>
-
-        <hr>
-
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="page-body table-responsive">
-                    <table class="table  table-hover table-sm">
-                        <thead class="page-body-thead">
-                            <tr>
-                                <th width='8%'>CODE</th>
-                                <th width='12%'>DESCRIPTION</th>
-                                <th width='15%'>REMARKS</th>
-                                <th width='10%'>A/C</th>
-                                <th width='5%'>QTY</th>
-                                <th width='5%'>RATE</th>
-                                <th width='8%'>AMOUNT</th>
-
-                                <th width='8%' *ngIf="show_currency">CURRENCY</th>
-                                <th width='5%' *ngIf="show_currency">EX.RATE</th>
-                                <th width='8%' *ngIf="show_currency">TOTAL</th>
-                                <th width='5%' *ngIf="show_vat">VAT%</th>
-                                <th width='5%' *ngIf="show_vat">VAT</th>
-                                <th width='5%' *ngIf="show_cc_control">BRANCH</th>
-                                <th width='2%'></th>
-                            </tr>
-                        </thead>
-                        <tbody class="page-body-tbody" *ngFor="let rec of records; let i = index">
-                            <tr>
-                                <td class="p-0">
-
-                                    <app-autocomplete2 #_invd_desc_code [controlname]="'INVOICED-CODE'"
-                                        [tabletype]="'PARAM'" [uid]="rec.invd_pkid" [subtype]="'INVOICE-DESCRIPTION'"
-                                        [displaycolumn]="'CODE'" [displaydata]="rec.invd_desc_code"
-                                        (ValueChanged)="LovSelected($event,i)">
-                                    </app-autocomplete2>
-
-                                </td>
-                                <td class="p-0">
-                                    <input #_invd_desc_name class="form-control form-control-sm" type="text"
-                                        [(ngModel)]="rec.invd_desc_name" (blur)="onBlur('invd_desc_name',rec)" />
-                                </td>
-
-                                <td class="p-0">
-                                    <input class="form-control form-control-sm" type="text"
-                                        [(ngModel)]="rec.invd_remarks" (blur)="onBlur('invd_remarks',rec)" />
-                                </td>
-                                <td class="p-0">
-                                    <app-autocomplete2 [controlname]="'INVOICED-ACCTM'" [tabletype]="'ACC_ACCTM'"
-                                        [subtype]="" [displaycolumn]="'CODE'" [displaydata]="rec.invd_acc_code"
-                                        [where]="acc_code_Where_Condition" [uid]="rec.invd_pkid"
-                                        [disabled]="!enable_acc_control" (ValueChanged)="LovSelected($event,i)">
-                                    </app-autocomplete2>
-
-                                </td>
-                                <td class="p-0">
-                                    <input #_invd_qty class="form-control form-control-sm" type="number"
-                                        style="text-align:right;" [(ngModel)]="rec.invd_qty"
-                                        (blur)="onBlur('invd_qty',rec)" />
-                                </td>
-                                <td class="p-0">
-                                    <input class="form-control form-control-sm" type="number" style="text-align:right;"
-                                        [(ngModel)]="rec.invd_rate" (blur)="onBlur('invd_rate',rec)" />
-                                </td>
-                                <td class="p-0">
-                                    <input disabled class="form-control form-control-sm" type="number"
-                                        style="text-align:right;" [(ngModel)]="rec.invd_ftotal"
-                                        (blur)="onBlur('invd_ftotal',rec)" />
-                                </td>
-
-                                <td class="p-0" *ngIf="show_currency">
-                                    <app-autocomplete2 [controlname]="'INVOICED-CURR'" [tabletype]="'PARAM'"
-                                        [subtype]="'CURRENCY'" [displaycolumn]="'CODE'" [uid]="rec.invd_pkid"
-                                        [displaydata]="rec.invd_curr_code" (ValueChanged)="LovSelected($event,i)">
-                                    </app-autocomplete2>
-                                </td>
-                                <td class="p-0" *ngIf="show_currency">
-                                    <input #_invd_exrate class="form-control form-control-sm" type="number"
-                                        style="text-align:right;" [(ngModel)]="rec.invd_exrate"
-                                        (blur)="onBlur('invd_exrate',rec)" />
-                                </td>
-                                <td class="p-0" *ngIf="show_currency">
-                                    <input class="form-control form-control-sm" type="number" [disabled]="true"
-                                        style="text-align:right;" [(ngModel)]="rec.invd_total"
-                                        (blur)="onBlur('invd_total',rec)" />
-                                </td>
-
-                                <td class="p-0" *ngIf="show_vat">
-                                    <input class="form-control form-control-sm" type="number" style="text-align:right;"
-                                        [(ngModel)]="rec.invd_vat_per" (blur)="onBlur('invd_vat_per',rec)" />
-                                </td>
-
-                                <td class="p-0" *ngIf="show_vat">
-                                    <input class="form-control form-control-sm" type="number" style="text-align:right;"
-                                        [disabled]="true" [(ngModel)]="rec.invd_vat_amt"
-                                        (blur)="onBlur('invd_vat_amt',rec)" />
-                                </td>
-
-
-                                <td class="p-0" *ngIf="show_cc_control">
-                                    <app-autocomplete2 [controlname]="'INVOICED-BRANCH'" [tabletype]="'BRANCH'"
-                                        [displaycolumn]="'CODE'" [uid]="rec.invd_pkid" [displaydata]="rec.invd_cc_code"
-                                        (ValueChanged)="LovSelected($event,i)">
-                                    </app-autocomplete2>
-                                </td>
-
-                                <td class="p-0">
-                                    <a class="btn btn-sm" (click)="removeRow(rec)">
-                                        <i class="fa fa-trash-o"></i>
-                                    </a>
-                                </td>
-
-
-                            </tr>
-
-                        </tbody>
-                    </table>
-                    <hr>
-                    <button class="btn btn-info btn-sm" (click)="AddRow()">Add Line Item</button>
-
-
-                </div>
-
-
-
-            </div>
-
-        </div>
-
-
-        <hr>
-
-        <div class="row">
-            <div class="col-md-12">
-                Payment History
-            </div>
-            <div class="col-md-6">
-
-                <div class="page-body table-responsive">
-                    <table class="table  table-hover table-sm">
-                        <thead class="page-body-thead">
-                            <tr>
-                                <th>PAY/DEP#</th>
-                                <th>DATE</th>
-                                <th>AMT</th>
-                                <th>CHQ#</th>
-                                <th>BY</th>
-                            </tr>
-                        </thead>
-                        <tbody class="page-body-tbody">
-                            <tr *ngFor="let rec of history"
-                                [ngStyle]="{'color':rec.deleted === 'Y' ? 'red' : 'black' }">
-                                <td>{{rec.docno}}</td>
-                                <td>{{rec.doc_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-                                <td>{{rec.amt | number : '1.2-2'}}</td>
-                                <td>{{rec.chqno}}</td>
-                                <td>{{rec.by}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-6">
-
-                <div class="form-group row" *ngIf="show_currency">
-                    <label class="col-6 col-form-label col-form-label-sm">Total(F.CURR)</label>
-                    <div class="col-6">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_ftotal')"
-                            [(ngModel)]="record.inv_ftotal" [disabled]="true" maxlength="60" />
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-6 col-form-label col-form-label-sm">Total</label>
-                    <div class="col-6">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_total')"
-                            [(ngModel)]="record.inv_total" [disabled]="true" maxlength="60" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-6 col-form-label col-form-label-sm">Paid</label>
-                    <div class="col-6">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('paid_amt')"
-                            [(ngModel)]="paid_amt" [disabled]="true" maxlength="60" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-6 col-form-label col-form-label-sm">Balance</label>
-                    <div class="col-6">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('bal_amt')"
-                            [(ngModel)]="bal_amt" [disabled]="true" maxlength="60" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-6 col-form-label col-form-label-sm">Remarks</label>
-                    <div class="col-6">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_remarks')"
-                            [(ngModel)]="record.inv_remarks" [disabled]="false" maxlength="60" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-6 col-form-label col-form-label-sm"></label>
-                    <div class="col-6">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_remarks2')"
-                            [(ngModel)]="record.inv_remarks2" [disabled]="false" maxlength="60" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-6 col-form-label col-form-label-sm"></label>
-                    <div class="col-6">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('inv_remarks3')"
-                            [(ngModel)]="record.inv_remarks3" [disabled]="false" maxlength="60" />
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-
     </div>
-
 
     <div class="page-footer">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm"></label>
                     <div class="col-8">
@@ -482,11 +519,6 @@
                             (click)="Save()">Save</button>
                         <button class="btn btn-primary btn-sm mr-1"
                             (click)="BtnNavigation('INVOICE-PRINT')">Print</button>
-                        <button class="btn btn-primary btn-sm mr-1"
-                            (click)="BtnNavigation('HISTORY',historymodal)">History</button>
-                        <button class="btn btn-primary btn-sm mr-1"
-                            (click)="instantPayment(paymentModalContent)">Instant Payment</button>                            
-
                     </div>
                 </div>
             </div>
@@ -523,8 +555,8 @@
         <div class="page-body">
             <div class="row">
                 <div class="col-md-12 testbox  px-0 mx-0">
-                    <app-logbook [setmenuid]="menuid" [setpkid]="pkid" [setsource]="'INVOICE'"
-                        [settitle]="report_title" [modalview]="true"></app-logbook>
+                    <app-logbook [setmenuid]="menuid" [setpkid]="pkid" [setsource]="'INVOICE'" [settitle]="report_title"
+                        [modalview]="true"></app-logbook>
                 </div>
             </div>
             <div class="page-footer">
@@ -549,7 +581,8 @@
             <div class="row">
                 <div class="col-md-12 testbox  px-0 mx-0">
 
-                    <app-pay-final ngbAutofocus [mpayrecrod]="mPayRecord" (callbackevent)="paymentcallbackevent($event)">
+                    <app-pay-final ngbAutofocus [mpayrecrod]="mPayRecord"
+                        (callbackevent)="paymentcallbackevent($event)">
                     </app-pay-final>
 
                 </div>
@@ -557,3 +590,29 @@
         </div>
     </div>
 </ng-template>
+
+
+
+<ng-template #attachmodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+      <div class="page-body">
+        <div class="row">
+          <div class="col-md-12 testbox  px-0 mx-0">
+            <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+              [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+              [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno" [customername]="attach_customername"
+              [updatecolumn]="attach_updatecolumn" [viewonlysource]="attach_viewonlysource"
+              [viewonlyid]="attach_viewonlyid" [filespath]="attach_filespath" [filespath2]="attach_filespath2"
+              [uploadfiles]="attach_uploadefiles"
+              [modalview]="true" (callbackevent)="callbackevent($event)"></app-fileupload>
+          </div>
+        </div>
+        <div class="page-footer">
+          <div class="row justify-content-center p-1">
+            <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  
