@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col-md-12 testbox  px-0 mx-0">
                                     <div class="page-list">
-                                        <div class="page-body table-responsive">
+                                        <div class="page-body table-responsive table-bordered">
                                             <table class="table  table-hover table-sm">
                                                 <thead class="page-body-thead">
                                                     <tr>
@@ -144,7 +144,7 @@
                         <div class="row">
                             <div class="col-md-12 testbox  px-0 mx-0">
                                 <div class="page-list">
-                                    <div class="page-body table-responsive">
+                                    <div class="page-body table-responsive table-bordered">
                                         <table class="table  table-hover table-sm">
                                             <thead class="page-body-thead">
                                                 <tr>
@@ -161,8 +161,7 @@
                                                     <td class="p-0">{{rec.rec_created_by}} </td>
                                                     <td class="p-0">{{rec.date | date : gs.date_display_fmt_with_time}}
                                                     </td>
-                                                    <td class="p-0"
-                                                        style="color: red;cursor:pointer;text-decoration: underline;"
+                                                    <td class="hlink2 p-0"
                                                         (blur)="onBlur('remarks',rec)" (click)="EditRow(rec)">
                                                         {{rec.remarks}}</td>
                                                     <td class='p-0 text-center'><i

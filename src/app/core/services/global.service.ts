@@ -766,12 +766,19 @@ export class GlobalService {
       "~HIDE_PAYROLL": this.user_hide_payroll,
       "~SOFTWARE_VERSION": this.SOFTWARE_VERSION,
       "~SOFTWARE_NAME": this.SOFTWARE_NAME,
+      "~BASE_CUR_CODE": this.base_cur_code,
+
 
       "~ADDRESS_LINE1": this.ADDRESS_LINE1,
       "~ADDRESS_LINE2": this.ADDRESS_LINE2,
       "~ADDRESS_LINE3": this.ADDRESS_LINE3,
       "~ADDRESS_LINE4": this.ADDRESS_LINE4,
       "~ADDRESS_LINE5": this.ADDRESS_LINE5,
+      "~ADDRESS_DUMMY_LINE1": this.ADDRESS_DUMMY_LINE1,
+      "~ADDRESS_DUMMY_LINE2": this.ADDRESS_DUMMY_LINE2,
+      "~ADDRESS_DUMMY_LINE3": this.ADDRESS_DUMMY_LINE3,
+      "~ADDRESS_DUMMY_LINE4": this.ADDRESS_DUMMY_LINE4,
+      "~ADDRESS_DUMMY_LINE5": this.ADDRESS_DUMMY_LINE5,
       "~DOC_FOOTER1": this.DOC_FOOTER1,
       "~DOC_FOOTER2": this.DOC_FOOTER2,
       "~DATE_DISPLAY_FMT": this.date_display_fmt,
@@ -790,6 +797,7 @@ export class GlobalService {
       "~HBL_INSTR1": this.HBL_INSTR1,
       "~HBL_INSTR2": this.HBL_INSTR2,
       "~DATE_DISPLAY_FMT_WITH_TIME": this.date_display_fmt_with_time
+      
     }
 
   }
