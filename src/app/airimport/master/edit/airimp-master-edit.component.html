@@ -313,7 +313,7 @@
                 <div *ngIf="mode=='EDIT'" class="row">
 
                     <div class="col-md-12  px-0 mx-0">
-                        <div class="page-body table-responsive">
+                        <div class="page-body table-responsive table-bordered">
                             <table class="table  table-hover table-sm">
                                 <thead class="page-body-thead">
                                     <tr>
@@ -349,7 +349,7 @@
                             </table>
                             <div class="form-group row">
                                 <div class="col-12">
-                                    <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_AI_HOUSE)" disabled="is_locked"
+                                    <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_AI_HOUSE)"  [class.disabled]="is_locked"
                                         [routerLink]="['/Silver.AirImport.Trans/AirImpHouseEditPage']"
                                         [queryParams]="{appid : gs.appid, menuid: this.gs.MENU_AI_HOUSE, parentid:this.pkid, pkid: '',refno: this.record.mbl_refno ,type: 'AI',origin: 'airimp-master-page',mode: 'ADD'}">Add
                                         House</a>
