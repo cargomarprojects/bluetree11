@@ -336,22 +336,8 @@ export class AirImpMasterEditComponent implements OnInit {
       this.errorMessage.push("Master Agent cannot be blank");
 
     }
-    if (this.gs.isBlank(this.record.mbl_liner_id)) {
-      bRet = false;
-      this.errorMessage.push("Carrier cannot be blank");
 
-    }
-    if (this.gs.isBlank(this.record.mbl_handled_id)) {
-      bRet = false;
-      this.errorMessage.push("A/N Handled By cannot be blank");
 
-    }
-
-    if (this.gs.isBlank(this.record.mbl_frt_status)) {
-      bRet = false;
-      this.errorMessage.push("Freight status cannot be blank");
-
-    }
 
     if (this.gs.isBlank(this.record.mbl_pol_id)) {
       bRet = false;
@@ -373,17 +359,42 @@ export class AirImpMasterEditComponent implements OnInit {
       this.errorMessage.push("ETA cannot be blank");
 
     }
+    if (this.gs.isBlank(this.record.mbl_liner_id)) {
+      bRet = false;
+      this.errorMessage.push("Carrier cannot be blank");
+
+    }
+    if (this.gs.isBlank(this.record.mbl_vessel)) {
+      bRet = false;
+      this.errorMessage.push("Flight No can't be blank");
+
+    }
+    if (this.gs.isBlank(this.record.mbl_frt_status)) {
+      bRet = false;
+      this.errorMessage.push("Freight status cannot be blank");
+
+    }
+    if (this.gs.isBlank(this.record.mbl_country_id)) {
+      bRet = false;
+      this.errorMessage.push("Country Cannot be blank");
+
+    }
+
+    if (this.gs.isBlank(this.record.mbl_handled_id)) {
+      bRet = false;
+      this.errorMessage.push("A/N Handled By cannot be blank");
+
+    }
+
+
+
     // if (this.record.mbl_pofd_id == "") {
     //   bRet = false;
     //   this.errorMessage = "Final Destination cannot be blank"
     //   return bRet;
     // }
 
-    if (this.gs.isBlank(this.record.mbl_country_id)) {
-      bRet = false;
-      this.errorMessage.push("Country Cannot be blank");
 
-    }
     // if (this.record.mbl_currency == "") {
     //   bRet = false;
     //   this.errorMessage = "Currency cannot be blank"
@@ -402,7 +413,14 @@ export class AirImpMasterEditComponent implements OnInit {
 
     }
 
-    if (!this.IsValidAWB(this.record.mbl_no)) {
+    if (!this.gs.isBlank(this.record.mbl_cargo_loccode)) {
+      if (this.gs.isBlank(this.record.mbl_cargo_locname)) {
+        bRet = false;
+        this.errorMessage.push("Invalid Cargo Location Code");
+      }
+    }
+
+    if (!this.gs.isBlank(this.record.mbl_no) && !this.IsValidAWB(this.record.mbl_no)) {
       bRet = false;
       this.errorMessage.push("Invalid Master BL#");
 
@@ -599,7 +617,7 @@ export class AirImpMasterEditComponent implements OnInit {
         return '/Silver.USAccounts.Trans/InvoicePage';
       if (_type == 'P')
         return {
-          appid : this.gs.appid,
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AI_MASTER_ARAP,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
