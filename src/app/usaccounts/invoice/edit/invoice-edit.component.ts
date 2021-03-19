@@ -42,6 +42,24 @@ export class InvoiceEditComponent implements OnInit {
   paid_amt: number;
   bal_amt: number;
 
+
+  attach_title: string = '';
+  attach_parentid: string = '';
+  attach_subid: string = '';
+  attach_type: string = '';
+  attach_typelist: any = {};
+  attach_tablename: string = '';
+  attach_tablepkcolumn: string = '';
+  attach_refno: string = '';
+  attach_customername: string = '';
+  attach_updatecolumn: string = '';
+  attach_viewonlysource: string = '';
+  attach_viewonlyid: string = '';
+  attach_filespath: string = '';
+  attach_filespath2: string = '';
+
+
+
   mPayRecord = {};
 
   inv_arap: string; // AR OR AP
@@ -1115,7 +1133,7 @@ export class InvoiceEditComponent implements OnInit {
 
   }
 
-  BtnNavigation(action: string, historymodal: any = null) {
+  BtnNavigation(action: string, _modal: any = null) {
     switch (action) {
       case 'HISTORY': {
         // let prm = {
@@ -1127,7 +1145,7 @@ export class InvoiceEditComponent implements OnInit {
         // };
         // this.gs.Naviagete('Silver.BusinessModule/LogBookPage', JSON.stringify(prm));
         this.report_title = "History [INVOICE NO : " + this.record.inv_no + "]";
-        this.modal = this.modalservice.open(historymodal, { centered: true });
+        this.modal = this.modalservice.open(_modal, { centered: true });
         break;
       }
       case 'INVOICE-PRINT': {
@@ -1147,6 +1165,74 @@ export class InvoiceEditComponent implements OnInit {
       case 'INSTANT PAYMENT': {
 
       }
+
+      case 'ATTACHMENT': {
+        let TypeList: any[] = [];
+        if ( this.gs.HIDE_DOCTYPE_INVOICE == "N")
+          TypeList = [{ "code": "AR/AP", "name": "AR/AP" },{ "code": "EMAIL", "name": "EMAIL" }, { "code": "HOUSEBL", "name": "HOUSE B/L" }, { "code": "MASTER", "name": "MASTER" }, { "code": "PAYMENT SETTLEMENT", "name": "OTHERS" }];
+        this.attach_title = 'Documents';
+        this.attach_parentid = this.pkid;
+        this.attach_subid = '';
+        if ( this.gs.HIDE_DOCTYPE_INVOICE == "N")
+          this.attach_type = 'PAYMENT SETTLEMENT';
+        else
+          this.attach_type = 'AR/AP';
+        this.attach_typelist = TypeList;
+        this.attach_tablename = 'cargo_masterm';
+        this.attach_tablepkcolumn = 'mbl_pkid';
+        this.attach_refno = this.record.inv_refno;
+        this.attach_customername = this.record.inv_cust_name;
+        this.attach_updatecolumn = 'rec_subfiles_attached';
+        this.attach_viewonlysource = '';
+        this.attach_viewonlyid = '';
+        this.attach_filespath = '';
+        this.attach_filespath2 = '';
+        this.modal = this.modalservice.open(_modal, { centered: true });
+        break;
+      }
+      case 'CHECKCOPY': {
+        let TypeList: any[] = [];
+        if ( this.gs.HIDE_DOCTYPE_INVOICE == "N")
+          TypeList = [{ "code": "CHECK COPY", "name": "CHECK COPY" }];
+        this.attach_title = 'Documents';
+        this.attach_parentid = this.pkid;
+        this.attach_subid = '';
+        this.attach_type = 'CHECK COPY';
+        this.attach_typelist = TypeList;
+        this.attach_tablename = 'cargo_masterm';
+        this.attach_tablepkcolumn = 'inv_pkid';
+        this.attach_refno = this.record.inv_refno;
+        this.attach_customername = this.record.inv_cust_name;
+        this.attach_updatecolumn = 'rec_files_attached';
+        this.attach_viewonlysource = '';
+        this.attach_viewonlyid = '';
+        this.attach_filespath = '';
+        this.attach_filespath2 = '';
+        this.modal = this.modalservice.open(_modal, { centered: true });
+        break;
+      }
+      case 'CHECKCOPYAP': {
+        let TypeList: any[] = [];
+        this.attach_title = 'Documents';
+        this.attach_parentid = '';
+        this.attach_subid = '';
+        this.attach_type = 'PAYMENT';
+        this.attach_typelist = TypeList;
+        this.attach_tablename = 'acc_paymenth';
+        this.attach_tablepkcolumn = 'pay_pkid';
+        this.attach_refno = '';
+        this.attach_customername = '';
+        this.attach_updatecolumn = 'rec_files_attached_chk';
+        this.attach_viewonlysource = 'INVOICE';
+        this.attach_viewonlyid = this.pkid;
+        this.attach_filespath = '';
+        this.attach_filespath2 = '';
+        this.modal = this.modalservice.open(_modal, { centered: true });
+        break;
+      }
+
+  
+
     }
   }
 

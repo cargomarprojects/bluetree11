@@ -164,7 +164,8 @@ export class Login2Component implements OnInit {
         this.GLOBALCONTANTS.IsAuthenticated = true;
         this.GLOBALCONTANTS.GSESSION += 1;
         
-        alert(this.GLOBALCONTANTS.GSESSION);
+        console.log('GSESSION', this.GLOBALCONTANTS.GSESSION);
+        
 
         this.GLOBALCONTANTS.Save2LocalStorage();
 
