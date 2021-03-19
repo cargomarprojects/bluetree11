@@ -113,7 +113,8 @@ export class PaymentReqComponent implements OnInit {
   init() {
     this.payrecord.cp_pkid = this.pkid;
     this.payrecord.cp_pay_status = '';
-    this.payrecord.cp_paytype_needed = 'PAYMENT NEEDED ONLY';
+    // this.payrecord.cp_paytype_needed = 'PAYMENT NEEDED ONLY';
+    this.payrecord.cp_paytype_needed = '';
     this.payrecord.cp_spl_notes = '';
     this.payrecord.cp_payment_date = '';
     this.payrecord.cp_cust_name = '';

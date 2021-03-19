@@ -273,8 +273,8 @@ export class AirImpHouseEditComponent implements OnInit {
     this.record.hbl_is_pl = false;
     this.record.hbl_is_ci = false;
     this.record.hbl_is_carr_an = false;
-    this.record.hbl_custom_reles_status = '';
-    this.record.hbl_is_delivery = '';
+    this.record.hbl_custom_reles_status = 'NA';
+    this.record.hbl_is_delivery = 'NA';
     this.record.hbl_lfd_date = '';
     this.record.hbl_paid_remarks = '';
     this.record.hbl_delivery_date = '';
@@ -880,7 +880,7 @@ export class AirImpHouseEditComponent implements OnInit {
         charecord = <Table_Address>response.record;
 
         if (charecord != null) {
-          this.record.hbl_agent_id = charecord.pkid;
+          this.record.hbl_cha_id = charecord.pkid;
           this.record.hbl_cha_code = charecord.code;
           this.record.hbl_cha_name = charecord.name;
           this.record.hbl_cha_attn = charecord.attention;
