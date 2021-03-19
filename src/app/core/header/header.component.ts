@@ -5,6 +5,7 @@ import { GlobalService } from '../services/global.service';
 import { LoginService } from '../services/login.service';
 import { User_Menu } from '../models/menum';
 
+
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html'
@@ -13,12 +14,24 @@ export class HeaderComponent {
     public isNavbarCollapsed = true;
     title = 'Motherlines INC USA';
     id = '';
+
+
+
     constructor(
         private router: Router,
         private location: Location,
         public gs: GlobalService,
         private loginservice: LoginService) {
+
+
     }
+
+
+
+    ngOnDestroy() {
+
+    }
+
 
     LoadPage(rec: User_Menu) {
         this.getUrlID();
@@ -44,7 +57,7 @@ export class HeaderComponent {
     }
 
     getParam(rec) {
-        return { appid : this.gs.appid, id: rec.menu_pkid, menuid: rec.menu_pkid, menu_param: rec.menu_param};
+        return { appid: this.gs.appid, id: rec.menu_pkid, menuid: rec.menu_pkid, menu_param: rec.menu_param };
     }
 
     getQParam(rec) {

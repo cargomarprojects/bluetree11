@@ -5,7 +5,6 @@ import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationErr
 
 import { LoadingScreenService } from './core/services/loadingscreen.service';
 import { GlobalService } from './core/services/global.service';
-import { ConditionalExpr } from '@angular/compiler';
 
 
 
