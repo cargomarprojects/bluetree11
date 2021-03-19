@@ -53,9 +53,6 @@ export class LoginComponent implements OnInit {
     this.gs.IsAuthenticated = false;
     this.showloginbutton = false;
 
-
-    this.gs.GSESSION = 100;
-
     this.username = 'ADMIN';
     this.password = '123';
 
