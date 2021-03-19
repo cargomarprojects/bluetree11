@@ -14,6 +14,7 @@ import { Tbl_House } from '../../models/tbl_house';
 import { invoiceService } from '../../services/invoice.service';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
+import { trimEnd } from 'lodash';
 
 
 
@@ -55,6 +56,7 @@ export class InvoiceEditComponent implements OnInit {
   attach_updatecolumn: string = '';
   attach_viewonlysource: string = '';
   attach_viewonlyid: string = '';
+  attach_uploadefiles : boolean = true;
   attach_filespath: string = '';
   attach_filespath2: string = '';
 
@@ -1158,6 +1160,7 @@ export class InvoiceEditComponent implements OnInit {
         this.report_searchdata.INV_ARAP = this.inv_arap;
         this.report_searchdata.BRANCH_REGION = this.gs.BRANCH_REGION;
         this.report_searchdata.FILE_PATH = sPath;
+
         this.report_menuid = this.menuid;
         this.tab = 'report';
         break;
@@ -1171,8 +1174,8 @@ export class InvoiceEditComponent implements OnInit {
         if ( this.gs.HIDE_DOCTYPE_INVOICE == "N")
           TypeList = [{ "code": "AR/AP", "name": "AR/AP" },{ "code": "EMAIL", "name": "EMAIL" }, { "code": "HOUSEBL", "name": "HOUSE B/L" }, { "code": "MASTER", "name": "MASTER" }, { "code": "PAYMENT SETTLEMENT", "name": "OTHERS" }];
         this.attach_title = 'Documents';
-        this.attach_parentid = this.pkid;
-        this.attach_subid = '';
+        this.attach_parentid = this.record.inv_mbl_id;
+        this.attach_subid = this.pkid;
         if ( this.gs.HIDE_DOCTYPE_INVOICE == "N")
           this.attach_type = 'PAYMENT SETTLEMENT';
         else
@@ -1184,6 +1187,7 @@ export class InvoiceEditComponent implements OnInit {
         this.attach_customername = this.record.inv_cust_name;
         this.attach_updatecolumn = 'rec_subfiles_attached';
         this.attach_viewonlysource = '';
+        this.attach_uploadefiles = true;
         this.attach_viewonlyid = '';
         this.attach_filespath = '';
         this.attach_filespath2 = '';
@@ -1199,13 +1203,14 @@ export class InvoiceEditComponent implements OnInit {
         this.attach_subid = '';
         this.attach_type = 'CHECK COPY';
         this.attach_typelist = TypeList;
-        this.attach_tablename = 'cargo_masterm';
+        this.attach_tablename = 'cargo_invoicem';
         this.attach_tablepkcolumn = 'inv_pkid';
         this.attach_refno = this.record.inv_refno;
         this.attach_customername = this.record.inv_cust_name;
         this.attach_updatecolumn = 'rec_files_attached';
         this.attach_viewonlysource = '';
         this.attach_viewonlyid = '';
+        this.attach_uploadefiles = true;        
         this.attach_filespath = '';
         this.attach_filespath2 = '';
         this.modal = this.modalservice.open(_modal, { centered: true });
@@ -1225,6 +1230,7 @@ export class InvoiceEditComponent implements OnInit {
         this.attach_updatecolumn = 'rec_files_attached_chk';
         this.attach_viewonlysource = 'INVOICE';
         this.attach_viewonlyid = this.pkid;
+        this.attach_uploadefiles = false;
         this.attach_filespath = '';
         this.attach_filespath2 = '';
         this.modal = this.modalservice.open(_modal, { centered: true });
