@@ -1499,7 +1499,7 @@ export class GlobalService {
 
     //bts_settings.mainlist = this.MainList;
     bts_settings.userrecord = this.UserRecord;
-    bts_settings.userinfo = this.UserInfoData;
+    bts_settings.userinfoData = this.UserInfoData;
     //bts_settings.modules = this.Modules;
     //bts_settings.menulist = this.MenuList;
     bts_settings.companylist = this.CompanyList
