@@ -774,7 +774,7 @@ export class GlobalService {
       "~ADDRESS_LINE5": this.ADDRESS_LINE5,
       "~DOC_FOOTER1": this.DOC_FOOTER1,
       "~DOC_FOOTER2": this.DOC_FOOTER2,
-      "~date_display_fmt": this.date_display_fmt,
+      "~DATE_DISPLAY_FMT": this.date_display_fmt,
       "~BOE_IMPORT_REQUIRED": this.BOE_IMPORT_REQUIRED,
       "~FRONTEND_DATEFORMAT": this.FRONTEND_DATEFORMAT,
       "~PRINT_FIRMCODE": this.PRINT_FIRMCODE,
