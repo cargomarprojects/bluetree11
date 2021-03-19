@@ -35,7 +35,7 @@ export class ApprovedPageListComponent implements OnInit {
 
   records: Tbl_Cargo_Approved[]
   is_locked: boolean = false;
-  
+
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -151,7 +151,7 @@ export class ApprovedPageListComponent implements OnInit {
           mbl_refno: this.mbl_refno,
           doc_type: this.doc_type,
           req_type: this.req_type,
-          is_locked: this.is_locked
+          is_locked: this.is_locked == true ? 'Y' : 'N'
         };
       }
       if (!this.canEdit)
@@ -165,7 +165,7 @@ export class ApprovedPageListComponent implements OnInit {
         mbl_refno: this.mbl_refno,
         doc_type: this.doc_type,
         req_type: this.req_type,
-        is_locked: this.is_locked
+        is_locked: this.is_locked == true ? 'Y' : 'N'
       };
     } else
       return null;
