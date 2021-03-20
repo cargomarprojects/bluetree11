@@ -17,6 +17,7 @@ import { Tbl_cargo_imp_masterm } from '../../models/tbl_cargo_imp_masterm';
 })
 export class SeaImpHouseEditComponent implements OnInit {
 
+  @ViewChild('_btnret') btnret_ctrl: ElementRef;
   @ViewChild('hbl_houseno') hbl_houseno_field: ElementRef;
   @ViewChild('hbl_shipment_stage') hbl_shipment_stage_field: ElementRef;
   @ViewChild('hbl_shipper_code') hbl_shipper_code_field: AutoComplete2Component;
@@ -382,7 +383,9 @@ export class SeaImpHouseEditComponent implements OnInit {
         }
         this.is_locked = this.gs.IsShipmentClosed("SEA IMPORT", this.record.mbl_ref_date, this.record.mbl_lock, this.record.mbl_unlock_date);
 
-        this.hbl_houseno_field.nativeElement.focus();
+        // this.hbl_houseno_field.nativeElement.focus();
+        if (!this.gs.isBlank(this.btnret_ctrl))
+          this.btnret_ctrl.nativeElement.focus();
         // this.hbl_agent_name_field.Focus();
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
