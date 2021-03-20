@@ -18,6 +18,7 @@ import { DateComponent } from '../../../shared/date/date.component';
 })
 export class AirImpHouseEditComponent implements OnInit {
 
+  @ViewChild('_btnret') btnret_field: ElementRef;
   @ViewChild('_hbl_shipment_stage') shipment_stage_field: ElementRef;
 
   @ViewChild('_hbl_houseno') hbl_houseno_field: ElementRef;
@@ -323,8 +324,12 @@ export class AirImpHouseEditComponent implements OnInit {
         this.is_locked = this.gs.IsShipmentClosed("AIR IMPORT", this.record.mbl_ref_date, this.record.mbl_lock, this.record.mbl_unlock_date);
 
         this.initDesc();
-        if (!this.gs.isBlank(this.hbl_houseno_field))
-          this.hbl_houseno_field.nativeElement.focus();
+        // if (!this.gs.isBlank(this.hbl_houseno_field))
+        //   this.hbl_houseno_field.nativeElement.focus();
+
+        if (!this.gs.isBlank(this.btnret_field))
+          this.btnret_field.nativeElement.focus();
+
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
       });
