@@ -7,14 +7,15 @@ import { AirExpHouseComponent } from './house/airexp-house.component';
 import { AirExpHouseEditComponent } from './house/edit/airexp-house-edit.component';
 import { MawbPageComponent } from './mawbpage/mawbpage.component';
 import { ManifestPageComponent } from './manifestpage/manifestpage.component';
-
+import { SearchPageComponent } from './searchpage/searchpage.component';
 const routes: Routes = [
   { path : 'AirExpMasterPage', component : AirExpMasterComponent },
   { path : 'AirExpMasterEditPage', component : AirExpMasterEditComponent },
   { path : 'AirExpHousePage', component : AirExpHouseComponent },
   { path : 'AirExpHouseEditPage', component : AirExpHouseEditComponent },
   { path : 'MawbPage', component : MawbPageComponent },
-  { path : 'ManifestPage', component : ManifestPageComponent }
+  { path : 'ManifestPage', component : ManifestPageComponent },
+  { path : 'SearchPage', component : SearchPageComponent }
 ];
 
 

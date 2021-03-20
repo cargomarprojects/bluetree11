@@ -14,6 +14,8 @@ import { AirExpHouseHeaderComponent } from './house/airexp-house-header.componen
 import { AirExpHouseEditComponent } from './house/edit/airexp-house-edit.component';
 import { MawbPageComponent } from './mawbpage/mawbpage.component';
 import { ManifestPageComponent } from './manifestpage/manifestpage.component';
+import { SearchPageComponent } from './searchpage/searchpage.component';
+import { SearchPageHeaderComponent } from './searchpage/searchpage-header.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { ManifestPageComponent } from './manifestpage/manifestpage.component';
     AirExpHouseHeaderComponent,
     AirExpHouseEditComponent,
     MawbPageComponent,
-    ManifestPageComponent
+    ManifestPageComponent,
+    SearchPageComponent,
+    SearchPageHeaderComponent
   ],
   imports: [
     SharedModule,    
