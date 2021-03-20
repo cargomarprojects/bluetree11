@@ -15,7 +15,7 @@
 
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
-<div class="page-body table-responsive">
+<div class="page-body table-responsive table-bordered">
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
@@ -33,7 +33,7 @@
     </thead>
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of records$ | async">
-        <td class='hlink' (click)="edit(rec)">{{rec.gf_slno}}</td>
+        <td class='hlink2' (click)="edit(rec)">{{rec.gf_slno}}</td>
         <td>{{rec.gf_type}} </td>
         <td>{{rec.gf_name}} </td>
         <td>{{rec.gf_accno}} </td>
