@@ -240,6 +240,12 @@ export class ShipmentLogReportComponent implements OnInit {
       return;
     }
 
+    if (this.format_type == "FORMAT-4") {
+      this.report_masterwise = false;
+      this.report_housewise = true;
+    }
+
+
     this.SearchData.outputformat = _outputformat;
     this.SearchData.pkid = this.urlid;
     this.SearchData.action = _action;
@@ -538,7 +544,7 @@ export class ShipmentLogReportComponent implements OnInit {
       alert("Invalid Record Selected");
       return;
     }
-   this.gs.LinkPage("REFNO", sMode, REFNO, sID);
+    this.gs.LinkPage("REFNO", sMode, REFNO, sID);
   }
 
 
