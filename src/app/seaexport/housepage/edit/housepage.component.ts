@@ -567,13 +567,28 @@ export class HousePageComponent implements OnInit {
       }
     }
 
-    if (this.gs.isBlank(this.record.hbl_pol_name)) {
+    if (this.gs.isBlank(this.gs.isBlank(this.record.hbl_agent_id) || this.record.hbl_agent_name)) {
+      this.errorMessage.push("Agent cannot be blank");
+      bret = false;
+    }
+
+    if (this.gs.isBlank(this.record.hbl_pol_id) || this.gs.isBlank(this.record.hbl_pol_name)) {
       this.errorMessage.push("Pol cannot be blank");
       bret = false;
     }
 
-    if (this.gs.isBlank(this.record.hbl_pod_name)) {
+    if (this.gs.isBlank(this.record.hbl_pod_id) || this.gs.isBlank(this.record.hbl_pod_name)) {
       this.errorMessage.push("Pod cannot be blank");
+      bret = false;
+    }
+
+    if (this.gs.isBlank(this.record.hbl_frt_status)) {
+      this.errorMessage.push("Freight Status cannot be blank");
+      bret = false;
+    }
+
+    if (this.gs.isBlank(this.record.hbl_bltype)) {
+      this.errorMessage.push("Nomination Type cannot be blank");
       bret = false;
     }
 
@@ -582,7 +597,24 @@ export class HousePageComponent implements OnInit {
       bret = false;
     }
 
+    if (!this.gs.isBlank(this.record.hbl_salesman_name)) {
+      if (this.gs.isBlank(this.record.hbl_salesman_id)) {
+        this.errorMessage.push("Salesman cannot be blank");
+        bret = false;
+      }
+    }
 
+    if (this.record.hbl_obl_telex == "OBL ISSUED") {
+      if (this.gs.isBlank(this.record.hbl_obl_slno)) {
+        this.errorMessage.push("OBL Serial Number cannot be blank");
+        bret = false;
+      }
+
+      if (this.gs.isZero(this.record.hbl_obl_slno)) {
+        this.errorMessage.push("Invalid OBL Serial Number");
+        bret = false;
+      }
+    }
 
     if (this.gs.BRANCH_REGION == "USA") {
       if (this.gs.isZero(this.record.hbl_lbs)) {
@@ -605,6 +637,26 @@ export class HousePageComponent implements OnInit {
       this.errorMessage.push("CBM cannot be blank");
       bret = false;
     }
+
+    
+    // if ( Lib.Convert2Decimal(Txt_Pkgs.Text) <=0)
+    // {
+    //     bRet = false;
+    //     MessageBox.Show("No. of packages cannot be blank", "Save", MessageBoxButton.OK);
+    //     Txt_Pkgs.Focus();
+    //     return bRet;
+    // }
+
+    // if (Txt_Pkgs_Uom.IsBlank())
+    // {
+    //     bRet = false;
+    //     MessageBox.Show("Unit of packages cannot be blank", "Save", MessageBoxButton.OK);
+    //     Txt_Pkgs_Uom.Focus();
+    //     return bRet;
+    // }
+
+
+    
 
     if (!bret)
       alert('Error While Saving');
