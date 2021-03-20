@@ -15,7 +15,7 @@
 
   <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
-  <div class="page-body table-responsive">
+  <div class="page-body table-responsive table-bordered">
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
@@ -38,7 +38,7 @@
           <td class='text-right'>{{rec.jv_debit | number : '1.2-2'}}</td>
           <td class='text-right'>{{rec.jv_credit | number : '1.2-2'}}</td>
           <td>{{rec.jv_posted_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td class='hlink' (click)="Reconcile(rec,datemodal)">UPDATE</td>
+          <td class='hlink2' (click)="Reconcile(rec,datemodal)">UPDATE</td>
         </tr>
       </tbody>
     </table>
