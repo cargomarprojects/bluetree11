@@ -276,7 +276,7 @@ export class FileUploadComponent implements OnInit {
           this.filesSelected = false;
           this.fileinput.nativeElement.value = '';
           this.List();
-          //alert('Upload Complete');
+          alert('Upload Complete');
         },
         error => {
           this.loading = false;
