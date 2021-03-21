@@ -118,7 +118,12 @@ export class SearchPageService {
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
         }
-
+        if (this.gs.isBlank(this.record.searchQuery.searchString)) {
+            // this.record.errormessage = 'Search String Not Found';
+            // this.mdata$.next(this.record);
+            alert('Search String Not Found');
+            return;
+        }
         var SearchData = this.gs.UserInfo;
         SearchData.outputformat = 'SCREEN';
         SearchData.action = 'NEW';
@@ -130,7 +135,7 @@ export class SearchPageService {
         SearchData.ISPARENT = this.record.searchQuery.isParentChecked == true ? "Y" : "N";
         SearchData.INCLUDEHOUSE = this.record.searchQuery.isHouseChecked == true ? "Y" : "N";
         SearchData.IS_GENEXP = this.gs.CAN_ACCESS_GENERAL_EXPENSE;
-        SearchData.IS_1099 =this.gs.CAN_ACCESS_1099_EXPENSE;
+        SearchData.IS_1099 = this.gs.CAN_ACCESS_1099_EXPENSE;
         SearchData.IS_PAYROLL = this.gs.CAN_ACCESS_PAYROLL_EXPENSE;
         SearchData.IS_IPS = this.gs.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT;
 
@@ -147,6 +152,9 @@ export class SearchPageService {
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
+            alert("Search Complete");
+            if (this.gs.isBlank(this.record.records))
+                alert("No Search Results");
             this.mdata$.next(this.record);
         }, error => {
             this.record = <SearchPageModel>{

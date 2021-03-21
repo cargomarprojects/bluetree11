@@ -39,11 +39,11 @@
       <div class="col-md-4">
         <div class="form-group row">
           <label class="col-2 col-form-label col-form-label-sm"></label>
-          <div class="col-4">
+          <div *ngIf="mainservice.search_type == 'AGENT' || mainservice.search_type == 'SHIPPER' || mainservice.search_type == 'CONSIGNEE'" class="col-4">
             <input type="checkbox" [(ngModel)]="searchQuery.isParentChecked" />
             <span class="ml-1">Parent</span>
           </div>
-          <div class="col-4">
+          <div *ngIf="mainservice.search_type == 'MASTER' || mainservice.search_type == 'REFNO' || mainservice.search_type == 'AGENT' || mainservice.search_type == 'POL' || mainservice.search_type == 'POD' || mainservice.search_type == 'VESSEL' || mainservice.search_type == 'BOOKING.NO' || mainservice.search_type == 'CONTAINER'" class="col-4">
             <input type="checkbox" [(ngModel)]="searchQuery.isHouseChecked" />
             <span class="ml-1">Include House</span>
           </div>

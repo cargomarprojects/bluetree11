@@ -31,10 +31,11 @@ export class SearchPageHeaderComponent implements OnInit {
 
   OnChange(field: string) {
     if (field == 'searchType') {
+      this.searchQuery.isParentChecked = false;
+      this.searchQuery.isHouseChecked = false;
       this.mainservice.search_type = this.searchQuery.searchType;
     }
   }
-
 
   List(outputformat: string) {
     this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.searchQuery });
