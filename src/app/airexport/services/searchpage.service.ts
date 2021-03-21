@@ -17,6 +17,8 @@ export class SearchPageService {
     }
     private record: SearchPageModel;
 
+    public search_type: string = 'CONTAINER';
+
     public id: string;
     public menuid: string;
     public param_type: string;
@@ -65,11 +67,11 @@ export class SearchPageService {
     }
     public ClearInit() {
         this.record = <SearchPageModel>{
-            sortcol: 'mbl_refno',
+            sortcol: this.search_type == "PARENT" ? 'gen_code' : 'mbl_refno',
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchType: 'REFNO' },
+            searchQuery: <SearchQuery>{ searchString: '', searchType: 'CONTAINER', isParentChecked: false, isHouseChecked: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -87,11 +89,11 @@ export class SearchPageService {
         this.param_type = params.param_type;
 
         this.record = <SearchPageModel>{
-            sortcol: 'mbl_refno',
+            sortcol: this.search_type == "PARENT" ? 'gen_code' : 'mbl_refno',
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchType: 'REFNO' },
+            searchQuery: <SearchQuery>{ searchString: '', searchType: 'CONTAINER', isParentChecked: false, isHouseChecked: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -121,16 +123,20 @@ export class SearchPageService {
         SearchData.outputformat = 'SCREEN';
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
-        SearchData.TYPE = this.param_type;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
-        SearchData.CODE = this.record.searchQuery.searchString;
 
-        SearchData.SEARCH_TYPE = this.record.searchQuery.searchType;
+        SearchData.CODE = this.record.searchQuery.searchString;
+        SearchData.TYPE = this.record.searchQuery.searchType;
+        SearchData.ISPARENT = this.record.searchQuery.isParentChecked == true ? "Y" : "N";
+        SearchData.INCLUDEHOUSE = this.record.searchQuery.isHouseChecked == true ? "Y" : "N";
+        SearchData.IS_GENEXP = this.gs.CAN_ACCESS_GENERAL_EXPENSE;
+        SearchData.IS_1099 =this.gs.CAN_ACCESS_1099_EXPENSE;
+        SearchData.IS_PAYROLL = this.gs.CAN_ACCESS_PAYROLL_EXPENSE;
+        SearchData.IS_IPS = this.gs.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT;
+
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
-
-
         if (type == 'PAGE') {
             SearchData.action = this.record.pageQuery.action;
             SearchData.page_count = this.record.pageQuery.page_count;

@@ -68,11 +68,13 @@ export interface Tbl_Search {
 export interface SearchQuery {
     searchString: string;
     searchType: string;
+    isParentChecked: boolean;
+    isHouseChecked: boolean;
 }
 
 export interface SearchPageModel {
-    sortcol : string ;
-    sortorder : boolean;
+    sortcol: string;
+    sortorder: boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

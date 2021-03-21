@@ -1,47 +1,58 @@
-<div class="page-list" >
-    <div class="page-search">
-      <div class="row">
-        <!-- <div class="col-md-3">
-          <div class="form-group row">
-            <label class="col-4 col-form-label col-form-label-sm">From</label>
-            <div class="col-8">
-              <app-date [inputdate]="searchQuery.fromdate" (ValueChanged)="searchQuery.fromdate=$event">
-              </app-date>
-            </div>
+<div class="page-list">
+  <div class="page-search">
+    <div class="row">     
+      <div class="col-md-4">
+        <div class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm">Type</label>
+          <div class="col-10">
+            <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchType" (change)="OnChange('searchType')">
+              <option [value]="'CONTAINER'">CONTAINER</option>
+              <option [value]="'MASTER'">MASTER</option>
+              <option [value]="'BOOKING.NO'">BOOKING.NO</option>
+              <option [value]="'REFNO'">REFNO</option>
+              <option [value]="'IT.NO'">IT.NO</option>
+              <option [value]="'PO.NO'">PO.NO</option>
+              <option [value]="'HOUSE'">HOUSE</option>
+              <option [value]="'VESSEL'">VESSEL</option>
+              <option [value]="'POL'">POL</option>
+              <option [value]="'POD'">POD</option>
+              <option [value]="'PARENT'">PARENT</option>
+              <option [value]="'AGENT'">AGENT</option>
+              <option [value]="'SHIPPER'">SHIPPER</option>
+              <option [value]="'CONSIGNEE'">CONSIGNEE</option>
+              <option [value]="'INVOICE.NO'">INVOICE.NO</option>
+              <option [value]="'THEIR.REF.NO'">THEIR.REF.NO</option>
+              <option [value]="'CUSTOMER'">CUSTOMER</option>
+              <option [value]="'CHB'">CHB</option> 
+            </select>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="form-group row">
-            <label class="col-4 col-form-label col-form-label-sm">To</label>
-            <div class="col-8">
-              <app-date [inputdate]="searchQuery.todate" (ValueChanged)="searchQuery.todate=$event">
-              </app-date>
-            </div>
-          </div>
-        </div> -->
-        <div class="col-md-3">
-          <div class="form-group row">
-            <div class="col-4">
-              <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchType">
-                <option [value]="'REFNO'">Ref No:</option>
-                <option [value]="'CONSIGNEE'">Consignee:</option>
-              </select>
-            </div>
-            <div class="col-8">
-              <input class="form-control form-control-sm" type="text" [(ngModel)]="searchQuery.searchString" />
-            </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm">String</label>
+          <div class="col-10">
+            <input class="form-control form-control-sm" type="text" [(ngModel)]="searchQuery.searchString" (blur)="onBlur('searchString')" />
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="form-group row">
-            <label class="col-4 col-form-label col-form-label-sm"></label>
-            <div class="col-8">
-              <button  (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
-              <!-- <button [disabled]="loading" (click)="List('EXCEL')" class="btn btn-primary btn-sm">Excel</button> -->
-            </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm"></label>
+          <div class="col-4">
+            <input type="checkbox" [(ngModel)]="searchQuery.isParentChecked" />
+            <span class="ml-1">Parent</span>
+          </div>
+          <div class="col-4">
+            <input type="checkbox" [(ngModel)]="searchQuery.isHouseChecked" />
+            <span class="ml-1">Include House</span>
+          </div>
+          <div class="col-2">
+            <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+            <!-- <button [disabled]="loading" (click)="List('EXCEL')" class="btn btn-primary btn-sm">Excel</button> -->
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
