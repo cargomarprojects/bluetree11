@@ -2,20 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GlobalService } from '../../core/services/global.service';
-import { Tbl_Search, SearchPageModel } from '../models/tbl_search';
-import { SearchQuery } from '../models/tbl_search';
+import { TBL_GEN_SEARCH, GenSearchReportModel } from '../models/tbl_gen_search';
+import { SearchQuery } from '../models/tbl_gen_search';
 import { PageQuery } from '../../shared/models/pageQuery';
+import { ElementSchemaRegistry } from '@angular/compiler';
 
 @Injectable({
     providedIn: 'root'
 })
-export class SearchPageService {
+export class GenSearchReportService {
 
-    private mdata$ = new BehaviorSubject<SearchPageModel>(null);
-    get data$(): Observable<SearchPageModel> {
+    private mdata$ = new BehaviorSubject<GenSearchReportModel>(null);
+    get data$(): Observable<GenSearchReportModel> {
         return this.mdata$.asObservable();
     }
-    private record: SearchPageModel;
+    private record: GenSearchReportModel;
 
     public search_type: string = 'CONTAINER';
 
@@ -66,12 +67,12 @@ export class SearchPageService {
         }
     }
     public ClearInit() {
-        this.record = <SearchPageModel>{
+        this.record = <GenSearchReportModel>{
             sortcol: this.search_type == "PARENT" ? 'gen_code' : 'mbl_refno',
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchType: 'CONTAINER', isParentChecked: false, isHouseChecked: false },
+            searchQuery: <SearchQuery>{ searchString: '', searchType: 'ADDRESS BOOK', searchDate: '', customerId: '', customerName: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -88,12 +89,12 @@ export class SearchPageService {
         this.menuid = params.id;
         this.param_type = params.param_type;
 
-        this.record = <SearchPageModel>{
+        this.record = <GenSearchReportModel>{
             sortcol: this.search_type == "PARENT" ? 'gen_code' : 'mbl_refno',
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchType: 'CONTAINER', isParentChecked: false, isHouseChecked: false },
+            searchQuery: <SearchQuery>{ searchString: '', searchType: 'ADDRESS BOOK', searchDate: '', customerId: '', customerName: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -119,26 +120,19 @@ export class SearchPageService {
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
         }
-        if (this.gs.isBlank(this.record.searchQuery.searchString)) {
-            // this.record.errormessage = 'Search String Not Found';
-            // this.mdata$.next(this.record);
-            alert('Search String Not Found');
-            return;
-        }
+
         var SearchData = this.gs.UserInfo;
         SearchData.outputformat = 'SCREEN';
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
 
-        SearchData.CODE = this.record.searchQuery.searchString;
-        SearchData.TYPE = this.record.searchQuery.searchType;
-        SearchData.ISPARENT = this.record.searchQuery.isParentChecked == true ? "Y" : "N";
-        SearchData.INCLUDEHOUSE = this.record.searchQuery.isHouseChecked == true ? "Y" : "N";
-        SearchData.IS_GENEXP = this.gs.CAN_ACCESS_GENERAL_EXPENSE;
-        SearchData.IS_1099 = this.gs.CAN_ACCESS_1099_EXPENSE;
-        SearchData.IS_PAYROLL = this.gs.CAN_ACCESS_PAYROLL_EXPENSE;
-        SearchData.IS_IPS = this.gs.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT;
+        SearchData.STYPE = this.record.searchQuery.searchType;
+        SearchData.CUST_ID = this.record.searchQuery.customerId;
+        if (SearchData.STYPE == "TB DIFFERENCE")
+            SearchData.DATE = this.record.searchQuery.searchDate;
+        else
+            SearchData.DATE = '';
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
@@ -153,17 +147,10 @@ export class SearchPageService {
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
-            if (this.gs.isBlank(this.record.records))
-                this.record.errormessage = "No Search Results";
-            else
-                this.record.errormessage = "Search Complete";
             this.mdata$.next(this.record);
-            // if (this.gs.isBlank(this.record.records))
-            //     alert("No Search Results");
-            // else
-            //     alert("Search Complete");
+         
         }, error => {
-            this.record = <SearchPageModel>{
+            this.record = <GenSearchReportModel>{
                 records: [],
                 errormessage: this.gs.getError(error),
             }
@@ -172,6 +159,6 @@ export class SearchPageService {
     }
 
     List(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/AirExport/SearchPage/List', SearchData, this.gs.headerparam2('authorized'));
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Report/GenSearchReport/List', SearchData, this.gs.headerparam2('authorized'));
     }
 }

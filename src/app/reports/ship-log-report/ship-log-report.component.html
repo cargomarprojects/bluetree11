@@ -268,7 +268,7 @@
                                     <option [value]="'FORMAT-1'">FORMAT-1</option>
                                     <option [value]="'FORMAT-2'">FORMAT-2</option>
                                     <option [value]="'FORMAT-3'">FORMAT-3</option>
-                                    <option *ngIf="this.gs.GENERAL_BRANCH_CODE != 'MFDR'" [value]="'FORMAT-4'">FORMAT-4</option>
+                                    <option *ngIf="this.gs.GENERAL_BRANCH_CODE == 'MFDR'" [value]="'FORMAT-4'">FORMAT-4</option>
                                 </select>
                             </div>
                             <div class="col-4 form-check">
