@@ -596,6 +596,7 @@ export class InvoiceEditComponent implements OnInit {
     var SearchData = this.gs.UserInfo;
     SearchData.IS_SINGLE_CURRENCY = (this.gs.IS_SINGLE_CURRENCY) ? "Y" : "N";
     SearchData.BASE_CURRENCY_CODE = this.gs.base_cur_code;
+    SearchData.FOREIGN_CURRENCY_CODE = this.gs.foreign_cur_code;
     SearchData.VERSION = this.inv_verson;
 
     const data = <vm_tbl_cargo_invoicem>{};
