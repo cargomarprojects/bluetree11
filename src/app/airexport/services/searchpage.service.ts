@@ -109,7 +109,10 @@ export class SearchPageService {
         this.initlialized = true;
 
     }
-
+    public ClearList() {
+        this.record.records= <Tbl_Search[]>[];
+        this.mdata$.next(this.record);
+    }
     Search(_searchdata: any, type: string = '') {
         this.record.errormessage = '';
         this.mdata$.next(this.record);
@@ -174,4 +177,6 @@ export class SearchPageService {
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AirExport/SearchPage/List', SearchData, this.gs.headerparam2('authorized'));
     }
+
+    
 }

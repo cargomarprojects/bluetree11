@@ -31,6 +31,7 @@ export class SearchPageHeaderComponent implements OnInit {
 
   OnChange(field: string) {
     if (field == 'searchType') {
+      this.mainservice.ClearList();
       this.searchQuery.isParentChecked = false;
       this.searchQuery.isHouseChecked = false;
       this.mainservice.search_type = this.searchQuery.searchType;
