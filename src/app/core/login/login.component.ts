@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
   Company_Code: string = '';
 
 
+
   constructor(
     private mainservice: LoginService,
     public gs: GlobalService,
@@ -53,7 +54,6 @@ export class LoginComponent implements OnInit {
     this.gs.IsAuthenticated = false;
     this.showloginbutton = false;
 
-    
 
     this.username = 'ADMIN';
     this.password = '123';
