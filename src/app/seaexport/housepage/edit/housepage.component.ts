@@ -638,24 +638,26 @@ export class HousePageComponent implements OnInit {
       bret = false;
     }
 
-    
-    // if ( Lib.Convert2Decimal(Txt_Pkgs.Text) <=0)
-    // {
-    //     bRet = false;
-    //     MessageBox.Show("No. of packages cannot be blank", "Save", MessageBoxButton.OK);
-    //     Txt_Pkgs.Focus();
-    //     return bRet;
-    // }
+    if (this.gs.isZero(this.record.hbl_packages)) {
+      this.errorMessage.push("No. of packages cannot be blank");
+      bret = false;
+    }
 
-    // if (Txt_Pkgs_Uom.IsBlank())
-    // {
-    //     bRet = false;
-    //     MessageBox.Show("Unit of packages cannot be blank", "Save", MessageBoxButton.OK);
-    //     Txt_Pkgs_Uom.Focus();
-    //     return bRet;
-    // }
-
-
+    if (this.gs.isBlank(this.record.hbl_uom)) {
+      this.errorMessage.push("Unit of packages cannot be blank");
+      bret = false;
+    }
+   
+     this.cntrs.forEach(Rec => {
+      if (Rec.cntr_no.toString().trim().length < 11) {
+        this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) Invalid ");
+        bret = false;
+      }
+      if (Rec.cntr_type.toString().trim().length <= 0) {
+        this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) container type has to be select");
+        bret = false;
+      }
+    })
     
 
     if (!bret)
