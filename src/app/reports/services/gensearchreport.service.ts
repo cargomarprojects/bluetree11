@@ -5,6 +5,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { TBL_GEN_SEARCH, GenSearchReportModel } from '../models/tbl_gen_search';
 import { SearchQuery } from '../models/tbl_gen_search';
 import { PageQuery } from '../../shared/models/pageQuery';
+import { ElementSchemaRegistry } from '@angular/compiler';
 
 @Injectable({
     providedIn: 'root'
@@ -93,7 +94,7 @@ export class GenSearchReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '',searchType: 'ADDRESS BOOK', searchDate: '', customerId: '', customerName: '' },
+            searchQuery: <SearchQuery>{ searchString: '', searchType: 'ADDRESS BOOK', searchDate: '', customerId: '', customerName: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -119,22 +120,19 @@ export class GenSearchReportService {
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
         }
-        if (this.gs.isBlank(this.record.searchQuery.searchString)) {
-            // this.record.errormessage = 'Search String Not Found';
-            // this.mdata$.next(this.record);
-            alert('Search String Not Found');
-            return;
-        }
+
         var SearchData = this.gs.UserInfo;
         SearchData.outputformat = 'SCREEN';
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
 
-        SearchData.CODE = this.record.searchQuery.searchString;
-        SearchData.TYPE = this.record.searchQuery.searchType;
-
-
+        SearchData.STYPE = this.record.searchQuery.searchType;
+        SearchData.CUST_ID = this.record.searchQuery.customerId;
+        if (SearchData.STYPE == "TB DIFFERENCE")
+            SearchData.DATE = this.record.searchQuery.searchDate;
+        else
+            SearchData.DATE = '';
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
@@ -149,15 +147,8 @@ export class GenSearchReportService {
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
-            if (this.gs.isBlank(this.record.records))
-                this.record.errormessage = "No Search Results";
-            else
-                this.record.errormessage = "Search Complete";
             this.mdata$.next(this.record);
-            // if (this.gs.isBlank(this.record.records))
-            //     alert("No Search Results");
-            // else
-            //     alert("Search Complete");
+         
         }, error => {
             this.record = <GenSearchReportModel>{
                 records: [],

@@ -17,36 +17,18 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>INVNO</th>
-          <th>LOTNO</th>   
-          <th>INV DATE</th>
-          <th>INV AMT</th>
-          <th>PAID AMT</th>
-          <th>PARTY</th>        
-          <th>BANK</th>                
-          <th>PAYMENT#</th>                
-          <th>DATE PAID</th>                
-          <th>PAY AMT</th>                
-          <th>CHECK NO</th>        
-          <th>MASTER#</th>                
-          <th>INV REFNO</th>                
+          <th>USED IN</th>
+          <th>REFERENCE#</th>   
+          <th>HOUSE#</th>
+          <th>INVOICE#</th> 
         </tr>
       </thead>
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of records$ | async">
-          <td class='hlink2' (click)="editinvoice(rec)">{{rec.pay_invno}}</td>
-          <td class='hlink2' (click)="editmaster(rec)">{{rec.pay_mblrefno}}</td>
-          <td >{{rec.pay_inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td >{{rec.pay_inv_total}}</td>
-          <td >{{rec.pay_inv_paid}}</td>
-          <td >{{rec.pay_cust_name}}</td>        
-          <td >{{rec.pay_acc_name}}</td>        
-          <td >{{rec.pay_docno}}</td>
-          <td >{{rec.pay_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td >{{rec.pay_total}}</td>
-          <td >{{rec.pay_chqno}}</td>        
-          <td >{{rec.pay_mblno}}</td>
-          <td >{{rec.pay_invrefno}}</td>        
+          <td >{{rec.gs_category}}</td>
+          <td >{{rec.gs_refno}}</td>
+          <td >{{rec.gs_houseno}}</td>        
+          <td >{{rec.gs_invoiceno}}</td>        
         </tr>
       </tbody>
     </table>

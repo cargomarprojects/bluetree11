@@ -44,7 +44,7 @@
             </app-autocomplete2>
           </div>
         </div>
-        <div *ngIf="searchQuery.searchType == 'EMAIL VERIFICATION'" class="form-group row">
+        <div *ngIf="searchQuery.searchType == 'TB DIFFERENCE'" class="form-group row">
           <label class="col-4 col-form-label col-form-label-sm">Date</label>
           <div class="col-8">
             <app-date #_search_date [inputdate]="searchQuery.searchDate" (ValueChanged)="searchQuery.searchDate=$event"></app-date>
