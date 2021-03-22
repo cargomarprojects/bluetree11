@@ -481,6 +481,7 @@ export class CertOrgPageComponent implements OnInit {
     if (rec.controlname == "HANDLEDBY") {
       this.record.mbld_handled_id = rec.id;
       this.record.mbld_handled_code = rec.code;
+      this.record.mbld_handled_name =rec.name;
     }
 
     if (rec.controlname == "SALEMSAN") {

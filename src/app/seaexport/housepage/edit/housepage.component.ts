@@ -572,12 +572,12 @@ export class HousePageComponent implements OnInit {
       bret = false;
     }
 
-    if (this.gs.isBlank(this.record.hbl_pol_id) || this.gs.isBlank(this.record.hbl_pol_name)) {
+    if (this.gs.isBlank(this.record.hbl_pol_name)) {
       this.errorMessage.push("Pol cannot be blank");
       bret = false;
     }
 
-    if (this.gs.isBlank(this.record.hbl_pod_id) || this.gs.isBlank(this.record.hbl_pod_name)) {
+    if (this.gs.isBlank(this.record.hbl_pod_name)) {
       this.errorMessage.push("Pod cannot be blank");
       bret = false;
     }
