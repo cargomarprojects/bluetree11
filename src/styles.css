@@ -618,6 +618,8 @@ select option:hover {
       width: auto;
       max-width: auto !important;
     }
+
+
 }
   
 /*Small devices (landscape phones, less than 768px)*/
@@ -629,6 +631,8 @@ select option:hover {
       width: auto;
       max-width: 766 !important;
     }
+
+
 }
   
 /*Medium devices (tablets, less than 992px)*/
@@ -640,6 +644,7 @@ select option:hover {
       width: auto;
       max-width: 990px !important;
     }
+
 }
   
 /*Large devices (desktops, less than 1200px)*/
@@ -651,7 +656,14 @@ select option:hover {
       width: auto;
       max-width: 1198px !important;
     }
+
 }
+
+.lspace-1 {
+    letter-spacing: 1px;
+}
+
+
   
 .fixed_header thead tr th td {
     display:block;
