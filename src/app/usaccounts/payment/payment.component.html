@@ -28,10 +28,10 @@
           <th (click)="mainservice.sort('pay_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('pay_date')"></i></th>
           <th (click)="mainservice.sort('pay_cust_name')">CUSTOMER&nbsp;<i [ngClass]="mainservice.getIcon('pay_cust_name')"></i></th>
           <th (click)="mainservice.sort('pay_rp')">TYPE&nbsp;<i [ngClass]="mainservice.getIcon('pay_rp')"></i></th>
-          <th (click)="mainservice.sort('pay_ar_total')">AR&nbsp;<i [ngClass]="mainservice.getIcon('pay_ar_total')"></i></th>
-          <th (click)="mainservice.sort('pay_ap_total')">AP&nbsp;<i [ngClass]="mainservice.getIcon('pay_ap_total')"></i></th>
+          <th (click)="mainservice.sort('pay_ar_total')" class='text-right'>AR&nbsp;<i [ngClass]="mainservice.getIcon('pay_ar_total')"></i></th>
+          <th (click)="mainservice.sort('pay_ap_total')" class='text-right'>AP&nbsp;<i [ngClass]="mainservice.getIcon('pay_ap_total')"></i></th>
           <th (click)="mainservice.sort('pay_acc_name')">BANK&nbsp;<i [ngClass]="mainservice.getIcon('pay_acc_name')"></i></th>
-          <th (click)="mainservice.sort('pay_diff')">AMOUNT&nbsp;<i [ngClass]="mainservice.getIcon('pay_diff')"></i></th>
+          <th (click)="mainservice.sort('pay_diff')" class='text-right'>AMOUNT&nbsp;<i [ngClass]="mainservice.getIcon('pay_diff')"></i></th>
           <th (click)="mainservice.sort('pay_bank_charges')" *ngIf="!gs.IS_SINGLE_CURRENCY" >CHARGES&nbsp;<i [ngClass]="mainservice.getIcon('pay_bank_charges')"></i></th>
           <th (click)="mainservice.sort('pay_exchange_diff')" *ngIf="!gs.IS_SINGLE_CURRENCY" >EX.DIFF&nbsp;<i [ngClass]="mainservice.getIcon('pay_exchange_diff')"></i></th>
           <th (click)="mainservice.sort('pay_posted')">POSTED&nbsp;<i [ngClass]="mainservice.getIcon('pay_posted')"></i></th>
@@ -56,10 +56,10 @@
           <td>{{rec.pay_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.pay_cust_name}} </td>
           <td>{{rec.pay_rp}} </td>
-          <td>{{rec.pay_ar_total | number : '1.2-2'}} </td>
-          <td>{{rec.pay_ap_total | number : '1.2-2'}} </td>
+          <td class='text-right'>{{rec.pay_ar_total | number : '1.2-2'}} </td>
+          <td class='text-right'>{{rec.pay_ap_total | number : '1.2-2'}} </td>
           <td>{{rec.pay_acc_name}} </td>
-          <td>{{rec.pay_diff | number : '1.2-2'}} </td>          
+          <td class='text-right'>{{rec.pay_diff | number : '1.2-2'}} </td>          
           <td  *ngIf="!gs.IS_SINGLE_CURRENCY" >{{rec.pay_bank_charges | number : '1.2-2'}} </td>          
           <td  *ngIf="!gs.IS_SINGLE_CURRENCY" >{{rec.pay_exchange_diff | number : '1.2-2'}} </td>          
           <td>{{rec.pay_posted}} </td>
