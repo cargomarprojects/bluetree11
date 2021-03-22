@@ -17,7 +17,7 @@
   justify-self: flex-end;
   border-left: 2px solid transparent;
   border-right: 2px solid transparent;
-  background: blueviolet;
+  /* background: blueviolet; */
   background-clip: content-box;
   cursor: ew-resize;
   opacity: 0;

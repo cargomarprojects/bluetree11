@@ -57,7 +57,8 @@ import { InputBoxNumberComponent } from './inputnumber/inputboxnumber.component'
 import { ReportComponent } from './report/report.component';
 import { GenListComponent } from './genlist/genlist.component';
 import { SortByPipe } from './pipe/orderby';
-import { ResizableDirective } from './directive/resizable.component';
+import { ResizableDirective } from './directive/resizable';
+import { ResizableComponent } from './directive/resizable.component';
 
 @NgModule({
   imports: [
@@ -97,6 +98,7 @@ import { ResizableDirective } from './directive/resizable.component';
     FileUploadEditComponent,
     GenListComponent,
     SortByPipe,
+    ResizableComponent,
     ResizableDirective
   ],
   exports: [
@@ -132,6 +134,7 @@ import { ResizableDirective } from './directive/resizable.component';
     FileUploadEditComponent,
     GenListComponent,
     SortByPipe,
+    ResizableComponent,
     ResizableDirective
   ],
   providers: [

@@ -28,15 +28,15 @@
                 <th resizable (click)="mainservice.sort('mbl_liner_name')">CARRIER&nbsp;<i [ngClass]="mainservice.getIcon('mbl_liner_name')"></i></th>
                 <th resizable (click)="mainservice.sort('mbl_pol_name')">POL&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_name')"></i></th>
                 <th resizable (click)="mainservice.sort('mbl_pol_etd')">ETD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_etd')"></i></th>
-                <th (click)="mainservice.sort('mbl_pod_name')">POD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_name')"></i></th>
-                <th (click)="mainservice.sort('mbl_pod_eta')">ETA&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_eta')"></i></th>
-                <th (click)="mainservice.sort('mbl_cntr_type')">TYPE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_cntr_type')"></i></th>
-                <th (click)="mainservice.sort('mbl_teu')">TEU&nbsp;<i [ngClass]="mainservice.getIcon('mbl_teu')"></i></th>
-                <th (click)="mainservice.sort('mbl_cntr_cbm')">CBM&nbsp;<i [ngClass]="mainservice.getIcon('mbl_cntr_cbm')"></i></th>
-                <th (click)="mainservice.sort('mbl_handled_name')">HANDLED-BY&nbsp;<i [ngClass]="mainservice.getIcon('mbl_handled_name')"></i></th>
-                <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
-                <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
-                <th *ngIf="mainservice.canDelete" class='text-center'>DELETE</th>
+                <th resizable (click)="mainservice.sort('mbl_pod_name')">POD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_name')"></i></th>
+                <th resizable (click)="mainservice.sort('mbl_pod_eta')">ETA&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_eta')"></i></th>
+                <th resizable (click)="mainservice.sort('mbl_cntr_type')">TYPE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_cntr_type')"></i></th>
+                <th resizable (click)="mainservice.sort('mbl_teu')">TEU&nbsp;<i [ngClass]="mainservice.getIcon('mbl_teu')"></i></th>
+                <th resizable (click)="mainservice.sort('mbl_cntr_cbm')">CBM&nbsp;<i [ngClass]="mainservice.getIcon('mbl_cntr_cbm')"></i></th>
+                <th resizable (click)="mainservice.sort('mbl_handled_name')">HANDLED-BY&nbsp;<i [ngClass]="mainservice.getIcon('mbl_handled_name')"></i></th>
+                <th resizable (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+                <th resizable (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
+                <th resizable  *ngIf="mainservice.canDelete" class='text-center'>DELETE</th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">

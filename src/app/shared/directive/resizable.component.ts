@@ -1,35 +1,19 @@
-import { DOCUMENT } from '@angular/common';
-import { Directive, ElementRef, Inject, Output } from '@angular/core';
-import {distinctUntilChanged, map, switchMap, takeUntil, tap,} from 'rxjs/operators';
-import { fromEvent } from 'rxjs';
 
-@Directive({
-  selector: '[resizable]',
-})
-export class ResizableDirective {
-  @Output()
+import { Component, HostBinding } from '@angular/core';
+
+
+@Component({
+  selector: 'th[resizable]',
+  templateUrl: './resizable.component.html',
+  styleUrls: ['./resizable.component.css']
   
-  readonly resizable = fromEvent<MouseEvent>(
-    this.elementRef.nativeElement,
-    'mousedown'
-  ).pipe(
-    tap((e) => e.preventDefault()),
-    switchMap(() => {
-      const { width, right } = this.elementRef.nativeElement
-        .closest('th')!
-        .getBoundingClientRect();
+})
+export class ResizableComponent {
+  constructor() {}
+  @HostBinding('style.width.px')
+  width: number | null = null;
 
-      return fromEvent<MouseEvent>(this.documentRef, 'mousemove').pipe(
-        map(({ clientX }) => width + clientX - right),
-        distinctUntilChanged(),
-        takeUntil(fromEvent(this.documentRef, 'mouseup'))
-      );
-    })
-  );
-
-  constructor(
-    @Inject(DOCUMENT) private readonly documentRef: Document,
-    @Inject(ElementRef)
-    private readonly elementRef: ElementRef<HTMLElement>
-  ) {}
+  onResize(width: any) {
+    this.width = width;
+  }
 }
