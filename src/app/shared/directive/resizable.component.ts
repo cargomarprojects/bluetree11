@@ -8,6 +8,7 @@ import { fromEvent } from 'rxjs';
 })
 export class ResizableDirective {
   @Output()
+  
   readonly resizable = fromEvent<MouseEvent>(
     this.elementRef.nativeElement,
     'mousedown'
