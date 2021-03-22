@@ -27,7 +27,8 @@ export class ShipDataPageHeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.searchsender_ctrl.focus();
+    if (!this.gs.isBlank(this.searchsender_ctrl))
+      this.searchsender_ctrl.focus();
   }
 
   ngOnChanges(changes: SimpleChange) {

@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -64,8 +64,10 @@ export class MissingDataPageComponent implements OnInit {
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
         this.title = "Missing Data";
-        this.searchstring_ctrl.focus();
-        
+
+        if (!this.gs.isBlank(this.searchstring_ctrl))
+            this.searchstring_ctrl.focus();
+
         if (this.origin === "shipdata-page")
             this.List('DEFAULT');
     }
