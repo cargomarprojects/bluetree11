@@ -71,7 +71,7 @@ export class GenSearchReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchType: 'CONTAINER', isParentChecked: false, isHouseChecked: false },
+            searchQuery: <SearchQuery>{ searchString: '', searchType: 'ADDRESS BOOK', searchDate: '', customerId: '', customerName: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -93,7 +93,7 @@ export class GenSearchReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchType: 'CONTAINER', isParentChecked: false, isHouseChecked: false },
+            searchQuery: <SearchQuery>{ searchString: '',searchType: 'ADDRESS BOOK', searchDate: '', customerId: '', customerName: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -133,12 +133,8 @@ export class GenSearchReportService {
 
         SearchData.CODE = this.record.searchQuery.searchString;
         SearchData.TYPE = this.record.searchQuery.searchType;
-        SearchData.ISPARENT = this.record.searchQuery.isParentChecked == true ? "Y" : "N";
-        SearchData.INCLUDEHOUSE = this.record.searchQuery.isHouseChecked == true ? "Y" : "N";
-        SearchData.IS_GENEXP = this.gs.CAN_ACCESS_GENERAL_EXPENSE;
-        SearchData.IS_1099 = this.gs.CAN_ACCESS_1099_EXPENSE;
-        SearchData.IS_PAYROLL = this.gs.CAN_ACCESS_PAYROLL_EXPENSE;
-        SearchData.IS_IPS = this.gs.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT;
+
+
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;

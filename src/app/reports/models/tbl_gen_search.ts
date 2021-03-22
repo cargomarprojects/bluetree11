@@ -9,8 +9,9 @@ export class TBL_GEN_SEARCH {
 export interface SearchQuery {
     searchString: string;
     searchType: string;
-    isParentChecked: boolean;
-    isHouseChecked: boolean;
+    searchDate: string;
+    customerName: string;
+    customerId: string;
 }
 
 export interface GenSearchReportModel {
