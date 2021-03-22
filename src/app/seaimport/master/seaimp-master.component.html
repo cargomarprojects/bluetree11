@@ -21,13 +21,13 @@
     <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
-                <th (click)="mainservice.sort('mbl_refno')">REF.NO&nbsp;<i [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
-                <th (click)="mainservice.sort('mbl_ref_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_ref_date')"></i></th>
-                <th (click)="mainservice.sort('mbl_no')">MBL#&nbsp;<i [ngClass]="mainservice.getIcon('mbl_no')"></i></th>
-                <th (click)="mainservice.sort('mbl_agent_name')">AGENT&nbsp;<i [ngClass]="mainservice.getIcon('mbl_agent_name')"></i></th>
-                <th (click)="mainservice.sort('mbl_liner_name')">CARRIER&nbsp;<i [ngClass]="mainservice.getIcon('mbl_liner_name')"></i></th>
-                <th (click)="mainservice.sort('mbl_pol_name')">POL&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_name')"></i></th>
-                <th (click)="mainservice.sort('mbl_pol_etd')">ETD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_etd')"></i></th>
+                <th resizable (click)="mainservice.sort('mbl_refno')">REF.NO&nbsp;<i [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
+                <th resizable (click)="mainservice.sort('mbl_ref_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_ref_date')"></i></th>
+                <th resizable (click)="mainservice.sort('mbl_no')">MBL#&nbsp;<i [ngClass]="mainservice.getIcon('mbl_no')"></i></th>
+                <th resizable (click)="mainservice.sort('mbl_agent_name')">AGENT&nbsp;<i [ngClass]="mainservice.getIcon('mbl_agent_name')"></i></th>
+                <th resizable (click)="mainservice.sort('mbl_liner_name')">CARRIER&nbsp;<i [ngClass]="mainservice.getIcon('mbl_liner_name')"></i></th>
+                <th resizable (click)="mainservice.sort('mbl_pol_name')">POL&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_name')"></i></th>
+                <th resizable (click)="mainservice.sort('mbl_pol_etd')">ETD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_etd')"></i></th>
                 <th (click)="mainservice.sort('mbl_pod_name')">POD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_name')"></i></th>
                 <th (click)="mainservice.sort('mbl_pod_eta')">ETA&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_eta')"></i></th>
                 <th (click)="mainservice.sort('mbl_cntr_type')">TYPE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_cntr_type')"></i></th>
