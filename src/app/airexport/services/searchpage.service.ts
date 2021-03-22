@@ -153,10 +153,10 @@ export class SearchPageService {
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
-            if (this.gs.isBlank(this.record.records))
-                this.record.errormessage = "No Search Results";
-            else
-                this.record.errormessage = "Search Complete";
+            // if (this.gs.isBlank(this.record.records))
+            //     this.record.errormessage = "No Search Results";
+            // else
+            //     this.record.errormessage = "Search Complete";
             this.mdata$.next(this.record);
             // if (this.gs.isBlank(this.record.records))
             //     alert("No Search Results");

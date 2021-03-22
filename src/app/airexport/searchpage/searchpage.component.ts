@@ -55,38 +55,7 @@ export class SearchPageComponent implements OnInit {
   pageEvents(actions: any) {
     this.mainservice.Search(actions,'PAGE');
   }
-
-  NewRecord() {
-    if (!this.mainservice.canAdd) {
-      alert('Insufficient User Rights')
-      return;
-    }
-
-    let parameter = {
-      menuid: this.mainservice.menuid,
-      pkid: '',
-      type: this.mainservice.param_type,
-      origin: 'airexp-master-page',
-      mode: 'ADD'
-    };
-    this.gs.Naviagete('Silver.AirExport.Trans/AirExpMasterEditPage', JSON.stringify(parameter));
-
-  }
-  edit(_record: Tbl_Search) {
-    if (!this.mainservice.canEdit) {
-      alert('Insufficient User Rights')
-      return;
-    }
-
-    let parameter = {
-      menuid: this.mainservice.menuid,
-      pkid: _record.mbl_pkid,
-      type: '',
-      origin: 'airexp-master-page',
-      mode: 'EDIT'
-    };
-    this.gs.Naviagete('Silver.AirExport.Trans/AirExpMasterEditPage', JSON.stringify(parameter));
-  }
+  
 
   Close() {
     this.location.back();

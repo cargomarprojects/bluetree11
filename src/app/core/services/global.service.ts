@@ -733,9 +733,9 @@ export class GlobalService {
     this.InitUserInfo();
   }
 
-   public get UserInfo(){
-     return {...this.UserInfoData};
-   }
+  public get UserInfo() {
+    return { ...this.UserInfoData };
+  }
 
   public InitUserInfo() {
 
@@ -801,7 +801,7 @@ export class GlobalService {
       "~HBL_INSTR1": this.HBL_INSTR1,
       "~HBL_INSTR2": this.HBL_INSTR2,
       "~DATE_DISPLAY_FMT_WITH_TIME": this.date_display_fmt_with_time
-      
+
     }
 
   }
@@ -2533,7 +2533,7 @@ export class GlobalService {
     }
   }
 
-  public Link2Page(INVOKETYPE: string = "", MBLMODE: string = "", REFNO: string = "", MBLID: string = "", HBLID: string = "", INVID: string = "", FORMATTYPE: string = "", BRANCHCODE: string = "", BRANCHNAME: string = "") {
+  public Link2Page(INVOKETYPE: string = "", MBLMODE: string = "", REFNO: string = "", MBLID: string = "", HBLID: string = "", INVID: string = "", FORMATTYPE: string = "", BRANCHCODE: string = "", BRANCHNAME: string = "", CUSTOMERNAME: string = "", CREATEDBY: string = "") {
     let sType: string = "";
     let SMENU_ID: string = "";
     try {
@@ -2565,6 +2565,10 @@ export class GlobalService {
       }
 
       if (INVOKETYPE == "INVNO") {
+        if (CUSTOMERNAME == "***") {
+          if (CREATEDBY != this.user_code)
+            return null;
+        }
         if (INVID.trim() == "")
           return null;
         else if (sType == "OI")
