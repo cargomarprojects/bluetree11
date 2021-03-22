@@ -3,7 +3,7 @@ import { Component, HostBinding } from '@angular/core';
 
 
 @Component({
-  selector: 'th[resizable]',
+  selector: '[resizable]th',
   templateUrl: './resizable.component.html',
   styleUrls: ['./resizable.component.css']
   
