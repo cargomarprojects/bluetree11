@@ -14,8 +14,6 @@ import { Tbl_House } from '../../models/tbl_house';
 import { invoiceService } from '../../services/invoice.service';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
-import { trimEnd } from 'lodash';
-
 
 
 @Component({
@@ -596,6 +594,7 @@ export class InvoiceEditComponent implements OnInit {
     var SearchData = this.gs.UserInfo;
     SearchData.IS_SINGLE_CURRENCY = (this.gs.IS_SINGLE_CURRENCY) ? "Y" : "N";
     SearchData.BASE_CURRENCY_CODE = this.gs.base_cur_code;
+    SearchData.FOREIGN_CURRENCY_CODE = this.gs.foreign_cur_code;
     SearchData.VERSION = this.inv_verson;
 
     const data = <vm_tbl_cargo_invoicem>{};
@@ -727,12 +726,20 @@ export class InvoiceEditComponent implements OnInit {
           sErrMsg = 'Invalid Currency in Invoice Detail';
         }
       }
-      if (this.gs.isZero(Rec.invd_exrate)) {
-        sErrMsg = 'Invalid Ex.Rate in Invoice Detail';
+      
+      if (this.gs.isZero(Rec.invd_qty)) {
+        sErrMsg = 'Invalid Qty in Invoice Detail';
+      }
+      if (this.gs.isZero(Rec.invd_rate) || this.gs.isZero(Rec.invd_frate)) {
+        sErrMsg = 'Invalid Rate in Invoice Detail';
       }
 
-      if (this.gs.isZero(Rec.invd_ftotal) || this.gs.isZero(Rec.invd_total)) {
+      if (this.gs.isZero(Rec.invd_total) || this.gs.isZero(Rec.invd_ftotal)) {
         sErrMsg = 'Invalid Amount in Invoice Detail';
+      }
+
+      if (this.gs.isZero(Rec.invd_exrate)) {
+        sErrMsg = 'Invalid Ex.Rate in Invoice Detail';
       }
 
       if (this.record.inv_type == "GE" || this.record.inv_type == "PR" || this.record.inv_type == "CM" || this.record.inv_type == "PS" || this.record.inv_type == "FA") {
