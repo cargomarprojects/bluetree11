@@ -41,6 +41,8 @@ import { PayDueReportReducer } from './pay-due/store/pay-due-report.reducer';
 
 import { GenSearchReportComponent } from './gen-search-report/gen-search-report.component';
 import { GenSearchHeaderComponent } from './gen-search-report/gen-search-header.component';
+import { NomReportComponent } from './nom-report/nom-report.component';
+import { NomReportHeaderComponent} from './nom-report/nom-report-header.component';
 
 @NgModule({
     declarations :[
@@ -61,7 +63,9 @@ import { GenSearchHeaderComponent } from './gen-search-report/gen-search-header.
     PayUploadReportComponent,
     PayDueReportComponent,
     GenSearchReportComponent,
-    GenSearchHeaderComponent
+    GenSearchHeaderComponent,
+    NomReportComponent,
+    NomReportHeaderComponent
   ],
   imports: [
     SharedModule,

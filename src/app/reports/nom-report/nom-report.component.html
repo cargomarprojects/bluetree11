@@ -1,0 +1,34 @@
+<div class="page-header">
+    <div class="col">
+      <label class="mr-1">{{mainservice.title}}</label>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+  </div>
+  
+  <div *ngIf="errorMessage$ | async as errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+  
+  <app-nom-report-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+    </app-nom-report-header>
+      
+  
+  <div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>NAME</th>
+          <th>BRANCH</th>   
+          <th>HANDLEDBY</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of records$ | async">
+          <td >{{rec.nom_name}}</td>
+          <td >{{rec.nom_handled_loc}}</td>
+          <td >{{rec.nom_handled_by}}</td>              
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />

@@ -19,6 +19,7 @@ import { ShipCloseReportComponent } from './ship-closing/ship-close-report.compo
 import { PayReqReportComponent } from './pay-req/pay-req-report.component';
 import { PayDueReportComponent } from './pay-due/pay-due-report.component';
 import { GenSearchReportComponent } from './gen-search-report/gen-search-report.component';
+import { NomReportComponent } from './nom-report/nom-report.component';
 
 const routes: Routes = [
    { path :'ShipmentHandledReport', component : ShipHandReportComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
    { path :'PaymentRequest', component : PayReqReportComponent },   
    { path :'PaymentDuePage', component : PayDueReportComponent },   
    { path :'GeneralSearchReport', component : GenSearchReportComponent },   
+   { path :'NominationListPage', component : NomReportComponent },   
 ];
 
 @NgModule({

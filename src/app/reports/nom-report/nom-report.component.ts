@@ -5,22 +5,22 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { GlobalService } from '../../core/services/global.service';
-import { SearchQuery, GenSearchReportModel, TBL_GEN_SEARCH } from '../models/tbl_gen_search';
+import { SearchQuery, NomReportModel, TBL_NOM_LIST} from '../models/tbl_nom_list';
 import { PageQuery } from '../../shared/models/pageQuery';
-import { GenSearchReportService } from '../services/gensearchreport.service';
+import { NomReportService } from '../services/nomreport.service';
 
 @Component({
-  selector: 'app-gen-search-report',
-  templateUrl: './gen-search-report.component.html'
+  selector: 'app-nom-report',
+  templateUrl: './nom-report.component.html'
 })
-export class GenSearchReportComponent implements OnInit {
+export class NomReportComponent implements OnInit {
 
   /*
    Joy
  */
 
   errorMessage$: Observable<string>;
-  records$: Observable<TBL_GEN_SEARCH[]>;
+  records$: Observable<TBL_NOM_LIST[]>;
   pageQuery$: Observable<PageQuery>;
   searchQuery$: Observable<SearchQuery>;
 
@@ -28,7 +28,7 @@ export class GenSearchReportComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     public gs: GlobalService,
-    public mainservice: GenSearchReportService
+    public mainservice: NomReportService
   ) { }
 
   ngOnInit() {
@@ -54,10 +54,8 @@ export class GenSearchReportComponent implements OnInit {
   }
 
 
-
   Close() {
     this.location.back();
   }
-   
 
 }
