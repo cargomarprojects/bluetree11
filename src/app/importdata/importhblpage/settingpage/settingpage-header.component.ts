@@ -24,8 +24,14 @@ export class SettingPageHeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-   this.searchstring_ctrl.focus();
+    if (!this.gs.isBlank(this.searchstring_ctrl))
+    this.searchstring_ctrl.focus();
   }
+  ngAfterViewInit() {
+    if (!this.gs.isBlank(this.searchstring_ctrl))
+      this.searchstring_ctrl.focus();
+  }
+
 
   ngOnChanges(changes: SimpleChange) {
   }

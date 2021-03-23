@@ -33,6 +33,8 @@ export interface SearchQuery {
 }
 
 export interface LinkPageModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

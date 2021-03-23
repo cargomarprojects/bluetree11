@@ -72,7 +72,11 @@ export class MissingDataPageComponent implements OnInit {
             this.List('DEFAULT');
     }
 
-
+    ngAfterViewInit() {
+        if (!this.gs.isBlank(this.searchstring_ctrl))
+            this.searchstring_ctrl.focus();
+      }
+    
     List(action: string = '') {
         var SearchData = this.gs.UserInfo;
         if (this.gs.isBlank(this.searchString))

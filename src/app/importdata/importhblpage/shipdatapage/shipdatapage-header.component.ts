@@ -31,7 +31,13 @@ export class ShipDataPageHeaderComponent implements OnInit {
       this.searchsender_ctrl.focus();
   }
 
+
   ngOnChanges(changes: SimpleChange) {
+  }
+  
+  ngAfterViewInit() {
+    if (!this.gs.isBlank(this.searchsender_ctrl))
+      this.searchsender_ctrl.focus();
   }
 
   List(outputformat: string) {
