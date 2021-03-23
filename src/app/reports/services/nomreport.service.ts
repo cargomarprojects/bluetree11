@@ -108,12 +108,13 @@ export class NomReportService {
         this.canSave = this.canAdd || this.canEdit;
         this.canDelete = this.gs.canDelete(this.menuid);
         this.canPrint = this.gs.canPrint(this.menuid);
-        
+
         this.initlialized = true;
 
     }
 
     Search(_searchdata: any, type: string = '') {
+        let compids = "";
         this.record.errormessage = '';
         this.mdata$.next(this.record);
         if (type == 'SEARCH') {
@@ -130,8 +131,16 @@ export class NomReportService {
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.HANDLED_ID = this.record.searchQuery.handled_id;
         if (this.record.searchQuery.comp_code == 'ALL') {
+            compids = "";
+            this.gs.CompanyList.forEach(Rec => {
+                if (Rec.comp_code != "ALL") {
+                    if (compids != "")
+                        compids += ",";
+                    compids += "'" + Rec.comp_pkid.toString() + "'";
+                }
+            })
             SearchData.COMP_TYPE = "ALL";
-            SearchData.COMP_CODE = this.gs.branch_codes;
+            SearchData.COMP_CODE = compids;
         }
         else {
             SearchData.COMP_TYPE = "SINGLE";

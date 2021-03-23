@@ -67,6 +67,7 @@ export class NomReportComponent implements OnInit {
 
   PrintNom(_searchdata: any) {
 
+    let compids = "";
     if (!this.mainservice.canPrint) {
       alert('Insufficient User Rights')
       return;
@@ -78,19 +79,52 @@ export class NomReportComponent implements OnInit {
     this.report_searchdata.pkid = this.gs.getGuid();
     this.report_searchdata.HANDLED_ID = _searchdata.searchQuery.handled_id;
     if (_searchdata.searchQuery.comp_code == 'ALL') {
+      compids = "";
+      this.gs.CompanyList.forEach(Rec => {
+        if (Rec.comp_code != "ALL") {
+          if (compids != "")
+            compids += ",";
+          compids += "'" + Rec.comp_pkid.toString() + "'";
+        }
+      })
       this.report_searchdata.COMP_TYPE = "ALL";
-      this.report_searchdata.COMP_CODE = this.gs.branch_codes;
+      this.report_searchdata.COMP_CODE = compids;
+      this.report_searchdata.COMP_NAME = "ALL";
     }
     else {
       this.report_searchdata.COMP_TYPE = "SINGLE";
       this.report_searchdata.COMP_CODE = _searchdata.searchQuery.comp_code;
+      this.report_searchdata.COMP_NAME = this.GetCompName(_searchdata.searchQuery.comp_code);
     }
-    this.report_menuid = this.mainservice.menuid; 
+    this.report_menuid = this.mainservice.menuid;
     this.tab = 'report';
   }
 
   Close() {
     this.location.back();
+  }
+
+  // GetCompName(_code:string)
+  // {
+  //   let _sName='';
+  //   if (this.gs.CompanyList != null) {
+  //     var REC = this.gs.CompanyList.find(rec => rec.comp_code == _code);
+  //     if (REC != null) {
+  //       _sName = REC.comp_name;
+  //     }
+  //   }
+  //   return _sName;
+  // }
+
+  GetCompName(_code: string) {
+    let _sName = '';
+    if (this.gs.CompanyList != null) {
+      var REC = this.gs.CompanyList.find(rec => rec.comp_pkid == _code);
+      if (REC != null) {
+        _sName = REC.comp_name;
+      }
+    }
+    return _sName;
   }
 
 }
