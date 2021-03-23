@@ -116,7 +116,7 @@ export class BankEnquiryReportComponent implements OnInit {
         this.SearchData.FDATE = this.fdate;
         this.SearchData.EDATE = this.edate;
         this.SearchData.OPDATE = this.fdate;
-        this.SearchData.COMP_NAME = this.comp_name;
+        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
         this.SearchData.BRANCH_CODE = this.comp_code;
       } else {
 
@@ -194,7 +194,7 @@ export class BankEnquiryReportComponent implements OnInit {
       this.SearchData.EDATE = this.edate;
       this.SearchData.OPDATE = this.fdate;
       this.SearchData.BRANCH_CODE = this.comp_code;
-      this.SearchData.COMP_NAME = this.comp_name;
+      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
 
       this.SearchData.filename = "";
       this.SearchData.filedisplayname = "";

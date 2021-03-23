@@ -149,7 +149,7 @@ export class AgingReportComponent implements OnInit {
                     this.SearchData.COMP_CODE = this.gs.branch_codes;
                 else
                     this.SearchData.COMP_CODE = this.comp_type;
-                this.SearchData.COMP_NAME = this.comp_name;
+                this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
                 this.SearchData.CUST_ID = this.cust_id;
                 this.SearchData.ARAP = this.report_arap;
                 this.SearchData.RPTTYPE = this.report_type;
@@ -255,7 +255,7 @@ export class AgingReportComponent implements OnInit {
                 this.SearchData.COMP_CODE = this.gs.branch_codes;
             else
                 this.SearchData.COMP_CODE = this.comp_type;
-            this.SearchData.COMP_NAME = this.comp_name;
+            this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
             this.SearchData.CUST_ID = this.cust_id;
             this.SearchData.ARAP = this.report_arap;
             this.SearchData.RPTTYPE = this.report_type;

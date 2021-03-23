@@ -116,7 +116,7 @@ export class TrialBalReportComponent implements OnInit {
         this.SearchData.FDATE = this.fdate;
         this.SearchData.TDATE = this.tdate;
         this.SearchData.BRCODE = this.comp_code;
-        this.SearchData.COMP_NAME = this.comp_name;
+        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
         this.SearchData.BASEDON = this.basedon;
         this.SearchData.SHOW_ZERO_BAL = this.showzerobal == true ? 'Y' : 'N';
         this.SearchData.RETAINED_PROFIT = this.gs.RETAINED_PROFIT_ID;
@@ -205,7 +205,7 @@ export class TrialBalReportComponent implements OnInit {
       this.SearchData.FDATE = this.fdate;
       this.SearchData.TDATE = this.tdate;
       this.SearchData.BRCODE = this.comp_code;
-      this.SearchData.COMP_NAME = this.comp_name;
+      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
       this.SearchData.BASEDON = this.basedon;
       this.SearchData.SHOW_ZERO_BAL = this.showzerobal == true ? 'Y' : 'N';
       this.SearchData.RETAINED_PROFIT = this.gs.RETAINED_PROFIT_ID;
