@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDet
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/tbl_nom_list';
 import { SearchTable } from '../../shared/models/searchtable';
+import { NomReportService } from '../services/nomreport.service';
 
 @Component({
     selector: 'app-nom-report-header',
@@ -17,7 +18,8 @@ export class NomReportHeaderComponent implements OnInit {
     }
     @Output() searchEvents = new EventEmitter<any>();
 
-    constructor(public gs: GlobalService
+    constructor(public gs: GlobalService,
+        public mainservice: NomReportService
     ) { }
 
     ngOnInit() {
@@ -25,7 +27,7 @@ export class NomReportHeaderComponent implements OnInit {
     }
 
     initData() {
-        
+
     }
 
     ngOnChanges(changes: SimpleChange) {

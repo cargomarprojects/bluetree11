@@ -30,6 +30,7 @@ export class NomReportService {
     public canEdit: boolean;
     public canSave: boolean;
     public canDelete: boolean;
+    public canPrint: boolean;
 
     public initlialized: boolean;
     private LSESSION = 0;
@@ -106,7 +107,8 @@ export class NomReportService {
         this.canEdit = this.gs.canEdit(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
         this.canDelete = this.gs.canDelete(this.menuid);
-
+        this.canPrint = this.gs.canPrint(this.menuid);
+        
         this.initlialized = true;
 
     }
