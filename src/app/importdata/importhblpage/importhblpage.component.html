@@ -20,15 +20,15 @@
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <th>FILE-NAME</th>
-        <th>PROCESSED</th>
-        <th>REFNO</th>
-        <th>UPLOADED-DT</th>
-        <th>CREATED-DT</th>
+        <th (click)="mainservice.sort('files_desc')">FILE-NAME&nbsp;<i [ngClass]="mainservice.getIcon('files_desc')"></i></th>
+        <th (click)="mainservice.sort('files_processed')">PROCESSED&nbsp;<i [ngClass]="mainservice.getIcon('files_processed')"></i></th>
+        <th (click)="mainservice.sort('files_ref_no')">REFNO&nbsp;<i [ngClass]="mainservice.getIcon('files_ref_no')"></i></th>
+        <th (click)="mainservice.sort('files_uploaded_date')">UPLOADED-&nbsp;<i [ngClass]="mainservice.getIcon('files_uploaded_date')"></i></th>
+        <th (click)="mainservice.sort('files_created_date')">CREATED-DT&nbsp;<i [ngClass]="mainservice.getIcon('files_created_date')"></i></th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of  records$ | async">
+      <tr *ngFor="let rec of  records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
         <td class='hlink2' (click)="XmlImportData(rec)">{{rec.files_desc}}</td>
         <td>{{rec.files_processed}}</td>
         <td>{{rec.files_ref_no}}</td>
