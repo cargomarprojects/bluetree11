@@ -1,52 +1,40 @@
-
 <div class="input-group input-group-sm">
   <input [disabled]="disabled" type="text" class="form-control form-control-sm" (focus)="onfocus()" (blur)="onBlur()"
-    [(ngModel)]="_displaydata" list="datalistOptions" autocomplete="off" #inputbox   />
+    [(ngModel)]="_displaydata" #inputbox />
 
-  <button [disabled]="showDiv || disabled" [ngStyle]="setMyStyles()" class="btn btn-default btn-sm" 
+  <button [disabled]="showDiv || disabled" [ngStyle]="setMyStyles()" class="btn btn-default btn-sm"
     (click)="List()">...</button>
 
 </div>
- 
-  
-  <div [ngClass]="showDiv ? 'm1 dispdiv':'m1 hidediv'" >
-    
-    <select #LOV class="custom-select custom-select-sm" size="15" 
-    (keydown)="ListKeyDown2($event)" 
-    (click)="ListMouseDown2($event)"
-    (blur)="Cancel()"
-    [(ngModel)]="_selectedItem"
-    >
-      <option  style ="cursor: pointer;"
-        *ngFor="let item of RecList ;let i = index" 
-        [selected]="item.id == _selectedItem"
-        [value] = "item.id"
-      >[{{item.code}}]&nbsp;{{item.name}}</option>
 
-      <option value ="-*-*-*-MORE_ITEM-*-*-*-"  style=" cursor:pointer"  *ngIf="bShowMore">
-        MORE...
-      </option>
+<div [ngClass]="{'my-class': showDiv}">
 
-    </select>
-    
-  </div>
-
-
- 
-
-
-<!-- <div [ngClass]="{'my-class': showDiv}">
   <div *ngIf="showDiv">
-    <button tabindex="0" type="button" class="close" aria-label="Close" (click)="Cancel()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <ul style="padding-top: 0%;padding-bottom: 0%;" *ngFor="let item of RecList ;let i = index" (keydown)="ListKeydown($event,item)" >
-      <li style="border-bottom: 1px solid black;" ><a (click)="SelectedItem('LIST',item)">{{item.code}}<br>{{item.name}}</a></li>
-    </ul>
-    <ul *ngIf="bShowMore" (keydown)="MoreKeydown($event)">
-      <li><a (click)="More()">More...</a></li>
-    </ul>
+
+    <div class="page-body table-responsive table-bordered">
+      <table class="table  table-hover table-sm" (blur)="Cancel()">
+        <tbody class="page-body-tbody">
+          <tr *ngFor="let item of RecList ;let i = index">
+            <td>
+              <input type="radio" [(ngModel)]="_selectedid" [value]="item.id" [checked]="item.id === _selectedid"
+                (keydown)="ListKeydown($event,item)" #lov>
+            </td>
+            <td (click)="SelectedItem('LIST',item)">{{item.code}}</td>
+            <td (click)="SelectedItem('LIST',item)">{{item.name}}</td>
+            <td (click)="SelectedItem('LIST',item)">{{item.col1}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="page-pager center">
+      <ul class="pagination pagination-sm">
+        <li class="page-item"><a class="page-link" (click)="PageEvents('PREV')"><span
+              class="fa fa-arrow-left"></span></a></li>
+        <li class="page-item"><a class="page-link" (click)="PageEvents('NEXT')"><span
+              class="fa fa-arrow-right"></span></a></li>
+      </ul>
+    </div>
+
   </div>
 </div>
-
- -->

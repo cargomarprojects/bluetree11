@@ -1,4 +1,5 @@
 export class SearchTable {
+    selected : boolean =false;
     controlname: string = '';
     displaycolumn: string = '';
     type: string = '';

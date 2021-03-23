@@ -621,6 +621,10 @@ select option:hover {
 
 
 }
+
+.bgSelected {
+    background-color: royalblue;
+}
   
 /*Small devices (landscape phones, less than 768px)*/
 @media (max-width: 767px) {

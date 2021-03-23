@@ -1,5 +1,4 @@
 
-
 import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, OnChanges, SimpleChange, ViewChildren, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -18,23 +17,14 @@ import { GlobalService } from '../../core/services/global.service';
                 cursor: pointer;
                 border-style: solid;
                 border-width: 1px;
+                overflow-y: scroll; 
                 position: absolute;     
+                height:400px;
                 width:auto;
-                min-width:200px;
+                min-width:400px;
                 z-index: 2000;
                 background: #fff;
                 display: block;
-            }
-
-            .dispdiv {
-              position: absolute;     
-              width:auto;
-              min-width:200px;
-              z-index: 2000;
-              display: block;
-            }
-            .hidediv {
-              display :none;
             }
     `
   ]
@@ -44,10 +34,6 @@ export class AutoComplete2Component {
 
   //@ViewChild('_cbtn') cbtn_field: ElementRef;
   //@ViewChildren('_itms') itms_field: QueryList<ElementRef>;
-
-  _selectedItem = '';
-
-  _lastItem = '';
 
   private _controlname: string;
   @Input() set controlname(value: string) {
@@ -109,13 +95,14 @@ export class AutoComplete2Component {
 
   @ViewChild('inputbox') private inputbox: ElementRef;
 
-  @ViewChild("LOV") private lov: ElementRef;
+  @ViewChild("lov") private lov: ElementRef;
 
   focuselement: number = 0;
   rows_to_display: number = 0;
   rows_total: number = 0;
   rows_starting_number: number = 0;
   rows_ending_number: number = 0;
+
 
   old_data: string;
 
@@ -134,13 +121,15 @@ export class AutoComplete2Component {
 
   loading = false;
 
+  _selectedid = '';
+
+
   constructor(
     private elementRef: ElementRef,
     private route: ActivatedRoute,
     private router: Router,
     private loginservice: LoginService,
-    private gs: GlobalService,
-
+    private gs: GlobalService
   ) {
 
   }
@@ -151,17 +140,23 @@ export class AutoComplete2Component {
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
 
   }
-
+  // ngAfterViewInit() {
+  //   // this.itms_field.changes
+  //   // .subscribe((queryChanges) => {
+  //   //   this.itms_field.first.nativeElement.focus();
+  //   // });
+  //   // if (!this.gs.isBlank(this.cbtn_field))
+  //   //   this.cbtn_field.nativeElement.focus();
+  // }
   Focus() {
     if (!this.disabled)
       this.inputbox.nativeElement.focus();
   }
-  /*
 
   eventHandler(KeyCode: any) {
     this.List();
   }
-  */
+
   More() {
     // if (this.rows_ending_number < this.rows_total)
     // {
@@ -169,32 +164,62 @@ export class AutoComplete2Component {
     //     this.rows_ending_number = this.rows_ending_number + this.rows_to_display;
     //     this.List('NEXT');
     // }
-
-
     this.rows_starting_number = this.rows_ending_number + 1;
     this.rows_ending_number = this.rows_ending_number + this.rows_to_display;
     this.List('NEXT');
-
-
-
-
   }
+
+  PageEvents(action) {
+
+    console.log(action);
+
+    /*
+    if ( action == 'PREV' && this.rows_starting_number > this.rows_to_display) {
+      this.rows_starting_number = this.rows_starting_number - this.rows_to_display;
+      this.rows_ending_number = this.rows_ending_number - this.rows_to_display;
+    }
+    if ( action == 'NEXT') {
+      this.rows_starting_number = this.rows_ending_number + 1;
+      this.rows_ending_number = this.rows_ending_number + this.rows_to_display;
+    }
+    */
+    this.List(action);
+  }
+
+
 
   List(_action: string = 'NEW') {
     this.loading = true;
+
+    let row1 = 0;
+    let row2 = 0;
 
     if (_action == "NEW") {
       this.rows_to_display = 10;
       this.rows_starting_number = 1;
       this.rows_ending_number = this.rows_to_display;
+      row1 = this.rows_starting_number;
+      row2 = this.rows_ending_number;
       this.bShowMore = true;
+    }
+    else {
+      row1 = this.rows_starting_number;
+      row1 = this.rows_ending_number;
+    }
+    if (_action == 'PREV') {
+      row1 = this.rows_starting_number - this.rows_to_display;
+      row2 = this.rows_ending_number - this.rows_to_display;
+    }
+    if (_action == 'NEXT') {
+      row1 = this.rows_ending_number + 1;
+      row2 = this.rows_ending_number + this.rows_to_display;
     }
 
     let SearchData = {
       action: _action,
       rows_to_display: this.rows_to_display,
-      rows_starting_number: this.rows_starting_number,
-      rows_ending_number: this.rows_ending_number,
+      rows_starting_number: row1,
+      rows_ending_number: row2,
       type: this._tabletype,
       subtype: this._subtype,
       parentid: this._parentid,
@@ -213,45 +238,47 @@ export class AutoComplete2Component {
         //     this.bShowMore = false;
 
         if (response.list == null) {
-          this.bShowMore = false;
-        }
-        else {
-          if (_action == "NEW") {
-            this._lastItem = response.list[0].id;
-            console.log( 'new',response.list[0].name);
+          if (this.showDiv && this.RecList.length > 0) {
+            this._selectedid = this.RecList[0].id;
+            setTimeout(() => {
+              this.lov.nativeElement.focus();
+              this.lov.nativeElement.scrollTop = this.lov.nativeElement.scrollHeight;
+            }, 0);
           }
+          return;
         }
-        this._selectedItem = this._lastItem;
-       
 
-        if(response.list)
-          this.RecList.push(...response.list);
+        //this.RecList.push(...response.list);
+
+        this.RecList = response.list;
 
         this.loading = false;
 
-        if (this.RecList.length === 0) {
-          this.SelectedItem('', null);
-          this.showDiv = false;
+        if ( _action == "NEW" ) {
+          if (this.RecList.length === 0) {
+            this.SelectedItem('', null);
+            this.showDiv = false;
+          }
+          else if (this.RecList.length === 1) {
+            this.SelectedItem('', this.RecList[0]);
+            this.showDiv = false;
+          }
         }
-        else if (this.RecList.length === 1) {
-          this.SelectedItem('', this.RecList[0]);
-          this.showDiv = false;
-        }
-        else {
-          /*
-          if (_action == "NEW")
-            this._selectedItem =  this.RecList[0].id;
-          */
-          if (response.list)
-            this._lastItem = response.list[response.list.length - 1].id;
+        else if ( this.RecList.length >0 ) {
+
+          this.rows_starting_number = row1;
+          this.rows_ending_number = row2;
 
           this.showDiv = true;
+
+
+          this._selectedid = this.RecList[0].id;
+
           setTimeout(() => {
             this.lov.nativeElement.focus();
             this.lov.nativeElement.scrollTop = this.lov.nativeElement.scrollHeight;
           }, 0);
         }
-
       },
         error => {
           this.loading = false;
@@ -317,6 +344,7 @@ export class AutoComplete2Component {
       this.inputdata.col9 = _Record.col9;
     }
 
+
     this.showDiv = false;
     this.ValueChanged.emit(this.inputdata);
     this.RecList = [];
@@ -348,10 +376,6 @@ export class AutoComplete2Component {
   }
 
   Cancel() {
-
-
-    if (!this.showDiv)
-      return;
     let localdata: string = "";
     if (this._displaydata === null)
       localdata = '';
@@ -374,32 +398,9 @@ export class AutoComplete2Component {
     return styles;
   }
 
-  ListKeyDown2(event: KeyboardEvent) {
-    if (this._selectedItem == "-*-*-*-MORE_ITEM-*-*-*-") {
-      if (event.key === 'ArrowDown') {
-        this.More();
-        return;
-      }
-    }
-    if (event.key === 'Enter') {
-      this.SelectedItem('LIST', this.RecList.find(rec => rec.id == this._selectedItem));
-    }
-    if (event.key === 'Escape') {
-      this.Cancel();
-    }
+  onSelectionChange(item: SearchTable) {
+
   }
-
-  ListMouseDown2(event: KeyboardEvent) {
-
-    if (this._selectedItem == "-*-*-*-MORE_ITEM-*-*-*-") {
-      this.More();
-      return;
-    }
-
-
-    this.SelectedItem('LIST', this.RecList.find(rec => rec.id == this._selectedItem));
-  }
-
   ListKeydown(event: KeyboardEvent, _rec: SearchTable) {
     if (event.key === 'Enter') {
       this.SelectedItem('LIST', _rec)
@@ -416,4 +417,6 @@ export class AutoComplete2Component {
     }
   }
 }
+
+
 
