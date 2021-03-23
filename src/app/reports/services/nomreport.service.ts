@@ -72,7 +72,7 @@ export class NomReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', handled_id: '', handled_name: '', comp_code: '', comp_type: '' },
+            searchQuery: <SearchQuery>{ searchString: '', handled_id: '', handled_name: '', comp_code: this.gs.branch_pkid, comp_type: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -94,7 +94,7 @@ export class NomReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', handled_id: '', handled_name: '', comp_code: '', comp_type: '' },
+            searchQuery: <SearchQuery>{ searchString: '', handled_id: '', handled_name: '', comp_code: this.gs.branch_pkid, comp_type: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -126,7 +126,7 @@ export class NomReportService {
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
-        SearchData.STYPE = this.record.searchQuery.handled_id;
+        SearchData.HANDLED_ID = this.record.searchQuery.handled_id;
         if (this.record.searchQuery.comp_code == 'ALL') {
             SearchData.COMP_TYPE = "ALL";
             SearchData.COMP_CODE = this.gs.branch_codes;
