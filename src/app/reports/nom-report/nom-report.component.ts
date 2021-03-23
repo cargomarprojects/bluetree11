@@ -104,18 +104,6 @@ export class NomReportComponent implements OnInit {
     this.location.back();
   }
 
-  // GetCompName(_code:string)
-  // {
-  //   let _sName='';
-  //   if (this.gs.CompanyList != null) {
-  //     var REC = this.gs.CompanyList.find(rec => rec.comp_code == _code);
-  //     if (REC != null) {
-  //       _sName = REC.comp_name;
-  //     }
-  //   }
-  //   return _sName;
-  // }
-
   GetCompName(_code: string) {
     let _sName = '';
     if (this.gs.CompanyList != null) {
