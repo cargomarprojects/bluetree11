@@ -14,17 +14,20 @@ import { GlobalService } from '../../core/services/global.service';
   styles: [
     `
             .my-class {
+                position: fixed;       
+                display: block;
+                width:auto;
+                height:auto;
+                
                 cursor: pointer;
                 border-style: solid;
                 border-width: 1px;
-                overflow-y: scroll; 
-                position: absolute;     
-                height:400px;
-                width:auto;
-                min-width:400px;
+
+                min-width:initial;
+                margin-top :1px;
                 z-index: 2000;
                 background: #fff;
-                display: block;
+                
             }
     `
   ]
@@ -170,19 +173,6 @@ export class AutoComplete2Component {
   }
 
   PageEvents(action) {
-
-    console.log(action);
-
-    /*
-    if ( action == 'PREV' && this.rows_starting_number > this.rows_to_display) {
-      this.rows_starting_number = this.rows_starting_number - this.rows_to_display;
-      this.rows_ending_number = this.rows_ending_number - this.rows_to_display;
-    }
-    if ( action == 'NEXT') {
-      this.rows_starting_number = this.rows_ending_number + 1;
-      this.rows_ending_number = this.rows_ending_number + this.rows_to_display;
-    }
-    */
     this.List(action);
   }
 
@@ -264,7 +254,7 @@ export class AutoComplete2Component {
             this.showDiv = false;
           }
         }
-        else if ( this.RecList.length >0 ) {
+        if ( this.RecList.length > 1 ) {
 
           this.rows_starting_number = row1;
           this.rows_ending_number = row2;
@@ -401,6 +391,7 @@ export class AutoComplete2Component {
   onSelectionChange(item: SearchTable) {
 
   }
+  
   ListKeydown(event: KeyboardEvent, _rec: SearchTable) {
     if (event.key === 'Enter') {
       this.SelectedItem('LIST', _rec)
@@ -408,8 +399,12 @@ export class AutoComplete2Component {
     if (event.key === 'Escape') {
       this.Cancel();
     }
-    // if (event.key === 'ArrowDown'||event.key === 'Tab') {
-    // }
+    if (event.key === 'PageUp') {
+      this.List('PREV');
+    }
+    if (event.key === 'PageDown') {
+      this.List('NEXT');
+    }
   }
   MoreKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
