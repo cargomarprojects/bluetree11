@@ -129,7 +129,7 @@ export class TonReportComponent implements OnInit {
           this.SearchData.COMP_CODE = this.gs.branch_codes;
         else
           this.SearchData.COMP_CODE = this.comp_type;
-        this.SearchData.COMP_NAME = this.gs.branch_name;
+        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
         this.SearchData.REPORT_TYPE = this.report_type;
 
 
@@ -207,7 +207,7 @@ export class TonReportComponent implements OnInit {
         this.SearchData.COMP_CODE = this.gs.branch_codes;
       else
         this.SearchData.COMP_CODE = this.comp_type;
-      this.SearchData.COMP_NAME = this.gs.branch_name;
+      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
       this.SearchData.REPORT_TYPE = this.report_type;
 
       this.SearchData.CUST_ID = this.agent_id;

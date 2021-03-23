@@ -131,7 +131,7 @@ export class ShipHandReportComponent implements OnInit {
         else
           this.SearchData.COMP_CODE = this.branch;
 
-        this.SearchData.COMP_NAME = this.gs.branch_name;
+        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.branch) ;
         this.SearchData.HANDLED_ID = this.handled_id;
         this.SearchData.HANDLED_NAME = this.handled_name;
 
@@ -202,7 +202,7 @@ export class ShipHandReportComponent implements OnInit {
         this.SearchData.COMP_CODE = this.gs.branch_codes;
       else
         this.SearchData.COMP_CODE = this.branch;
-      this.SearchData.COMP_NAME = this.gs.branch_name;
+      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.branch) ;
       this.SearchData.HANDLED_ID = this.handled_id;
       this.SearchData.HANDLED_NAME = this.handled_name;
 

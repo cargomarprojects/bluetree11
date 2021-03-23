@@ -132,7 +132,7 @@ export class TopCustomerReportComponent implements OnInit {
           this.SearchData.COMP_CODE = this.gs.branch_codes;
         else
           this.SearchData.COMP_CODE = this.comp_type;
-        this.SearchData.COMP_NAME = this.gs.branch_name;
+        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
         this.SearchData.ISPARENT = this.group_by_parent == true ? "Y" : "N";
         this.SearchData.ISADMIN = (this.gs.user_isadmin == "Y" || this.gs.IsAdmin(this.menuid)) ? "Y" : "N";
 
@@ -235,7 +235,7 @@ export class TopCustomerReportComponent implements OnInit {
         this.SearchData.COMP_CODE = this.gs.branch_codes;
       else
         this.SearchData.COMP_CODE = this.comp_type;
-      this.SearchData.COMP_NAME = this.gs.branch_name;
+      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
       this.SearchData.ISPARENT = this.group_by_parent == true ? "Y" : "N";
       this.SearchData.ISADMIN = (this.gs.user_isadmin == "Y" || this.gs.IsAdmin(this.menuid)) ? "Y" : "N";
 
