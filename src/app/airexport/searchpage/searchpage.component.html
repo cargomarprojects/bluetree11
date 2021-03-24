@@ -93,9 +93,9 @@
         <th (click)="mainservice.sort('cntr_type')">TYPE&nbsp;<i [ngClass]="mainservice.getIcon('cntr_type')"></i></th>
         <th (click)="mainservice.sort('cntr_sealno')">SEALNO&nbsp;<i [ngClass]="mainservice.getIcon('cntr_sealno')"></i>
         </th>
-        <th (click)="mainservice.sort('pcs')">PCS&nbsp;<i [ngClass]="mainservice.getIcon('pcs')"></i></th>
-        <th (click)="mainservice.sort('wt')">WT&nbsp;<i [ngClass]="mainservice.getIcon('wt')"></i></th>
-        <th (click)="mainservice.sort('cbm')">CBM&nbsp;<i [ngClass]="mainservice.getIcon('cbm')"></i></th>
+        <th class='text-right' (click)="mainservice.sort('pcs')">PCS&nbsp;<i [ngClass]="mainservice.getIcon('pcs')"></i></th>
+        <th class='text-right' (click)="mainservice.sort('wt')">WT&nbsp;<i [ngClass]="mainservice.getIcon('wt')"></i></th>
+        <th class='text-right' (click)="mainservice.sort('cbm')">CBM&nbsp;<i [ngClass]="mainservice.getIcon('cbm')"></i></th>
         <th (click)="mainservice.sort('pol_name')">POL&nbsp;<i [ngClass]="mainservice.getIcon('pol_name')"></i></th>
         <th (click)="mainservice.sort('pol_etd')">ETD&nbsp;<i [ngClass]="mainservice.getIcon('pol_etd')"></i></th>
         <th (click)="mainservice.sort('pod_name')">POD&nbsp;<i [ngClass]="mainservice.getIcon('pod_name')"></i></th>
@@ -121,9 +121,9 @@
         <td>{{rec.cntr_no}}</td>
         <td>{{rec.cntr_type}}</td>
         <td>{{rec.cntr_sealno}}</td>
-        <td>{{rec.pcs}}</td>
-        <td>{{rec.wt}}</td>
-        <td>{{rec.cbm}}</td>
+        <td class='text-right'>{{rec.pcs}}</td>
+        <td class='text-right'>{{rec.wt | number : '1.3-3'}}</td>
+        <td class='text-right'>{{rec.cbm | number : '1.3-3'}}</td>
         <td>{{rec.pol_name}}</td>
         <td>{{rec.pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td>{{rec.pod_name}}</td>
@@ -152,11 +152,11 @@
             [ngClass]="mainservice.getIcon('hbl_cha_name')"></i></th>
         <th (click)="mainservice.sort('hbl_it_no')">IT-NO&nbsp;<i [ngClass]="mainservice.getIcon('hbl_it_no')"></i></th>
         <th (click)="mainservice.sort('hbl_pono')">PO-NO&nbsp;<i [ngClass]="mainservice.getIcon('hbl_pono')"></i></th>
-        <th (click)="mainservice.sort('pkgs')">PKGS&nbsp;<i [ngClass]="mainservice.getIcon('pkgs')"></i></th>
-        <th (click)="mainservice.sort('cbm')">CBM&nbsp;<i [ngClass]="mainservice.getIcon('cbm')"></i></th>
-        <th (click)="mainservice.sort('wt')">WT&nbsp;<i [ngClass]="mainservice.getIcon('wt')"></i></th>
-        <th (click)="mainservice.sort('chwt')">CHWT&nbsp;<i [ngClass]="mainservice.getIcon('chwt')"></i></th>
-        <th (click)="mainservice.sort('pcs')">PCS&nbsp;<i [ngClass]="mainservice.getIcon('pcs')"></i></th>
+        <th class='text-right' (click)="mainservice.sort('pkgs')">PKGS&nbsp;<i [ngClass]="mainservice.getIcon('pkgs')"></i></th>
+        <th class='text-right' (click)="mainservice.sort('cbm')">CBM&nbsp;<i [ngClass]="mainservice.getIcon('cbm')"></i></th>
+        <th class='text-right' (click)="mainservice.sort('wt')">WT&nbsp;<i [ngClass]="mainservice.getIcon('wt')"></i></th>
+        <th class='text-right' (click)="mainservice.sort('chwt')">CHWT&nbsp;<i [ngClass]="mainservice.getIcon('chwt')"></i></th>
+        <th class='text-right' (click)="mainservice.sort('pcs')">PCS&nbsp;<i [ngClass]="mainservice.getIcon('pcs')"></i></th>
         <th (click)="mainservice.sort('pol_name')">POL&nbsp;<i [ngClass]="mainservice.getIcon('pol_name')"></i></th>
         <th (click)="mainservice.sort('pol_etd')">ETD&nbsp;<i [ngClass]="mainservice.getIcon('pol_etd')"></i></th>
         <th (click)="mainservice.sort('pod_name')">POD&nbsp;<i [ngClass]="mainservice.getIcon('pod_name')"></i></th>
@@ -182,11 +182,11 @@
         <td *ngIf="mainservice.search_type == 'CHB'">{{rec.hbl_cha_name}}</td>
         <td>{{rec.hbl_it_no}}</td>
         <td>{{rec.hbl_pono}}</td>
-        <td>{{rec.pkgs}}</td>
-        <td>{{rec.cbm}}</td>
-        <td>{{rec.wt}}</td>
-        <td>{{rec.chwt}}</td>
-        <td>{{rec.pcs}}</td>
+        <td class='text-right'>{{rec.pkgs}}</td>
+        <td class='text-right'>{{rec.cbm | number : '1.3-3'}}</td>
+        <td class='text-right'>{{rec.wt | number : '1.3-3'}}</td>
+        <td class='text-right'>{{rec.chwt | number : '1.3-3'}}</td>
+        <td class='text-right'>{{rec.pcs}}</td>
         <td>{{rec.pol_name}}</td>
         <td>{{rec.pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td>{{rec.pod_name}}</td>
@@ -213,8 +213,8 @@
             [ngClass]="mainservice.getIcon('inv_refno')"></i></th>
         <th (click)="mainservice.sort('shipper_name')">INVOICE-TO&nbsp;<i
             [ngClass]="mainservice.getIcon('shipper_name')"></i></th>
-        <th (click)="mainservice.sort('inv_total')">TOTAL&nbsp;<i [ngClass]="mainservice.getIcon('inv_total')"></i></th>
-        <th (click)="mainservice.sort('inv_paid')">PAID&nbsp;<i [ngClass]="mainservice.getIcon('inv_paid')"></i></th>
+        <th class='text-right' (click)="mainservice.sort('inv_total')">TOTAL&nbsp;<i [ngClass]="mainservice.getIcon('inv_total')"></i></th>
+        <th class='text-right' (click)="mainservice.sort('inv_paid')">PAID&nbsp;<i [ngClass]="mainservice.getIcon('inv_paid')"></i></th>
         <th (click)="mainservice.sort('pol_name')">POL&nbsp;<i [ngClass]="mainservice.getIcon('pol_name')"></i></th>
         <th (click)="mainservice.sort('pol_etd')">ETD&nbsp;<i [ngClass]="mainservice.getIcon('pol_etd')"></i></th>
         <th (click)="mainservice.sort('pod_name')">POD&nbsp;<i [ngClass]="mainservice.getIcon('pod_name')"></i></th>
@@ -239,8 +239,8 @@
         <td>{{rec.inv_arap}}</td>
         <td>{{rec.inv_refno}}</td>
         <td>{{rec.shipper_name}}</td>
-        <td>{{rec.inv_total}}</td>
-        <td>{{rec.inv_paid}}</td>
+        <td class='text-right'>{{rec.inv_total | number : '1.2-2'}}</td>
+        <td class='text-right'>{{rec.inv_paid | number : '1.2-2'}}</td>
         <td>{{rec.pol_name}}</td>
         <td>{{rec.pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td>{{rec.pod_name}}</td>

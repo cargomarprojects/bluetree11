@@ -1,7 +1,7 @@
 import { PageQuery } from '../../shared/models/pageQuery';
 
 export interface SearchQuery {
-    searchString : string ;
+    searchString: string;
 }
 
 
@@ -28,7 +28,7 @@ export interface Tbl_cargo_exp_masterm {
 
     mbl_direct: string;
     mbl_direct_bool: boolean;
-    
+
     mbl_liner_id: string;
     mbl_liner_name: string;
     mbl_liner_code: string;
@@ -112,53 +112,53 @@ export interface Tbl_cargo_exp_masterm {
     mbl_book_slno: number;
     mbl_ismemo_attached: string;
     mbl_cntr_desc: string;
-    mbl_cooformat_id:string;
+    mbl_cooformat_id: string;
 }
 
-export interface Tbl_cargo_exp_container
-{
-    cntr_pkid : string;
-    cntr_hblid : string;
-    cntr_catg : string;
-    cntr_order : number;
-    cntr_no : string;
-    cntr_type : string;
-    cntr_sealno : string;
-    cntr_movement : string;
-    cntr_pieces : number;
-    cntr_packages_uom : string;
-    cntr_packages  : number;
-    cntr_cbm : number;
-    cntr_teu : number;
-    cntr_weight_uom : string;
-    cntr_weight : number;
-    cntr_tare_weight : number;
-    rec_year : number;
-    cntr_rider : string;
-    cntr_yn : string;
-    cntr_selected:boolean;
+export interface Tbl_cargo_exp_container {
+    cntr_pkid: string;
+    cntr_hblid: string;
+    cntr_catg: string;
+    cntr_order: number;
+    cntr_no: string;
+    cntr_type: string;
+    cntr_sealno: string;
+    cntr_movement: string;
+    cntr_pieces: number;
+    cntr_packages_uom: string;
+    cntr_packages: number;
+    cntr_cbm: number;
+    cntr_teu: number;
+    cntr_weight_uom: string;
+    cntr_weight: number;
+    cntr_tare_weight: number;
+    rec_year: number;
+    cntr_rider: string;
+    cntr_yn: string;
+    cntr_selected: boolean;
 }
 
 
 
 export interface vm_tbl_cargo_exp_masterm {
-    mode : string;
-    record : Tbl_cargo_exp_masterm;
-    cntrs  : Tbl_cargo_exp_container[];
-    userinfo : any,
-    filter : any;
+    mode: string;
+    record: Tbl_cargo_exp_masterm;
+    cntrs: Tbl_cargo_exp_container[];
+    userinfo: any,
+    filter: any;
 }
 
 export interface SearchQuery {
-    searchString : string ;
+    searchString: string;
+    searchtype: string;
     fromdate: string;
     todate: string;
 }
 
 export interface seaExpMasterModel {
-    sortcol : string ;
-    sortorder : boolean;
-    errormessage : string;
+    sortcol: string;
+    sortorder: boolean;
+    errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
     records: Tbl_cargo_exp_masterm[];

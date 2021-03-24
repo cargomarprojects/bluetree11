@@ -604,7 +604,7 @@
         <div class="form-group row">
           <div class="col-8 px-0">
             <label class="col-4 pr-0 col-form-label col-form-label-sm">Marks & Nos</label>
-            <button class="col-4 btn btn-info btn-sm" (click)="LoadMBL()">Load MBL</button>
+            <button class="col-4 btn btn-info btn-sm" (click)="LoadMBL()">COPY MBL. INSTR.</button>
           </div>
           <div class="col-4 pl-0">
             <label class="col-5 pl-0 col-form-label col-form-label-sm">Pkgs</label>
@@ -1029,6 +1029,12 @@
   <div class="page-footer">
     <div class="row align-items-center justify-content-center p-1">
       <button class="btn btn-primary btn-md mr-1" [disabled]="is_locked" *ngIf="canSave" (click)="Save()">Save</button>
+      <div  >
+        <select class="form-control form-control-sm mr-1" [(ngModel)]="bl_format_for">
+          <option [value]="'AS AGENT'">AS AGENT</option>
+          <option [value]="'AS CARRIER'">AS CARRIER</option>
+        </select>
+      </div>
       <div class="form-check mr-1">
         <input type="checkbox" class="form-check-input" [(ngModel)]="bl_backside" /><span>BL Backside</span>
       </div>
