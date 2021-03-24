@@ -126,10 +126,10 @@ export class SeaImpMasterEditComponent implements OnInit {
       this.MblStatusList = [{ "name": "NIL" }
         , { "name": "OMBL WITH ACCOUNTING" }, { "name": "OMBL SENT TO CARRIER" }
         , { "name": "OMBL WITH LAX OFFICE" }, { "name": "OMBL SENT BY LAX OFFICE" }, { "name": "OMBL WITH NYC OFFICE" }
-        , { "name": "OMBL SENT BY NYC OFFICE" }];
+        , { "name": "OMBL SENT BY NYC OFFICE" }, { "name": "PAPERLESS" }, { "name": "SURRENDERED ONLINE" }];
     } else {
       this.MblStatusList = [{ "name": "NIL" }, { "name": "OMBL WITH OPERATION" },
-      { "name": "OMBL WITH ACCOUNTING" }, { "name": "OMBL SENT TO CARRIER" }];
+      { "name": "OMBL WITH ACCOUNTING" }, { "name": "OMBL SENT TO CARRIER" }, { "name": "PAPERLESS" }, { "name": "SURRENDERED ONLINE" }];
     }
 
     this.BlStatusList = [{ "name": "NIL" }
