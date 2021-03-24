@@ -14,33 +14,36 @@
 
   <div *ngIf="showDiv">
 
-     
+    
     <div class="page-body table-responsive table-bordered">
-      <table class="table  table-hover table-sm" >
+      <table class="table  table-hover table-sm ">
         <tbody class="page-body-tbody">
-          <tr *ngFor="let item of RecList ;let i = index">
-            <td>
-              <input type="radio" [(ngModel)]="_selectedid" [value]="item.id" [checked]="item.id === _selectedid" name="lov"
+          <tr *ngFor="let item of RecList ;let i = index"  [style.background-color]="item == _selectedItem ? 'orange' : ''">
+            <td >
+              <input  type="radio" [(ngModel)]="_selectedItem" [value]="item" [checked]="item.id === _selectedid" name="lov"
                 (keydown)="ListKeydown($event,item)" #lov>
             </td>
-            <td (click)="SelectedItem('LIST',item)">{{item.code}}</td>
-            <td (click)="SelectedItem('LIST',item)">{{item.name}}</td>
-            <td (click)="SelectedItem('LIST',item)">{{item.col1}}</td>
+            <td (click)="ChangeSelection(item,i)">{{item.code}}</td>
+            <td class="hlink2" (click)="SelectedItem('LIST',item)">{{item.name}}</td>
+            <td (click)="ChangeSelection(item,i)">{{item.col1}}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div class="page-pager mx-auto">
-      <ul class="pagination pagination-sm">
+    <div class="page-pager">
+      <ul class="pagination pagination-sm ulcenter">
+        
         <li class="page-item"><a class="page-link" (click)="PageEvents('PREV')"><span
               class="fa fa-arrow-left"></span></a></li>
-        <li class="page-item"><a class="page-link" (click)="PageEvents('NEXT')"><span
+        <li class="page-item ml-2"><a class="page-link" (click)="PageEvents('NEXT')"><span
               class="fa fa-arrow-right"></span></a></li>
+        <li class="page-item ml-2"><a class="page-link" (click)="Cancel()"><span
+                class="fa fa-window-close"></span></a></li>
+
       </ul>
     </div>
-
-
+  
 
   </div>
 </div>
