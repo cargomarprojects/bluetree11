@@ -34,7 +34,7 @@ export class ShipDataPageHeaderComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChange) {
   }
-  
+
   ngAfterViewInit() {
     if (!this.gs.isBlank(this.searchsender_ctrl))
       this.searchsender_ctrl.focus();
@@ -48,7 +48,9 @@ export class ShipDataPageHeaderComponent implements OnInit {
     let IDs: string = "";
 
     this.mainservice.record.records.forEach(Rec => {
-      if (Rec.selected == 'Y') {
+      Rec.selected = 'N';
+      if (Rec.selected_b) {
+        Rec.selected = 'Y';
         if (IDs != '')
           IDs += ',';
         IDs += "'" + Rec.masterid + "'";

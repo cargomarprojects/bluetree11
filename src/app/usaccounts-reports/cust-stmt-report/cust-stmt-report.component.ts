@@ -166,7 +166,7 @@ export class CustStmtReportComponent implements OnInit {
         this.SearchData.HIDE_PAYROLL = this.gs.user_hide_payroll;
 
         this.SearchData.SORT = this.sortname;
-        this.SearchData.COMP_NAME = this.comp_name;
+        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
         this.SearchData.COMP_TYPE = this.comp_type;
         if (this.comp_type == 'ALL')
           this.SearchData.COMP_CODE = this.gs.branch_codes;
@@ -266,7 +266,7 @@ export class CustStmtReportComponent implements OnInit {
       this.SearchData.HIDE_PAYROLL = this.gs.user_hide_payroll;
 
       this.SearchData.SORT = this.sortname;
-      this.SearchData.COMP_NAME = this.comp_name;
+      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
       this.SearchData.COMP_TYPE = this.comp_type;
       if (this.comp_type == 'ALL')
         this.SearchData.COMP_CODE = this.gs.branch_codes;

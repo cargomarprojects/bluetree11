@@ -118,7 +118,7 @@ export class PandLReportComponent implements OnInit {
         this.SearchData.FDATE = this.fdate;
         this.SearchData.TDATE = this.tdate;
         this.SearchData.BRCODE = this.comp_code;
-        this.SearchData.COMP_NAME = this.comp_name;
+        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
         this.SearchData.BASEDON = this.basedon;
 
       } else {
@@ -199,7 +199,7 @@ export class PandLReportComponent implements OnInit {
       this.SearchData.FDATE = this.fdate;
       this.SearchData.TDATE = this.tdate;
       this.SearchData.BRCODE = this.comp_code;
-      this.SearchData.COMP_NAME = this.comp_name;
+      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
       this.SearchData.BASEDON = this.basedon;
       this.SearchData.filename = "";
       this.SearchData.filedisplayname = "";

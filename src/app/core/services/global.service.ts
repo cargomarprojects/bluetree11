@@ -3057,7 +3057,20 @@ export class GlobalService {
     return new URLSearchParams(window.location.search).get(param);
   }
 
-
+  public GetCompanyName(_compCode: string) {
+    let str: string = "";
+    if (_compCode == "ALL")
+      str = "ALL";
+    else {
+      if (this.CompanyList != null) {
+        var REC = this.CompanyList.find(rec => rec.comp_code == _compCode);
+        if (REC != null) {
+          str = REC.comp_name;
+        }
+      }
+    }
+    return str;
+  }
 
 
 

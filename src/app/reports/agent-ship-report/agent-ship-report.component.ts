@@ -129,7 +129,7 @@ export class AgentShipReportComponent implements OnInit {
         } else {
           this.SearchData.COMP_CODE = this.comp_type;
         }
-        this.SearchData.COMP_NAME = this.gs.branch_name;
+        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
 
         this.SearchData.SHIPPER_ID = this.shipper_id;
         this.SearchData.SHIPPER_NAME = this.shipper_name;
@@ -209,7 +209,7 @@ export class AgentShipReportComponent implements OnInit {
       } else {
         this.SearchData.COMP_CODE = this.comp_type;
       }
-      this.SearchData.COMP_NAME = this.gs.branch_name;
+      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
       this.SearchData.SHIPPER_ID = this.shipper_id;
       this.SearchData.SHIPPER_NAME = this.shipper_name;
       this.SearchData.CONSIGNEE_ID = this.consignee_id;

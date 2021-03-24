@@ -138,6 +138,7 @@ export class QtnLclComponent implements OnInit {
     this.tab = 'report';
   }
 
+  
   callbackevent(event: any) {
     this.tab = 'main';
   }

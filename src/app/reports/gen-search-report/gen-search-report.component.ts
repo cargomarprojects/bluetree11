@@ -53,90 +53,11 @@ export class GenSearchReportComponent implements OnInit {
     this.mainservice.Search(actions, 'PAGE');
   }
 
-  NewRecord() {
-    if (!this.mainservice.canAdd) {
-      alert('Insufficient User Rights')
-      return;
-    }
 
-    let parameter = {
-      menuid: this.mainservice.menuid,
-      pkid: '',
-      type: this.mainservice.param_type,
-      origin: 'mblusage-page',
-      mode: 'ADD'
-    };
-    this.gs.Naviagete('Silver.Other.Trans/MblUsageEditPage', JSON.stringify(parameter));
-
-  }
-  edit(_record: TBL_GEN_SEARCH) {
-    if (!this.mainservice.canEdit) {
-      alert('Insufficient User Rights')
-      return;
-    }
-
-    let parameter = {
-      menuid: this.mainservice.menuid,
-      pkid: _record.gs_pkid,
-      type: '',
-      origin: 'mblusage-page',
-      mode: 'EDIT'
-    };
-    this.gs.Naviagete('Silver.Other.Trans/MblUsageEditPage', JSON.stringify(parameter));
-  }
 
   Close() {
     this.location.back();
   }
-
-  editinvoice(_record: TBL_GEN_SEARCH) {
-
-    // let sID: string = (_record.pay_mblid != null) ? _record.pay_mblid.toString() : "";
-    // let REFNO: string = _record.pay_invtype != null ? _record.pay_invtype.toString() : "";
-    // let sMode: string = "";
-    // let INVID: string = (_record.pay_invid != null) ? _record.pay_invid.toString() : "";
-    // let HBLID: string = (_record.pay_hblid != null) ? _record.pay_hblid.toString() : "";
-
-    // if (REFNO == "OI")
-    //   sMode = "SEA IMPORT";
-    // else if (REFNO == "OE")
-    //   sMode = "SEA EXPORT";
-    // else if (REFNO == "AI")
-    //   sMode = "AIR IMPORT";
-    // else if (REFNO == "AE")
-    //   sMode = "AIR EXPORT";
-    // else if (REFNO == "OT")
-    //   sMode = "OTHERS";
-
-    // if (INVID == "" || sID == "") {
-    //   alert("Invalid Record Selected");
-    //   return;
-    // }
-
-    // this.gs.LinkPage("INVNO", sMode, REFNO, sID, HBLID, INVID);
-
-  }
-
-  editmaster(_record: TBL_GEN_SEARCH) {
-    // let sID: string = (_record.pay_mblid != null) ? _record.pay_mblid.toString() : "";
-    // let REFNO: string = _record.pay_invtype != null ? _record.pay_invtype.toString() : "";
-    // let sMode: string = "";
-    // if (REFNO == "OI")
-    //   sMode = "SEA IMPORT";
-    // else if (REFNO == "OE")
-    //   sMode = "SEA EXPORT";
-    // else if (REFNO == "AI")
-    //   sMode = "AIR IMPORT";
-    // else if (REFNO == "AE")
-    //   sMode = "AIR EXPORT";
-    // else if (REFNO == "OT")
-    //   sMode = "OTHERS";
-
-    // if (sID == "") {
-    //   alert("Invalid Record Selected");
-    //   return;
-    // }
-    // this.gs.LinkPage("REFNO", sMode, REFNO, sID);
-  }
+   
 
 }

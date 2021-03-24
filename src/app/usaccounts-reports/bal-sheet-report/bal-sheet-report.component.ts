@@ -110,7 +110,7 @@ export class BalSheetReportComponent implements OnInit {
         this.SearchData.JV_YEAR = this.gs.year_code;
         this.SearchData.TDATE = this.tdate;
         this.SearchData.BRCODE = this.comp_code;
-        this.SearchData.COMP_NAME = this.comp_name;
+        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
         this.SearchData.RETAINED_PROFIT = this.gs.RETAINED_PROFIT_ID;
         this.SearchData.FY_START_MONTH = this.fy_start_month;
 
@@ -188,7 +188,7 @@ export class BalSheetReportComponent implements OnInit {
       this.SearchData.JV_YEAR = this.gs.year_code;
       this.SearchData.TDATE = this.tdate;
       this.SearchData.BRCODE = this.comp_code;
-      this.SearchData.COMP_NAME = this.comp_name;
+      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
       this.SearchData.RETAINED_PROFIT = this.gs.RETAINED_PROFIT_ID;
       this.SearchData.FY_START_MONTH = this.fy_start_month;
 
