@@ -18,7 +18,7 @@
     <div class="page-body table-responsive table-bordered">
       <table class="table  table-hover table-sm ">
         <tbody class="page-body-tbody">
-          <tr *ngFor="let item of RecList ;let i = index"  [style.background-color]="item == _selectedItem ? 'orange' : ''">
+          <tr *ngFor="let item of RecList ;let i = index"  [style.background-color]="item == _selectedItem ? '#ffcccc' : ''">
             <td >
               <input  type="radio" [(ngModel)]="_selectedItem" [value]="item" [checked]="item.id === _selectedid" name="lov"
                 (keydown)="ListKeydown($event,item)" #lov>
