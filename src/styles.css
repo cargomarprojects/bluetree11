@@ -382,6 +382,12 @@ tr:nth-child(even) {
 
 .pagination {
     margin-bottom:0px;
+
+    
+}
+.ulcenter {
+    justify-content: center;
+    display: flex;
 }
   
 .alert {

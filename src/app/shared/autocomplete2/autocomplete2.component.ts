@@ -7,36 +7,24 @@ import { LoginService } from '../../core/services/login.service';
 import { GlobalService } from '../../core/services/global.service';
 
 
-
 @Component({
   selector: 'app-autocomplete2',
   templateUrl: './autocomplete2.component.html',
-  styles: [
-    `
-            .my-class {
-                position: fixed;       
-                display: block;
-                width:auto;
-                height:auto;
-                
-                cursor: pointer;
-                border-style: solid;
-                border-width: 1px;
-
-                min-width:initial;
-                margin-top :1px;
-                z-index: 2000;
-                background: #fff;
-                
-            }
-    `
-  ]
+  styleUrls: ['./autocomplete2.component.css']
 })
 
 export class AutoComplete2Component {
 
   //@ViewChild('_cbtn') cbtn_field: ElementRef;
   //@ViewChildren('_itms') itms_field: QueryList<ElementRef>;
+
+  @Output() ValueChanged = new EventEmitter<SearchTable>();
+  @Input() disabled: boolean = false;
+
+  @ViewChild('inputbox') private inputbox: ElementRef;
+  @ViewChild("lov") private lov: ElementRef;
+  @ViewChildren('lov') inputs: QueryList<ElementRef>;
+
 
   private _controlname: string;
   @Input() set controlname(value: string) {
@@ -93,12 +81,9 @@ export class AutoComplete2Component {
 
   private inputdata: SearchTable = new SearchTable();
 
-  @Output() ValueChanged = new EventEmitter<SearchTable>();
-  @Input() disabled: boolean = false;
+  
 
-  @ViewChild('inputbox') private inputbox: ElementRef;
-
-  @ViewChild("lov") private lov: ElementRef;
+  
 
   focuselement: number = 0;
   rows_to_display: number = 0;
@@ -124,7 +109,7 @@ export class AutoComplete2Component {
 
   loading = false;
 
-  _selectedid = '';
+  _selectedItem: SearchTable;
 
 
   constructor(
@@ -152,8 +137,12 @@ export class AutoComplete2Component {
   //   //   this.cbtn_field.nativeElement.focus();
   // }
   Focus() {
-    if (!this.disabled)
-      this.inputbox.nativeElement.focus();
+    if (!this.disabled) {
+      setTimeout(() => {
+        this.inputbox.nativeElement.focus();
+      }, 0);
+    }
+
   }
 
   eventHandler(KeyCode: any) {
@@ -229,7 +218,7 @@ export class AutoComplete2Component {
 
         if (response.list == null) {
           if (this.showDiv && this.RecList.length > 0) {
-            this._selectedid = this.RecList[0].id;
+            this._selectedItem = this.RecList[0];
             setTimeout(() => {
               this.lov.nativeElement.focus();
               this.lov.nativeElement.scrollTop = this.lov.nativeElement.scrollHeight;
@@ -244,7 +233,7 @@ export class AutoComplete2Component {
 
         this.loading = false;
 
-        if ( _action == "NEW" ) {
+        if (_action == "NEW") {
           if (this.RecList.length === 0) {
             this.SelectedItem('', null);
             this.showDiv = false;
@@ -254,7 +243,7 @@ export class AutoComplete2Component {
             this.showDiv = false;
           }
         }
-        if ( this.RecList.length > 1 ) {
+        if (this.RecList.length > 1) {
 
           this.rows_starting_number = row1;
           this.rows_ending_number = row2;
@@ -262,7 +251,7 @@ export class AutoComplete2Component {
           this.showDiv = true;
 
 
-          this._selectedid = this.RecList[0].id;
+          this._selectedItem = this.RecList[0];
 
           setTimeout(() => {
             this.lov.nativeElement.focus();
@@ -278,6 +267,14 @@ export class AutoComplete2Component {
       );
   }
 
+  ChangeSelection(item: SearchTable, index : number = 0) {
+    this._selectedItem = item;
+    setTimeout(() => {
+      //this.lov.nativeElement.focus();
+      this.inputs.toArray()[index].nativeElement.focus();
+      
+    }, 0);
+  }
 
   SelectedItem(_source: string, _Record: SearchTable) {
     if (_Record == null) {
@@ -375,6 +372,13 @@ export class AutoComplete2Component {
     if (this.old_data != localdata) {
       this.SelectedItem('', null);
     }
+
+    if (!this.disabled) {
+      setTimeout(() => {
+        this.inputbox.nativeElement.focus();
+      }, 0);
+    }
+
     this.showDiv = false;
   }
 
@@ -391,7 +395,13 @@ export class AutoComplete2Component {
   onSelectionChange(item: SearchTable) {
 
   }
-  
+
+  TableKeyDown(event: KeyboardEvent, _rec: SearchTable) {
+    if (event.key === 'Escape') {
+      this.Cancel();
+    }
+  }
+
   ListKeydown(event: KeyboardEvent, _rec: SearchTable) {
     if (event.key === 'Enter') {
       this.SelectedItem('LIST', _rec)

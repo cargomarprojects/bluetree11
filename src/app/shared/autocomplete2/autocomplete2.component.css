@@ -1,0 +1,17 @@
+           .my-class {
+                position: fixed;       
+                display: block;
+                width:auto;
+                height:auto;
+                
+                cursor: pointer;
+                border-style: solid;
+                border-width: 1px;
+
+                min-width:initial;
+                margin-top :2px;
+                z-index: 2000;
+                background: #fff;
+                
+            }
+   
