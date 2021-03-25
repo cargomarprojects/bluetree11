@@ -80,7 +80,7 @@ export class ShipLabelReportComponent implements OnInit {
             this.InitPage();
         });
 
-
+        
     }
 
     InitPage() {

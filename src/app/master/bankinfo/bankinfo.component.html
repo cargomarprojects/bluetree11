@@ -180,7 +180,7 @@
                                     <tbody class="page-body-tbody">
                                         <tr *ngFor="let rec of records; let i = index"
                                             [class.active]="i == selectedRowIndex" (click)="SetRowIndex(i)">
-                                            <td (click)="EditRow(rec)">{{rec.pb_benefi_name}} </td>
+                                            <td class="hlink2" (click)="EditRow(rec)">{{rec.pb_benefi_name}} </td>
                                             <td>{{rec.pb_benefi_address1}}</td>
                                             <td>{{rec.pb_bank_name}}</td>
                                         </tr>
