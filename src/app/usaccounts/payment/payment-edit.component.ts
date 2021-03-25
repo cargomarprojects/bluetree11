@@ -652,8 +652,11 @@ export class PaymentEditComponent implements OnInit {
             if (_rec.inv_flag2)
                 if (_rec.inv_pay_amt > _rec.inv_balance || _rec.inv_pay_amt <= 0) {
                     alert('Invalid Payment Amount, ' + _rec.inv_no)
+                  
                     if (idx < this.inv_pay_amt_field.toArray().length)
-                    this.inv_pay_amt_field.toArray()[idx].nativeElement.focus();
+                        this.inv_pay_amt_field.toArray()[idx].nativeElement.focus();
+
+                    _rec.inv_pay_amt = _rec.inv_balance;
                 }
         }
 
