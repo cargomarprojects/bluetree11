@@ -156,8 +156,11 @@
                                 [(ngModel)]="rec.inv_flag2">
                         </div>
                     </td>
-                    <td style="text-align:right">{{rec.inv_pay_amt | number : '1.2-2'}} </td>
-
+                    <!-- <td style="text-align:right">{{rec.inv_pay_amt | number : '1.2-2'}} </td> -->
+                    <td class="p-0" >
+                        <input style="text-align:right" class="form-control form-control-sm" type="number" [(ngModel)]="rec.inv_pay_amt"
+                          (blur)="onBlur('inv_pay_amt',rec)"  />
+                      </td>
                 </tr>
             </tbody>
         </table>

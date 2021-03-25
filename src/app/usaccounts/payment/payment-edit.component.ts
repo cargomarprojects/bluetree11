@@ -27,6 +27,7 @@ export class PaymentEditComponent implements OnInit {
     Old_List: Tbl_cargo_invoicem[] = [];
     InvoiceList: Tbl_cargo_invoicem[] = [];
 
+
     modal: any;
     tab: string = 'main';
 
@@ -635,6 +636,7 @@ export class PaymentEditComponent implements OnInit {
 
             this.NewRecord();
         }
+
     }
 
 
@@ -643,12 +645,24 @@ export class PaymentEditComponent implements OnInit {
     onFocusout(field: string) {
     }
 
-    onBlur(field: string) {
+    onBlur(field: string, _rec: Tbl_cargo_invoicem = null) {
+        if (field == 'inv_pay_amt') {
+            _rec.inv_pay_amt = this.gs.roundNumber(_rec.inv_pay_amt, 2);
+            this.isValidPayAmt(_rec);
+        }
+
     }
 
     onBlur2(cb: any) {
     }
 
+    isValidPayAmt(_rec: Tbl_cargo_invoicem) {
+
+        if (_rec.inv_flag2)
+            if (_rec.inv_pay_amt > _rec.inv_balance || _rec.inv_pay_amt <= 0) {
+                alert('Invalid Payment Amount, ' + _rec.inv_no)
+            }
+    }
 
     swapSelection(rec: Tbl_cargo_invoicem) {
         rec.inv_flag2 = !rec.inv_flag2;
