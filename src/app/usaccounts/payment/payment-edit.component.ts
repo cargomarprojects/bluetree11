@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { GlobalService } from '../../core/services/global.service';
@@ -27,7 +27,7 @@ export class PaymentEditComponent implements OnInit {
     Old_List: Tbl_cargo_invoicem[] = [];
     InvoiceList: Tbl_cargo_invoicem[] = [];
 
-
+    @ViewChildren('_inv_pay_amt') inv_pay_amt_field: QueryList<ElementRef>;
     modal: any;
     tab: string = 'main';
 
@@ -645,10 +645,16 @@ export class PaymentEditComponent implements OnInit {
     onFocusout(field: string) {
     }
 
-    onBlur(field: string, _rec: Tbl_cargo_invoicem = null) {
+
+    onBlur(field: string, _rec: Tbl_cargo_invoicem = null, idx: number = 0) {
         if (field == 'inv_pay_amt') {
             _rec.inv_pay_amt = this.gs.roundNumber(_rec.inv_pay_amt, 2);
-            this.isValidPayAmt(_rec);
+            if (_rec.inv_flag2)
+                if (_rec.inv_pay_amt > _rec.inv_balance || _rec.inv_pay_amt <= 0) {
+                    alert('Invalid Payment Amount, ' + _rec.inv_no)
+                    // if (idx < this.inv_pay_amt_field.toArray().length)
+                    // this.inv_pay_amt_field.toArray()[idx].nativeElement.focus();
+                }
         }
 
     }
@@ -656,13 +662,6 @@ export class PaymentEditComponent implements OnInit {
     onBlur2(cb: any) {
     }
 
-    isValidPayAmt(_rec: Tbl_cargo_invoicem) {
-
-        if (_rec.inv_flag2)
-            if (_rec.inv_pay_amt > _rec.inv_balance || _rec.inv_pay_amt <= 0) {
-                alert('Invalid Payment Amount, ' + _rec.inv_no)
-            }
-    }
 
     swapSelection(rec: Tbl_cargo_invoicem) {
         rec.inv_flag2 = !rec.inv_flag2;
