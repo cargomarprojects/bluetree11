@@ -115,14 +115,14 @@
                             <div class="offset-2 col-8">
                                 <button [disabled]="loading" (click)="List('SCREEN')"
                                     class="btn btn-primary btn-sm mr-1">Search</button>
-                                <button [disabled]="loading" (click)="Print()"
+                                <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="Print()"
                                     class="btn btn-primary btn-sm">Print</button>
                             </div>
                         </div>
                         <div class="form-group row">
                             <!-- <label class="col-4 col-form-label col-form-label-sm"></label> -->
                             <div class="offset-2 col-10">
-                                <button [disabled]="loading" (click)="PrintOsInvoice('ALL')"
+                                <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="PrintOsInvoice('ALL')"
                                     class="btn btn-primary btn-sm">Print O/S
                                     Invoices All</button>
                             </div>
@@ -130,7 +130,7 @@
                         <div class="form-group row">
                             <!-- <label class="col-4 col-form-label col-form-label-sm"></label> -->
                             <div class="offset-2 col-10">
-                                <button [disabled]="loading" (click)="PrintOsInvoice('')"
+                                <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="PrintOsInvoice('')"
                                     class="btn btn-primary btn-sm">Print O/S
                                     Invoices Selected</button>
                             </div>
