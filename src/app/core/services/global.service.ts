@@ -1228,34 +1228,34 @@ export class GlobalService {
 
 
     this.SHIPMENT_STAGE_OI = [{ "code": "NIL", "name": "NIL" }];
-    this.MainList.filter(a => a.param_code == 'OI').sort(function (a, b) {
+    this.MainList.filter(a =>a.param_type == 'GLOBAL SETTINGS' &&  a.param_code == 'OI').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
     }).forEach(a => {
       this.SHIPMENT_STAGE_OI.push({ "code": a.param_name4, "name": a.param_name3 })
     });
 
     this.SHIPMENT_STAGE_OE = [{ "code": "NIL", "name": "NIL" }];
-    this.MainList.filter(a => a.param_code == 'OE').sort(function (a, b) {
+    this.MainList.filter(a =>a.param_type == 'GLOBAL SETTINGS' &&  a.param_code == 'OE').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
     }).forEach(a => {
       this.SHIPMENT_STAGE_OE.push({ "code": a.param_name4, "name": a.param_name3 })
     });
 
     this.SHIPMENT_STAGE_AI = [{ "code": "NIL", "name": "NIL" }];
-    this.MainList.filter(a => a.param_code == 'AI').sort(function (a, b) {
+    this.MainList.filter(a =>a.param_type == 'GLOBAL SETTINGS' &&  a.param_code == 'AI').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
     }).forEach(a => {
       this.SHIPMENT_STAGE_AI.push({ "code": a.param_name4, "name": a.param_name3 })
     });
 
     this.SHIPMENT_STAGE_AE = [{ "code": "NIL", "name": "NIL" }];
-    this.MainList.filter(a => a.param_code == 'AE').sort(function (a, b) {
+    this.MainList.filter(a =>a.param_type == 'GLOBAL SETTINGS' &&  a.param_code == 'AE').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
     }).forEach(a => {
       this.SHIPMENT_STAGE_AE.push({ "code": a.param_name4, "name": a.param_name3 })
     });
     this.SHIPMENT_STAGE_OT = [{ "code": "NIL", "name": "NIL" }];
-    this.MainList.filter(a => a.param_code == 'OT').sort(function (a, b) {
+    this.MainList.filter(a =>a.param_type == 'GLOBAL SETTINGS' &&  a.param_code == 'OT').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
     }).forEach(a => {
       this.SHIPMENT_STAGE_OT.push({ "code": a.param_name4, "name": a.param_name3 })
