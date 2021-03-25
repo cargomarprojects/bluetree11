@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
 
   CompanyList: Companym[];
-
+    
   Company_Id: string = '';
   Company_Code: string = '';
 
