@@ -176,7 +176,7 @@
               <div class="col-10">
                 <button [disabled]="loading" (click)="List('SCREEN')"
                   class="btn btn-primary btn-sm mr-1">Search</button>
-                <button [disabled]="loading" (click)="Print()" class="btn btn-primary btn-sm">Print</button>
+                <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="Print()" class="btn btn-primary btn-sm">Print</button>
               </div>
             </div>
           </div>

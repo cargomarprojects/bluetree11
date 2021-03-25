@@ -100,7 +100,7 @@
               <label class="col-4 col-form-label col-form-label-sm"></label>
               <div class="col-8">
                 <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
-                <button (click)="Print()" class="btn btn-primary btn-sm">Print</button>
+                <button (click)="Print()" *ngIf="gs.canPrint(menuid)" class="btn btn-primary btn-sm">Print</button>
               </div>
             </div>
           </div>
