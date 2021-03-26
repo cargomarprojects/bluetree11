@@ -1512,9 +1512,11 @@ export class GlobalService {
 
   getlocalStorageFileName() {
     return this.defaultValues.today + "-" + this.appid;
-
   }
 
+  isAppidExtistsInLocalStorage() {
+    return localStorage.getItem(this.getlocalStorageFileName()) ? true : false;
+  }
 
   RemoveLocalStorage() {
     console.log('removing local storage Started : ', this.defaultValues.today);
@@ -1531,9 +1533,9 @@ export class GlobalService {
 
 
 
-  ReadLocalStorage(_appid: string) {
+  ReadLocalStorage() {
 
-    const bts_settings: gsdata = JSON.parse(localStorage.getItem(_appid));
+    const bts_settings: gsdata = JSON.parse(localStorage.getItem(this.getlocalStorageFileName()));
 
     this.UserRecord = bts_settings.userrecord;
 
@@ -1583,12 +1585,6 @@ export class GlobalService {
     this.InitUserInfo();
 
   }
-
-
-
-
-
-
 
 
 

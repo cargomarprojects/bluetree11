@@ -64,8 +64,8 @@ export class AppComponent {
       return;
     }
     
-    if (localStorage.getItem(this.gs.getlocalStorageFileName())) {
-      this.gs.ReadLocalStorage(this.gs.getlocalStorageFileName());
+    if (this.gs.isAppidExtistsInLocalStorage()) {
+      this.gs.ReadLocalStorage();
       this.gs.reload_url =  window.location.pathname + window.location.search;
       this.router.navigate(['/reload']);
     } else {
@@ -76,7 +76,6 @@ export class AppComponent {
 
   }
  
-
   ngOnDestroy() {
     this.sub.unsusbscribe();
   }
