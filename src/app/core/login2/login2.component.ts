@@ -107,14 +107,19 @@ export class Login2Component implements OnInit {
     async Login() {
        
 
-        const rid = this.GLOBALCONTANTS.getRandomInt();
-        this.GLOBALCONTANTS.appid = rid.toString();
+        let rid : number = this.GLOBALCONTANTS.getRandomInt();
         if  ( rid <= 0)
         {
             alert('Cannot Generate Appliation ID ');
             return;
         }
+        if  ( this.GLOBALCONTANTS.appid == rid.toString())
+        {
+            alert('Cannot Generate Appliation ID ');
+            return;
+        }
 
+        this.GLOBALCONTANTS.appid = rid.toString();
 
         this.Comp_Row = this.CompanyList.find(a => a.comp_pkid == this.Company_Id);
         this.Year_Row = this.YearList.find(a => a.fy_pkid == this.Year_Id);
