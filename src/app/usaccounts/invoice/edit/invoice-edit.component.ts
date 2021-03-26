@@ -1492,7 +1492,7 @@ export class InvoiceEditComponent implements OnInit {
 
   QuoteFill() {
 
-    if (!confirm("Fill Data")) {
+    if (!confirm("Fill Line Item")) {
       return;
     }
     var SearchData = this.gs.UserInfo;
