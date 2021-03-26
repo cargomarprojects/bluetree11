@@ -14,11 +14,11 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent {
     public isNavbarCollapsed = true;
-    title = 'Motherlines INC USA';
+    title = 'BlueTree Systems';
     id = '';
 
-
-    loading$ : Observable<boolean>;
+    loading  = false;
+    sub : any ;
 
     constructor(
         private router: Router,
@@ -26,11 +26,11 @@ export class HeaderComponent {
         public gs: GlobalService,
         private loadingScreenService: LoadingScreenService,
         private loginservice: LoginService) {
-            this.loading$ = this.loadingScreenService.loadingStatus;
+            this.sub = this.loadingScreenService.loadingStatus.subscribe( value =>  this.loading = value);
     }
 
     ngOnDestroy() {
-
+        this.sub.unsubscribe();
     }
 
 
