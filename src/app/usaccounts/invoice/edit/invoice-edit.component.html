@@ -131,26 +131,23 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div *ngIf="INV_TYPE == 'OI' || INV_TYPE == 'OE' || INV_TYPE == 'AI' || INV_TYPE == 'AE' || INV_TYPE == 'OT' || INV_TYPE == 'EX'" class="form-group row">
                             <label class="col-4 col-form-label col-form-label-sm">Quote#</label>
                             <div class="col-3">
                                 <input class="form-control form-control-sm" type="text" (blur)="onBlur('qtnno')"
                                     [(ngModel)]="qtnno" [disabled]="false" maxlength="50" />
-
                             </div>
                             <div class="col-1">
-                                <button (click)="QuoteFill()"  class="btn btn-info btn-sm mr-1"><span>Fill</span></button>
+                                <button (click)="QuoteFill()"
+                                    class="btn btn-info btn-sm mr-1"><span>Fill</span></button>
                             </div>
 
-
                         </div>
-
-
 
                     </div>
 
                 </div>
-               
+
 
                 <div class="row border p-1">
                     <div class="col-md-6">
@@ -386,7 +383,7 @@
                     </div>
 
                 </div>
-                
+
 
                 <div class="row border p-1">
                     <div class="col-md-12">
@@ -477,7 +474,7 @@
 
             </div>
             <div class="col-md-2 p-1">
-                <div class="col-md-12 p-2 border" *ngIf="mode=='EDIT'" >
+                <div class="col-md-12 p-2 border" *ngIf="mode=='EDIT'">
                     <div class="form-group row">
                         <button class="col-12 btn  btn-info btn-sm text-uppercase"
                             (click)="BtnNavigation('HISTORY',historymodal)">History</button>
@@ -487,20 +484,20 @@
                             (click)="instantPayment(paymentModalContent)">Instant Payment</button>
                     </div>
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm text-uppercase" 
-                          [style.color]="record.rec_subfiles_attached=='Y'?'red':'white'"
-                          (click)="BtnNavigation('ATTACHMENT',attachmodal)">Attachments</button>
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            [style.color]="record.rec_subfiles_attached=='Y'?'red':'white'"
+                            (click)="BtnNavigation('ATTACHMENT',attachmodal)">Attachments</button>
                     </div>
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm text-uppercase" 
-                          [style.color]="record.rec_files_attached=='Y'?'red':'white'"
-                          (click)="BtnNavigation('CHECKCOPY',attachmodal)">Check Copy</button>
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            [style.color]="record.rec_files_attached=='Y'?'red':'white'"
+                            (click)="BtnNavigation('CHECKCOPY',attachmodal)">Check Copy</button>
                     </div>
 
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm text-uppercase" 
-                          [style.color]="record.rec_files_attached_chk=='Y'?'red':'white'"
-                          (click)="BtnNavigation('CHECKCOPYAP',attachmodal)">Check Copy(A/P)</button>
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            [style.color]="record.rec_files_attached_chk=='Y'?'red':'white'"
+                            (click)="BtnNavigation('CHECKCOPYAP',attachmodal)">Check Copy(A/P)</button>
                     </div>
 
 
@@ -515,8 +512,8 @@
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm"></label>
                     <div class="col-8">
-                        <button class="btn btn-primary btn-sm mr-1" [disabled]="is_locked" *ngIf="gs.canSave(menuid,mode)"
-                            (click)="Save()">Save</button>
+                        <button class="btn btn-primary btn-sm mr-1" [disabled]="is_locked"
+                            *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
                         <button class="btn btn-primary btn-sm mr-1"
                             (click)="BtnNavigation('INVOICE-PRINT')">Print</button>
                     </div>
@@ -595,24 +592,24 @@
 
 <ng-template #attachmodal let-c="close" let-d="dismiss">
     <div class="modal-body">
-      <div class="page-body">
-        <div class="row">
-          <div class="col-md-12 testbox  px-0 mx-0">
-            <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
-              [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
-              [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno" [customername]="attach_customername"
-              [updatecolumn]="attach_updatecolumn" [viewonlysource]="attach_viewonlysource"
-              [viewonlyid]="attach_viewonlyid" [filespath]="attach_filespath" [filespath2]="attach_filespath2"
-              [uploadfiles]="attach_uploadefiles"
-              [modalview]="true" (callbackevent)="callbackevent($event)"></app-fileupload>
-          </div>
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+                        [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+                        [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
+                        [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+                        [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
+                        [filespath]="attach_filespath" [filespath2]="attach_filespath2"
+                        [uploadfiles]="attach_uploadefiles" [modalview]="true" (callbackevent)="callbackevent($event)">
+                    </app-fileupload>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="page-footer">
-          <div class="row justify-content-center p-1">
-            <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
-          </div>
-        </div>
-      </div>
     </div>
-  </ng-template>
-  
+</ng-template>
