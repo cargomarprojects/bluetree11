@@ -1490,4 +1490,100 @@ export class InvoiceEditComponent implements OnInit {
 
   }
 
+  QuoteFill() {
+
+    if (!confirm("Fill Data")) {
+      return;
+    }
+    var SearchData = this.gs.UserInfo;
+    if (this.gs.isBlank(this.record.inv_cust_id))
+      SearchData.CLIENT_ID = '';
+    else
+      SearchData.CLIENT_ID = this.record.inv_cust_id;
+    SearchData.QUOTE_NO = this.qtnno;
+    this.mainservice.GetQuotation(SearchData).subscribe(response => {
+
+      let qtnrecords = <Tbl_Cargo_Invoiced[]>[];
+      qtnrecords = response.list;
+
+      if (!this.gs.isBlank(qtnrecords)) {
+
+        this.SetIncomeExpenseCodesForLineItems();
+        qtnrecords.forEach(rec => {
+          this.AddQtnRow(rec);
+        });
+
+        this.FindGrandTotal();
+        this.invd_desc_code_ctrl.changes
+          .subscribe((queryChanges) => {
+            this.invd_desc_code_ctrl.first.Focus();
+          });
+      }
+
+    }, error => {
+      alert(this.gs.getError(error));
+    });
+  }
+
+  AddQtnRow(_rec: Tbl_Cargo_Invoiced) {
+
+    var rec = <Tbl_Cargo_Invoiced>{};
+    rec.invd_pkid = this.gs.getGuid();
+    rec.invd_parent_id = this.pkid;
+
+    rec.invd_desc_id = _rec.invd_desc_id;
+    rec.invd_desc_code = _rec.invd_desc_code;
+    rec.invd_desc_name = _rec.invd_desc_name;
+    rec.invd_remarks = _rec.invd_remarks;
+    rec.invd_acc_id = this.acc_id;
+    rec.invd_acc_code = this.acc_code;
+    rec.invd_acc_name = this.acc_code;
+
+    rec.invd_qty = 1;
+    rec.invd_rate = _rec.invd_frate;;
+    rec.invd_frate = _rec.invd_frate;
+    rec.invd_curr_code = this.gs.base_cur_code;
+    rec.invd_exrate = 1;
+    rec.invd_total = _rec.invd_frate;
+    rec.invd_ftotal = _rec.invd_frate;
+
+    rec.invd_vat_per = 0;
+    rec.invd_vat_amt = 0;
+    rec.invd_fvat_amt = 0;
+
+    rec.invd_cc_id = this.gs.branch_pkid;
+    rec.invd_cc_code = this.gs.branch_code;
+
+    this.records.push(rec);
+
+  }
+
+  // private void UpdtDetailRow(Tbl_Cargo_Invoiced Rec)
+  // {
+
+  //     DetailRow = AddRow();
+
+  //     DetailRow.invd_desc_id = Rec.invd_desc_id;
+  //     DetailRow.invd_desc_code = Rec.invd_desc_code;
+  //     DetailRow.invd_desc_name = Rec.invd_desc_name;
+  //     DetailRow.invd_remarks = Rec.invd_remarks;
+  //     DetailRow.invd_acc_id = Rec.invd_acc_id;
+  //     DetailRow.invd_acc_code = Rec.invd_acc_code;
+  //     DetailRow.invd_acc_name = Rec.invd_acc_name;
+
+  //     DetailRow.invd_qty = 1;
+  //     DetailRow.invd_rate = Rec.invd_frate;
+  //     DetailRow.invd_frate = Rec.invd_frate;
+  //     DetailRow.invd_curr_code = GLOBALCONTANTS.base_cur_code.ToString();
+  //     DetailRow.invd_exrate = 1;
+  //     DetailRow.invd_total = Rec.invd_frate;
+  //     DetailRow.invd_ftotal = Rec.invd_frate;
+  //     DetailRow.invd_cc_id = Txt_CC.PKID.Trim();
+  //     DetailRow.invd_cc_code = Txt_CC.TxtLovBox.Text.Trim();
+  //     DetailGrid.SelectedItem = DetailRow;
+
+  //     FindGrandTotal();
+  //     DisplayBalance();
+  // }
+
 }
