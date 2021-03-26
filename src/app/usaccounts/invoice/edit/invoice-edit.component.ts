@@ -54,7 +54,7 @@ export class InvoiceEditComponent implements OnInit {
   attach_updatecolumn: string = '';
   attach_viewonlysource: string = '';
   attach_viewonlyid: string = '';
-  attach_uploadefiles : boolean = true;
+  attach_uploadefiles: boolean = true;
   attach_filespath: string = '';
   attach_filespath2: string = '';
 
@@ -113,6 +113,7 @@ export class InvoiceEditComponent implements OnInit {
   isVat: boolean = false;
   isConfirmed: boolean = true;
   modal: any;
+  is_locked: boolean = false;
 
   public record: Tbl_cargo_invoicem = <Tbl_cargo_invoicem>{};
   public records: Tbl_Cargo_Invoiced[] = [];
@@ -399,7 +400,7 @@ export class InvoiceEditComponent implements OnInit {
 
   actionHandler() {
     this.errorMessage = '';
-
+    this.is_locked = false;
     if (this.mode == 'ADD') {
       this.record = <Tbl_cargo_invoicem>{};
       this.records = <Tbl_Cargo_Invoiced[]>[];
@@ -540,7 +541,17 @@ export class InvoiceEditComponent implements OnInit {
           this.isVat = true;
       }
 
-      this.inv_date_ctrl.Focus();
+      let OprMode = this.record.inv_mbl_mode;
+      if (OprMode == "FA")
+        OprMode = "OTHERS";
+      else if (OprMode == "GE" || OprMode == "PR" || OprMode == "CM" || OprMode == "PS")
+        OprMode = "ADMIN";
+      this.is_locked = this.gs.IsShipmentClosed(OprMode, this.record.inv_mbl_ref_date, this.record.inv_mbl_lock, this.record.inv_mbl_unlock_date);
+      if (!this.is_locked)
+        this.is_locked = this.gs.IsDateLocked(this.record.inv_date);//Locked by locked date from br settings by 01/July/2018
+
+      if (!this.gs.isBlank(this.inv_date_ctrl))
+        this.inv_date_ctrl.Focus();
     }, error => {
       alert(this.gs.getError(error));
     });
@@ -726,7 +737,7 @@ export class InvoiceEditComponent implements OnInit {
           sErrMsg = 'Invalid Currency in Invoice Detail';
         }
       }
-      
+
       if (this.gs.isZero(Rec.invd_qty)) {
         sErrMsg = 'Invalid Qty in Invoice Detail';
       }
@@ -1178,12 +1189,12 @@ export class InvoiceEditComponent implements OnInit {
 
       case 'ATTACHMENT': {
         let TypeList: any[] = [];
-        if ( this.gs.HIDE_DOCTYPE_INVOICE == "N")
-          TypeList = [{ "code": "AR/AP", "name": "AR/AP" },{ "code": "EMAIL", "name": "EMAIL" }, { "code": "HOUSEBL", "name": "HOUSE B/L" }, { "code": "MASTER", "name": "MASTER" }, { "code": "PAYMENT SETTLEMENT", "name": "OTHERS" }];
+        if (this.gs.HIDE_DOCTYPE_INVOICE == "N")
+          TypeList = [{ "code": "AR/AP", "name": "AR/AP" }, { "code": "EMAIL", "name": "EMAIL" }, { "code": "HOUSEBL", "name": "HOUSE B/L" }, { "code": "MASTER", "name": "MASTER" }, { "code": "PAYMENT SETTLEMENT", "name": "OTHERS" }];
         this.attach_title = 'Documents';
         this.attach_parentid = this.record.inv_mbl_id;
         this.attach_subid = this.pkid;
-        if ( this.gs.HIDE_DOCTYPE_INVOICE == "N")
+        if (this.gs.HIDE_DOCTYPE_INVOICE == "N")
           this.attach_type = 'PAYMENT SETTLEMENT';
         else
           this.attach_type = 'AR/AP';
@@ -1203,7 +1214,7 @@ export class InvoiceEditComponent implements OnInit {
       }
       case 'CHECKCOPY': {
         let TypeList: any[] = [];
-        if ( this.gs.HIDE_DOCTYPE_INVOICE == "N")
+        if (this.gs.HIDE_DOCTYPE_INVOICE == "N")
           TypeList = [{ "code": "CHECK COPY", "name": "CHECK COPY" }];
         this.attach_title = 'Documents';
         this.attach_parentid = this.pkid;
@@ -1217,7 +1228,7 @@ export class InvoiceEditComponent implements OnInit {
         this.attach_updatecolumn = 'rec_files_attached';
         this.attach_viewonlysource = '';
         this.attach_viewonlyid = '';
-        this.attach_uploadefiles = true;        
+        this.attach_uploadefiles = true;
         this.attach_filespath = '';
         this.attach_filespath2 = '';
         this.modal = this.modalservice.open(_modal, { centered: true });
@@ -1244,7 +1255,7 @@ export class InvoiceEditComponent implements OnInit {
         break;
       }
 
-  
+
 
     }
   }
@@ -1385,7 +1396,7 @@ export class InvoiceEditComponent implements OnInit {
     }
 
     var SearchData = this.gs.UserInfo;
-    SearchData.PKID = this.pkid;    
+    SearchData.PKID = this.pkid;
     SearchData.MODE = "INVPKID";
     SearchData.SHOWALL = "N";
     if (this.gs.IS_SINGLE_CURRENCY == true) {

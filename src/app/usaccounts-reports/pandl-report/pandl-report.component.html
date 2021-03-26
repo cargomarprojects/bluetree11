@@ -60,7 +60,7 @@
                             <div class="col-8">
                                 <button [disabled]="loading" (click)="List('SCREEN')"
                                     class="btn btn-primary btn-sm mr-1">Search</button>
-                                <button [disabled]="loading" (click)="Print()"
+                                <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="Print()"
                                     class="btn btn-primary btn-sm mr-1">Print</button>
                                 <button *ngIf="gs.user_isadmin=='Y'" [disabled]="loading" (click)="Update()"
                                     class="btn btn-primary btn-sm mr-1">Update</button>
