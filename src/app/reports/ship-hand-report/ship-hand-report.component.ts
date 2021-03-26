@@ -67,7 +67,7 @@ export class ShipHandReportComponent implements OnInit {
   MainList: TBL_MBL_REPORT[];
 
   USERRECORD: SearchTable = new SearchTable();
-  //private LSESSION = 0;
+  
 
   constructor(
     public gs: GlobalService,
@@ -93,10 +93,6 @@ export class ShipHandReportComponent implements OnInit {
 
   InitPage() {
 
-    // if (this.LSESSION < this.gs.GSESSION) {
-    //   this.LSESSION = this.gs.GSESSION;
-    //   this.store.dispatch(new myActions.Delete({ id: this.urlid }));
-    // }
 
     this.storesub = this.store.select(myReducer.getState(this.urlid)).subscribe(rec => {
       this.initLov();
