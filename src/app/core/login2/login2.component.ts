@@ -105,8 +105,7 @@ export class Login2Component implements OnInit {
     }
 
     async Login() {
-
-        
+       
 
         const rid = this.GLOBALCONTANTS.getRandomInt();
         this.GLOBALCONTANTS.appid = rid.toString();
