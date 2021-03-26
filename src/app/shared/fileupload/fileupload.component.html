@@ -1,7 +1,7 @@
 <div class="page-header">
   <div class="row align-items-center justify-content-left p-1">
     <label class="mr-3">{{Doc_title}}</label>
-    <button *ngIf="!ismodal" class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    <button *ngIf="!ismodal" class="btn btn-primary btn-sm mr-1" [disabled]="loading" (click)="Close()">Return</button>
   </div>
 </div>
 
