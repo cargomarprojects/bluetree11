@@ -11,12 +11,12 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto" >
 
       <div *ngFor="let rech of gs.Modules">
         <li class="nav-item dropdown" *ngIf="gs.IsAuthenticated">
           <a class="nav-link dropdown-toggle text-white h6" href="#" id="navbarDropdown" role="button"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [disabled]="loading$ | async">
             {{rech.module_name}}
           </a>
           <div class="dropdown-menu py-0 border-1 rounded-3 shadow-lg" aria-labelledby="navbarDropdown">
@@ -37,17 +37,17 @@
 
 
       <li class="nav-item">
-        <a class="nav-link h6 text-white" *ngIf="gs.IsAuthenticated" (click)="changeBranch()">Change Branch</a>
+        <a class="nav-link h6 text-white" *ngIf="gs.IsAuthenticated" (click)="changeBranch()" [disabled]="loading$ | async">Change Branch</a>
       </li>
       <li class="nav-item showelement">
-        <label class="nav-link h6 text-warning"  *ngIf="gs.IsAuthenticated">{{gs.user_name}}/{{gs.branch_name}}</label>
+        <label class="nav-link h6 text-warning"  *ngIf="gs.IsAuthenticated" [disabled]="loading$ | async">{{gs.user_name}}/{{gs.branch_name}}</label>
       </li>
 
     </ul>
 
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn border border-info ml-1 text-white h6" (click)="login()" *ngIf="!gs.IsAuthenticated">Login</button>
-      <button class="btn border border-info ml-1 text-white h6" *ngIf="gs.IsAuthenticated" (click)="Logout()">Logout</button>
+      <button class="btn border border-info ml-1 text-white h6" (click)="login()"  *ngIf="!gs.IsAuthenticated" >Login</button>
+      <button class="btn border border-info ml-1 text-white h6" (click)="Logout()" *ngIf="gs.IsAuthenticated" [disabled]="loading$ | async" >Logout</button>
     </form>
 
   </div>

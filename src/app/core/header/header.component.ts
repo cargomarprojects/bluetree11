@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import { GlobalService } from '../services/global.service';
 import { LoginService } from '../services/login.service';
 import { User_Menu } from '../models/menum';
+import { LoadingScreenService } from '../services/loadingscreen.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -16,17 +18,16 @@ export class HeaderComponent {
     id = '';
 
 
+    loading$ : Observable<boolean>;
 
     constructor(
         private router: Router,
         private location: Location,
         public gs: GlobalService,
+        private loadingScreenService: LoadingScreenService,
         private loginservice: LoginService) {
-
-
+            this.loading$ = this.loadingScreenService.loadingStatus;
     }
-
-
 
     ngOnDestroy() {
 
