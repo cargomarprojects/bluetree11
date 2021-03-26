@@ -543,10 +543,12 @@ export class InvoiceEditComponent implements OnInit {
 
       let OprMode = this.record.inv_mbl_mode;
       if (OprMode == "FA")
-          OprMode = "OTHERS";
+        OprMode = "OTHERS";
       else if (OprMode == "GE" || OprMode == "PR" || OprMode == "CM" || OprMode == "PS")
-          OprMode = "ADMIN";
+        OprMode = "ADMIN";
       this.is_locked = this.gs.IsShipmentClosed(OprMode, this.record.inv_mbl_ref_date, this.record.inv_mbl_lock, this.record.inv_mbl_unlock_date);
+      if (!this.is_locked)
+        this.is_locked = this.gs.IsDateLocked(this.record.inv_date);//Locked by locked date from br settings by 01/July/2018
 
       if (!this.gs.isBlank(this.inv_date_ctrl))
         this.inv_date_ctrl.Focus();
