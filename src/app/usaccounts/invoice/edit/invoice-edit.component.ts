@@ -113,6 +113,7 @@ export class InvoiceEditComponent implements OnInit {
   isVat: boolean = false;
   isConfirmed: boolean = true;
   modal: any;
+  is_locked: boolean = false;
 
   public record: Tbl_cargo_invoicem = <Tbl_cargo_invoicem>{};
   public records: Tbl_Cargo_Invoiced[] = [];
@@ -399,7 +400,7 @@ export class InvoiceEditComponent implements OnInit {
 
   actionHandler() {
     this.errorMessage = '';
-
+    this.is_locked = false;
     if (this.mode == 'ADD') {
       this.record = <Tbl_cargo_invoicem>{};
       this.records = <Tbl_Cargo_Invoiced[]>[];
@@ -539,6 +540,14 @@ export class InvoiceEditComponent implements OnInit {
         if (this.gs.CompareDate(this.record.inv_date, "2018-02-01") == ">")
           this.isVat = true;
       }
+
+      let OprMode = this.record.inv_mbl_mode;
+      if (OprMode == "FA")
+          OprMode = "OTHERS";
+      else if (OprMode == "GE" || OprMode == "PR" || OprMode == "CM" || OprMode == "PS")
+          OprMode = "ADMIN";
+      this.is_locked = this.gs.IsShipmentClosed(OprMode, this.record.inv_mbl_ref_date, this.record.inv_mbl_lock, this.record.inv_mbl_unlock_date);
+
       if (!this.gs.isBlank(this.inv_date_ctrl))
         this.inv_date_ctrl.Focus();
     }, error => {
