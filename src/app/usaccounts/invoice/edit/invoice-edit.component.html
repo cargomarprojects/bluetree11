@@ -131,7 +131,7 @@
                             </div>
                         </div>
 
-                        <div *ngIf="INV_TYPE == 'OI' || INV_TYPE == 'OE' || INV_TYPE == 'AI' || INV_TYPE == 'AE' || INV_TYPE == 'OT' || INV_TYPE == 'EX'" class="form-group row">
+                        <div *ngIf="mbl_type == 'OI' || mbl_type == 'OE' || mbl_type == 'AI' || mbl_type == 'AE' || mbl_type == 'OT' || mbl_type == 'EX'" class="form-group row">
                             <label class="col-4 col-form-label col-form-label-sm">Quote#</label>
                             <div class="col-3">
                                 <input class="form-control form-control-sm" type="text" (blur)="onBlur('qtnno')"
