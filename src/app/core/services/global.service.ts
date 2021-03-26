@@ -56,7 +56,7 @@ export class GlobalService {
   public CompanyList: Companym[] = [];
   public YearList: any[];
   public AccGroupList: any[];
-  public GSESSION = 100;
+  
 
 
   public branch_codes: string = '';
@@ -1461,7 +1461,7 @@ export class GlobalService {
 
     const bts_settings = new gsdata();
     bts_settings.appid = this.appid;
-    bts_settings.GSession = this.GSESSION;
+
     bts_settings.IsLoginSuccess = this.IsLoginSuccess;
     bts_settings.IsAuthenticated = this.IsAuthenticated;
     bts_settings.access_token = this.Access_Token;
@@ -1540,7 +1540,7 @@ export class GlobalService {
     this.InitLogin();
 
     this.appid = bts_settings.appid;
-    this.GSESSION = bts_settings.GSession;
+
     this.Access_Token = bts_settings.access_token;
 
     this.user_ua_pkid = bts_settings.user_ua_pkid;
