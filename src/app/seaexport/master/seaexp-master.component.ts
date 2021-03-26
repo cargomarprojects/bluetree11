@@ -44,9 +44,6 @@ export class SeaexpMasterComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('ngOnInit SEXPM', this.route.snapshot.queryParams);
-    console.log('ngOnInit SEXPM SETTINGS', this.gs.MainList.length);
-    console.log('ngOnInit SEXPM MENULIST', this.gs.MenuList.length);
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
   }
