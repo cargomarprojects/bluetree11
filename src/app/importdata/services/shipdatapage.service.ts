@@ -32,7 +32,7 @@ export class ShipDataPageService {
 
 
     public initlialized: boolean;
-    private LSESSION = 0;
+    private appid = '';
     
     private selectdeselect: boolean = false;
     constructor(
@@ -81,8 +81,8 @@ export class ShipDataPageService {
     }
 
     public init(params: any) {
-        if (this.LSESSION < this.gs.GSESSION) {
-            this.LSESSION = this.gs.GSESSION;
+        if (this.appid != this.gs.appid) {
+            this.appid = this.gs.appid;
             this.initlialized = false;
         }
         if (this.initlialized)

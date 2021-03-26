@@ -32,7 +32,7 @@ export class ImportHblPageService {
 
 
     public initlialized: boolean;
-    private LSESSION = 0;
+    private appid  ='';
 
     private ProcessXML: boolean = false;
     public Xml_MainRecIndex: number = 0;
@@ -86,8 +86,8 @@ export class ImportHblPageService {
     }
 
     public init(params: any) {
-        if (this.LSESSION < this.gs.GSESSION) {
-            this.LSESSION = this.gs.GSESSION;
+        if (this.appid != this.gs.appid) {
+            this.appid = this.gs.appid;
             this.initlialized = false;
         }
         if (this.initlialized)
