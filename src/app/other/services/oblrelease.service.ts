@@ -29,7 +29,7 @@ export class OblReleaseService {
     public canDelete: boolean;
 
     public initlialized: boolean;
-    private LSESSION = 0;
+    private appid =''
 
     constructor(
         private http2: HttpClient,
@@ -77,8 +77,8 @@ export class OblReleaseService {
     }
     
     public init(params: any) {
-        if (this.LSESSION < this.gs.GSESSION) {
-            this.LSESSION = this.gs.GSESSION;
+        if (this.appid != this.gs.appid) {
+            this.appid = this.gs.appid;
             this.initlialized = false;
         }
         if (this.initlialized)

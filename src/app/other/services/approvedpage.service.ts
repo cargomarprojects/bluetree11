@@ -30,7 +30,7 @@ export class ApprovedPageService {
 
     public initlialized: boolean;
     private menutype: string = '';
-    private LSESSION = 0;
+    private appid =''
 
     constructor(
         private http2: HttpClient,
@@ -85,8 +85,8 @@ export class ApprovedPageService {
         let usrid: string = '';
         let usrname: string = '';
 
-        if (this.LSESSION < this.gs.GSESSION) {
-            this.LSESSION = this.gs.GSESSION;
+        if (this.appid != this.gs.appid) {
+            this.appid = this.gs.appid;
             this.initlialized = false;
             this.menutype = '';
             this.gs.APPROVEDPAGE_INIT_APPROVED = null;
