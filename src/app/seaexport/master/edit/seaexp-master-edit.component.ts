@@ -104,6 +104,7 @@ export class SeaexpMasterEditComponent implements OnInit {
   }
 
   ngOnInit() {
+
     if (this.route.snapshot.queryParams.parameter == null) {
       this.pkid = this.route.snapshot.queryParams.pkid;
       this.menuid = this.route.snapshot.queryParams.menuid;
