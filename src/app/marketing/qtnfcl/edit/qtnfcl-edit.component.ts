@@ -54,7 +54,7 @@ export class QtnFclEditComponent implements OnInit {
     attach_filespath2: string = '';
 
     modal: any;
-    lblSave = "Add Row";
+    lblSave = "Add";
     qtnd_pkid: string;
     mbl_pkid: string;
     pkid: string;
@@ -415,7 +415,7 @@ export class QtnFclEditComponent implements OnInit {
     }
 
     NewRow() {
-        this.lblSave = "Add Row";
+        this.lblSave = "Add";
         this.qtnd_pkid = this.gs.getGuid();
         this.InitDetail();
         // Txt_Pol_code.Focus();
@@ -469,7 +469,7 @@ export class QtnFclEditComponent implements OnInit {
         this.arrRtVal[this.arrRtColFld[4]] = _rec[this.arrRtColFld[4]];
         this.arrRtVal[this.arrRtColFld[5]] = _rec[this.arrRtColFld[5]];
         this.totAmt = _rec.qtnd_tot_amt;
-        this.lblSave = "Update Row";
+        this.lblSave = "Update";
         //Dispatcher.BeginInvoke(() => { Txt_Pol_code.Focus(); });
         if (!this.gs.isBlank(this.pol_code_field))
             this.pol_code_field.Focus();
