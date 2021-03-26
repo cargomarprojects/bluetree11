@@ -126,8 +126,6 @@ export class LoginComponent implements OnInit {
             this.errorMessage = "Login Success";
             this.gs.user_pwd = this.password;
             // this.clrservice.ClearInit();
-            this.gs.GSESSION += 1;
-            console.log( 'Login gsesssion ', this.gs.GSESSION);
             this.Login1();
           }
           else {
