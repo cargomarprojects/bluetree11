@@ -54,7 +54,7 @@ export class InvoiceEditComponent implements OnInit {
   attach_updatecolumn: string = '';
   attach_viewonlysource: string = '';
   attach_viewonlyid: string = '';
-  attach_uploadefiles : boolean = true;
+  attach_uploadefiles: boolean = true;
   attach_filespath: string = '';
   attach_filespath2: string = '';
 
@@ -539,8 +539,8 @@ export class InvoiceEditComponent implements OnInit {
         if (this.gs.CompareDate(this.record.inv_date, "2018-02-01") == ">")
           this.isVat = true;
       }
-
-      this.inv_date_ctrl.Focus();
+      if (!this.gs.isBlank(this.inv_date_ctrl))
+        this.inv_date_ctrl.Focus();
     }, error => {
       alert(this.gs.getError(error));
     });
@@ -726,7 +726,7 @@ export class InvoiceEditComponent implements OnInit {
           sErrMsg = 'Invalid Currency in Invoice Detail';
         }
       }
-      
+
       if (this.gs.isZero(Rec.invd_qty)) {
         sErrMsg = 'Invalid Qty in Invoice Detail';
       }
@@ -1178,12 +1178,12 @@ export class InvoiceEditComponent implements OnInit {
 
       case 'ATTACHMENT': {
         let TypeList: any[] = [];
-        if ( this.gs.HIDE_DOCTYPE_INVOICE == "N")
-          TypeList = [{ "code": "AR/AP", "name": "AR/AP" },{ "code": "EMAIL", "name": "EMAIL" }, { "code": "HOUSEBL", "name": "HOUSE B/L" }, { "code": "MASTER", "name": "MASTER" }, { "code": "PAYMENT SETTLEMENT", "name": "OTHERS" }];
+        if (this.gs.HIDE_DOCTYPE_INVOICE == "N")
+          TypeList = [{ "code": "AR/AP", "name": "AR/AP" }, { "code": "EMAIL", "name": "EMAIL" }, { "code": "HOUSEBL", "name": "HOUSE B/L" }, { "code": "MASTER", "name": "MASTER" }, { "code": "PAYMENT SETTLEMENT", "name": "OTHERS" }];
         this.attach_title = 'Documents';
         this.attach_parentid = this.record.inv_mbl_id;
         this.attach_subid = this.pkid;
-        if ( this.gs.HIDE_DOCTYPE_INVOICE == "N")
+        if (this.gs.HIDE_DOCTYPE_INVOICE == "N")
           this.attach_type = 'PAYMENT SETTLEMENT';
         else
           this.attach_type = 'AR/AP';
@@ -1203,7 +1203,7 @@ export class InvoiceEditComponent implements OnInit {
       }
       case 'CHECKCOPY': {
         let TypeList: any[] = [];
-        if ( this.gs.HIDE_DOCTYPE_INVOICE == "N")
+        if (this.gs.HIDE_DOCTYPE_INVOICE == "N")
           TypeList = [{ "code": "CHECK COPY", "name": "CHECK COPY" }];
         this.attach_title = 'Documents';
         this.attach_parentid = this.pkid;
@@ -1217,7 +1217,7 @@ export class InvoiceEditComponent implements OnInit {
         this.attach_updatecolumn = 'rec_files_attached';
         this.attach_viewonlysource = '';
         this.attach_viewonlyid = '';
-        this.attach_uploadefiles = true;        
+        this.attach_uploadefiles = true;
         this.attach_filespath = '';
         this.attach_filespath2 = '';
         this.modal = this.modalservice.open(_modal, { centered: true });
@@ -1244,7 +1244,7 @@ export class InvoiceEditComponent implements OnInit {
         break;
       }
 
-  
+
 
     }
   }
@@ -1385,7 +1385,7 @@ export class InvoiceEditComponent implements OnInit {
     }
 
     var SearchData = this.gs.UserInfo;
-    SearchData.PKID = this.pkid;    
+    SearchData.PKID = this.pkid;
     SearchData.MODE = "INVPKID";
     SearchData.SHOWALL = "N";
     if (this.gs.IS_SINGLE_CURRENCY == true) {
