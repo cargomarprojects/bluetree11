@@ -29,7 +29,7 @@ export class PartyService {
     public isCompany: boolean;
 
     public initlialized: boolean;
-    private LSESSION = 0;
+    private appid =''
     private menutype: string = '';
 
     constructor(
@@ -80,8 +80,8 @@ export class PartyService {
     }
     public init(params: any) {
 
-        if (this.LSESSION < this.gs.GSESSION) {
-            this.LSESSION = this.gs.GSESSION;
+        if (this.appid != this.gs.appid) {
+            this.appid = this.gs.appid;
             this.initlialized = false;
             this.menutype = '';
             this.gs.PARTYPAGE_INIT_PARTYS = null;
