@@ -1261,6 +1261,7 @@ export class InvoiceEditComponent implements OnInit {
   }
 
   callbackevent(event: any) {
+
     this.tab = 'main';
 
   }
@@ -1510,6 +1511,9 @@ export class InvoiceEditComponent implements OnInit {
 
         this.SetIncomeExpenseCodesForLineItems();
         qtnrecords.forEach(rec => {
+          rec.invd_acc_id = this.acc_id;
+          rec.invd_acc_code = this.acc_code;
+          rec.invd_acc_name = this.acc_code;
           this.AddQtnRow(rec);
         });
 
@@ -1535,9 +1539,9 @@ export class InvoiceEditComponent implements OnInit {
     rec.invd_desc_code = _rec.invd_desc_code;
     rec.invd_desc_name = _rec.invd_desc_name;
     rec.invd_remarks = _rec.invd_remarks;
-    rec.invd_acc_id = this.acc_id;
-    rec.invd_acc_code = this.acc_code;
-    rec.invd_acc_name = this.acc_code;
+    rec.invd_acc_id = _rec.invd_acc_id;
+    rec.invd_acc_code = _rec.invd_acc_code;
+    rec.invd_acc_name = _rec.invd_acc_name;
 
     rec.invd_qty = 1;
     rec.invd_rate = _rec.invd_frate;;
@@ -1557,33 +1561,18 @@ export class InvoiceEditComponent implements OnInit {
     this.records.push(rec);
 
   }
+  
+  payrollcallbackevent(event: any) {
 
-  // private void UpdtDetailRow(Tbl_Cargo_Invoiced Rec)
-  // {
+    if (event.action == 'OK') {
+      if (this.records.length > 0)
+        alert('Cannot Copy, Record Exists');
+      else {
+        this.AddQtnRow(event.rec);
+        this.FindGrandTotal();
+      }
+    }
 
-  //     DetailRow = AddRow();
-
-  //     DetailRow.invd_desc_id = Rec.invd_desc_id;
-  //     DetailRow.invd_desc_code = Rec.invd_desc_code;
-  //     DetailRow.invd_desc_name = Rec.invd_desc_name;
-  //     DetailRow.invd_remarks = Rec.invd_remarks;
-  //     DetailRow.invd_acc_id = Rec.invd_acc_id;
-  //     DetailRow.invd_acc_code = Rec.invd_acc_code;
-  //     DetailRow.invd_acc_name = Rec.invd_acc_name;
-
-  //     DetailRow.invd_qty = 1;
-  //     DetailRow.invd_rate = Rec.invd_frate;
-  //     DetailRow.invd_frate = Rec.invd_frate;
-  //     DetailRow.invd_curr_code = GLOBALCONTANTS.base_cur_code.ToString();
-  //     DetailRow.invd_exrate = 1;
-  //     DetailRow.invd_total = Rec.invd_frate;
-  //     DetailRow.invd_ftotal = Rec.invd_frate;
-  //     DetailRow.invd_cc_id = Txt_CC.PKID.Trim();
-  //     DetailRow.invd_cc_code = Txt_CC.TxtLovBox.Text.Trim();
-  //     DetailGrid.SelectedItem = DetailRow;
-
-  //     FindGrandTotal();
-  //     DisplayBalance();
-  // }
+  }
 
 }

@@ -34,6 +34,7 @@ import { PayFinalComponent } from './payfinal/payfinal.component';
 import { AccSettingsComponent } from './accsettings/accsettings.component';
 import { AccSettingsEditComponent } from './accsettings/accsettings-edit.component';
 import { AccSettingsHeaderComponent } from './accsettings/accsettings-header.component';
+import { PayrollComponent } from './invoice/payroll/payroll.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { AccSettingsHeaderComponent } from './accsettings/accsettings-header.com
   PayFinalComponent,
   AccSettingsComponent,
   AccSettingsEditComponent,
-  AccSettingsHeaderComponent
+  AccSettingsHeaderComponent,
+  PayrollComponent
 ],
   imports: [
     SharedModule,

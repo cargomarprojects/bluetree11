@@ -184,8 +184,8 @@ export interface Tbl_cargo_invoicem {
     inv_confirmed: string;
 
     inv_stage: string;
-    inv_hbl_consignee_id:string;
-    inv_hbl_incoterm:string;
+    inv_hbl_consignee_id: string;
+    inv_hbl_incoterm: string;
 }
 
 
@@ -229,7 +229,7 @@ export interface Tbl_Cargo_Invoiced {
     invd_payroll_id: string;
     invd_payroll_yn: string;
     invd_payroll_date: string;
-
+    invd_payroll_b: boolean;
 }
 
 

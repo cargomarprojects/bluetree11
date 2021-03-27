@@ -55,5 +55,8 @@ export class invoiceService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/USAccounts/Invoice/GetQuotation', SearchData, this.gs.headerparam2('authorized'));
     }
 
-
+    GetPayroll(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/USAccounts/Invoice/GetPayroll', SearchData, this.gs.headerparam2('authorized'));
+    }
+    
 }
