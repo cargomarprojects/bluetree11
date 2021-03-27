@@ -1561,16 +1561,12 @@ export class InvoiceEditComponent implements OnInit {
     this.records.push(rec);
 
   }
-  
+
   payrollcallbackevent(event: any) {
 
     if (event.action == 'OK') {
-      if (this.records.length > 0)
-        alert('Cannot Copy, Record Exists');
-      else {
-        this.AddQtnRow(event.rec);
-        this.FindGrandTotal();
-      }
+      this.AddQtnRow(event.rec);
+      this.FindGrandTotal();
     }
 
   }

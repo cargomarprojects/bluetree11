@@ -147,7 +147,7 @@
                             class="form-group row">
                             <label class="col-4 col-form-label col-form-label-sm"></label>
                             <div class="col-2">
-                                <app-payroll [mblid]="record.inv_mbl_id" [custid]="record.inv_cust_id" [refno]="mbl_refno" [empname]="record.inv_cust_name" (callbackevent)="payrollcallbackevent($event)" ></app-payroll>
+                                <app-payroll [recordexist]="records.length > 0" [mblid]="record.inv_mbl_id" [custid]="record.inv_cust_id" [refno]="mbl_refno" [empname]="record.inv_cust_name" (callbackevent)="payrollcallbackevent($event)" ></app-payroll>
                             </div>
                             
                         </div>

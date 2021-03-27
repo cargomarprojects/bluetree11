@@ -33,6 +33,11 @@ export class PayrollComponent implements OnInit {
     @Input() set empname(value: string) {
         this._empname = value;
     }
+    
+    private _recordexist: boolean;
+    @Input() set recordexist(value: boolean) {
+        this._recordexist = value;
+    }
 
     @Output() callbackevent = new EventEmitter<any>();
 
@@ -61,6 +66,13 @@ export class PayrollComponent implements OnInit {
             alert('Invalid Customer');
             return;
         }
+
+        if (this._recordexist)
+        {
+            alert('Cannot Copy, Record Exists');
+            return;
+        }
+
         var SearchData = this.gs.UserInfo;
         SearchData.DCODE = this.gs.PAYROLL_INVOICE_CODE;
         SearchData.ACODE = this.gs.PAYROLL_ACC_CODE;
@@ -96,8 +108,8 @@ export class PayrollComponent implements OnInit {
             }
         })
     }
-    
-    CloseModal(_type:string) {
+
+    CloseModal(_type: string) {
 
         if (this.callbackevent)
             this.callbackevent.emit({ action: _type, rec: this.SelectedRecord });
@@ -105,5 +117,5 @@ export class PayrollComponent implements OnInit {
         this.modal.close();
     }
 
-    
+
 }
