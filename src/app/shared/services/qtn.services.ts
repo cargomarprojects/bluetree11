@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { qtnm } from '../models/qtn';
 import { GlobalService } from '../../core/services/global.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class QtnService {
 
   constructor(

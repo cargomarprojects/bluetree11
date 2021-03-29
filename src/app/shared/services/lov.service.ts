@@ -5,7 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { GlobalService } from '../../core/services/global.service';
 import { SearchTable } from '../models/searchtable';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LovService {
   constructor(
     private http2: HttpClient,

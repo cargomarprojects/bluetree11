@@ -555,23 +555,7 @@
 
 
 
-<ng-template #historymodal let-c="close" let-d="dismiss">
-    <div class="modal-body">
-        <div class="page-body">
-            <div class="row">
-                <div class="col-md-12 testbox  px-0 mx-0">
-                    <app-logbook [setmenuid]="menuid" [setpkid]="pkid" [setsource]="'INVOICE'" [settitle]="report_title"
-                        [modalview]="true"></app-logbook>
-                </div>
-            </div>
-            <div class="page-footer">
-                <div class="row justify-content-center p-1">
-                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</ng-template>
+
 
 <ng-template #paymentModalContent let-c="close" let-d="dismiss">
 
@@ -597,8 +581,26 @@
 </ng-template>
 
 
+<ng-template #historymodal let-c="close" let-d="dismiss" >
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-logbook [setmenuid]="menuid" [setpkid]="pkid" [setsource]="'INVOICE'" [settitle]="report_title"
+                        [modalview]="true"></app-logbook>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
 
-<ng-template #attachmodal let-c="close" let-d="dismiss">
+
+<ng-template #attachmodal let-c="close" let-d="dismiss" >
     <div class="modal-body">
         <div class="page-body">
             <div class="row">

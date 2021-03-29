@@ -136,10 +136,7 @@ import { ResizableComponent } from './directive/resizable.component';
     SortByPipe,
     ResizableComponent,
     ResizableDirective
-  ],
-  providers: [
-    LovService,
-    GenerateDocService
   ]
+
 })
 export class SharedModule { }
