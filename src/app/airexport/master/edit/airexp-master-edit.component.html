@@ -326,7 +326,7 @@
                 <div class="col-12">
                   <!-- <button class="btn btn-info btn-sm mr-1" *ngIf="!is_locked && gs.screenExists(gs.MENU_AE_HOUSE)"
                     (click)="AddHouse()">Add House</button> -->
-                    <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_AE_HOUSE)" disabled="is_locked"
+                    <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_AE_HOUSE)" [class.disabled]="is_locked"
                     [routerLink]="['/Silver.AirExport.Trans/AirExpHouseEditPage']"
                     [queryParams]="{appid : gs.appid, menuid: this.gs.MENU_AE_HOUSE, parentid:this.pkid, pkid: '',refno: this.record.mbl_refno ,type: 'AIR EXPORT',origin: 'airexp-master-page',mode: 'ADD'}">Add
                     House</a>
