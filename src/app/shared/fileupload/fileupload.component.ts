@@ -257,7 +257,7 @@ export class FileUploadComponent implements OnInit {
     frmData.append("branch_code", this.gs.branch_code);
     frmData.append("files_created_date", this.fileCreateDate);
     frmData.append("files_ref_no", this.txt_fileRefno);
-    frmData.append("updatecolumn", this.updatecolumn);
+    frmData.append("updatecolumn", this.UpdateColumn);
     frmData.append("files_size", this.fileSize.toString());
     frmData.append("files_desc", this.fileDesc);
     frmData.append("root_folder", this.gs.FS_APP_FOLDER);

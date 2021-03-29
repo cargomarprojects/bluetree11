@@ -100,7 +100,7 @@
 
 <div *ngIf="tab=='attachment'">
     <app-fileupload [title]="'File Upload Page'" [parentid]="upload_pay_pkid" [subid]="" [type]="'PAYMENT'" [typelist]=""
-        [tablename]="acc_paymenth" [tablepkcolumn]="'pay_pkid'" [refno]="upload_pay_docno" [customername]="" [updatecolumn]="'REC_FILES_ATTACHED_CHK'"
+        [tablename]="'acc_paymenth'" [tablepkcolumn]="'pay_pkid'" [refno]="upload_pay_docno" [customername]="" [updatecolumn]="'REC_FILES_ATTACHED_CHK'" 
         [viewonlysource]="" [viewonlyid]="" [filespath]="" [filespath2]="" (callbackevent)="callbackevent($event)">
     </app-fileupload>
 </div>
