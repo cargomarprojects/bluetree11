@@ -18,8 +18,16 @@
 
   <div class="page-body" style="height:80vh">
 
-    <ng2-pdfjs-viewer [showSpinner]="true" [print]="canPrint" [download]="canDownload" [openFile]="false" [zoom]="100"
-      [cursor]="'HAND'" [scroll]="'H'" #pdfViewerAutoLoad></ng2-pdfjs-viewer>
+    <ng2-pdfjs-viewer 
+      [showSpinner]="true" 
+      [print]="canPrint" 
+      [download]="false" 
+      [openFile]="false" 
+      [zoom]="100"
+      [cursor]="'HAND'" 
+      [scroll]="'V'" 
+      #pdfViewerAutoLoad>
+    </ng2-pdfjs-viewer>
 
   </div>
 
