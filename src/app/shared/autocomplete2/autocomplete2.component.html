@@ -1,21 +1,14 @@
 <div class="input-group input-group-sm">
   <input [disabled]="disabled" type="text" class="form-control form-control-sm" (focus)="onfocus()" (blur)="onBlur()"
     [(ngModel)]="_displaydata" #inputbox />
-
   <button [disabled]="showDiv || disabled" [ngStyle]="setMyStyles()" class="btn btn-default btn-sm"
     (click)="List()">...</button>
-
-  </div>
-
-
+</div>
   
 
-<div [ngClass]="{'my-class': showDiv}" >
+<div class="my-class"  [ngStyle]="{'display' : showDiv ? 'block' : 'none'}" >
 
-  <div *ngIf="showDiv">
-
-    
-    <div class="page-body table-responsive table-bordered">
+  <div class="page-body table-responsive table-bordered">
       <table class="table  table-hover table-sm ">
         <tbody class="page-body-tbody">
           <tr *ngFor="let item of RecList ;let i = index"  [style.background-color]="item == _selectedItem ? '#ffcccc' : ''">
@@ -45,7 +38,7 @@
     </div>
   
 
-  </div>
+
 </div>
 
 
