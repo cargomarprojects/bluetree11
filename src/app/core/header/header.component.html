@@ -47,7 +47,7 @@
 
     <form class="form-inline my-2 my-lg-0">
       <button class="btn border border-info ml-1 text-white h6" (click)="login()"  *ngIf="!gs.IsAuthenticated" >Login</button>
-      <button class="btn border border-info ml-1 text-white h6" (click)="Logout()" *ngIf="gs.IsAuthenticated" [disabled]="loading" >Logout</button>
+      <button class="btn border border-info ml-1 text-white h6" (click)="Logout()" *ngIf="gs.IsAuthenticated"  >Logout</button>
     </form>
 
   </div>
