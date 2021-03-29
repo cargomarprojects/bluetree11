@@ -39,6 +39,7 @@ export class AppComponent {
           this.loadingservice.startLoading();
         }
         if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
+          console.log('cancelled');
           this.loadingservice.stopLoading();
         }
       }
