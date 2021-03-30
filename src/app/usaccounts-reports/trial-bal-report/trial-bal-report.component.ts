@@ -98,8 +98,8 @@ export class TrialBalReportComponent implements OnInit {
         this.comp_name = rec.comp_name;
         this.comp_code = rec.comp_code;
         this.showzerobal = rec.showzerobal,
-        this.fy_start_month = rec.fy_start_month,
-        this.filename = rec.filename;
+          this.fy_start_month = rec.fy_start_month,
+          this.filename = rec.filename;
         this.filetype = rec.filetype;
         this.filedisplayname = rec.filedisplayname;
         this.filename2 = rec.filename2;
@@ -116,7 +116,7 @@ export class TrialBalReportComponent implements OnInit {
         this.SearchData.FDATE = this.fdate;
         this.SearchData.TDATE = this.tdate;
         this.SearchData.BRCODE = this.comp_code;
-        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
+        this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_code);
         this.SearchData.BASEDON = this.basedon;
         this.SearchData.SHOW_ZERO_BAL = this.showzerobal == true ? 'Y' : 'N';
         this.SearchData.RETAINED_PROFIT = this.gs.RETAINED_PROFIT_ID;
@@ -191,6 +191,13 @@ export class TrialBalReportComponent implements OnInit {
     //   alert(this.errorMessage);
     //   return;
     // }
+    if (_outputformat == "PRINT") {
+      if (this.MainList.length <= 0) {
+        this.errorMessage = "List Not Found";
+        alert(this.errorMessage);
+        return;
+      }
+    }
 
     this.SearchData.outputformat = _outputformat;
     this.SearchData.pkid = this.urlid;
@@ -205,7 +212,7 @@ export class TrialBalReportComponent implements OnInit {
       this.SearchData.FDATE = this.fdate;
       this.SearchData.TDATE = this.tdate;
       this.SearchData.BRCODE = this.comp_code;
-      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
+      this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_code);
       this.SearchData.BASEDON = this.basedon;
       this.SearchData.SHOW_ZERO_BAL = this.showzerobal == true ? 'Y' : 'N';
       this.SearchData.RETAINED_PROFIT = this.gs.RETAINED_PROFIT_ID;
@@ -258,6 +265,15 @@ export class TrialBalReportComponent implements OnInit {
             filedisplayname2: this.SearchData.filedisplayname2
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
+        } else if (_outputformat == "PRINT") {
+
+          this.filename = response.filename;
+          this.filetype = response.filetype;
+          this.filedisplayname = response.filedisplayname;
+          this.filename2 = response.filename2;
+          this.filetype2 = response.filetype2;
+          this.filedisplayname2 = response.filedisplayname2;
+          this.Print();
         }
 
         this.loading = false;

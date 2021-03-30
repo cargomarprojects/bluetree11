@@ -116,7 +116,7 @@ export class BankEnquiryReportComponent implements OnInit {
         this.SearchData.FDATE = this.fdate;
         this.SearchData.EDATE = this.edate;
         this.SearchData.OPDATE = this.fdate;
-        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
+        this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_code);
         this.SearchData.BRANCH_CODE = this.comp_code;
       } else {
 
@@ -173,6 +173,15 @@ export class BankEnquiryReportComponent implements OnInit {
       alert(this.errorMessage);
       return;
     }
+
+    if (_outputformat == "PRINT") {
+      if (this.MainList.length <= 0) {
+        this.errorMessage = "List Not Found";
+        alert(this.errorMessage);
+        return;
+      }
+    }
+
     if (this.gs.isBlank(this.fdate)) {
       this.fdate = this.gs.year_start_date;
     }
@@ -194,7 +203,7 @@ export class BankEnquiryReportComponent implements OnInit {
       this.SearchData.EDATE = this.edate;
       this.SearchData.OPDATE = this.fdate;
       this.SearchData.BRANCH_CODE = this.comp_code;
-      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
+      this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_code);
 
       this.SearchData.filename = "";
       this.SearchData.filedisplayname = "";
@@ -244,6 +253,15 @@ export class BankEnquiryReportComponent implements OnInit {
             filedisplayname2: this.SearchData.filedisplayname2
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
+        } else if (_outputformat == "PRINT") {
+
+          this.filename = response.filename;
+          this.filetype = response.filetype;
+          this.filedisplayname = response.filedisplayname;
+          this.filename2 = response.filename2;
+          this.filetype2 = response.filetype2;
+          this.filedisplayname2 = response.filedisplayname2;
+          this.Print();
         }
 
         this.loading = false;
@@ -299,7 +317,7 @@ export class BankEnquiryReportComponent implements OnInit {
     if (_rec.pay_pkid === "CL")
       return;
 
-      
+
     this.report_title = 'Bank Payment Details';
     this.report_url = '/api/UsAccBankEnquiryRpt/PaymentDetails';
     this.report_searchdata = this.gs.UserInfo;

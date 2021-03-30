@@ -150,11 +150,19 @@ export class DayBookReportComponent implements OnInit {
       alert(this.errorMessage);
       return;
     }
-    
+
     if (this.gs.isBlank(this.edate)) {
       this.errorMessage = 'To Date cannot be empty';
       alert(this.errorMessage);
       return;
+    }
+
+    if (_outputformat == "PRINT") {
+      if (this.MainList.length <= 0) {
+        this.errorMessage = "List Not Found";
+        alert(this.errorMessage);
+        return;
+      }
     }
 
     this.SearchData.outputformat = _outputformat;
@@ -208,6 +216,15 @@ export class DayBookReportComponent implements OnInit {
             filedisplayname2: this.SearchData.filedisplayname2
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
+        } else if (_outputformat == "PRINT") {
+
+          this.filename = response.filename;
+          this.filetype = response.filetype;
+          this.filedisplayname = response.filedisplayname;
+          this.filename2 = response.filename2;
+          this.filetype2 = response.filetype2;
+          this.filedisplayname2 = response.filedisplayname2;
+          this.Print();
         }
 
         this.loading = false;
