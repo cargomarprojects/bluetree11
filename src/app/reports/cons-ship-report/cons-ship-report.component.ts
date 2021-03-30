@@ -175,6 +175,15 @@ export class ConsShipReportComponent implements OnInit {
 
   List(_outputformat: string, _action: string = 'NEW') {
 
+    this.errorMessage = "";
+    if (_outputformat == "PRINT") {
+      if (this.MainList.length <= 0) {
+        this.errorMessage = "List Not Found";
+        alert(this.errorMessage);
+        return;
+      }
+    }
+
     this.SearchData.outputformat = _outputformat;
     this.SearchData.pkid = this.urlid;
     this.SearchData.action = _action;
@@ -250,6 +259,14 @@ export class ConsShipReportComponent implements OnInit {
             filedisplayname: this.SearchData.filedisplayname
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
+        }else if (_outputformat == "PRINT") {
+          this.filename = response.filename;
+          this.filetype = response.filetype;
+          this.filedisplayname = response.filedisplayname;
+          // this.filename2 = response.filename2;
+          // this.filetype2 = response.filetype2;
+          // this.filedisplayname2 = response.filedisplayname2;
+          this.Print();
         }
 
         this.loading = false;
