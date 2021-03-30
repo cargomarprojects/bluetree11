@@ -56,7 +56,7 @@ export class GlobalService {
   public CompanyList: Companym[] = [];
   public YearList: any[];
   public AccGroupList: any[];
-  
+
 
 
   public branch_codes: string = '';
@@ -1970,8 +1970,6 @@ export class GlobalService {
     return object;
   }
 
-
-
   public roundNumber(_number: number, _precision: number) {
     var factor = Math.pow(10, _precision);
     var tempNumber = _number * factor;
@@ -1979,6 +1977,10 @@ export class GlobalService {
     return roundedTempNumber / factor;
   };
 
+  public roundNumber2(_number: number, _precision: number = 2) {
+    const noAsString = _number.toFixed(_precision);
+    return Number.parseFloat(noAsString);
+  };
 
   public SetupCompanyList(_companylist: Companym[]) {
 
