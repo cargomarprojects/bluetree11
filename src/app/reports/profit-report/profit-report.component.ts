@@ -196,6 +196,7 @@ export class ProfitReportComponent implements OnInit {
         this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
 
         this.SearchData.REPORT_TYPE = this.report_type;
+        this.SearchData.REPORT_CATEGORY = this.report_category;
 
         this.SearchData.CUST_ID = this.cust_id;
         this.SearchData.CUST_NAME = this.cust_name;
@@ -259,8 +260,8 @@ export class ProfitReportComponent implements OnInit {
   }
 
   LoadStage() {
-    var SearchData = this.gs.UserInfo;
-    this.mainservice.StageList(SearchData).subscribe(response => {
+    var SearchData2 = this.gs.UserInfo;
+    this.mainservice.StageList(SearchData2).subscribe(response => {
       this.stagefullrecords = response.list;
       this.FillChkListBox();
     }, error => {
@@ -321,9 +322,18 @@ export class ProfitReportComponent implements OnInit {
 
   List(_outputformat: string, _action: string = 'NEW') {
 
-
+    this.errorMessage = "";
     if (this._report_category == "PARTY")
       this.report_type = "MASTER";
+     
+    if (_outputformat == "PRINT") {
+      if (this.MainList.length <= 0) {
+        this.errorMessage = "List Not Found";
+        alert(this.errorMessage);
+        return;
+      }
+    }
+
 
     let _STAGES: string = "";
     this.stagerecords.forEach(Rec => {
@@ -446,6 +456,15 @@ export class ProfitReportComponent implements OnInit {
             filedisplayname2: this.SearchData.filedisplayname2
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
+        }else if (_outputformat == "PRINT") {
+
+          this.filename = response.filename;
+          this.filetype = response.filetype;
+          this.filedisplayname = response.filedisplayname;
+          this.filename2 = response.filename2;
+          this.filetype2 = response.filetype2;
+          this.filedisplayname2 = response.filedisplayname2;
+          this.Print();
         }
 
         this.loading = false;
