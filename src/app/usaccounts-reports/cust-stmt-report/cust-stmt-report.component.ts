@@ -187,7 +187,7 @@ export class CustStmtReportComponent implements OnInit {
         this.cust_name = '';
         this.adate = this.gs.defaultValues.today;
         this.ddate = '';
-        this.comp_code = this.gs.branch_code;
+        this.comp_code = this.gs.branch_codes;
         this.comp_name = this.gs.branch_name;
         this.comp_type = 'ALL';
         this.sortname = 'inv_date';
