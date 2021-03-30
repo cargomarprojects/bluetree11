@@ -81,7 +81,8 @@
               <div class="col-8">
                 <button [disabled]="loading" (click)="List('SCREEN')"
                   class="btn btn-primary btn-sm mr-1">Search</button>
-                <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="Print()" class="btn btn-primary btn-sm">Print</button>
+                <!-- <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="Print()" class="btn btn-primary btn-sm">Print</button> -->
+                <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="List('PRINT')" class="btn btn-primary btn-sm">Print</button>
               </div>
             </div>
           </div>
@@ -193,5 +194,6 @@
 </div>
 <div *ngIf="tab == 'report'">
   <app-report [title]="'Top Customer Report'" [url]="" [searchdata]="" [menuid]="report_menuid" [filename]="filename"
-    [filetype]="filetype" [filedisplayname]="filedisplayname" (callbackevent)="callbackevent($event)"></app-report>
+    [filetype]="filetype" [filedisplayname]="filedisplayname" [filename2]="filename2" [filetype2]="filetype2"
+    [filedisplayname2]="filedisplayname2" (callbackevent)="callbackevent($event)"></app-report>
 </div>

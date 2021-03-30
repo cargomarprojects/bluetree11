@@ -47,6 +47,9 @@ export class ShipHandReportComponent implements OnInit {
   filename: string = '';
   filetype: string = '';
   filedisplayname: string = '';
+  filename2: string = '';
+  filetype2: string = '';
+  filedisplayname2: string = '';
 
   page_count: number = 0;
   page_current: number = 0;
@@ -67,7 +70,7 @@ export class ShipHandReportComponent implements OnInit {
   MainList: TBL_MBL_REPORT[];
 
   USERRECORD: SearchTable = new SearchTable();
-  
+
 
   constructor(
     public gs: GlobalService,
@@ -127,7 +130,7 @@ export class ShipHandReportComponent implements OnInit {
         else
           this.SearchData.COMP_CODE = this.branch;
 
-        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.branch) ;
+        this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.branch);
         this.SearchData.HANDLED_ID = this.handled_id;
         this.SearchData.HANDLED_NAME = this.handled_name;
 
@@ -198,7 +201,7 @@ export class ShipHandReportComponent implements OnInit {
         this.SearchData.COMP_CODE = this.gs.branch_codes;
       else
         this.SearchData.COMP_CODE = this.branch;
-      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.branch) ;
+      this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.branch);
       this.SearchData.HANDLED_ID = this.handled_id;
       this.SearchData.HANDLED_NAME = this.handled_name;
 
@@ -213,6 +216,8 @@ export class ShipHandReportComponent implements OnInit {
 
     this.mainservice.ShipmentHandledReport(this.SearchData)
       .subscribe(response => {
+
+        // alert(response.ptime);
 
         if (_outputformat == "SCREEN") {
 
@@ -245,7 +250,18 @@ export class ShipHandReportComponent implements OnInit {
             filedisplayname: this.SearchData.filedisplayname
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: this.mainState }));
+        } 
+        else if (_outputformat == "PRINT") {
+
+          this.filename =  response.filename;
+          this.filetype =  response.filetype;
+          this.filedisplayname =  response.filedisplayname;
+          this.filename2 =  response.filename2;
+          this.filetype2 =  response.filetype2;
+          this.filedisplayname2 =  response.filedisplayname2;
+          this.Print();
         }
+
 
         this.loading = false;
       }, error => {
