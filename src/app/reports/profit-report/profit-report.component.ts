@@ -182,8 +182,6 @@ export class ProfitReportComponent implements OnInit {
         this.page_current = rec.page_current;
         this.page_rowcount = rec.page_rowcount;
 
-
-
         this.SearchData = this.gs.UserInfo;
         this.SearchData.SDATE = this.sdate;
         this.SearchData.EDATE = this.edate;
@@ -202,17 +200,30 @@ export class ProfitReportComponent implements OnInit {
         this.SearchData.CUST_NAME = this.cust_name;
         this.SearchData.CUST_PARENT_ID = this.cust_parent_id;
         this.SearchData.CUST_PARENT_NAME = this.cust_parent_name;
-
-        this.CUSTRECORD.id = this.cust_id;
-        this.CUSTRECORD.name = this.cust_name;
-
         this.SearchData.SALES_ID = this.sales_id;
         this.SearchData.SALES_NAME = this.sales_name;
 
+        this.CUSTRECORD.id = this.cust_id;
+        this.CUSTRECORD.name = this.cust_name;
         this.SMANRECORD.id = this.sales_id;
         this.SMANRECORD.name = this.sales_name;
-        
+
+        this.SearchData.ISADMIN = (this.isAdmin) ? 'Y' : 'N';
+        this.SearchData.SHOWSTAGES = (this.showStages) ? 'Y' : 'N';
         this.SearchData.STAGES = rec.stage;
+
+        if (this.report_type == 'MASTER') {
+          this.SearchData.REPORT_CRITERIA = this.report_criteria;
+          this.SearchData.REPORT_AMOUNT = this.report_amount;
+          this.SearchData.REPORT_PROFIT_MET = (this.report_profit_met) ? 'Y' : 'N';
+          this.SearchData.REPORT_LOSS_APPROVED = (this.report_loss_approved) ? 'Y' : 'N';
+        }
+        else {
+          this.SearchData.REPORT_CRITERIA = 'NIL';
+          this.SearchData.REPORT_AMOUNT = 0;
+          this.SearchData.REPORT_PROFIT_MET = false;
+          this.SearchData.REPORT_LOSS_APPROVED = false;
+        }
 
       }
       else {
