@@ -50,7 +50,7 @@ export class GlobalService {
 
   public MainList: any[];
   public UserRecord: any;
-  public UserInfoData: any;
+  private UserInfoData: any;
   public Modules: Modulem[] = [];
   public MenuList: User_Menu[] = [];
   public CompanyList: Companym[] = [];
