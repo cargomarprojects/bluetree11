@@ -759,6 +759,23 @@ export class InvoiceEditComponent implements OnInit {
         }
       }
 
+      if( this.gs.roundNumber2(Rec.invd_qty*Rec.invd_rate,2) !=  this.gs.roundNumber2(Rec.invd_total,2))
+      {
+        sErrMsg = "Row Amount Mismatch";
+      }
+
+      if(this.gs.BRANCH_REGION=="USA")
+      {
+         if(this.record.inv_arap=="AR")
+         {
+
+         }
+         if(this.record.inv_arap=="AP")
+         {
+           
+         }
+      }
+
     });
 
     if (iCtr == 0) {
