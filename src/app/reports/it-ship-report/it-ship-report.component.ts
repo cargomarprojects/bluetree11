@@ -151,7 +151,7 @@ export class ItShipReportComponent implements OnInit {
       this.SearchData.SDATE = this.sdate;
       this.SearchData.EDATE = this.edate;
       this.SearchData.COMP_TYPE = this.comp_type;
-
+      this.SearchData.MODE = this.mode;
       if (this.comp_type === 'ALL') {
         this.SearchData.COMP_CODE = this.gs.branch_codes;
       } else {

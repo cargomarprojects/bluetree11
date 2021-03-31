@@ -123,7 +123,7 @@ export class ConsShipReportComponent implements OnInit {
         this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
         this.SearchData.REPORT_TYPE = this.report_type;
         this.SearchData.REPORT_SHPTYPE = this.report_shptype;
-
+        this.SearchData.REPORT_CATEGORY = this.report_category;
         this.SearchData.CONSIGNEE_ID = this.cons_id;
         this.SearchData.CONSIGNEE_NAME = this.cons_name;
 
