@@ -178,7 +178,11 @@ export class ProfitReportHouseComponent implements OnInit {
         this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
         this.SearchData.REPORT_TYPE = this.report_type;
         this.SearchData.REPORT_CATEGORY = this.report_category;
-
+        this.SearchData.BASEDON = '';
+        this.SearchData.REPORT_COLUMN = 'REF.DATE';
+  
+        this.SearchData.ISADMIN = (this.isAdmin) ? 'Y' : 'N';
+        this.SearchData.SHOWSTAGES = (this.showStages) ? 'Y' : 'N';
         this.SearchData.CUST_ID = this.cust_id;
         this.SearchData.CUST_NAME = this.cust_name;
 
