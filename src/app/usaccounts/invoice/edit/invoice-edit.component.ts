@@ -716,6 +716,37 @@ export class InvoiceEditComponent implements OnInit {
       }
     }
 
+    if (this.gs.BRANCH_REGION == "USA") {
+      if (this.record.inv_arap == "AR") {
+        if (this.record.inv_acc_id != this.gs.SETTINGS_AC_RECEIVABLE) {
+          this.errorMessage = "Invalid AR Account Code";
+          return false;
+        }
+      }
+      if (this.record.inv_arap == "AP") {
+        if (this.record.inv_acc_id != this.gs.SETTINGS_AC_PAYABLE) {
+          this.errorMessage = "Invalid AP Account Code";
+          return false;
+        }
+      }
+    }
+
+    //NEW
+    if (this.gs.isBlank(this.record.inv_arap)) {
+      this.errorMessage = "Invalid ARAP Type";
+      return false;
+    }
+
+    if (this.gs.isBlank(this.record.inv_type)) {
+      this.errorMessage = "Invalid Invoice Type";
+      return false;
+    }
+
+    if (this.gs.isBlank(this.record.inv_mbl_id)) {
+      this.errorMessage = "Invalid Master ID";
+      return false;
+    }
+
     let sErrMsg = "";
     let iCtr = 0;
     this.records.forEach(Rec => {
@@ -759,21 +790,8 @@ export class InvoiceEditComponent implements OnInit {
         }
       }
 
-      if( this.gs.roundNumber2(Rec.invd_qty*Rec.invd_rate,2) !=  this.gs.roundNumber2(Rec.invd_total,2))
-      {
+      if (this.gs.roundNumber2(Rec.invd_qty * Rec.invd_rate, 2) != this.gs.roundNumber2(Rec.invd_total, 2)) {
         sErrMsg = "Row Amount Mismatch";
-      }
-
-      if(this.gs.BRANCH_REGION=="USA")
-      {
-         if(this.record.inv_arap=="AR")
-         {
-
-         }
-         if(this.record.inv_arap=="AP")
-         {
-           
-         }
       }
 
     });
