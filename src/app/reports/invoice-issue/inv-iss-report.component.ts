@@ -137,7 +137,7 @@ export class InvIssReportComponent implements OnInit {
         this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
         this.SearchData.REPORT_TYPE = this.report_type;
         this.SearchData.REPORT_SHPTYPE = this.report_shptype;
-
+        this.SearchData.REPORT_CATEGORY = this.report_category;
         this.SearchData.CUST_ID = this.cust_id;
         this.SearchData.CUST_NAME = this.cust_name;
         // this.CUSTRECORD.id = this.cust_id;

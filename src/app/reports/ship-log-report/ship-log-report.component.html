@@ -498,6 +498,8 @@
                         <th> DLVRY STATUS </th>
                         <th> DLVRY ORD SENT </th>
                         <th> DLVRY ORD DATE </th>
+                        <th> MASTER BL STATUS </th>
+                        <th> HOUSE BL STATUS </th>
                     </tr>
                 </thead>
                 <tbody class="page-body-tbody" *ngFor="let rec of MainList">
@@ -514,6 +516,8 @@
                         <td>{{rec.hbl_is_delivery}}</td>
                         <td>{{rec.pick_is_delivery_sent}}</td>
                         <td>{{rec.pick_delivery_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <td>{{rec.mbl_is_sea_waybill}}</td>
+                        <td>{{rec.hbl_bl_status}}</td>
                     </tr>
                 </tbody>
             </table>

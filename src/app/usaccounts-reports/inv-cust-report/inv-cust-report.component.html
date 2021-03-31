@@ -77,13 +77,14 @@
         <table class="table  table-hover table-sm">
             <thead class="page-body-thead">
                 <tr>
-                    <th>CUSTOMER-CODE</th>
-                    <th>CUSTOMER-NAME</th>
                     <th (click)="SelectDeselect()">
-                        <div class="form-check"> <input type="checkbox" class="form-check-input"
-                                [(ngModel)]="allchecked"><span>INV.NO</span>
+                        <div class="form-check mr-1"> <input type="checkbox" class="form-check-input"
+                                [(ngModel)]="allchecked"><span>SELECT</span>
                         </div>
                     </th>
+                    <th>CUSTOMER-CODE</th>
+                    <th>CUSTOMER-NAME</th>
+                    <th>INV.NO</th>
                     <th>INV.DATE</th>
                     <th>REFNO</th>
                     <th>CUST REFNO</th>
@@ -91,13 +92,14 @@
             </thead>
             <tbody class="page-body-tbody" *ngFor="let rec of MainList">
                 <tr>
-                    <td>{{rec.inv_cust_code}}</td>
-                    <td>{{rec.inv_cust_name}}</td>
-                    <td class='hlink2' (click)="editinvoice(rec)">
+                    <td>
                         <div class="form-check"> <input type="checkbox" class="form-check-input"
-                                [(ngModel)]="rec.inv_flag_b"><span>{{rec.inv_no}}</span>
+                                [(ngModel)]="rec.inv_flag_b">
                         </div>
                     </td>
+                    <td>{{rec.inv_cust_code}}</td>
+                    <td>{{rec.inv_cust_name}}</td>
+                    <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td>
                     <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                     <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mrefno}}</td>
                     <td>{{rec.inv_refno}}</td>
