@@ -5,7 +5,8 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-report',
-  templateUrl: './report.component.html'
+  templateUrl: './report.component.html',
+  styleUrls: ['./report.component.css']
 })
 export class ReportComponent implements OnInit {
 

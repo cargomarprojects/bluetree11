@@ -25,14 +25,14 @@ export class InterceptorService implements HttpInterceptor {
         router : Router
     ) {
 
-        this.sub = router.events.subscribe(event => {
+/*         this.sub = router.events.subscribe(event => {
             // An event triggered at the end of the activation part of the Resolve phase of routing.
             if (event instanceof ActivationEnd ) {
               // Cancel pending calls
               this.activeRequests  =0;
               this.loadingScreenService.stopLoading();
             }
-        });
+        }); */
     }
 
     
