@@ -112,11 +112,10 @@ export class PartyAddrEditComponent implements OnInit {
 
   onBlur(field: string, _rec: Tbl_Mast_Addressm = null) {
     switch (field) {
-      //   case 'remarks': {
-      //     _rec.cf_remarks = _rec.cf_remarks.toUpperCase();
-      //     break;
-      //   }
-
+        case 'add_pincode': {
+         this.record.add_pincode = this.record.add_pincode.toUpperCase();
+          break;
+        }
     }
   }
 

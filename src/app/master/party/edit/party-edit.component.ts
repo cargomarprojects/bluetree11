@@ -237,7 +237,30 @@ export class PartyEditComponent implements OnInit {
     this.record.gen_is_acc_alert = 'N';
     this.record.gen_protected = 'N';
     this.gen_branch_b = false;
-
+    this.record.gen_is_importer_b = false;
+    this.record.gen_is_exporter_b = false;
+    this.record.gen_is_terminal_b = false;
+    this.record.gen_is_terminal2_b = false;
+    this.record.gen_is_shipper_b = false;
+    this.record.gen_is_consignee_b = false;
+    this.record.gen_is_cha_b = false;
+    this.record.gen_is_forwarder_b = false;
+    this.record.gen_is_agent_b = false;
+    this.record.gen_is_carrier_b = false;
+    this.record.gen_is_trucker_b = false;
+    this.record.gen_is_vendor_b = false;
+    this.record.gen_is_warehouse_b = false;
+    this.record.gen_is_miscellaneous_b = false;
+    this.record.gen_is_employees_b = false;
+    this.record.gen_is_tbd_b = false;
+    this.record.gen_is_bank_b = false;
+    this.record.gen_is_carrier2_sea_b = false;
+    this.record.gen_is_shipper_vendor_b = false;
+    this.record.gen_is_contractor_b = false;
+    this.record.gen_is_ctpat_b = false;
+    this.record.gen_poa_customs_yn_b = false;
+    this.record.gen_poa_isf_yn_b = false;
+    this.record.gen_bond_yn_b = false;
     this.gs.IsAdmin
 
     if (this.gs.JOB_TYPE_AI.length > 0) {
@@ -372,7 +395,7 @@ export class PartyEditComponent implements OnInit {
       Type2 += "O";
     if (this.record.gen_is_tbd_b)
       Type2 += "D";
-    if (this.record.gen_is_importer)
+    if (this.record.gen_is_importer_b)
       Type2 += "I";
     if (this.record.gen_is_exporter_b)
       Type2 += "X";
