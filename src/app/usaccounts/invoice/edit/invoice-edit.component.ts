@@ -192,7 +192,8 @@ export class InvoiceEditComponent implements OnInit {
 
     this.mainservice.GetHouseList(SearchData).subscribe(response => {
       this.HouseList = <Tbl_House[]>response.records;
-      this.inv_date_ctrl.Focus();
+      if (!this.gs.isBlank(this.inv_date_ctrl))
+        this.inv_date_ctrl.Focus();
     }, Error => {
       this.gs.getError(Error);
     });
