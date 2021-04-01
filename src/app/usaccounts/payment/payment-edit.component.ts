@@ -118,6 +118,17 @@ export class PaymentEditComponent implements OnInit {
         this.actionHandler();
     }
 
+    actionHandler() {
+        this.errorMessage = '';
+        if (this.mode == 'ADD') {
+            this.record = <Tbl_cargo_invoicem>{};
+            this.pendingList = <Tbl_cargo_invoicem[]>[];
+            this.pkid = this.gs.getGuid();
+            this.init();
+        }
+    }
+
+
     setup() {
         if (!this.gs.IS_SINGLE_CURRENCY)
             this.curr_code = this.gs.base_cur_code;
@@ -140,16 +151,7 @@ export class PaymentEditComponent implements OnInit {
         this.actionHandler();
     }
 
-    actionHandler() {
-        this.errorMessage = '';
 
-        if (this.mode == 'ADD') {
-            this.record = <Tbl_cargo_invoicem>{};
-            this.pendingList = <Tbl_cargo_invoicem[]>[];
-            this.pkid = this.gs.getGuid();
-            this.init();
-        }
-    }
 
     init() {
 
@@ -179,14 +181,16 @@ export class PaymentEditComponent implements OnInit {
     }
 
     FindInvoice() {
+       
 
+        /*
         if (this.gs.isBlank(this.cust_id)) {
             alert("No Customer/Parent Selected");
             return;
         }
-
+        */
         if (this.gs.IS_SINGLE_CURRENCY == false) {
-            if (this.curr_code.length <= 0) {
+            if ( this.gs.isBlank(this.curr_code.length)) {
                 alert("Currency Code Has to be entered");
                 return;
             }
@@ -195,24 +199,24 @@ export class PaymentEditComponent implements OnInit {
         var SearchData = this.gs.UserInfo;
 
         SearchData.pkid = this.pkid;
-        if (this.cust_id != '') {
+        if (!this.gs.isBlank(this.cust_id)) {
             this.Customer_ID = this.cust_id;
             this.str_id = this.cust_id;
             this.Search_Mode = (this.custType == "MASTER") ? "CUSTOMER" : "GROUP";
         }
-        else if (this.refno != '') {
+        else if ( !this.gs.isBlank(this.refno)) {
             this.str_id = this.refno;
             this.Search_Mode = "MASTER";
         }
-        else if (this.invno != '') {
+        else if (!this.gs.isBlank(this.invno)) {
             this.str_id = this.invno;
             this.Search_Mode = "INVNO";
         }
-        else if (this.custrefno != '') {
+        else if (!this.gs.isBlank(this.custrefno)) {
             this.str_id = this.custrefno;
             this.Search_Mode = "REFNO";
         }
-        if (this.Search_Mode == "") {
+        if (this.gs.isBlank(this.Search_Mode)) {
             alert("Search Data Not Found");
             return;
         }
@@ -264,6 +268,7 @@ export class PaymentEditComponent implements OnInit {
         nAR = 0;
         nAP = 0;
         nDiff = 0;
+        
         if (this.pendingList) {
             this.pendingList.forEach(mRec => {
                 nAR += mRec.inv_ar_total;
@@ -272,6 +277,7 @@ export class PaymentEditComponent implements OnInit {
                 nAP = this.gs.roundNumber(nAP, 2);
             });
         }
+
         nDiff = nAR - nAP;
         nDiff = this.gs.roundNumber(nDiff, 2);
         this.txt_Bal_AR = nAR;
@@ -330,7 +336,7 @@ export class PaymentEditComponent implements OnInit {
         this.pendingList.forEach(Record => {
             if (Record.inv_flag == "Y") {
                 iCtr++;
-                if (Record.inv_pay_amt < 0) {
+                if (Record.inv_pay_amt < 0 ) {
                     sErrMsg = "Invalid Amount " + Record.inv_pay_amt.toString();
                     //break;
                 }
@@ -379,6 +385,8 @@ export class PaymentEditComponent implements OnInit {
             Record.inv_curr_code = this.curr_code;
             if (Record.inv_type == "PR")
                 IS_PAYROLL_RECORD = "Y";
+            if (Record.inv_type == "CM")
+                IS_PAYROLL_RECORD = "Y";                
 
 
 
@@ -417,6 +425,12 @@ export class PaymentEditComponent implements OnInit {
 
         });
 
+        
+        nAp = this.gs.roundNumber(nAp, 2);
+        nAp_Base = this.gs.roundNumber(nAp_Base, 2);        
+        
+        nAr = this.gs.roundNumber(nAr, 2);
+        nAr_Base = this.gs.roundNumber(nAr_Base, 2);        
 
         Customer_Type = this.Search_Mode;
 
@@ -439,6 +453,9 @@ export class PaymentEditComponent implements OnInit {
 
         nDiff = nAr - nAp;
         nDiff_Base = nAr_Base - nAp_Base;
+
+        nDiff = this.gs.roundNumber(nDiff, 2);
+        nDiff_Base = this.gs.roundNumber(nDiff_Base, 2);
 
         if (nAr != this.txt_tot_AR) {
             alert("Mismatch in Total A/R");
@@ -649,17 +666,16 @@ export class PaymentEditComponent implements OnInit {
     onBlur(field: string, _rec: Tbl_cargo_invoicem = null, idx: number = 0) {
         if (field == 'inv_pay_amt') {
             _rec.inv_pay_amt = this.gs.roundNumber(_rec.inv_pay_amt, 2);
-            if (_rec.inv_flag2)
-                if (_rec.inv_pay_amt > _rec.inv_balance || _rec.inv_pay_amt <= 0) {
+            if (_rec.inv_flag2) {
+                if ( _rec.inv_pay_amt < 0) {
                     alert('Invalid Payment Amount, ' + _rec.inv_no)
-                  
                     if (idx < this.inv_pay_amt_field.toArray().length)
                         this.inv_pay_amt_field.toArray()[idx].nativeElement.focus();
-
                     _rec.inv_pay_amt = _rec.inv_balance;
                 }
+            }
+            this.FindTotal('', _rec);
         }
-
     }
 
     onBlur2(cb: any) {
@@ -743,11 +759,11 @@ export class PaymentEditComponent implements OnInit {
         this.Pay_RP = "";
         if (nDiff > 0) {
             this.Pay_RP = "RECEIPT";
-            this.LBL_STATUS = "RECEIPT AMT " + nDiff.toString();
+            this.LBL_STATUS = "RECEIPT " + nDiff.toString();
         }
         else if (nDiff < 0) {
             this.Pay_RP = "PAYMENT";
-            this.LBL_STATUS = "PAYMENT AMT " + Math.abs(nDiff).toString();
+            this.LBL_STATUS = "PAYMENT " + Math.abs(nDiff).toString();
         }
 
 

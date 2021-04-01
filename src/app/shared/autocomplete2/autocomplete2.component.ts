@@ -217,13 +217,8 @@ export class AutoComplete2Component {
         //     this.bShowMore = false;
 
         if (response.list == null) {
-          if (this.showDiv && this.RecList.length > 0) {
-            this._selectedItem = this.RecList[0];
-            setTimeout(() => {
-              this.lov.nativeElement.focus();
-              this.lov.nativeElement.scrollTop = this.lov.nativeElement.scrollHeight;
-            }, 0);
-          }
+          this.SelectedItem('', null);
+          this.showDiv = false;
           return;
         }
 
