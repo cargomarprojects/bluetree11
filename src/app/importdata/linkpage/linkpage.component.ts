@@ -58,7 +58,7 @@ export class LinkPageComponent implements OnInit {
 
     LinkData(_rec: Tbl_edi_link) {
 
-        if (!confirm("Assign The Current Selected Name")) {
+        if (!confirm("Assign The Current Selected Name "+_rec.link_target_name )) {
             return;
         }
 
