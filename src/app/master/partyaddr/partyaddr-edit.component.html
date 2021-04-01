@@ -96,7 +96,7 @@
                                     <input class="form-control form-control-sm" type="text"
                                         [(ngModel)]="record.add_pincode" (blur)="onBlur('add_pincode')"
                                         maxlength="30" />
-                                    <button (click)="SetAddress()" class="btn btn-success btn-sm mr-1">Set
+                                    <button (click)="SetAddress()" class="btn btn-info btn-sm mr-1">Set
                                         Address</button>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                             <div class="form-group row">
                                 <label class="col-2 col-form-label col-form-label-sm">web</label>
                                 <div class="col-10">
-                                    <InputBox [(inputModel)]="record.add_web" maxlength="100" [uppercase]="true"
+                                    <InputBox [(inputModel)]="record.add_web" maxlength="100" [uppercase]="false"
                                         #_gen_location>
                                     </InputBox>
                                 </div>
@@ -147,7 +147,7 @@
                             <div class="form-group row">
                                 <label class="col-2 col-form-label col-form-label-sm">Email</label>
                                 <div class="col-10">
-                                    <InputBox [(inputModel)]="record.add_email" maxlength="60" [uppercase]="true"
+                                    <InputBox [(inputModel)]="record.add_email" maxlength="60" [uppercase]="false"
                                         #_gen_location>
                                     </InputBox>
                                 </div>

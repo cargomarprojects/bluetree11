@@ -192,7 +192,8 @@ export class InvoiceEditComponent implements OnInit {
 
     this.mainservice.GetHouseList(SearchData).subscribe(response => {
       this.HouseList = <Tbl_House[]>response.records;
-      this.inv_date_ctrl.Focus();
+      if (!this.gs.isBlank(this.inv_date_ctrl))
+        this.inv_date_ctrl.Focus();
     }, Error => {
       this.gs.getError(Error);
     });
@@ -732,20 +733,20 @@ export class InvoiceEditComponent implements OnInit {
     }
 
     //NEW
-    if (this.gs.isBlank(this.record.inv_arap)) {
-      this.errorMessage = "Invalid ARAP Type";
-      return false;
-    }
+    // if (this.gs.isBlank(this.record.inv_arap)) {
+    //   this.errorMessage = "Invalid ARAP Type";
+    //   return false;
+    // }
 
-    if (this.gs.isBlank(this.record.inv_type)) {
-      this.errorMessage = "Invalid Invoice Type";
-      return false;
-    }
+    // if (this.gs.isBlank(this.record.inv_type)) {
+    //   this.errorMessage = "Invalid Invoice Type";
+    //   return false;
+    // }
 
-    if (this.gs.isBlank(this.record.inv_mbl_id)) {
-      this.errorMessage = "Invalid Master ID";
-      return false;
-    }
+    // if (this.gs.isBlank(this.record.inv_mbl_id)) {
+    //   this.errorMessage = "Invalid Master ID";
+    //   return false;
+    // }
 
     let sErrMsg = "";
     let iCtr = 0;
@@ -790,9 +791,9 @@ export class InvoiceEditComponent implements OnInit {
         }
       }
 
-      if (this.gs.roundNumber2(Rec.invd_qty * Rec.invd_rate, 2) != this.gs.roundNumber2(Rec.invd_total, 2)) {
-        sErrMsg = "Row Amount Mismatch";
-      }
+      // if (this.gs.roundNumber2(Rec.invd_qty * Rec.invd_rate, 2) != this.gs.roundNumber2(Rec.invd_total, 2)) {
+      //   sErrMsg = "Row Amount Mismatch";
+      // }
 
     });
 

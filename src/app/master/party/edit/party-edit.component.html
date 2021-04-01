@@ -175,7 +175,7 @@
                                 <div class="form-group row">
                                     <label class="col-2 col-form-label col-form-label-sm">web</label>
                                     <div class="col-10">
-                                        <InputBox [(inputModel)]="record.gen_web" maxlength="100" [uppercase]="true"
+                                        <InputBox [(inputModel)]="record.gen_web" maxlength="100" [uppercase]="false"
                                             #_gen_location>
                                         </InputBox>
                                     </div>
@@ -183,7 +183,7 @@
                                 <div class="form-group row">
                                     <label class="col-2 col-form-label col-form-label-sm">Email</label>
                                     <div class="col-10">
-                                        <InputBox [(inputModel)]="record.gen_email" maxlength="60" [uppercase]="true"
+                                        <InputBox [(inputModel)]="record.gen_email" maxlength="60" [uppercase]="false"
                                             #_gen_location>
                                         </InputBox>
                                     </div>
@@ -856,7 +856,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('BUSSINESS-INFO')">Business
+                        <button disabled class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('BUSSINESS-INFO')">Business
                             Info</button>
                     </div>
 
