@@ -94,6 +94,7 @@ export class PartyEditComponent implements OnInit {
         this.ms_type = this.route.snapshot.queryParams.ms_type;
         this.ms_from = this.route.snapshot.queryParams.ms_from;
         this.ms_name = this.route.snapshot.queryParams.ms_name;
+        this.ms_name = this.ms_name.replace("#", ",");
       }
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
@@ -106,6 +107,7 @@ export class PartyEditComponent implements OnInit {
         this.ms_type = options.ms_type;
         this.ms_from = options.ms_from;
         this.ms_name = options.ms_name;
+        this.ms_name = this.ms_name.replace("#", ",");
       }
     }
     this.closeCaption = 'Return';
@@ -140,7 +142,12 @@ export class PartyEditComponent implements OnInit {
       this.pkid = this.gs.getGuid();
       this.init();
       if (this.origin === "EXTERNAL") {
-        this.LoadMissingData();
+        if (this.ms_type == "AGENT") {
+          this.record.gen_short_name = this.ms_name;
+          this.record.gen_name = this.ms_name;
+        }
+        if (this.ms_type == "SHIPPER" || this.ms_type == "CONSIGNEE" || this.ms_type == "NOTIFY")
+          this.LoadMissingData();
       }
     }
     if (this.mode == 'EDIT') {
