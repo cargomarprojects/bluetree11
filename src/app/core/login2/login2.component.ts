@@ -140,7 +140,8 @@ export class Login2Component implements OnInit {
         this.GLOBALCONTANTS.branch_prefix = this.Comp_Row.comp_prefix;
 
 
-        this.GLOBALCONTANTS.USER_LOCATION_ID = +this.Comp_Row.comp_code;
+        //this.GLOBALCONTANTS.USER_LOCATION_ID = +this.Comp_Row.comp_code;
+        this.GLOBALCONTANTS.USER_LOCATION_ID = 0;
         this.GLOBALCONTANTS.REC_BRANCH_CODE = this.Comp_Row.comp_code;
 
         this.GLOBALCONTANTS.ADDRESS_LINE1 = this.Comp_Row.comp_line1;
