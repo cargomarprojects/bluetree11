@@ -116,6 +116,8 @@ export class AcctmEditComponent implements OnInit {
             .subscribe(response => {
                 this.record = <Tbl_acc_acctm>response.record;
                 this.mode = 'EDIT';
+                if (this.gs.isBlank(this.record.acc_chq_format_id))
+                    this.record.acc_chq_format_id = 'NIL';
             }, error => {
                 this.errorMessage = this.gs.getError(error);
             });
