@@ -117,7 +117,9 @@ export class AccSettingsService {
     }
 
     RefreshList(_rec: Tbl_acc_acctm) {
-        if (this.record.records == null)
+        if (this.gs.isBlank(this.record))
+        return;
+        if (this.gs.isBlank(this.record.records))
             return;
         var REC = this.record.records.find(rec => rec.acc_pkid == _rec.acc_pkid);
         if (REC == null) {

@@ -111,7 +111,9 @@ export class BudgetService {
     }
 
     RefreshList(_rec: Tbl_Budgetm) {
-        if (this.record.records == null)
+        if (this.gs.isBlank(this.record))
+        return;
+        if (this.gs.isBlank(this.record.records))
             return;
         var REC = this.record.records.find(rec => rec.bm_pkid == _rec.bm_pkid);
         if (REC == null) {

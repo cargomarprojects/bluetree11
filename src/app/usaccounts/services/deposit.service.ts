@@ -29,39 +29,38 @@ export class DepositService {
     public canDelete: boolean;
 
     public initlialized: boolean;
-    private appid =''
+    private appid = ''
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    public getSortCol(){
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
     public init(params: any) {
@@ -77,11 +76,11 @@ export class DepositService {
         this.param_type = params.param_type;
 
         this.record = <AccPaymentModel>{
-            sortcol : 'pay_docno',
-            sortorder : true,
+            sortcol: 'pay_docno',
+            sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: 'pay_docno'},
+            searchQuery: <SearchQuery>{ searchString: 'pay_docno' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -91,7 +90,7 @@ export class DepositService {
         this.title = this.gs.getTitle(this.menuid);
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
-        this.canDelete = this.gs.canDelete(this.menuid);        
+        this.canDelete = this.gs.canDelete(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
 
         this.initlialized = true;
@@ -116,7 +115,7 @@ export class DepositService {
         SearchData.FDATE = this.record.searchQuery.sdate;
         SearchData.EDATE = this.record.searchQuery.edate;
         SearchData.YEAR = this.gs.year_code;
-        SearchData.SORT = this.record.searchQuery.searchString;        
+        SearchData.SORT = this.record.searchQuery.searchString;
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
@@ -143,7 +142,9 @@ export class DepositService {
     }
 
     RefreshList(_rec: Tbl_Acc_Payment) {
-        if (this.record.records == null)
+        if (this.gs.isBlank(this.record))
+            return;
+        if (this.gs.isBlank(this.record.records))
             return;
         var REC = this.record.records.find(rec => rec.pay_pkid == _rec.pay_pkid);
         if (REC == null) {
@@ -153,7 +154,7 @@ export class DepositService {
             REC.pay_docno = _rec.pay_docno;
             REC.pay_date = _rec.pay_date;
             REC.pay_acc_name = _rec.pay_acc_name;
-            
+
             REC.pay_diff = _rec.pay_diff;
             REC.pay_tot_chq = _rec.pay_tot_chq;
             REC.pay_posted = _rec.pay_posted;
@@ -163,7 +164,7 @@ export class DepositService {
             REC.rec_closed = _rec.rec_closed;
         }
     }
-    
+
     DeleteRow(_rec: Tbl_Acc_Payment) {
 
         this.record.errormessage = '';

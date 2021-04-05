@@ -145,7 +145,9 @@ export class FundTransferService {
     }
 
     RefreshList(_rec: Tbl_Acc_Payment) {
-        if (this.record.records == null)
+        if (this.gs.isBlank(this.record))
+            return;
+        if (this.gs.isBlank(this.record.records))
             return;
         var REC = this.record.records.find(rec => rec.pay_pkid == _rec.pay_pkid);
         if (REC == null) {

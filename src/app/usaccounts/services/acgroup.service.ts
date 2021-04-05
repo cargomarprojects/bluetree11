@@ -31,39 +31,38 @@ export class AcGroupService {
     public canSave: boolean;
 
     public initlialized: boolean;
-    private appid ='';
+    private appid = '';
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    public getSortCol(){
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
     public init(params: any) {
@@ -79,11 +78,11 @@ export class AcGroupService {
         this.param_type = params.param_type;
 
         this.record = <AccGroupModel>{
-            sortcol : 'acc_parent_code',
-            sortorder : true,
+            sortcol: 'acc_parent_code',
+            sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: ''},
+            searchQuery: <SearchQuery>{ searchString: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -140,7 +139,9 @@ export class AcGroupService {
     }
 
     RefreshList(_rec: Tbl_acc_groupm) {
-        if (this.record.records == null)
+        if (this.gs.isBlank(this.record))
+            return;
+        if (this.gs.isBlank(this.record.records))
             return;
         var REC = this.record.records.find(rec => rec.acc_group_pkid == _rec.acc_group_pkid);
         if (REC == null) {
@@ -152,10 +153,10 @@ export class AcGroupService {
             REC.acc_parent_name = _rec.acc_parent_name;
             REC.acc_sub_group_name = _rec.acc_sub_group_name;
             REC.rec_closed = _rec.rec_closed;
-            REC.rec_created_by = _rec.rec_created_by;            
+            REC.rec_created_by = _rec.rec_created_by;
         }
     }
-    
+
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AcGroupm/List', SearchData, this.gs.headerparam2('authorized'));
     }
