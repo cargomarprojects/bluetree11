@@ -171,7 +171,7 @@ export class PreSetMsgService {
 
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = _rec.pkid;
-
+        SearchData.remarks = _rec.remarks;
         this.DeleteRecord(SearchData)
             .subscribe(response => {
                 if (response.retvalue == false) {
