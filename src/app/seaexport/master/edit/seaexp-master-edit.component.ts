@@ -1004,7 +1004,8 @@ export class SeaexpMasterEditComponent implements OnInit {
       pkid: '',
       type: '',
       origin: 'seaexp-master-page',
-      mode: 'ADD'
+      mode: 'ADD',
+      rnd: this.gs.getRandomInt()
     };
   }
 
