@@ -37,39 +37,37 @@ export class AirImpMasterService {
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
-    public getSortCol(){
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
-    public ClearInit()
-    {
+    public ClearInit() {
         this.record = <AirImpMasterModel>{
-            sortcol : 'mbl_refno',
-            sortorder : true,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today },
@@ -90,8 +88,8 @@ export class AirImpMasterService {
         this.param_type = params.param_type;
 
         this.record = <AirImpMasterModel>{
-            sortcol : 'mbl_refno',
-            sortorder : true,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today },
@@ -155,7 +153,9 @@ export class AirImpMasterService {
     }
 
     RefreshList(_rec: Tbl_cargo_imp_masterm) {
-        if (this.record.records == null)
+        if (this.gs.isBlank(this.record))
+            return;
+        if (this.gs.isBlank(this.record.records))
             return;
         var REC = this.record.records.find(rec => rec.mbl_pkid == _rec.mbl_pkid);
         if (REC == null) {
@@ -177,11 +177,11 @@ export class AirImpMasterService {
 
 
     DeleteRow(_rec: Tbl_cargo_imp_masterm) {
-        
+
         if (!confirm("DELETE " + _rec.mbl_refno)) {
             return;
         }
-        
+
         this.record.errormessage = '';
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = _rec.mbl_pkid;
