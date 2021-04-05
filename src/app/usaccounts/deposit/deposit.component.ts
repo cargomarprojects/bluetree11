@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery, Tbl_Acc_Payment, AccPaymentModel } from '../models/Tbl_Acc_Payment';
 import { PageQuery } from '../../shared/models/pageQuery';
@@ -30,15 +30,21 @@ export class DepositComponent implements OnInit {
   report_searchdata: any = {};
   report_menuid: string;
   tab: string = 'main';
-
-
+  attach_pkid = '';
+  attach_title = '';
+  modal: any;
 
   constructor(
+    private modalconfig: NgbModalConfig,
+    private modalservice: NgbModal,
     private route: ActivatedRoute,
     private location: Location,
     public gs: GlobalService,
     public mainservice: DepositService
-  ) { }
+  ) {
+    modalconfig.backdrop = 'static'; //true/false/static
+    modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
+  }
 
   ngOnInit() {
     this.mainservice.init(this.route.snapshot.queryParams);
@@ -133,6 +139,9 @@ export class DepositComponent implements OnInit {
     this.location.back();
   }
 
+  CloseModal() {
+    this.modal.close();
+  }
 
   Print(rec: Tbl_Acc_Payment, _type: string) {
 
@@ -159,6 +168,10 @@ export class DepositComponent implements OnInit {
     this.tab = 'main';
   }
 
-
+  AttachRow(_rec: Tbl_Acc_Payment, attachmodal: any = null) {
+    this.attach_pkid = _rec.pay_pkid;
+    this.attach_title = "DEPOSIT # " + _rec.pay_docno;
+    this.modal = this.modalservice.open(attachmodal, { centered: true });
+  }
 
 }
