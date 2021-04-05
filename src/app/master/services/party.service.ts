@@ -29,39 +29,38 @@ export class PartyService {
     public isCompany: boolean;
 
     public initlialized: boolean;
-    private appid =''
+    private appid = ''
     private menutype: string = '';
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
-    public getSortCol(){
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
     public ClearInit() {
@@ -69,8 +68,8 @@ export class PartyService {
         this.gs.PARTYPAGE_INIT_PARTYS = null;
         this.gs.PARTYPAGE_INIT_OVERSEAAGENT = null;
         this.record = <PartyModel>{
-            sortcol : 'gen_code',
-            sortorder : true,
+            sortcol: 'gen_code',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', searchSort: 'gen_short_name', searchState: '', searchCity: '', searchTel: '', searchFax: '', searchZip: '', searchBlackAc: false, menuType: this.param_type },
@@ -101,8 +100,8 @@ export class PartyService {
                 this.record = this.gs.PARTYPAGE_INIT_OVERSEAAGENT;
             else
                 this.record = <PartyModel>{
-                    sortcol : 'gen_code',
-                    sortorder : true,
+                    sortcol: 'gen_code',
+                    sortorder: true,
                     errormessage: '',
                     records: [],
                     searchQuery: <SearchQuery>{ searchString: '', searchSort: 'gen_short_name', searchState: '', searchCity: '', searchTel: '', searchFax: '', searchZip: '', searchBlackAc: false, menuType: this.param_type },
@@ -177,6 +176,8 @@ export class PartyService {
     }
 
     RefreshList(_rec: Tbl_Mast_Partym) {
+        if (this.gs.isBlank(this.record))
+            return;
         if (this.record.records == null)
             return;
         var REC = this.record.records.find(rec => rec.gen_pkid == _rec.gen_pkid);
