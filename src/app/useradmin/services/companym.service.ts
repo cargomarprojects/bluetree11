@@ -53,8 +53,9 @@ export class CompanyService {
             this.appid = this.gs.appid;
             this.initlialized = false;
         }
-        if (this.initlialized)
-            return;
+        
+        //if (this.initlialized)
+          //  return;
 
         this.id = params.id;
         this.menuid = params.id;
