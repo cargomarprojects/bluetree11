@@ -31,6 +31,7 @@
         <th (click)="mainservice.sort('pay_chq_date')">CHQDT&nbsp;<i [ngClass]="mainservice.getIcon('pay_chq_date')"></i></th>
         <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
         <th (click)="mainservice.sort('rec_created_date')">CREATE-DT&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
+        <th (click)="mainservice.sort('rec_closed')">CLOSED&nbsp;<i [ngClass]="mainservice.getIcon('rec_closed')"></i></th>
         <th>DELETE</th>
       </tr>
     </thead>
@@ -50,6 +51,7 @@
         <td>{{rec.pay_chq_date | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td>{{rec.rec_created_by}} </td>
         <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+        <td>{{rec.rec_closed}} </td>
         <td *ngIf="mainservice.canDelete" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
           aria-hidden="true" (click)="mainservice.DeleteRow(rec)"></i></td>
       </tr>
