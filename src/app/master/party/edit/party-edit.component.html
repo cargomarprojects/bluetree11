@@ -5,7 +5,7 @@
             <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button> -->
             <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)"
             [routerLink]="['/Silver.Master/PartyEditPage']"
-            [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.type,origin: 'partymaster-edit-page',mode: 'ADD'}">New</a>
+            [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.type,origin: 'partymaster-edit-page',mode: 'ADD','rnd': gs.getRandomInt()}">New</a>
             <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
         </div>
     </div>
