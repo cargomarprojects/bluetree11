@@ -20,6 +20,8 @@ export class CompanyComponent implements OnInit {
    Joy
  */
 
+  searchQuery: SearchQuery;
+
   errorMessage$: Observable<string>;
   records$: Observable<Tbl_User_Companym []>;
   pageQuery$: Observable<PageQuery>;
@@ -35,6 +37,9 @@ export class CompanyComponent implements OnInit {
   ngOnInit() {
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
+
+    this.searchQuery = {searchString : '' };
+    this.searchEvents({ outputformat: 'SCREEN' , searchQuery: this.searchQuery });
   }
 
   initPage() {
