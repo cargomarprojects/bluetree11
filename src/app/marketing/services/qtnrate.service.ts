@@ -29,46 +29,45 @@ export class QtnRateService {
     public canDelete: boolean;
 
     public initlialized: boolean;
-    private appid ='';
+    private appid = '';
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    
-    public getSortCol(){
+
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
     public ClearInit() {
         this.record = <QtnRateModel>{
-            sortcol : 'qtnr_slno',
-            sortorder : true,
+            sortcol: 'qtnr_slno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, searchtype: 'REFNO' },
@@ -90,8 +89,8 @@ export class QtnRateService {
         this.param_type = params.param_type;
 
         this.record = <QtnRateModel>{
-            sortcol : 'qtnr_slno',
-            sortorder : true,
+            sortcol: 'qtnr_slno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, searchtype: 'REFNO' },
@@ -156,7 +155,9 @@ export class QtnRateService {
     }
 
     RefreshList(_rec: Tbl_Cargo_Qtn_Rates) {
-        if (this.record.records == null)
+        if (this.gs.isBlank(this.record))
+            return;
+        if (this.gs.isBlank(this.record.records))
             return;
         var REC = this.record.records.find(rec => rec.qtnr_pkid == _rec.qtnr_pkid);
         if (REC == null) {

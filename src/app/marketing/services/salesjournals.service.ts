@@ -30,46 +30,45 @@ export class SalesJournalService {
     public canDelete: boolean;
 
     public initlialized: boolean;
-    private appid =''
-    
+    private appid = ''
+
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    
-    public getSortCol(){
+
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
     public ClearInit() {
         this.record = <SalesJournalModel>{
-            sortcol : 'cjm_customer_code',
-            sortorder : true,
+            sortcol: 'cjm_customer_code',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '' },
@@ -89,8 +88,8 @@ export class SalesJournalService {
         this.menuid = params.id;
         this.param_type = "MARKETING";  //params.menu_param;
         this.record = <SalesJournalModel>{
-            sortcol : 'cjm_customer_code',
-            sortorder : true,
+            sortcol: 'cjm_customer_code',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '' },
@@ -154,7 +153,9 @@ export class SalesJournalService {
     }
 
     RefreshList(_rec: Tbl_Cargo_Journals_Master) {
-        if (this.record.records == null)
+        if (this.gs.isBlank(this.record))
+            return;
+        if (this.gs.isBlank(this.record.records))
             return;
         // var REC = this.record.records.find(rec => rec.qtnr_pkid == _rec.qtnr_pkid);
         // if (REC == null) {
