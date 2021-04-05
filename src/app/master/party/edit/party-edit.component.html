@@ -738,16 +738,17 @@
                         <div class="row">
                             <div class="col-md-6 testbox  px-0 mx-0">
                                 <div class="form-group row">
-                                    <div class="col-2">
+                                    <!-- <div class="col-2">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input"
                                                 [(ngModel)]="gen_branch_b"><span>Branch</span>
                                         </div>
-                                    </div>
+                                    </div> -->
+                                    <label class="col-2 col-form-label col-form-label-sm">Branch</label>
                                     <div class="col-10">
-                                        <select class="form-control form-control-sm" [disabled]="!gen_branch_b"
+                                        <select class="form-control form-control-sm" 
                                             [(ngModel)]="record.gen_branch">
-                                            <option *ngFor="let rec of locationList" [value]="rec.comp_code">
+                                            <option *ngFor="let rec of gs.CompanyList" [value]="rec.comp_code">
                                                 {{rec.comp_name}}</option>
                                         </select>
                                     </div>

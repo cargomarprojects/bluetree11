@@ -233,7 +233,7 @@ export class PartyEditComponent implements OnInit {
     this.record.gen_chb_email = '';
     this.record.gen_criteria = '';
     this.record.gen_min_profit = '';
-    this.record.gen_branch = '';
+    this.record.gen_branch = 'ALL';
     this.record.gen_protected = 'N';
     this.record.gen_is_actual_vendor = 'N';
     this.record.gen_is_splac = 'N';
@@ -322,14 +322,18 @@ export class PartyEditComponent implements OnInit {
         if (profitamt <= 0)
           this.record.gen_min_profit = '';
 
-        this.gen_branch_b = false;
-        if (this.record.gen_branch == "" || this.record.gen_branch == "ALL") {
-          this.gen_branch_b = false;
-          this.record.gen_branch = '';
-        }
-        else {
-          this.gen_branch_b = true;
-        }
+        // this.gen_branch_b = false;
+        // if (this.record.gen_branch == "" || this.record.gen_branch == "ALL") {
+        //   this.gen_branch_b = false;
+        //   this.record.gen_branch = '';
+        // }
+        // else {
+        //   this.gen_branch_b = true;
+        // }
+
+        if (this.gs.isBlank(this.record.gen_branch))
+          this.record.gen_branch = "ALL";
+
 
       }, error => {
         this.errorMessage = this.gs.getError(error);
