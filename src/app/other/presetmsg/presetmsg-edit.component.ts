@@ -35,14 +35,14 @@ export class PreSetMsgEditComponent implements OnInit {
     title: string;
     isAdmin: boolean;
     refno: string = "";
- 
+
     isAccLocked = false;
 
     showchqdt = true;
 
     where = "";
 
-    
+
 
     constructor(
         private router: Router,
@@ -51,7 +51,7 @@ export class PreSetMsgEditComponent implements OnInit {
         public gs: GlobalService,
         public mainService: PreSetMsgService,
     ) {
-        
+
     }
 
     ngOnInit() {
@@ -70,7 +70,7 @@ export class PreSetMsgEditComponent implements OnInit {
         this.initPage();
         this.actionHandler();
     }
- 
+
 
     private initPage() {
         this.isAdmin = this.gs.IsAdmin(this.menuid);
@@ -102,6 +102,7 @@ export class PreSetMsgEditComponent implements OnInit {
 
     init() {
         this.record.pkid = this.pkid;
+        this.record.source = 'ADD TO FOLLOW UP';
         this.record.remarks = '';
     }
 
@@ -202,7 +203,7 @@ export class PreSetMsgEditComponent implements OnInit {
     onBlur(field: string) {
     }
 
-  
+
     getRouteDet(_type: string, _mode: string, _record: Table_Cargo_Remarks = null) {
         if (_type == "L") {
             if ((_mode == "ADD" && this.gs.canAdd(this.menuid)) || (_mode == "EDIT" && this.gs.canEdit(this.menuid)))
