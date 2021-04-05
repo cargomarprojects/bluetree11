@@ -27,6 +27,9 @@ import { GenFileUploadEditComponent } from './genfileupload/genfileupload-edit.c
 import {  PayrollDetComponent } from './payrolldet/payrolldet.component';
 import { PayrollDetEditComponent } from './payrolldet/payrolldet-edit.component';
 
+import { PreSetMsgComponent } from './presetmsg/presetmsg.component';
+import { PreSetMsgEditComponent } from './presetmsg/presetmsg-edit.component';
+
 const routes: Routes = [
   { path : 'GeneralPage', component : OthGeneralComponent },
   { path : 'OthGeneralEditPage', component : OthGeneralEditComponent },
@@ -52,6 +55,8 @@ const routes: Routes = [
   { path : 'GeneralFileUploadEditPage', component : GenFileUploadEditComponent  },
   { path : 'PayrollPage', component : PayrollDetComponent  },
   { path : 'PayrollEditPage', component : PayrollDetEditComponent },
+  { path : 'SystemMessagePage', component : PreSetMsgComponent },
+  { path : 'SystemMessageEditPage', component : PreSetMsgEditComponent },
 ];
 
 @NgModule({

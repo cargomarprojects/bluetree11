@@ -1,0 +1,47 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-1">{{mainservice.title}}</label>
+        <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" [routerLink]="getRouteDet('L','ADD')"
+            [queryParams]="getRouteDet('P','ADD')">New</a>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage$ | async as errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+</div>
+
+<acc-presetmsg-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+</acc-presetmsg-header>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th (click)="mainservice.sort('mu_agent_name')">TYPE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mu_agent_name')"></i></th>
+                <th (click)="mainservice.sort('mu_bl_start_no')">REMARKS&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mu_bl_start_no')"></i></th>
+                <th class='text-center'>DELETE</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+                <td>{{rec.source}} </td>
+                <td *ngIf="!this.mainservice.canEdit">{{rec.remarks}}</td>
+                <td *ngIf="this.mainservice.canEdit">
+                    <a class="hlink" [routerLink]="getRouteDet('L','EDIT',rec)"
+                        [queryParams]="getRouteDet('P','EDIT',rec)">{{rec.remarks}}</a>
+                </td>
+                <td *ngIf="mainservice.canDelete" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
+                        aria-hidden="true" (click)="mainservice.DeleteRow(rec)"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />

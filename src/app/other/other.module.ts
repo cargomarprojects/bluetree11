@@ -52,6 +52,10 @@ import {  PayrollDetComponent } from './payrolldet/payrolldet.component';
 import { PayrollDetEditComponent } from './payrolldet/payrolldet-edit.component';
 import { PayrollDetHeaderComponent } from './payrolldet/payrolldet-header.component';
 
+import { PreSetMsgComponent } from './presetmsg/presetmsg.component';
+import { PreSetMsgHeaderComponent } from './presetmsg/presetmsg-header.component';
+import { PreSetMsgEditComponent } from './presetmsg/presetmsg-edit.component';
+
 @NgModule({
   declarations: [
     OthGeneralComponent,
@@ -88,7 +92,10 @@ import { PayrollDetHeaderComponent } from './payrolldet/payrolldet-header.compon
     GenFileUploadEditComponent,
     PayrollDetComponent,
     PayrollDetHeaderComponent,
-    PayrollDetEditComponent
+    PayrollDetEditComponent,
+    PreSetMsgComponent,
+    PreSetMsgHeaderComponent,
+    PreSetMsgEditComponent
   ],
   imports: [
     SharedModule,    
