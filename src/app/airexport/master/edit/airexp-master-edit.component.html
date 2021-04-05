@@ -4,7 +4,7 @@
       <label class="mr-3">{{title}} ({{mode}})</label>
       <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)"
       [routerLink]="['/Silver.AirExport.Trans/AirExpMasterEditPage']"
-      [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.mainService.param_type,origin: 'airexp-master-edit-page',mode: 'ADD'}">New</a>
+      [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.mainService.param_type,origin: 'airexp-master-edit-page',mode: 'ADD','rnd': gs.getRandomInt()}">New</a>
       <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
       <label class="text-danger" *ngIf="is_locked">LOCKED</label>
     </div>

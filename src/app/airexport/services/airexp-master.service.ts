@@ -156,7 +156,9 @@ export class AirExpMasterService {
     }
 
     RefreshList(_rec: Tbl_cargo_exp_masterm) {
-        if (this.record.records == null)
+        if (this.gs.isBlank(this.record))
+        return;
+        if (this.gs.isBlank(this.record.records))
             return;
         var REC = this.record.records.find(rec => rec.mbl_pkid == _rec.mbl_pkid);
         if (REC == null) {

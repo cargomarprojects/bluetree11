@@ -157,7 +157,10 @@ export class AirExpHouseService {
         });
     }
     RefreshList(_rec: Tbl_cargo_exp_housem) {
-        if (this.record.records == null)
+        if (this.gs.isBlank(this.record))
+        return;
+
+        if (this.gs.isBlank(this.record.records))
             return;
         var REC = this.record.records.find(rec => rec.hbl_pkid == _rec.hbl_pkid);
         if (REC == null) {
