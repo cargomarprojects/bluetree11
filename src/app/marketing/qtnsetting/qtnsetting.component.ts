@@ -43,13 +43,13 @@ export class QtnSettingComponent implements OnInit {
 
   ShowFile(_rec: Tbl_Cargo_Qtnm) {
 
-    let filepath = "Files_Folder\\" + this.gs.FILES_FOLDER + "\\Files\\";
-    let filename: string = "";
-    let filedisplayname: string = "";
-    // //filename = this.gs.FS_APP_FOLDER + this.gs.WWW_FILES_URL + _rec.qtnr_file_id;
-    // filename = this.gs.FS_APP_FOLDER + filepath + _rec.qtnr_file_id;
-    // filedisplayname = _rec.qtnr_file_name;
-    this.Downloadfile(filename, "", filedisplayname);
+    // let filepath = "Files_Folder\\" + this.gs.FILES_FOLDER + "\\Files\\";
+    // let filename: string = "";
+    // let filedisplayname: string = "";
+    // // //filename = this.gs.FS_APP_FOLDER + this.gs.WWW_FILES_URL + _rec.qtnr_file_id;
+    // // filename = this.gs.FS_APP_FOLDER + filepath + _rec.qtnr_file_id;
+    // // filedisplayname = _rec.qtnr_file_name;
+    // this.Downloadfile(filename, "", filedisplayname);
   }
 
   Downloadfile(filename: string, filetype: string, filedisplayname: string) {

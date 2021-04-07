@@ -28,7 +28,9 @@ export class QtnSettingService {
 
     public initlialized: boolean;
     private appid = '';
-
+    MainList: Tbl_Cargo_Qtnm[] = [];
+    
+  
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
@@ -87,6 +89,16 @@ export class QtnSettingService {
         });
     }
 
+    FillMainList(FldId:string,FldName:string)
+    {
+       let RecQtn  = <Tbl_Cargo_Qtnm>{};
+        RecQtn.qtnm_no = FldId;
+        RecQtn.qtnm_to_name = FldName;
+        this.MainList.push(RecQtn)
+    }
+    
+    
+      
 
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Marketing/QtnSetting/List', SearchData, this.gs.headerparam2('authorized'));
