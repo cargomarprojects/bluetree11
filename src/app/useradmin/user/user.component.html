@@ -29,7 +29,7 @@
     </thead>
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of records$ | async">
-        <td (click)="edit(rec)">{{rec.usr_code}}</td>
+        <td class='hlink2' (click)="edit(rec)">{{rec.usr_code}}</td>
         <td>{{rec.usr_name}}</td>
         <td>{{rec.usr_islocked}}</td>
         <td>{{rec.usr_tel}}</td>        

@@ -30,7 +30,7 @@
     </thead>
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of records$ | async">
-        <td (click)="edit(rec)">{{rec.comp_code}}</td>
+        <td class='hlink2' (click)="edit(rec)">{{rec.comp_code}}</td>
         <td>{{rec.comp_name}}</td>
         <td>{{rec.comp_add1}}</td>
         <td>{{rec.comp_add2}}</td>

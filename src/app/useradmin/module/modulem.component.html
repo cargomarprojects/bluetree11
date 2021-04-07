@@ -26,7 +26,7 @@
     </thead>
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of records$ | async">
-        <td (click)="edit(rec)">{{rec.module_name}}</td>
+        <td class='hlink2' (click)="edit(rec)">{{rec.module_name}}</td>
         <td>{{rec.module_order}}</td>
         <td>{{rec.module_installed}}</td>
       </tr>
