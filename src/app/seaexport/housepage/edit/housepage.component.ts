@@ -79,6 +79,7 @@ export class HousePageComponent implements OnInit {
   parentid: string;
   mbl_refno: string;
   type: string;
+  origin:string;
 
   refno: string;
 
@@ -99,6 +100,7 @@ export class HousePageComponent implements OnInit {
       this.mbl_refno = this.route.snapshot.queryParams.refno;
       this.type = this.route.snapshot.queryParams.type;
       this.mode = this.route.snapshot.queryParams.mode;
+      this.origin = this.route.snapshot.queryParams.origin;
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.pkid = options.pkid;
@@ -107,6 +109,7 @@ export class HousePageComponent implements OnInit {
       this.mbl_refno = options.refno;
       this.type = options.type;
       this.mode = options.mode;
+      this.origin = options.origin;
     }
     this.initPage();
     this.actionHandler();
@@ -989,13 +992,15 @@ export class HousePageComponent implements OnInit {
   }
 
   getLink(_mode: string) {
+    
     if (_mode == "LIST")
       return "/Silver.SeaExport.Trans/SeaExpHousePage";
     else
       return null;
+     
   }
   getParam(_mode: string) {
-
+ 
     if (_mode == "LIST") {
       return {
         appid: this.gs.appid,
