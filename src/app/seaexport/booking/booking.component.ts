@@ -171,7 +171,7 @@ export class BookingComponent implements OnInit {
       if (response.retvalue) {
         this.mode = 'EDIT';
         this.errorMessage.push('Save Complete');
-       // alert(this.errorMessage);
+        // alert(this.errorMessage);
       } else {
         this.errorMessage.push(response.error);
         alert(this.errorMessage);
@@ -298,5 +298,19 @@ export class BookingComponent implements OnInit {
     this.location.back();
   }
 
+  getLink(_mode: string) {
+    return "/Silver.SeaExport.Trans/SeaExpMasterEditPage";
+  }
 
+  getParam(_mode: string) {
+    return {
+      appid: this.gs.appid,
+      menuid: this.gs.MENU_SE_MASTER,
+      pkid: this.pkid,
+      type: '',
+      origin: 'seaexp-booking-page',
+      mode: 'EDIT'
+    };
+  }
 }
+ 

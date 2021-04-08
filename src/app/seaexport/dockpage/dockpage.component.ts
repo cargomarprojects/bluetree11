@@ -507,5 +507,18 @@ export class DockPageComponent implements OnInit {
   callbackevent() {
     this.tab = 'main';
   }
+  getLink(_mode: string) {
+    return "/Silver.SeaExport.Trans/SeaExpMasterEditPage";
+  }
 
+  getParam(_mode: string) {
+    return {
+      appid: this.gs.appid,
+      menuid: this.gs.MENU_SE_MASTER,
+      pkid: this.pkid,
+      type: '',
+      origin: 'seaexp-dock-page',
+      mode: 'EDIT'
+    };
+  }
 }
