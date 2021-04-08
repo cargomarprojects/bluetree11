@@ -29,8 +29,8 @@ export class QtnSettingService {
     public initlialized: boolean;
     private appid = '';
     MainList: Tbl_Cargo_Qtnm[] = [];
-    
-  
+
+
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
@@ -76,32 +76,35 @@ export class QtnSettingService {
 
     Search() {
 
-        var SearchData = this.gs.UserInfo;
-        this.List(SearchData).subscribe(response => {
-            this.record.records = response.list;
-            this.mdata$.next(this.record);
-        }, error => {
-            this.record = <QtnmModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
-            this.mdata$.next(this.record);
-        });
+        this.MainList = new Array<Tbl_Cargo_Qtnm>();
+        this.FillMainList("", "QUOTATION AIR");
+        this.FillMainList("AIRMSG1", "Msg 1 (C-Imp)");
+        this.FillMainList("AIRMSG2", "Msg 2 (C-Exp)");
+        this.FillMainList("AIRMSG3", "Msg 3 (A-Exp)");
+        this.FillMainList("", "QUOTATION FCL");
+        this.FillMainList("FCLMSG1", "Msg 1 (C-Imp)");
+        this.FillMainList("FCLMSG2", "Msg 2 (C-Exp)");
+        this.FillMainList("FCLMSG3", "Msg 3 (A-Exp)");
+        this.FillMainList("", "QUOTATION LCL & LOCAL");
+        this.FillMainList("LCLMSG1", "Msg 1 (C-Imp)");
+        this.FillMainList("LCLMSG2", "Msg 2 (C-Exp)");
+        this.FillMainList("LCLMSG3", "Msg 3 (C-Local)");
+        this.FillMainList("LCLMSG4", "Msg 4 (A-Exp)");
+        this.FillMainList("LCLMSG5", "Msg 5 (A-Local)");
+        this.FillMainList("LCLMSG6", "DDU/DDP");
+        this.FillMainList("", "INVOICE FOOTER NOTE");
+        this.FillMainList("INV_FTR_CR_GULF", "Invoice Footer Debit Note");
+        this.FillMainList("INV_FTR_DR_GULF", "Invoice Footer Credit Note");
+
+        this.record.records = this.MainList;
+        this.mdata$.next(this.record);
     }
 
-    FillMainList(FldId:string,FldName:string)
-    {
-       let RecQtn  = <Tbl_Cargo_Qtnm>{};
+    FillMainList(FldId: string, FldName: string) {
+        let RecQtn = <Tbl_Cargo_Qtnm>{};
         RecQtn.qtnm_no = FldId;
         RecQtn.qtnm_to_name = FldName;
         this.MainList.push(RecQtn)
-    }
-    
-    
-      
-
-    List(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Marketing/QtnSetting/List', SearchData, this.gs.headerparam2('authorized'));
     }
 
     GetRecord(SearchData: any) {

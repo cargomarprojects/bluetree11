@@ -15,10 +15,10 @@
                 <th>NAME</th>
             </tr>
         </thead>
-        <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of records$ | async">
+        <tbody class="page-body-tbody" *ngFor="let rec of records$ | async">
+            <tr [style.font-weight]="rec.qtnm_to_name.includes('QUOTATION')||rec.qtnm_to_name.includes('INVOICE')?'bold':'normal'" >
                 <td *ngIf="!(this.mainservice.canEdit)">{{rec.qtnm_to_name}}</td>
-                <td *ngIf="(this.mainservice.canEdit)" class='hlink' (click)="ShowFile(rec)">{{rec.qtnm_to_name}}</td>
+                <td *ngIf="(this.mainservice.canEdit)" class='hlink2' (click)="edit(rec)">{{rec.qtnm_to_name}}</td>
             </tr>
         </tbody>
     </table>

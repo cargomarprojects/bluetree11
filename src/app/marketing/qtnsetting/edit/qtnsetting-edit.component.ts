@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { GlobalService } from '../../../core/services/global.service';
-import { vm_Tbl_Cargo_Qtnd_Lcl,Tbl_Cargo_Qtnm } from '../../models/tbl_cargo_qtnm';
+import { vm_Tbl_Cargo_Qtnm,Tbl_Cargo_Qtnm } from '../../models/tbl_cargo_qtnm';
  import { QtnSettingService } from '../../services/qtnsetting.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class QtnSettingEditComponent implements OnInit {
   record: Tbl_Cargo_Qtnm = <Tbl_Cargo_Qtnm>{};
   menuid: string;
   pkid: string;
-  source: string;
+  subject: string;
   mode: string;
   title: string = '';
   isAdmin: boolean;
@@ -36,6 +36,7 @@ export class QtnSettingEditComponent implements OnInit {
     this.menuid = options.menuid;
     this.pkid = options.pkid;
     this.title = options.title;
+    this.subject = options.subject;
     
     this.initPage();
     this.actionHandler();
@@ -66,11 +67,10 @@ export class QtnSettingEditComponent implements OnInit {
     SearchData.filePath = filePath;
     SearchData.pkid = this.pkid;
     
-
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
         this.record = <Tbl_Cargo_Qtnm>{};
-        this.record.qtnm_subjects = response.remarks;
+        this.record.qtnm_subjects = response.subjects;
      
       }, error => {
         this.errorMessage = this.gs.getError(error);
@@ -100,10 +100,11 @@ export class QtnSettingEditComponent implements OnInit {
     let sPath: string = "";
     sPath = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\quotation\\";
 
-    const saveRecord = <vm_Tbl_Cargo_Qtnd_Lcl>{};
+    const saveRecord = <vm_Tbl_Cargo_Qtnm>{};
     saveRecord.userinfo = this.gs.UserInfo;
-    saveRecord.record = this.record;
-    // saveRecord.filepath = sPath;
+    saveRecord.subject = this.record.qtnm_subjects;
+    saveRecord.filepath = sPath;
+    saveRecord.pkid = this.pkid;
 
     this.mainService.Save(saveRecord)
       .subscribe(response => {
@@ -132,12 +133,13 @@ export class QtnSettingEditComponent implements OnInit {
     //   return bRet;
     // }
 
-    // if (this.gs.isBlank(this.record.remarks)) {
-    //   bRet = false;
-    //   this.errorMessage = "Remarks Cannot be empty";
-    //   alert(this.errorMessage);
-    //   return bRet;
-    // }
+    if (this.gs.isBlank(this.pkid)) {
+      bRet = false;
+      this.errorMessage = "File Name Cannot be blank";
+      alert(this.errorMessage);
+      return bRet;
+    }
+
     return bRet;
   }
 

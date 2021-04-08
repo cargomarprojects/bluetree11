@@ -123,8 +123,8 @@ export interface vm_Tbl_Cargo_Qtnd_Lcl {
     mode: string;
     pkid: string;
     record: Tbl_Cargo_Qtnm;
-    records: Tbl_Cargo_Qtnd_Lcl[]
-    userinfo: any,
+    records: Tbl_Cargo_Qtnd_Lcl[];
+    userinfo: any;
     filter: any;
     historys: Tbl_Cargo_Qtnd_Lcl[];
 }
@@ -133,8 +133,8 @@ export interface vm_Tbl_Cargo_Qtnd_Fcl {
     mode: string;
     pkid: string;
     record: Tbl_Cargo_Qtnm;
-    records: Tbl_Cargo_Qtnd_Fcl[]
-    userinfo: any,
+    records: Tbl_Cargo_Qtnd_Fcl[];
+    userinfo: any;
     filter: any;
 }
 
@@ -142,8 +142,16 @@ export interface vm_Tbl_Cargo_Qtnd_Air {
     mode: string;
     pkid: string;
     record: Tbl_Cargo_Qtnm;
-    records: Tbl_Cargo_Qtnd_Air[]
-    userinfo: any,
+    records: Tbl_Cargo_Qtnd_Air[];
+    userinfo: any;
+    filter: any;
+}
+export interface vm_Tbl_Cargo_Qtnm {
+    mode: string;
+    pkid: string;
+    subject:string;
+    filepath:string;
+    userinfo: any;
     filter: any;
 }
 
@@ -160,5 +168,5 @@ export interface QtnmModel {
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
-    records: Tbl_Cargo_Qtnm[]
+    records: Tbl_Cargo_Qtnm[];
 }

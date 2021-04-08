@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { GlobalService } from '../../core/services/global.service';
 import { Tbl_Cargo_Qtnm } from '../models/tbl_cargo_qtnm';
- 
+
 import { QtnSettingService } from '../services/qtnsetting.service';
 
 @Component({
@@ -35,8 +35,8 @@ export class QtnSettingComponent implements OnInit {
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errormessage));
   }
- 
-   
+
+
   Close() {
     this.location.back();
   }
@@ -56,4 +56,26 @@ export class QtnSettingComponent implements OnInit {
     this.gs.DownloadFile(this.gs.FS_APP_FOLDER, filename, filetype, filedisplayname);
   }
 
+  edit(_record: Tbl_Cargo_Qtnm) {
+
+    if (this.gs.isBlank(_record.qtnm_no)) {
+      alert('Cannot View/Edit This Row')
+      return;
+    }
+
+    if (!this.mainservice.canEdit) {
+      alert('Insufficient User Rights')
+      return;
+    }
+
+    let parameter = {
+      menuid: this.mainservice.menuid,
+      pkid: _record.qtnm_no,
+      subject: _record.qtnm_to_name,
+      title: this.mainservice.title,
+      origin: 'qtnsetting-page',
+      mode: 'EDIT'
+    };
+    this.gs.Naviagete('Silver.Marketing.Quotation/QuotationSettingEditPage', JSON.stringify(parameter));
+  }
 }
