@@ -26,7 +26,7 @@ export class MessengerSlipListComponent implements OnInit {
   canEdit: boolean;
   canSave: boolean;
 
-
+  origin: string;
   records: Tbl_cargo_slip[]
   is_locked: boolean = false;
 
@@ -45,6 +45,7 @@ export class MessengerSlipListComponent implements OnInit {
     this.mbl_refno = options.mbl_refno;
     this.mbl_mode = options.mbl_mode;
     this.is_locked = options.is_locked;
+    this.origin = options.origin;
 
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
@@ -81,7 +82,7 @@ export class MessengerSlipListComponent implements OnInit {
       mbl_pkid: this.mbl_pkid,
       mbl_refno: this.mbl_refno,
       mbl_mode: this.mbl_mode,
-      is_locked:this.is_locked
+      is_locked: this.is_locked
     };
     this.gs.Naviagete('Silver.Other.Trans/MessengerSlipEdit', JSON.stringify(parameter));
 
@@ -100,7 +101,7 @@ export class MessengerSlipListComponent implements OnInit {
       mbl_pkid: this.mbl_pkid,
       mbl_refno: this.mbl_refno,
       mbl_mode: this.mbl_mode,
-      is_locked:this.is_locked
+      is_locked: this.is_locked
     };
     this.gs.Naviagete('Silver.Other.Trans/MessengerSlipEdit', JSON.stringify(parameter));
   }
@@ -108,4 +109,23 @@ export class MessengerSlipListComponent implements OnInit {
   Close() {
     this.location.back();
   }
+
+  getLink(_mode: string) {
+    if (this.origin == "seaexp-master-page")
+      return "/Silver.SeaExport.Trans/SeaExpMasterEditPage";
+  }
+
+  getParam(_mode: string) {
+    if (this.origin == "seaexp-master-page") {
+      return {
+        appid: this.gs.appid,
+        menuid: this.gs.MENU_SE_MASTER,
+        pkid: this.mbl_pkid,
+        type: '',
+        origin: 'seaexp-messenger-list-page',
+        mode: 'EDIT'
+      };
+    }
+  }
+
 }

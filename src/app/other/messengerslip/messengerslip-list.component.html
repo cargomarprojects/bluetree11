@@ -2,7 +2,8 @@
     <div class="row align-items-center justify-content-left p-1">
         <label class="mr-3">{{title}}</label>
         <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
-        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        <button *ngIf="origin != 'seaexp-master-page'"  class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        <a  *ngIf="origin == 'seaexp-master-page'" class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('EDIT')" [queryParams]="getParam('EDIT')">Return</a>
     </div>
 </div>
 
