@@ -4,10 +4,10 @@
     <div class="row  align-items-center justify-content-left p-1">
       <label class="mr-3">{{title}} ({{mode}})</label>
       <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button> -->
-      
-      <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" [routerLink]="getLink('ADD')" [queryParams]="getParam()">New</a>
+      <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" [routerLink]="getLink('ADD')" [queryParams]="getParam(null,'ADD')">New</a>
 
-      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+      <!-- <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button> -->
+      <a class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('LIST')" [queryParams]="getParam(null,'LIST')">Return</a>
       <label class="text-danger" *ngIf="is_locked">LOCKED</label>
     </div>
 

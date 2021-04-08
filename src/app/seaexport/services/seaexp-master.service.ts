@@ -93,7 +93,7 @@ export class seaexpMasterService {
 
         this.id = params.id;
         this.menuid = params.id;
-        this.param_type = params.param_type;
+        this.param_type = params.menu_param;
 
         this.record = <seaExpMasterModel>{
             sortcol : 'mbl_refno',

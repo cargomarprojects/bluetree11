@@ -121,10 +121,10 @@ export class SeaexpMasterEditComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    
+
     if (!this.gs.isBlank(this.mbl_ref_date_field))
       this.mbl_ref_date_field.Focus();
-    
+
   }
   private initPage() {
     this.isAdmin = this.gs.IsAdmin(this.menuid);
@@ -232,10 +232,10 @@ export class SeaexpMasterEditComponent implements OnInit {
     if (this.gs.PARAM_COO_FORMAT_BLANK.length > 0) {
       this.record.mbl_cooformat_id = this.gs.PARAM_COO_FORMAT_BLANK[0].code;
     }
-    
+
     if (!this.gs.isBlank(this.mbl_ref_date_field))
       this.mbl_ref_date_field.Focus();
-    
+
   }
 
   GetRecord() {
@@ -729,12 +729,12 @@ export class SeaexpMasterEditComponent implements OnInit {
   }
 
 
-  BtnNavigation2(action: string, _type : string ,  attachmodal: any = null) {
-    if ( action == "ARAP") {
-        if (_type == "L")
-          return '/Silver.USAccounts.Trans/InvoicePage';
-        if (_type == 'P' )
-          return  { appid : this.gs.appid, menuid: this.gs.MENU_SE_MASTER_ARAP,mbl_pkid: this.pkid,mbl_refno: this.record.mbl_refno,mbl_type: 'OE',origin: 'seaexp-master-page'};
+  BtnNavigation2(action: string, _type: string, attachmodal: any = null) {
+    if (action == "ARAP") {
+      if (_type == "L")
+        return '/Silver.USAccounts.Trans/InvoicePage';
+      if (_type == 'P')
+        return { appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER_ARAP, mbl_pkid: this.pkid, mbl_refno: this.record.mbl_refno, mbl_type: 'OE', origin: 'seaexp-master-page' };
     }
   }
 
@@ -995,18 +995,32 @@ export class SeaexpMasterEditComponent implements OnInit {
   }
 
   getLink(_mode: string) {
-    return "/Silver.SeaExport.Trans/SeaExpMasterEditPage";
+    if (_mode == "LIST")
+      return "/Silver.SeaExport.Trans/SeaExpMasterPage";
+    else
+      return "/Silver.SeaExport.Trans/SeaExpMasterEditPage";
   }
-  getParam(_record: Tbl_cargo_exp_masterm = null) {
-    return {
-      appid: this.gs.appid,
-      menuid: this.menuid,
-      pkid: '',
-      type: '',
-      origin: 'seaexp-master-page',
-      mode: 'ADD',
-      rnd: this.gs.getRandomInt()
-    };
+  getParam(_record: Tbl_cargo_exp_masterm = null, _mode: string = "") {
+
+    if (_mode == "LIST") {
+      return {
+        appid: this.gs.appid,
+        id: this.gs.MENU_SE_MASTER,
+        menu_param: '',
+        origin: 'seaexp-master-page',
+        rnd: this.gs.getRandomInt()
+      };
+    } else {
+      return {
+        appid: this.gs.appid,
+        menuid: this.menuid,
+        pkid: '',
+        type: '',
+        origin: 'seaexp-master-page',
+        mode: 'ADD',
+        rnd: this.gs.getRandomInt()
+      };
+    }
   }
 
 }
