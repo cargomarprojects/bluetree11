@@ -2,7 +2,8 @@
   <div class="page-header">
     <div class="row align-items-center justify-content-left p-1">
       <label class="pr-1">{{title}} ({{mode}}) </label>
-      <button #_btnret class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+      <!-- <button #_btnret class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button> -->
+      <a #_btnret class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('LIST')" [queryParams]="getParam('LIST')">Return</a>
       <label class="text-danger" *ngIf="is_locked">LOCKED</label>
     </div>
   </div>

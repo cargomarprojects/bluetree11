@@ -43,7 +43,7 @@ export class HousePageComponent implements OnInit {
   cntr_seal_hrzprint: boolean = true;
   bl_backside: boolean = false;
   bl_colour: boolean = true;
-  bl_format_for:string='AS AGENT';
+  bl_format_for: string = 'AS AGENT';
 
   record: Tbl_cargo_exp_housem = <Tbl_cargo_exp_housem>{};
   records: Tbl_cargo_exp_desc[] = [];
@@ -649,8 +649,8 @@ export class HousePageComponent implements OnInit {
       this.errorMessage.push("Unit of packages cannot be blank");
       bret = false;
     }
-   
-     this.cntrs.forEach(Rec => {
+
+    this.cntrs.forEach(Rec => {
       if (Rec.cntr_no.toString().trim().length < 11) {
         this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) Invalid ");
         bret = false;
@@ -660,7 +660,7 @@ export class HousePageComponent implements OnInit {
         bret = false;
       }
     })
-    
+
 
     if (!bret)
       alert('Error While Saving');
@@ -988,5 +988,24 @@ export class HousePageComponent implements OnInit {
     this.tab = 'main';
   }
 
+  getLink(_mode: string) {
+    if (_mode == "LIST")
+      return "/Silver.SeaExport.Trans/SeaExpHousePage";
+    else
+      return null;
+  }
+  getParam(_mode: string) {
+
+    if (_mode == "LIST") {
+      return {
+        appid: this.gs.appid,
+        id: this.gs.MENU_SE_HOUSE,
+        menu_param: '',
+        origin: 'seaexp-house-page',
+        rnd: this.gs.getRandomInt()
+      };
+    } else
+      return null;
+  }
 
 }
