@@ -53,7 +53,7 @@ export class HousePageComponent implements OnInit {
   cntrs: Tbl_cargo_exp_container[] = [];
 
   ShipmentType: string = '';
-  @ViewChild('_btnret') btnret_ctrl: ElementRef;
+  // @ViewChild('_btnret') btnret_ctrl: ElementRef;
   @ViewChild('_hbl_shipper_code') hbl_shipper_code_ctrl: AutoComplete2Component;
   @ViewChild('_hbl_shipper_name') hbl_shipper_name_ctrl: InputBoxComponent;
   @ViewChild('hbl_shipment_stage') hbl_shipment_stage_field: ElementRef;
@@ -319,8 +319,8 @@ export class HousePageComponent implements OnInit {
 
         // if (!this.gs.isBlank(this.hbl_shipper_code_ctrl))
         //   this.hbl_shipper_code_ctrl.Focus();
-        if (!this.gs.isBlank(this.btnret_ctrl))
-          this.btnret_ctrl.nativeElement.focus();
+        // if (!this.gs.isBlank(this.btnret_ctrl))
+        //   this.btnret_ctrl.nativeElement.focus();
 
 
       }, error => {
