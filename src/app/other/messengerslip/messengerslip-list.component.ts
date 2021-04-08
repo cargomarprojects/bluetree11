@@ -107,25 +107,11 @@ export class MessengerSlipListComponent implements OnInit {
   }
 
   Close() {
-    this.location.back();
-  }
 
-  getLink(_mode: string) {
-    if (this.origin == "seaexp-master-page")
-      return "/Silver.SeaExport.Trans/SeaExpMasterEditPage";
-  }
-
-  getParam(_mode: string) {
-    if (this.origin == "seaexp-master-page") {
-      return {
-        appid: this.gs.appid,
-        menuid: this.gs.MENU_SE_MASTER,
-        pkid: this.mbl_pkid,
-        type: '',
-        origin: 'seaexp-messenger-list-page',
-        mode: 'EDIT'
-      };
-    }
+    if (this.origin == 'seaexp-master-page')
+      this.gs.LinkReturn(this.origin, this.mbl_pkid, '');
+    else
+      this.location.back();
   }
 
 }
