@@ -78,7 +78,7 @@ export class HousePageListComponent implements OnInit {
       mode: 'EDIT',
       refno:_record.mbl_refno
     };
-    this.gs.Naviagete('Silver.SeaExport.Trans/SeaExpHouseEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete('Silver.SeaExport.Trans/SeaExpHouseEditPage', JSON.stringify(parameter)); 
   }
 
   editmaster(_record: Tbl_cargo_exp_housem) {
