@@ -1105,6 +1105,7 @@ export class SeaImpMasterEditComponent implements OnInit {
       return {
         appid: this.gs.appid,
         id: this.gs.MENU_SI_MASTER,
+        menuid: this.gs.MENU_SI_MASTER,
         menu_param: '',
         origin: 'seaimp-master-page',
         rnd: this.gs.getRandomInt()
