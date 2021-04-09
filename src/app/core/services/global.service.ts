@@ -3117,7 +3117,10 @@ export class GlobalService {
         mode: 'EDIT'
       };
 
-      this.Naviagete(url, JSON.stringify(parameter));
+      //this.Naviagete(url, JSON.stringify(parameter));
+
+      this.router.navigate( [url], { queryParams: parameter });
+
     } else {
       alert('Insufficient User Rights')
       return;
