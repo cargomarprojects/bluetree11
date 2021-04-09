@@ -1091,7 +1091,37 @@ export class SeaImpMasterEditComponent implements OnInit {
   CloseModal() {
     this.modal.close();
   }
-}
 
+  getLink(_mode: string) {
+    if (_mode == "LIST")
+      return "/Silver.SeaImport/SeaImpMasterPage";
+    else
+      return "/Silver.SeaImport/SeaImpMasterEditPage";
+  }
+
+  getParam(_mode: string = "") {
+
+    if (_mode == "LIST") {
+      return {
+        appid: this.gs.appid,
+        id: this.gs.MENU_SI_MASTER,
+        menu_param: '',
+        origin: 'seaimp-master-page',
+        rnd: this.gs.getRandomInt()
+      };
+    } else {
+      return {
+        appid: this.gs.appid,
+        menuid: this.menuid,
+        pkid: '',
+        type: this.mainService.param_type,
+        origin: 'seaimp-master-page',
+        mode: 'ADD',
+        rnd: this.gs.getRandomInt()
+      };
+    }
+  }
+
+}
 
 
