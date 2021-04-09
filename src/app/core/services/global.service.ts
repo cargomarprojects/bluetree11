@@ -3032,7 +3032,7 @@ export class GlobalService {
     }
   }
 
-  public LinkReturn(origin: string = "", mblid: string = "", stype: string = "", refno: string = "") {
+  public LinkReturn(origin: string = "", mblid: string = "", stype: string = "") {
 
     let url = '';
     let menuid = '';

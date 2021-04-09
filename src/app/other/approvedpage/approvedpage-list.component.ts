@@ -27,6 +27,7 @@ export class ApprovedPageListComponent implements OnInit {
   canAdd: boolean;
   canEdit: boolean;
   canSave: boolean;
+  origin: string;
 
   tab: string = 'main';
   attach_pkid: string = "";
@@ -51,6 +52,7 @@ export class ApprovedPageListComponent implements OnInit {
     this.mbl_refno = options.mbl_refno;
     this.doc_type = options.doc_type;
     this.req_type = options.req_type;
+    this.origin = options.origin;
     this.is_locked = options.is_locked;
 
     this.isAdmin = this.gs.IsAdmin(this.menuid);
@@ -115,7 +117,10 @@ export class ApprovedPageListComponent implements OnInit {
   }
 
   Close() {
-    this.location.back();
+    if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
+      this.gs.LinkReturn(this.origin, this.mbl_pkid, '');
+    else
+      this.location.back();
   }
 
   AttachRow(_rec: Tbl_Cargo_Approved) {

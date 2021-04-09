@@ -46,6 +46,7 @@ export class OthTrackingPageComponent implements OnInit {
   attach_pkid: string = "";
   attach_typelist: any = {};
   modal: any;
+  origin: string;
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -69,6 +70,7 @@ export class OthTrackingPageComponent implements OnInit {
     this.hideTracking = options.hideTracking;
     this.oprgrp = options.oprgrp;
     this.refno = options.refno;
+    this.origin = options.origin;
     this.is_locked = options.is_locked;
     // this.mode = 'ADD';
     this.parentTypememo = this.parentType + "-MEMO";
@@ -185,6 +187,9 @@ export class OthTrackingPageComponent implements OnInit {
 
 
   Close() {
+    if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
+    this.gs.LinkReturn(this.origin, this.pkid, '');
+  else
     this.location.back();
   }
   OnChange(field: string) {

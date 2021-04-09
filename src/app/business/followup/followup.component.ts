@@ -263,7 +263,10 @@ export class FollowupComponent implements OnInit {
 
 
   Close() {
-    this.location.back();
+    if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
+      this.gs.LinkReturn(this.origin, this.cf_masterid, '');
+    else
+      this.location.back();
   }
 
   RemoveRow(_rec: Table_Cargo_Followup) {
