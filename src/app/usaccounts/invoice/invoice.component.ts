@@ -40,21 +40,21 @@ export class InvoiceComponent implements OnInit {
   MBL_PROFIT_REQ: boolean = false;
   MBL_LOSS_MEMO: string = '';
   inv_verson: string = "9";
-
+  origin: string;
   records: Tbl_cargo_invoicem[]
 
   constructor(
     private route: ActivatedRoute,
-    private router : Router,
+    private router: Router,
     private location: Location,
     public gs: GlobalService,
     public mainservice: invoiceService
   ) { }
 
   ngOnInit() {
-    if ( this.route.snapshot.queryParams.parameter == null)
+    if (this.route.snapshot.queryParams.parameter == null)
       this.init(this.route.snapshot.queryParams);
-    else   
+    else
       this.init(this.route.snapshot.queryParams.parameter);
 
     this.List('SCREEN');
@@ -72,6 +72,7 @@ export class InvoiceComponent implements OnInit {
     this.mbl_pkid = options.mbl_pkid;
     this.id = this.mbl_pkid;
     this.mbl_refno = options.mbl_refno;
+    this.origin = options.origin;
     this.showdeleted = false;
 
 
@@ -125,7 +126,7 @@ export class InvoiceComponent implements OnInit {
 
     this.errorMessage = '';
     this.mainservice.MasterLoss_Status_Save(SearchData).subscribe(response => {
-       alert('Update Complete');
+      alert('Update Complete');
     }, error => {
       alert(this.gs.getError(error));
     });
@@ -175,7 +176,7 @@ export class InvoiceComponent implements OnInit {
     }
 
     let parameter = {
-      appid : this.gs.appid,
+      appid: this.gs.appid,
       menuid: this.menuid,
       pkid: '',
       mode: 'ADD',
@@ -186,14 +187,14 @@ export class InvoiceComponent implements OnInit {
       arrival_notice: '',
       origin: 'invoice-list-page',
     };
-    this.router.navigate(['Silver.USAccounts.Trans/InvoiceEditPage'], { queryParams: parameter});
+    this.router.navigate(['Silver.USAccounts.Trans/InvoiceEditPage'], { queryParams: parameter });
   }
   edit(_record: Tbl_cargo_invoicem) {
     if (!this.canEdit) {
       alert('Insufficient User Rights')
       return;
     }
- 
+
     if (_record.inv_cust_name == "***") {
       if (_record.rec_created_by != this.gs.user_code) {
         alert("Cannot Load Details");
@@ -213,19 +214,19 @@ export class InvoiceComponent implements OnInit {
       arrival_notice: '',
       origin: 'invoice-list-page',
     };
-    this.router.navigate(['Silver.USAccounts.Trans/InvoiceEditPage'], { queryParams: parameter});
+    this.router.navigate(['Silver.USAccounts.Trans/InvoiceEditPage'], { queryParams: parameter });
   }
 
 
-  removeRow(rec : Tbl_cargo_invoicem ){
-    
-    var remarks = "Delete Invoice " +  rec.inv_no;
-    if ( rec.rec_deleted  == "Y" && this.isAdmin)
+  removeRow(rec: Tbl_cargo_invoicem) {
+
+    var remarks = "Delete Invoice " + rec.inv_no;
+    if (rec.rec_deleted == "Y" && this.isAdmin)
       remarks += " Permanently."
 
-    if ( !confirm(remarks))
-      return; 
-      
+    if (!confirm(remarks))
+      return;
+
 
     var SearchData = this.gs.UserInfo;
     SearchData.pkid = rec.inv_pkid;
@@ -235,20 +236,23 @@ export class InvoiceComponent implements OnInit {
 
     this.mainservice.DeletRecord(SearchData).subscribe(response => {
       if (rec.rec_deleted == "Y" && this.isAdmin)
-        this.records.splice( this.records.findIndex( r => r.inv_pkid == rec.inv_pkid),1 );
+        this.records.splice(this.records.findIndex(r => r.inv_pkid == rec.inv_pkid), 1);
       else
         rec.rec_deleted = "Y";
     }, error => {
       this.errorMessage = this.gs.getError(error);
-      alert( this.errorMessage);
+      alert(this.errorMessage);
     });
-  
+
   }
 
 
 
   Close() {
-    this.location.back();
+    if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
+      this.gs.LinkReturn(this.origin, this.mbl_pkid, '');
+    else
+      this.location.back();
   }
 
 
