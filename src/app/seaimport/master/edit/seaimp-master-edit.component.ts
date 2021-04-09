@@ -897,6 +897,7 @@ export class SeaImpMasterEditComponent implements OnInit {
         let prm = {
           menuid: this.gs.MENU_SI_MASTER_DELIVERY_ORDER,
           pkid: this.pkid,
+          parentid:'',
           origin: 'seaimp-master-page',
           is_locked: this.is_locked
         };

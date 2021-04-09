@@ -1624,6 +1624,7 @@ export class SeaImpHouseEditComponent implements OnInit {
         let prm = {
           menuid: this.gs.MENU_SI_HOUSE_DELIVERY_ORDER,
           pkid: this.pkid,
+          parentid: this.parentid,
           origin: 'seaimp-House-page',
           is_locked: this.is_locked,
         };

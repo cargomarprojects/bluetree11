@@ -45,6 +45,7 @@ export class SeaImpCargoPickupComponent implements OnInit {
   selectdeselect: boolean = false;
   errorMessage: string;
   IsLocked: boolean = false;
+  parentid:string;
 
   constructor(
     private router: Router,
@@ -60,6 +61,8 @@ export class SeaImpCargoPickupComponent implements OnInit {
     this.menuid = options.menuid;
     this.origin = options.origin;
     this.IsLocked = options.is_locked;
+    this.parentid= options.parentid;
+
     this.mode = 'EDIT';
     this.initPage();
     this.actionHandler();
@@ -790,17 +793,34 @@ export class SeaImpCargoPickupComponent implements OnInit {
     this.tab = 'main';
   }
   getLink(_mode: string) {
-    return "/Silver.SeaImport/SeaImpMasterEditPage";
+    if (this.origin == "seaimp-master-page")
+      return "/Silver.SeaImport/SeaImpMasterEditPage";
+    else
+      return "/Silver.SeaImport/SeaImpHouseEditPage";
   }
 
   getParam(_mode: string) {
-    return {
-      appid: this.gs.appid,
-      menuid: this.gs.MENU_SI_MASTER,
-      pkid: this.pkid,
-      type: '',
-      origin: 'seaexp-master-page',
-      mode: 'EDIT'
-    };
+    if (this.origin == "seaimp-master-page") {
+      return {
+        appid: this.gs.appid,
+        menuid: this.gs.MENU_SI_MASTER,
+        pkid: this.pkid,
+        type: '',
+        origin: 'seaimp-master-page',
+        mode: 'EDIT'
+      };
+    } else {
+      return {
+        appid: this.gs.appid,
+        menuid: this.gs.MENU_SI_HOUSE,
+        pkid: this.pkid,
+        parentid:this.parentid,
+        type: '',
+        origin: 'seaimp-house-page',
+        mode: 'EDIT'
+      };
+    }
   }
 }
+
+ 
