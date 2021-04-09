@@ -170,7 +170,7 @@ export class DevanComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
-                     this.errorMessage = 'Save Complete';
+                    this.errorMessage = 'Save Complete';
                     // alert(this.errorMessage);
                 }
             }, error => {
@@ -287,4 +287,18 @@ export class DevanComponent implements OnInit {
         this.tab = 'main';
     }
 
+    getLink(_mode: string) {
+        return "/Silver.SeaImport/SeaImpMasterEditPage";
+    }
+
+    getParam(_mode: string) {
+        return {
+            appid: this.gs.appid,
+            menuid: this.gs.MENU_SI_MASTER,
+            pkid: this.pkid,
+            type: '',
+            origin: 'seaexp-master-page',
+            mode: 'EDIT'
+        };
+    }
 }

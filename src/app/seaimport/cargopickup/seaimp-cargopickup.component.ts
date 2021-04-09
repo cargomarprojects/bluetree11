@@ -86,8 +86,7 @@ export class SeaImpCargoPickupComponent implements OnInit {
     if (this.mode == 'ADD') {
       this.record = <Tbl_cargo_imp_pickup>{};
       //this.cntrrecords = <Tbl_cargo_imp_container[]>[];
-      if(!this.gs.isBlank(this.cntrrecords))
-      {
+      if (!this.gs.isBlank(this.cntrrecords)) {
         this.SelectDeselect();//To set Deafault Tick in cntrlist
       }
       this.init();
@@ -790,5 +789,18 @@ export class SeaImpCargoPickupComponent implements OnInit {
   callbackevent(event: any) {
     this.tab = 'main';
   }
+  getLink(_mode: string) {
+    return "/Silver.SeaImport/SeaImpMasterEditPage";
+  }
 
+  getParam(_mode: string) {
+    return {
+      appid: this.gs.appid,
+      menuid: this.gs.MENU_SI_MASTER,
+      pkid: this.pkid,
+      type: '',
+      origin: 'seaexp-master-page',
+      mode: 'EDIT'
+    };
+  }
 }
