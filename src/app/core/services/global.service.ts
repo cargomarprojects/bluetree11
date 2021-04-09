@@ -3050,7 +3050,7 @@ export class GlobalService {
     //   menuid = this.MENU_SE_MASTER;
     //   url = 'Silver.SeaExport.Trans/SeaExpMasterEditPage';
     // }
-    // else if (origin == "OI") {
+    // else if (origin == "seaimp-master-page") {
     //   menuid = this.MENU_SI_MASTER;
     //   url = 'Silver.SeaImport/SeaImpMasterEditPage';
     // }
@@ -3087,6 +3087,21 @@ export class GlobalService {
       menuid = this.MENU_SE_MASTER;
       url = 'Silver.SeaExport.Trans/SeaExpMasterEditPage';
     }
+    else if (origin == "seaimp-master-page") {
+      menuid = this.MENU_SI_MASTER;
+      url = 'Silver.SeaImport/SeaImpMasterEditPage';
+    }
+    else if (origin == "airexp-master-page") {
+      menuid = this.MENU_AE_MASTER;
+      url = 'Silver.AirExport.Trans/AirExpMasterEditPage';
+    }
+    else if (origin == "airimp-master-page") {
+      menuid = this.MENU_AI_MASTER;
+      url = 'Silver.AirImport.Trans/AirImpMasterEditPage';
+    } else if (origin == "other-general-page") {
+        menuid = this.MENU_OT_OPERATION;
+        url = 'Silver.Other.Trans/OthGeneralEditPage'
+      }
     else {
       // alert("Cannot Load Details");
       return;
@@ -3097,7 +3112,7 @@ export class GlobalService {
         appid: this.appid,
         menuid: menuid,
         pkid: mblid,
-        type: '',
+        type: stype,
         origin: origin,
         mode: 'EDIT'
       };
