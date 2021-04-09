@@ -572,7 +572,7 @@ export class CertOrgPageComponent implements OnInit {
       menuid: this.gs.MENU_SE_MASTER,
       pkid: this.pkid,
       type: '',
-      origin: 'seaexp-certorg-page',
+      origin: 'seaexp-master-page',
       mode: 'EDIT'
     };
   }

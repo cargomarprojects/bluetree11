@@ -1012,7 +1012,7 @@ export class HousePageComponent implements OnInit {
           menuid: this.gs.MENU_SE_MASTER,
           pkid: this.parentid,
           type: '',
-          origin: origin,
+          origin: this.origin,
           mode: 'EDIT',
           rnd: this.gs.getRandomInt()
         };
