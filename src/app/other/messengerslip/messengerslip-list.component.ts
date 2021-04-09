@@ -107,12 +107,10 @@ export class MessengerSlipListComponent implements OnInit {
   }
 
   Close() {
-
-    this.gs.LinkReturn(this.origin, this.mbl_pkid, this.mbl_mode);
-    // if (this.origin == 'seaexp-master-page')
-    //   this.gs.LinkReturn(this.origin, this.mbl_pkid, '');
-    // else
-    //   this.location.back();
+    if (origin == "seaexp-master-page" || origin == "seaimp-master-page" || origin == "airexp-master-page" || origin == "airimp-master-page" || origin == "other-general-page")
+      this.gs.LinkReturn(this.origin, this.mbl_pkid, this.mbl_mode);
+    else
+      this.location.back();
   }
 
 }

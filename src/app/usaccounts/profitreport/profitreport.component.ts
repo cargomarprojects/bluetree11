@@ -54,14 +54,14 @@ export class ProfitReportComponent implements OnInit {
   CBM: number = 0;
 
   radio_cbm: string = 'CBM';
+  origin: string;
 
-
-  filename : string ;
-  filetype  : string ;
-  filedisplayname  : string ;
-  filename2 : string ;
-  filetype2  : string ;
-  filedisplayname2  : string ;
+  filename: string;
+  filetype: string;
+  filedisplayname: string;
+  filename2: string;
+  filetype2: string;
+  filedisplayname2: string;
 
   tab: string = 'main';
 
@@ -88,6 +88,7 @@ export class ProfitReportComponent implements OnInit {
     this.mbl_pkid = options.mbl_pkid;
     this.id = this.mbl_pkid;
     this.mbl_refno = options.mbl_refno;
+    this.origin = options.origin;
     this.showdeleted = false;
 
     this.isAdmin = this.gs.IsAdmin(this.menuid);
@@ -110,7 +111,7 @@ export class ProfitReportComponent implements OnInit {
       SearchData.REP_BASEDON = '';
 
 
-     this.mainservice.ProfitReport(SearchData).subscribe(response => {
+    this.mainservice.ProfitReport(SearchData).subscribe(response => {
 
       this.records = response.list;
       this.refno = response.record.mbl_refno;
@@ -151,11 +152,11 @@ export class ProfitReportComponent implements OnInit {
   }
 
 
-
   Close() {
-    this.location.back();
+    if (origin == "seaexp-master-page" || origin == "seaimp-master-page" || origin == "airexp-master-page" || origin == "airimp-master-page" || origin == "other-general-page")
+      this.gs.LinkReturn(this.origin, this.mbl_pkid, '');
+    else
+      this.location.back();
   }
-
-
 
 }
