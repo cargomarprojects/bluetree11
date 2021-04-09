@@ -35,7 +35,8 @@ export class PaymentReqComponent implements OnInit {
   isAdmin: boolean;
   errorMessage: string;
   is_locked: boolean = false;
-
+  origin: string;
+  
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -51,6 +52,7 @@ export class PaymentReqComponent implements OnInit {
     this.cp_source = options.cp_source;
     this.cp_mode = options.cp_mode;
     this.cp_ref_no = options.cp_ref_no;
+    this.origin = options.origin;
     this.is_locked = options.is_locked;
     this.mode = 'ADD';
     this.initPage();
@@ -250,7 +252,10 @@ export class PaymentReqComponent implements OnInit {
 
 
   Close() {
-    this.location.back();
+    if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
+      this.gs.LinkReturn(this.origin, this.cp_master_id, '');
+    else
+      this.location.back();
   }
 
   SelectInvoice(_rec: Table_Cargo_Payrequest) {
