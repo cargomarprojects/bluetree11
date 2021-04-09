@@ -1950,6 +1950,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           return {
             appid: this.gs.appid,
             id: this.gs.MENU_SI_HOUSE,
+            menuid: this.gs.MENU_SI_HOUSE,
             menu_param: '',
             origin: 'seaimp-house-page',
             rnd: this.gs.getRandomInt()

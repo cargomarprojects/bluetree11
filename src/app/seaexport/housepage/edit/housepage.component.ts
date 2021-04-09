@@ -1020,6 +1020,7 @@ export class HousePageComponent implements OnInit {
         return {
           appid: this.gs.appid,
           id: this.gs.MENU_SE_HOUSE,
+          menuid: this.gs.MENU_SE_HOUSE,
           menu_param: '',
           origin: 'seaexp-house-page',
           rnd: this.gs.getRandomInt()
