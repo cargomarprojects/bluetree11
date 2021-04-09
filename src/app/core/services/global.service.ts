@@ -3032,7 +3032,7 @@ export class GlobalService {
     }
   }
 
-  public LinkReturn(origin: string = "", mblid: string = "", stype: string = "") {
+  public LinkReturn(origin: string = "", pkid: string = "", stype: string = "") {
 
     let url = '';
     let menuid = '';
@@ -3111,7 +3111,7 @@ export class GlobalService {
       let parameter = {
         appid: this.appid,
         menuid: menuid,
-        pkid: mblid,
+        pkid: pkid,
         type: stype,
         origin: origin,
         mode: 'EDIT'

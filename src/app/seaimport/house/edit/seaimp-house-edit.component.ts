@@ -91,7 +91,7 @@ export class SeaImpHouseEditComponent implements OnInit {
 
   TelexRlsList: any[] = [];
   PaidStatusList: any[] = [];
-
+  origin: string;
   is_locked: boolean = false;
 
   constructor(
@@ -113,12 +113,14 @@ export class SeaImpHouseEditComponent implements OnInit {
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.mode = this.route.snapshot.queryParams.mode;
       this.parentid = this.route.snapshot.queryParams.parentid;
+      this.origin = this.route.snapshot.queryParams.origin;
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.pkid = options.pkid;
       this.menuid = options.menuid;
       this.mode = options.mode;
       this.parentid = options.parentid;
+      this.origin = options.origin;
     }
     this.closeCaption = 'Return';
     this.initPage();
@@ -1919,4 +1921,41 @@ export class SeaImpHouseEditComponent implements OnInit {
         });
     }*/
 
+    getLink(_mode: string) {
+
+      if (_mode == "LIST") {
+        if (this.origin == 'seaimp-master-page')
+          return "/Silver.SeaImport/SeaImpMasterEditPage";
+        else
+          return "/Silver.SeaImport/SeaImpHousePage";
+      }
+      else
+        return null;
+  
+    }
+    getParam(_mode: string) {
+  
+      if (_mode == "LIST") {
+        if (this.origin == 'seaimp-master-page') {
+          return {
+            appid: this.gs.appid,
+            menuid: this.gs.MENU_SI_MASTER,
+            pkid: this.parentid,
+            type: '',
+            origin: this.origin,
+            mode: 'EDIT',
+            rnd: this.gs.getRandomInt()
+          };
+         } else {
+          return {
+            appid: this.gs.appid,
+            id: this.gs.MENU_SI_HOUSE,
+            menu_param: '',
+            origin: 'seaimp-house-page',
+            rnd: this.gs.getRandomInt()
+          };
+        }
+      } else
+        return null;
+    }
 }
