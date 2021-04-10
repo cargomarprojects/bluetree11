@@ -10,6 +10,8 @@ import { BranchComponent } from './branch/branch.component';
 import { BranchEditComponent } from './branch/branch-edit.component';
 import { UserComponent } from './user/user.component';
 import { UserEditComponent } from './user/user-edit.component';
+import { RightsComponent } from './rights/rights.component';
+
 
 const routes: Routes = [
   {path:'ModulePage', component : ModulemComponent},
@@ -21,7 +23,9 @@ const routes: Routes = [
   {path:'BranchPage', component : BranchComponent },
   {path:'BranchEditPage', component : BranchEditComponent } ,
   {path:'UserPage', component : UserComponent },
-  {path:'UserEditPage', component : UserEditComponent }             
+  {path:'UserEditPage', component : UserEditComponent } ,
+  {path:'RightsPage', component  : RightsComponent  },
+
 ];
 
 @NgModule({

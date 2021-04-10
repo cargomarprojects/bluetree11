@@ -17,6 +17,9 @@ import { BranchHeaderComponent } from './branch/branch-header.component';
 import { UserComponent } from './user/user.component';
 import { UserEditComponent } from './user/user-edit.component';
 import { UserHeaderComponent } from './user/user-header.component';
+import { RightsComponent } from './rights/rights.component';
+import { RightsEditComponent } from './rights/rights-edit.component';
+import { RightsHeaderComponent } from './rights/rights-header.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +37,10 @@ import { UserHeaderComponent } from './user/user-header.component';
     BranchHeaderComponent,
     UserComponent,
     UserEditComponent,
-    UserHeaderComponent
-
+    UserHeaderComponent,
+    RightsComponent,
+    RightsHeaderComponent,
+    RightsEditComponent
   ],
   imports: [
     SharedModule,

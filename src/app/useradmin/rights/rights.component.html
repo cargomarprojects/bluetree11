@@ -10,7 +10,7 @@
   {{errorMessage}}
 </div>
 
-<app-modulem-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-modulem-header>
+<app-rights-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-rights-header>
 
 
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
@@ -19,16 +19,18 @@
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
+        <th>CODE</th>
         <th>NAME</th>
-        <th>ORDER</th>        
-        <th>INSTALLED</th>
+        <th>COMPANY</th>
+        <th>DEFAULT</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of records$ | async">
-        <td class='hlink2' (click)="edit(rec)">{{rec.module_name}}</td>
-        <td>{{rec.module_order}}</td>
-        <td>{{rec.module_installed}}</td>
+        <td class='hlink2' (click)="edit(rec)">{{rec.usr_code}}</td>
+        <td>{{rec.user_name}}</td>
+        <td>{{rec.comp_name}}</td>
+        <td>{{rec.ua_default}}</td>
       </tr>
     </tbody>
   </table>

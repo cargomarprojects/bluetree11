@@ -64,7 +64,7 @@ export class RightsComponent implements OnInit {
       menuid: this.mainservice.menuid,
       pkid: '',
       type: this.mainservice.param_type,
-      origin: 'module-page',
+      origin: 'rights-page',
       mode: 'ADD'
     };
     this.gs.Naviagete('Silver.UserAdmin/ModulemEditPage', JSON.stringify(parameter));

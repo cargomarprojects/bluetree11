@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { GlobalService } from '../../core/services/global.service';
-import { vm_Tbl_User_Access ,User_Access_Model , Tbl_User_Access }  from '../models/Tbl_User_Access';
+import { vm_Tbl_User_Access ,User_Access_Model , Tbl_User_Access }  from '../models/Tbl_User_Rights';
 
 import { SearchQuery } from '../models/Tbl_User_Userm';
 import { PageQuery } from '../../shared/models/pageQuery';
@@ -139,7 +139,7 @@ export class UserRightsService {
     }
     
     List(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/UserAccess/List', SearchData, this.gs.headerparam2('authorized'));
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Rights/List', SearchData, this.gs.headerparam2('authorized'));
     }
 
     GetRecord(SearchData: any) {
