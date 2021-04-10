@@ -1061,4 +1061,43 @@ export class AirExpHouseEditComponent implements OnInit {
     }
 
   }
+  getLink(_mode: string) {
+
+    if (_mode == "LIST") {
+      if (this.origin == 'airexp-master-page')
+        return "/Silver.AirExport.Trans/AirExpMasterEditPage";
+      else
+        return "/Silver.AirExport.Trans/AirExpHousePage";
+    }
+    else
+      return null;
+
+  }
+  getParam(_mode: string) {
+
+    if (_mode == "LIST") {
+      if (this.origin == 'airexp-master-page') {
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_AE_MASTER,
+          pkid: this.parentid,
+          type: '',
+          origin: this.origin,
+          mode: 'EDIT',
+          rnd: this.gs.getRandomInt()
+        };
+       } else {
+        return {
+          appid: this.gs.appid,
+          id: this.gs.MENU_AE_HOUSE,
+          menuid: this.gs.MENU_AE_HOUSE,
+          menu_param: '',
+          origin: 'airexp-house-page',
+          rnd: this.gs.getRandomInt()
+        };
+      }
+    } else
+      return null;
+  }
 }
+ 

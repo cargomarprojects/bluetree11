@@ -768,7 +768,7 @@ export class AirExpMasterEditComponent implements OnInit {
       return "/Silver.AirExport.Trans/AirExpMasterEditPage";
   }
 
-  getParam(_record: Tbl_cargo_exp_masterm = null, _mode: string = "") {
+  getParam(_mode: string = "") {
 
     if (_mode == "LIST") {
       return {
