@@ -806,7 +806,7 @@ export class SeaImpCargoPickupComponent implements OnInit {
         menuid: this.gs.MENU_SI_MASTER,
         pkid: this.pkid,
         type: '',
-        origin: 'seaimp-master-page',
+        origin: this.origin,
         mode: 'EDIT'
       };
     } else {
