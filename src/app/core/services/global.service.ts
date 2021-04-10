@@ -2117,6 +2117,10 @@ export class GlobalService {
     this.router.navigate([menu_route], { queryParams: { parameter: jsonstring }, replaceUrl: _replaceurl });
   }
 
+  Naviagete2(menu_route: string, jsonstring: any, _replaceurl: boolean = false) {
+    this.router.navigate([menu_route],{ queryParams: jsonstring , replaceUrl: _replaceurl });
+  }
+
 
   public GetAttention(Attention: string) {
     let str: string = "";
@@ -3036,52 +3040,6 @@ export class GlobalService {
 
     let url = '';
     let menuid = '';
-
-
-    // if (origin == "AE") {
-    //   menuid = this.MENU_AE_MASTER;
-    //   url = 'Silver.AirExport.Trans/AirExpMasterEditPage';
-    // }
-    // else if (origin == "AI") {
-    //   menuid = this.MENU_AI_MASTER;
-    //   url = 'Silver.AirImport.Trans/AirImpMasterEditPage';
-    // }
-    // else if (origin == "OE") {
-    //   menuid = this.MENU_SE_MASTER;
-    //   url = 'Silver.SeaExport.Trans/SeaExpMasterEditPage';
-    // }
-    // else if (origin == "seaimp-master-page") {
-    //   menuid = this.MENU_SI_MASTER;
-    //   url = 'Silver.SeaImport/SeaImpMasterEditPage';
-    // }
-    // else if (origin == "OT") {
-    //   menuid = this.MENU_OT_OPERATION;
-    //   url = 'Silver.Other.Trans/OthGeneralEditPage'
-    // }
-    // else if (origin == "EX") {
-    //   menuid = this.MENU_EX_OPERATION;
-    //   menuid = 'Silver.Other.Trans/OthGeneralEditPage';
-    // }
-    // else if (origin == "GE") {
-    //   menuid = this.MENU_GENERAL_EXPENSE;
-    //   url = 'Silver.Other.Trans/OthGeneralExpenseEditPage';
-    // }
-    // else if (origin == "CM") {
-    //   menuid = this.MENU_1099_EXPENSE;
-    //   url = 'Silver.Other.Trans/OthGeneralExpenseEditPage';
-    // }
-    // else if (origin == "PR") {
-    //   menuid = this.MENU_PAYROLL_EXPENSE;
-    //   url = 'Silver.Other.Trans/OthGeneralExpenseEditPage';
-    // }
-    // else if (origin == "FA") {
-    //   menuid = this.MENU_FILE_ADJUSTMENT;
-    //   url = 'Silver.Other.Trans/OthGeneralExpenseEditPage';
-    // }
-    // else if (origin == "PS") {
-    //   menuid = this.MENU_INTERNAL_PAYMENT_SETTLEMENT;
-    //   url = 'Silver.Other.Trans/OthGeneralExpenseEditPage';
-    // }
 
     if (origin == "seaexp-master-page") {
       menuid = this.MENU_SE_MASTER;

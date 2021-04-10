@@ -729,4 +729,20 @@ export class MawbPageComponent implements OnInit {
     }
 
   }
+  getLink(_mode: string) {
+    return "/Silver.AirExport.Trans/AirExpMasterEditPage";
+  }
+
+  getParam(_mode: string) {
+    return {
+      appid: this.gs.appid,
+      menuid: this.gs.MENU_AE_MASTER,
+      pkid: this.pkid,
+      type: '',
+      origin: 'airexp-master-page',
+      mode: 'EDIT'
+    };
+  }
+
 }
+ 
