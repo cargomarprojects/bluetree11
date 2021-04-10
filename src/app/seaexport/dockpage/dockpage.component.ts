@@ -518,7 +518,7 @@ export class DockPageComponent implements OnInit {
       menuid: this.gs.MENU_SE_MASTER,
       pkid: this.pkid,
       type: '',
-      origin: 'seaexp-dock-page',
+      origin: 'seaexp-master-page',
       mode: 'EDIT'
     };
   }

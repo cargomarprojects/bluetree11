@@ -588,7 +588,7 @@ export class MblPageComponent implements OnInit {
       menuid: this.gs.MENU_SE_MASTER,
       pkid: this.pkid,
       type: '',
-      origin: 'seaexp-mbl-page',
+      origin: 'seaexp-master-page',
       mode: 'EDIT'
     };
   }
