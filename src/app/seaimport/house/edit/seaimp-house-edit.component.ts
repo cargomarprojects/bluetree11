@@ -1630,7 +1630,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           invokefrom:'house',
           is_locked: this.is_locked,
         };
-        this.gs.Naviagete('Silver.SeaImport/CargoPickupPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.SeaImport/CargoPickupPage', prm);
         break;
       }
       case 'RIDERPAGE': {
