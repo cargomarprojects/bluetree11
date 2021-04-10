@@ -47,6 +47,7 @@ export class OthTrackingPageComponent implements OnInit {
   attach_typelist: any = {};
   modal: any;
   origin: string;
+  parentid: string;
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -72,6 +73,7 @@ export class OthTrackingPageComponent implements OnInit {
     this.refno = options.refno;
     this.origin = options.origin;
     this.is_locked = options.is_locked;
+    this.parentid =  options.parentid;
     // this.mode = 'ADD';
     this.parentTypememo = this.parentType + "-MEMO";
     this.initPage();
@@ -88,7 +90,7 @@ export class OthTrackingPageComponent implements OnInit {
   LoadCombo() {
     this.SearchRecord('loadcombo');
   }
-  
+
   actionHandler() {
     // this.errorMessage = '';
     // if (this.mode == 'ADD') {
@@ -162,7 +164,7 @@ export class OthTrackingPageComponent implements OnInit {
           alert(this.errorMessage);
         }
         else {
-           this.errorMessage = 'Save Complete';
+          this.errorMessage = 'Save Complete';
           // alert(this.errorMessage);
         }
       }, error => {
@@ -187,10 +189,11 @@ export class OthTrackingPageComponent implements OnInit {
 
 
   Close() {
-    if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
-    this.gs.LinkReturn(this.origin, this.pkid, '');
-  else
-    this.location.back();
+    if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" 
+    || this.origin == "other-general-page" || this.origin == "seaimp-house-page")
+      this.gs.LinkReturn(this.origin, this.pkid, '', this.parentid);
+    else
+      this.location.back();
   }
   OnChange(field: string) {
     if (field == 'cmbNotes') {

@@ -28,6 +28,8 @@ export class XmlRemarksComponent implements OnInit {
   errorMessage: string;
   is_locked: boolean = false;
   remarks: string = "";
+  origin: string;
+  parentid: string;
 
   constructor(
     private router: Router,
@@ -44,6 +46,8 @@ export class XmlRemarksComponent implements OnInit {
     this.source = options.source;
     this.title = options.title;
     this.is_locked = options.is_locked;
+    this.origin = options.origin;
+    this.parentid =  options.parentid;
     this.initPage();
     this.actionHandler();
   }
@@ -118,8 +122,8 @@ export class XmlRemarksComponent implements OnInit {
         if (response.retvalue == false) {
           this.errorMessage = response.error;
           alert(this.errorMessage);
-        }else{
-           this.errorMessage = 'Save Complete';
+        } else {
+          this.errorMessage = 'Save Complete';
           // alert(this.errorMessage);
         }
 
@@ -151,22 +155,25 @@ export class XmlRemarksComponent implements OnInit {
 
   BtnNavigation(action: string) {
     switch (action) {
-        case 'HISTORY': {
-            let prm = {
-                menuid: this.menuid,
-                pkid: this.pkid,
-                source: this.source,
-                title: "History [" + this.source + "]",
-                origin: 'Xml-remark-page'
-            };
-            this.gs.Naviagete('Silver.BusinessModule/LogBookPage', JSON.stringify(prm));
-            break;
-        }
+      case 'HISTORY': {
+        let prm = {
+          menuid: this.menuid,
+          pkid: this.pkid,
+          source: this.source,
+          title: "History [" + this.source + "]",
+          origin: 'Xml-remark-page'
+        };
+        this.gs.Naviagete('Silver.BusinessModule/LogBookPage', JSON.stringify(prm));
+        break;
+      }
     }
-}
+  }
 
   Close() {
-    this.location.back();
+    if (this.origin == "seaimp-house-page")
+      this.gs.LinkReturn(this.origin, this.pkid, '', this.parentid);
+    else
+      this.location.back();
   }
 
 }

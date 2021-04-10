@@ -1614,7 +1614,8 @@ export class SeaImpHouseEditComponent implements OnInit {
         let prm = {
           menuid: this.gs.MENU_SI_HOUSE_US_CUSTOM_HOLD,
           pkid: this.pkid,
-          origin: 'seaimp-House-page',
+          parentid: this.parentid,
+          origin: this.origin,
           is_locked: this.is_locked,
         };
         this.gs.Naviagete('Silver.SeaImport/USCustomsHoldPage', JSON.stringify(prm));
@@ -1625,7 +1626,8 @@ export class SeaImpHouseEditComponent implements OnInit {
           menuid: this.gs.MENU_SI_HOUSE_DELIVERY_ORDER,
           pkid: this.pkid,
           parentid: this.parentid,
-          origin: 'seaimp-House-page',
+          origin: this.origin,
+          invokefrom:'house',
           is_locked: this.is_locked,
         };
         this.gs.Naviagete('Silver.SeaImport/CargoPickupPage', JSON.stringify(prm));
@@ -1635,9 +1637,10 @@ export class SeaImpHouseEditComponent implements OnInit {
         let prm = {
           menuid: this.gs.MENU_SI_HOUSE,
           pkid: this.pkid,
+          parentid: this.parentid,
           source: 'SI-DESC-EX',
           is_locked: this.is_locked,
-          origin: 'seaimp-House-page',
+          origin: this.origin,
           canPrint: false
         };
         this.gs.Naviagete('Silver.SeaImport/RiderPage', JSON.stringify(prm));
@@ -1648,7 +1651,8 @@ export class SeaImpHouseEditComponent implements OnInit {
           menuid: this.gs.MENU_SI_SHIPMENT_MOVEMENT,
           refno: "REF : " + this.record.mbl_refno + "  HBL : " + this.record.hbl_houseno,
           pkid: this.pkid,
-          origin: 'seaimp-House-page',
+          parentid: this.parentid,
+          origin: 'seaimp-house-page',
           oprgrp: 'SEA IMPORT',
           parentType: 'SEAIMP-SHIP',
           paramType: 'SHIP-MOVE-STATUS',
@@ -1722,9 +1726,10 @@ export class SeaImpHouseEditComponent implements OnInit {
         let prm = {
           menuid: this.menuid,
           pkid: this.pkid,
+          parentid: this.parentid,
           source: 'SEA-HOUSE-DEVAN',
           title: 'Devanning Instruction',
-          origin: 'seaimp-House-page',
+          origin:  'seaimp-house-page',
           is_locked: this.is_locked,
         };
         this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
@@ -1953,7 +1958,7 @@ export class SeaImpHouseEditComponent implements OnInit {
             id: this.gs.MENU_SI_HOUSE,
             menuid: this.gs.MENU_SI_HOUSE,
             menu_param: '',
-            origin: 'seaimp-house-page',
+            origin: this.origin,
             rnd: this.gs.getRandomInt()
           };
         }

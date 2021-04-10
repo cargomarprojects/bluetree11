@@ -35,6 +35,7 @@ export class SeaImpCargoPickupComponent implements OnInit {
   report_searchdata: any = {};
   report_menuid: string = '';
 
+  invokefrom: string = '';
   origin: string = '';
   pkid: string;
   menuid: string;
@@ -45,7 +46,7 @@ export class SeaImpCargoPickupComponent implements OnInit {
   selectdeselect: boolean = false;
   errorMessage: string;
   IsLocked: boolean = false;
-  parentid:string;
+  parentid: string;
 
   constructor(
     private router: Router,
@@ -61,7 +62,8 @@ export class SeaImpCargoPickupComponent implements OnInit {
     this.menuid = options.menuid;
     this.origin = options.origin;
     this.IsLocked = options.is_locked;
-    this.parentid= options.parentid;
+    this.parentid = options.parentid;
+    this.invokefrom = options.invokefrom;
 
     this.mode = 'EDIT';
     this.initPage();
@@ -779,7 +781,7 @@ export class SeaImpCargoPickupComponent implements OnInit {
     this.report_searchdata = this.gs.UserInfo;
     this.report_searchdata.pkid = this.pkid;
     this.report_searchdata.cntrs = cntr2print;
-    if (this.origin == "seaimp-master-page") {
+    if (this.invokefrom == "master") {
       this.report_searchdata.invokefrom = 'MASTER';
       this.report_menuid = this.gs.MENU_SI_MASTER_DELIVERY_ORDER;
     } else {
@@ -793,14 +795,14 @@ export class SeaImpCargoPickupComponent implements OnInit {
     this.tab = 'main';
   }
   getLink(_mode: string) {
-    if (this.origin == "seaimp-master-page")
+    if (this.invokefrom == "master")
       return "/Silver.SeaImport/SeaImpMasterEditPage";
     else
       return "/Silver.SeaImport/SeaImpHouseEditPage";
   }
 
   getParam(_mode: string) {
-    if (this.origin == "seaimp-master-page") {
+    if (this.invokefrom == "master") {
       return {
         appid: this.gs.appid,
         menuid: this.gs.MENU_SI_MASTER,
@@ -814,13 +816,12 @@ export class SeaImpCargoPickupComponent implements OnInit {
         appid: this.gs.appid,
         menuid: this.gs.MENU_SI_HOUSE,
         pkid: this.pkid,
-        parentid:this.parentid,
+        parentid: this.parentid,
         type: '',
-        origin: 'seaimp-house-page',
+        origin: this.origin,
         mode: 'EDIT'
       };
     }
   }
 }
 
- 

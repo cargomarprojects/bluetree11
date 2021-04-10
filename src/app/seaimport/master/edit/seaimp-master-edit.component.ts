@@ -899,6 +899,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           pkid: this.pkid,
           parentid:'',
           origin: 'seaimp-master-page',
+          invokefrom:'master',
           is_locked: this.is_locked
         };
         this.gs.Naviagete('Silver.SeaImport/CargoPickupPage', JSON.stringify(prm));

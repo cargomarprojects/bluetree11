@@ -3032,7 +3032,7 @@ export class GlobalService {
     }
   }
 
-  public LinkReturn(origin: string = "", pkid: string = "", stype: string = "") {
+  public LinkReturn(origin: string = "", pkid: string = "", stype: string = "",parentid:string ="") {
 
     let url = '';
     let menuid = '';
@@ -3099,9 +3099,13 @@ export class GlobalService {
       menuid = this.MENU_AI_MASTER;
       url = 'Silver.AirImport.Trans/AirImpMasterEditPage';
     } else if (origin == "other-general-page") {
-        menuid = this.MENU_OT_OPERATION;
-        url = 'Silver.Other.Trans/OthGeneralEditPage'
-      }
+      menuid = this.MENU_OT_OPERATION;
+      url = 'Silver.Other.Trans/OthGeneralEditPage'
+    }
+    else if (origin == "seaimp-house-page") {
+      menuid = this.MENU_SI_HOUSE;
+      url = 'Silver.SeaImport/SeaImpHouseEditPage'
+    }
     else {
       // alert("Cannot Load Details");
       return;
@@ -3114,19 +3118,19 @@ export class GlobalService {
         pkid: pkid,
         type: stype,
         origin: origin,
-        mode: 'EDIT'
+        mode: 'EDIT',
+        parentid:parentid
       };
 
       //this.Naviagete(url, JSON.stringify(parameter));
 
-      this.router.navigate( [url], { queryParams: parameter });
+      this.router.navigate([url], { queryParams: parameter });
 
     } else {
       alert('Insufficient User Rights')
       return;
     }
-
-
+    
   }
 
   public copyToClipboard(val: string) {

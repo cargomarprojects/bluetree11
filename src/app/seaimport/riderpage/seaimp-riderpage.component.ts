@@ -29,7 +29,9 @@ export class SeaImpRiderPageComponent implements OnInit {
   errorMessage: string;
   selectedRowIndex: number = -1;
   IsLocked: boolean = false;
-
+  parentid: string;
+  origin: string = '';
+  
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -43,6 +45,8 @@ export class SeaImpRiderPageComponent implements OnInit {
     this.pkid = options.pkid;
     this.source = options.source;
     this.menuid = options.menuid;
+    this.origin = options.origin;
+    this.parentid = options.parentid;
     this.IsLocked = options.is_locked;
     this.mode = 'EDIT';
     this.initPage();
@@ -220,5 +224,20 @@ export class SeaImpRiderPageComponent implements OnInit {
     this.descrecords.splice(this.descrecords.findIndex(rec => rec.cargo_ctr == _rec.cargo_ctr), 1);
   }
 
+  getLink(_mode: string) {
+    return "/Silver.SeaImport/SeaImpHouseEditPage";
+  }
 
+  getParam(_mode: string) {
+    return {
+      appid: this.gs.appid,
+      menuid: this.gs.MENU_SI_HOUSE,
+      pkid: this.pkid,
+      parentid: this.parentid,
+      type: '',
+      origin: this.origin,
+      mode: 'EDIT'
+    };
+
+  }
 }

@@ -21,15 +21,15 @@ export class SeaImpUsCustomsHoldComponent implements OnInit {
 
   // 15-07-2019 Created By Ajith  
 
-   pkid: string;
-   menuid: string;
-   mode: string;
-   title: string='';
-   isAdmin: boolean;
-   houseno: string = '';
-   mblrefno: string = '';
+  pkid: string;
+  menuid: string;
+  mode: string;
+  title: string = '';
+  isAdmin: boolean;
+  houseno: string = '';
+  mblrefno: string = '';
 
-   errorMessage: string;
+  errorMessage: string;
 
   tab: string = 'main';
   report_title: string = '';
@@ -38,7 +38,9 @@ export class SeaImpUsCustomsHoldComponent implements OnInit {
   report_menuid: string = '';
 
   IsLocked: boolean = false;
-
+  parentid: string;
+  origin: string = '';
+  
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -51,6 +53,8 @@ export class SeaImpUsCustomsHoldComponent implements OnInit {
     const options = JSON.parse(this.route.snapshot.queryParams.parameter);
     this.pkid = options.pkid;
     this.menuid = options.menuid;
+    this.origin = options.origin;
+    this.parentid = options.parentid;
     this.IsLocked = options.is_locked;
     this.mode = 'EDIT';
     this.initPage();
@@ -59,7 +63,7 @@ export class SeaImpUsCustomsHoldComponent implements OnInit {
 
   private initPage() {
     this.title = 'US Custom Hold';
-    this.isAdmin = this.gs.IsAdmin(this.menuid); 
+    this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
     this.LoadCombo();
   }
@@ -103,7 +107,7 @@ export class SeaImpUsCustomsHoldComponent implements OnInit {
   GetRecord() {
     this.errorMessage = '';
     var SearchData = this.gs.UserInfo;
-     SearchData.pkid = this.pkid;
+    SearchData.pkid = this.pkid;
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
         this.mode = response.mode;
@@ -258,5 +262,21 @@ export class SeaImpUsCustomsHoldComponent implements OnInit {
   }
   callbackevent(event: any) {
     this.tab = 'main';
+  }
+  getLink(_mode: string) {
+    return "/Silver.SeaImport/SeaImpHouseEditPage";
+  }
+
+  getParam(_mode: string) {
+    return {
+      appid: this.gs.appid,
+      menuid: this.gs.MENU_SI_HOUSE,
+      pkid: this.pkid,
+      parentid: this.parentid,
+      type: '',
+      origin: this.origin,
+      mode: 'EDIT'
+    };
+
   }
 }
