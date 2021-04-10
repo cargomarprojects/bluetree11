@@ -4,7 +4,7 @@
     <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd"
     [routerLink]="['/Silver.AirExport.Trans/AirExpMasterEditPage']"
     [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid,pkid: '',type: this.mainservice.param_type,origin: 'airexp-master-page',mode: 'ADD'}">New</a>
-    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    <!-- <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button> -->
   </div>
 </div>
 

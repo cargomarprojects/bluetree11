@@ -761,4 +761,34 @@ export class AirExpMasterEditComponent implements OnInit {
     this.modal.close();
   }
 
+  getLink(_mode: string) {
+    if (_mode == "LIST")
+      return "/Silver.AirExport.Trans/AirExpMasterPage";
+    else
+      return "/Silver.AirExport.Trans/AirExpMasterEditPage";
+  }
+
+  getParam(_record: Tbl_cargo_exp_masterm = null, _mode: string = "") {
+
+    if (_mode == "LIST") {
+      return {
+        appid: this.gs.appid,
+        id: this.gs.MENU_AE_MASTER,
+        menuid: this.gs.MENU_AE_MASTER,
+        menu_param: '',
+        origin: 'airexp-master-page',
+        rnd: this.gs.getRandomInt()
+      };
+    } else {
+      return {
+        appid: this.gs.appid,
+        menuid: this.menuid,
+        pkid: '',
+        type: this.mainService.param_type,
+        origin: 'airexp-master-page',
+        mode: 'ADD',
+        rnd: this.gs.getRandomInt()
+      };
+    }
+  }
 }
