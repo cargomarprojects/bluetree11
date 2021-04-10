@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { GlobalService } from '../../core/services/global.service';
-import { vm_Tbl_User_Access ,User_Access_Model , Tbl_User_Access }  from '../models/Tbl_User_Rights';
+import { vm_Tbl_User_Access ,User_Access_Model , Tbl_User_Access }  from '../models/Tbl_User_Access';
 
-import { SearchQuery } from '../models/Tbl_User_Rights';
+import { SearchQuery } from '../models/Tbl_User_Userm';
 import { PageQuery } from '../../shared/models/pageQuery';
 
 

@@ -1,20 +1,5 @@
 import { PageQuery } from '../../shared/models/pageQuery';
 
-export interface SearchQuery {
-    searchString: string;
-    deleted : boolean;
-}
-
-export class Tbl_User_Access
-{
-    ua_pkid  : string ;
-    ua_usr_id : string ;
-    ua_company_id : string ;
-    ua_default : string ;
-    usr_code : string ;
-    usr_name : string ;
-    comp_name : string ;
-}
 
 export class Tbl_User_Rightsm {
     
@@ -45,17 +30,39 @@ export class Tbl_User_Rightsm {
     rec_closed: string;
 }
 
-export interface User_User_Rightsm_Model {
+export interface SearchQuery {
+    searchString: string;
+    deleted : boolean;
+}
+
+export class Tbl_User_Access
+{
+    ua_pkid  : string ;
+    ua_usr_id : string ;
+    ua_company_id : string ;
+    ua_default : string ;
+    usr_code : string ;
+    usr_name : string ;
+    comp_name : string ;
+
+    rec_created_by: string;
+    rec_created_date: string;
+    rec_closed: string;    
+
+}
+
+
+export interface User_Access_Model {
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
-    records: Tbl_User_Rightsm[]
+    records: Tbl_User_Access[]
 }
 
-export interface vm_Tbl_User_Rightsm {
+export interface vm_Tbl_User_Access {
     mode: string;
     pkid: string;
-    record: Tbl_User_Rightsm;
+    record: Tbl_User_Access;
     userinfo: any,
     filter: any;
 }
