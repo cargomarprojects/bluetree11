@@ -27,7 +27,6 @@ const routes: Routes = [
   {path:'UserEditPage', component : UserEditComponent } ,
   {path:'RightsPage', component  : RightsComponent  },
   {path:'RightsEditPage', component : RightsEditComponent } ,
-
 ];
 
 @NgModule({

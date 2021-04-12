@@ -45,8 +45,8 @@ export class RightsEditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
+        const options = this.route.snapshot.queryParams;
 
         this.menuid = options.menuid;
         this.pkid = options.pkid;

@@ -67,7 +67,7 @@ export class RightsComponent implements OnInit {
       origin: 'rights-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.UserAdmin/ModulemEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete('Silver.UserAdmin/RightsEditPage', JSON.stringify(parameter));
 
   }
   edit(_record: Tbl_User_Access) {
@@ -80,10 +80,10 @@ export class RightsComponent implements OnInit {
       menuid: this.mainservice.menuid,
       pkid: _record.ua_pkid ,
       type: '',
-      origin: 'module-page',
+      origin: 'rights-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.UserAdmin/ModulemEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/RightsEditPage', parameter);
   }
 
   Close() {
