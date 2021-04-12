@@ -63,11 +63,11 @@ export class UserComponent implements OnInit {
     let parameter = {
       menuid: this.mainservice.menuid,
       pkid: '',
-      type: this.mainservice.param_type,
+      type: '',
       origin: 'user-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.UserAdmin/UserEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/UserEditPage', parameter);
 
   }
   edit(_record: Tbl_User_Userm) {
@@ -83,7 +83,7 @@ export class UserComponent implements OnInit {
       origin: 'user-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.UserAdmin/UserEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/UserEditPage', parameter);
   }
 
   Close() {

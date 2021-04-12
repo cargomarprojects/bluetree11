@@ -45,7 +45,7 @@ export class UserEditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+        const options = this.route.snapshot.queryParams;
 
 
         this.menuid = options.menuid;
@@ -129,6 +129,7 @@ export class UserEditComponent implements OnInit {
 
     Save() {
 
+        let _mode = this.mode;
 
         if (!this.Allvalid())
             return;
@@ -139,6 +140,7 @@ export class UserEditComponent implements OnInit {
         saveRecord.mode = this.mode;
         saveRecord.userinfo = this.gs.UserInfo;
 
+
         this.mainService.Save(saveRecord)
             .subscribe(response => {
                 if (response.retvalue == false) {
@@ -147,6 +149,16 @@ export class UserEditComponent implements OnInit {
                 }
                 else {
                     this.mode = 'EDIT';
+                    if ( _mode == "ADD") {
+                    let parameter = {
+                        menuid: this.mainService.menuid,
+                        pkid: this.pkid ,
+                        type: '',
+                        origin: 'user-page',
+                        mode: 'EDIT'
+                      };
+                      this.location.replaceState('Silver.UserAdmin/UserEditPage', this.gs.getUrlParameter(parameter));
+                    }
                     this.mainService.RefreshList(this.record);
                     this.errorMessage = 'Save Complete';
                     alert(this.errorMessage);
