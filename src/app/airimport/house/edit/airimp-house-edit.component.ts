@@ -903,4 +903,43 @@ export class AirImpHouseEditComponent implements OnInit {
       });
   }
 
+  getLink(_mode: string) {
+
+    if (_mode == "LIST") {
+      if (this.origin == 'airimp-master-page')
+        return "/Silver.AirImport.Trans/AirImpMasterEditPage";
+      else
+        return "/Silver.AirImport.Trans/AirImpHousePage";
+    }
+    else
+      return null;
+
+  }
+  getParam(_mode: string) {
+
+    if (_mode == "LIST") {
+      if (this.origin == 'airimp-master-page') {
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_AI_MASTER,
+          pkid: this.parentid,
+          type: '',
+          origin: this.origin,
+          mode: 'EDIT',
+          rnd: this.gs.getRandomInt()
+        };
+       } else {
+        return {
+          appid: this.gs.appid,
+          id: this.gs.MENU_AI_HOUSE,
+          menuid: this.gs.MENU_AI_HOUSE,
+          menu_param: '',
+          origin: 'airimp-house-page',
+          rnd: this.gs.getRandomInt()
+        };
+      }
+    } else
+      return null;
+  }
+
 }
