@@ -586,28 +586,31 @@ export class AirExpMasterEditComponent implements OnInit {
     switch (action) {
       case 'ARAP': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AE_MASTER_ARAP,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
           mbl_type: 'AE',
           origin: 'airexp-master-page',
         };
-        this.gs.Naviagete('Silver.USAccounts.Trans/InvoicePage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.USAccounts.Trans/InvoicePage', prm);
         break;
       }
       case 'PROFITREPORT': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AE_MASTER_PROFIT_REPORT,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
           mbl_type: 'AE',
           origin: 'airexp-master-page',
         };
-        this.gs.Naviagete('Silver.USAccounts.Trans/ProfitReportPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.USAccounts.Trans/ProfitReportPage', prm);
         break;
       }
       case 'HOUSE': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AE_HOUSE,
           parentid: this.pkid,
           pkid: this.hbl_pkid,
@@ -616,12 +619,13 @@ export class AirExpMasterEditComponent implements OnInit {
           origin: 'airexp-master-page',
           mode: this.hbl_mode
         };
-        this.gs.Naviagete('Silver.AirExport.Trans/AirExpHouseEditPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.AirExport.Trans/AirExpHouseEditPage', prm);
         break;
       }
 
       case 'PAYMENT-REQUEST': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AE_PAYMENT_REQUEST,
           cp_master_id: this.pkid,
           cp_source: 'AIR-MASTER',
@@ -630,7 +634,7 @@ export class AirExpMasterEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'airexp-master-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/PaymentRequestPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/PaymentRequestPage', prm);
         break;
       }
       case 'ATTACHMENT': {
@@ -655,6 +659,7 @@ export class AirExpMasterEditComponent implements OnInit {
       }
       case 'MESSENGER-SLIP': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AE_MESSENGER_SLIP,
           mbl_pkid: this.pkid,
           mbl_mode: 'AIR EXPORT',
@@ -662,11 +667,12 @@ export class AirExpMasterEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'airexp-master-page'
         };
-        this.gs.Naviagete('Silver.Other.Trans/MessengerSlipList', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/MessengerSlipList', prm);
         break;
       }
       case 'FOLLOWUP': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AE_MASTER,
           master_id: this.pkid,
           master_refno: this.record.mbl_refno,
@@ -674,11 +680,12 @@ export class AirExpMasterEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'airexp-master-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/FollowUpPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/FollowUpPage', prm);
         break;
       }
       case 'REQUEST-APPROVAL': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AE_MASTER_REQUEST_APPROVAL,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
@@ -687,11 +694,12 @@ export class AirExpMasterEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'airexp-master-page'
         };
-        this.gs.Naviagete('Silver.Other.Trans/ApprovedPageList', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageList', prm);
         break;
       }
       case 'INERNALMEMO': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AE_MASTER_INTERNAL_MEMO,
           refno: "REF : " + this.record.mbl_refno,
           pkid: this.pkid,
@@ -702,7 +710,7 @@ export class AirExpMasterEditComponent implements OnInit {
           hideTracking: 'Y',
           is_locked: this.is_locked
         };
-        this.gs.Naviagete('Silver.Other.Trans/TrackingPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/TrackingPage', prm);
         break;
       }
       // case 'POD': {
@@ -717,17 +725,19 @@ export class AirExpMasterEditComponent implements OnInit {
 
       case 'MAWBPAGE': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AE_MASTER_PRINT_MAWB,
           pkid: this.pkid,
           is_locked: this.is_locked,
           origin: 'airexp-master-page',
         };
-        this.gs.Naviagete('Silver.AirExport.Trans/MawbPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.AirExport.Trans/MawbPage',  prm);
         break;
       }
 
       case 'MANIFESTPAGE': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AE_MASTER_MANIFEST,
           pkid: this.pkid,
           mbl_no: this.record.mbl_no,
@@ -735,7 +745,7 @@ export class AirExpMasterEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'airexp-master-page',
         };
-        this.gs.Naviagete('Silver.AirExport.Trans/ManifestPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.AirExport.Trans/ManifestPage', prm);
         break;
       }
       case 'SHIP-LABEL-PRINT': {

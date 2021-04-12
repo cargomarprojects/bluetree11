@@ -65,11 +65,18 @@ export class ManifestPageComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-        this.pkid = options.pkid;
-        this.menuid = options.menuid;
-        this.mbl_no = options.mbl_no;
-        this.mbl_refno = options.mbl_refno;
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.mbl_no = this.route.snapshot.queryParams.mbl_no;
+            this.mbl_refno = this.route.snapshot.queryParams.mbl_refno;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.pkid = options.pkid;
+            this.menuid = options.menuid;
+            this.mbl_no = options.mbl_no;
+            this.mbl_refno = options.mbl_refno;
+        }
         this.initPage();
         this.actionHandler();
     }
