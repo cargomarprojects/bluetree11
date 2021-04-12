@@ -15,17 +15,17 @@ import { DeliveryOrderService } from '../services/deliveryorder.service';
 export class DeliveryOrderListComponent implements OnInit {
 
   errorMessage: string;
-   parentid: string;
-   pickCategory: string;
+  parentid: string;
+  pickCategory: string;
 
-   menuid: string;
-   title: string;
-   isAdmin: boolean;
-   canAdd: boolean;
-   canEdit: boolean;
-   canSave: boolean;
+  menuid: string;
+  title: string;
+  isAdmin: boolean;
+  canAdd: boolean;
+  canEdit: boolean;
+  canSave: boolean;
 
- 
+
   records: Tbl_cargo_imp_pickup[]
 
   constructor(
@@ -36,11 +36,16 @@ export class DeliveryOrderListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-   
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.menuid = options.menuid;
-    this.parentid = options.parentid;
-    this.pickCategory = options.pickCategory;
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.parentid = this.route.snapshot.queryParams.parentid;
+      this.pickCategory = this.route.snapshot.queryParams.pickCategory;
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.menuid = options.menuid;
+      this.parentid = options.parentid;
+      this.pickCategory = options.pickCategory;
+    }
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.canAdd = this.gs.canAdd(this.menuid);
@@ -48,20 +53,20 @@ export class DeliveryOrderListComponent implements OnInit {
 
     this.List('SCREEN');
   }
- 
+
 
   List(action: string = '') {
     var SearchData = this.gs.UserInfo;
     SearchData.parentid = this.parentid;
-    
+
     this.mainservice.GeneralList(SearchData).subscribe(response => {
       this.records = response.list;
-      
+
     }, error => {
       this.errorMessage = this.gs.getError(error)
     });
   }
-  
+
 
   NewRecord() {
     if (!this.canAdd) {
@@ -73,8 +78,8 @@ export class DeliveryOrderListComponent implements OnInit {
       menuid: this.menuid,
       pkid: '',
       mode: 'ADD',
-      parentid : this.parentid,
-      pickCategory : this.pickCategory,
+      parentid: this.parentid,
+      pickCategory: this.pickCategory,
       origin: 'oth-deliveryorder-page'
     };
     this.gs.Naviagete('Silver.Other.Trans/DeliveryOrderEdit', JSON.stringify(parameter));
@@ -91,8 +96,8 @@ export class DeliveryOrderListComponent implements OnInit {
       menuid: this.menuid,
       pkid: _record.pick_pkid,
       mode: 'EDIT',
-      parentid : _record.pick_parentid,
-      pickCategory : this.pickCategory,
+      parentid: _record.pick_parentid,
+      pickCategory: this.pickCategory,
       origin: 'oth-deliveryorder-page',
     };
     this.gs.Naviagete('Silver.Other.Trans/DeliveryOrderEdit', JSON.stringify(parameter));
