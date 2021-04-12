@@ -75,10 +75,16 @@ export class CertOrgPageComponent implements OnInit {
 
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.pkid = options.pkid;
-    this.menuid = options.menuid;
-    this.is_locked = options.is_locked;
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.pkid = this.route.snapshot.queryParams.pkid;
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.is_locked = this.route.snapshot.queryParams.is_locked;
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.pkid = options.pkid;
+      this.menuid = options.menuid;
+      this.is_locked = options.is_locked;
+    }
     this.initPage();
     this.actionHandler();
   }
@@ -481,7 +487,7 @@ export class CertOrgPageComponent implements OnInit {
     if (rec.controlname == "HANDLEDBY") {
       this.record.mbld_handled_id = rec.id;
       this.record.mbld_handled_code = rec.code;
-      this.record.mbld_handled_name =rec.name;
+      this.record.mbld_handled_name = rec.name;
     }
 
     if (rec.controlname == "SALEMSAN") {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef,QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { GlobalService } from '../../core/services/global.service';
@@ -44,11 +44,18 @@ export class CopyExpCntrPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.pkid = options.pkid;
-    this.menuid = options.menuid;
-    this.mbl_cntr_type = options.mbl_cntr_type;
-    this.is_locked=options.is_locked;
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.pkid = this.route.snapshot.queryParams.pkid;
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.mbl_cntr_type = this.route.snapshot.queryParams.mbl_cntr_type;
+      this.is_locked = this.route.snapshot.queryParams.is_locked;
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.pkid = options.pkid;
+      this.menuid = options.menuid;
+      this.mbl_cntr_type = options.mbl_cntr_type;
+      this.is_locked = options.is_locked;
+    }
     this.initPage();
     this.actionHandler();
   }
@@ -77,7 +84,7 @@ export class CopyExpCntrPageComponent implements OnInit {
         this.cntrrecords = response.cntrlist;
         this.hblrecords = response.hbllist;
         if (!this.gs.isBlank(this.cntr_chked_field))
-        this.cntr_chked_field.nativeElement.focus();
+          this.cntr_chked_field.nativeElement.focus();
       }, error => {
         this.errorMessage = this.gs.getError(error);
       });
@@ -104,7 +111,7 @@ export class CopyExpCntrPageComponent implements OnInit {
         }
         else {
           this.errorMessage = 'Save Complete';
-         // alert(this.errorMessage);
+          // alert(this.errorMessage);
         }
       }, error => {
         this.errorMessage = this.gs.getError(error);
