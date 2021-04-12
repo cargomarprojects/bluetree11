@@ -11,6 +11,7 @@ import { BranchEditComponent } from './branch/branch-edit.component';
 import { UserComponent } from './user/user.component';
 import { UserEditComponent } from './user/user-edit.component';
 import { RightsComponent } from './rights/rights.component';
+import { RightsEditComponent } from './rights/rights-edit.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path:'UserPage', component : UserComponent },
   {path:'UserEditPage', component : UserEditComponent } ,
   {path:'RightsPage', component  : RightsComponent  },
+  {path:'RightsEditPage', component : RightsEditComponent } ,
 
 ];
 
