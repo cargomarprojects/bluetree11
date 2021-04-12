@@ -73,7 +73,7 @@ export class OthTrackingPageComponent implements OnInit {
       this.oprgrp = this.route.snapshot.queryParams.oprgrp;
       this.refno = this.route.snapshot.queryParams.refno;
       this.origin = this.route.snapshot.queryParams.origin;
-      this.is_locked = this.route.snapshot.queryParams.is_locked;
+      this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
       this.parentid = this.route.snapshot.queryParams.parentid;
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);

@@ -54,7 +54,7 @@ export class FollowupComponent implements OnInit {
       this.cf_masterid = this.route.snapshot.queryParams.master_id;
       this.cf_refno = this.route.snapshot.queryParams.master_refno;
       this.cf_refdate = this.route.snapshot.queryParams.master_refdate;
-      this.is_locked = this.route.snapshot.queryParams.is_locked;
+      this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
       this.origin = this.route.snapshot.queryParams.origin;
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);

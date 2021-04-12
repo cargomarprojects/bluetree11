@@ -48,7 +48,7 @@ export class CopyExpCntrPageComponent implements OnInit {
       this.pkid = this.route.snapshot.queryParams.pkid;
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.mbl_cntr_type = this.route.snapshot.queryParams.mbl_cntr_type;
-      this.is_locked = this.route.snapshot.queryParams.is_locked;
+      this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.pkid = options.pkid;

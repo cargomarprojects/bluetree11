@@ -55,7 +55,7 @@ export class SeaImpUsCustomsHoldComponent implements OnInit {
     this.menuid = options.menuid;
     this.origin = options.origin;
     this.parentid = options.parentid;
-    this.IsLocked = options.is_locked;
+    this.IsLocked = JSON.parse(options.is_locked);
     this.mode = 'EDIT';
     this.initPage();
     this.actionHandler();

@@ -79,7 +79,7 @@ export class DockPageComponent implements OnInit {
     if (this.route.snapshot.queryParams.parameter == null) {
       this.pkid = this.route.snapshot.queryParams.pkid;
       this.menuid = this.route.snapshot.queryParams.menuid;
-      this.is_locked = this.route.snapshot.queryParams.is_locked;
+      this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.pkid = options.pkid;

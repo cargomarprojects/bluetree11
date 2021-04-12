@@ -44,7 +44,7 @@ export class MessengerSlipListComponent implements OnInit {
       this.mbl_pkid = this.route.snapshot.queryParams.mbl_pkid;
       this.mbl_refno = this.route.snapshot.queryParams.mbl_refno;
       this.mbl_mode = this.route.snapshot.queryParams.mbl_mode;
-      this.is_locked = this.route.snapshot.queryParams.is_locked;
+      this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
       this.origin = this.route.snapshot.queryParams.origin;
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);

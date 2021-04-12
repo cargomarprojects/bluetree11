@@ -45,7 +45,7 @@ export class XmlRemarksComponent implements OnInit {
       this.pkid = this.route.snapshot.queryParams.pkid;
       this.source = this.route.snapshot.queryParams.source;
       this.title = this.route.snapshot.queryParams.title;
-      this.is_locked = this.route.snapshot.queryParams.is_locked;
+      this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
       this.origin = this.route.snapshot.queryParams.origin;
       this.parentid = this.route.snapshot.queryParams.parentid;
     } else {

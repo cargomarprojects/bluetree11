@@ -52,7 +52,7 @@ export class ApprovedPageListComponent implements OnInit {
       this.doc_type = this.route.snapshot.queryParams.doc_type;
       this.req_type = this.route.snapshot.queryParams.req_type;
       this.origin = this.route.snapshot.queryParams.origin;
-      this.is_locked = this.route.snapshot.queryParams.is_locked;
+      this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.menuid = options.menuid;

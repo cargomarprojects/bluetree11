@@ -1629,7 +1629,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           pkid: this.pkid,
           parentid: this.parentid,
           origin: this.origin,
-          invokefrom:'house',
+          invokefrom:'HOUSE',
           is_locked: this.is_locked,
         };
         this.gs.Naviagete2('Silver.SeaImport/CargoPickupPage', prm);
@@ -1661,6 +1661,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           parentType: 'SEAIMP-SHIP',
           paramType: 'SHIP-MOVE-STATUS',
           hideTracking: 'Y',
+          invokefrom:'HOUSE',
           is_locked: this.is_locked
         };
         this.gs.Naviagete2('Silver.Other.Trans/TrackingPage', prm);
@@ -1735,6 +1736,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           source: 'SEA-HOUSE-DEVAN',
           title: 'Devanning Instruction',
           origin:  'seaimp-house-page',
+          invokefrom:'HOUSE',
           is_locked: this.is_locked,
         };
         this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage', prm);
