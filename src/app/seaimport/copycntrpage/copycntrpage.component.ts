@@ -45,10 +45,16 @@ export class CopyCntrPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.pkid = options.pkid;
-    this.menuid = options.menuid;
-    this.mbl_cntr_type = options.mbl_cntr_type;
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.pkid = this.route.snapshot.queryParams.pkid;
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.mbl_cntr_type = this.route.snapshot.queryParams.mbl_cntr_type;
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.pkid = options.pkid;
+      this.menuid = options.menuid;
+      this.mbl_cntr_type = options.mbl_cntr_type;
+    }
     this.initPage();
     this.actionHandler();
   }
@@ -105,7 +111,7 @@ export class CopyCntrPageComponent implements OnInit {
           alert(this.errorMessage);
         }
         else {
-           this.errorMessage = 'Save Complete';
+          this.errorMessage = 'Save Complete';
           // alert(this.errorMessage);
         }
       }, error => {

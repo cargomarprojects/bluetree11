@@ -57,15 +57,22 @@ export class SeaImpCargoPickupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    const options = this.route.snapshot.queryParams;
-    this.pkid = options.pkid;
-    this.menuid = options.menuid;
-    this.origin = options.origin;
-    this.IsLocked = options.is_locked;
-    this.parentid = options.parentid;
-    this.invokefrom = options.invokefrom;
-
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.pkid = this.route.snapshot.queryParams.pkid;
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.origin = this.route.snapshot.queryParams.origin;
+      this.IsLocked = this.route.snapshot.queryParams.is_locked;
+      this.parentid = this.route.snapshot.queryParams.parentid;
+      this.invokefrom = this.route.snapshot.queryParams.invokefrom;
+    } else {
+      const options = this.route.snapshot.queryParams;
+      this.pkid = options.pkid;
+      this.menuid = options.menuid;
+      this.origin = options.origin;
+      this.IsLocked = options.is_locked;
+      this.parentid = options.parentid;
+      this.invokefrom = options.invokefrom;
+    }
     this.mode = 'EDIT';
     this.initPage();
     this.actionHandler();

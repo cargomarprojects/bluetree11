@@ -39,14 +39,22 @@ export class MessengerSlipListComponent implements OnInit {
 
   ngOnInit() {
 
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.menuid = options.menuid;
-    this.mbl_pkid = options.mbl_pkid;
-    this.mbl_refno = options.mbl_refno;
-    this.mbl_mode = options.mbl_mode;
-    this.is_locked = options.is_locked;
-    this.origin = options.origin;
-
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.mbl_pkid = this.route.snapshot.queryParams.mbl_pkid;
+      this.mbl_refno = this.route.snapshot.queryParams.mbl_refno;
+      this.mbl_mode = this.route.snapshot.queryParams.mbl_mode;
+      this.is_locked = this.route.snapshot.queryParams.is_locked;
+      this.origin = this.route.snapshot.queryParams.origin;
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.menuid = options.menuid;
+      this.mbl_pkid = options.mbl_pkid;
+      this.mbl_refno = options.mbl_refno;
+      this.mbl_mode = options.mbl_mode;
+      this.is_locked = options.is_locked;
+      this.origin = options.origin;
+    }
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.canAdd = this.gs.canAdd(this.menuid);
