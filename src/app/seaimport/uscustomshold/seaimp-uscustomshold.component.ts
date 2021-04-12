@@ -40,7 +40,7 @@ export class SeaImpUsCustomsHoldComponent implements OnInit {
   IsLocked: boolean = false;
   parentid: string;
   origin: string = '';
-  
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -50,7 +50,7 @@ export class SeaImpUsCustomsHoldComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+    const options = this.route.snapshot.queryParams;
     this.pkid = options.pkid;
     this.menuid = options.menuid;
     this.origin = options.origin;

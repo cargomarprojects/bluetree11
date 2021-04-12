@@ -40,14 +40,24 @@ export class XmlRemarksComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.menuid = options.menuid;
-    this.pkid = options.pkid;
-    this.source = options.source;
-    this.title = options.title;
-    this.is_locked = options.is_locked;
-    this.origin = options.origin;
-    this.parentid =  options.parentid;
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.pkid = this.route.snapshot.queryParams.pkid;
+      this.source = this.route.snapshot.queryParams.source;
+      this.title = this.route.snapshot.queryParams.title;
+      this.is_locked = this.route.snapshot.queryParams.is_locked;
+      this.origin = this.route.snapshot.queryParams.origin;
+      this.parentid = this.route.snapshot.queryParams.parentid;
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.menuid = options.menuid;
+      this.pkid = options.pkid;
+      this.source = options.source;
+      this.title = options.title;
+      this.is_locked = options.is_locked;
+      this.origin = options.origin;
+      this.parentid = options.parentid;
+    }
     this.initPage();
     this.actionHandler();
   }

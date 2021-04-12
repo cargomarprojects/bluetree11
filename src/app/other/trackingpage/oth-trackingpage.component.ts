@@ -63,17 +63,31 @@ export class OthTrackingPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.pkid = options.pkid;
-    this.menuid = options.menuid;
-    this.parentType = options.parentType;
-    this.paramType = options.paramType;
-    this.hideTracking = options.hideTracking;
-    this.oprgrp = options.oprgrp;
-    this.refno = options.refno;
-    this.origin = options.origin;
-    this.is_locked = options.is_locked;
-    this.parentid =  options.parentid;
+
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.pkid = this.route.snapshot.queryParams.pkid;
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.parentType = this.route.snapshot.queryParams.parentType;
+      this.paramType = this.route.snapshot.queryParams.paramType;
+      this.hideTracking = this.route.snapshot.queryParams.hideTracking;
+      this.oprgrp = this.route.snapshot.queryParams.oprgrp;
+      this.refno = this.route.snapshot.queryParams.refno;
+      this.origin = this.route.snapshot.queryParams.origin;
+      this.is_locked = this.route.snapshot.queryParams.is_locked;
+      this.parentid = this.route.snapshot.queryParams.parentid;
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.pkid = options.pkid;
+      this.menuid = options.menuid;
+      this.parentType = options.parentType;
+      this.paramType = options.paramType;
+      this.hideTracking = options.hideTracking;
+      this.oprgrp = options.oprgrp;
+      this.refno = options.refno;
+      this.origin = options.origin;
+      this.is_locked = options.is_locked;
+      this.parentid = options.parentid;
+    }
     // this.mode = 'ADD';
     this.parentTypememo = this.parentType + "-MEMO";
     this.initPage();
@@ -189,8 +203,8 @@ export class OthTrackingPageComponent implements OnInit {
 
 
   Close() {
-    if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" 
-    || this.origin == "other-general-page" || this.origin == "seaimp-house-page")
+    if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page"
+      || this.origin == "other-general-page" || this.origin == "seaimp-house-page")
       this.gs.LinkReturn(this.origin, this.pkid, '', this.parentid);
     else
       this.location.back();

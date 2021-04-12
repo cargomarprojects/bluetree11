@@ -41,7 +41,7 @@ export class SeaImpRiderPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+    const options = this.route.snapshot.queryParams;
     this.pkid = options.pkid;
     this.source = options.source;
     this.menuid = options.menuid;
