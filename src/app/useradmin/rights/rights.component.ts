@@ -63,11 +63,11 @@ export class RightsComponent implements OnInit {
     let parameter = {
       menuid: this.mainservice.menuid,
       pkid: '',
-      type: this.mainservice.param_type,
+      type: '',
       origin: 'rights-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.UserAdmin/RightsEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/RightsEditPage', parameter);
 
   }
   edit(_record: Tbl_User_Access) {

@@ -154,6 +154,10 @@ export class UserRightsService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/CompanyList', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    getUserList(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/UserList', SearchData, this.gs.headerparam2('authorized'));
+    }
+
 
 }
 

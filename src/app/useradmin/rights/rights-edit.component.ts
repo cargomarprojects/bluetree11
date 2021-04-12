@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, UrlSerializer } from '@angular/router';
 import { Location } from '@angular/common';
 import { GlobalService } from '../../core/services/global.service';
 
@@ -12,6 +12,7 @@ import { vm_Tbl_User_Access, Tbl_User_Access, Tbl_User_Rightsm } from '../models
 
 import { SearchTable } from '../../shared/models/searchtable';
 import { UserRightsService } from '../services/userRights.service';
+import { HttpParams } from '@angular/common/http';
 
 
 @Component({
@@ -22,7 +23,10 @@ export class RightsEditComponent implements OnInit {
 
     record: Tbl_User_Access = <Tbl_User_Access>{};
 
-    records: Tbl_User_Rightsm [] = [];
+    records: Tbl_User_Rightsm[] = [];
+
+    companyList: any[];
+    userList: any[];
 
     tab: string = 'main';
 
@@ -42,6 +46,7 @@ export class RightsEditComponent implements OnInit {
         private location: Location,
         public gs: GlobalService,
         public mainService: UserRightsService,
+        
     ) { }
 
     ngOnInit() {
@@ -60,13 +65,39 @@ export class RightsEditComponent implements OnInit {
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
-        this.LoadCombo();
+        this.LoadCompany();
+        this.LoadUser();
     }
 
-    LoadCombo() {
+    LoadCompany() {
+        
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.CODE = "";
+        SearchData.TYPE = "USR_BRANCH";
+        SearchData.PKID = this.gs.company_pkid;
 
-
+        this.mainService.getCompanyList(SearchData).subscribe(response => {
+            this.companyList = <any>response.list;
+        }, error => {
+            this.errorMessage = this.gs.getError(error);
+        });
     }
+
+    LoadUser() {
+        
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.CODE = "";
+        SearchData.TYPE = "";
+
+        this.mainService.getUserList(SearchData).subscribe(response => {
+            this.userList = <any>response.list;
+        }, error => {
+            this.errorMessage = this.gs.getError(error);
+        });
+    }
+
 
     NewRecord() {
         this.mode = 'ADD'
@@ -87,10 +118,30 @@ export class RightsEditComponent implements OnInit {
 
     init() {
 
-        this.record.ua_pkid= this.pkid;
+        this.record.ua_pkid = this.pkid;
         this.record.comp_name = '';
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
+
+        
+        let parameter = {
+            menuid: this.mainService.menuid,
+            pkid: this.pkid,
+            type: this.mainService.param_type,
+            origin: 'rights-page',
+            mode: 'EDIT'
+        };
+
+
+        let params = new  HttpParams();
+        params = params.set('menuid', this.mainService.menuid);
+        params = params.set('pkid', this.pkid);
+        params = params.set('type', '');
+        params = params.set('origin', 'rights-page');        
+        params = params.set('mode', 'EDIT');        
+
+        console.log(params.toString());
+        this.location.replaceState('Silver.UserAdmin/BranchEditPage', params.toString());
     }
 
     GetRecord() {
@@ -100,7 +151,7 @@ export class RightsEditComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_User_Access>response.record;
-                this.records =  <Tbl_User_Rightsm[]>response.records;
+                this.records = <Tbl_User_Rightsm[]>response.records;
                 this.mode = 'EDIT';
             }, error => {
                 this.errorMessage = this.gs.getError(error);
