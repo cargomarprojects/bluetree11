@@ -8,7 +8,7 @@ import { InputBoxComponent } from '../../shared/input/inputbox.component';
 
 import { ModuleService } from '../services/modulem.service';
 import { User_Menu } from '../../core/models/menum';
-import { vm_Tbl_User_Access, Tbl_User_Access } from '../models/Tbl_User_Rights';
+import { vm_Tbl_User_Access, Tbl_User_Access, Tbl_User_Rightsm } from '../models/Tbl_User_Rights';
 
 import { SearchTable } from '../../shared/models/searchtable';
 import { UserRightsService } from '../services/userRights.service';
@@ -21,6 +21,8 @@ import { UserRightsService } from '../services/userRights.service';
 export class RightsEditComponent implements OnInit {
 
     record: Tbl_User_Access = <Tbl_User_Access>{};
+
+    records: Tbl_User_Rightsm [] = [];
 
     tab: string = 'main';
 
@@ -98,6 +100,7 @@ export class RightsEditComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_User_Access>response.record;
+                this.records =  <Tbl_User_Rightsm[]>response.records;
                 this.mode = 'EDIT';
             }, error => {
                 this.errorMessage = this.gs.getError(error);
@@ -113,6 +116,8 @@ export class RightsEditComponent implements OnInit {
         this.SaveParent();
         const saveRecord = <vm_Tbl_User_Access>{};
         saveRecord.record = this.record;
+        saveRecord.records = this.records;
+
         saveRecord.pkid = this.pkid;
         saveRecord.mode = this.mode;
         saveRecord.userinfo = this.gs.UserInfo;

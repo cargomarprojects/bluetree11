@@ -63,6 +63,7 @@ export interface vm_Tbl_User_Access {
     mode: string;
     pkid: string;
     record: Tbl_User_Access;
+    records: Tbl_User_Rightsm[];
     userinfo: any,
     filter: any;
 }
