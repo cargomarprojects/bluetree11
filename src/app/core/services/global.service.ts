@@ -20,6 +20,7 @@ import { gsdata } from '../models/gsdata';
 
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -1981,6 +1982,14 @@ export class GlobalService {
     const noAsString = _number.toFixed(_precision);
     return Number.parseFloat(noAsString);
   };
+
+  public getUrlParameter(obj : {}) {
+    let _param = new  HttpParams();
+    Object.entries(obj).forEach( (key:any[]) =>{
+        _param =  _param.set( key[0], key[1]);
+    })
+    return  _param.toString();
+  }
 
   public SetupCompanyList(_companylist: Companym[]) {
 

@@ -132,16 +132,7 @@ export class RightsEditComponent implements OnInit {
             mode: 'EDIT'
         };
 
-
-        let params = new  HttpParams();
-        params = params.set('menuid', this.mainService.menuid);
-        params = params.set('pkid', this.pkid);
-        params = params.set('type', '');
-        params = params.set('origin', 'rights-page');        
-        params = params.set('mode', 'EDIT');        
-
-        console.log(params.toString());
-        this.location.replaceState('Silver.UserAdmin/BranchEditPage', params.toString());
+        this.location.replaceState('Silver.UserAdmin/BranchEditPage', this.gs.getUrlParameter(parameter));
     }
 
     GetRecord() {
