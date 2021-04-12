@@ -48,6 +48,7 @@ export class OthTrackingPageComponent implements OnInit {
   modal: any;
   origin: string;
   parentid: string;
+  invokefrom: string;
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -75,6 +76,7 @@ export class OthTrackingPageComponent implements OnInit {
       this.origin = this.route.snapshot.queryParams.origin;
       this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
       this.parentid = this.route.snapshot.queryParams.parentid;
+      this.invokefrom = this.route.snapshot.queryParams.invokefrom;
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.pkid = options.pkid;
@@ -87,6 +89,7 @@ export class OthTrackingPageComponent implements OnInit {
       this.origin = options.origin;
       this.is_locked = options.is_locked;
       this.parentid = options.parentid;
+      this.invokefrom = options.invokefrom;
     }
     // this.mode = 'ADD';
     this.parentTypememo = this.parentType + "-MEMO";
@@ -203,8 +206,10 @@ export class OthTrackingPageComponent implements OnInit {
 
 
   Close() {
-    if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page"
-      || this.origin == "other-general-page" || this.origin == "seaimp-house-page")
+    if (this.invokefrom == "SI-HOUSE")
+      this.gs.LinkReturn('seaimp-house-page', this.pkid, '', this.parentid);
+    else if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page"
+      || this.origin == "other-general-page")
       this.gs.LinkReturn(this.origin, this.pkid, '', this.parentid);
     else
       this.location.back();
