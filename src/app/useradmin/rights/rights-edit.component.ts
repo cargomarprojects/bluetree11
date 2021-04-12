@@ -127,7 +127,7 @@ export class RightsEditComponent implements OnInit {
         let parameter = {
             menuid: this.mainService.menuid,
             pkid: this.pkid,
-            type: this.mainService.param_type,
+            type: '',
             origin: 'rights-page',
             mode: 'EDIT'
         };
