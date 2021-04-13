@@ -202,6 +202,7 @@ export class RightsEditComponent implements OnInit {
         this.records2  = this.records.filter( rec => rec.module_name == tagName);
     }
 
+    selectRecord = (rec : Tbl_User_Rightsm)  => rec.rights_company || rec.rights_admin || rec.rights_add  || rec.rights_edit || rec.rights_view || rec.rights_delete || rec.rights_print;
 
     Save() {
         if (!this.Allvalid())
@@ -209,7 +210,7 @@ export class RightsEditComponent implements OnInit {
         this.SaveParent();
         const saveRecord = <vm_Tbl_User_Access>{};
         saveRecord.record = this.record;
-        saveRecord.records = this.records;
+        saveRecord.records = this.records.filter(this.selectRecord);
 
         saveRecord.pkid = this.pkid;
         saveRecord.mode = this.mode;
@@ -249,14 +250,16 @@ export class RightsEditComponent implements OnInit {
             return bRet;
         }
 
-
-        if (this.gs.isBlank(this.record.comp_name)) {
-            bRet = false;
-            this.errorMessage = "Name Cannot be blank";
-            alert(this.errorMessage);
-            return bRet;
+        if ( this.gs.isBlank(this.record.ua_company_id))
+        {
+            alert("Company has to be selected");
+            return false;
         }
-
+        if ( this.gs.isBlank(this.record.ua_usr_id))
+        {
+            alert("User has to be selected");
+            return false;
+        }
 
         return bRet;
     }
