@@ -708,13 +708,7 @@ export class HousePageComponent implements OnInit {
     saverec.userinfo = this.gs.UserInfo;
 
     this.mainService.Save(saverec).subscribe(response => {
-
-      // if (response.retvalue) {
-
-      //   this.record.hbl_houseno = response.refno;
-      //   this.mode = 'EDIT';
-
-      // }
+ 
 
       if (response.retvalue == false) {
         this.errorMessage.push(response.error);
@@ -724,6 +718,16 @@ export class HousePageComponent implements OnInit {
         if (this.mode == "ADD" && response.refno != '')
           this.record.hbl_houseno = response.refno;
         this.mode = 'EDIT';
+       
+        let parameter = {
+          appid: this.gs.appid,
+          menuid: this.mainService.menuid,
+          pkid: this.pkid,
+          type: '',
+          origin: 'seaexp-house-page',
+          mode: 'EDIT'
+        };
+        this.location.replaceState('Silver.SeaExport.Trans/SeaExpHouseEditPage', this.gs.getUrlParameter(parameter));
         this.errorMessage.push('Save Complete');
         // alert(this.errorMessage);
       }
@@ -843,7 +847,16 @@ export class HousePageComponent implements OnInit {
   }
 
   Close() {
-    this.location.back();
+    let prm = {
+      appid: this.gs.appid,
+      id: this.gs.MENU_SE_HOUSE,
+      menuid: this.gs.MENU_SE_HOUSE,
+      menu_param: '',
+      origin: 'seaexp-house-page',
+      rnd: this.gs.getRandomInt()
+    };
+    this.gs.AutoReloadReturn(prm);
+    
   }
 
   private SaveParent() {

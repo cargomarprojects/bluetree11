@@ -338,6 +338,19 @@ export class SeaexpMasterEditComponent implements OnInit {
           if (this.mode == "ADD" && response.code != '')
             this.record.mbl_refno = response.code;
           this.mode = 'EDIT';
+
+          let parameter = {
+            appid: this.gs.appid,
+            menuid: this.mainService.menuid,
+            pkid: this.pkid,
+            type: '',
+            origin: 'seaexp-master-page',
+            mode: 'EDIT'
+          };
+          this.location.replaceState('Silver.SeaExport.Trans/SeaExpMasterEditPage', this.gs.getUrlParameter(parameter));
+
+          // this.mainService.RefreshList(this.record);
+
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage[0]);
         }
@@ -522,7 +535,15 @@ export class SeaexpMasterEditComponent implements OnInit {
 
 
   Close() {
-    this.location.back();
+    let prm = {
+      appid: this.gs.appid,
+      id: this.gs.MENU_SE_MASTER,
+      menuid: this.gs.MENU_SE_MASTER,
+      menu_param: '',
+      origin: 'seaexp-master-page',
+      rnd: this.gs.getRandomInt()
+    };
+    this.gs.AutoReloadReturn(prm);
   }
 
 
