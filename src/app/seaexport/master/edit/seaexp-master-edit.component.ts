@@ -744,17 +744,19 @@ export class SeaexpMasterEditComponent implements OnInit {
 
       case 'BOOKING': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_BOOKING,
           pkid: this.pkid,
           origin: 'seaexp-master-page',
           is_locked: this.is_locked
         };
-        this.gs.Naviagete('Silver.SeaExport.Trans/BookingPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.SeaExport.Trans/BookingPage', prm);
         break;
       }
 
       case 'HOUSE': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_HOUSE,
           parentid: this.pkid,
           pkid: this.hblid,
@@ -763,7 +765,7 @@ export class SeaexpMasterEditComponent implements OnInit {
           origin: 'seaexp-master-page',
           mode: this.hblmode
         };
-        this.gs.Naviagete('Silver.SeaExport.Trans/SeaExpHouseEditPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.SeaExport.Trans/SeaExpHouseEditPage', prm);
         break;
       }
 
@@ -774,48 +776,52 @@ export class SeaexpMasterEditComponent implements OnInit {
           origin: 'seaexp-master-page',
           is_locked: this.is_locked
         };
-        this.gs.Naviagete('Silver.SeaExport.Trans/MBLPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.SeaExport.Trans/MBLPage', prm);
         break;
       }
 
       case 'DOCKPAGE': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_MASTER_DOCK_RECEIPT,
           pkid: this.pkid,
           origin: 'seaexp-master-page',
           is_locked: this.is_locked
         };
-        this.gs.Naviagete('Silver.SeaExport.Trans/DockPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.SeaExport.Trans/DockPage', prm);
         break;
       }
 
       case 'ARAP': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_MASTER_ARAP,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
           mbl_type: 'OE',
           origin: 'seaexp-master-page',
         };
-        this.gs.Naviagete('Silver.USAccounts.Trans/InvoicePage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.USAccounts.Trans/InvoicePage', prm);
         break;
       }
 
       case 'PROFITREPORT': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_MASTER_PROFIT_REPORT,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
           mbl_type: 'OE',
           origin: 'seaexp-master-page',
         };
-        this.gs.Naviagete('Silver.USAccounts.Trans/ProfitReportPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.USAccounts.Trans/ProfitReportPage', prm);
         break;
       }
 
 
       case 'PAYMENT-REQUEST': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_PAYMENT_REQUEST,
           cp_master_id: this.pkid,
           cp_source: 'SEA-MASTER',
@@ -825,7 +831,7 @@ export class SeaexpMasterEditComponent implements OnInit {
           origin: 'seaexp-master-page',
           is_locked: this.is_locked
         };
-        this.gs.Naviagete('Silver.BusinessModule/PaymentRequestPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/PaymentRequestPage', prm);
         break;
       }
       case 'ATTACHMENT': {
@@ -850,6 +856,7 @@ export class SeaexpMasterEditComponent implements OnInit {
       }
       case 'MESSENGER-SLIP': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_MESSENGER_SLIP,
           mbl_pkid: this.pkid,
           mbl_mode: 'SEA EXPORT',
@@ -858,11 +865,12 @@ export class SeaexpMasterEditComponent implements OnInit {
           origin: 'seaexp-master-page',
           is_locked: this.is_locked
         };
-        this.gs.Naviagete('Silver.Other.Trans/MessengerSlipList', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/MessengerSlipList', prm);
         break;
       }
       case 'FOLLOWUP': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_MASTER,
           master_id: this.pkid,
           master_refno: this.record.mbl_refno,
@@ -871,11 +879,12 @@ export class SeaexpMasterEditComponent implements OnInit {
           origin: 'seaexp-master-page',
           is_locked: this.is_locked
         };
-        this.gs.Naviagete('Silver.BusinessModule/FollowUpPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/FollowUpPage', prm);
         break;
       }
       case 'REQUEST-APPROVAL': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_MASTER_REQUEST_APPROVAL,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
@@ -884,11 +893,12 @@ export class SeaexpMasterEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'seaexp-master-page'
         };
-        this.gs.Naviagete('Silver.Other.Trans/ApprovedPageList', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageList',  prm);
         break;
       }
       case 'INERNALMEMO': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_MASTER_INTERNAL_MEMO,
           refno: "REF : " + this.record.mbl_refno,
           pkid: this.pkid,
@@ -899,7 +909,7 @@ export class SeaexpMasterEditComponent implements OnInit {
           hideTracking: 'Y',
           is_locked: this.is_locked
         };
-        this.gs.Naviagete('Silver.Other.Trans/TrackingPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/TrackingPage',  prm);
         break;
       }
       case 'MANIFEST': {
@@ -926,23 +936,25 @@ export class SeaexpMasterEditComponent implements OnInit {
         break;
       } case 'COPY-CNTR': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_MASTER,
           pkid: this.pkid,
           mbl_cntr_type: this.record.mbl_cntr_type,
           origin: 'seaexp-master-page',
           is_locked: this.is_locked
         };
-        this.gs.Naviagete('Silver.SeaExport.Trans/CopyCntrPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.SeaExport.Trans/CopyCntrPage', prm);
         break;
       }
       case 'CERTIFICATE-ORIGIN': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_MASTER_CERTIFICATE_ORIGIN,
           pkid: this.pkid,
           origin: 'seaexp-master-page',
           is_locked: this.is_locked
         };
-        this.gs.Naviagete('Silver.SeaExport.Trans/CertOriginPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.SeaExport.Trans/CertOriginPage', prm);
         break;
       }
 

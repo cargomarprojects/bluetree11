@@ -1612,22 +1612,24 @@ export class SeaImpHouseEditComponent implements OnInit {
     switch (action) {
       case 'CUSTOMSHOLD': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SI_HOUSE_US_CUSTOM_HOLD,
           pkid: this.pkid,
           parentid: this.parentid,
           origin: this.origin,
           is_locked: this.is_locked,
         };
-        this.gs.Naviagete('Silver.SeaImport/USCustomsHoldPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.SeaImport/USCustomsHoldPage', prm);
         break;
       }
       case 'CARGOPICKUP': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SI_HOUSE_DELIVERY_ORDER,
           pkid: this.pkid,
           parentid: this.parentid,
           origin: this.origin,
-          invokefrom:'house',
+          invokefrom:'SI-HOUSE',
           is_locked: this.is_locked,
         };
         this.gs.Naviagete2('Silver.SeaImport/CargoPickupPage', prm);
@@ -1635,6 +1637,7 @@ export class SeaImpHouseEditComponent implements OnInit {
       }
       case 'RIDERPAGE': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SI_HOUSE,
           pkid: this.pkid,
           parentid: this.parentid,
@@ -1643,11 +1646,12 @@ export class SeaImpHouseEditComponent implements OnInit {
           origin: this.origin,
           canPrint: false
         };
-        this.gs.Naviagete('Silver.SeaImport/RiderPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.SeaImport/RiderPage', prm);
         break;
       }
       case 'SHIPMOVEMENT': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SI_SHIPMENT_MOVEMENT,
           refno: "REF : " + this.record.mbl_refno + "  HBL : " + this.record.hbl_houseno,
           pkid: this.pkid,
@@ -1657,9 +1661,10 @@ export class SeaImpHouseEditComponent implements OnInit {
           parentType: 'SEAIMP-SHIP',
           paramType: 'SHIP-MOVE-STATUS',
           hideTracking: 'Y',
+          invokefrom:'SI-HOUSE',
           is_locked: this.is_locked
         };
-        this.gs.Naviagete('Silver.Other.Trans/TrackingPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/TrackingPage', prm);
         break;
       }
       case 'ARRIVAL-NOTICE': {
@@ -1724,15 +1729,17 @@ export class SeaImpHouseEditComponent implements OnInit {
       }
       case 'HOUSE-DEVAN': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           parentid: this.parentid,
           source: 'SEA-HOUSE-DEVAN',
           title: 'Devanning Instruction',
           origin:  'seaimp-house-page',
+          invokefrom:'SI-HOUSE',
           is_locked: this.is_locked,
         };
-        this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage', prm);
         break;
       }
     }

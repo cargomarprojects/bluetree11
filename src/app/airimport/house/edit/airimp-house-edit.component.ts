@@ -729,39 +729,43 @@ export class AirImpHouseEditComponent implements OnInit {
 
     switch (action) {
       case 'CUSTOMSHOLD': {
-        let prm = {
-          menuid: this.gs.MENU_SI_HOUSE_US_CUSTOM_HOLD,
-          pkid: this.pkid,
-          is_locked: this.is_locked,
-          origin: 'seaimp-House-page',
-        };
-        this.gs.Naviagete('Silver.SeaImport/USCustomsHoldPage', JSON.stringify(prm));
+        // let prm = {
+        //   appid: this.gs.appid,
+        //   menuid: this.gs.MENU_SI_HOUSE_US_CUSTOM_HOLD,
+        //   pkid: this.pkid,
+        //   is_locked: this.is_locked,
+        //   origin: 'seaimp-House-page',
+        // };
+        // this.gs.Naviagete2('Silver.SeaImport/USCustomsHoldPage', prm);
         break;
       }
       case 'CARGOPICKUP': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AI_HOUSE_DELIVERY_ORDER,
           pkid: this.pkid,
           is_locked: this.is_locked,
           origin: 'airimp-House-page',
         };
-        this.gs.Naviagete('Silver.AirImport.Trans/AirCargoPickupPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.AirImport.Trans/AirCargoPickupPage', prm);
         break;
       }
       case 'RIDERPAGE': {
-        let prm = {
-          menuid: this.gs.MENU_SI_HOUSE,
-          pkid: this.pkid,
-          source: 'SI-DESC-EX',
-          is_locked: this.is_locked,
-          origin: 'seaimp-House-page',
-          canPrint: false
-        };
-        this.gs.Naviagete('Silver.SeaImport/RiderPage', JSON.stringify(prm));
+        // let prm = {
+        //   appid: this.gs.appid,
+        //   menuid: this.gs.MENU_SI_HOUSE,
+        //   pkid: this.pkid,
+        //   source: 'SI-DESC-EX',
+        //   is_locked: this.is_locked,
+        //   origin: 'seaimp-House-page',
+        //   canPrint: false
+        // };
+        // this.gs.Naviagete2('Silver.SeaImport/RiderPage', prm);
         break;
       }
       case 'SHIPMOVEMENT': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_AI_SHIPMENT_MOVEMENT,
           refno: "REF : " + this.record.mbl_refno + "  HBL : " + this.record.hbl_houseno,
           pkid: this.pkid,
@@ -772,7 +776,7 @@ export class AirImpHouseEditComponent implements OnInit {
           hideTracking: 'Y',
           is_locked: this.is_locked
         };
-        this.gs.Naviagete('Silver.Other.Trans/TrackingPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/TrackingPage', prm);
         break;
       }
       case 'ARRIVAL-NOTICE': {
@@ -901,6 +905,45 @@ export class AirImpHouseEditComponent implements OnInit {
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
       });
+  }
+
+  getLink(_mode: string) {
+
+    if (_mode == "LIST") {
+      if (this.origin == 'airimp-master-page')
+        return "/Silver.AirImport.Trans/AirImpMasterEditPage";
+      else
+        return "/Silver.AirImport.Trans/AirImpHousePage";
+    }
+    else
+      return null;
+
+  }
+  getParam(_mode: string) {
+
+    if (_mode == "LIST") {
+      if (this.origin == 'airimp-master-page') {
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_AI_MASTER,
+          pkid: this.parentid,
+          type: '',
+          origin: this.origin,
+          mode: 'EDIT',
+          rnd: this.gs.getRandomInt()
+        };
+       } else {
+        return {
+          appid: this.gs.appid,
+          id: this.gs.MENU_AI_HOUSE,
+          menuid: this.gs.MENU_AI_HOUSE,
+          menu_param: '',
+          origin: 'airimp-house-page',
+          rnd: this.gs.getRandomInt()
+        };
+      }
+    } else
+      return null;
   }
 
 }

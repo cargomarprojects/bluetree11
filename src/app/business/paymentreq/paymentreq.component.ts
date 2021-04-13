@@ -36,7 +36,7 @@ export class PaymentReqComponent implements OnInit {
   errorMessage: string;
   is_locked: boolean = false;
   origin: string;
-  
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -46,14 +46,24 @@ export class PaymentReqComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.menuid = options.menuid;
-    this.cp_master_id = options.cp_master_id;
-    this.cp_source = options.cp_source;
-    this.cp_mode = options.cp_mode;
-    this.cp_ref_no = options.cp_ref_no;
-    this.origin = options.origin;
-    this.is_locked = options.is_locked;
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.cp_master_id = this.route.snapshot.queryParams.cp_master_id;
+      this.cp_source = this.route.snapshot.queryParams.cp_source;
+      this.cp_mode = this.route.snapshot.queryParams.cp_mode;
+      this.cp_ref_no = this.route.snapshot.queryParams.cp_ref_no;
+      this.origin = this.route.snapshot.queryParams.origin;
+      this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.menuid = options.menuid;
+      this.cp_master_id = options.cp_master_id;
+      this.cp_source = options.cp_source;
+      this.cp_mode = options.cp_mode;
+      this.cp_ref_no = options.cp_ref_no;
+      this.origin = options.origin;
+      this.is_locked = options.is_locked;
+    }
     this.mode = 'ADD';
     this.initPage();
     this.actionHandler();

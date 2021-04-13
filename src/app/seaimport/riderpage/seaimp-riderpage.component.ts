@@ -41,13 +41,13 @@ export class SeaImpRiderPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+    const options = this.route.snapshot.queryParams;
     this.pkid = options.pkid;
     this.source = options.source;
     this.menuid = options.menuid;
     this.origin = options.origin;
     this.parentid = options.parentid;
-    this.IsLocked = options.is_locked;
+    this.IsLocked = JSON.parse(options.is_locked);
     this.mode = 'EDIT';
     this.initPage();
     this.actionHandler();

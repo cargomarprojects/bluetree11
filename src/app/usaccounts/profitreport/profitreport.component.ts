@@ -73,16 +73,17 @@ export class ProfitReportComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.init(this.route.snapshot.queryParams.parameter);
+    if (this.route.snapshot.queryParams.parameter == null)
+      this.init(this.route.snapshot.queryParams);
+    else
+      this.init(JSON.parse(this.route.snapshot.queryParams.parameter));
     this.List('SCREEN');
   }
 
 
   public init(params: any) {
 
-    const options = JSON.parse(params);
-
-
+    const options = params;
     this.menuid = options.menuid;
     this.mbl_type = options.mbl_type;
     this.mbl_pkid = options.mbl_pkid;

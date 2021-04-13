@@ -860,40 +860,44 @@ export class OthGeneralEditComponent implements OnInit {
     switch (action) {
       case 'DELIVERY-ORDER': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_OT_OPERATION_DELIVERY_ORDER,
           parentid: this.pkid,
           pickCategory: 'OTHERS',
           is_locked: this.is_locked,
           origin: 'other-general-page'
         };
-        this.gs.Naviagete('Silver.Other.Trans/DeliveryOrderList', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/DeliveryOrderList', prm);
         break;
       }
 
       case 'ARAP': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_OT_OPERATION_ARAP,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
           mbl_type: 'OT',
           origin: 'other-general-page',
         };
-        this.gs.Naviagete('Silver.USAccounts.Trans/InvoicePage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.USAccounts.Trans/InvoicePage',prm);
         break;
       }
       case 'PROFITREPORT': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_OT_OPERATION_PROFIT_REPORT,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
           mbl_type: 'OT',
           origin: 'other-general-page',
         };
-        this.gs.Naviagete('Silver.USAccounts.Trans/ProfitReportPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.USAccounts.Trans/ProfitReportPage', prm);
         break;
       }
       case 'PAYMENT-REQUEST': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_OT_PAYMENT_REQUEST,
           cp_master_id: this.pkid,
           cp_source: 'OTHER OPERATION',
@@ -902,7 +906,7 @@ export class OthGeneralEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'other-general-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/PaymentRequestPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/PaymentRequestPage',prm);
         break;
       }
       case 'ATTACHMENT': {
@@ -927,6 +931,7 @@ export class OthGeneralEditComponent implements OnInit {
       }
       case 'MESSENGER-SLIP': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_OT_MESSENGER_SLIP,
           mbl_pkid: this.pkid,
           mbl_mode: 'OTHERS',
@@ -934,11 +939,12 @@ export class OthGeneralEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'other-general-page'
         };
-        this.gs.Naviagete('Silver.Other.Trans/MessengerSlipList', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/MessengerSlipList', prm);
         break;
       }
       case 'FOLLOWUP': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_OT_OPERATION,
           master_id: this.pkid,
           master_refno: this.record.mbl_refno,
@@ -946,11 +952,12 @@ export class OthGeneralEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'other-general-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/FollowUpPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/FollowUpPage', prm);
         break;
       }
       case 'REQUEST-APPROVAL': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_OT_MASTER_REQUEST_APPROVAL,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
@@ -959,11 +966,12 @@ export class OthGeneralEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'other-general-page'
         };
-        this.gs.Naviagete('Silver.Other.Trans/ApprovedPageList', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageList', prm);
         break;
       }
       case 'INERNALMEMO': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.gs.MENU_OT_MASTER_INTERNAL_MEMO,
           refno: "REF : " + this.record.mbl_refno,
           pkid: this.pkid,
@@ -974,7 +982,7 @@ export class OthGeneralEditComponent implements OnInit {
           is_locked: this.is_locked,
           hideTracking: 'Y'
         };
-        this.gs.Naviagete('Silver.Other.Trans/TrackingPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/TrackingPage', prm);
         break;
       }
       case 'SHIP-LABEL-PRINT': {
@@ -1015,5 +1023,36 @@ export class OthGeneralEditComponent implements OnInit {
   }
   CloseModal() {
     this.modal.close();
+  }
+
+  getLink(_mode: string) {
+    if (_mode == "LIST")
+      return "/Silver.Other.Trans/GeneralPage";
+    else
+      return "/Silver.Other.Trans/OthGeneralEditPage";
+  }
+
+  getParam(_mode: string = "") {
+
+    if (_mode == "LIST") {
+      return {
+        appid: this.gs.appid,
+        id: this.gs.MENU_OT_OPERATION,
+        menuid: this.gs.MENU_OT_OPERATION,
+        menu_param: this.mainService.param_type,
+        origin: 'oth-general-page',
+        rnd: this.gs.getRandomInt()
+      };
+    } else {
+      return {
+        appid: this.gs.appid,
+        menuid: this.gs.MENU_OT_OPERATION,
+        pkid: '',
+        type: this.mainService.param_type,
+        origin: 'oth-general-page',
+        mode: 'ADD',
+        rnd: this.gs.getRandomInt()
+      };
+    }
   }
 }

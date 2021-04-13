@@ -53,11 +53,18 @@ export class DevanComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-        this.pkid = options.pkid;
-        this.menuid = options.menuid;
-        this.mbl_refno = options.mbl_refno;
-        this.IsLocked = options.is_locked;
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.mbl_refno = this.route.snapshot.queryParams.mbl_refno;
+            this.IsLocked = JSON.parse(this.route.snapshot.queryParams.is_locked);
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.pkid = options.pkid;
+            this.menuid = options.menuid;
+            this.mbl_refno = options.mbl_refno;
+            this.IsLocked = options.is_locked;
+        }
         this.mode = 'EDIT';
         this.initPage();
         this.actionHandler();

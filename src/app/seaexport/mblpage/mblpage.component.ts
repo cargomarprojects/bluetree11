@@ -75,10 +75,16 @@ export class MblPageComponent implements OnInit {
 
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.pkid = options.pkid;
-    this.menuid = options.menuid;
-    this.is_locked = options.is_locked;
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.pkid = this.route.snapshot.queryParams.pkid;
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.pkid = options.pkid;
+      this.menuid = options.menuid;
+      this.is_locked = options.is_locked;
+    }
     this.initPage();
     this.actionHandler();
   }
@@ -409,14 +415,14 @@ export class MblPageComponent implements OnInit {
 
     this.mainService.Save(saverec).subscribe(response => {
 
-        if (response.retvalue) {
-          this.mode = 'EDIT';
-          this.errorMessage.push('Save Complete');
-         // alert(this.errorMessage);
-        } else {
-          this.errorMessage.push(response.error);
-          alert(this.errorMessage);
-        }
+      if (response.retvalue) {
+        this.mode = 'EDIT';
+        this.errorMessage.push('Save Complete');
+        // alert(this.errorMessage);
+      } else {
+        this.errorMessage.push(response.error);
+        alert(this.errorMessage);
+      }
 
     }, error => {
       this.errorMessage.push(this.gs.getError(error));

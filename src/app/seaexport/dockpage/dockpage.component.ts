@@ -76,10 +76,16 @@ export class DockPageComponent implements OnInit {
 
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.pkid = options.pkid;
-    this.menuid = options.menuid;
-    this.is_locked = options.is_locked;
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.pkid = this.route.snapshot.queryParams.pkid;
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.pkid = options.pkid;
+      this.menuid = options.menuid;
+      this.is_locked = options.is_locked;
+    }
     this.initPage();
     this.actionHandler();
   }
@@ -337,15 +343,15 @@ export class DockPageComponent implements OnInit {
 
       if (this.mode == "ADD" && response.retvalue)
         this.record.mbld_dockno = response.docno;
- 
-        if (response.retvalue) {
-          this.mode = 'EDIT';
-          this.errorMessage.push('Save Complete');
-         // alert(this.errorMessage);
-        } else {
-          this.errorMessage.push(response.error);
-          alert(this.errorMessage);
-        }
+
+      if (response.retvalue) {
+        this.mode = 'EDIT';
+        this.errorMessage.push('Save Complete');
+        // alert(this.errorMessage);
+      } else {
+        this.errorMessage.push(response.error);
+        alert(this.errorMessage);
+      }
 
     }, error => {
       this.errorMessage.push(this.gs.getError(error));
@@ -370,7 +376,7 @@ export class DockPageComponent implements OnInit {
       this.record.mbld_shipper_add3 = rec.col3;
       this.record.mbld_shipper_add4 = this.gs.GetTelFax(rec.col6, rec.col7);
       if (!this.gs.isBlank(this.mbld_shipper_name_ctrl))
-      this.mbld_shipper_name_ctrl.focus();
+        this.mbld_shipper_name_ctrl.focus();
     }
 
     if (rec.controlname == 'CONSIGNEE') {
@@ -382,7 +388,7 @@ export class DockPageComponent implements OnInit {
       this.record.mbld_consigned_to4 = rec.col3;
       this.record.mbld_consigned_to5 = this.gs.GetTelFax(rec.col6, rec.col7);
       if (!this.gs.isBlank(this.mbld_consigned_to1_ctrl))
-      this.mbld_consigned_to1_ctrl.focus();
+        this.mbld_consigned_to1_ctrl.focus();
 
     }
 
@@ -507,7 +513,7 @@ export class DockPageComponent implements OnInit {
   callbackevent() {
     this.tab = 'main';
   }
-  
+
   getLink(_mode: string) {
     return "/Silver.SeaExport.Trans/SeaExpMasterEditPage";
   }

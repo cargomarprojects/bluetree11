@@ -49,14 +49,22 @@ export class FollowupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.menuid = options.menuid;
-    this.cf_masterid = options.master_id;
-    this.cf_refno = options.master_refno;
-    this.cf_refdate = options.master_refdate;
-    this.is_locked = options.is_locked;
-    this.origin = options.origin;
-
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.cf_masterid = this.route.snapshot.queryParams.master_id;
+      this.cf_refno = this.route.snapshot.queryParams.master_refno;
+      this.cf_refdate = this.route.snapshot.queryParams.master_refdate;
+      this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
+      this.origin = this.route.snapshot.queryParams.origin;
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.menuid = options.menuid;
+      this.cf_masterid = options.master_id;
+      this.cf_refno = options.master_refno;
+      this.cf_refdate = options.master_refdate;
+      this.is_locked = options.is_locked;
+      this.origin = options.origin;
+    }
     this.initPage();
     this.actionHandler();
   }

@@ -2,7 +2,7 @@
     <div class="row  align-items-center justify-content-left p-1">
         <label class="mr-1">{{mainservice.title}}</label>
         <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" [routerLink]="['/Silver.Other.Trans/OthGeneralEditPage']" [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid, pkid: '', type: this.mainservice.param_type,origin: 'oth-general-page',mode: 'ADD'}">New</a>
-        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        <!-- <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button> -->
     </div>
   </div>
   
