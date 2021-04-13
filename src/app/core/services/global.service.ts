@@ -1984,12 +1984,18 @@ export class GlobalService {
   };
 
   public getUrlParameter(obj : {}) {
-    let _param = new  HttpParams();
-    Object.entries(obj).forEach( (key:any[]) =>{
-        _param =  _param.set( key[0], key[1]);
-    })
+    const _param = Object.entries(obj).reduce ( (acc , key : any[]) =>{
+      return acc.set( key[0],key[1]);
+    }, new HttpParams());
     return  _param.toString();
   }
+
+
+  public _getUrlParameter(obj : {}) {
+    let _param = new  HttpParams({fromObject: obj});
+    return  _param.toString();
+  }
+
 
   public SetupCompanyList(_companylist: Companym[]) {
 
