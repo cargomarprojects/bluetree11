@@ -180,9 +180,9 @@ export class XmlRemarksComponent implements OnInit {
   }
 
   Close() {
-    if (this.origin == "seaimp-house-page")
-      this.gs.LinkReturn(this.origin, this.pkid, '', this.parentid);
-    else
+    // if (this.origin == "seaimp-house-page")
+    //   this.gs.LinkReturn(this.origin, this.pkid, '', this.parentid);
+    // else
       this.location.back();
   }
 
