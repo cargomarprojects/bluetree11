@@ -1983,7 +1983,8 @@ export class GlobalService {
     return Number.parseFloat(noAsString);
   };
 
-  public getUrlParameter(obj : {}) {
+  public _getUrlParameter(obj : {}) {
+    // this is not used
     const _param = Object.entries(obj).reduce ( (acc , key : any[]) =>{
       return acc.set( key[0],key[1]);
     }, new HttpParams());
@@ -1991,7 +1992,7 @@ export class GlobalService {
   }
 
 
-  public _getUrlParameter(obj : {}) {
+  public getUrlParameter(obj : {}) {
     let _param = new  HttpParams({fromObject: obj});
     return  _param.toString();
   }

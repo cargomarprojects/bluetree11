@@ -129,8 +129,6 @@ export class UserEditComponent implements OnInit {
 
     Save() {
 
-        let _mode = this.mode;
-
         if (!this.Allvalid())
             return;
         this.SaveParent();
@@ -149,17 +147,15 @@ export class UserEditComponent implements OnInit {
                 }
                 else {
                     this.mode = 'EDIT';
-                    if ( _mode == "ADD") {
                     let parameter = {
                         menuid: this.mainService.menuid,
                         pkid: this.pkid ,
                         type: '',
                         origin: 'user-page',
                         mode: 'EDIT'
-                      };
-                      this.location.replaceState('Silver.UserAdmin/UserEditPage', this.gs.getUrlParameter(parameter));
-                      
-                    }
+                    };
+                    this.location.replaceState('Silver.UserAdmin/UserEditPage', this.gs.getUrlParameter(parameter));
+                    
                     this.mainService.RefreshList(this.record);
                     this.errorMessage = 'Save Complete';
                     alert(this.errorMessage);
