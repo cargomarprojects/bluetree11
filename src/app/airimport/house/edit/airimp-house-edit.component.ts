@@ -405,6 +405,18 @@ export class AirImpHouseEditComponent implements OnInit {
           if (this.mode == "ADD" && response.code != '')
             this.record.mbl_refno = response.code;
           this.mode = 'EDIT';
+
+          let parameter = {
+            appid: this.gs.appid,
+            menuid: this.mainService.menuid,
+            pkid: this.pkid,
+            parentid :this.parentid,
+            type: '',
+            origin: 'airimp-house-edit-page',
+            mode: 'EDIT'
+          };
+          this.location.replaceState('Silver.AirImport.Trans/AirImpHouseEditPage', this.gs.getUrlParameter(parameter));
+
           if (this.origin === "airimp-house-page")
             this.mainService.RefreshList(this.record);
           this.errorMessage.push('Save Complete');
@@ -551,7 +563,15 @@ export class AirImpHouseEditComponent implements OnInit {
 
 
   Close() {
-    this.location.back();
+    let prm = {
+      appid: this.gs.appid,
+      id: this.gs.MENU_AI_HOUSE,
+      menuid: this.gs.MENU_AI_HOUSE,
+      menu_param: '',
+      origin: 'airimp-house-edit-page',
+      rnd: this.gs.getRandomInt()
+    };
+    this.gs.AutoReloadReturn(prm);
   }
 
 
