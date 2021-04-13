@@ -545,7 +545,7 @@
                         <td *ngIf="!gs.canEdit(this.gs.MENU_SI_HOUSE)">{{rec.hbl_houseno}}</td>
                         <td *ngIf="gs.canEdit(this.gs.MENU_SI_HOUSE)">
                           <a class='hlink' [routerLink]="['/Silver.SeaImport/SeaImpHouseEditPage']"
-                          [queryParams]="{appid : this.gs.appid ,menuid: this.gs.MENU_SI_HOUSE,parentid:this.pkid,pkid: rec.hbl_pkid,refno: this.record.mbl_refno ,type: 'OI',origin: 'seaimp-master-page',mode: 'EDIT'}">{{rec.hbl_houseno}}</a>
+                          [queryParams]="{appid : this.gs.appid ,menuid: this.gs.MENU_SI_HOUSE,parentid:this.pkid,pkid: rec.hbl_pkid,refno: this.record.mbl_refno ,type: 'OI',origin: 'seaimp-master-page',mode: 'EDIT',invokefrom:'MASTER'}">{{rec.hbl_houseno}}</a>
                         </td>
                         <td>{{rec.hbl_shipper_name}}</td>
                         <td>{{rec.hbl_consignee_name}}</td>

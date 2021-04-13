@@ -80,14 +80,13 @@ export class SeaImpHouseComponent implements OnInit {
       parentid: _record.hbl_mbl_id,
       type: '',
       origin: 'seaimp-house-page',
-      mode: 'EDIT'
+      mode: 'EDIT',
+      invokefrom:'LIST'
     };
-    this.gs.Naviagete('Silver.SeaImport/SeaImpHouseEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.SeaImport/SeaImpHouseEditPage', parameter);
   }
 
   editmaster(_record: Tbl_cargo_imp_housem) {
-    
-    
     this.gs.LinkPage("REFNO", "SEA IMPORT", _record.mbl_refno, _record.hbl_mbl_id, _record.hbl_pkid, "");
   }
 

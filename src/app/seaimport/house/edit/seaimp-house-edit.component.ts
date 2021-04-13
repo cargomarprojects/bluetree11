@@ -92,6 +92,7 @@ export class SeaImpHouseEditComponent implements OnInit {
   TelexRlsList: any[] = [];
   PaidStatusList: any[] = [];
   origin: string;
+  invokefrom: string;
   is_locked: boolean = false;
 
   constructor(
@@ -114,6 +115,7 @@ export class SeaImpHouseEditComponent implements OnInit {
       this.mode = this.route.snapshot.queryParams.mode;
       this.parentid = this.route.snapshot.queryParams.parentid;
       this.origin = this.route.snapshot.queryParams.origin;
+      this.invokefrom = this.route.snapshot.queryParams.invokefrom;
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.pkid = options.pkid;
@@ -121,6 +123,7 @@ export class SeaImpHouseEditComponent implements OnInit {
       this.mode = options.mode;
       this.parentid = options.parentid;
       this.origin = options.origin;
+      this.invokefrom = options.invokefrom;
     }
     this.closeCaption = 'Return';
     this.initPage();
@@ -1629,7 +1632,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           pkid: this.pkid,
           parentid: this.parentid,
           origin: this.origin,
-          invokefrom:'SI-HOUSE',
+          invokefrom: 'SI-HOUSE',
           is_locked: this.is_locked,
         };
         this.gs.Naviagete2('Silver.SeaImport/CargoPickupPage', prm);
@@ -1661,7 +1664,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           parentType: 'SEAIMP-SHIP',
           paramType: 'SHIP-MOVE-STATUS',
           hideTracking: 'Y',
-          invokefrom:'SI-HOUSE',
+          invokefrom: this.invokefrom,
           is_locked: this.is_locked
         };
         this.gs.Naviagete2('Silver.Other.Trans/TrackingPage', prm);
@@ -1735,8 +1738,8 @@ export class SeaImpHouseEditComponent implements OnInit {
           parentid: this.parentid,
           source: 'SEA-HOUSE-DEVAN',
           title: 'Devanning Instruction',
-          origin:  'seaimp-house-page',
-          invokefrom:'SI-HOUSE',
+          origin: 'seaimp-house-page',
+          invokefrom: 'SI-HOUSE',
           is_locked: this.is_locked,
         };
         this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage', prm);
@@ -1934,42 +1937,42 @@ export class SeaImpHouseEditComponent implements OnInit {
         });
     }*/
 
-    getLink(_mode: string) {
+  getLink(_mode: string) {
 
-      if (_mode == "LIST") {
-        if (this.origin == 'seaimp-master-page')
-          return "/Silver.SeaImport/SeaImpMasterEditPage";
-        else
-          return "/Silver.SeaImport/SeaImpHousePage";
-      }
+    if (_mode == "LIST") {
+      if (this.origin == 'seaimp-master-page')
+        return "/Silver.SeaImport/SeaImpMasterEditPage";
       else
-        return null;
-  
+        return "/Silver.SeaImport/SeaImpHousePage";
     }
-    getParam(_mode: string) {
-  
-      if (_mode == "LIST") {
-        if (this.origin == 'seaimp-master-page') {
-          return {
-            appid: this.gs.appid,
-            menuid: this.gs.MENU_SI_MASTER,
-            pkid: this.parentid,
-            type: '',
-            origin: this.origin,
-            mode: 'EDIT',
-            rnd: this.gs.getRandomInt()
-          };
-         } else {
-          return {
-            appid: this.gs.appid,
-            id: this.gs.MENU_SI_HOUSE,
-            menuid: this.gs.MENU_SI_HOUSE,
-            menu_param: '',
-            origin: this.origin,
-            rnd: this.gs.getRandomInt()
-          };
-        }
-      } else
-        return null;
-    }
+    else
+      return null;
+
+  }
+  getParam(_mode: string) {
+
+    if (_mode == "LIST") {
+      if (this.origin == 'seaimp-master-page') {
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_MASTER,
+          pkid: this.parentid,
+          type: '',
+          origin: this.origin,
+          mode: 'EDIT',
+          rnd: this.gs.getRandomInt()
+        };
+      } else {
+        return {
+          appid: this.gs.appid,
+          id: this.gs.MENU_SI_HOUSE,
+          menuid: this.gs.MENU_SI_HOUSE,
+          menu_param: '',
+          origin: this.origin,
+          rnd: this.gs.getRandomInt()
+        };
+      }
+    } else
+      return null;
+  }
 }
