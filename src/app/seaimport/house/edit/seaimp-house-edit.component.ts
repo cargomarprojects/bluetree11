@@ -607,14 +607,15 @@ export class SeaImpHouseEditComponent implements OnInit {
           this.mode = 'EDIT';
 
           let parameter = {
+            appid: this.gs.appid,
             menuid: this.mainService.menuid,
-            pkid: this.pkid ,
+            pkid: this.pkid,
             type: '',
-            origin: 'seaimp-house-edit-page',
+            origin: 'seaimp-house-page',
             mode: 'EDIT'
-        };
-        this.location.replaceState('Silver.SeaImport/SeaImpHouseEditPage', this.gs.getUrlParameter(parameter));
-        
+          };
+          this.location.replaceState('Silver.SeaImport/SeaImpHouseEditPage', this.gs.getUrlParameter(parameter));
+
 
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage);
@@ -836,7 +837,19 @@ export class SeaImpHouseEditComponent implements OnInit {
 
 
   Close() {
-    this.location.back();
+    if (window.history.length == this.gs.HISTORY_MIN_LENGTH) {
+      let prm = {
+        appid: this.gs.appid,
+        id: this.gs.MENU_SI_HOUSE,
+        menuid: this.gs.MENU_SI_HOUSE,
+        menu_param: '',
+        origin: 'seaimp-house-page',
+        rnd: this.gs.getRandomInt()
+      };
+      this.gs.Naviagete2('Silver.SeaImport/SeaImpHousePage', prm);
+
+    } else
+      this.location.back();
   }
 
 
