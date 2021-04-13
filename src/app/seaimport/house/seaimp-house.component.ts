@@ -75,6 +75,7 @@ export class SeaImpHouseComponent implements OnInit {
     }
     
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.hbl_pkid,
       parentid: _record.hbl_mbl_id,

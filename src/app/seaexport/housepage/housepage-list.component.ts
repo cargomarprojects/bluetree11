@@ -70,6 +70,7 @@ export class HousePageListComponent implements OnInit {
 
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.hbl_pkid,
       parentid :_record.hbl_mbl_id,
@@ -78,7 +79,7 @@ export class HousePageListComponent implements OnInit {
       mode: 'EDIT',
       refno:_record.mbl_refno
     };
-    this.gs.Naviagete('Silver.SeaExport.Trans/SeaExpHouseEditPage', JSON.stringify(parameter)); 
+    this.gs.Naviagete2('Silver.SeaExport.Trans/SeaExpHouseEditPage',  parameter); 
   }
 
   editmaster(_record: Tbl_cargo_exp_housem) {

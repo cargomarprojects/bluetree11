@@ -62,13 +62,14 @@ export class OthGeneralComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       type: this.mainservice.param_type,
       origin: 'oth-general-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.Other.Trans/OthGeneralEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/OthGeneralEditPage',  parameter);
 
   }
   edit(_record: Tbl_cargo_general) {
@@ -78,13 +79,14 @@ export class OthGeneralComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.mbl_pkid,
       type: this.mainservice.param_type,
       origin: 'oth-general-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Other.Trans/OthGeneralEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/OthGeneralEditPage', parameter);
   }
 
   Close() {

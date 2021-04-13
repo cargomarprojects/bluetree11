@@ -79,6 +79,7 @@ export class AirExpHouseComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.hbl_pkid,
       parentid: _record.hbl_mbl_id,
@@ -87,7 +88,7 @@ export class AirExpHouseComponent implements OnInit {
       origin: 'airexp-house-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.AirExport.Trans/AirExpHouseEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.AirExport.Trans/AirExpHouseEditPage',  parameter);
   }
 
   editmaster(_record: Tbl_cargo_exp_housem) {

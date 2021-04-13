@@ -63,13 +63,14 @@ export class AirImpMasterComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       type: this.mainservice.param_type,
       origin: 'airimp-master-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.AirImport.Trans/AirImpMasterEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.AirImport.Trans/AirImpMasterEditPage',  parameter);
 
   }
   edit(_record: Tbl_cargo_imp_masterm) {
@@ -79,13 +80,14 @@ export class AirImpMasterComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.mbl_pkid,
       type: '',
       origin: 'airimp-master-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.AirImport.Trans/AirImpMasterEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.AirImport.Trans/AirImpMasterEditPage', parameter);
   }
 
   Close() {

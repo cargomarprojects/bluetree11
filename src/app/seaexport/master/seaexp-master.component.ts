@@ -109,7 +109,7 @@ export class SeaexpMasterComponent implements OnInit {
       origin: 'seaexp-master-page',
       mode: 'ADD'
     };
-    this.router.navigate(['Silver.SeaExport.Trans/SeaExpMasterEditPage'], { queryParams: { menuid: this.mainservice.menuid, pkid: '', type: this.mainservice.param_type, origin: 'seaexp-master-page', mode: 'ADD' } });
+    this.router.navigate(['Silver.SeaExport.Trans/SeaExpMasterEditPage'], { queryParams: { appid: this.gs.appid, menuid: this.mainservice.menuid, pkid: '', type: this.mainservice.param_type, origin: 'seaexp-master-page', mode: 'ADD' } });
   }
   edit(_record: Tbl_cargo_exp_masterm) {
     if (!this.mainservice.canEdit) {
@@ -117,13 +117,14 @@ export class SeaexpMasterComponent implements OnInit {
       return;
     }
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.mbl_pkid,
       type: '',
       origin: 'seaexp-master-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.SeaExport.Trans/SeaExpMasterEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.SeaExport.Trans/SeaExpMasterEditPage',  parameter);
   }
 
   Close() {

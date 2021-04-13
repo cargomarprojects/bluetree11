@@ -63,13 +63,14 @@ export class SeaImpMasterComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       type: this.mainservice.param_type,
       origin: 'seaimp-master-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.SeaImport/SeaImpMasterEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.SeaImport/SeaImpMasterEditPage', parameter);
   }
   
   edit(_record: Tbl_cargo_imp_masterm) {
@@ -79,13 +80,14 @@ export class SeaImpMasterComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.mbl_pkid,
       type: '',
       origin: 'seaimp-master-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.SeaImport/SeaImpMasterEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.SeaImport/SeaImpMasterEditPage',  parameter);
   }
 
   Close() {
