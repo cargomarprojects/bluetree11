@@ -1983,13 +1983,20 @@ export class GlobalService {
     return Number.parseFloat(noAsString);
   };
 
-  public getUrlParameter(obj : {}) {
-    let _param = new  HttpParams();
-    Object.entries(obj).forEach( (key:any[]) =>{
-        _param =  _param.set( key[0], key[1]);
-    })
+  public _getUrlParameter(obj : {}) {
+    // this is not used
+    const _param = Object.entries(obj).reduce ( (acc , key : any[]) =>{
+      return acc.set( key[0],key[1]);
+    }, new HttpParams());
     return  _param.toString();
   }
+
+
+  public getUrlParameter(obj : {}) {
+    let _param = new  HttpParams({fromObject: obj});
+    return  _param.toString();
+  }
+
 
   public SetupCompanyList(_companylist: Companym[]) {
 
