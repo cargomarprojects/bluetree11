@@ -419,7 +419,6 @@ export class OthGeneralExpenseEditComponent implements OnInit {
       rnd: this.gs.getRandomInt()
     };
     this.gs.AutoReloadReturn(prm);
-    this.location.back();
   }
 
   LovSelected(_Record: SearchTable) {
