@@ -16,6 +16,7 @@ export class Tbl_User_Rightsm {
     menu_xap_class : string ;
 
     rights_ua_id : string ;
+    rights_all : boolean ;
     rights_company : string ;
     rights_admin : string ;
     rights_add : string ;

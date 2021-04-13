@@ -12,7 +12,7 @@ import { vm_Tbl_User_Access, Tbl_User_Access, Tbl_User_Rightsm } from '../models
 
 import { SearchTable } from '../../shared/models/searchtable';
 import { UserRightsService } from '../services/userRights.service';
-import { HttpParams } from '@angular/common/http';
+
 
 
 @Component({
@@ -25,8 +25,13 @@ export class RightsEditComponent implements OnInit {
 
     records: Tbl_User_Rightsm[] = [];
 
+    records2: Tbl_User_Rightsm[] = [];
+
     companyList: any[];
     userList: any[];
+
+    moduleList : any[];
+    
 
     tab: string = 'main';
 
@@ -109,6 +114,7 @@ export class RightsEditComponent implements OnInit {
         if (this.mode == 'ADD') {
             this.record = <Tbl_User_Access>{};
             this.pkid = this.gs.getGuid();
+            this.record.ua_default = 'N';
             this.init();
         }
         if (this.mode == 'EDIT') {
@@ -117,12 +123,10 @@ export class RightsEditComponent implements OnInit {
     }
 
     init() {
-
         this.record.ua_pkid = this.pkid;
         this.record.comp_name = '';
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
-
         
         let parameter = {
             menuid: this.mainService.menuid,
@@ -143,22 +147,70 @@ export class RightsEditComponent implements OnInit {
             .subscribe(response => {
                 this.record = <Tbl_User_Access>response.record;
                 this.records = <Tbl_User_Rightsm[]>response.records;
+                this.getModules(this.records);
                 this.mode = 'EDIT';
             }, error => {
                 this.errorMessage = this.gs.getError(error);
             });
     }
 
+    swap(rec, fld) {
+        if (fld == 'all') {
+            rec.rights_all = !rec.rights_all;
+            rec.rights_company = 'N';
+            rec.rights_admin = 'N';
+            rec.rights_add = rec.rights_all ? 'Y' : 'N';
+            rec.rights_edit = rec.rights_all ? 'Y' : 'N';
+            rec.rights_view = rec.rights_all ? 'Y' : 'N';
+            rec.rights_delete = 'N';
+            rec.rights_print = rec.rights_all ? 'Y' : 'N';
+            rec.rights_email = rec.rights_all ? 'Y' : 'N';
+        }
+        if (fld == 'company')
+            rec.rights_company = rec.rights_company == 'Y' ? 'N' : 'Y';
+        if (fld == 'admin')
+            rec.rights_admin = rec.rights_admin == 'Y' ? 'N' : 'Y';
+        if (fld == 'add')
+            rec.rights_add = rec.rights_add == 'Y' ? 'N' : 'Y';
+        if (fld == 'edit')
+            rec.rights_edit = rec.rights_edit == 'Y' ? 'N' : 'Y';
+        if (fld == 'view')
+            rec.rights_view = rec.rights_view == 'Y' ? 'N' : 'Y';
+        if (fld == 'delete')
+            rec.rights_delete = rec.rights_delete == 'Y' ? 'N' : 'Y';
+        if (fld == 'print')
+            rec.rights_print = rec.rights_print == 'Y' ? 'N' : 'Y';
+        if (fld == 'email')
+            rec.rights_email = rec.rights_email == 'Y' ? 'N' : 'Y';
+    }
+
+      
+    getModules(list : any[]){
+        this.moduleList = [];
+        list.filter( (rec) =>{
+            if ( this.moduleList.indexOf(rec.module_name) == -1)
+                this.moduleList.push(rec.module_name);
+        })    
+        if ( this.moduleList.length > 0) {
+            this.filterRecord(this.moduleList[0])
+        }
+        else 
+            this.filterRecord('');
+    }
+
+    filterRecord(tagName : string){
+        this.records2  = this.records.filter( rec => rec.module_name == tagName);
+    }
+
+    selectRecord = (rec : Tbl_User_Rightsm)  => rec.rights_company || rec.rights_admin || rec.rights_add  || rec.rights_edit || rec.rights_view || rec.rights_delete || rec.rights_print;
 
     Save() {
-
-
         if (!this.Allvalid())
             return;
         this.SaveParent();
         const saveRecord = <vm_Tbl_User_Access>{};
         saveRecord.record = this.record;
-        saveRecord.records = this.records;
+        saveRecord.records = this.records.filter(this.selectRecord);
 
         saveRecord.pkid = this.pkid;
         saveRecord.mode = this.mode;
@@ -198,14 +250,16 @@ export class RightsEditComponent implements OnInit {
             return bRet;
         }
 
-
-        if (this.gs.isBlank(this.record.comp_name)) {
-            bRet = false;
-            this.errorMessage = "Name Cannot be blank";
-            alert(this.errorMessage);
-            return bRet;
+        if ( this.gs.isBlank(this.record.ua_company_id))
+        {
+            alert("Company has to be selected");
+            return false;
         }
-
+        if ( this.gs.isBlank(this.record.ua_usr_id))
+        {
+            alert("User has to be selected");
+            return false;
+        }
 
         return bRet;
     }
