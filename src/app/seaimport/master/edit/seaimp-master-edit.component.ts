@@ -302,6 +302,17 @@ export class SeaImpMasterEditComponent implements OnInit {
           if (this.mode == "ADD" && response.code != '')
             this.record.mbl_refno = response.code;
           this.mode = 'EDIT';
+         
+          let parameter = {
+            menuid: this.mainService.menuid,
+            pkid: this.pkid ,
+            type: '',
+            origin: 'seaimp-master-edit-page',
+            mode: 'EDIT'
+        };
+        this.location.replaceState('Silver.SeaImport/SeaImpMasterEditPage', this.gs.getUrlParameter(parameter));
+        
+        // this.mainService.RefreshList(this.record);
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage);
         }

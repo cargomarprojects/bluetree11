@@ -361,6 +361,30 @@ export class SeaImpCargoPickupComponent implements OnInit {
           alert(this.errorMessage);
         }
         else {
+          if (this.invokefrom == "MASTER") {
+            let parameter = {
+              appid: this.gs.appid,
+              menuid: this.gs.MENU_SI_MASTER_DELIVERY_ORDER,
+              pkid: this.pkid,
+              parentid:  this.parentid,
+              origin: 'seaimp-master-page',
+              invokefrom: 'MASTER',
+              is_locked: this.IsLocked
+            };
+            this.location.replaceState('Silver.SeaImport/CargoPickupPage', this.gs.getUrlParameter(parameter));
+          }else{
+            let parameter = {
+              appid: this.gs.appid,
+              menuid: this.gs.MENU_SI_HOUSE_DELIVERY_ORDER,
+              pkid: this.pkid,
+              parentid: this.parentid,
+              origin: 'seaimp-house-page',
+              invokefrom: 'HOUSE',
+              is_locked: this.IsLocked,
+            };
+            this.location.replaceState('Silver.SeaImport/CargoPickupPage', this.gs.getUrlParameter(parameter));
+          }
+
           this.errorMessage = 'Save Complete';
           // alert(this.errorMessage);
         }

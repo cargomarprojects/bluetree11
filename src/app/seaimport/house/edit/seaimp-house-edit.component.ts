@@ -605,6 +605,17 @@ export class SeaImpHouseEditComponent implements OnInit {
           if (this.mode == "ADD" && response.code != '')
             this.record.mbl_refno = response.code;
           this.mode = 'EDIT';
+
+          let parameter = {
+            menuid: this.mainService.menuid,
+            pkid: this.pkid ,
+            type: '',
+            origin: 'seaimp-house-edit-page',
+            mode: 'EDIT'
+        };
+        this.location.replaceState('Silver.SeaImport/SeaImpHouseEditPage', this.gs.getUrlParameter(parameter));
+        
+
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage);
         }

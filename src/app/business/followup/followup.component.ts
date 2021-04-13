@@ -271,9 +271,9 @@ export class FollowupComponent implements OnInit {
 
 
   Close() {
-    if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
-      this.gs.LinkReturn(this.origin, this.cf_masterid, '');
-    else
+    // if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
+    //   this.gs.LinkReturn(this.origin, this.cf_masterid, '');
+    // else
       this.location.back();
   }
 
