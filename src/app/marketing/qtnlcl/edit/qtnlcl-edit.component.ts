@@ -337,6 +337,7 @@ export class QtnLclEditComponent implements OnInit {
 
 
     Close() {
+        alert(window.history.length);
         this.location.back();
     }
 
