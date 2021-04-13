@@ -357,6 +357,18 @@ export class OthGeneralEditComponent implements OnInit {
           if (this.mode == "ADD" && response.code != '')
             this.record.mbl_refno = response.code;
           this.mode = 'EDIT';
+          let parameter = {
+            appid: this.gs.appid,
+            menuid: this.mainService.menuid,
+            pkid: this.pkid,
+            type: this.mainService.param_type,
+            origin: 'oth-general-edit-page',
+            mode: 'EDIT'
+          };
+          this.location.replaceState('Silver.Other.Trans/OthGeneralEditPage', this.gs.getUrlParameter(parameter));
+
+          // this.mainService.RefreshList(this.record);
+
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage);
         }
@@ -499,7 +511,16 @@ export class OthGeneralEditComponent implements OnInit {
 
 
   Close() {
-    this.location.back();
+
+    let prm = {
+      appid: this.gs.appid,
+      id: this.gs.MENU_OT_OPERATION,
+      menuid: this.gs.MENU_OT_OPERATION,
+      menu_param: this.mainService.param_type,
+      origin: 'oth-general-edit-page',
+      rnd: this.gs.getRandomInt()
+    };
+    this.gs.AutoReloadReturn(prm);
   }
 
 
@@ -837,21 +858,21 @@ export class OthGeneralEditComponent implements OnInit {
       this.record.hbl_chwt = this.gs.Convert_Weight("LBS2KG", this.record.hbl_chwt_lbs, 3);
   }
 
-  BtnNavigation2(action: string, _type : string ,  attachmodal: any = null) {
-    if ( action == "ARAP") {
-        if (_type == "L")
-          return '/Silver.USAccounts.Trans/InvoicePage';
-        if (_type == 'P' )
-          return  {
-            appid: this.gs.appid,
-            menuid: this.gs.MENU_OT_OPERATION_ARAP,
-            mbl_pkid: this.pkid,
-            mbl_refno: this.record.mbl_refno,
-            mbl_type: 'OT',
-            origin: 'other-general-page',
-          };
-	}
-}
+  BtnNavigation2(action: string, _type: string, attachmodal: any = null) {
+    if (action == "ARAP") {
+      if (_type == "L")
+        return '/Silver.USAccounts.Trans/InvoicePage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_OT_OPERATION_ARAP,
+          mbl_pkid: this.pkid,
+          mbl_refno: this.record.mbl_refno,
+          mbl_type: 'OT',
+          origin: 'other-general-page',
+        };
+    }
+  }
 
 
 
@@ -880,7 +901,7 @@ export class OthGeneralEditComponent implements OnInit {
           mbl_type: 'OT',
           origin: 'other-general-page',
         };
-        this.gs.Naviagete2('Silver.USAccounts.Trans/InvoicePage',prm);
+        this.gs.Naviagete2('Silver.USAccounts.Trans/InvoicePage', prm);
         break;
       }
       case 'PROFITREPORT': {
@@ -906,7 +927,7 @@ export class OthGeneralEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'other-general-page'
         };
-        this.gs.Naviagete2('Silver.BusinessModule/PaymentRequestPage',prm);
+        this.gs.Naviagete2('Silver.BusinessModule/PaymentRequestPage', prm);
         break;
       }
       case 'ATTACHMENT': {

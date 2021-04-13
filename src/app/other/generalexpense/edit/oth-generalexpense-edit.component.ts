@@ -332,6 +332,17 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           if (this.mode == "ADD" && response.code != '' && this.EXPTYPE.trim() == "FA")
             this.record.mbl_refno = response.code;
           this.mode = 'EDIT';
+         
+          let parameter = {
+            appid: this.gs.appid,
+            menuid: this.mainService.menuid,
+            pkid: this.pkid,
+            exptype: this.mainService.param_type,
+            origin: 'oth-generalexp-edit-page',
+            mode: 'EDIT'
+          };
+          this.location.replaceState('Silver.Other.Trans/OthGeneralExpenseEditPage', this.gs.getUrlParameter(parameter));
+
           this.errorMessage.push('Save Complete');
           //alert(this.errorMessage);
         }
@@ -399,6 +410,15 @@ export class OthGeneralExpenseEditComponent implements OnInit {
 
 
   Close() {
+    let prm = {
+      appid: this.gs.appid,
+      id: this.mainService.menuid,
+      menuid: this.mainService.menuid,
+      menu_param: this.mainService.param_type,
+      origin: 'oth-generalexp-edit-page',
+      rnd: this.gs.getRandomInt()
+    };
+    this.gs.AutoReloadReturn(prm);
     this.location.back();
   }
 
