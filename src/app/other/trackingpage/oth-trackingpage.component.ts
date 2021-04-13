@@ -206,12 +206,12 @@ export class OthTrackingPageComponent implements OnInit {
 
 
   Close() {
-    if (this.invokefrom == "SI-HOUSE")
-      this.gs.LinkReturn('seaimp-house-page', this.pkid, '', this.parentid);
-    else if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page"
-      || this.origin == "other-general-page")
-      this.gs.LinkReturn(this.origin, this.pkid, '', this.parentid);
-    else
+    // if (this.invokefrom == "SI-HOUSE")
+    //   this.gs.LinkReturn('seaimp-house-page', this.pkid, '', this.parentid);
+    // else if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page"
+    //   || this.origin == "other-general-page")
+    //   this.gs.LinkReturn(this.origin, this.pkid, '', this.parentid);
+    // else
       this.location.back();
   }
   OnChange(field: string) {

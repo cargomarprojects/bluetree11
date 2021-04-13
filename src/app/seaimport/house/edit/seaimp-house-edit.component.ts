@@ -92,6 +92,7 @@ export class SeaImpHouseEditComponent implements OnInit {
   TelexRlsList: any[] = [];
   PaidStatusList: any[] = [];
   origin: string;
+  invokefrom: string;
   is_locked: boolean = false;
 
   constructor(
@@ -114,6 +115,7 @@ export class SeaImpHouseEditComponent implements OnInit {
       this.mode = this.route.snapshot.queryParams.mode;
       this.parentid = this.route.snapshot.queryParams.parentid;
       this.origin = this.route.snapshot.queryParams.origin;
+      this.invokefrom = this.route.snapshot.queryParams.invokefrom;
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.pkid = options.pkid;
@@ -121,6 +123,7 @@ export class SeaImpHouseEditComponent implements OnInit {
       this.mode = options.mode;
       this.parentid = options.parentid;
       this.origin = options.origin;
+      this.invokefrom = options.invokefrom;
     }
     this.closeCaption = 'Return';
     this.initPage();
@@ -602,6 +605,18 @@ export class SeaImpHouseEditComponent implements OnInit {
           if (this.mode == "ADD" && response.code != '')
             this.record.mbl_refno = response.code;
           this.mode = 'EDIT';
+
+          let parameter = {
+            appid: this.gs.appid,
+            menuid: this.mainService.menuid,
+            pkid: this.pkid,
+            type: '',
+            origin: 'seaimp-house-page',
+            mode: 'EDIT'
+          };
+          this.location.replaceState('Silver.SeaImport/SeaImpHouseEditPage', this.gs.getUrlParameter(parameter));
+
+
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage);
         }
@@ -822,7 +837,29 @@ export class SeaImpHouseEditComponent implements OnInit {
 
 
   Close() {
-    this.location.back();
+    // if (window.history.length == this.gs.HISTORY_MIN_LENGTH) {
+    //   let prm = {
+    //     appid: this.gs.appid,
+    //     id: this.gs.MENU_SI_HOUSE,
+    //     menuid: this.gs.MENU_SI_HOUSE,
+    //     menu_param: '',
+    //     origin: 'seaimp-house-page',
+    //     rnd: this.gs.getRandomInt()
+    //   };
+    //   this.gs.Naviagete2('Silver.SeaImport/SeaImpHousePage', prm);
+
+    // } else
+    //   this.location.back();
+
+    let prm = {
+      appid: this.gs.appid,
+      id: this.gs.MENU_SI_HOUSE,
+      menuid: this.gs.MENU_SI_HOUSE,
+      menu_param: '',
+      origin: 'seaimp-house-page',
+      rnd: this.gs.getRandomInt()
+    };
+    this.gs.AutoReloadReturn(prm);
   }
 
 
@@ -1629,7 +1666,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           pkid: this.pkid,
           parentid: this.parentid,
           origin: this.origin,
-          invokefrom:'SI-HOUSE',
+          invokefrom: 'SI-HOUSE',
           is_locked: this.is_locked,
         };
         this.gs.Naviagete2('Silver.SeaImport/CargoPickupPage', prm);
@@ -1661,7 +1698,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           parentType: 'SEAIMP-SHIP',
           paramType: 'SHIP-MOVE-STATUS',
           hideTracking: 'Y',
-          invokefrom:'SI-HOUSE',
+          invokefrom: this.invokefrom,
           is_locked: this.is_locked
         };
         this.gs.Naviagete2('Silver.Other.Trans/TrackingPage', prm);
@@ -1735,8 +1772,8 @@ export class SeaImpHouseEditComponent implements OnInit {
           parentid: this.parentid,
           source: 'SEA-HOUSE-DEVAN',
           title: 'Devanning Instruction',
-          origin:  'seaimp-house-page',
-          invokefrom:'SI-HOUSE',
+          origin: 'seaimp-house-page',
+          invokefrom: 'SI-HOUSE',
           is_locked: this.is_locked,
         };
         this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage', prm);
@@ -1934,42 +1971,42 @@ export class SeaImpHouseEditComponent implements OnInit {
         });
     }*/
 
-    getLink(_mode: string) {
+  getLink(_mode: string) {
 
-      if (_mode == "LIST") {
-        if (this.origin == 'seaimp-master-page')
-          return "/Silver.SeaImport/SeaImpMasterEditPage";
-        else
-          return "/Silver.SeaImport/SeaImpHousePage";
-      }
+    if (_mode == "LIST") {
+      if (this.origin == 'seaimp-master-page')
+        return "/Silver.SeaImport/SeaImpMasterEditPage";
       else
-        return null;
-  
+        return "/Silver.SeaImport/SeaImpHousePage";
     }
-    getParam(_mode: string) {
-  
-      if (_mode == "LIST") {
-        if (this.origin == 'seaimp-master-page') {
-          return {
-            appid: this.gs.appid,
-            menuid: this.gs.MENU_SI_MASTER,
-            pkid: this.parentid,
-            type: '',
-            origin: this.origin,
-            mode: 'EDIT',
-            rnd: this.gs.getRandomInt()
-          };
-         } else {
-          return {
-            appid: this.gs.appid,
-            id: this.gs.MENU_SI_HOUSE,
-            menuid: this.gs.MENU_SI_HOUSE,
-            menu_param: '',
-            origin: this.origin,
-            rnd: this.gs.getRandomInt()
-          };
-        }
-      } else
-        return null;
-    }
+    else
+      return null;
+
+  }
+  getParam(_mode: string) {
+
+    if (_mode == "LIST") {
+      if (this.origin == 'seaimp-master-page') {
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_MASTER,
+          pkid: this.parentid,
+          type: '',
+          origin: this.origin,
+          mode: 'EDIT',
+          rnd: this.gs.getRandomInt()
+        };
+      } else {
+        return {
+          appid: this.gs.appid,
+          id: this.gs.MENU_SI_HOUSE,
+          menuid: this.gs.MENU_SI_HOUSE,
+          menu_param: '',
+          origin: this.origin,
+          rnd: this.gs.getRandomInt()
+        };
+      }
+    } else
+      return null;
+  }
 }

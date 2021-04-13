@@ -302,6 +302,18 @@ export class SeaImpMasterEditComponent implements OnInit {
           if (this.mode == "ADD" && response.code != '')
             this.record.mbl_refno = response.code;
           this.mode = 'EDIT';
+
+          let parameter = {
+            appid: this.gs.appid,
+            menuid: this.mainService.menuid,
+            pkid: this.pkid,
+            type: '',
+            origin: 'seaimp-master-page',
+            mode: 'EDIT'
+          };
+          this.location.replaceState('Silver.SeaImport/SeaImpMasterEditPage', this.gs.getUrlParameter(parameter));
+
+          // this.mainService.RefreshList(this.record);
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage);
         }
@@ -489,7 +501,29 @@ export class SeaImpMasterEditComponent implements OnInit {
 
 
   Close() {
-    this.location.back();
+    // if (window.history.length == this.gs.HISTORY_MIN_LENGTH) {
+    //   let prm = {
+    //     appid: this.gs.appid,
+    //     id: this.gs.MENU_SI_MASTER,
+    //     menuid: this.gs.MENU_SI_MASTER,
+    //     menu_param: '',
+    //     origin: 'seaimp-master-page',
+    //     rnd: this.gs.getRandomInt()
+    //   };
+    //   this.gs.Naviagete2('Silver.SeaImport/SeaImpMasterPage', prm);
+
+    // } else
+    //   this.location.back();
+
+    let prm = {
+      appid: this.gs.appid,
+      id: this.gs.MENU_SI_MASTER,
+      menuid: this.gs.MENU_SI_MASTER,
+      menu_param: '',
+      origin: 'seaimp-master-page',
+      rnd: this.gs.getRandomInt()
+    };
+    this.gs.AutoReloadReturn(prm);
   }
 
 
@@ -825,7 +859,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
           origin: 'seaimp-master-page',
-          is_locked: this.is_locked 
+          is_locked: this.is_locked
         };
         this.gs.Naviagete2('Silver.SeaImport/DevanInstructionPage', prm);
         break;
@@ -838,7 +872,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           cp_source: 'SEA-MASTER',
           cp_mode: 'SEA IMPORT',
           cp_ref_no: this.record.mbl_refno,
-          is_locked: this.is_locked ,
+          is_locked: this.is_locked,
           origin: 'seaimp-master-page'
         };
         this.gs.Naviagete2('Silver.BusinessModule/PaymentRequestPage', prm);
@@ -851,7 +885,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           mbl_pkid: this.pkid,
           mbl_mode: 'SEA IMPORT',
           mbl_refno: this.record.mbl_refno,
-          islocked: this.is_locked ,
+          islocked: this.is_locked,
           origin: 'seaimp-master-page',
           is_locked: this.is_locked
         };
@@ -865,7 +899,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           master_id: this.pkid,
           master_refno: this.record.mbl_refno,
           master_refdate: this.record.mbl_ref_date,
-          is_locked: this.is_locked ,
+          is_locked: this.is_locked,
           origin: 'seaimp-master-page'
         };
         this.gs.Naviagete2('Silver.BusinessModule/FollowUpPage', prm);
@@ -879,7 +913,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           mbl_refno: this.record.mbl_refno,
           doc_type: 'SEA IMPORT',
           req_type: 'REQUEST',
-          is_locked: this.is_locked ,
+          is_locked: this.is_locked,
           origin: 'seaimp-master-page'
         };
         this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageList', prm);
@@ -896,7 +930,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           parentType: 'SEAIMP-CNTR',
           paramType: 'CNTR-MOVE-STATUS',
           hideTracking: 'Y',
-          is_locked: this.is_locked 
+          is_locked: this.is_locked
         };
         this.gs.Naviagete2('Silver.Other.Trans/TrackingPage', prm);
         break;
@@ -909,7 +943,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           parentid: '',
           origin: 'seaimp-master-page',
           invokefrom: 'MASTER',
-          is_locked: this.is_locked 
+          is_locked: this.is_locked
         };
         this.gs.Naviagete2('Silver.SeaImport/CargoPickupPage', prm);
         break;
@@ -921,7 +955,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           pkid: this.pkid,
           mbl_cntr_type: this.record.mbl_cntr_type,
           origin: 'seaimp-master-page',
-          is_locked: this.is_locked  
+          is_locked: this.is_locked
         };
         this.gs.Naviagete2('Silver.SeaImport/CopyCntrPage', prm);
         break;

@@ -292,6 +292,17 @@ export class AirExpMasterEditComponent implements OnInit {
           if (this.mode == "ADD" && response.code != '')
             this.record.mbl_refno = response.code;
           this.mode = 'EDIT';
+          
+          let parameter = {
+            appid: this.gs.appid,
+            menuid: this.mainService.menuid,
+            pkid: this.pkid,
+            type: '',
+            origin: 'airexp-master-edit-page',
+            mode: 'EDIT'
+          };
+          this.location.replaceState('Silver.AirExport.Trans/AirExpMasterEditPage', this.gs.getUrlParameter(parameter));
+
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage);
           this.mainService.RefreshList(this.record);
@@ -414,7 +425,15 @@ export class AirExpMasterEditComponent implements OnInit {
   }
 
   Close() {
-    this.location.back();
+    let prm = {
+      appid: this.gs.appid,
+      id: this.gs.MENU_AE_MASTER,
+      menuid: this.gs.MENU_AE_MASTER,
+      menu_param: '',
+      origin: 'airexp-master-edit-page',
+      rnd: this.gs.getRandomInt()
+    };
+    this.gs.AutoReloadReturn(prm);
   }
 
   LovSelected(_Record: SearchTable) {

@@ -62,7 +62,7 @@ export class GlobalService {
 
   public branch_codes: string = '';
   public history: Array<{ id: string, url: string }> = [];
-
+  public HISTORY_MIN_LENGTH = 2;
 
   // SILVERLIGHT SOFTWARE
   public SOFTWARE_NAME = "ANGULAR";
@@ -3148,6 +3148,8 @@ export class GlobalService {
     return str;
   }
 
-
+  AutoReloadReturn(obj: any) {
+    this.location.back();
+  }
 
 }

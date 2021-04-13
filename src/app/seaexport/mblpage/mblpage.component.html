@@ -2,8 +2,8 @@
   <div class="page-header">
     <div class="col">
       <label class="pr-1">{{title}} ({{mode}}) </label>
-      <!-- <button #_btnretoemi class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button> -->
-      <a #_btnretoemi class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('EDIT')" [queryParams]="getParam('EDIT')">Return</a>
+      <button #_btnretoemi class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+      <!-- <a #_btnretoemi class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('EDIT')" [queryParams]="getParam('EDIT')">Return</a> -->
       <label class="text-danger" *ngIf="is_locked">LOCKED</label>
     </div>
   </div>

@@ -801,6 +801,19 @@ export class AirExpHouseEditComponent implements OnInit {
         if (this.mode === "ADD" && response.code != '')
           this.record.hbl_houseno = response.code;
         this.mode = 'EDIT';
+
+        let parameter = {
+          appid: this.gs.appid,
+          menuid: this.mainService.menuid,
+          pkid: this.pkid,
+          type: '',
+          parentid: this.parentid,
+          refno: this.mbl_refno,
+          origin: 'airexp-house-edit-page',
+          mode: 'EDIT'
+        };
+        this.location.replaceState('Silver.AirExport.Trans/AirExpHouseEditPage', this.gs.getUrlParameter(parameter));
+
         if (this.origin === "airexp-house-page")
           this.mainService.RefreshList(this.record);
         this.errorMessage.push('Save Complete');
@@ -1014,7 +1027,15 @@ export class AirExpHouseEditComponent implements OnInit {
   }
 
   Close() {
-    this.location.back();
+    let prm = {
+      appid: this.gs.appid,
+      id: this.gs.MENU_AE_HOUSE,
+      menuid: this.gs.MENU_AE_HOUSE,
+      menu_param: '',
+      origin: 'airexp-house-edit-page',
+      rnd: this.gs.getRandomInt()
+    };
+    this.gs.AutoReloadReturn(prm);
   }
 
   private FindTotal() {
@@ -1086,7 +1107,7 @@ export class AirExpHouseEditComponent implements OnInit {
           mode: 'EDIT',
           rnd: this.gs.getRandomInt()
         };
-       } else {
+      } else {
         return {
           appid: this.gs.appid,
           id: this.gs.MENU_AE_HOUSE,
@@ -1100,4 +1121,3 @@ export class AirExpHouseEditComponent implements OnInit {
       return null;
   }
 }
- 
