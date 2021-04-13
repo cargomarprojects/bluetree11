@@ -3148,6 +3148,8 @@ export class GlobalService {
     return str;
   }
 
-
+  AutoReloadReturn(obj: any) {
+    this.location.back();
+  }
 
 }

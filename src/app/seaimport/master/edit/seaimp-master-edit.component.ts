@@ -501,19 +501,29 @@ export class SeaImpMasterEditComponent implements OnInit {
 
 
   Close() {
-    if (window.history.length == this.gs.HISTORY_MIN_LENGTH) {
-      let prm = {
-        appid: this.gs.appid,
-        id: this.gs.MENU_SI_MASTER,
-        menuid: this.gs.MENU_SI_MASTER,
-        menu_param: '',
-        origin: 'seaimp-master-page',
-        rnd: this.gs.getRandomInt()
-      };
-      this.gs.Naviagete2('Silver.SeaImport/SeaImpMasterPage', prm);
+    // if (window.history.length == this.gs.HISTORY_MIN_LENGTH) {
+    //   let prm = {
+    //     appid: this.gs.appid,
+    //     id: this.gs.MENU_SI_MASTER,
+    //     menuid: this.gs.MENU_SI_MASTER,
+    //     menu_param: '',
+    //     origin: 'seaimp-master-page',
+    //     rnd: this.gs.getRandomInt()
+    //   };
+    //   this.gs.Naviagete2('Silver.SeaImport/SeaImpMasterPage', prm);
 
-    } else
-      this.location.back();
+    // } else
+    //   this.location.back();
+
+    let prm = {
+      appid: this.gs.appid,
+      id: this.gs.MENU_SI_MASTER,
+      menuid: this.gs.MENU_SI_MASTER,
+      menu_param: '',
+      origin: 'seaimp-master-page',
+      rnd: this.gs.getRandomInt()
+    };
+    this.gs.AutoReloadReturn(prm);
   }
 
 

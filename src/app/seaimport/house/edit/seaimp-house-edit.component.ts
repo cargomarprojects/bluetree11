@@ -837,19 +837,29 @@ export class SeaImpHouseEditComponent implements OnInit {
 
 
   Close() {
-    if (window.history.length == this.gs.HISTORY_MIN_LENGTH) {
-      let prm = {
-        appid: this.gs.appid,
-        id: this.gs.MENU_SI_HOUSE,
-        menuid: this.gs.MENU_SI_HOUSE,
-        menu_param: '',
-        origin: 'seaimp-house-page',
-        rnd: this.gs.getRandomInt()
-      };
-      this.gs.Naviagete2('Silver.SeaImport/SeaImpHousePage', prm);
+    // if (window.history.length == this.gs.HISTORY_MIN_LENGTH) {
+    //   let prm = {
+    //     appid: this.gs.appid,
+    //     id: this.gs.MENU_SI_HOUSE,
+    //     menuid: this.gs.MENU_SI_HOUSE,
+    //     menu_param: '',
+    //     origin: 'seaimp-house-page',
+    //     rnd: this.gs.getRandomInt()
+    //   };
+    //   this.gs.Naviagete2('Silver.SeaImport/SeaImpHousePage', prm);
 
-    } else
-      this.location.back();
+    // } else
+    //   this.location.back();
+
+    let prm = {
+      appid: this.gs.appid,
+      id: this.gs.MENU_SI_HOUSE,
+      menuid: this.gs.MENU_SI_HOUSE,
+      menu_param: '',
+      origin: 'seaimp-house-page',
+      rnd: this.gs.getRandomInt()
+    };
+    this.gs.AutoReloadReturn(prm);
   }
 
 
