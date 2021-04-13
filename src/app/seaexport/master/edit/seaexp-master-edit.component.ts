@@ -344,7 +344,7 @@ export class SeaexpMasterEditComponent implements OnInit {
             menuid: this.mainService.menuid,
             pkid: this.pkid,
             type: '',
-            origin: 'seaexp-master-page',
+            origin: 'seaexp-master-edit-page',
             mode: 'EDIT'
           };
           this.location.replaceState('Silver.SeaExport.Trans/SeaExpMasterEditPage', this.gs.getUrlParameter(parameter));
@@ -540,7 +540,7 @@ export class SeaexpMasterEditComponent implements OnInit {
       id: this.gs.MENU_SE_MASTER,
       menuid: this.gs.MENU_SE_MASTER,
       menu_param: '',
-      origin: 'seaexp-master-page',
+      origin: 'seaexp-master-edit-page',
       rnd: this.gs.getRandomInt()
     };
     this.gs.AutoReloadReturn(prm);

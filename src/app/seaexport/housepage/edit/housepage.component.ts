@@ -724,7 +724,7 @@ export class HousePageComponent implements OnInit {
           menuid: this.mainService.menuid,
           pkid: this.pkid,
           type: '',
-          origin: 'seaexp-house-page',
+          origin: 'seaexp-house-edit-page',
           mode: 'EDIT'
         };
         this.location.replaceState('Silver.SeaExport.Trans/SeaExpHouseEditPage', this.gs.getUrlParameter(parameter));
@@ -852,7 +852,7 @@ export class HousePageComponent implements OnInit {
       id: this.gs.MENU_SE_HOUSE,
       menuid: this.gs.MENU_SE_HOUSE,
       menu_param: '',
-      origin: 'seaexp-house-page',
+      origin: 'seaexp-house-edit-page',
       rnd: this.gs.getRandomInt()
     };
     this.gs.AutoReloadReturn(prm);

@@ -3,8 +3,8 @@
     <div class="col">
       <label class="mr-3">{{title}} ({{mode}})</label>
       <a   *ngIf="gs.canAdd(menuid)" class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('ADD')" [queryParams]="getParam('ADD')">New</a>
-      <!-- <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button> -->
-      <a class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('LIST')" [queryParams]="getParam('LIST')">Return</a>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+      <!-- <a class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('LIST')" [queryParams]="getParam('LIST')">Return</a> -->
       <label class="text-danger" *ngIf="is_locked">LOCKED</label>
     </div>
   </div>
