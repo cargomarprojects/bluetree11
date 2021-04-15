@@ -43,6 +43,8 @@ import { GenSearchReportComponent } from './gen-search-report/gen-search-report.
 import { GenSearchHeaderComponent } from './gen-search-report/gen-search-header.component';
 import { NomReportComponent } from './nom-report/nom-report.component';
 import { NomReportHeaderComponent} from './nom-report/nom-report-header.component';
+import { LogRegisterHeaderComponent } from './log-register/logregister-header.component';
+import { LogRegisterComponent } from './log-register/logregister.component';
 
 @NgModule({
     declarations :[
@@ -65,7 +67,9 @@ import { NomReportHeaderComponent} from './nom-report/nom-report-header.componen
     GenSearchReportComponent,
     GenSearchHeaderComponent,
     NomReportComponent,
-    NomReportHeaderComponent
+    NomReportHeaderComponent,
+    LogRegisterHeaderComponent,
+    LogRegisterComponent
   ],
   imports: [
     SharedModule,
