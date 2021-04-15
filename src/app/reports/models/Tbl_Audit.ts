@@ -2,6 +2,9 @@ import { PageQuery } from '../../shared/models/pageQuery';
 
 export interface SearchQuery {
     searchString: string;
+    fromdate: string;
+    todate: string;
+    searchtype: string;    
 }
 
 export class Tbl_Audit {

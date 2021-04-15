@@ -1,6 +1,28 @@
 <div class="page-list">
     <div class="page-search">
       <div class="row">
+
+
+        <div class="col-md-3">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">From</label>
+            <div class="col-8">
+              <app-date [inputdate]="searchQuery.fromdate" (ValueChanged)="searchQuery.fromdate=$event">
+              </app-date>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">To</label>
+            <div class="col-8">
+              <app-date [inputdate]="searchQuery.todate" (ValueChanged)="searchQuery.todate=$event">
+              </app-date>
+            </div>
+          </div>
+        </div>
+        
+
         <div class="col-md-3">
           <div class="form-group row">
             <label class="col-4 col-form-label col-form-label-sm">Code/Name</label>
