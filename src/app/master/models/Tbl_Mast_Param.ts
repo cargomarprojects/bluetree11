@@ -25,3 +25,11 @@ export interface VM_TBL_MAST_PARAM {
     userinfo : any,
     filter : any;
 }
+
+
+export interface VM_TBL_MAST_SETTINGS {
+    mode : string;
+    records : TBL_MAST_PARAM[],
+    userinfo : any,
+    filter : any;
+}
