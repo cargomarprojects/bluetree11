@@ -20,6 +20,9 @@ import { UserHeaderComponent } from './user/user-header.component';
 import { RightsComponent } from './rights/rights.component';
 import { RightsEditComponent } from './rights/rights-edit.component';
 import { RightsHeaderComponent } from './rights/rights-header.component';
+import { MailServerEditComponent } from './mailserver/mailserver-edit.component';
+import { MailServerComponent } from './mailserver/mailserver.component';
+import { MailServerHeaderComponent } from './mailserver/mailserver-header.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { RightsHeaderComponent } from './rights/rights-header.component';
     UserHeaderComponent,
     RightsComponent,
     RightsHeaderComponent,
-    RightsEditComponent
+    RightsEditComponent,
+    MailServerComponent,
+    MailServerHeaderComponent,
+    MailServerEditComponent,
   ],
   imports: [
     SharedModule,

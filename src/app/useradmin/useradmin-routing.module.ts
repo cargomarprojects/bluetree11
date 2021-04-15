@@ -12,6 +12,8 @@ import { UserComponent } from './user/user.component';
 import { UserEditComponent } from './user/user-edit.component';
 import { RightsComponent } from './rights/rights.component';
 import { RightsEditComponent } from './rights/rights-edit.component';
+import { MailServerComponent } from './mailserver/mailserver.component';
+import { MailServerEditComponent } from './mailserver/mailserver-edit.component';
 
 
 const routes: Routes = [
@@ -27,6 +29,10 @@ const routes: Routes = [
   {path:'UserEditPage', component : UserEditComponent } ,
   {path:'RightsPage', component  : RightsComponent  },
   {path:'RightsEditPage', component : RightsEditComponent } ,
+
+  {path:'MailServerPage', component  : MailServerComponent  },
+  {path:'MailServerEditPage', component  : MailServerEditComponent  },
+
 ];
 
 @NgModule({
