@@ -22,8 +22,8 @@
         <div class="row border">
             <div class="col-md-4 testbox  px-0 mx-0">
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm">Ref#</label>
-                    <div class="col-9">
+                    <label class="col-2 col-form-label col-form-label-sm">Ref#</label>
+                    <div class="col-10">
                         <input class="form-control form-control-sm text-danger" type="text"
                             [(ngModel)]="record.cwm_refno" [disabled]="true" maxlength="25" #refno />
                     </div>
@@ -35,45 +35,45 @@
         <div class="row border">
             <div class="col-md-4 testbox  px-0 mx-0">
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm">To</label>
-                    <div class="col-9">
-                        <InputBox [(inputModel)]="record.qtnm_to_name" [maxlength]="60" [uppercase]="true" #to_name>
+                    <label class="col-2 col-form-label col-form-label-sm">To</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.cwm_to_name" [maxlength]="60" [uppercase]="true" #to_name>
                         </InputBox>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm">Company</label>
-                    <div class="col-9">
-                        <app-autocomplete2 [controlname]="'QUOTE-TO'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
-                            [displaydata]="record.qtnm_to_code" (ValueChanged)="LovSelected($event)" #to_code>
+                    <label class="col-2 col-form-label col-form-label-sm">Company</label>
+                    <div class="col-10">
+                        <app-autocomplete2 [controlname]="'COMPANY'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                            [displaydata]="record.cwm_company_code" (ValueChanged)="LovSelected($event)" #to_code>
                         </app-autocomplete2>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm"></label>
-                    <div class="col-9">
-                        <InputBox [(inputModel)]="record.qtnm_to_name" [maxlength]="60" [uppercase]="true" #to_name>
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.cwm_company_name" [maxlength]="60" [uppercase]="true" #to_name>
                         </InputBox>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm">Fax</label>
-                    <div class="col-9">
-                        <InputBox [(inputModel)]="record.qtnm_to_addr1" [maxlength]="60" [uppercase]="true" #to_addr1>
+                    <label class="col-2 col-form-label col-form-label-sm">Fax</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.cwm_company_fax" [maxlength]="60" [uppercase]="true" #to_fax>
                         </InputBox>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm">Tel</label>
-                    <div class="col-9">
-                        <InputBox [(inputModel)]="record.qtnm_to_addr2" [maxlength]="60" [uppercase]="true" #to_addr2>
+                    <label class="col-2 col-form-label col-form-label-sm">Tel</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.cwm_company_tel" [maxlength]="60" [uppercase]="true" #to_tel>
                         </InputBox>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm">A/c#</label>
-                    <div class="col-9">
-                        <InputBox [(inputModel)]="record.qtnm_to_addr3" [maxlength]="60" [uppercase]="true" #to_addr3>
+                    <label class="col-2 col-form-label col-form-label-sm">A/c#</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.cwm_acc_number" [maxlength]="60" [uppercase]="true" #to_acno>
                         </InputBox>
                     </div>
                 </div>
@@ -81,40 +81,43 @@
             <div class="col-md-4 testbox  px-0 mx-0">
 
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm">Req.Type</label>
-                    <div class="col-9">
-                        <InputBox [(inputModel)]="record.qtnm_to_addr3" [maxlength]="60" [uppercase]="true" #to_addr7>
+                    <label class="col-2 col-form-label col-form-label-sm">Req.Type</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.cwm_request_type" [maxlength]="60" [uppercase]="true"
+                            #_reqtype>
                         </InputBox>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm">From</label>
-                    <div class="col-9">
-                        <InputBox [(inputModel)]="record.qtnm_quot_by" [maxlength]="60" [uppercase]="true" #quot_by>
+                    <label class="col-2 col-form-label col-form-label-sm">From</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.cwm_from_name" [maxlength]="60" [uppercase]="true" #quot_by>
                         </InputBox>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm">Date</label>
-                    <div class="col-9">
-                        <app-date [inputdate]="record.qtnm_valid_date" (ValueChanged)="record.qtnm_valid_date=$event">
+                    <label class="col-2 col-form-label col-form-label-sm">Date</label>
+                    <div class="col-10">
+                        <app-date [inputdate]="record.cwm_date" (ValueChanged)="record.cwm_date=$event">
                         </app-date>
                     </div>
                 </div>
 
 
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm">SenderRef#</label>
-                    <div class="col-9">
-                        <InputBox [(inputModel)]="record.qtnm_move_type" [maxlength]="25" [uppercase]="true" #move_type>
+                    <label class="col-2 col-form-label col-form-label-sm">SenderRef#</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.cwm_senders_reference" [maxlength]="60" [uppercase]="true"
+                            #_senderref>
                         </InputBox>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm">YourRef#</label>
-                    <div class="col-9">
-                        <InputBox [(inputModel)]="record.qtnm_move_type" [maxlength]="25" [uppercase]="true" #move_type>
+                    <label class="col-2 col-form-label col-form-label-sm">YourRef#</label>
+                    <div class="col-10">
+                        <InputBox [(inputModel)]="record.cwm_your_reference" [maxlength]="60" [uppercase]="true"
+                            #_yourref>
                         </InputBox>
                     </div>
                 </div>
@@ -123,37 +126,40 @@
             </div>
         </div>
         <div class="row border">
-            <div class="col-md-4 testbox  px-0 mx-0">
+            <div class="col-md-4 testbox ">
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm">Commodity</label>
-                    <div class="col-9">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input mr-1"
-                                [(ngModel)]="record.cs_is_check_bool" /><span>Urgent</span>
-                            <input type="checkbox" class="form-check-input mr-1"
-                                [(ngModel)]="record.cs_is_check_bool" /><span>Review</span>
-                            <input type="checkbox" class="form-check-input mr-1"
-                                [(ngModel)]="record.cs_is_check_bool" /><span>Comment</span>
-                        </div>
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-3 form-check">
+                        <input type="checkbox" class="form-check-input" [(ngModel)]="record.cwm_is_urgent" />
+                        <span>Urgent</span>
+                    </div>
+                    <div class="col-3 form-check">
+                        <input type="checkbox" class="form-check-input" [(ngModel)]="record.cwm_is_review" />
+                        <span>Review</span>
+                    </div>
+                    <div class="col-3 form-check">
+                        <input type="checkbox" class="form-check-input" [(ngModel)]="record.cwm_is_comment" />
+                        <span>Comment</span>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 testbox  px-0 mx-0">
+            <div class="col-md-4 testbox">
                 <div class="form-group row">
-                    <label class="col-3 col-form-label col-form-label-sm"></label>
-                    <div class="col-9">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input mr-1"
-                                [(ngModel)]="record.cs_is_check_bool" /><span>Reply</span>
-                            <input type="checkbox" class="form-check-input mr-1"
-                                [(ngModel)]="record.cs_is_check_bool" /><span>Recycle</span>
-                        </div>
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-3 form-check">
+                        <input type="checkbox" class="form-check-input" [(ngModel)]="record.cwm_is_reply" />
+                        <span>Reply</span>
+                    </div>
+                    <div class="col-3 form-check">
+                        <input type="checkbox" class="form-check-input" [(ngModel)]="record.cwm_is_recycle" />
+                        <span>Recycle</span>
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="row border">
-            <div class="col-md-8">
+            <div class="col-md-8 mx-0 px-0">
                 <div class="page-body table-responsive table-bordered">
                     <table class="table  table-hover table-sm">
                         <thead class="page-body-thead">
@@ -169,32 +175,31 @@
                         <tbody class="page-body-tbody">
                             <tr *ngFor="let rec of records; let i = index">
                                 <td class="p-0">
-                                    <select class="form-control form-control-sm mr-1" [(ngModel)]="Client_Category">
-                                        <option [value]="'CNEE'">CONSIGNEE</option>
-                                        <option [value]="'CNOR'">CONSIGNOR</option>
-                                        <option [value]="'SHPR'">SHIPPER</option>
+                                    <select class="form-control form-control-sm mr-1" [(ngModel)]="rec.cwd_type">
+                                        <option [value]="'INTERNATIONAL WIRE TRANSFER'">INTERNATIONAL WIRE TRANSFER
+                                        </option>
                                     </select>
                                 </td>
                                 <td class="p-0">
-                                    <app-autocomplete2 #_qtnd_desc_code [controlname]="'INVOICE-CODE'"
-                                        [displaycolumn]="'CODE'" [tabletype]="'PARAM'" [subtype]="'INVOICE-DESCRIPTION'"
-                                        [uid]="rec.qtnd_pkid" [displaydata]="rec.qtnd_desc_code"
+                                    <app-autocomplete2 #_qtnd_desc_code [controlname]="'BENIFICIARY'"
+                                        [displaycolumn]="'NAME'" [tabletype]="'MASTER'" 
+                                        [uid]="rec.cwd_pkid" [displaydata]="rec.cwd_beneficiary_name"
                                         (ValueChanged)="LovSelected($event,i)">
                                     </app-autocomplete2>
                                 </td>
                                 <td class="p-0">
-                                    <InputBox [(inputModel)]="rec.qtnd_per" [maxlength]="60" [uppercase]="true"
+                                    <InputBox [(inputModel)]="rec.pb_bank_name" [maxlength]="60" [uppercase]="true"
                                         #quot_per>
                                     </InputBox>
                                 </td>
                                 <td class="p-0">
-                                    <InputBox [(inputModel)]="rec.qtnd_per" [maxlength]="60" [uppercase]="true"
+                                    <InputBox [(inputModel)]="rec.cwd_beneficiary_reference" [maxlength]="60" [uppercase]="true"
                                         #quot_per>
                                     </InputBox>
                                 </td>
                                 <td class="p-0">
-                                    <InputBoxNumber [(inputModel)]="rec.qtnd_amt" [maxlength]="15"
-                                        [dec]="foreign_amt_decplace">
+                                    <InputBoxNumber [(inputModel)]="rec.cwd_transfer_amt" [maxlength]="15"
+                                        [dec]="0">
                                     </InputBoxNumber>
                                 </td>
                                 <td style="text-align:center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
@@ -215,17 +220,16 @@
         <div class="row border">
             <div class="col-md-8  px-0 mx-0">
                 <div class="row">
-                    <div class="col-12 px-0 mx-0">
+                    <div class="col-12 ">
                         <div class="form-group row">
                             <label class="col-1 col-form-label col-form-label-sm">Remarks</label>
                             <div class="col-11">
-                                <textarea #_qtnm_remarks rows="6" class="form-control form-control-sm"
-                                    [(ngModel)]="record.qtnm_remarks"></textarea>
+                                <textarea #_remarks rows="6" class="form-control form-control-sm"
+                                    [(ngModel)]="record.cwm_remarks"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="page-footer">
@@ -239,31 +243,31 @@
                     Documents</button>
             </div>
         </div>
+
     </div>
-</div>
-<div *ngIf="tab=='report'">
-    <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
-        (callbackevent)="callbackevent($event)"></app-report>
-</div>
-<ng-template #attachmodal let-c="close" let-d="dismiss">
-    <div class="modal-body">
-        <div class="page-body">
-            <div class="row">
-                <div class="col-md-12 testbox  px-0 mx-0">
-                    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
-                        [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
-                        [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
-                        [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
-                        [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
-                        [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
-                        (callbackevent)="callbackevent($event)"></app-fileupload>
+    <div *ngIf="tab=='report'">
+        <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+            (callbackevent)="callbackevent($event)"></app-report>
+    </div>
+    <ng-template #attachmodal let-c="close" let-d="dismiss">
+        <div class="modal-body">
+            <div class="page-body">
+                <div class="row">
+                    <div class="col-md-12 testbox  px-0 mx-0">
+                        <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+                            [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+                            [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
+                            [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+                            [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
+                            [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
+                            (callbackevent)="callbackevent($event)"></app-fileupload>
+                    </div>
                 </div>
-            </div>
-            <div class="page-footer">
-                <div class="row justify-content-center p-1">
-                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                <div class="page-footer">
+                    <div class="row justify-content-center p-1">
+                        <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</ng-template>
+    </ng-template>

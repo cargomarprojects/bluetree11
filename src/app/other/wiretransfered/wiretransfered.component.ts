@@ -61,16 +61,14 @@ export class WireTransferedComponent implements OnInit {
       return;
     }
 
-    // let parameter = {
-    //   menuid: this.mainservice.menuid,
-    //   pkid: '',
-    //   mode: 'ADD',
-    //   mbl_pkid : '',
-    //   mbl_refno : '',
-    //   mbl_mode:'GENERAL',
-    //   origin: 'messengerslip-general-page'
-    // };
-    // this.gs.Naviagete('Silver.Other.Trans/MessengerSlipEdit', JSON.stringify(parameter));
+    let parameter = {
+      appid : this.gs.appid,
+      menuid: this.mainservice.menuid,
+      pkid: '',
+      mode: 'ADD',
+      origin: 'wiretransfer-page'
+    };
+    this.gs.Naviagete2('Silver.Other.Trans/WireTransferEditPage', parameter);
 
   }
   
@@ -80,16 +78,14 @@ export class WireTransferedComponent implements OnInit {
       return;
     }
 
-    // let parameter = {
-    //     menuid: this.mainservice.menuid,
-    //     pkid: _record.cs_pkid,
-    //     mode: 'EDIT',
-    //     mbl_pkid : '',
-    //     mbl_refno : '',
-    //     mbl_mode:'GENERAL',
-    //     origin: 'messengerslip-general-page',
-    //   };
-    //   this.gs.Naviagete('Silver.Other.Trans/MessengerSlipEdit', JSON.stringify(parameter));
+    let parameter = {
+        appid : this.gs.appid,
+        menuid: this.mainservice.menuid,
+        pkid: _record.cwm_pkid,
+        mode: 'EDIT',
+        origin: 'wiretransfer-edit-page',
+      };
+      this.gs.Naviagete2('Silver.Other.Trans/WireTransferEditPage', parameter);
   }
 
   Close() {

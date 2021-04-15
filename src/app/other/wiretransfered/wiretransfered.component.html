@@ -1,10 +1,10 @@
 <div class="page-header">
     <div class="row align-items-center justify-content-left p-1">
         <label class="mr-3">{{mainservice.title}}</label>
-        <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button>
-        <!-- <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd"
-            [routerLink]="['/Silver.Other.Trans/MessengerSlipEdit']"
-            [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid, pkid: '', mbl_pkid:'',mbl_refno:'', mbl_mode:'GENERAL', origin: 'messengerslip-general-page', mode: 'ADD'}">New</a> -->
+        <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button> -->
+        <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd"
+            [routerLink]="['/Silver.Other.Trans/WireTransferEditPage']"
+            [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid, pkid: '', origin: 'wiretransfer-page', mode: 'ADD'}">New</a>
         <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
     </div>
 </div>
@@ -36,13 +36,13 @@
                 <!-- <td class='hlink' (click)="edit(rec)">{{rec.cs_refno}}</td> -->
                 <td *ngIf="!this.mainservice.canEdit">{{rec.cwm_refno}}</td>
                 <td *ngIf="this.mainservice.canEdit">
-                    <a class='hlink' [routerLink]="['/Silver.Other.Trans/MessengerSlipEdit']" [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.cs_pkid,mbl_pkid: '',mbl_refno: '',mbl_mode:'GENERAL', origin: 'messengerslip-general-page',mode: 'EDIT'}">{{rec.cwm_refno}}</a>
+                    <a class='hlink' [routerLink]="['/Silver.Other.Trans/WireTransferEditPage']" [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.cwm_pkid, origin: 'wiretransfer-edit-page',mode: 'EDIT'}">{{rec.cwm_refno}}</a>
                 </td>
                 <td>{{rec.cwm_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.cwm_to_name}}</td>
                 <td>{{rec.cwm_company_name}}</td>
-                <td>{{rec.cs_to_tel}}</td>
-                <td>{{rec.cs_to_fax}}</td>
+                <td>{{rec.cwm_company_tel}}</td>
+                <td>{{rec.cwm_company_fax}}</td>
                 <td>{{rec.cwm_request_type}}</td>
             </tr>
         </tbody>

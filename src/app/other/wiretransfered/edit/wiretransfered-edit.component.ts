@@ -293,7 +293,7 @@ export class WireTransferedEditComponent implements OnInit {
         var rec = <Tbl_Cargo_Wiretransferd>{};
         rec.cwd_pkid = this.gs.getGuid();
         rec.cwd_parent_id = this.pkid;
-       
+        rec.cwd_type='INTERNATIONAL WIRE TRANSFER';
         rec.cwd_beneficiary_id = '';
         rec.cwd_beneficiary_code = '';
         rec.cwd_beneficiary_name = '';
@@ -308,20 +308,18 @@ export class WireTransferedEditComponent implements OnInit {
 
     LovSelected(_Record: SearchTable, idx: number = 0) {
 
-        // if (_Record.controlname == "QUOTE-TO") {
+        if (_Record.controlname == "COMPANY") {
 
-        //     this.record.qtnm_to_id = _Record.id;
-        //     this.record.qtnm_to_code = _Record.code;
-        //     this.record.qtnm_to_name = _Record.name;
-        //     if (_Record.col8.toString() != "")
-        //         this.record.qtnm_to_name = _Record.col8.toString();
-        //     this.record.qtnm_to_addr1 = _Record.col1.toString();
-        //     this.record.qtnm_to_addr2 = _Record.col2.toString();
-        //     this.record.qtnm_to_addr3 = _Record.col3.toString();
-        //     this.record.qtnm_to_addr4 = this.gs.GetAttention(_Record.col5.toString());
-        //     // Dispatcher.BeginInvoke(() => { Txt_QuoteTo_Name.Focus(); });
-        //     this.GetContactMemo(this.record.qtnm_to_id);
-        // }
+            this.record.cwm_company_id = _Record.id;
+            this.record.cwm_company_code = _Record.code;
+            this.record.cwm_company_name = _Record.name;
+            if (_Record.col8.toString() != "")
+                this.record.cwm_company_name = _Record.col8.toString();
+            
+            this.record.cwm_company_tel = _Record.col6.toString();
+            this.record.cwm_company_fax =  _Record.col7.toString();
+            // Dispatcher.BeginInvoke(() => { Txt_QuoteTo_Name.Focus(); });
+        }
         // if (_Record.controlname == "SALESMAN") {
         //     this.record.qtnm_salesman_id = _Record.id;
         //     this.record.qtnm_salesman_name = _Record.name;

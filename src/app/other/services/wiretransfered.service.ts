@@ -117,8 +117,6 @@ export class WireTransferedService {
         var SearchData = this.gs.UserInfo;
         SearchData.outputformat = 'SCREEN';
         SearchData.action = 'NEW';
-        SearchData.MBLID = '';
-        SearchData.OPERATION_MODE = 'GENERAL';
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.CODE = this.record.searchQuery.searchString;
         SearchData.SDATE = this.record.searchQuery.fromdate;
