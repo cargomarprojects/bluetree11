@@ -42,17 +42,14 @@
             </div>
         </div>
         <div class="col-md-6 testbox  px-0 mx-0">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group row">
-                        <label class="col-4 col-form-label col-form-label-sm"></label>
-                        <div class="col-8">
-                            <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
-                        </div>
+                <div class="form-group row">
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
                     </div>
                 </div>
-            </div>
-            
         </div>
     </div>
 
@@ -82,34 +79,37 @@
                     </thead>
                     <tbody class="page-body-tbody">
                         <tr *ngFor="let rec of records2; let i = index">
-                            <td>{{rec.module_name}}</td>
-                            <td>{{rec.menu_name}}</td>
-                            <td style="text-align:center">
-                                <div class="form-check"><input class="form-check-input" type="checkbox"  [checked]="rec.all" (change)="swap(rec,'all')"></div>
+                            <td> <h5><small>{{rec.module_name}}</small></h5> </td>
+                            <td> <h5><small>{{rec.menu_name}}</small></h5></td>
+                            <td style="text-align:center" >
+                                <button class="btn btn-sm" [ngClass]="rec.rights_all ? 'btn-success' : 'btn-info'"  (click)="swap(rec,'all')">{{rec.rights_all ? 'Y' : 'N'}}</button>                                
+                                <!-- <div class="form-check"><input class="form-check-input" type="checkbox"  [checked]="rec.all" (change)="swap(rec,'all')"></div> -->
                             </td>   
                             <td style="text-align:center">
-                                <div class="form-check"><input class="form-check-input" type="checkbox" [checked]="rec.rights_company == 'Y'" (change)="swap(rec,'company')"></div>
+                                <button class="btn btn-sm" [ngClass]="rec.rights_company == 'Y' ? 'btn-success' : 'btn-info'"  (click)="swap(rec,'company')">{{rec.rights_company == 'Y' ? 'Y' : 'N'}}</button>
+                                <!-- <div class="form-check"><input class="form-check-input" type="checkbox" [checked]="rec.rights_company == 'Y'" (change)="swap(rec,'company')"></div> -->
                             </td>
                             <td style="text-align:center">
-                                <div class="form-check"><input class="form-check-input" type="checkbox" [checked]="rec.rights_admin == 'Y'" (change)="swap(rec,'admin')"></div>
+                                <button class="btn btn-sm" [ngClass]="rec.rights_admin == 'Y' ? 'btn-success' : 'btn-info'"  (click)="swap(rec,'admin')">{{rec.rights_admin == 'Y' ? 'Y' : 'N'}}</button>
+                                <!-- <div class="form-check"><input class="form-check-input" type="checkbox" [checked]="rec.rights_admin == 'Y'" (change)="swap(rec,'admin')"></div> -->
                             </td>
                             <td style="text-align:center">
-                                <div class="form-check"><input class="form-check-input" type="checkbox" [checked]="rec.rights_add == 'Y'" (change)="swap(rec,'add')"></div>
+                                <button class="btn btn-sm" [ngClass]="rec.rights_add == 'Y' ? 'btn-success' : 'btn-info'"  (click)="swap(rec,'add')">{{rec.rights_add == 'Y' ? 'Y' : 'N'}}</button>
                             </td>
                             <td style="text-align:center">
-                                <div class="form-check"><input class="form-check-input" type="checkbox" [checked]="rec.rights_edit == 'Y'" (change)="swap(rec,'edit')"></div>
+                                <button class="btn btn-sm" [ngClass]="rec.rights_edit == 'Y' ? 'btn-success' : 'btn-info'"  (click)="swap(rec,'edit')">{{rec.rights_edit == 'Y' ? 'Y' : 'N'}}</button>
                             </td>                            
                             <td style="text-align:center">
-                                <div class="form-check"><input class="form-check-input" type="checkbox" [checked]="rec.rights_view == 'Y'" (change)="swap(rec,'view')"></div>
+                                <button class="btn btn-sm" [ngClass]="rec.rights_view == 'Y' ? 'btn-success' : 'btn-info'"  (click)="swap(rec,'view')">{{rec.rights_view == 'Y' ? 'Y' : 'N'}}</button>
                             </td>                            
                             <td style="text-align:center">
-                                <div class="form-check"><input class="form-check-input" type="checkbox" [checked]="rec.rights_delete == 'Y'" (change)="swap(rec,'delete')"></div>
+                                <button class="btn btn-sm" [ngClass]="rec.rights_delete == 'Y' ? 'btn-success' : 'btn-info'"  (click)="swap(rec,'delete')">{{rec.rights_delete == 'Y' ? 'Y' : 'N'}}</button>
                             </td>                            
                             <td style="text-align:center">
-                                <div class="form-check"><input class="form-check-input" type="checkbox" [checked]="rec.rights_print == 'Y'" (change)="swap(rec,'print')"></div>
+                                <button class="btn btn-sm" [ngClass]="rec.rights_print == 'Y' ? 'btn-success' : 'btn-info'"  (click)="swap(rec,'print')">{{rec.rights_print == 'Y' ? 'Y' : 'N'}}</button>
                             </td>
                             <td style="text-align:center">
-                                <div class="form-check"><input class="form-check-input" type="checkbox" [checked]="rec.rights_email == 'Y'" (change)="swap(rec,'email')"></div>
+                                <button class="btn btn-sm" [ngClass]="rec.rights_email == 'Y' ? 'btn-success' : 'btn-info'"  (click)="swap(rec,'email')">{{rec.rights_email == 'Y' ? 'Y' : 'N'}}</button>
                             </td>                            
    
                         </tr>
@@ -123,10 +123,13 @@
 <div class="page-footer">
     <div class="row">
         <div class="col-md-6">
+
+        </div>
+        <div class="col-md-6">
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm"></label>
                 <div class="col-8">
-                    <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
+                    <button *ngIf="mode =='EDIT'" class="btn btn-primary btn-sm m-1" (click)="Save()">Save</button>
                 </div>
             </div>
         </div>
