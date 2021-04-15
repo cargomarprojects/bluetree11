@@ -55,6 +55,9 @@ import { PayrollDetHeaderComponent } from './payrolldet/payrolldet-header.compon
 import { PreSetMsgComponent } from './presetmsg/presetmsg.component';
 import { PreSetMsgHeaderComponent } from './presetmsg/presetmsg-header.component';
 import { PreSetMsgEditComponent } from './presetmsg/presetmsg-edit.component';
+import { WireTransferedComponent } from './wiretransfered/wiretransfered.component';
+import { WireTransferedHeaderComponent } from './wiretransfered/wiretransfered-header.component';
+import { WireTransferedEditComponent } from './wiretransfered/edit/wiretransfered-edit.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +98,10 @@ import { PreSetMsgEditComponent } from './presetmsg/presetmsg-edit.component';
     PayrollDetEditComponent,
     PreSetMsgComponent,
     PreSetMsgHeaderComponent,
-    PreSetMsgEditComponent
+    PreSetMsgEditComponent,
+    WireTransferedComponent,
+    WireTransferedHeaderComponent,
+    WireTransferedEditComponent
   ],
   imports: [
     SharedModule,    
