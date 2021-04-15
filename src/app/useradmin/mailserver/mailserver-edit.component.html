@@ -26,12 +26,10 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Pwd Authentication</label>
+                <label class="col-4 col-form-label col-form-label-sm">Outgoing Server(SMTP) </label>
                 <div class="col-8">
-                    <select class="form-control form-control-sm" [(ngModel)]="record.mail_is_spa_required">
-                        <option [value]="'Y'">Yes</option>
-                        <option [value]="'N'">No</option>
-                    </select>
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mail_smtp_name')"
+                        [(ngModel)]="record.mail_smtp_name" maxlength="100" />
                 </div>
             </div>
 
@@ -42,6 +40,38 @@
                         [(ngModel)]="record.mail_smtp_port" maxlength="10" />
                 </div>
             </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Secured Pwd Authentication</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.mail_is_spa_required">
+                        <option [value]="'Y'">Yes</option>
+                        <option [value]="'N'">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Smtp Authentication</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.mail_is_auth_required">
+                        <option [value]="'Y'">Yes</option>
+                        <option [value]="'N'">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Require SSL</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.mail_is_ssl_required">
+                        <option [value]="'Y'">Yes</option>
+                        <option [value]="'N'">No</option>
+                    </select>
+                </div>
+            </div>
+
 
         </div>
 

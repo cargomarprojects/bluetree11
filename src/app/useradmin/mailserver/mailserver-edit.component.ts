@@ -127,9 +127,7 @@ export class MailServerEditComponent implements OnInit {
                     this.mode = 'EDIT';
                     this.mainService.RefreshList(this.record);
                     this.errorMessage = 'Save Complete';
-                    alert(this.errorMessage);
                 }
-
             }, error => {
                 this.errorMessage = this.gs.getError(error);
                 alert(this.errorMessage);
