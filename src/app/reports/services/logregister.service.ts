@@ -43,7 +43,7 @@ export class LogRegisterService {
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '',fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, searchtype: 'REFNO' },
-            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
+            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 30 }
         };
         this.mdata$.next(this.record);
     }
@@ -64,7 +64,7 @@ export class LogRegisterService {
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '',fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, searchtype: 'REFNO' },
-            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
+            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 30 }
         };
 
         this.mdata$.next(this.record);
@@ -99,7 +99,7 @@ export class LogRegisterService {
         SearchData.EDATE = this.record.searchQuery.todate;
         SearchData.SEARCH_TYPE = this.record.searchQuery.searchtype;        
         SearchData.page_count = 0;
-        SearchData.page_rows = 0;
+        SearchData.page_rows = 30;
         SearchData.page_current = -1;
 
         if (type == 'PAGE') {
