@@ -87,6 +87,11 @@ export class MailServerEditComponent implements OnInit {
         this.record.mail_pkid= this.pkid;
         this.record.mail_name = '';
         this.record.mail_smtp_name = '';
+        this.record.mail_smtp_port = '587';
+        this.record.mail_is_auth_required = 'Y';
+        this.record.mail_is_spa_required = 'Y';
+        this.record.mail_is_ssl_required = 'Y';
+
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
     }
