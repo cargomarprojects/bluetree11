@@ -35,6 +35,8 @@ export interface Tbl_cargo_genfiles {
 
 
 export interface Tbl_cargo_genfilesModel {
+    sortcol: string;
+    sortorder: boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

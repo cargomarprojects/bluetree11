@@ -60,6 +60,9 @@ import { WireTransferedHeaderComponent } from './wiretransfered/wiretransfered-h
 import { WireTransferedEditComponent } from './wiretransfered/edit/wiretransfered-edit.component';
 import { WireTransferedBankComponent } from './wiretransfered/bank/wiretransfered-bank.component';
 
+import { FormsComponent } from './forms/forms.component';
+import { FormsHeaderComponent } from './forms/forms-header.component';
+
 @NgModule({
   declarations: [
     OthGeneralComponent,
@@ -103,7 +106,9 @@ import { WireTransferedBankComponent } from './wiretransfered/bank/wiretransfere
     WireTransferedComponent,
     WireTransferedHeaderComponent,
     WireTransferedEditComponent,
-    WireTransferedBankComponent
+    WireTransferedBankComponent,
+    FormsComponent,
+    FormsHeaderComponent
   ],
   imports: [
     SharedModule,    

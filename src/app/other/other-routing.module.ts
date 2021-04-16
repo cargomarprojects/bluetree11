@@ -31,6 +31,7 @@ import { PreSetMsgComponent } from './presetmsg/presetmsg.component';
 import { PreSetMsgEditComponent } from './presetmsg/presetmsg-edit.component';
 import { WireTransferedComponent } from './wiretransfered/wiretransfered.component';
 import { WireTransferedEditComponent } from './wiretransfered/edit/wiretransfered-edit.component';
+import { FormsComponent } from './forms/forms.component';
 
 const routes: Routes = [
   { path : 'GeneralPage', component : OthGeneralComponent },
@@ -61,6 +62,7 @@ const routes: Routes = [
   { path : 'SystemMessageEditPage', component : PreSetMsgEditComponent },
   { path : 'WireTransferPage', component : WireTransferedComponent },
   { path : 'WireTransferEditPage', component : WireTransferedEditComponent },
+  { path : 'FormsUploadPage', component : FormsComponent },
 ];
 
 @NgModule({
