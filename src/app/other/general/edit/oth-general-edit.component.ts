@@ -367,8 +367,7 @@ export class OthGeneralEditComponent implements OnInit {
           };
           this.location.replaceState('Silver.Other.Trans/OthGeneralEditPage', this.gs.getUrlParameter(parameter));
 
-          // this.mainService.RefreshList(this.record);
-
+          this.mainService.RefreshList(this.record);
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage);
         }
