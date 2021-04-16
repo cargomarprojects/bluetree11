@@ -26,6 +26,8 @@ export class WireTransferedService {
     public canAdd: boolean;
     public canEdit: boolean;
     public canSave: boolean;
+    public canDelete: boolean;
+    public canPrint: boolean;
 
     public initlialized: boolean;
     private appid =''
@@ -101,6 +103,8 @@ export class WireTransferedService {
         this.title = this.gs.getTitle(this.menuid);
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
+        this.canDelete = this.gs.canDelete(this.menuid);
+        this.canPrint = this.gs.canPrint(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
         this.initlialized = true;
     }
