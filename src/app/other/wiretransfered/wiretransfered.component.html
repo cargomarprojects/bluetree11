@@ -1,0 +1,55 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">{{mainservice.title}}</label>
+        <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button> -->
+        <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd"
+            [routerLink]="['/Silver.Other.Trans/WireTransferEditPage']"
+            [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid, pkid: '', origin: 'wiretransfer-page', mode: 'ADD'}">New</a>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage}}
+</div>
+
+<app-wiretransfered-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+</app-wiretransfered-header>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th (click)="mainservice.sort('cwm_refno')">WIRE SL#&nbsp;<i [ngClass]="mainservice.getIcon('cwm_refno')"></i></th>
+                <th (click)="mainservice.sort('cwm_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('cwm_date')"></i></th>
+                <th (click)="mainservice.sort('cwm_to_name')">TO&nbsp;<i [ngClass]="mainservice.getIcon('cwm_to_name')"></i></th>
+                <th (click)="mainservice.sort('cwm_company_name')">COMPANY&nbsp;<i [ngClass]="mainservice.getIcon('cwm_company_name')"></i></th>
+                <th (click)="mainservice.sort('cwm_company_tel')">TEL&nbsp;<i [ngClass]="mainservice.getIcon('cwm_company_tel')"></i></th>
+                <th (click)="mainservice.sort('cwm_company_fax')">FAX&nbsp;<i [ngClass]="mainservice.getIcon('cwm_company_fax')"></i></th>
+                <th (click)="mainservice.sort('cwm_request_type')">REQUEST TYPE&nbsp;<i [ngClass]="mainservice.getIcon('cwm_request_type')"></i></th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+                <!-- <td class='hlink' (click)="edit(rec)">{{rec.cs_refno}}</td> -->
+                <td *ngIf="!this.mainservice.canEdit">{{rec.cwm_refno}}</td>
+                <td *ngIf="this.mainservice.canEdit">
+                    <a class='hlink' [routerLink]="['/Silver.Other.Trans/WireTransferEditPage']" [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.cwm_pkid, origin: 'wiretransfer-edit-page',mode: 'EDIT'}">{{rec.cwm_refno}}</a>
+                </td>
+                <td>{{rec.cwm_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.cwm_to_name}}</td>
+                <td>{{rec.cwm_company_name}}</td>
+                <td>{{rec.cwm_company_tel}}</td>
+                <td>{{rec.cwm_company_fax}}</td>
+                <td>{{rec.cwm_request_type}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />
