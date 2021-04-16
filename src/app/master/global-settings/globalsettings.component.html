@@ -24,7 +24,7 @@
 
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm"></label>
-                    <label class="col-8 col-form-label col-form-label-sm">General Email Settings</label>
+                    <label class="col-8 col-form-label col-form-label-sm"> <h6>General Email Settings</h6></label>
                 </div>
 
                 <div class="form-group row">
@@ -114,7 +114,7 @@
 
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm"></label>
-                    <label class="col-8 col-form-label col-form-label-sm">FCL Quotation Labels</label>
+                    <label class="col-8 col-form-label col-form-label-sm"><h6>FCL Quotation Labels</h6></label>
                 </div>
 
                 <div class="form-group row">
@@ -189,7 +189,7 @@
 
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm"></label>
-                    <label class="col-8 col-form-label col-form-label-sm">Others</label>
+                    <label class="col-8 col-form-label col-form-label-sm"><h6>Others</h6></label>
                 </div>
 
                 <div class="form-group row">
@@ -234,7 +234,15 @@
 
     <div class="page-body">
         <div class="row">
+
+
             <div class="col-md-3 border">
+
+                <div class="form-group row">
+                    <label class="col-12 col-form-label col-form-label-sm"><h6>SHIPMENT STAGES</h6></label>
+                </div>
+
+
                 <div class="btn-group-vertical">
                     <button type="button" class="btn btn-info m-1" (click)="StageClick('OCEAN IMPORT')" >Ocean Import</button>
                     <button type="button" class="btn btn-info m-1" (click)="StageClick('OCEAN EXPORT')">Ocean Export</button>
@@ -246,7 +254,7 @@
             <div class="col-md-4 border">
 
                 <div class="form-group row">
-                    <label class="col-12 col-form-label col-form-label-sm"><h5>{{LBL_STAGES}}</h5></label>
+                    <label class="col-12 col-form-label col-form-label-sm"><h6>{{LBL_STAGES}}</h6></label>
                 </div>
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">SEQ</label>
