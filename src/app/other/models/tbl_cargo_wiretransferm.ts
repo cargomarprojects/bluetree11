@@ -48,6 +48,7 @@ export interface Tbl_Cargo_Wiretransferd {
     pb_iban: string;
     pb_routing_no: string;
     cwd_rows_to_print: number;
+    pb_row_selected:boolean;
 }
 
 export interface vm_Tbl_Cargo_Wiretransferm {

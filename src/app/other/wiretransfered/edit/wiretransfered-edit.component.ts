@@ -33,12 +33,16 @@ export class WireTransferedEditComponent implements OnInit {
 
     record: Tbl_Cargo_Wiretransferm = <Tbl_Cargo_Wiretransferm>{};
     records: Tbl_Cargo_Wiretransferd[] = [];
+    genlist: Tbl_Cargo_Wiretransferd[] = [];
+    genrecords: SearchTable[] = [];
 
     tab: string = 'main';
     report_title: string = '';
     report_url: string = '';
     report_searchdata: any = {};
     report_menuid: string = '';
+    BenficiaryName:string = '';
+    Selectedcwdpkid:string = '';
 
     attach_title: string = '';
     attach_parentid: string = '';
@@ -157,8 +161,9 @@ export class WireTransferedEditComponent implements OnInit {
     }
 
     GetRecord() {
+
         this.errorMessage = [];
-        let filepath: string = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\quotation\\";
+        let filepath: string = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\xmlremarks\\";
 
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = this.pkid;
@@ -189,7 +194,7 @@ export class WireTransferedEditComponent implements OnInit {
             return;
         this.SaveParent();
 
-        let filepath: string = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\quotation\\";
+        let filepath: string = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\xmlremarks\\";
         let filter: any = {};
         filter.PATH = filepath;
 
@@ -208,10 +213,10 @@ export class WireTransferedEditComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
-                    // if (this.mode == "ADD" && response.code != '')
-                    //     this.record.qtnm_no = response.code;
+                    if (this.mode == "ADD" && response.slno != '')
+                        this.record.cwm_slno = response.slno;
                     this.mode = 'EDIT';
-                    // this.mainService.RefreshList(this.record);
+                   // this.mainService.RefreshList(this.record);
                     this.errorMessage.push('Save Complete');
                     //alert(this.errorMessage);
                 }
@@ -224,7 +229,7 @@ export class WireTransferedEditComponent implements OnInit {
 
     private SaveParent() {
 
-         
+
     }
     private Allvalid(): boolean {
 
@@ -293,13 +298,15 @@ export class WireTransferedEditComponent implements OnInit {
         var rec = <Tbl_Cargo_Wiretransferd>{};
         rec.cwd_pkid = this.gs.getGuid();
         rec.cwd_parent_id = this.pkid;
-        rec.cwd_type='INTERNATIONAL WIRE TRANSFER';
         rec.cwd_beneficiary_id = '';
-        rec.cwd_beneficiary_code = '';
-        rec.cwd_beneficiary_name = '';
-        rec.cwd_transfer_amt=0;
-
+        rec.cwd_type = 'INTERNATIONAL WIRE TRANSFER';
+        rec.cwd_beneficiary_reference = '';
+        rec.cwd_beneficiary_bank_id = '';
+        rec.pb_parent_id = '';
+        rec.pb_bank_name = '';
+        rec.cwd_transfer_amt = 0;
         this.records.push(rec);
+
         // this.qtnd_desc_code_field.changes
         //     .subscribe((queryChanges) => {
         //         this.qtnd_desc_code_field.last.Focus();
@@ -315,55 +322,62 @@ export class WireTransferedEditComponent implements OnInit {
             this.record.cwm_company_name = _Record.name;
             if (_Record.col8.toString() != "")
                 this.record.cwm_company_name = _Record.col8.toString();
-            
+
             this.record.cwm_company_tel = _Record.col6.toString();
-            this.record.cwm_company_fax =  _Record.col7.toString();
+            this.record.cwm_company_fax = _Record.col7.toString();
             // Dispatcher.BeginInvoke(() => { Txt_QuoteTo_Name.Focus(); });
         }
-        // if (_Record.controlname == "SALESMAN") {
-        //     this.record.qtnm_salesman_id = _Record.id;
-        //     this.record.qtnm_salesman_name = _Record.name;
-        //     if (!this.gs.isBlank(this.move_type_field))
-        //         this.move_type_field.focus();
-        // }
-        // if (_Record.controlname == "POR") {
-        //     this.record.qtnm_por_id = _Record.id;
-        //     this.record.qtnm_por_code = _Record.code;
-        //     this.record.qtnm_por_name = _Record.name;
-        //     if (!this.gs.isBlank(this.por_field))
-        //         this.por_field.focus();
-        // }
-        // if (_Record.controlname == "POL") {
-        //     this.record.qtnm_pol_id = _Record.id;
-        //     this.record.qtnm_pol_code = _Record.code;
-        //     this.record.qtnm_pol_name = _Record.name;
-        //     if (!this.gs.isBlank(this.pol_field))
-        //         this.pol_field.focus();
-        // }
-        // if (_Record.controlname == "POD") {
-        //     this.record.qtnm_pod_id = _Record.id;
-        //     this.record.qtnm_pod_code = _Record.code;
-        //     this.record.qtnm_pod_name = _Record.name;
-        //     if (!this.gs.isBlank(this.pod_field))
-        //         this.pod_field.focus();
-        // }
-        // if (_Record.controlname == "CURR") {
-        //     this.record.qtnm_curr_code = _Record.code;
-        //     if (!this.gs.isBlank(this.qtnm_commodity_field))
-        //         this.qtnm_commodity_field.focus();
-        // }
+  
+        if (_Record.controlname == "BENIFICIARY") {
+            this.records.forEach(rec => {
+                if (rec.cwd_pkid == _Record.uid) {
+                    rec.cwd_beneficiary_id = _Record.id;
+                    rec.cwd_beneficiary_code = _Record.code;
+                    rec.cwd_beneficiary_name = _Record.name;
+                    // if (idx < this.qtnd_desc_name_field.toArray().length)
+                    //     this.qtnd_desc_name_field.toArray()[idx].focus();
+                    this.Selectedcwdpkid = rec.cwd_pkid;
+                    this.BenficiaryName=rec.cwd_beneficiary_name;
+                    this.LoadGenList(_Record.id);
+                }
+            });
+        }
+    }
 
-        // if (_Record.controlname == "INVOICE-CODE") {
-        //     this.records.forEach(rec => {
-        //         if (rec.qtnd_pkid == _Record.uid) {
-        //             rec.qtnd_desc_id = _Record.id;
-        //             rec.qtnd_desc_code = _Record.code;
-        //             rec.qtnd_desc_name = _Record.name;
-        //             if (idx < this.qtnd_desc_name_field.toArray().length)
-        //                 this.qtnd_desc_name_field.toArray()[idx].focus();
-        //         }
-        //     });
-        // }
+    LoadGenList(_beneficiary_id:string)
+    {
+        this.genlist = <Tbl_Cargo_Wiretransferd[]>[];
+    
+        this.errorMessage = [];
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = _beneficiary_id;
+        this.mainService.LoadGenList(SearchData)
+          .subscribe(response => {
+           
+           
+        //     let charecord: Table_Address = <Table_Address>{};
+        //     charecord = <Table_Address>response.record;
+    
+        //     if (charecord != null) {
+        //       this.record.hbl_cha_id = charecord.pkid;
+        //       this.record.hbl_cha_code = charecord.code;
+        //       this.record.hbl_cha_name = charecord.name;
+        //       this.record.hbl_cha_attn = charecord.attention;
+        //       this.record.hbl_cha_tel = charecord.telephone;
+        //       this.record.hbl_cha_fax = charecord.fax;
+        //       if (this.gs.GENERAL_BRANCH_CODE == "MFDR") {
+        //         this.record.hbl_salesman_id = charecord.sman_id;
+        //         this.record.hbl_salesman_name = charecord.sman_name;
+        //       }
+        //     }
+    
+        //     if (!this.gs.isBlank(this.hbl_consignee_name_field))
+        //       this.hbl_consignee_name_field.nativeElement.focus();
+    
+          }, error => {
+            this.errorMessage.push(this.gs.getError(error));
+          });
+
     }
 
     OnChange(field: string) {
@@ -393,28 +407,10 @@ export class WireTransferedEditComponent implements OnInit {
         }
     }
 
-   
+
 
     BtnNavigation(action: string, attachmodal: any = null) {
         switch (action) {
-            case 'ATTACHMENT': {
-                this.attach_title = 'Documents';
-                this.attach_parentid = this.pkid;
-                this.attach_subid = '';
-                this.attach_type = 'QUOT-LCL';
-                this.attach_typelist = [];
-                this.attach_tablename = 'cargo_qtnm';
-                this.attach_tablepkcolumn = 'qtnm_pkid';
-                this.attach_refno = '';
-                this.attach_customername = '';
-                this.attach_updatecolumn = 'REC_FILES_ATTACHED';
-                this.attach_viewonlysource = '';
-                this.attach_viewonlyid = '';
-                this.attach_filespath = '';
-                this.attach_filespath2 = '';
-                this.modal = this.modalservice.open(attachmodal, { centered: true });
-                break;
-            } 
             case 'PRINT': {
                 let filepath: string = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\quotation\\";
                 this.report_title = 'Quotation LCL';
@@ -439,5 +435,12 @@ export class WireTransferedEditComponent implements OnInit {
     CloseModal() {
         this.modal.close();
     }
+
+    SelectRecord(_rec: SearchTable) {
+       
+       
+    }
+
+    
 }
 

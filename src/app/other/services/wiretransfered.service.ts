@@ -158,8 +158,8 @@ export class WireTransferedService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/WireTransfered/Save', SearchData, this.gs.headerparam2('authorized'));
     }
 
-    LoadDeliveryAddress(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Other/WireTransfered/LoadDeliveryAddress', SearchData, this.gs.headerparam2('authorized'));
+    LoadGenList(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Other/WireTransfered/LoadGenList', SearchData, this.gs.headerparam2('authorized'));
     }
 
 }
