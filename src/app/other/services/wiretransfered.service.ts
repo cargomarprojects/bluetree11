@@ -26,6 +26,8 @@ export class WireTransferedService {
     public canAdd: boolean;
     public canEdit: boolean;
     public canSave: boolean;
+    public canDelete: boolean;
+    public canPrint: boolean;
 
     public initlialized: boolean;
     private appid =''
@@ -101,6 +103,8 @@ export class WireTransferedService {
         this.title = this.gs.getTitle(this.menuid);
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
+        this.canDelete = this.gs.canDelete(this.menuid);
+        this.canPrint = this.gs.canPrint(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
         this.initlialized = true;
     }
@@ -145,6 +149,57 @@ export class WireTransferedService {
         });
     }
 
+
+
+    RefreshList(_rec: Tbl_Cargo_Wiretransferm) {
+        if (this.gs.isBlank(this.record))
+            return;
+        if (this.gs.isBlank(this.record.records))
+            return;
+        var REC = this.record.records.find(rec => rec.cwm_pkid == _rec.cwm_pkid);
+        if (REC == null) {
+            this.record.records.push(_rec);
+        }
+        else {
+
+            REC.cwm_refno = _rec.cwm_refno;
+            REC.cwm_date = _rec.cwm_date;
+            REC.cwm_to_name = _rec.cwm_to_name;
+            REC.cwm_company_name = _rec.cwm_company_name;;
+            REC.cwm_company_tel = _rec.cwm_company_tel;
+            REC.cwm_company_fax = _rec.cwm_company_fax;
+            REC.cwm_request_type = _rec.cwm_request_type;
+        }
+    }
+
+    DeleteRow(_rec: Tbl_Cargo_Wiretransferm) {
+
+        if (!confirm("DELETE " + _rec.cwm_refno)) {
+            return;
+        }
+
+        this.record.errormessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = _rec.cwm_pkid;
+        SearchData.remarks = _rec.cwm_refno + ", " + _rec.cwm_to_name.toString() + ", " + _rec.cwm_company_name.toString();
+
+        this.DeleteRecord(SearchData)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.record.errormessage = response.error;
+                    alert(this.record.errormessage);
+                }
+                else {
+                    this.record.records.splice(this.record.records.findIndex(rec => rec.cwm_pkid == _rec.cwm_pkid), 1);
+                }
+                this.mdata$.next(this.record);
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+                alert(this.record.errormessage);
+                this.mdata$.next(this.record);
+            });
+    }
+
      
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/WireTransfered/List', SearchData, this.gs.headerparam2('authorized'));
@@ -158,8 +213,12 @@ export class WireTransferedService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/WireTransfered/Save', SearchData, this.gs.headerparam2('authorized'));
     }
 
-    LoadDeliveryAddress(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Other/WireTransfered/LoadDeliveryAddress', SearchData, this.gs.headerparam2('authorized'));
+    DeleteRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Other/WireTransfered/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+    LoadGenList(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Other/WireTransfered/LoadGenList', SearchData, this.gs.headerparam2('authorized'));
     }
 
 }

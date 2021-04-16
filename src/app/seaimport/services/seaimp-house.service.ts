@@ -159,6 +159,30 @@ export class SeaImpHouseService {
         });
     }
 
+    RefreshList(_rec: Tbl_cargo_imp_housem) {
+        if (this.gs.isBlank(this.record))
+            return;
+        if (this.gs.isBlank(this.record.records))
+            return;
+        var REC = this.record.records.find(rec => rec.hbl_pkid == _rec.hbl_pkid);
+        if (REC == null) {
+            this.record.records.push(_rec);
+        }
+        else {
+            REC.mbl_refno = _rec.mbl_refno;
+            REC.mbl_no = _rec.mbl_no;
+            REC.hbl_houseno = _rec.hbl_houseno;
+            REC.hbl_shipper_name = _rec.hbl_shipper_name;
+            REC.hbl_consignee_name = _rec.hbl_consignee_name;
+            REC.hbl_packages = _rec.hbl_packages;
+            REC.hbl_handled_name = _rec.hbl_handled_name;
+            REC.mbl_pol_etd = _rec.mbl_pol_etd;
+            REC.mbl_pod_eta = _rec.mbl_pod_eta;
+            REC.rec_created_by = _rec.rec_created_by;
+            REC.rec_created_date = _rec.rec_created_date;
+        }
+    }
+
     DeleteRow(_rec: Tbl_cargo_imp_housem) {
 
         if (this.gs.isBlank(_rec.hbl_pkid) || this.gs.isBlank(_rec.hbl_mbl_id)) {

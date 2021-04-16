@@ -186,6 +186,26 @@ export class OthGeneralExpenseService {
         });
     }
 
+    RefreshList(_rec: Tbl_cargo_general) {
+        if (this.gs.isBlank(this.record))
+            return;
+        if (this.gs.isBlank(this.record.records))
+            return;
+        var REC = this.record.records.find(rec => rec.mbl_pkid == _rec.mbl_pkid);
+        if (REC == null) {
+            this.record.records.push(_rec);
+        }
+        else {
+            REC.mbl_refno = _rec.mbl_refno;
+            REC.mbl_no = _rec.mbl_no;
+            REC.mbl_cargo_loc_name = _rec.mbl_cargo_loc_name;
+            REC.mbl_devan_loc_name = _rec.mbl_devan_loc_name;
+            REC.mbl_remarks = _rec.mbl_remarks;;
+            REC.mbl_ar_total = _rec.mbl_ar_total;
+            REC.mbl_ap_total = _rec.mbl_ap_total;
+            REC.rec_created_by = _rec.rec_created_by;
+        }
+    }
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/GeneralExpense/List', SearchData, this.gs.headerparam2('authorized'));
     }

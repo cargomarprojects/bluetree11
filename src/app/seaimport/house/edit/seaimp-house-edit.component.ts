@@ -616,6 +616,8 @@ export class SeaImpHouseEditComponent implements OnInit {
           };
           this.location.replaceState('Silver.SeaImport/SeaImpHouseEditPage', this.gs.getUrlParameter(parameter));
 
+          if (this.origin === "seaimp-house-page")
+          this.mainService.RefreshList(this.record);
 
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage);

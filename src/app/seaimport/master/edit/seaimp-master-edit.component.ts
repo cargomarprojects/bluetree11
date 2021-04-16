@@ -313,7 +313,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           };
           this.location.replaceState('Silver.SeaImport/SeaImpMasterEditPage', this.gs.getUrlParameter(parameter));
 
-          // this.mainService.RefreshList(this.record);
+          this.mainService.RefreshList(this.record);
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage);
         }

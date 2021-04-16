@@ -58,6 +58,7 @@ import { PreSetMsgEditComponent } from './presetmsg/presetmsg-edit.component';
 import { WireTransferedComponent } from './wiretransfered/wiretransfered.component';
 import { WireTransferedHeaderComponent } from './wiretransfered/wiretransfered-header.component';
 import { WireTransferedEditComponent } from './wiretransfered/edit/wiretransfered-edit.component';
+import { WireTransferedBankComponent } from './wiretransfered/bank/wiretransfered-bank.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { WireTransferedEditComponent } from './wiretransfered/edit/wiretransfere
     PreSetMsgEditComponent,
     WireTransferedComponent,
     WireTransferedHeaderComponent,
-    WireTransferedEditComponent
+    WireTransferedEditComponent,
+    WireTransferedBankComponent
   ],
   imports: [
     SharedModule,    
