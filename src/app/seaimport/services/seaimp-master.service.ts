@@ -161,6 +161,29 @@ export class SeaImpMasterService {
         });
     }
 
+    RefreshList(_rec: Tbl_cargo_imp_masterm) {
+        if (this.gs.isBlank(this.record))
+            return;
+        if (this.gs.isBlank(this.record.records))
+            return;
+        var REC = this.record.records.find(rec => rec.mbl_pkid == _rec.mbl_pkid);
+        if (REC == null) {
+            this.record.records.push(_rec);
+        }
+        else {
+            REC.mbl_refno = _rec.mbl_refno;
+            REC.mbl_no = _rec.mbl_no;
+            REC.mbl_agent_name = _rec.mbl_agent_name;
+            REC.mbl_liner_name = _rec.mbl_liner_name;
+            REC.mbl_pol_name = _rec.mbl_pol_name;;
+            REC.mbl_pol_etd = _rec.mbl_pol_etd;
+            REC.mbl_pod_name = _rec.mbl_pod_name;
+            REC.mbl_pod_eta = _rec.mbl_pod_eta;
+            REC.mbl_handled_name = _rec.mbl_handled_name;
+            REC.rec_created_by = _rec.rec_created_by;
+        }
+    }
+    
     DeleteRow(_rec: Tbl_cargo_imp_masterm) {
         if (!confirm("DELETE " + _rec.mbl_refno)) {
             return;
