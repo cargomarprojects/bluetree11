@@ -29,6 +29,7 @@
                 <th (click)="mainservice.sort('cwm_company_tel')">TEL&nbsp;<i [ngClass]="mainservice.getIcon('cwm_company_tel')"></i></th>
                 <th (click)="mainservice.sort('cwm_company_fax')">FAX&nbsp;<i [ngClass]="mainservice.getIcon('cwm_company_fax')"></i></th>
                 <th (click)="mainservice.sort('cwm_request_type')">REQUEST TYPE&nbsp;<i [ngClass]="mainservice.getIcon('cwm_request_type')"></i></th>
+                <th *ngIf="mainservice.canDelete" class='text-center'>DELETE</th> 
             </tr>
         </thead>
         <tbody class="page-body-tbody">
@@ -44,6 +45,8 @@
                 <td>{{rec.cwm_company_tel}}</td>
                 <td>{{rec.cwm_company_fax}}</td>
                 <td>{{rec.cwm_request_type}}</td>
+                <td *ngIf="mainservice.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                    (click)="mainservice.DeleteRow(rec)"></i></td>
             </tr>
         </tbody>
     </table>

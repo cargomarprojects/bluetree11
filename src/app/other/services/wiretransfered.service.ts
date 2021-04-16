@@ -167,6 +167,35 @@ export class WireTransferedService {
             REC.cwm_request_type = _rec.cwm_request_type;
         }
     }
+
+    DeleteRow(_rec: Tbl_Cargo_Wiretransferm) {
+
+        if (!confirm("DELETE " + _rec.cwm_refno)) {
+            return;
+        }
+
+        this.record.errormessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = _rec.cwm_pkid;
+        SearchData.remarks = _rec.cwm_refno + ", " + _rec.cwm_to_name.toString() + ", " + _rec.cwm_company_name.toString();
+
+        this.DeleteRecord(SearchData)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.record.errormessage = response.error;
+                    alert(this.record.errormessage);
+                }
+                else {
+                    this.record.records.splice(this.record.records.findIndex(rec => rec.cwm_pkid == _rec.cwm_pkid), 1);
+                }
+                this.mdata$.next(this.record);
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+                alert(this.record.errormessage);
+                this.mdata$.next(this.record);
+            });
+    }
+
      
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/WireTransfered/List', SearchData, this.gs.headerparam2('authorized'));
@@ -178,6 +207,10 @@ export class WireTransferedService {
 
     Save(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/WireTransfered/Save', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+    DeleteRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Other/WireTransfered/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
 
     LoadGenList(SearchData: any) {
