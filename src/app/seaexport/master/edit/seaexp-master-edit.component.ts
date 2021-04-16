@@ -349,8 +349,7 @@ export class SeaexpMasterEditComponent implements OnInit {
           };
           this.location.replaceState('Silver.SeaExport.Trans/SeaExpMasterEditPage', this.gs.getUrlParameter(parameter));
 
-          // this.mainService.RefreshList(this.record);
-
+          this.mainService.RefreshList(this.record);
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage[0]);
         }
