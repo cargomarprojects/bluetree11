@@ -11,30 +11,397 @@
     </div>
 </div>
 
-<div class="page-body">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Software Version</label>
-                <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="version" />
+<div class="page-body p-2">
+    <button type="button" class="btn btn-success mr-1" (click)="tab='page1'">General</button>
+    <button type="button" class="btn btn-success mr-1" (click)="tab='page2'">Shipment Stages</button>
+</div>
+
+
+<div *ngIf="tab == 'page1'">
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-4 border">
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <label class="col-8 col-form-label col-form-label-sm">General Email Settings</label>
                 </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Software Version</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="version" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Name"
+                            maxlength="100" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Display Name</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Display_Name"
+                            maxlength="100" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Email</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Email"
+                            maxlength="100" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Password</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="password" [(ngModel)]="Txt_Password"
+                            maxlength="100" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Auto-cc</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Cc" maxlength="100" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Auto-Bcc</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Bcc" maxlength="100" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Signature</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Sign1"
+                            maxlength="100" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Sign2"
+                            maxlength="100" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Sign3"
+                            maxlength="100" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Sign4"
+                            maxlength="100" />
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="col-md-3 border">
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <label class="col-8 col-form-label col-form-label-sm">FCL Quotation Labels</label>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">OF</label>
+                    <div class="col-5">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Of" maxlength="20" />
+                    </div>
+                    <div class="col-3">
+                        <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Of_Order"
+                            maxlength="3" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">PSS</label>
+                    <div class="col-5">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Pss" maxlength="20" />
+                    </div>
+                    <div class="col-3">
+                        <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Pss_Order"
+                            maxlength="3" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">BAF</label>
+                    <div class="col-5">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Baf" maxlength="20" />
+                    </div>
+                    <div class="col-3">
+                        <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Baf_Order"
+                            maxlength="3" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">ISPS</label>
+                    <div class="col-5">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_IsPs" maxlength="20" />
+                    </div>
+                    <div class="col-3">
+                        <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_IsPs_order"
+                            maxlength="3" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Haulage</label>
+                    <div class="col-5">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Haulage"
+                            maxlength="20" />
+                    </div>
+                    <div class="col-3">
+                        <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Haulage_Order"
+                            maxlength="3" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">ISF</label>
+                    <div class="col-5">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_ISF" maxlength="20" />
+                    </div>
+                    <div class="col-3">
+                        <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_ISF_Order"
+                            maxlength="3" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 border">
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <label class="col-8 col-form-label col-form-label-sm">Others</label>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Branch Code</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Branch_Code"
+                            maxlength="20" />
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Company ID</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Company_ID"
+                            maxlength="100" />
+                    </div>
+                </div>
+
 
             </div>
 
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <button class="btn btn-primary btn-sm m-1" (click)="Save()">Save</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="page-footer">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm"></label>
-                <div class="col-8">
-                    <button class="btn btn-primary btn-sm m-1" (click)="Save()">Save</button>
+
+<div *ngIf="tab == 'page2'">
+
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-3 border">
+                <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-info m-1" (click)="StageClick('OCEAN IMPORT')" >Ocean Import</button>
+                    <button type="button" class="btn btn-info m-1" (click)="StageClick('OCEAN EXPORT')">Ocean Export</button>
+                    <button type="button" class="btn btn-info m-1" (click)="StageClick('AIR IMPORT')">Air Import</button>
+                    <button type="button" class="btn btn-info m-1" (click)="StageClick('AIR EXPORT')">Air Export</button>
+                    <button type="button" class="btn btn-info m-1" (click)="StageClick('OTHERS')">Others</button>
                 </div>
             </div>
+            <div class="col-md-4 border">
+
+                <div class="form-group row">
+                    <label class="col-12 col-form-label col-form-label-sm"><h5>{{LBL_STAGES}}</h5></label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">SEQ</label>
+                    <label class="col-8 col-form-label col-form-label-sm">DESCRIPTION</label>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq1" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage1" maxlength="60" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq2" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage2" maxlength="60" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq3" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage3" maxlength="60" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq4" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage4" maxlength="60" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq5" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage5" maxlength="60" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq6" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage6" maxlength="60" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq7" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage7" maxlength="60" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq8" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage8" maxlength="60" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq9" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage9" maxlength="60" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq10" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage10" maxlength="60" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq11" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage11" maxlength="60" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq12" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage12" maxlength="60" />
+                    </div>
+                </div>                
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq13" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage13" maxlength="60" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq14" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage14" maxlength="60" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Seq15" maxlength="60" />
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Stage15" maxlength="60" />
+                    </div>
+                </div>                
+            </div>
+            
+            <div class="col-md-3 border">
+                <div class="form-group row">
+                    <div class="col-12">
+                        <button class="btn btn-primary btn-sm m-1" (click)="sortList()">Show Orderd List</button>
+                    </div>
+                </div>          
+
+                <div class="form-group row" *ngFor="let rec of sortedList; let i=index">
+                    <label class="col-12 col-form-label col-form-label-sm">{{i+1}}-{{rec.param_name3}}</label>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <button class="btn btn-primary btn-sm m-1" (click)="SaveStages()">Save Stages</button>
+                    </div>
+                </div>          
+
+
+
+            </div>  
         </div>
     </div>
+
 </div>
