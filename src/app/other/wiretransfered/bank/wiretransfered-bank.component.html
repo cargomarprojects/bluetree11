@@ -8,31 +8,9 @@
                 <div class="col-md-12 testbox  px-0 mx-0">
                     <div class="page-header">
                         <div class="row align-items-center justify-content-left p-1">
-                            <label class="mr-3">{{_mRecord.cwd_beneficiary_namee}}</label>
+                            <label class="mr-3">{{_mRecord.cwd_beneficiary_name}}</label>
                         </div>
                     </div>
-                    <!-- <div class="page-body">
-                    <div class="row border">
-                        <div class="col-md-6 testbox  px-0 mx-0">
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label col-form-label-sm">Ref# </label>
-                                <div class="col-10">
-                                    <input class="form-control form-control-sm text-danger" disabled type="text"
-                                        [(ngModel)]="_refno" maxlength="250" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 testbox  px-0 mx-0">
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label col-form-label-sm">Employee</label>
-                                <div class="col-10">
-                                    <input class="form-control form-control-sm text-danger" disabled type="text"
-                                        [(ngModel)]="_empname" maxlength="250" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
                     <div class="row border">
                         <div class="col-md-12  px-0 mx-0">
                             <div class="page-body table-responsive table-bordered">
@@ -64,8 +42,8 @@
             </div>
             <div class="page-footer">
                 <div class="row justify-content-center p-1">
-                    <button class="btn btn-primary btn-sm mr-1" (click)="CloseModal('OK')">Ok</button>
-                    <button class="btn btn-primary btn-sm mr-1" (click)="CloseModal('CLOSE')">Cancel</button>
+                    <!-- <button class="btn btn-primary btn-sm mr-1" (click)="CloseModal('OK')">Ok</button> -->
+                    <button class="btn btn-primary btn-sm mr-1" (click)="CloseModal('CLOSE')">Close</button>
                 </div>
             </div>
         </div>
