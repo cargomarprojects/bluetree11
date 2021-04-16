@@ -342,7 +342,8 @@ export class OthGeneralExpenseEditComponent implements OnInit {
             mode: 'EDIT'
           };
           this.location.replaceState('Silver.Other.Trans/OthGeneralExpenseEditPage', this.gs.getUrlParameter(parameter));
-
+          
+          this.mainService.RefreshList(this.record);
           this.errorMessage.push('Save Complete');
           //alert(this.errorMessage);
         }
