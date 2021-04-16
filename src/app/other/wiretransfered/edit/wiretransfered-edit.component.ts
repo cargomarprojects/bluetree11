@@ -16,48 +16,19 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class WireTransferedEditComponent implements OnInit {
 
     @ViewChild('_btnret') btnret_field: ElementRef;
-    // @ViewChild('to_code') to_code_field: AutoComplete2Component;
-    // @ViewChild('to_name') to_name_field: InputBoxComponent;
-    // @ViewChild('quot_by') quot_by_field: InputBoxComponent;
-    // @ViewChild('salesman_name') salesman_name_field: AutoComplete2Component;
-    // @ViewChild('move_type') move_type_field: InputBoxComponent;
-    // @ViewChild('por') por_field: InputBoxComponent;
-    // @ViewChild('pol') pol_field: InputBoxComponent;
-    // @ViewChild('pod') pod_field: InputBoxComponent;
-    // @ViewChild('_qtnm_subjects') qtnm_subjects_field: ElementRef;
-    // @ViewChild('_qtnm_commodity') qtnm_commodity_field: InputBoxComponent;
-    // @ViewChild('_qtnm_remarks') qtnm_remarks_field: ElementRef;
-    // @ViewChildren('_qtnd_desc_code') qtnd_desc_code_field: QueryList<AutoComplete2Component>;
-    // @ViewChildren('_qtnd_desc_name') qtnd_desc_name_field: QueryList<InputBoxComponent>;
-
+    @ViewChild('_company_name') company_name_field: InputBoxComponent;
+    @ViewChildren('_beneficiary_name') beneficiary_name_field: QueryList<AutoComplete2Component>;
+    @ViewChildren('_bank_name') bank_name_field: QueryList<InputBoxComponent>;
 
     record: Tbl_Cargo_Wiretransferm = <Tbl_Cargo_Wiretransferm>{};
     records: Tbl_Cargo_Wiretransferd[] = [];
-    genlist: Tbl_Cargo_Wiretransferd[] = [];
-    genrecords: SearchTable[] = [];
 
     tab: string = 'main';
     report_title: string = '';
     report_url: string = '';
     report_searchdata: any = {};
     report_menuid: string = '';
-    BenficiaryName:string = '';
-    Selectedcwdpkid:string = '';
 
-    attach_title: string = '';
-    attach_parentid: string = '';
-    attach_subid: string = '';
-    attach_type: string = '';
-    attach_typelist: any = {};
-    attach_tablename: string = '';
-    attach_tablepkcolumn: string = '';
-    attach_refno: string = '';
-    attach_customername: string = '';
-    attach_updatecolumn: string = '';
-    attach_viewonlysource: string = '';
-    attach_viewonlyid: string = '';
-    attach_filespath: string = '';
-    attach_filespath2: string = '';
 
     pkid: string;
     menuid: string;
@@ -99,10 +70,10 @@ export class WireTransferedEditComponent implements OnInit {
         this.actionHandler();
     }
     ngAfterViewInit() {
-        // if (this.mode == 'ADD') {
-        //     if (!this.gs.isBlank(this.to_code_field))
-        //         this.to_code_field.Focus();
-        // }
+
+        if (!this.gs.isBlank(this.btnret_field))
+            this.btnret_field.nativeElement.focus();
+
     }
     private initPage() {
         this.isAdmin = this.gs.IsAdmin(this.menuid);
@@ -179,9 +150,9 @@ export class WireTransferedEditComponent implements OnInit {
                 //     this.Foregroundcolor = "red";
                 // else
                 //     this.Foregroundcolor = "white";
-                // if (!this.gs.isBlank(this.btnretlcl_field))
-                //     this.btnretlcl_field.nativeElement.focus();
 
+                if (!this.gs.isBlank(this.btnret_field))
+                    this.btnret_field.nativeElement.focus();
             }, error => {
                 this.errorMessage.push(this.gs.getError(error));
             });
@@ -214,9 +185,9 @@ export class WireTransferedEditComponent implements OnInit {
                 }
                 else {
                     if (this.mode == "ADD" && response.slno != '')
-                        this.record.cwm_slno = response.slno;
+                        this.record.cwm_refno = response.slno;
                     this.mode = 'EDIT';
-                   // this.mainService.RefreshList(this.record);
+                    this.mainService.RefreshList(this.record);
                     this.errorMessage.push('Save Complete');
                     //alert(this.errorMessage);
                 }
@@ -240,48 +211,48 @@ export class WireTransferedEditComponent implements OnInit {
             bRet = false;
             this.errorMessage.push("Invalid ID");
         }
-
-        // if (this.gs.isBlank(this.record.qtnr_agent_id) || this.gs.isBlank(this.record.qtnr_agent_name)) {
-        //     bRet = false;
-        //     this.errorMessage = "Agent Cannot be blank";
-        //     alert(this.errorMessage);
-        //     return bRet;
-        // }
-        // if (this.gs.isBlank(this.record.qtnr_validity)) {
-        //     bRet = false;
-        //     this.errorMessage = "Validity cannot be blank";
-        //     alert(this.errorMessage);
-        //     return bRet;
-        // }
-
-
-        // if (this.gs.isBlank(this.record.qtnm_to_name)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Quote To Cannot blank");
-        // }
-        // if (this.gs.isBlank(this.record.qtnm_date)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Quote Date Cannot blank");
-        // }
-        // if (this.gs.isBlank(this.record.qtnm_salesman_id) || this.gs.isBlank(this.record.qtnm_salesman_name)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Sales Rep. Cannot blank");
-        // }
+        if (this.gs.isBlank(this.record.cwm_to_name)) {
+            bRet = false;
+            this.errorMessage.push("To Cannot blank");
+        }
+        if (this.gs.isBlank(this.record.cwm_date)) {
+            bRet = false;
+            this.errorMessage.push("Date Cannot blank");
+        }
+        if (this.gs.isBlank(this.record.cwm_company_id) || this.gs.isBlank(this.record.cwm_company_name)) {
+            bRet = false;
+            this.errorMessage.push("Company Cannot blank");
+        }
 
         let iCtr: number = 0;
         this.records.forEach(Rec => {
             iCtr++;
-            // if (Rec.qtnd_amt <= 0) {
-            //     bRet = false;
-            //     this.errorMessage.push("Amount Cannot blank (" + Rec.qtnd_desc_code + ")");
-            // }
+            if (this.gs.isBlank(Rec.cwd_beneficiary_id)) {
+                bRet = false;
+                this.errorMessage.push("Beneficiary Cannot blank");
+            }
+            if (this.gs.isBlank(Rec.pb_bank_name)) {
+                bRet = false;
+                this.errorMessage.push("Bank Cannot blank");
+            }
+            if (this.gs.isBlank(Rec.cwd_beneficiary_bank_id)) {
+                bRet = false;
+                this.errorMessage.push("Bank Details Not Found");
+            }
+            if (this.gs.isZero(Rec.cwd_transfer_amt)) {
+                bRet = false;
+                this.errorMessage.push("Amount Cannot blank");
+            }
+            if (Rec.pb_parent_id != Rec.cwd_beneficiary_id) {
+                bRet = false;
+                this.errorMessage.push("Invalid Bank Details");
+            }
         })
 
         if (iCtr == 0) {
             bRet = false;
             this.errorMessage.push("No Detail Rows To Save");
         }
-
 
         if (!bRet)
             alert('Error While Saving');
@@ -307,10 +278,10 @@ export class WireTransferedEditComponent implements OnInit {
         rec.cwd_transfer_amt = 0;
         this.records.push(rec);
 
-        // this.qtnd_desc_code_field.changes
-        //     .subscribe((queryChanges) => {
-        //         this.qtnd_desc_code_field.last.Focus();
-        //     });
+        this.beneficiary_name_field.changes
+            .subscribe((queryChanges) => {
+                this.beneficiary_name_field.last.Focus();
+            });
     }
 
     LovSelected(_Record: SearchTable, idx: number = 0) {
@@ -325,60 +296,24 @@ export class WireTransferedEditComponent implements OnInit {
 
             this.record.cwm_company_tel = _Record.col6.toString();
             this.record.cwm_company_fax = _Record.col7.toString();
-            // Dispatcher.BeginInvoke(() => { Txt_QuoteTo_Name.Focus(); });
+            
+            if (!this.gs.isBlank(this.company_name_field))
+                this.company_name_field.focus();
         }
-  
+
         if (_Record.controlname == "BENIFICIARY") {
             this.records.forEach(rec => {
                 if (rec.cwd_pkid == _Record.uid) {
                     rec.cwd_beneficiary_id = _Record.id;
                     rec.cwd_beneficiary_code = _Record.code;
                     rec.cwd_beneficiary_name = _Record.name;
-                    // if (idx < this.qtnd_desc_name_field.toArray().length)
-                    //     this.qtnd_desc_name_field.toArray()[idx].focus();
-                    this.Selectedcwdpkid = rec.cwd_pkid;
-                    this.BenficiaryName=rec.cwd_beneficiary_name;
-                    this.LoadGenList(_Record.id);
+                    if (idx < this.bank_name_field.toArray().length)
+                        this.bank_name_field.toArray()[idx].focus();
                 }
             });
         }
     }
 
-    LoadGenList(_beneficiary_id:string)
-    {
-        this.genlist = <Tbl_Cargo_Wiretransferd[]>[];
-    
-        this.errorMessage = [];
-        var SearchData = this.gs.UserInfo;
-        SearchData.pkid = _beneficiary_id;
-        this.mainService.LoadGenList(SearchData)
-          .subscribe(response => {
-           
-           
-        //     let charecord: Table_Address = <Table_Address>{};
-        //     charecord = <Table_Address>response.record;
-    
-        //     if (charecord != null) {
-        //       this.record.hbl_cha_id = charecord.pkid;
-        //       this.record.hbl_cha_code = charecord.code;
-        //       this.record.hbl_cha_name = charecord.name;
-        //       this.record.hbl_cha_attn = charecord.attention;
-        //       this.record.hbl_cha_tel = charecord.telephone;
-        //       this.record.hbl_cha_fax = charecord.fax;
-        //       if (this.gs.GENERAL_BRANCH_CODE == "MFDR") {
-        //         this.record.hbl_salesman_id = charecord.sman_id;
-        //         this.record.hbl_salesman_name = charecord.sman_name;
-        //       }
-        //     }
-    
-        //     if (!this.gs.isBlank(this.hbl_consignee_name_field))
-        //       this.hbl_consignee_name_field.nativeElement.focus();
-    
-          }, error => {
-            this.errorMessage.push(this.gs.getError(error));
-          });
-
-    }
 
     OnChange(field: string) {
     }
@@ -409,16 +344,16 @@ export class WireTransferedEditComponent implements OnInit {
 
 
 
-    BtnNavigation(action: string, attachmodal: any = null) {
+    BtnNavigation(action: string) {
         switch (action) {
             case 'PRINT': {
-                let filepath: string = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\quotation\\";
-                this.report_title = 'Quotation LCL';
-                this.report_url = '/api/Marketing/QtnReport/GetQuotationLclRpt';
+                let filepath: string = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\xmlremarks\\";
+                this.report_title = 'Wire Transfer';
+                this.report_url = '/api/Other/WireTransfered/GetWireTransferReport';
                 this.report_searchdata = this.gs.UserInfo;
                 this.report_searchdata.pkid = this.pkid;
                 this.report_searchdata.PATH = filepath;
-                this.report_menuid = this.gs.MENU_QUOTATION_LCL;
+                this.report_menuid = this.menuid;
                 this.tab = 'report';
                 break;
             }
@@ -436,11 +371,6 @@ export class WireTransferedEditComponent implements OnInit {
         this.modal.close();
     }
 
-    SelectRecord(_rec: SearchTable) {
-       
-       
-    }
 
-    
 }
 

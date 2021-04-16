@@ -52,7 +52,8 @@
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
-                        <InputBox [(inputModel)]="record.cwm_company_name" [maxlength]="60" [uppercase]="true" #to_name>
+                        <InputBox [(inputModel)]="record.cwm_company_name" [maxlength]="60" [uppercase]="true"
+                            #_company_name>
                         </InputBox>
                     </div>
                 </div>
@@ -181,20 +182,21 @@
                                     </select>
                                 </td>
                                 <td class="p-0">
-                                    <app-autocomplete2 #_qtnd_desc_code [controlname]="'BENIFICIARY'"
+                                    <app-autocomplete2 #_beneficiary_name [controlname]="'BENIFICIARY'"
                                         [displaycolumn]="'NAME'" [tabletype]="'MASTER'" [uid]="rec.cwd_pkid"
                                         [displaydata]="rec.cwd_beneficiary_name" (ValueChanged)="LovSelected($event,i)">
                                     </app-autocomplete2>
                                 </td>
                                 <td class="p-0">
-                                    <div class="input-group input-group-sm"> 
-                                        <div class="col-10 mx-0 px-0" >
-                                        <InputBox [(inputModel)]="rec.pb_bank_name" [maxlength]="60" [uppercase]="true"></InputBox>
-                                       </div>
-                                       <div class="col-2 mx-0 px-0" >
-                                        <!-- <button class="btn btn-default btn-sm" (click)="Close()">...</button>  -->
-                                        <app-wiretransfered-bank [mRecord]="rec" ></app-wiretransfered-bank>
-                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <div class="col-10 mx-0 px-0">
+                                            <InputBox #_bank_name [(inputModel)]="rec.pb_bank_name" [maxlength]="60"
+                                                [uppercase]="true"></InputBox>
+                                        </div>
+                                        <div class="col-2 mx-0 px-0">
+                                            <!-- <button class="btn btn-default btn-sm" (click)="Close()">...</button>  -->
+                                            <app-wiretransfered-bank [mRecord]="rec"></app-wiretransfered-bank>
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="p-0">
@@ -240,42 +242,15 @@
             <div class="row justify-content-center p-1">
                 <button class="btn btn-primary btn-md mr-1" *ngIf="gs.canSave(menuid,mode)"
                     (click)="Save()">Save</button>
-                <button *ngIf="mode=='EDIT'" class="btn btn-primary btn-md mr-1"
+                <button *ngIf="mode=='EDIT' && gs.canPrint(menuid)" class="btn btn-primary btn-md mr-1"
                     (click)="BtnNavigation('PRINT')">Print</button>
-                <!-- <button [style.color]="Foregroundcolor" *ngIf="mode=='EDIT'" class="btn btn-primary btn-md mr-1"
-                    (click)="BtnNavigation('ATTACHMENT',attachmodal)">Supporting
-                    Documents</button> -->
             </div>
         </div>
 
     </div>
-    <div *ngIf="tab=='report'">
-        <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
-            (callbackevent)="callbackevent($event)"></app-report>
-    </div>
-    <ng-template #attachmodal let-c="close" let-d="dismiss">
-        <div class="modal-body">
-            <div class="page-body">
-                <div class="row">
-                    <div class="col-md-12 testbox  px-0 mx-0">
-                        <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
-                            [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
-                            [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
-                            [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
-                            [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
-                            [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
-                            (callbackevent)="callbackevent($event)"></app-fileupload>
-                    </div>
-                </div>
-                <div class="page-footer">
-                    <div class="row justify-content-center p-1">
-                        <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </ng-template>
+</div>
 
-
-
-   
+<div *ngIf="tab=='report'">
+    <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+        (callbackevent)="callbackevent($event)"></app-report>
+</div>

@@ -145,6 +145,28 @@ export class WireTransferedService {
         });
     }
 
+
+
+    RefreshList(_rec: Tbl_Cargo_Wiretransferm) {
+        if (this.gs.isBlank(this.record))
+            return;
+        if (this.gs.isBlank(this.record.records))
+            return;
+        var REC = this.record.records.find(rec => rec.cwm_pkid == _rec.cwm_pkid);
+        if (REC == null) {
+            this.record.records.push(_rec);
+        }
+        else {
+
+            REC.cwm_refno = _rec.cwm_refno;
+            REC.cwm_date = _rec.cwm_date;
+            REC.cwm_to_name = _rec.cwm_to_name;
+            REC.cwm_company_name = _rec.cwm_company_name;;
+            REC.cwm_company_tel = _rec.cwm_company_tel;
+            REC.cwm_company_fax = _rec.cwm_company_fax;
+            REC.cwm_request_type = _rec.cwm_request_type;
+        }
+    }
      
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/WireTransfered/List', SearchData, this.gs.headerparam2('authorized'));
