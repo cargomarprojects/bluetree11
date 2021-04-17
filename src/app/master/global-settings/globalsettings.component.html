@@ -12,8 +12,8 @@
 </div>
 
 <div class="page-body p-2">
-    <button type="button" class="btn btn-success mr-1" (click)="tab='page1'">General</button>
-    <button type="button" class="btn btn-success mr-1" (click)="tab='page2'">Shipment Stages</button>
+    <button type="button" class="btn btn-success mr-1" (click)="changeTab('page1')">General</button>
+    <button type="button" class="btn btn-success mr-1" (click)="changeTab('page2')">Shipment Stages</button>
 </div>
 
 
@@ -106,6 +106,16 @@
                             maxlength="100" />
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Mail Server</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="mailServer">
+                            <option *ngFor="let rec of serverList" [value]="rec.mail_pkid">{{rec.mail_name}}</option>
+                        </select>
+                    </div>
+                </div>
+
 
 
 
@@ -221,7 +231,7 @@
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm"></label>
                     <div class="col-8">
-                        <button class="btn btn-primary btn-sm m-1" (click)="Save()">Save</button>
+                        <button class="btn btn-info btn-sm m-1" (click)="Save()">Save</button>
                     </div>
                 </div>
             </div>
@@ -391,18 +401,18 @@
             <div class="col-md-3 border">
                 <div class="form-group row">
                     <div class="col-12">
-                        <button class="btn btn-primary btn-sm m-1" (click)="sortList()">Show Orderd List</button>
+                        <button class="btn btn-info btn-sm m-1" (click)="sortList()">Show Orderd List</button>
                     </div>
                 </div>          
 
                 <div class="form-group row" *ngFor="let rec of sortedList; let i=index">
-                    <label class="col-12 col-form-label col-form-label-sm">{{i+1}}-{{rec.param_name3}}</label>
+                    <label class="col-12 col-form-label col-form-label-sm">{{i+1}} - {{rec.param_name3}}</label>
                 </div>
 
 
                 <div class="form-group row">
                     <div class="col-12">
-                        <button class="btn btn-primary btn-sm m-1" (click)="SaveStages()">Save Stages</button>
+                        <button class="btn btn-info btn-sm m-1" (click)="SaveStages()">Save Stages</button>
                     </div>
                 </div>          
 

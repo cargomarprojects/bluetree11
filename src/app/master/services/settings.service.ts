@@ -21,4 +21,8 @@ export class SettingsService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Settings/Save', SearchData, this.gs.headerparam2('authorized'));
     }
     
+    MailServerList(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/MailServer/ServerList', SearchData, this.gs.headerparam2('authorized'));
+    }
+
 }

@@ -21,6 +21,8 @@ export class GlobalSettingsComponent implements OnInit {
 
   stagesRecords: TBL_MAST_PARAM[] = [];
 
+  serverList: any[];
+
   menuid: string;
   title: string = '';
   isAdmin: boolean;
@@ -107,6 +109,7 @@ export class GlobalSettingsComponent implements OnInit {
     this.menuid = options.menuid;
 
     this.initPage();
+    this.LoadCombo();
     this.List('SCREEN');
   }
 
@@ -114,6 +117,19 @@ export class GlobalSettingsComponent implements OnInit {
     this.title = 'Global Settings';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
+  }
+
+  LoadCombo(){
+    this.errorMessage = '';
+    var SearchData = this.gs.UserInfo;
+    SearchData.CODE = "";
+    SearchData.TYPE = "";
+
+    this.mainService.MailServerList(SearchData).subscribe(response => {
+        this.serverList = <any>response.list;
+    }, error => {
+        this.errorMessage = this.gs.getError(error);
+    });
   }
 
 
@@ -531,5 +547,9 @@ export class GlobalSettingsComponent implements OnInit {
     this.location.back();
   }
 
+  changeTab(_tab : string ){
+    this.tab = _tab;
+    this.errorMessage = '';
+  }
 
 }
