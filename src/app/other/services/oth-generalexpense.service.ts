@@ -31,8 +31,9 @@ export class OthGeneralExpenseService {
     public canSave: boolean;
 
     public initlialized: boolean;
-    private menutype: string = '';
-    private appid =''
+    // private menutype: string = '';
+    private appid = ''
+    private db: OthGeneralModel[] = [];
 
     constructor(
         private http2: HttpClient,
@@ -67,12 +68,6 @@ export class OthGeneralExpenseService {
         }
     }
     public ClearInit() {
-        this.menutype = '';
-        this.gs.GENERALEXPENSE_INIT_GE = null;
-        this.gs.GENERALEXPENSE_INIT_PR = null;
-        this.gs.GENERALEXPENSE_INIT_CM = null;
-        this.gs.GENERALEXPENSE_INIT_PS = null;
-        this.gs.GENERALEXPENSE_INIT_FA = null;
         this.record = <OthGeneralModel>{
             sortcol: 'mbl_refno',
             sortorder: true,
@@ -87,54 +82,27 @@ export class OthGeneralExpenseService {
         if (this.appid != this.gs.appid) {
             this.appid = this.gs.appid;
             this.initlialized = false;
-            this.menutype = '';
-            this.gs.GENERALEXPENSE_INIT_GE = null;
-            this.gs.GENERALEXPENSE_INIT_PR = null;
-            this.gs.GENERALEXPENSE_INIT_CM = null;
-            this.gs.GENERALEXPENSE_INIT_PS = null;
-            this.gs.GENERALEXPENSE_INIT_FA = null;
+            this.db = <OthGeneralModel[]>[];
         }
 
         this.id = params.id;
         this.menuid = params.menuid;
         this.param_type = params.menu_param;
 
-        if (this.menutype != this.param_type) {
-            this.menutype = this.param_type;
+        if (!this.gs.isBlank(this.db[this.param_type]))
+            this.record = <OthGeneralModel>this.db[this.param_type];
+        else
+            this.record = <OthGeneralModel>{
+                sortcol: 'mbl_refno',
+                sortorder: true,
+                errormessage: '',
+                records: [],
+                searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today },
+                pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
+            };
 
-            if (this.menutype == 'GE' && !this.gs.isBlank(this.gs.GENERALEXPENSE_INIT_GE))
-                this.record = this.gs.GENERALEXPENSE_INIT_GE;
-            else if (this.menutype == 'PR' && !this.gs.isBlank(this.gs.GENERALEXPENSE_INIT_PR))
-                this.record = this.gs.GENERALEXPENSE_INIT_PR;
-            else if (this.menutype == 'CM' && !this.gs.isBlank(this.gs.GENERALEXPENSE_INIT_CM))
-                this.record = this.gs.GENERALEXPENSE_INIT_CM;
-            else if (this.menutype == 'PS' && !this.gs.isBlank(this.gs.GENERALEXPENSE_INIT_PS))
-                this.record = this.gs.GENERALEXPENSE_INIT_PS;
-            else if (this.menutype == 'FA' && !this.gs.isBlank(this.gs.GENERALEXPENSE_INIT_FA))
-                this.record = this.gs.GENERALEXPENSE_INIT_FA;
-            else
-                this.record = <OthGeneralModel>{
-                    sortcol: 'mbl_refno',
-                    sortorder: true,
-                    errormessage: '',
-                    records: [],
-                    searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today },
-                    pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
-                };
+        this.mdata$.next(this.record);
 
-            this.mdata$.next(this.record);
-
-            // if (this.menutype == 'GE')
-            //     this.gs.GENERALEXPENSE_INIT_GE = this.record;
-            // else if (this.menutype == 'PR')
-            //     this.gs.GENERALEXPENSE_INIT_PR = this.record;
-            // else if (this.menutype == 'CM')
-            //     this.gs.GENERALEXPENSE_INIT_CM = this.record;
-            // else if (this.menutype == 'PS')
-            //     this.gs.GENERALEXPENSE_INIT_PS = this.record;
-            // else if (this.menutype == 'FA')
-            //     this.gs.GENERALEXPENSE_INIT_FA = this.record;
-        }
 
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
@@ -178,17 +146,8 @@ export class OthGeneralExpenseService {
             this.record.records = response.list;
             this.mdata$.next(this.record);
 
-            if (this.menutype == 'GE')
-                this.gs.GENERALEXPENSE_INIT_GE = this.record;
-            else if (this.menutype == 'PR')
-                this.gs.GENERALEXPENSE_INIT_PR = this.record;
-            else if (this.menutype == 'CM')
-                this.gs.GENERALEXPENSE_INIT_CM = this.record;
-            else if (this.menutype == 'PS')
-                this.gs.GENERALEXPENSE_INIT_PS = this.record;
-            else if (this.menutype == 'FA')
-                this.gs.GENERALEXPENSE_INIT_FA = this.record;
-                
+            this.db[this.param_type] = this.record;
+
         }, error => {
             this.record = <OthGeneralModel>{
                 records: [],
