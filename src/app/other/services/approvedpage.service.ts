@@ -29,7 +29,6 @@ export class ApprovedPageService {
     public canSave: boolean;
 
     public initlialized: boolean;
-    //private menutype: string = '';
     private appid = ''
     private db: ApprovedPageModel[] = [];
 

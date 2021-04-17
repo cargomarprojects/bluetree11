@@ -30,7 +30,8 @@ export class PartyService {
 
     public initlialized: boolean;
     private appid = ''
-    private menutype: string = '';
+    // private menutype: string = '';
+    private db: PartyModel[] = [];
 
     constructor(
         private http2: HttpClient,
@@ -64,9 +65,6 @@ export class PartyService {
         }
     }
     public ClearInit() {
-        this.menutype = '';
-        this.gs.PARTYPAGE_INIT_PARTYS = null;
-        this.gs.PARTYPAGE_INIT_OVERSEAAGENT = null;
         this.record = <PartyModel>{
             sortcol: 'gen_code',
             sortorder: true,
@@ -82,39 +80,26 @@ export class PartyService {
         if (this.appid != this.gs.appid) {
             this.appid = this.gs.appid;
             this.initlialized = false;
-            this.menutype = '';
-            this.gs.PARTYPAGE_INIT_PARTYS = null;
-            this.gs.PARTYPAGE_INIT_OVERSEAAGENT = null;
+            this.db = <PartyModel[]>[];
         }
 
         this.id = params.id;
         this.menuid = params.id;
         this.param_type = params.menu_param;
 
-        if (this.menutype != this.param_type) {
-            this.menutype = this.param_type;
+        if (!this.gs.isBlank(this.db[this.param_type]))
+            this.record = <PartyModel>this.db[this.param_type];
+        else
+            this.record = <PartyModel>{
+                sortcol: 'gen_code',
+                sortorder: true,
+                errormessage: '',
+                records: [],
+                searchQuery: <SearchQuery>{ searchString: '', searchSort: 'gen_short_name', searchState: '', searchCity: '', searchTel: '', searchFax: '', searchZip: '', searchBlackAc: false, menuType: this.param_type },
+                pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
+            };
 
-            if (this.menutype == 'PARTYS' && !this.gs.isBlank(this.gs.PARTYPAGE_INIT_PARTYS))
-                this.record = this.gs.PARTYPAGE_INIT_PARTYS;
-            else if (this.menutype == 'OVERSEAAGENT' && !this.gs.isBlank(this.gs.PARTYPAGE_INIT_OVERSEAAGENT))
-                this.record = this.gs.PARTYPAGE_INIT_OVERSEAAGENT;
-            else
-                this.record = <PartyModel>{
-                    sortcol: 'gen_code',
-                    sortorder: true,
-                    errormessage: '',
-                    records: [],
-                    searchQuery: <SearchQuery>{ searchString: '', searchSort: 'gen_short_name', searchState: '', searchCity: '', searchTel: '', searchFax: '', searchZip: '', searchBlackAc: false, menuType: this.param_type },
-                    pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
-                };
-
-            this.mdata$.next(this.record);
-
-            // if (this.menutype == 'PARTYS')
-            //     this.gs.PARTYPAGE_INIT_PARTYS = this.record;
-            // else if (this.menutype == 'OVERSEAAGENT')
-            //     this.gs.PARTYPAGE_INIT_OVERSEAAGENT = this.record;
-        }
+        this.mdata$.next(this.record);
 
         this.isCompany = this.gs.IsCompany(this.menuid);
         this.isAdmin = this.gs.IsAdmin(this.menuid);
@@ -122,7 +107,6 @@ export class PartyService {
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
-
     }
 
     Search(_searchdata: any, type: string = '') {
@@ -166,11 +150,9 @@ export class PartyService {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
             this.mdata$.next(this.record);
+
+            this.db[this.param_type] = this.record;
             
-            if (this.menutype == 'PARTYS')
-                this.gs.PARTYPAGE_INIT_PARTYS = this.record;
-            else if (this.menutype == 'OVERSEAAGENT')
-                this.gs.PARTYPAGE_INIT_OVERSEAAGENT = this.record;
         }, error => {
             this.record = <PartyModel>{
                 records: [],
