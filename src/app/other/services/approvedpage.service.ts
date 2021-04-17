@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GlobalService } from '../../core/services/global.service';
 import { Tbl_Cargo_Approved, ApprovedPageModel, vm_tbl_cargo_approved } from '../models/tbl_cargo_approved';
-import { SearchQuery } from '../models/tbl_cargo_slip';
+import { SearchQuery } from '../models/tbl_cargo_approved';
 import { PageQuery } from '../../shared/models/pageQuery';
 
 @Injectable({
@@ -29,53 +29,49 @@ export class ApprovedPageService {
     public canSave: boolean;
 
     public initlialized: boolean;
-    private menutype: string = '';
-    private appid =''
+    //private menutype: string = '';
+    private appid = ''
+    private db: ApprovedPageModel[] = [];
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    public getSortCol(){
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
     public ClearInit() {
-        this.menutype = '';
-        this.gs.APPROVEDPAGE_INIT_APPROVED = null;
-        this.gs.APPROVEDPAGE_INIT_APPROVEDREPORT = null;
-        this.gs.APPROVEDPAGE_INIT_REQUESTREPORT = null;
-        this.record = <ApprovedPageModel><unknown>{
-            sortcol : 'ca_reqno',
-            sortorder : true,
+        this.record = <ApprovedPageModel>{
+            sortcol: 'ca_reqno',
+            sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery><unknown>{ searchString: '', fromDate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), toDate: this.gs.defaultValues.today, sortParameter: 'a.rec_created_date', isHidden: false, caType: 'ALL', userName: '', userId: '', userLovDisabled: true, userLovCaption: 'Request./Aprvd.By' },
+            searchQuery: <SearchQuery>{ searchString: '', fromDate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), toDate: this.gs.defaultValues.today, sortParameter: 'a.rec_created_date', isHidden: false, caType: 'ALL', userName: '', userId: '', userLovDisabled: true, userLovCaption: 'Request./Aprvd.By' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -88,10 +84,7 @@ export class ApprovedPageService {
         if (this.appid != this.gs.appid) {
             this.appid = this.gs.appid;
             this.initlialized = false;
-            this.menutype = '';
-            this.gs.APPROVEDPAGE_INIT_APPROVED = null;
-            this.gs.APPROVEDPAGE_INIT_APPROVEDREPORT = null;
-            this.gs.APPROVEDPAGE_INIT_REQUESTREPORT = null;
+            this.db = <ApprovedPageModel[]>[];
         }
 
         this.id = params.id;
@@ -103,34 +96,19 @@ export class ApprovedPageService {
             usrname = this.gs.user_name;
         }
 
-        if (this.menutype != this.param_type) {
-            this.menutype = this.param_type;
+        if (!this.gs.isBlank(this.db[this.param_type]))
+            this.record = <ApprovedPageModel>this.db[this.param_type];
+        else
+            this.record = <ApprovedPageModel>{
+                sortcol: 'ca_reqno',
+                sortorder: true,
+                errormessage: '',
+                records: [],
+                searchQuery: <SearchQuery>{ searchString: '', fromDate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), toDate: this.gs.defaultValues.today, sortParameter: 'a.rec_created_date', isHidden: false, caType: 'ALL', userName: usrname, userId: usrid, userLovDisabled: true, userLovCaption: 'Request./Aprvd.By' },
+                pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
+            };
 
-            if (this.menutype == 'APPROVED' && !this.gs.isBlank(this.gs.APPROVEDPAGE_INIT_APPROVED))
-                this.record = this.gs.APPROVEDPAGE_INIT_APPROVED;
-            else if (this.menutype == 'APPROVED REPORT' && !this.gs.isBlank(this.gs.APPROVEDPAGE_INIT_APPROVEDREPORT))
-                this.record = this.gs.APPROVEDPAGE_INIT_APPROVEDREPORT;
-            else if (this.menutype == 'REQUEST REPORT' && !this.gs.isBlank(this.gs.APPROVEDPAGE_INIT_REQUESTREPORT))
-                this.record = this.gs.APPROVEDPAGE_INIT_REQUESTREPORT;
-            else
-                this.record = <ApprovedPageModel><unknown>{
-                    sortcol : 'ca_reqno',
-                    sortorder : true,
-                    errormessage: '',
-                    records: [],
-                    searchQuery: <SearchQuery><unknown>{ searchString: '', fromDate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), toDate: this.gs.defaultValues.today, sortParameter: 'a.rec_created_date', isHidden: false, caType: 'ALL', userName: usrname, userId: usrid, userLovDisabled: true, userLovCaption: 'Request./Aprvd.By' },
-                    pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
-                };
-
-            this.mdata$.next(this.record);
-
-            // if (this.menutype == 'APPROVED')
-            //     this.gs.APPROVEDPAGE_INIT_APPROVED = this.record;
-            // else if (this.menutype == 'APPROVED REPORT')
-            //     this.gs.APPROVEDPAGE_INIT_APPROVEDREPORT = this.record;
-            // else if (this.menutype == 'REQUEST REPORT')
-            //     this.gs.APPROVEDPAGE_INIT_REQUESTREPORT = this.record;
-        }
+        this.mdata$.next(this.record);
 
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
@@ -188,13 +166,8 @@ export class ApprovedPageService {
             this.record.records = response.list;
             this.mdata$.next(this.record);
 
-            if (this.menutype == 'APPROVED')
-                this.gs.APPROVEDPAGE_INIT_APPROVED = this.record;
-            else if (this.menutype == 'APPROVED REPORT')
-                this.gs.APPROVEDPAGE_INIT_APPROVEDREPORT = this.record;
-            else if (this.menutype == 'REQUEST REPORT')
-                this.gs.APPROVEDPAGE_INIT_REQUESTREPORT = this.record;
-                
+            this.db[this.param_type] = this.record;
+
         }, error => {
             this.record = <ApprovedPageModel>{
                 records: [],
