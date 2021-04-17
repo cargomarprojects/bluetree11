@@ -124,16 +124,16 @@ export class OthGeneralExpenseService {
 
             this.mdata$.next(this.record);
 
-            if (this.menutype == 'GE')
-                this.gs.GENERALEXPENSE_INIT_GE = this.record;
-            else if (this.menutype == 'PR')
-                this.gs.GENERALEXPENSE_INIT_PR = this.record;
-            else if (this.menutype == 'CM')
-                this.gs.GENERALEXPENSE_INIT_CM = this.record;
-            else if (this.menutype == 'PS')
-                this.gs.GENERALEXPENSE_INIT_PS = this.record;
-            else if (this.menutype == 'FA')
-                this.gs.GENERALEXPENSE_INIT_FA = this.record;
+            // if (this.menutype == 'GE')
+            //     this.gs.GENERALEXPENSE_INIT_GE = this.record;
+            // else if (this.menutype == 'PR')
+            //     this.gs.GENERALEXPENSE_INIT_PR = this.record;
+            // else if (this.menutype == 'CM')
+            //     this.gs.GENERALEXPENSE_INIT_CM = this.record;
+            // else if (this.menutype == 'PS')
+            //     this.gs.GENERALEXPENSE_INIT_PS = this.record;
+            // else if (this.menutype == 'FA')
+            //     this.gs.GENERALEXPENSE_INIT_FA = this.record;
         }
 
         this.isAdmin = this.gs.IsAdmin(this.menuid);
@@ -177,6 +177,18 @@ export class OthGeneralExpenseService {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
             this.mdata$.next(this.record);
+
+            if (this.menutype == 'GE')
+                this.gs.GENERALEXPENSE_INIT_GE = this.record;
+            else if (this.menutype == 'PR')
+                this.gs.GENERALEXPENSE_INIT_PR = this.record;
+            else if (this.menutype == 'CM')
+                this.gs.GENERALEXPENSE_INIT_CM = this.record;
+            else if (this.menutype == 'PS')
+                this.gs.GENERALEXPENSE_INIT_PS = this.record;
+            else if (this.menutype == 'FA')
+                this.gs.GENERALEXPENSE_INIT_FA = this.record;
+                
         }, error => {
             this.record = <OthGeneralModel>{
                 records: [],
