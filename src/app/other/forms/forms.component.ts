@@ -63,10 +63,10 @@ export class FormsComponent implements OnInit {
       menuid: this.mainservice.menuid,
       pkid: '',
       type: this.mainservice.param_type,
-      origin: 'mblusage-page',
+      origin: 'forms-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.Other.Trans/MblUsageEditPage', JSON.stringify(parameter));
+    // this.gs.Naviagete('Silver.Other.Trans/MblUsageEditPage', JSON.stringify(parameter));
 
   }
   
@@ -80,17 +80,17 @@ export class FormsComponent implements OnInit {
       menuid: this.mainservice.menuid,
       pkid: _record.gf_pkid,
       type: '',
-      origin: 'mblusage-page',
+      origin: 'forms-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Other.Trans/MblUsageEditPage', JSON.stringify(parameter));
+    // this.gs.Naviagete('Silver.Other.Trans/MblUsageEditPage', JSON.stringify(parameter));
   }
 
   getRouteDet(_type: string, _mode: string, _record: Tbl_cargo_genfiles = null) {
 
     if (_type == "L") {
       if ((_mode == "ADD" && this.mainservice.canAdd) || (_mode == "EDIT" && this.mainservice.canEdit))
-        return "/Silver.Other.Trans/MblUsageEditPage";
+        return null; //Silver.Other.Trans/MblUsageEditPage
       else
         return null;
     } else if (_type == "P") {
@@ -103,7 +103,7 @@ export class FormsComponent implements OnInit {
           menuid: this.mainservice.menuid,
           pkid: '',
           type: this.mainservice.param_type,
-          origin: 'mblusage-page',
+          origin: 'forms-page',
           mode: 'ADD'
         };
       }
@@ -114,7 +114,7 @@ export class FormsComponent implements OnInit {
         menuid: this.mainservice.menuid,
         pkid: _record.gf_pkid,
         type: '',
-        origin: 'mblusage-page',
+        origin: 'forms-page',
         mode: 'EDIT'
       };
     } else

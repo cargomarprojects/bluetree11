@@ -29,43 +29,45 @@ export class FormsService {
     public canDelete: boolean;
 
     public initlialized: boolean;
-    private appid =''
+    private appid = ''
+    private db: Tbl_cargo_genfilesModel[] = [];
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    public getSortCol(){
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
     public ClearInit() {
         this.record = <Tbl_cargo_genfilesModel>{
+            sortcol: 'gf_refno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', accNo: '' },
@@ -77,20 +79,25 @@ export class FormsService {
         if (this.appid != this.gs.appid) {
             this.appid = this.gs.appid;
             this.initlialized = false;
+            this.db = <Tbl_cargo_genfilesModel[]>[];
         }
-        if (this.initlialized)
-            return;
+
 
         this.id = params.id;
         this.menuid = params.id;
-        this.param_type = params.param_type;
+        this.param_type = params.menu_param;
 
-        this.record = <Tbl_cargo_genfilesModel>{
-            errormessage: '',
-            records: [],
-            searchQuery: <SearchQuery>{ searchString: '', accNo: '' },
-            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
-        };
+        if (!this.gs.isBlank(this.db[this.param_type]))
+            this.record = <Tbl_cargo_genfilesModel>this.db[this.param_type];
+        else
+            this.record = <Tbl_cargo_genfilesModel>{
+                sortcol: 'gf_refno',
+                sortorder: true,
+                errormessage: '',
+                records: [],
+                searchQuery: <SearchQuery>{ searchString: '', accNo: '' },
+                pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
+            };
 
         this.mdata$.next(this.record);
 
@@ -118,16 +125,18 @@ export class FormsService {
         SearchData.outputformat = 'SCREEN';
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
-        SearchData.TYPE = 'FT';
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.CODE = '';
-        SearchData.ACC_NO = this.record.searchQuery.accNo;
-
+        if (this.param_type == "ADMIN")
+            SearchData.GFCATEGORY = 'ADMINFORMS';
+        else
+            SearchData.GFCATEGORY = 'FORMS';
+        if (this.gs.user_isadmin == "Y" || this.isAdmin || this.param_type == "ADMIN")
+            SearchData.ISADMIN = 'Y';
+        else
+            SearchData.ISADMIN = 'N';
         SearchData.SDATE = this.record.searchQuery.sdate;
         SearchData.EDATE = this.record.searchQuery.edate;
-        SearchData.YEAR = this.gs.year_code;
-
-
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
@@ -144,6 +153,7 @@ export class FormsService {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
             this.mdata$.next(this.record);
+            this.db[this.param_type] = this.record;
         }, error => {
             this.record = <Tbl_cargo_genfilesModel>{
                 records: [],
