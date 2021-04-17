@@ -110,10 +110,10 @@ export class PartyService {
 
             this.mdata$.next(this.record);
 
-            if (this.menutype == 'PARTYS')
-                this.gs.PARTYPAGE_INIT_PARTYS = this.record;
-            else if (this.menutype == 'OVERSEAAGENT')
-                this.gs.PARTYPAGE_INIT_OVERSEAAGENT = this.record;
+            // if (this.menutype == 'PARTYS')
+            //     this.gs.PARTYPAGE_INIT_PARTYS = this.record;
+            // else if (this.menutype == 'OVERSEAAGENT')
+            //     this.gs.PARTYPAGE_INIT_OVERSEAAGENT = this.record;
         }
 
         this.isCompany = this.gs.IsCompany(this.menuid);
@@ -166,6 +166,11 @@ export class PartyService {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
             this.mdata$.next(this.record);
+            
+            if (this.menutype == 'PARTYS')
+                this.gs.PARTYPAGE_INIT_PARTYS = this.record;
+            else if (this.menutype == 'OVERSEAAGENT')
+                this.gs.PARTYPAGE_INIT_OVERSEAAGENT = this.record;
         }, error => {
             this.record = <PartyModel>{
                 records: [],

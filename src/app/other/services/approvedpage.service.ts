@@ -124,12 +124,12 @@ export class ApprovedPageService {
 
             this.mdata$.next(this.record);
 
-            if (this.menutype == 'APPROVED')
-                this.gs.APPROVEDPAGE_INIT_APPROVED = this.record;
-            else if (this.menutype == 'APPROVED REPORT')
-                this.gs.APPROVEDPAGE_INIT_APPROVEDREPORT = this.record;
-            else if (this.menutype == 'REQUEST REPORT')
-                this.gs.APPROVEDPAGE_INIT_REQUESTREPORT = this.record;
+            // if (this.menutype == 'APPROVED')
+            //     this.gs.APPROVEDPAGE_INIT_APPROVED = this.record;
+            // else if (this.menutype == 'APPROVED REPORT')
+            //     this.gs.APPROVEDPAGE_INIT_APPROVEDREPORT = this.record;
+            // else if (this.menutype == 'REQUEST REPORT')
+            //     this.gs.APPROVEDPAGE_INIT_REQUESTREPORT = this.record;
         }
 
         this.isAdmin = this.gs.IsAdmin(this.menuid);
@@ -187,6 +187,14 @@ export class ApprovedPageService {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
             this.mdata$.next(this.record);
+
+            if (this.menutype == 'APPROVED')
+                this.gs.APPROVEDPAGE_INIT_APPROVED = this.record;
+            else if (this.menutype == 'APPROVED REPORT')
+                this.gs.APPROVEDPAGE_INIT_APPROVEDREPORT = this.record;
+            else if (this.menutype == 'REQUEST REPORT')
+                this.gs.APPROVEDPAGE_INIT_REQUESTREPORT = this.record;
+                
         }, error => {
             this.record = <ApprovedPageModel>{
                 records: [],
