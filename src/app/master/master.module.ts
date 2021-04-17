@@ -35,6 +35,7 @@ import { PayrollMasterHeaderComponent } from './payrollmaster/payrollmaster-head
 import { PayrollMasterEditComponent } from './payrollmaster/payrollmaster-edit.component';
 import { CompSettingsComponent } from './comp-settings/compsettings.component';
 import { GlobalSettingsComponent } from './global-settings/globalsettings.component';
+import { BranchSettingsComponent } from './branch-settings/branchsettings.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { GlobalSettingsComponent } from './global-settings/globalsettings.compon
     PayrollMasterHeaderComponent,
     PayrollMasterEditComponent,
     CompSettingsComponent,
-    GlobalSettingsComponent
+    GlobalSettingsComponent,
+    BranchSettingsComponent
   ],
   imports: [
     SharedModule,
