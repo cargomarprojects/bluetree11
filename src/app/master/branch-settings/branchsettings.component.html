@@ -13,15 +13,417 @@
 
 <div class="page-body">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Resouce URL</label>
+                <label class="col-4 col-form-label col-form-label-sm">Resource URL</label>
                 <div class="col-8">
                     <input class="form-control form-control-sm" type="text" [(ngModel)]="TxtImageUrl" maxlength="100"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Files URL</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TxtFileUrl" maxlength="100"/>
+                </div>
+            </div>            
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Files Folder</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TxtFileFolder" maxlength="100"/>
+                </div>
+            </div>            
+            
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Front End Date Format</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Date_Format_FrontEnd" maxlength="100"/>
+                </div>
+            </div>            
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Back End Date Format</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Date_Format_BackEnd" maxlength="100"/>
+                </div>
+            </div>            
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Base Currency Code</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Base_Curr_Code" maxlength="100"/>
+                </div>
+            </div>            
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Foreign Currency Code</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Foreign_Curr_Code" maxlength="100"/>
+                </div>
+            </div>            
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Number Of Rows In Grid</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Rows" maxlength="100"/>
+                </div>
+            </div>            
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Issuing Agent Name</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_IssuingAgent" maxlength="100"/>
+                </div>
+            </div>            
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Address</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Agent_Address" maxlength="100"/>
+                </div>
+            </div>            
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">City</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Agent_City" maxlength="100"/>
+                </div>
+            </div>            
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">IATA Code</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_IATA" maxlength="100"/>
+                </div>
+            </div>            
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Auto Bcc Email</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Auto_Bcc" maxlength="100"/>
+                </div>
+            </div>            
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <label class="col-2 col-form-label col-form-label-sm">Prefix</label>
+                <label class="col-1 col-form-label col-form-label-sm">Pol</label>
+                <label class="col-1 col-form-label col-form-label-sm">Pod</label>
+                <label class="col-2 col-form-label col-form-label-sm">Start#</label>
+                <label class="col-2 col-form-label col-form-label-sm">Incr By</label>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Ocean Export House Prefix</label>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Sea_Prefix" maxlength="20"/>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm" (click)="Chk_Sea_Prefix_Pol=Chk_Sea_Prefix_Pol == 'Y' ? 'N' : 'Y'">{{Chk_Sea_Prefix_Pol}}</button>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm" (click)="Chk_Sea_Prefix_Pod=Chk_Sea_Prefix_Pod == 'Y' ? 'N' : 'Y'">{{Chk_Sea_Prefix_Pod}}</button>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Sea_Prefix2" maxlength="20"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Sea_Prefix3" maxlength="20"/>
                 </div>
 
             </div>
 
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Air Export House Prefix</label>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Air_Prefix" maxlength="20"/>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm" (click)="Chk_Air_Prefix_Pol=Chk_Air_Prefix_Pol == 'Y' ? 'N' : 'Y'">{{Chk_Air_Prefix_Pol}}</button>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm" (click)="Chk_Air_Prefix_Pod=Chk_Air_Prefix_Pod == 'Y' ? 'N' : 'Y'">{{Chk_Air_Prefix_Pod}}</button>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Air_Prefix2" maxlength="20"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Air_Prefix3" maxlength="20"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Ocean Import Prefix</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_SI_PREFIX1" maxlength="20"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_SI_PREFIX2" maxlength="20"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Ocean Export Prefix</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_SE_PREFIX1" maxlength="20"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_SE_PREFIX2" maxlength="20"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Air Import Prefix</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_AI_PREFIX1" maxlength="20"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_AI_PREFIX2" maxlength="20"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Air Export Prefix</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_AE_PREFIX1" maxlength="20"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_AE_PREFIX2" maxlength="20"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Other OP. Prefix</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_OP_PREFIX1" maxlength="20"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_OP_PREFIX2" maxlength="20"/>
+                </div>
+            </div>            
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Extra Prefix</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_EX_PREFIX1" maxlength="20"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_EX_PREFIX2" maxlength="20"/>
+                </div>
+            </div>            
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">AR Prefix</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_AR_PREFIX1" maxlength="20"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_AR_PREFIX2" maxlength="20"/>
+                </div>
+            </div>            
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">AP Prefix</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_AP_PREFIX1" maxlength="20"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_AP_PREFIX2" maxlength="20"/>
+                </div>
+            </div>            
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Debit Note Prefix</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_DN_PREFIX1" maxlength="20"/>
+                </div>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_DN_PREFIX2" maxlength="20"/>
+                </div>
+            </div>            
+
+            
+
+        </div>
+
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <label class="col-4 col-form-label col-form-label-sm">Show Logo In Home Page</label>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm" (click)="Chk_Home_Logo=Chk_Home_Logo == 'Y' ? 'N' : 'Y'">{{Chk_Home_Logo}}</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <label class="col-4 col-form-label col-form-label-sm">Show Name In Home Page</label>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm" (click)="Chk_Home_Name=Chk_Home_Name == 'Y' ? 'N' : 'Y'">{{Chk_Home_Name}}</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <label class="col-4 col-form-label col-form-label-sm">Show C-TPAT Logo</label>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm" (click)="Chk_CTPAT=Chk_CTPAT == 'Y' ? 'N' : 'Y'">{{Chk_CTPAT}}</button>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <label class="col-4 col-form-label col-form-label-sm">Remove Zero Format</label>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm" (click)="Chk_Remove_Zero_Format=Chk_Remove_Zero_Format == 'Y' ? 'N' : 'Y'">{{Chk_Remove_Zero_Format}}</button>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="col-md-3">
+
+
+            <div class="form-group row">
+                <label class="col-8 col-form-label col-form-label-sm">Parent Address Visible</label>
+                <div class="col-4">
+                    <button class="btn btn-info btn-sm" (click)="Chk_Parent_Address=Chk_Parent_Address == 'Y' ? 'N' : 'Y'">{{Chk_Parent_Address}}</button>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-8 col-form-label col-form-label-sm">Enable Extra Option</label>
+                <div class="col-4">
+                    <button class="btn btn-info btn-sm" (click)="Chk_Extra=Chk_Extra == 'Y' ? 'N' : 'Y'">{{Chk_Extra}}</button>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-8 col-form-label col-form-label-sm">Auto Close Check Screen</label>
+                <div class="col-4">
+                    <button class="btn btn-info btn-sm" (click)="Chk_PrintCheck=Chk_PrintCheck == 'Y' ? 'N' : 'Y'">{{Chk_PrintCheck}}</button>
+                </div>
+            </div>    
+            
+            <div class="form-group row">
+                <label class="col-8 col-form-label col-form-label-sm">Re-Print Check</label>
+                <div class="col-4">
+                    <button class="btn btn-info btn-sm" (click)="Chk_RePrintCheck=Chk_RePrintCheck == 'Y' ? 'N' : 'Y'">{{Chk_RePrintCheck}}</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="form-group row">
+                <label class="col-8 col-form-label col-form-label-sm">Show BOE</label>
+                <div class="col-4">
+                    <button class="btn btn-info btn-sm" (click)="Chk_Boe=Chk_Boe == 'Y' ? 'N' : 'Y'">{{Chk_Boe}}</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-8 col-form-label col-form-label-sm">AR/AP Code Selection</label>
+                <div class="col-4">
+                    <button class="btn btn-info btn-sm" (click)="Chk_Arap_Code_Selection=Chk_Arap_Code_Selection == 'Y' ? 'N' : 'Y'">{{Chk_Arap_Code_Selection}}</button>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-8 col-form-label col-form-label-sm">Show Check Date&Bank</label>
+                <div class="col-4">
+                    <button class="btn btn-info btn-sm" (click)="Chk_ShowChkDate=Chk_ShowChkDate == 'Y' ? 'N' : 'Y'">{{Chk_ShowChkDate}}</button>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-8 col-form-label col-form-label-sm">Package Total Button</label>
+                <div class="col-4">
+                    <button class="btn btn-info btn-sm" (click)="Chk_Package_Total_Button=Chk_Package_Total_Button == 'Y' ? 'N' : 'Y'">{{Chk_Package_Total_Button}}</button>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="page-body">
+    <div class="row">
+        <div class="col-md-6">
+            
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Lock Days-Sea</label>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Lock_Sea" maxlength="100"/>
+                </div>
+                <label class="col-4 col-form-label col-form-label-sm">Lock Days-Other</label>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Lock_Others" maxlength="100"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Lock Days-Air</label>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Lock_Air" maxlength="100"/>
+                </div>
+                <label class="col-4 col-form-label col-form-label-sm">Lock Days-Admin</label>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Lock_Admin" maxlength="100"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Region</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Region" maxlength="100"/>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Sea Arrival Notice Format</label>
+                <div class="col-4">
+                    <select class="form-control form-control-sm" [(ngModel)]="Cmb_Sea_Arr_Format">
+                        <option [value]="1">1</option>
+                        <option [value]="2">2</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">HBL INSTRUCTION 1</label>
+                <div class="col-10">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Hbl_Inst1" maxlength="100"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">HBL INSTRUCTION 2</label>
+                <div class="col-10">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Hbl_Inst2" maxlength="100"/>
+                </div>
+            </div>
         </div>
     </div>
 </div>
