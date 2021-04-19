@@ -26,6 +26,7 @@ export interface Tbl_cargo_genfiles {
     gf_file_id: string;
     gf_file_name: string;
     gf_file_uri: string;
+    gf_file_path: string;
     rec_files_attached: string;
     gf_category: string;
     gf_refno: string;

@@ -62,6 +62,7 @@ import { WireTransferedBankComponent } from './wiretransfered/bank/wiretransfere
 
 import { FormsComponent } from './forms/forms.component';
 import { FormsHeaderComponent } from './forms/forms-header.component';
+import { FormsEditComponent } from './forms/edit/forms-edit.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import { FormsHeaderComponent } from './forms/forms-header.component';
     WireTransferedEditComponent,
     WireTransferedBankComponent,
     FormsComponent,
-    FormsHeaderComponent
+    FormsHeaderComponent,
+    FormsEditComponent
   ],
   imports: [
     SharedModule,    

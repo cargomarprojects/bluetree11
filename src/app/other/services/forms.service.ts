@@ -172,6 +172,10 @@ export class FormsService {
         }
         else {
             REC.gf_pkid = _rec.gf_pkid;
+            REC.gf_type = _rec.gf_type;
+            REC.gf_name = _rec.gf_name;
+            REC.gf_remarks = _rec.gf_remarks;
+            REC.gf_file_name = _rec.gf_file_name;
             REC.rec_created_by = _rec.rec_created_by;
             REC.rec_created_date = _rec.rec_created_date;
         }
@@ -180,15 +184,22 @@ export class FormsService {
     DeleteRow(_rec: Tbl_cargo_genfiles) {
 
         this.record.errormessage = '';
-        if (!confirm("DELETE ")) {
+        if (_rec.gf_slno.toString().trim() == "")
+        {
+            this.record.errormessage = "Invalid Data, Delete";
+            this.mdata$.next(this.record);
             return;
         }
 
-        var fPath = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\Files\\";
+        if (!confirm("DELETE "+_rec.gf_refno)) {
+            return;
+        }
+         
+        let filepath= "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\Files\\";
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = _rec.gf_pkid;
-        SearchData.filepath = fPath;
-
+        SearchData.remarks = "SLNO " +  _rec.gf_slno;
+        SearchData.filepath = filepath;
 
         this.DeleteRecord(SearchData)
             .subscribe(response => {

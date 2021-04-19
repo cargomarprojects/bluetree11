@@ -1,0 +1,100 @@
+<div *ngIf="tab=='main'">
+    <div class="page-header">
+        <div class="row align-items-center justify-content-left p-1">
+            <label class="mr-3">{{title}}({{mode}})</label>
+            <button #_btnretform class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage">
+        <div class="alert alert-primary">
+            {{errorMessage}}
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="row">
+
+            <div class="col-md-4 testbox  px-0 mx-0">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">SL#</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm text-danger" type="text"
+                            [(ngModel)]="record.gf_refno" [disabled]="true" maxlength="25" #refno />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Categories</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="record.gf_type">
+                            <option *ngFor="let rec of gs.PARAM_FORM_CATEGORIES" [value]="rec.name">
+                                {{rec.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-8">
+                        <InputBox #_bank_name [(inputModel)]="record.gf_name" [maxlength]="60" [uppercase]="true"></InputBox>
+                        
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Remarks</label>
+                    <div class="col-8">
+                        <InputBox #_bank_name2 [(inputModel)]="record.gf_remarks" [maxlength]="60" [uppercase]="true">
+                        </InputBox>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4 testbox  px-0 mx-0">
+
+
+            </div>
+        </div>
+    </div>
+    <div class="page-footer">
+        <!-- <div class="row">
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
+                        <button  [style.color]="Foregroundcolor" *ngIf="mode=='EDIT'" class="btn btn-success btn-sm mr-1" (click)="BtnNavigation('ATTACHMENT')">File Upload</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="row justify-content-center p-1">
+            <button class="btn btn-primary btn-md mr-1" *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
+            <button [style.color]="Foregroundcolor" *ngIf="mode=='EDIT'" class="btn btn-info btn-md mr-1"
+                (click)="BtnNavigation('ATTACHMENT',attachmodal)">File Upload</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #attachmodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+                        [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+                        [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
+                        [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+                        [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
+                        [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
+                        (callbackevent)="callbackevent($event)"></app-fileupload>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

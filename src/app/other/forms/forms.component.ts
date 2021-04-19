@@ -69,7 +69,7 @@ export class FormsComponent implements OnInit {
     // this.gs.Naviagete('Silver.Other.Trans/MblUsageEditPage', JSON.stringify(parameter));
 
   }
-  
+
   edit(_record: Tbl_cargo_genfiles) {
     if (!this.mainservice.canEdit) {
       alert('Insufficient User Rights')
@@ -90,7 +90,7 @@ export class FormsComponent implements OnInit {
 
     if (_type == "L") {
       if ((_mode == "ADD" && this.mainservice.canAdd) || (_mode == "EDIT" && this.mainservice.canEdit))
-        return null; //Silver.Other.Trans/MblUsageEditPage
+        return "/Silver.Other.Trans/FormsUploadEditPage"
       else
         return null;
     } else if (_type == "P") {
@@ -113,16 +113,29 @@ export class FormsComponent implements OnInit {
         appid: this.gs.appid,
         menuid: this.mainservice.menuid,
         pkid: _record.gf_pkid,
-        type: '',
+        type: this.mainservice.param_type,
         origin: 'forms-page',
         mode: 'EDIT'
       };
     } else
       return null;
   }
+
   Close() {
     this.location.back();
   }
 
+  ShowFile(_rec: Tbl_cargo_genfiles) {
 
+    let filename: string = "";
+    let filedisplayname: string = "";
+    filename = this.gs.FS_APP_FOLDER + _rec.gf_file_path + _rec.gf_file_id;
+    filedisplayname = _rec.gf_file_name;
+    if (_rec.gf_file_path != "")
+      this.Downloadfile(filename, "", filedisplayname);
+  }
+
+  Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+    this.gs.DownloadFile(this.gs.FS_APP_FOLDER, filename, filetype, filedisplayname);
+  }
 }

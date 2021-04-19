@@ -48,7 +48,7 @@
         <td>{{rec.gf_type}} </td>
         <td>{{rec.gf_name}} </td>
         <td>{{rec.gf_remarks}} </td>
-        <td>{{rec.gf_file_name}} </td>
+        <td class="hlink2" (click)="ShowFile(rec)" >{{rec.gf_file_name}} </td>
         <td>{{rec.rec_created_by}} </td>
         <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td *ngIf="mainservice.canDelete" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
