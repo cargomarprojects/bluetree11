@@ -120,9 +120,22 @@ export class FormsComponent implements OnInit {
     } else
       return null;
   }
+
   Close() {
     this.location.back();
   }
 
+  ShowFile(_rec: Tbl_cargo_genfiles) {
 
+    // let filename: string = "";
+    // let filedisplayname: string = "";
+    // // filename = this.gs.FS_APP_FOLDER + _rec.files_path + _rec.gf_file_id;
+    // filename = this.gs.FS_APP_FOLDER + this.gs.WWW_FILES_URL + _rec.gf_file_id;
+    // filedisplayname = _rec.gf_file_name;
+    // this.Downloadfile(filename, "", filedisplayname);
+  }
+
+  Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+    this.gs.DownloadFile(this.gs.FS_APP_FOLDER, filename, filetype, filedisplayname);
+  }
 }

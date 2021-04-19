@@ -266,10 +266,10 @@ export class FormsEditComponent implements OnInit {
                 this.attach_title = 'Documents';
                 this.attach_parentid = this.pkid;
                 this.attach_subid = '';
-                this.attach_type = 'QUOTATION RATES';
+                this.attach_type = 'GENERAL FILES';
                 this.attach_typelist = [];
-                this.attach_tablename = 'cargo_qtn_rates';
-                this.attach_tablepkcolumn = 'qtnr_pkid';
+                this.attach_tablename = 'cargo_genfiles';
+                this.attach_tablepkcolumn = 'gf_pkid';
                 this.attach_refno = '';
                 this.attach_customername = '';
                 this.attach_updatecolumn = 'REC_FILES_ATTACHED';
@@ -282,6 +282,7 @@ export class FormsEditComponent implements OnInit {
             }
         }
     }
+
     callbackevent(event: any) {
         this.tab = 'main';
     }
