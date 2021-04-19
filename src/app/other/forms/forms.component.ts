@@ -90,7 +90,7 @@ export class FormsComponent implements OnInit {
 
     if (_type == "L") {
       if ((_mode == "ADD" && this.mainservice.canAdd) || (_mode == "EDIT" && this.mainservice.canEdit))
-        return null; //Silver.Other.Trans/MblUsageEditPage
+        return "/Silver.Other.Trans/FormsUploadEditPage"
       else
         return null;
     } else if (_type == "P") {
