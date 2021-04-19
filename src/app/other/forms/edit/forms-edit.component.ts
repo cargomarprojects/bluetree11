@@ -53,6 +53,7 @@ export class FormsEditComponent implements OnInit {
     title: string;
     isAdmin: boolean;
     refno: string = "";
+    param_type: string = "";
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -72,11 +73,13 @@ export class FormsEditComponent implements OnInit {
             this.menuid = this.route.snapshot.queryParams.menuid;
             this.pkid = this.route.snapshot.queryParams.pkid;
             this.mode = this.route.snapshot.queryParams.mode;
+            this.param_type = this.route.snapshot.queryParams.type;
         } else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
             this.menuid = options.menuid;
             this.pkid = options.pkid;
             this.mode = options.mode;
+            this.param_type = options.type;
         }
         this.initPage();
         this.actionHandler();
@@ -91,7 +94,7 @@ export class FormsEditComponent implements OnInit {
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
-       
+
         this.LoadCombo();
     }
 
@@ -175,8 +178,8 @@ export class FormsEditComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
-                    if (this.mode == "ADD" && response.code != '')
-                        this.record.gf_slno = response.code;
+                    if (this.mode == "ADD" && response.slno != '')
+                        this.record.gf_refno = response.slno;
                     this.mode = 'EDIT';
                     this.mainService.RefreshList(this.record);
                     this.errorMessage = 'Save Complete';
@@ -190,7 +193,14 @@ export class FormsEditComponent implements OnInit {
     }
 
     private SaveParent() {
-
+        if (this.param_type == "ADMIN") {
+            this.record.gf_category = "ADMINFORMS";
+            this.record.gf_prefix = this.gs.branch_prefix;
+        }
+        else {
+            this.record.gf_category = "FORMS";
+            this.record.gf_prefix = this.gs.branch_prefix;
+        }
     }
     private Allvalid(): boolean {
 

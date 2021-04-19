@@ -69,7 +69,7 @@ export class FormsComponent implements OnInit {
     // this.gs.Naviagete('Silver.Other.Trans/MblUsageEditPage', JSON.stringify(parameter));
 
   }
-  
+
   edit(_record: Tbl_cargo_genfiles) {
     if (!this.mainservice.canEdit) {
       alert('Insufficient User Rights')
@@ -113,7 +113,7 @@ export class FormsComponent implements OnInit {
         appid: this.gs.appid,
         menuid: this.mainservice.menuid,
         pkid: _record.gf_pkid,
-        type: '',
+        type: this.mainservice.param_type,
         origin: 'forms-page',
         mode: 'EDIT'
       };
@@ -127,12 +127,12 @@ export class FormsComponent implements OnInit {
 
   ShowFile(_rec: Tbl_cargo_genfiles) {
 
-    // let filename: string = "";
-    // let filedisplayname: string = "";
-    // // filename = this.gs.FS_APP_FOLDER + _rec.files_path + _rec.gf_file_id;
-    // filename = this.gs.FS_APP_FOLDER + this.gs.WWW_FILES_URL + _rec.gf_file_id;
-    // filedisplayname = _rec.gf_file_name;
-    // this.Downloadfile(filename, "", filedisplayname);
+    let filename: string = "";
+    let filedisplayname: string = "";
+    filename = this.gs.FS_APP_FOLDER + _rec.gf_file_path + _rec.gf_file_id;
+    filedisplayname = _rec.gf_file_name;
+    if (_rec.gf_file_path != "")
+      this.Downloadfile(filename, "", filedisplayname);
   }
 
   Downloadfile(filename: string, filetype: string, filedisplayname: string) {
