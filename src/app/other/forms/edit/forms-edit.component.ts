@@ -99,7 +99,7 @@ export class FormsEditComponent implements OnInit {
     }
 
     LoadCombo() {
-        // let abc = this.gs.PARAM_FORM_CATEGORIES
+        
     }
 
     NewRecord() {
@@ -123,16 +123,8 @@ export class FormsEditComponent implements OnInit {
 
         this.record.gf_pkid = this.pkid;
         this.record.gf_type = '';
-        // this.record.qtnr_agent_code = '';
-        // this.record.qtnr_agent_name = '';
-        // this.record.qtnr_pol_cntry_id = '';
-        // this.record.qtnr_pol_cntry_code = '';
-        // this.record.qtnr_pol_cntry_name = '';
-        // this.record.qtnr_pod_cntry_id = '';
-        // this.record.qtnr_pod_cntry_code = '';
-        // this.record.qtnr_pod_cntry_name = '';
-        // this.record.qtnr_mode = 'AIR';
-        // this.record.qtnr_validity = this.gs.defaultValues.today;
+        this.record.gf_name = '';
+        this.record.gf_remarks = '';
         this.record.rec_files_attached = 'N';;
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
