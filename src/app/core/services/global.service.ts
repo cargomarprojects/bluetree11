@@ -1412,6 +1412,12 @@ export class GlobalService {
       this.PARAM_COO_FORMAT_BLANK.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
+    this.PARAM_FORM_CATEGORIES = [];
+    this.MainList.filter(a => a.param_type == 'FORM CATEGORY').sort(function (a, b) {
+      return b.param_name1 < a.param_name1 ? 1 : -1;
+    }).forEach(a => {
+      this.PARAM_FORM_CATEGORIES.push({ "code": a.param_pkid, "name": a.param_name1 })
+    });
 
 
     this.MainList.filter(a => a.param_type == 'SALESMAN' && a.param_lookup_id == this.user_pkid).forEach(b => {
