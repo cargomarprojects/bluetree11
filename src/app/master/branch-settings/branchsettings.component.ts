@@ -22,6 +22,12 @@ export class BranchSettingsComponent implements OnInit {
   isAdmin: boolean;
   errorMessage: string;
 
+  where_ips_ar = "ACC_PARENT_CODE IN('1A','1B','2A','2B')";
+  where_ips_ap = "ACC_PARENT_CODE IN('1A','1B','2A','2B')";
+  where_bank_charges = "ACC_PARENT_CODE IN('1A','1B','2A','2B')";
+  where_ex_diff = "ACC_PARENT_CODE IN('1A','1B','2A','2B')";
+  where_profit = "ACC_PARENT_CODE IN('3B')";
+
   Txt_AR_id = '';
   Txt_AR = '';
   Txt_AP_id = '';
@@ -189,7 +195,7 @@ export class BranchSettingsComponent implements OnInit {
   Txt_Region_id = '';
   Txt_Region = '';
   Cmb_Sea_Arr_Format_id = '';
-  Cmb_Sea_Arr_Format = '';
+  Cmb_Sea_Arr_Format = '1';
   Txt_Payroll_Invoice_Code_id = '';
   Txt_Payroll_Invoice_Code = '';
   Txt_Payroll_Ac_Code_id = '';
@@ -211,7 +217,7 @@ export class BranchSettingsComponent implements OnInit {
   Txt_Def_Hbl_Draftformat_id = '';
   Txt_Def_Hbl_Draftformat = '';
   Cmb_Ac_Rep_Base_id = '';
-  Cmb_Ac_Rep_Base = '';
+  Cmb_Ac_Rep_Base = 'MASTER REF DATE';
   Txt_RootFolder_id = '';
   Txt_RootFolder = '';
   Txt_Ftp_Folder_id = '';
@@ -438,10 +444,10 @@ export class BranchSettingsComponent implements OnInit {
         this.Txt_Sea_Prefix = Rec.param_name3;
       }
       else if (Rec.param_name1 == "SEA-EXPORT-HOUSE-PREFIX-POL") {
-          this.Chk_Sea_Prefix_Pol = Rec.param_name3;
+        this.Chk_Sea_Prefix_Pol = Rec.param_name3;
       }
       else if (Rec.param_name1 == "SEA-EXPORT-HOUSE-PREFIX-POD") {
-          this.Chk_Sea_Prefix_Pod = Rec.param_name3;
+        this.Chk_Sea_Prefix_Pod = Rec.param_name3;
       }
       else if (Rec.param_name1 == "SEA-EXPORT-HOUSE-STARTING-NO") {
         this.Txt_Sea_Prefix2_id = Rec.param_name2;
@@ -457,10 +463,10 @@ export class BranchSettingsComponent implements OnInit {
         this.Txt_Air_Prefix = Rec.param_name3;
       }
       else if (Rec.param_name1 == "AIR-EXPORT-HOUSE-PREFIX-POL") {
-          this.Chk_Air_Prefix_Pol = Rec.param_name3;
+        this.Chk_Air_Prefix_Pol = Rec.param_name3;
       }
       else if (Rec.param_name1 == "AIR-EXPORT-HOUSE-PREFIX-POD") {
-          this.Chk_Air_Prefix_Pod = Rec.param_name3;
+        this.Chk_Air_Prefix_Pod = Rec.param_name3;
       }
       else if (Rec.param_name1 == "AIR-EXPORT-HOUSE-STARTING-NO") {
         this.Txt_Air_Prefix2_id = Rec.param_name2;
@@ -472,15 +478,15 @@ export class BranchSettingsComponent implements OnInit {
       }
       else if (Rec.param_name1 == "SHOW-LOGO-HOME-PAGE") {
         this.Chk_Home_Logo_id = Rec.param_name2;
-          this.Chk_Home_Logo = Rec.param_name3;
+        this.Chk_Home_Logo = Rec.param_name3;
       }
       else if (Rec.param_name1 == "SHOW-NAME-HOME-PAGE") {
         this.Chk_Home_Name_id = Rec.param_name2;
-          this.Chk_Home_Name = Rec.param_name3;
+        this.Chk_Home_Name = Rec.param_name3;
       }
       else if (Rec.param_name1 == "SHOW-CTPAT") {
-          this.Chk_CTPAT_id = Rec.param_name2;
-          this.Chk_CTPAT = Rec.param_name3;
+        this.Chk_CTPAT_id = Rec.param_name2;
+        this.Chk_CTPAT = Rec.param_name3;
       }
       else if (Rec.param_name1 == "SEA-EXPORT-REFNO-PREFIX") {
         this.TXT_SE_PREFIX1_id = Rec.param_name2;
@@ -560,7 +566,7 @@ export class BranchSettingsComponent implements OnInit {
       }
       else if (Rec.param_name1 == "PARENT-ADDRESS") {
         this.Chk_Parent_Address_id = Rec.param_name2;
-        this.Chk_Parent_Address= Rec.param_name3;
+        this.Chk_Parent_Address = Rec.param_name3;
       }
       else if (Rec.param_name1 == "AUTO-BCC-EMAIL-ID") {
         this.Txt_Auto_Bcc_id = Rec.param_name2;
@@ -568,11 +574,11 @@ export class BranchSettingsComponent implements OnInit {
       }
       else if (Rec.param_name1 == "AUTO-CLOSE-CHECK-PRINT") {
         this.Chk_PrintCheck_id = Rec.param_name2;
-          this.Chk_PrintCheck = Rec.param_name3;
+        this.Chk_PrintCheck = Rec.param_name3;
       }
       else if (Rec.param_name1 == "RE-PRINT-CHECK") {
         this.Chk_RePrintCheck_id = Rec.param_name2;
-          this.Chk_RePrintCheck = Rec.param_name3;
+        this.Chk_RePrintCheck = Rec.param_name3;
       }
       else if (Rec.param_name1 == "LOCK-DAYS-SEA") {
         this.Txt_Lock_Sea_id = Rec.param_name2;
@@ -592,31 +598,31 @@ export class BranchSettingsComponent implements OnInit {
       }
       else if (Rec.param_name1 == "SHOW-BOE") {
         this.Chk_Boe_id = Rec.param_name2;
-          this.Chk_Boe= Rec.param_name3;
+        this.Chk_Boe = Rec.param_name3;
       }
       else if (Rec.param_name1 == "ARAP-CODE-SELECTION") {
         this.Chk_Arap_Code_Selection_id = Rec.param_name2;
-          this.Chk_Arap_Code_Selection= Rec.param_name3;
+        this.Chk_Arap_Code_Selection = Rec.param_name3;
       }
       else if (Rec.param_name1 == "SHOW-CHECK-DATE") {
         this.Chk_ShowChkDate_id = Rec.param_name2;
-        this.Chk_ShowChkDate= Rec.param_name3;
+        this.Chk_ShowChkDate = Rec.param_name3;
       }
       else if (Rec.param_name1 == "REMOVE-ZERO-FORMAT") {
         this.Chk_Remove_Zero_Format_id = Rec.param_name2;
-        this.Chk_Remove_Zero_Format= Rec.param_name3;
+        this.Chk_Remove_Zero_Format = Rec.param_name3;
       }
       else if (Rec.param_name1 == "SHOW-EXTRA-OPTION") {
         this.Chk_Extra_id = Rec.param_name2;
-        this.Chk_Extra= Rec.param_name3;
+        this.Chk_Extra = Rec.param_name3;
       }
       else if (Rec.param_name1 == "PACKAGE-TOTAL-BUTTON") {
         this.Chk_Package_Total_Button_id = Rec.param_name2;
-        this.Chk_Package_Total_Button= Rec.param_name3;
+        this.Chk_Package_Total_Button = Rec.param_name3;
       }
       else if (Rec.param_name1 == "OPTIONAL-DESCRIPTION") {
         this.Chk_Description_id = Rec.param_name2;
-        this.Chk_Description= Rec.param_name3;
+        this.Chk_Description = Rec.param_name3;
       }
       else if (Rec.param_name1 == "REGION") {
         this.Txt_Region_id = Rec.param_name2;
@@ -625,7 +631,7 @@ export class BranchSettingsComponent implements OnInit {
 
       else if (Rec.param_name1 == "SEA_ARVL_FORMAT") {
         this.Cmb_Sea_Arr_Format_id = Rec.param_name2;
-        this.Cmb_Sea_Arr_Format= Rec.param_name3;
+        this.Cmb_Sea_Arr_Format = Rec.param_name3;
       }
       else if (Rec.param_name1 == "PAYROLL-INVOICE-CODE") {
         this.Txt_Payroll_Invoice_Code_id = Rec.param_name2;
@@ -637,15 +643,15 @@ export class BranchSettingsComponent implements OnInit {
       }
       else if (Rec.param_name1 == "PAYROLL-ENABLED") {
         this.Chk_Enable_Payroll_id = Rec.param_name2;
-        this.Chk_Enable_Payroll= Rec.param_name3;
+        this.Chk_Enable_Payroll = Rec.param_name3;
       }
       else if (Rec.param_name1 == "HIDE-DOCTYPE-INVOICE") {
         this.Chk_HideDocType_id = Rec.param_name2;
-        this.Chk_HideDocType= Rec.param_name3;
+        this.Chk_HideDocType = Rec.param_name3;
       }
       else if (Rec.param_name1 == "DUMMY-INVOICE") {
         this.chk_dummy_Invoice_id = Rec.param_name2;
-        this.chk_dummy_Invoice= Rec.param_name3;
+        this.chk_dummy_Invoice = Rec.param_name3;
       }
 
       else if (Rec.param_name1 == "DOC-FOOTER1") {
@@ -683,19 +689,19 @@ export class BranchSettingsComponent implements OnInit {
       }
       else if (Rec.param_name1 == "SEA-IMP-OVERRIDE-POD-ETA") {
         this.Chk_SI_OVERRIDE_POD_ETA_id = Rec.param_name2;
-        this.Chk_SI_OVERRIDE_POD_ETA= Rec.param_name3;
+        this.Chk_SI_OVERRIDE_POD_ETA = Rec.param_name3;
       }
       else if (Rec.param_name1 == "AIR-IMP-OVERRIDE-POD-ETA") {
         this.Chk_AI_OVERRIDE_POD_ETA_id = Rec.param_name2;
-        this.Chk_AI_OVERRIDE_POD_ETA= Rec.param_name3;
+        this.Chk_AI_OVERRIDE_POD_ETA = Rec.param_name3;
       }
       else if (Rec.param_name1 == "SHIPMENT-LOG-FORMAT") {
         this.Chk_ShipLogFormat_id = Rec.param_name2;
-        this.Chk_ShipLogFormat= Rec.param_name3;
+        this.Chk_ShipLogFormat = Rec.param_name3;
       }
       else if (Rec.param_name1 == "SHIPMENT-LOCKED-DATE") {
-        this.Dt_Locked = "";
-        if (Rec.param_name3 != "") {
+        this.Dt_Locked = Rec.param_name3;
+        /*if (Rec.param_name3 != "") {
           let sdata = Rec.param_name3.toString().split('-');
           if (sdata.length == 3) {
             let yy = +sdata[0];
@@ -705,7 +711,8 @@ export class BranchSettingsComponent implements OnInit {
             let Dt_Locked = dt;
             //let Dt_Locked = dt.ToString(GLOBALCONTANTS.FRONTEND_DATEFORMAT);
           }
-        }
+        } */
+
       }
 
 
@@ -719,13 +726,267 @@ export class BranchSettingsComponent implements OnInit {
     if (!this.Allvalid())
       return;
 
-      alert('option not completed');
-
-      return;
-
     this.saveList = <TBL_MAST_PARAM[]>[];
-    this.saveList.push(this.AddRecord("RESOURCE URL", this.gs.branch_pkid, this.TxtImageUrl));
+    
+
+
+    this.saveList.push( this.AddRecord ("A/C RECEIVABLE", this.Txt_AR_id, this.Txt_AR));
+    this.saveList.push(this.AddRecord("A/C PAYABLE", this.Txt_AP_id, this.Txt_AP));
+    this.saveList.push(this.AddRecord("PETTY CASH", this.Txt_PettyCash_id, this.Txt_PettyCash));
+
+    this.saveList.push(this.AddRecord("INTERNAL-PAYMENT-SETTLEMENT-AR", this.Txt_AR_id, this.TXT_IPS_AR));
+    this.saveList.push(this.AddRecord("INTERNAL-PAYMENT-SETTLEMENT-AP", this.TXT_IPS_AP_id, this.TXT_IPS_AP));
+
+
+    this.saveList.push(this.AddRecord("INCOME-AE", this.Txt_Inc_AE_id, this.Txt_Inc_AE));
+    this.saveList.push(this.AddRecord("INCOME-AI", this.Txt_Inc_AI_id, this.Txt_Inc_AI));
+    this.saveList.push(this.AddRecord("INCOME-SE", this.Txt_Inc_SE_id, this.Txt_Inc_SE));
+    this.saveList.push(this.AddRecord("INCOME-SI", this.Txt_Inc_SI_id, this.Txt_Inc_SI));
+    this.saveList.push(this.AddRecord("INCOME-OT", this.Txt_Inc_OT_id, this.Txt_Inc_OT));
+
+    this.saveList.push(this.AddRecord("INCOME-EX", this.Txt_Inc_Ex_id, this.Txt_Inc_Ex));
+
+
+    this.saveList.push(this.AddRecord("EXPENSE-AE", this.Txt_Exp_AE_id, this.Txt_Exp_AE));
+    this.saveList.push(this.AddRecord("EXPENSE-AI", this.Txt_Exp_AI_id, this.Txt_Exp_AI));
+    this.saveList.push(this.AddRecord("EXPENSE-SE", this.Txt_Exp_SE_id, this.Txt_Exp_SE));
+    this.saveList.push(this.AddRecord("EXPENSE-SI", this.Txt_Exp_SI_id, this.Txt_Exp_SI));
+    this.saveList.push(this.AddRecord("EXPENSE-OT", this.Txt_Exp_OT_id, this.Txt_Exp_OT));
+
+    this.saveList.push(this.AddRecord("EXPENSE-EX", this.Txt_Exp_Ex_id, this.Txt_Exp_Ex));
+
+
+
+    this.saveList.push(this.AddRecord("RETAINED-PROFIT", this.Txt_Profit_id, this.Txt_Profit));
+
+    this.saveList.push(this.AddRecord("VAT-ACCOUNT", this.Txt_VatAccount_id, this.Txt_VatAccount));
+
+    this.saveList.push(this.AddRecord("VAT-INVOICE-DESCRIPTION", this.Txt_Code_id, this.Txt_Code));
+    
+
+    this.saveList.push(this.AddRecord("VAT-PERCENTAGE", this.gs.branch_pkid, this.Txt_Vat_Per));
+
+
+    this.saveList.push(this.AddRecord("DIRECT-BILL-AGENT", this.Txt_Direct_Agent_id, this.Txt_Direct_Agent));
+
+
+    this.saveList.push(this.AddRecord("BANK CHARGES", this.Txt_Bank_Charges_id, this.Txt_Bank_Charges));
+    this.saveList.push(this.AddRecord("EXCHANGE DIFFERENCE", this.Txt_Ex_Diff_id, this.Txt_Ex_Diff));
+
+    this.saveList.push(this.AddRecord("ISSUE-AGENT", this.gs.branch_pkid, this.Txt_IssuingAgent));
+    this.saveList.push(this.AddRecord("ISSUE-AGENT-CITY", this.gs.branch_pkid, this.Txt_Agent_City));
+
+    this.saveList.push(this.AddRecord("ISSUE-AGENT-ADDRESS", this.gs.branch_pkid, this.Txt_Agent_Address));
+    this.saveList.push(this.AddRecord("IATA-CODE", this.gs.branch_pkid, this.Txt_IATA));
+
+    this.saveList.push(this.AddRecord("RESOURCE URL",this.gs.branch_pkid , this.TxtImageUrl));
     this.saveList.push(this.AddRecord("FILES URL", this.gs.branch_pkid, this.TxtFileUrl));
+    this.saveList.push(this.AddRecord("FILES FOLDER", this.gs.branch_pkid, this.TxtFileFolder));
+
+    this.saveList.push(this.AddRecord("BACK END DATE FORMAT", this.gs.branch_pkid, this.Txt_Date_Format_BackEnd));
+    this.saveList.push(this.AddRecord("FRONT END DATE FORMAT", this.gs.branch_pkid, this.Txt_Date_Format_FrontEnd));
+
+    this.saveList.push(this.AddRecord("BASE CURRENCY CODE", this.gs.branch_pkid, this.Txt_Base_Curr_Code));
+    this.saveList.push(this.AddRecord("FOREIGN CURRENCY CODE", this.gs.branch_pkid, this.Txt_Foreign_Curr_Code));
+
+    this.saveList.push(this.AddRecord("NO OF ROWS", this.gs.branch_pkid, this.Txt_Rows));
+
+
+
+    this.saveList.push(this.AddRecord("HBL INSTRUCTION-1", this.gs.branch_pkid, this.Txt_Hbl_Inst1));
+    this.saveList.push(this.AddRecord("HBL INSTRUCTION-2", this.gs.branch_pkid, this.Txt_Hbl_Inst2));
+
+
+    this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX", this.gs.branch_pkid, this.Txt_Sea_Prefix));
+    if (this.Chk_Sea_Prefix_Pol == 'Y') 
+        this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX-POL", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX-POL", this.gs.branch_pkid, "N"));
+    if (this.Chk_Sea_Prefix_Pod == 'Y')
+        this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX-POD", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX-POD", this.gs.branch_pkid, "N"));
+    this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-STARTING-NO", this.gs.branch_pkid, this.Txt_Sea_Prefix2));
+    this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-INCREMENT-BY", this.gs.branch_pkid, this.Txt_Sea_Prefix3));
+
+    
+    this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX", this.gs.branch_pkid, this.Txt_Air_Prefix));
+    if (this.Chk_Air_Prefix_Pol == 'Y')
+        this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX-POL", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX-POL", this.gs.branch_pkid, "N"));
+    if (this.Chk_Air_Prefix_Pod == 'Y')
+        this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX-POD", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX-POD", this.gs.branch_pkid, "N"));
+
+    this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-STARTING-NO", this.gs.branch_pkid, this.Txt_Air_Prefix2));
+    this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-INCREMENT-BY", this.gs.branch_pkid, this.Txt_Air_Prefix3));
+
+
+
+
+    this.saveList.push(this.AddRecord("SEA-EXPORT-REFNO-PREFIX", this.gs.branch_pkid, this.TXT_SE_PREFIX1));
+    this.saveList.push(this.AddRecord("SEA-EXPORT-REFNO-STARTING-NO", this.gs.branch_pkid, this.TXT_SE_PREFIX2));
+    this.saveList.push(this.AddRecord("SEA-IMPORT-REFNO-PREFIX", this.gs.branch_pkid, this.TXT_SI_PREFIX1));
+    this.saveList.push(this.AddRecord("SEA-IMPORT-REFNO-STARTING-NO", this.gs.branch_pkid, this.TXT_SI_PREFIX2));
+    this.saveList.push(this.AddRecord("AIR-EXPORT-REFNO-PREFIX", this.gs.branch_pkid, this.TXT_AE_PREFIX1));
+    this.saveList.push(this.AddRecord("AIR-EXPORT-REFNO-STARTING-NO", this.gs.branch_pkid, this.TXT_AE_PREFIX2));
+    this.saveList.push(this.AddRecord("AIR-IMPORT-REFNO-PREFIX", this.gs.branch_pkid, this.TXT_AI_PREFIX1));
+    this.saveList.push(this.AddRecord("AIR-IMPORT-REFNO-STARTING-NO", this.gs.branch_pkid, this.TXT_AI_PREFIX2));
+    
+    this.saveList.push(this.AddRecord("OTHER-OPERATION-REFNO-PREFIX", this.gs.branch_pkid, this.TXT_OP_PREFIX1));
+    this.saveList.push(this.AddRecord("OTHER-OPERATION-REFNO-STARTING-NO", this.gs.branch_pkid, this.TXT_OP_PREFIX2));
+
+    this.saveList.push(this.AddRecord("EXTRA-OPERATION-REFNO-PREFIX", this.gs.branch_pkid, this.TXT_EX_PREFIX1));
+    this.saveList.push(this.AddRecord("EXTRA-OPERATION-REFNO-STARTING-NO", this.gs.branch_pkid, this.TXT_EX_PREFIX2));
+
+
+    this.saveList.push(this.AddRecord("AR-INVOICE-PREFIX", this.gs.branch_pkid, this.TXT_AR_PREFIX1));
+    this.saveList.push(this.AddRecord("AR-INVOICE-STARTING-NO", this.gs.branch_pkid, this.TXT_AR_PREFIX2));
+    
+    this.saveList.push(this.AddRecord("AP-INVOICE-PREFIX", this.gs.branch_pkid, this.TXT_AP_PREFIX1));
+    this.saveList.push(this.AddRecord("AP-INVOICE-STARTING-NO", this.gs.branch_pkid, this.TXT_AP_PREFIX2));
+
+
+    this.saveList.push(this.AddRecord("DEBIT-NOTE-PREFIX", this.gs.branch_pkid, this.TXT_DN_PREFIX1));
+    this.saveList.push(this.AddRecord("DEBIT-NOTE-STARTING-NO", this.gs.branch_pkid, this.TXT_DN_PREFIX2));
+
+
+    this.saveList.push(this.AddRecord("AUTO-BCC-EMAIL-ID", this.gs.branch_pkid, this.Txt_Auto_Bcc));
+
+    if ( this.Chk_Home_Logo == 'Y') 
+        this.saveList.push(this.AddRecord("SHOW-LOGO-HOME-PAGE", this.gs.branch_pkid, "Y"));
+    else 
+        this.saveList.push(this.AddRecord("SHOW-LOGO-HOME-PAGE", this.gs.branch_pkid, "N"));
+
+    if ( this.Chk_Home_Name == 'Y') 
+        this.saveList.push(this.AddRecord("SHOW-NAME-HOME-PAGE", this.gs.branch_pkid, "Y"));
+    else 
+        this.saveList.push(this.AddRecord("SHOW-NAME-HOME-PAGE", this.gs.branch_pkid, "N"));
+
+    if (this.Chk_CTPAT == 'Y')
+        this.saveList.push(this.AddRecord("SHOW-CTPAT", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("SHOW-CTPAT", this.gs.branch_pkid, "N"));
+
+    if (this.Chk_Parent_Address == 'Y')
+        this.saveList.push(this.AddRecord("PARENT-ADDRESS", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("PARENT-ADDRESS", this.gs.branch_pkid, "N"));
+
+
+    if (this.Chk_PrintCheck == 'Y')
+        this.saveList.push(this.AddRecord("AUTO-CLOSE-CHECK-PRINT", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("AUTO-CLOSE-CHECK-PRINT", this.gs.branch_pkid, "N"));
+
+    if (this.Chk_RePrintCheck == 'Y')
+        this.saveList.push(this.AddRecord("RE-PRINT-CHECK", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("RE-PRINT-CHECK", this.gs.branch_pkid, "N"));
+
+
+    this.saveList.push(this.AddRecord("LOCK-DAYS-SEA", this.gs.branch_pkid, this.Txt_Lock_Sea));
+    this.saveList.push(this.AddRecord("LOCK-DAYS-AIR", this.gs.branch_pkid, this.Txt_Lock_Air));
+    this.saveList.push(this.AddRecord("LOCK-DAYS-OTHERS", this.gs.branch_pkid, this.Txt_Lock_Others));
+    this.saveList.push(this.AddRecord("LOCK-DAYS-ADMIN", this.gs.branch_pkid, this.Txt_Lock_Admin));
+
+    if (this.Chk_Boe == 'Y')
+        this.saveList.push(this.AddRecord("SHOW-BOE", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("SHOW-BOE", this.gs.branch_pkid, "N"));
+
+    if (this.Chk_Arap_Code_Selection == 'Y')
+        this.saveList.push(this.AddRecord("ARAP-CODE-SELECTION", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("ARAP-CODE-SELECTION", this.gs.branch_pkid, "N"));
+
+    if (this.Chk_ShowChkDate == 'Y')
+        this.saveList.push(this.AddRecord("SHOW-CHECK-DATE", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("SHOW-CHECK-DATE", this.gs.branch_pkid, "N"));
+
+
+    if (this.Chk_Remove_Zero_Format == 'Y')
+        this.saveList.push(this.AddRecord("REMOVE-ZERO-FORMAT", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("REMOVE-ZERO-FORMAT", this.gs.branch_pkid, "N"));
+
+    if (this.Chk_Extra == 'Y')
+        this.saveList.push(this.AddRecord("SHOW-EXTRA-OPTION", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("SHOW-EXTRA-OPTION", this.gs.branch_pkid, "N"));
+
+
+    if (this.Chk_Package_Total_Button == 'Y')
+        this.saveList.push(this.AddRecord("PACKAGE-TOTAL-BUTTON", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("PACKAGE-TOTAL-BUTTON", this.gs.branch_pkid, "N"));
+
+    if (this.Chk_Description == 'Y')
+        this.saveList.push(this.AddRecord("OPTIONAL-DESCRIPTION", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("OPTIONAL-DESCRIPTION", this.gs.branch_pkid, "N"));
+
+
+    this.saveList.push(this.AddRecord("REGION", this.gs.branch_pkid, this.Txt_Region));
+
+    this.saveList.push(this.AddRecord("SEA_ARVL_FORMAT", this.gs.branch_pkid,this.Cmb_Sea_Arr_Format));
+
+    this.saveList.push(this.AddRecord("PAYROLL-INVOICE-CODE", this.gs.branch_pkid, this.Txt_Payroll_Invoice_Code));
+    this.saveList.push(this.AddRecord("PAYROLL-ACC-CODE", this.gs.branch_pkid, this.Txt_Payroll_Ac_Code));
+    
+    if ( this.Chk_Enable_Payroll == 'Y')
+        this.saveList.push(this.AddRecord("PAYROLL-ENABLED", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("PAYROLL-ENABLED", this.gs.branch_pkid, "N"));
+
+
+    if (this.Chk_HideDocType == 'Y')
+        this.saveList.push(this.AddRecord("HIDE-DOCTYPE-INVOICE", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("HIDE-DOCTYPE-INVOICE", this.gs.branch_pkid, "N"));
+
+    if (this.chk_dummy_Invoice == 'Y')
+        this.saveList.push(this.AddRecord("DUMMY-INVOICE", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("DUMMY-INVOICE", this.gs.branch_pkid, "N"));
+
+
+    this.saveList.push(this.AddRecord("DOC-FOOTER1", this.gs.branch_pkid, this.Txt_Terms1));
+    this.saveList.push(this.AddRecord("DOC-FOOTER2", this.gs.branch_pkid, this.Txt_Terms2));
+
+    this.saveList.push(this.AddRecord("FY-START-MONTH", this.gs.branch_pkid, this.Txt_FY_Start_Month));
+
+    this.saveList.push(this.AddRecord("DEFAULT-HBL-FORMAT", this.gs.branch_pkid, this.Txt_Def_Hbl_Format));
+    this.saveList.push(this.AddRecord("DEFAULT-HBL-DRAFT-FORMAT", this.gs.branch_pkid, this.Txt_Def_Hbl_Draftformat));
+
+    this.saveList.push(this.AddRecord("AC-REPORT-BASED-ON", this.gs.branch_pkid, this.Cmb_Ac_Rep_Base));
+    this.saveList.push(this.AddRecord("FS-APP-FOLDER", this.gs.branch_pkid, this.Txt_RootFolder));
+    this.saveList.push(this.AddRecord("GLOBAL-FTP-FOLDER", this.gs.branch_pkid, this.Txt_Ftp_Folder));
+
+
+    if (this.Chk_SI_OVERRIDE_POD_ETA == 'Y')
+        this.saveList.push(this.AddRecord("SEA-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("SEA-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "N"));
+
+    if (this.Chk_AI_OVERRIDE_POD_ETA == 'Y')
+        this.saveList.push(this.AddRecord("AIR-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "Y"));
+    else
+        this.saveList.push(this.AddRecord("AIR-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "N"));
+
+    if (this.Chk_ShipLogFormat == 'Y')
+        this.saveList.push(this.AddRecord("SHIPMENT-LOG-FORMAT", this.gs.branch_pkid, "NEW"));
+    else
+        this.saveList.push(this.AddRecord("SHIPMENT-LOG-FORMAT", this.gs.branch_pkid, "OLD"));
+
+    if (this.gs.isBlank(this.Dt_Locked))
+        this.saveList.push(this.AddRecord("SHIPMENT-LOCKED-DATE", this.gs.branch_pkid, ""));
+    else
+        this.saveList.push(this.AddRecord("SHIPMENT-LOCKED-DATE", this.gs.branch_pkid, this.Dt_Locked));
+
 
     const saveRecord = <VM_TBL_MAST_SETTINGS>{};
     saveRecord.userinfo = this.gs.UserInfo;
@@ -750,7 +1011,7 @@ export class BranchSettingsComponent implements OnInit {
   private AddRecord(SCATG: string, SPKID: string, ACNAME: string) {
     let Rec = <TBL_MAST_PARAM>{};
     Rec.param_pkid = this.gs.getGuid();
-    Rec.param_type = "COMPANY SETTINGS";
+    Rec.param_type = "BRANCH SETTINGS";
     Rec.param_code = "";
     Rec.param_name1 = SCATG;
     Rec.param_name2 = SPKID;
@@ -759,10 +1020,101 @@ export class BranchSettingsComponent implements OnInit {
     return Rec;
   }
 
+  LovSelected(_Record: SearchTable) {
+
+    if (_Record.controlname == "TXT_PROFIT") {
+      this.Txt_Profit_id = _Record.id;
+      this.Txt_Profit = _Record.name;
+    }
+
+    if (_Record.controlname == "TXT_CODE") {
+      this.Txt_Code_id = _Record.id;
+      this.Txt_Code = _Record.name;
+    }
+
+    if (_Record.controlname == "TXT_VATACCOUNT") {
+      this.Txt_VatAccount_id = _Record.id;
+      this.Txt_VatAccount = _Record.name;
+    }
+    if (_Record.controlname == "TXT_INC_AE") {
+      this.Txt_Inc_AE_id = _Record.id;
+      this.Txt_Inc_AE = _Record.name;
+    }
+    if (_Record.controlname == "TXT_INC_AI") {
+      this.Txt_Inc_AI_id = _Record.id;
+      this.Txt_Inc_AI = _Record.name;
+    }
+    if (_Record.controlname == "TXT_INC_SE") {
+      this.Txt_Inc_SE_id = _Record.id;
+      this.Txt_Inc_SE = _Record.name;
+    }
+    if (_Record.controlname == "TXT_INC_SI") {
+      this.Txt_Inc_SI_id = _Record.id;
+      this.Txt_Inc_SI = _Record.name;
+    }
+    if (_Record.controlname == "TXT_INC_AE") {
+      this.Txt_Inc_AE_id = _Record.id;
+      this.Txt_Inc_AE = _Record.name;
+    }
+    if (_Record.controlname == "TXT_INC_OT") {
+      this.Txt_Inc_OT_id = _Record.id;
+      this.Txt_Inc_OT = _Record.name;
+    }
+    if (_Record.controlname == "TXT_INC_AE") {
+      this.Txt_Inc_AE_id = _Record.id;
+      this.Txt_Inc_AE = _Record.name;
+    }
+    if (_Record.controlname == "TXT_INC_EX") {
+      this.Txt_Inc_Ex_id = _Record.id;
+      this.Txt_Inc_Ex = _Record.name;
+    }
+
+    if (_Record.controlname == "TXT_AR") {
+      this.Txt_AR_id = _Record.id;
+      this.Txt_AR = _Record.name;
+    }
+    if (_Record.controlname == "TXT_AP") {
+      this.Txt_AP_id = _Record.id;
+      this.Txt_AP = _Record.name;
+    }
+    if (_Record.controlname == "TXT_PETTYCASH") {
+      this.Txt_PettyCash_id = _Record.id;
+      this.Txt_PettyCash = _Record.name;
+    }
+    if (_Record.controlname == "TXT_IPS_AR") {
+      this.TXT_IPS_AR_id = _Record.id;
+      this.TXT_IPS_AR = _Record.name;
+    }
+    if (_Record.controlname == "TXT_IPS_AP") {
+      this.TXT_IPS_AP_id = _Record.id;
+      this.TXT_IPS_AP = _Record.name;
+    }
+
+    if (_Record.controlname == "TXT_DIRECT_AGENT") {
+      this.Txt_Direct_Agent_id = _Record.id;
+      this.Txt_Direct_Agent = _Record.name;
+    }
+
+    if (_Record.controlname == "TXT_BANK_CHARGES") {
+      this.Txt_Bank_Charges_id = _Record.id;
+      this.Txt_Bank_Charges = _Record.name;
+    }
+
+    if (_Record.controlname == "TXT_EX_DIFF") {
+      this.Txt_Ex_Diff_id = _Record.id;
+      this.Txt_Ex_Diff = _Record.name;
+    }
+  }
+
 
   Allvalid(): boolean {
     var bRet = true;
     this.errorMessage = "";
+
+    if (this.Txt_Region != "USA" && this.Txt_Region != "GULF" && this.Txt_Region != "INDIA") {
+      alert("Invalid Region (INDIA/USA/GULF)");
+      return false;
+    }
     return bRet;
   }
 

@@ -13,98 +13,311 @@
 
 <div class="page-body">
     <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Income - Air Export</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_INC_AE'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Inc_AE" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Income - Air Import</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_INC_AI'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Inc_AI" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Income - Sea Export</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_INC_SE'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Inc_SE" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Income - Sea Import</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_INC_SI'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Inc_SI" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Income - Others</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_INC_OT'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Inc_OT" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Income - Extra</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_INC_Ex'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Inc_Ex" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Expense - Air Export</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_EXP_AE'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Exp_AE" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Expense - Air Import</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_EXP_AI'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Exp_AI" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Expense - Sea Export</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_EXP_SE'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Exp_SE" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Expense - Sea Import</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_Exp_SI'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Exp_SI" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Expense - Others</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_EXP_OT'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Exp_OT" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Expense - Extra</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_EXP_Ex'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Exp_Ex" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-6">
+            
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">A/c Receivable</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_AR'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_AR" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">A/c Payable</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_AP'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_AP" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Petty Cash</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_PETTYCASH'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_PettyCash" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">INTERNAL.PAY.SETTLEMENT A/R</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_IPS_AR'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [where]="where_ips_ar"
+                        [displaydata]="TXT_IPS_AR" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">INTERNAL.PAY.SETTLEMENT A/P</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_IPS_AP'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [where]="where_ips_ap"
+                        [displaydata]="TXT_IPS_AP" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Direct Bill Agent</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_DIRECT_AGENT'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [displaydata]="Txt_Direct_Agent" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Bank Charges</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_BANK_CHARGES'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [where]="where_bank_charges"
+                        [displaydata]="Txt_Bank_Charges" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Ex.Diff.</label>
+                <div class="col-8">
+                    <app-autocomplete2 [controlname]="'TXT_EX_DIFF'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
+                        [where]="where_ex_diff"
+                        [displaydata]="Txt_Ex_Diff" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+        </div>
+    
+
+
+    </div>
+</div>
+
+
+
+
+
+<div class="page-body">
+    <div class="row">
         <div class="col-md-6">
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Resource URL</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TxtImageUrl" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TxtImageUrl" maxlength="100" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Files URL</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TxtFileUrl" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TxtFileUrl" maxlength="100" />
                 </div>
-            </div>            
+            </div>
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Files Folder</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TxtFileFolder" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TxtFileFolder"
+                        maxlength="100" />
                 </div>
-            </div>            
-            
+            </div>
+
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Front End Date Format</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Date_Format_FrontEnd" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Date_Format_FrontEnd"
+                        maxlength="100" />
                 </div>
-            </div>            
+            </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Back End Date Format</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Date_Format_BackEnd" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Date_Format_BackEnd"
+                        maxlength="100" />
                 </div>
-            </div>            
+            </div>
 
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Base Currency Code</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Base_Curr_Code" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Base_Curr_Code"
+                        maxlength="100" />
                 </div>
-            </div>            
+            </div>
 
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Foreign Currency Code</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Foreign_Curr_Code" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Foreign_Curr_Code"
+                        maxlength="100" />
                 </div>
-            </div>            
+            </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Number Of Rows In Grid</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Rows" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Rows" maxlength="100" />
                 </div>
-            </div>            
+            </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Issuing Agent Name</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_IssuingAgent" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_IssuingAgent"
+                        maxlength="100" />
                 </div>
-            </div>            
+            </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Address</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Agent_Address" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Agent_Address"
+                        maxlength="100" />
                 </div>
-            </div>            
+            </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">City</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Agent_City" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Agent_City"
+                        maxlength="100" />
                 </div>
-            </div>            
+            </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">IATA Code</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_IATA" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_IATA" maxlength="100" />
                 </div>
-            </div>            
+            </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Auto Bcc Email</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Auto_Bcc" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Auto_Bcc"
+                        maxlength="100" />
                 </div>
-            </div>            
+            </div>
         </div>
 
         <div class="col-md-6">
@@ -122,19 +335,24 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Ocean Export House Prefix</label>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Sea_Prefix" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Sea_Prefix"
+                        maxlength="20" />
                 </div>
                 <div class="col-1">
-                    <button class="btn btn-info btn-sm" (click)="Chk_Sea_Prefix_Pol=Chk_Sea_Prefix_Pol == 'Y' ? 'N' : 'Y'">{{Chk_Sea_Prefix_Pol}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Sea_Prefix_Pol=Chk_Sea_Prefix_Pol == 'Y' ? 'N' : 'Y'">{{Chk_Sea_Prefix_Pol}}</button>
                 </div>
                 <div class="col-1">
-                    <button class="btn btn-info btn-sm" (click)="Chk_Sea_Prefix_Pod=Chk_Sea_Prefix_Pod == 'Y' ? 'N' : 'Y'">{{Chk_Sea_Prefix_Pod}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Sea_Prefix_Pod=Chk_Sea_Prefix_Pod == 'Y' ? 'N' : 'Y'">{{Chk_Sea_Prefix_Pod}}</button>
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Sea_Prefix2" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Sea_Prefix2"
+                        maxlength="20" />
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Sea_Prefix3" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Sea_Prefix3"
+                        maxlength="20" />
                 </div>
 
             </div>
@@ -142,107 +360,130 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Air Export House Prefix</label>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Air_Prefix" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Air_Prefix"
+                        maxlength="20" />
                 </div>
                 <div class="col-1">
-                    <button class="btn btn-info btn-sm" (click)="Chk_Air_Prefix_Pol=Chk_Air_Prefix_Pol == 'Y' ? 'N' : 'Y'">{{Chk_Air_Prefix_Pol}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Air_Prefix_Pol=Chk_Air_Prefix_Pol == 'Y' ? 'N' : 'Y'">{{Chk_Air_Prefix_Pol}}</button>
                 </div>
                 <div class="col-1">
-                    <button class="btn btn-info btn-sm" (click)="Chk_Air_Prefix_Pod=Chk_Air_Prefix_Pod == 'Y' ? 'N' : 'Y'">{{Chk_Air_Prefix_Pod}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Air_Prefix_Pod=Chk_Air_Prefix_Pod == 'Y' ? 'N' : 'Y'">{{Chk_Air_Prefix_Pod}}</button>
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Air_Prefix2" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Air_Prefix2"
+                        maxlength="20" />
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Air_Prefix3" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Air_Prefix3"
+                        maxlength="20" />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Ocean Import Prefix</label>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_SI_PREFIX1" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_SI_PREFIX1"
+                        maxlength="20" />
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_SI_PREFIX2" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_SI_PREFIX2"
+                        maxlength="20" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Ocean Export Prefix</label>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_SE_PREFIX1" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_SE_PREFIX1"
+                        maxlength="20" />
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_SE_PREFIX2" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_SE_PREFIX2"
+                        maxlength="20" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Air Import Prefix</label>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_AI_PREFIX1" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_AI_PREFIX1"
+                        maxlength="20" />
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_AI_PREFIX2" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_AI_PREFIX2"
+                        maxlength="20" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Air Export Prefix</label>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_AE_PREFIX1" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_AE_PREFIX1"
+                        maxlength="20" />
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_AE_PREFIX2" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_AE_PREFIX2"
+                        maxlength="20" />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Other OP. Prefix</label>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_OP_PREFIX1" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_OP_PREFIX1"
+                        maxlength="20" />
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_OP_PREFIX2" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_OP_PREFIX2"
+                        maxlength="20" />
                 </div>
-            </div>            
+            </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Extra Prefix</label>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_EX_PREFIX1" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_EX_PREFIX1"
+                        maxlength="20" />
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_EX_PREFIX2" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_EX_PREFIX2"
+                        maxlength="20" />
                 </div>
-            </div>            
+            </div>
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">AR Prefix</label>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_AR_PREFIX1" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_AR_PREFIX1"
+                        maxlength="20" />
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_AR_PREFIX2" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_AR_PREFIX2"
+                        maxlength="20" />
                 </div>
-            </div>            
+            </div>
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">AP Prefix</label>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_AP_PREFIX1" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_AP_PREFIX1"
+                        maxlength="20" />
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_AP_PREFIX2" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_AP_PREFIX2"
+                        maxlength="20" />
                 </div>
-            </div>            
+            </div>
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Debit Note Prefix</label>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_DN_PREFIX1" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="TXT_DN_PREFIX1"
+                        maxlength="20" />
                 </div>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_DN_PREFIX2" maxlength="20"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="TXT_DN_PREFIX2"
+                        maxlength="20" />
                 </div>
-            </div>            
+            </div>
 
-            
+
 
         </div>
 
@@ -257,21 +498,24 @@
                 <label class="col-4 col-form-label col-form-label-sm"></label>
                 <label class="col-4 col-form-label col-form-label-sm">Show Logo In Home Page</label>
                 <div class="col-1">
-                    <button class="btn btn-info btn-sm" (click)="Chk_Home_Logo=Chk_Home_Logo == 'Y' ? 'N' : 'Y'">{{Chk_Home_Logo}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Home_Logo=Chk_Home_Logo == 'Y' ? 'N' : 'Y'">{{Chk_Home_Logo}}</button>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm"></label>
                 <label class="col-4 col-form-label col-form-label-sm">Show Name In Home Page</label>
                 <div class="col-1">
-                    <button class="btn btn-info btn-sm" (click)="Chk_Home_Name=Chk_Home_Name == 'Y' ? 'N' : 'Y'">{{Chk_Home_Name}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Home_Name=Chk_Home_Name == 'Y' ? 'N' : 'Y'">{{Chk_Home_Name}}</button>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm"></label>
                 <label class="col-4 col-form-label col-form-label-sm">Show C-TPAT Logo</label>
                 <div class="col-1">
-                    <button class="btn btn-info btn-sm" (click)="Chk_CTPAT=Chk_CTPAT == 'Y' ? 'N' : 'Y'">{{Chk_CTPAT}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_CTPAT=Chk_CTPAT == 'Y' ? 'N' : 'Y'">{{Chk_CTPAT}}</button>
                 </div>
             </div>
 
@@ -279,7 +523,8 @@
                 <label class="col-4 col-form-label col-form-label-sm"></label>
                 <label class="col-4 col-form-label col-form-label-sm">Remove Zero Format</label>
                 <div class="col-1">
-                    <button class="btn btn-info btn-sm" (click)="Chk_Remove_Zero_Format=Chk_Remove_Zero_Format == 'Y' ? 'N' : 'Y'">{{Chk_Remove_Zero_Format}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Remove_Zero_Format=Chk_Remove_Zero_Format == 'Y' ? 'N' : 'Y'">{{Chk_Remove_Zero_Format}}</button>
                 </div>
             </div>
 
@@ -293,28 +538,32 @@
             <div class="form-group row">
                 <label class="col-8 col-form-label col-form-label-sm">Parent Address Visible</label>
                 <div class="col-4">
-                    <button class="btn btn-info btn-sm" (click)="Chk_Parent_Address=Chk_Parent_Address == 'Y' ? 'N' : 'Y'">{{Chk_Parent_Address}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Parent_Address=Chk_Parent_Address == 'Y' ? 'N' : 'Y'">{{Chk_Parent_Address}}</button>
                 </div>
             </div>
-            
+
             <div class="form-group row">
                 <label class="col-8 col-form-label col-form-label-sm">Enable Extra Option</label>
                 <div class="col-4">
-                    <button class="btn btn-info btn-sm" (click)="Chk_Extra=Chk_Extra == 'Y' ? 'N' : 'Y'">{{Chk_Extra}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Extra=Chk_Extra == 'Y' ? 'N' : 'Y'">{{Chk_Extra}}</button>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-8 col-form-label col-form-label-sm">Auto Close Check Screen</label>
                 <div class="col-4">
-                    <button class="btn btn-info btn-sm" (click)="Chk_PrintCheck=Chk_PrintCheck == 'Y' ? 'N' : 'Y'">{{Chk_PrintCheck}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_PrintCheck=Chk_PrintCheck == 'Y' ? 'N' : 'Y'">{{Chk_PrintCheck}}</button>
                 </div>
-            </div>    
-            
+            </div>
+
             <div class="form-group row">
                 <label class="col-8 col-form-label col-form-label-sm">Re-Print Check</label>
                 <div class="col-4">
-                    <button class="btn btn-info btn-sm" (click)="Chk_RePrintCheck=Chk_RePrintCheck == 'Y' ? 'N' : 'Y'">{{Chk_RePrintCheck}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_RePrintCheck=Chk_RePrintCheck == 'Y' ? 'N' : 'Y'">{{Chk_RePrintCheck}}</button>
                 </div>
             </div>
 
@@ -325,13 +574,15 @@
             <div class="form-group row">
                 <label class="col-8 col-form-label col-form-label-sm">Show BOE</label>
                 <div class="col-4">
-                    <button class="btn btn-info btn-sm" (click)="Chk_Boe=Chk_Boe == 'Y' ? 'N' : 'Y'">{{Chk_Boe}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Boe=Chk_Boe == 'Y' ? 'N' : 'Y'">{{Chk_Boe}}</button>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-8 col-form-label col-form-label-sm">AR/AP Code Selection</label>
                 <div class="col-4">
-                    <button class="btn btn-info btn-sm" (click)="Chk_Arap_Code_Selection=Chk_Arap_Code_Selection == 'Y' ? 'N' : 'Y'">{{Chk_Arap_Code_Selection}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Arap_Code_Selection=Chk_Arap_Code_Selection == 'Y' ? 'N' : 'Y'">{{Chk_Arap_Code_Selection}}</button>
                 </div>
             </div>
 
@@ -339,14 +590,16 @@
             <div class="form-group row">
                 <label class="col-8 col-form-label col-form-label-sm">Show Check Date&Bank</label>
                 <div class="col-4">
-                    <button class="btn btn-info btn-sm" (click)="Chk_ShowChkDate=Chk_ShowChkDate == 'Y' ? 'N' : 'Y'">{{Chk_ShowChkDate}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_ShowChkDate=Chk_ShowChkDate == 'Y' ? 'N' : 'Y'">{{Chk_ShowChkDate}}</button>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-8 col-form-label col-form-label-sm">Package Total Button</label>
                 <div class="col-4">
-                    <button class="btn btn-info btn-sm" (click)="Chk_Package_Total_Button=Chk_Package_Total_Button == 'Y' ? 'N' : 'Y'">{{Chk_Package_Total_Button}}</button>
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Package_Total_Button=Chk_Package_Total_Button == 'Y' ? 'N' : 'Y'">{{Chk_Package_Total_Button}}</button>
                 </div>
             </div>
 
@@ -363,36 +616,40 @@
 <div class="page-body">
     <div class="row">
         <div class="col-md-6">
-            
+
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Lock Days-Sea</label>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Lock_Sea" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Lock_Sea"
+                        maxlength="100" />
                 </div>
                 <label class="col-4 col-form-label col-form-label-sm">Lock Days-Other</label>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Lock_Others" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Lock_Others"
+                        maxlength="100" />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Lock Days-Air</label>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Lock_Air" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Lock_Air"
+                        maxlength="100" />
                 </div>
                 <label class="col-4 col-form-label col-form-label-sm">Lock Days-Admin</label>
                 <div class="col-2">
-                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Lock_Admin" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Lock_Admin"
+                        maxlength="100" />
                 </div>
             </div>
         </div>
 
         <div class="col-md-6">
-            
+
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Region</label>
                 <div class="col-4">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Region" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Region" maxlength="100" />
                 </div>
             </div>
 
@@ -415,28 +672,249 @@
             <div class="form-group row">
                 <label class="col-2 col-form-label col-form-label-sm">HBL INSTRUCTION 1</label>
                 <div class="col-10">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Hbl_Inst1" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Hbl_Inst1"
+                        maxlength="100" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-2 col-form-label col-form-label-sm">HBL INSTRUCTION 2</label>
                 <div class="col-10">
-                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Hbl_Inst2" maxlength="100"/>
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Hbl_Inst2"
+                        maxlength="100" />
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="page-footer">
+
+
+<div class="page-body">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Description Optional </label>
+                <div class="col-2">
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Description=Chk_Description == 'Y' ? 'N' : 'Y'">{{Chk_Description}}</button>
+                </div>
+                <label class="col-4 col-form-label col-form-label-sm">Payroll Enabled</label>
+                <div class="col-2">
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_Enable_Payroll=Chk_Enable_Payroll == 'Y' ? 'N' : 'Y'">{{Chk_Enable_Payroll}}</button>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Payroll Invoice Code </label>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Payroll_Invoice_Code"
+                        maxlength="20" />
+                </div>
+                <label class="col-4 col-form-label col-form-label-sm">Payroll A/c Code</label>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Payroll_Ac_Code"
+                        maxlength="20" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Terms And Service 1</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Terms1" maxlength="150" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Terms And Service 2</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Terms2" maxlength="150" />
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <label class="col-4 col-form-label col-form-label-sm">Hide doc type in Invoice</label>
+                <div class="col-2">
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_HideDocType=Chk_HideDocType == 'Y' ? 'N' : 'Y'">{{Chk_HideDocType}}</button>
+                </div>
+
+                <label class="col-4 col-form-label col-form-label-sm">Fin-Year Start Month</label>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_FY_Start_Month"
+                        maxlength="10" />
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Default HBL Format</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Def_Hbl_Format"
+                        maxlength="50" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">HBL Format</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Def_Hbl_Draftformat"
+                        maxlength="50" />
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">A/c Report Based On</label>
+                <div class="col-4">
+                    <select class="form-control form-control-sm" [(ngModel)]="Cmb_Ac_Rep_Base">
+                        <option [value]="'MASTER REF DATE'">MASTER REF DATE</option>
+                        <option [value]="'INVOICE DATE'">INVOICE DATE</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">File System App Folder</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_RootFolder"
+                        maxlength="100" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Global FTP Folder</label>
+                <div class="col-8">
+                    <input class="form-control form-control-sm" type="text" [(ngModel)]="Txt_Ftp_Folder"
+                        maxlength="100" />
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="page-body">
+    <div class="row">
+        <div class="col-md-6">
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm"></label>
-                <div class="col-8">
+                <label class="col-6 col-form-label col-form-label-sm">Shipment Log Format</label>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_ShipLogFormat=Chk_ShipLogFormat == 'NEW' ? 'OLD' : 'NEW'">{{Chk_ShipLogFormat}}</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <label class="col-6 col-form-label col-form-label-sm">Sea Import-Override Pod ETA with Place Delivery
+                    ETA</label>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_SI_OVERRIDE_POD_ETA=Chk_SI_OVERRIDE_POD_ETA == 'Y' ? 'N' : 'Y'">{{Chk_SI_OVERRIDE_POD_ETA}}</button>
+                </div>
+            </div>
+            
+            <div class="form-group row" *ngIf="false">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <label class="col-6 col-form-label col-form-label-sm">Air Import-Override Pod ETA with Place Delivery
+                    ETA</label>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm"
+                        (click)="Chk_AI_OVERRIDE_POD_ETA=Chk_AI_OVERRIDE_POD_ETA == 'Y' ? 'N' : 'Y'">{{Chk_AI_OVERRIDE_POD_ETA}}</button>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <label class="col-6 col-form-label col-form-label-sm">Enable Dummy Invoice</label>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm"
+                        (click)="chk_dummy_Invoice=chk_dummy_Invoice == 'Y' ? 'N' : 'Y'">{{chk_dummy_Invoice}}</button>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">All Shipments Locked Up To</label>
+                <div class="col-2">
+                    <app-date [inputdate]="Dt_Locked" (ValueChanged)="Dt_Locked=$event"></app-date>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-6">
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Profit & Loss A/c</label>
+                <div class="col-4">
+                    <app-autocomplete2 [controlname]="'TXT_PROFIT'" [tabletype]="'ACC_ACCTM'" [where]="where_profit"
+                        [displaycolumn]="'NAME'" [displaydata]="Txt_Profit" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Vat Invoice Description</label>
+                <div class="col-4">
+                    <app-autocomplete2 [controlname]="'TXT_CODE'" [tabletype]="'PARAM'"
+                        [subtype]="'INVOICE-DESCRIPTION'" [displaycolumn]="'NAME'" [displaydata]="Txt_Code"
+                        (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Vat A/c</label>
+                <div class="col-4">
+                    <app-autocomplete2 [controlname]="'TXT_VATACCOUNT'" [tabletype]="'ACC_ACCTM'"
+                        [displaycolumn]="'NAME'" [displaydata]="Txt_VatAccount" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Vat%</label>
+                <div class="col-2">
+                    <input class="form-control form-control-sm" type="number" [(ngModel)]="Txt_Vat_Per"
+                        maxlength="20" />
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group row">
+                <label class="col-6 col-form-label col-form-label-sm"></label>
+                <div class="col-6">
                     <button class="btn btn-primary btn-sm m-1" (click)="Save()">Save</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<br>
+<br>
