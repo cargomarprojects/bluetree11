@@ -91,12 +91,12 @@ export class FormsEditComponent implements OnInit {
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
-        // this.gs.PARAM_FORM_CATEGORIES
+       
         this.LoadCombo();
     }
 
     LoadCombo() {
-
+        // let abc = this.gs.PARAM_FORM_CATEGORIES
     }
 
     NewRecord() {
@@ -119,7 +119,7 @@ export class FormsEditComponent implements OnInit {
     init() {
 
         this.record.gf_pkid = this.pkid;
-        // this.record.qtnr_agent_id = '';
+        this.record.gf_type = '';
         // this.record.qtnr_agent_code = '';
         // this.record.qtnr_agent_name = '';
         // this.record.qtnr_pol_cntry_id = '';
