@@ -32,7 +32,8 @@ export class GlobalService {
 
   public IsAuthenticated: boolean = false;
   public Access_Token: string;
-  public User_role: string;
+  public User_Category: string;
+  public User_Role: string;
 
   public globalData: GlobalData;
   public globalVariables: GlobalVariables;
@@ -679,6 +680,8 @@ export class GlobalService {
     this.user_islocked = "N";
     this.user_isadmin = "N";
 
+    this.User_Role = this.UserRecord.User_Role;
+
 
     this.ALLOW_LOGIN_FROM_MULTIPLE_SYSTEM = this.UserRecord.ALLOW_LOGIN_FROM_MULTIPLE_SYSTEM;
 
@@ -747,6 +750,10 @@ export class GlobalService {
       "~USR_NAME": this.user_name,
       "~USR_ISADMIN": this.user_isadmin,
       "~USER_NAME": this.user_name,
+
+      "~USER_CATEGORY": this.User_Category,
+      "~USER_ROLE": this.User_Role,
+
       "~COMPANY_CODE": this.company_code,
       "~COMPANY_PKID": this.company_pkid,
       "~COMPANY_PARENT_ID": this.company_parent_id,
