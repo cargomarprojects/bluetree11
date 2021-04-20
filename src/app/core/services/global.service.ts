@@ -680,7 +680,7 @@ export class GlobalService {
     this.user_islocked = "N";
     this.user_isadmin = "N";
 
-    this.User_Role = this.UserRecord.User_Role;
+    this.User_Role = this.UserRecord.ROLE;
 
 
     this.ALLOW_LOGIN_FROM_MULTIPLE_SYSTEM = this.UserRecord.ALLOW_LOGIN_FROM_MULTIPLE_SYSTEM;
