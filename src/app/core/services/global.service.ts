@@ -32,6 +32,7 @@ export class GlobalService {
 
   public IsAuthenticated: boolean = false;
   public Access_Token: string;
+  public User_role: string;
 
   public globalData: GlobalData;
   public globalVariables: GlobalVariables;

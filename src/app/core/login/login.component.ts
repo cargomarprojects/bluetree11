@@ -122,6 +122,7 @@ export class LoginComponent implements OnInit {
         if (user && user.access_token) {
           this.gs.IsLoginSuccess = true;
           this.gs.Access_Token = user.access_token;
+          this.gs.User_role = user.usr_role;
           if (this.gs.IsLoginSuccess) {
             this.errorMessage = "Login Success";
             this.gs.user_pwd = this.password;
@@ -150,7 +151,8 @@ export class LoginComponent implements OnInit {
     let SearchData = {
       sCompanyId: this.Company_Id,
       sUserId: this.username,
-      sPwd: this.password
+      sPwd: this.password,
+      role : this.gs.User_role
     };
 
 
