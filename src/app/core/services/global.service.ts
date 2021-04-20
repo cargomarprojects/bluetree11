@@ -1593,6 +1593,10 @@ export class GlobalService {
     this.year_islocked = bts_settings.year_islocked;
     this.software_start_year = bts_settings.software_start_year;
 
+    this.User_Category =bts_settings.user_category ;
+    this.User_Role = bts_settings.user_role;
+
+
     //this.MainList = bts_settings.mainlist;
 
     this.UserInfoData = bts_settings.userinfoData;
