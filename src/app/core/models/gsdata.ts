@@ -35,6 +35,10 @@ export class gsdata {
     year_end_date: string;
     year_islocked: string;
     software_start_year: number;
+
+    user_category : string ;
+    user_role : string ;
+
     mainlist: any[];
     userrecord: any;
     userinfoData: any;

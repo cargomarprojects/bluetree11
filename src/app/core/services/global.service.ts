@@ -1484,6 +1484,10 @@ export class GlobalService {
     bts_settings.user_name = this.user_name;
     bts_settings.user_pwd = this.user_pwd;
     bts_settings.user_ua_pkid = this.user_ua_pkid;
+
+    bts_settings.user_category = this.User_Category;
+    bts_settings.user_role = this.User_Role;
+
     bts_settings.branch_pkid = this.branch_pkid;
     bts_settings.branch_code = this.branch_code;
     bts_settings.branch_name = this.branch_name;
