@@ -34,6 +34,10 @@ export class GlobalService {
   public Access_Token: string;
   public User_Category: string;
   public User_Role: string;
+  public User_isParent: string;
+  public User_Customer_Id: string;
+  public User_Customer_Parent_Id: string;
+
 
   public globalData: GlobalData;
   public globalVariables: GlobalVariables;
@@ -681,8 +685,10 @@ export class GlobalService {
     this.user_islocked = "N";
     this.user_isadmin = "N";
 
-    this.User_Role = this.UserRecord.ROLE;
-
+    this.User_Role = this.UserRecord.usr_role;
+    this.User_isParent = this.UserRecord.usr_isparent;
+    this.User_Customer_Id = this.UserRecord.usr_customer_id;
+    this.User_Customer_Parent_Id = this.UserRecord.usr_customer_parent_id;
 
     this.ALLOW_LOGIN_FROM_MULTIPLE_SYSTEM = this.UserRecord.ALLOW_LOGIN_FROM_MULTIPLE_SYSTEM;
 
@@ -1492,6 +1498,10 @@ export class GlobalService {
 
     bts_settings.user_category = this.User_Category;
     bts_settings.user_role = this.User_Role;
+    bts_settings.user_isparent = this.User_isParent;
+    bts_settings.user_customer_id = this.User_Customer_Parent_Id;
+    bts_settings.user_customer_parent_id = this.User_Customer_Parent_Id;
+
 
     bts_settings.branch_pkid = this.branch_pkid;
     bts_settings.branch_code = this.branch_code;
@@ -1600,7 +1610,9 @@ export class GlobalService {
 
     this.User_Category =bts_settings.user_category ;
     this.User_Role = bts_settings.user_role;
-
+    this.User_isParent = bts_settings.user_isparent;
+    this.User_Customer_Id = bts_settings.user_customer_id;
+    this.User_Customer_Parent_Id = bts_settings.user_customer_parent_id;
 
     //this.MainList = bts_settings.mainlist;
 

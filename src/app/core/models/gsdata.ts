@@ -38,6 +38,9 @@ export class gsdata {
 
     user_category : string ;
     user_role : string ;
+    user_isparent : string ;
+    user_customer_id : string ;
+    user_customer_parent_id : string ;
 
     mainlist: any[];
     userrecord: any;
