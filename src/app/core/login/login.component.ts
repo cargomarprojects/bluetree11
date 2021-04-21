@@ -54,9 +54,10 @@ export class LoginComponent implements OnInit {
     this.gs.IsAuthenticated = false;
     this.showloginbutton = false;
 
-
     this.username = 'ADMIN';
     this.password = '123';
+    this.username = 'CUST-VIRTRA';
+       
 
     this.LoadCombo();
   }
@@ -163,7 +164,10 @@ export class LoginComponent implements OnInit {
         
         this.gs.InitLogin();
 
-        this.router.navigate(['login2'], { replaceUrl: true });
+        if (this.gs.UserRecord.CATEGORY == 'CUSTOMER')
+          this.router.navigate(['home'], { replaceUrl: true });
+        else 
+          this.router.navigate(['login2'], { replaceUrl: true });
 
       }, error => {
         this.loading = false;
