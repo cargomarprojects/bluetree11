@@ -77,7 +77,9 @@ export class Login2Component implements OnInit {
 
         let SearchData = {
             CompanyId: this.GLOBALCONTANTS.company_pkid,
-            User_Id: userid
+            User_Id: userid,
+            User_Category : this.GLOBALCONTANTS.User_Category,
+            User_Role : this.GLOBALCONTANTS.User_Role
         };
 
         this.mainservice.LoadCompanyYearList(SearchData)
@@ -96,6 +98,10 @@ export class Login2Component implements OnInit {
                 response.yearlist.forEach(a => {
                     this.Year_Id = a.fy_pkid;
                 });
+
+                if ( this.GLOBALCONTANTS.User_Category == "CUSTOMER")
+                    this.Login();
+
                 this.loading = false;
             }, error => {
                 this.loading = false;

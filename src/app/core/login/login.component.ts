@@ -165,8 +165,9 @@ export class LoginComponent implements OnInit {
         this.gs.InitLogin();
 
         if (this.gs.UserRecord.CATEGORY == 'CUSTOMER') {
-          this.loadMenu();
-          this.router.navigate(['home'], { replaceUrl: true });
+          //this.loadMenu();
+          //this.router.navigate(['home'], { replaceUrl: true });
+          this.router.navigate(['login2'], { replaceUrl: true });
         }
         else 
           this.router.navigate(['login2'], { replaceUrl: true });
