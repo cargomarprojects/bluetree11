@@ -33,6 +33,7 @@ const routes: Routes = [
   { path: 'Silver.ImportData', loadChildren: () => import('./importdata/importdata.module').then( m => m.ImportDataModule) },
   { path: 'reports', loadChildren: () => import('./reports/reports.module').then( m => m.ReportsModule) },  
   { path: 'seaexport', loadChildren: () => import('./seaexport/seaexport.module').then( m => m.SeaExportModule) },
+  { path: 'tracking', loadChildren: () => import('./tracking/tracking.module').then( m => m.TrackingModule) },
   // { path: 'accounts', loadChildren: './accounts/accounts.module#AccountsModule' },
   
   { path: '', redirectTo: '', pathMatch: 'full' }
