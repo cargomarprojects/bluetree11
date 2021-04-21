@@ -164,8 +164,10 @@ export class LoginComponent implements OnInit {
         
         this.gs.InitLogin();
 
-        if (this.gs.UserRecord.CATEGORY == 'CUSTOMER')
+        if (this.gs.UserRecord.CATEGORY == 'CUSTOMER') {
+          this.loadMenu();
           this.router.navigate(['home'], { replaceUrl: true });
+        }
         else 
           this.router.navigate(['login2'], { replaceUrl: true });
 
@@ -174,8 +176,11 @@ export class LoginComponent implements OnInit {
         this.errorMessage = error.error.error_description;
         alert(this.errorMessage);
       });
+  }
 
-
+  async loadMenu(){
+    await this.gs.LoadMenu();
+    this.gs.IsAuthenticated = true;
   }
 
 

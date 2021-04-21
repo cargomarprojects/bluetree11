@@ -51,6 +51,7 @@ export class GlobalService {
 
   public isolderror: boolean = false;
 
+  
   public MainList: any[];
   public UserRecord: any;
   private UserInfoData: any;
@@ -859,6 +860,10 @@ export class GlobalService {
       SearchData.UA_ID = "";
     else
       SearchData.UA_ID = this.user_ua_pkid;
+      
+    SearchData.user_category  = this.User_Category;
+    SearchData.user_role  = this.User_Role;
+    
     console.log('Menu Loading Begin 1');
     await this.http2.post<any>(this.baseUrl + "/api/Auth/LoadMenu", SearchData, this.headerparam2('authorized')).toPromise().then((response) => {
       console.log('Menu Loaded 2');
