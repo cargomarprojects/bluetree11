@@ -1,0 +1,123 @@
+<div *ngIf="tab=='main'">
+    <div class="page-header">
+        <div class="row align-items-center justify-content-left p-1">
+            <label class="mr-3">{{title}} ({{mode}})</label>
+            <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage">
+        <div class="alert alert-primary">
+            {{errorMessage}}
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-8  p-1 testbox">
+                <div class="col-md-12 p-2 border">
+                    <div class="row">
+                        <div class="col-md-6 px-0 mx-0">
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label col-form-label-sm">Format</label>
+                                <div class="col-8">
+                                    <select class="form-control form-control-sm"
+                                        [(ngModel)]="format_id">
+                                        <option *ngFor="let rec of formatList" [value]="rec.comp_pkid">
+                                            {{rec.comp_name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-2">
+                                    <button  (click)="List()"
+                                        class="btn btn-primary btn-sm mr-1">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 p-2 border">
+                    <div class="row">
+                        <div class="col-md-12 px-0 mx-0">
+                            <div class="page-body table-responsive">
+                                <table class="table  table-hover table-sm">
+                                    <thead class="page-body-thead">
+                                        <tr>
+                                            <th>HEADING</th>
+                                            <th>X(LEFT-MARGIN)</th>
+                                            <th>Y(TOP-MARGIN)</th>
+                                            <th>LEFT</th>
+                                            <th>RIGHT</th>
+                                            <th>UP</th>
+                                            <th>DOWN</th>
+                                            <th>VISIBLE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="page-body-tbody">
+                                        <tr *ngFor="let rec of records">
+                                            <td>
+                                                {{rec.blf_col_name}}
+                                              </td>
+                                              <td>
+                                                <input type="number" class="form-control form-control-sm" [(ngModel)]="rec.blf_col_x" (blur)="OnBlur('blf_col_x', rec)" />
+                                              </td>
+                              
+                                              <td>
+                                                <input type="number" class="form-control form-control-sm" [(ngModel)]="rec.blf_col_y" (blur)="OnBlur('blf_col_y', rec)" />
+                                              </td>
+                              
+                                              <td>
+                                                <button class="btn btn-info btn-sm" (click)="changepos('left',rec)">LEFT</button>
+                                              </td>
+                                              <td>
+                                                <button class="btn btn-info btn-sm" (click)="changepos('right',rec)">RIGHT</button>
+                                              </td>
+                                              <td>
+                                                <button class="btn btn-info btn-sm" (click)="changepos('up',rec)">UP</button>
+                                              </td>
+                                              <td>
+                                                <button class="btn btn-info btn-sm" (click)="changepos('down',rec)">DOWN</button>
+                                              </td>
+                                              <td>
+                                                <!-- {{rec.blf_col_enabled}} -->
+                                              </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="page-footer">
+        <div class="row justify-content-center p-1">
+            <button class="btn btn-primary btn-md" *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
+
+        </div>
+    </div>
+</div>
+<ng-template #attachmodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+                        [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+                        [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
+                        [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+                        [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
+                        [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
+                        (callbackevent)="callbackevent($event)"></app-fileupload>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -20,6 +20,7 @@ import { PayrollMasterEditComponent } from './payrollmaster/payrollmaster-edit.c
 import { CompSettingsComponent } from './comp-settings/compsettings.component';
 import { GlobalSettingsComponent } from './global-settings/globalsettings.component';
 import { BranchSettingsComponent } from './branch-settings/branchsettings.component';
+import { FormatPageComponent } from './formatpage/formatpage.component';
 
 const routes: Routes = [
   {path:'ParamPage', component: ParamPageComponent},
@@ -40,7 +41,7 @@ const routes: Routes = [
   {path:'CompSettingsPage', component: CompSettingsComponent}, 
   {path:'GlobalSettingsPage', component: GlobalSettingsComponent}, 
   {path:'SettingsPage', component: BranchSettingsComponent}, 
-  
+  {path:'FormatPage', component: FormatPageComponent}
 ];
 
 @NgModule({
