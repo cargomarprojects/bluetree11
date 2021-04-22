@@ -11,9 +11,7 @@ export interface Tbl_cargo_hblformat {
 }
 
 export interface vm_Tbl_cargo_hblformat {
-    mode: string;
-    record: Tbl_cargo_hblformat;
-    pkid: string;
+    records: Tbl_cargo_hblformat[];
     userinfo: any;
     filter: any;
 }

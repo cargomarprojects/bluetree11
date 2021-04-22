@@ -8,6 +8,7 @@ import { InputBoxComponent } from '../../shared/input/inputbox.component';
 import { FormatPageService } from '../../master/services/formatpage.service';
 import { vm_Tbl_cargo_hblformat, Tbl_cargo_hblformat } from '../../master/models/Tbl_cargo_hblformat';
 import { SearchTable } from '../../shared/models/searchtable';
+import { TBL_MAST_PARAM } from '../../master/models/Tbl_Mast_Param';
 
 @Component({
     selector: 'app-formatpage',
@@ -45,10 +46,11 @@ export class FormatPageComponent implements OnInit {
     Foregroundcolor: string;
     modal: any;
 
-    formatList: any[];
+    formatList: TBL_MAST_PARAM[];
     title: string;
     isAdmin: boolean;
     param_type: string;
+    format_id: string;
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -66,15 +68,11 @@ export class FormatPageComponent implements OnInit {
     ngOnInit() {
         if (this.route.snapshot.queryParams.parameter == null) {
             this.menuid = this.route.snapshot.queryParams.menuid;
-            this.pkid = this.route.snapshot.queryParams.pkid;
-            this.customer_id = this.route.snapshot.queryParams.custid;
-            this.mode = this.route.snapshot.queryParams.mode;
+            this.param_type = this.route.snapshot.queryParams.menu_param;
         } else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
             this.menuid = options.menuid;
-            this.pkid = options.pkid;
-            this.customer_id = options.custid;
-            this.mode = options.mode;
+            this.param_type = options.menu_param;
         }
         this.initPage();
         this.actionHandler();
@@ -93,7 +91,10 @@ export class FormatPageComponent implements OnInit {
         SearchData.param_type = this.param_type;
         this.mainService.GetFormats(SearchData)
             .subscribe(response => {
-                this.formatList = response.list;
+                this.formatList = <TBL_MAST_PARAM[]>response.list;
+
+                if (response.list.length > 0)
+                    this.format_id = response.list[0].param_pkid;
             }, error => {
                 this.errorMessage = this.gs.getError(error);
             });
@@ -133,16 +134,15 @@ export class FormatPageComponent implements OnInit {
     List() {
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
-        SearchData.pkid = this.pkid;
-        this.mainService.GetRecord(SearchData)
+        SearchData.pkid = this.format_id;
+        this.mainService.List(SearchData)
             .subscribe(response => {
-                this.records = <Tbl_cargo_hblformat[]>response.records;
-
+                this.records = <Tbl_cargo_hblformat[]>response.list;
             }, error => {
                 this.errorMessage = this.gs.getError(error);
             });
     }
- 
+
 
     Save() {
 
@@ -150,9 +150,7 @@ export class FormatPageComponent implements OnInit {
             return;
         this.SaveParent();
         const saveRecord = <vm_Tbl_cargo_hblformat>{};
-        saveRecord.record = this.record;
-        saveRecord.pkid = this.pkid;
-        saveRecord.mode = this.mode;
+        saveRecord.records = this.records;
         saveRecord.userinfo = this.gs.UserInfo;
 
         this.mainService.Save(saveRecord)
@@ -210,7 +208,7 @@ export class FormatPageComponent implements OnInit {
     LovSelected(_Record: SearchTable) {
         let bchange: boolean = false;
 
-        
+
     }
 
     OnChange(field: string) {
@@ -254,7 +252,7 @@ export class FormatPageComponent implements OnInit {
             //     this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
             //     break;
             // }
-            
+
         }
     }
     callbackevent(event: any) {
@@ -265,17 +263,17 @@ export class FormatPageComponent implements OnInit {
     }
     changepos(pos: string, rec: Tbl_cargo_hblformat) {
         if (pos == 'left') {
-          rec.blf_col_x = rec.blf_col_x - 8;
+            rec.blf_col_x = rec.blf_col_x - 8;
         }
         if (pos == 'right') {
-          rec.blf_col_x = rec.blf_col_x + 8;
+            rec.blf_col_x = rec.blf_col_x + 8;
         }
         if (pos == 'up') {
-          rec.blf_col_y = rec.blf_col_y - 15;
+            rec.blf_col_y = rec.blf_col_y - 15;
         }
         if (pos == 'down') {
-          rec.blf_col_y = rec.blf_col_y + 15;
+            rec.blf_col_y = rec.blf_col_y + 15;
         }
-      }
-    
+    }
+
 }

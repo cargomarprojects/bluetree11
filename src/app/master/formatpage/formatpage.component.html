@@ -1,7 +1,7 @@
 <div *ngIf="tab=='main'">
     <div class="page-header">
         <div class="row align-items-center justify-content-left p-1">
-            <label class="mr-3">{{title}} ({{mode}})</label>
+            <label class="mr-3">{{title}}</label>
             <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
         </div>
     </div>
@@ -23,8 +23,8 @@
                                 <div class="col-8">
                                     <select class="form-control form-control-sm"
                                         [(ngModel)]="format_id">
-                                        <option *ngFor="let rec of formatList" [value]="rec.comp_pkid">
-                                            {{rec.comp_name}}</option>
+                                        <option *ngFor="let rec of formatList" [value]="rec.param_pkid">
+                                            {{rec.param_name1}}</option>
                                     </select>
                                 </div>
                                 <div class="col-2">
@@ -49,7 +49,7 @@
                                             <th>RIGHT</th>
                                             <th>UP</th>
                                             <th>DOWN</th>
-                                            <th>VISIBLE</th>
+                                            <!-- <th>VISIBLE</th> -->
                                         </tr>
                                     </thead>
                                     <tbody class="page-body-tbody">
@@ -77,9 +77,9 @@
                                               <td>
                                                 <button class="btn btn-info btn-sm" (click)="changepos('down',rec)">DOWN</button>
                                               </td>
-                                              <td>
-                                                <!-- {{rec.blf_col_enabled}} -->
-                                              </td>
+                                              <!-- <td>
+                                                {{rec.blf_col_enabled}}
+                                              </td> -->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -90,7 +90,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="page-footer">
         <div class="row justify-content-center p-1">
