@@ -1,3 +1,4 @@
+import { PageQuery } from '../../shared/models/pageQuery';
 export interface Tbl_cargo_hblformat {
     blf_format_id: string;
     blf_col_name: string;
@@ -11,7 +12,19 @@ export interface Tbl_cargo_hblformat {
 }
 
 export interface vm_Tbl_cargo_hblformat {
+    format_id:string;
     records: Tbl_cargo_hblformat[];
     userinfo: any;
     filter: any;
+}
+export interface SearchQuery {
+    searchString: string;
+    format_id: string;
+}
+
+export interface FormatModel {
+    errorMessage: string;
+    searchQuery: SearchQuery;
+    pageQuery: PageQuery;
+    records: Tbl_cargo_hblformat[]
 }

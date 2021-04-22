@@ -9,7 +9,7 @@
     </div>
   </div>
   
-  <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+  <div *ngIf="errorMessage$ |  async as errorMessage" class="alert alert-danger">
     {{errorMessage}}
   </div>
   

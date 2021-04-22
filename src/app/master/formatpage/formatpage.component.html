@@ -1,40 +1,22 @@
 <div *ngIf="tab=='main'">
     <div class="page-header">
         <div class="row align-items-center justify-content-left p-1">
-            <label class="mr-3">{{title}}</label>
+            <label class="mr-3">{{mainservice.title}}</label>
             <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
         </div>
     </div>
 
-    <div *ngIf="errorMessage">
-        <div class="alert alert-primary">
-            {{errorMessage}}
-        </div>
-    </div>
+    <div *ngIf="errorMessage$ | async as errorMessage" class="alert alert-primary">
+        {{errorMessage}}
+      </div>
 
+      <app-formatpage-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-formatpage-header>
+  
+      <!-- <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2> -->
+    
     <div class="page-body">
         <div class="row">
             <div class="col-md-8  p-1 testbox">
-                <div class="col-md-12 p-2 border">
-                    <div class="row">
-                        <div class="col-md-6 px-0 mx-0">
-                            <div class="form-group row">
-                                <label class="col-2 col-form-label col-form-label-sm">Format</label>
-                                <div class="col-8">
-                                    <select class="form-control form-control-sm"
-                                        [(ngModel)]="format_id">
-                                        <option *ngFor="let rec of formatList" [value]="rec.param_pkid">
-                                            {{rec.param_name1}}</option>
-                                    </select>
-                                </div>
-                                <div class="col-2">
-                                    <button  (click)="List()"
-                                        class="btn btn-primary btn-sm mr-1">Search</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-12 p-2 border">
                     <div class="row">
                         <div class="col-md-12 px-0 mx-0">
@@ -45,6 +27,7 @@
                                             <th>HEADING</th>
                                             <th>X(LEFT-MARGIN)</th>
                                             <th>Y(TOP-MARGIN)</th>
+                                            <th>WIDTH</th>
                                             <th>LEFT</th>
                                             <th>RIGHT</th>
                                             <th>UP</th>
@@ -53,7 +36,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="page-body-tbody">
-                                        <tr *ngFor="let rec of records">
+                                        <tr *ngFor="let rec of  records$ | async">
                                             <td>
                                                 {{rec.blf_col_name}}
                                               </td>
@@ -64,7 +47,9 @@
                                               <td>
                                                 <input type="number" class="form-control form-control-sm" [(ngModel)]="rec.blf_col_y" (blur)="OnBlur('blf_col_y', rec)" />
                                               </td>
-                              
+                                              <td>
+                                                <input type="number" class="form-control form-control-sm" [(ngModel)]="rec.blf_width" (blur)="OnBlur('blf_width', rec)" />
+                                              </td>
                                               <td>
                                                 <button class="btn btn-info btn-sm" (click)="changepos('left',rec)">LEFT</button>
                                               </td>
@@ -93,12 +78,12 @@
 
     <div class="page-footer">
         <div class="row justify-content-center p-1">
-            <button class="btn btn-primary btn-md" *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
+            <button class="btn btn-primary btn-md" *ngIf="mainservice.canSave" (click)="mainservice.SaveRecords()">Save</button>
 
         </div>
     </div>
 </div>
-<ng-template #attachmodal let-c="close" let-d="dismiss">
+<!-- <ng-template #attachmodal let-c="close" let-d="dismiss">
     <div class="modal-body">
         <div class="page-body">
             <div class="row">
@@ -119,4 +104,4 @@
             </div>
         </div>
     </div>
-</ng-template>
+</ng-template> -->
