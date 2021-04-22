@@ -162,7 +162,7 @@ export class ShipmentService {
 
 
     List(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Tracking/List', SearchData, this.gs.headerparam2('authorized'));
+        return this.http2.post<any>(this.gs.baseUrl + '/api/ShipmentTracking/List', SearchData, this.gs.headerparam2('authorized'));
     }
 
 

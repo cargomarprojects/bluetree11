@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
 
 
-  software_version_string = '1.112';
+  software_version_string = '1.113';
 
   username: string = '';
   password: string = '';
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
     this.username = 'ADMIN';
     this.password = '123';
-    this.username = 'CUST-VIRTRA';
+    //this.username = 'CUST-VIRTRA';
        
 
     this.LoadCombo();
