@@ -90,7 +90,10 @@ export class GlobalService {
   public INSTANCE_ID = "";
 
   public GLOBAL_REPORT_FOLDER = "D://motherlines.us//ftp//reports";
+  
   public SEARCH_DATE_DIFF = 60;
+  public SEARCH_DATE_DIFF_15 = 15;
+  public SEARCH_DATE_DIFF_30 = 30;
 
   //Normal server or cloud server ...etc
   public SERVER_CATEGORY = "NORMAL";

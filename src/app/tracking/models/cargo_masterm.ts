@@ -4,6 +4,8 @@ export interface SearchQuery {
     searchString: string;
     fromdate: string;
     todate: string;
+    refno: string;
+    mode: string;
 }
 
 export interface ShipmentModel {

@@ -9,23 +9,40 @@
             </app-date>
           </div>
         </div>
-      </div>
-      <div class="col-md-3">
         <div class="form-group row">
           <label class="col-4 col-form-label col-form-label-sm">To</label>
           <div class="col-8">
             <app-date [inputdate]="searchQuery.todate" (ValueChanged)="searchQuery.todate=$event">
             </app-date>
           </div>
-        </div>
+        </div>        
       </div>
+
       <div class="col-md-3">
+        
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Type</label>
+          <div class="col-8">
+            <select class="form-control form-control-sm" [(ngModel)]="searchQuery.mode">
+              <option [value]="'ALL'">ALL</option>
+              <option [value]="'SEA EXPORT'">OCEAN EXPORT</option>
+              <option [value]="'SEA IMPORT'">OCEAN IMPORT</option>
+              <option [value]="'AIR EXPORT'">AIR EXPORT</option>
+              <option [value]="'AIR IMPORT'">AIR IMPORT</option>
+            </select>
+          </div>
+
+
+        </div>
+        
         <div class="form-group row">
           <label class="col-4 col-form-label col-form-label-sm">Ref#:</label>
           <div class="col-8">
-            <input class="form-control form-control-sm" type="text" [(ngModel)]="searchQuery.searchString" />
+            <input class="form-control form-control-sm" type="text" [(ngModel)]="searchQuery.refno" />
           </div>
         </div>
+
+
       </div>
       <div class="col-md-3">
         <div class="form-group row">
@@ -37,5 +54,6 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>

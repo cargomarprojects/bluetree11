@@ -443,10 +443,18 @@ a {
     border-top-color: grey;
 }
   
-.border-right {
+.border-bottom {
     border-bottom: 0.2px;
     border-bottom-style: solid;
     border-bottom-color: grey;
+}
+
+tr.tr_border_top td {
+    border-top: 1px solid black;
+}
+
+tr.tr_border_bottom td {
+    border-bottom: 1px solid black;
 }
   
 .modal-custom {
@@ -835,6 +843,7 @@ input[type=number]::-webkit-outer-spin-button {
         background-size: contain;
         height:350px;
   }
+  
   
   
   .fullscreen {

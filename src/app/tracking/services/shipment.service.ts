@@ -73,7 +73,7 @@ export class ShipmentService {
             sortorder : true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today },
+            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF_30), todate: this.gs.defaultValues.today, refno : '',mode : 'ALL' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -97,7 +97,7 @@ export class ShipmentService {
             sortorder : true,       
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today },
+            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF_30), todate: this.gs.defaultValues.today, refno : '',mode : 'ALL' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -135,7 +135,15 @@ export class ShipmentService {
         SearchData.CODE = this.record.searchQuery.searchString;
         SearchData.SDATE = this.record.searchQuery.fromdate;
         SearchData.EDATE = this.record.searchQuery.todate;
+        SearchData.REFNO = this.record.searchQuery.refno;
+        SearchData.MODE = this.record.searchQuery.mode;
         SearchData.OVERRIDE_POD_ETA = this.gs.SEA_IMP_OVERRIDE_POD_ETA;
+        
+        SearchData.USER_CATEGORY = this.gs.User_Category;
+        SearchData.USER_ROLE = this.gs.User_Role;
+        SearchData.USER_ISPARENT = this.gs.User_isParent;
+        SearchData.USER_CUSTOMER_ID = this.gs.User_Customer_Id;
+        SearchData.USER_PARENT_ID = this.gs.User_Customer_Parent_Id;
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;

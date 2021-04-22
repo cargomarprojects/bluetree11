@@ -31,11 +31,7 @@ export class ShipmentHeaderComponent implements OnInit {
 
   List(outputformat: string) {
     
-    if (this.gs.isBlank(this.searchQuery.fromdate))
-      this.searchQuery.fromdate = this.gs.year_start_date;
 
-    if (this.gs.isBlank(this.searchQuery.todate))
-      this.searchQuery.todate = this.gs.defaultValues.today;
 
     this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.searchQuery });
   }
