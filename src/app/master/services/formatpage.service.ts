@@ -70,7 +70,7 @@ export class FormatPageService {
     }
 
     Search(_searchdata: any, type: string = '') {
-
+         
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
         }
@@ -160,6 +160,13 @@ export class FormatPageService {
         if (this.gs.isBlank(this.record.searchQuery.format_id)) {
             bRet = false;
             this.record.errorMessage = "Please select a format and continue...";
+            this.mdata$.next(this.record);
+            alert(this.record.errorMessage);
+            return bRet;
+        }
+        if (this.gs.isBlank(this.record.records)) {
+            bRet = false;
+            this.record.errorMessage = "List Not Found";
             this.mdata$.next(this.record);
             alert(this.record.errorMessage);
             return bRet;
