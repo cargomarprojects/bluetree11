@@ -449,12 +449,13 @@ a {
     border-bottom-color: grey;
 }
 
-tr.tr_border_top td {
-    border-top: 1px solid black;
+.tablecollapse {
+    border-collapse: collapse;
 }
 
-tr.tr_border_bottom td {
-    border-bottom: 1px solid black;
+
+.tr_bold  {
+    font-weight: bold;
 }
   
 .modal-custom {

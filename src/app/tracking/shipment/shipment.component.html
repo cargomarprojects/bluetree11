@@ -38,7 +38,7 @@
             </tr>
         </thead>
         <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of records$ | async |  sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" [class.tr_border_top]="rec.border == 'Y'">
+            <tr *ngFor="let rec of records$ | async |  sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" [class.tr_bold]="rec.border == 'Y'" >
                 <td >{{rec.mbl_refno}}</td>
                 <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td >{{rec.mbl_mode}}</td>
