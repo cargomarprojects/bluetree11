@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GlobalService } from '../../core/services/global.service';
 import { Tbl_cargo_hblformat, FormatModel, vm_Tbl_cargo_hblformat } from '../models/Tbl_cargo_hblformat';
-import { TBL_MAST_PARAM } from '../../master/models/Tbl_Mast_Param';
 import { SearchQuery } from '../models/Tbl_cargo_hblformat';
 import { PageQuery } from '../../shared/models/pageQuery';
 
@@ -18,8 +17,7 @@ export class FormatPageService {
         return this.mdata$.asObservable();
     }
     private record: FormatModel;
-    public formatList: TBL_MAST_PARAM[];
-
+   
     public id: string;
     public menuid: string;
     public param_type: string;
@@ -69,7 +67,6 @@ export class FormatPageService {
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
-        this.LoadCombo();
     }
 
     Search(_searchdata: any, type: string = '') {
@@ -116,23 +113,7 @@ export class FormatPageService {
         });
     }
 
-    LoadCombo() {
-
-        this.record.errorMessage = '';
-        var SearchData = this.gs.UserInfo;
-        SearchData.param_type = this.param_type;
-        this.GetFormats(SearchData)
-            .subscribe(response => {
-                this.formatList = <TBL_MAST_PARAM[]>response.list;
-                if (this.formatList.length > 0)
-                    this.record.searchQuery.format_id = this.formatList[0].param_pkid;
-                this.mdata$.next(this.record);
-            }, error => {
-                this.record.errorMessage = this.gs.getError(error);
-                this.mdata$.next(this.record);
-            });
-
-    }
+    
 
     SaveRecords() {
 

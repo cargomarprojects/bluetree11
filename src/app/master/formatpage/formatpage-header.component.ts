@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDet
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/Tbl_cargo_hblformat';
 import { FormatPageService } from '../../master/services/formatpage.service';
+import { SearchTable } from '../../shared/models/searchtable';
 
 @Component({
   selector: 'app-formatpage-header',
@@ -39,5 +40,14 @@ export class FormatPageHeaderComponent implements OnInit {
   }
 
     this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.searchQuery });
+  }
+
+  LovSelected(_Record: SearchTable) {
+
+    if (_Record.controlname == "FORMAT") {
+      this.searchQuery.format_id = _Record.id;
+      this.searchQuery.format_name = _Record.name;
+      // this.liner_lov_field.Focus();
+    }
   }
 }

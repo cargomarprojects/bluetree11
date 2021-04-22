@@ -20,6 +20,7 @@ export interface vm_Tbl_cargo_hblformat {
 export interface SearchQuery {
     searchString: string;
     format_id: string;
+    format_name: string;
 }
 
 export interface FormatModel {
