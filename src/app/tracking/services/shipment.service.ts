@@ -73,7 +73,7 @@ export class ShipmentService {
             sortorder : true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF_30), todate: this.gs.defaultValues.today, refno : '',mode : 'ALL' },
+            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF_30), todate: this.gs.defaultValues.today, refno : '',mode : 'ALL', sortcolumn :'REF-DATE' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -97,7 +97,7 @@ export class ShipmentService {
             sortorder : true,       
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF_30), todate: this.gs.defaultValues.today, refno : '',mode : 'ALL' },
+            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF_30), todate: this.gs.defaultValues.today, refno : '',mode : 'ALL' , sortcolumn :'REF-DATE'},
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -137,6 +137,7 @@ export class ShipmentService {
         SearchData.EDATE = this.record.searchQuery.todate;
         SearchData.REFNO = this.record.searchQuery.refno;
         SearchData.MODE = this.record.searchQuery.mode;
+        SearchData.SORTCOLUMN = this.record.searchQuery.sortcolumn;
         SearchData.OVERRIDE_POD_ETA = this.gs.SEA_IMP_OVERRIDE_POD_ETA;
         
         SearchData.USER_CATEGORY = this.gs.User_Category;
@@ -160,10 +161,14 @@ export class ShipmentService {
             this.record.records = response.list;
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <ShipmentModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            
+            // this.record = <ShipmentModel>{
+            //     records: [],
+            //     errormessage: this.gs.getError(error),
+            // }
+
+            this.record = {...this.record, errormessage: this.gs.getError(error) };
+
             this.mdata$.next(this.record);
         });
     }

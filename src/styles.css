@@ -453,10 +453,23 @@ a {
     border-collapse: collapse;
 }
 
+tr.border_top td {
+    border-top: 0.2px;
+    border-top-style: solid;
+    border-top-color: green;
+}
+
+tr.border_bottom td {
+    border-bottom: 0.2px;
+    border-bottom-style: solid;
+    border-bottom-color: green;
+}
 
 .tr_bold  {
     font-weight: bold;
 }
+
+
   
 .modal-custom {
     margin: auto;

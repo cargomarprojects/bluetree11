@@ -6,6 +6,7 @@ export interface SearchQuery {
     todate: string;
     refno: string;
     mode: string;
+    sortcolumn: string;
 }
 
 export interface ShipmentModel {

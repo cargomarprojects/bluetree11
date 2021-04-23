@@ -18,27 +18,36 @@
     <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
-                <th (click)="mainservice.sort('mbl_refno')">REF.NO&nbsp;<i [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
+                <!-- <th (click)="mainservice.sort('mbl_refno')">REF.NO&nbsp;<i [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
                 <th (click)="mainservice.sort('mbl_ref_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_ref_date')"></i></th>
-
                 <th (click)="mainservice.sort('mbl_mode')">TYPE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_mode')"></i></th>
-
                 <th (click)="mainservice.sort('mbl_no')">MBL#&nbsp;<i [ngClass]="mainservice.getIcon('mbl_no')"></i></th>
                 <th (click)="mainservice.sort('hbl_houseno')">HOUSE&nbsp;<i [ngClass]="mainservice.getIcon('hbl_houseno')"></i></th>                
                 <th (click)="mainservice.sort('hbl_shipper_name')">SHIPPER&nbsp;<i [ngClass]="mainservice.getIcon('hbl_shipper_name')"></i></th>
                 <th (click)="mainservice.sort('hbl_consignee_name')">CONSIGNEE&nbsp;<i [ngClass]="mainservice.getIcon('hbl_consignee_name')"></i></th>                
                 <th (click)="mainservice.sort('mbl_agent_name')">AGENT&nbsp;<i [ngClass]="mainservice.getIcon('mbl_agent_name')"></i></th>
                 <th (click)="mainservice.sort('mbl_liner_name')">CARRIER&nbsp;<i [ngClass]="mainservice.getIcon('mbl_liner_name')"></i></th>
-
-
                 <th (click)="mainservice.sort('mbl_pol_name')">POL&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_name')"></i></th>
                 <th (click)="mainservice.sort('mbl_pol_etd')">ETD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_etd')"></i></th>
                 <th (click)="mainservice.sort('mbl_pod_name')">POD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_name')"></i></th>
-                <th (click)="mainservice.sort('mbl_pod_eta')">ETA&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_eta')"></i></th>
+                <th (click)="mainservice.sort('mbl_pod_eta')">ETA&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_eta')"></i></th> -->
+                <th>REF.NO</th>
+                <th>DATE</th>
+                <th>TYPE</th>
+                <th>MASTER</th>
+                <th>HOUSE</th>                
+                <th>SHIPPER</th>
+                <th>CONSIGNEE</th>                
+                <th>AGENT</th>
+                <th>CARRIER</th>
+                <th>POL</th>
+                <th>ETD</th>
+                <th>POD</th>
+                <th>ETA</th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of records$ | async |  sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" [class.tr_bold]="rec.border == 'Y'" >
+            <tr *ngFor="let rec of records$ | async" [style.color]="rec.border == 'Y' ? 'green' : 'blue'" >
                 <td >{{rec.mbl_refno}}</td>
                 <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td >{{rec.mbl_mode}}</td>
