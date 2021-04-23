@@ -117,6 +117,7 @@ export class FormatPageDetComponent implements OnInit {
             else {
                 this.errorMessage = "Save Complete";
                 // alert(this.errorMessage);
+                this.modal.close();
             }
         }, error => {
             alert(this.gs.getError(error));
@@ -147,6 +148,7 @@ export class FormatPageDetComponent implements OnInit {
             else {
                 this.errorMessage = "Save Complete";
                 // alert(this.errorMessage);
+                this.modal.close();
             }
         }, error => {
             alert(this.gs.getError(error));
