@@ -23,6 +23,7 @@ import { QtnAirComponent } from './qtnair/qtnair.component';
 import { QtnAirEditComponent } from './qtnair/edit/qtnair-edit.component';
 import { QtnSettingComponent } from './qtnsetting/qtnsetting.component';
 import { QtnSettingEditComponent } from './qtnsetting/edit/qtnsetting-edit.component';
+import { DefaultInvoiceComponent } from './defaultinvoice/defaultinvoice.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { QtnSettingEditComponent } from './qtnsetting/edit/qtnsetting-edit.compo
     QtnAirComponent,
     QtnAirEditComponent,
     QtnSettingComponent,
-    QtnSettingEditComponent
+    QtnSettingEditComponent,
+    DefaultInvoiceComponent
   ],
   imports: [
     SharedModule,    

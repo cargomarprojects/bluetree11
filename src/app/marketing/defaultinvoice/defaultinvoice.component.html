@@ -1,0 +1,91 @@
+<div *ngIf="tab=='main'">
+    <div class="page-header">
+        <div class="row align-items-center justify-content-left p-1">
+            <label class="mr-3">{{mainService.title}}</label>
+            <button #_btnretdinv class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage.length >0">
+        <div class="alert alert-success">
+            <a (click)="errorMessage=[]" class="close" aria-label="close">&times;</a>
+            <ul>
+                <li *ngFor="let str of errorMessage">
+                    <p class="h4"> {{str}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="page-body">
+        <div class="row border">
+            <div class="col-md-4 testbox  px-0 mx-0">
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label-sm">Client Name</label>
+                    <div class="col-9">
+                        <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                            [displaydata]="client_name" (ValueChanged)="LovSelected($event)" #to_code>
+                        </app-autocomplete2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row border">
+            <div class="col-md-8">
+                <div class="page-body table-responsive table-bordered">
+                    <table class="table  table-hover table-sm">
+                        <thead class="page-body-thead">
+                            <tr>
+                                <th width="15%">CODE</th>
+                                <th width="30%">DESCRIPTION</th>
+                                <th width="15%">AMT</th>
+                                <th width="30%">REMARKS</th>
+                                <th width="10%" style="text-align:center">DELETE</th>
+                            </tr>
+                        </thead>
+                        <tbody class="page-body-tbody">
+                            <tr *ngFor="let rec of records; let i = index">
+                                <td class="p-0">
+                                    <app-autocomplete2 #_qtnd_desc_code [controlname]="'INVOICE-CODE'"
+                                        [displaycolumn]="'CODE'" [tabletype]="'PARAM'" [subtype]="'INVOICE-DESCRIPTION'"
+                                        [uid]="rec.qtnd_pkid" [displaydata]="rec.qtnd_desc_code"
+                                        (ValueChanged)="LovSelected($event,i)">
+                                    </app-autocomplete2>
+                                </td>
+                                <td class="p-0">
+                                    <InputBox [(inputModel)]="rec.qtnd_desc_name" [maxlength]="60" [uppercase]="true"
+                                        #_qtnd_desc_name>
+                                    </InputBox>
+                                </td>
+                                <td class="p-0">
+                                    <InputBoxNumber [(inputModel)]="rec.qtnd_amt" [maxlength]="15"
+                                        [dec]="foreign_amt_decplace">
+                                    </InputBoxNumber>
+                                </td>
+                                <td class="p-0">
+                                    <InputBox [(inputModel)]="rec.qtnd_per" [maxlength]="60" [uppercase]="true"
+                                        #quot_per>
+                                    </InputBox>
+                                </td>
+                                <td style="text-align:center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                                        (click)="RemoveRow(rec)"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <button class="btn btn-info btn-sm mr-1" (click)="AddRow()">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-footer">
+            <div class="row justify-content-center p-1">
+                <button class="btn btn-primary btn-md mr-1" *ngIf="mainService.canSave"
+                    (click)="Save()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
