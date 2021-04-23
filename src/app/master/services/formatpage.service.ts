@@ -194,7 +194,16 @@ export class FormatPageService {
     // DeleteRecord(SearchData: any) {
     //     return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     // }
+
     ListDet(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/ListDet', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+    SaveDet(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/SaveDet', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+    ReUpdateDet(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/ReUpdateDet', SearchData, this.gs.headerparam2('authorized'));
     }
 }

@@ -21,12 +21,12 @@
             <div class="col-md-3">
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm"></label>
-                    <div class="col-2 input-group input-group-sm">
+                    <div class="col-4 input-group input-group-sm">
                         <button (click)="List('SCREEN')"
                             class="btn btn-primary btn-sm mr-1">Search</button>
                     </div>
-                    <div class="col-2">
-                        <app-formatpagedet [formatid]="searchQuery.format_id" [formatname]="searchQuery.format_name" (callbackevent)="detpagecallbackevent($event)" ></app-formatpagedet>
+                    <div class="col-4">
+                        <app-formatpagedet [formatid]="searchQuery.format_id" [formatname]="searchQuery.format_name" [formattype]="mainservice.param_type" [title]="mainservice.title" (callbackevent)="detpagecallbackevent($event)" ></app-formatpagedet>
                     </div>
                 </div>
             </div>
