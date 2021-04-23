@@ -25,10 +25,14 @@ export class FormatPageComponent implements OnInit {
     records$: Observable<Tbl_cargo_hblformat[]>;
     pageQuery$: Observable<PageQuery>;
     searchQuery$: Observable<SearchQuery>;
-    
+
     tab: string = 'main';
+    report_title: string = '';
+    report_url: string = '';
+    report_searchdata: any = {};
+    report_menuid: string = '';
     modal: any;
-    
+
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -57,15 +61,18 @@ export class FormatPageComponent implements OnInit {
 
     ngAfterViewInit() {
         if (!this.gs.isBlank(this.btnretf_ctrl))
-          this.btnretf_ctrl.nativeElement.focus();
-      }
+            this.btnretf_ctrl.nativeElement.focus();
+    }
     searchEvents(actions: any) {
-        this.mainservice.Search(actions, 'SEARCH');
-      }
-    
-      pageEvents(actions: any) {
+        if (actions.outputformat === "PRINT")
+            this.PrintFormat(actions);
+        else
+            this.mainservice.Search(actions, 'SEARCH');
+    }
+
+    pageEvents(actions: any) {
         this.mainservice.Search(actions, 'PAGE');
-      }
+    }
 
     Close() {
         this.location.back();
@@ -146,6 +153,23 @@ export class FormatPageComponent implements OnInit {
         if (pos == 'down') {
             rec.blf_col_y = rec.blf_col_y + 15;
         }
+    }
+
+    PrintFormat(_searchdata: any) {
+
+        // if (!this.mainservice.canPrint) {
+        //     alert('Insufficient User Rights')
+        //     return;
+        // }
+
+        // this.report_title = this.mainservice.title;
+        // this.report_url = '/api/Master/FormatPage/GetFormatRpt';
+        // this.report_searchdata = this.gs.UserInfo;
+        // this.report_searchdata.pkid = this.gs.getGuid();
+        // this.report_searchdata.FORMAT_ID = _searchdata.searchQuery.format_id;
+        // this.report_searchdata.FORMAT_TYPE = _searchdata.searchQuery.fromdate;
+        // this.report_menuid = this.mainservice.menuid;
+        // this.tab = 'report';
     }
 
 }

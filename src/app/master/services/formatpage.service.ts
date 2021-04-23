@@ -28,7 +28,8 @@ export class FormatPageService {
     public canEdit: boolean;
     public canSave: boolean;
     public isCompany: boolean;
-
+    public canPrint: boolean;
+    
     public initlialized: boolean;
     private appid = ''
     private db: FormatModel[] = [];
