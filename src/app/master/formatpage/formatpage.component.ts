@@ -66,9 +66,6 @@ export class FormatPageComponent implements OnInit {
       pageEvents(actions: any) {
         this.mainservice.Search(actions, 'PAGE');
       }
-     
-
-    
 
     Close() {
         this.location.back();

@@ -38,6 +38,7 @@ import { GlobalSettingsComponent } from './global-settings/globalsettings.compon
 import { BranchSettingsComponent } from './branch-settings/branchsettings.component';
 import { FormatPageComponent } from './formatpage/formatpage.component';
 import { FormatPageHeaderComponent } from './formatpage/formatpage-header.component';
+import { FormatPageDetComponent } from './formatpage/formatpagedet.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { FormatPageHeaderComponent } from './formatpage/formatpage-header.compon
     GlobalSettingsComponent,
     BranchSettingsComponent,
     FormatPageComponent,
-    FormatPageHeaderComponent
+    FormatPageHeaderComponent,
+    FormatPageDetComponent
   ],
   imports: [
     SharedModule,

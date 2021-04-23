@@ -179,19 +179,22 @@ export class FormatPageService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/List', SearchData, this.gs.headerparam2('authorized'));
     }
 
-    GetFormats(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/GetFormats', SearchData, this.gs.headerparam2('authorized'));
-    }
+    // GetFormats(SearchData: any) {
+    //     return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/GetFormats', SearchData, this.gs.headerparam2('authorized'));
+    // }
 
-    GetRecord(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/GetRecord', SearchData, this.gs.headerparam2('authorized'));
-    }
+    // GetRecord(SearchData: any) {
+    //     return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/GetRecord', SearchData, this.gs.headerparam2('authorized'));
+    // }
 
     Save(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/Save', SearchData, this.gs.headerparam2('authorized'));
     }
 
-    DeleteRecord(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    // DeleteRecord(SearchData: any) {
+    //     return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    // }
+    ListDet(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/ListDet', SearchData, this.gs.headerparam2('authorized'));
     }
 }
