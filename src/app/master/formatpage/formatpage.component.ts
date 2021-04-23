@@ -101,25 +101,6 @@ export class FormatPageComponent implements OnInit {
 
     BtnNavigation(action: string, attachmodal: any = null) {
         switch (action) {
-            // case 'ATTACHMENT': {
-            //     this.attach_title = 'Documents';
-            //     this.attach_parentid = this.pkid;
-            //     this.attach_subid = '';
-            //     this.attach_type = 'MARKETING';
-            //     this.attach_typelist = [];
-            //     this.attach_tablename = 'cargo_journals_master';
-            //     this.attach_tablepkcolumn = 'cjm_pkid';
-            //     this.attach_refno = '';
-            //     this.attach_customername = '';
-            //     this.attach_updatecolumn = 'REC_FILES_ATTACHED';
-            //     this.attach_viewonlysource = '';
-            //     this.attach_viewonlyid = '';
-            //     this.attach_filespath = '';
-            //     this.attach_filespath2 = '';
-            //     // this.tab = 'attachment';
-            //     this.modal = this.modalservice.open(attachmodal, { centered: true });
-            //     break;
-            // }
             // case 'MEMO': {
             //     let prm = {
             //         menuid: this.menuid,
