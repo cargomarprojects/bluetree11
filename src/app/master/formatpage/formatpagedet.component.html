@@ -28,29 +28,39 @@
                     <div class="row border">
                         <div class="col-md-12  px-0 mx-0">
                             <div class="page-body table-responsive table-bordered">
-                                <div [style.height]="records.length>16?'450px':'auto'" [style.overflow-y]="records.length>16?'scroll':'auto'">
-                                <table class="table  table-hover table-sm">
-                                    <thead class="page-body-thead">
-                                        <tr>
-                                            <th>NAME</th>
-                                            <th class="text-center">DISPLAY Y/N</th>
-                                            <th>X-POSITION</th>
-                                            <th>Y-POSITION</th>
-                                            <th>WIDTH</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="page-body-tbody" *ngFor="let rec of records">
-                                        <tr>
-                                            <td>{{rec.blf_col_name}}</td>
-                                            <td (click)="SelectRecord(rec)"><input type="checkbox"
-                                                    [(ngModel)]="rec.blf_enabled_b"></td>
-                                            <td>{{rec.blf_col_x}}</td>
-                                            <td>{{rec.blf_col_y}}</td>
-                                            <td>{{rec.blf_width}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                <div [style.height]="records.length>16?'450px':'auto'"
+                                    [style.overflow-y]="records.length>16?'scroll':'auto'">
+                                    <table class="table  table-hover table-sm">
+                                        <thead class="page-body-thead">
+                                            <tr>
+                                                <th>NAME</th>
+                                                <th >
+                                                    <div class="form-check"> <input type="checkbox"
+                                                            (click)="SelectDeselect()" class="form-check-input"
+                                                            [(ngModel)]="chkallselected"><span>DISPLAY Y/N</span>
+                                                    </div>
+                                                </th>
+                                                <th>X-POSITION</th>
+                                                <th>Y-POSITION</th>
+                                                <th>WIDTH</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="page-body-tbody" *ngFor="let rec of records">
+                                            <tr>
+                                                <td>{{rec.blf_col_name}}</td>
+                                                <td >
+                                                    <div class="form-check"> <input type="checkbox"
+                                                            class="form-check-input" (click)="SelectRecord(rec)" #chkbox
+                                                            [(ngModel)]="rec.blf_enabled_b">
+                                                    </div>
+                                                </td>
+                                                <td>{{rec.blf_col_x}}</td>
+                                                <td>{{rec.blf_col_y}}</td>
+                                                <td>{{rec.blf_width}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

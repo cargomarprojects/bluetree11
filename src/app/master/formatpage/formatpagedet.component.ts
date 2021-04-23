@@ -39,7 +39,8 @@ export class FormatPageDetComponent implements OnInit {
     modal: any;
     public records: Tbl_cargo_hblformat[] = [];
     public SelectedRecord: Tbl_cargo_hblformat = <Tbl_cargo_hblformat>{};
-
+    private chkallselected: boolean = false;
+    private selectdeselect: boolean = false;
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -154,5 +155,15 @@ export class FormatPageDetComponent implements OnInit {
             alert(this.gs.getError(error));
         });
     }
+
+    SelectDeselect() {
+        this.selectdeselect = !this.selectdeselect;
+        this.records.forEach(Rec => {
+            Rec.blf_enabled_b = this.selectdeselect;
+            this.chkallselected = this.selectdeselect;
+            Rec.blf_enabled = Rec.blf_enabled_b ? 'Y' : 'N';
+        })
+    }
+
 
 }
