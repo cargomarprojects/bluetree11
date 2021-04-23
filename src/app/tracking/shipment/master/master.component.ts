@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Input, OnDestroy, SimpleChange } from '@angular/core';
+import { Component, OnInit, Input,Output, EventEmitter, OnDestroy, SimpleChange } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -12,13 +12,17 @@ import { _USER_RUNTIME_CHECKS } from '@ngrx/store/src/tokens';
 
 @Component({
   selector: 'app-master-records',
-  templateUrl: './master.component.html'
+  templateUrl: './master.component.html',
+  styleUrls: ['./master.component.css']
+
 })
 export class MasterComponentRecords implements OnInit {
 
   // 21-04-2021 Created By joy
 
   public records = [];
+  public cntrs = [];
+  public house = [];
 
   errorMessage = "";
 
@@ -32,6 +36,10 @@ export class MasterComponentRecords implements OnInit {
   get pkid (){
     return this._pkid;
   }
+
+
+  @Output() CloseEvent = new EventEmitter<string>();
+
 
   constructor(
     private route: ActivatedRoute,
@@ -54,7 +62,11 @@ export class MasterComponentRecords implements OnInit {
       SearchData.USER_PARENT_ID = this.gs.User_Customer_Parent_Id;
 
       this.mainservice.getMasterDetails(SearchData).subscribe(response => {
+        
         this.records =  response.master;
+        this.cntrs =  response.cntr;
+        this.house =  response.house;
+
       }, error => {
          this.errorMessage  = this.gs.getError(error);
          alert( this.errorMessage);
@@ -63,7 +75,7 @@ export class MasterComponentRecords implements OnInit {
   
 
   Close() {
-
+    this.CloseEvent.emit('CLOSE');
   }
 
  

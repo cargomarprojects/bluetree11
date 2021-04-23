@@ -1,27 +1,145 @@
-
 <div class="card">
-    <div class="card-header">
-      Master Information
-    </div>
-    <div class="card-body">
-      <div *ngFor="let rec of records">
+  <div class="card-header">
+    MASTER INFO
+  </div>
+  <div class="card-body">
 
-        <div class="page-list">
-            <div class="page-search">
-              <div class="row">
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">{{rec.info_code}}</label>
-                    <div class="col-8">
-                        <label class="col-4 col-form-label col-form-label-sm">{{rec.info_name}}</label>
-                    </div>
-                  </div>
-                </div>
+
+    <div class="row">
+      <div class="col-md-5">
+
+
+        <div class="form-group row">
+
+          <div class="col-12">
+
+
+            <div class="page-body table-responsive table-bordered">
+              <table class="table  table-hover table-sm">
+                <thead class="page-body-thead">
+                  <tr>
+                    <th>DESCRIPTION</th>
+                    <th>VALUE</th>
+                  </tr>
+                </thead>
+                <tbody class="page-body-tbody" *ngFor="let rec of records">
+                  <tr>
+                    <td>{{rec.info_code}}</td>
+                    <td>{{rec.info_name}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-        </div>        
 
+          </div>
+        </div>
       </div>
+
+      <div class="col-md-5" *ngIf="cntrs">
+
+
+        <div class="form-group row">
+
+          <div class="col-12">
+
+
+            <div class="page-body table-responsive table-bordered">
+              <table class="table  table-hover table-sm">
+                <thead class="page-body-thead">
+                  <tr>
+                    <th>CNTR#</th>
+                    <th>TYPE</th>
+                    <th>SEAL#</th>
+                  </tr>
+                </thead>
+                <tbody class="page-body-tbody" *ngFor="let rec of cntrs">
+                  <tr>
+                    <td>{{rec.cntr_no}}</td>
+                    <td>{{rec.cntr_type}}</td>
+                    <td>{{rec.cntr_sealno}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
     </div>
+
+
+  </div>
 </div>
 
 
+<div class="card">
+  <div class="card-header">
+    HOUSE INFO
+  </div>
+  <div class="card-body">
 
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="form-group row">
+
+          <div class="col-12">
+
+
+            <div class="page-body table-responsive table-bordered">
+              <table class="table  table-hover table-sm">
+                <thead class="page-body-thead">
+                  <tr>
+                    <th>SL#</th>
+                    <th>HOUSE</th>
+                    <th>SHIPPER</th>
+                    <th>CONSINGEE</th>
+                    <th>QTY</th>
+                    <th>CBM</th>
+                    <th>GR.WT</th>
+                    <th>CH.WT</th>
+                    <th>COMMODITY</th>
+                    <th>FINAL.DEST</th>
+
+                    <th>PAID-STATUS</th>
+                    <th>BL-STATUS</th>
+                    <th>CARGO.RELE.STATUS</th>
+                  </tr>
+                </thead>
+                <tbody class="page-body-tbody" *ngFor="let rec of house;let idx=index">
+                  <tr>
+                    <td>{{idx+1}}</td>
+                    <td>{{rec.houseno}}</td>
+                    <td>{{rec.shipper}}</td>
+                    <td>{{rec.consignee}}</td>
+                    <td>{{rec.pcs}}</td>
+                    <td>{{rec.cbm}}</td>
+                    <td>{{rec.wt}}</td>
+                    <td>{{rec.chwt}}</td>
+                    <td>{{rec.commodity}}</td>
+                    <td>{{rec.place_final}}</td>
+                    <td>{{rec.hbl_paid_status}}</td>
+                    <td>{{rec.bl_status}}</td>
+                    <td>{{rec.cargo_release_status}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+  <div class="text-center p-1">
+      <button class="btn btn-sm btn-info" (click)="Close()">Close</button>
+  </div>

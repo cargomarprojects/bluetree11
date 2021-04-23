@@ -48,9 +48,9 @@
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of records$ | async" >
             <tr [style.color]="rec.border == 'Y' ? 'green' : 'blue'" >
-                <td >{{rec.mbl_refno}}</td>
+                <td>{{rec.mbl_refno}}</td>
                 <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-                <td >{{rec.mbl_mode}}</td>
+                <td>{{rec.mbl_mode}}</td>
                 <td (click)="rec.show = !rec.show" class ="hlink" >  {{rec.mbl_no}}</td>
                 <td>{{rec.hbl_houseno}}</td>
                 <td>{{rec.hbl_shipper_name}}</td>
@@ -63,11 +63,14 @@
                 <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
             </tr>
             <tr *ngIf="rec.show">
-                <app-master-records [pkid]="rec.mbl_pkid">   </app-master-records>
+                <td colspan="13">
+                    <app-master-records [pkid]="rec.mbl_pkid" (CloseEvent)="rec.show=false" ></app-master-records>
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
+
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
 <br />
