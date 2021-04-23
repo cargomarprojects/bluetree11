@@ -20,6 +20,7 @@ import { PageQuery } from '../../shared/models/pageQuery';
 })
 export class FormatPageComponent implements OnInit {
 
+    @ViewChild('_btnretf') btnretf_ctrl: ElementRef;
     errorMessage$: Observable<string>;
     records$: Observable<Tbl_cargo_hblformat[]>;
     pageQuery$: Observable<PageQuery>;
@@ -53,7 +54,11 @@ export class FormatPageComponent implements OnInit {
         this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
         this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errorMessage));
     }
- 
+
+    ngAfterViewInit() {
+        if (!this.gs.isBlank(this.btnretf_ctrl))
+          this.btnretf_ctrl.nativeElement.focus();
+      }
     searchEvents(actions: any) {
         this.mainservice.Search(actions, 'SEARCH');
       }
