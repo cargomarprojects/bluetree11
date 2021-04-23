@@ -46,12 +46,12 @@
                 <th>ETA</th>
             </tr>
         </thead>
-        <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of records$ | async" [style.color]="rec.border == 'Y' ? 'green' : 'blue'" >
+        <tbody class="page-body-tbody" *ngFor="let rec of records$ | async" >
+            <tr [style.color]="rec.border == 'Y' ? 'green' : 'blue'" >
                 <td >{{rec.mbl_refno}}</td>
                 <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td >{{rec.mbl_mode}}</td>
-                <td>{{rec.mbl_no}}</td>
+                <td (click)="rec.show = !rec.show" class ="hlink" >  {{rec.mbl_no}}</td>
                 <td>{{rec.hbl_houseno}}</td>
                 <td>{{rec.hbl_shipper_name}}</td>
                 <td>{{rec.hbl_consignee_name}}</td>                
@@ -61,6 +61,9 @@
                 <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.mbl_pod_name}}</td>
                 <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+            </tr>
+            <tr *ngIf="rec.show">
+                <app-master-records [pkid]="rec.mbl_pkid">   </app-master-records>
             </tr>
         </tbody>
     </table>

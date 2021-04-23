@@ -4,11 +4,13 @@ import { TrackingRoutingModule } from './tracking-routing.module';
 
 import { ShipmentHeaderComponent } from './shipment/shipment-header.component';
 import { ShipmentComponent } from './shipment/shipment.component';
+import { MasterComponentRecords } from './shipment/master/master.component';
 
 @NgModule({
   declarations: [
     ShipmentHeaderComponent,
-    ShipmentComponent
+    ShipmentComponent,
+    MasterComponentRecords
   ],
   imports: [
     SharedModule,    

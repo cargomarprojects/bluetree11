@@ -98,6 +98,7 @@ export interface cargo_masterm {
     mbl_coloader_id:string;
     mbl_coloader_name:string;
     mbl_coloader_code:string;
+    show : boolean ;
 }
 
 

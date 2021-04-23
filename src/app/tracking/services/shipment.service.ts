@@ -178,5 +178,9 @@ export class ShipmentService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/ShipmentTracking/List', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    getMasterDetails(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/ShipmentTracking/getMasterDetails', SearchData, this.gs.headerparam2('authorized'));
+    }
+
 
 }
