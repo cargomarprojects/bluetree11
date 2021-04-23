@@ -20,14 +20,19 @@ import { PageQuery } from '../../shared/models/pageQuery';
 })
 export class FormatPageComponent implements OnInit {
 
+    @ViewChild('_btnretf') btnretf_ctrl: ElementRef;
     errorMessage$: Observable<string>;
     records$: Observable<Tbl_cargo_hblformat[]>;
     pageQuery$: Observable<PageQuery>;
     searchQuery$: Observable<SearchQuery>;
-    
+
     tab: string = 'main';
+    report_title: string = '';
+    report_url: string = '';
+    report_searchdata: any = {};
+    report_menuid: string = '';
     modal: any;
-    
+
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -53,17 +58,21 @@ export class FormatPageComponent implements OnInit {
         this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
         this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errorMessage));
     }
- 
-    searchEvents(actions: any) {
-        this.mainservice.Search(actions, 'SEARCH');
-      }
-    
-      pageEvents(actions: any) {
-        this.mainservice.Search(actions, 'PAGE');
-      }
-     
 
-    
+    ngAfterViewInit() {
+        if (!this.gs.isBlank(this.btnretf_ctrl))
+            this.btnretf_ctrl.nativeElement.focus();
+    }
+    searchEvents(actions: any) {
+        if (actions.outputformat === "PRINT")
+            this.PrintFormat(actions);
+        else
+            this.mainservice.Search(actions, 'SEARCH');
+    }
+
+    pageEvents(actions: any) {
+        this.mainservice.Search(actions, 'PAGE');
+    }
 
     Close() {
         this.location.back();
@@ -92,25 +101,6 @@ export class FormatPageComponent implements OnInit {
 
     BtnNavigation(action: string, attachmodal: any = null) {
         switch (action) {
-            // case 'ATTACHMENT': {
-            //     this.attach_title = 'Documents';
-            //     this.attach_parentid = this.pkid;
-            //     this.attach_subid = '';
-            //     this.attach_type = 'MARKETING';
-            //     this.attach_typelist = [];
-            //     this.attach_tablename = 'cargo_journals_master';
-            //     this.attach_tablepkcolumn = 'cjm_pkid';
-            //     this.attach_refno = '';
-            //     this.attach_customername = '';
-            //     this.attach_updatecolumn = 'REC_FILES_ATTACHED';
-            //     this.attach_viewonlysource = '';
-            //     this.attach_viewonlyid = '';
-            //     this.attach_filespath = '';
-            //     this.attach_filespath2 = '';
-            //     // this.tab = 'attachment';
-            //     this.modal = this.modalservice.open(attachmodal, { centered: true });
-            //     break;
-            // }
             // case 'MEMO': {
             //     let prm = {
             //         menuid: this.menuid,
@@ -144,6 +134,23 @@ export class FormatPageComponent implements OnInit {
         if (pos == 'down') {
             rec.blf_col_y = rec.blf_col_y + 15;
         }
+    }
+
+    PrintFormat(_searchdata: any) {
+
+        // if (!this.mainservice.canPrint) {
+        //     alert('Insufficient User Rights')
+        //     return;
+        // }
+
+        // this.report_title = this.mainservice.title;
+        // this.report_url = '/api/Master/FormatPage/GetFormatRpt';
+        // this.report_searchdata = this.gs.UserInfo;
+        // this.report_searchdata.pkid = this.gs.getGuid();
+        // this.report_searchdata.FORMAT_ID = _searchdata.searchQuery.format_id;
+        // this.report_searchdata.FORMAT_TYPE = _searchdata.searchQuery.fromdate;
+        // this.report_menuid = this.mainservice.menuid;
+        // this.tab = 'report';
     }
 
 }

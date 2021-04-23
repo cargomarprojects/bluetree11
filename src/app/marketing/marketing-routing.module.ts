@@ -13,6 +13,7 @@ import { QtnAirComponent } from './qtnair/qtnair.component';
 import { QtnAirEditComponent } from './qtnair/edit/qtnair-edit.component';
 import { QtnSettingComponent } from './qtnsetting/qtnsetting.component';
 import { QtnSettingEditComponent } from './qtnsetting/edit/qtnsetting-edit.component';
+import { DefaultInvoiceComponent } from './defaultinvoice/defaultinvoice.component';
 
 const routes: Routes = [
   { path : 'QuotationRatePage', component : QtnRateComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path : 'QuotationAIRPage', component : QtnAirComponent },
   { path : 'QuotationAirEditPage', component : QtnAirEditComponent },
   { path : 'QuotationSettingPage', component : QtnSettingComponent },
-  { path : 'QuotationSettingEditPage', component : QtnSettingEditComponent }
+  { path : 'QuotationSettingEditPage', component : QtnSettingEditComponent},
+  { path : 'InvoiceDefaultPage', component : DefaultInvoiceComponent }
 ];
 
 

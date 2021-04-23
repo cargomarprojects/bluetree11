@@ -1,14 +1,14 @@
 <div class="page-list">
     <div class="page-search">
-        <div  class="row">
+        <div class="row">
             <div class="col-md-3">
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Format</label>
                     <div class="col-8">
-                         <app-autocomplete2 [controlname]="'FORMAT'" [tabletype]="'PARAM'" [subtype]="mainservice.param_type"
-                        [displaycolumn]="'NAME'" [displaydata]="searchQuery.format_name"
-                        (ValueChanged)="LovSelected($event)">
-                      </app-autocomplete2>
+                        <app-autocomplete2 [controlname]="'FORMAT'" [tabletype]="'PARAM'"
+                            [subtype]="mainservice.param_type" [displaycolumn]="'NAME'"
+                            [displaydata]="searchQuery.format_name" (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
                     </div>
                 </div>
                 <!-- <div class="form-group row">
@@ -21,9 +21,15 @@
             <div class="col-md-3">
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm"></label>
-                    <div class="col-8 input-group input-group-sm">
-                        <button (click)="List('SCREEN')"
-                            class="btn btn-primary btn-sm mr-1">Search</button>
+                    <div class="col-4 input-group input-group-sm">
+                        <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+                        <button (click)="List('PRINT')" *ngIf="mainservice.canPrint"
+                            class="btn btn-primary btn-sm">Print</button>
+                    </div>
+                    <div class="col-4">
+                        <app-formatpagedet [formatid]="searchQuery.format_id" [formatname]="searchQuery.format_name"
+                            [formattype]="mainservice.param_type" [title]="mainservice.title"
+                            (callbackevent)="detpagecallbackevent($event)"></app-formatpagedet>
                     </div>
                 </div>
             </div>

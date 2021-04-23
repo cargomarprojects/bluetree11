@@ -28,7 +28,8 @@ export class FormatPageService {
     public canEdit: boolean;
     public canSave: boolean;
     public isCompany: boolean;
-
+    public canPrint: boolean;
+    
     public initlialized: boolean;
     private appid = ''
     private db: FormatModel[] = [];
@@ -179,19 +180,19 @@ export class FormatPageService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/List', SearchData, this.gs.headerparam2('authorized'));
     }
 
-    GetFormats(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/GetFormats', SearchData, this.gs.headerparam2('authorized'));
-    }
-
-    GetRecord(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/GetRecord', SearchData, this.gs.headerparam2('authorized'));
-    }
-
     Save(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/Save', SearchData, this.gs.headerparam2('authorized'));
     }
 
-    DeleteRecord(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    ListDet(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/ListDet', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+    SaveDet(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/SaveDet', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+    ReUpdateDet(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/FormatPage/ReUpdateDet', SearchData, this.gs.headerparam2('authorized'));
     }
 }

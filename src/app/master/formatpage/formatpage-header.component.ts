@@ -17,15 +17,15 @@ export class FormatPageHeaderComponent implements OnInit {
   }
 
   @Output() searchEvents = new EventEmitter<any>();
-  
+
   constructor(public gs: GlobalService,
     public mainservice: FormatPageService
-  ) { 
-    
+  ) {
+
   }
 
   ngOnInit() {
-   
+
   }
 
   ngOnChanges(changes: SimpleChange) {
@@ -33,11 +33,10 @@ export class FormatPageHeaderComponent implements OnInit {
 
 
   List(outputformat: string) {
-  if(this.gs.isBlank(this.searchQuery.format_id))
-  {
-    alert('Please select a format and continue...')
-    return;
-  }
+    if (this.gs.isBlank(this.searchQuery.format_id)) {
+      alert('Please select a format and continue...')
+      return;
+    }
 
     this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.searchQuery });
   }
@@ -49,5 +48,9 @@ export class FormatPageHeaderComponent implements OnInit {
       this.searchQuery.format_name = _Record.name;
       // this.liner_lov_field.Focus();
     }
+  }
+
+  detpagecallbackevent(params:any) {
+
   }
 }
