@@ -24,6 +24,8 @@ import { QtnAirEditComponent } from './qtnair/edit/qtnair-edit.component';
 import { QtnSettingComponent } from './qtnsetting/qtnsetting.component';
 import { QtnSettingEditComponent } from './qtnsetting/edit/qtnsetting-edit.component';
 import { DefaultInvoiceComponent } from './defaultinvoice/defaultinvoice.component';
+import { FaxMessageHeaderComponent } from './faxmessage/faxmessage-header.component';
+import { FaxMessageComponent } from './faxmessage/faxmessage.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,10 @@ import { DefaultInvoiceComponent } from './defaultinvoice/defaultinvoice.compone
     QtnAirEditComponent,
     QtnSettingComponent,
     QtnSettingEditComponent,
-    DefaultInvoiceComponent
+    DefaultInvoiceComponent,
+    FaxMessageComponent,
+    FaxMessageHeaderComponent
+
   ],
   imports: [
     SharedModule,    

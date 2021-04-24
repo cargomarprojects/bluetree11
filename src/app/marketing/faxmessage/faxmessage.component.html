@@ -1,0 +1,70 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-3">{{mainservice.title}}</label>
+        <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button> -->
+        <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd"
+        [routerLink]="['/Silver.Marketing.Quotation/QuotationRateEditPage']"
+        [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid,pkid: '',origin: 'qtnrate-page',mode: 'ADD'}">New</a>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage}}
+</div>
+
+<app-faxmessage-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+</app-faxmessage-header>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th>MSG#</th>
+                <th>DATE</th>
+                <th>TO</th>
+                <th>SUBJECT</th>
+                <th>VALIDITY</th>
+                <th>FILE</th>
+                <th>CREATED-BY</th>
+                <th>DATE</th>
+                <!-- <th (click)="mainservice.sort('qtnr_slno')">SL#&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_slno')"></i></th>
+                <th (click)="mainservice.sort('qtnr_agent_name')">AGENT&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_agent_name')"></i></th>
+                <th (click)="mainservice.sort('qtnr_pol_cntry_name')">COUNTRY OF POL&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_pol_cntry_name')"></i></th>
+                <th (click)="mainservice.sort('qtnr_pod_cntry_name')">COUNTRY OF POD&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_pod_cntry_name')"></i></th>
+                <th (click)="mainservice.sort('qtnr_mode')">MODE&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_mode')"></i></th>
+                <th (click)="mainservice.sort('qtnr_validity')">VALIDITY&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_validity')"></i></th>
+                <th (click)="mainservice.sort('qtnr_file_name')">FILE&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_file_name')"></i></th>
+                <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+                <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th> -->
+
+                <th *ngIf="mainservice.canDelete" style="text-align:center">DELETE</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <!-- | sortBy: mainservice.getSortCol() : mainservice.getSortOrder() -->
+            <tr *ngFor="let rec of records$ | async">
+                <!-- <td class='hlink' (click)="edit(rec)">{{rec.qtnr_slno}}</td> -->
+                <td *ngIf="!(this.mainservice.canEdit)">{{rec.msg_refno}}</td>
+                <td *ngIf="(this.mainservice.canEdit)">
+                    <a class='hlink' [routerLink]="['/Silver.Marketing.Quotation/QuotationRateEditPage']"
+              [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.qtnr_pkid,origin: 'qtnrate-page',mode: 'EDIT'}">{{rec.msg_refno}}</a>
+                </td>
+                <td>{{rec.msg_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.msg_party_name}}</td>
+                <td>{{rec.msg_subject}}</td>
+                <td>{{rec.rec_created_by}}</td>
+                <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td *ngIf="mainservice.canDelete" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
+                    aria-hidden="true" (click)="mainservice.DeleteRow(rec)"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />
