@@ -61,10 +61,10 @@ export class FaxMessageComponent implements OnInit {
     let parameter = {
       menuid: this.mainservice.menuid,
       pkid: '',
-      origin: 'qtnrate-page',
+      origin: 'faxmessage-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/QuotationRateEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete('Silver.Marketing.Quotation/FaxMessageEditPage', JSON.stringify(parameter));
 
   }
   edit(_record: Tbl_Cargo_Message) {
@@ -82,10 +82,10 @@ export class FaxMessageComponent implements OnInit {
     let parameter = {
       menuid: this.mainservice.menuid,
       pkid: _record.msg_pkid,
-      origin: 'qtnrate-page',
+      origin: 'faxmessage-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/QuotationRateEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete('Silver.Marketing.Quotation/FaxMessageEditPage', JSON.stringify(parameter));
   }
 
   Close() {

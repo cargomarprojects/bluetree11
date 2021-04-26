@@ -3,8 +3,8 @@
         <label class="mr-3">{{mainservice.title}}</label>
         <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button> -->
         <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd"
-        [routerLink]="['/Silver.Marketing.Quotation/QuotationRateEditPage']"
-        [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid,pkid: '',origin: 'qtnrate-page',mode: 'ADD'}">New</a>
+        [routerLink]="['/Silver.Marketing.Quotation/FaxMessageEditPage']"
+        [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid,pkid: '',origin: 'faxmessage-page',mode: 'ADD'}">New</a>
         <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
     </div>
 </div>
@@ -26,8 +26,6 @@
                 <th>DATE</th>
                 <th>TO</th>
                 <th>SUBJECT</th>
-                <th>VALIDITY</th>
-                <th>FILE</th>
                 <th>CREATED-BY</th>
                 <th>DATE</th>
                 <!-- <th (click)="mainservice.sort('qtnr_slno')">SL#&nbsp;<i [ngClass]="mainservice.getIcon('qtnr_slno')"></i></th>
@@ -49,8 +47,8 @@
                 <!-- <td class='hlink' (click)="edit(rec)">{{rec.qtnr_slno}}</td> -->
                 <td *ngIf="!(this.mainservice.canEdit)">{{rec.msg_refno}}</td>
                 <td *ngIf="(this.mainservice.canEdit)">
-                    <a class='hlink' [routerLink]="['/Silver.Marketing.Quotation/QuotationRateEditPage']"
-              [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.qtnr_pkid,origin: 'qtnrate-page',mode: 'EDIT'}">{{rec.msg_refno}}</a>
+                    <a class='hlink' [routerLink]="['/Silver.Marketing.Quotation/FaxMessageEditPage']"
+              [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.msg_pkid,origin: 'faxmessage-page',mode: 'EDIT'}">{{rec.msg_refno}}</a>
                 </td>
                 <td>{{rec.msg_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.msg_party_name}}</td>

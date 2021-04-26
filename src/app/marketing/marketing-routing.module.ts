@@ -15,6 +15,7 @@ import { QtnSettingComponent } from './qtnsetting/qtnsetting.component';
 import { QtnSettingEditComponent } from './qtnsetting/edit/qtnsetting-edit.component';
 import { DefaultInvoiceComponent } from './defaultinvoice/defaultinvoice.component';
 import { FaxMessageComponent } from './faxmessage/faxmessage.component';
+import { FaxMessageEditComponent } from './faxmessage/edit/faxmessage-edit.component';
 
 const routes: Routes = [
   { path : 'QuotationRatePage', component : QtnRateComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path : 'QuotationSettingPage', component : QtnSettingComponent },
   { path : 'QuotationSettingEditPage', component : QtnSettingEditComponent},
   { path : 'FaxMessagePage', component : FaxMessageComponent },
+  { path : 'FaxMessageEditPage', component : FaxMessageEditComponent },
   { path : 'InvoiceDefaultPage', component : DefaultInvoiceComponent }
 ];
 

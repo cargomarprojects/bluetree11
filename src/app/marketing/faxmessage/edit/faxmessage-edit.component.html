@@ -1,0 +1,187 @@
+<div *ngIf="tab=='main'">
+    <div class="page-header">
+        <div class="row align-items-center justify-content-left p-1">
+            <label class="mr-3">Fax Message ({{mode}})</label>
+            <!-- <button #_btnretfax class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button> -->
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage">
+        <div class="alert alert-primary">
+            {{errorMessage}}
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="row">
+
+            <div class="col-md-4 testbox  px-0 mx-0">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">MsgRef#</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm text-danger" type="text"
+                            [(ngModel)]="record.msg_refno" [disabled]="true" maxlength="25" #refno />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Date</label>
+                    <div class="col-8">
+                        <app-date [inputdate]="record.msg_date" (ValueChanged)="record.msg_date=$event">
+                        </app-date>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">TotalPages#</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm text-danger" type="number"
+                            [(ngModel)]="record.msg_page_nos"  maxlength="3" #pageno />
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm text-danger" type="text"
+                            [(ngModel)]="record.msg_from_name"  maxlength="60" #from_name />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Email</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm text-danger" type="text"
+                            [(ngModel)]="record.msg_from_email"  maxlength="60" #from_email />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Code</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                [displaydata]="record.msg_party_code" (ValueChanged)="LovSelected($event)">
+              </app-autocomplete2>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm text-danger" type="text"
+                            [(ngModel)]="record.msg_party_name"  maxlength="60" #partyname />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Attn.</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm text-danger" type="text"
+                            [(ngModel)]="record.msg_party_attn"  maxlength="60" #partyattn />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Fax</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm text-danger" type="text"
+                            [(ngModel)]="record.msg_page_nos"  maxlength="3" #pageno />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Subject</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm text-danger" type="text"
+                            [(ngModel)]="record.msg_page_nos"  maxlength="3" #pageno />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Message</label>
+                    <div class="col-8">
+                        <textarea rows="15" [style.font-family]="msgFontFamily" [style.font-size]="msgFontSize"
+                [style.color]="msgForeground" [style.font-weight]="msgFontWeight" class="form-control form-control-sm"
+                [(ngModel)]="message"></textarea>
+                    </div>
+                </div>
+
+                <!-- <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Country Of POL</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'POL-COUNTRY'" [tabletype]="'PARAM'" [subtype]="'COUNTRY'"
+                            [displaycolumn]="'NAME'" [displaydata]="record.qtnr_pol_cntry_name"
+                            (ValueChanged)="LovSelected($event)" #_qtnr_pol_cntry_name>
+                        </app-autocomplete2>
+                    </div>
+                </div> -->
+
+                <!-- <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Country Of POD</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'POD-COUNTRY'" [tabletype]="'PARAM'" [subtype]="'COUNTRY'"
+                            [displaycolumn]="'NAME'" [displaydata]="record.qtnr_pod_cntry_name"
+                            (ValueChanged)="LovSelected($event)" #_qtnr_pod_cntry_name>
+                        </app-autocomplete2>
+                    </div>
+                </div> -->
+                <!-- <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Mode</label>
+                    <div class="col-8">
+                        <select #_qtnr_mode class="form-control form-control-sm" [(ngModel)]="record.qtnr_mode">
+                            <option [value]="'AIR'">AIR</option>
+                            <option [value]="'FCL'">FCL</option>
+                            <option [value]="'LCL'">LCL</option>
+                        </select>
+                    </div>
+                </div> -->
+                <div class="form-group row">
+                    
+                </div>
+            </div>
+            <div class="col-md-4 testbox  px-0 mx-0">
+
+
+            </div>
+        </div>
+    </div>
+    <div class="page-footer">
+        <!-- <div class="row">
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
+                        <button  [style.color]="Foregroundcolor" *ngIf="mode=='EDIT'" class="btn btn-success btn-sm mr-1" (click)="BtnNavigation('ATTACHMENT')">File Upload</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="row justify-content-center p-1">
+            <button class="btn btn-primary btn-md mr-1" *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
+            <button [style.color]="Foregroundcolor" *ngIf="mode=='EDIT'" class="btn btn-info btn-md mr-1"
+                (click)="BtnNavigation('ATTACHMENT',attachmodal)">File Upload</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #attachmodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+                        [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+                        [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
+                        [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+                        [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
+                        [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
+                        (callbackevent)="callbackevent($event)"></app-fileupload>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
