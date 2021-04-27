@@ -25,7 +25,11 @@ export class FaxMessageEditComponent implements OnInit {
     record: Tbl_Cargo_Message = <Tbl_Cargo_Message>{};
 
     tab: string = 'main';
-
+    report_title: string = '';
+    report_url: string = '';
+    report_searchdata: any = {};
+    report_menuid: string = '';
+  
     attach_title: string = '';
     attach_parentid: string = '';
     attach_subid: string = '';
@@ -50,7 +54,7 @@ export class FaxMessageEditComponent implements OnInit {
     Foregroundcolor: string;
 
     msgFontFamily: string = "Calibri";
-    msgFontSize: string = "12px";
+    msgFontSize: string = "14px";
     msgForeground: string = "Black";
     msgFontWeight: string = "normal";
     title: string;
@@ -84,12 +88,14 @@ export class FaxMessageEditComponent implements OnInit {
         this.initPage();
         this.actionHandler();
     }
+
     ngAfterViewInit() {
         if (this.mode == 'ADD') {
             // if (!this.gs.isBlank(this.qtnr_agent_name_field))
             //     this.qtnr_agent_name_field.Focus();
         }
     }
+
     private initPage() {
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
@@ -121,31 +127,37 @@ export class FaxMessageEditComponent implements OnInit {
     init() {
 
         this.record.msg_pkid = this.pkid;
-        // this.record.qtnr_agent_id = '';
-        // this.record.qtnr_agent_code = '';
-        // this.record.qtnr_agent_name = '';
-        // this.record.qtnr_pol_cntry_id = '';
-        // this.record.qtnr_pol_cntry_code = '';
-        // this.record.qtnr_pol_cntry_name = '';
-        // this.record.qtnr_pod_cntry_id = '';
-        // this.record.qtnr_pod_cntry_code = '';
-        // this.record.qtnr_pod_cntry_name = '';
-        // this.record.qtnr_mode = 'AIR';
-        // this.record.qtnr_validity = this.gs.defaultValues.today;
-        // this.record.rec_files_attached = 'N';;
+        this.record.msg_date = this.gs.defaultValues.today;
+        this.record.msg_page_nos = 0;
+        this.record.msg_from_id = this.gs.user_pkid;
+        this.record.msg_from_name = this.gs.user_name;
+        this.record.msg_from_email = this.gs.user_email;
+        this.record.msg_party_code = '';
+        this.record.msg_party_name = '';
+        this.record.msg_party_id = '';
+        this.record.msg_party_attn = '';
+        this.record.msg_party_telfax = '';
+        this.record.msg_subject = '';
+        this.record.msg_body = '';;
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
     }
 
     GetRecord() {
         this.errorMessage = '';
+        let filepath: string = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\fax\\";
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = this.pkid;
+        SearchData.PATH = filepath;
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_Cargo_Message>response.record;
                 this.mode = 'EDIT';
 
+                this.record.msg_is_urgent_b = this.record.msg_is_urgent == 'Y' ? true : false;
+                this.record.msg_is_review_b = this.record.msg_is_review == 'Y' ? true : false;
+                this.record.msg_is_comment_b = this.record.msg_is_comment == 'Y' ? true : false;
+                this.record.msg_is_reply_b = this.record.msg_is_reply == 'Y' ? true : false;
                 // if (this.record.rec_files_attached == "Y")
                 //     this.Foregroundcolor = "red";
                 // else
@@ -163,12 +175,18 @@ export class FaxMessageEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+
         this.SaveParent();
+        let filepath: string = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\fax\\";
+        let filter: any = {};
+        filter.PATH = filepath;
+
         const saveRecord = <vm_tbl_cargo_message>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;
         saveRecord.mode = this.mode;
         saveRecord.userinfo = this.gs.UserInfo;
+        saveRecord.filter = filter;
 
         this.mainService.Save(saveRecord)
             .subscribe(response => {
@@ -192,7 +210,10 @@ export class FaxMessageEditComponent implements OnInit {
     }
 
     private SaveParent() {
-
+        this.record.msg_is_urgent = this.record.msg_is_urgent_b ? 'Y' : 'N';
+        this.record.msg_is_review = this.record.msg_is_review_b ? 'Y' : 'N';
+        this.record.msg_is_comment = this.record.msg_is_comment_b ? 'Y' : 'N';
+        this.record.msg_is_reply = this.record.msg_is_reply_b ? 'Y' : 'N';
     }
     private Allvalid(): boolean {
 
@@ -207,18 +228,18 @@ export class FaxMessageEditComponent implements OnInit {
             return bRet;
         }
 
-        // if (this.gs.isBlank(this.record.qtnr_agent_id) || this.gs.isBlank(this.record.qtnr_agent_name)) {
-        //     bRet = false;
-        //     this.errorMessage = "Agent Cannot be blank";
-        //     alert(this.errorMessage);
-        //     return bRet;
-        // }
-        // if (this.gs.isBlank(this.record.qtnr_validity)) {
-        //     bRet = false;
-        //     this.errorMessage = "Validity cannot be blank";
-        //     alert(this.errorMessage);
-        //     return bRet;
-        // }
+        if (this.gs.isBlank(this.record.msg_date)) {
+            bRet = false;
+            this.errorMessage = "Date Cannot be blank";
+            alert(this.errorMessage);
+            return bRet;
+        }
+        if (this.gs.isBlank(this.record.msg_body)) {
+            bRet = false;
+            this.errorMessage = "Message Body cannot be blank";
+            alert(this.errorMessage);
+            return bRet;
+        }
 
         return bRet;
     }
@@ -230,26 +251,15 @@ export class FaxMessageEditComponent implements OnInit {
 
     LovSelected(_Record: SearchTable) {
 
-        // if (_Record.controlname == "AGENT") {
-        //     this.record.qtnr_agent_id = _Record.id;
-        //     this.record.qtnr_agent_code = _Record.code;
-        //     this.record.qtnr_agent_name = _Record.name;
-        //     if (!this.gs.isBlank(this.qtnr_pol_cntry_name_field))
-        //         this.qtnr_pol_cntry_name_field.Focus();
-        // }
+        if (_Record.controlname == "CUSTOMER") {
+            this.record.msg_party_id = _Record.id;
+            this.record.msg_party_code = _Record.code;
+            this.record.msg_party_name = _Record.name;
+            // if (!this.gs.isBlank(this.qtnr_pol_cntry_name_field))
+            //     this.qtnr_pol_cntry_name_field.Focus();
+        }
 
-        // if (_Record.controlname == "POL-COUNTRY") {
-        //     this.record.qtnr_pol_cntry_id = _Record.id;
-        //     this.record.qtnr_pol_cntry_name = _Record.name;
-        //     if (!this.gs.isBlank(this.qtnr_pod_cntry_name_field))
-        //         this.qtnr_pod_cntry_name_field.Focus();
-        // }
-        // if (_Record.controlname == "POD-COUNTRY") {
-        //     this.record.qtnr_pod_cntry_id = _Record.id;
-        //     this.record.qtnr_pod_cntry_name = _Record.name;
-        //     if (!this.gs.isBlank(this.qtnr_mode_field))
-        //         this.qtnr_mode_field.nativeElement.focus();
-        // }
+
     }
 
     OnChange(field: string) {
@@ -259,6 +269,17 @@ export class FaxMessageEditComponent implements OnInit {
     }
 
     onBlur(field: string) {
+        if (field == "msg_from_name")
+            this.record.msg_from_name = this.record.msg_from_name.toUpperCase();
+        if (field == "msg_party_name")
+            this.record.msg_party_name = this.record.msg_party_name.toUpperCase();
+        if (field == "msg_party_attn")
+            this.record.msg_party_attn = this.record.msg_party_attn.toUpperCase();
+        if (field == "msg_party_telfax")
+            this.record.msg_party_telfax = this.record.msg_party_telfax.toUpperCase();
+        if (field == "msg_subject")
+            this.record.msg_subject = this.record.msg_subject.toUpperCase();
+
     }
 
 
@@ -290,5 +311,16 @@ export class FaxMessageEditComponent implements OnInit {
 
     CloseModal() {
         this.modal.close();
+    }
+
+    FaxMessageRptPrint() {
+
+        this.report_title = this.mainService.title;
+        this.report_url = '/api/Marketing/FaxMessagePage/GetFaxMessageReport';
+        this.report_searchdata = this.gs.UserInfo;
+        this.report_searchdata.pkid = this.pkid;
+        this.report_searchdata.PATH = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\fax\\";
+        this.report_menuid = this.menuid;
+        this.tab = 'report';
     }
 }

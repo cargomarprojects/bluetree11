@@ -31,6 +31,10 @@ export interface Tbl_Cargo_Message {
     msg_is_comment: string;
     msg_is_reply: string;
 
+    msg_is_urgent_b: boolean;
+    msg_is_review_b: boolean;
+    msg_is_comment_b: boolean;
+    msg_is_reply_b: boolean;
 }
 
 export interface vm_tbl_cargo_message {
