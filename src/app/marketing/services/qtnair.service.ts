@@ -166,13 +166,13 @@ export class QtnAirService {
         }
         else {
 
-            // REC.qtnr_agent_name = _rec.qtnr_agent_name;
-            // REC.qtnr_pol_cntry_name = _rec.qtnr_pol_cntry_name;
-            // REC.qtnr_pod_cntry_name = _rec.qtnr_pod_cntry_name;
-            // REC.qtnr_mode = _rec.qtnr_mode;
-            // REC.qtnr_validity = _rec.qtnr_validity;
-            // REC.qtnr_file_name = _rec.qtnr_file_name;
-            // REC.qtnr_file_name = _rec.qtnr_file_name;
+            REC.qtnm_date = _rec.qtnm_date;
+            REC.qtnm_to_name = _rec.qtnm_to_name;
+            REC.qtnm_quot_by = _rec.qtnm_quot_by;
+            REC.qtnm_pol_name = _rec.qtnm_pol_name;
+            REC.qtnm_pod_name = _rec.qtnm_pod_name;
+            REC.qtnm_move_type = _rec.qtnm_move_type;
+            REC.qtnm_commodity = _rec.qtnm_commodity;
         }
     }
 

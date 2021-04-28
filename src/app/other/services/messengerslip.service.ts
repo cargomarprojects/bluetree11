@@ -147,6 +147,24 @@ export class MessengerSlipService {
         });
     }
 
+    RefreshList(_rec: Tbl_cargo_slip) {
+        if (this.record.records == null)
+            return;
+        var REC = this.record.records.find(rec => rec.cs_pkid == _rec.cs_pkid);
+        if (REC == null) {
+            this.record.records.push(_rec);
+        }
+        else {
+            REC.cs_refno = _rec.cs_refno;
+            REC.cs_date = _rec.cs_date;
+            REC.cs_to_name = _rec.cs_to_name;
+            REC.cs_to_tel = _rec.cs_to_tel;
+            REC.cs_to_fax = _rec.cs_to_fax;
+            REC.rec_created_by = _rec.rec_created_by;
+            REC.rec_created_date = _rec.rec_created_date;
+        }
+    }
+
     GeneralList(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/MessengerSlip/GeneralList', SearchData, this.gs.headerparam2('authorized'));
     }

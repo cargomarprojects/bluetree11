@@ -145,6 +145,25 @@ export class DeliveryOrderService {
         });
     }
 
+    
+    RefreshList(_rec: Tbl_cargo_imp_pickup) {
+        if (this.record.records == null)
+            return;
+        var REC = this.record.records.find(rec => rec.pick_pkid == _rec.pick_pkid);
+        if (REC == null) {
+            this.record.records.push(_rec);
+        }
+        else {
+            REC.pick_orderno = _rec.pick_orderno;
+            REC.pick_order_date = _rec.pick_order_date;
+            REC.pick_truk_name = _rec.pick_truk_name;
+            REC.pick_fromname = _rec.pick_fromname;
+            REC.pick_toname = _rec.pick_toname;
+            REC.rec_created_by = _rec.rec_created_by;
+            REC.rec_created_date = _rec.rec_created_date;
+        }
+    }
+
     GeneralList(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/DeliveryOrder/GeneralList', SearchData, this.gs.headerparam2('authorized'));
     }

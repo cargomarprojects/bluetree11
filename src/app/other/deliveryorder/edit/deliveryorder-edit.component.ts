@@ -658,6 +658,7 @@ export class DeliveryOrderEditComponent implements OnInit {
         }
         else {
           this.errorMessage.push('Save Complete');
+          this.mainService.RefreshList(this.record);
           // alert(this.errorMessage);
         }
       }, error => {
