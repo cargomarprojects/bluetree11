@@ -533,6 +533,7 @@
                         <th>CONSIGNEE</th>
                         <th>PCS</th>
                         <th>HANDLED-BY</th>
+                        <th>{{(gs.company_code=='MNYC')?'HBL STATUS':'TELEX RELEASED'}}</th>
                         <th>FREIGHT</th>
                         <th>TERMS</th>
                         <th>CREATED-BY</th>
@@ -551,6 +552,7 @@
                         <td>{{rec.hbl_consignee_name}}</td>
                         <td>{{rec.hbl_packages}}</td>
                         <td>{{rec.hbl_handled_name}}</td>
+                        <td>{{rec.hbl_telex_released}}</td>
                         <td>{{rec.hbl_frt_status}}</td>
                         <td>{{rec.hbl_ship_term}}</td>
                         <td>{{rec.rec_created_by}}</td>
