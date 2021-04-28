@@ -159,8 +159,8 @@ export class DeliveryOrderService {
             REC.pick_truk_name = _rec.pick_truk_name;
             REC.pick_fromname = _rec.pick_fromname;
             REC.pick_toname = _rec.pick_toname;
-            REC.rec_created_by = _rec.rec_created_by;
-            REC.rec_created_date = _rec.rec_created_date;
+            // REC.rec_created_by = _rec.rec_created_by;
+            // REC.rec_created_date = _rec.rec_created_date;
         }
     }
 

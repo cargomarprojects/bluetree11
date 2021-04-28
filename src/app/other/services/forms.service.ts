@@ -176,8 +176,8 @@ export class FormsService {
             REC.gf_name = _rec.gf_name;
             REC.gf_remarks = _rec.gf_remarks;
             REC.gf_file_name = _rec.gf_file_name;
-            REC.rec_created_by = _rec.rec_created_by;
-            REC.rec_created_date = _rec.rec_created_date;
+            // REC.rec_created_by = _rec.rec_created_by;
+            // REC.rec_created_date = _rec.rec_created_date;
         }
     }
 

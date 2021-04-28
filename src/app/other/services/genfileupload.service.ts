@@ -134,8 +134,8 @@ export class GenFileUploadService {
         }
         else {
             REC.gf_pkid = _rec.gf_pkid;
-            REC.rec_created_by = _rec.rec_created_by;
-            REC.rec_created_date = _rec.rec_created_date;
+            // REC.rec_created_by = _rec.rec_created_by;
+            // REC.rec_created_date = _rec.rec_created_date;
         }
     }
 

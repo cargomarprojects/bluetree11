@@ -160,8 +160,8 @@ export class MessengerSlipService {
             REC.cs_to_name = _rec.cs_to_name;
             REC.cs_to_tel = _rec.cs_to_tel;
             REC.cs_to_fax = _rec.cs_to_fax;
-            REC.rec_created_by = _rec.rec_created_by;
-            REC.rec_created_date = _rec.rec_created_date;
+            // REC.rec_created_by = _rec.rec_created_by;
+            // REC.rec_created_date = _rec.rec_created_date;
         }
     }
 
