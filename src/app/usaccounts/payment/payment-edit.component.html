@@ -125,20 +125,20 @@
         <table class="table table-hover table-sm table-bordered fixed_header">
             <thead class="page-body-thead">
                 <tr>
-                    <th>INV-NO</th>
-                    <th>INV-DATE</th>
-                    <th>REFNO</th>
+                    <th (click)="sort('inv_no')">INV-NO&nbsp;<i [ngClass]="getIcon('inv_no')"></i></th>
+                    <th (click)="sort('inv_date')">INV-DATE&nbsp;<i [ngClass]="getIcon('inv_date')"></i></th>
+                    <th (click)="sort('inv_mbl_refno')">REFNO&nbsp;<i [ngClass]="getIcon('inv_mbl_refno')"></i></th>
                     <th>ARAP</th>
-                    <th>CUST-REFNO</th>
-                    <th style="text-align:right">INV-AMT</th>
-                    <th style="text-align:right">A/R</th>
-                    <th style="text-align:right">A/P</th>
+                    <th (click)="sort('inv_refno')">CUST-REFNO&nbsp;<i [ngClass]="getIcon('inv_refno')"></i></th>
+                    <th (click)="sort('inv_total')" style="text-align:right">INV-AMT&nbsp;<i [ngClass]="getIcon('inv_total')"></i></th>
+                    <th (click)="sort('inv_ar_total')" style="text-align:right">A/R&nbsp;<i [ngClass]="getIcon('inv_ar_total')"></i></th>
+                    <th (click)="sort('inv_ap_total')" style="text-align:right">A/P&nbsp;<i [ngClass]="getIcon('inv_ap_total')"></i></th>
                     <th style="text-align:center">SELECT</th>
                     <th style="text-align:right">PAY-AMT</th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
-                <tr *ngFor="let rec of pendingList; let i = index">
+                <tr *ngFor="let rec of pendingList  |  sortBy: getSortCol() : getSortOrder(); let i = index">
                     <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td>
                     <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                     <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mbl_refno}} </td>
