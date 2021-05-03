@@ -105,8 +105,8 @@
           <div class="form-group row">
             <label class="col-4 col-form-label col-form-label-sm">Ref No.</label>
             <div class="col-8">
-              <InputBox [(inputModel)]="sdata" [field]="'sdata'" [maxlength]="100"
-                        [uppercase]="true" (blur)="onBlur($event)"></InputBox>
+              <InputBox [(inputModel)]="sdata" [field]="'sdata'" [maxlength]="100" [uppercase]="true"
+                (blur)="onBlur($event)"></InputBox>
             </div>
           </div>
           <div class="form-group row">
@@ -130,7 +130,6 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-
           <th>REF#</th>
           <th>HOUSE#</th>
           <th>CUSTOMER</th>
@@ -143,10 +142,27 @@
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of MainList">
         <tr>
-          <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mbl_refno}}</td>
-          <td class='hlink2' (click)="edithouse(rec)">{{rec.inv_houseno}}</td>
+          <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mbl_refno}}</td> -->
+          <td *ngIf="(rec.mbl_mode=='CM'||rec.mbl_mode=='GE'||rec.mbl_mode=='PR'||rec.mbl_mode=='PS')">{{rec.inv_mbl_refno}}</td>
+          <td *ngIf="!(rec.mbl_mode=='CM'||rec.mbl_mode=='GE'||rec.mbl_mode=='PR'||rec.mbl_mode=='PS')">
+            <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L')"
+              [queryParams]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P')">{{rec.inv_mbl_refno}}</a>
+          </td>
+          <!-- <td class='hlink2' (click)="edithouse(rec)">{{rec.inv_houseno}}</td> -->
+          <td *ngIf="(rec.mbl_mode=='CM'||rec.mbl_mode=='GE'||rec.mbl_mode=='PR'||rec.mbl_mode=='PS')">{{rec.inv_houseno}}</td>
+          <td *ngIf="!(rec.mbl_mode=='CM'||rec.mbl_mode=='GE'||rec.mbl_mode=='PR'||rec.mbl_mode=='PS')">
+            <a class="hlink"
+              [routerLink]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.inv_hbl_id,'', 'L')"
+              [queryParams]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.inv_hbl_id,'', 'P')">{{rec.hbl_houseno}}</a>
+          </td>
           <td>{{rec.inv_name}}</td>
-          <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td>
+          <!-- <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td> -->
+          <td *ngIf="(rec.mbl_mode=='CM'||rec.mbl_mode=='GE'||rec.mbl_mode=='PR'||rec.mbl_mode=='PS')">{{rec.inv_no}}</td>
+          <td *ngIf="!(rec.mbl_mode=='CM'||rec.mbl_mode=='GE'||rec.mbl_mode=='PR'||rec.mbl_mode=='PS')">
+            <a class="hlink"
+              [routerLink]="gs.Link2Page('INVNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'',rec.inv_pkid, 'L')"
+              [queryParams]="gs.Link2Page('INVNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'',rec.inv_pkid, 'P')">{{rec.inv_no}}</a>
+          </td>
           <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.inv_payment_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.inv_amt}}</td>

@@ -77,9 +77,17 @@
       <tbody class="page-body-tbody" *ngFor="let rec of MainList">
         <tr>
           <td>{{rec.mbl_branch}}</td>
-          <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+          <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
+          <td>
+            <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L','',rec.mbl_branch)"
+                [queryParams]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P','',rec.mbl_branch)">{{rec.mbl_refno}}</a>
+         </td>
           <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td class='hlink2' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td>
+          <!-- <td class='hlink2' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td> -->
+          <td>
+            <a class="hlink" [routerLink]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L','',rec.mbl_branch)"
+                [queryParams]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'P','',rec.mbl_branch)">{{rec.hbl_houseno}}</a>
+          </td>
           <td>{{rec.hbl_consignee_name}}</td>
           <td>{{rec.mbl_pod_eta  | date : gs.FRONTEND_DATEFORMAT }}</td>          
           <td>{{rec.hbl_place_final}}</td>
