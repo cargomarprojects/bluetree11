@@ -110,7 +110,11 @@
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
           <tr>
             <td>{{rec.mbl_branch}}</td>
-            <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
+            <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
+            <td>
+              <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L','',rec.mbl_branch)"
+                  [queryParams]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P','',rec.mbl_branch)">{{rec.mbl_refno}}</a>
+          </td>
             <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
             <td>{{rec.hbl_hand_name}}</td>
             <td>{{rec.mbl_agent_name}}</td>
