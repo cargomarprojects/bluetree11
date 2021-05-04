@@ -13,6 +13,7 @@ import { ReportState } from './store/pay-due-report.models'
 
 import { Observable } from 'rxjs';
 import { map, tap, filter } from 'rxjs/operators';
+import { MbldService } from 'src/app/seaexport/services/mbld.service';
 
 @Component({
   selector: 'app-pay-due-report',
@@ -398,6 +399,40 @@ export class PayDueReportComponent implements OnInit {
       }
     }
 
+
+  }
+
+  getRouteDet(_format: string, _rec: Tbl_cargo_invoicem, _type: string) {
+
+    let MBLID: string = "";
+    let REFNO: string = "";
+    let HBLID: string = "";
+    let INVID: string = "";
+    let STYPE: string = "";
+    let MBL_MODE: string = "";
+
+    MBL_MODE = _rec.mbl_mode.toString();
+    MBLID = _rec.mbl_pkid.toString().trim();
+    REFNO = _rec.mbl_refno.toString().trim();
+    HBLID = _rec.inv_hbl_id.toString().trim();
+    INVID = _rec.inv_pkid.toString();
+
+    STYPE = REFNO;
+    if (STYPE.length >= 2)
+      STYPE = STYPE.substring(0, 2);
+    else
+      STYPE = "";
+
+    if (MBL_MODE == "CM" || MBL_MODE == "GE" || MBL_MODE == "PR" || MBL_MODE == "PS") {
+      return null;
+    }
+
+    if (_type == 'MASTER')
+      return this.gs.Link2Page('REFNO', MBL_MODE, REFNO, MBLID, '', '', _format);
+    else if (_type == 'INVNO')
+      return this.gs.Link2Page('INVNO', MBL_MODE, REFNO, MBLID, HBLID, INVID, _format);
+    else //HOUSE
+      return this.gs.Link2Page('HOUSE', MBL_MODE,REFNO, MBLID, HBLID, '', _format);
 
   }
 

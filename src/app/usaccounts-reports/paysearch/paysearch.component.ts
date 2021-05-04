@@ -121,6 +121,7 @@ export class PaySearchComponent implements OnInit {
     let sID: string = (_record.pay_mblid != null) ? _record.pay_mblid.toString() : "";
     let REFNO: string = _record.pay_invtype != null ? _record.pay_invtype.toString() : "";
     let sMode: string = "";
+
     if (REFNO == "OI")
       sMode = "SEA IMPORT";
     else if (REFNO == "OE")
@@ -137,6 +138,29 @@ export class PaySearchComponent implements OnInit {
       return;
     }
     this.gs.LinkPage("REFNO", sMode, REFNO, sID);
+  }
+
+  getRouteDet(_format: string, _rec: Tbl_Acc_Payment, _type: string) {
+    let sID: string = (_rec.pay_mblid != null) ? _rec.pay_mblid.toString() : "";
+    let REFNO: string = _rec.pay_invtype != null ? _rec.pay_invtype.toString() : "";
+    let INVID: string = (_rec.pay_invid != null) ? _rec.pay_invid.toString() : "";
+    let HBLID: string = (_rec.pay_hblid != null) ? _rec.pay_hblid.toString() : "";
+    let sMode: string = "";
+    if (REFNO == "OI")
+      sMode = "SEA IMPORT";
+    else if (REFNO == "OE")
+      sMode = "SEA EXPORT";
+    else if (REFNO == "AI")
+      sMode = "AIR IMPORT";
+    else if (REFNO == "AE")
+      sMode = "AIR EXPORT";
+    else if (REFNO == "OT")
+      sMode = "OTHERS";
+
+    if (_type == 'MASTER')
+      return this.gs.Link2Page('REFNO', sMode, REFNO, sID, '', '', _format);
+    else
+      return this.gs.Link2Page('INVNO', sMode, REFNO, sID, HBLID, INVID, _format);
   }
 
 }
