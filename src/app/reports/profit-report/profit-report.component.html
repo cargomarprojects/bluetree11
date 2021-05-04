@@ -224,7 +224,7 @@
             <!-- <td class='hlink2' (click)="editarap(rec)">{{rec.ROW_TYPE=='DETAIL'?'ARAP':''}}</td> -->
             <td>
               <a class="hlink" [routerLink]="gs.Link2Page('ARAP', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L','',rec.mbl_branch)"
-                  [queryParams]="gs.Link2Page('ARAP', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P','',rec.mbl_branch)">{{{{rec.ROW_TYPE=='DETAIL'?'ARAP':''}}}}</a>
+                  [queryParams]="gs.Link2Page('ARAP', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P','',rec.mbl_branch)">{{rec.ROW_TYPE=='DETAIL'?'ARAP':''}}</a>
           </td>
             <td>{{rec.mbl_no}}</td>
             <td *ngIf="showstages">{{rec.shipment_stage}}</td>
@@ -286,7 +286,7 @@
             <!-- <td class='hlink2' (click)="editarap(rec)">{{rec.ROW_TYPE=='DETAIL'?'ARAP':''}}</td> -->
             <td>
               <a class="hlink" [routerLink]="gs.Link2Page('ARAP', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L','',rec.mbl_branch)"
-                  [queryParams]="gs.Link2Page('ARAP', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P','',rec.mbl_branch)">{{{{rec.ROW_TYPE=='DETAIL'?'ARAP':''}}}}</a>
+                  [queryParams]="gs.Link2Page('ARAP', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P','',rec.mbl_branch)">{{rec.ROW_TYPE=='DETAIL'?'ARAP':''}}</a>
           </td>
             <td>{{rec.mbl_no}}</td>
             <td *ngIf="showstages">{{rec.shipment_stage}}</td>
@@ -343,7 +343,7 @@
             <!-- <td class='hlink2' (click)="editarap(rec)">{{rec.ROW_TYPE=='DETAIL'?'ARAP':''}}</td> -->
             <td>
               <a class="hlink" [routerLink]="gs.Link2Page('ARAP', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L','',rec.mbl_branch)"
-                  [queryParams]="gs.Link2Page('ARAP', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P','',rec.mbl_branch)">{{{{rec.ROW_TYPE=='DETAIL'?'ARAP':''}}}}</a>
+                  [queryParams]="gs.Link2Page('ARAP', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P','',rec.mbl_branch)">{{rec.ROW_TYPE=='DETAIL'?'ARAP':''}}</a>
           </td>
             <td *ngIf="showstages">{{rec.shipment_stage}}</td>
             <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
