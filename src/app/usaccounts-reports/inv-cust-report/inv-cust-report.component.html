@@ -99,9 +99,17 @@
                     </td>
                     <td>{{rec.inv_cust_code}}</td>
                     <td>{{rec.inv_cust_name}}</td>
-                    <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td>
+                    <!-- <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td> -->
+                    <td>
+                        <a class="hlink" [routerLink]="getRouteDet('L',rec,'INVNO')"
+                            [queryParams]="getRouteDet('P',rec,'INVNO')">{{rec.inv_no}}</a>
+                      </td>
                     <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-                    <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mrefno}}</td>
+                    <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mrefno}}</td> -->
+                    <td>
+                        <a class="hlink" [routerLink]="getRouteDet('L',rec,'MASTER')"
+                            [queryParams]="getRouteDet('P',rec,'MASTER')">{{rec.inv_mrefno}}</a>
+                    </td>
                     <td>{{rec.inv_refno}}</td>
                 </tr>
             </tbody>

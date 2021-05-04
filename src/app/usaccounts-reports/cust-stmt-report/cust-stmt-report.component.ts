@@ -166,7 +166,7 @@ export class CustStmtReportComponent implements OnInit {
         this.SearchData.HIDE_PAYROLL = this.gs.user_hide_payroll;
 
         this.SearchData.SORT = this.sortname;
-        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
+        this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
         this.SearchData.COMP_TYPE = this.comp_type;
         if (this.comp_type == 'ALL')
           this.SearchData.COMP_CODE = this.gs.branch_codes;
@@ -272,7 +272,7 @@ export class CustStmtReportComponent implements OnInit {
       this.SearchData.HIDE_PAYROLL = this.gs.user_hide_payroll;
 
       this.SearchData.SORT = this.sortname;
-      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
+      this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
       this.SearchData.COMP_TYPE = this.comp_type;
       if (this.comp_type == 'ALL')
         this.SearchData.COMP_CODE = this.gs.branch_codes;
@@ -336,7 +336,7 @@ export class CustStmtReportComponent implements OnInit {
             filedisplayname2: this.SearchData.filedisplayname2
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
-        }else if (_outputformat == "PRINT") {
+        } else if (_outputformat == "PRINT") {
 
           this.filename = response.filename;
           this.filetype = response.filetype;
@@ -517,6 +517,29 @@ export class CustStmtReportComponent implements OnInit {
       alert("Cannot Show Details from another Branch");
     }
 
+  }
+
+  getRouteDet(_format: string, _rec: Tbl_OS_REPORT, _type: string) {
+    let sID: string = (_rec.inv_mbl_id != null) ? _rec.inv_mbl_id.toString() : "";
+    let REFNO: string = _rec.inv_type != null ? _rec.inv_type.toString() : "";
+    let branch_name: string = _rec.inv_branch != null ? _rec.inv_branch.toString() : "";
+    let HBLID: string = _rec.inv_hbl_id != null ? _rec.inv_hbl_id.toString() : "";
+    let sMode: string = "";
+    if (REFNO == "OI")
+      sMode = "SEA IMPORT";
+    else if (REFNO == "OE")
+      sMode = "SEA EXPORT";
+    else if (REFNO == "AI")
+      sMode = "AIR IMPORT";
+    else if (REFNO == "AE")
+      sMode = "AIR EXPORT";
+    else if (REFNO == "OT")
+      sMode = "OTHERS";
+
+    if (_type == 'MASTER')
+      return this.gs.Link2Page('REFNO', sMode, REFNO, sID, '', '', _format, '', branch_name);
+    else
+      return this.gs.Link2Page('HOUSE', sMode, REFNO, sID, HBLID, '', _format, '', branch_name);
   }
 
 }

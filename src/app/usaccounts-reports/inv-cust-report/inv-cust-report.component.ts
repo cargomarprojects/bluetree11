@@ -346,4 +346,38 @@ export class InvCustReportComponent implements OnInit {
     }
   }
 
+  getRouteDet(_format: string, _rec: Tbl_OS_REPORT, _type: string) {
+
+    let sID: string = (_rec.inv_mbl_id != null) ? _rec.inv_mbl_id.toString() : "";
+    let REFNO: string = _rec.inv_type != null ? _rec.inv_type.toString() : "";
+    let sMode: string = "";
+    let branch_code: string = _rec.inv_branch_code != null ? _rec.inv_branch_code.toString() : "";
+    let INVID: string = (_rec.inv_pkid != null) ? _rec.inv_pkid.toString() : "";
+    let HBLID: string = (_rec.inv_hbl_id != null) ? _rec.inv_hbl_id.toString() : "";
+
+    if (REFNO == "OI")
+      sMode = "SEA IMPORT";
+    else if (REFNO == "OE")
+      sMode = "SEA EXPORT";
+    else if (REFNO == "AI")
+      sMode = "AIR IMPORT";
+    else if (REFNO == "AE")
+      sMode = "AIR EXPORT";
+    else if (REFNO == "OT")
+      sMode = "OTHERS";
+
+    if (_type == 'MASTER') {
+      if (sID == "")
+        return null;
+      else
+        return this.gs.Link2Page('REFNO', sMode, REFNO, sID, '', '', _format,branch_code);
+    }
+    else {
+      if (INVID == "")
+        return null;
+      else
+        return this.gs.Link2Page('INVNO', sMode, REFNO, sID, HBLID, INVID, _format,branch_code);
+    }
+  }
+
 }
