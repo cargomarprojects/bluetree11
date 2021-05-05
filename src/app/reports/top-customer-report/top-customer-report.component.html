@@ -164,10 +164,19 @@
                 <tbody class="page-body-tbody" *ngFor="let rec of MainList">
                     <tr [style.color]="rec.mbl_customer_name=='TOTAL'?'Red':'Black'"
                         [style.font-weight]="rec.mbl_customer_name=='TOTAL'?'bold':'normal'">
-                        <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
-                        <td *ngIf="!(report_category == 'OVERSEAS AGENT' || report_category == 'POL' || report_category == 'POD')"
+                        <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
+                        <td>
+                            <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L',rec.mbl_branch)"
+                                [queryParams]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P',rec.mbl_branch)">{{rec.mbl_refno}}</a>
+                        </td>
+                        <!-- <td *ngIf="!(report_category == 'OVERSEAS AGENT' || report_category == 'POL' || report_category == 'POD')"
                             class='hlink2' (click)="edithouse(rec)">
-                            {{rec.hbl_houseno}}</td>
+                            {{rec.hbl_houseno}}</td> -->
+                            <td *ngIf="!(report_category == 'OVERSEAS AGENT' || report_category == 'POL' || report_category == 'POD')" >
+                                <a class="hlink" [routerLink]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L',rec.mbl_branch)"
+                                    [queryParams]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'P',rec.mbl_branch)">{{rec.hbl_houseno}}</a>
+                            </td>
+
                         <td>{{rec.mbl_customer_name}}</td>
                         <td align='right'>{{rec.mbl_customer_amt | number : '1.2-2'}}</td>
                         <td></td>
