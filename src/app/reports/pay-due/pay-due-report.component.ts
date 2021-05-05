@@ -131,14 +131,18 @@ export class PayDueReportComponent implements OnInit {
         this.page_rowcount = rec.page_rowcount;
 
         this.SearchData = this.gs.UserInfo;
-        this.SearchData.SDATE = this.sdate;
-        this.SearchData.EDATE = this.edate;
+        this.SearchData.FDATE = this.sdate;
+        this.SearchData.TDATE = this.edate;
         this.SearchData.SHOWSMODE = this.showsmode;
         this.SearchData.COMP_TYPE = this.comp_type;
-        this.SearchData.CUST_ID = '';
-        this.SearchData.CUST_NAME = '';
-
-
+        this.SearchData.SDATA = this.sdata;
+        this.SearchData.SORT = this.sort;
+        this.SearchData.CUST_ID = this.cust_id;
+        this.SearchData.CUST_NAME = this.cust_name;
+        if (this.gs.IsAdmin(this.menuid))
+          this.SearchData.ISADMIN = 'Y';
+        else
+          this.SearchData.ISADMIN = 'N';
         if (this.comp_type === 'ALL') {
           this.SearchData.COMP_CODE = this.gs.branch_codes;
         } else {
@@ -216,12 +220,11 @@ export class PayDueReportComponent implements OnInit {
       this.SearchData.TDATE = this.edate;
 
       //this.SearchData.STYPE = this.mode;
-
-
-      this.SearchData.SORT = this.sort;
-
-      this.SearchData.ISADMIN = 'N';
-
+      // this.SearchData.SORT = this.sort;
+      if (this.gs.IsAdmin(this.menuid))
+        this.SearchData.ISADMIN = 'Y';
+      else
+        this.SearchData.ISADMIN = 'N';
       this.SearchData.SDATA = this.sdata;
       this.SearchData.SORT = this.sort;
       this.SearchData.CUST_ID = this.cust_id;
@@ -432,7 +435,7 @@ export class PayDueReportComponent implements OnInit {
     else if (_type == 'INVNO')
       return this.gs.Link2Page('INVNO', MBL_MODE, REFNO, MBLID, HBLID, INVID, _format);
     else //HOUSE
-      return this.gs.Link2Page('HOUSE', MBL_MODE,REFNO, MBLID, HBLID, '', _format);
+      return this.gs.Link2Page('HOUSE', MBL_MODE, REFNO, MBLID, HBLID, '', _format);
 
   }
 
