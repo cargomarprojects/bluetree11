@@ -175,13 +175,13 @@ export class ShipCloseReportComponent implements OnInit {
       this.SearchData.SDATE = this.sdate;
       this.SearchData.EDATE = this.edate;
       this.SearchData.MODE = this.mode;
-
-      this.SearchData.LOCK_DAYS_SEA = this.gs.LOCK_DAYS_SEA;
-      this.SearchData.LOCK_DAYS_AIR = this.gs.LOCK_DAYS_AIR;
-      this.SearchData.LOCK_DAYS_OTHERS = this.gs.LOCK_DAYS_OTHERS;
-      this.SearchData.LOCK_DAYS_ADMIN = this.gs.LOCK_DAYS_ADMIN;
-      this.SearchData.TODAYS_DATE = this.gs.defaultValues.today;
     }
+
+    this.SearchData.LOCK_DAYS_SEA = this.gs.LOCK_DAYS_SEA;
+    this.SearchData.LOCK_DAYS_AIR = this.gs.LOCK_DAYS_AIR;
+    this.SearchData.LOCK_DAYS_OTHERS = this.gs.LOCK_DAYS_OTHERS;
+    this.SearchData.LOCK_DAYS_ADMIN = this.gs.LOCK_DAYS_ADMIN;
+    this.SearchData.TODAYS_DATE = this.gs.defaultValues.today;
 
     this.loading = true;
 
