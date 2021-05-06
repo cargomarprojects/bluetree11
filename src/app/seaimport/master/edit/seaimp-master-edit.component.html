@@ -594,9 +594,9 @@
           </div>
 
           <div class="form-group row">
-
-            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_MASTER_DEVANNING_INSTRUCTION)"
-              (click)="BtnNavigation('DEVAN-INSTRUCTION')">DEVANING INSTRUCTION</button>
+            <a class="btn btn-primary btn-sm text-uppercase mr-1" *ngIf="gs.screenExists(gs.MENU_SI_MASTER_DEVANNING_INSTRUCTION)" [routerLink]="getRouteDet('L','DEVANING')" [queryParams]="getRouteDet('P','DEVANING')">DEVANING INSTRUCTION</a>
+            <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_MASTER_DEVANNING_INSTRUCTION)"
+              (click)="BtnNavigation('DEVAN-INSTRUCTION')">DEVANING INSTRUCTION</button> -->
           </div>
 
           <div class="form-group row">
