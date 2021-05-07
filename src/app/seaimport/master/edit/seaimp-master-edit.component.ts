@@ -10,6 +10,7 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
+import { NonNullAssert } from '@angular/compiler';
 
 @Component({
   selector: 'app-seaimp-master-edit',
@@ -808,7 +809,116 @@ export class SeaImpMasterEditComponent implements OnInit {
           mbl_type: 'OI',
           origin: 'seaimp-master-page',
         };
+    } else if (action == "DEVANING") {
+      if (_type == "L")
+        return '/Silver.SeaImport/DevanInstructionPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_MASTER_DEVANNING_INSTRUCTION,
+          pkid: this.pkid,
+          mbl_refno: this.record.mbl_refno,
+          origin: 'seaimp-master-page',
+          is_locked: this.is_locked
+        };
+    } else if (action == "PROFITREPORT") {
+      if (_type == "L")
+        return '/Silver.USAccounts.Trans/ProfitReportPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_MASTER_PROFIT_REPORT,
+          mbl_pkid: this.pkid,
+          mbl_refno: this.record.mbl_refno,
+          mbl_type: 'OI',
+          origin: 'seaimp-master-page',
+        };
+    } else if (action == "MESSENGER-SLIP") {
+      if (_type == "L")
+        return '/Silver.Other.Trans/MessengerSlipList';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_MESSENGER_SLIP,
+          mbl_pkid: this.pkid,
+          mbl_mode: 'SEA IMPORT',
+          mbl_refno: this.record.mbl_refno,
+          islocked: this.is_locked,
+          origin: 'seaimp-master-page',
+          is_locked: this.is_locked
+        };
+    } else if (action == "PAYMENT-REQUEST") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/PaymentRequestPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_PAYMENT_REQUEST,
+          cp_master_id: this.pkid,
+          cp_source: 'SEA-MASTER',
+          cp_mode: 'SEA IMPORT',
+          cp_ref_no: this.record.mbl_refno,
+          is_locked: this.is_locked,
+          origin: 'seaimp-master-page'
+        };
+    } else if (action == "FOLLOWUP") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/FollowUpPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_MASTER,
+          master_id: this.pkid,
+          master_refno: this.record.mbl_refno,
+          master_refdate: this.record.mbl_ref_date,
+          is_locked: this.is_locked,
+          origin: 'seaimp-master-page'
+        };
+    } else if (action == "REQUEST-APPROVAL") {
+      if (_type == "L")
+        return '/Silver.Other.Trans/ApprovedPageList';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_MASTER_REQUEST_APPROVAL,
+          mbl_pkid: this.pkid,
+          mbl_refno: this.record.mbl_refno,
+          doc_type: 'SEA IMPORT',
+          req_type: 'REQUEST',
+          is_locked: this.is_locked,
+          origin: 'seaimp-master-page'
+        };
+    } else if (action == "INERNALMEMO") {
+      if (_type == "L")
+        return '/Silver.Other.Trans/TrackingPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_MASTER_INTERNAL_MEMO,
+          refno: "REF : " + this.record.mbl_refno,
+          pkid: this.pkid,
+          origin: 'seaimp-master-page',
+          oprgrp: 'SEA IMPORT',
+          parentType: 'SEAIMP-CNTR',
+          paramType: 'CNTR-MOVE-STATUS',
+          hideTracking: 'Y',
+          is_locked: this.is_locked
+        };
+    } else if (action == "CARGOPICKUP") {
+      if (_type == "L")
+        return '/Silver.SeaImport/CargoPickupPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_MASTER_DELIVERY_ORDER,
+          pkid: this.pkid,
+          parentid: '',
+          origin: 'seaimp-master-page',
+          invokefrom: 'MASTER',
+          is_locked: this.is_locked
+        };
     }
+
   }
 
   BtnNavigation(action: string, attachmodal: any = null) {
@@ -1171,40 +1281,25 @@ export class SeaImpMasterEditComponent implements OnInit {
   }
 
   getRouteDet(_format: string, _type: string) {
-
-
-    // if (_type == "L") {
-    //   if ((_mode == "ADD" && this.gs.canAdd(this.menuid)) || (_mode == "EDIT" && this.gs.canEdit(this.menuid)))
-    //     return "/Silver.Master/ParamEdit";
-    //   else
-    //     return null;
-    // } else if (_type == "P") {
-
-    //   if (_record == null) {
-    //     if (!this.gs.canAdd(this.menuid))
-    //       return null;
-    //     return {
-    //       appid: this.gs.appid,
-    //       menuid: this.menuid,
-    //       pkid: '',
-    //       type: this.menu_param,
-    //       origin: 'param-page',
-    //       mode: 'ADD'
-    //     };
-    //   }
-    //   if (!this.gs.canEdit(this.menuid))
-    //     return null;
-    //   return {
-    //     appid: this.gs.appid,
-    //     menuid: this.menuid,
-    //     pkid: _record.param_pkid,
-    //     type: _record.param_type,
-    //     origin: 'param-page',
-    //     mode: 'EDIT'
-    //   };
-    // } else
-    //   return null;
-
+    if (_format == "L") {
+      if (_type == "DEVANING")
+        return "/Silver.SeaImport/DevanInstructionPage";
+      else
+        return null;
+    } else if (_format == "P") {
+      if (_type == "DEVANING") {
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_MASTER_DEVANNING_INSTRUCTION,
+          pkid: this.pkid,
+          mbl_refno: this.record.mbl_refno,
+          origin: 'seaimp-master-page',
+          is_locked: this.is_locked
+        };
+      } else
+        return null;
+    } else
+      return null;
   }
 
 }
