@@ -1645,6 +1645,81 @@ export class SeaImpHouseEditComponent implements OnInit {
     }
   }
 
+  BtnNavigation2(action: string, _type: string, attachmodal: any = null) {
+    if (action == "CUSTOMSHOLD") {
+      if (_type == "L")
+        return '/Silver.SeaImport/USCustomsHoldPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_HOUSE_US_CUSTOM_HOLD,
+          pkid: this.pkid,
+          parentid: this.parentid,
+          origin: this.origin,
+          is_locked: this.is_locked
+        };
+    }else if (action == "CARGOPICKUP") {
+      if (_type == "L")
+        return '/Silver.SeaImport/CargoPickupPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_HOUSE_DELIVERY_ORDER,
+          pkid: this.pkid,
+          parentid: this.parentid,
+          origin: this.origin,
+          invokefrom: 'SI-HOUSE',
+          is_locked: this.is_locked
+        };
+    }else if (action == "RIDERPAGE") {
+      if (_type == "L")
+        return '/Silver.SeaImport/RiderPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_HOUSE,
+          pkid: this.pkid,
+          parentid: this.parentid,
+          source: 'SI-DESC-EX',
+          is_locked: this.is_locked,
+          origin: this.origin,
+          canPrint: false
+        };
+    }else if (action == "SHIPMOVEMENT") {
+      if (_type == "L")
+        return '/Silver.Other.Trans/TrackingPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_SHIPMENT_MOVEMENT,
+          refno: "REF : " + this.record.mbl_refno + "  HBL : " + this.record.hbl_houseno,
+          pkid: this.pkid,
+          parentid: this.parentid,
+          origin: 'seaimp-house-page',
+          oprgrp: 'SEA IMPORT',
+          parentType: 'SEAIMP-SHIP',
+          paramType: 'SHIP-MOVE-STATUS',
+          hideTracking: 'Y',
+          invokefrom: this.invokefrom,
+          is_locked: this.is_locked
+        };
+    }else if (action == "HOUSE-DEVAN") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/XmlRemarksPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.menuid,
+          pkid: this.pkid,
+          parentid: this.parentid,
+          source: 'SEA-HOUSE-DEVAN',
+          title: 'Devanning Instruction',
+          origin: 'seaimp-house-page',
+          invokefrom: 'SI-HOUSE',
+          is_locked: this.is_locked
+        };
+    }
+  }
 
   BtnNavigation(action: string, attachmodal: any = null) {
 

@@ -1139,33 +1139,52 @@
           </div>
 
           <div class="form-group row">
-            <button class=" col-12 btn btn-info btn-sm text-uppercase"
+            <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_DELIVERY_ORDER)" (click)="BtnNavigation('CARGOPICKUP')">Delivery
-              Order</button>
+              Order</button> -->
+              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_DELIVERY_ORDER)"
+              [routerLink]="BtnNavigation2('CARGOPICKUP','L')"
+              [queryParams]="BtnNavigation2('CARGOPICKUP','P')">Delivery
+              Order</a>
           </div>
 
           <div class="form-group row">
-            <button class=" col-12 btn btn-info btn-sm text-uppercase"
+            <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_US_CUSTOM_HOLD)" (click)="BtnNavigation('CUSTOMSHOLD')">US Custom
-              Hold</button>
+              Hold</button> -->
+              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_US_CUSTOM_HOLD)"
+              [routerLink]="BtnNavigation2('CUSTOMSHOLD','L')"
+              [queryParams]="BtnNavigation2('CUSTOMSHOLD','P')">US Custom
+              Hold</a>
           </div>
 
           <div class="form-group row">
-            <button class=" col-12 btn btn-info btn-sm text-uppercase"
+            <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_DEVAN_INSTRUCTION)"
-              (click)="BtnNavigation('HOUSE-DEVAN')">Devan/Instructions</button>
+              (click)="BtnNavigation('HOUSE-DEVAN')">Devan/Instructions</button> -->
+              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_DEVAN_INSTRUCTION)"
+              [routerLink]="BtnNavigation2('HOUSE-DEVAN','L')"
+              [queryParams]="BtnNavigation2('HOUSE-DEVAN','P')">Devan/Instructions</a>
           </div>
 
           <div class="form-group row">
-            <button class=" col-12 btn btn-info btn-sm text-uppercase"
+            <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_SI_SHIPMENT_MOVEMENT)" (click)="BtnNavigation('SHIPMOVEMENT')">House
               Internal
-              Memo</button>
+              Memo</button> -->
+              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_SHIPMENT_MOVEMENT)"
+              [routerLink]="BtnNavigation2('SHIPMOVEMENT','L')"
+              [queryParams]="BtnNavigation2('SHIPMOVEMENT','P')">House
+              Internal
+              Memo</a>
           </div>
 
           <div class="form-group row">
-            <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE)"
-              (click)="BtnNavigation('RIDERPAGE')">Rider Page</button>
+            <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE)"
+              (click)="BtnNavigation('RIDERPAGE')">Rider Page</button> -->
+              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE)"
+              [routerLink]="BtnNavigation2('RIDERPAGE','L')"
+              [queryParams]="BtnNavigation2('RIDERPAGE','P')">Rider Page</a>
           </div>
 
         </div>
