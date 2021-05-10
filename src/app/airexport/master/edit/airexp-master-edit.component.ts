@@ -587,15 +587,13 @@ export class AirExpMasterEditComponent implements OnInit {
         if (_type == "L")
           return '/Silver.USAccounts.Trans/InvoicePage';
         if (_type == 'P' )
-          return  {
-            appid : this.gs.appid,            
-            menuid: this.gs.MENU_AE_MASTER_ARAP,
-            mbl_pkid: this.pkid,
-            mbl_refno: this.record.mbl_refno,
-            mbl_type: 'AE',
-            origin: 'airexp-master-page',
-          }
-	  }
+          return  {appid : this.gs.appid,menuid: this.gs.MENU_AE_MASTER_ARAP,mbl_pkid: this.pkid,mbl_refno: this.record.mbl_refno,mbl_type: 'AE', origin: 'airexp-master-page' }
+	  }else if ( action == "PROFITREPORT") {
+      // if (_type == "L")
+      //   return '/Silver.USAccounts.Trans/InvoicePage';
+      // if (_type == 'P' )
+      //   return  {appid : this.gs.appid,menuid: this.gs.MENU_AE_MASTER_ARAP,mbl_pkid: this.pkid,mbl_refno: this.record.mbl_refno,mbl_type: 'AE', origin: 'airexp-master-page' }
+  }
 }
 
 
