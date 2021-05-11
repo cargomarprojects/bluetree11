@@ -641,7 +641,89 @@ export class AirImpMasterEditComponent implements OnInit {
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
           mbl_type: 'AI',
+          origin: 'airimp-master-page'
+        };
+    }else if (action == "PROFITREPORT") {
+      if (_type == "L")
+        return '/Silver.USAccounts.Trans/ProfitReportPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_AI_MASTER_PROFIT_REPORT,
+          mbl_pkid: this.pkid,
+          mbl_refno: this.record.mbl_refno,
+          mbl_type: 'AI',
+          origin: 'airimp-master-page'
+        };
+    }else if (action == "PAYMENT-REQUEST") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/PaymentRequestPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_AI_PAYMENT_REQUEST,
+          cp_master_id: this.pkid,
+          cp_source: 'AIR-MASTER',
+          cp_mode: 'AIR IMPORT',
+          cp_ref_no: this.record.mbl_refno,
+          is_locked: this.is_locked,
+          origin: 'airimp-master-page'
+        };
+    }else if (action == "MESSENGER-SLIP") {
+      if (_type == "L")
+        return '/Silver.Other.Trans/MessengerSlipList';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_AI_MESSENGER_SLIP,
+          mbl_pkid: this.pkid,
+          mbl_mode: 'AIR IMPORT',
+          mbl_refno: this.record.mbl_refno,
+          is_locked: this.is_locked,
+          origin: 'airimp-master-page'
+        };
+    }else if (action == "FOLLOWUP") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/FollowUpPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_AI_MASTER,
+          master_id: this.pkid,
+          master_refno: this.record.mbl_refno,
+          master_refdate: this.record.mbl_ref_date,
+          is_locked: this.is_locked,
+          origin: 'airimp-master-page'
+        };
+    }else if (action == "REQUEST-APPROVAL") {
+      if (_type == "L")
+        return '/Silver.Other.Trans/ApprovedPageList';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_AI_MASTER_REQUEST_APPROVAL,
+          mbl_pkid: this.pkid,
+          mbl_refno: this.record.mbl_refno,
+          doc_type: 'AIR IMPORT',
+          req_type: 'REQUEST',
+          is_locked: this.is_locked,
+          origin: 'airimp-master-page'
+        };
+    }else if (action == "INERNALMEMO") {
+      if (_type == "L")
+        return '/Silver.Other.Trans/TrackingPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_AI_MASTER_INTERNAL_MEMO,
+          refno: "REF : " + this.record.mbl_refno,
+          pkid: this.pkid,
           origin: 'airimp-master-page',
+          oprgrp: 'AIR IMPORT',
+          parentType: 'AIRIMP-CNTR',
+          paramType: 'AIRIMP-CNTR-MOVE-STATUS',
+          is_locked: this.is_locked,
+          hideTracking: 'Y'
         };
     }
   }

@@ -385,10 +385,13 @@
                     </div>
 
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                        <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
                             *ngIf="gs.screenExists(gs.MENU_AI_MASTER_PROFIT_REPORT)"
                             (click)="BtnNavigation('PROFITREPORT')">Profit
-                            Report</button>
+                            Report</button> -->
+                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_MASTER_PROFIT_REPORT)" 
+                            [routerLink]="BtnNavigation2('PROFITREPORT','L')" [queryParams]="BtnNavigation2('PROFITREPORT','P')">Profit
+                            Report</a>
                     </div>
 
                     <div class="form-group row">
@@ -399,18 +402,24 @@
                     </div>
 
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                        <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
                             *ngIf="gs.screenExists(gs.MENU_AI_MESSENGER_SLIP)"
                             (click)="BtnNavigation('MESSENGER-SLIP')">Messenger
-                            Slip</button>
+                            Slip</button> -->
+                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_MESSENGER_SLIP)" 
+                            [routerLink]="BtnNavigation2('MESSENGER-SLIP','L')" [queryParams]="BtnNavigation2('MESSENGER-SLIP','P')">Messenger
+                            Slip</a>
                     </div>
 
 
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                        <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
                             *ngIf="gs.screenExists(gs.MENU_AI_PAYMENT_REQUEST)"
                             (click)="BtnNavigation('PAYMENT-REQUEST')">Payment
-                            Request</button>
+                            Request</button> -->
+                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_PAYMENT_REQUEST)" 
+                            [routerLink]="BtnNavigation2('PAYMENT-REQUEST','L')" [queryParams]="BtnNavigation2('PAYMENT-REQUEST','P')">Payment
+                            Request</a>
                     </div>
 
                     <div class="form-group row">
@@ -421,22 +430,32 @@
                     </div>
 
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                        <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
                             *ngIf="gs.screenExists(gs.MENU_AI_MASTER)" (click)="BtnNavigation('FOLLOWUP')">Add To Follow
-                            Up</button>
+                            Up</button> -->
+                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_MASTER)" 
+                            [routerLink]="BtnNavigation2('FOLLOWUP','L')" [queryParams]="BtnNavigation2('FOLLOWUP','P')">Add To Follow
+                            Up</a>
                     </div>
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                        <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
                             *ngIf="gs.screenExists(gs.MENU_AI_MASTER_INTERNAL_MEMO)"
                             [style.color]="record.mbl_ismemo_attached=='Y'?'red':black"
                             (click)="BtnNavigation('INERNALMEMO')">Internal
-                            Memo</button>
+                            Memo</button> -->
+                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_MASTER_INTERNAL_MEMO)" 
+                            [style.color]="record.mbl_ismemo_attached=='Y'?'red':black"
+                            [routerLink]="BtnNavigation2('INERNALMEMO','L')" [queryParams]="BtnNavigation2('INERNALMEMO','P')">Internal
+                            Memo</a>
                     </div>
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                        <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
                             *ngIf="gs.screenExists(gs.MENU_AI_MASTER_REQUEST_APPROVAL)"
                             (click)="BtnNavigation('REQUEST-APPROVAL')">Request
-                            For Approval</button>
+                            For Approval</button> -->
+                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_MASTER_REQUEST_APPROVAL)" 
+                            [routerLink]="BtnNavigation2('REQUEST-APPROVAL','L')" [queryParams]="BtnNavigation2('REQUEST-APPROVAL','P')">Request
+                            For Approval</a>
                     </div>
 
                 </div>
