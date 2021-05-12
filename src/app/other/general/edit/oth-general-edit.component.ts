@@ -870,6 +870,100 @@ export class OthGeneralEditComponent implements OnInit {
           mbl_type: 'OT',
           origin: 'other-general-page',
         };
+    }else if (action == "DELIVERY-ORDER") {
+      if (_type == "L")
+        return '/Silver.Other.Trans/DeliveryOrderList';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_OT_OPERATION_DELIVERY_ORDER,
+          parentid: this.pkid,
+          pickCategory: 'OTHERS',
+          is_locked: this.is_locked,
+          origin: 'other-general-page'
+        };
+    }else if (action == "PROFITREPORT") {
+      if (_type == "L")
+        return '/Silver.USAccounts.Trans/ProfitReportPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_OT_OPERATION_PROFIT_REPORT,
+          mbl_pkid: this.pkid,
+          mbl_refno: this.record.mbl_refno,
+          mbl_type: 'OT',
+          origin: 'other-general-page'
+        };
+    }else if (action == "PAYMENT-REQUEST") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/PaymentRequestPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_OT_PAYMENT_REQUEST,
+          cp_master_id: this.pkid,
+          cp_source: 'OTHER OPERATION',
+          cp_mode: 'OTHERS',
+          cp_ref_no: this.record.mbl_refno,
+          is_locked: this.is_locked,
+          origin: 'other-general-page'
+        };
+    }else if (action == "MESSENGER-SLIP") {
+      if (_type == "L")
+        return '/Silver.Other.Trans/MessengerSlipList';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_OT_MESSENGER_SLIP,
+          mbl_pkid: this.pkid,
+          mbl_mode: 'OTHERS',
+          mbl_refno: this.record.mbl_refno,
+          is_locked: this.is_locked,
+          origin: 'other-general-page'
+        };
+    }else if (action == "FOLLOWUP") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/FollowUpPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_OT_OPERATION,
+          master_id: this.pkid,
+          master_refno: this.record.mbl_refno,
+          master_refdate: this.record.mbl_ref_date,
+          is_locked: this.is_locked,
+          origin: 'other-general-page'
+        };
+    }else if (action == "REQUEST-APPROVAL") {
+      if (_type == "L")
+        return '/Silver.Other.Trans/ApprovedPageList';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_OT_MASTER_REQUEST_APPROVAL,
+          mbl_pkid: this.pkid,
+          mbl_refno: this.record.mbl_refno,
+          doc_type: 'OTHERS',
+          req_type: 'REQUEST',
+          is_locked: this.is_locked,
+          origin: 'other-general-page'
+        };
+    }else if (action == "INERNALMEMO") {
+      if (_type == "L")
+        return '/Silver.Other.Trans/TrackingPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_OT_MASTER_INTERNAL_MEMO,
+          refno: "REF : " + this.record.mbl_refno,
+          pkid: this.pkid,
+          origin: 'other-general-page',
+          oprgrp: 'OTHERS',
+          parentType: 'OTH-CNTR',
+          paramType: 'OTH-CNTR-MOVE-STATUS',
+          is_locked: this.is_locked,
+          hideTracking: 'Y'
+        };
     }
   }
 
