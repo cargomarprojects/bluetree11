@@ -410,7 +410,7 @@ export class AirImpHouseEditComponent implements OnInit {
             appid: this.gs.appid,
             menuid: this.mainService.menuid,
             pkid: this.pkid,
-            parentid :this.parentid,
+            parentid: this.parentid,
             type: '',
             origin: 'airimp-house-edit-page',
             mode: 'EDIT'
@@ -744,6 +744,36 @@ export class AirImpHouseEditComponent implements OnInit {
     }
   }
 
+  BtnNavigation2(action: string, _type: string, attachmodal: any = null) {
+    if (action == "CARGOPICKUP") {
+      if (_type == "L")
+        return '/Silver.AirImport.Trans/AirCargoPickupPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_AI_HOUSE_DELIVERY_ORDER,
+          pkid: this.pkid,
+          is_locked: this.is_locked,
+          origin: 'airimp-House-page'
+        };
+    } else if (action == "SHIPMOVEMENT") {
+      if (_type == "L")
+        return '/Silver.Other.Trans/TrackingPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_AI_SHIPMENT_MOVEMENT,
+          refno: "REF : " + this.record.mbl_refno + "  HBL : " + this.record.hbl_houseno,
+          pkid: this.pkid,
+          origin: 'airimp-House-page',
+          oprgrp: 'AIR IMPORT',
+          parentType: 'AIRIMP-SHIP',
+          paramType: 'SHIP-MOVE-STATUS',
+          hideTracking: 'Y',
+          is_locked: this.is_locked
+        };
+    }
+  }
 
   BtnNavigation(action: string) {
 
@@ -952,7 +982,7 @@ export class AirImpHouseEditComponent implements OnInit {
           mode: 'EDIT',
           rnd: this.gs.getRandomInt()
         };
-       } else {
+      } else {
         return {
           appid: this.gs.appid,
           id: this.gs.MENU_AI_HOUSE,
