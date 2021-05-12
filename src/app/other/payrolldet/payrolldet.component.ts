@@ -30,7 +30,10 @@ export class PayrollDetComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.mainservice.init(this.route.snapshot.queryParams.parameter);
+    if (this.route.snapshot.queryParams.parameter == null)
+      this.mainservice.init(this.route.snapshot.queryParams);
+    else
+      this.mainservice.init(JSON.parse(this.route.snapshot.queryParams.parameter));
     this.initPage();
   }
 

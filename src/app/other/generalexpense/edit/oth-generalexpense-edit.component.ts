@@ -492,6 +492,44 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           mbl_type: this.EXPTYPE,
           origin: 'other-generalexpense-page',
         };
+    }else if (action == "PROFITREPORT") {
+      let sid = this.gs.MENU_GENERAL_EXPENSE_PROFIT_REPORT;
+        if (this.EXPTYPE.trim() == "PR")
+          sid = this.gs.MENU_PAYROLL_EXPENSE_PROFIT_REPORT;
+        if (this.EXPTYPE.trim() == "CM")
+          sid = this.gs.MENU_1099_EXPENSE_PROFIT_REPORT;
+        if (this.EXPTYPE.trim() == "PS")
+          sid = this.gs.MENU_INTERNAL_PAYMENT_SETTLEMENT_PROFIT_REPORT;
+        if (this.EXPTYPE.trim() == "FA")
+          sid = this.gs.MENU_FILE_ADJUSTMENT_PROFIT_REPORT;
+
+      if (_type == "L")
+        return '/Silver.USAccounts.Trans/ProfitReportPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: sid,
+          mbl_pkid: this.pkid,
+          mbl_refno: this.record.mbl_refno,
+          mbl_type: this.EXPTYPE,
+          origin: 'other-generalexpense-page',
+        };
+    }else if (action == "PAYROLLDET") {
+      let sid = this.gs.MENU_GENERAL_EXPENSE_ARAP;
+      if (this.EXPTYPE.trim() == "PR")
+        sid = this.gs.MENU_PAYROLL_EXPENSE_ARAP;
+
+      if (_type == "L")
+        return '/Silver.Other.Trans/PayrollPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: sid,
+          mbl_pkid: this.pkid,
+          mbl_refno: this.record.mbl_refno,
+          mbl_type: this.EXPTYPE,
+          origin: 'other-generalexpense-page',
+        };
     }
   }
 

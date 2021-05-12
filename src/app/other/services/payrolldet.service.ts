@@ -56,7 +56,7 @@ export class PayrollDetService {
         }
         if (this.initlialized)
             return;
-        const options = JSON.parse(params);
+        const options = params;
         this.id = options.menuid;
         this.menuid = options.menuid;
         this.mbl_pkid = options.mbl_pkid;

@@ -89,10 +89,14 @@
                 </div>
 
                 <div class="form-group row">
-                    <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanProfitReport" (click)="BtnNavigation('PROFITREPORT')">Profit Report</button>
+                    <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanProfitReport" (click)="BtnNavigation('PROFITREPORT')">Profit Report</button> -->
+                    <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanProfitReport"
+                    [routerLink]="BtnNavigation2('PROFITREPORT','L')" [queryParams]="BtnNavigation2('PROFITREPORT','P')">Profit Report</a>
                 </div>
                 <div  *ngIf="gs.PAYROLL_ENABLED == 'Y' && EXPTYPE == 'PR'" class="form-group row">
-                    <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanPayroll" (click)="BtnNavigation('PAYROLLDET')">Payroll</button>
+                    <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanPayroll" (click)="BtnNavigation('PAYROLLDET')">Payroll</button> -->
+                    <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanPayroll"
+                    [routerLink]="BtnNavigation2('PAYROLLDET','L')" [queryParams]="BtnNavigation2('PAYROLLDET','P')">Payroll</a>
                 </div>
             </div>
         </div>
