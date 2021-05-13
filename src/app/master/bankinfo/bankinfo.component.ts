@@ -46,19 +46,30 @@ export class BankInfoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.menuid = options.menuid;
-    this.parentid = options.parentid;
-    this.partyCode = options.party_code;
-    this.partyName = options.party_name;
-    this.partyOfficialName = options.party_officialname;
-    this.partyAddr1 = options.party_addr1;
-    this.partyAddr2 = options.party_addr2;
-    this.partyAddr3 = options.party_addr3;
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.parentid = this.route.snapshot.queryParams.parentid;
+      this.partyCode = this.route.snapshot.queryParams.party_code;
+      this.partyName = this.route.snapshot.queryParams.party_name;
+      this.partyOfficialName = this.route.snapshot.queryParams.party_officialname;
+      this.partyAddr1 = this.route.snapshot.queryParams.party_addr1;
+      this.partyAddr2 = this.route.snapshot.queryParams.party_addr2;
+      this.partyAddr3 = this.route.snapshot.queryParams.party_addr3;
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.menuid = options.menuid;
+      this.parentid = options.parentid;
+      this.partyCode = options.party_code;
+      this.partyName = options.party_name;
+      this.partyOfficialName = options.party_officialname;
+      this.partyAddr1 = options.party_addr1;
+      this.partyAddr2 = options.party_addr2;
+      this.partyAddr3 = options.party_addr3;
+    }
     this.initPage();
     this.mode = "ADD";
     this.actionHandler();
-     this.List('SCREEN');
+    this.List('SCREEN');
   }
 
   private initPage() {

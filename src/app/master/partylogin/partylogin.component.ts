@@ -32,8 +32,8 @@ export class PartyLoginComponent implements OnInit {
   selectedRowIndex: number = -1;
   is_locked: boolean = false;
   lblSave: string = "Save";
-   
-  
+
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -43,11 +43,19 @@ export class PartyLoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.menuid = options.menuid;
-    this.parentid = options.parentid;
-    this.partyCode = options.party_code;
-    this.partyName = options.party_name;
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.parentid = this.route.snapshot.queryParams.parentid;
+      this.partyCode = this.route.snapshot.queryParams.party_code;
+      this.partyName = this.route.snapshot.queryParams.party_name;
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.menuid = options.menuid;
+      this.parentid = options.parentid;
+      this.partyCode = options.party_code;
+      this.partyName = options.party_name;
+    }
+
     this.initPage();
     this.mode = "ADD";
     this.actionHandler();
@@ -153,8 +161,7 @@ export class PartyLoginComponent implements OnInit {
     //Txtmemo.Focus();
   }
 
-  NewRecord()
-  {
+  NewRecord() {
     this.mode = "ADD";
     this.actionHandler();
   }
@@ -171,7 +178,7 @@ export class PartyLoginComponent implements OnInit {
 
     this.record.plogin_party_id = this.parentid;
     this.record.plogin_locked = this.record.plogin_locked_b == true ? "Y" : "N";
-    this.record.plogin_isparent = this.record.plogin_isparent_b == true? "Y" : "N";
+    this.record.plogin_isparent = this.record.plogin_isparent_b == true ? "Y" : "N";
 
     const saveRecord = <vm_Tbl_Party_Login>{};
     saveRecord.userinfo = this.gs.UserInfo;
@@ -192,16 +199,16 @@ export class PartyLoginComponent implements OnInit {
             //Grid_Memo.Focus();
           } else {
             if (this.records != null) {
-                var REC = this.records.find(rec => rec.plogin_pkid == this.pkid);
-                if (REC != null) {
-                  REC.plogin_code = this.record.plogin_code;
-                  REC.plogin_name = this.record.plogin_name;
-                  REC.plogin_locked = this.record.plogin_locked;
-                }
+              var REC = this.records.find(rec => rec.plogin_pkid == this.pkid);
+              if (REC != null) {
+                REC.plogin_code = this.record.plogin_code;
+                REC.plogin_name = this.record.plogin_name;
+                REC.plogin_locked = this.record.plogin_locked;
+              }
             }
           }
           this.NewRecord();
-           this.errorMessage = 'Save Complete';
+          this.errorMessage = 'Save Complete';
           // alert(this.errorMessage);
         }
       }, error => {
@@ -234,7 +241,7 @@ export class PartyLoginComponent implements OnInit {
       alert(this.errorMessage);
       return bRet;
     }
-    
+
     if (this.gs.isBlank(this.record.plogin_pwd)) {
       bRet = false;
       this.errorMessage = "Password Cannot Be Blank";
@@ -242,7 +249,7 @@ export class PartyLoginComponent implements OnInit {
       return bRet;
     }
 
-    
+
     if (this.gs.isBlank(this.record.plogin_email)) {
       bRet = false;
       this.errorMessage = "Email Cannot Be Blank";

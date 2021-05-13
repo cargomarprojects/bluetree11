@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
- 
+
 import { GlobalService } from '../../core/services/global.service';
 import { Tbl_Mast_Addressm } from '../models/Tbl_Mast_Addressm';
 import { PartyAddrService } from '../services/partyaddr.service';
@@ -15,7 +15,7 @@ export class PartyAddrListComponent implements OnInit {
   errorMessage: string;
   party_pkid: string;
   party_name: string;
-  
+
   menuid: string;
   title: string;
   isAdmin: boolean;
@@ -34,15 +34,20 @@ export class PartyAddrListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.party_pkid = this.route.snapshot.queryParams.parentid;
+      this.party_name = this.route.snapshot.queryParams.party_name;
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.menuid = options.menuid;
+      this.party_pkid = options.parentid;
+      this.party_name = options.party_name;
+    }
 
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.menuid = options.menuid;
-    this.party_pkid = options.parentid;
-    this.party_name = options.party_name;
-    
     this.isAdmin = this.gs.IsAdmin(this.menuid);
-   // this.title = this.gs.getTitle(this.menuid);
-   this.title ='Address';
+    // this.title = this.gs.getTitle(this.menuid);
+    this.title = 'Address';
     this.canAdd = this.gs.canAdd(this.menuid);
     this.canEdit = this.gs.canEdit(this.menuid);
 
@@ -75,7 +80,7 @@ export class PartyAddrListComponent implements OnInit {
       pkid: '',
       mode: 'ADD',
       parentid: this.party_pkid,
-      party_name:this.party_name
+      party_name: this.party_name
     };
     this.gs.Naviagete('Silver.Master/PartyAddrEditPage', JSON.stringify(parameter));
 
@@ -92,7 +97,7 @@ export class PartyAddrListComponent implements OnInit {
       pkid: _record.add_pkid,
       mode: 'EDIT',
       parentid: this.party_pkid,
-      party_name:this.party_name
+      party_name: this.party_name
     };
     this.gs.Naviagete('Silver.Master/PartyAddrEditPage', JSON.stringify(parameter));
   }
