@@ -675,9 +675,82 @@ export class PartyEditComponent implements OnInit {
           title: 'SOP Memo',
           origin: 'party-page'
         };
+    }else if (action == "QUOTN-MEMO") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/XmlRemarksPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.menuid,
+          pkid: this.pkid,
+          source: 'QUOTATION-MEMO',
+          title: 'Quotation Memo',
+          origin: 'party-page'
+        };
+    }else if (action == "ACC-ALERT") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/XmlRemarksPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.menuid,
+          pkid: this.pkid,
+          source: 'ACCOUNTING-ALERT',
+          title: 'Accounting Alert',
+          origin: 'party-page'
+        };
+    }else if (action == "DELIVERY-ADDRESS") {
+      if (_type == "L")
+        return '/Silver.Master/DeliveryAddrPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.menuid,
+          pkid: this.pkid,
+          origin: 'party-page'
+        };
+    }else if (action == "PARTY-LOGIN") {
+      if (_type == "L")
+        return '/Silver.Master/PartyLoginPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.menuid,
+          parentid: this.pkid,
+          party_code: this.record.gen_code,
+          party_name: this.record.gen_name,
+          origin: 'party-page'
+        };
+    }else if (action == "PARTY-ADDRESS") {
+      if (_type == "L")
+        return '/Silver.Master/PartyAddrPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.menuid,
+          parentid: this.pkid,
+          party_name: this.record.gen_short_name,
+          origin: 'party-page'
+        };
+    }else if (action == "BANK-INFO") {
+      if (_type == "L")
+        return '/Silver.Master/BankInfoPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.menuid,
+          parentid: this.pkid,
+          party_code: this.record.gen_code,
+          party_name: this.record.gen_short_name,
+          party_officialname: this.record.gen_name,
+          party_addr1: this.record.gen_address1,
+          party_addr2: this.record.gen_address2,
+          party_addr3: this.record.gen_address3,
+          origin: 'party-page'
+        };
     }
   }
-  
+
   BtnNavigation(action: string) {
 
     switch (action) {

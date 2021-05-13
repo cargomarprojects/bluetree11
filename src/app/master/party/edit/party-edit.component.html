@@ -845,38 +845,58 @@
                     </div>
 
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('QUOTN-MEMO')">Quotation
-                            Memo</button>
+                        <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('QUOTN-MEMO')">Quotation
+                            Memo</button> -->
+                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
+                            [routerLink]="BtnNavigation2('QUOTN-MEMO','L')" [queryParams]="BtnNavigation2('QUOTN-MEMO','P')">Quotation
+                            Memo</a>
                     </div>
 
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('ACC-ALERT')">Accounting
-                            Alert</button>
+                        <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('ACC-ALERT')">Accounting
+                            Alert</button> -->
+                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
+                            [routerLink]="BtnNavigation2('ACC-ALERT','L')" [queryParams]="BtnNavigation2('ACC-ALERT','P')">Accounting
+                            Alert</a>
                     </div>
 
 
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('DELIVERY-ADDRESS')">Delivery
-                            Address</button>
+                        <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('DELIVERY-ADDRESS')">Delivery
+                            Address</button> -->
+                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
+                            [routerLink]="BtnNavigation2('DELIVERY-ADDRESS','L')" [queryParams]="BtnNavigation2('DELIVERY-ADDRESS','P')">Delivery
+                            Address</a>
                     </div>
 
                     <div class="form-group row">
                         <button disabled class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('BUSSINESS-INFO')">Business
                             Info</button>
+                            <!-- <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
+                            [routerLink]="BtnNavigation2('BUSSINESS-INFO','L')" [queryParams]="BtnNavigation2('BUSSINESS-INFO','P')">Business
+                            Info</a> -->
                     </div>
 
                     <div *ngIf="gs.company_code == 'MNYC'" class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('PARTY-LOGIN')">Login
-                            Details</button>
+                        <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('PARTY-LOGIN')">Login
+                            Details</button> -->
+                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
+                            [routerLink]="BtnNavigation2('PARTY-LOGIN','L')" [queryParams]="BtnNavigation2('PARTY-LOGIN','P')">Login
+                            Details</a>
                     </div>
 
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm"
-                            (click)="BtnNavigation('PARTY-ADDRESS')">Addresses</button>
+                        <!-- <button class=" col-12 btn btn-info btn-sm"
+                            (click)="BtnNavigation('PARTY-ADDRESS')">Addresses</button> -->
+                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
+                            [routerLink]="BtnNavigation2('PARTY-ADDRESS','L')" [queryParams]="BtnNavigation2('PARTY-ADDRESS','P')">Addresses</a>
                     </div>
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('BANK-INFO')">Bank
-                            Information</button>
+                        <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('BANK-INFO')">Bank
+                            Information</button> -->
+                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
+                            [routerLink]="BtnNavigation2('BANK-INFO','L')" [queryParams]="BtnNavigation2('BANK-INFO','P')">Bank
+                            Information</a>
                     </div>
 
                 </div>
