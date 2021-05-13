@@ -650,32 +650,59 @@ export class PartyEditComponent implements OnInit {
     }
   }
 
-
+  BtnNavigation2(action: string, _type: string, attachmodal: any = null) {
+    if (action == "MEMO") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/XmlRemarksPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.menuid,
+          pkid: this.pkid,
+          source: 'PARTY-MEMO',
+          title: 'Memo',
+          origin: 'party-page'
+        };
+    }else if (action == "SOP-MEMO") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/XmlRemarksPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.menuid,
+          pkid: this.pkid,
+          source: 'SOP-MEMO',
+          title: 'SOP Memo',
+          origin: 'party-page'
+        };
+    }
+  }
+  
   BtnNavigation(action: string) {
 
     switch (action) {
-      case 'ARAP': {
-        let prm = {
-          menuid: this.gs.MENU_AI_MASTER_ARAP,
-          mbl_pkid: this.pkid,
-          mbl_refno: this.record.gen_code,
-          mbl_type: 'AI',
-          origin: 'airimp-master-page',
-        };
-        this.gs.Naviagete('Silver.USAccounts.Trans/InvoicePage', JSON.stringify(prm));
-        break;
-      }
-      case 'PROFITREPORT': {
-        let prm = {
-          menuid: this.gs.MENU_AI_MASTER_PROFIT_REPORT,
-          mbl_pkid: this.pkid,
-          mbl_refno: this.record.gen_code,
-          mbl_type: 'AI',
-          origin: 'airimp-master-page',
-        };
-        this.gs.Naviagete('Silver.USAccounts.Trans/ProfitReportPage', JSON.stringify(prm));
-        break;
-      }
+      // case 'ARAP': {
+      //   let prm = {
+      //     menuid: this.gs.MENU_AI_MASTER_ARAP,
+      //     mbl_pkid: this.pkid,
+      //     mbl_refno: this.record.gen_code,
+      //     mbl_type: 'AI',
+      //     origin: 'airimp-master-page',
+      //   };
+      //   this.gs.Naviagete('Silver.USAccounts.Trans/InvoicePage', JSON.stringify(prm));
+      //   break;
+      // }
+      // case 'PROFITREPORT': {
+      //   let prm = {
+      //     menuid: this.gs.MENU_AI_MASTER_PROFIT_REPORT,
+      //     mbl_pkid: this.pkid,
+      //     mbl_refno: this.record.gen_code,
+      //     mbl_type: 'AI',
+      //     origin: 'airimp-master-page',
+      //   };
+      //   this.gs.Naviagete('Silver.USAccounts.Trans/ProfitReportPage', JSON.stringify(prm));
+      //   break;
+      // }
       case 'ATTACHMENT': {
         let TypeList: any[] = [];
         this.attach_title = 'Documents';
