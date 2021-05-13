@@ -43,12 +43,21 @@ export class PartyAddrEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-    this.menuid = options.menuid;
-    this.parentid = options.parentid;
-    this.pkid = options.pkid;
-    this.mode = options.mode;
-    this.party_name = options.party_name;
+
+    if (this.route.snapshot.queryParams.parameter == null) {
+      this.menuid = this.route.snapshot.queryParams.menuid;
+      this.parentid = this.route.snapshot.queryParams.parentid;
+      this.pkid = this.route.snapshot.queryParams.pkid;
+      this.mode = this.route.snapshot.queryParams.mode;
+      this.party_name = this.route.snapshot.queryParams.party_name;
+    } else {
+      const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+      this.menuid = options.menuid;
+      this.parentid = options.parentid;
+      this.pkid = options.pkid;
+      this.mode = options.mode;
+      this.party_name = options.party_name;
+    }
 
     this.initPage();
     this.actionHandler();
@@ -112,10 +121,10 @@ export class PartyAddrEditComponent implements OnInit {
 
   onBlur(field: string, _rec: Tbl_Mast_Addressm = null) {
     switch (field) {
-        case 'add_pincode': {
-         this.record.add_pincode = this.record.add_pincode.toUpperCase();
-          break;
-        }
+      case 'add_pincode': {
+        this.record.add_pincode = this.record.add_pincode.toUpperCase();
+        break;
+      }
     }
   }
 
@@ -182,9 +191,9 @@ export class PartyAddrEditComponent implements OnInit {
           alert(this.errorMessage);
         }
         else {
-            this.mode = "EDIT"
-            this.errorMessage = 'Save Complete';
-           // alert(this.errorMessage);
+          this.mode = "EDIT"
+          this.errorMessage = 'Save Complete';
+          // alert(this.errorMessage);
         }
       }, error => {
         this.errorMessage = this.gs.getError(error);
@@ -203,7 +212,7 @@ export class PartyAddrEditComponent implements OnInit {
       return bRet;
     }
 
-    if (this.gs.isBlank(this.record.add_country_id)||this.gs.isBlank(this.record.add_country_name)) {
+    if (this.gs.isBlank(this.record.add_country_id) || this.gs.isBlank(this.record.add_country_name)) {
       bRet = false;
       this.errorMessage = "Country cannot be empty";
       alert(this.errorMessage);

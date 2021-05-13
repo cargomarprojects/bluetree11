@@ -42,9 +42,14 @@ export class DeliveryAddrComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-        this.pkid = options.pkid;
-        this.menuid = options.menuid;
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.menuid = this.route.snapshot.queryParams.menuid;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.pkid = options.pkid;
+            this.menuid = options.menuid;
+        }
         this.mode = 'EDIT';
         this.initPage();
         this.actionHandler();
@@ -120,7 +125,7 @@ export class DeliveryAddrComponent implements OnInit {
 
         this.record.add_pkid = this.gs.getGuid();
         this.record.add_parent_id = this.pkid;
-        
+
         const saveRecord = <vm_Tbl_Mast_Addressm>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;
@@ -134,7 +139,7 @@ export class DeliveryAddrComponent implements OnInit {
                 }
                 else {
                     this.errorMessage = 'Save Complete';
-                   // alert(this.errorMessage);
+                    // alert(this.errorMessage);
                 }
             }, error => {
                 this.errorMessage = this.gs.getError(error);
