@@ -3,9 +3,12 @@
     <!-- {{mainservice.title}} -->
     <label class="mr-1">EDI</label>
     <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-    <button class="btn btn-primary btn-sm mr-1" (click)="ShipData()">Shipment Data</button>
-    <button class="btn btn-primary btn-sm mr-1" (click)="MissingData()">Missing Data</button>
-    <button class="btn btn-primary btn-sm mr-1" (click)="SettingPage()">Settings</button>
+    <!-- <button class="btn btn-primary btn-sm mr-1" (click)="ShipData()">Shipment Data</button> -->
+    <a class="btn btn-primary btn-sm mr-1"  [routerLink]="ShipData('L')" [queryParams]="ShipData('P')">Shipment Data</a>
+    <!-- <button class="btn btn-primary btn-sm mr-1" (click)="MissingData()">Missing Data</button> -->
+    <a class="btn btn-primary btn-sm mr-1"  [routerLink]="MissingData('L')" [queryParams]="MissingData('P')">Missing Data</a>
+    <!-- <button class="btn btn-primary btn-sm mr-1" (click)="SettingPage()">Settings</button> -->
+    <a class="btn btn-primary btn-sm mr-1"  [routerLink]="SettingPage('L')" [queryParams]="SettingPage('P')">Settings</a>
   </div>
 </div>
 <div *ngIf="errorMessage$ | async" class="alert alert-danger">

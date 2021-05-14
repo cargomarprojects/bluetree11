@@ -74,33 +74,47 @@ export class ImportHblPageComponent implements OnInit {
         this.mainservice.ImportXmlData();
     }
 
-    ShipData() {
-        let prm = {
-            menuid: this.gs.MENU_IMPORT_HBL_DATA_SEA,
-            id: '',
-            param_type: '',
-            origin: 'shipdata-page',
-        };
-        this.gs.Naviagete('Silver.ImportData/ShipDataPage', JSON.stringify(prm));
+    ShipData(_type: string = "") {
+        // let prm = {
+        //     menuid: this.gs.MENU_IMPORT_HBL_DATA_SEA,
+        //     id: '',
+        //     param_type: '',
+        //     origin: 'shipdata-page',
+        // };
+        // this.gs.Naviagete('Silver.ImportData/ShipDataPage', JSON.stringify(prm));
+
+        if (_type == "L")
+            return '/Silver.ImportData/ShipDataPage';
+        if (_type == 'P')
+            return { appid: this.gs.appid, menuid: this.gs.MENU_IMPORT_HBL_DATA_SEA, id: '', param_type: '', origin: 'shipdata-page' }
     }
 
-    SettingPage() {
-        let prm = {
-            menuid: this.gs.MENU_IMPORT_HBL_DATA_SEA,
-            id: '',
-            param_type: '',
-            origin: 'shipdata-page',
-        };
-        this.gs.Naviagete('Silver.ImportData/SettingPage', JSON.stringify(prm));
+    SettingPage(_type: string = "") {
+        // let prm = {
+        //     menuid: this.gs.MENU_IMPORT_HBL_DATA_SEA,
+        //     id: '',
+        //     param_type: '',
+        //     origin: 'shipdata-page',
+        // };
+        // this.gs.Naviagete('Silver.ImportData/SettingPage', JSON.stringify(prm));
+
+        if (_type == "L")
+            return '/Silver.ImportData/SettingPage';
+        if (_type == 'P')
+            return { appid: this.gs.appid, menuid: this.gs.MENU_IMPORT_HBL_DATA_SEA, id: '', param_type: '', origin: 'shipdata-page' }
     }
 
-    MissingData()
-    {
-        let prm = {
-            menuid: this.gs.MENU_IMPORT_HBL_DATA_SEA,
-            mbl_pkid: '',
-            origin: 'importhbl-page'
-          };
-          this.gs.Naviagete('Silver.ImportData/MissingDataPage', JSON.stringify(prm));
+    MissingData(_type: string = "") {
+        // let prm = {
+        //     menuid: this.gs.MENU_IMPORT_HBL_DATA_SEA,
+        //     mbl_pkid: '',
+        //     origin: 'importhbl-page'
+        // };
+        // this.gs.Naviagete('Silver.ImportData/MissingDataPage', JSON.stringify(prm));
+
+        if (_type == "L")
+            return '/Silver.ImportData/MissingDataPage';
+        if (_type == 'P')
+            return { appid: this.gs.appid, menuid: this.gs.MENU_IMPORT_HBL_DATA_SEA, id: '', param_type: '', origin: 'importhbl-page' }
     }
 }
