@@ -2,7 +2,7 @@
   <div class="page-header">
     <div class="col">
       <label class="mr-1">{{title}}</label>
-      <button class="btn btn-primary btn-sm" (click)="Close()">Close</button>
+      <button class="btn btn-primary btn-sm" (click)="Close()">Return</button>
       <i *ngIf="loading" class="fa fa-spinner"></i>
     </div>
   </div>
@@ -148,8 +148,10 @@
             <td>{{rec.mbl_branch}}</td>
             <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
             <td>
-              <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L','',rec.mbl_branch)"
-                  [queryParams]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P','',rec.mbl_branch)">{{rec.mbl_refno}}</a>
+              <!-- <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L','',rec.mbl_branch)"
+                  [queryParams]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P','',rec.mbl_branch)">{{rec.mbl_refno}}</a> -->
+                  <a class="hlink" [routerLink]="getRouteDet('MASTER','L',rec)"
+                  [queryParams]="getRouteDet('MASTER','P',rec)">{{rec.mbl_refno}}</a>
           </td>
             <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
             <td>{{rec.hbl_hand_name}}</td>
@@ -157,10 +159,11 @@
             <td>{{rec.mbl_pol_name}}</td>
             <td>{{rec.mbl_pod_name}}</td>
             <!-- <td class='hlink2' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td> -->
-            <td>
+            <td  *ngIf="rec.mbl_branch==gs.branch_name">
               <a class="hlink" [routerLink]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L','',rec.mbl_branch)"
                   [queryParams]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'P','',rec.mbl_branch)">{{rec.hbl_houseno}}</a>
           </td>
+          <td *ngIf="rec.mbl_branch!=gs.branch_name" >{{rec.hbl_houseno}}</td>
             <td>{{rec.hbl_shipper_name}}</td>
             <td>{{rec.hbl_consignee_name}}</td>
             <td>{{rec.hbl_movement}}</td>
