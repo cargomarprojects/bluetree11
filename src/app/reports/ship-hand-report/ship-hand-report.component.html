@@ -159,10 +159,11 @@
             <td>{{rec.mbl_pol_name}}</td>
             <td>{{rec.mbl_pod_name}}</td>
             <!-- <td class='hlink2' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td> -->
-            <td>
+            <td  *ngIf="rec.mbl_branch==gs.branch_name">
               <a class="hlink" [routerLink]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L','',rec.mbl_branch)"
                   [queryParams]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'P','',rec.mbl_branch)">{{rec.hbl_houseno}}</a>
           </td>
+          <td *ngIf="rec.mbl_branch!=gs.branch_name" >{{rec.hbl_houseno}}</td>
             <td>{{rec.hbl_shipper_name}}</td>
             <td>{{rec.hbl_consignee_name}}</td>
             <td>{{rec.hbl_movement}}</td>
