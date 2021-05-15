@@ -360,19 +360,5 @@ export class ShipHandReportComponent implements OnInit {
     }
   }
 
-  // getRouteDet(_type: string, _format: string, _rec: TBL_MBL_REPORT) {
-  //   let branch_name: string = _rec.mbl_branch != null ? _rec.mbl_branch.toString() : "";
-  //   if (branch_name == this.gs.branch_name) {
-  //     if (_type == "MASTER")
-  //       return this.gs.Link2Page('REFNO', _rec.mbl_mode, _rec.mbl_refno, _rec.mbl_pkid, '', '', 'L', '', _rec.mbl_branch);
-  //     else
-  //       return this.gs.Link2Page('HOUSE', _rec.mbl_mode, _rec.mbl_refno, _rec.mbl_pkid, _rec.hbl_pkid, '', _format, '', _rec.mbl_branch);
-  //   }
-  //   else {
-  //      //alert("Cannot Show Details from another Branch");
-  //     return null;
-  //   }
-
-  // }
 
 }
