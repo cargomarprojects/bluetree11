@@ -145,10 +145,11 @@
           [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'">
             <td>{{rec.mbl_branch}}</td>
             <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
-            <td>
+            <td *ngIf="rec.mbl_branch==gs.branch_name">
               <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L','',rec.mbl_branch)"
                   [queryParams]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P','',rec.mbl_branch)">{{rec.mbl_refno}}</a>
             </td>
+            <td *ngIf="rec.mbl_branch!=gs.branch_name">{{rec.mbl_refno}}</td>
             <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
             <td>{{rec.mbl_agent_name}}</td>
             <td>{{rec.mbl_liner_name}}</td>

@@ -135,16 +135,18 @@
       <tbody class="page-body-tbody" *ngFor="let rec of MainList">
         <tr>
           <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
-          <td>
+          <td *ngIf="rec.mbl_branch_code==gs.branch_code">
             <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L',rec.mbl_branch_code)"
                 [queryParams]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P',rec.mbl_branch_code)">{{rec.mbl_refno}}</a>
           </td>
+          <td *ngIf="rec.mbl_branch_code!=gs.branch_code">{{rec.mbl_refno}}</td>
           <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
           <!-- <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td> -->
-          <td>
+          <td  *ngIf="rec.mbl_branch_code==gs.branch_code">
             <a class="hlink" [routerLink]="gs.Link2Page('INVNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.inv_hbl_id,rec.inv_pkid, 'L',rec.mbl_branch_code)"
                 [queryParams]="gs.Link2Page('INVNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.inv_hbl_id,rec.inv_pkid, 'P',rec.mbl_branch_code)">{{rec.inv_no}}</a>
           </td>
+          <td  *ngIf="rec.mbl_branch_code!=gs.branch_code">{{rec.inv_no}}</td>
           <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.vendor_name}}</td>
           <td>{{rec.customer_name}}</td>
