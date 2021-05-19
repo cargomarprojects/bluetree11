@@ -1,11 +1,16 @@
+import { PageQuery } from '../../shared/models/pageQuery';
 export interface Tbl_cargo_ehbl {
     ebl_pkid: string;
     ebl_agent_id: string;
+    ebl_agent_code: string;
+    ebl_agent_name: string;
     ebl_download_max_no: number;
     ebl_start_no: number;
     ebl_running_no: number;
     ebl_ending_no: number;
     ebl_color: string;
+
+    rec_mode: string;
     rec_locked: string;
     rec_status: string;
     rec_created_by: string;
@@ -23,4 +28,12 @@ export interface Tbl_cargo_ehbld {
     ebld_approved_by: string;
     ebld_approved_date: string;
 
+}
+
+export interface vm_Tbl_cargo_ehbl {
+    mode: string;
+    record: Tbl_cargo_ehbl;
+    pkid: string;
+    userinfo: any;
+    filter: any;
 }

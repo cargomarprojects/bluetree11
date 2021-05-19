@@ -39,6 +39,7 @@ import { BranchSettingsComponent } from './branch-settings/branchsettings.compon
 import { FormatPageComponent } from './formatpage/formatpage.component';
 import { FormatPageHeaderComponent } from './formatpage/formatpage-header.component';
 import { FormatPageDetComponent } from './formatpage/formatpagedet.component';
+import { EhblComponent } from './ehbl/ehbl.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { FormatPageDetComponent } from './formatpage/formatpagedet.component';
     BranchSettingsComponent,
     FormatPageComponent,
     FormatPageHeaderComponent,
-    FormatPageDetComponent
+    FormatPageDetComponent,
+    EhblComponent
   ],
   imports: [
     SharedModule,
