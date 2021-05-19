@@ -42,10 +42,9 @@
       </thead>
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of records;  let i = index" (click)="actionHandler('EDIT',rec.ebl_pkid, i)">
-          <td>{{rec.table_group}}</td>
-          <td>{{rec.table_name}}</td>
-          <td>{{rec.table_prefix}}</td>
-          <td>{{rec.table_value}}</td>
+          <td>{{rec.ebl_agent_name}}</td>
+          <td>{{rec.ebl_start_no}}</td>
+          <td>{{rec.ebl_download_max_no}}</td>          
         </tr>
       </tbody>
     </table>
