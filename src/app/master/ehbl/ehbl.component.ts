@@ -152,7 +152,7 @@ export class EhblComponent implements OnInit {
 
         // this.record.add_pkid = this.gs.getGuid();
         // this.record.add_parent_id = this.pkid;
-this.record.rec_mode=this.mode;
+        this.record.rec_mode = this.mode;
         const saveRecord = <vm_Tbl_cargo_ehbl>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;
@@ -201,7 +201,7 @@ this.record.rec_mode=this.mode;
             this.record.ebl_agent_id = _Record.id;
             this.record.ebl_agent_name = _Record.name;
             // this.liner_lov_field.Focus();
-          }
+        }
     }
 
     onFocusout(field: string) {
