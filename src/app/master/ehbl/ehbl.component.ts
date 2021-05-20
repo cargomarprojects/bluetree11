@@ -152,11 +152,12 @@ export class EhblComponent implements OnInit {
 
         // this.record.add_pkid = this.gs.getGuid();
         // this.record.add_parent_id = this.pkid;
-
+this.record.rec_mode=this.mode;
         const saveRecord = <vm_Tbl_cargo_ehbl>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;
         saveRecord.userinfo = this.gs.UserInfo;
+        saveRecord.mode = this.mode;
 
         this.mainService.Save(saveRecord)
             .subscribe(response => {
