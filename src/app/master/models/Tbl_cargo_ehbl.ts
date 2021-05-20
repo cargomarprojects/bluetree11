@@ -8,7 +8,7 @@ export interface Tbl_cargo_ehbl {
     ebl_start_no: number;
     ebl_running_no: number;
     ebl_ending_no: number;
-    ebl_color: string;
+    ebl_color: boolean;
 
     rec_mode: string;
     rec_locked: string;
