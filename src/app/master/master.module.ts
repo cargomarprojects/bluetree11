@@ -40,6 +40,7 @@ import { FormatPageComponent } from './formatpage/formatpage.component';
 import { FormatPageHeaderComponent } from './formatpage/formatpage-header.component';
 import { FormatPageDetComponent } from './formatpage/formatpagedet.component';
 import { EhblComponent } from './ehbl/ehbl.component';
+import { EhblReqComponent } from './ehbl/ehbl-req.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { EhblComponent } from './ehbl/ehbl.component';
     FormatPageComponent,
     FormatPageHeaderComponent,
     FormatPageDetComponent,
-    EhblComponent
+    EhblComponent,
+    EhblReqComponent
   ],
   imports: [
     SharedModule,

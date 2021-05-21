@@ -22,6 +22,7 @@ import { GlobalSettingsComponent } from './global-settings/globalsettings.compon
 import { BranchSettingsComponent } from './branch-settings/branchsettings.component';
 import { FormatPageComponent } from './formatpage/formatpage.component';
 import { EhblComponent } from './ehbl/ehbl.component';
+import { EhblReqComponent } from './ehbl/ehbl-req.component';
 
 const routes: Routes = [
   {path:'ParamPage', component: ParamPageComponent},
@@ -44,6 +45,7 @@ const routes: Routes = [
   {path:'SettingsPage', component: BranchSettingsComponent}, 
   {path:'FormatPage', component: FormatPageComponent},
   {path:'EhblPage', component: EhblComponent},  
+  {path:'EhblReqPage', component: EhblReqComponent}, 
 ];
 
 @NgModule({
