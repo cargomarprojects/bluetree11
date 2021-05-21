@@ -30,7 +30,8 @@ export class EhblComponent implements OnInit {
     public isAdmin: boolean;
 
     errorMessage: string;
-
+    id: string;
+    param_type: string;
     is_locked: boolean = false;
     searchstring: string = '';
 
@@ -45,12 +46,14 @@ export class EhblComponent implements OnInit {
     ngOnInit() {
         this.currentTab = 'LIST';
         if (this.route.snapshot.queryParams.parameter == null) {
-            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.id = this.route.snapshot.queryParams.id;
             this.menuid = this.route.snapshot.queryParams.menuid;
+            this.param_type = this.route.snapshot.queryParams.menu_param;
         } else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-            this.pkid = options.pkid;
+            this.id = options.id;
             this.menuid = options.menuid;
+            this.param_type = options.menu_param;
         }
 
         this.initPage();
@@ -166,6 +169,7 @@ export class EhblComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
+                    this.mode = 'EDIT';
                     this.errorMessage = 'Save Complete';
                     // alert(this.errorMessage);
                 }

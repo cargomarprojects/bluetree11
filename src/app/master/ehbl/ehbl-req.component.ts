@@ -6,7 +6,7 @@ import { InputBoxComponent } from '../../shared/input/inputbox.component';
 //import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
 import { EhblReqService } from '../services/ehblreq.service';
 import { User_Menu } from '../../core/models/menum';
-import { Tbl_cargo_ehbld, vm_Tbl_cargo_ehbl, Tbl_cargo_ehbl } from '../models/Tbl_cargo_ehbl';
+import { Tbl_cargo_ehbld, vm_Tbl_cargo_ehbld, vm_Tbl_cargo_ehbl,Tbl_cargo_ehbl } from '../models/Tbl_cargo_ehbl';
 import { SearchTable } from '../../shared/models/searchtable';
 
 
@@ -19,11 +19,13 @@ export class EhblReqComponent implements OnInit {
     // @ViewChild('request_to_code') request_to_code_ctrl: AutoComplete2Component;
     // @ViewChild('request_to_name') request_to_name_ctrl: InputBoxComponent;
     // @ViewChild('cargo_loc_name') cargo_loc_name_ctrl: InputBoxComponent;
-    record: Tbl_cargo_ehbl = <Tbl_cargo_ehbl>{};
-    records: Tbl_cargo_ehbl[] = [];
+    record: Tbl_cargo_ehbld = <Tbl_cargo_ehbld>{};
+    records: Tbl_cargo_ehbld[] = [];
     // 15-07-2019 Created By Ajith  
     currentTab = 'LIST';
     private pkid: string;
+    id: string;
+    param_type: string;
     private menuid: string;
     private mode: string = '';
     public title: string = '';
@@ -45,12 +47,14 @@ export class EhblReqComponent implements OnInit {
     ngOnInit() {
         this.currentTab = 'LIST';
         if (this.route.snapshot.queryParams.parameter == null) {
-            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.id = this.route.snapshot.queryParams.id;
             this.menuid = this.route.snapshot.queryParams.menuid;
+            this.param_type = this.route.snapshot.queryParams.menu_param;
         } else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-            this.pkid = options.pkid;
+            this.id = options.id;
             this.menuid = options.menuid;
+            this.param_type = options.menu_param;
         }
 
         this.initPage();
@@ -58,7 +62,7 @@ export class EhblReqComponent implements OnInit {
     }
 
     private initPage() {
-        this.title = 'E-hbl Setting';
+        this.title = 'E-hbl Request';
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.errorMessage = '';
         this.LoadCombo();
@@ -96,15 +100,13 @@ export class EhblReqComponent implements OnInit {
 
     NewRecord() {
         this.pkid = this.gs.getGuid();
-        this.record = <Tbl_cargo_ehbl>{};
-        this.record.ebl_pkid = this.pkid;
-        this.record.ebl_agent_id = "";
-        this.record.ebl_agent_code = "";
-        this.record.ebl_agent_name = "";
-        this.record.ebl_download_max_no = 0;
-        this.record.ebl_start_no = 0;
-        this.record.rec_mode = this.mode;
-
+        this.record = <Tbl_cargo_ehbld>{};
+        this.record.ebld_pkid = this.pkid;
+        this.record.ebld_agent_id = "";
+        this.record.ebld_agent_code = "";
+        this.record.ebld_agent_name = "";
+        this.record.ebld_req_nos = 0;
+        this.record.ebld_approved =false;
     }
 
 
@@ -137,7 +139,7 @@ export class EhblReqComponent implements OnInit {
         SearchData.pkid = this.pkid;
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
-                this.record = <Tbl_cargo_ehbl>response.record;
+                this.record = <Tbl_cargo_ehbld>response.record;
                 this.mode = 'EDIT';
             }, error => {
                 this.errorMessage = this.gs.getError(error);
@@ -153,7 +155,7 @@ export class EhblReqComponent implements OnInit {
         // this.record.add_pkid = this.gs.getGuid();
         // this.record.add_parent_id = this.pkid;
         this.record.rec_mode = this.mode;
-        const saveRecord = <vm_Tbl_cargo_ehbl>{};
+        const saveRecord = <vm_Tbl_cargo_ehbld>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;
         saveRecord.userinfo = this.gs.UserInfo;
@@ -166,6 +168,7 @@ export class EhblReqComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
+                    this.mode = 'EDIT';
                     this.errorMessage = 'Save Complete';
                     // alert(this.errorMessage);
                 }
@@ -198,8 +201,8 @@ export class EhblReqComponent implements OnInit {
 
     LovSelected(_Record: SearchTable) {
         if (_Record.controlname == "AGENT") {
-            this.record.ebl_agent_id = _Record.id;
-            this.record.ebl_agent_name = _Record.name;
+            this.record.ebld_agent_id = _Record.id;
+            this.record.ebld_agent_name = _Record.name;
             // this.liner_lov_field.Focus();
         }
     }

@@ -21,18 +21,28 @@ export interface Tbl_cargo_ehbl {
 export interface Tbl_cargo_ehbld {
     ebld_pkid: string;
     ebld_agent_id: string;
+    ebld_agent_code: string;
+    ebld_agent_name: string;
     ebld_req_nos: number;
     ebld_req_start_no: number;
     ebld_req_end_no: number;
-    ebld_approved: string;
+    ebld_approved: boolean;
     ebld_approved_by: string;
     ebld_approved_date: string;
-
+    rec_mode: string;
 }
 
 export interface vm_Tbl_cargo_ehbl {
     mode: string;
     record: Tbl_cargo_ehbl;
+    pkid: string;
+    userinfo: any;
+    filter: any;
+}
+
+export interface vm_Tbl_cargo_ehbld {
+    mode: string;
+    record: Tbl_cargo_ehbld;
     pkid: string;
     userinfo: any;
     filter: any;
