@@ -1,93 +1,108 @@
 <div class="page-header">
-    <div class="row  align-items-center justify-content-left p-1">
-        <label class="mr-3">{{title}}</label>
-        <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm mr-1">List</button>
-         <button (click)="actionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
-        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-    </div>
+  <div class="row  align-items-center justify-content-left p-1">
+    <label class="mr-3">{{title}}</label>
+    <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm mr-1">List</button>
+    <button (click)="actionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
   </div>
-  
-  <div *ngIf="errorMessage">
-    <div class="alert alert-primary">
-        {{errorMessage}}
-    </div>
+</div>
+
+<div *ngIf="errorMessage">
+  <div class="alert alert-primary">
+    {{errorMessage}}
   </div>
-  
-  <div *ngIf="currentTab=='LIST'" class="page-list">
-  
-    <div class="page-search">
-      <div class="row">
-        <label class="col-2">Search</label>
-        <div class="col">
-          <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" />
-        </div>
-        <!--<div class="col-2">
+</div>
+
+<div *ngIf="currentTab=='LIST'" class="page-list">
+
+  <div class="page-search">
+    <div class="row">
+      <label class="col-2">Search</label>
+      <div class="col">
+        <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" />
+      </div>
+      <!--<div class="col-2">
           <input type="checkbox" [(ngModel)]="sortby" />
           <span>Sort By Code</span>
         </div>-->
-        <div class="col">
-          <button (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
-        </div>
+      <div class="col">
+        <button (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
       </div>
     </div>
-  
-    <div class="page-body table-responsive table-bordered">
-      <table class="table table-hover table-sm">
-        <thead class="page-body-thead">
-          <tr>
-            <th>AGENT</th>
-            <th>APPROVED</th>
-            <th>REQUEST#</th>
-            <th>START#</th>
-            <th>END#</th>
-          </tr>
-        </thead>
-        <tbody class="page-body-tbody">
-          <tr *ngFor="let rec of records;  let i = index" (click)="actionHandler('EDIT',rec.ebl_pkid, i)">
-            <td>{{rec.ebld_agent_name}}</td>
-            <td>{{rec.ebld_approved==true?'YES':'NO'}}</td> 
-            <td>{{rec.ebld_req_nos}}</td>
-            <td>{{rec.ebld_req_start_no}}</td>  
-            <td>{{rec.ebld_req_end_no}}</td>    
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-  
   </div>
+
+  <div class="page-body table-responsive table-bordered">
+    <table class="table table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>AGENT</th>
+          <th>APPROVED</th>
+          <th>REQUEST#</th>
+          <th>START#</th>
+          <th>END#</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of records;  let i = index" (click)="actionHandler('EDIT',rec.ebl_pkid, i)">
+          <td>{{rec.ebld_agent_name}}</td>
+          <td>{{rec.ebld_approved==true?'YES':'NO'}}</td>
+          <td>{{rec.ebld_req_nos}}</td>
+          <td>{{rec.ebld_req_start_no}}</td>
+          <td>{{rec.ebld_req_end_no}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+
+<div *ngIf="currentTab=='DETAILS'" class="page-body">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="blrequest-tab" data-toggle="tab" href="#blrequest" role="tab"
+        aria-controls="blrequest" aria-selected="true">BL Request</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="bldownload-tab" data-toggle="tab" href="#bldownload" role="tab" aria-controls="bldownload"
+        aria-selected="false">BL Download</a>
+    </li>
+  </ul>
   
-  
-  <div *ngIf="currentTab=='DETAILS'" class="page-body">
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group row">
-          <label class="col-2 col-form-label  col-form-label-sm">Agent</label>
-          <div class="col-6">
-            <app-autocomplete2 #_agent_lov [controlname]="'AGENT'" [tabletype]="'MASTER'"
-                        [displaycolumn]="'NAME'" [displaydata]="record.ebld_agent_name"
-                        (ValueChanged)="LovSelected($event)">
-                      </app-autocomplete2>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="blrequest" role="tabpanel" aria-labelledby="blrequest-tab">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label class="col-2 col-form-label  col-form-label-sm">Agent</label>
+            <div class="col-6">
+              <app-autocomplete2 #_agent_lov [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                [displaydata]="record.ebld_agent_name" (ValueChanged)="LovSelected($event)">
+              </app-autocomplete2>
+            </div>
           </div>
-        </div>
-  
-        <div class="form-group row">
-          <label class="col-2 col-form-label  col-form-label-sm">BL.Request#</label>
-          <div class="col-6">
-            <input type="number" class="form-control form-control-sm" [(ngModel)]="record.ebld_req_nos" required maxlength="10" />
+
+          <div class="form-group row">
+            <label class="col-2 col-form-label  col-form-label-sm">BL.Request#</label>
+            <div class="col-6">
+              <input type="number" class="form-control form-control-sm" [(ngModel)]="record.ebld_req_nos" required
+                maxlength="10" />
+            </div>
           </div>
+
+
+          <div class="form-group row">
+            <label class="col-2 col-form-label  col-form-label-sm"></label>
+            <div class="col-6 form-check col-form-check-sm">
+              <input type="checkbox" class="form-check-input" [(ngModel)]="record.ebld_approved">Approved
+            </div>
+          </div>
+
         </div>
-  
-        
-        <div class="form-group row">
-          <label class="col-2 col-form-label  col-form-label-sm"></label>
-          <div class="col-6 form-check col-form-check-sm"> 
-            <input type="checkbox"  class="form-check-input" [(ngModel)]="record.ebld_approved">Approved</div>
-        </div>
-  
       </div>
-    </div>
-    <!-- <div class="row">
+
+      <!-- <div class="row">
       <div class="col-sm-6">
         <div class="form-group row">
           <div class="offset-2 col-10">
@@ -99,13 +114,29 @@
       </div>
     </div>
      -->
-  
-  <div class="page-footer">
-    <div class="row row justify-content-center p-1">
-        <button class="btn btn-primary btn-md mr-1" (click)="Save()">Save</button>
-        <button  (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm">Return</button>
+
+      <div class="page-footer">
+        <div class="row row justify-content-center p-1">
+          <button class="btn btn-primary btn-md mr-1" (click)="Save()">Save</button>
+          <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm">Return</button>
+        </div>
+      </div>
+      <!-- </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Download">
+      <ng-template ngbTabContent>
+        <div class="page-footer">
+          <div class="row row justify-content-center p-1">
+            <button class="btn btn-primary btn-md mr-1" (click)="Save()">Save</button>
+            <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm">Return</button>
+          </div>
+        </div> -->
+      <!-- </ng-template>
+    </ngb-tab>
+  </ngb-tabset> -->
+    </div>
+    <div class="tab-pane fade" id="bldownload" role="tabpanel" aria-labelledby="bldownload-tab">
+
     </div>
   </div>
-  
-  </div>
-  
+</div>
