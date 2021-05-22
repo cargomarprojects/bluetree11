@@ -183,14 +183,45 @@ export class EhblComponent implements OnInit {
 
         var bRet = true;
         this.errorMessage = "";
-        // if (this.gs.isBlank(this.record.add_address1)) {
+        if (this.gs.isBlank(this.record.ebl_agent_id)) {
+            bRet = false;
+            this.errorMessage = "Agent cannot be empty";
+            alert(this.errorMessage);
+            //  this.request_to_code_ctrl.Focus();
+            return bRet;
+        }
+
+
+        if (this.gs.isZero(this.record.ebl_start_no)) {
+            bRet = false;
+            this.errorMessage = "Invalid Starting Number";
+            alert(this.errorMessage);
+            //  this.request_to_code_ctrl.Focus();
+            return bRet;
+        }
+        if (this.gs.isZero(this.record.ebl_download_max_no)) {
+            bRet = false;
+            this.errorMessage = "Invalid MaxDownload Number";
+            alert(this.errorMessage);
+            //  this.request_to_code_ctrl.Focus();
+            return bRet;
+        }
+
+        if (this.record.ebl_download_max_no<this.record.ebl_start_no) {
+            bRet = false;
+            this.errorMessage = "Invalid Starting Number";
+            alert(this.errorMessage);
+            //  this.request_to_code_ctrl.Focus();
+            return bRet;
+        }
+
+        // if (this.record.ebl_download_max_no<this.record.ebl_start_no) {
         //     bRet = false;
-        //     this.errorMessage = "Address cannot be empty";
+        //     this.errorMessage = "Invalid MaxDownload Number";
         //     alert(this.errorMessage);
         //     //  this.request_to_code_ctrl.Focus();
         //     return bRet;
         // }
-
         return bRet;
     }
 
