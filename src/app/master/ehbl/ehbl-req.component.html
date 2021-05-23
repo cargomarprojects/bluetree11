@@ -62,11 +62,11 @@
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="blrequest-tab" data-toggle="tab" href="#blrequest" role="tab"
-        aria-controls="blrequest" aria-selected="true">BL Request</a>
+        aria-controls="blrequest" aria-selected="true">Request</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="bldownload-tab" data-toggle="tab" href="#bldownload" role="tab" aria-controls="bldownload"
-        aria-selected="false">BL Download</a>
+        aria-selected="false">Download</a>
     </li>
   </ul>
   
@@ -94,8 +94,8 @@
 
           <div class="form-group row">
             <label class="col-2 col-form-label  col-form-label-sm"></label>
-            <div class="col-6 form-check col-form-check-sm">
-              <input type="checkbox" class="form-check-input" [(ngModel)]="record.ebld_approved">Approved
+            <div class="col-6">
+              <input type="checkbox" [(ngModel)]="record.ebld_approved"><span>&nbsp;Approved</span>
             </div>
           </div>
 
@@ -118,7 +118,7 @@
       <div class="page-footer">
         <div class="row row justify-content-center p-1">
           <button class="btn btn-primary btn-md mr-1" (click)="Save()">Save</button>
-          <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm">Return</button>
+          <!-- <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm">Return</button> -->
         </div>
       </div>
       <!-- </ng-template>
