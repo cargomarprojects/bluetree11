@@ -42,8 +42,8 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of records;  let i = index" (click)="actionHandler('EDIT',rec.ebl_pkid, i)">
-          <td>{{rec.ebl_agent_name}}</td>
+        <tr *ngFor="let rec of records;  let i = index" >
+          <td class="hlink2" (click)="actionHandler('EDIT',rec.ebl_pkid, i)">{{rec.ebl_agent_name}}</td>
           <td>{{rec.ebl_start_no}}</td>
           <td>{{rec.ebl_download_max_no}}</td>  
           <td>{{rec.ebl_color==true?'YES':'NO'}}</td>        
