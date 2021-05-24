@@ -231,4 +231,28 @@ export class EhblReqComponent implements OnInit {
         }
     }
 
+
+    Approve(_rec:Tbl_cargo_ehbld) {
+ 
+        const saveRecord = <vm_Tbl_cargo_ehbld>{};
+        saveRecord.record = _rec;
+        saveRecord.pkid = '';
+        saveRecord.userinfo = this.gs.UserInfo;
+        this.mainService.Approve(saveRecord)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.errorMessage = response.error;
+                    alert(this.errorMessage);
+                }
+                else {
+                     
+                    this.errorMessage = 'Save Complete';
+                    // alert(this.errorMessage);
+                }
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+            });
+    }
+
 }

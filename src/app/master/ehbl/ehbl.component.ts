@@ -207,13 +207,13 @@ export class EhblComponent implements OnInit {
             return bRet;
         }
 
-        if (this.record.ebl_download_max_no<this.record.ebl_start_no) {
-            bRet = false;
-            this.errorMessage = "Invalid Starting Number";
-            alert(this.errorMessage);
-            //  this.request_to_code_ctrl.Focus();
-            return bRet;
-        }
+        // if (this.record.ebl_download_max_no<this.record.ebl_start_no) {
+        //     bRet = false;
+        //     this.errorMessage = "Invalid Starting Number";
+        //     alert(this.errorMessage);
+        //     //  this.request_to_code_ctrl.Focus();
+        //     return bRet;
+        // }
 
         // if (this.record.ebl_download_max_no<this.record.ebl_start_no) {
         //     bRet = false;
