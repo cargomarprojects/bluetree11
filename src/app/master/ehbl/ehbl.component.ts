@@ -252,10 +252,10 @@ export class EhblComponent implements OnInit {
 
     onBlur(field: string) {
         switch (field) {
-            //   case 'cust_title': {
-            //     this.record.cust_title = this.record.cust_title.toUpperCase();
-            //     break;
-            //   }
+              case 'searchstring': {
+                this.searchstring = this.searchstring.toUpperCase();
+                break;
+              }
             //   case 'cntr_pieces': {
             //     rec.cntr_pieces = this.gs.roundNumber(rec.cntr_pieces, 0);
             //     break;
