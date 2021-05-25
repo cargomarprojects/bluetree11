@@ -36,8 +36,10 @@
       <thead class="page-body-thead">
         <tr>
           <th>AGENT</th>
-          <th>APPROVED</th>
           <th>REQUEST#</th>
+          <th>APPROVED</th>
+          <th>APPROVED.BY</th>
+          <th>DATE</th>
           <th>START#</th>
           <th>END#</th>
           <th *ngIf="isAdmin">APPROVE</th>
@@ -46,8 +48,10 @@
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of records;  let i = index" >
           <td class="hlink2" (click)="actionHandler('EDIT',rec.ebld_pkid, i)">{{rec.ebld_agent_name}}</td>
-          <td>{{rec.ebld_approved==true?'YES':'NO'}}</td>
           <td>{{rec.ebld_req_nos}}</td>
+          <td>{{rec.ebld_approved==true?'YES':'NO'}}</td>
+          <td>{{rec.ebld_approved_by}}</td>
+          <td>{{rec.ebld_approved_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.ebld_req_start_no}}</td>
           <td>{{rec.ebld_req_end_no}}</td>
           <td *ngIf="isAdmin" class="hlink2"(click)="Approve(rec)">APPROVE</td>

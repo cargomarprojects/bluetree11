@@ -6,7 +6,7 @@ import { InputBoxComponent } from '../../shared/input/inputbox.component';
 //import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
 import { EhblReqService } from '../services/ehblreq.service';
 import { User_Menu } from '../../core/models/menum';
-import { Tbl_cargo_ehbld, vm_Tbl_cargo_ehbld, vm_Tbl_cargo_ehbl,Tbl_cargo_ehbl } from '../models/Tbl_cargo_ehbl';
+import { Tbl_cargo_ehbld, vm_Tbl_cargo_ehbld, vm_Tbl_cargo_ehbl, Tbl_cargo_ehbl } from '../models/Tbl_cargo_ehbl';
 import { SearchTable } from '../../shared/models/searchtable';
 
 
@@ -106,7 +106,7 @@ export class EhblReqComponent implements OnInit {
         this.record.ebld_agent_code = "";
         this.record.ebld_agent_name = "";
         this.record.ebld_req_nos = 0;
-        this.record.ebld_approved =false;
+        this.record.ebld_approved = false;
     }
 
 
@@ -171,6 +171,7 @@ export class EhblReqComponent implements OnInit {
                     this.mode = 'EDIT';
                     this.errorMessage = 'Save Complete';
                     // alert(this.errorMessage);
+                    this.RefreshList(this.record);
                 }
             }, error => {
                 this.errorMessage = this.gs.getError(error);
@@ -178,6 +179,22 @@ export class EhblReqComponent implements OnInit {
             });
     }
 
+    RefreshList(_rec: Tbl_cargo_ehbld) {
+        if (this.gs.isBlank(this.records))
+            return;
+        if (this.records == null)
+            return;
+        var REC = this.records.find(rec => rec.ebld_pkid == _rec.ebld_pkid);
+        if (REC == null) {
+            this.records.push(_rec);
+        }
+        else {
+            REC.ebld_approved = _rec.ebld_approved;
+            REC.ebld_req_nos = _rec.ebld_req_nos;
+            REC.ebld_req_start_no = _rec.ebld_req_start_no;
+            REC.ebld_req_end_no = _rec.ebld_req_end_no;
+        }
+    }
     private Allvalid(): boolean {
 
         var bRet = true;
@@ -232,8 +249,8 @@ export class EhblReqComponent implements OnInit {
     }
 
 
-    Approve(_rec:Tbl_cargo_ehbld) {
- 
+    Approve(_rec: Tbl_cargo_ehbld) {
+
         if (!confirm("Approve  " + _rec.ebld_agent_name)) {
             return;
         }
@@ -249,9 +266,13 @@ export class EhblReqComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
-                     
+
                     this.errorMessage = 'Save Complete';
                     // alert(this.errorMessage);
+                    _rec.ebld_approved = true;
+                    _rec.ebld_req_start_no = response.req_startno;
+                    _rec.ebld_req_end_no = response.req_endno;
+                    this.RefreshList(_rec);
                 }
             }, error => {
                 this.errorMessage = this.gs.getError(error);
