@@ -23,6 +23,11 @@ export class EhblReqComponent implements OnInit {
     records: Tbl_cargo_ehbld[] = [];
     // 15-07-2019 Created By Ajith  
     currentTab = 'LIST';
+    tab: string = 'main';
+    report_title: string = '';
+    report_url: string = '';
+    report_searchdata: any = {};
+    report_menuid: string = '';
     private pkid: string;
     id: string;
     param_type: string;
@@ -241,7 +246,7 @@ export class EhblReqComponent implements OnInit {
             case 'searchstring': {
                 this.searchstring = this.searchstring.toUpperCase();
                 break;
-              }
+            }
             //   case 'cust_title': {
             //     this.record.cust_title = this.record.cust_title.toUpperCase();
             //     break;
@@ -287,20 +292,19 @@ export class EhblReqComponent implements OnInit {
 
     DeleteRow(_rec: Tbl_cargo_ehbld) {
 
-        if(_rec.ebld_approved)
-        {
+        if (_rec.ebld_approved) {
             this.errorMessage = "Cannot Delete, Approved";
             alert(this.errorMessage);
             return;
         }
-        if (!confirm("DELETE "+_rec.ebld_agent_name+"(TOTAL BL REQUESTED "+_rec.ebld_req_nos +")")) {
+        if (!confirm("DELETE " + _rec.ebld_agent_name + "(TOTAL BL REQUESTED " + _rec.ebld_req_nos + ")")) {
             return;
         }
 
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = _rec.ebld_pkid;
-        SearchData.remarks = _rec.ebld_agent_name+", created "+_rec.rec_created_date;
+        SearchData.remarks = _rec.ebld_agent_name + ", created " + _rec.rec_created_date;
 
         this.mainService.DeleteRecord(SearchData)
             .subscribe(response => {
@@ -311,12 +315,20 @@ export class EhblReqComponent implements OnInit {
                 else {
                     this.records.splice(this.records.findIndex(rec => rec.ebld_pkid == _rec.ebld_pkid), 1);
                 }
-                 
+
             }, error => {
                 this.errorMessage = this.gs.getError(error);
                 alert(this.errorMessage);
-                
+
             });
     }
+
+    Generate() {
+        this.tab = 'report';
+    }
+
+    callbackevent(event: any) {
+         this.tab = 'main';
+      }
 
 }
