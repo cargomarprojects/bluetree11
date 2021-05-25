@@ -36,16 +36,18 @@
       <thead class="page-body-thead">
         <tr>
           <th>AGENT</th>
-          <th>START#</th>
-          <th>END#</th>
-          <th>MAX.DOWNLOADED#</th>
-          <th>COLOUR</th>
+          <th>STARTING#</th>
+          <th>RUNNING#</th>
+          <th>ENDING#</th>
+          <th>MAX DOWNLOAD BL#</th>
+          <th>COLOR</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of records;  let i = index" >
           <td class="hlink2" (click)="actionHandler('EDIT',rec.ebl_pkid, i)">{{rec.ebl_agent_name}}</td>
           <td>{{rec.ebl_start_no}}</td>
+          <td>{{rec.ebl_running_no}}</td>
           <td>{{rec.ebl_ending_no}}</td>
           <td>{{rec.ebl_download_max_no}}</td>  
           <td>{{rec.ebl_color==true?'YES':'NO'}}</td>        

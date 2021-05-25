@@ -32,4 +32,8 @@ export class EhblReqService {
     Approve(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/EhblReq/Approve', SearchData, this.gs.headerparam2('authorized'));
     }
+
+    DeleteRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/EhblReq/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

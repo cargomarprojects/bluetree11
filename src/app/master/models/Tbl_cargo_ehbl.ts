@@ -30,6 +30,8 @@ export interface Tbl_cargo_ehbld {
     ebld_approved_by: string;
     ebld_approved_date: string;
     rec_mode: string;
+    rec_created_by: string;
+    rec_created_date: string;
 }
 
 export interface vm_Tbl_cargo_ehbl {

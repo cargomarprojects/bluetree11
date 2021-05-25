@@ -30,7 +30,7 @@ export class EhblReqComponent implements OnInit {
     private mode: string = '';
     public title: string = '';
     public isAdmin: boolean;
-
+    public canDelete: boolean;
     errorMessage: string;
 
     is_locked: boolean = false;
@@ -64,6 +64,7 @@ export class EhblReqComponent implements OnInit {
     private initPage() {
         this.title = 'E-hbl Request';
         this.isAdmin = this.gs.IsAdmin(this.menuid);
+        this.canDelete = this.gs.canDelete(this.menuid);
         this.errorMessage = '';
         this.LoadCombo();
     }
@@ -277,6 +278,40 @@ export class EhblReqComponent implements OnInit {
             }, error => {
                 this.errorMessage = this.gs.getError(error);
                 alert(this.errorMessage);
+            });
+    }
+
+    DeleteRow(_rec: Tbl_cargo_ehbld) {
+
+        if(_rec.ebld_approved)
+        {
+            this.errorMessage = "Cannot Delete, Approved";
+            alert(this.errorMessage);
+            return;
+        }
+        if (!confirm("DELETE "+_rec.ebld_agent_name+"(TOTAL BL REQUESTED "+_rec.ebld_req_nos +")")) {
+            return;
+        }
+
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = _rec.ebld_pkid;
+        SearchData.remarks = _rec.ebld_agent_name+", created "+_rec.rec_created_date;
+
+        this.mainService.DeleteRecord(SearchData)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.errorMessage = response.error;
+                    alert(this.errorMessage);
+                }
+                else {
+                    this.records.splice(this.records.findIndex(rec => rec.ebld_pkid == _rec.ebld_pkid), 1);
+                }
+                 
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+                
             });
     }
 
