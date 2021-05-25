@@ -40,7 +40,7 @@
           <th>REQUEST#</th>
           <th>START#</th>
           <th>END#</th>
-          <th>APPROVE</th>
+          <th *ngIf="isAdmin">APPROVE</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody">
@@ -50,7 +50,7 @@
           <td>{{rec.ebld_req_nos}}</td>
           <td>{{rec.ebld_req_start_no}}</td>
           <td>{{rec.ebld_req_end_no}}</td>
-          <td class="hlink2"(click)="Approve(rec)">APPROVE</td>
+          <td *ngIf="isAdmin" class="hlink2"(click)="Approve(rec)">APPROVE</td>
         </tr>
       </tbody>
     </table>

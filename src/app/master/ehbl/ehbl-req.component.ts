@@ -234,6 +234,10 @@ export class EhblReqComponent implements OnInit {
 
     Approve(_rec:Tbl_cargo_ehbld) {
  
+        if (!confirm("Approve  " + _rec.ebld_agent_name)) {
+            return;
+        }
+
         const saveRecord = <vm_Tbl_cargo_ehbld>{};
         saveRecord.record = _rec;
         saveRecord.pkid = '';
