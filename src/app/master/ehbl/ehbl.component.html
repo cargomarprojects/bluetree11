@@ -37,6 +37,7 @@
         <tr>
           <th>AGENT</th>
           <th>START#</th>
+          <th>END#</th>
           <th>MAX.DOWNLOADED#</th>
           <th>COLOUR</th>
         </tr>
@@ -45,6 +46,7 @@
         <tr *ngFor="let rec of records;  let i = index" >
           <td class="hlink2" (click)="actionHandler('EDIT',rec.ebl_pkid, i)">{{rec.ebl_agent_name}}</td>
           <td>{{rec.ebl_start_no}}</td>
+          <td>{{rec.ebl_ending_no}}</td>
           <td>{{rec.ebl_download_max_no}}</td>  
           <td>{{rec.ebl_color==true?'YES':'NO'}}</td>        
         </tr>
