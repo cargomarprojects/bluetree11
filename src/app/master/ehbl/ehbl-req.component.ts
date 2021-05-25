@@ -238,6 +238,10 @@ export class EhblReqComponent implements OnInit {
 
     onBlur(field: string) {
         switch (field) {
+            case 'searchstring': {
+                this.searchstring = this.searchstring.toUpperCase();
+                break;
+              }
             //   case 'cust_title': {
             //     this.record.cust_title = this.record.cust_title.toUpperCase();
             //     break;
