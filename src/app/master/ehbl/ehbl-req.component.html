@@ -1,97 +1,102 @@
-<div class="page-header">
-  <div class="row  align-items-center justify-content-left p-1">
-    <label class="mr-3">{{title}}</label>
-    <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm mr-1">List</button>
-    <button (click)="actionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
-    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-  </div>
-</div>
-
-<div *ngIf="errorMessage">
-  <div class="alert alert-primary">
-    {{errorMessage}}
-  </div>
-</div>
-
-<div *ngIf="currentTab=='LIST'" class="page-list">
-
-  <div class="page-search">
-    <div class="row">
-      <label class="col-2">Search</label>
-      <div class="col">
-        <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" (blur)="onBlur('searchstring')" />
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="blrequest-tab" data-toggle="tab" href="#blrequest" role="tab"
+      aria-controls="blrequest" aria-selected="true">Request</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="bldownload-tab" data-toggle="tab" href="#bldownload" role="tab" aria-controls="bldownload"
+      aria-selected="false">Download</a>
+  </li>
+  <li class="nav-item">
+    <button class="btn btn-primary btn-sm m-1 p-1" (click)="Close()">Return</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="blrequest" role="tabpanel" aria-labelledby="blrequest-tab">
+    <div class="page-header">
+      <div class="row  align-items-center justify-content-left p-1">
+        <label class="mr-3">{{title}}</label>
+        <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm mr-1">List</button>
+        <button (click)="actionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
+        <!-- <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button> -->
       </div>
-      <!--<div class="col-2">
+    </div>
+
+    <div *ngIf="errorMessage">
+      <div class="alert alert-primary">
+        {{errorMessage}}
+      </div>
+    </div>
+
+    <div *ngIf="currentTab=='LIST'" class="page-list">
+
+      <div class="page-search">
+        <div class="row">
+          <label class="col-2">Search</label>
+          <div class="col">
+            <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring"
+              (blur)="onBlur('searchstring')" />
+          </div>
+          <!--<div class="col-2">
           <input type="checkbox" [(ngModel)]="sortby" />
           <span>Sort By Code</span>
         </div>-->
-      <div class="col">
-        <button (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
+          <div class="col">
+            <button (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
+          </div>
+        </div>
       </div>
+
+      <div class="page-body table-responsive table-bordered">
+        <table class="table table-hover table-sm">
+          <thead class="page-body-thead">
+            <tr>
+              <th>AGENT</th>
+              <th>TOTAL BL REQUESTED</th>
+              <th>STARTING#</th>
+              <th>ENDING#</th>
+              <th>REQUESTED.BY</th>
+              <th>REQUESTED.DATE</th>
+              <th *ngIf="isAdmin">APPROVE</th>
+              <th>APPROVED</th>
+              <th>APPROVED.BY</th>
+              <th>APPROVED.DATE</th>
+              <th *ngIf="canDelete" class='text-center'>DELETE</th>
+            </tr>
+          </thead>
+          <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records;  let i = index">
+              <td class="hlink2" (click)="actionHandler('EDIT',rec.ebld_pkid, i)">{{rec.ebld_agent_name}}</td>
+              <td>{{rec.ebld_req_nos}}</td>
+              <td>{{rec.ebld_req_start_no}}</td>
+              <td>{{rec.ebld_req_end_no}}</td>
+              <td>{{rec.rec_created_by}}</td>
+              <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+              <td *ngIf="isAdmin" class="hlink2" (click)="Approve(rec)">APPROVE</td>
+              <td [style.color]="rec.ebld_approved?'Red': 'Black'">{{rec.ebld_approved==true?'YES':'NO'}}</td>
+              <td>{{rec.ebld_approved_by}}</td>
+              <td>{{rec.ebld_approved_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+              <td *ngIf="canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                  (click)="DeleteRow(rec)"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
     </div>
-  </div>
-
-  <div class="page-body table-responsive table-bordered">
-    <table class="table table-hover table-sm">
-      <thead class="page-body-thead">
-        <tr>
-          <th>AGENT</th>
-          <th>TOTAL BL REQUESTED</th>
-          <th>STARTING#</th>
-          <th>ENDING#</th>
-          <th>REQUESTED.BY</th>
-          <th>REQUESTED.DATE</th>
-          <th *ngIf="isAdmin">APPROVE</th>
-          <th>APPROVED</th>
-          <th>APPROVED.BY</th>
-          <th>APPROVED.DATE</th>
-          <th *ngIf="canDelete" class='text-center'>DELETE</th> 
-        </tr>
-      </thead>
-      <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of records;  let i = index" >
-          <td class="hlink2" (click)="actionHandler('EDIT',rec.ebld_pkid, i)">{{rec.ebld_agent_name}}</td>
-          <td>{{rec.ebld_req_nos}}</td>
-          <td>{{rec.ebld_req_start_no}}</td>
-          <td>{{rec.ebld_req_end_no}}</td>
-          <td>{{rec.rec_created_by}}</td>
-          <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td *ngIf="isAdmin" class="hlink2"(click)="Approve(rec)">APPROVE</td>
-          <td  [style.color]="rec.ebld_approved?'Red': 'Black'">{{rec.ebld_approved==true?'YES':'NO'}}</td>
-          <td>{{rec.ebld_approved_by}}</td>
-          <td>{{rec.ebld_approved_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td *ngIf="canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
-            (click)="DeleteRow(rec)"></i></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
 
-</div>
+    <div *ngIf="currentTab=='DETAILS'" class="page-body mx-0 px-0">
 
-
-<div *ngIf="currentTab=='DETAILS'" class="page-body">
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" id="blrequest-tab" data-toggle="tab" href="#blrequest" role="tab"
-        aria-controls="blrequest" aria-selected="true">Request</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="bldownload-tab" data-toggle="tab" href="#bldownload" role="tab" aria-controls="bldownload"
-        aria-selected="false">Download</a>
-    </li>
-  </ul>
-  
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="blrequest" role="tabpanel" aria-labelledby="blrequest-tab">
-      <div class="row">
+      <div class="DeleteRow">
         <div class="col-sm-6">
           <div class="form-group row">
             <label class="col-2 col-form-label  col-form-label-sm">Agent</label>
             <div class="col-6">
               <app-autocomplete2 #_agent_lov [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
-                [disabled]="record.ebld_approved" [displaydata]="record.ebld_agent_name" (ValueChanged)="LovSelected($event)">
+                [disabled]="record.ebld_approved" [displaydata]="record.ebld_agent_name"
+                (ValueChanged)="LovSelected($event)">
               </app-autocomplete2>
             </div>
           </div>
@@ -99,8 +104,8 @@
           <div class="form-group row">
             <label class="col-2 col-form-label  col-form-label-sm">Total BL Requested</label>
             <div class="col-6">
-              <input type="number" [disabled]="record.ebld_approved" class="form-control form-control-sm" [(ngModel)]="record.ebld_req_nos" required
-                maxlength="10" />
+              <input type="number" [disabled]="record.ebld_approved" class="form-control form-control-sm"
+                [(ngModel)]="record.ebld_req_nos" required maxlength="10" />
             </div>
           </div>
 
@@ -147,9 +152,10 @@
       <!-- </ng-template>
     </ngb-tab>
   </ngb-tabset> -->
-    </div>
-    <div class="tab-pane fade" id="bldownload" role="tabpanel" aria-labelledby="bldownload-tab">
 
     </div>
+  </div>
+  <div class="tab-pane fade" id="bldownload" role="tabpanel" aria-labelledby="bldownload-tab">
+
   </div>
 </div>
