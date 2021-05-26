@@ -40,6 +40,10 @@ export class EhblReqComponent implements OnInit {
 
     is_locked: boolean = false;
     searchstring: string = '';
+    starting_no:number =0;
+    running_no: number = 0;
+    ending_no: number = 0;
+    balance_no: number = 0;
 
     constructor(
         private router: Router,
@@ -228,6 +232,10 @@ export class EhblReqComponent implements OnInit {
             this.record.ebld_agent_name = _Record.name;
             // this.liner_lov_field.Focus();
         }
+        if (_Record.controlname == "AGENT2") {
+            this.GetBalanceBL(_Record.id)
+            // this.liner_lov_field.Focus();
+        }
     }
 
     onFocusout(field: string) {
@@ -328,7 +336,31 @@ export class EhblReqComponent implements OnInit {
     }
 
     callbackevent(event: any) {
-         this.tab = 'main';
-      }
+        this.tab = 'main';
+    }
 
+    GetBalanceBL(_agentid: string) {
+
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.agentid = _agentid;
+        this.mainService.GetBalanceBL(SearchData)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.errorMessage = response.error;
+                    alert(this.errorMessage);
+                }
+                else {
+                    this.starting_no = response.starting_no;
+                    this.running_no = response.running_no;
+                    this.ending_no = response.ending_no;
+                    this.balance_no = response.balance_no;
+                }
+
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+
+            });
+    }
 }
