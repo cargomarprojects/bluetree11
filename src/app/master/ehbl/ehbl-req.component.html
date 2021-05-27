@@ -164,7 +164,7 @@
             <label class="col-4 col-form-label  col-form-label-sm">Agent</label>
             <div class="col-6">
               <app-autocomplete2 #_agent_lov [controlname]="'AGENT2'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
-                [disabled]="record.ebld_approved" [displaydata]="record.ebld_agent_name"
+                 [displaydata]="download_agent_name"
                 (ValueChanged)="LovSelected($event)">
               </app-autocomplete2>
             </div>
@@ -173,8 +173,8 @@
           <div class="form-group row">
             <label class="col-4 col-form-label  col-form-label-sm">BL Nos To Download</label>
             <div class="col-6">
-              <input type="number" [disabled]="record.ebld_approved" class="form-control form-control-sm"
-                [(ngModel)]="record.ebld_req_nos" required maxlength="10" />
+              <input type="number" class="form-control form-control-sm"
+                [(ngModel)]="download_req_nos" required maxlength="10" />
             </div>
           </div>
         </div>
