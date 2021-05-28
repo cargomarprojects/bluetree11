@@ -170,7 +170,7 @@
             <label class="col-4 col-form-label  col-form-label-sm">Agent</label>
             <div class="col-6">
               <app-autocomplete2 #_agent_lov [controlname]="'AGENT2'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
-                 [displaydata]="download_agent_name"
+               [disabled]="gs.User_Role=='AGENT'"   [displaydata]="download_agent_name"
                 (ValueChanged)="LovSelected($event)">
               </app-autocomplete2>
             </div>

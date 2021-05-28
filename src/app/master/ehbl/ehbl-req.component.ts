@@ -71,6 +71,8 @@ export class EhblReqComponent implements OnInit {
 
         this.initPage();
         this.List("NEW");
+
+
        
     }
 
@@ -79,6 +81,12 @@ export class EhblReqComponent implements OnInit {
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.canDelete = this.gs.canDelete(this.menuid);
         this.errorMessage = '';
+        if(this.gs.User_Role=="AGENT")
+        {
+            this.download_agent_id=this.gs.User_Customer_Id;
+            this.download_agent_name=this.gs.user_name;
+            this.GetBalanceBL(this.download_agent_id)
+        }
         this.LoadCombo();
     }
 
@@ -125,15 +133,15 @@ export class EhblReqComponent implements OnInit {
 
 
     List(_type: string) {
-
-
         let SearchData = {
             searchstring: this.searchstring.toUpperCase(),
             agentid: '',
             company_code: this.gs.globalVariables.comp_code,
             branch_code: this.gs.globalVariables.branch_code,
-
-        };
+            user_category:this.gs.User_Category,
+            user_role: this.gs.User_Role,
+            user_customer_id:this.gs.User_Customer_Id
+          };
 
         this.errorMessage = '';
         this.mainService.List(SearchData)
