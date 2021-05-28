@@ -30,7 +30,7 @@ export class EhblReqComponent implements OnInit {
     report_menuid: string = '';
     download_agent_id: string = '';
     download_agent_name: string = '';
-    download_req_nos:number=1;
+    download_req_nos: number = 1;
     private pkid: string;
     id: string;
     param_type: string;
@@ -43,7 +43,7 @@ export class EhblReqComponent implements OnInit {
 
     is_locked: boolean = false;
     searchstring: string = '';
-    starting_no:number =0;
+    starting_no: number = 0;
     running_no: number = 0;
     ending_no: number = 0;
     balance_no: number = 0;
@@ -236,8 +236,8 @@ export class EhblReqComponent implements OnInit {
             // this.liner_lov_field.Focus();
         }
         if (_Record.controlname == "AGENT2") {
-           this.download_agent_id=_Record.id;
-           this.download_agent_name=_Record.name;
+            this.download_agent_id = _Record.id;
+            this.download_agent_name = _Record.name;
             this.GetBalanceBL(_Record.id)
             // this.liner_lov_field.Focus();
         }
@@ -337,13 +337,25 @@ export class EhblReqComponent implements OnInit {
     }
 
     Generate() {
+
+        if (this.gs.isBlank(this.download_agent_id)) {
+            this.errorMessage = "Agent cannot be blank";
+            alert(this.errorMessage);
+            return;
+        }
+        if (this.gs.isZero(this.download_req_nos) || this.download_req_nos < 0) {
+            this.errorMessage = "Invalid, BL Nos To Download";
+            alert(this.errorMessage);
+            return;
+        }
+
         this.report_title = 'HBL';
         this.report_url = '/api/Master/EhblReq/GetBlankBLReport';
         this.report_searchdata = this.gs.UserInfo;
         this.report_searchdata.pkid = this.gs.getGuid();
         this.report_menuid = this.menuid;
         this.tab = 'report';
-       
+
     }
 
     callbackevent(event: any) {
