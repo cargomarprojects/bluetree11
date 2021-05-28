@@ -71,6 +71,7 @@ export class EhblReqComponent implements OnInit {
 
         this.initPage();
         this.List("NEW");
+       
     }
 
     private initPage() {
@@ -353,6 +354,8 @@ export class EhblReqComponent implements OnInit {
         this.report_url = '/api/Master/EhblReq/GetBlankBLReport';
         this.report_searchdata = this.gs.UserInfo;
         this.report_searchdata.pkid = this.gs.getGuid();
+        this.report_searchdata.download_agent_id = this.download_agent_id;
+        this.report_searchdata.download_req_nos = this.download_req_nos;
         this.report_menuid = this.menuid;
         this.tab = 'report';
 
@@ -360,6 +363,8 @@ export class EhblReqComponent implements OnInit {
 
     callbackevent(event: any) {
         this.tab = 'main';
+        if(!this.gs.isBlank(this.download_agent_id))
+        this.GetBalanceBL(this.download_agent_id);
     }
 
     GetBalanceBL(_agentid: string) {
