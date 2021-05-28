@@ -689,6 +689,7 @@ export class GlobalService {
     this.user_isadmin = "N";
 
     this.User_Role = this.UserRecord.usr_role;
+    console.log('user_role', this.User_Role);
     this.User_isParent = this.UserRecord.usr_isparent;
     this.User_Customer_Id = this.UserRecord.usr_customer_id;
     this.User_Customer_Parent_Id = this.UserRecord.usr_customer_parent_id;
