@@ -30,6 +30,7 @@ export class EhblReqComponent implements OnInit {
     report_menuid: string = '';
     download_agent_id: string = '';
     download_agent_name: string = '';
+    download_agent_code: string = '';
     download_req_nos: number = 1;
     private pkid: string;
     id: string;
@@ -85,6 +86,7 @@ export class EhblReqComponent implements OnInit {
         {
             this.download_agent_id=this.gs.User_Customer_Id;
             this.download_agent_name=this.gs.user_name;
+            this.download_agent_code=this.gs.user_code;
             this.GetBalanceBL(this.download_agent_id)
         }
         this.LoadCombo();
@@ -241,11 +243,13 @@ export class EhblReqComponent implements OnInit {
     LovSelected(_Record: SearchTable) {
         if (_Record.controlname == "AGENT") {
             this.record.ebld_agent_id = _Record.id;
+            this.record.ebld_agent_code = _Record.code;
             this.record.ebld_agent_name = _Record.name;
             // this.liner_lov_field.Focus();
         }
         if (_Record.controlname == "AGENT2") {
             this.download_agent_id = _Record.id;
+            this.download_agent_code = _Record.code;
             this.download_agent_name = _Record.name;
             this.GetBalanceBL(_Record.id)
             // this.liner_lov_field.Focus();
