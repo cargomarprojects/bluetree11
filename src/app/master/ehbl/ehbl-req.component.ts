@@ -366,8 +366,9 @@ export class EhblReqComponent implements OnInit {
         this.mainService.GenerateValid(SearchData)
             .subscribe(response => {
                 if (response.retvalue == false) {
-                    this.errorMessage = response.error;
-                    alert(this.errorMessage);
+                    // this.errorMessage = response.error;
+                    // alert(this.errorMessage);
+                    alert(response.error);
                 }
                 else {
                      this.Generate();
