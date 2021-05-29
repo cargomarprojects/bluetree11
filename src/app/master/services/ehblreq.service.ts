@@ -39,4 +39,7 @@ export class EhblReqService {
     GetBalanceBL(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/EhblReq/GetBalanceBL', SearchData, this.gs.headerparam2('authorized'));
     }
+    GenerateValid(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/EhblReq/GenerateValid', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

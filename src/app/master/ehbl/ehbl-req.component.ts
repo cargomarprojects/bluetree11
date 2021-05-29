@@ -345,8 +345,9 @@ export class EhblReqComponent implements OnInit {
             });
     }
 
-    Generate() {
+    GenerateValid(_agentid: string) {
 
+        this.errorMessage = '';
         if (this.gs.isBlank(this.download_agent_id)) {
             this.errorMessage = "Agent cannot be blank";
             alert(this.errorMessage);
@@ -357,6 +358,28 @@ export class EhblReqComponent implements OnInit {
             alert(this.errorMessage);
             return;
         }
+
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = this.gs.getGuid();
+        SearchData.download_agent_id = this.download_agent_id;
+        SearchData.download_req_nos = this.download_req_nos;
+        this.mainService.GenerateValid(SearchData)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.errorMessage = response.error;
+                    alert(this.errorMessage);
+                }
+                else {
+                     this.Generate();
+                }
+
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+
+            });
+    }
+    Generate() {
 
         this.report_title = 'HBL';
         this.report_url = '/api/Master/EhblReq/GetBlankBLReport';
