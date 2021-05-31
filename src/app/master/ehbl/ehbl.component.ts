@@ -116,15 +116,14 @@ export class EhblComponent implements OnInit {
             searchstring: this.searchstring.toUpperCase(),
             agentid: '',
             company_code: this.gs.company_code,
-            branch_code: this.gs.branch_code,
-
+            branch_code: this.gs.branch_code
         };
 
         this.errorMessage = '';
         SearchData.searchstring = this.searchstring.toUpperCase();
         SearchData.agentid = '';
-        SearchData.company_code = this.gs.globalVariables.comp_code;
-        SearchData.branch_code = this.gs.globalVariables.branch_code;
+        SearchData.company_code = this.gs.company_code;
+        SearchData.branch_code = this.gs.branch_code;
         this.mainService.List(SearchData)
             .subscribe(response => {
 
