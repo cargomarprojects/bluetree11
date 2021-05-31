@@ -8,7 +8,7 @@ import { EhblReqService } from '../services/ehblreq.service';
 import { User_Menu } from '../../core/models/menum';
 import { Tbl_cargo_ehbld, vm_Tbl_cargo_ehbld, vm_Tbl_cargo_ehbl, Tbl_cargo_ehbl } from '../models/Tbl_cargo_ehbl';
 import { SearchTable } from '../../shared/models/searchtable';
-
+// import { PageQuery } from '../../shared/models/pageQuery';
 
 @Component({
     selector: 'app-ehbl-req',
@@ -74,7 +74,7 @@ export class EhblReqComponent implements OnInit {
         this.List("NEW");
 
 
-       
+
     }
 
     private initPage() {
@@ -82,11 +82,10 @@ export class EhblReqComponent implements OnInit {
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.canDelete = this.gs.canDelete(this.menuid);
         this.errorMessage = '';
-        if(this.gs.User_Role=="AGENT")
-        {
-            this.download_agent_id=this.gs.User_Customer_Id;
-            this.download_agent_name=this.gs.user_name;
-            this.download_agent_code=this.gs.user_code;
+        if (this.gs.User_Role == "AGENT") {
+            this.download_agent_id = this.gs.User_Customer_Id;
+            this.download_agent_name = this.gs.user_name;
+            this.download_agent_code = this.gs.user_code;
             this.GetBalanceBL(this.download_agent_id)
         }
         this.LoadCombo();
@@ -140,10 +139,22 @@ export class EhblReqComponent implements OnInit {
             agentid: '',
             company_code: this.gs.company_code,
             branch_code: this.gs.branch_code,
-            user_category:this.gs.User_Category,
+            user_category: this.gs.User_Category,
             user_role: this.gs.User_Role,
-            user_customer_id:this.gs.User_Customer_Id
-          };
+            user_customer_id: this.gs.User_Customer_Id,
+            action:'NEW',
+            page_count: 0,
+            page_rows: 0,
+            page_current: -1
+
+        };
+
+        if (_type == 'PAGE') {
+            // SearchData.action = this.record.pageQuery.action;
+            // SearchData.page_count = this.record.pageQuery.page_count;
+            // SearchData.page_rows = this.record.pageQuery.page_rows;
+            // SearchData.page_current = this.record.pageQuery.page_current;;
+        }
 
         this.errorMessage = '';
         this.mainService.List(SearchData)
@@ -375,7 +386,7 @@ export class EhblReqComponent implements OnInit {
                     alert(response.error);
                 }
                 else {
-                     this.Generate();
+                    this.Generate();
                 }
 
             }, error => {
@@ -399,8 +410,8 @@ export class EhblReqComponent implements OnInit {
 
     callbackevent(event: any) {
         this.tab = 'main';
-        if(!this.gs.isBlank(this.download_agent_id))
-        this.GetBalanceBL(this.download_agent_id);
+        if (!this.gs.isBlank(this.download_agent_id))
+            this.GetBalanceBL(this.download_agent_id);
     }
 
     GetBalanceBL(_agentid: string) {
@@ -427,4 +438,10 @@ export class EhblReqComponent implements OnInit {
 
             });
     }
+
+    pageEvents(actions: any) {
+
+        // this.mainservice.Search(actions,'PAGE');
+    }
+
 }
