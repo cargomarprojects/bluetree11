@@ -138,8 +138,8 @@ export class EhblReqComponent implements OnInit {
         let SearchData = {
             searchstring: this.searchstring.toUpperCase(),
             agentid: '',
-            company_code: this.gs.globalVariables.comp_code,
-            branch_code: this.gs.globalVariables.branch_code,
+            company_code: this.gs.company_code,
+            branch_code: this.gs.branch_code,
             user_category:this.gs.User_Category,
             user_role: this.gs.User_Role,
             user_customer_id:this.gs.User_Customer_Id

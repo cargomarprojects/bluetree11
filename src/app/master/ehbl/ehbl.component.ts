@@ -112,17 +112,19 @@ export class EhblComponent implements OnInit {
 
 
     List(_type: string) {
-
-
         let SearchData = {
             searchstring: this.searchstring.toUpperCase(),
             agentid: '',
-            company_code: this.gs.globalVariables.comp_code,
-            branch_code: this.gs.globalVariables.branch_code,
+            company_code: this.gs.company_code,
+            branch_code: this.gs.branch_code,
 
         };
 
         this.errorMessage = '';
+        SearchData.searchstring = this.searchstring.toUpperCase();
+        SearchData.agentid = '';
+        SearchData.company_code = this.gs.globalVariables.comp_code;
+        SearchData.branch_code = this.gs.globalVariables.branch_code;
         this.mainService.List(SearchData)
             .subscribe(response => {
 
@@ -252,10 +254,10 @@ export class EhblComponent implements OnInit {
 
     onBlur(field: string) {
         switch (field) {
-              case 'searchstring': {
+            case 'searchstring': {
                 this.searchstring = this.searchstring.toUpperCase();
                 break;
-              }
+            }
             //   case 'cntr_pieces': {
             //     rec.cntr_pieces = this.gs.roundNumber(rec.cntr_pieces, 0);
             //     break;
