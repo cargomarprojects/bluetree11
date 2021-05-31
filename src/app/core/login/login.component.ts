@@ -57,8 +57,9 @@ export class LoginComponent implements OnInit {
     this.username = 'ADMIN';
     this.password = '123';
     //this.username = 'CUST-VIRTRA'; // consignee
+    //this.username = 'CUST-CLUHOU'; // consignee
     //this.username = 'CUST-PARGRA'; // agent
-       
+      
 
     this.LoadCombo();
   }
