@@ -8,7 +8,7 @@ import { EhblReqService } from '../services/ehblreq.service';
 import { User_Menu } from '../../core/models/menum';
 import { Tbl_cargo_ehbld, vm_Tbl_cargo_ehbld, vm_Tbl_cargo_ehbl, Tbl_cargo_ehbl } from '../models/Tbl_cargo_ehbl';
 import { SearchTable } from '../../shared/models/searchtable';
-// import { PageQuery } from '../../shared/models/pageQuery';
+import { PageQuery } from '../../shared/models/pageQuery';
 
 @Component({
     selector: 'app-ehbl-req',
@@ -48,6 +48,7 @@ export class EhblReqComponent implements OnInit {
     running_no: number = 0;
     ending_no: number = 0;
     balance_no: number = 0;
+    pageQuery: PageQuery;
 
     constructor(
         private router: Router,
@@ -82,6 +83,7 @@ export class EhblReqComponent implements OnInit {
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.canDelete = this.gs.canDelete(this.menuid);
         this.errorMessage = '';
+        this.pageQuery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         if (this.gs.User_Role == "AGENT") {
             this.download_agent_id = this.gs.User_Customer_Id;
             this.download_agent_name = this.gs.user_name;
@@ -136,24 +138,25 @@ export class EhblReqComponent implements OnInit {
     List(_type: string) {
         let SearchData = {
             searchstring: this.searchstring.toUpperCase(),
-            agentid: '',
+            pkid: '',
             company_code: this.gs.company_code,
             branch_code: this.gs.branch_code,
             user_category: this.gs.User_Category,
             user_role: this.gs.User_Role,
             user_customer_id: this.gs.User_Customer_Id,
-            action:'NEW',
+            page_rowcount: 5,
+            action: 'NEW',
             page_count: 0,
             page_rows: 0,
             page_current: -1
 
         };
-
+        // this.gs.ROWS_TO_DISPLAY
         if (_type == 'PAGE') {
-            // SearchData.action = this.record.pageQuery.action;
-            // SearchData.page_count = this.record.pageQuery.page_count;
-            // SearchData.page_rows = this.record.pageQuery.page_rows;
-            // SearchData.page_current = this.record.pageQuery.page_current;;
+            SearchData.action = this.pageQuery.action;
+            SearchData.page_count = this.pageQuery.page_count;
+            SearchData.page_rows = this.pageQuery.page_rows;
+            SearchData.page_current = this.pageQuery.page_current;
         }
 
         this.errorMessage = '';
@@ -161,6 +164,13 @@ export class EhblReqComponent implements OnInit {
             .subscribe(response => {
 
                 this.records = response.list;
+                // this.pageQuery.action = response.action;
+                // this.pageQuery.page_rows = response.page_rows;
+                // this.pageQuery.page_count = response.page_count;
+                // this.pageQuery.page_current = response.page_current;
+                // this.pageQuery.page_rowcount = response.page_rowcount;
+
+                this.pageQuery = <PageQuery>{ action: response.action, page_count: response.page_count, page_current:response.page_current, page_rows:response.page_rows }
 
             },
                 error => {
@@ -440,8 +450,9 @@ export class EhblReqComponent implements OnInit {
     }
 
     pageEvents(actions: any) {
-
-        // this.mainservice.Search(actions,'PAGE');
+        
+        this.pageQuery = <PageQuery>{ action: actions.action, page_count: actions.pageQuery.page_count, page_current:actions.pageQuery.page_current, page_rows:actions.pageQuery.page_rows }
+         this.List('PAGE');
     }
 
 }
