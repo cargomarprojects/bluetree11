@@ -31,6 +31,8 @@
     </div>
   </div>
 
+  <App-Page2 [_pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page2>
+
   <div class="page-body table-responsive table-bordered">
     <table class="table table-hover table-sm">
       <thead class="page-body-thead">
@@ -55,7 +57,8 @@
       </tbody>
     </table>
   </div>
-
+  
+<App-Page2 [_pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page2>
 
 </div>
 

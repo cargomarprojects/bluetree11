@@ -8,7 +8,7 @@ import { EhblService } from '../services/ehbl.service';
 import { User_Menu } from '../../core/models/menum';
 import { Tbl_cargo_ehbld, vm_Tbl_cargo_ehbl, Tbl_cargo_ehbl } from '../models/Tbl_cargo_ehbl';
 import { SearchTable } from '../../shared/models/searchtable';
-
+import { PageQuery } from '../../shared/models/pageQuery';
 
 @Component({
     selector: 'app-ehbl',
@@ -34,6 +34,7 @@ export class EhblComponent implements OnInit {
     param_type: string;
     is_locked: boolean = false;
     searchstring: string = '';
+    pageQuery: PageQuery;
 
     constructor(
         private router: Router,
@@ -64,6 +65,7 @@ export class EhblComponent implements OnInit {
         this.title = 'E-hbl Setting';
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.errorMessage = '';
+        this.pageQuery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 };
         this.LoadCombo();
     }
 
@@ -116,9 +118,20 @@ export class EhblComponent implements OnInit {
             searchstring: this.searchstring.toUpperCase(),
             agentid: '',
             company_code: this.gs.company_code,
-            branch_code: this.gs.branch_code
+            branch_code: this.gs.branch_code,
+            page_rowcount: 5,
+            action: 'NEW',
+            page_count: 0,
+            page_rows: 0,
+            page_current: -1
         };
-
+        // this.gs.ROWS_TO_DISPLAY
+        if (_type == 'PAGE') {
+            SearchData.action = this.pageQuery.action;
+            SearchData.page_count = this.pageQuery.page_count;
+            SearchData.page_rows = this.pageQuery.page_rows;
+            SearchData.page_current = this.pageQuery.page_current;
+        }
         this.errorMessage = '';
         SearchData.searchstring = this.searchstring.toUpperCase();
         SearchData.agentid = '';
@@ -128,7 +141,7 @@ export class EhblComponent implements OnInit {
             .subscribe(response => {
 
                 this.records = response.list;
-
+                this.pageQuery = <PageQuery>{ action: response.action, page_count: response.page_count, page_current:response.page_current, page_rows:response.page_rows };
             },
                 error => {
                     this.errorMessage = this.gs.getError(error);
@@ -262,6 +275,12 @@ export class EhblComponent implements OnInit {
             //     break;
             //   }
         }
+    }
+
+    pageEvents(actions: any) {
+        
+        this.pageQuery = <PageQuery>{ action: actions.action, page_count: actions.pageQuery.page_count, page_current:actions.pageQuery.page_current, page_rows:actions.pageQuery.page_rows }
+         this.List('PAGE');
     }
 
 }

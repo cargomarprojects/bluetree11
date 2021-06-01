@@ -83,7 +83,7 @@ export class EhblReqComponent implements OnInit {
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.canDelete = this.gs.canDelete(this.menuid);
         this.errorMessage = '';
-        this.pageQuery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
+        this.pageQuery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 };
         if (this.gs.User_Role == "AGENT") {
             this.download_agent_id = this.gs.User_Customer_Id;
             this.download_agent_name = this.gs.user_name;
@@ -164,13 +164,7 @@ export class EhblReqComponent implements OnInit {
             .subscribe(response => {
 
                 this.records = response.list;
-                // this.pageQuery.action = response.action;
-                // this.pageQuery.page_rows = response.page_rows;
-                // this.pageQuery.page_count = response.page_count;
-                // this.pageQuery.page_current = response.page_current;
-                // this.pageQuery.page_rowcount = response.page_rowcount;
-
-                this.pageQuery = <PageQuery>{ action: response.action, page_count: response.page_count, page_current:response.page_current, page_rows:response.page_rows }
+                 this.pageQuery = <PageQuery>{ action: response.action, page_count: response.page_count, page_current:response.page_current, page_rows:response.page_rows };
 
             },
                 error => {
