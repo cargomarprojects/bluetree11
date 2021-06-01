@@ -59,6 +59,7 @@ import { GenListComponent } from './genlist/genlist.component';
 import { SortByPipe } from './pipe/orderby';
 import { ResizableDirective } from './directive/resizable';
 import { ResizableComponent } from './directive/resizable.component';
+import { Report2Component } from './report2/report2.component';
 
 @NgModule({
   imports: [
@@ -99,7 +100,8 @@ import { ResizableComponent } from './directive/resizable.component';
     GenListComponent,
     SortByPipe,
     ResizableComponent,
-    ResizableDirective
+    ResizableDirective,
+    Report2Component
   ],
   exports: [
     CommonModule,
@@ -135,7 +137,8 @@ import { ResizableComponent } from './directive/resizable.component';
     GenListComponent,
     SortByPipe,
     ResizableComponent,
-    ResizableDirective
+    ResizableDirective,
+    Report2Component
   ]
 
 })

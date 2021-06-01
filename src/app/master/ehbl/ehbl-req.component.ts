@@ -408,7 +408,7 @@ export class EhblReqComponent implements OnInit {
         this.report_searchdata.download_agent_id = this.download_agent_id;
         this.report_searchdata.download_req_nos = this.download_req_nos;
         this.report_menuid = this.menuid;
-        this.tab = 'report';
+        this.tab = 'report2';
 
     }
 
