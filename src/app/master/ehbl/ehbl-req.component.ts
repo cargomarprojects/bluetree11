@@ -434,6 +434,7 @@ export class EhblReqComponent implements OnInit {
                 this.filedisplayname2 = response.filedisplayname2;
                 this.tab = 'report2';
 
+                
                 if (!this.gs.isBlank(this.download_agent_id))
                     this.GetBalanceBL(this.download_agent_id);
                

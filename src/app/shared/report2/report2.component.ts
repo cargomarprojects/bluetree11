@@ -168,6 +168,10 @@ export class Report2Component implements OnInit {
     this.modal.close();
     this.AutoLoad();
   }
-
+  Cancel()
+  {
+    if (this.callbackevent)
+    this.callbackevent.emit({ action: 'CLOSE', source: 'MANIFEST' });
+  }
 
 }
