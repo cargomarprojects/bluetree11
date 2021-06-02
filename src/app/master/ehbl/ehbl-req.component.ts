@@ -42,6 +42,13 @@ export class EhblReqComponent implements OnInit {
     public canDelete: boolean;
     errorMessage: string;
 
+    filename: string = '';
+    filetype: string = '';
+    filedisplayname: string = '';
+    filename2: string = '';
+    filetype2: string = '';
+    filedisplayname2: string = '';
+
     is_locked: boolean = false;
     searchstring: string = '';
     starting_no: number = 0;
@@ -164,7 +171,7 @@ export class EhblReqComponent implements OnInit {
             .subscribe(response => {
 
                 this.records = response.list;
-                 this.pageQuery = <PageQuery>{ action: response.action, page_count: response.page_count, page_current:response.page_current, page_rows:response.page_rows };
+                this.pageQuery = <PageQuery>{ action: response.action, page_count: response.page_count, page_current: response.page_current, page_rows: response.page_rows };
 
             },
                 error => {
@@ -364,7 +371,7 @@ export class EhblReqComponent implements OnInit {
             });
     }
 
-    GenerateValid(_agentid: string) {
+    GenerateValid() {
 
         this.errorMessage = '';
         if (this.gs.isBlank(this.download_agent_id)) {
@@ -401,14 +408,41 @@ export class EhblReqComponent implements OnInit {
     }
     Generate() {
 
-        this.report_title = 'HBL';
-        this.report_url = '/api/Master/EhblReq/GetBlankBLReport';
-        this.report_searchdata = this.gs.UserInfo;
-        this.report_searchdata.pkid = this.gs.getGuid();
-        this.report_searchdata.download_agent_id = this.download_agent_id;
-        this.report_searchdata.download_req_nos = this.download_req_nos;
-        this.report_menuid = this.menuid;
-        this.tab = 'report2';
+        // this.report_title = 'HBL';
+        // this.report_url = '/api/Master/EhblReq/GetBlankBLReport';
+        // this.report_searchdata = this.gs.UserInfo;
+        // this.report_searchdata.pkid = this.gs.getGuid();
+        // this.report_searchdata.download_agent_id = this.download_agent_id;
+        // this.report_searchdata.download_req_nos = this.download_req_nos;
+        // this.report_menuid = this.menuid;
+        // this.tab = 'report2';
+
+        this.errorMessage = '';
+
+
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = this.gs.getGuid();
+        SearchData.download_agent_id = this.download_agent_id;
+        SearchData.download_req_nos = this.download_req_nos;
+        this.mainService.GetBlankBLReport(SearchData)
+            .subscribe(response => {
+                this.filename = response.filename;
+                this.filetype = response.filetype;
+                this.filedisplayname = response.filedisplayname;
+                this.filename2 = response.filename2;
+                this.filetype2 = response.filetype2;
+                this.filedisplayname2 = response.filedisplayname2;
+                this.tab = 'report2';
+
+                if (!this.gs.isBlank(this.download_agent_id))
+                    this.GetBalanceBL(this.download_agent_id);
+               
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+
+            });
+
 
     }
 
@@ -444,9 +478,9 @@ export class EhblReqComponent implements OnInit {
     }
 
     pageEvents(actions: any) {
-        
-        this.pageQuery = <PageQuery>{ action: actions.action, page_count: actions.pageQuery.page_count, page_current:actions.pageQuery.page_current, page_rows:actions.pageQuery.page_rows }
-         this.List('PAGE');
+
+        this.pageQuery = <PageQuery>{ action: actions.action, page_count: actions.pageQuery.page_count, page_current: actions.pageQuery.page_current, page_rows: actions.pageQuery.page_rows }
+        this.List('PAGE');
     }
 
 }
