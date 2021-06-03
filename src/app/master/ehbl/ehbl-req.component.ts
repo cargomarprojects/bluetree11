@@ -95,6 +95,9 @@ export class EhblReqComponent implements OnInit {
             this.download_agent_id = this.gs.User_Customer_Id;
             this.download_agent_name = this.gs.user_name;
             this.download_agent_code = this.gs.user_code;
+            // this.record.ebld_agent_id = this.gs.User_Customer_Id;
+            // this.record.ebld_agent_name = this.gs.user_name;
+            // this.record.ebld_agent_code = this.gs.user_code;
             this.GetBalanceBL(this.download_agent_id)
         }
         this.LoadCombo();
@@ -139,6 +142,11 @@ export class EhblReqComponent implements OnInit {
         this.record.ebld_agent_name = "";
         this.record.ebld_req_nos = 0;
         this.record.ebld_approved = false;
+        if (this.gs.User_Role == "AGENT") {
+            this.record.ebld_agent_id = this.gs.User_Customer_Id;
+            this.record.ebld_agent_name = this.gs.user_name;
+            this.record.ebld_agent_code = this.gs.user_code;
+        }
     }
 
 
@@ -158,7 +166,7 @@ export class EhblReqComponent implements OnInit {
             page_current: -1
 
         };
-        
+
         if (_type == 'PAGE') {
             SearchData.action = this.pageQuery.action;
             SearchData.page_count = this.pageQuery.page_count;
@@ -434,10 +442,10 @@ export class EhblReqComponent implements OnInit {
                 this.filedisplayname2 = response.filedisplayname2;
                 this.tab = 'report2';
 
-                
+
                 if (!this.gs.isBlank(this.download_agent_id))
                     this.GetBalanceBL(this.download_agent_id);
-               
+
             }, error => {
                 this.errorMessage = this.gs.getError(error);
                 alert(this.errorMessage);
@@ -484,4 +492,9 @@ export class EhblReqComponent implements OnInit {
         this.List('PAGE');
     }
 
+    Cancel() {
+        this.tab = 'main';
+        if (!this.gs.isBlank(this.download_agent_id))
+            this.GetBalanceBL(this.download_agent_id);
+    }
 }
