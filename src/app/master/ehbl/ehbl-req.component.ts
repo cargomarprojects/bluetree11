@@ -95,9 +95,6 @@ export class EhblReqComponent implements OnInit {
             this.download_agent_id = this.gs.User_Customer_Id;
             this.download_agent_name = this.gs.user_name;
             this.download_agent_code = this.gs.user_code;
-            // this.record.ebld_agent_id = this.gs.User_Customer_Id;
-            // this.record.ebld_agent_name = this.gs.user_name;
-            // this.record.ebld_agent_code = this.gs.user_code;
             this.GetBalanceBL(this.download_agent_id)
         }
         this.LoadCombo();
