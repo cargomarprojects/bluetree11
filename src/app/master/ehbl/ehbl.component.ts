@@ -119,13 +119,13 @@ export class EhblComponent implements OnInit {
             agentid: '',
             company_code: this.gs.company_code,
             branch_code: this.gs.branch_code,
-            page_rowcount: 5,
+            page_rowcount: this.gs.ROWS_TO_DISPLAY,
             action: 'NEW',
             page_count: 0,
             page_rows: 0,
             page_current: -1
         };
-        // this.gs.ROWS_TO_DISPLAY
+        
         if (_type == 'PAGE') {
             SearchData.action = this.pageQuery.action;
             SearchData.page_count = this.pageQuery.page_count;

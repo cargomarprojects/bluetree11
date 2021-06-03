@@ -151,14 +151,14 @@ export class EhblReqComponent implements OnInit {
             user_category: this.gs.User_Category,
             user_role: this.gs.User_Role,
             user_customer_id: this.gs.User_Customer_Id,
-            page_rowcount: 5,
+            page_rowcount: this.gs.ROWS_TO_DISPLAY,
             action: 'NEW',
             page_count: 0,
             page_rows: 0,
             page_current: -1
 
         };
-        // this.gs.ROWS_TO_DISPLAY
+        
         if (_type == 'PAGE') {
             SearchData.action = this.pageQuery.action;
             SearchData.page_count = this.pageQuery.page_count;
