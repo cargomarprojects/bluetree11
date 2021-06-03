@@ -424,11 +424,13 @@ export class EhblReqComponent implements OnInit {
 
         this.errorMessage = '';
 
-
+        let remarks: string = '';
+        remarks = this.download_agent_name + ', START# ' + this.starting_no.toString() + ', ENDING# ' + this.ending_no.toString();
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = this.gs.getGuid();
         SearchData.download_agent_id = this.download_agent_id;
         SearchData.download_req_nos = this.download_req_nos;
+        SearchData.remarks = remarks;
         this.mainService.GetBlankBLReport(SearchData)
             .subscribe(response => {
                 this.filename = response.filename;
