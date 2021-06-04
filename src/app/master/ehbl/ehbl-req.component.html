@@ -190,9 +190,9 @@
           <div class="form-group row">
 
             <div class="col-6">
-              <button class="btn btn-primary btn-md mr-1" [disabled]="tab == 'report2'" (click)="GenerateValid()">Generate</button>
-              <!-- <button *ngIf="tab=='report2'" class="btn btn-primary btn-md mr-1" [disabled]="tab == 'main'" (click)="Cancel()">Close</button> -->
-              <button class="btn btn-primary btn-md mr-1" [disabled]="tab == 'main'" (click)="Cancel()">Close</button>
+              <button *ngIf="tab=='main'" class="btn btn-primary btn-md mr-1" [disabled]="tab == 'report2'" (click)="GenerateValid()">Generate</button>
+              <button *ngIf="tab=='report2'" class="btn btn-primary btn-md mr-1" [disabled]="tab == 'main'" (click)="Cancel()">Close</button>
+              <!-- <button class="btn btn-primary btn-md mr-1" [disabled]="tab == 'main'" (click)="Cancel()">Close</button> -->
             </div>
           </div>
 
