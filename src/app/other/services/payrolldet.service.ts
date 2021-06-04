@@ -50,12 +50,13 @@ export class PayrollDetService {
     }
     
     public init(params: any) {
-        if (this.appid != this.gs.appid) {
-            this.appid = this.gs.appid;
-            this.initlialized = false;
-        }
-        if (this.initlialized)
-            return;
+        //this is invoke from list so every time refresh
+        // if (this.appid != this.gs.appid) {
+        //     this.appid = this.gs.appid;
+        //     this.initlialized = false;
+        // }
+        // if (this.initlialized)
+        //     return;
         const options = params;
         this.id = options.menuid;
         this.menuid = options.menuid;
