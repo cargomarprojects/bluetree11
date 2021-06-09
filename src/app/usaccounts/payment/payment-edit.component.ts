@@ -75,6 +75,7 @@ export class PaymentEditComponent implements OnInit {
 
 
     replaceUrlMode(){
+        this.ms.mode = "EDIT";
         let parameter = {
             menuid: this.ms.menuid,
             pkid: '',
@@ -85,25 +86,19 @@ export class PaymentEditComponent implements OnInit {
         this.location.replaceState('Silver.USAccounts.Trans/PaymentEditPage', this.gs.getUrlParameter(parameter));
     }
 
-    actionHandler() {
-        this.ms.errorMessage = '';
-        if (this.ms.mode == 'ADD') {
-            //this.record = <Tbl_cargo_invoicem>{};
-            this.ms.pendingList = <Tbl_cargo_invoicem[]>[];
-            this.ms.pkid = this.gs.getGuid();
-            this.ms.init();
-        }
-    }
-
-
     NewRecord() {
         this.ms.mode = 'ADD'
         this.actionHandler();
     }
 
-
-
-
+    actionHandler() {
+        this.ms.errorMessage = '';
+        if (this.ms.mode == 'ADD') {
+            this.ms.pendingList = <Tbl_cargo_invoicem[]>[];
+            this.ms.pkid = this.gs.getGuid();
+            this.ms.init();
+        }
+    }
 
     ProcessData() {
     }
@@ -385,7 +380,7 @@ export class PaymentEditComponent implements OnInit {
             this.ms.cust_id = _Record.id;
             this.ms.cust_code = _Record.code;
             this.ms.cust_name = _Record.name;
-            this.NewRecord();
+            //this.NewRecord();
         }
         if (_Record.controlname == "CURRENCY") {
             this.ms.curr_code = _Record.code;
@@ -397,7 +392,7 @@ export class PaymentEditComponent implements OnInit {
             this.ms.cust_id = '';
             this.ms.cust_code = '';
             this.ms.cust_name = '';
-            this.NewRecord();
+            //this.NewRecord();
         }
     }
 

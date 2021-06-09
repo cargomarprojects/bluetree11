@@ -86,12 +86,18 @@ export class PaymentEditService {
 
     init() {
 
-        this.cust_id = "";
-        this.cust_code = "";
-        this.cust_name = "";
-        this.refno = '';
-        this.invno = '';
-        this.custrefno = '';
+        if ( this.mode == "ADD") {
+            this.cust_id = "";
+            this.cust_code = "";
+            this.cust_name = "";
+            this.refno = '';
+            this.invno = '';
+            this.custrefno = '';        
+
+            this.Customer_ID   = '';
+            this.Search_Mode = '';
+            this.str_id ='';
+        }
 
         this.Pay_RP = "";
         this.txt_Bal_AP = 0;
@@ -128,10 +134,6 @@ export class PaymentEditService {
                 return;
             }
         }
-
-        this.str_id = '';
-        this.Customer_ID  = '';
-        this.Search_Mode  = '';
 
         var SearchData = this.gs.UserInfo;
 
