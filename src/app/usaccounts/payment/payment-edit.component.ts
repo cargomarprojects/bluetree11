@@ -97,7 +97,6 @@ export class PaymentEditComponent implements OnInit {
         public gs: GlobalService,
         public mainService: PaymentService,
     ) {
-        this.decplace = this.gs.foreign_amt_dec;
         modalconfig.backdrop = 'static'; //true/false/static
         modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
     }
@@ -114,9 +113,28 @@ export class PaymentEditComponent implements OnInit {
             this.mode = options.mode;
         }
         this.setup();
-
-        this.initPage();
         this.actionHandler();
+    }
+
+    setup() {
+        this.decplace = this.gs.foreign_amt_dec;
+        if (!this.gs.IS_SINGLE_CURRENCY) {
+            this.curr_code = this.gs.base_cur_code;
+        }
+        this.isAdmin = this.gs.IsAdmin(this.menuid);
+        this.title = this.gs.getTitle(this.menuid);
+        this.errorMessage = '';
+    }
+
+    replaceUrlMode(){
+        let parameter = {
+            menuid: this.menuid,
+            pkid: '',
+            type: '',
+            origin: 'payment-page',
+            mode: 'EDIT'
+        };
+        this.location.replaceState('Silver.USAccounts.Trans/PaymentEditPage', this.gs.getUrlParameter(parameter));
     }
 
     actionHandler() {
@@ -129,35 +147,14 @@ export class PaymentEditComponent implements OnInit {
         }
     }
 
-
-    setup() {
-        if (!this.gs.IS_SINGLE_CURRENCY)
-            this.curr_code = this.gs.base_cur_code;
-    }
-
-
-    private initPage() {
-        this.isAdmin = this.gs.IsAdmin(this.menuid);
-        this.title = this.gs.getTitle(this.menuid);
-        this.errorMessage = '';
-        this.LoadCombo();
-    }
-
-    LoadCombo() {
-
-    }
-
     NewRecord() {
         this.mode = 'ADD'
         this.actionHandler();
     }
 
-
-
     init() {
 
         this.Pay_RP = "";
-
         this.txt_Bal_AP = 0;
         this.txt_Bal_AR = 0;
         this.txt_Bal_diff = 0;
