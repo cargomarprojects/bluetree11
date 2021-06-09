@@ -6,12 +6,13 @@ import { GlobalService } from '../../core/services/global.service';
 import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
 
-import { PaymentService } from '../services/payment.service';
+import { PaymentEditService } from '../services/paymentEditservice';
 import { User_Menu } from '../../core/models/menum';
 import { Tbl_Acc_Payment, vm_tbl_accPayment, AccPaymentModel } from '../models/Tbl_Acc_Payment';
 import { SearchTable } from '../../shared/models/searchtable';
 import { Tbl_cargo_invoicem } from '../models/Tbl_cargo_Invoicem';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @Component({
@@ -20,66 +21,17 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PaymentEditComponent implements OnInit {
 
-    record: Tbl_cargo_invoicem = <Tbl_cargo_invoicem>{};
-    pendingList: Tbl_cargo_invoicem[] = [];
+    //record: Tbl_cargo_invoicem = <Tbl_cargo_invoicem>{};
+
     DetailList: Tbl_cargo_invoicem[] = [];
 
-    Old_List: Tbl_cargo_invoicem[] = [];
+    
     InvoiceList: Tbl_cargo_invoicem[] = [];
 
     @ViewChildren('_inv_pay_amt') inv_pay_amt_field: QueryList<ElementRef>;
     modal: any;
-    tab: string = 'main';
-
     mPayRecord = {};
 
-    pkid: string;
-    menuid: string;
-    public mode: string = '';
-    errorMessage: string;
-    Foregroundcolor: string;
-
-    custType = 'MASTER';
-    sortcol: string = 'inv_no';
-    sortorder: boolean = true;
-
-    title: string;
-    isAdmin: boolean;
-
-    IsRefresh = "";
-
-    IsMultiCurrency = "N";
-
-    txt_Bal_AR = 0;
-    txt_Bal_AP = 0;
-    txt_Bal_diff = 0;
-
-    txt_tot_AR = 0;
-    txt_tot_AP = 0;
-    txt_tot_diff = 0;
-
-    txt_diff = 0;
-
-    LBL_COUNT = 0;
-    LBL_STATUS = '';
-
-    Pay_RP = "";
-
-    decplace = 0;
-
-    group = 'customer';
-    cust_id = "";
-    cust_code = "";
-    cust_name = "";
-    refno = '';
-    invno = '';
-    custrefno = '';
-    curr_code = '';
-    str_id = "";
-    Search_Mode = "";
-    showall: boolean = false;
-
-    Customer_ID = '';
 
     report_url: string;
     report_searchdata: any = {};
@@ -95,40 +47,36 @@ export class PaymentEditComponent implements OnInit {
         private route: ActivatedRoute,
         private location: Location,
         public gs: GlobalService,
-        public mainService: PaymentService,
+        public ms: PaymentEditService,
     ) {
         modalconfig.backdrop = 'static'; //true/false/static
         modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
     }
 
     ngOnInit() {
+        
+
         if (this.route.snapshot.queryParams.parameter == null) {
-            this.menuid = this.route.snapshot.queryParams.menuid;
-            this.pkid = this.route.snapshot.queryParams.pkid;
-            this.mode = this.route.snapshot.queryParams.mode;
+            this.ms.menuid = this.route.snapshot.queryParams.menuid;
+            this.ms.pkid = this.route.snapshot.queryParams.pkid;
+            this.ms.mode = this.route.snapshot.queryParams.mode;
         } else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-            this.menuid = options.menuid;
-            this.pkid = options.pkid;
-            this.mode = options.mode;
+            this.ms.menuid = options.menuid;
+            this.ms.pkid = options.pkid;
+            this.ms.mode = options.mode;
         }
-        this.setup();
-        this.actionHandler();
+        this.ms.setup();
+        if ( this.ms.mode == 'ADD' ) {
+            this.actionHandler();
+            this.replaceUrlMode();
+        }
     }
 
-    setup() {
-        this.decplace = this.gs.foreign_amt_dec;
-        if (!this.gs.IS_SINGLE_CURRENCY) {
-            this.curr_code = this.gs.base_cur_code;
-        }
-        this.isAdmin = this.gs.IsAdmin(this.menuid);
-        this.title = this.gs.getTitle(this.menuid);
-        this.errorMessage = '';
-    }
 
     replaceUrlMode(){
         let parameter = {
-            menuid: this.menuid,
+            menuid: this.ms.menuid,
             pkid: '',
             type: '',
             origin: 'payment-page',
@@ -138,167 +86,23 @@ export class PaymentEditComponent implements OnInit {
     }
 
     actionHandler() {
-        this.errorMessage = '';
-        if (this.mode == 'ADD') {
-            this.record = <Tbl_cargo_invoicem>{};
-            this.pendingList = <Tbl_cargo_invoicem[]>[];
-            this.pkid = this.gs.getGuid();
-            this.init();
+        this.ms.errorMessage = '';
+        if (this.ms.mode == 'ADD') {
+            //this.record = <Tbl_cargo_invoicem>{};
+            this.ms.pendingList = <Tbl_cargo_invoicem[]>[];
+            this.ms.pkid = this.gs.getGuid();
+            this.ms.init();
         }
     }
 
+
     NewRecord() {
-        this.mode = 'ADD'
+        this.ms.mode = 'ADD'
         this.actionHandler();
     }
 
-    init() {
-
-        this.Pay_RP = "";
-        this.txt_Bal_AP = 0;
-        this.txt_Bal_AR = 0;
-        this.txt_Bal_diff = 0;
-
-        this.txt_tot_AP = 0;
-        this.txt_tot_AR = 0;
-        this.txt_tot_diff = 0;
-
-        this.txt_diff = 0;
-
-        this.LBL_COUNT = 0;
-        this.LBL_STATUS = '';
-
-        //this.record.rec_created_by = this.gs.user_code;
-        //this.record.rec_created_date = this.gs.defaultValues.today;
-    }
-
-    RefreshList() {
-        this.IsRefresh = "YES";
-        this.Old_List = this.pendingList.filter(rec => rec.inv_flag === 'Y' && rec.inv_pay_amt > 0);
-        this.FindInvoice();
-    }
-
-    FindInvoice() {
 
 
-        /*
-        if (this.gs.isBlank(this.cust_id)) {
-            alert("No Customer/Parent Selected");
-            return;
-        }
-        */
-        if (this.gs.IS_SINGLE_CURRENCY == false) {
-            if (this.gs.isBlank(this.curr_code.length)) {
-                alert("Currency Code Has to be entered");
-                return;
-            }
-        }
-
-        var SearchData = this.gs.UserInfo;
-
-        SearchData.pkid = this.pkid;
-        if (!this.gs.isBlank(this.cust_id)) {
-            this.Customer_ID = this.cust_id;
-            this.str_id = this.cust_id;
-            this.Search_Mode = (this.custType == "MASTER") ? "CUSTOMER" : "GROUP";
-        }
-        else if (!this.gs.isBlank(this.refno)) {
-            this.str_id = this.refno;
-            this.Search_Mode = "MASTER";
-        }
-        else if (!this.gs.isBlank(this.invno)) {
-            this.str_id = this.invno;
-            this.Search_Mode = "INVNO";
-        }
-        else if (!this.gs.isBlank(this.custrefno)) {
-            this.str_id = this.custrefno;
-            this.Search_Mode = "REFNO";
-        }
-        if (this.gs.isBlank(this.Search_Mode)) {
-            alert("Search Data Not Found");
-            return;
-        }
-        SearchData.PKID = this.str_id;
-        SearchData.MODE = this.Search_Mode;
-        SearchData.SHOWALL = (this.showall) ? "Y" : "N";
-        if (this.gs.IS_SINGLE_CURRENCY == true) {
-            SearchData.CURRENCY = "";
-            SearchData.ISBASECURRENCY = "Y";
-        }
-        else {
-            SearchData.CURRENCY = this.curr_code;
-            if (this.curr_code == this.gs.base_cur_code)
-                SearchData.ISBASECURRENCY = "Y";
-            else
-                SearchData.ISBASECURRENCY = "N";
-        }
-        SearchData.HIDE_PAYROLL = this.gs.user_hide_payroll;
-
-        this.mainService.PendingList(SearchData).subscribe(
-            res => {
-
-                if (this.Search_Mode == "INVNO" || this.Search_Mode == "REFNO" || this.Search_Mode == "MASTER") {
-                    if (res.partyname != '')
-                        this.cust_name = res.partyname;
-                }
-                this.pendingList = res.list;
-
-                if (this.IsRefresh == "YES")
-                    this.ReProcessInvoiceList();
-
-                this.IsRefresh = "";
-
-                this.FindPartyBalance();
-
-                this.FindTotal();
-
-            },
-            err => {
-                this.errorMessage = this.gs.getError(err);
-                alert(this.errorMessage);
-            });
-    }
-
-    FindPartyBalance() {
-        let nAR = 0;
-        let nAP = 0;
-        let nDiff = 0;
-        nAR = 0;
-        nAP = 0;
-        nDiff = 0;
-
-        if (this.pendingList) {
-            this.pendingList.forEach(mRec => {
-                nAR += mRec.inv_ar_total;
-                nAP += mRec.inv_ap_total;
-                nAR = this.gs.roundNumber(nAR, 2);
-                nAP = this.gs.roundNumber(nAP, 2);
-            });
-        }
-
-        nDiff = nAR - nAP;
-        nDiff = this.gs.roundNumber(nDiff, 2);
-        this.txt_Bal_AR = nAR;
-        this.txt_Bal_AP = nAP;
-        this.txt_Bal_diff = nDiff;
-        this.txt_diff = nDiff;
-    }
-
-
-    ReProcessInvoiceList() {
-        let iCount = 0;
-        this.Old_List.forEach(mRec => {
-            this.pendingList.forEach(dRec => {
-                if (mRec.inv_pkid == dRec.inv_pkid) {
-                    dRec.inv_flag = mRec.inv_flag;
-                    dRec.inv_flag2 = mRec.inv_flag2;
-                    dRec.inv_pay_amt = mRec.inv_pay_amt;
-                    iCount++;
-                }
-            });
-        });
-        this.LBL_COUNT = iCount;
-    }
 
 
     ProcessData() {
@@ -310,7 +114,7 @@ export class PaymentEditComponent implements OnInit {
 
 
     Save(paymentModalContent) {
-        this.FindTotal();
+        this.ms.FindTotal();
         if (this.Allvalid())
             this.modal = this.modalservice.open(paymentModalContent, { centered: true });
     }
@@ -331,7 +135,7 @@ export class PaymentEditComponent implements OnInit {
         sErrMsg = "";
         iCtr = 0;
 
-        this.pendingList.forEach(Record => {
+        this.ms.pendingList.forEach(Record => {
             if (Record.inv_flag == "Y") {
                 iCtr++;
                 if (Record.inv_pay_amt < 0) {
@@ -340,7 +144,7 @@ export class PaymentEditComponent implements OnInit {
                 }
 
                 if (this.gs.IS_SINGLE_CURRENCY == false) {
-                    if (this.cust_code != this.gs.base_cur_code) {
+                    if (this.ms.cust_code != this.gs.base_cur_code) {
                         if (Record.inv_pay_amt > Record.inv_balance) {
                             sErrMsg = "Amount cannot be above available balance " + Record.inv_pay_amt.toString();
                             //break;
@@ -375,12 +179,12 @@ export class PaymentEditComponent implements OnInit {
         let nDiff = 0;
         let nDiff_Base = 0;
 
-        this.DetailList = this.pendingList.filter(Record => Record.inv_flag == "Y" && Record.inv_pay_amt > 0);
+        this.DetailList = this.ms.pendingList.filter(Record => Record.inv_flag == "Y" && Record.inv_pay_amt > 0);
 
 
         this.DetailList.forEach(Record => {
 
-            Record.inv_curr_code = this.curr_code;
+            Record.inv_curr_code = this.ms.curr_code;
             if (Record.inv_type == "PR")
                 IS_PAYROLL_RECORD = "Y";
             if (Record.inv_type == "CM")
@@ -430,13 +234,13 @@ export class PaymentEditComponent implements OnInit {
         nAr = this.gs.roundNumber(nAr, 2);
         nAr_Base = this.gs.roundNumber(nAr_Base, 2);
 
-        Customer_Type = this.Search_Mode;
+        Customer_Type = this.ms.Search_Mode;
 
 
-        if (this.Search_Mode != "CUSTOMER" && this.Search_Mode != "GROUP") {
+        if (this.ms.Search_Mode != "CUSTOMER" && this.ms.Search_Mode != "GROUP") {
             if (IsSingleCustID == true) {
                 Customer_Type = "CUSTOMER";
-                this.Customer_ID = mID;
+                this.ms.Customer_ID = mID;
             }
             else {
                 //Customer_ID = "";
@@ -455,23 +259,23 @@ export class PaymentEditComponent implements OnInit {
         nDiff = this.gs.roundNumber(nDiff, 2);
         nDiff_Base = this.gs.roundNumber(nDiff_Base, 2);
 
-        if (nAr != this.txt_tot_AR) {
+        if (nAr != this.ms.txt_tot_AR) {
             alert("Mismatch in Total A/R");
             bRet = false;
             return false;
         }
-        if (nAp != this.txt_tot_AP) {
+        if (nAp != this.ms.txt_tot_AP) {
             alert("Mismatch in Total A/P");
             bRet = false;
             return false;
         }
-        if (nDiff != this.txt_tot_diff) {
+        if (nDiff != this.ms.txt_tot_diff) {
             alert("Mismatch in Difference Amt");
             bRet = false;
             return false;
         }
 
-        if (this.Customer_ID == "") {
+        if (this.ms.Customer_ID == "") {
             alert("Invalid Customer");
             bRet = false;
             return false;
@@ -479,16 +283,16 @@ export class PaymentEditComponent implements OnInit {
 
 
         if (this.gs.IS_SINGLE_CURRENCY == true)
-            this.IsMultiCurrency = "N";
+            this.ms.IsMultiCurrency = "N";
         else {
-            if (this.curr_code == this.gs.base_cur_code)
-                this.IsMultiCurrency = "N";
+            if (this.ms.curr_code == this.gs.base_cur_code)
+                this.ms.IsMultiCurrency = "N";
             else
-                this.IsMultiCurrency = "Y";
+                this.ms.IsMultiCurrency = "Y";
         }
 
         if (nDiff != 0) {
-            if (this.IsMultiCurrency == "Y") {
+            if (this.ms.IsMultiCurrency == "Y") {
                 if (Math.sign(nDiff) != Math.sign(nDiff_Base)) {
                     bRet = false;
                     alert("Mismatch in Foreign Currency And Local Currency due to huge variation in Exchange Rate");
@@ -508,13 +312,13 @@ export class PaymentEditComponent implements OnInit {
             // for single currency always currency code will be blank.
             // for multi currency if the settlement is in base    currency, currency code will be base    currency code.
             // for multi currency if the settlement is in foreign currency, currency code will be foreign currency code.
-            FCURR_CODE: this.curr_code,
-            IsMultiCurrency: this.IsMultiCurrency,
+            FCURR_CODE: this.ms.curr_code,
+            IsMultiCurrency: this.ms.IsMultiCurrency,
             IS_PAYROLL_RECORD: IS_PAYROLL_RECORD,
             DetailList: this.DetailList,
-            IsAdmin: this.isAdmin,
-            Customer_ID: this.Customer_ID,
-            Customer_Name: this.cust_name,
+            IsAdmin: this.ms.isAdmin,
+            Customer_ID: this.ms.Customer_ID,
+            Customer_Name: this.ms.cust_name,
             Customer_Type: Customer_Type,
         };
 
@@ -531,13 +335,13 @@ export class PaymentEditComponent implements OnInit {
 
     callbackevent(data: any) {
         if (data.action == 'CLOSE') {
-            this.tab = 'main';
+            this.ms.tab = 'main';
             this.CloseModal();
         }
         if (data.action == 'PRINTCHECK') {
 
-            this.ResetGrid();
-            this.FindPartyBalance();
+            this.ms.ResetGrid();
+            this.ms.FindPartyBalance();
 
             this.CloseModal();
 
@@ -549,10 +353,10 @@ export class PaymentEditComponent implements OnInit {
                     this.report_searchdata.BANKID = data.bankid;
                     this.report_searchdata.PRINT_SIGNATURE = "N";
                     this.report_menuid = this.gs.MENU_ACC_ARAP_SETTLMENT;
-                    this.tab = 'chq';
+                    this.ms.tab = 'chq';
                 }
                 else {
-                    this.tab = 'main';
+                    this.ms.tab = 'main';
                 }
 
             } else {
@@ -566,64 +370,10 @@ export class PaymentEditComponent implements OnInit {
                 else
                     this.report_searchdata.REPORT_CAPTION = "BANK " + data.payrp;
                 this.report_menuid = this.gs.MENU_ACC_ARAP_SETTLMENT;
-                this.tab = 'cash';
+                this.ms.tab = 'cash';
             }
         }
     }
-
-
-    ResetGrid() {
-        let nAR = 0;
-        let nAP = 0;
-        let nPayAmt = 0;
-
-        this.pendingList.forEach(Rec => {
-
-            if (Rec.inv_flag == "Y") {
-                nPayAmt = Rec.inv_pay_amt;
-                if (Rec.inv_ar_total > 0) {
-                    nAR = Rec.inv_ar_total;
-                    nAR = nAR - nPayAmt;
-                    nAR = this.gs.roundNumber(nAR, 2);
-                    Rec.inv_balance = Math.abs(nAR);
-                    if (nAR == 0)
-                        Rec.inv_ar_total = null;
-                    else if (nAR > 0)
-                        Rec.inv_ar_total = nAR;
-                    else {
-                        Rec.inv_ar_total = null;
-                        Rec.inv_ap_total = Math.abs(nAR);
-                    }
-                }
-                else {
-                    nAP = Rec.inv_ap_total;
-                    nAP = nAP - nPayAmt;
-                    nAP = this.gs.roundNumber(nAP, 2);
-                    Rec.inv_balance = Math.abs(nAP);
-                    if (nAP == 0)
-                        Rec.inv_ap_total = null;
-                    else if (nAP > 0)
-                        Rec.inv_ap_total = nAP;
-                    else {
-                        Rec.inv_ap_total = null;
-                        Rec.inv_ar_total = Math.abs(nAP);
-                    }
-                }
-                Rec.inv_pay_amt = null;
-                Rec.inv_flag = "N";
-                Rec.inv_flag2 = false;
-
-            }
-        });
-
-        this.txt_tot_AR = 0;
-        this.txt_tot_AP = 0;
-        this.txt_tot_diff = 0;
-        this.LBL_STATUS = '';
-    }
-
-
-
 
     Close() {
         this.location.back();
@@ -632,34 +382,27 @@ export class PaymentEditComponent implements OnInit {
 
     LovSelected(_Record: SearchTable) {
         if (_Record.controlname == "CUSTOMER") {
-            this.cust_id = _Record.id;
-            this.cust_code = _Record.code;
-            this.cust_name = _Record.name;
+            this.ms.cust_id = _Record.id;
+            this.ms.cust_code = _Record.code;
+            this.ms.cust_name = _Record.name;
             this.NewRecord();
         }
         if (_Record.controlname == "CURRENCY") {
-            this.curr_code = _Record.code;
+            this.ms.curr_code = _Record.code;
         }
     }
 
     onChange(field: string) {
         if (field == "CUSTOMER") {
-
-            this.cust_id = '';
-            this.cust_code = '';
-            this.cust_name = '';
-
+            this.ms.cust_id = '';
+            this.ms.cust_code = '';
+            this.ms.cust_name = '';
             this.NewRecord();
         }
-
     }
-
-
-
 
     onFocusout(field: string) {
     }
-
 
     onBlur(field: string, _rec: Tbl_cargo_invoicem = null, idx: number = 0) {
         if (field == 'inv_pay_amt') {
@@ -672,7 +415,7 @@ export class PaymentEditComponent implements OnInit {
                     _rec.inv_pay_amt = _rec.inv_balance;
                 }
             }
-            this.FindTotal('', _rec);
+            this.ms.FindTotal('', _rec);
         }
     }
 
@@ -683,94 +426,10 @@ export class PaymentEditComponent implements OnInit {
     swapSelection(rec: Tbl_cargo_invoicem) {
         rec.inv_flag2 = !rec.inv_flag2;
         rec.inv_flag = (rec.inv_flag2) ? 'Y' : 'N';
-        this.FindTotal("CHKBOX", rec);
+        this.ms.FindTotal("CHKBOX", rec);
 
     }
 
-
-    FindTotal(sType: string = '', Rec: Tbl_cargo_invoicem = null) {
-        var nAR = 0;
-        var nAP = 0;
-        var nDiff = 0;
-        var nPayAmt = 0;
-
-        var iCount = 0;
-
-
-        if (sType == "CHKBOX") {
-            if (Rec != null) {
-                if (Rec.inv_ar_total <= 0 && Rec.inv_ap_total <= 0) {
-                    Rec.inv_flag = "N";
-                    Rec.inv_flag2 = false;
-                    return;
-                }
-                if (Rec.inv_flag == "Y")
-                    Rec.inv_pay_amt = Rec.inv_balance;
-                else
-                    Rec.inv_pay_amt = null;
-            }
-        }
-
-        if (Rec != null) {
-            nAR = Rec.inv_ar_total;
-            nAP = Rec.inv_ap_total;
-            nPayAmt = Rec.inv_pay_amt;
-            if (nAR > 0)
-                nDiff = nAR;
-            if (nAP > 0)
-                nDiff = nAP;
-            nAR = 0;
-            nAP = 0;
-            nDiff = 0;
-        }
-
-        if (this.pendingList) {
-            this.pendingList.forEach(mRec => {
-                if (mRec.inv_flag == "Y") {
-                    iCount++;
-                    if (mRec.inv_ar_total > 0) {
-                        nAR += mRec.inv_pay_amt;
-                        nAR = this.gs.roundNumber(nAR, 2);
-                    }
-                    else {
-                        nAP += mRec.inv_pay_amt;
-                        nAP = this.gs.roundNumber(nAP, 2);
-                    }
-                }
-                else {
-                    mRec.inv_pay_amt = null;
-                }
-            });
-        }
-
-        nDiff = nAR - nAP;
-
-        nDiff = this.gs.roundNumber(nDiff, 2);
-
-        this.txt_tot_AR = nAR;
-        this.txt_tot_AP = nAP;
-        this.txt_tot_diff = nDiff;
-
-        this.LBL_COUNT = iCount;
-
-        this.LBL_STATUS = "";
-        this.Pay_RP = "";
-        if (nDiff > 0) {
-            this.Pay_RP = "RECEIPT";
-            this.LBL_STATUS = "RECEIPT " + nDiff.toString();
-        }
-        else if (nDiff < 0) {
-            this.Pay_RP = "PAYMENT";
-            this.LBL_STATUS = "PAYMENT " + Math.abs(nDiff).toString();
-        }
-
-
-        var nBal2 = this.txt_Bal_diff;
-        nDiff = nBal2 - nDiff;
-        nDiff = this.gs.roundNumber(nDiff, 2);
-        this.txt_diff = nDiff;
-
-    }
 
 
     Print(rec: Tbl_Acc_Payment, _type: string) {
@@ -785,7 +444,7 @@ export class PaymentEditComponent implements OnInit {
             this.report_searchdata.BANKID = rec.pay_acc_id;
             this.report_searchdata.PRINT_SIGNATURE = "N";
             this.report_menuid = this.gs.MENU_ACC_ARAP_SETTLMENT;
-            this.tab = 'chq';
+            this.ms.tab = 'chq';
         }
 
     }
@@ -829,13 +488,13 @@ export class PaymentEditComponent implements OnInit {
             return;
         }
 
-        this.errorMessage = '';
+        this.ms.errorMessage = '';
         var searchData = this.gs.UserInfo;
         searchData.MBLID = MBLID;
         searchData.company_code = this.gs.company_code;
         searchData.branch_code = this.gs.branch_code;
 
-        this.mainService.InvoiceList(searchData)
+        this.ms.InvoiceList(searchData)
             .subscribe(response => {
                 this.InvoiceList = response.list;
                 if (this.InvoiceList != null) {
@@ -846,8 +505,8 @@ export class PaymentEditComponent implements OnInit {
                 } else
                     alert("Invoice Not Found");
             }, error => {
-                this.errorMessage = this.gs.getError(error);
-                alert(this.errorMessage);
+                this.ms.errorMessage = this.gs.getError(error);
+                alert(this.ms.errorMessage);
             });
     }
 
@@ -878,32 +537,6 @@ export class PaymentEditComponent implements OnInit {
         return sMode;
     }
 
-    getSortCol() {
-        return this.sortcol;
-    }
-    getSortOrder() {
-        return this.sortorder;
-    }
 
-    getIcon(col: string) {
-        if (col == this.sortcol) {
-            if (this.sortorder)
-                return 'fa fa-arrow-down';
-            else
-                return 'fa fa-arrow-up';
-        }
-        else
-            return null;
-    }
-
-    sort(col: string) {
-        if (col == this.sortcol) {
-            this.sortorder = !this.sortorder;
-        }
-        else {
-            this.sortcol = col;
-            this.sortorder = true;
-        }
-    }
 
 }
