@@ -101,6 +101,8 @@ export interface Tbl_cargo_invoicem {
     rec_created_date: string;
     rec_closed: string;
 
+    rec_branch_code: string;
+
 
     inv_pay_chqno: string;
     inv_pay_chq_date: string;

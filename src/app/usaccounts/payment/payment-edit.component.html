@@ -139,10 +139,25 @@
             </thead>
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of ms.pendingList  |  sortBy: ms.getSortCol() : ms.getSortOrder(); let i = index">
-                    <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td>
+                    
+                    
+                    <!-- <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td> -->
+
+                    <td> <a class="hlink" [routerLink]="gs.Link2Page('INVNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,rec.inv_hbl_id, rec.inv_pkid, 'L',rec.rec_branch_code,'',rec.inv_cust_name, rec.rec_created_by)"
+                        [queryParams]="gs.Link2Page('INVNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,rec.inv_hbl_id, rec.inv_pkid, 'P',rec.rec_branch_code,'',rec.inv_cust_name, rec.rec_created_by)">{{rec.inv_no}}
+                        </a>
+                    </td>   
+
+
                     <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-                    <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mbl_refno}} </td>
-                    <td class='hlink2' (click)="ArApList(rec,arapModalContent)">LIST1</td>
+                    <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mbl_refno}} </td> -->
+                    
+                    <td> <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,'','', 'L','','')"
+                        [queryParams]="gs.Link2Page('REFNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,'','', 'P','',rec.branch_code)">{{rec.inv_mbl_refno}}
+                        </a>
+                    </td>   
+
+                    <td class='hlink2' (click)="ArApList(rec,arapModalContent)">LIST</td>
                     <td >{{rec.inv_refno}} </td>
                     <td style="text-align:right">{{rec.inv_total | number : '1.2-2'}} </td>
                     <td style="text-align:right">{{rec.inv_ar_total | number : '1.2-2'}} </td>
