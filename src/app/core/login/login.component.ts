@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
 
 
-  software_version_string = '1.113';
+  software_version_string = '1.114';
 
   username: string = '';
   password: string = '';
@@ -54,8 +54,8 @@ export class LoginComponent implements OnInit {
     this.gs.IsAuthenticated = false;
     this.showloginbutton = false;
 
-    this.username = 'ADMIN';
-    this.password = '123';
+    this.username = '';
+    this.password = '';
     //this.username = 'CUST-VIRTRA'; // consignee
     //this.username = 'CUST-CLUHOU'; // consignee
     //this.username = 'CUST-PARGRA'; // agent
