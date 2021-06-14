@@ -67,11 +67,11 @@
               <th>ENDING#</th>
               <th>REQUESTED.BY</th>
               <th>REQUESTED.DATE</th>
-              <th *ngIf="isAdmin">APPROVE</th>
+              <th *ngIf="gs.User_Category=='EMPLOYEE'&&isAdmin">APPROVE</th>
               <th>APPROVED</th>
               <th>APPROVED.BY</th>
               <th>APPROVED.DATE</th>
-              <th *ngIf="canDelete" class='text-center'>DELETE</th>
+              <th *ngIf="gs.User_Category=='EMPLOYEE'&&canDelete" class='text-center'>DELETE</th>
             </tr>
           </thead>
           <tbody class="page-body-tbody">
@@ -82,11 +82,11 @@
               <td>{{rec.ebld_req_end_no}}</td>
               <td>{{rec.rec_created_by}}</td>
               <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-              <td *ngIf="isAdmin" class="hlink2" (click)="Approve(rec)">APPROVE</td>
+              <td *ngIf="gs.User_Category=='EMPLOYEE'&&isAdmin" class="hlink2" (click)="Approve(rec)">APPROVE</td>
               <td [style.color]="rec.ebld_approved?'Red': 'Black'">{{rec.ebld_approved==true?'YES':'NO'}}</td>
               <td>{{rec.ebld_approved_by}}</td>
               <td>{{rec.ebld_approved_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-              <td *ngIf="canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+              <td *ngIf="gs.User_Category=='EMPLOYEE'&&canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
                   (click)="DeleteRow(rec)"></i></td>
             </tr>
           </tbody>
