@@ -734,7 +734,7 @@ export class BranchSettingsComponent implements OnInit {
     this.saveList.push(this.AddRecord("A/C PAYABLE", this.Txt_AP_id, this.Txt_AP));
     this.saveList.push(this.AddRecord("PETTY CASH", this.Txt_PettyCash_id, this.Txt_PettyCash));
 
-    this.saveList.push(this.AddRecord("INTERNAL-PAYMENT-SETTLEMENT-AR", this.Txt_AR_id, this.TXT_IPS_AR));
+    this.saveList.push(this.AddRecord("INTERNAL-PAYMENT-SETTLEMENT-AR", this.TXT_IPS_AR_id, this.TXT_IPS_AR));
     this.saveList.push(this.AddRecord("INTERNAL-PAYMENT-SETTLEMENT-AP", this.TXT_IPS_AP_id, this.TXT_IPS_AP));
 
 
