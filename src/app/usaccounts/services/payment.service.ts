@@ -174,13 +174,30 @@ export class PaymentService {
     DeleteRow(_rec: Tbl_Acc_Payment) {
 
         this.record.errormessage = '';
+
+        if (_rec.rec_closed == "Y")
+        {
+            alert("Record Locked Cannot Delete");
+            return;
+        }
+        if (_rec.pay_depositno.toString().length > 0)
+        {
+            alert("Deposited Payments Cannot Be Removed");
+            return;
+        }
+
         if (!confirm("DELETE " + _rec.pay_docno)) {
             return;
         }
 
+        let IsBaseCurr1 = _rec.pay_isbasecurr.toString()
+        if (IsBaseCurr1 == "")
+            IsBaseCurr1 = "Y";
+
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = _rec.pay_pkid;
         SearchData.remarks = _rec.pay_narration;
+        SearchData.IsBaseCurrency = IsBaseCurr1;
 
         this.DeleteRecord(SearchData)
             .subscribe(response => {
