@@ -173,6 +173,13 @@ export class FundTransferService {
     DeleteRow(_rec: Tbl_Acc_Payment) {
 
         this.record.errormessage = '';
+
+        if (_rec.rec_closed == "Y")
+        {
+            alert("Record Locked Cannot Delete");
+            return;
+        }
+
         if (!confirm("DELETE " + _rec.pay_docno)) {
             return;
         }
