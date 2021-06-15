@@ -180,12 +180,13 @@ export class PaymentService {
             alert("Record Locked Cannot Delete");
             return;
         }
+    
         if (_rec.pay_depositno.toString().length > 0)
         {
             alert("Deposited Payments Cannot Be Removed");
             return;
         }
-
+    
         if (!confirm("DELETE " + _rec.pay_docno)) {
             return;
         }
