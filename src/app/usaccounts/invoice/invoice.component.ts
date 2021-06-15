@@ -220,6 +220,14 @@ export class InvoiceComponent implements OnInit {
 
   removeRow(rec: Tbl_cargo_invoicem) {
 
+
+    if (rec.rec_closed == "Y")
+    {
+        alert("Record Locked Cannot Delete");
+        return;
+    }
+
+
     var remarks = "Delete Invoice " + rec.inv_no;
     if (rec.rec_deleted == "Y" && this.isAdmin)
       remarks += " Permanently."
