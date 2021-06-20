@@ -57,7 +57,7 @@
                 <td>{{rec.messagesender}}</td>
                 <td>{{rec.messagenumber}}</td>
                 <td>{{rec.messagedate | date : gs.FRONTEND_DATEFORMAT}}</td>
-                <td class='hlink2' (click)="CheckMaster(rec)">{{rec.update_files_desc}}</td>
+                <td class='hlink2' (click)="DownloadEdiFile(rec)">{{rec.update_files_desc}}</td>
                 <td class='hlink2' (click)="CheckMaster(rec)">CHECK</td>
                 <td>{{rec.mshipper_name}}</td>
                 <td>{{rec.consignee_name}}</td>
