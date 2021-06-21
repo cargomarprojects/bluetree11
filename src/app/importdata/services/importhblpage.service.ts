@@ -158,7 +158,7 @@ export class ImportHblPageService {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
             this.mdata$.next(this.record);
-            this.ProcessXML = false;
+          //  this.ProcessXML = false; // ProcessXML set to true in ProcessFtp() inorder to invoke automatic ImportXmlData
             if (this.ProcessXML) {
                 this.ProcessXML = false;
                 this.Xml_MainRecIndex = 0;
