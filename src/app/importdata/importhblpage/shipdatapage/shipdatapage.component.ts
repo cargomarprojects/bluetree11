@@ -62,6 +62,8 @@ export class ShipDataPageComponent implements OnInit {
         this.location.back();
     }
     DownloadEdiFile(_record: Tbl_edi_master) {
+        if (this.gs.isBlank(_record.update_files_id))
+            return;
         let filename = this.gs.FS_APP_FOLDER + 'EDI\\' + _record.update_files_id;
         let filedisplayname = _record.update_files_desc;
         this.Downloadfile(filename, "XML", filedisplayname);
