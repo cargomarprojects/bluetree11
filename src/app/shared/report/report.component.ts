@@ -120,6 +120,7 @@ export class ReportComponent implements OnInit {
       error => {
         this.errorMessage = this.gs.getError(error);
         alert(this.errorMessage);
+        this.Close();
       }
     );
   }
