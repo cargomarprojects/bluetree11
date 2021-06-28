@@ -274,7 +274,7 @@ export class BookingComponent implements OnInit {
         this.book_salesman_name_ctrl.Focus();
     }
 
-    if (rec.controlname == "SALEMSAN") {
+    if (rec.controlname == "SALESMAN") {
       this.record.book_salesman_id = rec.id;
     }
 
