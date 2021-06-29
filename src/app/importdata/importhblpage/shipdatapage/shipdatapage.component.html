@@ -24,6 +24,7 @@
                     SELECT
                 </th>
                 <th (click)="mainservice.sort('updated_status')">STATUS&nbsp;<i [ngClass]="mainservice.getIcon('updated_status')"></i></th>
+                <th (click)="mainservice.sort('update_files_desc')">EDIFILE&nbsp;<i [ngClass]="mainservice.getIcon('update_files_desc')"></i></th>
                 <th (click)="mainservice.sort('messagesender')">MESSAGEFROM&nbsp;<i [ngClass]="mainservice.getIcon('messagesender')"></i></th>
                 <th (click)="mainservice.sort('messagenumber')">MESSAGE&nbsp;<i [ngClass]="mainservice.getIcon('messagenumber')"></i></th>
                 <th (click)="mainservice.sort('messagedate')">MESSAGEDATE&nbsp;<i [ngClass]="mainservice.getIcon('messagedate')"></i></th>
@@ -53,6 +54,7 @@
                     </div>
                 </td>
                 <td>{{rec.updated_status}}</td>
+                <td class='hlink2' (click)="DownloadEdiFile(rec)">{{rec.update_files_desc}}</td>
                 <td>{{rec.messagesender}}</td>
                 <td>{{rec.messagenumber}}</td>
                 <td>{{rec.messagedate | date : gs.FRONTEND_DATEFORMAT}}</td>

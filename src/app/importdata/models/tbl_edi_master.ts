@@ -44,6 +44,10 @@ export interface Tbl_edi_master {
     consignee_name: string;
     mshipper_name: string;
     agent_branch: string;
+    
+    update_files_id: string;
+    update_files_desc: string;
+    update_file_uri: string;
 
     selected_b: boolean;
 }

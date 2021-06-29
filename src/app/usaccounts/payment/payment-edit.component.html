@@ -153,7 +153,7 @@
                     <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mbl_refno}} </td> -->
                     
                     <td> <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,'','', 'L','','')"
-                        [queryParams]="gs.Link2Page('REFNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,'','', 'P','',rec.branch_code)">{{rec.inv_mbl_refno}}
+                        [queryParams]="gs.Link2Page('REFNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,'','', 'P',rec.rec_branch_code,'')">{{rec.inv_mbl_refno}}
                         </a>
                     </td>   
 

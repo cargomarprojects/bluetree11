@@ -821,7 +821,7 @@ export class InvoiceEditComponent implements OnInit {
         }
         if (rec.type == 'B') {
           this.record.inv_hbl_id = rec.pkid;
-          this.record.inv_cost_type = 'B';
+          this.record.inv_cost_type = 'H';
           this.record.inv_hbl_no = rec.houseno;
         }
         this.record.inv_hbl_shipper_name = rec.shipper.toString();
