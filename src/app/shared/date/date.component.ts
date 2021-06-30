@@ -150,20 +150,15 @@ export class DateComponent {
     
     }
 
+    ngAfterViewInit() {
+
+        if (!this.gs.isBlank(this.inputdate))
+          this.inputbox.nativeElement.focus();
+    
+      }
+
     OnBlur2() {
-        
-        if (this.isValidDate()) {
-
-            this.inputdate = this.yy + "-" + this.mm + "-" + this.dd;
-            this.ValueChanged.emit(this.inputdate);
-            return true;
-        }
-        else {
-            this.inputdate = '';
-            this.ValueChanged.emit(this.inputdate);
-            return false;
-        }
-
+    
     }
 
 
