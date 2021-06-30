@@ -10,6 +10,7 @@ export class CustomAdapter extends NgbDateAdapter<string> {
     readonly DELIMITER = '-';
 
     fromModel(value: string | null): NgbDateStruct | null {
+        console.log('from model ', value);
         if (value) {
             let date = value.split(this.DELIMITER);
             return {
@@ -22,6 +23,7 @@ export class CustomAdapter extends NgbDateAdapter<string> {
     }
 
     toModel(date: NgbDateStruct | null): string | null {
+        console.log('to model', date);
         return date ? date.year + this.DELIMITER + date.month + this.DELIMITER + date.day : null;
     }
 }
@@ -42,6 +44,7 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 
 
     parse(value: string): NgbDateStruct | null {
+        console.log('parse', value);
         if (value) {
             let date = value.split(this.DELIMITER);
             console.log(this.gs.FRONTEND_DATEFORMAT);
@@ -63,6 +66,7 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
     }
 
     format(date: NgbDateStruct | null): string {
+        console.log('format ', date);
         if (this.gs.DateFormat() == 'dd')
             return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
         else
@@ -134,6 +138,7 @@ export class DateComponent {
 
 
     OnBlur1() {
+        console.log( 'blur1', this.inputdate);
         if (this.isValidDate()) {
 
             this.inputdate = this.yy + "-" + this.mm + "-" + this.dd;
@@ -146,6 +151,25 @@ export class DateComponent {
             return false;
         }
     }
+
+    OnBlur2() {
+        console.log( 'blur2', this.inputdate);
+    }
+    OnBlur3() {
+        console.log( 'blur2', this.inputdate);
+        if (this.isValidDate()) {
+
+            this.inputdate = this.yy + "-" + this.mm + "-" + this.dd;
+            this.ValueChanged.emit(this.inputdate);
+            return true;
+        }
+        else {
+            this.inputdate = '';
+            this.ValueChanged.emit(this.inputdate);
+            return false;
+        }
+    }
+
 
     isValidDate() {
 
