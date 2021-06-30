@@ -133,24 +133,25 @@ export class DateComponent {
 
 
     OnBlur1() {
+    
         if (this.isValidDate()) {
 
             this.inputdate = this.yy + "-" + this.mm + "-" + this.dd;
             this.ValueChanged.emit(this.inputdate);
+            
             return true;
         }
         else {
             this.inputdate = '';
             this.ValueChanged.emit(this.inputdate);
+            
             return false;
         }
+    
     }
 
     OnBlur2() {
         
-    }
-    OnBlur3() {
-        
         if (this.isValidDate()) {
 
             this.inputdate = this.yy + "-" + this.mm + "-" + this.dd;
@@ -162,6 +163,7 @@ export class DateComponent {
             this.ValueChanged.emit(this.inputdate);
             return false;
         }
+
     }
 
 
