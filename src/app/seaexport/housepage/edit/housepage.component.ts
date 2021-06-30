@@ -299,6 +299,8 @@ export class HousePageComponent implements OnInit {
           this.records = <Tbl_cargo_exp_desc[]>[];
 
         this.ShipmentType = this.record.mbl_cntr_type;
+        
+alert(this.record.hbl_delivery_date);
 
         if (this.ShipmentType == "FCL" || this.ShipmentType == "LCL")
           this.is_stage_locked = true;
