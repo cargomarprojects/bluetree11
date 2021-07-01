@@ -13,17 +13,19 @@ export class CustomAdapter extends NgbDateAdapter<string> {
     fromModel(value: string | null): NgbDateStruct | null {
         if (value) {
             let date = value.split(this.DELIMITER);
-            return {
+            let mdt =  {
                 year: parseInt(date[0], 10),
                 month: parseInt(date[1], 10),
                 day: parseInt(date[2], 10),
             };
+            return mdt;
         }
         return null;
     }
 
     toModel(date: NgbDateStruct | null): string | null {
-        return date ? date.year + this.DELIMITER + date.month + this.DELIMITER + date.day : null;
+        let mdt= date ? date.year + this.DELIMITER + date.month + this.DELIMITER + date.day : null;
+        return mdt;
     }
 }
 
@@ -45,28 +47,35 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
     parse(value: string): NgbDateStruct | null {
         if (value) {
             let date = value.split(this.DELIMITER);
-            if (this.gs.DateFormat() == 'dd')
-                return {
+            if (this.gs.DateFormat() == 'dd') {
+                let mdt =  {
                     day: parseInt(date[0], 10),
                     month: parseInt(date[1], 10),
                     year: parseInt(date[2], 10),
                 };
-            else
-                return {
+                return mdt;
+            }
+            else {
+                let mdt= {
                     month: parseInt(date[0], 10),
                     day: parseInt(date[1], 10),
                     year: parseInt(date[2], 10),
                 };
-
+                return mdt;
+            }
         }
         return null;
     }
 
     format(date: NgbDateStruct | null): string {
-        if (this.gs.DateFormat() == 'dd')
-            return date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
-        else
-            return date ? date.month + this.DELIMITER + date.day + this.DELIMITER + date.year : '';
+        if (this.gs.DateFormat() == 'dd'){
+            let mdt = date ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year : '';
+            return mdt;
+        }
+        else {
+            let mdt = date ? date.month + this.DELIMITER + date.day + this.DELIMITER + date.year : '';
+            return mdt;
+        }
     }
 }
 
