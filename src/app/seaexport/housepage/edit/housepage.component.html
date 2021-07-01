@@ -46,6 +46,7 @@
               </div>
             </div>
 
+
             <div class="col-md-4  px-0 mx-0">
 
               <div class="form-group row">
@@ -514,6 +515,10 @@
                   </select>
                 </div>
               </div>
+
+
+
+
 
             </div>
 
@@ -1013,24 +1018,24 @@
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Issue Date</label>
                 <div class="col-4">
-                  <app-date [inputdate]="record.hbl_issued_date" (ValueChanged)="record.hbl_issued_date=$event">
+                  <app-date #_hbl_issue_date [colName]="Hbl_Issue_Date" [inputdate]="record.hbl_issued_date" (ValueChanged)="record.hbl_issued_date=$event">
                   </app-date>
                 </div>
-                <label class="col-1 col-form-label col-form-label-sm pl-0">Originals</label>
+                 <label class="col-1 col-form-label col-form-label-sm pl-0">Originals</label>
                 <div class="col-1 pl-0">
                   <InputBoxNumber [(inputModel)]="record.hbl_originals" [maxlength]="60" [dec]="0" #originals>
                   </InputBoxNumber>
-                </div>
+                </div> 
               </div>
 
 
-              <div class="form-group row">
+               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Actual Delivery Date</label>
-                <div class="col-6">
-                  <app-date [inputdate]="record.hbl_delivery_date" (ValueChanged)="record.hbl_delivery_date=$event">
+                <div class="col-4">
+                  <app-date #_hbl_delivery_date [colName]="Hbl_Delivery_Date" [inputdate]="record.hbl_delivery_date" (ValueChanged)="record.hbl_delivery_date=$event">
                   </app-date>
                 </div>
-              </div>
+              </div> 
 
             </div>
 

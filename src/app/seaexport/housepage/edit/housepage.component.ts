@@ -293,6 +293,9 @@ export class HousePageComponent implements OnInit {
         this.record = <Tbl_cargo_exp_housem>response.record;
         this.cntrs = <Tbl_cargo_exp_container[]>response.cntrs;
         this.records = <Tbl_cargo_exp_desc[]>response.records;
+
+        
+        
         if (this.cntrs == null)
           this.cntrs = <Tbl_cargo_exp_container[]>[];
         if (this.records == null)
@@ -321,11 +324,11 @@ export class HousePageComponent implements OnInit {
         //   this.hbl_shipper_code_ctrl.Focus();
         if (!this.gs.isBlank(this.btnret_ctrl))
           this.btnret_ctrl.nativeElement.focus();
-
+        
 
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
-
+        
       });
   }
 
