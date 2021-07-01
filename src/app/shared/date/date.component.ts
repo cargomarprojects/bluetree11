@@ -152,7 +152,7 @@ export class DateComponent {
 
     ngAfterViewInit() {
 
-        if (!this.gs.isBlank(this.inputdate))
+        //if (!this.gs.isBlank(this.inputdate))
           this.inputbox.nativeElement.focus();
     
       }
