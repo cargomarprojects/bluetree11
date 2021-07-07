@@ -1655,7 +1655,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           menuid: this.gs.MENU_SI_HOUSE_US_CUSTOM_HOLD,
           pkid: this.pkid,
           parentid: this.parentid,
-          origin: this.origin,
+          origin: 'seaimp-house-page',
           is_locked: this.is_locked
         };
     }else if (action == "CARGOPICKUP") {
@@ -1667,7 +1667,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           menuid: this.gs.MENU_SI_HOUSE_DELIVERY_ORDER,
           pkid: this.pkid,
           parentid: this.parentid,
-          origin: this.origin,
+          origin: 'seaimp-house-page',
           invokefrom: 'SI-HOUSE',
           is_locked: this.is_locked
         };
@@ -1682,7 +1682,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           parentid: this.parentid,
           source: 'SI-DESC-EX',
           is_locked: this.is_locked,
-          origin: this.origin,
+          origin: 'seaimp-house-page',
           canPrint: false
         };
     }else if (action == "SHIPMOVEMENT") {
@@ -1730,7 +1730,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           menuid: this.gs.MENU_SI_HOUSE_US_CUSTOM_HOLD,
           pkid: this.pkid,
           parentid: this.parentid,
-          origin: this.origin,
+          origin: 'seaimp-house-page',
           is_locked: this.is_locked,
         };
         this.gs.Naviagete2('Silver.SeaImport/USCustomsHoldPage', prm);
@@ -1742,7 +1742,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           menuid: this.gs.MENU_SI_HOUSE_DELIVERY_ORDER,
           pkid: this.pkid,
           parentid: this.parentid,
-          origin: this.origin,
+          origin: 'seaimp-house-page',
           invokefrom: 'SI-HOUSE',
           is_locked: this.is_locked,
         };
@@ -1757,7 +1757,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           parentid: this.parentid,
           source: 'SI-DESC-EX',
           is_locked: this.is_locked,
-          origin: this.origin,
+          origin: 'seaimp-house-page',
           canPrint: false
         };
         this.gs.Naviagete2('Silver.SeaImport/RiderPage', prm);

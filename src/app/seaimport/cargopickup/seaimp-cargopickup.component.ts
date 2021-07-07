@@ -192,7 +192,7 @@ export class SeaImpCargoPickupComponent implements OnInit {
     this.record.pick_delivery_date = '';
     this.record.pick_vessel = '';
     this.record.pick_voyage = '';
-
+   
   }
 
   GetRecord() {
