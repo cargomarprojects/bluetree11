@@ -392,7 +392,7 @@
               <div class="form-group row">
                 <label class="col-3 col-form-label col-form-label-sm">Pickup Date</label>
                 <div class="col-9">
-                  <app-date [inputdate]="record.hbl_pickup_date" (ValueChanged)="hbl_pickup_date=$event"></app-date>
+                  <app-date [inputdate]="record.hbl_pickup_date" (ValueChanged)="record.hbl_pickup_date=$event"></app-date>
                 </div>
               </div>
               <div *ngIf="gs.BOE_IMPORT_REQUIRED=='Y'" class="form-group row">
