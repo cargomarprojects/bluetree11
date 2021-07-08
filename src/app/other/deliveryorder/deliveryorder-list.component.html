@@ -24,7 +24,7 @@
         </thead>
         <tbody class="page-body-tbody">
             <tr *ngFor="let rec of records">
-                <td class="hlink" (click)="edit(rec)">{{rec.pick_orderno}}</td>
+                <td class="hlink2" (click)="edit(rec)">{{rec.pick_orderno}}</td>
                 <td>{{rec.pick_order_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.pick_truk_name}}</td>
                 <td>{{rec.pick_fromname}}</td>
