@@ -126,7 +126,7 @@ export class MblUsageService {
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.CODE = this.record.searchQuery.searchString;
 
-        SearchData.FDATE = this.record.searchQuery.sdate;
+        SearchData.SDATE = this.record.searchQuery.sdate;
         SearchData.EDATE = this.record.searchQuery.edate;
         SearchData.YEAR = this.gs.year_code;
         

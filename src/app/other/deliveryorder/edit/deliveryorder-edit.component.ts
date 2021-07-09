@@ -13,6 +13,7 @@ import { DeliveryOrderService } from '../../services/deliveryorder.service';
 import { Tbl_cargo_imp_pickup, vm_tbl_cargo_imp_pickup } from '../../models/tbl_cargo_imp_pickup';
 import { Tbl_cargo_container, Tbl_cargo_general } from '../../models/tbl_cargo_general';
 import { DateComponent } from '../../../shared/date/date.component';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-deliveryorder-edit',
@@ -652,11 +653,14 @@ export class DeliveryOrderEditComponent implements OnInit {
 
     this.mainService.Save(saveRecord)
       .subscribe(response => {
-        this.mode = 'EDIT';
+
         if (response.retvalue == false) {
           this.errorMessage.push(response.error);
         }
         else {
+          if (this.mode == 'ADD')
+            this.record.pick_orderno = response.code;
+          this.mode = 'EDIT';
           this.errorMessage.push('Save Complete');
           this.mainService.RefreshList(this.record);
           // alert(this.errorMessage);
