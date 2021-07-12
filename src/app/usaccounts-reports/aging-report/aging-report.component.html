@@ -62,12 +62,12 @@
 
                         <div class="form-group row">
                             <div class="col-4">
-                                <input type="radio" [(ngModel)]="radio_cust" [value]="'MASTER'" name="optcust" />
-                                <span>Customer</span>
+                                <input type="radio" [(ngModel)]="radio_cust" [value]="'MASTER'" name="optcust" (change)="OnChange('MASTER')" />
+                                <span>&nbsp;Customer</span>
                             </div>
                             <div class="col-4">
-                                <input type="radio" [(ngModel)]="radio_cust" [value]="'OVERSEAAGENT'" name="optcust" />
-                                <span>ParentGroup</span>
+                                <input type="radio" [(ngModel)]="radio_cust" [value]="'OVERSEAAGENT'" name="optcust" (change)="OnChange('OVERSEAAGENT')" />
+                                <span>&nbsp;ParentGroup</span>
                             </div>
                             <div class="col-4">
                                 <div class="form-check"> <input type="checkbox" class="form-check-input"

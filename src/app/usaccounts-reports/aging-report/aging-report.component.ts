@@ -42,7 +42,7 @@ export class AgingReportComponent implements OnInit {
     currency: string = '';
     radio_cust: string = 'MASTER';
     showall: boolean = false;
-    cust_name: string = '';
+
     show_advance: boolean = false;
     group_by_parent: boolean = false;
     report_type: string = '';
@@ -58,6 +58,7 @@ export class AgingReportComponent implements OnInit {
     comp_code: string = '';
     comp_name: string = '';
     cust_id: string = '';
+    cust_name: string = '';
     iscustomer: string = 'N';
     isparent: string = 'N';
     hide_payroll: string = 'N';
@@ -149,7 +150,8 @@ export class AgingReportComponent implements OnInit {
                     this.SearchData.COMP_CODE = this.gs.branch_codes;
                 else
                     this.SearchData.COMP_CODE = this.comp_type;
-                this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
+                this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
+                this.SearchData.CUST_NAME = this.cust_name;
                 this.SearchData.CUST_ID = this.cust_id;
                 this.SearchData.ARAP = this.report_arap;
                 this.SearchData.RPTTYPE = this.report_type;
@@ -208,7 +210,7 @@ export class AgingReportComponent implements OnInit {
                 this.filename2 = '';
                 this.filetype2 = '';
                 this.filedisplayname2 = '';
-                
+
                 this.SearchData = this.gs.UserInfo;
 
             }
@@ -237,11 +239,11 @@ export class AgingReportComponent implements OnInit {
         //   return;
         // }
         if (_outputformat == "PRINT") {
-          if (this.MainList.length <= 0) {
-            this.errorMessage = "List Not Found";
-            alert(this.errorMessage);
-            return;
-          }
+            if (this.MainList.length <= 0) {
+                this.errorMessage = "List Not Found";
+                alert(this.errorMessage);
+                return;
+            }
         }
 
         this.SearchData.outputformat = _outputformat;
@@ -261,7 +263,8 @@ export class AgingReportComponent implements OnInit {
                 this.SearchData.COMP_CODE = this.gs.branch_codes;
             else
                 this.SearchData.COMP_CODE = this.comp_type;
-            this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
+            this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
+            this.SearchData.CUST_NAME = this.cust_name;
             this.SearchData.CUST_ID = this.cust_id;
             this.SearchData.ARAP = this.report_arap;
             this.SearchData.RPTTYPE = this.report_type;
@@ -308,23 +311,23 @@ export class AgingReportComponent implements OnInit {
                         currentTab: this.currentTab,
                         jv_year: this.gs.year_code,
                         edate: this.SearchData.EDATE,
-                        basedon:this.SearchData.BASEDON,
-                        comp_type:this.SearchData.COMP_TYPE,
-                        comp_code:this.SearchData.COMP_CODE,
-                        comp_name:this.SearchData.COMP_NAME,
-                        report_arap:this.SearchData.ARAP,
+                        basedon: this.SearchData.BASEDON,
+                        comp_type: this.SearchData.COMP_TYPE,
+                        comp_code: this.SearchData.COMP_CODE,
+                        comp_name: this.SearchData.COMP_NAME,
+                        report_arap: this.SearchData.ARAP,
                         currency: this.SearchData.CURRENCY,
-                        radio_cust:this.SearchData.ISCUSTOMER=='Y'?'MASTER':'OVERSEAAGENT',
-                        showall :this.SearchData.SHOWALL=='Y'?true:false,
-                        cust_name:'',
-                        cust_id:this.SearchData.CUST_ID,
-                        show_advance:this.SearchData.SHOW_ADVANCE=='Y'?true:false,
-                        group_by_parent:this.SearchData.ISPARENT=='Y'?true:false, 
+                        radio_cust: this.SearchData.ISCUSTOMER == 'Y' ? 'MASTER' : 'OVERSEAAGENT',
+                        showall: this.SearchData.SHOWALL == 'Y' ? true : false,
+                        cust_name: this.SearchData.CUST_NAME,
+                        cust_id: this.SearchData.CUST_ID,
+                        show_advance: this.SearchData.SHOW_ADVANCE == 'Y' ? true : false,
+                        group_by_parent: this.SearchData.ISPARENT == 'Y' ? true : false,
                         report_type: this.SearchData.RPTTYPE,
-                        radio_days : this.SearchData.radio_days,
-                        iscustomer:this.SearchData.ISCUSTOMER,
-                        isparent:this.SearchData.ISPARENT,
-                        hide_payroll:this.SearchData.HIDE_PAYROLL,
+                        radio_days: this.SearchData.radio_days,
+                        iscustomer: this.SearchData.ISCUSTOMER,
+                        isparent: this.SearchData.ISPARENT,
+                        hide_payroll: this.SearchData.HIDE_PAYROLL,
                         page_rows: response.page_rows,
                         page_count: response.page_count,
                         page_current: response.page_current,
@@ -339,7 +342,7 @@ export class AgingReportComponent implements OnInit {
 
                     };
                     this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
-                }else if (_outputformat == "PRINT") {
+                } else if (_outputformat == "PRINT") {
 
                     this.filename = response.filename;
                     this.filetype = response.filetype;
@@ -348,7 +351,7 @@ export class AgingReportComponent implements OnInit {
                     this.filetype2 = response.filetype2;
                     this.filedisplayname2 = response.filedisplayname2;
                     this.Print();
-                  }
+                }
 
                 this.loading = false;
             }, error => {
@@ -370,9 +373,14 @@ export class AgingReportComponent implements OnInit {
 
     LovSelected(_Record: SearchTable) {
 
-        this.cust_id = _Record.id;
-        this.cust_name = _Record.name;
+        if (_Record.controlname == "CUST-AGENT") {
+            this.cust_id = _Record.id;
+            this.cust_name = _Record.name;
+        } else if (_Record.controlname == "CURR") {
+            this.currency = _Record.code;
+        }
     }
+
     OnChange(field: string) {
         if (field == 'report_category') {
             try {
@@ -390,9 +398,13 @@ export class AgingReportComponent implements OnInit {
             catch (Exception) {
             }
         }
+        if (field == 'MASTER' || field == 'OVERSEAAGENT') {
+            this.cust_id = '';
+            this.cust_name = '';
+        }
     }
 
-    
+
     Print() {
         this.errorMessage = "";
         if (this.MainList.length <= 0) {
