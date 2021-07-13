@@ -16,7 +16,8 @@ export interface ReportState{
 
     cust_id : string ;
     cust_name : string ;
-
+    cust_parent_id:string;
+    cust_parent_name:string;
     sales_id : string ;
     sales_name : string ;    
     

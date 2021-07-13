@@ -102,14 +102,25 @@
           <div class="col-md-2">
 
             <div class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">Parent</label>
+              <div class="col-10">
+                <app-autocomplete2 [controlname]="'PARENT'" [tabletype]="'OVERSEAAGENT'" [displaycolumn]="'NAME'"
+                  [displaydata]="cust_parent_name" (ValueChanged)="LovSelected($event)">
+                </app-autocomplete2>
+              </div>
+            </div>
+            <div class="form-group row">
               <label class="col-2 col-form-label col-form-label-sm">
               <span *ngIf="report_category=='AGENT'">Agent</span>
               <span *ngIf="report_category=='SHIPPER'">Shipper</span>
               <span *ngIf="report_category=='CONSIGNEE'">Consignee</span>
               <span *ngIf="report_category=='HANDLED BY'">Handled.By</span>
               </label>
-              <div class="col-10">
+              <div *ngIf="report_category=='AGENT'||report_category=='SHIPPER'||report_category=='CONSIGNEE'" class="col-10">
                 <app-autocomplete [inputdata]="CUSTRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+              </div>
+              <div *ngIf="report_category=='HANDLED BY'" class="col-10">
+                <app-autocomplete [inputdata]="HANDRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
               </div>
             </div>
 
