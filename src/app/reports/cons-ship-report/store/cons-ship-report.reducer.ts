@@ -23,6 +23,8 @@ export const initialState: ReportState = {
     report_shptype : '',
     cons_id :'',
     cons_name :'',
+    cust_parent_id:'',
+    cust_parent_name:'',
     reportformat :'',
     filename: '',
     filetype: '',

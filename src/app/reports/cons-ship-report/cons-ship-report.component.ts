@@ -43,6 +43,8 @@ export class ConsShipReportComponent implements OnInit {
   cons_id: string;
   cons_name: string;
   reportformat = '';
+  cust_parent_id: string;
+  cust_parent_name: string;
 
   page_count: number = 0;
   page_current: number = 0;
@@ -99,6 +101,8 @@ export class ConsShipReportComponent implements OnInit {
         this.report_shptype = rec.report_shptype;
         this.cons_id = rec.cons_id;
         this.cons_name = rec.cons_name;
+        this.cust_parent_id = rec.cust_parent_id;
+        this.cust_parent_name = rec.cust_parent_name;
         this.reportformat = rec.reportformat;
         this.filename = rec.filename;
         this.filetype = rec.filetype;
@@ -126,6 +130,8 @@ export class ConsShipReportComponent implements OnInit {
         this.SearchData.REPORT_CATEGORY = this.report_category;
         this.SearchData.CONSIGNEE_ID = this.cons_id;
         this.SearchData.CONSIGNEE_NAME = this.cons_name;
+        this.SearchData.CUST_PARENT_ID = this.cust_parent_id;
+        this.SearchData.CUST_PARENT_NAME = this.cust_parent_name;
 
         this.CONSRECORD.id = this.cons_id;
         this.CONSRECORD.name = this.cons_name;
@@ -149,6 +155,8 @@ export class ConsShipReportComponent implements OnInit {
         this.report_shptype = 'ALL';
         this.cons_id = '';
         this.cons_name = '';
+        this.cust_parent_id = '';
+        this.cust_parent_name = '';
         this.reportformat = 'DETAIL';
         this.filename = '';
         this.filetype = '';
@@ -193,7 +201,10 @@ export class ConsShipReportComponent implements OnInit {
     this.SearchData.page_rowcount = this.page_rowcount;
 
     if (_outputformat === 'SCREEN' && _action === 'NEW') {
-
+      if (this.cust_parent_id != '') { //If Parent Exist then customer need to empty
+        this.cons_id = '';
+        this.cons_name = '';
+      }
       this.SearchData.JV_YEAR = this.gs.globalVariables.year_code;
       this.SearchData.REPORT_CATEGORY = this.report_category;
       this.SearchData.SDATE = this.sdate;
@@ -212,6 +223,8 @@ export class ConsShipReportComponent implements OnInit {
 
       this.SearchData.CONSIGNEE_ID = this.cons_id;
       this.SearchData.CONSIGNEE_NAME = this.cons_name;
+      this.SearchData.CUST_PARENT_ID = this.cust_parent_id;
+      this.SearchData.CUST_PARENT_NAME = this.cust_parent_name;
 
       this.reportformat = this.report_type;
       this.SearchData.filename = "";
@@ -248,6 +261,8 @@ export class ConsShipReportComponent implements OnInit {
             report_shptype: this.SearchData.REPORT_SHPTYPE,
             cons_id: this.SearchData.CONSIGNEE_ID,
             cons_name: this.SearchData.CONSIGNEE_NAME,
+            cust_parent_id: this.SearchData.CUST_PARENT_ID,
+            cust_parent_name: this.SearchData.CUST_PARENT_NAME,
             reportformat: this.reportformat,
             page_rows: response.page_rows,
             page_count: response.page_count,
@@ -296,6 +311,10 @@ export class ConsShipReportComponent implements OnInit {
     if (_Record.controlname === 'CONSIGNEE') {
       this.cons_id = _Record.id;
       this.cons_name = _Record.name;
+    }
+    if (_Record.controlname === 'PARENT') {
+      this.cust_parent_id = _Record.id;
+      this.cust_parent_name = _Record.name;
     }
   }
   Print() {
