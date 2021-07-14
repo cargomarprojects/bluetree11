@@ -72,7 +72,7 @@ export class PayDueReportComponent implements OnInit {
 
   MainList: Tbl_cargo_invoicem[];
 
-  CUSTRECORD: SearchTable = new SearchTable();
+  // CUSTRECORD: SearchTable = new SearchTable();
 
 
   constructor(
@@ -121,8 +121,8 @@ export class PayDueReportComponent implements OnInit {
         this.cust_id = rec.cust_id;
         this.cust_name = rec.cust_name;
 
-        this.CUSTRECORD.id = this.cust_id;
-        this.CUSTRECORD.name = this.cust_name;
+        // this.CUSTRECORD.id = this.cust_id;
+        // this.CUSTRECORD.name = this.cust_name;
 
         this.comp_type = rec.comp_type;
         this.page_rows = rec.page_rows;
@@ -319,13 +319,13 @@ export class PayDueReportComponent implements OnInit {
   }
 
   initLov(caption: string = '') {
-    this.CUSTRECORD = new SearchTable();
-    this.CUSTRECORD.controlname = "CUSTOMER";
-    this.CUSTRECORD.displaycolumn = "NAME";
-    this.CUSTRECORD.type = "MASTER";
-    this.CUSTRECORD.subtype = "";
-    this.CUSTRECORD.id = "";
-    this.CUSTRECORD.code = "";
+    // this.CUSTRECORD = new SearchTable();
+    // this.CUSTRECORD.controlname = "CUSTOMER";
+    // this.CUSTRECORD.displaycolumn = "NAME";
+    // this.CUSTRECORD.type = "MASTER";
+    // this.CUSTRECORD.subtype = "";
+    // this.CUSTRECORD.id = "";
+    // this.CUSTRECORD.code = "";
 
   }
 
