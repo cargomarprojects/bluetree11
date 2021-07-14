@@ -69,7 +69,6 @@
             <div class="form-group row">
               <label class="col-4 col-form-label col-form-label-sm">Handled-By</label>
               <div class="col-8">
-                <!-- <app-autocomplete [inputdata]="USERRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete> -->
                 <app-autocomplete2 [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
                       [displaycolumn]="'NAME'" [displaydata]="handled_name"
                       (ValueChanged)="LovSelected($event)">

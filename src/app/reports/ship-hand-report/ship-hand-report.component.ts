@@ -69,9 +69,6 @@ export class ShipHandReportComponent implements OnInit {
 
   MainList: TBL_MBL_REPORT[];
 
-  // USERRECORD: SearchTable = new SearchTable();
-
-
   constructor(
     public gs: GlobalService,
     private router: Router,
@@ -135,9 +132,6 @@ export class ShipHandReportComponent implements OnInit {
         this.SearchData.HANDLED_NAME = this.handled_name;
 
         this.SearchData.VIEW_MODE = this.group;
-
-        // this.USERRECORD.id = this.handled_id;
-        // this.USERRECORD.name = this.handled_name;
 
       }
       else {
@@ -286,14 +280,7 @@ export class ShipHandReportComponent implements OnInit {
   }
 
   initLov(caption: string = '') {
-    // this.USERRECORD = new SearchTable();
-    // this.USERRECORD.controlname = "SALESMAN";
-    // this.USERRECORD.displaycolumn = "NAME";
-    // this.USERRECORD.type = "PARAM";
-    // this.USERRECORD.subtype = "SALESMAN";
-    // this.USERRECORD.id = "";
-    // this.USERRECORD.code = "";
-
+    
   }
 
   LovSelected(_Record: SearchTable) {
