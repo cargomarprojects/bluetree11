@@ -89,7 +89,10 @@
             <div class="form-group row">
               <label class="col-4 col-form-label col-form-label-sm">Agent</label>
               <div class="col-8">
-                <app-autocomplete [inputdata]="AGENTRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+                <!-- <app-autocomplete [inputdata]="AGENTRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete> -->
+                <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                [displaydata]="agent_name" (ValueChanged)="LovSelected($event)">
+              </app-autocomplete2>
               </div>
             </div>
 

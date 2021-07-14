@@ -71,7 +71,7 @@ export class TeuReportComponent implements OnInit {
 
   MainList: TBL_MBL_REPORT[];
 
-  AGENTRECORD: SearchTable = new SearchTable();
+  // AGENTRECORD: SearchTable = new SearchTable();
 
   constructor(
     public gs: GlobalService,
@@ -140,8 +140,8 @@ export class TeuReportComponent implements OnInit {
         this.SearchData.AGENT_ID = this.agent_id;
         this.SearchData.AGENT_NAME = this.agent_name;
 
-        this.AGENTRECORD.id = this.agent_id;
-        this.AGENTRECORD.name = this.agent_name;
+        // this.AGENTRECORD.id = this.agent_id;
+        // this.AGENTRECORD.name = this.agent_name;
 
       }
       else {
@@ -304,13 +304,13 @@ export class TeuReportComponent implements OnInit {
   }
 
   initLov(caption: string = '') {
-    this.AGENTRECORD = new SearchTable();
-    this.AGENTRECORD.controlname = "AGENT";
-    this.AGENTRECORD.displaycolumn = "NAME";
-    this.AGENTRECORD.type = "MASTER";
-    this.AGENTRECORD.subtype = "";
-    this.AGENTRECORD.id = "";
-    this.AGENTRECORD.code = "";
+    // this.AGENTRECORD = new SearchTable();
+    // this.AGENTRECORD.controlname = "AGENT";
+    // this.AGENTRECORD.displaycolumn = "NAME";
+    // this.AGENTRECORD.type = "MASTER";
+    // this.AGENTRECORD.subtype = "";
+    // this.AGENTRECORD.id = "";
+    // this.AGENTRECORD.code = "";
 
   }
 
