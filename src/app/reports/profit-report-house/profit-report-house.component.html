@@ -117,17 +117,28 @@
               <span *ngIf="report_category=='HANDLED BY'">Handled.By</span>
               </label>
               <div *ngIf="report_category=='AGENT'||report_category=='SHIPPER'||report_category=='CONSIGNEE'" class="col-10">
-                <app-autocomplete [inputdata]="CUSTRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+                <!-- <app-autocomplete [inputdata]="CUSTRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete> -->
+                <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                [displaydata]="cust_name" (ValueChanged)="LovSelected($event)">
+              </app-autocomplete2>
               </div>
               <div *ngIf="report_category=='HANDLED BY'" class="col-10">
-                <app-autocomplete [inputdata]="HANDRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+                <!-- <app-autocomplete [inputdata]="HANDRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete> -->
+                <app-autocomplete2 [controlname]="'HANDLED BY'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
+                      [displaycolumn]="'NAME'" [displaydata]="cust_name" 
+                      (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
               </div>
             </div>
 
             <div class="form-group row">
               <label class="col-2 col-form-label col-form-label-sm">Salesman</label>
               <div class="col-10">
-                <app-autocomplete [inputdata]="SMANRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+                <!-- <app-autocomplete [inputdata]="SMANRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete> -->
+                <app-autocomplete2 [controlname]="'SALESMAN'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
+                [displaycolumn]="'NAME'" [displaydata]="sales_name" [where]="sales_where"
+                (ValueChanged)="LovSelected($event)">
+              </app-autocomplete2>
               </div>
             </div>
 

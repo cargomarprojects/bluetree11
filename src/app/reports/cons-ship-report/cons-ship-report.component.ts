@@ -63,7 +63,7 @@ export class ConsShipReportComponent implements OnInit {
 
   MainList: TBL_MBL_REPORT[];
 
-  CONSRECORD: SearchTable = new SearchTable();
+  // CONSRECORD: SearchTable = new SearchTable();
 
   constructor(
     public gs: GlobalService,
@@ -133,8 +133,8 @@ export class ConsShipReportComponent implements OnInit {
         this.SearchData.CUST_PARENT_ID = this.cust_parent_id;
         this.SearchData.CUST_PARENT_NAME = this.cust_parent_name;
 
-        this.CONSRECORD.id = this.cons_id;
-        this.CONSRECORD.name = this.cons_name;
+        // this.CONSRECORD.id = this.cons_id;
+        // this.CONSRECORD.name = this.cons_name;
 
       } else {
         this.MainList = Array<TBL_MBL_REPORT>();
@@ -298,13 +298,13 @@ export class ConsShipReportComponent implements OnInit {
   }
 
   initLov(caption: string = '') {
-    this.CONSRECORD = new SearchTable();
-    this.CONSRECORD.controlname = 'CONSIGNEE';
-    this.CONSRECORD.displaycolumn = 'NAME';
-    this.CONSRECORD.type = 'MASTER';
-    this.CONSRECORD.subtype = '';
-    this.CONSRECORD.id = '';
-    this.CONSRECORD.code = '';
+    // this.CONSRECORD = new SearchTable();
+    // this.CONSRECORD.controlname = 'CONSIGNEE';
+    // this.CONSRECORD.displaycolumn = 'NAME';
+    // this.CONSRECORD.type = 'MASTER';
+    // this.CONSRECORD.subtype = '';
+    // this.CONSRECORD.id = '';
+    // this.CONSRECORD.code = '';
   }
 
   LovSelected(_Record: SearchTable) {

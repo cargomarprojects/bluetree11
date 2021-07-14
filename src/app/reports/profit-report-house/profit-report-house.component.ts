@@ -55,6 +55,7 @@ export class ProfitReportHouseComponent implements OnInit {
 
   sales_id: string;
   sales_name: string;
+  sales_where: string = '';
 
   _report_category: string;
   _report_type: string = '';
@@ -87,9 +88,9 @@ export class ProfitReportHouseComponent implements OnInit {
 
   menu_current: User_Menu = null;;
 
-  CUSTRECORD: SearchTable = new SearchTable();
-  SMANRECORD: SearchTable = new SearchTable();
-  HANDRECORD: SearchTable = new SearchTable();
+  // CUSTRECORD: SearchTable = new SearchTable();
+  // SMANRECORD: SearchTable = new SearchTable();
+  // HANDRECORD: SearchTable = new SearchTable();
 
   constructor(
     public gs: GlobalService,
@@ -125,7 +126,10 @@ export class ProfitReportHouseComponent implements OnInit {
     this.showStages = false;
     if (this.gs.GENERAL_BRANCH_CODE == "MFDR")// MFORWARDER USA
       this.showStages = true;
-
+  
+      this.sales_where = "";
+    if (!this.isAdmin)
+      this.sales_where = " param_lookup_id = '" + this.gs.user_pkid + "'";
     this.initLov('');
 
   }
@@ -192,16 +196,16 @@ export class ProfitReportHouseComponent implements OnInit {
         this.SearchData.CUST_PARENT_ID = this.cust_parent_id;
         this.SearchData.CUST_PARENT_NAME = this.cust_parent_name;
 
-        this.CUSTRECORD.id = this.cust_id;
-        this.CUSTRECORD.name = this.cust_name;
+        // this.CUSTRECORD.id = this.cust_id;
+        // this.CUSTRECORD.name = this.cust_name;
 
         this.SearchData.SALES_ID = this.sales_id;
         this.SearchData.SALES_NAME = this.sales_name;
 
-        this.SMANRECORD.id = this.sales_id;
-        this.SMANRECORD.name = this.sales_name;
-        this.HANDRECORD.id = this.cust_id;
-        this.HANDRECORD.name = this.cust_name;
+        // this.SMANRECORD.id = this.sales_id;
+        // this.SMANRECORD.name = this.sales_name;
+        // this.HANDRECORD.id = this.cust_id;
+        // this.HANDRECORD.name = this.cust_name;
 
         this.SearchData.STAGES = rec.stage;
       }
@@ -458,40 +462,40 @@ export class ProfitReportHouseComponent implements OnInit {
 
   initLov(caption: string = '') {
 
-    if (caption == '' || caption == 'CUSTOMER') {
-      this.CUSTRECORD = new SearchTable();
-      this.CUSTRECORD.controlname = "CUSTOMER";
-      this.CUSTRECORD.displaycolumn = "NAME";
-      this.CUSTRECORD.type = "MASTER";
-      this.CUSTRECORD.subtype = "";
-      this.CUSTRECORD.id = "";
-      this.CUSTRECORD.code = "";
-    }
-    if (caption == '' || caption == 'SALESMAN') {
-      this.SMANRECORD = new SearchTable();
-      this.SMANRECORD.controlname = "SALESMAN";
-      this.SMANRECORD.displaycolumn = "NAME";
-      this.SMANRECORD.type = "PARAM";
-      this.SMANRECORD.subtype = "SALESMAN";
-      this.SMANRECORD.id = "";
-      this.SMANRECORD.code = "";
-      if (!this.isAdmin)
-        this.SMANRECORD.where = " param_lookup_id = '" + this.gs.user_pkid + "'";
-    }
-    if (caption == ''||caption == 'HANDLED BY') {
-      this.HANDRECORD = new SearchTable();
-      this.HANDRECORD.controlname = "HANDLED BY";
-      this.HANDRECORD.displaycolumn = "NAME";
-      this.HANDRECORD.type = "PARAM";
-      this.HANDRECORD.subtype = "SALESMAN";
-      this.HANDRECORD.id = "";
-      this.HANDRECORD.code = "";
-    }
+    // if (caption == '' || caption == 'CUSTOMER') {
+    //   this.CUSTRECORD = new SearchTable();
+    //   this.CUSTRECORD.controlname = "CUSTOMER";
+    //   this.CUSTRECORD.displaycolumn = "NAME";
+    //   this.CUSTRECORD.type = "MASTER";
+    //   this.CUSTRECORD.subtype = "";
+    //   this.CUSTRECORD.id = "";
+    //   this.CUSTRECORD.code = "";
+    // }
+    // if (caption == '' || caption == 'SALESMAN') {
+    //   this.SMANRECORD = new SearchTable();
+    //   this.SMANRECORD.controlname = "SALESMAN";
+    //   this.SMANRECORD.displaycolumn = "NAME";
+    //   this.SMANRECORD.type = "PARAM";
+    //   this.SMANRECORD.subtype = "SALESMAN";
+    //   this.SMANRECORD.id = "";
+    //   this.SMANRECORD.code = "";
+    // if (!this.isAdmin)
+    //   this.SMANRECORD.where = " param_lookup_id = '" + this.gs.user_pkid + "'";
+    // }
+    // if (caption == ''||caption == 'HANDLED BY') {
+    // this.HANDRECORD = new SearchTable();
+    // this.HANDRECORD.controlname = "HANDLED BY";
+    // this.HANDRECORD.displaycolumn = "NAME";
+    // this.HANDRECORD.type = "PARAM";
+    // this.HANDRECORD.subtype = "SALESMAN";
+    // this.HANDRECORD.id = "";
+    // this.HANDRECORD.code = "";
+    // }
 
   }
 
   LovSelected(_Record: SearchTable) {
-    if (_Record.controlname == "CUSTOMER" || _Record.controlname == "HANDLED BY" ) {
+    if (_Record.controlname == "CUSTOMER" || _Record.controlname == "HANDLED BY") {
       this.cust_id = _Record.id;
       this.cust_name = _Record.name;
     }
@@ -503,7 +507,7 @@ export class ProfitReportHouseComponent implements OnInit {
       this.cust_parent_id = _Record.id;
       this.cust_parent_name = _Record.name;
     }
-     
+
   }
 
   Print() {

@@ -46,7 +46,7 @@ export class ProfitReportComponent implements OnInit {
   report_url: string;
   report_searchdata: any = {};
   report_menuid: string;
-
+  
   filename: string = '';
   filetype: string = '';
   filedisplayname: string = '';
@@ -61,7 +61,8 @@ export class ProfitReportComponent implements OnInit {
   cust_parent_name: string;
   sales_id: string;
   sales_name: string;
-
+  sales_where: string = '';
+  
   _report_category: string;
   _report_type: string = '';
 
@@ -93,9 +94,6 @@ export class ProfitReportComponent implements OnInit {
 
   menu_current: User_Menu = null;;
 
-  CUSTRECORD: SearchTable = new SearchTable();
-  SMANRECORD: SearchTable = new SearchTable();
-
   constructor(
     public gs: GlobalService,
     private router: Router,
@@ -119,7 +117,6 @@ export class ProfitReportComponent implements OnInit {
     if (this.menu_current = this.gs.getMenuById(this.menuid)) {
       if (this.menu_current.rights_admin == 'Y')
         this.isAdmin = true;
-
       this.title = this.menu_current.menu_name;
     }
 
@@ -130,6 +127,10 @@ export class ProfitReportComponent implements OnInit {
     this.showStages = false;
     if (this.gs.GENERAL_BRANCH_CODE == "MFDR")// MFORWARDER USA
       this.showStages = true;
+
+    this.sales_where = "";
+    if (!this.isAdmin)
+      this.sales_where = " param_lookup_id = '" + this.gs.user_pkid + "'";
 
     this.initLov();
 
@@ -175,7 +176,7 @@ export class ProfitReportComponent implements OnInit {
         this.filename2 = rec.filename2;
         this.filetype2 = rec.filetype2;
         this.filedisplayname2 = rec.filedisplayname2;
-        
+
 
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -191,7 +192,7 @@ export class ProfitReportComponent implements OnInit {
           this.SearchData.COMP_CODE = this.gs.branch_codes;
         else
           this.SearchData.COMP_CODE = this.comp_type;
-        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
+        this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
 
         this.SearchData.REPORT_TYPE = this.report_type;
         this.SearchData.REPORT_CATEGORY = this.report_category;
@@ -202,11 +203,6 @@ export class ProfitReportComponent implements OnInit {
         this.SearchData.CUST_PARENT_NAME = this.cust_parent_name;
         this.SearchData.SALES_ID = this.sales_id;
         this.SearchData.SALES_NAME = this.sales_name;
-
-        this.CUSTRECORD.id = this.cust_id;
-        this.CUSTRECORD.name = this.cust_name;
-        this.SMANRECORD.id = this.sales_id;
-        this.SMANRECORD.name = this.sales_name;
 
         this.SearchData.ISADMIN = (this.isAdmin) ? 'Y' : 'N';
         this.SearchData.SHOWSTAGES = (this.showStages) ? 'Y' : 'N';
@@ -336,7 +332,7 @@ export class ProfitReportComponent implements OnInit {
     this.errorMessage = "";
     if (this._report_category == "PARTY")
       this.report_type = "MASTER";
-     
+
     if (_outputformat == "PRINT") {
       if (this.MainList.length <= 0) {
         this.errorMessage = "List Not Found";
@@ -378,7 +374,7 @@ export class ProfitReportComponent implements OnInit {
         this.SearchData.COMP_CODE = this.gs.branch_codes;
       else
         this.SearchData.COMP_CODE = this.comp_type;
-      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
+      this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
 
       this.SearchData.REPORT_TYPE = this.report_type;
 
@@ -467,7 +463,7 @@ export class ProfitReportComponent implements OnInit {
             filedisplayname2: this.SearchData.filedisplayname2
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
-        }else if (_outputformat == "PRINT") {
+        } else if (_outputformat == "PRINT") {
 
           this.filename = response.filename;
           this.filetype = response.filetype;
@@ -494,29 +490,11 @@ export class ProfitReportComponent implements OnInit {
 
 
   initLov(caption: string = '') {
-
-    this.CUSTRECORD = new SearchTable();
-    this.CUSTRECORD.controlname = "AGENT";
-    this.CUSTRECORD.displaycolumn = "NAME";
-    this.CUSTRECORD.type = "MASTER";
-    this.CUSTRECORD.subtype = "";
-    this.CUSTRECORD.id = "";
-    this.CUSTRECORD.code = "";
-
-    this.SMANRECORD = new SearchTable();
-    this.SMANRECORD.controlname = "SALESMAN";
-    this.SMANRECORD.displaycolumn = "NAME";
-    this.SMANRECORD.type = "PARAM";
-    this.SMANRECORD.subtype = "SALESMAN";
-    this.SMANRECORD.id = "";
-    this.SMANRECORD.code = "";
-    if (!this.isAdmin)
-      this.SMANRECORD.where = " param_lookup_id = '" + this.gs.user_pkid + "'";
-
+ 
   }
 
   LovSelected(_Record: SearchTable) {
-    if (_Record.controlname == "AGENT") {
+    if (_Record.controlname == "CUSTOMER") {
       this.cust_id = _Record.id;
       this.cust_name = _Record.name;
     }
