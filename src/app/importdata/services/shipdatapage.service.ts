@@ -69,7 +69,7 @@ export class ShipDataPageService {
     }
     public ClearInit() {
         this.record = <ShipDataPageModel>{
-            sortcol: 'messagenumber',
+            sortcol: 'mblno',
             sortorder: true,
             errormessage: '',
             records: [],
@@ -93,7 +93,7 @@ export class ShipDataPageService {
         this.selectdeselect = false;
 
         this.record = <ShipDataPageModel>{
-            sortcol: 'messagenumber',
+            sortcol: 'mblno',
             sortorder: true,
             errormessage: '',
             records: [],
