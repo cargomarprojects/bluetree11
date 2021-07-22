@@ -1239,7 +1239,7 @@ export class InvoiceEditComponent implements OnInit {
         this.attach_tablepkcolumn = 'mbl_pkid';
         this.attach_refno = this.record.inv_refno;
         this.attach_customername = this.record.inv_cust_name;
-        this.attach_updatecolumn = 'rec_subfiles_attached';
+        this.attach_updatecolumn = 'rec_files_attached';
         this.attach_viewonlysource = '';
         this.attach_uploadefiles = true;
         this.attach_viewonlyid = '';
