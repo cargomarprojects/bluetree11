@@ -47,6 +47,7 @@ export class ShipmentLogReportComponent implements OnInit {
   menuid: string;
 
   currentTab: string = '';
+  // is_housewise: boolean = false;
 
   report_url: string;
   report_searchdata: any = {};
@@ -183,7 +184,7 @@ export class ShipmentLogReportComponent implements OnInit {
 
         this.job_mode = 'OCEAN IMPORT';
         this.date_basedon = 'REF. DATE';
-        this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
+        this.sdate = '';
         this.edate = this.gs.defaultValues.today;
         this.shipper_id = '';
         this.shipper_name = '';
@@ -209,7 +210,7 @@ export class ShipmentLogReportComponent implements OnInit {
       }
     });
 
-
+    // this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
   }
 
   ngOnInit() {
@@ -244,7 +245,6 @@ export class ShipmentLogReportComponent implements OnInit {
       this.report_masterwise = false;
       this.report_housewise = true;
     }
-
 
     this.SearchData.outputformat = _outputformat;
     this.SearchData.pkid = this.urlid;
