@@ -324,12 +324,12 @@
                                 [queryParams]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P')">{{rec.mbl_refno}}</a>
                         </td>                       
                         <!-- <td class='hlink' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td> -->
-                        <td *ngIf="report_housewise">
+                        <td *ngIf="rec.hbl_pkid!=''">
                             <a class="hlink" [routerLink]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L')"
                                 [queryParams]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'P')">{{rec.hbl_houseno}}</a>
                         </td>
                         <!-- MBL Instruction shown in below hbl_houseno-->
-                        <td *ngIf="!report_housewise">{{rec.hbl_houseno}}</td> 
+                        <td *ngIf="rec.hbl_pkid==''">{{rec.hbl_houseno}}</td> 
                         <td>{{rec.hbl_shipment_stage}}</td>
                         <td>{{rec.mbl_liner_name}}</td>
                         <td  *ngIf="job_mode=='OCEAN EXPORT'">{{rec.mbl_liner_bookingno}}</td>                        
@@ -392,12 +392,12 @@
                         </td>   
                         <!-- <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td> -->
                         <!-- <td class='hlink' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td> -->
-                        <td *ngIf="report_housewise">
+                        <td *ngIf="rec.hbl_pkid!=''">
                             <a class="hlink" [routerLink]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L')"
                                 [queryParams]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'P')">{{rec.hbl_houseno}}</a>
                         </td>
                         <!-- MBL Instruction shown in below hbl_houseno-->
-                        <td *ngIf="!report_housewise">{{rec.hbl_houseno}}</td> 
+                        <td *ngIf="rec.hbl_pkid==''">{{rec.hbl_houseno}}</td> 
                         <td>{{rec.hbl_shipment_stage}}</td>
                         <td>{{rec.mbl_liner_name}}</td>
                         <td *ngIf="job_mode=='OCEAN EXPORT'">{{rec.mbl_liner_bookingno}}</td>
@@ -475,12 +475,12 @@
                         </td>   
                         <!-- <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td> -->
                         <!-- <td class='hlink' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td> -->
-                        <td  *ngIf="report_housewise">
+                        <td  *ngIf="rec.hbl_pkid!=''">
                             <a class="hlink" [routerLink]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L')"
                                 [queryParams]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'P')">{{rec.hbl_houseno}}</a>
                         </td>
                         <!-- MBL Instruction shown in below hbl_houseno-->
-                        <td *ngIf="!report_housewise">{{rec.hbl_houseno}}</td> 
+                        <td *ngIf="rec.hbl_pkid==''">{{rec.hbl_houseno}}</td> 
                         <!-- <td>{{rec.hbl_shipment_stage}}</td>
                         <td>{{rec.mbl_liner_name}}</td>
                         <td>{{rec.mbl_liner_bookingno}}</td> -->

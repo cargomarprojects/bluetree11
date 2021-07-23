@@ -384,6 +384,7 @@ export class ShipmentLogReportComponent implements OnInit {
 
   OnChange(field: string) {
     if (field == 'job_mode') {
+      this.isRecStored = false;
       this.SetStages();
     }
   }
