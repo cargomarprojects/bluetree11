@@ -144,6 +144,7 @@ export class ShipmentLogReportComponent implements OnInit {
         this.format_type = rec.format_type;
         this.printer_friendly = rec.printer_friendly;
         this.reportformat = rec.reportformat;
+        this.chklstCol2Visible = rec.chklstCol2Visible;
 
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -204,12 +205,13 @@ export class ShipmentLogReportComponent implements OnInit {
         this.sort_order = 'mbl_refno'
         this.format_type = 'FORMAT-1';
         this.printer_friendly = false;
+        this.chklstCol2Visible = false;
         this.reportformat = 'FORMAT-1';
         this.SearchData = this.gs.UserInfo;
         this.SetStages();
       }
-    });
 
+    });
     // this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
   }
 
@@ -317,8 +319,8 @@ export class ShipmentLogReportComponent implements OnInit {
             sort_order: this.SearchData.SORT,
             format_type: this.format_type,
             printer_friendly: this.printer_friendly,
-
             reportformat: this.reportformat,
+            chklstCol2Visible: this.chklstCol2Visible,
 
             page_rows: response.page_rows,
             page_count: response.page_count,

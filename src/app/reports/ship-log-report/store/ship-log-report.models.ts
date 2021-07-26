@@ -26,7 +26,8 @@ export interface ReportState {
     format_type:string;
     printer_friendly:boolean;
     reportformat: string ;
-
+    chklstCol2Visible:boolean;
+    
     page_rows: number;
     page_count: number;
     page_current: number;
