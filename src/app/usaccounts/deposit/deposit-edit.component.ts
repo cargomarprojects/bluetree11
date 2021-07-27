@@ -6,6 +6,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
 
+import { DepositEditService } from '../services/depositEdit.service';
 import { DepositService } from '../services/deposit.service';
 import { User_Menu } from '../../core/models/menum';
 import { Tbl_Acc_Payment, vm_tbl_accPayment, AccPaymentModel } from '../models/Tbl_Acc_Payment';
@@ -19,127 +20,63 @@ import { SearchTable } from '../../shared/models/searchtable';
 })
 export class DepositEditComponent implements OnInit {
 
-    record: Tbl_Acc_Payment = <Tbl_Acc_Payment>{};
-
-    tab: string = 'main';
-
-    pkid: string;
-    menuid: string;
-    public mode: string = '';
-    errorMessage: string;
-    Foregroundcolor: string;
-
-    total_amount = 0;
-    iTotChq = 0;
-
-    docno = '';
-    sdate = '';
-    id = '';
-    code = '';
-    name = '';
-    remarks = '';
-
-    next_chqno = 0;
-
-    CFNO = "";
-
-    title: string;
-    isAdmin: boolean;
-    refno: string = "";
-
-    decplace = 0;
-
-    isAccLocked = false;
-
-    showchqdt = true;
-
-    where = " ACC_IS_PAYMENT_CODE = 'Y' AND ACC_BRANCH IN ('ALL','" + this.gs.branch_code + "')";
-    
-
-    oldrefno = '';
-
-    arPendingList: Tbl_Acc_Payment[] = [];
-
-    DetailList: Tbl_Acc_Payment[] = [];
-
-
-
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private location: Location,
         public gs: GlobalService,
-        public mainService: DepositService,
+        public msEdit: DepositEditService,
+        public msList: DepositService,
     ) {
-        this.decplace = this.gs.foreign_amt_dec;
-        this.sdate = this.gs.defaultValues.today;
+        this.msEdit.decplace = this.gs.foreign_amt_dec;
+        this.msEdit.sdate = this.gs.defaultValues.today;
     }
 
     ngOnInit() {
         if (this.route.snapshot.queryParams.parameter == null) {
-            this.menuid = this.route.snapshot.queryParams.menuid;
-            this.pkid = this.route.snapshot.queryParams.pkid;
-            this.mode = this.route.snapshot.queryParams.mode;
+            this.msEdit.menuid = this.route.snapshot.queryParams.menuid;
+            this.msEdit.pkid = this.route.snapshot.queryParams.pkid;
+            this.msEdit.mode = this.route.snapshot.queryParams.mode;
         } else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-            this.menuid = options.menuid;
-            this.pkid = options.pkid;
-            this.mode = options.mode;
+            this.msEdit.menuid = options.menuid;
+            this.msEdit.pkid = options.pkid;
+            this.msEdit.mode = options.mode;
         }
 
-        this.setup();
-
-        this.initPage();
+        this.msEdit.setup();
+        this.msEdit.initPage();
         this.actionHandler();
     }
 
-    setup() {
-
-        if (this.gs.SHOW_CHECK_DATE == "N") {
-            this.showchqdt = false;
-        }
-
-    }
-
-
-    private initPage() {
-        this.isAdmin = this.gs.IsAdmin(this.menuid);
-        this.title = this.gs.getTitle(this.menuid);
-        this.errorMessage = '';
-        this.LoadCombo();
-    }
-
-    LoadCombo() {
-
-    }
 
     NewRecord() {
-        this.mode = 'ADD'
+        this.msEdit.mode = 'ADD'
         this.actionHandler();
     }
 
     actionHandler() {
-        this.errorMessage = '';
-        this.isAccLocked = false;
+        this.msEdit.errorMessage = '';
+        this.msEdit.isAccLocked = false;
 
-        if (this.mode == 'ADD') {
-            this.record = <Tbl_Acc_Payment>{};
-            this.arPendingList = <Tbl_Acc_Payment[]>[];
-            this.DetailList = <Tbl_Acc_Payment[]>[];
-            this.total_amount = 0;
-            this.pkid = this.gs.getGuid();
+        if (this.msEdit.mode == 'ADD') {
+            this.msEdit.record = <Tbl_Acc_Payment>{};
+            this.msEdit.arPendingList = <Tbl_Acc_Payment[]>[];
+            this.msEdit.DetailList = <Tbl_Acc_Payment[]>[];
+            this.msEdit.total_amount = 0;
+            this.msEdit.pkid = this.gs.getGuid();
             this.init();
         }
     }
 
     init() {
 
-        this.record.pay_pkid = this.pkid;
-        this.record.pay_vrno = '';
-        this.remarks = '';
+        this.msEdit.record.pay_pkid = this.msEdit.pkid;
+        this.msEdit.record.pay_vrno = '';
+        this.msEdit.remarks = '';
 
-        this.record.rec_created_by = this.gs.user_code;
-        this.record.rec_created_date = this.gs.defaultValues.today;
+        this.msEdit.record.rec_created_by = this.gs.user_code;
+        this.msEdit.record.rec_created_date = this.gs.defaultValues.today;
     }
 
 
@@ -147,164 +84,95 @@ export class DepositEditComponent implements OnInit {
     ProcessData() {
     }
 
-    SaveParent() {
-
-        this.record = <Tbl_Acc_Payment>{};
-        this.record.pay_pkid = this.pkid;
-        this.record.pay_cust_id = "";
-        this.record.pay_acc_id = this.id;
-        this.record.pay_date = this.sdate;
-        this.record.pay_narration = this.remarks;
-        this.record.pay_type = "DEPOSIT";
-        this.record.pay_year = +this.gs.year_code;
-        this.record.pay_total = this.total_amount;
-        this.record.pay_status = "POSTED";
-        this.record.pay_posted = "Y";
-        this.record.pay_memo = "";
-        this.record.pay_tot_chq = this.iTotChq;
-
-    }
-
-
 
 
     Save() {
 
         this.FindTotal();
 
-        if (!this.Allvalid())
+        if (!this.msEdit.Allvalid())
             return;
 
-        this.SaveParent();
+        this.msEdit.SaveParent();
         const saveRecord = <vm_tbl_accPayment>{};
-        saveRecord.record = this.record;
-        saveRecord.records = this.DetailList;
+        saveRecord.record = this.msEdit.record;
+        saveRecord.records = this.msEdit.DetailList;
 
-        saveRecord.pkid = this.pkid;
-        saveRecord.mode = this.mode;
+        saveRecord.pkid = this.msEdit.pkid;
+        saveRecord.mode = this.msEdit.mode;
         saveRecord.userinfo = this.gs.UserInfo;
 
-        this.mainService.Save(saveRecord)
+        this.msEdit.Save(saveRecord)
             .subscribe(response => {
                 if (response.retvalue == false) {
-                    this.errorMessage = response.error;
-                    alert(this.errorMessage);
+                    this.msEdit.errorMessage = response.error;
+                    alert(this.msEdit.errorMessage);
                 }
                 else {
 
-                    this.record.pay_docno = response.DOCNO;
-                    this.record.pay_date = this.sdate;
-                    this.record.pay_acc_name = this.name;
-                    this.record.pay_diff = this.total_amount;
-                    this.record.pay_tot_chq = this.iTotChq;
-                    this.record.pay_posted = "Y";
-                    this.record.pay_narration = this.remarks;
-                    this.mainService.RefreshList(this.record);
-                    this.errorMessage = 'Save Complete';
-                    alert(this.errorMessage);
-                    this.mode = "ADD";
-                    this.actionHandler();
+                    this.msEdit.record.pay_docno = response.DOCNO;
+                    this.msEdit.record.pay_date = this.msEdit.sdate;
+                    this.msEdit.record.pay_acc_name = this.msEdit.name;
+                    this.msEdit.record.pay_diff = this.msEdit.total_amount;
+                    this.msEdit.record.pay_tot_chq = this.msEdit.iTotChq;
+                    this.msEdit.record.pay_posted = "Y";
+                    this.msEdit.record.pay_narration = this.msEdit.remarks;
+                    this.msList.RefreshList(this.msEdit.record);
+                    this.msEdit.errorMessage = 'Save Complete';
+                    alert(this.msEdit.errorMessage);
+
+                    this.msEdit.mode = "ADD";
+                    // this.actionHandler();
+                    this.msEdit.DetailList.forEach(_rec => {
+                        this.msEdit.arPendingList.splice(this.msEdit.arPendingList.findIndex(rec => rec.pay_pkid == _rec.pay_pkid), 1);
+                    });
+
+                    this.msEdit.errorMessage = '';
+                    this.msEdit.isAccLocked = false;
+                    this.msEdit.record = <Tbl_Acc_Payment>{};
+                    this.msEdit.DetailList = <Tbl_Acc_Payment[]>[];
+                    this.msEdit.total_amount = 0;
+                    this.msEdit.pkid = this.gs.getGuid();
+                    this.init();
                 }
 
             }, error => {
-                this.errorMessage = this.gs.getError(error);
-                alert(this.errorMessage);
+                this.msEdit.errorMessage = this.gs.getError(error);
+                alert(this.msEdit.errorMessage);
             });
     }
 
 
-    private Allvalid(): boolean {
-
-        var bRet = true;
-        this.errorMessage = "";
-
-        if (this.gs.isBlank(this.sdate)) {
-            bRet = false;
-            this.errorMessage = "Invalid Date";
-            alert(this.errorMessage);
-            return bRet;
-        }
-
-
-        if (this.gs.isBlank(this.id) || this.gs.isBlank(this.code) || this.gs.isBlank(this.name)) {
-            bRet = false;
-            this.errorMessage = "Invalid Bank";
-            alert(this.errorMessage);
-            return bRet;
-        }
-
-
-        if (this.gs.isZero(this.total_amount)) {
-            bRet = false;
-            this.errorMessage = "No Rows Selected";
-            alert(this.errorMessage);
-            return bRet;
-        }
 
 
 
-        var iCtr = 0;
-        this.arPendingList.forEach(Record => {
-            if (Record.pay_flag2) {
-                iCtr++;
-            }
-        });
-        if (iCtr == 0) {
-            alert("No Detail Rows To Save")
-            return;
-        }
-
-        var nAmt = 0;
-        this.iTotChq = 0;
-
-        this.DetailList = <Tbl_Acc_Payment[]>[];
-
-        this.arPendingList.forEach(Record => {
-
-            if (Record.pay_flag2 && Record.pay_total > 0) {
-                var DetailRow = <Tbl_Acc_Payment>{};
-                DetailRow.pay_pkid = Record.pay_pkid;
-                DetailRow.pay_total = Record.pay_total;
-                nAmt += Record.pay_total;
-                nAmt = this.gs.roundNumber(nAmt, 2);
-                this.iTotChq++;
-                this.DetailList.push(DetailRow);
-            }
-        });
-
-        if (nAmt != this.total_amount) {
-            alert("Difference in Total Amount And selected Amount");
-            return false;
-        }
-        return bRet;
-    }
-
-   
     pendingList() {
         var SearchData = this.gs.UserInfo;
-        SearchData.pkid = this.pkid;
-        this.mainService.DepositPendingList(SearchData).subscribe(
+        SearchData.pkid = this.msEdit.pkid;
+        this.msEdit.DepositPendingList(SearchData).subscribe(
             res => {
-                this.arPendingList = res.list;
+                this.msEdit.arPendingList = res.list;
             },
             err => {
-                this.errorMessage = this.gs.getError(err);
-                alert(this.errorMessage);
+                this.msEdit.errorMessage = this.gs.getError(err);
+                alert(this.msEdit.errorMessage);
             });
 
     }
+
+
     swapSelection(rec: Tbl_Acc_Payment) {
         rec.pay_flag2 = !rec.pay_flag2;
-        this.total_amount = 0;
-        this.arPendingList.forEach(Record => {
+        this.msEdit.total_amount = 0;
+        this.msEdit.arPendingList.forEach(Record => {
             if (Record.pay_flag2) {
-                this.total_amount += Record.pay_total;
-                this.total_amount = this.gs.roundNumber(this.total_amount, 2);
+                this.msEdit.total_amount += Record.pay_total;
+                this.msEdit.total_amount = this.gs.roundNumber(this.msEdit.total_amount, 2);
             }
         })
 
     }
-   
+
 
     Close() {
         this.location.back();
@@ -313,9 +181,9 @@ export class DepositEditComponent implements OnInit {
 
     LovSelected(_Record: SearchTable) {
         if (_Record.controlname == "ACCTM") {
-            this.id = _Record.id;
-            this.code = _Record.code;
-            this.name = _Record.name;
+            this.msEdit.id = _Record.id;
+            this.msEdit.code = _Record.code;
+            this.msEdit.name = _Record.name;
         }
     }
 
@@ -329,6 +197,8 @@ export class DepositEditComponent implements OnInit {
     }
 
     onBlur(field: string) {
+        if (field === 'remarks')
+            this.msEdit.remarks = this.msEdit.remarks.toUpperCase();
     }
 
     onBlur2(cb: any) {

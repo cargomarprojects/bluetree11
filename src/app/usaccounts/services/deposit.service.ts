@@ -211,19 +211,11 @@ export class DepositService {
     }
 
 
-    DepositPendingList(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Deposit/DepositPendingList', SearchData, this.gs.headerparam2('authorized'));
-    }
-
-
-
     DeleteRecord(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Deposit/Delete', SearchData, this.gs.headerparam2('authorized'));
     }
 
 
-    Save(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Deposit/Save', SearchData, this.gs.headerparam2('authorized'));
-    }
+   
 
 }
