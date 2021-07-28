@@ -46,9 +46,24 @@ export class DepositEditComponent implements OnInit {
 
         this.msEdit.setup();
         this.msEdit.initPage();
-        this.actionHandler();
+        if (this.msEdit.mode == 'ADD') {
+            this.actionHandler();
+            this.replaceUrlMode();
+        }
     }
 
+    replaceUrlMode() {
+        this.msEdit.mode = "EDIT";
+        let parameter = {
+            menuid: this.msList.menuid,
+            pkid: '',
+            type: this.msList.param_type,
+            origin: 'deposit-page',
+            mode: 'EDIT'
+        };
+        this.location.replaceState('Silver.USAccounts.Trans/DepositEditPage', this.gs.getUrlParameter(parameter));
+
+    }
 
     NewRecord() {
         this.msEdit.mode = 'ADD'
@@ -99,7 +114,7 @@ export class DepositEditComponent implements OnInit {
         saveRecord.records = this.msEdit.DetailList;
 
         saveRecord.pkid = this.msEdit.pkid;
-        saveRecord.mode = this.msEdit.mode;
+        saveRecord.mode = "ADD";
         saveRecord.userinfo = this.gs.UserInfo;
 
         this.msEdit.Save(saveRecord)
