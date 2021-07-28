@@ -94,9 +94,9 @@ export class HeaderComponent {
         this.loginservice.Logout();
         this.gs.MenuList = null;
         this.gs.Modules = null;
-        setTimeout(()=>{
-            this.router.navigate(['home'], { replaceUrl: true });
-        });
+        
+        this.router.navigate(['/home'], { replaceUrl: true });
+        
     }
 
     getUrlID() {
