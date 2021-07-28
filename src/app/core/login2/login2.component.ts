@@ -184,7 +184,9 @@ export class Login2Component implements OnInit {
 
         this.GLOBALCONTANTS.Save2LocalStorage();
 
-        this.router.navigate(['home'], { replaceUrl: true });
+        setTimeout(()=>{
+            this.router.navigate(['home'], { replaceUrl: true });
+        });
     }
 
 
@@ -289,7 +291,9 @@ export class Login2Component implements OnInit {
 
 
     Cancel() {
-        this.router.navigate(['login'], { replaceUrl: true });
+        setTimeout(()=>{
+            this.router.navigate(['login'], { replaceUrl: true });
+        });
     }
 
 }
