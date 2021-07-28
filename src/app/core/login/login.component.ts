@@ -144,7 +144,9 @@ export class LoginComponent implements OnInit {
 
 
   Cancel() {
-    this.router.navigate(['home'], { replaceUrl: true });
+    setTimeout(()=>{
+      this.router.navigate(['home'], { replaceUrl: true });
+    });
   }
 
 
@@ -166,7 +168,9 @@ export class LoginComponent implements OnInit {
         
         this.gs.InitLogin();
 
-        this.router.navigate(['login2'], { replaceUrl: true });
+        setTimeout(()=>{
+          this.router.navigate(['login2'], { replaceUrl: true });
+        });
 
       }, error => {
         this.loading = false;
