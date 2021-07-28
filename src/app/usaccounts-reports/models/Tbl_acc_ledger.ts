@@ -52,6 +52,10 @@ export class Tbl_acc_ledger {
     jv_posted_date: string;
     jv_reconciled_by: string;
     jv_reconciled_date: string;
+
+    jv_status: string;
+    inv_no: string;
+    sub_acc_name: string;
 }
 
 export interface SearchQuery {
