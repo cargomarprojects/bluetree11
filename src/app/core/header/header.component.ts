@@ -85,7 +85,7 @@ export class HeaderComponent {
 
     changeBranch() {
         setTimeout(()=>{
-            this.router.navigate(['login2'], { replaceUrl: true });
+            this.router.navigate(['/login2'], { replaceUrl: true });
         });
     }
 
