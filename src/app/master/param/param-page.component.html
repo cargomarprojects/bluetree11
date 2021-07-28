@@ -4,7 +4,7 @@
         <label class="mr-1">{{title}}</label>
         <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button> -->
         <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" [routerLink]="getRouteDet('L','ADD')" [queryParams]="getRouteDet('P','ADD')">New</a>
-        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Close</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
         <!-- <i *ngIf="loading" class="fa fa-spinner"></i> -->
     </div>
 </div>
