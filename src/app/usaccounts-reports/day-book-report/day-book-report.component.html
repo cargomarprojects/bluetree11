@@ -57,6 +57,9 @@
                         <th>VRNO</th>
                         <th>TYPE</th>
                         <th>NAME</th>
+                        <th>SUB-NAME</th>
+                        <th>INVNO</th>
+                        <th>STATUS</th>
                         <th *ngIf="!gs.IS_SINGLE_CURRENCY" style="text-align:right">AMOUNT</th>
                         <th *ngIf="!gs.IS_SINGLE_CURRENCY">CURR</th>
                         <th style="text-align:right">DEBIT</th>
@@ -72,6 +75,9 @@
                         <td>{{rec.jv_docno}}</td>
                         <td>{{rec.jv_type}}</td>
                         <td>{{rec.acc_name}}</td>
+                        <td>{{rec.sub_acc_name}}</td>
+                        <td>{{rec.inv_no}}</td>
+                        <td>{{rec.jv_status}}</td>
                         <td *ngIf="!gs.IS_SINGLE_CURRENCY" style="text-align:right">{{rec.jv_amount | number : '1.2-2'}}</td>
                         <td *ngIf="!gs.IS_SINGLE_CURRENCY">{{rec.jv_curr_code}}</td>
                         <td style="text-align:right">{{rec.jv_debit | number : '1.2-2'}}</td>
