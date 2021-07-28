@@ -89,6 +89,9 @@ export class DepositEditComponent implements OnInit {
         this.msEdit.record.pay_pkid = this.msEdit.pkid;
         this.msEdit.record.pay_vrno = '';
         this.msEdit.remarks = '';
+        this.msEdit.id = '';
+        this.msEdit.code = '';
+        this.msEdit.name = '';
 
         this.msEdit.record.rec_created_by = this.gs.user_code;
         this.msEdit.record.rec_created_date = this.gs.defaultValues.today;
