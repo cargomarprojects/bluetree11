@@ -70,12 +70,17 @@ export class HeaderComponent {
     home() {
         if (this.gs.IsAuthenticated)
             this.router.navigate(['/home']);
-        else
-            this.router.navigate(['/home'], { replaceUrl: true });
+        else {
+            setTimeout(()=>{
+                this.router.navigate(['/home'], { replaceUrl: true });
+            });
+        }
     }
 
     login() {
-        this.router.navigate(['login'], { replaceUrl: true });
+        setTimeout(()=>{
+            this.router.navigate(['login'], { replaceUrl: true });
+        });
     }
 
     changeBranch() {
@@ -89,7 +94,9 @@ export class HeaderComponent {
         this.loginservice.Logout();
         this.gs.MenuList = null;
         this.gs.Modules = null;
-        this.router.navigate(['home'], { replaceUrl: true });
+        setTimeout(()=>{
+            this.router.navigate(['home'], { replaceUrl: true });
+        });
     }
 
     getUrlID() {
