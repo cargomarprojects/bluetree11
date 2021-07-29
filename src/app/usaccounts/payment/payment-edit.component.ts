@@ -66,6 +66,7 @@ export class PaymentEditComponent implements OnInit {
             this.ms.pkid = options.pkid;
             this.ms.mode = options.mode;
         }
+        this.gs.checkAppVersion();
         this.ms.setup();
         if ( this.ms.mode == 'ADD' ) {
             this.actionHandler();

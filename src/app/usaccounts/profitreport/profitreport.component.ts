@@ -83,6 +83,8 @@ export class ProfitReportComponent implements OnInit {
 
   public init(params: any) {
 
+    this.gs.checkAppVersion();
+
     const options = params;
     this.menuid = options.menuid;
     this.mbl_type = options.mbl_type;

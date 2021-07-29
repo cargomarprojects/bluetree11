@@ -52,7 +52,7 @@ export class PaymentComponent implements OnInit {
   }
 
   initPage() {
-
+    this.gs.checkAppVersion();
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
