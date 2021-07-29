@@ -45,6 +45,7 @@ export class ApprovedPageListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.mbl_pkid = this.route.snapshot.queryParams.mbl_pkid;
@@ -92,6 +93,7 @@ export class ApprovedPageListComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.menuid,
       pkid: '',
       mode: 'ADD',
@@ -112,6 +114,7 @@ export class ApprovedPageListComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.menuid,
       pkid: _record.ca_pkid,
       mode: 'EDIT',

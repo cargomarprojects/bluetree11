@@ -33,12 +33,13 @@ export class OblReleaseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
   }
 
   initPage() {
-
+    
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -61,6 +62,7 @@ export class OblReleaseComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       type: this.mainservice.param_type,
@@ -77,6 +79,7 @@ export class OblReleaseComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.obl_pkid,
       type: '',

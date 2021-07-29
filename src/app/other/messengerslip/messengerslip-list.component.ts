@@ -38,7 +38,7 @@ export class MessengerSlipListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.mbl_pkid = this.route.snapshot.queryParams.mbl_pkid;
@@ -84,6 +84,7 @@ export class MessengerSlipListComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.menuid,
       pkid: '',
       mode: 'ADD',
@@ -103,6 +104,7 @@ export class MessengerSlipListComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.menuid,
       pkid: _record.cs_pkid,
       mode: 'EDIT',
@@ -115,9 +117,7 @@ export class MessengerSlipListComponent implements OnInit {
   }
 
   Close() {
-    // if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
-    //   this.gs.LinkReturn(this.origin, this.mbl_pkid, '');
-    // else
+   
       this.location.back();
   }
 

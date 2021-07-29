@@ -38,7 +38,7 @@ export class WireTransferedBankComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.gs.checkAppVersion();
     }
 
     BankFill(bankmodal: any = null) {

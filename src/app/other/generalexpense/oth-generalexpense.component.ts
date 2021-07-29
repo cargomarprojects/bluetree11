@@ -48,6 +48,7 @@ export class OthGeneralExpenseComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
    // this.mainservice.init(this.route.snapshot.queryParams);
     this.sub = this.route.queryParams.subscribe(params => {
       if (params["parameter"] != "") {

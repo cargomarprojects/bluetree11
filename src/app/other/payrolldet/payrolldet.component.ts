@@ -30,6 +30,7 @@ export class PayrollDetComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null)
       this.mainservice.init(this.route.snapshot.queryParams);
     else
@@ -38,7 +39,7 @@ export class PayrollDetComponent implements OnInit {
   }
 
   initPage() {
-
+    
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -64,6 +65,7 @@ export class PayrollDetComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       mode: 'ADD',
@@ -80,6 +82,7 @@ export class PayrollDetComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.cpd_pkid,
       mode: 'EDIT',

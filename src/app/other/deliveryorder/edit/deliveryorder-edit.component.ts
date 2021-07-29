@@ -69,6 +69,7 @@ export class DeliveryOrderEditComponent implements OnInit {
 
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.parentid = this.route.snapshot.queryParams.parentid;
@@ -88,6 +89,7 @@ export class DeliveryOrderEditComponent implements OnInit {
   }
 
   initPage() {
+    
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.errorMessage = [];

@@ -41,6 +41,7 @@ export class AlertLogPageComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.gs.checkAppVersion();
         this.mainservice.init(this.route.snapshot.queryParams);
         this.initPage();
         this.List('SCREEN');
@@ -60,6 +61,7 @@ export class AlertLogPageComponent implements OnInit {
     }
 
     initPage() {
+     
         this.records$ = this.mainservice.data$.pipe(map(res => res.records));
         this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
         this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -162,6 +164,7 @@ export class AlertLogPageComponent implements OnInit {
         let IsLocked: boolean = false;
         IsLocked = this.gs.IsShipmentClosed(_record.cf_mbl_mode, _record.cf_ref_date, _record.cf_mbl_lock, _record.cf_mbl_unlock_date);
         let prm = {
+            appid:this.gs.appid,
             menuid: this.mainservice.menuid,
             master_id: _record.cf_master_id,
             master_refno: _record.cf_refno,

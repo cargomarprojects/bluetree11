@@ -43,6 +43,7 @@ export class PayrollDetEditComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.gs.checkAppVersion();
         const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
         this.menuid = options.menuid;
@@ -61,6 +62,7 @@ export class PayrollDetEditComponent implements OnInit {
 
 
     private initPage() {
+        
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';

@@ -36,6 +36,7 @@ export class DeliveryOrderListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.parentid = this.route.snapshot.queryParams.parentid;
@@ -75,6 +76,7 @@ export class DeliveryOrderListComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.menuid,
       pkid: '',
       mode: 'ADD',
@@ -93,6 +95,7 @@ export class DeliveryOrderListComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.menuid,
       pkid: _record.pick_pkid,
       mode: 'EDIT',

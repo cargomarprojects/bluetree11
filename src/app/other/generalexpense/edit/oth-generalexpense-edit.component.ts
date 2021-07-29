@@ -58,6 +58,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.pkid = this.route.snapshot.queryParams.pkid;
       this.menuid = this.route.snapshot.queryParams.menuid;
@@ -76,6 +77,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
   }
 
   private initPage() {
+    
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.refnoFormat = "Format - " + this.EXPTYPE.trim() + "YYYYMM";
@@ -563,6 +565,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           sid = this.gs.MENU_FILE_ADJUSTMENT_ARAP;
 
         let prm = {
+          appid:this.gs.appid,
           menuid: sid,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
@@ -585,6 +588,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           sid = this.gs.MENU_FILE_ADJUSTMENT_PROFIT_REPORT;
 
         let prm = {
+          appid:this.gs.appid,
           menuid: sid,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
@@ -601,6 +605,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           sid = this.gs.MENU_PAYROLL_EXPENSE_ARAP;
 
         let prm = {
+          appid:this.gs.appid,
           menuid: sid,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,

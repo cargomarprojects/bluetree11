@@ -18,11 +18,11 @@ import { DeliveryOrderService } from '../services/deliveryorder.service';
 export class DeliveryOrderComponent implements OnInit {
 
   // 02-07-2019 Created By Ajith  
- 
-  errorMessage$ : Observable<string> ;
-  records$ :  Observable<Tbl_cargo_imp_pickup[]>;
-  pageQuery$ : Observable<PageQuery>;
-  searchQuery$ : Observable<SearchQuery>;
+
+  errorMessage$: Observable<string>;
+  records$: Observable<Tbl_cargo_imp_pickup[]>;
+  pageQuery$: Observable<PageQuery>;
+  searchQuery$: Observable<SearchQuery>;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +32,7 @@ export class DeliveryOrderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
   }
@@ -40,17 +41,17 @@ export class DeliveryOrderComponent implements OnInit {
     
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
-    this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));    
+    this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
     this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errormessage));
 
   }
 
   searchEvents(actions: any) {
-    this.mainservice.Search(actions,  'SEARCH');
+    this.mainservice.Search(actions, 'SEARCH');
   }
 
   pageEvents(actions: any) {
-    this.mainservice.Search(actions,'PAGE');
+    this.mainservice.Search(actions, 'PAGE');
   }
 
   NewRecord() {
@@ -60,17 +61,18 @@ export class DeliveryOrderComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       mode: 'ADD',
-      parentid : '',
-      pickCategory : 'GENERAL',
+      parentid: '',
+      pickCategory: 'GENERAL',
       origin: 'oth-deliveryorder-page',
     };
     this.gs.Naviagete('Silver.Other.Trans/DeliveryOrderEdit', JSON.stringify(parameter));
 
   }
-  
+
   edit(_record: Tbl_cargo_imp_pickup) {
     if (!this.mainservice.canEdit) {
       alert('Insufficient User Rights')
@@ -78,18 +80,19 @@ export class DeliveryOrderComponent implements OnInit {
     }
 
     let parameter = {
-        menuid: this.mainservice.menuid,
-        pkid: _record.pick_pkid,
-        mode: 'EDIT',
-        parentid : _record.pick_parentid,
-        pickCategory : 'GENERAL',
-        origin: 'oth-deliveryorder-page',
-      };
-      this.gs.Naviagete('Silver.Other.Trans/DeliveryOrderEdit', JSON.stringify(parameter));
+      appid: this.gs.appid,
+      menuid: this.mainservice.menuid,
+      pkid: _record.pick_pkid,
+      mode: 'EDIT',
+      parentid: _record.pick_parentid,
+      pickCategory: 'GENERAL',
+      origin: 'oth-deliveryorder-page',
+    };
+    this.gs.Naviagete('Silver.Other.Trans/DeliveryOrderEdit', JSON.stringify(parameter));
   }
 
   Close() {
     this.location.back();
   }
- 
+
 }

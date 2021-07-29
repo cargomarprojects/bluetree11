@@ -60,6 +60,7 @@ export class GenFileUploadEditComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.gs.checkAppVersion();
         const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
 
@@ -84,6 +85,7 @@ export class GenFileUploadEditComponent implements OnInit {
 
 
     private initPage() {
+        
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
