@@ -110,6 +110,8 @@ export class AirExpHouseEditComponent implements OnInit {
 
   initPage() {
 
+    this.gs.checkAppVersion();
+
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.canSave = this.gs.canSave(this.menuid, this.mode);
