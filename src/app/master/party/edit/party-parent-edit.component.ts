@@ -97,6 +97,7 @@ export class PartyParentEditComponent implements OnInit {
   }
 
   private initPage() {
+    this.gs.checkAppVersion();
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.isCompany = this.gs.IsCompany(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
@@ -535,6 +536,7 @@ export class PartyParentEditComponent implements OnInit {
     switch (action) {
       case 'ARAP': {
         let prm = {
+          appid:this.gs.appid,
           menuid: this.gs.MENU_AI_MASTER_ARAP,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.gen_code,
@@ -546,6 +548,7 @@ export class PartyParentEditComponent implements OnInit {
       }
       case 'PROFITREPORT': {
         let prm = {
+          appid:this.gs.appid,
           menuid: this.gs.MENU_AI_MASTER_PROFIT_REPORT,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.gen_code,
@@ -575,6 +578,7 @@ export class PartyParentEditComponent implements OnInit {
         break;
       } case 'MEMO': {
         let prm = {
+          appid:this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           source: 'PARTY-MEMO',
@@ -586,6 +590,7 @@ export class PartyParentEditComponent implements OnInit {
       }
       case 'SOP-MEMO': {
         let prm = {
+          appid: this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           source: 'SOP-MEMO',
@@ -597,6 +602,7 @@ export class PartyParentEditComponent implements OnInit {
       }
       case 'QUOTN-MEMO': {
         let prm = {
+          appid:this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           source: 'QUOTATION-MEMO',
@@ -608,6 +614,7 @@ export class PartyParentEditComponent implements OnInit {
       }
       case 'ACC-ALERT': {
         let prm = {
+          appid:this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           source: 'ACCOUNTING-ALERT',
@@ -619,6 +626,7 @@ export class PartyParentEditComponent implements OnInit {
       }
       case 'DELIVERY-ADDRESS': {
         let prm = {
+          appid:this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           origin: 'party-page'
@@ -628,6 +636,7 @@ export class PartyParentEditComponent implements OnInit {
       }
       case 'PARTY-LOGIN': {
         let prm = {
+          appid:this.gs.appid,
           menuid: this.menuid,
           parentid: this.pkid,
           party_code: this.record.gen_code,
@@ -639,6 +648,7 @@ export class PartyParentEditComponent implements OnInit {
       }
       case 'PARTY-ADDRESS': {
         let prm = {
+          appid:this.gs.appid,
           menuid: this.menuid,
           parentid: this.pkid,
           party_name: this.record.gen_short_name,
@@ -649,6 +659,7 @@ export class PartyParentEditComponent implements OnInit {
       }
       case 'BANK-INFO': {
         let prm = {
+          appid:this.gs.appid,
           menuid: this.menuid,
           parentid: this.pkid,
           party_code: this.record.gen_code,

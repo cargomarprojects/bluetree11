@@ -62,6 +62,7 @@ export class EhblComponent implements OnInit {
     }
 
     private initPage() {
+        this.gs.checkAppVersion();
         this.title = 'E-hbl Setting';
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.errorMessage = '';

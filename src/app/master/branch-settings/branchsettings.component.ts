@@ -250,6 +250,7 @@ export class BranchSettingsComponent implements OnInit {
   }
 
   private initPage() {
+    this.gs.checkAppVersion();
     this.title = 'Company Settings';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';

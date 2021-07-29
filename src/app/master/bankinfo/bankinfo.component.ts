@@ -73,6 +73,7 @@ export class BankInfoComponent implements OnInit {
   }
 
   private initPage() {
+    this.gs.checkAppVersion();
     this.title = 'Login Details';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';

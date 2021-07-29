@@ -34,6 +34,7 @@ export class PartyAddrListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.party_pkid = this.route.snapshot.queryParams.parentid;
@@ -76,6 +77,7 @@ export class PartyAddrListComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.menuid,
       pkid: '',
       mode: 'ADD',
@@ -93,6 +95,7 @@ export class PartyAddrListComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.menuid,
       pkid: _record.add_pkid,
       mode: 'EDIT',

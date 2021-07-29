@@ -136,6 +136,7 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.menuid,
       pkid: '',
       type: this.menu_param,
@@ -154,6 +155,7 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.menuid,
       pkid: _record.param_pkid,
       type: _record.param_type,

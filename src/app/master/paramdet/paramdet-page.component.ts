@@ -75,7 +75,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
   }
 
   private initPage() {
-
+    this.gs.checkAppVersion();
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
 
@@ -128,6 +128,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.menuid,
       pkid: '',
       type: this.menu_param,
@@ -146,6 +147,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
 
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.menuid,
       pkid: _record.param_pkid,
       type: _record.param_type,

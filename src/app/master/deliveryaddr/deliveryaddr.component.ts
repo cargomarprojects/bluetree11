@@ -56,6 +56,7 @@ export class DeliveryAddrComponent implements OnInit {
     }
 
     private initPage() {
+        this.gs.checkAppVersion();
         this.title = '';
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.errorMessage = '';

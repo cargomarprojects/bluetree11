@@ -53,7 +53,7 @@ export class FormatPageDetComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.gs.checkAppVersion();
     }
 
     FormatUpdate(formatmodal: any = null) {

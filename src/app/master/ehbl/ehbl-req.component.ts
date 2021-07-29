@@ -86,6 +86,7 @@ export class EhblReqComponent implements OnInit {
     }
 
     private initPage() {
+        this.gs.checkAppVersion();
         this.title = 'E-hbl Request';
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.canDelete = this.gs.canDelete(this.menuid);

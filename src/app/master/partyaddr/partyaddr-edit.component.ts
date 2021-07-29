@@ -64,6 +64,7 @@ export class PartyAddrEditComponent implements OnInit {
   }
 
   private initPage() {
+    this.gs.checkAppVersion();
     this.title = 'Address Details';
     if (this.gs.BRANCH_REGION == "USA")
       this.checkAddress = "Use this address while printing check.";
