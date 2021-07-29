@@ -47,6 +47,7 @@ export class AirImpCargoPickupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.pkid = this.route.snapshot.queryParams.pkid;
       this.menuid = this.route.snapshot.queryParams.menuid;
@@ -63,7 +64,7 @@ export class AirImpCargoPickupComponent implements OnInit {
   }
 
   private initPage() {
-    this.gs.checkAppVersion();
+    
     this.title = 'Delivery Order';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
