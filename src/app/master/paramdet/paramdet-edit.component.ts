@@ -70,6 +70,9 @@ export class ParamDetEditComponent implements OnInit {
 
   ngOnInit() {
     this.sub = this.route.queryParams.subscribe(params => {
+
+      this.gs.checkAppVersion();
+      
       if (this.route.snapshot.queryParams.parameter == null) {
         this.pkid = this.route.snapshot.queryParams.pkid;
         this.menuid = this.route.snapshot.queryParams.menuid;
@@ -98,7 +101,7 @@ export class ParamDetEditComponent implements OnInit {
   }
 
   private initPage() {
-    this.gs.checkAppVersion();
+    
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.errorMessage = '';
