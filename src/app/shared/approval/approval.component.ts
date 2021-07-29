@@ -45,6 +45,7 @@ export class ApprovalComponent {
 
   // Init Will be called After executing Constructor
   ngOnInit() {
+    this.gs.checkAppVersion();
     this.bAdd = false;
     this.chk_caption = this.status;
     this.LoadCombo();

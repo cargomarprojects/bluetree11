@@ -30,7 +30,7 @@ export class FileUploadEditComponent implements OnInit {
 
     // Init Will be called After executing Constructor
     ngOnInit() {
-
+        this.gs.checkAppVersion();
     }
 
     InitComponent() {

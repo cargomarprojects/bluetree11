@@ -35,6 +35,7 @@ export class HistoryComponent {
 
   // Init Will be called After executing Constructor
   ngOnInit() {
+    this.gs.checkAppVersion();
     this.LoadCombo();
     this.SearchRecord("history");
   }

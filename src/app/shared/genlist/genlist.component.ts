@@ -25,6 +25,7 @@ export class GenListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     this.initPage();
     this.actionHandler();
   }

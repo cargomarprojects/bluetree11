@@ -73,6 +73,7 @@ export class AutoCompleteComponent {
     }
 
     ngOnInit() {
+        this.gs.checkAppVersion();
         this.controlname = this.inputdata.controlname;
         this.TableType = this.inputdata.type;
         this.displaycolumn = this.inputdata.displaycolumn;

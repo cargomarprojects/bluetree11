@@ -65,6 +65,7 @@ export class MailComponent implements OnInit {
 
   // Init Will be called After executing Constructor
   ngOnInit() {
+    this.gs.checkAppVersion();
     this.customer_id = '';
     this.customer_name = '';
     this.chkDelivReceipt = false;

@@ -135,6 +135,7 @@ export class FileUploadComponent implements OnInit {
   filesSelected: boolean = false;;
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     this.txt_fileDocType = this.Files_Type;
     this.txt_fileRefno = this.Files_Ref_No;
     this.SetDefault();

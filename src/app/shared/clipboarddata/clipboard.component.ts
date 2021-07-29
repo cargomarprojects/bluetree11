@@ -60,6 +60,7 @@ export class ClipBoardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
   }
 
   open() {

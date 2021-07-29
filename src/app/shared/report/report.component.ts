@@ -87,6 +87,7 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     this.canPrint = this.gs.canPrint(this._menuid);
     this.canDownload = this.gs.canDownload(this._menuid);
     this.canExcel = this.gs.canExel(this._menuid);

@@ -123,6 +123,7 @@ export class AutoComplete2Component {
   }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
   }
 
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
