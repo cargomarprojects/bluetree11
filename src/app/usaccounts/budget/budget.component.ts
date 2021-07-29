@@ -69,7 +69,7 @@ export class BudgetComponent implements OnInit {
             origin: 'budget-page',
             mode: 'ADD'
         };
-        this.gs.Naviagete('Silver.USAccounts.Master/BudgetEditPage', JSON.stringify(parameter));
+        this.gs.Naviagete2('Silver.USAccounts.Master/BudgetEditPage', parameter);
     }
 
     edit(_record: Tbl_Budgetm) {
@@ -85,7 +85,7 @@ export class BudgetComponent implements OnInit {
             origin: 'budget-page',
             mode: 'EDIT'
         };
-        this.gs.Naviagete('Silver.USAccounts.Master/BudgetEditPage', JSON.stringify(parameter));
+        this.gs.Naviagete2('Silver.USAccounts.Master/BudgetEditPage',  parameter);
     }
 
     Close() {

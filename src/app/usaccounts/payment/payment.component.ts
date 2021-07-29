@@ -82,7 +82,7 @@ export class PaymentComponent implements OnInit {
       origin: 'payment-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.USAccounts.Trans/PaymentEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Trans/PaymentEditPage',  parameter);
 
   }
 
@@ -100,7 +100,7 @@ export class PaymentComponent implements OnInit {
       origin: 'payment-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.USAccounts.Trans/PaymentEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Trans/PaymentEditPage',  parameter);
   }
 
   getRouteDet(_type: string, _mode: string, _record: Tbl_Acc_Payment = null) {

@@ -75,7 +75,7 @@ export class BranchComponent implements OnInit {
       origin: 'branch-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.UserAdmin/BranchEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/BranchEditPage', parameter);
 
   }
   edit(_record: Tbl_User_Companym) {
@@ -92,7 +92,7 @@ export class BranchComponent implements OnInit {
       origin: 'branch-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.UserAdmin/BranchEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/BranchEditPage',  parameter);
   }
 
   Close() {

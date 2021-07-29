@@ -72,7 +72,7 @@ export class PayrollDetComponent implements OnInit {
       emp_name: '',
       origin: 'payrolldet-page'
     };
-    this.gs.Naviagete('Silver.Other.Trans/PayrollEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/PayrollEditPage',  parameter);
 
   }
   edit(_record: Tbl_Cargo_Payrolldet) {
@@ -89,7 +89,7 @@ export class PayrollDetComponent implements OnInit {
       emp_name: _record.cpd_emp_name,
       origin: 'payrolldet-page'
     };
-    this.gs.Naviagete('Silver.Other.Trans/PayrollEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/PayrollEditPage',  parameter);
   }
 
   Close() {

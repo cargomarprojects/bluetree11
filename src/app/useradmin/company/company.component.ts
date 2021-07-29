@@ -74,7 +74,7 @@ export class CompanyComponent implements OnInit {
       origin: 'company-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.UserAdmin/CompanyEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/CompanyEditPage',  parameter);
 
   }
   edit(_record: Tbl_User_Companym) {
@@ -91,7 +91,7 @@ export class CompanyComponent implements OnInit {
       origin: 'company-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.UserAdmin/CompanyEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/CompanyEditPage',  parameter);
   }
 
   Close() {

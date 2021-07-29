@@ -70,7 +70,7 @@ export class VoidCheckComponent implements OnInit {
       origin: 'voidcheck-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.USAccounts.Trans/VoidCheckEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Trans/VoidCheckEditPage',  parameter);
 
   }
   edit(_record: Tbl_VoidCheck) {
@@ -87,7 +87,7 @@ export class VoidCheckComponent implements OnInit {
       origin: 'voidcheck-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.USAccounts.Trans/VoidCheckEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Trans/VoidCheckEditPage',  parameter);
   }
   
   getRouteDet(_type: string, _mode: string, _record: Tbl_VoidCheck = null) {

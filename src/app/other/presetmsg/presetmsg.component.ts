@@ -68,7 +68,7 @@ export class PreSetMsgComponent implements OnInit {
             origin: 'presetmsg-page',
             mode: 'ADD'
         };
-        this.gs.Naviagete('Silver.Other.Trans/SystemMessageEditPage', JSON.stringify(parameter));
+        this.gs.Naviagete2('Silver.Other.Trans/SystemMessageEditPage',  parameter);
 
     }
     edit(_record: Table_Cargo_Remarks) {
@@ -85,7 +85,7 @@ export class PreSetMsgComponent implements OnInit {
             origin: 'presetmsg-page',
             mode: 'EDIT'
         };
-        this.gs.Naviagete('Silver.Other.Trans/SystemMessageEditPage', JSON.stringify(parameter));
+        this.gs.Naviagete2('Silver.Other.Trans/SystemMessageEditPage',  parameter);
     }
 
     getRouteDet(_type: string, _mode: string, _record: Table_Cargo_Remarks = null) {

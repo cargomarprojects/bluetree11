@@ -69,7 +69,7 @@ export class AcopenComponent implements OnInit {
       origin: 'acopen-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.USAccounts.Master/OpenEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Master/OpenEditPage',  parameter);
 
   }
   edit(_record: Tbl_Acc_Opening) {
@@ -86,7 +86,7 @@ export class AcopenComponent implements OnInit {
       origin: 'acopen-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.USAccounts.Master/OpenEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Master/OpenEditPage',  parameter);
   }
 
   getRouteDet(_type: string, _mode: string, _record: Tbl_Acc_Opening = null) {

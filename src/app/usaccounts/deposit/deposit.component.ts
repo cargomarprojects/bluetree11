@@ -82,7 +82,7 @@ export class DepositComponent implements OnInit {
       origin: 'deposit-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.USAccounts.Trans/DepositEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Trans/DepositEditPage',  parameter);
 
   }
   edit(_record: Tbl_Acc_Payment) {
@@ -99,7 +99,7 @@ export class DepositComponent implements OnInit {
       origin: 'deposit-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.USaccounts.Trans/DepositEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USaccounts.Trans/DepositEditPage', parameter);
   }
 
   getRouteDet(_type: string, _mode: string, _record: Tbl_Acc_Payment = null) {

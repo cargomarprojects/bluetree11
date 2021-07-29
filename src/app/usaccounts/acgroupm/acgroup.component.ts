@@ -69,7 +69,7 @@ export class AcgroupComponent implements OnInit {
       origin: 'acgroup-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.USAccounts.Master/AccGroupEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Master/AccGroupEditPage',  parameter);
 
   }
   edit(_record: Tbl_acc_groupm) {
@@ -86,7 +86,7 @@ export class AcgroupComponent implements OnInit {
       origin: 'acgroup-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.USAccounts.Master/AccGroupEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Master/AccGroupEditPage',  parameter);
   }
 
   getRouteDet(_type: string, _mode: string, _record: Tbl_acc_groupm = null) {

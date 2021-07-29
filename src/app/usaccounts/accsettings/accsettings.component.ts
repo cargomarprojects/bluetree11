@@ -70,7 +70,7 @@ NewRecord() {
     origin: 'accsettings-page',
     mode: 'ADD'
   };
-  this.gs.Naviagete('Silver.USAccounts.Master/AccSettingsEditPage', JSON.stringify(parameter));
+  this.gs.Naviagete2('Silver.USAccounts.Master/AccSettingsEditPage',  parameter);
 
 }
 edit(_record: Tbl_acc_acctm) {
@@ -87,7 +87,7 @@ edit(_record: Tbl_acc_acctm) {
     origin: 'accsettings-page',
     mode: 'EDIT'
   };
-  this.gs.Naviagete('Silver.USAccounts.Master/AccSettingsEditPage', JSON.stringify(parameter));
+  this.gs.Naviagete2('Silver.USAccounts.Master/AccSettingsEditPage',  parameter);
 }
 
 Close() {

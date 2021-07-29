@@ -68,7 +68,7 @@ export class FundTransferComponent implements OnInit {
       origin: 'accpayment-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.USAccounts.Trans/FundTransEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Trans/FundTransEditPage',  parameter);
 
   }
   edit(_record: Tbl_Acc_Payment) {
@@ -85,7 +85,7 @@ export class FundTransferComponent implements OnInit {
       origin: 'acopen-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.USAccounts.Trans/FundTransEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Trans/FundTransEditPage',  parameter);
   }
 
   getRouteDet(_type: string, _mode: string, _record: Tbl_Acc_Payment = null) {

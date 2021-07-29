@@ -69,7 +69,7 @@ export class MailServerComponent implements OnInit {
       origin: 'mailserver-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.UserAdmin/MailServerEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/MailServerEditPage',  parameter);
 
   }
   edit(_record: Tbl_User_Server) {
@@ -86,7 +86,7 @@ export class MailServerComponent implements OnInit {
       origin: 'mailserver-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.UserAdmin/MailServerEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/MailServerEditPage',  parameter);
   }
 
   Close() {

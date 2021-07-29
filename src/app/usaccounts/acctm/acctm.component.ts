@@ -71,7 +71,7 @@ export class AcctmComponent implements OnInit {
       origin: 'acctm-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.USAccounts.Master/AcctmEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Master/AcctmEditPage',  parameter);
 
   }
   edit(_record: Tbl_acc_acctm) {
@@ -89,7 +89,7 @@ export class AcctmComponent implements OnInit {
       origin: 'acctm-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.USAccounts.Master/AcctmEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.USAccounts.Master/AcctmEditPage',  parameter);
   }
 
   getRouteDet(_type: string, _mode: string, _record: Tbl_acc_acctm = null) {
