@@ -3182,11 +3182,13 @@ export class GlobalService {
       return true ;
     }
     else  {
+      
       if ( _id == null )
         alert('Page Expired, APPID not found');
       else
         alert('Page Expired');
-      this.router.navigate(['login'], {replaceUrl : true });
+
+      this.router.navigate(['login']);
       return false;
     }
   }
