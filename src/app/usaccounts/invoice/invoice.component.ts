@@ -52,6 +52,7 @@ export class InvoiceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null)
       this.init(this.route.snapshot.queryParams);
     else
@@ -63,7 +64,7 @@ export class InvoiceComponent implements OnInit {
 
   public init(params: any) {
 
-    this.gs.checkAppVersion();
+   
 
     //const options = JSON.parse(params);
     const options = params;

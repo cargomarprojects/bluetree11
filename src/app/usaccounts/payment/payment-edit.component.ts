@@ -54,7 +54,7 @@ export class PaymentEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        
+        this.gs.checkAppVersion();
 
         if (this.route.snapshot.queryParams.parameter == null) {
             this.ms.menuid = this.route.snapshot.queryParams.menuid;
@@ -66,7 +66,7 @@ export class PaymentEditComponent implements OnInit {
             this.ms.pkid = options.pkid;
             this.ms.mode = options.mode;
         }
-        this.gs.checkAppVersion();
+         
         this.ms.setup();
         if ( this.ms.mode == 'ADD' ) {
             this.actionHandler();

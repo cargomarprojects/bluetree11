@@ -57,7 +57,7 @@ export class PayrollComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.gs.checkAppVersion();
     }
 
     PayrollFill(payrollmodal: any = null) {
