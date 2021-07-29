@@ -49,6 +49,7 @@ export class MasterComponentRecords implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
   }
 
   List(){
