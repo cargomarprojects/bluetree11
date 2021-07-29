@@ -85,6 +85,9 @@ export class PayDueReportComponent implements OnInit {
   ) {
 
     this.sub = this.activatedroute.queryParams.subscribe(params => {
+
+      this.gs.checkAppVersion();
+      
       this.urlid = params.id;
       this.menuid = params.menuid;
       this.InitPage();
