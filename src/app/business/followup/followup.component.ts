@@ -70,6 +70,7 @@ export class FollowupComponent implements OnInit {
   }
 
   private initPage() {
+    this.gs.checkAppVersion();
     this.title = 'Tracking';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';

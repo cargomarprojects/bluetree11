@@ -70,6 +70,7 @@ export class PaymentReqComponent implements OnInit {
   }
 
   private initPage() {
+    this.gs.checkAppVersion();
     this.title = 'Payment Request';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';

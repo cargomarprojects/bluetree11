@@ -64,6 +64,7 @@ export class XmlRemarksComponent implements OnInit {
   }
 
   private initPage() {
+    this.gs.checkAppVersion();
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
     this.LoadCombo();
@@ -168,6 +169,7 @@ export class XmlRemarksComponent implements OnInit {
     switch (action) {
       case 'HISTORY': {
         let prm = {
+          appid:this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           source: this.source,
