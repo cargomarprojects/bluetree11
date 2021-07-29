@@ -84,7 +84,7 @@ export class MessengerSlipListComponent implements OnInit {
     }
 
     let parameter = {
-      appid:this.gs.appid,
+      appid: this.gs.appid,
       menuid: this.menuid,
       pkid: '',
       mode: 'ADD',
@@ -93,7 +93,7 @@ export class MessengerSlipListComponent implements OnInit {
       mbl_mode: this.mbl_mode,
       is_locked: this.is_locked
     };
-    this.gs.Naviagete('Silver.Other.Trans/MessengerSlipEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/MessengerSlipEdit',  parameter);
 
   }
 
@@ -104,7 +104,7 @@ export class MessengerSlipListComponent implements OnInit {
     }
 
     let parameter = {
-      appid:this.gs.appid,
+      appid: this.gs.appid,
       menuid: this.menuid,
       pkid: _record.cs_pkid,
       mode: 'EDIT',
@@ -113,12 +113,12 @@ export class MessengerSlipListComponent implements OnInit {
       mbl_mode: this.mbl_mode,
       is_locked: this.is_locked
     };
-    this.gs.Naviagete('Silver.Other.Trans/MessengerSlipEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/MessengerSlipEdit', parameter);
   }
 
   Close() {
-   
-      this.location.back();
+
+    this.location.back();
   }
 
 }
