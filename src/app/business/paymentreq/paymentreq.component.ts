@@ -46,6 +46,7 @@ export class PaymentReqComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.cp_master_id = this.route.snapshot.queryParams.cp_master_id;
@@ -70,7 +71,7 @@ export class PaymentReqComponent implements OnInit {
   }
 
   private initPage() {
-    this.gs.checkAppVersion();
+    
     this.title = 'Payment Request';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';

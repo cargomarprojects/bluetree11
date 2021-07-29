@@ -54,7 +54,7 @@ export class LogBookComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
+        this.gs.checkAppVersion();
         if (!this.ismodal) {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
             this.menuid = options.menuid;
@@ -67,7 +67,7 @@ export class LogBookComponent implements OnInit {
     }
 
     private initPage() {
-        this.gs.checkAppVersion();
+        
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.errorMessage = '';
         this.LoadCombo();
