@@ -50,6 +50,7 @@ export class SeaImpUsCustomsHoldComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     const options = this.route.snapshot.queryParams;
     this.pkid = options.pkid;
     this.menuid = options.menuid;

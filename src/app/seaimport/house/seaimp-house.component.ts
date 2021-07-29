@@ -34,6 +34,7 @@ export class SeaImpHouseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
   }

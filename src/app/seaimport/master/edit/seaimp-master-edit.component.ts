@@ -97,6 +97,7 @@ export class SeaImpMasterEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.pkid = this.route.snapshot.queryParams.pkid;
       this.menuid = this.route.snapshot.queryParams.menuid;
@@ -1134,6 +1135,7 @@ export class SeaImpMasterEditComponent implements OnInit {
 
     if (!this.gs.isBlank(_rec.cntr_pkid)) {
       let prm = {
+        appid:this.gs.appid,
         menuid: this.gs.MENU_SI_CONTAINER_MOVEMENT,
         refno: "REF : " + this.record.mbl_refno + "  CNTR : " + _rec.cntr_no,
         pkid: _rec.cntr_pkid,

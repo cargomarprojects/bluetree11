@@ -41,6 +41,7 @@ export class SeaImpRiderPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     const options = this.route.snapshot.queryParams;
     this.pkid = options.pkid;
     this.source = options.source;
