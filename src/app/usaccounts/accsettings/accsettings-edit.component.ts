@@ -37,22 +37,27 @@ export class AccSettingsEditComponent implements OnInit {
         private location: Location,
         public gs: GlobalService,
         public mainService: AccSettingsService,
-    ){}
+    ) { }
 
     ngOnInit() {
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-
-
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-
+        this.gs.checkAppVersion();
+        //Route Change 29072021
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+        }
         this.initPage();
         this.actionHandler();
     }
 
     private initPage() {
-        this.gs.checkAppVersion();        
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
@@ -94,11 +99,11 @@ export class AccSettingsEditComponent implements OnInit {
             .subscribe(response => {
                 this.record = <Tbl_acc_acctm>response.record;
 
-                if ( this.gs.isBlank( this.record.acc_is_arap_code) ){
+                if (this.gs.isBlank(this.record.acc_is_arap_code)) {
                     this.record.acc_is_arap_code = 'N';
                 }
 
-                if ( this.gs.isBlank( this.record.acc_is_payment_code) ){
+                if (this.gs.isBlank(this.record.acc_is_payment_code)) {
                     this.record.acc_is_payment_code = 'N';
                 }
 
@@ -121,7 +126,7 @@ export class AccSettingsEditComponent implements OnInit {
         saveRecord.mode = this.mode;
         saveRecord.userinfo = this.gs.UserInfo;
 
-        this.mainService.Save (saveRecord)
+        this.mainService.Save(saveRecord)
             .subscribe(response => {
                 if (response.retvalue == false) {
                     this.errorMessage = response.error;

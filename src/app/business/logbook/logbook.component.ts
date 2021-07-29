@@ -56,18 +56,27 @@ export class LogBookComponent implements OnInit {
     ngOnInit() {
         this.gs.checkAppVersion();
         if (!this.ismodal) {
-            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-            this.menuid = options.menuid;
-            this.pkid = options.pkid;
-            this.source = options.source;
-            this.title = options.title;
+
+            if (this.route.snapshot.queryParams.parameter == null) {
+                this.menuid = this.route.snapshot.queryParams.menuid;
+                this.pkid = this.route.snapshot.queryParams.pkid;
+                this.source = this.route.snapshot.queryParams.source;
+                this.title = this.route.snapshot.queryParams.title;
+            } else {
+                const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+                this.menuid = options.menuid;
+                this.pkid = options.pkid;
+                this.source = options.source;
+                this.title = options.title;
+            }
+
         }
         this.initPage();
         this.actionHandler();
     }
 
     private initPage() {
-        
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.errorMessage = '';
         this.LoadCombo();

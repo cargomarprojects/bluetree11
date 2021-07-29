@@ -51,10 +51,16 @@ export class MissingDataPageComponent implements OnInit {
 
     ngOnInit() {
         this.gs.checkAppVersion();
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-        this.menuid = options.menuid;
-        this.mbl_pkid = options.mbl_pkid;
-        this.origin = options.origin;
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.mbl_pkid = this.route.snapshot.queryParams.mbl_pkid;
+            this.origin = this.route.snapshot.queryParams.origin;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+            this.menuid = options.menuid;
+            this.mbl_pkid = options.mbl_pkid;
+            this.origin = options.origin;
+        }
         // this.mbl_refno = options.mbl_refno;
         // this.mbl_mode = options.mbl_mode;
         // this.is_locked = options.is_locked;
@@ -65,7 +71,7 @@ export class MissingDataPageComponent implements OnInit {
         this.canEdit = this.gs.canEdit(this.menuid);
         this.title = "Missing Data";
 
-       
+
 
         if (!this.gs.isBlank(this.searchstring_ctrl))
             this.searchstring_ctrl.focus();
@@ -77,8 +83,8 @@ export class MissingDataPageComponent implements OnInit {
     ngAfterViewInit() {
         if (!this.gs.isBlank(this.searchstring_ctrl))
             this.searchstring_ctrl.focus();
-      }
-    
+    }
+
     List(action: string = '') {
         var SearchData = this.gs.UserInfo;
         if (this.gs.isBlank(this.searchString))
@@ -155,7 +161,7 @@ export class MissingDataPageComponent implements OnInit {
         let SMENU_ID = this.gs.MENU_MASTER_DATA; //'6727DF99-9385-4991-841B-1ECAA9E3B28A';
         if (this.gs.canAdd(SMENU_ID) || this.gs.canEdit(SMENU_ID) || this.gs.canView(SMENU_ID)) {
             let parameter = {
-                appid:this.gs.appid,
+                appid: this.gs.appid,
                 menuid: SMENU_ID,
                 pkid: '',
                 type: 'PARTYS',
@@ -165,7 +171,7 @@ export class MissingDataPageComponent implements OnInit {
                 ms_from: _messagesender,
                 ms_name: _sDesc
             };
-            this.gs.Naviagete2('Silver.Master/PartyEditPage',  parameter);
+            this.gs.Naviagete2('Silver.Master/PartyEditPage', parameter);
         }
         else
             alert("Insufficient Rights");
@@ -175,7 +181,7 @@ export class MissingDataPageComponent implements OnInit {
 
         if (this.gs.canAdd(_smenu_id) || this.gs.canEdit(_smenu_id) || this.gs.canView(_smenu_id)) {
             let parameter = {
-                appid:this.gs.appid,
+                appid: this.gs.appid,
                 menuid: _smenu_id,
                 pkid: '',
                 type: _type,
@@ -193,7 +199,7 @@ export class MissingDataPageComponent implements OnInit {
 
         if (this.gs.canAdd(_smenu_id) || this.gs.canEdit(_smenu_id) || this.gs.canView(_smenu_id)) {
             let parameter = {
-                appid:this.gs.appid,
+                appid: this.gs.appid,
                 menuid: _smenu_id,
                 pkid: '',
                 type: _type,
@@ -201,7 +207,7 @@ export class MissingDataPageComponent implements OnInit {
                 mode: 'ADD',
                 ms_name: _sDesc
             };
-            this.gs.Naviagete2('Silver.Master/ParamEdit',  parameter);
+            this.gs.Naviagete2('Silver.Master/ParamEdit', parameter);
         }
         else
             alert("Insufficient Rights");

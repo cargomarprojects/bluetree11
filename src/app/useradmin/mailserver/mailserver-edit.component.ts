@@ -43,13 +43,18 @@ export class MailServerEditComponent implements OnInit {
 
     ngOnInit() {
         this.gs.checkAppVersion();
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+        //Route Change 29072021
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
-
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+        }
         this.initPage();
         this.actionHandler();
     }
@@ -74,7 +79,7 @@ export class MailServerEditComponent implements OnInit {
     actionHandler() {
         this.errorMessage = '';
         if (this.mode == 'ADD') {
-            this.record = <Tbl_User_Server >{};
+            this.record = <Tbl_User_Server>{};
             this.pkid = this.gs.getGuid();
             this.init();
         }
@@ -85,7 +90,7 @@ export class MailServerEditComponent implements OnInit {
 
     init() {
 
-        this.record.mail_pkid= this.pkid;
+        this.record.mail_pkid = this.pkid;
         this.record.mail_name = '';
         this.record.mail_smtp_name = '';
         this.record.mail_smtp_port = '587';

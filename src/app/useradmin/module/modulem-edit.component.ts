@@ -43,13 +43,19 @@ export class ModulemEditComponent implements OnInit {
 
     ngOnInit() {
         this.gs.checkAppVersion();
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+        //Route Change 29072021
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
 
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+        }
         this.initPage();
         this.actionHandler();
     }
@@ -74,7 +80,7 @@ export class ModulemEditComponent implements OnInit {
     actionHandler() {
         this.errorMessage = '';
         if (this.mode == 'ADD') {
-            this.record = <Tbl_User_Modulem >{};
+            this.record = <Tbl_User_Modulem>{};
             this.pkid = this.gs.getGuid();
             this.init();
         }
@@ -85,7 +91,7 @@ export class ModulemEditComponent implements OnInit {
 
     init() {
 
-        this.record.module_pkid= this.pkid;
+        this.record.module_pkid = this.pkid;
         this.record.module_name = '';
         this.record.module_installed = 0;
         this.record.module_order = 0;
@@ -99,7 +105,7 @@ export class ModulemEditComponent implements OnInit {
         SearchData.pkid = this.pkid;
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
-                this.record = <Tbl_User_Modulem >response.record;
+                this.record = <Tbl_User_Modulem>response.record;
                 this.mode = 'EDIT';
             }, error => {
                 this.errorMessage = this.gs.getError(error);

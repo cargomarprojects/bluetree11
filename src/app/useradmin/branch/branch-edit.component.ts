@@ -35,7 +35,7 @@ export class BranchEditComponent implements OnInit {
 
     where = " ACC_TYPE = 'BANK' ";
 
-    companyList : any [];
+    companyList: any[];
 
     constructor(
         private router: Router,
@@ -47,13 +47,19 @@ export class BranchEditComponent implements OnInit {
 
     ngOnInit() {
         this.gs.checkAppVersion();
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+        //Route Change 29072021
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
 
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+        }
         this.initPage();
         this.actionHandler();
     }
@@ -91,7 +97,7 @@ export class BranchEditComponent implements OnInit {
     actionHandler() {
         this.errorMessage = '';
         if (this.mode == 'ADD') {
-            this.record = <Tbl_User_Companym >{};
+            this.record = <Tbl_User_Companym>{};
             this.pkid = this.gs.getGuid();
             this.init();
         }
@@ -102,7 +108,7 @@ export class BranchEditComponent implements OnInit {
 
     init() {
 
-        this.record.comp_pkid= this.pkid;
+        this.record.comp_pkid = this.pkid;
         this.record.comp_name = '';
         this.record.comp_add1 = '';
         this.record.comp_add2 = '';
@@ -116,7 +122,7 @@ export class BranchEditComponent implements OnInit {
         this.record.comp_line5 = '';
 
         this.record.comp_parent_id = '';
-        this.record.parent_name ='';
+        this.record.parent_name = '';
 
 
         this.record.comp_order = 0;
@@ -130,7 +136,7 @@ export class BranchEditComponent implements OnInit {
         SearchData.pkid = this.pkid;
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
-                this.record = <Tbl_User_Companym >response.record;
+                this.record = <Tbl_User_Companym>response.record;
                 this.mode = 'EDIT';
             }, error => {
                 this.errorMessage = this.gs.getError(error);
@@ -170,11 +176,11 @@ export class BranchEditComponent implements OnInit {
     }
 
     private SaveParent() {
-        
+
         this.record.comp_type = 'B';
-        var mRec =   this.companyList.find( rec => rec.pkid == this.record.comp_parent_id  );
-        if ( mRec )
-            this.record.parent_name =  mRec.name;
+        var mRec = this.companyList.find(rec => rec.pkid == this.record.comp_parent_id);
+        if (mRec)
+            this.record.parent_name = mRec.name;
 
     }
     private Allvalid(): boolean {
@@ -216,9 +222,9 @@ export class BranchEditComponent implements OnInit {
             this.errorMessage = "Address2 Cannot be blank";
             alert(this.errorMessage);
             return bRet;
-        }        
-        
-        
+        }
+
+
 
 
         if (this.gs.isZero(this.record.comp_order)) {
@@ -234,8 +240,8 @@ export class BranchEditComponent implements OnInit {
             this.errorMessage = "Company Cannot be blank";
             alert(this.errorMessage);
             return bRet;
-        }        
-        
+        }
+
 
 
         return bRet;

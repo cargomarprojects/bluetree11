@@ -46,13 +46,19 @@ export class MenuEditComponent implements OnInit {
 
     ngOnInit() {
         this.gs.checkAppVersion();
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+        //Route Change 29072021
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+        } else {
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
 
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+        }
         this.initPage();
         this.actionHandler();
     }
@@ -159,12 +165,12 @@ export class MenuEditComponent implements OnInit {
     private SaveParent() {
 
 
-        var mRec =   this.modulelist.find( rec => rec.pkid == this.record.menu_module_id  );
-        if ( mRec )
-            this.record.module_name =  mRec.name;
-        var gRec =   this.modulelist.find( rec => rec.pkid == this.record.menu_group_id  );
-            if ( gRec )
-                this.record.menu_group_name =  mRec.name;
+        var mRec = this.modulelist.find(rec => rec.pkid == this.record.menu_module_id);
+        if (mRec)
+            this.record.module_name = mRec.name;
+        var gRec = this.modulelist.find(rec => rec.pkid == this.record.menu_group_id);
+        if (gRec)
+            this.record.menu_group_name = mRec.name;
 
 
     }

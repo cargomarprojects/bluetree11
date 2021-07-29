@@ -44,12 +44,21 @@ export class PayrollDetEditComponent implements OnInit {
 
     ngOnInit() {
         this.gs.checkAppVersion();
-        const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+        //Route Change 29072021
+        if (this.route.snapshot.queryParams.parameter == null) {
+            this.menuid = this.route.snapshot.queryParams.menuid;
+            this.pkid = this.route.snapshot.queryParams.pkid;
+            this.mode = this.route.snapshot.queryParams.mode;
+            this.emp_name = this.route.snapshot.queryParams.emp_name;
+        } else {
+            
+            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
-        this.menuid = options.menuid;
-        this.pkid = options.pkid;
-        this.mode = options.mode;
-        this.emp_name = options.emp_name;
+            this.menuid = options.menuid;
+            this.pkid = options.pkid;
+            this.mode = options.mode;
+            this.emp_name = options.emp_name;
+        }
         this.setup();
         this.initPage();
         this.actionHandler();
@@ -62,7 +71,7 @@ export class PayrollDetEditComponent implements OnInit {
 
 
     private initPage() {
-        
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
@@ -152,7 +161,7 @@ export class PayrollDetEditComponent implements OnInit {
                     this.mode = 'EDIT';
                     this.mainService.RefreshList(this.record);
                     this.errorMessage = 'Save Complete';
-                  //  alert(this.errorMessage);
+                    //  alert(this.errorMessage);
                 }
 
             }, error => {
