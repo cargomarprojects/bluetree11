@@ -44,6 +44,7 @@ export class TransferPageComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.gs.checkAppVersion();
         this.LoadCompany();
         this.List('SCREEN');
         this.ref_date = this.gs.defaultValues.today;

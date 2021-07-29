@@ -65,6 +65,8 @@ export class MissingDataPageComponent implements OnInit {
         this.canEdit = this.gs.canEdit(this.menuid);
         this.title = "Missing Data";
 
+        this.gs.checkAppVersion();
+
         if (!this.gs.isBlank(this.searchstring_ctrl))
             this.searchstring_ctrl.focus();
 
@@ -153,6 +155,7 @@ export class MissingDataPageComponent implements OnInit {
         let SMENU_ID = this.gs.MENU_MASTER_DATA; //'6727DF99-9385-4991-841B-1ECAA9E3B28A';
         if (this.gs.canAdd(SMENU_ID) || this.gs.canEdit(SMENU_ID) || this.gs.canView(SMENU_ID)) {
             let parameter = {
+                appid:this.gs.appid,
                 menuid: SMENU_ID,
                 pkid: '',
                 type: 'PARTYS',
@@ -172,6 +175,7 @@ export class MissingDataPageComponent implements OnInit {
 
         if (this.gs.canAdd(_smenu_id) || this.gs.canEdit(_smenu_id) || this.gs.canView(_smenu_id)) {
             let parameter = {
+                appid:this.gs.appid,
                 menuid: _smenu_id,
                 pkid: '',
                 type: _type,
@@ -189,6 +193,7 @@ export class MissingDataPageComponent implements OnInit {
 
         if (this.gs.canAdd(_smenu_id) || this.gs.canEdit(_smenu_id) || this.gs.canView(_smenu_id)) {
             let parameter = {
+                appid:this.gs.appid,
                 menuid: _smenu_id,
                 pkid: '',
                 type: _type,
