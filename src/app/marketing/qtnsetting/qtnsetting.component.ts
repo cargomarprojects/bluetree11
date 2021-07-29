@@ -32,6 +32,7 @@ export class QtnSettingComponent implements OnInit {
   }
 
   initPage() {
+    this.gs.checkAppVersion();
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errormessage));
   }
@@ -55,6 +56,7 @@ export class QtnSettingComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.qtnm_no,
       subject: _record.qtnm_to_name,

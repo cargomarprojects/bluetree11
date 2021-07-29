@@ -42,6 +42,7 @@ export class QtnFclComponent implements OnInit {
   }
 
   initPage() {
+    this.gs.checkAppVersion();
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -67,6 +68,7 @@ export class QtnFclComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       origin: 'qtnm-fcl-page',
@@ -87,6 +89,7 @@ export class QtnFclComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.qtnm_pkid,
       origin: 'qtnm-fcl-page',
@@ -107,6 +110,7 @@ export class QtnFclComponent implements OnInit {
       return;
     }
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.qtnm_pkid,
       origin: 'qtnm-fcl-page',

@@ -44,6 +44,7 @@ export class QtnLclComponent implements OnInit {
   }
 
   initPage() {
+    this.gs.checkAppVersion();
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -69,6 +70,7 @@ export class QtnLclComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       origin: 'qtnm-lcl-page',
@@ -89,6 +91,7 @@ export class QtnLclComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.qtnm_pkid,
       origin: 'qtnm-lcl-page',
@@ -109,6 +112,7 @@ export class QtnLclComponent implements OnInit {
       return;
     }
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.qtnm_pkid,
       origin: 'qtnm-lcl-page',

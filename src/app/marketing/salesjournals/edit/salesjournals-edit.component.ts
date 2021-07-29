@@ -82,6 +82,7 @@ export class SalesJournalsEditComponent implements OnInit {
     }
 
     private initPage() {
+        this.gs.checkAppVersion();
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
@@ -295,6 +296,7 @@ export class SalesJournalsEditComponent implements OnInit {
             }
             case 'MEMO': {
                 let prm = {
+                    appid:this.gs.appid,
                     menuid: this.menuid,
                     pkid: this.pkid,
                     source: 'CONTACT-MEMO',
@@ -306,6 +308,7 @@ export class SalesJournalsEditComponent implements OnInit {
             }
             case 'FOLLOWUP': {
                 let prm = {
+                    appid:this.gs.appid,
                     menuid: this.menuid,
                     master_id: this.customer_id,
                     master_refno: this.customer_name,

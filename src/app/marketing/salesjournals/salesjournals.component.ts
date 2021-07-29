@@ -36,6 +36,7 @@ export class SalesJournalsComponent implements OnInit {
   }
 
   initPage() {
+    this.gs.checkAppVersion();
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -58,6 +59,7 @@ export class SalesJournalsComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       custid:'',
@@ -80,6 +82,7 @@ export class SalesJournalsComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.cjm_pkid,
       custid: _record.cjm_customer_id,
@@ -95,6 +98,7 @@ export class SalesJournalsComponent implements OnInit {
 
   ShowMemo(_rec: Tbl_Cargo_Journals_Master) {
     let prm = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _rec.cjm_pkid,
       source: 'CONTACT-MEMO',

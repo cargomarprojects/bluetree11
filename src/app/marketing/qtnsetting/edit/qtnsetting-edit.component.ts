@@ -43,6 +43,7 @@ export class QtnSettingEditComponent implements OnInit {
   }
 
   private initPage() {
+    this.gs.checkAppVersion();
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
     this.LoadCombo();
