@@ -1146,7 +1146,7 @@ export class SeaImpMasterEditComponent implements OnInit {
         hideTracking: 'N',
         is_locked: this.is_locked
       };
-      this.gs.Naviagete('Silver.Other.Trans/TrackingPage', JSON.stringify(prm));
+      this.gs.Naviagete2('Silver.Other.Trans/TrackingPage',  prm);
     }
   }
   RemoveRow(_rec: Tbl_cargo_imp_container) {

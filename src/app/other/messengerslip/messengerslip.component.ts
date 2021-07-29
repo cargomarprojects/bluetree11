@@ -92,7 +92,7 @@ export class MessengerSlipComponent implements OnInit {
       mbl_mode: 'GENERAL',
       origin: 'messengerslip-general-page',
     };
-    this.gs.Naviagete('Silver.Other.Trans/MessengerSlipEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/MessengerSlipEdit',  parameter);
   }
 
   Close() {

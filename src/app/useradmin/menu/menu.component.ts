@@ -69,7 +69,7 @@ export class MenuComponent implements OnInit {
       origin: 'module-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.UserAdmin/MenuEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/MenuEditPage',  parameter);
 
   }
   edit(_record: Tbl_User_Menum) {
@@ -86,7 +86,7 @@ export class MenuComponent implements OnInit {
       origin: 'menu-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.UserAdmin/MenuEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/MenuEditPage',  parameter);
   }
 
   Close() {

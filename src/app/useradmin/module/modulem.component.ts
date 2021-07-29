@@ -69,7 +69,7 @@ export class ModulemComponent implements OnInit {
       origin: 'module-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.UserAdmin/ModulemEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/ModulemEditPage',  parameter);
 
   }
   edit(_record: Tbl_User_Modulem) {
@@ -86,7 +86,7 @@ export class ModulemComponent implements OnInit {
       origin: 'module-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.UserAdmin/ModulemEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.UserAdmin/ModulemEditPage',  parameter);
   }
 
   Close() {

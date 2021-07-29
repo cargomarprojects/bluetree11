@@ -321,7 +321,7 @@ export class PayReqReportComponent implements OnInit {
         is_locked: false,
         origin: 'payment-req-page'
       };
-      this.gs.Naviagete('Silver.Other.Trans/ApprovedPageList', JSON.stringify(parameter));
+      this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageList',  parameter);
 
     }
     else
