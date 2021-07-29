@@ -36,9 +36,10 @@
       </div>
 
 
-      <li class="nav-item" *ngIf="gs.User_Category=='EMPLOYEE'">
+      <!--<li class="nav-item" *ngIf="gs.User_Category=='EMPLOYEE'">
         <a class="nav-link h6 text-white" *ngIf="gs.IsAuthenticated" (click)="changeBranch()">Change Branch</a>
-      </li>
+      </li> -->
+
       <li class="nav-item showelement" *ngIf="gs.User_Category=='EMPLOYEE'">
         <label class="nav-link h6 text-warning"  *ngIf="gs.IsAuthenticated" >{{gs.user_name}}/{{gs.branch_name}}</label>
       </li>
