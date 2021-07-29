@@ -81,6 +81,7 @@ export class AirExpHouseEditComponent implements OnInit {
 
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.parentid = this.route.snapshot.queryParams.parentid;
@@ -110,7 +111,7 @@ export class AirExpHouseEditComponent implements OnInit {
 
   initPage() {
 
-    this.gs.checkAppVersion();
+    
 
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
