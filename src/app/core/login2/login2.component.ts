@@ -61,6 +61,7 @@ export class Login2Component implements OnInit {
     }
 
     ngOnInit() {
+        this.GenerateAppID();
         this.store.dispatch ( logoutAction() );
     }
 
