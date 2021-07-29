@@ -63,6 +63,7 @@ export class AirImpCargoPickupComponent implements OnInit {
   }
 
   private initPage() {
+    this.gs.checkAppVersion();
     this.title = 'Delivery Order';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
