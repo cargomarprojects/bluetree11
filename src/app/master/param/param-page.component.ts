@@ -69,12 +69,14 @@ export class ParamPageComponent implements OnInit, OnDestroy {
       this.menuid = params.id;
       this.menu_param = params.menu_param;
       this.initPage();
-      this.gs.checkAppVersion();
+      
     });
 
   }
 
   private initPage() {
+    
+    this.gs.checkAppVersion();
 
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
