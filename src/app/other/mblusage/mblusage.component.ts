@@ -68,7 +68,7 @@ export class MblUsageComponent implements OnInit {
       origin: 'mblusage-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.Other.Trans/MblUsageEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/MblUsageEditPage',  parameter);
 
   }
   edit(_record: Tbl_cargo_mblusage) {
@@ -85,7 +85,7 @@ export class MblUsageComponent implements OnInit {
       origin: 'mblusage-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Other.Trans/MblUsageEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/MblUsageEditPage',  parameter);
   }
 
   getRouteDet(_type: string, _mode: string, _record: Tbl_cargo_mblusage = null) {

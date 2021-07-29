@@ -69,7 +69,7 @@ export class DeliveryOrderComponent implements OnInit {
       pickCategory: 'GENERAL',
       origin: 'oth-deliveryorder-page',
     };
-    this.gs.Naviagete('Silver.Other.Trans/DeliveryOrderEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/DeliveryOrderEdit',  parameter);
 
   }
 
@@ -88,7 +88,7 @@ export class DeliveryOrderComponent implements OnInit {
       pickCategory: 'GENERAL',
       origin: 'oth-deliveryorder-page',
     };
-    this.gs.Naviagete('Silver.Other.Trans/DeliveryOrderEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/DeliveryOrderEdit',  parameter);
   }
 
   Close() {

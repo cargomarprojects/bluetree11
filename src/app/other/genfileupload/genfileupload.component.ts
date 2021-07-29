@@ -68,7 +68,7 @@ export class GenFileUploadComponent implements OnInit {
       origin: 'genfileupload-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.Other.Trans/GeneralFileUploadEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/GeneralFileUploadEditPage',  parameter);
 
   }
   edit(_record: Tbl_cargo_genfiles) {
@@ -85,7 +85,7 @@ export class GenFileUploadComponent implements OnInit {
       origin: 'genfileupload-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Other.Trans/GeneralFileUploadEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/GeneralFileUploadEditPage',  parameter);
   }
 
   Close() {    

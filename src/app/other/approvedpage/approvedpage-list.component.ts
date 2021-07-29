@@ -103,7 +103,7 @@ export class ApprovedPageListComponent implements OnInit {
       req_type: this.req_type,
       is_locked: this.is_locked
     };
-    this.gs.Naviagete('Silver.Other.Trans/ApprovedPageEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageEdit',  parameter);
 
   }
 
@@ -124,7 +124,7 @@ export class ApprovedPageListComponent implements OnInit {
       req_type: this.req_type,
       is_locked: this.is_locked
     };
-    this.gs.Naviagete('Silver.Other.Trans/ApprovedPageEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageEdit',  parameter);
   }
 
   Close() {

@@ -84,7 +84,7 @@ export class ApprovedPageComponent implements OnInit {
       mbl_mode: 'GENERAL',
       origin: 'approved-page'
     };
-    this.gs.Naviagete('Silver.Other.Trans/ApprovedPageEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageEdit',  parameter);
   }
 
   edit(_record: Tbl_Cargo_Approved) {
@@ -107,7 +107,7 @@ export class ApprovedPageComponent implements OnInit {
       doc_type: _record.ca_doc_type,
       req_type: this.mainservice.param_type
     };
-    this.gs.Naviagete('Silver.Other.Trans/ApprovedPageEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageEdit',  parameter);
   }
 
   editmaster(_record: Tbl_Cargo_Approved) {

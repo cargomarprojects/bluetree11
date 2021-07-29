@@ -572,7 +572,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           mbl_type: this.EXPTYPE,
           origin: 'other-generalexpense-page',
         };
-        this.gs.Naviagete('Silver.USAccounts.Trans/InvoicePage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.USAccounts.Trans/InvoicePage',  prm);
         break;
 
       }
@@ -595,7 +595,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           mbl_type: this.EXPTYPE,
           origin: 'other-generalexpense-page',
         };
-        this.gs.Naviagete('Silver.USAccounts.Trans/ProfitReportPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.USAccounts.Trans/ProfitReportPage',  prm);
         break;
 
       }
@@ -612,7 +612,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           mbl_type: this.EXPTYPE,
           origin: 'other-generalexpense-page',
         };
-        this.gs.Naviagete('Silver.Other.Trans/PayrollPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Other.Trans/PayrollPage',  prm);
         break;
 
       }

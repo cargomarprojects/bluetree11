@@ -173,7 +173,7 @@ export class AlertLogPageComponent implements OnInit {
             origin: _record.cf_mbl_lock == "J" ? 'sales-journal-page' : 'alert-log-page'
         };
         if (branch_code == this.gs.branch_code) {
-            this.gs.Naviagete('Silver.BusinessModule/FollowUpPage', JSON.stringify(prm));
+            this.gs.Naviagete2('Silver.BusinessModule/FollowUpPage',  prm);
         }
         else {
             alert("Cannot Show Details from another Branch");
