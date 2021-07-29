@@ -105,7 +105,7 @@ export class SeaexpMasterEditComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.pkid = this.route.snapshot.queryParams.pkid;
       this.menuid = this.route.snapshot.queryParams.menuid;
@@ -846,6 +846,7 @@ export class SeaexpMasterEditComponent implements OnInit {
 
       case 'MBLPAGE': {
         let prm = {
+          appid:this.gs.appid,
           menuid: this.gs.MENU_SE_MASTER_MBL_INSTRUCTION,
           pkid: this.pkid,
           origin: 'seaexp-master-page',
