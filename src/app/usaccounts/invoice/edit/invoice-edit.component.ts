@@ -168,6 +168,7 @@ export class InvoiceEditComponent implements OnInit {
 
 
   initpage() {
+    this.gs.checkAppVersion();
     this.old_amt = 0;
     this.old_inv_date = '';
     this.showdeleted = false;

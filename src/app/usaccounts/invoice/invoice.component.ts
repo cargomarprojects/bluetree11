@@ -63,6 +63,8 @@ export class InvoiceComponent implements OnInit {
 
   public init(params: any) {
 
+    this.gs.checkAppVersion();
+
     //const options = JSON.parse(params);
     const options = params;
 
