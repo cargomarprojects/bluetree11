@@ -110,26 +110,32 @@ export class Login2Component implements OnInit {
             });
     }
 
-    async Login() {
-       
+    GenerateAppID() {
 
         let rid : number = this.GLOBALCONTANTS.getRandomInt();
         if  ( rid <= 0)
         {
             alert('Cannot Generate Appliation ID ' + rid.toString());
-            return;
+            return false;
         }
         if  ( this.GLOBALCONTANTS.appid == rid.toString())
         {
             alert('Cannot Generate Appliation ID ' + rid.toString());
-            return;
+            return false;
         }
         this.GLOBALCONTANTS.appid = rid.toString();
         if ( this.GLOBALCONTANTS.isAppidExtistsInLocalStorage())
         {
             alert('Duplicate Application ID ' + rid.toString());
-            return;
+            return false;
         }
+        return true;
+    }
+
+    async Login() {
+        
+        if ( this.GenerateAppID() == false)
+            return;
 
 
         this.Comp_Row = this.CompanyList.find(a => a.comp_pkid == this.Company_Id);
@@ -178,8 +184,6 @@ export class Login2Component implements OnInit {
         await this.GLOBALCONTANTS.LoadMenu();
        
         this.GLOBALCONTANTS.IsAuthenticated = true;
-        
-        
         
 
         this.GLOBALCONTANTS.Save2LocalStorage();
