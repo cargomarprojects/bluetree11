@@ -50,7 +50,7 @@ export class MissingDataPageComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.gs.checkAppVersion();
         const options = JSON.parse(this.route.snapshot.queryParams.parameter);
         this.menuid = options.menuid;
         this.mbl_pkid = options.mbl_pkid;
@@ -65,7 +65,7 @@ export class MissingDataPageComponent implements OnInit {
         this.canEdit = this.gs.canEdit(this.menuid);
         this.title = "Missing Data";
 
-        this.gs.checkAppVersion();
+       
 
         if (!this.gs.isBlank(this.searchstring_ctrl))
             this.searchstring_ctrl.focus();
