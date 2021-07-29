@@ -8,7 +8,7 @@ import { User_Menu } from '../../../core/models/menum';
 import { Tbl_Mast_Partym, vm_Tbl_Mast_Partym } from '../../models/Tbl_Mast_Partym';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { Tbl_Mast_Contacts } from '../../../marketing/models/tbl_cargo_journals_master';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-party-edit',
@@ -110,6 +110,7 @@ export class PartyEditComponent implements OnInit {
         this.ms_name = this.ms_name.replace("#", ",");
       }
     }
+    this.gs.checkAppVersion();
     this.closeCaption = 'Return';
     this.initPage();
     this.actionHandler();

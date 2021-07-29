@@ -3176,6 +3176,22 @@ export class GlobalService {
     return new URLSearchParams(window.location.search).get(param);
   }
 
+  public checkAppVersion(){
+    const _id = this.getURLParam('appid');
+    if (this.appid == _id){
+      return true ;
+    }
+    else  {
+      if ( _id == null)
+        alert('Page Expired, APPID not found');
+      else
+        alert('Page Expired');
+      this.router.navigate(['login'], {replaceUrl : true });
+      return false;
+    }
+  }
+
+
   public GetCompanyName(_compCode: string) {
     let str: string = "";
     if (_compCode == "ALL")

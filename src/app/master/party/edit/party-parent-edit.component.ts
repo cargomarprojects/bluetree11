@@ -90,6 +90,7 @@ export class PartyParentEditComponent implements OnInit {
       this.mode = options.mode;
       this.type = options.type;
     }
+    this.gs.checkAppVersion();
     this.closeCaption = 'Return';
     this.initPage();
     this.actionHandler();

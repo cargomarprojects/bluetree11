@@ -97,7 +97,7 @@ export class ParamEditComponent implements OnInit {
       this.showHideControls();
       this.actionHandler();
     });
-
+    this.gs.checkAppVersion();
   }
 
   private initPage() {
