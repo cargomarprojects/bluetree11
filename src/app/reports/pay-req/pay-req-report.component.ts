@@ -98,6 +98,9 @@ export class PayReqReportComponent implements OnInit {
     modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
 
     this.sub = this.activatedroute.queryParams.subscribe(params => {
+
+      this.gs.checkAppVersion();
+      
       this.urlid = params.id;
       this.menuid = params.menuid;
       this.InitPage();

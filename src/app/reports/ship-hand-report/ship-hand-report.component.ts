@@ -79,6 +79,9 @@ export class ShipHandReportComponent implements OnInit {
   ) {
 
     this.sub = this.route.queryParams.subscribe(params => {
+
+      this.gs.checkAppVersion();
+      
       this.urlid = params.id;
       this.menuid = params.menuid;
       this.InitPage();
