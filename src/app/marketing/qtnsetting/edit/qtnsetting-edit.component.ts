@@ -32,6 +32,7 @@ export class QtnSettingEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     const options = JSON.parse(this.route.snapshot.queryParams.parameter);
     this.menuid = options.menuid;
     this.pkid = options.pkid;
@@ -43,7 +44,7 @@ export class QtnSettingEditComponent implements OnInit {
   }
 
   private initPage() {
-    this.gs.checkAppVersion();
+    
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
     this.LoadCombo();

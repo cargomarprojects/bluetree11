@@ -50,6 +50,7 @@ export class DefaultInvoiceComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.gs.checkAppVersion();
         this.mainService.init(this.route.snapshot.queryParams);
         this.initPage();
 
@@ -61,7 +62,7 @@ export class DefaultInvoiceComponent implements OnInit {
 
     }
     private initPage() {
-        this.gs.checkAppVersion();
+        
         this.foreign_amt_decplace = this.gs.foreign_amt_dec;
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
