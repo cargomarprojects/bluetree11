@@ -44,6 +44,7 @@ export class HousePageComponent implements OnInit {
   bl_backside: boolean = false;
   bl_colour: boolean = true;
   bl_format_for: string = 'AS AGENT';
+  bl_new_format: boolean = false;
 
   record: Tbl_cargo_exp_housem = <Tbl_cargo_exp_housem>{};
   records: Tbl_cargo_exp_desc[] = [];
@@ -970,6 +971,7 @@ export class HousePageComponent implements OnInit {
         this.report_searchdata.pkid = this.pkid;
         this.report_searchdata.format_type = 'BLANK';
         this.report_searchdata.bl_format_for = this.bl_format_for;
+        this.report_searchdata.bl_new_format = this.bl_new_format == true ? 'Y' : 'N';
         this.report_searchdata.bl_backside = this.bl_backside == true ? 'Y' : 'N';
         this.report_searchdata.bl_colour = this.bl_colour == true ? '2' : '0';
         this.report_searchdata.cntr_seal_hrzprint = this.cntr_seal_hrzprint == true ? 'Y' : 'N';
@@ -983,7 +985,7 @@ export class HousePageComponent implements OnInit {
         this.report_searchdata = this.gs.UserInfo;
         this.report_searchdata.pkid = this.pkid;
         this.report_searchdata.format_type = 'DRAFT';
-        this.report_searchdata.bl_format_for = this.bl_format_for;
+        this.report_searchdata.bl_format_for = this.bl_format_for;        
         this.report_searchdata.bl_backside = this.bl_backside == true ? 'Y' : 'N';
         this.report_searchdata.bl_colour = this.bl_colour == true ? '2' : '0';
         this.report_searchdata.cntr_seal_hrzprint = this.cntr_seal_hrzprint == true ? 'Y' : 'N';
