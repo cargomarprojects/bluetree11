@@ -33,6 +33,7 @@ export class DepositEditComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.gs.checkAppVersion();
         if (this.route.snapshot.queryParams.parameter == null) {
             this.msEdit.menuid = this.route.snapshot.queryParams.menuid;
             this.msEdit.pkid = this.route.snapshot.queryParams.pkid;

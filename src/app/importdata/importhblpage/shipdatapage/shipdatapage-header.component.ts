@@ -62,6 +62,7 @@ export class ShipDataPageHeaderComponent implements OnInit {
     }
 
     let prm = {
+      appid:this.gs.appid,
       menuid: this.gs.MENU_IMPORT_HBL_DATA_SEA,
       mbl_pkid: IDs,
       origin: 'shipdata-page'

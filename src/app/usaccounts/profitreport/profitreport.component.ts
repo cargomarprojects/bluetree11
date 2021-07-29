@@ -73,6 +73,7 @@ export class ProfitReportComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null)
       this.init(this.route.snapshot.queryParams);
     else
@@ -83,7 +84,7 @@ export class ProfitReportComponent implements OnInit {
 
   public init(params: any) {
 
-    this.gs.checkAppVersion();
+    
 
     const options = params;
     this.menuid = options.menuid;

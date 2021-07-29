@@ -54,7 +54,7 @@ export class FundTransferEditComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.gs.checkAppVersion();
         if (this.route.snapshot.queryParams.parameter == null) {
             this.menuid = this.route.snapshot.queryParams.menuid;
             this.pkid = this.route.snapshot.queryParams.pkid;
@@ -82,7 +82,7 @@ export class FundTransferEditComponent implements OnInit {
 
 
     private initPage() {
-        this.gs.checkAppVersion();
+        
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';

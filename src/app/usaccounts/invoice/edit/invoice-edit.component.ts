@@ -137,6 +137,7 @@ export class InvoiceEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.pkid = this.route.snapshot.queryParams.pkid;
@@ -168,7 +169,7 @@ export class InvoiceEditComponent implements OnInit {
 
 
   initpage() {
-    this.gs.checkAppVersion();
+     
     this.old_amt = 0;
     this.old_inv_date = '';
     this.showdeleted = false;
