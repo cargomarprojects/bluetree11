@@ -80,7 +80,7 @@ export class MawbPageComponent implements OnInit {
   }
 
   initPage() {
-
+    this.gs.checkAppVersion();
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.errorMessage = [];
