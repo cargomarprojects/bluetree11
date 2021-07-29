@@ -66,6 +66,9 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.route.queryParams.subscribe(params => {
+      
+      this.gs.checkAppVersion();
+
       this.appid = params.appid;      
       this.id = params.id;
       this.menuid = params.id;
@@ -75,7 +78,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
   }
 
   private initPage() {
-    this.gs.checkAppVersion();
+    
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
 
