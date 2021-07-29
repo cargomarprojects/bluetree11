@@ -43,6 +43,7 @@ export class BudgetComponent implements OnInit {
     }
 
     initPage() {
+        this.gs.checkAppVersion();
         this.records$ = this.mainservice.data$.pipe(map(res => res.records));
         this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errormessage));
     }
@@ -61,6 +62,7 @@ export class BudgetComponent implements OnInit {
             return;
         }
         let parameter = {
+            appid: this.gs.appid,
             menuid: this.mainservice.menuid,
             pkid: '',
             type: this.mainservice.param_type,
@@ -76,6 +78,7 @@ export class BudgetComponent implements OnInit {
             return;
         }
         let parameter = {
+            appid: this.gs.appid,
             menuid: this.mainservice.menuid,
             pkid: _record.bm_pkid,
             type: '',

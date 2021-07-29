@@ -77,6 +77,7 @@ export class PaymentEditComponent implements OnInit {
     replaceUrlMode(){
         this.ms.mode = "EDIT";
         let parameter = {
+            appid: this.gs.appid,
             menuid: this.ms.menuid,
             pkid: '',
             type: '',

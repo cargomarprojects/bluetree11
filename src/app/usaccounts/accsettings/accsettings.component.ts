@@ -34,12 +34,13 @@ constructor(
 ) { }
 
 ngOnInit() {
+  
   this.mainservice.init(this.route.snapshot.queryParams);
   this.initPage();
 }
 
 initPage() {
-  
+  this.gs.checkAppVersion();
   this.records$ = this.mainservice.data$.pipe(map(res => res.records));
   this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
   this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));    
@@ -62,6 +63,7 @@ NewRecord() {
   }
 
   let parameter = {
+    appid: this.gs.appid,
     menuid: this.mainservice.menuid,
     pkid: '',
     type: this.mainservice.param_type,
@@ -78,6 +80,7 @@ edit(_record: Tbl_acc_acctm) {
   }
 
   let parameter = {
+    appid: this.gs.appid,
     menuid: this.mainservice.menuid,
     pkid: _record.acc_pkid,
     type: '',

@@ -39,7 +39,7 @@ export class AcctmComponent implements OnInit {
   }
 
   initPage() {
-
+    this.gs.checkAppVersion();
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -62,6 +62,7 @@ export class AcctmComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       type: this.mainservice.param_type,
@@ -77,7 +78,9 @@ export class AcctmComponent implements OnInit {
       return;
     }
 
+
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.acc_pkid,
       type: '',

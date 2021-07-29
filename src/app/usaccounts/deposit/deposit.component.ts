@@ -75,6 +75,7 @@ export class DepositComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       type: this.mainservice.param_type,
@@ -91,6 +92,7 @@ export class DepositComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.pay_pkid,
       type: '',
