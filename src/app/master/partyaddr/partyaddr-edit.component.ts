@@ -43,7 +43,7 @@ export class PartyAddrEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.parentid = this.route.snapshot.queryParams.parentid;
@@ -64,7 +64,7 @@ export class PartyAddrEditComponent implements OnInit {
   }
 
   private initPage() {
-    this.gs.checkAppVersion();
+    
     this.title = 'Address Details';
     if (this.gs.BRANCH_REGION == "USA")
       this.checkAddress = "Use this address while printing check.";

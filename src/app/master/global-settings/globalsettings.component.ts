@@ -105,6 +105,7 @@ export class GlobalSettingsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     const options = this.route.snapshot.queryParams;
     this.menuid = options.menuid;
 
@@ -114,7 +115,7 @@ export class GlobalSettingsComponent implements OnInit {
   }
 
   private initPage() {
-    this.gs.checkAppVersion();
+    
     this.title = 'Global Settings';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';

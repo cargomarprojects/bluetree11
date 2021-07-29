@@ -66,6 +66,7 @@ export class EhblReqComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.gs.checkAppVersion();
         this.currentTab = 'LIST';
         if (this.route.snapshot.queryParams.parameter == null) {
             this.id = this.route.snapshot.queryParams.id;
@@ -86,7 +87,7 @@ export class EhblReqComponent implements OnInit {
     }
 
     private initPage() {
-        this.gs.checkAppVersion();
+        
         this.title = 'E-hbl Request';
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.canDelete = this.gs.canDelete(this.menuid);

@@ -78,6 +78,7 @@ export class PartyParentEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.pkid = this.route.snapshot.queryParams.pkid;
       this.menuid = this.route.snapshot.queryParams.menuid;
@@ -90,7 +91,7 @@ export class PartyParentEditComponent implements OnInit {
       this.mode = options.mode;
       this.type = options.type;
     }
-    this.gs.checkAppVersion();
+    
     this.closeCaption = 'Return';
     this.initPage();
     this.actionHandler();

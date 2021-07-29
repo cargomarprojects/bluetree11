@@ -43,6 +43,7 @@ export class PartyLoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.parentid = this.route.snapshot.queryParams.parentid;
@@ -63,7 +64,7 @@ export class PartyLoginComponent implements OnInit {
   }
 
   private initPage() {
-    this.gs.checkAppVersion();
+    
     this.title = 'Login Details';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
