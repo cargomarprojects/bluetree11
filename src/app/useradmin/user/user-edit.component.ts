@@ -45,6 +45,7 @@ export class UserEditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.gs.checkAppVersion();
         const options = this.route.snapshot.queryParams;
 
 
@@ -148,6 +149,7 @@ export class UserEditComponent implements OnInit {
                 else {
                     this.mode = 'EDIT';
                     let parameter = {
+                        appid:this.gs.appid,
                         menuid: this.mainService.menuid,
                         pkid: this.pkid ,
                         type: '',

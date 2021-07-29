@@ -42,6 +42,7 @@ export class ModulemEditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.gs.checkAppVersion();
         const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
 

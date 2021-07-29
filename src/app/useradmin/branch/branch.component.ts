@@ -35,6 +35,7 @@ export class BranchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
     
@@ -67,6 +68,7 @@ export class BranchComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       type: this.mainservice.param_type,
@@ -83,6 +85,7 @@ export class BranchComponent implements OnInit {
     }
 
     let parameter = {
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.comp_pkid ,
       type: '',

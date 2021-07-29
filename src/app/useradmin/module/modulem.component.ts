@@ -33,6 +33,7 @@ export class ModulemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.gs.checkAppVersion();
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
   }
@@ -61,6 +62,7 @@ export class ModulemComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       type: this.mainservice.param_type,
@@ -77,6 +79,7 @@ export class ModulemComponent implements OnInit {
     }
 
     let parameter = {
+      appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.module_pkid ,
       type: '',

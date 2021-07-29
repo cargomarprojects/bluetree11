@@ -55,7 +55,7 @@ export class RightsEditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
+        this.gs.checkAppVersion();
         const options = this.route.snapshot.queryParams;
 
         this.menuid = options.menuid;
