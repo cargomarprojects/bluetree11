@@ -3183,7 +3183,7 @@ export class GlobalService {
     }
     else  {
       
-      if ( _id == null )
+      if ( _id == undefined ||  _id == null ||  _id == '')
         alert('Page Expired, APPID not found');
       else
         alert('Page Expired');
