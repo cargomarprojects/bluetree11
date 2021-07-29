@@ -66,7 +66,7 @@ export class ShipDataPageHeaderComponent implements OnInit {
       mbl_pkid: IDs,
       origin: 'shipdata-page'
     };
-    this.gs.Naviagete('Silver.ImportData/MissingDataPage', JSON.stringify(prm));
+    this.gs.Naviagete2('Silver.ImportData/MissingDataPage',  prm);
   }
 
   DeleteRecord() {

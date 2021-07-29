@@ -76,7 +76,7 @@ export class QtnAirComponent implements OnInit {
       origin: 'qtnm-air-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/QuotationAirEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Quotation/QuotationAirEditPage',  parameter);
   }
   edit(_record: Tbl_Cargo_Qtnm) {
 
@@ -97,7 +97,7 @@ export class QtnAirComponent implements OnInit {
       origin: 'qtnm-air-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/QuotationAirEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Quotation/QuotationAirEditPage',  parameter);
 
   }
 
@@ -118,7 +118,7 @@ export class QtnAirComponent implements OnInit {
       origin: 'qtnm-air-page',
       mode: 'COPY'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/QuotationAirEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Quotation/QuotationAirEditPage',  parameter);
 
   }
   PrintQtn(_searchdata: any) {

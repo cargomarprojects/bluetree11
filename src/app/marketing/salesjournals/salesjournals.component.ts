@@ -67,7 +67,7 @@ export class SalesJournalsComponent implements OnInit {
       origin: 'salesjournals-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.Marketing.Master/SalesJournalsEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Master/SalesJournalsEditPage',  parameter);
 
   }
   edit(_record: Tbl_Cargo_Journals_Master) {
@@ -90,7 +90,7 @@ export class SalesJournalsComponent implements OnInit {
       origin: 'salesjournals-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Marketing.Master/SalesJournalsEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Master/SalesJournalsEditPage',  parameter);
   }
 
   Close() {
@@ -106,7 +106,7 @@ export class SalesJournalsComponent implements OnInit {
       title: 'Memo',
       origin: 'salesjournals-page'
     };
-    this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
+    this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
      
   }
 

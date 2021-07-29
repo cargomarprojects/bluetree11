@@ -67,7 +67,7 @@ export class FaxMessageComponent implements OnInit {
       origin: 'faxmessage-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/FaxMessageEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Quotation/FaxMessageEditPage',  parameter);
 
   }
   edit(_record: Tbl_Cargo_Message) {
@@ -89,7 +89,7 @@ export class FaxMessageComponent implements OnInit {
       origin: 'faxmessage-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/FaxMessageEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Quotation/FaxMessageEditPage',  parameter);
   }
 
   Close() {

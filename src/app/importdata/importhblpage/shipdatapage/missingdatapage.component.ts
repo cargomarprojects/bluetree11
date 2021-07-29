@@ -165,7 +165,7 @@ export class MissingDataPageComponent implements OnInit {
                 ms_from: _messagesender,
                 ms_name: _sDesc
             };
-            this.gs.Naviagete('Silver.Master/PartyEditPage', JSON.stringify(parameter));
+            this.gs.Naviagete2('Silver.Master/PartyEditPage',  parameter);
         }
         else
             alert("Insufficient Rights");
@@ -183,7 +183,7 @@ export class MissingDataPageComponent implements OnInit {
                 mode: 'ADD',
                 ms_name: _sDesc
             };
-            this.gs.Naviagete('Silver.Master/ParamPageDetEdit', JSON.stringify(parameter));
+            this.gs.Naviagete2('Silver.Master/ParamPageDetEdit', parameter);
         }
         else
             alert("Insufficient Rights");
@@ -201,7 +201,7 @@ export class MissingDataPageComponent implements OnInit {
                 mode: 'ADD',
                 ms_name: _sDesc
             };
-            this.gs.Naviagete('Silver.Master/ParamEdit', JSON.stringify(parameter));
+            this.gs.Naviagete2('Silver.Master/ParamEdit',  parameter);
         }
         else
             alert("Insufficient Rights");

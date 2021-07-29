@@ -67,7 +67,7 @@ export class QtnRateComponent implements OnInit {
       origin: 'qtnrate-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/QuotationRateEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Quotation/QuotationRateEditPage',  parameter);
 
   }
   edit(_record: Tbl_Cargo_Qtn_Rates) {
@@ -89,7 +89,7 @@ export class QtnRateComponent implements OnInit {
       origin: 'qtnrate-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/QuotationRateEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Quotation/QuotationRateEditPage',  parameter);
   }
 
   Close() {

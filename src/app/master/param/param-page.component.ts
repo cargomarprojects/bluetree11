@@ -146,7 +146,7 @@ export class ParamPageComponent implements OnInit, OnDestroy {
       origin: 'param-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.Master/ParamEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Master/ParamEdit',  parameter);
   }
 
 
@@ -165,7 +165,7 @@ export class ParamPageComponent implements OnInit, OnDestroy {
       origin: 'param-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Master/ParamEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Master/ParamEdit',  parameter);
   }
 
 

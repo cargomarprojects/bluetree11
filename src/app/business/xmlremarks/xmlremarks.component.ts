@@ -177,7 +177,7 @@ export class XmlRemarksComponent implements OnInit {
           title: "History [" + this.source + "]",
           origin: 'Xml-remark-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/LogBookPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/LogBookPage', prm);
         break;
       }
     }

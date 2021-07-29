@@ -65,6 +65,6 @@ export class QtnSettingComponent implements OnInit {
       origin: 'qtnsetting-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/QuotationSettingEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Quotation/QuotationSettingEditPage',  parameter);
   }
 }

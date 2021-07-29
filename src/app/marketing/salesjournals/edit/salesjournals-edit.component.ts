@@ -304,7 +304,7 @@ export class SalesJournalsEditComponent implements OnInit {
                     title: 'Memo',
                     origin: 'sales-journal-page'
                 };
-                this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
+                this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
                 break;
             }
             case 'FOLLOWUP': {
@@ -317,7 +317,7 @@ export class SalesJournalsEditComponent implements OnInit {
                     is_locked: false,
                     origin: 'sales-journal-page'
                 };
-                this.gs.Naviagete('Silver.BusinessModule/FollowUpPage', JSON.stringify(prm));
+                this.gs.Naviagete2('Silver.BusinessModule/FollowUpPage',  prm);
                 break;
             }
         }

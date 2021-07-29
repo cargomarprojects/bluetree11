@@ -76,7 +76,7 @@ export class QtnLclComponent implements OnInit {
       origin: 'qtnm-lcl-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/QuotationLclEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Quotation/QuotationLclEditPage',  parameter);
   }
   edit(_record: Tbl_Cargo_Qtnm) {
 
@@ -97,7 +97,7 @@ export class QtnLclComponent implements OnInit {
       origin: 'qtnm-lcl-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/QuotationLclEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Quotation/QuotationLclEditPage',  parameter);
 
   }
 
@@ -118,7 +118,7 @@ export class QtnLclComponent implements OnInit {
       origin: 'qtnm-lcl-page',
       mode: 'COPY'
     };
-    this.gs.Naviagete('Silver.Marketing.Quotation/QuotationLclEditPage', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Marketing.Quotation/QuotationLclEditPage',  parameter);
   }
 
 

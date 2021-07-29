@@ -66,6 +66,6 @@ export class SettingPageComponent implements OnInit {
             param_type: '',
             origin: 'setting-page',
           };
-          this.gs.Naviagete('Silver.ImportData/ShipDataPage', JSON.stringify(prm)); 
+          this.gs.Naviagete2('Silver.ImportData/ShipDataPage',  prm); 
     }
 }

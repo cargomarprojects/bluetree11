@@ -138,7 +138,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
       origin: 'param-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete('Silver.Master/ParamPageDetEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Master/ParamPageDetEdit',  parameter);
 
   }
   edit(_record: TBL_MAST_PARAM) {
@@ -157,7 +157,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
       origin: 'param-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete('Silver.Master/ParamPageDetEdit', JSON.stringify(parameter));
+    this.gs.Naviagete2('Silver.Master/ParamPageDetEdit',  parameter);
   }
 
   getRouteDet(_type: string, _mode: string, _record: TBL_MAST_PARAM = null) {

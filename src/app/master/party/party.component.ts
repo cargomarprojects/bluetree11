@@ -81,9 +81,9 @@ export class PartyComponent implements OnInit {
     };
 
     if (this.mainservice.param_type === "PARTYS")
-      this.gs.Naviagete('Silver.Master/PartyEditPage', JSON.stringify(parameter));
+      this.gs.Naviagete2('Silver.Master/PartyEditPage',  parameter);
     else
-      this.gs.Naviagete('Silver.Master/PartyParentEditPage', JSON.stringify(parameter));
+      this.gs.Naviagete2('Silver.Master/PartyParentEditPage',  parameter);
   }
   edit(_record: Tbl_Mast_Partym) {
     if (!this.mainservice.canEdit) {
@@ -101,9 +101,9 @@ export class PartyComponent implements OnInit {
     };
 
     if (this.mainservice.param_type === "PARTYS")
-      this.gs.Naviagete('Silver.Master/PartyEditPage', JSON.stringify(parameter));
+      this.gs.Naviagete2('Silver.Master/PartyEditPage', parameter);
     else
-      this.gs.Naviagete('Silver.Master/PartyParentEditPage', JSON.stringify(parameter));
+      this.gs.Naviagete2('Silver.Master/PartyParentEditPage',  parameter);
   }
 
   Close() {

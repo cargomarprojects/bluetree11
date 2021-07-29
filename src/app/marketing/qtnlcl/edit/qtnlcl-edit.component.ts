@@ -489,7 +489,7 @@ export class QtnLclEditComponent implements OnInit {
                     title: "History [Quote# : " + this.record.qtnm_no + "]",
                     origin: 'qtn-lcl-page'
                 };
-                this.gs.Naviagete('Silver.BusinessModule/LogBookPage', JSON.stringify(prm));
+                this.gs.Naviagete2('Silver.BusinessModule/LogBookPage',  prm);
                 break;
             }
             case 'PRINT': {

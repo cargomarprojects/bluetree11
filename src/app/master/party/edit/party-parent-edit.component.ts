@@ -544,7 +544,7 @@ export class PartyParentEditComponent implements OnInit {
           mbl_type: 'AI',
           origin: 'airimp-master-page',
         };
-        this.gs.Naviagete('Silver.USAccounts.Trans/InvoicePage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.USAccounts.Trans/InvoicePage',  prm);
         break;
       }
       case 'PROFITREPORT': {
@@ -556,7 +556,7 @@ export class PartyParentEditComponent implements OnInit {
           mbl_type: 'AI',
           origin: 'airimp-master-page',
         };
-        this.gs.Naviagete('Silver.USAccounts.Trans/ProfitReportPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.USAccounts.Trans/ProfitReportPage',  prm);
         break;
       }
       case 'ATTACHMENT': {
@@ -586,7 +586,7 @@ export class PartyParentEditComponent implements OnInit {
           title: 'Memo',
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
         break;
       }
       case 'SOP-MEMO': {
@@ -598,7 +598,7 @@ export class PartyParentEditComponent implements OnInit {
           title: 'SOP Memo',
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
         break;
       }
       case 'QUOTN-MEMO': {
@@ -610,7 +610,7 @@ export class PartyParentEditComponent implements OnInit {
           title: 'Quotation Memo',
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
         break;
       }
       case 'ACC-ALERT': {
@@ -622,7 +622,7 @@ export class PartyParentEditComponent implements OnInit {
           title: 'Accounting Alert',
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
         break;
       }
       case 'DELIVERY-ADDRESS': {
@@ -632,7 +632,7 @@ export class PartyParentEditComponent implements OnInit {
           pkid: this.pkid,
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.Master/DeliveryAddrPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Master/DeliveryAddrPage',  prm);
         break;
       }
       case 'PARTY-LOGIN': {
@@ -644,7 +644,7 @@ export class PartyParentEditComponent implements OnInit {
           party_name: this.record.gen_name,
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.Master/PartyLoginPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Master/PartyLoginPage',  prm);
         break;
       }
       case 'PARTY-ADDRESS': {
@@ -655,7 +655,7 @@ export class PartyParentEditComponent implements OnInit {
           party_name: this.record.gen_short_name,
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.Master/PartyAddrPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Master/PartyAddrPage',  prm);
         break;
       }
       case 'BANK-INFO': {
@@ -671,7 +671,7 @@ export class PartyParentEditComponent implements OnInit {
           party_addr3: this.record.gen_address3,
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.Master/BankInfoPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Master/BankInfoPage',  prm);
         break;
       }
     }

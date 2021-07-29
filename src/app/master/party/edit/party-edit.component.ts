@@ -806,7 +806,7 @@ export class PartyEditComponent implements OnInit {
           title: 'Memo',
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
         break;
       }
       case 'SOP-MEMO': {
@@ -818,7 +818,7 @@ export class PartyEditComponent implements OnInit {
           title: 'SOP Memo',
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
         break;
       }
       case 'QUOTN-MEMO': {
@@ -830,7 +830,7 @@ export class PartyEditComponent implements OnInit {
           title: 'Quotation Memo',
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
         break;
       }
       case 'ACC-ALERT': {
@@ -842,7 +842,7 @@ export class PartyEditComponent implements OnInit {
           title: 'Accounting Alert',
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.BusinessModule/XmlRemarksPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
         break;
       }
       case 'DELIVERY-ADDRESS': {
@@ -852,7 +852,7 @@ export class PartyEditComponent implements OnInit {
           pkid: this.pkid,
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.Master/DeliveryAddrPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Master/DeliveryAddrPage',  prm);
         break;
       }
       case 'PARTY-LOGIN': {
@@ -864,7 +864,7 @@ export class PartyEditComponent implements OnInit {
           party_name: this.record.gen_name,
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.Master/PartyLoginPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Master/PartyLoginPage',  prm);
         break;
       }
       case 'PARTY-ADDRESS': {
@@ -875,7 +875,7 @@ export class PartyEditComponent implements OnInit {
           party_name: this.record.gen_short_name,
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.Master/PartyAddrPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Master/PartyAddrPage',  prm);
         break;
       }
       case 'BANK-INFO': {
@@ -891,7 +891,7 @@ export class PartyEditComponent implements OnInit {
           party_addr3: this.record.gen_address3,
           origin: 'party-page'
         };
-        this.gs.Naviagete('Silver.Master/BankInfoPage', JSON.stringify(prm));
+        this.gs.Naviagete2('Silver.Master/BankInfoPage',  prm);
         break;
       }
     }
