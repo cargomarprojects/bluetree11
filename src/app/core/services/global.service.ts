@@ -3188,7 +3188,10 @@ export class GlobalService {
       else
         alert('Page Expired');
 
-      this.router.navigate(['login']);
+        setTimeout( () =>{
+          this.router.navigate(['/login']);
+        });
+
       return false;
     }
   }
