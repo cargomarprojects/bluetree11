@@ -272,8 +272,8 @@
                                         <th width='12%'>DESCRIPTION</th>
                                         <th width='15%'>REMARKS</th>
                                         <th width='10%'>A/C</th>
-                                        <th width='5%'>QTY</th>
                                         <th width='5%'>RATE</th>
+                                        <th width='5%'>QTY</th>
                                         <th width='8%'>AMOUNT</th>
 
                                         <th width='8%' *ngIf="show_currency">CURRENCY</th>
@@ -317,14 +317,14 @@
 
                                         </td>
                                         <td class="p-0">
-                                            <input #_invd_qty class="form-control form-control-sm" type="number"
-                                                style="text-align:right;" [(ngModel)]="rec.invd_qty"
-                                                (blur)="onBlur('invd_qty',rec)" />
-                                        </td>
-                                        <td class="p-0">
                                             <input class="form-control form-control-sm" type="number"
                                                 style="text-align:right;" [(ngModel)]="rec.invd_rate"
                                                 (blur)="onBlur('invd_rate',rec)" />
+                                        </td>                                        
+                                        <td class="p-0">
+                                            <input #_invd_qty class="form-control form-control-sm" type="number"
+                                                style="text-align:right;" [(ngModel)]="rec.invd_qty"
+                                                (blur)="onBlur('invd_qty',rec)" />
                                         </td>
                                         <td class="p-0">
                                             <input disabled class="form-control form-control-sm" type="number"
