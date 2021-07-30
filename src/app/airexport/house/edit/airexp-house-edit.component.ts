@@ -464,7 +464,7 @@ export class AirExpHouseEditComponent implements OnInit {
       .subscribe(response => {
 
         this.record = <Tbl_cargo_exp_housem>response.record;
-        this.records = <Tbl_cargo_exp_desc[]>response.records;
+        this.records =  (response.records == undefined || response.records == null) ? <Tbl_cargo_exp_desc[]>[]: <Tbl_cargo_exp_desc[]>response.records;
         this.is_locked = this.gs.IsShipmentClosed("AIR EXPORT", this.record.mbl_ref_date, this.record.mbl_lock, this.record.mbl_unlock_date);
         this.InitDesc();
         if (this.records != null) {

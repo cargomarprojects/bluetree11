@@ -217,7 +217,7 @@ export class AirImpMasterEditComponent implements OnInit {
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
         this.record = <Tbl_cargo_imp_masterm>response.record;
-        this.hrecords = <Tbl_cargo_imp_housem[]>response.hrecords;
+        this.hrecords = (response.hrecords == undefined || response.hrecords == null) ? <Tbl_cargo_imp_housem[]>[]:<Tbl_cargo_imp_housem[]>response.hrecords;
         this.mode = 'EDIT';
         this.is_locked = this.gs.IsShipmentClosed("AIR IMPORT", this.record.mbl_ref_date, this.record.mbl_lock, this.record.mbl_unlock_date);
         // this.CheckData();
