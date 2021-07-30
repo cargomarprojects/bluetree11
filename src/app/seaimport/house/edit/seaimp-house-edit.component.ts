@@ -618,7 +618,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           this.location.replaceState('Silver.SeaImport/SeaImpHouseEditPage', this.gs.getUrlParameter(parameter));
 
           if (this.origin === "seaimp-house-page")
-          this.mainService.RefreshList(this.record);
+            this.mainService.RefreshList(this.record);
 
           this.errorMessage.push('Save Complete');
           // alert(this.errorMessage);
@@ -803,19 +803,20 @@ export class SeaImpHouseEditComponent implements OnInit {
 
 
     //decimal iWt = 0;
-    this.cntrrecords.forEach(Rec => {
+    if (!this.gs.isBlank(this.cntrrecords)) {
+      this.cntrrecords.forEach(Rec => {
 
-      if (Rec.cntr_no.toString().trim().length < 11) {
-        this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) Invalid ");
-        bRet = false;
-      }
-      if (Rec.cntr_type.toString().trim().length <= 0) {
-        this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) container type has to be select");
-        bRet = false;
-      }
+        if (Rec.cntr_no.toString().trim().length < 11) {
+          this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) Invalid ");
+          bRet = false;
+        }
+        if (Rec.cntr_type.toString().trim().length <= 0) {
+          this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) container type has to be select");
+          bRet = false;
+        }
 
-    })
-
+      })
+    }
     if (this.gs.isBlank(this.record.hbl_handled_id)) {
       this.errorMessage.push("Handled By cannot be blank");
       bRet = false;
@@ -1659,7 +1660,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           origin: 'seaimp-house-page',
           is_locked: this.is_locked
         };
-    }else if (action == "CARGOPICKUP") {
+    } else if (action == "CARGOPICKUP") {
       if (_type == "L")
         return '/Silver.SeaImport/CargoPickupPage';
       if (_type == 'P')
@@ -1672,7 +1673,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           invokefrom: 'SI-HOUSE',
           is_locked: this.is_locked
         };
-    }else if (action == "RIDERPAGE") {
+    } else if (action == "RIDERPAGE") {
       if (_type == "L")
         return '/Silver.SeaImport/RiderPage';
       if (_type == 'P')
@@ -1686,7 +1687,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           origin: 'seaimp-house-page',
           canPrint: false
         };
-    }else if (action == "SHIPMOVEMENT") {
+    } else if (action == "SHIPMOVEMENT") {
       if (_type == "L")
         return '/Silver.Other.Trans/TrackingPage';
       if (_type == 'P')
@@ -1704,7 +1705,7 @@ export class SeaImpHouseEditComponent implements OnInit {
           invokefrom: this.invokefrom,
           is_locked: this.is_locked
         };
-    }else if (action == "HOUSE-DEVAN") {
+    } else if (action == "HOUSE-DEVAN") {
       if (_type == "L")
         return '/Silver.BusinessModule/XmlRemarksPage';
       if (_type == 'P')

@@ -484,7 +484,7 @@ export class OthGeneralEditComponent implements OnInit {
     }
 
     let cntrList: string = "";
-    if (this.records != null) {
+    if (!this.gs.isBlank(this.records)) {
       this.records.forEach(Rec => {
         if (cntrList.indexOf(Rec.cntr_no.trim()) < 0)
           cntrList += Rec.cntr_no.trim() + ",";

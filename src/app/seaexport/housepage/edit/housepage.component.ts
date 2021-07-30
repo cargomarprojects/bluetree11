@@ -296,8 +296,8 @@ export class HousePageComponent implements OnInit {
         this.cntrs = <Tbl_cargo_exp_container[]>response.cntrs;
         this.records = <Tbl_cargo_exp_desc[]>response.records;
 
-        
-        
+
+
         if (this.cntrs == null)
           this.cntrs = <Tbl_cargo_exp_container[]>[];
         if (this.records == null)
@@ -326,11 +326,11 @@ export class HousePageComponent implements OnInit {
         //   this.hbl_shipper_code_ctrl.Focus();
         if (!this.gs.isBlank(this.btnret_ctrl))
           this.btnret_ctrl.nativeElement.focus();
-        
+
 
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
-        
+
       });
   }
 
@@ -657,18 +657,18 @@ export class HousePageComponent implements OnInit {
       this.errorMessage.push("Unit of packages cannot be blank");
       bret = false;
     }
-
-    this.cntrs.forEach(Rec => {
-      if (Rec.cntr_no.toString().trim().length < 11) {
-        this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) Invalid ");
-        bret = false;
-      }
-      if (Rec.cntr_type.toString().trim().length <= 0) {
-        this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) container type has to be select");
-        bret = false;
-      }
-    })
-
+    if ( !this.gs.isBlank(this.cntrs)) {
+      this.cntrs.forEach(Rec => {
+        if (Rec.cntr_no.toString().trim().length < 11) {
+          this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) Invalid ");
+          bret = false;
+        }
+        if (Rec.cntr_type.toString().trim().length <= 0) {
+          this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) container type has to be select");
+          bret = false;
+        }
+      })
+    }
 
     if (!bret)
       alert('Error While Saving');
@@ -736,7 +736,7 @@ export class HousePageComponent implements OnInit {
 
         if (this.origin === "seaexp-house-page")
           this.mainService.RefreshList(this.record);
-          
+
         this.errorMessage.push('Save Complete');
         // alert(this.errorMessage);
       }
@@ -985,7 +985,7 @@ export class HousePageComponent implements OnInit {
         this.report_searchdata = this.gs.UserInfo;
         this.report_searchdata.pkid = this.pkid;
         this.report_searchdata.format_type = 'DRAFT';
-        this.report_searchdata.bl_format_for = this.bl_format_for;        
+        this.report_searchdata.bl_format_for = this.bl_format_for;
         this.report_searchdata.bl_backside = this.bl_backside == true ? 'Y' : 'N';
         this.report_searchdata.bl_colour = this.bl_colour == true ? '2' : '0';
         this.report_searchdata.cntr_seal_hrzprint = this.cntr_seal_hrzprint == true ? 'Y' : 'N';

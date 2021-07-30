@@ -514,17 +514,19 @@ export class SeaexpMasterEditComponent implements OnInit {
 
     if (this.record.mbl_cntr_type != "OTHERS") {
 
-      this.records.forEach(Rec => {
+      if (!this.gs.isBlank(this.records)) {
+        this.records.forEach(Rec => {
 
-        if (Rec.cntr_no.length != 11) {
-          bRet = false;
-          this.errorMessage.push("cntr No cannot be Blank");
-        }
-        if (Rec.cntr_type.length <= 0) {
-          bRet = false;
-          this.errorMessage.push("Container( " + Rec.cntr_no + " ) Type Has to be selected");
-        }
-      })
+          if (Rec.cntr_no.length != 11) {
+            bRet = false;
+            this.errorMessage.push("cntr No cannot be Blank");
+          }
+          if (Rec.cntr_type.length <= 0) {
+            bRet = false;
+            this.errorMessage.push("Container( " + Rec.cntr_no + " ) Type Has to be selected");
+          }
+        })
+      }
     }
 
     if (!bRet)
@@ -754,7 +756,7 @@ export class SeaexpMasterEditComponent implements OnInit {
     if (action == "ARAP") {
       if (_type == "L")
         return '/Silver.USAccounts.Trans/InvoicePage';
-      if (_type == 'P') 
+      if (_type == 'P')
         return { appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER_ARAP, mbl_pkid: this.pkid, mbl_refno: this.record.mbl_refno, mbl_type: 'OE', origin: 'seaexp-master-page' };
     } else if (action == "BOOKING") {
       if (_type == "L")
@@ -767,46 +769,46 @@ export class SeaexpMasterEditComponent implements OnInit {
         return '/Silver.SeaExport.Trans/MBLPage';
       if (_type == 'P')
         return { appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER_MBL_INSTRUCTION, pkid: this.pkid, origin: 'seaexp-master-page', is_locked: this.is_locked };
-    }else if (action == "DOCKPAGE") {
+    } else if (action == "DOCKPAGE") {
       if (_type == "L")
         return '/Silver.SeaExport.Trans/DockPage';
       if (_type == 'P')
-        return { appid: this.gs.appid,menuid: this.gs.MENU_SE_MASTER_DOCK_RECEIPT,pkid: this.pkid,origin: 'seaexp-master-page',is_locked: this.is_locked };
-    }else if (action == "PROFITREPORT") {
+        return { appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER_DOCK_RECEIPT, pkid: this.pkid, origin: 'seaexp-master-page', is_locked: this.is_locked };
+    } else if (action == "PROFITREPORT") {
       if (_type == "L")
         return '/Silver.USAccounts.Trans/ProfitReportPage';
       if (_type == 'P')
-        return {appid: this.gs.appid,menuid: this.gs.MENU_SE_MASTER_PROFIT_REPORT,mbl_pkid: this.pkid,mbl_refno: this.record.mbl_refno,mbl_type: 'OE',origin: 'seaexp-master-page'};
-    }else if (action == "PAYMENT-REQUEST") {
+        return { appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER_PROFIT_REPORT, mbl_pkid: this.pkid, mbl_refno: this.record.mbl_refno, mbl_type: 'OE', origin: 'seaexp-master-page' };
+    } else if (action == "PAYMENT-REQUEST") {
       if (_type == "L")
         return '/Silver.BusinessModule/PaymentRequestPage';
       if (_type == 'P')
-        return {appid: this.gs.appid,menuid: this.gs.MENU_SE_PAYMENT_REQUEST,cp_master_id: this.pkid,cp_source: 'SEA-MASTER',cp_mode: 'SEA EXPORT',cp_ref_no: this.record.mbl_refno,origin: 'seaexp-master-page',is_locked: this.is_locked};
-    }else if (action == "MESSENGER-SLIP") {
+        return { appid: this.gs.appid, menuid: this.gs.MENU_SE_PAYMENT_REQUEST, cp_master_id: this.pkid, cp_source: 'SEA-MASTER', cp_mode: 'SEA EXPORT', cp_ref_no: this.record.mbl_refno, origin: 'seaexp-master-page', is_locked: this.is_locked };
+    } else if (action == "MESSENGER-SLIP") {
       if (_type == "L")
         return '/Silver.Other.Trans/MessengerSlipList';
       if (_type == 'P')
-        return {appid: this.gs.appid,menuid: this.gs.MENU_SE_MESSENGER_SLIP,mbl_pkid: this.pkid, mbl_mode: 'SEA EXPORT',mbl_refno: this.record.mbl_refno,origin: 'seaexp-master-page',is_locked: this.is_locked};
-    }else if (action == "FOLLOWUP") {
+        return { appid: this.gs.appid, menuid: this.gs.MENU_SE_MESSENGER_SLIP, mbl_pkid: this.pkid, mbl_mode: 'SEA EXPORT', mbl_refno: this.record.mbl_refno, origin: 'seaexp-master-page', is_locked: this.is_locked };
+    } else if (action == "FOLLOWUP") {
       if (_type == "L")
         return '/Silver.BusinessModule/FollowUpPage';
       if (_type == 'P')
-        return {appid: this.gs.appid,menuid: this.gs.MENU_SE_MASTER,master_id: this.pkid,master_refno: this.record.mbl_refno,master_refdate: this.record.mbl_ref_date,origin: 'seaexp-master-page',is_locked: this.is_locked};
-    }else if (action == "REQUEST-APPROVAL") {
+        return { appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER, master_id: this.pkid, master_refno: this.record.mbl_refno, master_refdate: this.record.mbl_ref_date, origin: 'seaexp-master-page', is_locked: this.is_locked };
+    } else if (action == "REQUEST-APPROVAL") {
       if (_type == "L")
         return '/Silver.Other.Trans/ApprovedPageList';
       if (_type == 'P')
-        return {appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER_REQUEST_APPROVAL, mbl_pkid: this.pkid, mbl_refno: this.record.mbl_refno,doc_type: 'SEA EXPORT', req_type: 'REQUEST',is_locked: this.is_locked,origin: 'seaexp-master-page'};
-    }else if (action == "INERNALMEMO") {
+        return { appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER_REQUEST_APPROVAL, mbl_pkid: this.pkid, mbl_refno: this.record.mbl_refno, doc_type: 'SEA EXPORT', req_type: 'REQUEST', is_locked: this.is_locked, origin: 'seaexp-master-page' };
+    } else if (action == "INERNALMEMO") {
       if (_type == "L")
         return '/Silver.Other.Trans/TrackingPage';
       if (_type == 'P')
-        return {appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER_INTERNAL_MEMO,refno: "REF : " + this.record.mbl_refno, pkid: this.pkid, origin: 'seaexp-master-page',oprgrp: 'SEA EXPORT', parentType: 'SEAEXP-CNTR',paramType: 'CNTR-MOVE-STATUS',hideTracking: 'Y', is_locked: this.is_locked};
-    }else if (action == "CERTIFICATE-ORIGIN") {
+        return { appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER_INTERNAL_MEMO, refno: "REF : " + this.record.mbl_refno, pkid: this.pkid, origin: 'seaexp-master-page', oprgrp: 'SEA EXPORT', parentType: 'SEAEXP-CNTR', paramType: 'CNTR-MOVE-STATUS', hideTracking: 'Y', is_locked: this.is_locked };
+    } else if (action == "CERTIFICATE-ORIGIN") {
       if (_type == "L")
         return '/Silver.SeaExport.Trans/CertOriginPage';
       if (_type == 'P')
-        return {appid: this.gs.appid,menuid: this.gs.MENU_SE_MASTER_CERTIFICATE_ORIGIN,pkid: this.pkid,origin: 'seaexp-master-page', is_locked: this.is_locked};
+        return { appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER_CERTIFICATE_ORIGIN, pkid: this.pkid, origin: 'seaexp-master-page', is_locked: this.is_locked };
     }
 
 
@@ -846,7 +848,7 @@ export class SeaexpMasterEditComponent implements OnInit {
 
       case 'MBLPAGE': {
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: this.gs.MENU_SE_MASTER_MBL_INSTRUCTION,
           pkid: this.pkid,
           origin: 'seaexp-master-page',
