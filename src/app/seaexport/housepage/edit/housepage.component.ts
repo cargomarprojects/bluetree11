@@ -263,7 +263,7 @@ export class HousePageComponent implements OnInit {
         this.record.mbl_cntr_type = this.ShipmentType;
         this.is_locked = this.gs.IsShipmentClosed("SEA EXPORT", rec.mbl_ref_date, rec.mbl_lock, rec.mbl_unlock_date);
 
-        this.cntrs = <Tbl_cargo_exp_container[]>response.cntrs;
+        this.cntrs = (response.cntrs == undefined || response.cntrs == null) ? <Tbl_cargo_exp_container[]>[]:  <Tbl_cargo_exp_container[]>response.cntrs;
 
         this.cntrs.forEach(rec => {
           rec.cntr_pkid = this.gs.getGuid();
@@ -293,15 +293,9 @@ export class HousePageComponent implements OnInit {
       .subscribe(response => {
 
         this.record = <Tbl_cargo_exp_housem>response.record;
-        this.cntrs = <Tbl_cargo_exp_container[]>response.cntrs;
-        this.records = <Tbl_cargo_exp_desc[]>response.records;
-
-
-
-        if (this.cntrs == null)
-          this.cntrs = <Tbl_cargo_exp_container[]>[];
-        if (this.records == null)
-          this.records = <Tbl_cargo_exp_desc[]>[];
+        this.cntrs = (response.cntrs == undefined || response.cntrs == null) ? <Tbl_cargo_exp_container[]>[]: <Tbl_cargo_exp_container[]>response.cntrs;
+        this.records = (response.records == undefined || response.records == null) ? <Tbl_cargo_exp_desc[]>[]: <Tbl_cargo_exp_desc[]>response.records;
+       
 
         this.ShipmentType = this.record.mbl_cntr_type;
 
@@ -657,7 +651,7 @@ export class HousePageComponent implements OnInit {
       this.errorMessage.push("Unit of packages cannot be blank");
       bret = false;
     }
-    if ( !this.gs.isBlank(this.cntrs)) {
+    if (!this.gs.isBlank(this.cntrs)) {
       this.cntrs.forEach(Rec => {
         if (Rec.cntr_no.toString().trim().length < 11) {
           this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) Invalid ");
