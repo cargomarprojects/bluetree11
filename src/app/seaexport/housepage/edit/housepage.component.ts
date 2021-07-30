@@ -263,7 +263,7 @@ export class HousePageComponent implements OnInit {
         this.record.mbl_cntr_type = this.ShipmentType;
         this.is_locked = this.gs.IsShipmentClosed("SEA EXPORT", rec.mbl_ref_date, rec.mbl_lock, rec.mbl_unlock_date);
 
-        this.cntrs = <Tbl_cargo_exp_container[]>response.cntrs;
+        this.cntrs = (response.cntrs == undefined || response.cntrs == null) ? <Tbl_cargo_exp_container[]>[]:  <Tbl_cargo_exp_container[]>response.cntrs;
 
         this.cntrs.forEach(rec => {
           rec.cntr_pkid = this.gs.getGuid();
@@ -293,15 +293,9 @@ export class HousePageComponent implements OnInit {
       .subscribe(response => {
 
         this.record = <Tbl_cargo_exp_housem>response.record;
-        this.cntrs = <Tbl_cargo_exp_container[]>response.cntrs;
-        this.records = <Tbl_cargo_exp_desc[]>response.records;
-
-        
-        
-        if (this.cntrs == null)
-          this.cntrs = <Tbl_cargo_exp_container[]>[];
-        if (this.records == null)
-          this.records = <Tbl_cargo_exp_desc[]>[];
+        this.cntrs = (response.cntrs == undefined || response.cntrs == null) ? <Tbl_cargo_exp_container[]>[]: <Tbl_cargo_exp_container[]>response.cntrs;
+        this.records = (response.records == undefined || response.records == null) ? <Tbl_cargo_exp_desc[]>[]: <Tbl_cargo_exp_desc[]>response.records;
+       
 
         this.ShipmentType = this.record.mbl_cntr_type;
 
@@ -326,11 +320,11 @@ export class HousePageComponent implements OnInit {
         //   this.hbl_shipper_code_ctrl.Focus();
         if (!this.gs.isBlank(this.btnret_ctrl))
           this.btnret_ctrl.nativeElement.focus();
-        
+
 
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
-        
+
       });
   }
 
@@ -657,18 +651,18 @@ export class HousePageComponent implements OnInit {
       this.errorMessage.push("Unit of packages cannot be blank");
       bret = false;
     }
-
-    this.cntrs.forEach(Rec => {
-      if (Rec.cntr_no.toString().trim().length < 11) {
-        this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) Invalid ");
-        bret = false;
-      }
-      if (Rec.cntr_type.toString().trim().length <= 0) {
-        this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) container type has to be select");
-        bret = false;
-      }
-    })
-
+    if (!this.gs.isBlank(this.cntrs)) {
+      this.cntrs.forEach(Rec => {
+        if (Rec.cntr_no.toString().trim().length < 11) {
+          this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) Invalid ");
+          bret = false;
+        }
+        if (Rec.cntr_type.toString().trim().length <= 0) {
+          this.errorMessage.push("Container( " + Rec.cntr_no.toString() + " ) container type has to be select");
+          bret = false;
+        }
+      })
+    }
 
     if (!bret)
       alert('Error While Saving');
@@ -736,7 +730,7 @@ export class HousePageComponent implements OnInit {
 
         if (this.origin === "seaexp-house-page")
           this.mainService.RefreshList(this.record);
-          
+
         this.errorMessage.push('Save Complete');
         // alert(this.errorMessage);
       }
@@ -985,7 +979,7 @@ export class HousePageComponent implements OnInit {
         this.report_searchdata = this.gs.UserInfo;
         this.report_searchdata.pkid = this.pkid;
         this.report_searchdata.format_type = 'DRAFT';
-        this.report_searchdata.bl_format_for = this.bl_format_for;        
+        this.report_searchdata.bl_format_for = this.bl_format_for;
         this.report_searchdata.bl_backside = this.bl_backside == true ? 'Y' : 'N';
         this.report_searchdata.bl_colour = this.bl_colour == true ? '2' : '0';
         this.report_searchdata.cntr_seal_hrzprint = this.cntr_seal_hrzprint == true ? 'Y' : 'N';

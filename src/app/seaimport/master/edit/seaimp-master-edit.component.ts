@@ -478,22 +478,24 @@ export class SeaImpMasterEditComponent implements OnInit {
     }
 
     if (this.record.mbl_cntr_type != "OTHERS") {
-      this.records.forEach(Rec => {
-        if (Rec.cntr_no.length != 11) {
-          bRet = false;
-          this.errorMessage.push("Container( " + Rec.cntr_no + " ) Invalid");
-        }
-        if (Rec.cntr_type.length <= 0) {
-          bRet = false;
-          this.errorMessage.push("Container( " + Rec.cntr_no + " ) type has to be selected");
-        }
-        if (Rec.cntr_type == "LCL") {
-          if (Rec.cntr_cbm <= 0) {
+      if (!this.gs.isBlank(this.records)) {
+        this.records.forEach(Rec => {
+          if (Rec.cntr_no.length != 11) {
             bRet = false;
-            this.errorMessage.push("Container( " + Rec.cntr_no + " ) CBM cannot be zero");
+            this.errorMessage.push("Container( " + Rec.cntr_no + " ) Invalid");
           }
-        }
-      })
+          if (Rec.cntr_type.length <= 0) {
+            bRet = false;
+            this.errorMessage.push("Container( " + Rec.cntr_no + " ) type has to be selected");
+          }
+          if (Rec.cntr_type == "LCL") {
+            if (Rec.cntr_cbm <= 0) {
+              bRet = false;
+              this.errorMessage.push("Container( " + Rec.cntr_no + " ) CBM cannot be zero");
+            }
+          }
+        })
+      }
     }
     if (!bRet)
       alert('Error While Saving');
@@ -1135,7 +1137,7 @@ export class SeaImpMasterEditComponent implements OnInit {
 
     if (!this.gs.isBlank(_rec.cntr_pkid)) {
       let prm = {
-        appid:this.gs.appid,
+        appid: this.gs.appid,
         menuid: this.gs.MENU_SI_CONTAINER_MOVEMENT,
         refno: "REF : " + this.record.mbl_refno + "  CNTR : " + _rec.cntr_no,
         pkid: _rec.cntr_pkid,
@@ -1146,7 +1148,7 @@ export class SeaImpMasterEditComponent implements OnInit {
         hideTracking: 'N',
         is_locked: this.is_locked
       };
-      this.gs.Naviagete2('Silver.Other.Trans/TrackingPage',  prm);
+      this.gs.Naviagete2('Silver.Other.Trans/TrackingPage', prm);
     }
   }
   RemoveRow(_rec: Tbl_cargo_imp_container) {
