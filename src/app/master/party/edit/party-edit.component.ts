@@ -211,8 +211,8 @@ export class PartyEditComponent implements OnInit {
     this.record.gen_is_contractor = 'N';
     this.record.gen_is_ctpat = 'N';
     this.record.gen_days = '';
-    this.record.gen_nomination = '';
-    this.record.gen_priority = '';
+    this.record.gen_nomination = 'N/A';
+    this.record.gen_priority = '0';
     this.record.gen_brokers = '';
     this.record.gen_poa_customs_yn = 'N';
     this.record.gen_poa_isf_yn = 'N';
@@ -234,7 +234,7 @@ export class PartyEditComponent implements OnInit {
     this.record.gen_chb_tel = '';
     this.record.gen_chb_fax = '';
     this.record.gen_chb_email = '';
-    this.record.gen_criteria = '';
+    this.record.gen_criteria = 'NIL';
     this.record.gen_min_profit = '';
     this.record.gen_branch = 'ALL';
     this.record.gen_protected = 'N';
