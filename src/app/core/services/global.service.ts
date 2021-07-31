@@ -55,7 +55,7 @@ export class GlobalService {
 
   public isolderror: boolean = false;
 
-  
+
   public MainList: any[];
   public UserRecord: any;
   private UserInfoData: any;
@@ -90,7 +90,7 @@ export class GlobalService {
   public INSTANCE_ID = "";
 
   public GLOBAL_REPORT_FOLDER = "D://motherlines.us//ftp//reports";
-  
+
   public SEARCH_DATE_DIFF = 60;
   public SEARCH_DATE_DIFF_15 = 15;
   public SEARCH_DATE_DIFF_30 = 30;
@@ -870,10 +870,10 @@ export class GlobalService {
       SearchData.UA_ID = "";
     else
       SearchData.UA_ID = this.user_ua_pkid;
-      
-    SearchData.user_category  = this.User_Category;
-    SearchData.user_role  = this.User_Role;
-    
+
+    SearchData.user_category = this.User_Category;
+    SearchData.user_role = this.User_Role;
+
     console.log('Menu Loading Begin 1');
     await this.http2.post<any>(this.baseUrl + "/api/Auth/LoadMenu", SearchData, this.headerparam2('authorized')).toPromise().then((response) => {
       console.log('Menu Loaded 2');
@@ -1612,7 +1612,7 @@ export class GlobalService {
     this.year_islocked = bts_settings.year_islocked;
     this.software_start_year = bts_settings.software_start_year;
 
-    this.User_Category =bts_settings.user_category ;
+    this.User_Category = bts_settings.user_category;
     this.User_Role = bts_settings.user_role;
     this.User_isParent = bts_settings.user_isparent;
     this.User_Customer_Id = bts_settings.user_customer_id;
@@ -2026,18 +2026,18 @@ export class GlobalService {
     return Number.parseFloat(noAsString);
   };
 
-  public _getUrlParameter(obj : {}) {
+  public _getUrlParameter(obj: {}) {
     // this is not used
-    const _param = Object.entries(obj).reduce ( (acc , key : any[]) =>{
-      return acc.set( key[0],key[1]);
+    const _param = Object.entries(obj).reduce((acc, key: any[]) => {
+      return acc.set(key[0], key[1]);
     }, new HttpParams());
-    return  _param.toString();
+    return _param.toString();
   }
 
 
-  public getUrlParameter(obj : {}) {
-    let _param = new  HttpParams({fromObject: obj});
-    return  _param.toString();
+  public getUrlParameter(obj: {}) {
+    let _param = new HttpParams({ fromObject: obj });
+    return _param.toString();
   }
 
 
@@ -2177,7 +2177,7 @@ export class GlobalService {
   }
 
   Naviagete2(menu_route: string, jsonstring: any, _replaceurl: boolean = false) {
-    this.router.navigate([menu_route],{ queryParams: jsonstring , replaceUrl: _replaceurl });
+    this.router.navigate([menu_route], { queryParams: jsonstring, replaceUrl: _replaceurl });
   }
 
 
@@ -2221,25 +2221,22 @@ export class GlobalService {
 
   GenerateAppID() {
 
-    let rid : number = this.getRandomInt();
-    if  ( rid <= 0)
-    {
-        alert('Cannot Generate Appliation ID ' + rid.toString());
-        return false;
+    let rid: number = this.getRandomInt();
+    if (rid <= 0) {
+      alert('Cannot Generate Appliation ID ' + rid.toString());
+      return false;
     }
-    if  ( this.appid == rid.toString())
-    {
-        alert('Cannot Generate Appliation ID ' + rid.toString());
-        return false;
+    if (this.appid == rid.toString()) {
+      alert('Cannot Generate Appliation ID ' + rid.toString());
+      return false;
     }
     this.appid = rid.toString();
-    if ( this.isAppidExtistsInLocalStorage())
-    {
-        alert('Duplicate Application ID ' + rid.toString());
-        return false;
+    if (this.isAppidExtistsInLocalStorage()) {
+      alert('Duplicate Application ID ' + rid.toString());
+      return false;
     }
     return true;
-}
+  }
 
 
 
@@ -3118,7 +3115,7 @@ export class GlobalService {
     }
   }
 
-  public LinkReturn(origin: string = "", pkid: string = "", stype: string = "",parentid:string ="") {
+  public LinkReturn(origin: string = "", pkid: string = "", stype: string = "", parentid: string = "") {
 
     let url = '';
     let menuid = '';
@@ -3159,7 +3156,7 @@ export class GlobalService {
         type: stype,
         origin: origin,
         mode: 'EDIT',
-        parentid:parentid
+        parentid: parentid
       };
 
       //this.Naviagete(url, JSON.stringify(parameter));
@@ -3170,7 +3167,7 @@ export class GlobalService {
       alert('Insufficient User Rights')
       return;
     }
-    
+
   }
 
   public copyToClipboard(val: string) {
@@ -3199,21 +3196,21 @@ export class GlobalService {
     return new URLSearchParams(window.location.search).get(param);
   }
 
-  public checkAppVersion(){
+  public checkAppVersion() {
     const _id = this.getURLParam('appid');
-    if (this.appid == _id){
-      return true ;
+    if (this.appid == _id) {
+      return true;
     }
-    else  {
-      
-      if ( _id == undefined ||  _id == null ||  _id == '')
+    else {
+
+      if (_id == undefined || _id == null || _id == '')
         alert('Page Expired, APPID not found');
       else
         alert('Page Expired');
 
-        setTimeout( () =>{
-          this.router.navigate(['/login']);
-        });
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      });
 
       return false;
     }
@@ -3237,6 +3234,182 @@ export class GlobalService {
 
   AutoReloadReturn(obj: any) {
     this.location.back();
+  }
+
+  IsGlobalDataOk() {
+    
+    if (this.isBlank(this.company_pkid))
+      return  false;
+     if (this.isBlank(this.company_code))
+      return  false;
+     if (this.isBlank(this.branch_pkid))
+      return  false;
+     if (this.isBlank(this.branch_code))
+      return  false;
+     if (this.isBlank(this.user_pkid))
+      return  false;
+     if (this.isBlank(this.user_code))
+      return  false;
+     if (this.isBlank(this.SETTINGS_AC_RECEIVABLE))
+      return  false;
+     if (this.isBlank(this.SETTINGS_AC_RECEIVABLE_NAME))
+      return  false;
+     if (this.isBlank(this.SETTINGS_AC_PAYABLE))
+      return  false;
+     if (this.isBlank(this.SETTINGS_AC_PAYABLE_NAME))
+      return  false;
+     if (this.isBlank(this.INTERNAL_PAYMENT_SETTLMENT_AR_ID))
+      return  false;
+     if (this.isBlank(this.INTERNAL_PAYMENT_SETTLMENT_AR_NAME))
+      return  false;
+     if (this.isBlank(this.INTERNAL_PAYMENT_SETTLMENT_AP_ID))
+      return  false;
+     if (this.isBlank(this.INTERNAL_PAYMENT_SETTLMENT_AP_NAME))
+      return  false;
+     if (this.isBlank(this.INCOME_AE_ID))
+      return  false;
+     if (this.isBlank(this.INCOME_AE_NAME))
+      return  false;
+     if (this.isBlank(this.INCOME_AI_ID))
+      return  false;
+     if (this.isBlank(this.INCOME_AI_NAME))
+      return  false;
+     if (this.isBlank(this.INCOME_SE_ID))
+      return  false;
+     if (this.isBlank(this.INCOME_SE_NAME))
+      return  false;
+     if (this.isBlank(this.INCOME_SI_ID))
+      return  false;
+     if (this.isBlank(this.INCOME_SI_NAME))
+      return  false;
+     if (this.isBlank(this.INCOME_OT_ID))
+      return  false;
+     if (this.isBlank(this.INCOME_OT_NAME))
+      return  false;
+     if (this.isBlank(this.INCOME_EX_ID))
+      return  false;
+     if (this.isBlank(this.INCOME_EX_NAME))
+      return  false;
+     if (this.isBlank(this.EXPENSE_AE_ID))
+      return  false;
+     if (this.isBlank(this.EXPENSE_AE_NAME))
+      return  false;
+     if (this.isBlank(this.EXPENSE_AI_ID))
+      return  false;
+     if (this.isBlank(this.EXPENSE_AI_NAME))
+      return  false;
+     if (this.isBlank(this.EXPENSE_SE_ID))
+      return  false;
+     if (this.isBlank(this.EXPENSE_SE_NAME))
+      return  false;
+     if (this.isBlank(this.EXPENSE_SI_ID))
+      return  false;
+     if (this.isBlank(this.EXPENSE_SI_NAME))
+      return  false;
+     if (this.isBlank(this.EXPENSE_OT_ID))
+      return  false;
+     if (this.isBlank(this.EXPENSE_OT_NAME))
+      return  false;
+     if (this.isBlank(this.EXPENSE_EX_ID))
+      return  false;
+     if (this.isBlank(this.EXPENSE_EX_NAME))
+      return  false;
+     if (this.isBlank(this.RETAINED_PROFIT_ID))
+      return  false;
+     if (this.isBlank(this.RETAINED_PROFIT_NAME))
+      return  false;
+     if (this.isBlank(this.SEA_EXPORT_HOUSE_PREFIX))
+      return  false;
+     if (this.isBlank(this.SEA_EXPORT_HOUSE_PREFIX_POL))
+      return  false;
+     if (this.isBlank(this.SEA_EXPORT_HOUSE_PREFIX_POD))
+      return  false;
+     if (this.isBlank(this.SEA_EXPORT_HOUSE_STARTING_NO))
+      return  false;
+     if (this.isBlank(this.SEA_EXPORT_HOUSE_INCR_BY))
+      return  false;
+     if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX))
+      return  false;
+     if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX_POL))
+      return  false;
+     if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX_POD))
+      return  false;
+     if (this.isBlank(this.AIR_EXPORT_HOUSE_STARTING_NO))
+      return  false;
+     if (this.isBlank(this.AIR_EXPORT_HOUSE_INCR_BY))
+      return  false;
+     if (this.isBlank(this.SEA_EXPORT_REFNO_PREFIX))
+      return  false;
+     if (this.isBlank(this.SEA_EXPORT_REFNO_STARTING_NO))
+      return  false;
+     if (this.isBlank(this.SEA_IMPORT_REFNO_PREFIX))
+      return  false;
+     if (this.isBlank(this.SEA_IMPORT_REFNO_STARTING_NO))
+      return  false;
+     if (this.isBlank(this.AIR_EXPORT_REFNO_PREFIX))
+      return  false;
+     if (this.isBlank(this.AIR_EXPORT_REFNO_STARTING_NO))
+      return  false;
+     if (this.isBlank(this.AIR_IMPORT_REFNO_PREFIX))
+      return  false;
+     if (this.isBlank(this.AIR_IMPORT_REFNO_STARTING_NO))
+      return  false;
+     if (this.isBlank(this.OTHER_OPERATION_REFNO_PREFIX))
+      return  false;
+     if (this.isBlank(this.OTHER_OPERATION_REFNO_STARTING_NO))
+      return  false;
+     if (this.isBlank(this.AR_INVOICE_PREFIX))
+      return  false;
+     if (this.isBlank(this.AR_INVOICE_STARTING_NO))
+      return  false;
+     if (this.isBlank(this.AP_INVOICE_PREFIX))
+      return  false;
+     if (this.isBlank(this.AP_INVOICE_STARTING_NO))
+      return  false;
+     if (this.isBlank(this.WWW_ROOT))
+      return  false;
+     if (this.isBlank(this.WWW_ROOT_FILE_FOLDER))
+      return  false;
+     if (this.isBlank(this.FILES_FOLDER))
+      return  false;
+     if (this.isBlank(this.BACKEND_DATEFORMAT))
+      return  false;
+     if (this.isBlank(this.FRONTEND_DATEFORMAT))
+      return  false;
+     if (this.isBlank(this.date_display_fmt))
+      return  false;
+     if (this.isBlank(this.base_cur_code))
+      return  false;
+     if (this.isBlank(this.foreign_cur_code))
+      return  false;
+     if (this.isBlank(this.ROWS_TO_DISPLAY))
+      return  false;
+     if (this.isBlank(this.HBL_INSTR1))
+      return  false;
+     if (this.isBlank(this.HBL_INSTR2))
+      return  false;
+     if (this.isZero(this.LOCK_DAYS_SEA))
+      return  false;
+     if (this.isZero(this.LOCK_DAYS_AIR))
+      return  false;
+     if (this.isZero(this.LOCK_DAYS_OTHERS))
+      return  false;
+     if (this.isZero(this.LOCK_DAYS_ADMIN))
+      return  false;
+     if (this.isBlank(this.BRANCH_REGION))
+      return  false;
+     if (this.isBlank(this.PAYROLL_INVOICE_CODE))
+      return  false;
+     if (this.isBlank(this.PAYROLL_ACC_CODE))
+      return  false;
+     if (this.isBlank(this.FS_APP_FOLDER))
+      return  false;
+     if (this.isBlank(this.GLOBAL_FTP_FOLDER))
+      return  false;
+     if (this.isBlank(this.GLOBAL_REPORT_FOLDER))
+      return  false;
+
+    return true;
   }
 
 }

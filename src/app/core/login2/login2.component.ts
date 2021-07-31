@@ -50,7 +50,7 @@ export class Login2Component implements OnInit {
         public GLOBALCONTANTS: GlobalService,
         public clrservice: ClearService,
         private router: Router,
-        private store : Store<AppState>
+        private store: Store<AppState>
     ) {
 
         this.GLOBALCONTANTS.Modules = null;
@@ -62,7 +62,7 @@ export class Login2Component implements OnInit {
 
     ngOnInit() {
         this.GLOBALCONTANTS.GenerateAppID();
-        this.store.dispatch ( logoutAction() );
+        this.store.dispatch(logoutAction());
     }
 
     LoadCombo() {
@@ -79,13 +79,13 @@ export class Login2Component implements OnInit {
         let SearchData = {
             CompanyId: this.GLOBALCONTANTS.company_pkid,
             User_Id: userid,
-            User_Category : this.GLOBALCONTANTS.User_Category,
-            User_Role : this.GLOBALCONTANTS.User_Role
+            User_Category: this.GLOBALCONTANTS.User_Category,
+            User_Role: this.GLOBALCONTANTS.User_Role
         };
 
         this.mainservice.LoadCompanyYearList(SearchData)
             .subscribe(response => {
-                
+
                 this.CompanyList = response.companylist;
                 this.YearList = response.yearlist;
                 this.GLOBALCONTANTS.SetupCompanyList(response.companylist);
@@ -100,7 +100,7 @@ export class Login2Component implements OnInit {
                     this.Year_Id = a.fy_pkid;
                 });
 
-                if ( this.GLOBALCONTANTS.User_Category == "CUSTOMER")
+                if (this.GLOBALCONTANTS.User_Category == "CUSTOMER")
                     this.Login();
 
                 this.loading = false;
@@ -113,8 +113,8 @@ export class Login2Component implements OnInit {
 
 
     async Login() {
-        
-        if ( this.GLOBALCONTANTS.GenerateAppID() == false)
+
+        if (this.GLOBALCONTANTS.GenerateAppID() == false)
             return;
 
 
@@ -162,13 +162,18 @@ export class Login2Component implements OnInit {
 
         await this.GLOBALCONTANTS.LoadSettings();
         await this.GLOBALCONTANTS.LoadMenu();
-       
+
         this.GLOBALCONTANTS.IsAuthenticated = true;
-        
 
         this.GLOBALCONTANTS.Save2LocalStorage();
+ 
 
-        setTimeout(()=>{
+        if (!this.GLOBALCONTANTS.IsGlobalDataOk()) {
+            this.router.navigate(['login'], { replaceUrl: true });
+            return;
+        }
+
+        setTimeout(() => {
             this.router.navigate(['home'], { replaceUrl: true });
         });
     }
@@ -196,7 +201,7 @@ export class Login2Component implements OnInit {
         Rec.fy_end_date = mRec.fy_end_date;
         Rec.fy_islocked = mRec.fy_islocked;
         GLOBALCONTANTS.YearList.Add(Rec); 
-        */    
+        */
     }
 
 
@@ -220,7 +225,7 @@ export class Login2Component implements OnInit {
                 this.GLOBALCONTANTS.InitData();
 
                 this.GLOBALCONTANTS.InitUserInfo();
-                
+
                 //this.GLOBALCONTANTS.InitMonths();
 
                 //this.GLOBALCONTANTS.Save2LocalStorage();
@@ -275,7 +280,7 @@ export class Login2Component implements OnInit {
 
 
     Cancel() {
-        setTimeout(()=>{
+        setTimeout(() => {
             this.router.navigate(['login'], { replaceUrl: true });
         });
     }
