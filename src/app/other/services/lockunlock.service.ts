@@ -30,8 +30,8 @@ export class LockUnlockService {
     public lock_all: boolean = false;
     public unlock_all: boolean = false;
     public initlialized: boolean;
-    private appid =''
-    
+    private appid = ''
+
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
@@ -84,6 +84,9 @@ export class LockUnlockService {
     Search(_searchdata: any, type: string = '') {
 
         this.record.errormessage = '';
+        this.lock_all = false;
+        this.unlock_all = false;
+
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
         }
