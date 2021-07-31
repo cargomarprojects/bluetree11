@@ -612,6 +612,8 @@ export class SeaImpHouseEditComponent implements OnInit {
             menuid: this.menuid,
             pkid: this.pkid,
             type: '',
+            parentid: this.parentid,
+            invokefrom: this.invokefrom,
             origin: 'seaimp-house-page',
             mode: 'EDIT'
           };
