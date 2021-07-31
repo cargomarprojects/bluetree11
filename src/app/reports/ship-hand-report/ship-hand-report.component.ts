@@ -22,7 +22,7 @@ import { map, tap, filter } from 'rxjs/operators';
 })
 export class ShipHandReportComponent implements OnInit {
 
-  title: string = 'Shipment Handled Report ';
+  title: string = 'Operations Handled Report ';
 
   pkid: string;
   urlid: string;
