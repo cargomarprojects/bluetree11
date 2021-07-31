@@ -2219,6 +2219,29 @@ export class GlobalService {
   }
 
 
+  GenerateAppID() {
+
+    let rid : number = this.getRandomInt();
+    if  ( rid <= 0)
+    {
+        alert('Cannot Generate Appliation ID ' + rid.toString());
+        return false;
+    }
+    if  ( this.appid == rid.toString())
+    {
+        alert('Cannot Generate Appliation ID ' + rid.toString());
+        return false;
+    }
+    this.appid = rid.toString();
+    if ( this.isAppidExtistsInLocalStorage())
+    {
+        alert('Duplicate Application ID ' + rid.toString());
+        return false;
+    }
+    return true;
+}
+
+
 
   public IsShipmentClosed(OPR_MODE: string, REF_DATE: string, LOCK_STATUS: string, UNLOCK_DATE: string = "") {
     var bRet = false;

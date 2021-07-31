@@ -49,6 +49,7 @@ export class LoginService {
         this.gs.IsLoginSuccess = false;
         this.gs.IsAuthenticated = false;
         this.gs.Access_Token = '';
+        this.gs.GenerateAppID();
     }
 
 

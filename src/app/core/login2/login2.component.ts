@@ -61,7 +61,7 @@ export class Login2Component implements OnInit {
     }
 
     ngOnInit() {
-        this.GenerateAppID();
+        this.GLOBALCONTANTS.GenerateAppID();
         this.store.dispatch ( logoutAction() );
     }
 
@@ -111,31 +111,10 @@ export class Login2Component implements OnInit {
             });
     }
 
-    GenerateAppID() {
-
-        let rid : number = this.GLOBALCONTANTS.getRandomInt();
-        if  ( rid <= 0)
-        {
-            alert('Cannot Generate Appliation ID ' + rid.toString());
-            return false;
-        }
-        if  ( this.GLOBALCONTANTS.appid == rid.toString())
-        {
-            alert('Cannot Generate Appliation ID ' + rid.toString());
-            return false;
-        }
-        this.GLOBALCONTANTS.appid = rid.toString();
-        if ( this.GLOBALCONTANTS.isAppidExtistsInLocalStorage())
-        {
-            alert('Duplicate Application ID ' + rid.toString());
-            return false;
-        }
-        return true;
-    }
 
     async Login() {
         
-        if ( this.GenerateAppID() == false)
+        if ( this.GLOBALCONTANTS.GenerateAppID() == false)
             return;
 
 
