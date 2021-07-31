@@ -1240,9 +1240,11 @@ export class SeaImpMasterEditComponent implements OnInit {
   CopyCntrClipboard() {
     let strcntr: string = "";
     this.records.forEach(Rec => {
-      if (strcntr != "")
-        strcntr += ",";
-      strcntr += Rec.cntr_no.trim();
+      if (!this.gs.isBlank(Rec.cntr_no)) {
+        if (strcntr != "")
+          strcntr += ",";
+        strcntr += Rec.cntr_no.trim();
+      }
     })
     if (strcntr != "") {
       alert(strcntr)

@@ -116,7 +116,7 @@ export class OthGeneralEditComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.errorMessage = [];
@@ -872,7 +872,7 @@ export class OthGeneralEditComponent implements OnInit {
           mbl_type: 'OT',
           origin: 'other-general-page',
         };
-    }else if (action == "DELIVERY-ORDER") {
+    } else if (action == "DELIVERY-ORDER") {
       if (_type == "L")
         return '/Silver.Other.Trans/DeliveryOrderList';
       if (_type == 'P')
@@ -884,7 +884,7 @@ export class OthGeneralEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'other-general-page'
         };
-    }else if (action == "PROFITREPORT") {
+    } else if (action == "PROFITREPORT") {
       if (_type == "L")
         return '/Silver.USAccounts.Trans/ProfitReportPage';
       if (_type == 'P')
@@ -896,7 +896,7 @@ export class OthGeneralEditComponent implements OnInit {
           mbl_type: 'OT',
           origin: 'other-general-page'
         };
-    }else if (action == "PAYMENT-REQUEST") {
+    } else if (action == "PAYMENT-REQUEST") {
       if (_type == "L")
         return '/Silver.BusinessModule/PaymentRequestPage';
       if (_type == 'P')
@@ -910,7 +910,7 @@ export class OthGeneralEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'other-general-page'
         };
-    }else if (action == "MESSENGER-SLIP") {
+    } else if (action == "MESSENGER-SLIP") {
       if (_type == "L")
         return '/Silver.Other.Trans/MessengerSlipList';
       if (_type == 'P')
@@ -923,7 +923,7 @@ export class OthGeneralEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'other-general-page'
         };
-    }else if (action == "FOLLOWUP") {
+    } else if (action == "FOLLOWUP") {
       if (_type == "L")
         return '/Silver.BusinessModule/FollowUpPage';
       if (_type == 'P')
@@ -936,7 +936,7 @@ export class OthGeneralEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'other-general-page'
         };
-    }else if (action == "REQUEST-APPROVAL") {
+    } else if (action == "REQUEST-APPROVAL") {
       if (_type == "L")
         return '/Silver.Other.Trans/ApprovedPageList';
       if (_type == 'P')
@@ -950,7 +950,7 @@ export class OthGeneralEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'other-general-page'
         };
-    }else if (action == "INERNALMEMO") {
+    } else if (action == "INERNALMEMO") {
       if (_type == "L")
         return '/Silver.Other.Trans/TrackingPage';
       if (_type == 'P')
@@ -1128,9 +1128,11 @@ export class OthGeneralEditComponent implements OnInit {
   CopyCntrClipboard() {
     let strcntr: string = "";
     this.records.forEach(Rec => {
-      if (strcntr != "")
-        strcntr += ",";
-      strcntr += Rec.cntr_no.trim();
+      if (!this.gs.isBlank(Rec.cntr_no)) {
+        if (strcntr != "")
+          strcntr += ",";
+        strcntr += Rec.cntr_no.trim();
+      }
     })
     if (strcntr != "") {
       alert(strcntr)
