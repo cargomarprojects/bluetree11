@@ -627,6 +627,7 @@ export class InvoiceEditComponent implements OnInit {
         this.mode = 'EDIT';
         this.old_amt = this.record.inv_total;
         this.old_inv_date = this.record.inv_date;
+        alert('Save Complete');
       }
       else {
         alert(this.errorMessage);

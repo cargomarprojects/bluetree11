@@ -307,7 +307,7 @@ export class AirImpMasterEditComponent implements OnInit {
 
           this.mainService.RefreshList(this.record);
           this.errorMessage.push('Save Complete');
-          // alert(this.errorMessage[0]);
+          alert('Save Complete');
         }
       }, error => {
         this.errorMessage.push(this.gs.getError(error));

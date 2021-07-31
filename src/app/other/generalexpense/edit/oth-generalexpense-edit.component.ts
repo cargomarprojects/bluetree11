@@ -347,7 +347,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           
           this.mainService.RefreshList(this.record);
           this.errorMessage.push('Save Complete');
-          //alert(this.errorMessage);
+          alert('Save Complete');
         }
       }, error => {
         this.errorMessage.push(this.gs.getError(error));

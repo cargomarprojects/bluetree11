@@ -306,7 +306,7 @@ export class AirExpMasterEditComponent implements OnInit {
           this.location.replaceState('Silver.AirExport.Trans/AirExpMasterEditPage', this.gs.getUrlParameter(parameter));
 
           this.errorMessage.push('Save Complete');
-          // alert(this.errorMessage);
+          alert('Save Complete');
           this.mainService.RefreshList(this.record);
         }
       }, error => {

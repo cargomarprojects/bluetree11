@@ -734,7 +734,7 @@ export class HousePageComponent implements OnInit {
           this.mainService.RefreshList(this.record);
 
         this.errorMessage.push('Save Complete');
-        // alert(this.errorMessage);
+        alert('Save Complete');
       }
 
     }, error => {
