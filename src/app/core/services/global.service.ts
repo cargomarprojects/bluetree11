@@ -3258,14 +3258,6 @@ export class GlobalService {
       return  false;
      if (this.isBlank(this.SETTINGS_AC_PAYABLE_NAME))
       return  false;
-     if (this.isBlank(this.INTERNAL_PAYMENT_SETTLMENT_AR_ID))
-      return  false;
-     if (this.isBlank(this.INTERNAL_PAYMENT_SETTLMENT_AR_NAME))
-      return  false;
-     if (this.isBlank(this.INTERNAL_PAYMENT_SETTLMENT_AP_ID))
-      return  false;
-     if (this.isBlank(this.INTERNAL_PAYMENT_SETTLMENT_AP_NAME))
-      return  false;
      if (this.isBlank(this.INCOME_AE_ID))
       return  false;
      if (this.isBlank(this.INCOME_AE_NAME))
@@ -3286,10 +3278,6 @@ export class GlobalService {
       return  false;
      if (this.isBlank(this.INCOME_OT_NAME))
       return  false;
-     if (this.isBlank(this.INCOME_EX_ID))
-      return  false;
-     if (this.isBlank(this.INCOME_EX_NAME))
-      return  false;
      if (this.isBlank(this.EXPENSE_AE_ID))
       return  false;
      if (this.isBlank(this.EXPENSE_AE_NAME))
@@ -3309,14 +3297,6 @@ export class GlobalService {
      if (this.isBlank(this.EXPENSE_OT_ID))
       return  false;
      if (this.isBlank(this.EXPENSE_OT_NAME))
-      return  false;
-     if (this.isBlank(this.EXPENSE_EX_ID))
-      return  false;
-     if (this.isBlank(this.EXPENSE_EX_NAME))
-      return  false;
-     if (this.isBlank(this.RETAINED_PROFIT_ID))
-      return  false;
-     if (this.isBlank(this.RETAINED_PROFIT_NAME))
       return  false;
      if (this.isBlank(this.SEA_EXPORT_HOUSE_PREFIX))
       return  false;
@@ -3397,10 +3377,6 @@ export class GlobalService {
      if (this.isZero(this.LOCK_DAYS_ADMIN))
       return  false;
      if (this.isBlank(this.BRANCH_REGION))
-      return  false;
-     if (this.isBlank(this.PAYROLL_INVOICE_CODE))
-      return  false;
-     if (this.isBlank(this.PAYROLL_ACC_CODE))
       return  false;
      if (this.isBlank(this.FS_APP_FOLDER))
       return  false;
