@@ -720,7 +720,7 @@ export class HousePageComponent implements OnInit {
 
         let parameter = {
           appid: this.gs.appid,
-          menuid: this.mainService.menuid,
+          menuid: this.menuid,
           pkid: this.pkid,
           type: '',
           origin: 'seaexp-house-edit-page',

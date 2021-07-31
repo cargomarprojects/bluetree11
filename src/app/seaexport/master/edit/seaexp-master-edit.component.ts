@@ -342,7 +342,7 @@ export class SeaexpMasterEditComponent implements OnInit {
 
           let parameter = {
             appid: this.gs.appid,
-            menuid: this.mainService.menuid,
+            menuid: this.menuid,
             pkid: this.pkid,
             type: '',
             origin: 'seaexp-master-edit-page',
