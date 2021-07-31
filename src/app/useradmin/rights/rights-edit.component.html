@@ -18,7 +18,7 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">User</label>
                 <div class="col-8">
-                    <select class="form-control form-control-sm" [(ngModel)]="record.ua_usr_id">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.ua_usr_id" [disabled]="mode == 'EDIT'">
                         <option *ngFor="let rec of userList" [value]="rec.pkid">{{rec.name}}</option>
                     </select>
                 </div>
@@ -26,7 +26,7 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Branch</label>
                 <div class="col-8">
-                    <select class="form-control form-control-sm" [(ngModel)]="record.ua_company_id">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.ua_company_id"  [disabled]="mode == 'EDIT'">
                         <option *ngFor="let rec of companyList" [value]="rec.pkid">{{rec.name}}</option>
                     </select>
                 </div>
