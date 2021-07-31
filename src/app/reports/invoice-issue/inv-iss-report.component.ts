@@ -169,7 +169,7 @@ export class InvIssReportComponent implements OnInit {
         this.report_category = 'CONSIGNEE SHIPMENT REPORT';
         this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
         this.edate = this.gs.defaultValues.today;
-        this.mode = 'OCEAN IMPORT';
+        this.mode = 'ALL';
         this.comp_type = this.gs.branch_code;
         this.report_type = 'DETAIL';
         this.report_shptype = 'ALL';
