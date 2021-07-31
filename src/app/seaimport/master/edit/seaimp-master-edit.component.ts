@@ -307,7 +307,7 @@ export class SeaImpMasterEditComponent implements OnInit {
 
           let parameter = {
             appid: this.gs.appid,
-            menuid: this.mainService.menuid,
+            menuid: this.menuid,
             pkid: this.pkid,
             type: '',
             origin: 'seaimp-master-page',
