@@ -17,7 +17,7 @@ export class ReloadComponent {
     public gs: GlobalService,
     public loadingservice: LoadingScreenService,
     private router: Router,
-    private route : ActivatedRoute
+    private route: ActivatedRoute
   ) {
 
 
@@ -26,21 +26,26 @@ export class ReloadComponent {
   async ngOnInit() {
     let url = this.gs.reload_url;
     this.gs.reload_url = '';
-    if ( url == '')
-      this.router.navigate(['home'], { replaceUrl: true }); 
-      
-    await this.gs.LoadSettings();
-    await this.gs.LoadMenu();    
+    if (url == '')
+      this.router.navigate(['home'], { replaceUrl: true });
 
-    this.router.navigateByUrl(url,{ replaceUrl: true });
+    await this.gs.LoadSettings();
+    await this.gs.LoadMenu();
+
+    if (!this.gs.IsGlobalDataOk()) {
+      this.router.navigate(['login'], { replaceUrl: true });
+      return;
+    }
+    
+    this.router.navigateByUrl(url, { replaceUrl: true });
 
     this.gs.IsLoginSuccess = true;
-    this.gs.IsAuthenticated = true;    
-    
+    this.gs.IsAuthenticated = true;
+
   }
- 
+
   ngOnDestroy() {
-    
+
   }
 
 
