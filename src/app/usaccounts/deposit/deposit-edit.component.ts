@@ -59,7 +59,7 @@ export class DepositEditComponent implements OnInit {
             appid: this.gs.appid,            
             menuid: this.msEdit.menuid,
             pkid: '',
-            type: this.msList.param_type,
+            type: '',
             origin: 'deposit-page',
             mode: 'EDIT'
         };
