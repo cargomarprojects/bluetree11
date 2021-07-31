@@ -723,6 +723,8 @@ export class HousePageComponent implements OnInit {
           menuid: this.menuid,
           pkid: this.pkid,
           type: '',
+          parentid: this.parentid,
+          refno: this.mbl_refno,
           origin: 'seaexp-house-edit-page',
           mode: 'EDIT'
         };
