@@ -361,9 +361,9 @@ export class OthGeneralEditComponent implements OnInit {
           this.mode = 'EDIT';
           let parameter = {
             appid: this.gs.appid,
-            menuid: this.mainService.menuid,
+            menuid: this.menuid,
             pkid: this.pkid,
-            type: this.mainService.param_type,
+            type: this.OPERATION_MODE,
             origin: 'oth-general-edit-page',
             mode: 'EDIT'
           };

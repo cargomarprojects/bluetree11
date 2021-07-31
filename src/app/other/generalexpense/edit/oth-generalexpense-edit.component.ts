@@ -337,9 +337,9 @@ export class OthGeneralExpenseEditComponent implements OnInit {
          
           let parameter = {
             appid: this.gs.appid,
-            menuid: this.mainService.menuid,
+            menuid: this.menuid,
             pkid: this.pkid,
-            exptype: this.mainService.param_type,
+            exptype: this.EXPTYPE,
             origin: 'oth-generalexp-edit-page',
             mode: 'EDIT'
           };

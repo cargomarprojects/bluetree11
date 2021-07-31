@@ -807,7 +807,7 @@ export class AirExpHouseEditComponent implements OnInit {
 
         let parameter = {
           appid: this.gs.appid,
-          menuid: this.mainService.menuid,
+          menuid: this.menuid,
           pkid: this.pkid,
           type: '',
           parentid: this.parentid,

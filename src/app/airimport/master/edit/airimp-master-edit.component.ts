@@ -297,7 +297,7 @@ export class AirImpMasterEditComponent implements OnInit {
 
           let parameter = {
             appid: this.gs.appid,
-            menuid: this.mainService.menuid,
+            menuid: this.menuid,
             pkid: this.pkid,
             type: '',
             origin: 'airimp-master-edit-page',
