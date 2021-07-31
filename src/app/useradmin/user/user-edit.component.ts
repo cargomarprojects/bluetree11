@@ -150,7 +150,7 @@ export class UserEditComponent implements OnInit {
                     this.mode = 'EDIT';
                     let parameter = {
                         appid:this.gs.appid,
-                        menuid: this.mainService.menuid,
+                        menuid: this.menuid,
                         pkid: this.pkid ,
                         type: '',
                         origin: 'user-page',
