@@ -121,7 +121,7 @@ export class QtnSettingEditComponent implements OnInit {
           alert(this.errorMessage);
         } else {
           this.errorMessage = 'Save Complete';
-          // alert(this.errorMessage);
+          alert('Save Complete');
         }
 
       }, error => {

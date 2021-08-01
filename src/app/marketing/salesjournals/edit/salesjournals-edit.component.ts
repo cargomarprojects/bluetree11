@@ -206,7 +206,7 @@ export class SalesJournalsEditComponent implements OnInit {
                 else {
                     this.mode = 'EDIT';
                     this.errorMessage = 'Save Complete';
-                    // alert(this.errorMessage);
+                    alert('Save Complete');
                 }
 
             }, error => {

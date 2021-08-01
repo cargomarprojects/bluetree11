@@ -255,7 +255,7 @@ export class QtnLclEditComponent implements OnInit {
                     this.mode = 'EDIT';
                     this.mainService.RefreshList(this.record);
                     this.errorMessage.push('Save Complete');
-                    //alert(this.errorMessage);
+                    alert('Save Complete');
                 }
 
                 this.historyList = new Array<Tbl_Cargo_Qtnd_Lcl>();

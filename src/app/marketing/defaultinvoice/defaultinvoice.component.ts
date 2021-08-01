@@ -99,7 +99,7 @@ export class DefaultInvoiceComponent implements OnInit {
                 }
                 else {
                     this.errorMessage.push('Save Complete');
-                    //alert(this.errorMessage);
+                    alert('Save Complete');
                 }
             }, error => {
                 this.errorMessage.push(this.gs.getError(error));
