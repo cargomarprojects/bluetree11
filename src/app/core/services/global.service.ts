@@ -3237,153 +3237,80 @@ export class GlobalService {
   }
 
   IsGlobalDataOk() {
-    
-    if (this.isBlank(this.company_pkid))
-      return  false;
-     if (this.isBlank(this.company_code))
-      return  false;
-     if (this.isBlank(this.branch_pkid))
-      return  false;
-     if (this.isBlank(this.branch_code))
-      return  false;
-     if (this.isBlank(this.user_pkid))
-      return  false;
-     if (this.isBlank(this.user_code))
-      return  false;
-     if (this.isBlank(this.SETTINGS_AC_RECEIVABLE))
-      return  false;
-     if (this.isBlank(this.SETTINGS_AC_RECEIVABLE_NAME))
-      return  false;
-     if (this.isBlank(this.SETTINGS_AC_PAYABLE))
-      return  false;
-     if (this.isBlank(this.SETTINGS_AC_PAYABLE_NAME))
-      return  false;
-     if (this.isBlank(this.INCOME_AE_ID))
-      return  false;
-     if (this.isBlank(this.INCOME_AE_NAME))
-      return  false;
-     if (this.isBlank(this.INCOME_AI_ID))
-      return  false;
-     if (this.isBlank(this.INCOME_AI_NAME))
-      return  false;
-     if (this.isBlank(this.INCOME_SE_ID))
-      return  false;
-     if (this.isBlank(this.INCOME_SE_NAME))
-      return  false;
-     if (this.isBlank(this.INCOME_SI_ID))
-      return  false;
-     if (this.isBlank(this.INCOME_SI_NAME))
-      return  false;
-     if (this.isBlank(this.INCOME_OT_ID))
-      return  false;
-     if (this.isBlank(this.INCOME_OT_NAME))
-      return  false;
-     if (this.isBlank(this.EXPENSE_AE_ID))
-      return  false;
-     if (this.isBlank(this.EXPENSE_AE_NAME))
-      return  false;
-     if (this.isBlank(this.EXPENSE_AI_ID))
-      return  false;
-     if (this.isBlank(this.EXPENSE_AI_NAME))
-      return  false;
-     if (this.isBlank(this.EXPENSE_SE_ID))
-      return  false;
-     if (this.isBlank(this.EXPENSE_SE_NAME))
-      return  false;
-     if (this.isBlank(this.EXPENSE_SI_ID))
-      return  false;
-     if (this.isBlank(this.EXPENSE_SI_NAME))
-      return  false;
-     if (this.isBlank(this.EXPENSE_OT_ID))
-      return  false;
-     if (this.isBlank(this.EXPENSE_OT_NAME))
-      return  false;
-     if (this.isBlank(this.SEA_EXPORT_HOUSE_PREFIX))
-      return  false;
-     if (this.isBlank(this.SEA_EXPORT_HOUSE_PREFIX_POL))
-      return  false;
-     if (this.isBlank(this.SEA_EXPORT_HOUSE_PREFIX_POD))
-      return  false;
-     if (this.isBlank(this.SEA_EXPORT_HOUSE_STARTING_NO))
-      return  false;
-     if (this.isBlank(this.SEA_EXPORT_HOUSE_INCR_BY))
-      return  false;
-     if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX))
-      return  false;
-     if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX_POL))
-      return  false;
-     if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX_POD))
-      return  false;
-     if (this.isBlank(this.AIR_EXPORT_HOUSE_STARTING_NO))
-      return  false;
-     if (this.isBlank(this.AIR_EXPORT_HOUSE_INCR_BY))
-      return  false;
-     if (this.isBlank(this.SEA_EXPORT_REFNO_PREFIX))
-      return  false;
-     if (this.isBlank(this.SEA_EXPORT_REFNO_STARTING_NO))
-      return  false;
-     if (this.isBlank(this.SEA_IMPORT_REFNO_PREFIX))
-      return  false;
-     if (this.isBlank(this.SEA_IMPORT_REFNO_STARTING_NO))
-      return  false;
-     if (this.isBlank(this.AIR_EXPORT_REFNO_PREFIX))
-      return  false;
-     if (this.isBlank(this.AIR_EXPORT_REFNO_STARTING_NO))
-      return  false;
-     if (this.isBlank(this.AIR_IMPORT_REFNO_PREFIX))
-      return  false;
-     if (this.isBlank(this.AIR_IMPORT_REFNO_STARTING_NO))
-      return  false;
-     if (this.isBlank(this.OTHER_OPERATION_REFNO_PREFIX))
-      return  false;
-     if (this.isBlank(this.OTHER_OPERATION_REFNO_STARTING_NO))
-      return  false;
-     if (this.isBlank(this.AR_INVOICE_PREFIX))
-      return  false;
-     if (this.isBlank(this.AR_INVOICE_STARTING_NO))
-      return  false;
-     if (this.isBlank(this.AP_INVOICE_PREFIX))
-      return  false;
-     if (this.isBlank(this.AP_INVOICE_STARTING_NO))
-      return  false;
-     if (this.isBlank(this.WWW_ROOT))
-      return  false;
-     if (this.isBlank(this.WWW_ROOT_FILE_FOLDER))
-      return  false;
-     if (this.isBlank(this.FILES_FOLDER))
-      return  false;
-     if (this.isBlank(this.BACKEND_DATEFORMAT))
-      return  false;
-     if (this.isBlank(this.FRONTEND_DATEFORMAT))
-      return  false;
-     if (this.isBlank(this.date_display_fmt))
-      return  false;
-     if (this.isBlank(this.base_cur_code))
-      return  false;
-     if (this.isBlank(this.foreign_cur_code))
-      return  false;
-     if (this.isBlank(this.ROWS_TO_DISPLAY))
-      return  false;
-     if (this.isBlank(this.HBL_INSTR1))
-      return  false;
-     if (this.isBlank(this.HBL_INSTR2))
-      return  false;
-     if (this.isZero(this.LOCK_DAYS_SEA))
-      return  false;
-     if (this.isZero(this.LOCK_DAYS_AIR))
-      return  false;
-     if (this.isZero(this.LOCK_DAYS_OTHERS))
-      return  false;
-     if (this.isZero(this.LOCK_DAYS_ADMIN))
-      return  false;
-     if (this.isBlank(this.BRANCH_REGION))
-      return  false;
-     if (this.isBlank(this.FS_APP_FOLDER))
-      return  false;
-     if (this.isBlank(this.GLOBAL_FTP_FOLDER))
-      return  false;
-     if (this.isBlank(this.GLOBAL_REPORT_FOLDER))
-      return  false;
+
+    if (this.isBlank(this.company_pkid)) { alert('Company Unique ID Cannot Blank'); return false; }
+    if (this.isBlank(this.company_code)) { alert('Company Code Cannot Blank'); return false; }
+    if (this.isBlank(this.branch_pkid)) { alert('Branch Unique ID Cannot Blank'); return false; }
+    if (this.isBlank(this.branch_code)) { alert('Branch Code Cannot Blank'); return false; }
+    if (this.isBlank(this.user_pkid)) { alert('User Unique ID Cannot Blank'); return false; }
+    if (this.isBlank(this.user_code)) { alert('User Code Cannot Blank'); return false; }
+    if (this.isBlank(this.SETTINGS_AC_RECEIVABLE)) { alert('SETTINGS AC RECEIVABLE Cannot Blank'); return false; }
+    if (this.isBlank(this.SETTINGS_AC_RECEIVABLE_NAME)) { alert('SETTINGS AC RECEIVABLE NAME Cannot Blank'); return false; }
+    if (this.isBlank(this.SETTINGS_AC_PAYABLE)) { alert('SETTINGS AC PAYABLE Cannot Blank'); return false; }
+    if (this.isBlank(this.SETTINGS_AC_PAYABLE_NAME)) { alert('SETTINGS AC PAYABLE NAME Cannot Blank'); return false; }
+    if (this.isBlank(this.INCOME_AE_ID)) { alert('INCOME AE ID Cannot Blank'); return false; }
+    if (this.isBlank(this.INCOME_AE_NAME)) { alert('INCOME AE NAME Cannot Blank'); return false; }
+    if (this.isBlank(this.INCOME_AI_ID)) { alert('INCOME AI ID Cannot Blank'); return false; }
+    if (this.isBlank(this.INCOME_AI_NAME)) { alert('INCOME AI NAME Cannot Blank'); return false; }
+    if (this.isBlank(this.INCOME_SE_ID)) { alert('INCOME SE ID Cannot Blank'); return false; }
+    if (this.isBlank(this.INCOME_SE_NAME)) { alert('INCOME SE NAME Cannot Blank'); return false; }
+    if (this.isBlank(this.INCOME_SI_ID)) { alert('INCOME SI ID Cannot Blank'); return false; }
+    if (this.isBlank(this.INCOME_SI_NAME)) { alert('INCOME SI NAME Cannot Blank'); return false; }
+    if (this.isBlank(this.INCOME_OT_ID)) { alert('INCOME OT ID Cannot Blank'); return false; }
+    if (this.isBlank(this.INCOME_OT_NAME)) { alert('INCOME OT NAME Cannot Blank'); return false; }
+    if (this.isBlank(this.EXPENSE_AE_ID)) { alert('EXPENSE AE ID Cannot Blank'); return false; }
+    if (this.isBlank(this.EXPENSE_AE_NAME)) { alert('EXPENSE AE NAME Cannot Blank'); return false; }
+    if (this.isBlank(this.EXPENSE_AI_ID)) { alert('EXPENSE AI ID Cannot Blank'); return false; }
+    if (this.isBlank(this.EXPENSE_AI_NAME)) { alert('EXPENSE AI NAME Cannot Blank'); return false; }
+    if (this.isBlank(this.EXPENSE_SE_ID)) { alert('EXPENSE SE ID Cannot Blank'); return false; }
+    if (this.isBlank(this.EXPENSE_SE_NAME)) { alert('EXPENSE SE NAME Cannot Blank'); return false; }
+    if (this.isBlank(this.EXPENSE_SI_ID)) { alert('EXPENSE SI ID Cannot Blank'); return false; }
+    if (this.isBlank(this.EXPENSE_SI_NAME)) { alert('EXPENSE SI NAME Cannot Blank'); return false; }
+    if (this.isBlank(this.EXPENSE_OT_ID)) { alert('EXPENSE OT ID Cannot Blank'); return false; }
+    if (this.isBlank(this.EXPENSE_OT_NAME)) { alert('EXPENSE OT NAME Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_EXPORT_HOUSE_PREFIX)) { alert('SEA EXPORT HOUSE PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_EXPORT_HOUSE_PREFIX_POL)) { alert('SEA EXPORT HOUSE PREFIX POL Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_EXPORT_HOUSE_PREFIX_POD)) { alert('SEA EXPORT HOUSE PREFIX POD Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_EXPORT_HOUSE_STARTING_NO)) { alert('SEA EXPORT HOUSE STARTING NO Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_EXPORT_HOUSE_INCR_BY)) { alert('SEA_EXPORT_HOUSE_INCR_BY Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX)) { alert('AIR_EXPORT_HOUSE_PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX_POL)) { alert('AIR_EXPORT_HOUSE_PREFIX_POL Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX_POD)) { alert('AIR_EXPORT_HOUSE_PREFIX_POD Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_HOUSE_STARTING_NO)) { alert('AIR_EXPORT_HOUSE_STARTING_NO Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_HOUSE_INCR_BY)) { alert('AIR_EXPORT_HOUSE_INCR_BY Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_EXPORT_REFNO_PREFIX)) { alert('SEA_EXPORT_REFNO_PREFIX) Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_EXPORT_REFNO_STARTING_NO)) { alert('SEA_EXPORT_REFNO_STARTING_NO Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_IMPORT_REFNO_PREFIX)) { alert('SEA_IMPORT_REFNO_PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_IMPORT_REFNO_STARTING_NO)) { alert('SEA_IMPORT_REFNO_STARTING_NO Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_REFNO_PREFIX)) { alert('AIR_EXPORT_REFNO_PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_REFNO_STARTING_NO)) { alert('AIR_EXPORT_REFNO_STARTING_NO Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_IMPORT_REFNO_PREFIX)) { alert('AIR_IMPORT_REFNO_PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_IMPORT_REFNO_STARTING_NO)) { alert('AIR_IMPORT_REFNO_STARTING_NO Cannot Blank'); return false; }
+    if (this.isBlank(this.OTHER_OPERATION_REFNO_PREFIX)) { alert('OTHER_OPERATION_REFNO_PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.OTHER_OPERATION_REFNO_STARTING_NO)) { alert('OTHER_OPERATION_REFNO_STARTING_NO Cannot Blank'); return false; }
+    if (this.isBlank(this.AR_INVOICE_PREFIX)) { alert('AR_INVOICE_PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.AR_INVOICE_STARTING_NO)) { alert('AR_INVOICE_STARTING_NO Cannot Blank'); return false; }
+    if (this.isBlank(this.AP_INVOICE_PREFIX)) { alert('AP_INVOICE_PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.AP_INVOICE_STARTING_NO)) { alert('AP INVOICE STARTING NO Cannot Blank'); return false; }
+    if (this.isBlank(this.WWW_ROOT)) { alert('WWW ROOT Cannot Blank'); return false; }
+    if (this.isBlank(this.WWW_ROOT_FILE_FOLDER)) { alert('WWW ROOT FILE FOLDER Cannot Blank'); return false; }
+    if (this.isBlank(this.FILES_FOLDER)) { alert('FILES FOLDER Cannot Blank'); return false; }
+    if (this.isBlank(this.BACKEND_DATEFORMAT)) { alert('BACKEND DATEFORMAT Cannot Blank'); return false; }
+    if (this.isBlank(this.FRONTEND_DATEFORMAT)) { alert('FRONTEND DATEFORMAT Cannot Blank'); return false; }
+    if (this.isBlank(this.date_display_fmt)) { alert('date display fmt Cannot Blank'); return false; }
+    if (this.isBlank(this.base_cur_code)) { alert('base cur code Cannot Blank'); return false; }
+    if (this.isBlank(this.foreign_cur_code)) { alert('foreign cur code Cannot Blank'); return false; }
+    if (this.isBlank(this.ROWS_TO_DISPLAY)) { alert('ROWS TO DISPLAY Cannot Blank'); return false; }
+    if (this.isBlank(this.HBL_INSTR1)) { alert('HBL INSTR1 Cannot Blank'); return false; }
+    if (this.isBlank(this.HBL_INSTR2)) { alert('HBL INSTR2 Cannot Blank'); return false; }
+    if (this.isZero(this.LOCK_DAYS_SEA)) { alert('LOCK DAYS SEA Cannot Blank'); return false; }
+    if (this.isZero(this.LOCK_DAYS_AIR)) { alert('LOCK DAYS AIR Cannot Blank'); return false; }
+    if (this.isZero(this.LOCK_DAYS_OTHERS)) { alert('LOCK DAYS OTHERS Cannot Blank'); return false; }
+    if (this.isZero(this.LOCK_DAYS_ADMIN)) { alert('LOCK DAYS ADMIN Cannot Blank'); return false; }
+    if (this.isBlank(this.BRANCH_REGION)) { alert('BRANCH REGION Cannot Blank'); return false; }
+    if (this.isBlank(this.FS_APP_FOLDER)) { alert('FS APP FOLDER Cannot Blank'); return false; }
+    if (this.isBlank(this.GLOBAL_FTP_FOLDER)) { alert('GLOBAL FTP FOLDER Cannot Blank'); return false; }
+    if (this.isBlank(this.GLOBAL_REPORT_FOLDER)) { alert('GLOBAL REPORT FOLDER Cannot Blank'); return false; }
 
     return true;
   }
