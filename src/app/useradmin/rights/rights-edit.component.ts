@@ -129,6 +129,7 @@ export class RightsEditComponent implements OnInit {
         this.record.rec_created_date = this.gs.defaultValues.today;
         
         let parameter = {
+            appid : this.gs.appid,
             menuid: this.menuid,
             pkid: this.pkid,
             type: '',

@@ -1,6 +1,6 @@
 
 import { Component, Injectable, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
-import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct, NgbInputDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { GlobalService } from 'src/app/core/services/global.service';
 
 
@@ -92,7 +92,8 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
     changeDetection :ChangeDetectionStrategy.OnPush ,
     providers: [
         { provide: NgbDateAdapter, useClass: CustomAdapter },
-        { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
+        { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
+        { provide: NgbInputDatepickerConfig}
     ]
 })
 
@@ -122,10 +123,13 @@ export class DateComponent {
     dd: number;
 
     constructor(
+        private config: NgbInputDatepickerConfig,
         private ngbCalendar: NgbCalendar,
         private dateAdapter: NgbDateAdapter<string>,
         private gs: GlobalService
     ) { 
+        config.displayMonths = 12;
+        config.autoClose = 'outside';
         if ( this.gs.DateFormat() == 'dd')
             this.localdateFormat = 'dd-mm-yyyy';
         else 

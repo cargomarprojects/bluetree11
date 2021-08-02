@@ -78,6 +78,7 @@ export class BankReconComponent implements OnInit {
     }
 
     let parameter = {
+      appid : this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       type: this.mainservice.param_type,
@@ -94,6 +95,7 @@ export class BankReconComponent implements OnInit {
     }
 
     let parameter = {
+      appid : this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.acc_name,
       type: '',

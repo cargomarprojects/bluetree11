@@ -104,6 +104,7 @@ export class SeaexpMasterComponent implements OnInit {
       return;
     }
     let parameter = {
+      appid : this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       type: this.mainservice.param_type,
