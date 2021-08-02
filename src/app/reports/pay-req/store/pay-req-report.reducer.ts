@@ -41,20 +41,6 @@ export function PayReqReportReducer(state: ReportState[] = [initialState], actio
         case myActions.ActionTypes.SORT_DATA: {
             if (state[action.payload.id] == null)
                 return [...state];
-
-            var st = Object.assign({}, state[action.payload.id]);
-            if (st.sortcol != action.payload.sortcol) {
-                st.sortcol = action.payload.sortcol;
-                st.sortorder = true;
-            }
-            else
-                st.sortorder = !st.sortorder;
-
-            st.records = st.records.sort((a, b) => a[st.sortcol] - b[st.sortcol]);
-
-            st.errormessage = '';
-            return [...state.filter(rec => rec.urlid != action.payload.id), st];
-
         }
         default:
             return state;
