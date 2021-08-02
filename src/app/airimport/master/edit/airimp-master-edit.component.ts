@@ -439,7 +439,7 @@ export class AirImpMasterEditComponent implements OnInit {
 
     }
     if (!bRet)
-      alert('Error While Saving');
+      alert(this.errorMessage);
 
     return bRet;
 
