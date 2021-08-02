@@ -100,7 +100,7 @@ export class PayReqReportComponent implements OnInit {
     this.sub = this.activatedroute.queryParams.subscribe(params => {
 
       this.gs.checkAppVersion();
-      
+
       this.urlid = params.id;
       this.menuid = params.menuid;
       this.InitPage();
@@ -313,6 +313,7 @@ export class PayReqReportComponent implements OnInit {
     let SMENU_ID: string = "11815566-3D53-4DE6-9EBD-FFE83061AD76";
     if (this.gs.canEdit(SMENU_ID) || this.gs.canView(SMENU_ID)) {
       let parameter = {
+        appid: this.gs.appid,
         menuid: SMENU_ID,
         mbl_pkid: sID,
         mbl_refno: _record.cp_master_refno,
@@ -321,7 +322,7 @@ export class PayReqReportComponent implements OnInit {
         is_locked: false,
         origin: 'payment-req-page'
       };
-      this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageList',  parameter);
+      this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageList', parameter);
 
     }
     else
@@ -466,7 +467,7 @@ export class PayReqReportComponent implements OnInit {
   }
 
   ArApList(_record: Tbl_Cargo_Payrequest, payarapmodal: any) {
-    
+
     this.InvoiceList = <Tbl_cargo_invoicem[]>[];
     let MBLID: string = (_record.cp_master_id != null) ? _record.cp_master_id.toString() : "";
     if (MBLID.trim() == "") {
@@ -502,4 +503,43 @@ export class PayReqReportComponent implements OnInit {
   callbackevent() {
 
   }
+
+  getLink(_type: string) {
+
+    if (_type == "APPROVAL") {
+      let SMENU_ID: string = "11815566-3D53-4DE6-9EBD-FFE83061AD76";
+      if (this.gs.canEdit(SMENU_ID) || this.gs.canView(SMENU_ID)) {
+        return "/Silver.Other.Trans/ApprovedPageList";
+      } else
+        return null;
+    }
+    else
+      return null;
+
+  }
+  getParam(_type: string, _record: Tbl_Cargo_Payrequest) {
+
+    if (_type == "APPROVAL") {
+      let sID: string = (_record.cp_master_id != null) ? _record.cp_master_id.toString() : "";
+      let SMENU_ID: string = "11815566-3D53-4DE6-9EBD-FFE83061AD76";
+      if (this.gs.isBlank(sID)) {
+        return null;
+      }
+      if (this.gs.canEdit(SMENU_ID) || this.gs.canView(SMENU_ID)) {
+        return {
+          appid: this.gs.appid,
+          menuid: SMENU_ID,
+          mbl_pkid: sID,
+          mbl_refno: _record.cp_master_refno,
+          doc_type: _record.cp_mode,
+          req_type: 'APPROVED',
+          is_locked: false,
+          origin: 'payment-req-page'
+        };
+      } else
+        return null;
+    } else
+      return null;
+  }
+
 }

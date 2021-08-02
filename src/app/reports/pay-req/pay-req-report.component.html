@@ -98,15 +98,17 @@
           <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.cp_master_refno}}</td> -->
           <td>
-            <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'','', 'L')"
-                [queryParams]="gs.Link2Page('REFNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'','', 'P')">{{rec.cp_master_refno}}</a>
-        </td>
+            <a class="hlink"
+              [routerLink]="gs.Link2Page('REFNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'','', 'L')"
+              [queryParams]="gs.Link2Page('REFNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'','', 'P')">{{rec.cp_master_refno}}</a>
+          </td>
           <td>{{rec.cp_paytype_needed}}</td>
           <td>{{rec.cp_cust_name}}</td>
           <!-- <td class='hlink2' (click)="editinvoice(rec)">{{rec.cp_inv_no}}</td> -->
           <td>
-            <a class="hlink" [routerLink]="gs.Link2Page('INVNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'',rec.cp_inv_id, 'L')"
-                [queryParams]="gs.Link2Page('INVNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'',rec.cp_inv_id, 'P')">{{rec.ca_inv_no}}</a>
+            <a class="hlink"
+              [routerLink]="gs.Link2Page('INVNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'',rec.cp_inv_id, 'L')"
+              [queryParams]="gs.Link2Page('INVNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'',rec.cp_inv_id, 'P')">{{rec.ca_inv_no}}</a>
           </td>
           <td>{{rec.cp_payment_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td class='hlink2' (click)="UpdatePayStatus(rec,paymodal)">{{rec.cp_pay_status}}</td>
@@ -114,6 +116,8 @@
           <td class='hlink2' (click)="AttachedOhblFiles(rec,payuploadmodal,payattachmodal)">ATTACHMENTS</td>
           <td class='hlink2' (click)="AttachedCheckFiles(rec,payuploadmodal,payattachmodal)">CHECK COPY</td>
           <td class='hlink2' (click)="editapproval(rec)">APPROVAL</td>
+          <!-- <td><a class="hlink" [routerLink]="getLink('APPROVAL')" [queryParams]="getParam('APPROVAL',rec)">APPROVAL</a>
+          </td> -->
           <td class='hlink2' (click)="ArApList(rec,payarapmodal)">ARAP</td>
         </tr>
       </tbody>
@@ -183,7 +187,8 @@
     <div class="page-body">
       <div class="row">
         <div class="col-md-12 testbox  px-0 mx-0">
-          <app-pay-upload-report [title]="Invoketitle" [type]="Invoketype" [HouseList]="HouseList" [InvoiceList]="InvoiceList">
+          <app-pay-upload-report [title]="Invoketitle" [type]="Invoketype" [HouseList]="HouseList"
+            [InvoiceList]="InvoiceList">
           </app-pay-upload-report>
         </div>
       </div>
@@ -201,9 +206,10 @@
       <div class="row">
         <div class="col-md-12 testbox  px-0 mx-0">
           <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="" [type]="attach_type"
-            [typelist]="attach_typelist" [tablename]="attach_tablename" [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
-            [uploadfiles]="flase" [customername]="attach_customername" [updatecolumn]="" [viewonlysource]=""
-            [viewonlyid]="" [filespath]="" [filespath2]="" [modalview]="true" (callbackevent)="callbackevent($event)">
+            [typelist]="attach_typelist" [tablename]="attach_tablename" [tablepkcolumn]="attach_tablepkcolumn"
+            [refno]="attach_refno" [uploadfiles]="flase" [customername]="attach_customername" [updatecolumn]=""
+            [viewonlysource]="" [viewonlyid]="" [filespath]="" [filespath2]="" [modalview]="true"
+            (callbackevent)="callbackevent($event)">
           </app-fileupload>
         </div>
       </div>
