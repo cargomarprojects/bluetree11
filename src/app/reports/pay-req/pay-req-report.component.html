@@ -77,8 +77,10 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>REQUESTED-BY</th>
-          <th>REQ.DATE</th>
+          <!-- <th>REQUESTED-BY</th>
+          <th>REQ.DATE</th> -->
+          <th (click) ="sort('rec_created_by')" >REQUESTED-BY&nbsp;<i [ngClass]="getIcon('rec_created_by')"></i></th>
+          <th (click) ="sort('rec_created_date')" >REQ.DATE&nbsp;<i [ngClass]="getIcon('rec_created_date')"></i></th>
           <th>REF#</th>
           <th>REQ.TYPE</th>
           <th>PAYEE</th>
