@@ -39,10 +39,11 @@ export function PayReqReportReducer(state: ReportState[] = [initialState], actio
         case myActions.ActionTypes.DELETE:
             return [...state.filter(rec => rec.urlid != action.payload.id)];
         case myActions.ActionTypes.SORT_DATA: {
-            if (state[action.payload.id] == null)
+
+            var st = Object.assign({},state.find( rec => rec.urlid  == action.payload.id));
+            if ( st == null)
                 return [...state];
-            
-            var st = Object.assign({},state[action.payload.id]);
+
             if (st.sortcol != action.payload.sortcol) {
                 st.sortcol = action.payload.sortcol;
                 st.sortorder = true;

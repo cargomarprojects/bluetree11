@@ -25,6 +25,10 @@ export class PayReqReportComponent implements OnInit {
 
   title = 'Payment Request Report';
 
+  sortCol  = '';
+  sortOrder = true;  
+
+
   pkid: string;
   urlid: string;
   url: string;
@@ -129,6 +133,11 @@ export class PayReqReportComponent implements OnInit {
         // this.USERRECORD.id = this.user_id;
         // this.USERRECORD.name = this.user_name;
 
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
+
+        
+
         this.comp_type = rec.comp_type;
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -156,6 +165,9 @@ export class PayReqReportComponent implements OnInit {
         this.page_rowcount = 0;
 
         this.currentTab = 'LIST';
+
+        this.sortCol = 'rec_created_date';
+        this.sortOrder = true;
         
         this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
         this.edate = this.gs.defaultValues.today;
@@ -249,9 +261,26 @@ export class PayReqReportComponent implements OnInit {
   }
 
   Close() {
-    this.store.dispatch(new myActions.Delete({ id: this.urlid }));
     this.location.back();
+
   }
+
+  private sort(sortcol : string){
+    this.store.dispatch(new myActions.SortData({ id : this.urlid, sortcol : sortcol }))
+  }
+
+  public getIcon(col : string){
+    if ( col == this.sortCol){
+      if ( this.sortOrder )
+        return 'fa fa-arrow-down';
+      else 
+        return 'fa fa-arrow-up';
+    }
+    else 
+      return null;
+  }
+
+
 
   initLov(caption: string = '') {
     // this.USERRECORD = new SearchTable();

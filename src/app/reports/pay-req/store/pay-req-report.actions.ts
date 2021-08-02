@@ -6,7 +6,7 @@ export enum ActionTypes {
   ADD = '[Pay-Req-Report-new] Add Report',
   UPDATE = '[Pay-Req-Report-new] Update Report',
   DELETE = '[Pay-Req-Report-new] Delete Report',
-  SORT_DATA = '[[Pay-Req-Report-new] Sort Data',
+  SORT_DATA = '[Pay-Req-Report-new] Sort Data',
 }
 
 export class Add implements Action {
