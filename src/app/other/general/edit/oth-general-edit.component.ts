@@ -1122,6 +1122,9 @@ export class OthGeneralEditComponent implements OnInit {
   }
 
   RemoveRow(_rec: Tbl_cargo_container) {
+    if (!confirm("Delete Y/N")) {
+      return;
+    }
     this.records.splice(this.records.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
   }
 

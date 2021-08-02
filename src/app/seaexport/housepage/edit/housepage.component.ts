@@ -946,6 +946,9 @@ export class HousePageComponent implements OnInit {
   }
 
   RemoveRow(_rec: Tbl_cargo_exp_container) {
+    if (!confirm("Delete Y/N")) {
+      return;
+    }
     this.cntrs.splice(this.cntrs.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
   }
 

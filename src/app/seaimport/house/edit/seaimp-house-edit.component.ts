@@ -1960,6 +1960,9 @@ export class SeaImpHouseEditComponent implements OnInit {
   }
 
   RemoveRow(_rec: Tbl_cargo_imp_container) {
+    if (!confirm("Delete Y/N")) {
+      return;
+    }
     this.cntrrecords.splice(this.cntrrecords.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
   }
 
