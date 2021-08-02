@@ -498,7 +498,7 @@ export class SeaImpMasterEditComponent implements OnInit {
       }
     }
     if (!bRet)
-      alert('Error While Saving');
+      alert(this.errorMessage);
 
     return bRet;
   }

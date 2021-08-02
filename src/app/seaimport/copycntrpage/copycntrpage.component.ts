@@ -82,8 +82,8 @@ export class CopyCntrPageComponent implements OnInit {
         this.selectdeselect_cntr = false;
         this.chkallselected_hbl = false;
         this.selectdeselect_hbl = false;
-        this.cntrrecords = response.cntrlist;
-        this.hblrecords = response.hbllist;
+        this.cntrrecords = (response.cntrlist == undefined || response.cntrlist == null) ? <Tbl_cargo_imp_container[]>[] : response.cntrlist;
+        this.hblrecords = (response.hbllist == undefined || response.hbllist == null) ? <Tbl_cargo_imp_housem[]>[] : response.hbllist;
 
         if (!this.gs.isBlank(this.cntr_chked_field))
           this.cntr_chked_field.nativeElement.focus();
