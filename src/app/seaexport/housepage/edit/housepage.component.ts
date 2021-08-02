@@ -665,7 +665,7 @@ export class HousePageComponent implements OnInit {
     }
 
     if (!bret)
-      alert('Error While Saving');
+      alert(this.errorMessage);
 
     return bret;
   }

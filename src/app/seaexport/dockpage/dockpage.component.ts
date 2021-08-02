@@ -307,7 +307,7 @@ export class DockPageComponent implements OnInit {
 
 
     if (!bret)
-      alert('Error While Saving');
+      alert(this.errorMessage);
 
     return bret;
   }
