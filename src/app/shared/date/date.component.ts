@@ -128,8 +128,8 @@ export class DateComponent {
         private dateAdapter: NgbDateAdapter<string>,
         private gs: GlobalService
     ) { 
-        config.displayMonths = 12;
-        config.autoClose = 'outside';
+        //config.displayMonths = 12;
+        //config.autoClose = 'outside';
         if ( this.gs.DateFormat() == 'dd')
             this.localdateFormat = 'dd-mm-yyyy';
         else 
