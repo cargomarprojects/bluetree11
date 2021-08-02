@@ -115,9 +115,9 @@
           <td>{{rec.cp_spl_notes}}</td>
           <td class='hlink2' (click)="AttachedOhblFiles(rec,payuploadmodal,payattachmodal)">ATTACHMENTS</td>
           <td class='hlink2' (click)="AttachedCheckFiles(rec,payuploadmodal,payattachmodal)">CHECK COPY</td>
-          <td class='hlink2' (click)="editapproval(rec)">APPROVAL</td>
-          <!-- <td><a class="hlink" [routerLink]="getLink('APPROVAL')" [queryParams]="getParam('APPROVAL',rec)">APPROVAL</a>
-          </td> -->
+          <!-- <td class='hlink2' (click)="editapproval(rec)">APPROVAL</td> -->
+          <td><a class="hlink" [routerLink]="getLink('APPROVAL')" [queryParams]="getParam('APPROVAL',rec)">APPROVAL</a>
+          </td>
           <td class='hlink2' (click)="ArApList(rec,payarapmodal)">ARAP</td>
         </tr>
       </tbody>
