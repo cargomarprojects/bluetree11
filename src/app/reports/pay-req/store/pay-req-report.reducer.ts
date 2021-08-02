@@ -5,6 +5,8 @@ import { AppState as thisState } from '../../../reducer';
 import * as myActions from './pay-req-report.actions';
 import { ReportState } from './pay-req-report.models';
 
+import * as _ from 'lodash-es';
+
 export interface AppState extends thisState {
     'PayReqReport': ReportState
 }
@@ -51,6 +53,11 @@ export function PayReqReportReducer(state: ReportState[] = [initialState], actio
             else
                 st.sortorder = !st.sortorder;
 
+            if (st.sortorder)
+                st.records = _.sortBy(st.records, st.sortcol);
+            else
+                st.records = _.sortBy(st.records, st.sortcol).reverse();
+            
             return [...state.filter(rec => rec.urlid != action.payload.id), st ];
         }
         default:
