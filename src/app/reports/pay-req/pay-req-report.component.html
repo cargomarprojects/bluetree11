@@ -80,12 +80,12 @@
           <th (click) ="sort('rec_created_by')"   >REQUESTED-BY &nbsp;<i [ngClass]="getIcon('rec_created_by')"></i></th>
           <th (click) ="sort('rec_created_date')" >REQ.DATE&nbsp;<i [ngClass]="getIcon('rec_created_date')"></i></th> 
           <th (click) ="sort('cp_master_refno')"  >REF#&nbsp;<i [ngClass]="getIcon('cp_master_refno')"></i></th>
-          <th>REQ.TYPE</th>
-          <th>PAYEE</th>
-          <th>A/P NO</th>
-          <th>PAYMENT DATE</th>
-          <th>STATUS</th>
-          <th>NOTES</th>
+          <th (click) ="sort('cp_paytype_needed')"  >REQ.TYPE&nbsp;<i [ngClass]="getIcon('cp_paytype_needed')"></i></th>
+          <th (click) ="sort('cp_cust_name')"  >PAYEE&nbsp;<i [ngClass]="getIcon('cp_cust_name')"></i></th>
+          <th (click) ="sort('cp_inv_no')"  >A/P NO&nbsp;<i [ngClass]="getIcon('cp_inv_no')"></i></th>
+          <th (click) ="sort('cp_payment_date')"  >PAYMENT DATE&nbsp;<i [ngClass]="getIcon('cp_payment_date')"></i></th>
+          <th (click) ="sort('cp_pay_status')"  >STATUS&nbsp;<i [ngClass]="getIcon('cp_pay_status')"></i></th>
+          <th (click) ="sort('cp_spl_notes')"  >NOTES&nbsp;<i [ngClass]="getIcon('cp_spl_notes')"></i></th>
           <th>OHBL/TELEX RLS COPY</th>
           <th>CHECK COPY</th>
           <th>APPROVAL</th>
@@ -106,7 +106,7 @@
           <td>
             <a class="hlink"
               [routerLink]="gs.Link2Page('INVNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'',rec.cp_inv_id, 'L')"
-              [queryParams]="gs.Link2Page('INVNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'',rec.cp_inv_id, 'P')">{{rec.ca_inv_no}}</a>
+              [queryParams]="gs.Link2Page('INVNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'',rec.cp_inv_id, 'P')">{{rec.cp_inv_no}}</a>
           </td>
           <td>{{rec.cp_payment_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td class='hlink2' (click)="UpdatePayStatus(rec,paymodal)">{{rec.cp_pay_status}}</td>
