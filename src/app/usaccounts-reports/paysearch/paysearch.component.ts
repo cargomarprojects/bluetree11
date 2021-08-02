@@ -78,6 +78,7 @@ export class PaySearchComponent implements OnInit {
     }
 
     let parameter = {
+      appid : this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.pay_pkid,
       type: '',
