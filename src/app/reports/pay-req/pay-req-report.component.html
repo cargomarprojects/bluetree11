@@ -96,7 +96,6 @@
         <tr>
           <td>{{rec.rec_created_by}}</td>
           <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.cp_master_refno}}</td> -->
           <td>
             <a class="hlink"
               [routerLink]="gs.Link2Page('REFNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'','', 'L')"
@@ -104,7 +103,6 @@
           </td>
           <td>{{rec.cp_paytype_needed}}</td>
           <td>{{rec.cp_cust_name}}</td>
-          <!-- <td class='hlink2' (click)="editinvoice(rec)">{{rec.cp_inv_no}}</td> -->
           <td>
             <a class="hlink"
               [routerLink]="gs.Link2Page('INVNO', rec.cp_mode, rec.cp_master_refno, rec.cp_master_id,'',rec.cp_inv_id, 'L')"
@@ -115,9 +113,7 @@
           <td>{{rec.cp_spl_notes}}</td>
           <td class='hlink2' (click)="AttachedOhblFiles(rec,payuploadmodal,payattachmodal)">ATTACHMENTS</td>
           <td class='hlink2' (click)="AttachedCheckFiles(rec,payuploadmodal,payattachmodal)">CHECK COPY</td>
-          <!-- <td class='hlink2' (click)="editapproval(rec)">APPROVAL</td> -->
-          <td><a class="hlink" [routerLink]="getLink('APPROVAL')" [queryParams]="getParam('APPROVAL',rec)">APPROVAL</a>
-          </td>
+          <td><a class="hlink" [routerLink]="getLink('APPROVAL')" [queryParams]="getParam('APPROVAL',rec)">APPROVAL</a></td>
           <td class='hlink2' (click)="ArApList(rec,payarapmodal)">ARAP</td>
         </tr>
       </tbody>
