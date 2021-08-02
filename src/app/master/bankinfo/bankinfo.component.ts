@@ -223,7 +223,7 @@ export class BankInfoComponent implements OnInit {
           }
           this.NewRecord();
           this.errorMessage = 'Save Complete';
-          // alert(this.errorMessage);
+           alert(this.errorMessage);
         }
       }, error => {
         this.errorMessage = this.gs.getError(error);

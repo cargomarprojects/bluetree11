@@ -195,7 +195,7 @@ export class PaymentReqComponent implements OnInit {
         else {
           this.RefreshList();
           this.errorMessage = 'Save Complete';
-          // alert(this.errorMessage);
+          alert(this.errorMessage);
           this.NewRecord();
         }
       }, error => {

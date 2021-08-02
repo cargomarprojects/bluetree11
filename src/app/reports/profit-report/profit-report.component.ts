@@ -46,7 +46,7 @@ export class ProfitReportComponent implements OnInit {
   report_url: string;
   report_searchdata: any = {};
   report_menuid: string;
-  
+
   filename: string = '';
   filetype: string = '';
   filedisplayname: string = '';
@@ -62,7 +62,7 @@ export class ProfitReportComponent implements OnInit {
   sales_id: string;
   sales_name: string;
   sales_where: string = '';
-  
+
   _report_category: string;
   _report_type: string = '';
 
@@ -106,7 +106,7 @@ export class ProfitReportComponent implements OnInit {
     this.sub = this.activatedroute.queryParams.subscribe(params => {
 
       this.gs.checkAppVersion();
-      
+
       this.urlid = params.id;
       this.menuid = params.menuid;
       this.InitPage();
@@ -317,6 +317,12 @@ export class ProfitReportComponent implements OnInit {
     if (feild == 'mode') {
       this.FillChkListBox();
     }
+    if (feild == 'report_category') {
+      this.cust_id = "";
+      this.cust_name = "";
+      this.cust_parent_id = "";
+      this.cust_parent_name = "";
+    }
   }
   ngOnInit() {
   }
@@ -493,7 +499,7 @@ export class ProfitReportComponent implements OnInit {
 
 
   initLov(caption: string = '') {
- 
+
   }
 
   LovSelected(_Record: SearchTable) {

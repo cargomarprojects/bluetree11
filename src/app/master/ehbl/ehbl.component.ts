@@ -187,7 +187,7 @@ export class EhblComponent implements OnInit {
                 else {
                     this.mode = 'EDIT';
                     this.errorMessage = 'Save Complete';
-                    // alert(this.errorMessage);
+                     alert(this.errorMessage);
                 }
             }, error => {
                 this.errorMessage = this.gs.getError(error);
