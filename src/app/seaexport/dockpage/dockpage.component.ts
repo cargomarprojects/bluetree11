@@ -348,7 +348,7 @@ export class DockPageComponent implements OnInit {
       if (response.retvalue) {
         this.mode = 'EDIT';
         this.errorMessage.push('Save Complete');
-        // alert(this.errorMessage);
+        alert(this.errorMessage);
       } else {
         this.errorMessage.push(response.error);
         alert(this.errorMessage);

@@ -112,7 +112,7 @@ export class CopyExpCntrPageComponent implements OnInit {
         }
         else {
           this.errorMessage = 'Save Complete';
-          // alert(this.errorMessage);
+          alert(this.errorMessage);
         }
       }, error => {
         this.errorMessage = this.gs.getError(error);
