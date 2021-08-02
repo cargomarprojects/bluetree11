@@ -630,6 +630,7 @@ export class InvoiceEditComponent implements OnInit {
         alert('Save Complete');
       }
       else {
+        this.errorMessage = rec.error;
         alert(this.errorMessage);
       }
     },
