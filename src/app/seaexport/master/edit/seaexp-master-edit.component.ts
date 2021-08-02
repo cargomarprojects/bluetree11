@@ -530,7 +530,7 @@ export class SeaexpMasterEditComponent implements OnInit {
     }
 
     if (!bRet)
-      alert('Error While Saving');
+      alert(this.errorMessage);
 
     return bRet;
   }
@@ -1063,6 +1063,9 @@ export class SeaexpMasterEditComponent implements OnInit {
   }
 
   RemoveRow(_rec: Tbl_cargo_exp_container) {
+    if (!confirm("Delete Y/N")) {
+      return;
+    }
     this.records.splice(this.records.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
   }
 

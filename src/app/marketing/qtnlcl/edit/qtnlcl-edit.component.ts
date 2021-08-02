@@ -106,7 +106,7 @@ export class QtnLclEditComponent implements OnInit {
         }
     }
     private initPage() {
-        
+
         this.foreign_amt_decplace = this.gs.foreign_amt_dec;
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
@@ -332,7 +332,7 @@ export class QtnLclEditComponent implements OnInit {
 
 
         if (!bRet)
-            alert('Error While Saving');
+            alert(this.errorMessage);
 
         return bRet;
     }
@@ -482,14 +482,14 @@ export class QtnLclEditComponent implements OnInit {
                 break;
             } case 'HISTORY': {
                 let prm = {
-                    appid:this.gs.appid,
+                    appid: this.gs.appid,
                     menuid: this.menuid,
                     pkid: this.pkid,
                     source: 'QUOTATION-LCL-RATE',
                     title: "History [Quote# : " + this.record.qtnm_no + "]",
                     origin: 'qtn-lcl-page'
                 };
-                this.gs.Naviagete2('Silver.BusinessModule/LogBookPage',  prm);
+                this.gs.Naviagete2('Silver.BusinessModule/LogBookPage', prm);
                 break;
             }
             case 'PRINT': {
@@ -510,6 +510,9 @@ export class QtnLclEditComponent implements OnInit {
     }
 
     RemoveRow(_rec: Tbl_Cargo_Qtnd_Lcl) {
+        if (!confirm("Delete Y/N")) {
+            return;
+        }
         if (this.mode === "EDIT" && this.historyList != null) {
             this.records.forEach(rec => {
                 if (rec.qtnd_pkid == _rec.qtnd_pkid)

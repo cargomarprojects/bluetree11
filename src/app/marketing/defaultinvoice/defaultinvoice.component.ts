@@ -131,7 +131,7 @@ export class DefaultInvoiceComponent implements OnInit {
 
 
         if (!bRet)
-            alert('Error While Saving');
+            alert(this.errorMessage);
 
         return bRet;
     }
@@ -189,7 +189,7 @@ export class DefaultInvoiceComponent implements OnInit {
         SearchData.CLIENT_ID = this.client_id;
         this.mainService.List(SearchData)
             .subscribe(response => {
-                this.records = <Tbl_Cargo_Qtnd_Lcl[]>response.list;
+                this.records =  (response.list == undefined || response.list == null) ? <Tbl_Cargo_Qtnd_Lcl[]>[]:  <Tbl_Cargo_Qtnd_Lcl[]>response.list;
             }, error => {
                 this.errorMessage.push(this.gs.getError(error));
             });
@@ -216,6 +216,9 @@ export class DefaultInvoiceComponent implements OnInit {
     }
 
     RemoveRow(_rec: Tbl_Cargo_Qtnd_Lcl) {
+        if (!confirm("Delete Y/N")) {
+            return;
+          }
         this.records.splice(this.records.findIndex(rec => rec.qtnd_pkid == _rec.qtnd_pkid), 1);
     }
 

@@ -380,7 +380,7 @@ export class CertOrgPageComponent implements OnInit {
     }
 
     if (!bret)
-      alert('Error While Saving');
+      alert(this.errorMessage);
 
     return bret;
   }

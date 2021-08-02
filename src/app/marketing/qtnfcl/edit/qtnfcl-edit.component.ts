@@ -368,7 +368,7 @@ export class QtnFclEditComponent implements OnInit {
 
 
         if (!bRet)
-            alert('Error While Saving');
+            alert(this.errorMessage);
 
         return bRet;
     }
@@ -584,6 +584,9 @@ export class QtnFclEditComponent implements OnInit {
     }
 
     RemoveRow(_rec: Tbl_Cargo_Qtnd_Fcl) {
+        if (!confirm("Delete Y/N")) {
+            return;
+          }
         this.records.splice(this.records.findIndex(rec => rec.qtnd_pkid == _rec.qtnd_pkid), 1);
     }
 
