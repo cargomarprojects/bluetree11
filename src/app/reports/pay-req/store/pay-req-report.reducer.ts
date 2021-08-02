@@ -21,7 +21,7 @@ export const initialState: ReportState = {
     comp_type: '',
     user_id: '',
     user_name: '',
-    sortcol: '',
+    sortcol: 'rec_created_date',
     sortorder: true,
     page_rows: 0,
     page_count: 0,
@@ -41,6 +41,16 @@ export function PayReqReportReducer(state: ReportState[] = [initialState], actio
         case myActions.ActionTypes.SORT_DATA: {
             if (state[action.payload.id] == null)
                 return [...state];
+            
+            var st = Object.assign({},state[action.payload.id]);
+            if (st.sortcol != action.payload.sortcol) {
+                st.sortcol = action.payload.sortcol;
+                st.sortorder = true;
+            }
+            else
+                st.sortorder = !st.sortorder;
+
+            return [...state.filter(rec => rec.urlid != action.payload.id), st ];
         }
         default:
             return state;

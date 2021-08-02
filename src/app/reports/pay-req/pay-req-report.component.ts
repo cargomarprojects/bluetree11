@@ -135,21 +135,18 @@ export class PayReqReportComponent implements OnInit {
         this.page_current = rec.page_current;
         this.page_rowcount = rec.page_rowcount;
 
-
-
-
         this.SearchData = this.gs.UserInfo;
-        this.SearchData.SDATE = this.sdate;
-        this.SearchData.EDATE = this.edate;
-        this.SearchData.MODE = this.mode;
-        this.SearchData.COMP_TYPE = this.comp_type;
-        if (this.comp_type === 'ALL') {
-          this.SearchData.COMP_CODE = this.gs.branch_codes;
-        } else {
-          this.SearchData.COMP_CODE = this.comp_type;
-        }
+        
+        this.SearchData.FDATE = this.sdate;
+        this.SearchData.TDATE = this.edate;
+        this.SearchData.STYPE = this.mode;
+        this.SearchData.ISADMIN = 'N';
+  
+        this.SearchData.REQUEST_ID = this.user_id;
+        this.SearchData.user_id = this.user_id;
+        this.SearchData.user_name = this.user_name;
 
-
+        
       } else {
         this.MainList = Array<Tbl_Cargo_Payrequest>();
 
@@ -159,8 +156,7 @@ export class PayReqReportComponent implements OnInit {
         this.page_rowcount = 0;
 
         this.currentTab = 'LIST';
-
-        this.report_category = 'CONSIGNEE SHIPMENT REPORT';
+        
         this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
         this.edate = this.gs.defaultValues.today;
         this.mode = 'PENDING';
@@ -170,7 +166,7 @@ export class PayReqReportComponent implements OnInit {
         this.user_name = this.gs.user_name;
 
         this.SearchData = this.gs.UserInfo;
-
+        
       }
     });
 
@@ -202,9 +198,6 @@ export class PayReqReportComponent implements OnInit {
     if (_outputformat === 'SCREEN' && _action === 'NEW') {
 
       this.SearchData.page_current = -1;
-
-      this.SearchData.JV_YEAR = this.gs.globalVariables.year_code;
-      this.SearchData.REPORT_CATEGORY = this.report_category;
       this.SearchData.FDATE = this.sdate;
       this.SearchData.TDATE = this.edate;
       this.SearchData.STYPE = this.mode;
@@ -236,7 +229,7 @@ export class PayReqReportComponent implements OnInit {
 
             user_id: this.SearchData.user_id,
             user_name: this.SearchData.user_name,
-            sortcol:'',
+            sortcol:'rec_created_date',
             sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
@@ -250,7 +243,7 @@ export class PayReqReportComponent implements OnInit {
         this.loading = false;
       }, error => {
         this.loading = false;
-        this.errorMessage = error.error.error_description;
+        this.errorMessage = error.error;
         alert(this.errorMessage);
       });
   }
