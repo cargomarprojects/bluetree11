@@ -365,6 +365,10 @@ tr:nth-child(even) {
     background-color:var(--custom-bg-color);
 }
 
+.page-body table-responsive {
+    overflow: visible;
+}
+
   
 .page-footer {
     border: 1px solid rgba(0,0,0,.125);
