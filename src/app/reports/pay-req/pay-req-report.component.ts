@@ -236,7 +236,8 @@ export class PayReqReportComponent implements OnInit {
 
             user_id: this.SearchData.user_id,
             user_name: this.SearchData.user_name,
-
+            sortcol:'',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
