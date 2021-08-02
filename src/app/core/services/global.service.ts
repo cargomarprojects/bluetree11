@@ -3272,25 +3272,25 @@ export class GlobalService {
     if (this.isBlank(this.SEA_EXPORT_HOUSE_PREFIX_POL)) { alert('SEA EXPORT HOUSE PREFIX POL Cannot Blank'); return false; }
     if (this.isBlank(this.SEA_EXPORT_HOUSE_PREFIX_POD)) { alert('SEA EXPORT HOUSE PREFIX POD Cannot Blank'); return false; }
     if (this.isBlank(this.SEA_EXPORT_HOUSE_STARTING_NO)) { alert('SEA EXPORT HOUSE STARTING NO Cannot Blank'); return false; }
-    if (this.isBlank(this.SEA_EXPORT_HOUSE_INCR_BY)) { alert('SEA_EXPORT_HOUSE_INCR_BY Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_EXPORT_HOUSE_INCR_BY)) { alert('SEA EXPORT HOUSE INCR BY Cannot Blank'); return false; }
     if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX)) { alert('AIR_EXPORT_HOUSE_PREFIX Cannot Blank'); return false; }
-    if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX_POL)) { alert('AIR_EXPORT_HOUSE_PREFIX_POL Cannot Blank'); return false; }
-    if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX_POD)) { alert('AIR_EXPORT_HOUSE_PREFIX_POD Cannot Blank'); return false; }
-    if (this.isBlank(this.AIR_EXPORT_HOUSE_STARTING_NO)) { alert('AIR_EXPORT_HOUSE_STARTING_NO Cannot Blank'); return false; }
-    if (this.isBlank(this.AIR_EXPORT_HOUSE_INCR_BY)) { alert('AIR_EXPORT_HOUSE_INCR_BY Cannot Blank'); return false; }
-    if (this.isBlank(this.SEA_EXPORT_REFNO_PREFIX)) { alert('SEA_EXPORT_REFNO_PREFIX) Cannot Blank'); return false; }
-    if (this.isBlank(this.SEA_EXPORT_REFNO_STARTING_NO)) { alert('SEA_EXPORT_REFNO_STARTING_NO Cannot Blank'); return false; }
-    if (this.isBlank(this.SEA_IMPORT_REFNO_PREFIX)) { alert('SEA_IMPORT_REFNO_PREFIX Cannot Blank'); return false; }
-    if (this.isBlank(this.SEA_IMPORT_REFNO_STARTING_NO)) { alert('SEA_IMPORT_REFNO_STARTING_NO Cannot Blank'); return false; }
-    if (this.isBlank(this.AIR_EXPORT_REFNO_PREFIX)) { alert('AIR_EXPORT_REFNO_PREFIX Cannot Blank'); return false; }
-    if (this.isBlank(this.AIR_EXPORT_REFNO_STARTING_NO)) { alert('AIR_EXPORT_REFNO_STARTING_NO Cannot Blank'); return false; }
-    if (this.isBlank(this.AIR_IMPORT_REFNO_PREFIX)) { alert('AIR_IMPORT_REFNO_PREFIX Cannot Blank'); return false; }
-    if (this.isBlank(this.AIR_IMPORT_REFNO_STARTING_NO)) { alert('AIR_IMPORT_REFNO_STARTING_NO Cannot Blank'); return false; }
-    if (this.isBlank(this.OTHER_OPERATION_REFNO_PREFIX)) { alert('OTHER_OPERATION_REFNO_PREFIX Cannot Blank'); return false; }
-    if (this.isBlank(this.OTHER_OPERATION_REFNO_STARTING_NO)) { alert('OTHER_OPERATION_REFNO_STARTING_NO Cannot Blank'); return false; }
-    if (this.isBlank(this.AR_INVOICE_PREFIX)) { alert('AR_INVOICE_PREFIX Cannot Blank'); return false; }
-    if (this.isBlank(this.AR_INVOICE_STARTING_NO)) { alert('AR_INVOICE_STARTING_NO Cannot Blank'); return false; }
-    if (this.isBlank(this.AP_INVOICE_PREFIX)) { alert('AP_INVOICE_PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX_POL)) { alert('AIR EXPORT HOUSE PREFIX POL Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_HOUSE_PREFIX_POD)) { alert('AIR EXPORT HOUSE PREFIX POD Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_HOUSE_STARTING_NO)) { alert('AIR EXPORT HOUSE STARTING NO Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_HOUSE_INCR_BY)) { alert('AIR EXPORT HOUSE INCR BY Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_EXPORT_REFNO_PREFIX)) { alert('SEA EXPORT REFNO PREFIX) Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_EXPORT_REFNO_STARTING_NO)) { alert('SEA EXPORT REFNO STARTING NO Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_IMPORT_REFNO_PREFIX)) { alert('SEA IMPORT REFNO PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.SEA_IMPORT_REFNO_STARTING_NO)) { alert('SEA IMPORT REFNO STARTING NO Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_REFNO_PREFIX)) { alert('AIR EXPORT REFNO PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_EXPORT_REFNO_STARTING_NO)) { alert('AIR EXPORT REFNO STARTING NO Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_IMPORT_REFNO_PREFIX)) { alert('AIR IMPORT REFNO PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.AIR_IMPORT_REFNO_STARTING_NO)) { alert('AIR IMPORT REFNO STARTING NO Cannot Blank'); return false; }
+    if (this.isBlank(this.OTHER_OPERATION_REFNO_PREFIX)) { alert('OTHER OPERATION REFNO PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.OTHER_OPERATION_REFNO_STARTING_NO)) { alert('OTHER OPERATION REFNO STARTING NO Cannot Blank'); return false; }
+    if (this.isBlank(this.AR_INVOICE_PREFIX)) { alert('AR INVOICE PREFIX Cannot Blank'); return false; }
+    if (this.isBlank(this.AR_INVOICE_STARTING_NO)) { alert('AR INVOICE STARTING NO Cannot Blank'); return false; }
+    if (this.isBlank(this.AP_INVOICE_PREFIX)) { alert('AP INVOICE PREFIX Cannot Blank'); return false; }
     if (this.isBlank(this.AP_INVOICE_STARTING_NO)) { alert('AP INVOICE STARTING NO Cannot Blank'); return false; }
     if (this.isBlank(this.WWW_ROOT)) { alert('WWW ROOT Cannot Blank'); return false; }
     if (this.isBlank(this.WWW_ROOT_FILE_FOLDER)) { alert('WWW ROOT FILE FOLDER Cannot Blank'); return false; }

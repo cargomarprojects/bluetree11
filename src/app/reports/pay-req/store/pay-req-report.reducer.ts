@@ -21,6 +21,8 @@ export const initialState: ReportState = {
     comp_type: '',
     user_id: '',
     user_name: '',
+    sortcol: '',
+    sortorder: true,
     page_rows: 0,
     page_count: 0,
     page_current: 0,
@@ -36,6 +38,10 @@ export function PayReqReportReducer(state: ReportState[] = [initialState], actio
             return [...state.filter(rec => rec.urlid != action.payload.id), action.payload.changes];
         case myActions.ActionTypes.DELETE:
             return [...state.filter(rec => rec.urlid != action.payload.id)];
+        case myActions.ActionTypes.SORT_DATA: {
+            if ( state[action.payload.id] == null )
+                    return [...state];
+        }
         default:
             return state;
     }
