@@ -53,6 +53,36 @@ export class DepositEditComponent implements OnInit {
         }
     }
 
+    actionHandler() {
+        this.msEdit.errorMessage = '';
+        this.msEdit.isAccLocked = false;
+
+        if (this.msEdit.mode == 'ADD') {
+            this.msEdit.record = <Tbl_Acc_Payment>{};
+            this.msEdit.arPendingList = <Tbl_Acc_Payment[]>[];
+            this.msEdit.DetailList = <Tbl_Acc_Payment[]>[];
+            this.msEdit.total_amount = 0;
+            this.msEdit.pkid = this.gs.getGuid();
+            this.InitBank();
+            this.init();
+        }
+    }
+    
+    init() {
+
+        this.msEdit.record.pay_pkid = this.msEdit.pkid;
+        this.msEdit.record.pay_vrno = '';
+        this.msEdit.remarks = '';
+        this.msEdit.record.rec_created_by = this.gs.user_code;
+        this.msEdit.record.rec_created_date = this.gs.defaultValues.today;
+    }    
+
+    InitBank(){
+        this.msEdit.id = '';
+        this.msEdit.code = '';
+        this.msEdit.name = '';
+    }
+
     replaceUrlMode() {
         this.msEdit.mode = "EDIT";
         let parameter = {
@@ -71,34 +101,6 @@ export class DepositEditComponent implements OnInit {
         this.msEdit.mode = 'ADD'
         this.actionHandler();
     }
-
-    actionHandler() {
-        this.msEdit.errorMessage = '';
-        this.msEdit.isAccLocked = false;
-
-        if (this.msEdit.mode == 'ADD') {
-            this.msEdit.record = <Tbl_Acc_Payment>{};
-            this.msEdit.arPendingList = <Tbl_Acc_Payment[]>[];
-            this.msEdit.DetailList = <Tbl_Acc_Payment[]>[];
-            this.msEdit.total_amount = 0;
-            this.msEdit.pkid = this.gs.getGuid();
-            this.init();
-        }
-    }
-
-    init() {
-
-        this.msEdit.record.pay_pkid = this.msEdit.pkid;
-        this.msEdit.record.pay_vrno = '';
-        this.msEdit.remarks = '';
-        this.msEdit.id = '';
-        this.msEdit.code = '';
-        this.msEdit.name = '';
-
-        this.msEdit.record.rec_created_by = this.gs.user_code;
-        this.msEdit.record.rec_created_date = this.gs.defaultValues.today;
-    }
-
 
 
     ProcessData() {
@@ -139,10 +141,11 @@ export class DepositEditComponent implements OnInit {
                     this.msEdit.record.pay_narration = this.msEdit.remarks;
                     this.msList.RefreshList(this.msEdit.record);
                     this.msEdit.errorMessage = 'Save Complete';
+                    
                     alert(this.msEdit.errorMessage);
 
                     this.msEdit.mode = "ADD";
-                    // this.actionHandler();
+                    
                     this.msEdit.DetailList.forEach(_rec => {
                         this.msEdit.arPendingList.splice(this.msEdit.arPendingList.findIndex(rec => rec.pay_pkid == _rec.pay_pkid), 1);
                     });
@@ -154,17 +157,13 @@ export class DepositEditComponent implements OnInit {
                     this.msEdit.total_amount = 0;
                     this.msEdit.pkid = this.gs.getGuid();
                     this.init();
-                }
 
+                }
             }, error => {
                 this.msEdit.errorMessage = this.gs.getError(error);
                 alert(this.msEdit.errorMessage);
             });
     }
-
-
-
-
 
     pendingList() {
         var SearchData = this.gs.UserInfo;

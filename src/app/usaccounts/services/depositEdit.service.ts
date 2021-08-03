@@ -76,10 +76,6 @@ export class DepositEditService {
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
-        this.LoadCombo();
-    }
-
-    LoadCombo() {
 
     }
       
