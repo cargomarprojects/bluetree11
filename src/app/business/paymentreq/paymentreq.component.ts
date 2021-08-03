@@ -71,7 +71,7 @@ export class PaymentReqComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.title = 'Payment Request';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
@@ -151,8 +151,8 @@ export class PaymentReqComponent implements OnInit {
 
     this.mainService.List(SearchData)
       .subscribe(response => {
-        this.payrecords = <Table_Cargo_Payrequest[]>response.records;
-        this.invrecords = <Table_Cargo_Payrequest[]>response.invrecords;
+        this.payrecords = (response.records == undefined || response.records == null) ? <Table_Cargo_Payrequest[]>[] : <Table_Cargo_Payrequest[]>response.records;
+        this.invrecords = (response.invrecords == undefined || response.invrecords == null) ? <Table_Cargo_Payrequest[]>[] : <Table_Cargo_Payrequest[]>response.invrecords;
         if (!this.gs.isBlank(this.paytype_needed_field))
           this.paytype_needed_field.nativeElement.focus();
       },
@@ -267,7 +267,7 @@ export class PaymentReqComponent implements OnInit {
     // if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
     //   this.gs.LinkReturn(this.origin, this.cp_master_id, '');
     // else
-      this.location.back();
+    this.location.back();
   }
 
   SelectInvoice(_rec: Table_Cargo_Payrequest) {

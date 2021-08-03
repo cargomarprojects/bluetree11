@@ -96,7 +96,7 @@ export class FollowupComponent implements OnInit {
 
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
-        this.records = <Table_Cargo_Followup[]>response.records;
+        this.records = (response.records == undefined || response.records == null) ? <Table_Cargo_Followup[]>[]:<Table_Cargo_Followup[]>response.records;
         this.NewRecord();
       }, error => {
         this.errorMessage = this.gs.getError(error);
