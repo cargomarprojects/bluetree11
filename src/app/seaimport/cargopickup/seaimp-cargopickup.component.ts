@@ -205,7 +205,7 @@ export class SeaImpCargoPickupComponent implements OnInit {
       .subscribe(response => {
         this.chkallselected = false;
         this.selectdeselect = false;
-        this.cntrrecords = <Tbl_cargo_imp_container[]>response.cntrrecords;
+        this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_cargo_imp_container[]>[]:<Tbl_cargo_imp_container[]>response.cntrrecords;
         this.mode = response.mode;
         if (this.mode == 'ADD') {
           this.defaultrecord = <Tbl_cargo_imp_pickup>response.defaultrecord;

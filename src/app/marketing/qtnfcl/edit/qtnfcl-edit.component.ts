@@ -270,7 +270,7 @@ export class QtnFclEditComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_Cargo_Qtnm>response.record;
-                this.records = <Tbl_Cargo_Qtnd_Fcl[]>response.records;
+                this.records = (response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Fcl[]>[]:<Tbl_Cargo_Qtnd_Fcl[]>response.records;
                 this.mode = 'EDIT';
                 if (this.record.rec_files_attached == "Y")
                     this.Foregroundcolor = "red";
@@ -648,7 +648,7 @@ export class QtnFclEditComponent implements OnInit {
             .subscribe(response => {
                 this.NewRecord();
                 this.record = <Tbl_Cargo_Qtnm>response.record;
-                this.records = <Tbl_Cargo_Qtnd_Fcl[]>response.records;
+                this.records = (response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Fcl[]>[]:<Tbl_Cargo_Qtnd_Fcl[]>response.records;
 
                 this.record.qtnm_cfno = 0;
                 this.record.qtnm_no = "";

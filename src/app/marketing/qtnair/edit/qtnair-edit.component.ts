@@ -130,7 +130,7 @@ export class QtnAirEditComponent implements OnInit {
     }
 
     private initPage() {
-        
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = [];
@@ -223,7 +223,7 @@ export class QtnAirEditComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_Cargo_Qtnm>response.record;
-                this.records = <Tbl_Cargo_Qtnd_Air[]>response.records;
+                this.records = (response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Air[]>[] : <Tbl_Cargo_Qtnd_Air[]>response.records;
                 this.mode = 'EDIT';
                 if (this.record.rec_files_attached == "Y")
                     this.Foregroundcolor = "red";
@@ -532,7 +532,7 @@ export class QtnAirEditComponent implements OnInit {
     RemoveRow(_rec: Tbl_Cargo_Qtnd_Air) {
         if (!confirm("Delete Y/N")) {
             return;
-          }
+        }
         this.records.splice(this.records.findIndex(rec => rec.qtnd_pkid == _rec.qtnd_pkid), 1);
     }
 
@@ -592,7 +592,7 @@ export class QtnAirEditComponent implements OnInit {
             .subscribe(response => {
                 this.NewRecord();
                 this.record = <Tbl_Cargo_Qtnm>response.record;
-                this.records = <Tbl_Cargo_Qtnd_Air[]>response.records;
+                this.records = (response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Air[]>[] : <Tbl_Cargo_Qtnd_Air[]>response.records;
 
                 this.record.qtnm_cfno = 0;
                 this.record.qtnm_no = "";

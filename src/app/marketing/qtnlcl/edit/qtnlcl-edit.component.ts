@@ -200,7 +200,7 @@ export class QtnLclEditComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_Cargo_Qtnm>response.record;
-                this.records = <Tbl_Cargo_Qtnd_Lcl[]>response.records;
+                this.records = (response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Lcl[]>[]:<Tbl_Cargo_Qtnd_Lcl[]>response.records;
                 this.mode = 'EDIT';
 
                 if (this.record.rec_files_attached == "Y")
@@ -589,7 +589,7 @@ export class QtnLclEditComponent implements OnInit {
             .subscribe(response => {
                 this.NewRecord();
                 this.record = <Tbl_Cargo_Qtnm>response.record;
-                this.records = <Tbl_Cargo_Qtnd_Lcl[]>response.records;
+                this.records =(response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Lcl[]>[]: <Tbl_Cargo_Qtnd_Lcl[]>response.records;
 
                 this.record.qtnm_cfno = 0;
                 this.record.qtnm_no = "";

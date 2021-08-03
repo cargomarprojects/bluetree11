@@ -256,7 +256,7 @@ export class DeliveryOrderEditComponent implements OnInit {
       .subscribe(response => {
 
         this.record = <Tbl_cargo_imp_pickup>response.record;
-        this.cntrrecords = <Tbl_cargo_container[]>response.cntrrecords;
+        this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_cargo_container[]>[]:<Tbl_cargo_container[]>response.cntrrecords;
 
         let str: string = "";
         var sData = null;
