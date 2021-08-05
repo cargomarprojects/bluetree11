@@ -78,8 +78,9 @@
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of RecordList">
           <tr>
-            <td  class="p-0 text-center"><i class="fa fa-download fa-lg pointer" aria-hidden="true" (click)="ShowFile(rec)"></i>
-            </td>
+             <td  class="p-0 text-center"><i class="fa fa-download fa-lg pointer" aria-hidden="true" (click)="ShowFile(rec)"></i>
+            </td> 
+
             <td *ngIf="Files_TypeList.length>1" class="p-0">{{rec.files_type}}</td>
             <td class="p-0 hlink2" (click)="editrow(rec)" >{{rec.file_desc}}</td>
             <td class="p-0">{{rec.files_sizewithunit}}</td>
