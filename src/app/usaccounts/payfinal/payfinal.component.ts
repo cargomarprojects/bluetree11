@@ -683,6 +683,8 @@ export class PayFinalComponent implements OnInit {
             this.Txt_Address2 = _Record.col4;
             this.Txt_Address3 = _Record.col5;
             this.Txt_Address4 = _Record.col6;
+
+            this.LoadNextChqNo();
         }
     }
 
@@ -927,6 +929,8 @@ export class PayFinalComponent implements OnInit {
 
         if (this.paymode == "CHECK") {
             this.Txt_ChqNo = (+this.Txt_Next_ChqNo + 1).toString();
+            if( this.Txt_ChqNo == 'NaN')
+                this.Txt_ChqNo = '';
             return;
         }
 
@@ -945,7 +949,10 @@ export class PayFinalComponent implements OnInit {
             sPrefix += "OT";
 
         var yymmdd = this.sdate.replace("-", "");
-        yymmdd = yymmdd.substring(2, 6);
+        yymmdd = yymmdd.replace("-", "");
+        yymmdd = yymmdd.substring(2,8);
+
+
 
         if (this.gs.isBlank(this.Txt_Next_ChqNo) || this.gs.isZero(this.Txt_Next_ChqNo))
             this.Txt_ChqNo = sPrefix + yymmdd;
@@ -954,12 +961,14 @@ export class PayFinalComponent implements OnInit {
             var sChar = chqno.charAt(chqno.length - 1);
             var sCharCode = chqno.charCodeAt(chqno.length - 1) + 1;
             if (sChar >= '0' && sChar <= '9')
-                this.record.pay_chqno = sPrefix + yymmdd + "A"; // Dt_Date.SelectedDate.Value.ToString("yyMMdd") + "A";
+                //this.record.pay_chqno = sPrefix + yymmdd + "A"; // Dt_Date.SelectedDate.Value.ToString("yyMMdd") + "A";
+                this.Txt_ChqNo = sPrefix + yymmdd + "A"; // Dt_Date.SelectedDate.Value.ToString("yyMMdd") + "A";
             else {
                 //sChar++;
                 //Txt_ChqNo.Text = sPrefix + Dt_Date.SelectedDate.Value.ToString("yyMMdd") + sChar.ToString();
                 sChar = String.fromCharCode(sCharCode);
-                this.record.pay_chqno = sPrefix + yymmdd + sChar;
+                //this.record.pay_chqno = sPrefix + yymmdd + sChar;
+                this.Txt_ChqNo  = sPrefix + yymmdd + sChar;
             }
         }
 
