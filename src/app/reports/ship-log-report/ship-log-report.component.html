@@ -586,20 +586,20 @@
             <table class="table  table-hover table-sm">
                 <thead class="page-body-thead">
                     <tr>
-                        <th> REFNO </th>
-                        <th> ETA </th>
-                        <th> CI </th>
-                        <th> PL </th>
-                        <th> CARRIER AN </th>
-                        <th> CUSTOM CLR STATUS </th>
-                        <th> CUSTOM CLR DATE </th>
-                        <th> CARGO LOCATION </th>
-                        <th> COLOADER </th>
-                        <th> DLVRY STATUS </th>
-                        <th> DLVRY ORD SENT </th>
-                        <th> DLVRY ORD DATE </th>
-                        <th> MASTER BL STATUS </th>
-                        <th> HOUSE BL STATUS </th>
+                        <th (click)="sort('mbl_refno')"> REFNO &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i> </th>
+                        <th (click)="sort('mbl_pod_eta')"> ETA &nbsp;<i [ngClass]="getIcon('mbl_pod_eta')"></i> </th>
+                        <th (click)="sort('hbl_is_ci')"> CI &nbsp;<i [ngClass]="getIcon('hbl_is_ci')"></i> </th>
+                        <th (click)="sort('hbl_is_pl')"> PL &nbsp;<i [ngClass]="getIcon('hbl_is_pl')"></i>  </th>
+                        <th (click)="sort('hbl_is_carr_an')"> CARRIER AN &nbsp;<i [ngClass]="getIcon('hbl_is_carr_an')"></i>  </th>
+                        <th (click)="sort('hbl_custom_reles_status')"> CUSTOM CLR STATUS &nbsp;<i [ngClass]="getIcon('hbl_custom_reles_status')"></i>  </th>
+                        <th (click)="sort('hbl_custom_clear_date')"> CUSTOM CLR DATE &nbsp;<i [ngClass]="getIcon('hbl_custom_clear_date')"></i>  </th>
+                        <th (click)="sort('hbl_location_name')"> CARGO LOCATION &nbsp;<i [ngClass]="getIcon('hbl_location_name')"></i>  </th>
+                        <th (click)="sort('mbl_coloader_name')"> COLOADER &nbsp;<i [ngClass]="getIcon('mbl_coloader_name')"></i>  </th>
+                        <th (click)="sort('hbl_is_delivery')"> DLVRY STATUS &nbsp;<i [ngClass]="getIcon('hbl_is_delivery')"></i>  </th>
+                        <th (click)="sort('pick_is_delivery_sent')"> DLVRY ORD SENT &nbsp;<i [ngClass]="getIcon('pick_is_delivery_sent')"></i>  </th>
+                        <th (click)="sort('pick_delivery_date')"> DLVRY ORD DATE &nbsp;<i [ngClass]="getIcon('pick_delivery_date')"></i>  </th>
+                        <th (click)="sort('mbl_is_sea_waybill')"> MASTER BL STATUS &nbsp;<i [ngClass]="getIcon('mbl_is_sea_waybill')"></i>  </th>
+                        <th (click)="sort('hbl_bl_status')"> HOUSE BL STATUS &nbsp;<i [ngClass]="getIcon('hbl_bl_status')"></i>  </th>
                     </tr>
                 </thead>
                 <tbody class="page-body-tbody" *ngFor="let rec of MainList">
