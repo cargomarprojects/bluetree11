@@ -33,6 +33,7 @@ export class InputBoxComponent {
 
     onBlur1($event) {
         if (this.inputModel != null) {
+            this.inputModel = this.inputModel.trim();
             if (this.uppercase) {
                 this.inputModel = this.inputModel.toUpperCase();
 
