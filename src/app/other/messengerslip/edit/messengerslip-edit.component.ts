@@ -64,7 +64,7 @@ export class MessengerSlipEditComponent implements OnInit {
       this.oprgrp = this.route.snapshot.queryParams.mbl_mode;
       this.refno = this.route.snapshot.queryParams.mbl_refno;
       this.mode = this.route.snapshot.queryParams.mode;
-      this.is_locked = this.route.snapshot.queryParams.is_locked;
+      this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.menuid = options.menuid;

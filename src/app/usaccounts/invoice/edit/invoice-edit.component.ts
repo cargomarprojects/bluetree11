@@ -27,6 +27,7 @@ export class InvoiceEditComponent implements OnInit {
   @ViewChildren('_invd_desc_code') invd_desc_code_ctrl: QueryList<AutoComplete2Component>;
   @ViewChildren('_invd_desc_name') invd_desc_name_ctrl: QueryList<ElementRef>;
   @ViewChildren('_invd_qty') invd_qty_ctrl: QueryList<ElementRef>;
+  @ViewChildren('_invd_rate') invd_rate_ctrl: QueryList<ElementRef>;
   @ViewChildren('_invd_exrate') invd_exrate_ctrl: QueryList<ElementRef>;
   errorMessage: string;
 
@@ -600,8 +601,10 @@ export class InvoiceEditComponent implements OnInit {
 
     this.SaveParent();
 
-    if (!this.Allvalid())
+    if (!this.Allvalid()) {
+      alert(this.errorMessage);
       return;
+    }
 
     this.errorMessage = '';
 
@@ -1188,9 +1191,9 @@ export class InvoiceEditComponent implements OnInit {
             rec.invd_acc_id = _Record.id;
             rec.invd_acc_code = _Record.code;
             rec.invd_acc_name = _Record.name;
-            if (!this.gs.isBlank(this.invd_qty_ctrl))
-              if (idx < this.invd_qty_ctrl.toArray().length)
-                this.invd_qty_ctrl.toArray()[idx].nativeElement.focus();
+            if (!this.gs.isBlank(this.invd_rate_ctrl))
+              if (idx < this.invd_rate_ctrl.toArray().length)
+                this.invd_rate_ctrl.toArray()[idx].nativeElement.focus();
           }
 
           if (_Record.controlname == "INVOICED-BRANCH") {
