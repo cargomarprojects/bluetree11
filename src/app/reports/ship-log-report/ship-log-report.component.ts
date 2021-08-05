@@ -78,6 +78,8 @@ export class ShipmentLogReportComponent implements OnInit {
 
   reportformat: string = '';
 
+  sortCol  = 'mbl_refno';
+  sortOrder = true;  
 
   page_count: number = 0;
   page_current: number = 0;
@@ -146,6 +148,8 @@ export class ShipmentLogReportComponent implements OnInit {
         this.printer_friendly = rec.printer_friendly;
         this.reportformat = rec.reportformat;
         this.chklstCol2Visible = rec.chklstCol2Visible;
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
 
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -209,6 +213,8 @@ export class ShipmentLogReportComponent implements OnInit {
         this.chklstCol2Visible = false;
         this.reportformat = 'FORMAT-1';
         this.SearchData = this.gs.UserInfo;
+        this.sortCol = 'mbl_refno';
+        this.sortOrder = true;
         this.SetStages();
       }
 
@@ -322,6 +328,8 @@ export class ShipmentLogReportComponent implements OnInit {
             printer_friendly: this.printer_friendly,
             reportformat: this.reportformat,
             chklstCol2Visible: this.chklstCol2Visible,
+            sortcol:'mbl_refno',
+            sortorder: true,
 
             page_rows: response.page_rows,
             page_count: response.page_count,
@@ -355,6 +363,21 @@ export class ShipmentLogReportComponent implements OnInit {
   Close() {
   //  this.store.dispatch(new myActions.Delete({ id: this.urlid }));
     this.location.back();
+  }
+
+  private sort(sortcol : string){
+    this.store.dispatch(new myActions.SortData({ id : this.urlid, sortcol : sortcol }))
+  }
+
+  public getIcon(col : string){
+    if ( col == this.sortCol){
+      if ( this.sortOrder )
+        return 'fa fa-arrow-down';
+      else 
+        return 'fa fa-arrow-up';
+    }
+    else 
+      return null;
   }
 
   initLov(caption: string = '') {

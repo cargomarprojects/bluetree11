@@ -300,16 +300,16 @@
             <table  class="table  table-hover table-sm">
                 <thead class="page-body-thead">
                     <tr>
-                        <th> REFNO </th>                         
-                        <th> MASTER/HOUSE# </th>
-                        <th> SHIPMENT STAGE </th>
-                        <th> CARRIER </th>
-                        <th  *ngIf="job_mode=='OCEAN EXPORT'"> BOOKING# </th>
-                        <th> CONSIGNEE </th>
-                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'"> TYPE </th>                        
-                        <th> ETA </th>         
-                        <th> FIRM.CODE </th>     
-                        <th> IT.SHIPMENT </th>                   
+                        <th (click) ="sort('mbl_refno')" > REFNO &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>                         
+                        <th (click) ="sort('hbl_houseno')" > MASTER/HOUSE# &nbsp;<i [ngClass]="getIcon('hbl_houseno')"></i></th>
+                        <th (click) ="sort('hbl_shipment_stage')" > SHIPMENT STAGE &nbsp;<i [ngClass]="getIcon('hbl_shipment_stage')"></i></th>
+                        <th (click) ="sort('mbl_liner_name')" > CARRIER &nbsp;<i [ngClass]="getIcon('mbl_liner_name')"></i></th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT'" (click) ="sort('mbl_liner_bookingno')" > BOOKING# &nbsp;<i [ngClass]="getIcon('mbl_liner_bookingno')"></i> </th>
+                        <th (click) ="sort('hbl_consignee_name')" > CONSIGNEE &nbsp;<i [ngClass]="getIcon('hbl_consignee_name')"></i> </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'" (click) ="sort('mbl_cntr_type')" > TYPE &nbsp;<i [ngClass]="getIcon('mbl_cntr_type')"></i> </th>                        
+                        <th (click) ="sort('mbl_pod_eta')" > ETA &nbsp;<i [ngClass]="getIcon('mbl_pod_eta')"></i> </th>         
+                        <th (click) ="sort('mbl_cargo_loc_firmcode')" > FIRM.CODE &nbsp;<i [ngClass]="getIcon('mbl_cargo_loc_firmcode')"></i> </th>     
+                        <th (click) ="sort('hbl_is_itshipment')" > IT.SHIPMENT &nbsp;<i [ngClass]="getIcon('hbl_is_itshipment')"></i> </th>                   
                         <!-- <th> A </th>
                         <th> B </th>
                         <th> C </th>

@@ -77,15 +77,15 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th (click) ="sort('rec_created_by')"   >REQUESTED-BY &nbsp;<i [ngClass]="getIcon('rec_created_by')"></i></th>
-          <th (click) ="sort('rec_created_date')" >REQ.DATE&nbsp;<i [ngClass]="getIcon('rec_created_date')"></i></th> 
-          <th (click) ="sort('cp_master_refno')"  >REF#&nbsp;<i [ngClass]="getIcon('cp_master_refno')"></i></th>
-          <th (click) ="sort('cp_paytype_needed')"  >REQ.TYPE&nbsp;<i [ngClass]="getIcon('cp_paytype_needed')"></i></th>
-          <th (click) ="sort('cp_cust_name')"  >PAYEE&nbsp;<i [ngClass]="getIcon('cp_cust_name')"></i></th>
-          <th (click) ="sort('cp_inv_no')"  >A/P NO&nbsp;<i [ngClass]="getIcon('cp_inv_no')"></i></th>
-          <th (click) ="sort('cp_payment_date')"  >PAYMENT DATE&nbsp;<i [ngClass]="getIcon('cp_payment_date')"></i></th>
-          <th (click) ="sort('cp_pay_status')"  >STATUS&nbsp;<i [ngClass]="getIcon('cp_pay_status')"></i></th>
-          <th (click) ="sort('cp_spl_notes')"  >NOTES&nbsp;<i [ngClass]="getIcon('cp_spl_notes')"></i></th>
+          <th (click)="sort('rec_created_by')">REQUESTED-BY &nbsp;<i [ngClass]="getIcon('rec_created_by')"></i></th>
+          <th (click)="sort('rec_created_date')">REQ.DATE&nbsp;<i [ngClass]="getIcon('rec_created_date')"></i></th>
+          <th (click)="sort('cp_master_refno')">REF#&nbsp;<i [ngClass]="getIcon('cp_master_refno')"></i></th>
+          <th (click)="sort('cp_paytype_needed')">REQ.TYPE&nbsp;<i [ngClass]="getIcon('cp_paytype_needed')"></i></th>
+          <th (click)="sort('cp_cust_name')">PAYEE&nbsp;<i [ngClass]="getIcon('cp_cust_name')"></i></th>
+          <th (click)="sort('cp_inv_no')">A/P NO&nbsp;<i [ngClass]="getIcon('cp_inv_no')"></i></th>
+          <th (click)="sort('cp_payment_date')">PAYMENT DATE&nbsp;<i [ngClass]="getIcon('cp_payment_date')"></i></th>
+          <th (click)="sort('cp_pay_status')">STATUS&nbsp;<i [ngClass]="getIcon('cp_pay_status')"></i></th>
+          <th (click)="sort('cp_spl_notes')">NOTES&nbsp;<i [ngClass]="getIcon('cp_spl_notes')"></i></th>
           <th>OHBL/TELEX RLS COPY</th>
           <th>CHECK COPY</th>
           <th>APPROVAL</th>
@@ -113,7 +113,8 @@
           <td>{{rec.cp_spl_notes}}</td>
           <td class='hlink2' (click)="AttachedOhblFiles(rec,payuploadmodal,payattachmodal)">ATTACHMENTS</td>
           <td class='hlink2' (click)="AttachedCheckFiles(rec,payuploadmodal,payattachmodal)">CHECK COPY</td>
-          <td><a class="hlink" [routerLink]="getLink('APPROVAL')" [queryParams]="getParam('APPROVAL',rec)">APPROVAL</a></td>
+          <td><a class="hlink" [routerLink]="getLink('APPROVAL')" [queryParams]="getParam('APPROVAL',rec)">APPROVAL</a>
+          </td>
           <td class='hlink2' (click)="ArApList(rec,payarapmodal)">ARAP</td>
         </tr>
       </tbody>
