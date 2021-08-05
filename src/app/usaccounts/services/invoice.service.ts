@@ -58,5 +58,8 @@ export class invoiceService {
     GetPayroll(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/USAccounts/Invoice/GetPayroll', SearchData, this.gs.headerparam2('authorized'));
     }
-    
+
+    IsCustRefnoDupliation(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/USAccounts/Invoice/IsCustRefnoDupliation', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

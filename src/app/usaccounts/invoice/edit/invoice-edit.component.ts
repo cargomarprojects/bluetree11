@@ -169,7 +169,7 @@ export class InvoiceEditComponent implements OnInit {
 
 
   initpage() {
-     
+
     this.old_amt = 0;
     this.old_inv_date = '';
     this.showdeleted = false;
@@ -940,6 +940,17 @@ export class InvoiceEditComponent implements OnInit {
       this.record.inv_hbl_cbm = this.gs.Convert_Weight("CFT2CBM", this.record.inv_hbl_cft, 3);
   }
 
+  onFocusout(field: string) {
+
+    switch (field) {
+      case 'inv_refno': {
+        this.IsCustRefnoDupliation(this.record.inv_refno);
+        break;
+      }
+
+    }
+  }
+
   onBlur(field: string, rec: Tbl_Cargo_Invoiced = null) {
     switch (field) {
       case 'inv_no': {
@@ -1608,6 +1619,36 @@ export class InvoiceEditComponent implements OnInit {
       this.AddQtnRow(event.rec);
       this.FindGrandTotal();
     }
+
+  }
+
+  IsCustRefnoDupliation(_custrefno: string) {
+
+    if (this.gs.isBlank(_custrefno))
+      return;
+    if (this.gs.isBlank(this.record.inv_cust_id))
+      return;
+
+    this.errorMessage = '';
+
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = this.pkid;
+    SearchData.cust_pkid = this.record.inv_cust_id;
+    SearchData.cust_refno = _custrefno;
+    SearchData.company_code = this.gs.company_code;
+    SearchData.branch_code = this.gs.branch_code;
+
+    this.mainservice.IsCustRefnoDupliation(SearchData)
+      .subscribe(response => {
+        if (response.retvalue) {
+          this.errorMessage = response.retstring;
+          // if (!this.gs.isBlank(this.inv_refno_ctrl))
+          //   this.inv_refno_ctrl.nativeElement.focus();
+          alert(this.errorMessage);
+        }
+      }, error => {
+        alert(this.gs.getError(error));
+      });
 
   }
 
