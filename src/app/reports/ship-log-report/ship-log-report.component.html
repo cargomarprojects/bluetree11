@@ -351,31 +351,31 @@
             <table  class="table  table-hover table-sm">
                 <thead class="page-body-thead">
                     <tr>
-                        <th> REFNO </th>
+                        <th (click) ="sort('mbl_refno')" > REFNO &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i> </th>
                         <!-- <th> REF-DATE </th> -->
-                        <th> MASTER/HOUSE# </th>
-                        <th> SHIPMENT STAGE </th>
-                        <th> CARRIER </th>
-                        <th *ngIf="job_mode=='OCEAN EXPORT'"> BOOKING# </th>
+                        <th (click) ="sort('hbl_houseno')" > MASTER/HOUSE# &nbsp;<i [ngClass]="getIcon('hbl_houseno')"></i> </th>
+                        <th (click) ="sort('hbl_shipment_stage')" > SHIPMENT STAGE &nbsp;<i [ngClass]="getIcon('hbl_shipment_stage')"></i> </th>
+                        <th (click) ="sort('mbl_liner_name')" > CARRIER &nbsp;<i [ngClass]="getIcon('mbl_liner_name')"></i> </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT'" (click) ="sort('mbl_liner_bookingno')" > BOOKING# &nbsp;<i [ngClass]="getIcon('mbl_liner_bookingno')"></i> </th>
                         <!-- <th> SHIPPER </th> -->
-                        <th> CONSIGNEE </th>
-                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'"> TYPE </th>
+                        <th (click) ="sort('hbl_consignee_name')" > CONSIGNEE &nbsp;<i [ngClass]="getIcon('hbl_consignee_name')"></i> </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'" (click) ="sort('mbl_cntr_type')" > TYPE &nbsp;<i [ngClass]="getIcon('mbl_cntr_type')"></i> </th>
                         <!-- <th> PACKAGES </th>
                         <th> FINAL DESTINATION </th> -->
-                        <th> ETD </th>
-                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='OTHER OPERATION'"> ISF </th>
-                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'"> M RLS </th>
-                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'"> H RLS </th>
-                        <th> PL </th>
-                        <th> CI </th>
-                        <th> CARRIER AN </th>
-                        <th> CUSTOM RELEASE STATUS </th>
-                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='AIR IMPORT'"> FREIGHT RELEASE STATUS </th>
-                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='AIR IMPORT'"> CLIENT PAID </th>
-                        <th> ETA </th>
-                        <th *ngIf="job_mode=='OTHER OPERATION' || job_mode=='OCEAN IMPORT' || job_mode=='AIR IMPORT'"> LAST FREE DATE </th>
-                        <th> DELIVERY </th>
-                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='AIR EXPORT'"> DELIVERY DATE </th>
+                        <th (click) ="sort('mbl_pol_etd')" > ETD  &nbsp;<i [ngClass]="getIcon('mbl_pol_etd')"></i></th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='OTHER OPERATION'" (click) ="sort('hbl_isf_no')" > ISF &nbsp;<i [ngClass]="getIcon('hbl_isf_no')"></i> </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'" (click) ="sort('mbl_is_sea_waybill')" > M RLS &nbsp;<i [ngClass]="getIcon('mbl_is_sea_waybill')"></i> </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'" (click) ="sort('hbl_bl_status')" > H RLS &nbsp;<i [ngClass]="getIcon('hbl_bl_status')"></i> </th>
+                        <th (click) ="sort('hbl_is_pl')" > PL &nbsp;<i [ngClass]="getIcon('hbl_is_pl')"></i> </th>
+                        <th (click) ="sort('hbl_is_ci')" > CI &nbsp;<i [ngClass]="getIcon('hbl_is_ci')"></i> </th>
+                        <th (click) ="sort('hbl_is_carr_an')" > CARRIER AN &nbsp;<i [ngClass]="getIcon('hbl_is_carr_an')"></i> </th>
+                        <th (click) ="sort('hbl_custom_reles_status')" > CUSTOM RELEASE STATUS &nbsp;<i [ngClass]="getIcon('hbl_custom_reles_status')"></i> </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='AIR IMPORT'" (click) ="sort('hbl_cargo_release_status')" > FREIGHT RELEASE STATUS &nbsp;<i [ngClass]="getIcon('hbl_cargo_release_status')"></i> </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='AIR IMPORT'" (click) ="sort('hbl_paid_status')" > CLIENT PAID &nbsp;<i [ngClass]="getIcon('hbl_paid_status')"></i> </th>
+                        <th (click) ="sort('mbl_pod_eta')" > ETA &nbsp;<i [ngClass]="getIcon('mbl_pod_eta')"></i> </th>
+                        <th *ngIf="job_mode=='OTHER OPERATION' || job_mode=='OCEAN IMPORT' || job_mode=='AIR IMPORT'" (click) ="sort('hbl_lfd_date')" > LAST FREE DATE &nbsp;<i [ngClass]="getIcon('hbl_lfd_date')"></i> </th>
+                        <th (click) ="sort('hbl_is_delivery')" > DELIVERY &nbsp;<i [ngClass]="getIcon('hbl_is_delivery')"></i>  </th>
+                        <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='AIR EXPORT'" (click) ="sort('hbl_pld_eta')" > DELIVERY DATE &nbsp;<i [ngClass]="getIcon('hbl_pld_eta')"></i> </th>
                         <!-- <th> REMARKS </th> -->
                         <!-- <th> A </th>
                         <th> B </th>
