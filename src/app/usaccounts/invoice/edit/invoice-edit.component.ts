@@ -601,8 +601,10 @@ export class InvoiceEditComponent implements OnInit {
 
     this.SaveParent();
 
-    if (!this.Allvalid())
+    if (!this.Allvalid()) {
+      alert(this.errorMessage);
       return;
+    }
 
     this.errorMessage = '';
 
