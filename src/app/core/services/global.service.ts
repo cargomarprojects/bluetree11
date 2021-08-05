@@ -1924,7 +1924,7 @@ export class GlobalService {
 
   public DownloadFile(report_folder: string, filename: string, filetype: string, filedisplayname: string = 'N') {
     let body = 'report_folder=' + report_folder + '&filename=' + filename + '&filetype=' + filetype + '&filedisplayname=' + filedisplayname;
-    window.open(this.baseUrl + '/api/Master/Param/DownloadFile?' + body, "_blank");
+    window.open(this.baseUrl + '/api/Master/Param/DownloadFile?' + body, '_blank');
   }
 
   public ShowAccAlert(party_id: string) {
