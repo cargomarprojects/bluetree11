@@ -944,7 +944,7 @@ export class InvoiceEditComponent implements OnInit {
 
     switch (field) {
       case 'inv_refno': {
-        this.IsCustRefnoDupliation(this.record.inv_refno);
+        this.IsCustRefnoDupliation();
         break;
       }
 
@@ -1622,9 +1622,9 @@ export class InvoiceEditComponent implements OnInit {
 
   }
 
-  IsCustRefnoDupliation(_custrefno: string) {
+  IsCustRefnoDupliation() {
 
-    if (this.gs.isBlank(_custrefno))
+    if (this.gs.isBlank(this.record.inv_refno))
       return;
     if (this.gs.isBlank(this.record.inv_cust_id))
       return;
@@ -1634,7 +1634,7 @@ export class InvoiceEditComponent implements OnInit {
     var SearchData = this.gs.UserInfo;
     SearchData.pkid = this.pkid;
     SearchData.cust_pkid = this.record.inv_cust_id;
-    SearchData.cust_refno = _custrefno;
+    SearchData.cust_refno = this.record.inv_refno;
     SearchData.company_code = this.gs.company_code;
     SearchData.branch_code = this.gs.branch_code;
 
