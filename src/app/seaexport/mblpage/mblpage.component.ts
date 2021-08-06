@@ -149,7 +149,6 @@ export class MblPageComponent implements OnInit {
         this.canPrint = this.gs.canPrint(this.menuid);
 
         if (this.records != null) {
-
           this.records.forEach(rec => {
             this.ShowDesc(rec);
           });
