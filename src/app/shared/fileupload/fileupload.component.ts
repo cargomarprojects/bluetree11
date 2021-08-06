@@ -169,18 +169,23 @@ export class FileUploadComponent implements OnInit {
     let mFiles = <Table_Mast_Files>{};
 
     let fileExtn: string = "";
-
+    let fileDefaultFilename = "";
 
 
     let strDfname: string = "";
+    let strMultiplefname: string = '';
 
     let isValidFile = true;
     this.filesSelected = false;
     this.myFiles = [];
     for (var i = 0; i < e.target.files.length; i++) {
       this.filesSelected = true;
+      if (strMultiplefname != '')
+        strMultiplefname += ",";
+      strMultiplefname += e.target.files[i].name;
 
       fileExtn = this.getExtension(e.target.files[i].name);
+      fileDefaultFilename = this.DefaultFilename;
 
       this.fileName = this.gs.getGuid().toString().replace("-", "") + fileExtn;
       this.fileName = this.fileName.toUpperCase();
@@ -188,11 +193,11 @@ export class FileUploadComponent implements OnInit {
       this.fileDesc = this.fileDesc.toUpperCase();
       this.fileSize = e.target.files[i].size;
 
-      if (this.DefaultFilename.trim() != "")
-        strDfname = this.DefaultFilename + fileExtn.toUpperCase();
+      if (fileDefaultFilename.trim() != "")
+        strDfname = fileDefaultFilename + fileExtn.toUpperCase();
       if (strDfname.length > 50) {
-        this.DefaultFilename = this.DefaultFilename.substring(0, 50 - fileExtn.length);
-        strDfname = this.DefaultFilename + fileExtn.toUpperCase();
+        fileDefaultFilename = fileDefaultFilename.substring(0, 50 - fileExtn.length);
+        strDfname = fileDefaultFilename + fileExtn.toUpperCase();
       }
 
       if (this.fileDesc.length > 50)
@@ -207,6 +212,9 @@ export class FileUploadComponent implements OnInit {
       this.myFiles.push(e.target.files[i]);
     }
 
+    if (this.filesSelected)
+      if (this.myFiles.length > 1)
+        this.txt_fileName = strMultiplefname;
   }
 
 
@@ -265,6 +273,7 @@ export class FileUploadComponent implements OnInit {
     frmData.append("files_created_by", this.gs.user_code);
     frmData.append("user_name", this.gs.user_name);
     frmData.append("instance_id", this.gs.INSTANCE_ID);
+    frmData.append("files_default_name", this.DefaultFilename);
 
     for (var i = 0; i < this.myFiles.length; i++) {
       frmData.append("fileUpload", this.myFiles[i]);
@@ -359,7 +368,7 @@ export class FileUploadComponent implements OnInit {
 
   }
 
- 
+
 
   ShowFile(_rec: Table_Mast_Files) {
 
@@ -379,7 +388,7 @@ export class FileUploadComponent implements OnInit {
     this.Mail_Pkid = this.gs.getGuid();
     let DispName: string = "document";
     if (_rec.file_desc != "")
-    DispName = this.gs.ProperFileName(_rec.file_desc);
+      DispName = this.gs.ProperFileName(_rec.file_desc);
     this.AttachList = new Array<any>();
     this.AttachList.push({ filename: _rec.file_id, filetype: 'PDF', filedisplayname: DispName });
     this.modal = this.modalservice.open(emailmodal, { centered: true });
@@ -440,7 +449,7 @@ export class FileUploadComponent implements OnInit {
       _rec.files_editrow = !_rec.files_editrow;
     }
   }
-   
+
   mailcallbackevent(event: any) {
     this.modal.close();
   }
