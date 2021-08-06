@@ -27,8 +27,8 @@ export class AlertLogPageComponent implements OnInit {
     _artab: boolean = true;
     chkallselected: boolean = false;
     selectdeselect: boolean = false;
-    sortCol  = 'mbl_refno';
-    sortOrder = true;  
+    sortCol = 'mbl_refno';
+    sortOrder = true;
 
     errorMessage$: Observable<string>;
     records$: Observable<Tbl_cargo_general[]>;
@@ -63,7 +63,7 @@ export class AlertLogPageComponent implements OnInit {
     }
 
     initPage() {
-     
+
         this.records$ = this.mainservice.data$.pipe(map(res => res.records));
         this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
         this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -166,7 +166,7 @@ export class AlertLogPageComponent implements OnInit {
         let IsLocked: boolean = false;
         IsLocked = this.gs.IsShipmentClosed(_record.cf_mbl_mode, _record.cf_ref_date, _record.cf_mbl_lock, _record.cf_mbl_unlock_date);
         let prm = {
-            appid:this.gs.appid,
+            appid: this.gs.appid,
             menuid: this.mainservice.menuid,
             master_id: _record.cf_master_id,
             master_refno: _record.cf_refno,
@@ -175,7 +175,7 @@ export class AlertLogPageComponent implements OnInit {
             origin: _record.cf_mbl_lock == "J" ? 'sales-journal-page' : 'alert-log-page'
         };
         if (branch_code == this.gs.branch_code) {
-            this.gs.Naviagete2('Silver.BusinessModule/FollowUpPage',  prm);
+            this.gs.Naviagete2('Silver.BusinessModule/FollowUpPage', prm);
         }
         else {
             alert("Cannot Show Details from another Branch");
@@ -237,33 +237,67 @@ export class AlertLogPageComponent implements OnInit {
 
         return smode;
     }
-    
-    public getSortCol(){
+
+    getRouteDetFollowup(_format: string, _rec: Tbl_cargo_followup, _type: string) {
+       
+        let sID: string = (_rec.cf_master_id != null) ? _rec.cf_master_id.toString() : "";
+        let REFNO: string = _rec.cf_refno != null ? _rec.cf_refno.toString() : "";
+        let sMode: string = _rec.cf_mbl_mode != null ? _rec.cf_mbl_mode.toString() : "";
+        // let branch_code: string = _rec.cf_branch_code != null ? _rec.cf_branch_code.toString() : "";
+        // if (sID == "") {
+        //     alert('Invalid Record Selected');
+        //     return;
+        // }
+        // if (branch_code == this.gs.branch_code) {
+        //     this.gs.LinkPage("REFNO", sMode, REFNO, sID);
+        // }
+        // else {
+        //     alert("Cannot Show Details from another Branch");
+        // }
+       
+       
+        
+            return this.gs.Link2Page('REFNO', sMode, REFNO, sID, '', '', _format);
+        
+    }
+    getRouteDet(_format: string, _rec: Tbl_cargo_general, _type: string) {
+        let sID: string = (_rec.mbl_pkid != null) ? _rec.mbl_pkid.toString() : "";
+        let REFNO: string = _rec.mbl_refno != null ? _rec.mbl_refno.toString() : "";
+        let branch_code: string = _rec.mbl_branch != null ? _rec.mbl_branch.toString() : "";
+        let HBLID: string = _rec.hbl_pkid != null ? _rec.hbl_pkid.toString() : "";
+        let sMode: string = this.getmode(REFNO);
+
+        if (_type == 'MASTER')
+            return this.gs.Link2Page('REFNO', sMode, REFNO, sID, '', '', _format);
+        else
+            return this.gs.Link2Page('HOUSE', sMode, REFNO, sID, HBLID, '', _format);
+    }
+
+    public getSortCol() {
         return this.sortCol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.sortOrder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.sortCol){
-          if ( this.sortOrder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.sortCol) {
+            if (this.sortOrder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.sortCol){
-          this.sortOrder = !this.sortOrder;
+
+    public sort(col: string) {
+        if (col == this.sortCol) {
+            this.sortOrder = !this.sortOrder;
         }
-        else 
-        {
-          this.sortCol = col;
-          this.sortOrder = true;
+        else {
+            this.sortCol = col;
+            this.sortOrder = true;
         }
     }
 }
