@@ -26,6 +26,10 @@ body {
     background-color: var(--custom-bg-color);
 }
 
+.commonbgcolor2 {
+    background-color: var(--custom-bg-color) !important;
+}
+
 
 .navbar {
     margin-top: 1px;

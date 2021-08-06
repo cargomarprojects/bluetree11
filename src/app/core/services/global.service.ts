@@ -1666,11 +1666,14 @@ export class GlobalService {
   }
 
   public getPagetitle(menucode: string): string {
-    return this.MenuList.find(f => f.menu_name == menucode).menu_name;
+    if ( this.MenuList) 
+      return this.MenuList.find(f => f.menu_name == menucode).menu_name;
+    else 
+      return '';
   }
 
   public getMenu(menucode: string): User_Menu {
-    return this.MenuList.find(f => f.menu_name == menucode);
+      return this.MenuList.find(f => f.menu_name == menucode);
   }
 
   public getMenuById(menuid: string): User_Menu {
@@ -1681,7 +1684,6 @@ export class GlobalService {
   public getTitle(menuid: string): string {
     if (!this.MenuList)
       return '';
-      
     var itm = this.MenuList.find(f => f.menu_pkid == menuid);
     if (itm)
       return itm.menu_name;
@@ -1729,12 +1731,14 @@ export class GlobalService {
   public canSave(menuid: string, mode: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    var itm = this.MenuList.find(f => f.menu_pkid == menuid);
-    if (itm) {
-      if (mode == "ADD" && itm.rights_add == "Y")
-        bret = true;
-      if (mode == "EDIT" && itm.rights_edit == "Y")
-        bret = true;
+    if ( this.MenuList) {
+      var itm = this.MenuList.find(f => f.menu_pkid == menuid);
+      if (itm) {
+        if (mode == "ADD" && itm.rights_add == "Y")
+          bret = true;
+        if (mode == "EDIT" && itm.rights_edit == "Y")
+          bret = true;
+      }
     }
     return bret;
   }
@@ -1742,9 +1746,11 @@ export class GlobalService {
   public canAdd(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_add == "Y");
-    if (itm)
-      bret = true;
+    if ( this.MenuList) {
+      var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_add == "Y");
+      if (itm)
+        bret = true;
+    }
     return bret;
   }
   public canEdit(menuid: string): boolean {
@@ -1753,54 +1759,65 @@ export class GlobalService {
 
     bret = this.user_isadmin == 'Y';
 
-    var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_edit == "Y");
-    if (itm)
-      bret = true;
-
+    if ( this.MenuList) {
+      var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_edit == "Y");
+      if (itm)
+        bret = true;
+    }
     return bret;
   }
   public canView(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    var itm = this.MenuList.find(f => f.menu_pkid == menuid && (f.rights_edit == "Y" || f.rights_view == "Y"));
-    if (itm)
-      bret = true;
+    if ( this.MenuList) {
+      var itm = this.MenuList.find(f => f.menu_pkid == menuid && (f.rights_edit == "Y" || f.rights_view == "Y"));
+      if (itm)
+        bret = true;
+    }
     return bret;
   }
 
   public canDelete(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_delete == "Y");
-    if (itm)
-      bret = true;
+    if ( this.MenuList) {
+      var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_delete == "Y");
+      if (itm)
+        bret = true;
+    }
     return bret;
   }
 
   public canPrint(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_print == "Y");
-    if (itm)
-      bret = true;
+    if ( this.MenuList) {
+      var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_print == "Y");
+      if (itm)
+        bret = true;
+    }
     return bret;
   }
 
   public screenExists(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    var itm = this.MenuList.find(f => f.menu_pkid == menuid && (f.rights_add == "Y" || f.rights_edit == "Y" || f.rights_view == "Y" || f.rights_print == "Y" || f.rights_delete == "Y"));
-    if (itm)
-      bret = true;
+    if ( this.MenuList) {
+      var itm = this.MenuList.find(f => f.menu_pkid == menuid && (f.rights_add == "Y" || f.rights_edit == "Y" || f.rights_view == "Y" || f.rights_print == "Y" || f.rights_delete == "Y"));
+      if (itm)
+        bret = true;
+    }
     return bret;
   }
 
   public canDownload(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_print == "Y");
-    if (itm)
-      bret = true;
+    if ( this.MenuList) {
+      var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_print == "Y");
+      if (itm)
+        bret = true;
+    }
     return bret;
   }
 
@@ -1808,42 +1825,51 @@ export class GlobalService {
   public canEmail(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_email == "Y");
-    if (itm)
-      bret = true;
+    if ( this.MenuList) {
+      var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_email == "Y");
+      if (itm)
+        bret = true;
+    }
     return bret;
   }
 
   public canExel(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_print == "Y");
-    if (itm)
-      bret = true;
+    if ( this.MenuList) {
+      var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_print == "Y");
+      if   (itm)
+        bret = true;
+    }
     return bret;
   }
 
 
 
   public IsAdmin(menuid: string): boolean {
-    var bret1: boolean;
-    var bret2: boolean;
+    var bret1: boolean = false;
+    var bret2: boolean = false;
     bret1 = this.user_isadmin == 'Y';
-    var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_admin == 'Y');
-    if (itm)
-      bret2 = true;
+
+    if ( this.MenuList) {
+      var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_admin == 'Y');
+      if (itm)
+        bret2 = true;
+    }
 
     return bret1 || bret2;
   }
 
   public IsCompany(menuid: string): boolean {
-    var bret1: boolean;
-    var bret2: boolean;
+    var bret1: boolean = false;
+    var bret2: boolean = false;
     bret1 = this.user_isadmin == 'Y';
-    var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_company == 'Y');
-    if (itm)
-      bret2 = true;
-
+    
+    if ( this.MenuList) {
+      var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_company == 'Y');
+      if (itm)
+        bret2 = true;
+    }
     return bret1 || bret2;
   }
 

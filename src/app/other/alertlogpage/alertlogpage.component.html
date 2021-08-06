@@ -19,7 +19,7 @@
 </ul>
 
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="followup" role="tabpanel" aria-labelledby="followup-tab">
+  <div class="tab-pane fade show active commonbgcolor2" id="followup" role="tabpanel" aria-labelledby="followup-tab">
     <div *ngIf="ErrorMessage" class="alert alert-danger">
       {{ErrorMessage}}
     </div>
@@ -68,7 +68,7 @@
       </div>
     </div>
   </div>
-  <div class="tab-pane fade" id="arlist" role="tabpanel" aria-labelledby="arlist-tab">
+  <div class="tab-pane fade commonbgcolor2" id="arlist" role="tabpanel" aria-labelledby="arlist-tab">
 
     <div *ngIf="errorMessage$ | async" class="alert alert-danger">
       {{errorMessage$ | async}}
