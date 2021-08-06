@@ -55,7 +55,12 @@
             </thead>
             <tbody class="page-body-tbody">
               <tr *ngFor="let rec of frecords | sortBy: getSortCol() : getSortOrder()">
-                <td class='hlink2' (click)="editmasterfup(rec)">{{rec.cf_refno}}</td>
+                <!-- <td class='hlink2' (click)="editmasterfup(rec)">{{rec.cf_refno}}</td> -->
+                <td *ngIf="rec.cf_branch_code==gs.branch_code">
+                  <a class="hlink" [routerLink]="getRouteDetFollowup('L',rec,'MASTER')"
+                    [queryParams]="getRouteDetFollowup('P',rec,'MASTER')">{{rec.cf_refno}}</a>
+                </td>
+                <td *ngIf="rec.cf_branch_code!=gs.branch_code">{{rec.cf_refno}}</td>
                 <td>{{rec.cf_assigned_code}}</td>
                 <td class='hlink2' (click)="editfup(rec)">{{rec.cf_followup_date | date : gs.FRONTEND_DATEFORMAT}}</td>
                 <td>{{rec.cf_remarks}}</td>
