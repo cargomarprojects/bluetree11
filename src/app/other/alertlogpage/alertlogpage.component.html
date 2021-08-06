@@ -44,15 +44,15 @@
           <table class="table  table-hover table-sm">
             <thead class="page-body-thead">
               <tr>
-                <th>REFNO</th>
-                <th>ASSIGNED TO</th>
-                <th>FOLLOW UP DATE</th>
-                <th>NOTES</th>
+                <th (click)="sort('cf_refno')">REFNO&nbsp;<i [ngClass]="getIcon('cf_refno')"></i></th>
+                <th (click)="sort('cf_assigned_code')">ASSIGNED TO&nbsp;<i [ngClass]="getIcon('cf_assigned_code')"></i></th>
+                <th (click)="sort('cf_followup_date')">FOLLOW UP DATE&nbsp;<i [ngClass]="getIcon('cf_followup_date')"></i></th>
+                <th (click)="sort('cf_remarks')">NOTES&nbsp;<i [ngClass]="getIcon('cf_remarks')"></i></th>
                 <th><input type="checkbox" (click)="SelectDeselect()" [(ngModel)]="chkallselected"></th>
               </tr>
             </thead>
             <tbody class="page-body-tbody">
-              <tr *ngFor="let rec of frecords">
+              <tr *ngFor="let rec of frecords | sortBy: getSortCol() : getSortOrder()">
                 <td class='hlink2' (click)="editmasterfup(rec)">{{rec.cf_refno}}</td>
                 <td>{{rec.cf_assigned_code}}</td>
                 <td class='hlink2' (click)="editfup(rec)">{{rec.cf_followup_date | date : gs.FRONTEND_DATEFORMAT}}</td>
@@ -83,17 +83,17 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
-            <th>REFNO</th>
-            <th>REF-DATE</th>
-            <th>HOUSE</th>
-            <th>SHIPMENT TYPE</th>
-            <th>ETA</th>
-            <th>REMARK</th>
-            <th>STATUS</th>
+            <th (click)="mainservice.sort('mbl_refno')">REFNO&nbsp;<i [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
+            <th (click)="mainservice.sort('mbl_ref_date')">REF-DATE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_ref_date')"></i></th>
+            <th (click)="mainservice.sort('hbl_houseno')">HOUSE&nbsp;<i [ngClass]="mainservice.getIcon('hbl_houseno')"></i></th>
+            <th (click)="mainservice.sort('hbl_bltype')">SHIPMENT TYPE&nbsp;<i [ngClass]="mainservice.getIcon('hbl_bltype')"></i></th>
+            <th (click)="mainservice.sort('mbl_pod_eta')">ETA&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_eta')"></i></th>
+            <th (click)="mainservice.sort('mbl_remarks')">REMARK&nbsp;<i [ngClass]="mainservice.getIcon('mbl_remarks')"></i></th>
+            <th (click)="mainservice.sort('mbl_pending_status')">STATUS&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pending_status')"></i></th>
           </tr>
         </thead>
         <tbody class="page-body-tbody">
-          <tr *ngFor="let rec of records$ | async">
+          <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
             <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td>
             <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT}}</td>
             <td class='hlink2' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td>

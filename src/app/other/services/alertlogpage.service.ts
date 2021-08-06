@@ -28,18 +28,48 @@ export class AlertLogPageService {
     public isCompany: boolean;
 
     public initlialized: boolean;
-    private appid =''
+    private appid = ''
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
+
+    public getSortCol(){
+        return this.record.sortcol;
+    }
+    public getSortOrder(){
+        return this.record.sortorder;
+    }
+
+    public getIcon(col : string){
+        if ( col == this.record.sortcol){
+          if ( this.record.sortorder )
+            return 'fa fa-arrow-down';
+          else 
+            return 'fa fa-arrow-up';
+        }
+        else 
+          return null;
+    }
     
+    public  sort(col : string){
+        if ( col == this.record.sortcol){
+          this.record.sortorder = !this.record.sortorder;
+        }
+        else 
+        {
+          this.record.sortcol = col;
+          this.record.sortorder = true;
+        }
+    }
     public ClearInit() {
         this.record = <OthGeneralModel>{
+            sortcol : 'mbl_refno',
+            sortorder : true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: 'ALL', handled_id: this.gs.user_handled_id, handled_name: this.gs.user_handled_name , show_hide: false },
+            searchQuery: <SearchQuery>{ searchString: 'ALL', handled_id: this.gs.user_handled_id, handled_name: this.gs.user_handled_name, show_hide: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -57,9 +87,11 @@ export class AlertLogPageService {
         this.param_type = params.menu_param;
 
         this.record = <OthGeneralModel>{
+            sortcol : 'mbl_refno',
+            sortorder : true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: 'ALL', handled_id: this.gs.user_handled_id, handled_name: this.gs.user_handled_name , show_hide: false },
+            searchQuery: <SearchQuery>{ searchString: 'ALL', handled_id: this.gs.user_handled_id, handled_name: this.gs.user_handled_name, show_hide: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -118,8 +150,10 @@ export class AlertLogPageService {
         });
     }
 
-    HideRecord(_rec:Tbl_cargo_general)
-    {
+    HideRecord(_rec: Tbl_cargo_general) {
+        if (!confirm(_rec.mbl_pending_status + " Y/N")) {
+            return;
+        }
         var SearchData = this.gs.UserInfo;
         SearchData.STYPE = _rec.mbl_pending_status;
         SearchData.MBLID = _rec.mbl_pkid;
@@ -131,7 +165,7 @@ export class AlertLogPageService {
             } else {
                 this.record.records.filter(x => x.mbl_pkid === _rec.mbl_pkid).forEach(x => this.record.records.splice(this.record.records.indexOf(x), 1));
             }
-            
+
         }, error => {
             this.record = <OthGeneralModel>{
                 records: [],
@@ -140,7 +174,7 @@ export class AlertLogPageService {
             this.mdata$.next(this.record);
         });
     }
-    
+
 
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/AlertLogPage/List', SearchData, this.gs.headerparam2('authorized'));
