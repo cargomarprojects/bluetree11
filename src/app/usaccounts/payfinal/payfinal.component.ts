@@ -702,6 +702,28 @@ export class PayFinalComponent implements OnInit {
             this.FindTotal('BANK');
         if ( field == 'Txt_Bank_Charges')
             this.FindTotal("CHARGES");
+
+
+        if ( field == 'txt_bank_name'){
+            this.Txt_Bank_Name = this.Txt_Bank_Name.toUpperCase();
+        }
+        if ( field == 'Txt_Address1'){
+            this.Txt_Address1 = this.Txt_Address1.toUpperCase();
+        }
+        if ( field == 'Txt_Address2'){
+            this.Txt_Address2 = this.Txt_Address2.toUpperCase();
+        }
+        if ( field == 'Txt_Address3'){
+            this.Txt_Address3 = this.Txt_Address3.toUpperCase();
+        }
+        if ( field == 'Txt_Address4'){
+            this.Txt_Address4 = this.Txt_Address4.toUpperCase();
+        }
+
+
+        if ( field == 'Txt_ChqNo' ){
+            this.Txt_ChqNo = this.Txt_ChqNo.toUpperCase();
+        }            
         if ( field == 'Txt_Chq_Bank' ){
             this.Txt_Chq_Bank = this.Txt_Chq_Bank.toUpperCase();
         }            
