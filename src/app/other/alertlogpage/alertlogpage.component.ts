@@ -237,6 +237,19 @@ export class AlertLogPageComponent implements OnInit {
 
         return smode;
     }
+
+    getRouteDet(_format: string, _rec: Tbl_cargo_general, _type: string) {
+        let sID: string = (_rec.mbl_pkid != null) ? _rec.mbl_pkid.toString() : "";
+        let REFNO: string = _rec.mbl_refno != null ? _rec.mbl_refno.toString() : "";
+        let branch_code: string = _rec.mbl_branch != null ? _rec.mbl_branch.toString() : "";
+        let HBLID: string = _rec.hbl_pkid != null ? _rec.hbl_pkid.toString() : "";
+        let sMode: string = this.getmode(REFNO);
+        
+        if (_type == 'MASTER')
+          return this.gs.Link2Page('REFNO', sMode, REFNO, sID, '', '', _format);
+        else
+          return this.gs.Link2Page('HOUSE', sMode, REFNO, sID, HBLID, '', _format);
+      }
     
     public getSortCol(){
         return this.sortCol;
