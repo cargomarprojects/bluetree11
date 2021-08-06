@@ -43,8 +43,12 @@
             <tr *ngFor="let rec of records$ | async |  sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
                 <td *ngIf="!this.mainservice.canEdit">{{rec.mbl_refno}}</td>
                 <td *ngIf="this.mainservice.canEdit">
-                    <a class='hlink' [routerLink]="['/Silver.SeaImport/SeaImpMasterEditPage']"
-                        [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.mbl_pkid,type: '',origin: 'seaimp-master-page',mode: 'EDIT'}">{{rec.mbl_refno}}</a>
+                    <a  [routerLink]="['/Silver.SeaImport/SeaImpMasterEditPage']"
+                        [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.mbl_pkid,type: '',origin: 'seaimp-master-page',mode: 'EDIT'}"
+                        class="hlink"
+                        >
+                            {{rec.mbl_refno}}
+                    </a>
                 </td>
                 <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.mbl_no}}</td>

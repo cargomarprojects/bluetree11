@@ -48,6 +48,8 @@ export class SeaImpMasterComponent implements OnInit {
     this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errormessage));
 
   }
+  
+
 
   searchEvents(actions: any) {
     this.mainservice.Search(actions,  'SEARCH');
