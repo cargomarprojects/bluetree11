@@ -120,6 +120,7 @@ export class MblPageComponent implements OnInit {
 
         this.record = <Tbl_cargo_exp_mbldet>response.record;
         this.records = <Tbl_cargo_exp_desc[]>response.records;
+        this.InitDesc();
 
         this.ShipmentType = this.record.mbld_cntr_type;
 
@@ -146,8 +147,6 @@ export class MblPageComponent implements OnInit {
 
         this.canSave = this.gs.canSave(this.menuid, this.mode);
         this.canPrint = this.gs.canPrint(this.menuid);
-
-        this.InitDesc();
 
         if (this.records != null) {
 
