@@ -1,7 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-    --custom-bg-color:snow;
+
+
+
+    --custom-bg-color: #c9c2c2; 
+    --custom-even-color : #a7a1a1; 
+
+    /* --custom-bg-color:#D3D3D3;
+    --custom-even-color : #D3D3D3; 
+    */
+  
+}
+
+tr:nth-child(even) {
+    background-color: var(--custom-even-color) !important;
 }
 
 html {
@@ -9,7 +22,7 @@ html {
     font-size : 14px;    
     margin: 2px;
     padding-top :37px;
-    background-color: var(--custom-bg-color);
+    background-color: var(--custom-bg-color) !important;
 }
 
 body {
@@ -19,7 +32,7 @@ body {
     min-height:100%;
     margin: 0px;
     padding-top :36px;
-    background-color: var(--custom-bg-color);
+    background-color: var(--custom-bg-color) !important;
 }
 
 .commonbgcolor {
@@ -38,7 +51,7 @@ body {
 }
   
 .navbar-toggler {
-    color: white !important; 
+     color: white !important;  
 }
   
 .page-body-thead {
@@ -82,9 +95,9 @@ hr {
     line-height: 1px;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
+
+
+
 
 
 .centerdiv {
@@ -378,11 +391,15 @@ tr:nth-child(even) {
 }
   
 .page-pager {
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin-top: 1px;
+    margin-bottom: 1px;
     cursor: pointer;
     border: 1px solid rgba(0,0,0,.125);    
-    background-color:var(--custom-bg-color);
+    background-color:var(--custom-bg-color) ;
+}
+
+.page-link {
+    background-color:var(--custom-bg-color) !important;
 }
 
 .pagination {
@@ -909,6 +926,10 @@ input[type=number]::-webkit-outer-spin-button {
    
 .active {
     background-color: yellow;
+}
+
+br {
+    background-color: var(--custom-bg-color);
 }
 
   
