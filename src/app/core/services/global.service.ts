@@ -1679,6 +1679,9 @@ export class GlobalService {
 
 
   public getTitle(menuid: string): string {
+    if (!this.MenuList)
+      return '';
+      
     var itm = this.MenuList.find(f => f.menu_pkid == menuid);
     if (itm)
       return itm.menu_name;
@@ -3195,6 +3198,27 @@ export class GlobalService {
   getURLParam(param: string) {
     return new URLSearchParams(window.location.search).get(param);
   }
+
+
+  getURLParamFromString(url : string, colname : string) {
+
+    var sval = '';
+    var qs = url.split('?')[1];
+    if (qs) {
+      var arr = qs.split('&');
+      for (var i = 0; i < arr.length; i++) {
+          var data = arr[i].split('=');
+          if ( data.length >= 2) {
+            if ( data[0].toLowerCase() == colname)
+              sval = data[1];
+          }
+      }
+    }
+    return sval;
+  }
+   
+
+
 
   public checkAppVersion() {
     const _id = this.getURLParam('appid');

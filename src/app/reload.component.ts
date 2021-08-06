@@ -6,6 +6,10 @@ import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationErr
 import { LoadingScreenService } from './core/services/loadingscreen.service';
 import { GlobalService } from './core/services/global.service';
 
+
+import { Title } from '@angular/platform-browser';
+
+
 @Component({
   selector: 'app-reload',
   templateUrl: './reload.component.html'
@@ -17,7 +21,8 @@ export class ReloadComponent {
     public gs: GlobalService,
     public loadingservice: LoadingScreenService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private titleService: Title
   ) {
 
 
@@ -37,12 +42,21 @@ export class ReloadComponent {
       return;
     }
     
+    var menuid = this.gs.getURLParamFromString(url,'menuid');
+    if ( menuid != '') {
+      var title  = this.gs.getTitle(menuid);
+      if ( title != '') {
+        this.titleService.setTitle(title);    
+      }
+    }
+
     this.router.navigateByUrl(url, { replaceUrl: true });
 
     this.gs.IsLoginSuccess = true;
     this.gs.IsAuthenticated = true;
 
   }
+
 
   ngOnDestroy() {
 
