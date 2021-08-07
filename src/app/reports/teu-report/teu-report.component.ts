@@ -66,6 +66,8 @@ export class TeuReportComponent implements OnInit {
   errorMessage: string = '';
 
   SearchData: any = {};
+  sortCol = 'mbl_refno';
+  sortOrder = true;
 
   Reportstate1: Observable<ReportState>;
 
@@ -117,6 +119,8 @@ export class TeuReportComponent implements OnInit {
         this.filename2 = rec.filename2;
         this.filetype2 = rec.filetype2;
         this.filedisplayname2 = rec.filedisplayname2;
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
 
 
         this.page_rows = rec.page_rows;
@@ -134,7 +138,7 @@ export class TeuReportComponent implements OnInit {
           this.SearchData.COMP_CODE = this.gs.branch_codes;
         else
           this.SearchData.COMP_CODE = this.comp_type;
-        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
+        this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
         this.SearchData.REPORT_TYPE = this.report_type;
         this.SearchData.REPORT_SHPTYPE = this.report_shptype;
         this.SearchData.REPORT_CATEGORY = this.report_category;
@@ -171,7 +175,8 @@ export class TeuReportComponent implements OnInit {
         this.filename2 = '';
         this.filetype2 = '';
         this.filedisplayname2 = '';
-
+        this.sortCol = 'mbl_refno';
+        this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
       }
@@ -222,7 +227,7 @@ export class TeuReportComponent implements OnInit {
         this.SearchData.COMP_CODE = this.gs.branch_codes;
       else
         this.SearchData.COMP_CODE = this.comp_type;
-      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
+      this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
       this.SearchData.REPORT_TYPE = this.report_type;
       this.SearchData.REPORT_SHPTYPE = this.report_shptype;
       this.SearchData.CUST_ID = this.agent_id;
@@ -267,6 +272,8 @@ export class TeuReportComponent implements OnInit {
             agent_id: this.SearchData.AGENT_ID,
             agent_name: this.SearchData.AGENT_NAME,
             reportformat: this.reportformat,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -280,7 +287,7 @@ export class TeuReportComponent implements OnInit {
             filedisplayname2: this.SearchData.filedisplayname2
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
-        }else if (_outputformat == "PRINT") {
+        } else if (_outputformat == "PRINT") {
 
           this.filename = response.filename;
           this.filetype = response.filetype;
@@ -300,10 +307,23 @@ export class TeuReportComponent implements OnInit {
   }
 
   Close() {
-   // this.store.dispatch(new myActions.Delete({ id: this.urlid }));
+    // this.store.dispatch(new myActions.Delete({ id: this.urlid }));
     this.location.back();
   }
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
 
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
   initLov(caption: string = '') {
     // this.AGENTRECORD = new SearchTable();
     // this.AGENTRECORD.controlname = "AGENT";
@@ -357,7 +377,7 @@ export class TeuReportComponent implements OnInit {
     else {
       alert("Cannot Show Details from another Branch");
     }
-    
+
   }
 
 }
