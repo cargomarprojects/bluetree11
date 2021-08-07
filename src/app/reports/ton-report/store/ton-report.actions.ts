@@ -6,6 +6,7 @@ export enum ActionTypes {
   ADD = '[Ton-Report] Add Report',
   UPDATE = '[Ton-Report] Update Report',
   DELETE = '[Ton-Report] Delete Report',
+  SORT_DATA = '[Ton-Report] Sort Data'
 }
 
 export class Add implements Action {
@@ -23,4 +24,10 @@ export class Delete implements Action {
   constructor(public payload : { id: string}) { }
 }
 
-export type Actions = Add | Update | Delete;
+export class SortData implements Action {
+  readonly type = ActionTypes.SORT_DATA;
+  constructor(public payload: {id : string, sortcol : string } ) {}
+}
+
+
+export type Actions = Add | Update | Delete | SortData;

@@ -112,16 +112,16 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>BRANCH</th>
-          <th>REF#</th>
-          <th>REF-DATE</th>
-          <th>AGENT</th>
-          <th>CARRIER</th>
-          <th>SHIPPER</th>
-          <th>CONSIGNEE</th>
-          <th class="text-right">PCS</th>
-          <th class="text-right">HAWB.WT</th>
-          <th class="text-right">HAWB.CHWT</th>
+          <th (click)="sort('mbl_branch')">BRANCH &nbsp;<i [ngClass]="getIcon('mbl_branch')"></i></th>
+          <th (click)="sort('mbl_refno')">REF# &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
+          <th (click)="sort('mbl_refdate')">REF-DATE &nbsp;<i [ngClass]="getIcon('mbl_refdate')"></i></th>
+          <th (click)="sort('mbl_agent_name')">AGENT &nbsp;<i [ngClass]="getIcon('mbl_agent_name')"></i></th>
+          <th (click)="sort('mbl_liner_name')">CARRIER &nbsp;<i [ngClass]="getIcon('mbl_liner_name')"></i></th>
+          <th (click)="sort('hbl_shipper_name')">SHIPPER &nbsp;<i [ngClass]="getIcon('hbl_shipper_name')"></i></th>
+          <th (click)="sort('hbl_consignee_name')">CONSIGNEE &nbsp;<i [ngClass]="getIcon('hbl_consignee_name')"></i></th>
+          <th (click)="sort('mbl_pcs')" class="text-right">PCS &nbsp;<i [ngClass]="getIcon('mbl_pcs')"></i></th>
+          <th (click)="sort('hbl_weight')" class="text-right">HAWB.WT &nbsp;<i [ngClass]="getIcon('hbl_weight')"></i></th>
+          <th (click)="sort('hbl_chwt')" class="text-right">HAWB.CHWT &nbsp;<i [ngClass]="getIcon('hbl_chwt')"></i></th>
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of MainList">
@@ -153,10 +153,10 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>GROUP</th>
-          <th class="text-right">PCS</th>
-          <th class="text-right">HAWB.WT</th>
-          <th class="text-right">HAWB.CHWT</th>
+          <th (click)="sort('mbl_agent_name')">GROUP &nbsp;<i [ngClass]="getIcon('mbl_agent_name')"></i></th>
+          <th (click)="sort('mbl_pcs')" class="text-right">PCS &nbsp;<i [ngClass]="getIcon('mbl_pcs')"></i></th>
+          <th (click)="sort('hbl_weight')" class="text-right">HAWB.WT &nbsp;<i [ngClass]="getIcon('hbl_weight')"></i></th>
+          <th (click)="sort('hbl_chwt')" class="text-right">HAWB.CHWT &nbsp;<i [ngClass]="getIcon('hbl_chwt')"></i></th>
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of MainList">
