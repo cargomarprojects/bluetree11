@@ -22,6 +22,8 @@ export interface ReportState{
     agent_id : string ;
     agent_name : string ;
     reportformat : string ;
+    sortcol : string ;
+    sortorder : boolean;    
     
     page_rows :number;
     page_count :number;

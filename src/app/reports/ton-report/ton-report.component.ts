@@ -64,6 +64,8 @@ export class TonReportComponent implements OnInit {
   errorMessage: string = '';
 
   SearchData: any = {};
+  sortCol = 'mbl_refno';
+  sortOrder = true;
 
   Reportstate1: Observable<ReportState>;
 
@@ -113,6 +115,8 @@ export class TonReportComponent implements OnInit {
         this.filename2 = rec.filename2;
         this.filetype2 = rec.filetype2;
         this.filedisplayname2 = rec.filedisplayname2;
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
 
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -163,6 +167,8 @@ export class TonReportComponent implements OnInit {
         this.filename2 = '';
         this.filetype2 = '';
         this.filedisplayname2 = '';
+        this.sortCol = 'mbl_refno';
+        this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
       }
@@ -261,6 +267,8 @@ export class TonReportComponent implements OnInit {
             agent_id: this.SearchData.AGENT_ID,
             agent_name: this.SearchData.AGENT_NAME,
             reportformat: this.reportformat,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -298,6 +306,20 @@ export class TonReportComponent implements OnInit {
     this.location.back();
   }
 
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
+
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
   initLov(caption: string = '') {
     
   }
