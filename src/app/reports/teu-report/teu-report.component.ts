@@ -17,8 +17,7 @@ import { map, tap, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-teu-report',
-  templateUrl: './teu-report.component.html',
-  styleUrls: ['./teu-report.component.css']
+  templateUrl: './teu-report.component.html'
 })
 export class TeuReportComponent implements OnInit {
 

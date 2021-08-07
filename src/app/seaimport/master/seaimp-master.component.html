@@ -18,7 +18,7 @@
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
 <div class="page-body table-responsive table-bordered">
-    <table class="table  table-hover table-sm">
+    <table class="table table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
                 <th (click)="mainservice.sort('mbl_refno')">REF.NO&nbsp;<i [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>

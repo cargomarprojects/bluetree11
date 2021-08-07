@@ -10,6 +10,7 @@
   <div *ngIf="currentTab=='LIST'">
 
     <div class="page-list">
+      
       <div class="page-search">
 
         <div class="row">
@@ -122,7 +123,7 @@
 
 
     <div *ngIf="reportformat=='DETAIL'" class="page-body table-responsive table-bordered">
-      <table class="table  table-hover table-sm">
+      <table class="table table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
             <th (click)="sort('mbl_branch')">BRANCH &nbsp;<i [ngClass]="getIcon('mbl_branch')"></i></th>
@@ -144,8 +145,7 @@
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-          <tr  [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
-          [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'">
+          <tr  [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'" [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'" >
             <td>{{rec.mbl_branch}}</td>
             <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
             <td *ngIf="rec.mbl_branch==gs.branch_name">

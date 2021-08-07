@@ -2,16 +2,20 @@
 
 :root {
 
-
-
     --custom-bg-color: #c9c2c2; 
     --custom-even-color : #a7a1a1; 
+
+    --custom-fg-color: #c9c2c2; 
+
+    --custom-border-color:rgba(0,0,0,.125)
 
     /* --custom-bg-color:#D3D3D3;
     --custom-even-color : #D3D3D3; 
     */
   
 }
+
+
 
 tr:nth-child(even) {
     background-color: var(--custom-even-color) !important;
@@ -53,12 +57,20 @@ body {
 .navbar-toggler {
      color: white !important;  
 }
-  
+
+.page-body {
+    border-color: var(--custom-border-color) !important;
+}
+
 .page-body-thead {
   font-size: 10px; 
   cursor: pointer;
   background-color: steelblue;
   color: white;
+}
+
+table, th, td {
+    border-color: var(--custom-border-color) !important;
 }
 
 .page-body-tbody {
@@ -144,11 +156,8 @@ hr {
     text-decoration: none;
 }
   
-.table tr.active td {
-    background-color: #F0F0F0 !important;
-}
-  
-  /* Menu */
+
+/* Menu */
   
 .menu {
     overflow: auto;
@@ -312,13 +321,13 @@ hr {
     border-right: 1px;
     border-bottom: 1px;
     border-style: solid;
-    border-color: rgba(0,0,0,.125);
+    border-color: var(--custom-border-color) !important;
 
 }
   
 
 .testbox {
-     border: 0px solid rgba(0,0,0,.125);
+     border: 0px solid var(--custom-border-color) !important;
 }
 
 
@@ -329,7 +338,7 @@ hr {
     border-right: 1px;
     border-bottom: 1px;
     border-style: solid;
-    border-color: rgba(0,0,0,.125);
+    border-color: var(--custom-border-color) !important;
     padding: 2px;
     margin: 1px;
 }
@@ -358,55 +367,53 @@ hr {
     border-right: 1px;
     border-bottom: 0px;
     border-style: solid;
-    border-color: rgba(0,0,0,.125);
+    border-color: var(--custom-border-color) !important;
     padding: 3px;
     background-color:var(--custom-bg-color);
 }
 
 .page-list {
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid var(--custom-border-color) !important;
     background-color:var(--custom-bg-color);
 }
   
 .page-search {
     margin: 5px;
     padding: 5px;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid var(--custom-border-color) !important;
     border-radius: 2px;
 }
 
 
 .page-body {
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid var(--custom-border-color) !important;
     padding: 3px;
     background-color:var(--custom-bg-color);
 }
 
-
   
 .page-footer {
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid var(--custom-border-color) !important;
     padding: 1px;
     background-color:var(--custom-bg-color);
 }
-  
+ 
 .page-pager {
     margin-top: 1px;
     margin-bottom: 1px;
     cursor: pointer;
-    border: 1px solid rgba(0,0,0,.125);    
+    border: 1px solid var(--custom-border-color) !important;    
     background-color:var(--custom-bg-color) ;
 }
 
 .page-link {
     background-color:var(--custom-bg-color) !important;
+    border-color: var(--custom-border-color) !important;
 }
-
 .pagination {
-    margin-bottom:0px;
-
-    
+    margin:3px;
 }
+
 .ulcenter {
     justify-content: center;
     display: flex;
@@ -420,7 +427,7 @@ hr {
   
 .page-details {
     padding: 10px;
-    border: 1px solid rgba(0,0,0,.125)
+    border: 1px solid var(--custom-border-color) !important
 }
 
 .abs-center-x {
