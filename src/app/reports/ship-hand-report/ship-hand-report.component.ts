@@ -64,6 +64,8 @@ export class ShipHandReportComponent implements OnInit {
   errorMessage: string = '';
 
   SearchData: any = {};
+  sortCol = 'hbl_hand_name';
+  sortOrder = true;
 
   mainState: ReportState;
 
@@ -81,7 +83,7 @@ export class ShipHandReportComponent implements OnInit {
     this.sub = this.route.queryParams.subscribe(params => {
 
       this.gs.checkAppVersion();
-      
+
       this.urlid = params.id;
       this.menuid = params.menuid;
       this.InitPage();
@@ -114,6 +116,9 @@ export class ShipHandReportComponent implements OnInit {
         this.filename = rec.filename;
         this.filetype = rec.filetype;
         this.filedisplayname = rec.filedisplayname;
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
+
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
         this.page_current = rec.page_current;
@@ -158,7 +163,8 @@ export class ShipHandReportComponent implements OnInit {
         this.filename = '';
         this.filetype = '';
         this.filedisplayname = '';
-
+        this.sortCol = 'hbl_hand_name';
+        this.sortOrder = true;
 
         this.SearchData = this.gs.UserInfo;
 
@@ -246,6 +252,8 @@ export class ShipHandReportComponent implements OnInit {
             handled_id: this.SearchData.HANDLED_ID,
             handled_name: this.SearchData.HANDLED_NAME,
             reporttype: this.reporttype,
+            sortcol: 'hbl_hand_name',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -278,12 +286,27 @@ export class ShipHandReportComponent implements OnInit {
   }
 
   Close() {
-  //  this.store.dispatch(new myActions.Delete({ id: this.urlid }));
+    //  this.store.dispatch(new myActions.Delete({ id: this.urlid }));
     this.location.back();
   }
 
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
+
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
+  
   initLov(caption: string = '') {
-    
+
   }
 
   LovSelected(_Record: SearchTable) {

@@ -102,13 +102,13 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
-            <th>BRANCH</th>
-            <th>REF#</th>
-            <th>REF-DATE</th>
-            <th>HANDLED-BY</th>
-            <th>AGENT</th>
-            <th>POL</th>
-            <th>POD</th>
+            <th (click)="sort('mbl_branch')">BRANCH &nbsp;<i [ngClass]="getIcon('mbl_branch')"></i></th>
+            <th (click)="sort('mbl_refno')">REF# &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
+            <th (click)="sort('mbl_refdate')">REF-DATE &nbsp;<i [ngClass]="getIcon('mbl_refdate')"></i></th>
+            <th (click)="sort('hbl_hand_name')">HANDLED-BY &nbsp;<i [ngClass]="getIcon('hbl_hand_name')"></i></th>
+            <th (click)="sort('mbl_agent_name')">AGENT &nbsp;<i [ngClass]="getIcon('mbl_agent_name')"></i></th>
+            <th (click)="sort('mbl_pol_name')">POL &nbsp;<i [ngClass]="getIcon('mbl_pol_name')"></i></th>
+            <th (click)="sort('mbl_pod_name')">POD &nbsp;<i [ngClass]="getIcon('mbl_pod_name')"></i></th>
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
@@ -136,17 +136,17 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
-            <th>BRANCH</th>
-            <th>REF#</th>
-            <th>REF-DATE</th>
-            <th>HANDLED-BY</th>
-            <th>AGENT</th>
-            <th>POL</th>
-            <th>POD</th>
-            <th>HOUSE</th>
-            <th>SHIPPER</th>
-            <th>CONSIGNEE</th>
-            <th>H-TERMS</th>
+            <th (click)="sort('mbl_branch')">BRANCH &nbsp;<i [ngClass]="getIcon('mbl_branch')"></i></th>
+            <th (click)="sort('mbl_refno')">REF# &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
+            <th (click)="sort('mbl_refdate')">REF-DATE &nbsp;<i [ngClass]="getIcon('mbl_refdate')"></i></th>
+            <th (click)="sort('hbl_hand_name')">HANDLED-BY &nbsp;<i [ngClass]="getIcon('hbl_hand_name')"></i></th>
+            <th (click)="sort('mbl_agent_name')">AGENT &nbsp;<i [ngClass]="getIcon('mbl_agent_name')"></i></th>
+            <th (click)="sort('mbl_pol_name')">POL &nbsp;<i [ngClass]="getIcon('mbl_pol_name')"></i></th>
+            <th (click)="sort('mbl_pod_name')">POD &nbsp;<i [ngClass]="getIcon('mbl_pod_name')"></i></th>
+            <th (click)="sort('hbl_houseno')">HOUSE &nbsp;<i [ngClass]="getIcon('hbl_houseno')"></i></th>
+            <th (click)="sort('hbl_shipper_name')">SHIPPER &nbsp;<i [ngClass]="getIcon('hbl_shipper_name')"></i></th>
+            <th (click)="sort('hbl_consignee_name')">CONSIGNEE &nbsp;<i [ngClass]="getIcon('hbl_consignee_name')"></i></th>
+            <th (click)="sort('hbl_movement')">H-TERMS &nbsp;<i [ngClass]="getIcon('hbl_movement')"></i></th>
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
@@ -184,10 +184,10 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
-            <th>BRANCH</th>
-            <th>HANDLED-BY</th>
-            <th>MASTER</th>
-            <th>HOUSE</th>
+            <th (click)="sort('mbl_branch')">BRANCH &nbsp;<i [ngClass]="getIcon('mbl_branch')"></i></th>
+            <th (click)="sort('hbl_hand_name')">HANDLED-BY &nbsp;<i [ngClass]="getIcon('hbl_hand_name')"></i></th>
+            <th (click)="sort('mbl_agent_name')">MASTER &nbsp;<i [ngClass]="getIcon('mbl_agent_name')"></i></th>
+            <th (click)="sort('mbl_pol_name')">HOUSE &nbsp;<i [ngClass]="getIcon('mbl_pol_name')"></i></th>
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
