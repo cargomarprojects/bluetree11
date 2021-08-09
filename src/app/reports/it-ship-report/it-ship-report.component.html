@@ -74,8 +74,8 @@
           <th (click)="sort('mbl_cntr_type')" >SHIPMENT MODE &nbsp;<i [ngClass]="getIcon('mbl_cntr_type')"></i></th>
         </tr>
       </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-        <tr>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of MainList">
           <td>{{rec.mbl_branch}}</td>
           <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
           <td *ngIf="rec.mbl_branch==gs.branch_name">

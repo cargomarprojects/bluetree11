@@ -111,8 +111,8 @@
             <th (click)="sort('mbl_pod_name')">POD &nbsp;<i [ngClass]="getIcon('mbl_pod_name')"></i></th>
           </tr>
         </thead>
-        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-          <tr>
+        <tbody class="page-body-tbody">
+          <tr *ngFor="let rec of MainList">
             <td>{{rec.mbl_branch}}</td>
             <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
             <td *ngIf="rec.mbl_branch==gs.branch_name">
@@ -149,8 +149,8 @@
             <th (click)="sort('hbl_movement')">H-TERMS &nbsp;<i [ngClass]="getIcon('hbl_movement')"></i></th>
           </tr>
         </thead>
-        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-          <tr>
+        <tbody class="page-body-tbody">
+          <tr *ngFor="let rec of MainList">
             <td>{{rec.mbl_branch}}</td>
             <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
             <td *ngIf="rec.mbl_branch==gs.branch_name">
@@ -190,8 +190,8 @@
             <th (click)="sort('mbl_pol_name')">HOUSE &nbsp;<i [ngClass]="getIcon('mbl_pol_name')"></i></th>
           </tr>
         </thead>
-        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-          <tr>
+        <tbody class="page-body-tbody" >
+          <tr *ngFor="let rec of MainList">
             <td>{{rec.mbl_branch}}</td>
             <td>{{rec.hbl_hand_name}}</td>
             <td>{{rec.mbl_agent_name}}</td>

@@ -110,31 +110,31 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>REF#</th>
-          <th>REF-DATE</th>
-          <th>INV#</th>
-          <th>INV-DATE</th>
-          <th>VENDOR</th>
-          <th>CUSTOMER</th>
-          <th>ORDEDR#</th>
-          <th>LOAD-COUNTRY</th>
-          <th>LOAD-POSTCODE</th>
-          <th>LOAD-CITY</th>
-          <th>LOAD-DATE</th>
-          <th>POL</th>
-          <th>POD</th>
-          <th>RECEIVER-COUNTRY</th>
-          <th>RECEIVER-CITY</th>
-          <th>DELIVERY-DATE</th>
-          <th>CNTR-TYPE</th>
-          <th>CARRIER</th>
-          <th>CURR</th>
-          <th align='right'>INV-AMT</th>
-          <th>FREE-TIME</th>
+          <th (click)="sort('mbl_refno')" >REF# &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
+          <th (click)="sort('mbl_refdate')" >REF-DATE &nbsp;<i [ngClass]="getIcon('mbl_refdate')"></i></th>
+          <th (click)="sort('inv_no')" >INV# &nbsp;<i [ngClass]="getIcon('inv_no')"></i></th>
+          <th (click)="sort('inv_date')" >INV-DATE &nbsp;<i [ngClass]="getIcon('inv_date')"></i></th>
+          <th (click)="sort('vendor_name')" >VENDOR &nbsp;<i [ngClass]="getIcon('vendor_name')"></i></th>
+          <th (click)="sort('customer_name')" >CUSTOMER &nbsp;<i [ngClass]="getIcon('customer_name')"></i></th>
+          <th (click)="sort('order_number')" >ORDEDR# &nbsp;<i [ngClass]="getIcon('order_number')"></i></th>
+          <th (click)="sort('loading_country')" >LOAD-COUNTRY &nbsp;<i [ngClass]="getIcon('loading_country')"></i></th>
+          <th (click)="sort('loading_postcode')" >LOAD-POSTCODE &nbsp;<i [ngClass]="getIcon('loading_postcode')"></i></th>
+          <th (click)="sort('loading_city')" >LOAD-CITY &nbsp;<i [ngClass]="getIcon('loading_city')"></i></th>
+          <th (click)="sort('load_date_from')" >LOAD-DATE &nbsp;<i [ngClass]="getIcon('load_date_from')"></i></th>
+          <th (click)="sort('mbl_pol_code')" >POL &nbsp;<i [ngClass]="getIcon('mbl_pol_code')"></i></th>
+          <th (click)="sort('mbl_pod_code')" >POD &nbsp;<i [ngClass]="getIcon('mbl_pod_code')"></i></th>
+          <th (click)="sort('receiver_country')" >RECEIVER-COUNTRY &nbsp;<i [ngClass]="getIcon('receiver_country')"></i></th>
+          <th (click)="sort('receiver_city')">RECEIVER-CITY &nbsp;<i [ngClass]="getIcon('receiver_city')"></i></th>
+          <th (click)="sort('delivery_date_from')">DELIVERY-DATE &nbsp;<i [ngClass]="getIcon('delivery_date_from')"></i></th>
+          <th (click)="sort('container_type')">CNTR-TYPE &nbsp;<i [ngClass]="getIcon('container_type')"></i></th>
+          <th (click)="sort('carrier_name')">CARRIER &nbsp;<i [ngClass]="getIcon('carrier_name')"></i></th>
+          <th (click)="sort('currency')">CURR &nbsp;<i [ngClass]="getIcon('currency')"></i></th>
+          <th (click)="sort('inv_amt')" align='right'>INV-AMT &nbsp;<i [ngClass]="getIcon('inv_amt')"></i></th>
+          <th (click)="sort('free_time')">FREE-TIME &nbsp;<i [ngClass]="getIcon('free_time')"></i></th>
         </tr>
       </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-        <tr>
+      <tbody class="page-body-tbody" >
+        <tr *ngFor="let rec of MainList">
           <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
           <td *ngIf="rec.mbl_branch_code==gs.branch_code">
             <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L',rec.mbl_branch_code)"

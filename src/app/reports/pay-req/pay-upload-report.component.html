@@ -21,8 +21,8 @@
                                 <th class='text-center'>OHBL OR TELEX RLS COPY</th>
                             </tr>
                         </thead>
-                        <tbody class="page-body-tbody" *ngFor="let rec of HouseList">
-                            <tr>
+                        <tbody class="page-body-tbody" >
+                            <tr *ngFor="let rec of HouseList">
                                 <td class="p-0">{{rec.hbl_houseno}}</td>
                                 <td class="p-0">{{rec.hbl_consignee_name}}</td>
                                 <td class='text-center'><i class="fa fa-paperclip  fa-lg pointer" style="font-size:24px"
@@ -43,8 +43,8 @@
                                 <th class='text-center'>CHECK COPY</th>
                             </tr>
                         </thead>
-                        <tbody class="page-body-tbody" *ngFor="let rec of InvoiceList">
-                            <tr>
+                        <tbody class="page-body-tbody">
+                            <tr *ngFor="let rec of InvoiceList">
                                 <td class="p-0">{{rec.inv_no}}</td>
                                 <td class="p-0">{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT}}</td>
                                 <td class="p-0">{{rec.inv_name}}</td>

@@ -63,6 +63,8 @@ export class InvIssReportComponent implements OnInit {
   errorMessage: string = '';
 
   SearchData: any = {};
+  sortCol = 'mbl_refno';
+  sortOrder = true;
 
   Reportstate1: Observable<ReportState>;
 
@@ -119,6 +121,9 @@ export class InvIssReportComponent implements OnInit {
         this.datetype = rec.datetype;
         this.araptype = rec.araptype;
         this.reportformat = rec.reportformat;
+
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
 
 
         this.page_rows = rec.page_rows;
@@ -186,7 +191,8 @@ export class InvIssReportComponent implements OnInit {
         this.araptype = 'A/R';
         this.reportformat = 'DETAIL';
 
-
+        this.sortCol = 'mbl_refno';
+        this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
       }
@@ -297,6 +303,8 @@ export class InvIssReportComponent implements OnInit {
             datetype: this.SearchData.DATE_TYPE,
             araptype: this.SearchData.ARAP_TYPE,
             reportformat: this.reportformat,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -331,6 +339,20 @@ export class InvIssReportComponent implements OnInit {
     this.location.back();
   }
 
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
+
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
   initLov(caption: string = '') {
     // this.CUSTRECORD = new SearchTable();
     // this.CUSTRECORD.controlname = 'CUSTOMER';

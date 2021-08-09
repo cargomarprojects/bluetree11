@@ -191,8 +191,8 @@
             <th class="text-right">KGS/CHWT</th>
           </tr>
         </thead>
-        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-          <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red': rec.ROW_TYPE=='SUB TOTAL'?'Blue' :'Black'"
+        <tbody class="page-body-tbody">
+          <tr *ngFor="let rec of MainList" [style.color]="rec.ROW_TYPE=='TOTAL'?'Red': rec.ROW_TYPE=='SUB TOTAL'?'Blue' :'Black'"
             [style.font-weight]="rec.ROW_TYPE=='HEADING'||rec.ROW_TYPE=='TOTAL'||rec.ROW_TYPE=='SUB TOTAL'?'bold':'normal'">
             <td>{{rec.mbl_branch}}</td>
             <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
@@ -246,8 +246,8 @@
             <th class="text-right">KGS/CHWT</th>
           </tr>
         </thead>
-        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-          <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+        <tbody class="page-body-tbody">
+          <tr *ngFor="let rec of MainList" [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
           [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'">
 
             <td>{{rec.mbl_customer_name}}</td>

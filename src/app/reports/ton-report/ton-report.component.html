@@ -124,8 +124,8 @@
           <th (click)="sort('hbl_chwt')" class="text-right">HAWB.CHWT &nbsp;<i [ngClass]="getIcon('hbl_chwt')"></i></th>
         </tr>
       </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-        <tr  [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of MainList"  [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
         [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'">
           <td>{{rec.mbl_branch}}</td>
           <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
@@ -159,8 +159,8 @@
           <th (click)="sort('hbl_chwt')" class="text-right">HAWB.CHWT &nbsp;<i [ngClass]="getIcon('hbl_chwt')"></i></th>
         </tr>
       </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-        <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of MainList" [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
         [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'">
           <td>{{rec.mbl_agent_name}}</td>
           <td align='right'>{{rec.mbl_pcs}}</td>

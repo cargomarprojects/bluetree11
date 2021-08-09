@@ -82,8 +82,8 @@
             <th>HANDLED-BY</th>
           </tr>
         </thead>
-        <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-          <tr>
+        <tbody class="page-body-tbody">
+          <tr *ngFor="let rec of MainList">
             <!-- <td>{{rec.lblm_refno}}</td> -->
             <td> <div class="form-check"> <input type="checkbox" class="form-check-input" (click)="SelectDeselect2(rec)" #chkbox
               [(ngModel)]="rec.lblm_yn_b"><span>{{rec.lblm_refno}}</span></div></td>
