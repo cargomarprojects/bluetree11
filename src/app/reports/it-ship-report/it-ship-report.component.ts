@@ -29,12 +29,12 @@ export class ItShipReportComponent implements OnInit {
 
   currentTab = '';
 
- 
+
   sdate: string;
   edate: string;
-  mode  = '';
+  mode = '';
   comp_type: string = '';
-  
+
 
   page_count: number = 0;
   page_current: number = 0;
@@ -48,12 +48,14 @@ export class ItShipReportComponent implements OnInit {
   errorMessage: string = '';
 
   SearchData: any = {};
+  sortCol = 'mbl_refno';
+  sortOrder = true;
 
   Reportstate1: Observable<ReportState>;
 
   MainList: TBL_MBL_REPORT[];
 
-  
+
 
   constructor(
     public gs: GlobalService,
@@ -67,7 +69,7 @@ export class ItShipReportComponent implements OnInit {
     this.sub = this.activatedroute.queryParams.subscribe(params => {
 
       this.gs.checkAppVersion();
-      
+
       this.urlid = params.id;
       this.menuid = params.menuid;
       this.InitPage();
@@ -78,7 +80,7 @@ export class ItShipReportComponent implements OnInit {
   InitPage() {
 
     this.storesub = this.store.select(myReducer.getState(this.urlid)).subscribe(rec => {
-      
+
       if (rec) {
 
         this.MainList = rec.records;
@@ -87,6 +89,8 @@ export class ItShipReportComponent implements OnInit {
         this.sdate = rec.sdate;
         this.edate = rec.edate;
         this.comp_type = rec.comp_type;
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
         this.page_current = rec.page_current;
@@ -106,7 +110,7 @@ export class ItShipReportComponent implements OnInit {
 
       } else {
         this.MainList = Array<TBL_MBL_REPORT>();
-
+       
         this.page_rows = this.gs.ROWS_TO_DISPLAY;
         this.page_count = 0;
         this.page_current = 0;
@@ -115,12 +119,13 @@ export class ItShipReportComponent implements OnInit {
         this.currentTab = 'LIST';
 
 
-        this.sdate =  this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
+        this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
         this.edate = this.gs.defaultValues.today;
         this.mode = 'OCEAN IMPORT';
         this.comp_type = this.gs.branch_code;
         this.SearchData = this.gs.UserInfo;
-
+        this.sortCol = 'mbl_refno';
+        this.sortOrder = true;
       }
     });
 
@@ -150,7 +155,7 @@ export class ItShipReportComponent implements OnInit {
 
     if (_outputformat === 'SCREEN' && _action === 'NEW') {
 
-      
+
       this.SearchData.SDATE = this.sdate;
       this.SearchData.EDATE = this.edate;
       this.SearchData.COMP_TYPE = this.comp_type;
@@ -178,6 +183,8 @@ export class ItShipReportComponent implements OnInit {
             sdate: this.SearchData.SDATE,
             edate: this.SearchData.EDATE,
             comp_type: this.SearchData.COMP_TYPE,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -196,8 +203,23 @@ export class ItShipReportComponent implements OnInit {
   }
 
   Close() {
-   // this.store.dispatch(new myActions.Delete({ id: this.urlid }));
+    // this.store.dispatch(new myActions.Delete({ id: this.urlid }));
     this.location.back();
+  }
+
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
+
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
   }
 
   editmaster(_record: TBL_MBL_REPORT) {

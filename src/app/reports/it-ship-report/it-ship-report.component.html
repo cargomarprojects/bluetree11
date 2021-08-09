@@ -64,14 +64,14 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>BRANCH</th>
-          <th>REF#</th>
-          <th>REF-DATE</th>
-          <th>HOUSE</th>
-          <th>CONSIGNEE</th>
-          <th>POD ETA</th>
-          <th>FINAL-DESTINATION</th>
-          <th>SHIPMENT MODE</th>
+          <th (click)="sort('mbl_branch')" >BRANCH &nbsp;<i [ngClass]="getIcon('mbl_branch')"></i></th>
+          <th (click)="sort('mbl_refno')" >REF# &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
+          <th (click)="sort('mbl_refdate')" >REF-DATE &nbsp;<i [ngClass]="getIcon('mbl_refdate')"></i></th>
+          <th (click)="sort('hbl_houseno')" >HOUSE &nbsp;<i [ngClass]="getIcon('hbl_houseno')"></i></th>
+          <th (click)="sort('hbl_consignee_name')" >CONSIGNEE &nbsp;<i [ngClass]="getIcon('hbl_consignee_name')"></i></th>
+          <th (click)="sort('mbl_pod_eta')" >POD ETA &nbsp;<i [ngClass]="getIcon('mbl_pod_eta')"></i></th>
+          <th (click)="sort('hbl_place_final')" >FINAL-DESTINATION &nbsp;<i [ngClass]="getIcon('hbl_place_final')"></i></th>
+          <th (click)="sort('mbl_cntr_type')" >SHIPMENT MODE &nbsp;<i [ngClass]="getIcon('mbl_cntr_type')"></i></th>
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of MainList">
