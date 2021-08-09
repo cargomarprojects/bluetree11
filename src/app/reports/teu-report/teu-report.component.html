@@ -188,15 +188,15 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
-            <th>AGENT</th>
-            <th class="text-right">PCS</th>
-            <th class="text-right">20</th>
-            <th class="text-right">40</th>
-            <th class="text-right">40HC</th>
-            <th class="text-right">45</th>
-            <th class="text-right">TEU</th>
-            <th class="text-right">CBM</th>
-            <th class="text-right">KGS</th>
+            <th (click)="sort('mbl_agent_name')">AGENT &nbsp;<i [ngClass]="getIcon('mbl_agent_name')"></i></th>
+            <th (click)="sort('mbl_pcs')" class="text-right">PCS &nbsp;<i [ngClass]="getIcon('mbl_pcs')"></i></th>
+            <th (click)="sort('mbl_20')" class="text-right">20 &nbsp;<i [ngClass]="getIcon('mbl_20')"></i></th>
+            <th (click)="sort('mbl_40')" class="text-right">40 &nbsp;<i [ngClass]="getIcon('mbl_40')"></i></th>
+            <th (click)="sort('mbl_40HQ')" class="text-right">40HC &nbsp;<i [ngClass]="getIcon('mbl_40HQ')"></i></th>
+            <th (click)="sort('mbl_45')" class="text-right">45 &nbsp;<i [ngClass]="getIcon('mbl_45')"></i></th>
+            <th (click)="sort('mbl_teu')" class="text-right">TEU &nbsp;<i [ngClass]="getIcon('mbl_teu')"></i></th>
+            <th (click)="sort('mbl_cntr_cbm')" class="text-right">CBM &nbsp;<i [ngClass]="getIcon('mbl_cntr_cbm')"></i></th>
+            <th (click)="sort('mbl_weight')" class="text-right">KGS &nbsp;<i [ngClass]="getIcon('mbl_weight')"></i></th>
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
