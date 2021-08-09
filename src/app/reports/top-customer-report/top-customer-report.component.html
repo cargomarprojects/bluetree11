@@ -152,13 +152,13 @@
             <table class="table  table-hover table-sm">
                 <thead class="page-body-thead">
                     <tr>
-                        <th width="15%">REFNO</th>
-                        <th width="15%"
+                        <th (click)="sort('mbl_refno')" width="15%">REFNO &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
+                        <th (click)="sort('hbl_houseno')" width="15%"
                             *ngIf="!(report_category == 'OVERSEAS AGENT' || report_category == 'POL' || report_category == 'POD')">
-                            HOUSE</th>
-                        <th width="20%">{{report_category}}</th>
-                        <th width="15%" class="text-right">{{report_amt_caption}}</th>
-                        <th width="35%"></th>
+                            HOUSE &nbsp;<i [ngClass]="getIcon('hbl_houseno')"></i></th>
+                        <th (click)="sort('mbl_customer_name')" width="20%">{{report_category}} &nbsp;<i [ngClass]="getIcon('mbl_customer_name')"></i></th>
+                        <th (click)="sort('mbl_customer_amt')" width="15%" class="text-right">{{report_amt_caption}} &nbsp;<i [ngClass]="getIcon('mbl_customer_amt')"></i></th>
+                        <th ></th>
                     </tr>
                 </thead>
                 <tbody class="page-body-tbody" *ngFor="let rec of MainList">
@@ -194,8 +194,8 @@
             <table class="table  table-hover table-sm">
                 <thead class="page-body-thead">
                     <tr>
-                        <th width="15%">{{report_category}}</th>
-                        <th width="15%" class="text-right">{{report_amt_caption}}</th>
+                        <th (click)="sort('mbl_customer_name')" width="15%">{{report_category}} &nbsp;<i [ngClass]="getIcon('mbl_customer_name')"></i></th>
+                        <th (click)="sort('mbl_customer_amt')" width="15%" class="text-right">{{report_amt_caption}} &nbsp;<i [ngClass]="getIcon('mbl_customer_amt')"></i></th>
                         <th width="70%"></th>
                     </tr>
                 </thead>

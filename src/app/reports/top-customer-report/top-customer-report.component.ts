@@ -67,6 +67,8 @@ export class TopCustomerReportComponent implements OnInit {
 
 
   SearchData: any = {};
+  sortCol = 'mbl_refno';
+  sortOrder = true;
 
   Reportstate1: Observable<ReportState>;
 
@@ -114,7 +116,8 @@ export class TopCustomerReportComponent implements OnInit {
         this.filename2 = rec.filename2;
         this.filetype2 = rec.filetype2;
         this.filedisplayname2 = rec.filedisplayname2;
-
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
 
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -185,7 +188,8 @@ export class TopCustomerReportComponent implements OnInit {
         this.filename2 = '';
         this.filetype2 = '';
         this.filedisplayname2 = '';
-
+        this.sortCol = 'mbl_refno';
+        this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
       }
@@ -300,6 +304,8 @@ export class TopCustomerReportComponent implements OnInit {
             radio_exp: this.radio_exp,
             report_amt_caption: this.report_amt_caption,
             group_by_parent: this.group_by_parent,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -338,6 +344,21 @@ export class TopCustomerReportComponent implements OnInit {
     this.location.back();
   }
 
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
+
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
+  
   initLov(caption: string = '') {
 
 
