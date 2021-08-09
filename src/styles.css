@@ -19,7 +19,8 @@
 
 
 tr:nth-child(even) {
-    background-color: var(--custom-even-color) !important;
+    /* background-color: var(--custom-even-color) !important; */
+    background-color: green !important;
 }
 
 html {
