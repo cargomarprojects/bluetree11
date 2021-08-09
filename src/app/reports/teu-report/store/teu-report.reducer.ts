@@ -62,9 +62,9 @@ export function TeuReportReducer(state: ReportState[] = [initialState], action: 
                 st.sortorder = !st.sortorder;
 
             if (st.sortorder)
-                st.records = _.orderBy(st.records, ['ROW_TYPE',st.sortcol], ['asc','asc']);
+                st.records = _.sortBy(st.records, ['ROW_TYPE',st.sortcol], ['asc','asc']);
             else
-                st.records = _.orderBy(st.records, ['ROW_TYPE',st.sortcol], ['asc','desc']);
+                st.records = _.sortBy(st.records, ['ROW_TYPE',st.sortcol], ['asc','desc']);
 
             /*
             if (st.sortorder)
