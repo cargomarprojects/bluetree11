@@ -444,7 +444,8 @@
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-          <tr>
+          <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+          [style.font-weight]="rec.ROW_TYPE=='TOTAL'?'bold':'normal'">
             <td *ngIf="_report_category == 'OPERATION GROUP'">{{rec.mbl_refno}}</td>
             <td *ngIf="_report_category == 'AGENT'">{{rec.mbl_agent_name}}</td>
             <td>{{rec.mbl_refno_tot}}</td>
