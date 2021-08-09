@@ -69,17 +69,17 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
-            <th>REF#</th>
-            <th>REF-DATE</th>
-            <th>LOCK</th>
-            <th *ngIf="mode=='OCEAN IMPORT'">BL-STATUS</th>
-            <th *ngIf="mode=='OCEAN IMPORT'">SHIPMENT</th>
-            <th *ngIf="mode=='OCEAN IMPORT'">E.RET-DATE</th>
-            <th *ngIf="mode=='OCEAN IMPORT'">PICKUP-DATE</th>
-            <th>PROFIT-MET</th>
-            <th>LOSS-APPROVED</th>
-            <th>MEMO</th>
-            <th>PROFIT</th>
+            <th (click)="sort('sc_mbl_refno')" >REF# &nbsp;<i [ngClass]="getIcon('sc_mbl_refno')"></i></th>
+            <th (click)="sort('sc_mbl_ref_date')" >REF-DATE &nbsp;<i [ngClass]="getIcon('sc_mbl_ref_date')"></i></th>
+            <th (click)="sort('sc_mbl_lock')" >LOCK &nbsp;<i [ngClass]="getIcon('sc_mbl_lock')"></i></th>
+            <th (click)="sort('sc_bl_status')"  *ngIf="mode=='OCEAN IMPORT'">BL-STATUS &nbsp;<i [ngClass]="getIcon('sc_bl_status')"></i></th>
+            <th (click)="sort('sc_shipment_type')"  *ngIf="mode=='OCEAN IMPORT'">SHIPMENT &nbsp;<i [ngClass]="getIcon('sc_shipment_type')"></i></th>
+            <th (click)="sort('sc_emptyret_date')"  *ngIf="mode=='OCEAN IMPORT'">E.RET-DATE &nbsp;<i [ngClass]="getIcon('sc_emptyret_date')"></i></th>
+            <th (click)="sort('sc_pickup_date')"  *ngIf="mode=='OCEAN IMPORT'">PICKUP-DATE &nbsp;<i [ngClass]="getIcon('sc_pickup_date')"></i></th>
+            <th (click)="sort('sc_profit_met')" >PROFIT-MET &nbsp;<i [ngClass]="getIcon('sc_profit_met')"></i></th>
+            <th (click)="sort('sc_loss_approved')" >LOSS-APPROVED &nbsp;<i [ngClass]="getIcon('sc_loss_approved')"></i></th>
+            <th (click)="sort('sc_memo')" >MEMO &nbsp;<i [ngClass]="getIcon('sc_memo')"></i></th>
+            <th (click)="sort('sc_profit')" >PROFIT &nbsp;<i [ngClass]="getIcon('sc_profit')"></i></th>
             <th class='text-center'>ATTACHMENTS</th>
           </tr>
         </thead>

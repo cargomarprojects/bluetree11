@@ -62,7 +62,8 @@ export class ShipCloseReportComponent implements OnInit {
   errorMessage: string = '';
 
   SearchData: any = {};
-
+  sortCol = 'sc_mbl_refno';
+  sortOrder = true;
   Reportstate1: Observable<ReportState>;
 
   MainList: Tbl_shipment_close[];
@@ -109,7 +110,8 @@ export class ShipCloseReportComponent implements OnInit {
         this.page_count = rec.page_count;
         this.page_current = rec.page_current;
         this.page_rowcount = rec.page_rowcount;
-
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
 
         this.SearchData = this.gs.UserInfo;
         this.SearchData.SDATE = this.sdate;
@@ -138,7 +140,8 @@ export class ShipCloseReportComponent implements OnInit {
         this.edate = this.gs.defaultValues.today;
         this.mode = 'OCEAN IMPORT';
         this.comp_type = this.gs.branch_code;
-
+        this.sortCol = 'sc_mbl_refno';
+        this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
       }
@@ -202,6 +205,8 @@ export class ShipCloseReportComponent implements OnInit {
             edate: this.SearchData.EDATE,
             mode: this.SearchData.MODE,
             comp_type: this.SearchData.COMP_TYPE,
+            sortcol: 'sc_mbl_refno',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -223,7 +228,20 @@ export class ShipCloseReportComponent implements OnInit {
    // this.store.dispatch(new myActions.Delete({ id: this.urlid }));
     this.location.back();
   }
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
 
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
   editmaster(_record: Tbl_shipment_close) {
     let sID: string = (_record.sc_mbl_pkid != null) ? _record.sc_mbl_pkid.toString() : "";
     let REFNO: string = _record.sc_mbl_refno != null ? _record.sc_mbl_refno.toString() : "";

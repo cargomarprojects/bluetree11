@@ -4,6 +4,7 @@ import { AppState as thisState } from '../../../reducer';
 
 import * as myActions from './ship-close-report.actions';
 import { ReportState } from './ship-close-report.models';
+import * as _ from 'lodash-es';
 
 export interface AppState extends thisState {
     'ShipCloseReport': ReportState
@@ -19,6 +20,8 @@ export const initialState: ReportState = {
     edate: '',
     mode: '',
     comp_type: '',
+    sortcol: 'sc_mbl_refno',
+    sortorder: true,
     page_rows: 0,
     page_count: 0,
     page_current: 0,
@@ -34,6 +37,26 @@ export function ShipCloseReportReducer(state: ReportState[] = [initialState], ac
             return [...state.filter(rec => rec.urlid != action.payload.id), action.payload.changes];
         case myActions.ActionTypes.DELETE:
             return [...state.filter(rec => rec.urlid != action.payload.id)];
+        case myActions.ActionTypes.SORT_DATA: {
+
+            var st = Object.assign({}, state.find(rec => rec.urlid == action.payload.id));
+            if (st == null)
+                return [...state];
+
+            if (st.sortcol != action.payload.sortcol) {
+                st.sortcol = action.payload.sortcol;
+                st.sortorder = true;
+            }
+            else
+                st.sortorder = !st.sortorder;
+
+            if (st.sortorder)
+                st.records = _.sortBy(st.records, st.sortcol);
+            else
+                st.records = _.sortBy(st.records, st.sortcol).reverse();
+
+            return [...state.filter(rec => rec.urlid != action.payload.id), st];
+        }
         default:
             return state;
     }

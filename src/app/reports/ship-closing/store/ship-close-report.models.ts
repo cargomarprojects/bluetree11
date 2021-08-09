@@ -10,7 +10,8 @@ export interface ReportState{
     edate: string;
     mode : string;
     comp_type: string;
-    
+    sortcol : string ;
+    sortorder : boolean;    
     page_rows :number;
     page_count :number;
     page_current :number;
