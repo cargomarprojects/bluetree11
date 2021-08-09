@@ -105,26 +105,26 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>REFNO</th>
-          <th>REF-DATE</th>
-          <th>SHIPPER</th>
-          <th>CONSIGNEE</th>
-          <th>VESSEL</th>
-          <th>VOYAGE</th>
-          <th>POL</th>
-          <th>POD</th>
-          <th>ETD</th>
-          <th>ETA</th>
-          <th>VOL.</th>
-          <th>CARRIER</th>
-          <th>MBL#</th>
-          <th>CNTR#</th>
-          <th>SEAL</th>
-          <th>HBL#</th>
-          <th>DISCHARGE</th>
-          <th>CUSTOM.CLR</th>
-          <th>PICKUP</th>
-          <th>EMPTY.RET</th>
+          <th (click)="sort('mbl_refno')" >REFNO &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
+          <th (click)="sort('mbl_refdate')" >REF-DATE &nbsp;<i [ngClass]="getIcon('mbl_refdate')"></i></th>
+          <th (click)="sort('hbl_shipper_name')" >SHIPPER &nbsp;<i [ngClass]="getIcon('hbl_shipper_name')"></i></th>
+          <th (click)="sort('hbl_consignee_name')" >CONSIGNEE &nbsp;<i [ngClass]="getIcon('hbl_consignee_name')"></i></th>
+          <th (click)="sort('mbl_vessel')" >VESSEL &nbsp;<i [ngClass]="getIcon('mbl_vessel')"></i></th>
+          <th (click)="sort('mbl_voyage')" >VOYAGE &nbsp;<i [ngClass]="getIcon('mbl_voyage')"></i></th>
+          <th (click)="sort('mbl_pol_code')" >POL &nbsp;<i [ngClass]="getIcon('mbl_pol_code')"></i></th>
+          <th (click)="sort('mbl_pod_code')" >POD &nbsp;<i [ngClass]="getIcon('mbl_pod_code')"></i></th>
+          <th (click)="sort('mbl_pol_etd')" >ETD &nbsp;<i [ngClass]="getIcon('mbl_pol_etd')"></i></th>
+          <th (click)="sort('mbl_pod_eta')" >ETA &nbsp;<i [ngClass]="getIcon('mbl_pod_eta')"></i></th>
+          <th (click)="sort('mbl_cntr_type')" >VOL. &nbsp;<i [ngClass]="getIcon('mbl_cntr_type')"></i></th>
+          <th (click)="sort('mbl_liner_name')" >CARRIER &nbsp;<i [ngClass]="getIcon('mbl_liner_name')"></i></th>
+          <th (click)="sort('mbl_no')" >MBL# &nbsp;<i [ngClass]="getIcon('mbl_no')"></i></th>
+          <th (click)="sort('mbl_cntr_no')" >CNTR# &nbsp;<i [ngClass]="getIcon('mbl_cntr_no')"></i></th>
+          <th (click)="sort('mbl_cntr_seal')" >SEAL &nbsp;<i [ngClass]="getIcon('mbl_cntr_seal')"></i></th>
+          <th (click)="sort('hbl_houseno')" >HBL# &nbsp;<i [ngClass]="getIcon('hbl_houseno')"></i></th>
+          <th (click)="sort('mbl_cntr_discharge_date')" >DISCHARGE &nbsp;<i [ngClass]="getIcon('mbl_cntr_discharge_date')"></i></th>
+          <th (click)="sort('hbl_custom_clear_date')" >CUSTOM.CLR &nbsp;<i [ngClass]="getIcon('hbl_custom_clear_date')"></i></th>
+          <th (click)="sort('mbl_cntr_pick_date')" >PICKUP &nbsp;<i [ngClass]="getIcon('mbl_cntr_pick_date')"></i></th>
+          <th (click)="sort('mbl_cntr_return_date')" >EMPTY.RET &nbsp;<i [ngClass]="getIcon('mbl_cntr_return_date')"></i></th>
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of MainList">

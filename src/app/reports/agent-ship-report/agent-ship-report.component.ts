@@ -61,6 +61,8 @@ export class AgentShipReportComponent implements OnInit {
   errorMessage: string = '';
 
   SearchData: any = {};
+  sortCol = 'mbl_refno';
+  sortOrder = true;
 
   Reportstate1: Observable<ReportState>;
 
@@ -80,13 +82,13 @@ export class AgentShipReportComponent implements OnInit {
     this.sub = this.activatedroute.queryParams.subscribe(params => {
 
       this.gs.checkAppVersion();
-      
+
       this.appid = params.appid;
       this.urlid = params.id;
       this.menuid = params.menuid;
 
       this.InitPage();
-      
+
     });
 
   }
@@ -115,6 +117,9 @@ export class AgentShipReportComponent implements OnInit {
         this.filename = rec.filename;
         this.filetype = rec.filetype;
         this.filedisplayname = rec.filedisplayname;
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
+
 
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -132,7 +137,7 @@ export class AgentShipReportComponent implements OnInit {
         } else {
           this.SearchData.COMP_CODE = this.comp_type;
         }
-        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
+        this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
 
         this.SearchData.SHIPPER_ID = this.shipper_id;
         this.SearchData.SHIPPER_NAME = this.shipper_name;
@@ -168,6 +173,8 @@ export class AgentShipReportComponent implements OnInit {
         this.filename = '';
         this.filetype = '';
         this.filedisplayname = '';
+        this.sortCol = 'mbl_refno';
+        this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
       }
@@ -221,7 +228,7 @@ export class AgentShipReportComponent implements OnInit {
       } else {
         this.SearchData.COMP_CODE = this.comp_type;
       }
-      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
+      this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
       this.SearchData.SHIPPER_ID = this.shipper_id;
       this.SearchData.SHIPPER_NAME = this.shipper_name;
       this.SearchData.CONSIGNEE_ID = this.consignee_id;
@@ -249,7 +256,7 @@ export class AgentShipReportComponent implements OnInit {
 
 
           const state: ReportState = {
-            appid : this.gs.appid,
+            appid: this.gs.appid,
             pkid: this.pkid,
             urlid: this.urlid,
             menuid: this.menuid,
@@ -266,6 +273,8 @@ export class AgentShipReportComponent implements OnInit {
             shipper_name: this.SearchData.SHIPPER_NAME,
             consignee_id: this.SearchData.CONSIGNEE_ID,
             consignee_name: this.SearchData.CONSIGNEE_NAME,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -277,7 +286,7 @@ export class AgentShipReportComponent implements OnInit {
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
 
-        }else if (_outputformat == "PRINT") {
+        } else if (_outputformat == "PRINT") {
 
           this.filename = response.filename;
           this.filetype = response.filetype;
@@ -301,6 +310,20 @@ export class AgentShipReportComponent implements OnInit {
     this.location.back();
   }
 
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
+
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
   initLov(caption: string = '') {
     // this.CONSRECORD = new SearchTable();
     // this.CONSRECORD.controlname = 'CONSIGNEE';
@@ -322,11 +345,11 @@ export class AgentShipReportComponent implements OnInit {
     }
     if (_Record.controlname === 'SHIPPER') {
       this.shipper_id = _Record.id;
-      this.shipper_name  = _Record.name;
+      this.shipper_name = _Record.name;
     }
     if (_Record.controlname === 'CONSIGNEE') {
       this.consignee_id = _Record.id;
-      this.consignee_name  = _Record.name;
+      this.consignee_name = _Record.name;
     }
   }
   Print() {
