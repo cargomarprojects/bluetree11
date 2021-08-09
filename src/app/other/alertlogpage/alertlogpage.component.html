@@ -118,9 +118,8 @@
 
             <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT}}</td>
             <!-- <td class='hlink2' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td> -->
-            <td *ngIf="rec.mbl_branch==gs.branch_code">{{rec.hbl_houseno}}
-              <a class="hlink" [routerLink]="getRouteDet('L',rec,'HOUSE')"
-                [queryParams]="getRouteDet('P',rec,'HOUSE')">{{rec.hbl_houseno}}</a>
+            <td *ngIf="rec.mbl_branch==gs.branch_code">
+              <a class="hlink" [routerLink]="getRouteDet('L',rec,'HOUSE')" [queryParams]="getRouteDet('P',rec,'HOUSE')">{{rec.hbl_houseno}}</a>
             </td>
             <td *ngIf="rec.mbl_branch!=gs.branch_code">{{rec.hbl_houseno}}</td>
             <td>{{rec.hbl_bltype}}</td>

@@ -151,8 +151,8 @@
               </th>
             </tr>
           </thead>
-          <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-            <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+          <tbody class="page-body-tbody" >
+            <tr *ngFor="let rec of MainList" [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
               [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'">
               <td>{{rec.mbl_branch}}</td>
               <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
