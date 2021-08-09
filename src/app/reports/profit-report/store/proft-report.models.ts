@@ -33,6 +33,8 @@ export interface ReportState{
     _report_category: string;
     _report_type: string;
     stage:string;
+    sortcol : string ;
+    sortorder : boolean;    
     
     page_rows :number;
     page_count :number;

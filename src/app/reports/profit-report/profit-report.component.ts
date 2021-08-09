@@ -87,6 +87,8 @@ export class ProfitReportComponent implements OnInit {
   errorMessage: string = '';
 
   SearchData: any = {};
+  sortCol = 'mbl_refno';
+  sortOrder = true;
 
   CurrentState: Observable<ReportState>;
 
@@ -180,7 +182,8 @@ export class ProfitReportComponent implements OnInit {
         this.filetype2 = rec.filetype2;
         this.filedisplayname2 = rec.filedisplayname2;
 
-
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
         this.page_current = rec.page_current;
@@ -262,6 +265,8 @@ export class ProfitReportComponent implements OnInit {
         this.filedisplayname2 = '';
         this._report_category = 'GENERAL';
         this._report_type = 'MASTER';
+        this.sortCol = 'mbl_refno';
+        this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
       }
@@ -458,7 +463,8 @@ export class ProfitReportComponent implements OnInit {
             _report_category: this.SearchData.REPORT_CATEGORY,
             _report_type: this.SearchData.REPORT_TYPE,
             stage: this.SearchData.STAGES,
-
+            sortcol: 'mbl_refno',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -496,6 +502,20 @@ export class ProfitReportComponent implements OnInit {
     this.location.back();
   }
 
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
+
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
 
 
   initLov(caption: string = '') {

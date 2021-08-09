@@ -202,19 +202,19 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
-            <th>BRANCH</th>
-            <th>REF#</th>
-            <th>ARAP</th>
-            <th>MBL#</th>
-            <th *ngIf="showstages">STAGE</th>
-            <th>REF-DATE</th>
-            <th>AGENT</th>
-            <th>CARRIER</th>
-            <th>REF.COUNT</th>
-            <th>HOUSE.COUNT</th>
-            <th class="text-right">REVENUE</th>
-            <th class="text-right">EXPENSE</th>
-            <th class="text-right">PORFIT</th>
+            <th (click)="sort('mbl_branch')">BRANCH &nbsp;<i [ngClass]="getIcon('mbl_branch')"></i></th>
+            <th (click)="sort('mbl_refno')">REF# &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
+            <th >ARAP</th>
+            <th (click)="sort('mbl_no')">MBL# &nbsp;<i [ngClass]="getIcon('mbl_no')"></i></th>
+            <th (click)="sort('shipment_stage')" *ngIf="showstages">STAGE &nbsp;<i [ngClass]="getIcon('shipment_stage')"></i></th>
+            <th (click)="sort('mbl_refdate')">REF-DATE &nbsp;<i [ngClass]="getIcon('mbl_refdate')"></i></th>
+            <th (click)="sort('mbl_agent_name')">AGENT &nbsp;<i [ngClass]="getIcon('mbl_agent_name')"></i></th>
+            <th (click)="sort('mbl_liner_name')">CARRIER &nbsp;<i [ngClass]="getIcon('mbl_liner_name')"></i></th>
+            <th (click)="sort('mbl_refno_tot')">REF.COUNT &nbsp;<i [ngClass]="getIcon('mbl_refno_tot')"></i></th>
+            <th (click)="sort('mbl_house_tot')">HOUSE.COUNT &nbsp;<i [ngClass]="getIcon('mbl_house_tot')"></i></th>
+            <th (click)="sort('hbl_income')" class="text-right">REVENUE &nbsp;<i [ngClass]="getIcon('hbl_income')"></i></th>
+            <th (click)="sort('hbl_expense')" class="text-right">EXPENSE &nbsp;<i [ngClass]="getIcon('hbl_expense')"></i></th>
+            <th (click)="sort('hbl_profit')" class="text-right">PORFIT &nbsp;<i [ngClass]="getIcon('hbl_profit')"></i></th>
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
@@ -254,31 +254,31 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
-            <th>BRANCH</th>
-            <th>REF#</th>
+            <th (click)="sort('mbl_branch')">BRANCH &nbsp;<i [ngClass]="getIcon('mbl_branch')"></i></th>
+            <th (click)="sort('mbl_refno')">REF# &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
             <th>ARAP</th>
-            <th>MBL#</th>
-            <th *ngIf="showstages">STAGE</th>
-            <th>REF-DATE</th>
+            <th (click)="sort('mbl_no')">MBL# &nbsp;<i [ngClass]="getIcon('mbl_no')"></i></th>
+            <th (click)="sort('shipment_stage')" *ngIf="showstages">STAGE &nbsp;<i [ngClass]="getIcon('shipment_stage')"></i></th>
+            <th (click)="sort('mbl_refdate')">REF-DATE &nbsp;<i [ngClass]="getIcon('mbl_refdate')"></i></th>
 
-            <th>AGENT</th>
-            <th>CARRIER</th>
+            <th (click)="sort('mbl_agent_name')">AGENT &nbsp;<i [ngClass]="getIcon('mbl_agent_name')"></i></th>
+            <th (click)="sort('mbl_liner_name')">CARRIER &nbsp;<i [ngClass]="getIcon('mbl_liner_name')"></i></th>
 
-            <th>REF.COUNT</th>
-            <th>HOUSE.COUNT</th>
-            <th class="text-right">REVENUE</th>
-            <th class="text-right">EXPENSE</th>
-            <th class="text-right">PORFIT</th>
-            <th class="text-right">%</th>
+            <th (click)="sort('mbl_refno_tot')">REF.COUNT &nbsp;<i [ngClass]="getIcon('mbl_refno_tot')"></i></th>
+            <th (click)="sort('mbl_house_tot')">HOUSE.COUNT &nbsp;<i [ngClass]="getIcon('mbl_house_tot')"></i></th>
+            <th (click)="sort('hbl_income')" class="text-right">REVENUE &nbsp;<i [ngClass]="getIcon('hbl_income')"></i></th>
+            <th (click)="sort('hbl_expense')" class="text-right">EXPENSE &nbsp;<i [ngClass]="getIcon('hbl_expense')"></i></th>
+            <th (click)="sort('hbl_profit')" class="text-right">PORFIT &nbsp;<i [ngClass]="getIcon('hbl_profit')"></i></th>
+            <th (click)="sort('hbl_profit_per')" class="text-right">% &nbsp;<i [ngClass]="getIcon('hbl_profit_per')"></i></th>
 
-            <th>F/L</th>
-            <th class="text-right">20</th>
-            <th class="text-right">40</th>
-            <th class="text-right">40HC</th>
-            <th class="text-right">45</th>
-            <th class="text-right">TEU</th>
-            <th class="text-right">CBM</th>
-            <th class="text-right">KGS</th>
+            <th (click)="sort('mbl_cntr_type')">F/L &nbsp;<i [ngClass]="getIcon('mbl_cntr_type')"></i></th>
+            <th (click)="sort('mbl_20')" class="text-right">20 &nbsp;<i [ngClass]="getIcon('mbl_20')"></i></th>
+            <th (click)="sort('mbl_40')" class="text-right">40 &nbsp;<i [ngClass]="getIcon('mbl_40')"></i></th>
+            <th (click)="sort('mbl_40HQ')" class="text-right">40HC &nbsp;<i [ngClass]="getIcon('mbl_40HQ')"></i></th>
+            <th (click)="sort('mbl_45')" class="text-right">45 &nbsp;<i [ngClass]="getIcon('mbl_45')"></i></th>
+            <th (click)="sort('mbl_teu')" class="text-right">TEU &nbsp;<i [ngClass]="getIcon('mbl_teu')"></i></th>
+            <th (click)="sort('mbl_cntr_cbm')" class="text-right">CBM &nbsp;<i [ngClass]="getIcon('mbl_cntr_cbm')"></i></th>
+            <th (click)="sort('mbl_weight')" class="text-right">KGS &nbsp;<i [ngClass]="getIcon('mbl_weight')"></i></th>
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
@@ -325,19 +325,19 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
-            <th>BRANCH</th>
-            <th>REF#</th>
+            <th (click)="sort('mbl_branch')">BRANCH &nbsp;<i [ngClass]="getIcon('mbl_branch')"></i></th>
+            <th (click)="sort('mbl_refno')">REF# &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
             <th>ARAP</th>
-            <th *ngIf="showstages">STAGE</th>
-            <th>REF-DATE</th>
-            <th>AGENT</th>
-            <th>SHIPPER</th>
-            <th>CONSIGNEE</th>
-            <th>BILLING-PARTY</th>
-            <th>BL#</th>
-            <th class="text-right">REVENUE</th>
-            <th class="text-right">EXPENSE</th>
-            <th class="text-right">PORFIT</th>
+            <th (click)="sort('shipment_stage')" *ngIf="showstages">STAGE &nbsp;<i [ngClass]="getIcon('shipment_stage')"></i></th>
+            <th (click)="sort('mbl_refdate')">REF-DATE &nbsp;<i [ngClass]="getIcon('mbl_refdate')"></i></th>
+            <th (click)="sort('mbl_agent_name')">AGENT &nbsp;<i [ngClass]="getIcon('mbl_agent_name')"></i></th>
+            <th (click)="sort('hbl_shipper_name')">SHIPPER &nbsp;<i [ngClass]="getIcon('hbl_shipper_name')"></i></th>
+            <th (click)="sort('hbl_consignee_name')">CONSIGNEE &nbsp;<i [ngClass]="getIcon('hbl_consignee_name')"></i></th>
+            <th (click)="sort('mbl_customer_name')">BILLING-PARTY &nbsp;<i [ngClass]="getIcon('mbl_customer_name')"></i></th>
+            <th (click)="sort('mbl_house_tot')">BL# &nbsp;<i [ngClass]="getIcon('mbl_house_tot')"></i></th>
+            <th (click)="sort('hbl_income')" class="text-right">REVENUE &nbsp;<i [ngClass]="getIcon('hbl_income')"></i></th>
+            <th (click)="sort('hbl_expense')" class="text-right">EXPENSE &nbsp;<i [ngClass]="getIcon('hbl_expense')"></i></th>
+            <th (click)="sort('hbl_profit')" class="text-right">PORFIT &nbsp;<i [ngClass]="getIcon('hbl_profit')"></i></th>
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
@@ -377,22 +377,22 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
-            <th>BRANCH</th>
-            <th>TYPE</th>
-            <th>REF.COUNT</th>
-            <th>HOUSE.COUNT</th>
-            <th class="text-right">REVENUE</th>
-            <th class="text-right">EXPENSE</th>
-            <th class="text-right">PORFIT</th>
-            <th class="text-right">%</th>
-            <th>F/L</th>
-            <th class="text-right">20</th>
-            <th class="text-right">40</th>
-            <th class="text-right">40HC</th>
-            <th class="text-right">45</th>
-            <th class="text-right">TEU</th>
-            <th class="text-right">CBM</th>
-            <th class="text-right">KGS</th>
+            <th (click)="sort('mbl_branch')">BRANCH &nbsp;<i [ngClass]="getIcon('mbl_branch')"></i></th>
+            <th (click)="sort('mbl_refno')">TYPE &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
+            <th (click)="sort('mbl_refno_tot')">REF.COUNT &nbsp;<i [ngClass]="getIcon('mbl_refno_tot')"></i></th>
+            <th (click)="sort('mbl_house_tot')">HOUSE.COUNT &nbsp;<i [ngClass]="getIcon('mbl_house_tot')"></i></th>
+            <th (click)="sort('hbl_income')" class="text-right">REVENUE &nbsp;<i [ngClass]="getIcon('hbl_income')"></i></th>
+            <th (click)="sort('hbl_expense')" class="text-right">EXPENSE &nbsp;<i [ngClass]="getIcon('hbl_expense')"></i></th>
+            <th (click)="sort('hbl_profit')" class="text-right">PORFIT &nbsp;<i [ngClass]="getIcon('hbl_profit')"></i></th>
+            <th (click)="sort('hbl_profit_per')" class="text-right">% &nbsp;<i [ngClass]="getIcon('hbl_profit_per')"></i></th>
+            <!-- <th (click)="sort('mbl_cntr_type')">F/L &nbsp;<i [ngClass]="getIcon('mbl_cntr_type')"></i></th> -->
+            <th (click)="sort('mbl_20')" class="text-right">20 &nbsp;<i [ngClass]="getIcon('mbl_20')"></i></th>
+            <th (click)="sort('mbl_40')" class="text-right">40 &nbsp;<i [ngClass]="getIcon('mbl_40')"></i></th>
+            <th (click)="sort('mbl_40HQ')" class="text-right">40HC &nbsp;<i [ngClass]="getIcon('mbl_40HQ')"></i></th>
+            <th (click)="sort('mbl_45')" class="text-right">45 &nbsp;<i [ngClass]="getIcon('mbl_45')"></i></th>
+            <th (click)="sort('mbl_teu')" class="text-right">TEU &nbsp;<i [ngClass]="getIcon('mbl_teu')"></i></th>
+            <th (click)="sort('mbl_cntr_cbm')" class="text-right">CBM &nbsp;<i [ngClass]="getIcon('mbl_cntr_cbm')"></i></th>
+            <th (click)="sort('mbl_weight')" class="text-right">KGS &nbsp;<i [ngClass]="getIcon('mbl_weight')"></i></th>
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
@@ -406,7 +406,7 @@
             <td align='right'>{{rec.hbl_expense | number : '1.2-2'}}</td>
             <td align='right'>{{rec.hbl_profit | number : '1.2-2'}}</td>
             <td align='right'>{{rec.hbl_profit_per | number : '1.2-2'}}</td>
-            <td>{{rec.mbl_cntr_type}}</td>
+            <!-- <td>{{rec.mbl_cntr_type}}</td> -->
             <td align='right'>{{rec.mbl_20 | number : '1.2-2'}}</td>
             <td align='right'>{{rec.mbl_40 | number : '1.2-2'}}</td>
             <td align='right'>{{rec.mbl_40HQ | number : '1.2-2'}}</td>
@@ -425,22 +425,22 @@
       <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
           <tr>
-            <th *ngIf="_report_category == 'OPERATION GROUP'">TYPE</th>
-            <th *ngIf="_report_category == 'AGENT'">AGENT</th>
-            <th>REF.COUNT</th>
-            <th>HOUSE.COUNT</th>
-            <th class="text-right">REVENUE</th>
-            <th class="text-right">EXPENSE</th>
-            <th class="text-right">PORFIT</th>
-            <th class="text-right">%</th>
-            <th>F/L</th>
-            <th class="text-right">20</th>
-            <th class="text-right">40</th>
-            <th class="text-right">40HC</th>
-            <th class="text-right">45</th>
-            <th class="text-right">TEU</th>
-            <th class="text-right">CBM</th>
-            <th class="text-right">KGS</th>
+            <th (click)="sort('mbl_refno')"  *ngIf="_report_category == 'OPERATION GROUP'">TYPE &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
+            <th (click)="sort('mbl_agent_name')" *ngIf="_report_category == 'AGENT'">AGENT &nbsp;<i [ngClass]="getIcon('mbl_agent_name')"></i></th>
+            <th (click)="sort('mbl_refno_tot')">REF.COUNT &nbsp;<i [ngClass]="getIcon('mbl_refno_tot')"></i></th>
+            <th (click)="sort('mbl_house_tot')">HOUSE.COUNT &nbsp;<i [ngClass]="getIcon('mbl_house_tot')"></i></th>
+            <th (click)="sort('hbl_income')" class="text-right">REVENUE &nbsp;<i [ngClass]="getIcon('hbl_income')"></i></th>
+            <th (click)="sort('hbl_expense')" class="text-right">EXPENSE &nbsp;<i [ngClass]="getIcon('hbl_expense')"></i></th>
+            <th (click)="sort('hbl_profit')" class="text-right">PORFIT &nbsp;<i [ngClass]="getIcon('hbl_profit')"></i></th>
+            <th (click)="sort('hbl_profit_per')" class="text-right">% &nbsp;<i [ngClass]="getIcon('hbl_profit_per')"></i></th>
+            <!-- <th (click)="sort('mbl_cntr_type')">F/L &nbsp;<i [ngClass]="getIcon('mbl_cntr_type')"></i></th> -->
+            <th (click)="sort('mbl_20')" class="text-right">20 &nbsp;<i [ngClass]="getIcon('mbl_20')"></i></th>
+            <th (click)="sort('mbl_40')" class="text-right">40 &nbsp;<i [ngClass]="getIcon('mbl_40')"></i></th>
+            <th (click)="sort('mbl_40HQ')" class="text-right">40HC &nbsp;<i [ngClass]="getIcon('mbl_40HQ')"></i></th>
+            <th (click)="sort('mbl_45')" class="text-right">45 &nbsp;<i [ngClass]="getIcon('mbl_45')"></i></th>
+            <th (click)="sort('mbl_teu')" class="text-right">TEU &nbsp;<i [ngClass]="getIcon('mbl_teu')"></i></th>
+            <th (click)="sort('mbl_cntr_cbm')" class="text-right">CBM &nbsp;<i [ngClass]="getIcon('mbl_cntr_cbm')"></i></th>
+            <th (click)="sort('mbl_weight')" class="text-right">KGS &nbsp;<i [ngClass]="getIcon('mbl_weight')"></i></th>
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of MainList">
@@ -454,7 +454,7 @@
             <td align='right'>{{rec.hbl_expense | number : '1.2-2'}}</td>
             <td align='right'>{{rec.hbl_profit | number : '1.2-2'}}</td>
             <td align='right'>{{rec.hbl_profit_per | number : '1.2-2'}}</td>
-            <td>{{rec.mbl_cntr_type}}</td>
+            <!-- <td>{{rec.mbl_cntr_type}}</td> -->
             <td align='right'>{{rec.mbl_20 | number : '1.2-2'}}</td>
             <td align='right'>{{rec.mbl_40 | number : '1.2-2'}}</td>
             <td align='right'>{{rec.mbl_40HQ | number : '1.2-2'}}</td>
