@@ -18,18 +18,18 @@
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <th>ID</th>
-        <th>SERVER-DATETIME</th>        
-        <th>CLIENT-DATETIME</th>
-        <th>BRANCH</th>
-        <th>USER</th>
-        <th>MODULE</th>
-        <th>ACTION</th>
-        <th>REMARKS</th>        
+        <th (click)="mainservice.sort('audit_id')">ID&nbsp;<i [ngClass]="mainservice.getIcon('audit_id')"></i></th>
+        <th (click)="mainservice.sort('audit_server_date')">SERVER-DATETIME&nbsp;<i [ngClass]="mainservice.getIcon('audit_server_date')"></i></th>        
+        <th (click)="mainservice.sort('audit_client_date')">CLIENT-DATETIME&nbsp;<i [ngClass]="mainservice.getIcon('audit_client_date')"></i></th>
+        <th (click)="mainservice.sort('audit_branch_code')">BRANCH&nbsp;<i [ngClass]="mainservice.getIcon('audit_branch_code')"></i></th>
+        <th (click)="mainservice.sort('audit_user_code')">USER&nbsp;<i [ngClass]="mainservice.getIcon('audit_user_code')"></i></th>
+        <th (click)="mainservice.sort('audit_screen')">MODULE&nbsp;<i [ngClass]="mainservice.getIcon('audit_screen')"></i></th>
+        <th (click)="mainservice.sort('audit_action')">ACTION&nbsp;<i [ngClass]="mainservice.getIcon('audit_action')"></i></th>
+        <th (click)="mainservice.sort('audit_remarks')">REMARKS&nbsp;<i [ngClass]="mainservice.getIcon('audit_remarks')"></i></th>        
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async">
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
         <td>{{rec.audit_id}}</td>
         <td>{{rec.audit_server_date}}</td>
         <td>{{rec.audit_client_date}}</td>

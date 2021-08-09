@@ -28,6 +28,8 @@ export class Tbl_Audit {
 }
 
 export interface Audit_Model {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
