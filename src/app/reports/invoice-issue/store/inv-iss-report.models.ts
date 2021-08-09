@@ -24,6 +24,9 @@ export interface ReportState {
     datetype: string;
     araptype: string;
     reportformat: string;
+    sortcol : string ;
+    sortorder : boolean;    
+    
     page_rows: number;
     page_count: number;
     page_current: number;

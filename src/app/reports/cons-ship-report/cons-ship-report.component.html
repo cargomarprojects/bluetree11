@@ -109,17 +109,17 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>BRANCH</th>
-          <th>REF#</th>
-          <th>REF-DATE</th>
-          <th>B/LNO</th>
-          <th>CONTAINER#</th>
-          <th>SHIPPER</th>
-          <th align='right'>WEIGHT</th>
-          <th>POL</th>
-          <th>ETD</th>
-          <th>POD</th>
-          <th>ETA</th>
+          <th (click)="sort('mbl_branch')" >BRANCH &nbsp;<i [ngClass]="getIcon('mbl_branch')"></i></th>
+          <th (click)="sort('mbl_refno')" >REF# &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
+          <th (click)="sort('mbl_refdate')" >REF-DATE &nbsp;<i [ngClass]="getIcon('mbl_refdate')"></i></th>
+          <th (click)="sort('hbl_houseno')" >B/LNO &nbsp;<i [ngClass]="getIcon('hbl_houseno')"></i></th>
+          <th (click)="sort('hbl_cntr_no')" >CONTAINER# &nbsp;<i [ngClass]="getIcon('hbl_cntr_no')"></i></th>
+          <th (click)="sort('hbl_shipper_name')" >SHIPPER &nbsp;<i [ngClass]="getIcon('hbl_shipper_name')"></i></th>
+          <th (click)="sort('hbl_weight')"  align='right'>WEIGHT &nbsp;<i [ngClass]="getIcon('hbl_weight')"></i></th>
+          <th (click)="sort('mbl_pol_name')" >POL &nbsp;<i [ngClass]="getIcon('mbl_pol_name')"></i></th>
+          <th (click)="sort('mbl_pol_etd')" >ETD &nbsp;<i [ngClass]="getIcon('mbl_pol_etd')"></i></th>
+          <th (click)="sort('mbl_pod_name')" >POD &nbsp;<i [ngClass]="getIcon('mbl_pod_name')"></i></th>
+          <th (click)="sort('mbl_pod_eta')" >ETA &nbsp;<i [ngClass]="getIcon('mbl_pod_eta')"></i></th>
         </tr>
       </thead>
       <tbody class="page-body-tbody" *ngFor="let rec of MainList">
@@ -145,19 +145,19 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>BRANCH</th>
-          <th>REF#</th>
-          <th>ORIGIN</th>
-          <th>DESTINATION</th>
-          <th>B/LNO</th>
-          <th>CONTAINER#</th>
-          <th>MASTER#</th>
-          <th>PO#</th>
-          <th>ETD</th>
-          <th>ETA</th>
-          <th>DELIVERY.DATE</th>
-          <th>LFD</th>
-          <th>REMARKS</th>
+          <th (click)="sort('mbl_branch')" >BRANCH &nbsp;<i [ngClass]="getIcon('mbl_branch')"></i></th>
+          <th (click)="sort('mbl_refno')" >REF# &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
+          <th (click)="sort('mbl_pol_code')" >ORIGIN &nbsp;<i [ngClass]="getIcon('mbl_pol_code')"></i></th>
+          <th (click)="sort('mbl_pod_code')" >DESTINATION &nbsp;<i [ngClass]="getIcon('mbl_pod_code')"></i></th>
+          <th (click)="sort('hbl_houseno')" >B/LNO &nbsp;<i [ngClass]="getIcon('hbl_houseno')"></i></th>
+          <th (click)="sort('hbl_cntr_no')" >CONTAINER# &nbsp;<i [ngClass]="getIcon('hbl_cntr_no')"></i></th>
+          <th (click)="sort('mbl_no')" >MASTER# &nbsp;<i [ngClass]="getIcon('mbl_no')"></i></th>
+          <th (click)="sort('hbl_pono')" >PO# &nbsp;<i [ngClass]="getIcon('hbl_pono')"></i></th>
+          <th (click)="sort('mbl_pol_etd')" >ETD &nbsp;<i [ngClass]="getIcon('mbl_pol_etd')"></i></th>
+          <th (click)="sort('mbl_pol_eta')" >ETA &nbsp;<i [ngClass]="getIcon('mbl_pol_eta')"></i></th>
+          <th (click)="sort('hbl_delivery_date')" >DELIVERY.DATE &nbsp;<i [ngClass]="getIcon('hbl_delivery_date')"></i></th>
+          <th (click)="sort('hbl_lfd_date')" >LFD &nbsp;<i [ngClass]="getIcon('hbl_lfd_date')"></i></th>
+          <th (click)="sort('hbl_remarks')" >REMARKS &nbsp;<i [ngClass]="getIcon('hbl_remarks')"></i></th>
 
         </tr>
       </thead>

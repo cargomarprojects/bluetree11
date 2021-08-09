@@ -32,7 +32,7 @@ export class ConsShipReportComponent implements OnInit {
   report_category: string;
   sdate: string;
   edate: string;
-  mode  = '';
+  mode = '';
   comp_type: string = '';
   report_type: string = '';
   report_shptype: string = '';
@@ -58,6 +58,8 @@ export class ConsShipReportComponent implements OnInit {
   errorMessage: string = '';
 
   SearchData: any = {};
+  sortCol = 'mbl_refno';
+  sortOrder = true;
 
   Reportstate1: Observable<ReportState>;
 
@@ -77,7 +79,7 @@ export class ConsShipReportComponent implements OnInit {
     this.sub = this.activatedroute.queryParams.subscribe(params => {
 
       this.gs.checkAppVersion();
-      
+
       this.urlid = params.id;
       this.menuid = params.menuid;
       this.InitPage();
@@ -110,6 +112,8 @@ export class ConsShipReportComponent implements OnInit {
         this.filename = rec.filename;
         this.filetype = rec.filetype;
         this.filedisplayname = rec.filedisplayname;
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
 
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -127,7 +131,7 @@ export class ConsShipReportComponent implements OnInit {
         } else {
           this.SearchData.COMP_CODE = this.comp_type;
         }
-        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
+        this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
         this.SearchData.REPORT_TYPE = this.report_type;
         this.SearchData.REPORT_SHPTYPE = this.report_shptype;
         this.SearchData.REPORT_CATEGORY = this.report_category;
@@ -150,7 +154,7 @@ export class ConsShipReportComponent implements OnInit {
         this.currentTab = 'LIST';
 
         this.report_category = 'CONSIGNEE SHIPMENT REPORT';
-        this.sdate =  this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
+        this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
         this.edate = this.gs.defaultValues.today;
         this.mode = 'OCEAN IMPORT';
         this.comp_type = this.gs.branch_code;
@@ -164,7 +168,8 @@ export class ConsShipReportComponent implements OnInit {
         this.filename = '';
         this.filetype = '';
         this.filedisplayname = '';
-
+        this.sortCol = 'mbl_refno';
+        this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
       }
@@ -220,7 +225,7 @@ export class ConsShipReportComponent implements OnInit {
       } else {
         this.SearchData.COMP_CODE = this.comp_type;
       }
-      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_type) ;
+      this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
       this.SearchData.REPORT_TYPE = this.report_type;
       this.SearchData.REPORT_SHPTYPE = this.report_shptype;
 
@@ -267,6 +272,8 @@ export class ConsShipReportComponent implements OnInit {
             cust_parent_id: this.SearchData.CUST_PARENT_ID,
             cust_parent_name: this.SearchData.CUST_PARENT_NAME,
             reportformat: this.reportformat,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -277,7 +284,7 @@ export class ConsShipReportComponent implements OnInit {
             filedisplayname: this.SearchData.filedisplayname
           };
           this.store.dispatch(new myActions.Update({ id: this.urlid, changes: state }));
-        }else if (_outputformat == "PRINT") {
+        } else if (_outputformat == "PRINT") {
           this.filename = response.filename;
           this.filetype = response.filetype;
           this.filedisplayname = response.filedisplayname;
@@ -300,6 +307,20 @@ export class ConsShipReportComponent implements OnInit {
     this.location.back();
   }
 
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
+
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
   initLov(caption: string = '') {
     // this.CONSRECORD = new SearchTable();
     // this.CONSRECORD.controlname = 'CONSIGNEE';
