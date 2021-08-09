@@ -161,9 +161,9 @@
                         <th ></th>
                     </tr>
                 </thead>
-                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
+                <tbody class="page-body-tbody">
                     <tr [style.color]="rec.mbl_customer_name=='TOTAL'?'Red':'Black'"
-                        [style.font-weight]="rec.mbl_customer_name=='TOTAL'?'bold':'normal'">
+                        [style.font-weight]="rec.mbl_customer_name=='TOTAL'?'bold':'normal'" *ngFor="let rec of MainList">
                         <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
                         <td *ngIf="rec.mbl_branch==gs.branch_code">
                             <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L',rec.mbl_branch)"
@@ -199,8 +199,8 @@
                         <th width="70%"></th>
                     </tr>
                 </thead>
-                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-                    <tr>
+                <tbody class="page-body-tbody">
+                    <tr *ngFor="let rec of MainList">
                         <td>{{rec.mbl_customer_name}}</td>
                         <td align='right'>{{rec.mbl_customer_amt | number : '1.2-2'}}</td>
                         <td></td>

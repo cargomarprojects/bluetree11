@@ -92,8 +92,8 @@
           <th>ARAP</th>
         </tr>
       </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-        <tr>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of MainList">
           <td>{{rec.rec_created_by}}</td>
           <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>

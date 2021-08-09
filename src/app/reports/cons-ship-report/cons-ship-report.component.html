@@ -122,8 +122,8 @@
           <th (click)="sort('mbl_pod_eta')" >ETA &nbsp;<i [ngClass]="getIcon('mbl_pod_eta')"></i></th>
         </tr>
       </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-        <tr>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of MainList">
           <td>{{rec.mbl_branch}}</td>
           <td>{{rec.mbl_refno}}</td>
           <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
@@ -161,8 +161,8 @@
 
         </tr>
       </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-        <tr>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of MainList">
           <td>{{rec.mbl_branch}}</td>
           <td>{{rec.mbl_refno}}</td>
           <td>{{rec.mbl_pol_code}}</td>

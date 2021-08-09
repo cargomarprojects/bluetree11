@@ -127,8 +127,8 @@
           <th (click)="sort('mbl_cntr_return_date')" >EMPTY.RET &nbsp;<i [ngClass]="getIcon('mbl_cntr_return_date')"></i></th>
         </tr>
       </thead>
-      <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-        <tr>
+      <tbody class="page-body-tbody">
+        <tr  *ngFor="let rec of MainList">
           <td>{{rec.mbl_refno}}</td>
           <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.hbl_shipper_name}}</td>
