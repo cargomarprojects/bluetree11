@@ -22,7 +22,8 @@ export interface ReportState{
 
     cust_id: string ;
     cust_name: string ;
-    
+    sortcol : string ;
+    sortorder : boolean;    
     page_rows :number;
     page_count :number;
     page_current :number;

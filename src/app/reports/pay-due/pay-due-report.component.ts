@@ -67,6 +67,8 @@ export class PayDueReportComponent implements OnInit {
   errorMessage: string = '';
 
   SearchData: any = {};
+  sortCol = 'inv_mbl_refno';
+  sortOrder = true;
 
   Reportstate1: Observable<ReportState>;
 
@@ -128,6 +130,8 @@ export class PayDueReportComponent implements OnInit {
         // this.CUSTRECORD.name = this.cust_name;
 
         this.comp_type = rec.comp_type;
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
         this.page_current = rec.page_current;
@@ -182,7 +186,8 @@ export class PayDueReportComponent implements OnInit {
         this.chk_sea_export = true;
         this.chk_others = true;
         this.chk_admin_expense = false;
-
+        this.sortCol = 'inv_mbl_refno';
+        this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
       }
@@ -298,7 +303,8 @@ export class PayDueReportComponent implements OnInit {
             chk_others: this.chk_others,
             chk_admin_expense: this.chk_admin_expense,
             showsmode: this.SearchData.SHOWSMODE,
-
+            sortcol: 'inv_mbl_refno',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -321,6 +327,20 @@ export class PayDueReportComponent implements OnInit {
     this.location.back();
   }
 
+  private sort_(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
+
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
   initLov(caption: string = '') {
     // this.CUSTRECORD = new SearchTable();
     // this.CUSTRECORD.controlname = "CUSTOMER";

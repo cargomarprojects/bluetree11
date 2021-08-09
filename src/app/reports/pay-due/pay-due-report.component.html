@@ -132,14 +132,14 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
-          <th>REF#</th>
-          <th>HOUSE#</th>
-          <th>CUSTOMER</th>
-          <th>INVOICE#</th>
-          <th>INVOICE DATE</th>
-          <th>PAYMENT DATE</th>
-          <th>INVOICE AMOUNT</th>
-          <th>BALANCE</th>
+          <th (click)="sort_('inv_mbl_refno')" >REF# &nbsp;<i [ngClass]="getIcon('inv_mbl_refno')"></i></th>
+          <th (click)="sort_('inv_houseno')" >HOUSE# &nbsp;<i [ngClass]="getIcon('inv_houseno')"></i></th>
+          <th (click)="sort_('inv_name')" >CUSTOMER &nbsp;<i [ngClass]="getIcon('inv_name')"></i></th>
+          <th (click)="sort_('inv_no')" >INVOICE# &nbsp;<i [ngClass]="getIcon('inv_no')"></i></th>
+          <th (click)="sort_('inv_date')" >INVOICE DATE &nbsp;<i [ngClass]="getIcon('inv_date')"></i></th>
+          <th (click)="sort_('inv_payment_date')" >PAYMENT DATE &nbsp;<i [ngClass]="getIcon('inv_payment_date')"></i></th>
+          <th (click)="sort_('inv_amt')" >INVOICE AMOUNT &nbsp;<i [ngClass]="getIcon('inv_amt')"></i></th>
+          <th (click)="sort_('inv_bal_amt')" >BALANCE &nbsp;<i [ngClass]="getIcon('inv_bal_amt')"></i></th>
         </tr>
       </thead>
       <tbody class="page-body-tbody" >
