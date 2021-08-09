@@ -125,8 +125,8 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr  [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
-        [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'" *ngFor="let rec of MainList">
+        <tr *ngFor="let rec of MainList"  [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+        [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'">
           <td>{{rec.mbl_branch}}</td>
           <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
           <td *ngIf="rec.mbl_branch==gs.branch_name">
@@ -160,8 +160,8 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
-        [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'" *ngFor="let rec of MainList">
+        <tr *ngFor="let rec of MainList" [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+        [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'">
           <td>{{rec.mbl_agent_name}}</td>
           <td align='right'>{{rec.mbl_pcs}}</td>
           <td align='right'>{{rec.hbl_weight | number : '1.3-3'}}</td>

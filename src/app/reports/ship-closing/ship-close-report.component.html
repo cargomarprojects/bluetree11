@@ -84,7 +84,7 @@
           </tr>
         </thead>
         <tbody class="page-body-tbody">
-          <tr [style.color]="rec.sc_mbl_lock=='L'?'green':'blue'" *ngFor="let rec of MainList" >
+          <tr *ngFor="let rec of MainList"  [style.color]="rec.sc_mbl_lock=='L'?'green':'blue'">
             <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.sc_mbl_refno}}</td> -->
             <td>
               <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.sc_mbl_mode, rec.sc_mbl_refno, rec.sc_mbl_pkid,'','', 'L')"
