@@ -9,18 +9,24 @@
     --custom-border-color:rgba(0,0,0,.125)
     */
     
-    --custom-bg-color:rgba(255, 250, 250, 1);
+    --custom-bg-color:rgba(242, 242, 242, 1);
     --custom-even-color :rgba(0,0,0,.125)    ;
     --custom-fg-color: #c9c2c2; 
     --custom-border-color:rgba(0,0,0,.125)    
+
+
+/*     --custom-bg-color:rgba(255, 250, 250, 1);
+    --custom-even-color :rgba(0,0,0,.125)    ;
+    --custom-fg-color: #c9c2c2; 
+    --custom-border-color:rgba(0,0,0,.125)    */
+
   
 }
 
 
 
-tr:nth-child(even) {
-    background-color: var(--custom-even-color) !important; 
-}
+
+
 
 html {
     font-family: 'roboto' ;
@@ -40,12 +46,18 @@ body {
     background-color: var(--custom-bg-color) !important;
 }
 
+
 .commonbgcolor {
     background-color: var(--custom-bg-color);
 }
 
 .commonbgcolor2 {
     background-color: var(--custom-bg-color) !important;
+}
+
+
+tr:nth-child(even) {
+    background-color: var(--custom-even-color) !important; 
 }
 
 
@@ -370,7 +382,7 @@ hr {
     border-style: solid;
     border-color: var(--custom-border-color) !important;
     padding: 3px;
-    background-color:var(--custom-bg-color);
+    background-color:var(--custom-bg-color) !important;
 }
 
 .page-list {
