@@ -690,6 +690,9 @@ export class PayFinalComponent implements OnInit {
 
 
     OnChange(field: string) {
+        if ( field ='paymode')   {
+            this.LoadNextChqNo();
+        }
     }
 
     onFocusout(field: string) {
