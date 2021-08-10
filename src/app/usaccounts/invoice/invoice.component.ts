@@ -20,6 +20,8 @@ export class InvoiceComponent implements OnInit {
   mbl_refno: string;
   mbl_type: string;
   showdeleted: boolean;
+  sortCol = 'inv_no';
+  sortOrder = true;
 
   id: string;
   menuid: string;
@@ -64,7 +66,7 @@ export class InvoiceComponent implements OnInit {
 
   public init(params: any) {
 
-   
+
 
     //const options = JSON.parse(params);
     const options = params;
@@ -224,10 +226,9 @@ export class InvoiceComponent implements OnInit {
   removeRow(rec: Tbl_cargo_invoicem) {
 
 
-    if (rec.rec_closed == "Y")
-    {
-        alert("Record Locked Cannot Delete");
-        return;
+    if (rec.rec_closed == "Y") {
+      alert("Record Locked Cannot Delete");
+      return;
     }
 
 
@@ -263,10 +264,36 @@ export class InvoiceComponent implements OnInit {
     // if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
     //   this.gs.LinkReturn(this.origin, this.mbl_pkid, '');
     // else
-      this.location.back();
+    this.location.back();
   }
 
+  public getSortCol() {
+    return this.sortCol;
+  }
+  public getSortOrder() {
+    return this.sortOrder;
+  }
 
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
+
+  public sort(col: string) {
+    if (col == this.sortCol) {
+      this.sortOrder = !this.sortOrder;
+    }
+    else {
+      this.sortCol = col;
+      this.sortOrder = true;
+    }
+  }
 
 
 

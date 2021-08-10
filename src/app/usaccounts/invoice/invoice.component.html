@@ -126,26 +126,26 @@
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <th>INV.NO</th>
-        <th>INV.DATE</th>
-        <th>CUSTOMER</th>
-        <th>REF#</th>
-        <th>AR/AP</th>
-        <th>AN</th>
-        <th>DELETED</th>
-        <th>HOUSE</th>
-        <th class='text-right'>AR</th>
-        <th class='text-right'>AP</th>
-        <th class='text-right'>PAID</th>
-        <th class='text-right'>BALANCE</th>
-        <th>REMARKS</th>
-        <th>CREATED-BY</th>
-        <th>CREATED-DATE</th>
+        <th (click)="sort('inv_no')">INV.NO&nbsp;<i [ngClass]="getIcon('inv_no')"></i></th> 
+        <th (click)="sort('inv_date')">INV.DATE&nbsp;<i [ngClass]="getIcon('inv_date')"></i></th>
+        <th (click)="sort('inv_cust_name')">CUSTOMER&nbsp;<i [ngClass]="getIcon('inv_cust_name')"></i></th>
+        <th (click)="sort('inv_mbl_refno')">REF#&nbsp;<i [ngClass]="getIcon('inv_mbl_refno')"></i></th>
+        <th (click)="sort('inv_arap')">AR/AP&nbsp;<i [ngClass]="getIcon('inv_arap')"></i></th>
+        <th (click)="sort('inv_arrnotice')">AN&nbsp;<i [ngClass]="getIcon('inv_arrnotice')"></i></th>
+        <th (click)="sort('rec_deleted')">DELETED&nbsp;<i [ngClass]="getIcon('rec_deleted')"></i></th>
+        <th (click)="sort('inv_hbl_no')">HOUSE&nbsp;<i [ngClass]="getIcon('inv_hbl_no')"></i></th>
+        <th (click)="sort('inv_ar_total')" class='text-right'>AR&nbsp;<i [ngClass]="getIcon('inv_ar_total')"></i></th>
+        <th (click)="sort('inv_ap_total')" class='text-right'>AP&nbsp;<i [ngClass]="getIcon('inv_ap_total')"></i></th>
+        <th (click)="sort('inv_paid')" class='text-right'>PAID&nbsp;<i [ngClass]="getIcon('inv_paid')"></i></th>
+        <th (click)="sort('inv_balance')" class='text-right'>BALANCE&nbsp;<i [ngClass]="getIcon('inv_balance')"></i></th>
+        <th (click)="sort('inv_remarks')">REMARKS&nbsp;<i [ngClass]="getIcon('inv_remarks')"></i></th>
+        <th (click)="sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="getIcon('rec_created_by')"></i></th>
+        <th (click)="sort('rec_created_date')">CREATED-DATE&nbsp;<i [ngClass]="getIcon('rec_created_date')"></i></th>
         <th>Remove</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records" [style.color]="rec.rec_deleted == 'Y' ?'Red' : 'Black'">
+      <tr *ngFor="let rec of records | sortBy: getSortCol() : getSortOrder()" [style.color]="rec.rec_deleted == 'Y' ?'Red' : 'Black'">
         <td class='hlink2'  (click)="edit(rec)">{{rec.inv_no}}</td>
         <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td>{{rec.inv_cust_name}}</td>
