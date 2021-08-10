@@ -272,8 +272,8 @@ export class SeaImpMasterEditComponent implements OnInit {
         if (response.retvalue) {
           this.errorMessage.push(response.retstring);
           if (stype == 'MBL') {
-            if (!this.gs.isBlank(this.mbl_no_field))
-              this.mbl_no_field.nativeElement.focus();
+            // if (!this.gs.isBlank(this.mbl_no_field))
+            //   this.mbl_no_field.nativeElement.focus();
           }
         }
       }, error => {

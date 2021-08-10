@@ -262,8 +262,8 @@ export class AirImpMasterEditComponent implements OnInit {
       .subscribe(response => {
         if (response.retvalue) {
           this.errorMessage.push(response.retstring);
-          if (stype == 'MAWB')
-            this.mbl_no_field.nativeElement.focus();
+          // if (stype == 'MAWB')
+          //   this.mbl_no_field.nativeElement.focus();
         }
       }, error => {
         this.errorMessage = this.gs.getError(error);
