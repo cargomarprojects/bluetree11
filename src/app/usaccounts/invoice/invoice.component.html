@@ -145,7 +145,7 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records">
+      <tr *ngFor="let rec of records" [style.color]="rec.rec_deleted == 'Y' ?'Red' : 'Black'">
         <td class='hlink2'  (click)="edit(rec)">{{rec.inv_no}}</td>
         <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td>{{rec.inv_cust_name}}</td>

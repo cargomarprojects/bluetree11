@@ -75,7 +75,7 @@
             <div class="form-group row" *ngIf="paymode_enabled">
                 <label class="col-4 col-form-label col-form-label-sm">Pay/Mode</label>
                 <div class="col-8">
-                    <select class="form-control form-control-sm" [(ngModel)]="paymode">
+                    <select class="form-control form-control-sm" [(ngModel)]="paymode" (change)="OnChange('paymode')">
                         <option [value]="'CHECK'">CHECK</option>
                         <option [value]="'WIRE TRANSFER'">WIRE TRANSFER</option>
                         <option [value]="'CASH'">CASH</option>
