@@ -58,9 +58,9 @@ export function BankEnquiryReportReducer(state: ReportState[] = [initialState], 
                 st.sortorder = !st.sortorder;
 
             if (st.sortorder)
-                st.records = _.sortBy(st.records, st.sortcol);
+                st.records = _.orderBy(st.records, ['row_type', st.sortcol], ['asc', 'asc']);
             else
-                st.records = _.sortBy(st.records, st.sortcol).reverse();
+                st.records = _.orderBy(st.records, ['row_type', st.sortcol], ['asc', 'desc']);
 
             return [...state.filter(rec => rec.urlid != action.payload.id), st];
         }

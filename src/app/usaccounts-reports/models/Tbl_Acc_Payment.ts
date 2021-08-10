@@ -107,6 +107,7 @@ export class Tbl_Acc_Payment {
     pay_mblid: string;
     pay_invtype: string;
     pay_hblid: string;
+    row_type:string;
 
 }
 
