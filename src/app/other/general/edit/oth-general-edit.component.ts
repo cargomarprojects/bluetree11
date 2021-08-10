@@ -325,8 +325,8 @@ export class OthGeneralEditComponent implements OnInit {
           this.errorMessage.push(response.retstring);
           alert(this.errorMessage);
           if (stype == 'MBL') {
-            if (!this.gs.isBlank(this.mbl_no_field))
-              this.mbl_no_field.nativeElement.focus();
+            // if (!this.gs.isBlank(this.mbl_no_field))
+            //   this.mbl_no_field.nativeElement.focus();
           }
         }
       }, error => {
