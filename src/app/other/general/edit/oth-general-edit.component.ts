@@ -110,6 +110,9 @@ export class OthGeneralEditComponent implements OnInit {
     }
     if (this.gs.isBlank(this.OPERATION_MODE))
       this.OPERATION_MODE = "OTHERS";
+    if (this.OPERATION_MODE == 'OT')
+      this.OPERATION_MODE = "OTHERS";
+
     this.closeCaption = 'Return';
     this.initPage();
     this.actionHandler();
@@ -481,6 +484,18 @@ export class OthGeneralEditComponent implements OnInit {
     if (this.gs.isBlank(this.record.mbl_handled_id)) {
       bRet = false;
       this.errorMessage.push("A/N Handled By cannot be blank");
+    }
+
+    if ( this.gs.isBlank( this.OPERATION_MODE)){
+      bRet = false;
+      this.errorMessage.push("Mode Cannot Be Blank" );
+    }
+
+    if ( !this.gs.isBlank( this.OPERATION_MODE)){
+      if ( this.OPERATION_MODE != 'OTHERS'){
+        bRet = false;
+        this.errorMessage.push("Invalid Mode " + this.OPERATION_MODE );
+      }
     }
 
     let cntrList: string = "";
