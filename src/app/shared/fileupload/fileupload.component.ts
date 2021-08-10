@@ -5,13 +5,17 @@ import { LovService } from '../services/lov.service';
 import { Table_Mast_Files } from '../models/table_mast_files';
 // import { stringify } from 'querystring';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+// import * as $ from 'jquery';
+
+
 @Component({
   selector: 'app-fileupload',
   templateUrl: './fileupload.component.html'
 })
 export class FileUploadComponent implements OnInit {
 
-
+  
 
   public Doc_title: string = "";
   @Input() set title(value: string) {
@@ -117,6 +121,8 @@ export class FileUploadComponent implements OnInit {
   Mail_Pkid: string = '';
   modal: any;
 
+
+
   constructor(
     private modalconfig: NgbModalConfig,
     private modalservice: NgbModal,
@@ -141,6 +147,14 @@ export class FileUploadComponent implements OnInit {
     this.SetDefault();
     this.LoadCombo();
     this.List();
+
+/*     $(document).ready(function() {
+      let modalContent: any = $('.modal-content');
+      modalContent.draggable({
+        handle: '.modal-header'
+      });
+    });
+ */
   }
 
   SetDefault() {

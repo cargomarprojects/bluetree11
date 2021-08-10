@@ -10,7 +10,10 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
-import { NonNullAssert } from '@angular/compiler';
+
+
+
+
 
 @Component({
   selector: 'app-seaimp-master-edit',
@@ -112,6 +115,16 @@ export class SeaImpMasterEditComponent implements OnInit {
     this.closeCaption = 'Return';
     this.initPage();
     this.actionHandler();
+
+
+/*     $(document).ready(function() {
+      let modalContent: any = $('.modal-content');
+      modalContent.draggable({
+        handle: '.modal-header'
+      });
+    });
+ */    
+
   }
 
   private initPage() {
@@ -1124,7 +1137,7 @@ export class SeaImpMasterEditComponent implements OnInit {
         this.attach_viewonlyid = '';
         this.attach_filespath = '';
         this.attach_filespath2 = '';
-        this.modal = this.modalservice.open(attachmodal, { centered: false, backdrop :false });
+        this.modal = this.modalservice.open(attachmodal, { centered: true});
         break;
       }
     }
