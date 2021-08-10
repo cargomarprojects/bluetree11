@@ -1124,7 +1124,7 @@ export class SeaImpMasterEditComponent implements OnInit {
         this.attach_viewonlyid = '';
         this.attach_filespath = '';
         this.attach_filespath2 = '';
-        this.modal = this.modalservice.open(attachmodal, { centered: true });
+        this.modal = this.modalservice.open(attachmodal, { centered: false, backdrop :false });
         break;
       }
     }
