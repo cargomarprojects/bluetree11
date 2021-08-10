@@ -55,6 +55,8 @@ export class BankStmtReportComponent implements OnInit {
   storesub: any;
   sub: any;
   tab: string = 'main';
+  sortCol = 'pay_date';
+  sortOrder = true;
 
   loading: boolean = false;
   errorMessage: string = '';
@@ -75,7 +77,7 @@ export class BankStmtReportComponent implements OnInit {
     this.sub = this.activatedroute.queryParams.subscribe(params => {
 
       this.gs.checkAppVersion();
-      
+
       this.urlid = params.id;
       this.menuid = params.menuid;
       this.title = this.gs.getTitle(this.menuid);
@@ -106,7 +108,8 @@ export class BankStmtReportComponent implements OnInit {
         this.filename2 = rec.filename2;
         this.filetype2 = rec.filetype2;
         this.filedisplayname2 = rec.filedisplayname2;
-
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
 
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -120,7 +123,7 @@ export class BankStmtReportComponent implements OnInit {
         this.SearchData.FDATE = this.fdate;
         this.SearchData.EDATE = this.edate;
         this.SearchData.OPDATE = this.fdate;
-        this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
+        this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_code);
         this.SearchData.BRANCH_CODE = this.comp_code;
       } else {
 
@@ -143,7 +146,8 @@ export class BankStmtReportComponent implements OnInit {
         this.filename2 = '';
         this.filetype2 = '';
         this.filedisplayname2 = '';
-
+        this.sortCol = 'pay_date';
+        this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
       }
@@ -207,7 +211,7 @@ export class BankStmtReportComponent implements OnInit {
       this.SearchData.EDATE = this.edate;
       this.SearchData.OPDATE = this.fdate;
       this.SearchData.BRANCH_CODE = this.comp_code;
-      this.SearchData.COMP_NAME =  this.gs.GetCompanyName(this.comp_code) ;
+      this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_code);
 
       this.SearchData.filename = "";
       this.SearchData.filedisplayname = "";
@@ -244,6 +248,8 @@ export class BankStmtReportComponent implements OnInit {
             edate: this.SearchData.EDATE,
             comp_name: this.SearchData.COMP_NAME,
             comp_code: this.SearchData.BRANCH_CODE,
+            sortcol: 'pay_date',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -280,7 +286,20 @@ export class BankStmtReportComponent implements OnInit {
     this.store.dispatch(new myActions.Delete({ id: this.urlid }));
     this.location.back();
   }
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
 
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
   initLov(caption: string = '') {
 
   }
@@ -321,7 +340,7 @@ export class BankStmtReportComponent implements OnInit {
     if (_rec.pay_pkid === "CL")
       return;
 
-      
+
     this.report_title = 'Bank Payment Details';
     this.report_url = '/api/UsAccBankStmtRpt/PaymentDetails';
     this.report_searchdata = this.gs.UserInfo;
