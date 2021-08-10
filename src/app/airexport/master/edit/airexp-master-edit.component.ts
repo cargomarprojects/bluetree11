@@ -858,4 +858,14 @@ export class AirExpMasterEditComponent implements OnInit {
       };
     }
   }
+
+  DirectAgent() {
+    if (this.record.mbl_direct_bool) {
+      this.record.mbl_agent_name = this.gs.DIRECT_AGENT_NAME;
+      this.record.mbl_agent_id = this.gs.DIRECT_AGENT_ID;
+    } else {
+      this.record.mbl_agent_name = '';
+      this.record.mbl_agent_id = '';
+    }
+  }
 }
