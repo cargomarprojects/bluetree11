@@ -414,6 +414,20 @@ export class PaymentEditComponent implements OnInit {
             }
             this.ms.FindTotal('', _rec);
         }
+
+        if ( field =='refno'){
+            this.ms.refno = this.ms.refno.trim();
+            this.ms.refno = this.ms.refno.toUpperCase();
+        }
+        if ( field =='invno'){
+            this.ms.invno = this.ms.invno.trim();
+            this.ms.invno = this.ms.invno.toUpperCase();
+        }
+        if ( field =='custrefno'){
+            this.ms.custrefno = this.ms.custrefno.trim();
+            this.ms.custrefno = this.ms.custrefno.toUpperCase();
+        }
+
     }
 
     onBlur2(cb: any) {
