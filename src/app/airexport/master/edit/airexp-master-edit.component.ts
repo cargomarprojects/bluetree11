@@ -261,6 +261,7 @@ export class AirExpMasterEditComponent implements OnInit {
       .subscribe(response => {
         if (response.retvalue) {
           this.errorMessage.push(response.retstring);
+          alert(this.errorMessage);
           // alert(this.errorMessage);
           // if (stype == 'MBL')
           //   this.mbl_no_field.nativeElement.focus();

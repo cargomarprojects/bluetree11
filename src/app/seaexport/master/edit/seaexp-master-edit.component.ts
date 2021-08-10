@@ -300,6 +300,7 @@ export class SeaexpMasterEditComponent implements OnInit {
       .subscribe(response => {
         if (response.retvalue) {
           this.errorMessage.push(response.retstring);
+          alert(this.errorMessage);
           // if (stype == 'BOOKING')
           //   this.mbl_liner_bookingno_field.focus(); ''
           // if (stype == 'MBL')

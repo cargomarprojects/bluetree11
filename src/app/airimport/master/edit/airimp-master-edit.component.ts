@@ -110,7 +110,7 @@ export class AirImpMasterEditComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.errorMessage = [];
@@ -217,7 +217,7 @@ export class AirImpMasterEditComponent implements OnInit {
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
         this.record = <Tbl_cargo_imp_masterm>response.record;
-        this.hrecords = (response.hrecords == undefined || response.hrecords == null) ? <Tbl_cargo_imp_housem[]>[]:<Tbl_cargo_imp_housem[]>response.hrecords;
+        this.hrecords = (response.hrecords == undefined || response.hrecords == null) ? <Tbl_cargo_imp_housem[]>[] : <Tbl_cargo_imp_housem[]>response.hrecords;
         this.mode = 'EDIT';
         this.is_locked = this.gs.IsShipmentClosed("AIR IMPORT", this.record.mbl_ref_date, this.record.mbl_lock, this.record.mbl_unlock_date);
         // this.CheckData();
@@ -262,6 +262,7 @@ export class AirImpMasterEditComponent implements OnInit {
       .subscribe(response => {
         if (response.retvalue) {
           this.errorMessage.push(response.retstring);
+          alert(this.errorMessage);
           // if (stype == 'MAWB')
           //   this.mbl_no_field.nativeElement.focus();
         }
@@ -645,7 +646,7 @@ export class AirImpMasterEditComponent implements OnInit {
           mbl_type: 'AI',
           origin: 'airimp-master-page'
         };
-    }else if (action == "PROFITREPORT") {
+    } else if (action == "PROFITREPORT") {
       if (_type == "L")
         return '/Silver.USAccounts.Trans/ProfitReportPage';
       if (_type == 'P')
@@ -657,7 +658,7 @@ export class AirImpMasterEditComponent implements OnInit {
           mbl_type: 'AI',
           origin: 'airimp-master-page'
         };
-    }else if (action == "PAYMENT-REQUEST") {
+    } else if (action == "PAYMENT-REQUEST") {
       if (_type == "L")
         return '/Silver.BusinessModule/PaymentRequestPage';
       if (_type == 'P')
@@ -671,7 +672,7 @@ export class AirImpMasterEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'airimp-master-page'
         };
-    }else if (action == "MESSENGER-SLIP") {
+    } else if (action == "MESSENGER-SLIP") {
       if (_type == "L")
         return '/Silver.Other.Trans/MessengerSlipList';
       if (_type == 'P')
@@ -684,7 +685,7 @@ export class AirImpMasterEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'airimp-master-page'
         };
-    }else if (action == "FOLLOWUP") {
+    } else if (action == "FOLLOWUP") {
       if (_type == "L")
         return '/Silver.BusinessModule/FollowUpPage';
       if (_type == 'P')
@@ -697,7 +698,7 @@ export class AirImpMasterEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'airimp-master-page'
         };
-    }else if (action == "REQUEST-APPROVAL") {
+    } else if (action == "REQUEST-APPROVAL") {
       if (_type == "L")
         return '/Silver.Other.Trans/ApprovedPageList';
       if (_type == 'P')
@@ -711,7 +712,7 @@ export class AirImpMasterEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'airimp-master-page'
         };
-    }else if (action == "INERNALMEMO") {
+    } else if (action == "INERNALMEMO") {
       if (_type == "L")
         return '/Silver.Other.Trans/TrackingPage';
       if (_type == 'P')
@@ -957,4 +958,3 @@ export class AirImpMasterEditComponent implements OnInit {
   }
 
 }
- 
