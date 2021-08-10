@@ -56,6 +56,7 @@ export class Tbl_acc_ledger {
     jv_status: string;
     inv_no: string;
     sub_acc_name: string;
+    row_type:string;
 }
 
 export interface SearchQuery {

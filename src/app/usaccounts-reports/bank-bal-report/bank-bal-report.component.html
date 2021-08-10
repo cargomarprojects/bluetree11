@@ -75,13 +75,13 @@
         <table class="table  table-hover table-sm">
             <thead class="page-body-thead">
                 <tr>
-                    <th width="30%">BANK</th>
-                    <th width="10%" style="text-align:right">BALANCE</th>
+                    <th (click)="sort('acc_name')"  width="30%">BANK &nbsp;<i [ngClass]="getIcon('acc_name')"></i></th>
+                    <th (click)="sort('jv_balance')"  width="10%" style="text-align:right">BALANCE &nbsp;<i [ngClass]="getIcon('jv_balance')"></i></th>
                     <th width="60%"></th>
                 </tr>
             </thead>
-            <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-                <tr [style.color]="rec.acc_name=='BALANCE'?'Red':'Black'"
+            <tbody class="page-body-tbody">
+                <tr *ngFor="let rec of MainList" [style.color]="rec.acc_name=='BALANCE'?'Red':'Black'"
                 [style.font-weight]="rec.acc_name=='BALANCE' ?'bold':'normal'">
                     <td>{{rec.acc_name}}</td>
                     <td style="text-align:right">{{rec.jv_balance | number : '1.2-2'}}</td>

@@ -12,7 +12,9 @@ export interface ReportState {
     comp_name: string;
     comp_code:string;
     bankids:string;
-
+    sortcol : string ;
+    sortorder : boolean;    
+    
     page_rows: number;
     page_count: number;
     page_current: number;
