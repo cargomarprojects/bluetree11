@@ -41,7 +41,7 @@ export class LockUnlockComponent implements OnInit {
   }
 
   initPage() {
-    
+
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -69,6 +69,21 @@ export class LockUnlockComponent implements OnInit {
 
   Close() {
     this.location.back();
+  }
+
+  getRouteDet(_format: string, _rec: Tbl_cargo_general, _type: string) {
+    let sID: string = (_rec.mbl_pkid != null) ? _rec.mbl_pkid.toString() : "";
+    let REFNO: string = _rec.mbl_refno != null ? _rec.mbl_refno.toString() : "";
+    let sMode: string = _rec.mbl_mode != null ? _rec.mbl_mode.toString() : "";
+    let branch_name: string = _rec.mbl_branch != null ? _rec.mbl_branch.toString() : "";
+
+    if (branch_name == this.gs.branch_name) {
+      if (_type == 'MASTER')
+        return this.gs.Link2Page('REFNO', sMode, REFNO, sID, '', '', _format, '', branch_name);
+      else
+        return null;
+    } else
+      return null;
   }
 
 }

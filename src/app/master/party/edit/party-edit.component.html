@@ -828,6 +828,7 @@
 
                     <div class="form-group row">
                         <button class=" col-12 btn btn-info btn-sm text-uppercase" 
+                        [style.color]="record.rec_files_attached=='Y'?'red':'white'"
                             (click)="BtnNavigation('ATTACHMENT')">Attachments</button>
                     </div>
 
@@ -835,12 +836,14 @@
                     <div class="form-group row">
                         <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('MEMO')">Memo</button> -->
                         <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
+                        [style.color]="record.gen_is_memo=='Y'?'red':'white'"
                         [routerLink]="BtnNavigation2('MEMO','L')" [queryParams]="BtnNavigation2('MEMO','P')">Memo</a>
                     </div>
 
                     <div class="form-group row">
                         <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('SOP-MEMO')">SOP</button> -->
                         <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
+                        [style.color]="record.gen_is_sopmemo=='Y'?'red':'white'"
                         [routerLink]="BtnNavigation2('SOP-MEMO','L')" [queryParams]="BtnNavigation2('SOP-MEMO','P')">SOP</a>
                     </div>
 
@@ -848,6 +851,7 @@
                         <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('QUOTN-MEMO')">Quotation
                             Memo</button> -->
                             <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
+                            [style.color]="record.gen_is_qtnmemo=='Y'?'red':'white'"
                             [routerLink]="BtnNavigation2('QUOTN-MEMO','L')" [queryParams]="BtnNavigation2('QUOTN-MEMO','P')">Quotation
                             Memo</a>
                     </div>
@@ -856,6 +860,7 @@
                         <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('ACC-ALERT')">Accounting
                             Alert</button> -->
                             <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
+                            [style.color]="record.gen_is_acc_alert=='Y'?'red':'white'"
                             [routerLink]="BtnNavigation2('ACC-ALERT','L')" [queryParams]="BtnNavigation2('ACC-ALERT','P')">Accounting
                             Alert</a>
                     </div>

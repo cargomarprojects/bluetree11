@@ -3,26 +3,34 @@
         <label class="mr-1">{{mainservice.title}}</label>
         <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
     </div>
-  </div>
-  
-  <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
     {{errorMessage$ | async}}
-  </div>
-  
-  <app-lockunlock-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-lockunlock-header>
-  
-  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
-  
-  <div class="page-body table-responsive">
+</div>
+
+<app-lockunlock-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-lockunlock-header>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive">
     <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
                 <th>STATUS</th>
-                <th><div class="form-check"> <input type="checkbox" class="form-check-input" (click)="mainservice.LockUnlock('LOCK')" [(ngModel)]="mainservice.lock_all" [disabled]="mainservice.lock_all && !mainservice.unlock_all" ><span>LOCK</span></div></th>
-                <th><div class="form-check"> <input type="checkbox" class="form-check-input" (click)="mainservice.LockUnlock('UNLOCK')" [(ngModel)]="mainservice.unlock_all" [disabled]="!mainservice.lock_all && mainservice.unlock_all"><span>UNLOCK</span></div></th>
+                <th>
+                    <div class="form-check"> <input type="checkbox" class="form-check-input"
+                            (click)="mainservice.LockUnlock('LOCK')" [(ngModel)]="mainservice.lock_all"
+                            [disabled]="mainservice.lock_all && !mainservice.unlock_all"><span>LOCK</span></div>
+                </th>
+                <th>
+                    <div class="form-check"> <input type="checkbox" class="form-check-input"
+                            (click)="mainservice.LockUnlock('UNLOCK')" [(ngModel)]="mainservice.unlock_all"
+                            [disabled]="!mainservice.lock_all && mainservice.unlock_all"><span>UNLOCK</span></div>
+                </th>
                 <th>AUDIT</th>
                 <th>REFERENCE#</th>
-                <th>REF DATE</th>              
+                <th>REF DATE</th>
                 <th>AGENT</th>
                 <th>POL</th>
                 <th>ETD</th>
@@ -33,11 +41,23 @@
         <tbody class="page-body-tbody">
             <tr *ngFor="let rec of records$ | async">
                 <td>{{rec.mbl_lock_status}}</td>
-                <td><div class="form-check"> <input type="checkbox" class="form-check-input" (click)="mainservice.Lock(rec)" [(ngModel)]="rec.mbl_lock_yn_b" [disabled]="rec.mbl_lock_yn_b && !rec.mbl_unlock_yn_b"></div></td>
-                <td><div class="form-check"> <input type="checkbox" class="form-check-input" (click)="mainservice.Unlock(rec)" [(ngModel)]="rec.mbl_unlock_yn_b" [disabled]="!rec.mbl_lock_yn_b && rec.mbl_unlock_yn_b"></div></td>
+                <td>
+                    <div class="form-check"> <input type="checkbox" class="form-check-input"
+                            (click)="mainservice.Lock(rec)" [(ngModel)]="rec.mbl_lock_yn_b"
+                            [disabled]="rec.mbl_lock_yn_b && !rec.mbl_unlock_yn_b"></div>
+                </td>
+                <td>
+                    <div class="form-check"> <input type="checkbox" class="form-check-input"
+                            (click)="mainservice.Unlock(rec)" [(ngModel)]="rec.mbl_unlock_yn_b"
+                            [disabled]="!rec.mbl_lock_yn_b && rec.mbl_unlock_yn_b"></div>
+                </td>
                 <td>{{rec.mbl_ulcode}}</td>
-                <td>{{rec.mbl_refno}}</td>
-                <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>              
+                <td *ngIf="rec.mbl_branch==gs.branch_name">
+                    <a class="hlink" [routerLink]="getRouteDet('L',rec,'MASTER')"
+                        [queryParams]="getRouteDet('P',rec,'MASTER')">{{rec.mbl_refno}}</a>
+                </td>
+                <td *ngIf="rec.mbl_branch!=gs.branch_name">{{rec.mbl_refno}}</td>
+                <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.mbl_agent_name}}</td>
                 <td>{{rec.mbl_pol_name}}</td>
                 <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
@@ -46,11 +66,9 @@
             </tr>
         </tbody>
     </table>
-  </div>
-  
-  
-  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
-  
-  <br />
-  
-  
+</div>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />
