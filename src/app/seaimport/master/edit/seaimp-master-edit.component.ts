@@ -15,6 +15,7 @@ import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomple
 
 
 
+
 @Component({
   selector: 'app-seaimp-master-edit',
   templateUrl: './seaimp-master-edit.component.html'
@@ -99,7 +100,12 @@ export class SeaImpMasterEditComponent implements OnInit {
     modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
   }
 
+
+
   ngOnInit() {
+
+
+
     this.gs.checkAppVersion();
     if (this.route.snapshot.queryParams.parameter == null) {
       this.pkid = this.route.snapshot.queryParams.pkid;
