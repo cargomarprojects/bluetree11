@@ -19,20 +19,20 @@
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <th>SL#</th>
-        <th>TYPE</th>
-        <th>NAME</th>
-        <th>A/C#</th>
-        <th>MONTH/YEAR</th>
-        <th>REMARKS</th>
-        <th>FILE</th>
-        <th>CREATED-BY</th>
-        <th>CREATE-DT</th>
+        <th (click)="mainservice.sort('gf_slno')">SL#&nbsp;<i [ngClass]="mainservice.getIcon('gf_slno')"></i></th>
+        <th (click)="mainservice.sort('gf_type')">TYPE&nbsp;<i [ngClass]="mainservice.getIcon('gf_type')"></i></th>
+        <th (click)="mainservice.sort('gf_name')">NAME&nbsp;<i [ngClass]="mainservice.getIcon('gf_name')"></i></th>
+        <th (click)="mainservice.sort('gf_accno')">A/C#&nbsp;<i [ngClass]="mainservice.getIcon('gf_accno')"></i></th>
+        <th (click)="mainservice.sort('gf_mmyy')">MONTH/YEAR&nbsp;<i [ngClass]="mainservice.getIcon('gf_mmyy')"></i></th>
+        <th (click)="mainservice.sort('gf_remarks')">REMARKS&nbsp;<i [ngClass]="mainservice.getIcon('gf_remarks')"></i></th>
+        <th (click)="mainservice.sort('gf_file_name')">FILE&nbsp;<i [ngClass]="mainservice.getIcon('gf_file_name')"></i></th>
+        <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+        <th (click)="mainservice.sort('rec_created_date')">CREATE-DT&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
         <th>DELETE</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async">
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
         <td class='hlink2' (click)="edit(rec)">{{rec.gf_slno}}</td>
         <td>{{rec.gf_type}} </td>
         <td>{{rec.gf_name}} </td>
