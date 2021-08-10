@@ -141,7 +141,7 @@
         <th (click)="sort('inv_remarks')">REMARKS&nbsp;<i [ngClass]="getIcon('inv_remarks')"></i></th>
         <th (click)="sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="getIcon('rec_created_by')"></i></th>
         <th (click)="sort('rec_created_date')">CREATED-DATE&nbsp;<i [ngClass]="getIcon('rec_created_date')"></i></th>
-        <th>Remove</th>
+        <th *ngIf="canDelete" class='text-center'>Remove</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
@@ -161,7 +161,7 @@
         <td>{{rec.inv_remarks}}</td>
         <td>{{rec.rec_created_by}}</td>
         <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-        <td class="p-0">
+        <td *ngIf="canDelete" class='text-center' class="p-0">
           <a class="btn btn-sm" (click)="removeRow(rec)">
               <i class="fa fa-trash-o"></i>
           </a>

@@ -31,6 +31,7 @@ export class InvoiceComponent implements OnInit {
   canAdd: boolean;
   canEdit: boolean;
   canSave: boolean;
+  canDelete: boolean;
 
   income: number = 0;
   expense: number = 0;
@@ -86,6 +87,7 @@ export class InvoiceComponent implements OnInit {
     this.canAdd = this.gs.canAdd(this.menuid);
     this.canEdit = this.gs.canEdit(this.menuid);
     this.canSave = this.canAdd || this.canEdit;
+    this.canDelete= this.gs.canDelete(this.menuid);
 
   }
 
