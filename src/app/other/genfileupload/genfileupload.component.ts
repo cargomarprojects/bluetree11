@@ -31,6 +31,7 @@ export class GenFileUploadComponent implements OnInit {
     public mainservice: GenFileUploadService
   ) { }
 
+ 
   ngOnInit() {
     this.gs.checkAppVersion();
     this.mainservice.init(this.route.snapshot.queryParams);

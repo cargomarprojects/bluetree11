@@ -4,6 +4,7 @@ import { AppState as thisState } from '../../../reducer';
 
 import * as myActions from './aging-report.actions';
 import { ReportState } from './aging-report.models';
+import * as _ from 'lodash-es';
 
 export interface AppState extends thisState {
     'AgingReport': ReportState
@@ -25,7 +26,7 @@ export const initialState: ReportState = {
     radio_cust: 'CUSTOMER',
     showall: false,
     cust_name: '',
-    cust_id : '',
+    cust_id: '',
     show_advance: false,
     group_by_parent: false,
     report_type: '',
@@ -39,6 +40,8 @@ export const initialState: ReportState = {
     filename2: '',
     filetype2: '',
     filedisplayname2: '',
+    sortcol: 'inv_cust_name',
+    sortorder: true,
     page_rows: 0,
     page_count: 0,
     page_current: 0,
@@ -54,6 +57,26 @@ export function AgingReportReducer(state: ReportState[] = [initialState], action
             return [...state.filter(rec => rec.urlid != action.payload.id), action.payload.changes];
         case myActions.ActionTypes.DELETE:
             return [...state.filter(rec => rec.urlid != action.payload.id)];
+        case myActions.ActionTypes.SORT_DATA: {
+
+            var st = Object.assign({}, state.find(rec => rec.urlid == action.payload.id));
+            if (st == null)
+                return [...state];
+
+            if (st.sortcol != action.payload.sortcol) {
+                st.sortcol = action.payload.sortcol;
+                st.sortorder = true;
+            }
+            else
+                st.sortorder = !st.sortorder;
+
+            if (st.sortorder)
+                st.records = _.orderBy(st.records, ['ROW_TYPE', st.sortcol], ['asc', 'asc']);
+            else
+                st.records = _.orderBy(st.records, ['ROW_TYPE', st.sortcol], ['asc', 'desc']);
+
+            return [...state.filter(rec => rec.urlid != action.payload.id), st];
+        }
         default:
             return state;
     }

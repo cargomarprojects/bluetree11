@@ -62,11 +62,13 @@
 
                         <div class="form-group row">
                             <div class="col-4">
-                                <input type="radio" [(ngModel)]="radio_cust" [value]="'MASTER'" name="optcust" (change)="OnChange('MASTER')" />
+                                <input type="radio" [(ngModel)]="radio_cust" [value]="'MASTER'" name="optcust"
+                                    (change)="OnChange('MASTER')" />
                                 <span>&nbsp;Customer</span>
                             </div>
                             <div class="col-4">
-                                <input type="radio" [(ngModel)]="radio_cust" [value]="'OVERSEAAGENT'" name="optcust" (change)="OnChange('OVERSEAAGENT')" />
+                                <input type="radio" [(ngModel)]="radio_cust" [value]="'OVERSEAAGENT'" name="optcust"
+                                    (change)="OnChange('OVERSEAAGENT')" />
                                 <span>&nbsp;ParentGroup</span>
                             </div>
                             <div class="col-4">
@@ -134,7 +136,7 @@
                                     class="btn btn-primary btn-sm mr-1">Search</button>
                                 <!-- <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="Print()"
                                     class="btn btn-primary btn-sm">Print</button> -->
-                                    <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="List('PRINT')"
+                                <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="List('PRINT')"
                                     class="btn btn-primary btn-sm">Print</button>
                             </div>
                         </div>
@@ -150,8 +152,9 @@
         <div *ngIf="report_type=='DETAIL'" class="page-body table-responsive table-bordered">
             <table class="table table-hover table-sm">
                 <thead class="page-body-thead">
-                    <tr><th style="text-align:left;">BRANCH</th>
-                        <th style="text-align:left;">INV.NO</th>
+                    <tr>
+                        <th style="text-align:left;">BRANCH </th>
+                        <th style="text-align:left;">INV.NO </th>
                         <th style="text-align:left;">INV.DATE</th>
                         <th style="text-align:left;">REFNO</th>
                         <th style="text-align:left;">HOUSE</th>
@@ -162,16 +165,16 @@
                         <th style="text-align:right;">BALANCE</th>
                         <th style="text-align:right;">UN-DEPOSITED</th>
                         <th style="text-align:right;">UPTO 30</th>
-                        <th style="text-align:right;">31-60</th>
-                        <th *ngIf="radio_days=='30to60'" style="text-align:right;">>60</th>
-                        <th *ngIf="radio_days=='30to365'" style="text-align:right;">61-90</th>
-                        <th *ngIf="radio_days=='30to365'" style="text-align:right;">91-180</th>
-                        <th *ngIf="radio_days=='30to365'" style="text-align:right;">181-365</th>
-                        <th *ngIf="radio_days=='30to365'" style="text-align:right;"> >365</th>
+                        <th style="text-align:right;">31-60 </th>
+                        <th *ngIf="radio_days=='30to60'" style="text-align:right;">>60 </th>
+                        <th *ngIf="radio_days=='30to365'" style="text-align:right;"> 61-90 </th>
+                        <th *ngIf="radio_days=='30to365'" style="text-align:right;"> 91-180 </th>
+                        <th *ngIf="radio_days=='30to365'" style="text-align:right;"> 181-365</th>
+                        <th *ngIf="radio_days=='30to365'" style="text-align:right;"> >365 </th>
                     </tr>
                 </thead>
-                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-                    <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+                <tbody class="page-body-tbody">
+                    <tr *ngFor="let rec of MainList" [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
                         [style.font-weight]="rec.ROW_TYPE=='TOTAL'?'bold':'normal'">
                         <td style="text-align:left;">{{rec.inv_branch}}</td>
                         <td style="text-align:left;">{{rec.inv_no}}</td>
@@ -205,23 +208,35 @@
             <table class="table  table-hover table-sm">
                 <thead class="page-body-thead">
                     <tr>
-                        <th style="text-align:left;">CUSTOMER </th>
-                        <th style="text-align:right;">TOTAL</th>
-                        <th style="text-align:right;">PAID</th>
-                        <th style="text-align:right;">BALANCE</th>
-                        <th style="text-align:right;">UN-DEPOSITED</th>
-                        <th style="text-align:right;">UPTO 30</th>
-                        <th style="text-align:right;">31-60</th>
-                        <th *ngIf="radio_days=='30to60'" style="text-align: right;">>60</th>
-                        <th *ngIf="radio_days=='30to365'" style="text-align: right;">61-90</th>
-                        <th *ngIf="radio_days=='30to365'" style="text-align: right;">91-180</th>
-                        <th *ngIf="radio_days=='30to365'" style="text-align: right;">181-365</th>
-                        <th *ngIf="radio_days=='30to365'" style="text-align: right;">>365</th>
+                        <th (click)="sort('inv_cust_name')" style="text-align:left;">CUSTOMER &nbsp;<i
+                                [ngClass]="getIcon('inv_cust_name')"></i> </th>
+                        <th (click)="sort('inv_total')" style="text-align:right;">TOTAL &nbsp;<i
+                                [ngClass]="getIcon('inv_total')"></i></th>
+                        <th (click)="sort('inv_paid')" style="text-align:right;">PAID &nbsp;<i
+                                [ngClass]="getIcon('inv_paid')"></i></th>
+                        <th (click)="sort('inv_bal')" style="text-align:right;">BALANCE &nbsp;<i
+                                [ngClass]="getIcon('inv_bal')"></i></th>
+                        <th (click)="sort('inv_undeposited')" style="text-align:right;">UN-DEPOSITED &nbsp;<i
+                                [ngClass]="getIcon('inv_undeposited')"></i></th>
+                        <th (click)="sort('inv_bal_below30')" style="text-align:right;">UPTO 30 &nbsp;<i
+                                [ngClass]="getIcon('inv_bal_below30')"></i></th>
+                        <th (click)="sort('inv_bal_30to60')" style="text-align:right;">31-60 &nbsp;<i
+                                [ngClass]="getIcon('inv_bal_30to60')"></i></th>
+                        <th (click)="sort('inv_bal_above60')" *ngIf="radio_days=='30to60'" style="text-align: right;">
+                            >60 &nbsp;<i [ngClass]="getIcon('inv_bal_above60')"></i></th>
+                        <th (click)="sort('inv_bal_60to90')" *ngIf="radio_days=='30to365'" style="text-align: right;">
+                            61-90 &nbsp;<i [ngClass]="getIcon('inv_bal_60to90')"></i></th>
+                        <th (click)="sort('inv_bal_90to180')" *ngIf="radio_days=='30to365'" style="text-align: right;">
+                            91-180 &nbsp;<i [ngClass]="getIcon('inv_bal_90to180')"></i></th>
+                        <th (click)="sort('inv_bal_180to365')" *ngIf="radio_days=='30to365'" style="text-align: right;">
+                            181-365 &nbsp;<i [ngClass]="getIcon('inv_bal_180to365')"></i></th>
+                        <th (click)="sort('inv_bal_above365')" *ngIf="radio_days=='30to365'" style="text-align: right;">
+                            >365 &nbsp;<i [ngClass]="getIcon('inv_bal_above365')"></i></th>
                     </tr>
                 </thead>
-                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-                    <tr [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
-                    [style.font-weight]="rec.ROW_TYPE=='TOTAL'?'bold':'normal'">
+                <tbody class="page-body-tbody">
+                    <tr *ngFor="let rec of MainList" [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
+                        [style.font-weight]="rec.ROW_TYPE=='TOTAL'?'bold':'normal'">
                         <td style="text-align: left;">{{rec.inv_cust_name}}</td>
                         <td style="text-align: right;">{{rec.inv_total | number: '1.2-2'}}</td>
                         <td style="text-align: right;">{{rec.inv_paid | number: '1.2-2'}}</td>
@@ -258,8 +273,7 @@
 </div>
 
 <div *ngIf="tab == 'report'">
-    <app-report [title]="'Top Customer Report'" [url]="" [searchdata]="" [menuid]="report_menuid" 
-    [filename]="filename" [filetype]="filetype" [filedisplayname]="filedisplayname" 
-    [filename2]="filename2" [filetype2]="filetype2" [filedisplayname2]="filedisplayname2" 
-    (callbackevent)="callbackevent($event)"></app-report>
+    <app-report [title]="'Top Customer Report'" [url]="" [searchdata]="" [menuid]="report_menuid" [filename]="filename"
+        [filetype]="filetype" [filedisplayname]="filedisplayname" [filename2]="filename2" [filetype2]="filetype2"
+        [filedisplayname2]="filedisplayname2" (callbackevent)="callbackevent($event)"></app-report>
 </div>

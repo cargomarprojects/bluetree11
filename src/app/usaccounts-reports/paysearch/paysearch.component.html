@@ -18,23 +18,23 @@
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <th>INVNO</th>
-        <th>LOTNO</th>   
-        <th>INV DATE</th>
-        <th>INV AMT</th>
-        <th>PAID AMT</th>
-        <th>PARTY</th>        
-        <th>BANK</th>                
-        <th>PAYMENT#</th>                
-        <th>DATE PAID</th>                
-        <th>PAY AMT</th>                
-        <th>CHECK NO</th>        
-        <th>MASTER#</th>                
-        <th>INV REFNO</th>                
+        <th (click)="mainservice.sort('pay_invno')">INVNO&nbsp;<i [ngClass]="mainservice.getIcon('pay_invno')"></i></th>
+        <th (click)="mainservice.sort('pay_mblrefno')">LOTNO&nbsp;<i [ngClass]="mainservice.getIcon('pay_mblrefno')"></i></th>   
+        <th (click)="mainservice.sort('pay_inv_date')">INV DATE&nbsp;<i [ngClass]="mainservice.getIcon('pay_inv_date')"></i></th>
+        <th (click)="mainservice.sort('pay_inv_total')">INV AMT&nbsp;<i [ngClass]="mainservice.getIcon('pay_inv_total')"></i></th>
+        <th (click)="mainservice.sort('pay_inv_paid')">PAID AMT&nbsp;<i [ngClass]="mainservice.getIcon('pay_inv_paid')"></i></th>
+        <th (click)="mainservice.sort('pay_cust_name')">PARTY&nbsp;<i [ngClass]="mainservice.getIcon('pay_cust_name')"></i></th>        
+        <th (click)="mainservice.sort('pay_acc_name')">BANK&nbsp;<i [ngClass]="mainservice.getIcon('pay_acc_name')"></i></th>                
+        <th (click)="mainservice.sort('pay_docno')">PAYMENT#&nbsp;<i [ngClass]="mainservice.getIcon('pay_docno')"></i></th>                
+        <th (click)="mainservice.sort('pay_date')">DATE PAID&nbsp;<i [ngClass]="mainservice.getIcon('pay_date')"></i></th>                
+        <th (click)="mainservice.sort('pay_total')">PAY AMT&nbsp;<i [ngClass]="mainservice.getIcon('pay_total')"></i></th>                
+        <th (click)="mainservice.sort('pay_chqno')">CHECK NO&nbsp;<i [ngClass]="mainservice.getIcon('pay_chqno')"></i></th>        
+        <th (click)="mainservice.sort('pay_mblno')">MASTER#&nbsp;<i [ngClass]="mainservice.getIcon('pay_mblno')"></i></th>                
+        <th (click)="mainservice.sort('pay_invrefno')">INV REFNO&nbsp;<i [ngClass]="mainservice.getIcon('pay_invrefno')"></i></th>                
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async">
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
         <!-- <td class='hlink2' (click)="editinvoice(rec)">{{rec.pay_invno}}</td> -->
         <td>
           <a class="hlink" [routerLink]="getRouteDet('L',rec,'INVNO')"

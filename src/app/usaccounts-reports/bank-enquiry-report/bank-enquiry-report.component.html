@@ -81,18 +81,18 @@
             <table class="table  table-hover table-sm">
                 <thead class="page-body-thead">
                     <tr>
-                        <th>PAY/DEP NO</th>
-                        <th>PARTY</th>
-                        <th>MEMO</th>
-                        <th>DATE</th>
-                        <th>CHECKNO</th>
-                        <th style="text-align:right">RECD</th>
-                        <th style="text-align:right">PAID</th>
-                        <th style="text-align:right">BALANCE</th>
+                        <th (click)="sort('pay_docno')" >PAY/DEP NO &nbsp;<i [ngClass]="getIcon('pay_docno')"></i></th>
+                        <th (click)="sort('pay_cust_name')" >PARTY &nbsp;<i [ngClass]="getIcon('pay_cust_name')"></i></th>
+                        <th (click)="sort('pay_acc_name')" >MEMO &nbsp;<i [ngClass]="getIcon('pay_acc_name')"></i></th>
+                        <th (click)="sort('pay_date')" >DATE &nbsp;<i [ngClass]="getIcon('pay_date')"></i></th>
+                        <th (click)="sort('pay_chqno')" >CHECKNO &nbsp;<i [ngClass]="getIcon('pay_chqno')"></i></th>
+                        <th (click)="sort('pay_ar_total')"  style="text-align:right">RECD &nbsp;<i [ngClass]="getIcon('pay_ar_total')"></i></th>
+                        <th (click)="sort('pay_ap_total')"  style="text-align:right">PAID &nbsp;<i [ngClass]="getIcon('pay_ap_total')"></i></th>
+                        <th (click)="sort('pay_diff')"  style="text-align:right">BALANCE &nbsp;<i [ngClass]="getIcon('pay_diff')"></i></th>
                     </tr>
                 </thead>
-                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-                    <tr [style.color]="rec.pay_cust_name=='BALANCE'?'Red':'Black'"
+                <tbody class="page-body-tbody">
+                    <tr *ngFor="let rec of MainList" [style.color]="rec.pay_cust_name=='BALANCE'?'Red':'Black'"
                     [style.font-weight]="rec.pay_cust_name=='BALANCE' ?'bold':'normal'">
                         <td class='hlink2' (click)="PrintPayment(rec)">{{rec.pay_docno}}</td>
                         <td>{{rec.pay_cust_name}}</td>

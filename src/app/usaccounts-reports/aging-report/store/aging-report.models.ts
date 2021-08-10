@@ -33,7 +33,8 @@ export interface ReportState {
     filename2: string;
     filetype2: string;
     filedisplayname2: string;
-
+    sortcol : string ;
+    sortorder : boolean;    
     page_rows: number;
     page_count: number;
     page_current: number;

@@ -107,11 +107,14 @@ export class Tbl_Acc_Payment {
     pay_mblid: string;
     pay_invtype: string;
     pay_hblid: string;
+    row_type:string;
 
 }
 
 
 export interface AccPaymentModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

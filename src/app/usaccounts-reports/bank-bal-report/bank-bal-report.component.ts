@@ -48,6 +48,9 @@ export class BankBalReportComponent implements OnInit {
     loading: boolean = false;
     errorMessage: string = '';
     SearchData: any = {};
+    sortCol = 'acc_name';
+    sortOrder = true;
+
     Reportstate1: Observable<ReportState>;
     MainList: Tbl_acc_ledger[];
 
@@ -63,7 +66,7 @@ export class BankBalReportComponent implements OnInit {
         this.sub = this.activatedroute.queryParams.subscribe(params => {
 
             this.gs.checkAppVersion();
-            
+
             this.urlid = params.id;
             this.menuid = params.menuid;
             this.title = this.gs.getTitle(this.menuid);
@@ -88,6 +91,8 @@ export class BankBalReportComponent implements OnInit {
                 this.comp_type = rec.comp_type;
                 this.comp_name = rec.comp_name;
                 this.comp_code = rec.comp_code;
+                this.sortCol = rec.sortcol;
+                this.sortOrder = rec.sortorder;
 
                 this.page_rows = rec.page_rows;
                 this.page_count = rec.page_count;
@@ -124,6 +129,8 @@ export class BankBalReportComponent implements OnInit {
                 this.comp_type = this.gs.branch_code;
                 this.comp_code = this.gs.branch_code;
                 this.comp_name = this.gs.branch_name;
+                this.sortCol = 'acc_name';
+                this.sortOrder = true;
                 this.SearchData = this.gs.UserInfo;
             }
         });
@@ -216,7 +223,8 @@ export class BankBalReportComponent implements OnInit {
                         comp_code: this.SearchData.COMP_CODE,
                         comp_type: this.SearchData.COMPANY_TYPE,
                         bankids: this.SearchData.JV_ACC_ID,
-
+                        sortcol: 'acc_name',
+                        sortorder: true,
                         page_rows: response.page_rows,
                         page_count: response.page_count,
                         page_current: response.page_current,
@@ -238,6 +246,21 @@ export class BankBalReportComponent implements OnInit {
         this.store.dispatch(new myActions.Delete({ id: this.urlid }));
         this.location.back();
     }
+
+    private sort(sortcol: string) {
+        this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+      }
+    
+      public getIcon(col: string) {
+        if (col == this.sortCol) {
+          if (this.sortOrder)
+            return 'fa fa-arrow-down';
+          else
+            return 'fa fa-arrow-up';
+        }
+        else
+          return null;
+      }
 
     initLov(caption: string = '') {
 
@@ -267,12 +290,12 @@ export class BankBalReportComponent implements OnInit {
 
     onChange(field: string) {
 
-       this.FillChkListBox(this.comp_type);
-      }
+        this.FillChkListBox(this.comp_type);
+    }
 
     FillChkListBox(sCode: string) {
         this.bankrecords = <Tbl_Bank_List[]>[];
-        this.allbankchecked=false;
+        this.allbankchecked = false;
         this.selectdeselect = false;
         if (sCode.trim() == "ALL") {
             this.bankfullrecords.forEach(Rec => {
