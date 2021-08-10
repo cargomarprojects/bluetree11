@@ -369,6 +369,12 @@ export class FileUploadComponent implements OnInit {
   }
 
 
+  OpenFile(_rec: Table_Mast_Files) {
+
+    window.open(_rec.file_uri, '_blank');
+
+  }
+
 
   ShowFile(_rec: Table_Mast_Files) {
 
