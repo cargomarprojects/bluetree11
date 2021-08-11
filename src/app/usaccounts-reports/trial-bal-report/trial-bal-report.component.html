@@ -104,15 +104,15 @@
             <table class="table  table-hover table-sm">
                 <thead class="page-body-thead">
                     <tr>
-                        <th>GROUP</th>
-                        <th>CODE</th>
-                        <th>NAME</th>
-                        <th style="text-align:right">DEBIT</th>
-                        <th style="text-align:right">CREDIT</th>
+                        <th (click)="sort('tb_sub_group')">GROUP&nbsp;<i [ngClass]="getIcon('tb_sub_group')"></i></th>
+                        <th (click)="sort('tb_acc_code')">CODE&nbsp;<i [ngClass]="getIcon('tb_acc_code')"></i></th>
+                        <th (click)="sort('tb_acc_name')">NAME&nbsp;<i [ngClass]="getIcon('tb_acc_name')"></i></th>
+                        <th (click)="sort('tb_bal_debit')" style="text-align:right">DEBIT&nbsp;<i [ngClass]="getIcon('tb_bal_debit')"></i></th>
+                        <th (click)="sort('tb_bal_credit')" style="text-align:right">CREDIT&nbsp;<i [ngClass]="getIcon('tb_bal_credit')"></i></th>
                     </tr>
                 </thead>
-                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-                    <tr [style.color]="rec.tb_acc_name=='TOTAL'?'Red':'Black'"
+                <tbody class="page-body-tbody">
+                    <tr  *ngFor="let rec of MainList" [style.color]="rec.tb_acc_name=='TOTAL'?'Red':'Black'"
                         [style.font-weight]="rec.tb_acc_name=='TOTAL'?'bold':'normal'">
                         <td>{{rec.tb_sub_group}}</td>
                         <td>{{rec.tb_acc_code}}</td>
