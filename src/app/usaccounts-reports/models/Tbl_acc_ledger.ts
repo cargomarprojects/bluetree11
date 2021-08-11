@@ -75,6 +75,8 @@ export interface SearchQuery {
     lbl_balance: string;
 }
 export interface BankReconModel {
+    sortcol : string ;
+    sortorder : boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

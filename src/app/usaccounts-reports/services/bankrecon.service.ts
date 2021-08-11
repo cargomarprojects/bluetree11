@@ -52,7 +52,34 @@ export class BankReconService {
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
+    public getSortCol(){
+        return this.record.sortcol;
+    }
+    public getSortOrder(){
+        return this.record.sortorder;
+    }
 
+    public getIcon(col : string){
+        if ( col == this.record.sortcol){
+          if ( this.record.sortorder )
+            return 'fa fa-arrow-down';
+          else 
+            return 'fa fa-arrow-up';
+        }
+        else 
+          return null;
+    }
+    
+    public  sort(col : string){
+        if ( col == this.record.sortcol){
+          this.record.sortorder = !this.record.sortorder;
+        }
+        else 
+        {
+          this.record.sortcol = col;
+          this.record.sortorder = true;
+        }
+    }
     public init(params: any) {
         if (this.initlialized)
             return;
@@ -62,6 +89,8 @@ export class BankReconService {
         this.param_type = params.param_type;
 
         this.record = <BankReconModel>{
+            sortcol : 'jv_date',
+            sortorder : true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ sdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), edate: this.gs.defaultValues.today, accId: '', accCode: '', accName: '', sdate2: '', edate2: '', chkreconciled: false, chkunreconciled: true, lbl_balance: '', lbl_op: '', lbl_trans_cr: '', lbl_trans_dr: '' },
