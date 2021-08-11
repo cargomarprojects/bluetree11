@@ -6,7 +6,7 @@ import { Table_Mast_Files } from '../models/table_mast_files';
 // import { stringify } from 'querystring';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-// import * as $ from 'jquery';
+declare var $: any;
 
 
 @Component({
@@ -148,13 +148,12 @@ export class FileUploadComponent implements OnInit {
     this.LoadCombo();
     this.List();
 
-/*     $(document).ready(function() {
+     $(function() {
+     
       let modalContent: any = $('.modal-content');
-      modalContent.draggable({
-        handle: '.modal-header'
-      });
+      modalContent.draggable(); 
     });
- */
+ 
   }
 
   SetDefault() {
