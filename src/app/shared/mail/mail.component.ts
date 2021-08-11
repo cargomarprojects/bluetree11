@@ -8,6 +8,8 @@ import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { HtmlParser } from '@angular/compiler';
 
+declare var $: any;
+
 @Component({
   selector: 'app-mail',
   templateUrl: './mail.component.html',
@@ -84,6 +86,11 @@ export class MailComponent implements OnInit {
       this.msgFontWeight = "bold";
     else
       this.msgFontWeight = "normal";
+
+      $(function() {
+        let modalContent: any = $('.modal-content');
+        modalContent.draggable(); 
+      });
   }
 
   LovSelected(_Record: SearchTable) {
