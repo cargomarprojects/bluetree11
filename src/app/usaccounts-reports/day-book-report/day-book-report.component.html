@@ -53,23 +53,23 @@
             <table class="table  table-hover table-sm">
                 <thead class="page-body-thead">
                     <tr>
-                        <th>DATE</th>
-                        <th>VRNO</th>
-                        <th>TYPE</th>
-                        <th>NAME</th>
-                        <th>SUB-NAME</th>
-                        <th>INVNO</th>
-                        <th>STATUS</th>
-                        <th *ngIf="!gs.IS_SINGLE_CURRENCY" style="text-align:right">AMOUNT</th>
-                        <th *ngIf="!gs.IS_SINGLE_CURRENCY">CURR</th>
-                        <th style="text-align:right">DEBIT</th>
-                        <th style="text-align:right">CREDIT</th>
-                        <th style="text-align:right">BALANCE</th>
-                        <th>NARRATION</th>
+                        <th (click)="sort('jv_date')">DATE&nbsp;<i [ngClass]="getIcon('jv_date')"></i></th>
+                        <th (click)="sort('jv_docno')">VRNO&nbsp;<i [ngClass]="getIcon('jv_docno')"></i></th>
+                        <th (click)="sort('jv_type')">TYPE&nbsp;<i [ngClass]="getIcon('jv_type')"></i></th>
+                        <th (click)="sort('acc_name')">NAME&nbsp;<i [ngClass]="getIcon('acc_name')"></i></th>
+                        <th (click)="sort('sub_acc_name')">SUB-NAME&nbsp;<i [ngClass]="getIcon('sub_acc_name')"></i></th>
+                        <th (click)="sort('inv_no')">INVNO&nbsp;<i [ngClass]="getIcon('inv_no')"></i></th>
+                        <th (click)="sort('jv_status')">STATUS&nbsp;<i [ngClass]="getIcon('jv_status')"></i></th>
+                        <th (click)="sort('jv_amount')" *ngIf="!gs.IS_SINGLE_CURRENCY" style="text-align:right">AMOUNT&nbsp;<i [ngClass]="getIcon('jv_amount')"></i></th>
+                        <th (click)="sort('jv_curr_code')" *ngIf="!gs.IS_SINGLE_CURRENCY">CURR&nbsp;<i [ngClass]="getIcon('jv_curr_code')"></i></th>
+                        <th (click)="sort('jv_debit')" style="text-align:right">DEBIT&nbsp;<i [ngClass]="getIcon('jv_debit')"></i></th>
+                        <th (click)="sort('jv_credit')" style="text-align:right">CREDIT&nbsp;<i [ngClass]="getIcon('jv_credit')"></i></th>
+                        <th (click)="sort('jv_balance')" style="text-align:right">BALANCE&nbsp;<i [ngClass]="getIcon('jv_balance')"></i></th>
+                        <th (click)="sort('jv_narration')">NARRATION&nbsp;<i [ngClass]="getIcon('jv_narration')"></i></th>
                     </tr>
                 </thead>
-                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-                    <tr [style.color]="rec.jv_type=='BALANCE'?'Red':'Black'"
+                <tbody class="page-body-tbody" >
+                    <tr *ngFor="let rec of MainList" [style.color]="rec.jv_type=='BALANCE'?'Red':'Black'"
                     [style.font-weight]="rec.jv_type=='BALANCE'?'bold':'normal'">
                         <td >{{rec.jv_date | date : gs.FRONTEND_DATEFORMAT}}</td>
                         <td>{{rec.jv_docno}}</td>
