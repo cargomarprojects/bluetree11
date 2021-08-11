@@ -48,6 +48,8 @@ export class InvCustReportComponent implements OnInit {
   loading: boolean = false;
   errorMessage: string = '';
   SearchData: any = {};
+  sortCol = 'inv_no';
+  sortOrder = true;
   Reportstate1: Observable<ReportState>;
   MainList: Tbl_OS_REPORT[];
 
@@ -84,7 +86,8 @@ export class InvCustReportComponent implements OnInit {
         this.cust_code = rec.cust_code;
         this.cust_name = rec.cust_name;
         this.sortname = rec.sortname;
-
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
         this.page_current = rec.page_current;
@@ -107,6 +110,8 @@ export class InvCustReportComponent implements OnInit {
         this.cust_code = '';
         this.cust_name = '';
         this.sortname = 'inv_date';
+        this.sortCol = 'inv_no';
+        this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
       }
     });
@@ -169,6 +174,8 @@ export class InvCustReportComponent implements OnInit {
             cust_code: this.SearchData.CUST_CODE,
             cust_name: this.SearchData.CUST_NAME,
             sortname: this.sortname,
+            sortcol: 'inv_no',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -189,6 +196,20 @@ export class InvCustReportComponent implements OnInit {
   Close() {
     this.store.dispatch(new myActions.Delete({ id: this.urlid }));
     this.location.back();
+  }
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
+
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
   }
 
   initLov(caption: string = '') {

@@ -8,7 +8,8 @@ export interface ReportState {
     cust_code: string;
     cust_name: string;
     sortname: string;
-
+    sortcol : string ;
+    sortorder : boolean;    
     page_rows: number;
     page_count: number;
     page_current: number;
