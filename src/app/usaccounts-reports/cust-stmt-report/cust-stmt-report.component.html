@@ -150,28 +150,28 @@
             <table class="table  table-hover table-sm">
                 <thead class="page-body-thead">
                     <tr>
-                        <th>BRANCH</th>
-                        <th *ngIf="gs.BRANCH_REGION != 'USA'">INV.NO</th>
+                        <th (click)="sort('inv_branch')" >BRANCH &nbsp;<i [ngClass]="getIcon('inv_branch')"></i></th>
+                        <th (click)="sort('inv_no')"  *ngIf="gs.BRANCH_REGION != 'USA'">INV.NO&nbsp;<i [ngClass]="getIcon('inv_no')"></i></th>
                         <th *ngIf="gs.BRANCH_REGION == 'USA'" (click)="SelectDeselect()">
                             <div class="form-check"> <input type="checkbox" class="form-check-input"
                                     [(ngModel)]="allchecked"><span>INV.NO</span>
                             </div>
-                        </th>
-                        <th>INV.DATE</th>
-                        <th>REFNO</th>
-                        <th>CUST REFNO</th>
-                        <th>MASTER B/L</th>
-                        <th>HOUSE B/L</th>
-                        <th style="text-align:right">DR</th>
-                        <th style="text-align:right">CR</th>
-                        <th *ngIf="gs.BRANCH_REGION == 'USA' && gs.company_code == '100' && showprofit"
-                            style="text-align:right">M.PROFIT</th>
-                        <th *ngIf="gs.BRANCH_REGION == 'USA' && gs.company_code == '100' && showprofit"
-                            style="text-align:right">H.PROFIT</th>
+                           </th>
+                        <th (click)="sort('inv_date')" >INV.DATE&nbsp;<i [ngClass]="getIcon('inv_date')"></i></th>
+                        <th (click)="sort('inv_mrefno')" >REFNO&nbsp;<i [ngClass]="getIcon('inv_mrefno')"></i></th>
+                        <th (click)="sort('inv_refno')" >CUST REFNO&nbsp;<i [ngClass]="getIcon('inv_refno')"></i></th>
+                        <th (click)="sort('inv_mblno')" >MASTER B/L&nbsp;<i [ngClass]="getIcon('inv_mblno')"></i></th>
+                        <th (click)="sort('inv_hrefno')" >HOUSE B/L&nbsp;<i [ngClass]="getIcon('inv_hrefno')"></i></th>
+                        <th (click)="sort('inv_ar')"  style="text-align:right">DR&nbsp;<i [ngClass]="getIcon('inv_ar')"></i></th>
+                        <th (click)="sort('inv_ap')" style="text-align:right">CR&nbsp;<i [ngClass]="getIcon('inv_ap')"></i></th>
+                        <th (click)="sort('inv_mbl_profit')"  *ngIf="gs.BRANCH_REGION == 'USA' && gs.company_code == '100' && showprofit"
+                            style="text-align:right">M.PROFIT&nbsp;<i [ngClass]="getIcon('inv_mbl_profit')"></i></th>
+                        <th (click)="sort('inv_hbl_profit')"  *ngIf="gs.BRANCH_REGION == 'USA' && gs.company_code == '100' && showprofit"
+                            style="text-align:right">H.PROFIT&nbsp;<i [ngClass]="getIcon('inv_hbl_profit')"></i></th>
                     </tr>
                 </thead>
-                <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-                    <tr [style.color]="(rec.ROW_TYPE=='TOTAL'||rec.ROW_TYPE=='BALANCE')?'Red':'Black'"
+                <tbody class="page-body-tbody">
+                    <tr *ngFor="let rec of MainList" [style.color]="(rec.ROW_TYPE=='TOTAL'||rec.ROW_TYPE=='BALANCE')?'Red':'Black'"
                     [style.font-weight]="(rec.ROW_TYPE=='TOTAL'||rec.ROW_TYPE=='BALANCE') ?'bold':'normal'">
                         <td>{{rec.inv_branch}}</td>
                         <td *ngIf="gs.BRANCH_REGION != 'USA'">{{rec.inv_no}}</td>
