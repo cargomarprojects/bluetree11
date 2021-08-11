@@ -554,50 +554,42 @@ export class AirImpMasterEditComponent implements OnInit {
   onBlur(field: string) {
     switch (field) {
       case 'mbl_refno': {
-        this.record.mbl_refno = this.record.mbl_refno.toUpperCase();
+        this.record.mbl_refno = this.record.mbl_refno.toUpperCase().trim();
         break;
       }
       case 'mbl_no': {
-        this.record.mbl_no = this.record.mbl_no.toUpperCase();
+        this.record.mbl_no = this.record.mbl_no.toUpperCase().trim();
         break;
       }
-      //   case 'mbl_liner_bookingno': {
-      //     this.record.mbl_liner_bookingno = this.record.mbl_liner_bookingno.toUpperCase();
-      //     break;
-      //   }
       case 'mbl_vessel': {
-        this.record.mbl_vessel = this.record.mbl_vessel.toUpperCase();
+        this.record.mbl_vessel = this.record.mbl_vessel.toUpperCase().trim();
         break;
       }
-      //   case 'mbl_voyage': {
-      //     this.record.mbl_voyage = this.record.mbl_voyage.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_to_port1': {
-      //     this.record.mbl_to_port1 = this.record.mbl_to_port1.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_by_carrier1': {
-      //     this.record.mbl_by_carrier1 = this.record.mbl_by_carrier1.toUpperCase();
-      //     break;
-      //   }
 
-      //   case 'mbl_to_port2': {
-      //     this.record.mbl_to_port2 = this.record.mbl_to_port2.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_by_carrier2': {
-      //     this.record.mbl_by_carrier2 = this.record.mbl_by_carrier2.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_to_port3': {
-      //     this.record.mbl_to_port3 = this.record.mbl_to_port3.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_by_carrier3': {
-      //     this.record.mbl_by_carrier3 = this.record.mbl_by_carrier3.toUpperCase();
-      //     break;
-      //   }
+      case 'mbl_cargo_locname': {
+        this.record.mbl_cargo_locname = this.record.mbl_cargo_locname.toUpperCase().trim();
+        break;
+      }
+
+      case 'mbl_cargo_locaddr1': {
+        this.record.mbl_cargo_locaddr1 = this.record.mbl_cargo_locaddr1.toUpperCase().trim();
+        break;
+      }
+      case 'mbl_cargo_locaddr2': {
+        this.record.mbl_cargo_locaddr2 = this.record.mbl_cargo_locaddr2.toUpperCase().trim();
+        break;
+      }
+      case 'mbl_cargo_locaddr3': {
+        this.record.mbl_cargo_locaddr3 = this.record.mbl_cargo_locaddr3.toUpperCase().trim();
+        break;
+      }
+      case 'mbl_cargo_locaddr4': {
+        this.record.mbl_cargo_locaddr4 = this.record.mbl_cargo_locaddr4.toUpperCase().trim();
+        break;
+      }
+
+
+
       case 'mbl_mawb_weight': {
         this.record.mbl_mawb_weight = this.gs.roundNumber(this.record.mbl_mawb_weight, 3);
         break;
