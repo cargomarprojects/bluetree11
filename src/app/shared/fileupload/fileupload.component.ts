@@ -148,11 +148,8 @@ export class FileUploadComponent implements OnInit {
     this.LoadCombo();
     this.List();
 
-     $(function() {
-
-      
-      let modalContent: any = $('.modal-content');
-      modalContent.draggable(); 
+    $(function() {
+      $('.modal-content').draggable();
     });
  
   }
