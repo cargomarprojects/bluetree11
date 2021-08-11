@@ -82,16 +82,16 @@
                                 [(ngModel)]="allchecked"><span>SELECT</span>
                         </div>
                     </th>
-                    <th>CUSTOMER-CODE</th>
-                    <th>CUSTOMER-NAME</th>
-                    <th>INV.NO</th>
-                    <th>INV.DATE</th>
-                    <th>REFNO</th>
-                    <th>CUST REFNO</th>
+                    <th (click)="sort('inv_cust_code')">CUSTOMER-CODE&nbsp;<i [ngClass]="getIcon('inv_cust_code')"></i> </th>
+                    <th (click)="sort('inv_cust_name')">CUSTOMER-NAME&nbsp;<i [ngClass]="getIcon('inv_cust_name')"></i></th>
+                    <th (click)="sort('inv_no')">INV.NO&nbsp;<i [ngClass]="getIcon('inv_no')"></i></th>
+                    <th (click)="sort('inv_date')">INV.DATE&nbsp;<i [ngClass]="getIcon('inv_date')"></i></th>
+                    <th (click)="sort('inv_mrefno')">REFNO&nbsp;<i [ngClass]="getIcon('inv_mrefno')"></i></th>
+                    <th (click)="sort('inv_refno')">CUST REFNO&nbsp;<i [ngClass]="getIcon('inv_refno')"></i></th>
                 </tr>
             </thead>
-            <tbody class="page-body-tbody" *ngFor="let rec of MainList">
-                <tr>
+            <tbody class="page-body-tbody">
+                <tr *ngFor="let rec of MainList">
                     <td>
                         <div class="form-check"> <input type="checkbox" class="form-check-input"
                                 [(ngModel)]="rec.inv_flag_b">
