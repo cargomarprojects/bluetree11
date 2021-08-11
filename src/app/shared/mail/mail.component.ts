@@ -88,8 +88,7 @@ export class MailComponent implements OnInit {
       this.msgFontWeight = "normal";
 
       $(function() {
-        let modalContent: any = $('.modal-content');
-        modalContent.draggable(); 
+        $('.modal-dialog').draggable();
       });
   }
 
