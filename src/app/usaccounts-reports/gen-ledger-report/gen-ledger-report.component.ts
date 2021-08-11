@@ -65,6 +65,8 @@ export class GenLedgerReportComponent implements OnInit {
   loading: boolean = false;
   errorMessage: string = '';
   SearchData: any = {};
+  sortCol = 'jv_date';
+  sortOrder = true;
   Reportstate1: Observable<ReportState>;
   MainList: Tbl_acc_ledger[];
   CompList: any[];
@@ -116,7 +118,8 @@ export class GenLedgerReportComponent implements OnInit {
         this.filename2 = rec.filename2;
         this.filetype2 = rec.filetype2;
         this.filedisplayname2 = rec.filedisplayname2;
-
+        this.sortCol = rec.sortcol;
+        this.sortOrder = rec.sortorder;
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
         this.page_current = rec.page_current;
@@ -162,6 +165,8 @@ export class GenLedgerReportComponent implements OnInit {
         this.filename2 = '';
         this.filetype2 = '';
         this.filedisplayname2 = '';
+        this.sortCol = 'jv_date';
+        this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
       }
@@ -276,6 +281,8 @@ export class GenLedgerReportComponent implements OnInit {
             is_ledger: this.SearchData.ISLEDGER,
             acc_parent_code: this.SearchData.ACC_PARENT_CODE,
             fy_start_month: this.SearchData.FY_START_MONTH,
+            sortcol: 'jv_date',
+            sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -312,6 +319,21 @@ export class GenLedgerReportComponent implements OnInit {
     this.store.dispatch(new myActions.Delete({ id: this.urlid }));
     this.location.back();
   }
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
+  }
+
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
+    }
+    else
+      return null;
+  }
+
 
   initLov(caption: string = '') {
 
