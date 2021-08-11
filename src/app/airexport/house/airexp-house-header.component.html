@@ -23,7 +23,8 @@
           <div class="form-group row">
             <label class="col-4 col-form-label col-form-label-sm">Ref#/Hbl#</label>
             <div class="col-8">
-              <input class="form-control form-control-sm" type="text" [(ngModel)]="searchQuery.searchString" />
+
+              <InputBox [(inputModel)]="searchQuery.searchString" [maxlength]="100" [uppercase]="true"></InputBox>              
             </div>
           </div>
         </div>

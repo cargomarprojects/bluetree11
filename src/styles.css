@@ -14,8 +14,6 @@
     --custom-fg-color: #c9c2c2; 
     --custom-border-color:rgba(0,0,0,.125) ;   
     --custom-icon-color:rgba(18, 134, 201, 0.918)    ;    
-
-
     /*     
     --custom-bg-color:rgba(255, 250, 250, 1);
     --custom-even-color :rgba(0,0,0,.125)    ;
@@ -25,12 +23,9 @@
   
 }
 
-
-.fa {
+.iconcolor{
     color : var(--custom-icon-color);
 }
-
-
 
 html {
     font-family: 'roboto' ;

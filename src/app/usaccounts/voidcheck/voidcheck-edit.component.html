@@ -21,8 +21,10 @@
             <div class="form-group row">
                 <label class="col-3 col-form-label col-form-label-sm">Ref#</label>
                 <div class="col-9">
+                    
                     <input class="form-control form-control-sm" type="text" (blur)="onBlur('void_vrno')"
                         [(ngModel)]="record.void_vrno" maxlength="60" disabled />
+                        
                 </div>
             </div>
 
@@ -51,16 +53,20 @@
             <div class="form-group row">
                 <label class="col-3 col-form-label col-form-label-sm">Check No</label>
                 <div class="col-9">
-                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('void_chqno')"
-                        [(ngModel)]="record.void_chqno" maxlength="50" />
+
+
+                    <InputBox [(inputModel)]="record.void_chqno" [maxlength]="50" [uppercase]="true"></InputBox>
+
+
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-3 col-form-label col-form-label-sm">Memo</label>
                 <div class="col-9">
-                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('void_memo')"
-                        [(ngModel)]="record.void_memo" maxlength="100" />
+
+                        <InputBox [(inputModel)]="record.void_memo" [maxlength]="100" [uppercase]="true"></InputBox>                        
+
                 </div>
             </div>
 

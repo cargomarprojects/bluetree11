@@ -232,10 +232,10 @@ export class UserEditComponent implements OnInit {
 
     onBlur(field: string) {
         if ( field == 'usr_code') {
-            this.record.usr_code = this.record.usr_code.toString().toUpperCase();
+            this.record.usr_code = this.record.usr_code.toString().toUpperCase().trim();
         }
         if ( field == 'usr_name') {
-            this.record.usr_name = this.record.usr_name.toString().toUpperCase();
+            this.record.usr_name = this.record.usr_name.toString().toUpperCase().trim();
         }
     }
 
