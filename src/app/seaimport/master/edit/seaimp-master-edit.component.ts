@@ -691,11 +691,11 @@ export class SeaImpMasterEditComponent implements OnInit {
   onBlur(field: string, rec: Tbl_cargo_imp_container) {
     switch (field) {
       case 'mbl_refno': {
-        this.record.mbl_refno = this.record.mbl_refno.toUpperCase();
+        this.record.mbl_refno = this.record.mbl_refno.toUpperCase().trim();
         break;
       }
       case 'mbl_no': {
-        this.record.mbl_no = this.record.mbl_no.toUpperCase();
+        this.record.mbl_no = this.record.mbl_no.toUpperCase().trim();
         break;
       }
 
@@ -708,69 +708,69 @@ export class SeaImpMasterEditComponent implements OnInit {
       //     break;
       //   }
       case 'mbl_place_delivery': {
-        this.record.mbl_place_delivery = this.record.mbl_place_delivery.toUpperCase();
+        this.record.mbl_place_delivery = this.record.mbl_place_delivery.toUpperCase().trim();
         break;
       }
       case 'mbl_vessel': {
-        this.record.mbl_vessel = this.record.mbl_vessel.toUpperCase();
+        this.record.mbl_vessel = this.record.mbl_vessel.toUpperCase().trim();
         break;
       }
       case 'mbl_voyage': {
-        this.record.mbl_voyage = this.record.mbl_voyage.toUpperCase();
+        this.record.mbl_voyage = this.record.mbl_voyage.toUpperCase().trim();
         break;
       }
 
       case 'mbl_cargo_locname': {
-        this.record.mbl_cargo_locname = this.record.mbl_cargo_locname.toUpperCase();
+        this.record.mbl_cargo_locname = this.record.mbl_cargo_locname.toUpperCase().trim();
         break;
       }
       case 'mbl_cargo_locaddr1': {
-        this.record.mbl_cargo_locaddr1 = this.record.mbl_cargo_locaddr1.toUpperCase();
+        this.record.mbl_cargo_locaddr1 = this.record.mbl_cargo_locaddr1.toUpperCase().trim();
         break;
       }
       case 'mbl_cargo_locaddr2': {
-        this.record.mbl_cargo_locaddr2 = this.record.mbl_cargo_locaddr2.toUpperCase();
+        this.record.mbl_cargo_locaddr2 = this.record.mbl_cargo_locaddr2.toUpperCase().trim();
         break;
       }
       case 'mbl_cargo_locaddr3': {
-        this.record.mbl_cargo_locaddr3 = this.record.mbl_cargo_locaddr3.toUpperCase();
+        this.record.mbl_cargo_locaddr3 = this.record.mbl_cargo_locaddr3.toUpperCase().trim();
         break;
       }
       case 'mbl_cargo_locaddr4': {
-        this.record.mbl_cargo_locaddr4 = this.record.mbl_cargo_locaddr4.toUpperCase();
+        this.record.mbl_cargo_locaddr4 = this.record.mbl_cargo_locaddr4.toUpperCase().trim();
         break;
       }
       case 'mbl_devan_locname': {
-        this.record.mbl_devan_locname = this.record.mbl_devan_locname.toUpperCase();
+        this.record.mbl_devan_locname = this.record.mbl_devan_locname.toUpperCase().trim();
         break;
       }
       case 'mbl_devan_locaddr1': {
-        this.record.mbl_devan_locaddr1 = this.record.mbl_devan_locaddr1.toUpperCase();
+        this.record.mbl_devan_locaddr1 = this.record.mbl_devan_locaddr1.toUpperCase().trim();
         break;
       }
       case 'mbl_devan_locaddr2': {
-        this.record.mbl_devan_locaddr2 = this.record.mbl_devan_locaddr2.toUpperCase();
+        this.record.mbl_devan_locaddr2 = this.record.mbl_devan_locaddr2.toUpperCase().trim();
         break;
       }
       case 'mbl_devan_locaddr3': {
-        this.record.mbl_devan_locaddr3 = this.record.mbl_devan_locaddr3.toUpperCase();
+        this.record.mbl_devan_locaddr3 = this.record.mbl_devan_locaddr3.toUpperCase().trim();
         break;
       }
       case 'mbl_devan_locaddr4': {
-        this.record.mbl_devan_locaddr4 = this.record.mbl_devan_locaddr4.toUpperCase();
+        this.record.mbl_devan_locaddr4 = this.record.mbl_devan_locaddr4.toUpperCase().trim();
         break;
       }
 
       case 'cntr_no': {
-        rec.cntr_no = rec.cntr_no.toUpperCase();
+        rec.cntr_no = rec.cntr_no.toUpperCase().trim();
         break;
       }
       case 'cntr_type': {
-        rec.cntr_type = rec.cntr_type.toUpperCase();
+        rec.cntr_type = rec.cntr_type.toUpperCase().trim();
         break;
       }
       case 'cntr_sealno': {
-        rec.cntr_sealno = rec.cntr_sealno.toUpperCase();
+        rec.cntr_sealno = rec.cntr_sealno.toUpperCase().trim();
         break;
       }
       case 'cntr_pieces': {
@@ -778,7 +778,7 @@ export class SeaImpMasterEditComponent implements OnInit {
         break;
       }
       case 'cntr_packages_uom': {
-        rec.cntr_packages_uom = rec.cntr_packages_uom.toUpperCase();
+        rec.cntr_packages_uom = rec.cntr_packages_uom.toUpperCase().trim();
         break;
       }
       case 'cntr_weight': {
