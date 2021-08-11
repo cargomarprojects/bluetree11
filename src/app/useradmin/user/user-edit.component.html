@@ -21,8 +21,7 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Code</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_code')"
-                        [(ngModel)]="record.usr_code" maxlength="15" [disabled]="mode!='ADD'" />
+                    <InputBox [(inputModel)]="record.usr_code" [maxlength]="15" [uppercase]="true" [disabled]="mode!='ADD'" ></InputBox>
                 </div>
             </div>
 
@@ -30,8 +29,7 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Name</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_name')"
-                        [(ngModel)]="record.usr_name" maxlength="60" />
+                    <InputBox [(inputModel)]="record.usr_name" [maxlength]="60" [uppercase]="true" ></InputBox>                        
                 </div>
             </div>
 
@@ -46,8 +44,7 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Email</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_email')"
-                        [(ngModel)]="record.usr_email" maxlength="100" />
+                    <InputBox [(inputModel)]="record.usr_email" [maxlength]="100" [lowercase]="true" ></InputBox>                        
                 </div>
             </div>
 
@@ -63,16 +60,14 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Display Name</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_email_display_name')"
-                        [(ngModel)]="record.usr_email_display_name" maxlength="100" />
+                    <InputBox [(inputModel)]="record.usr_email_display_name" [maxlength]="100" [uppercase]="true" ></InputBox>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">CC-Ids</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_email_cc')"
-                        [(ngModel)]="record.usr_email_cc" maxlength="500" />
+                    <InputBox [(inputModel)]="record.usr_email_cc" [maxlength]="500" [lowercase]="true" ></InputBox>                                                
                 </div>
             </div>
 
@@ -89,16 +84,15 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Tel</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_tel')"
-                        [(ngModel)]="record.usr_tel" maxlength="60" />
+                        <InputBox [(inputModel)]="record.usr_tel" [maxlength]="60" [uppercase]="true" ></InputBox>                        
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Mobile</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('usr_mobile')"
-                        [(ngModel)]="record.usr_mobile" maxlength="60" />
+
+                        <InputBox [(inputModel)]="record.usr_mobile" [maxlength]="60" [uppercase]="true" ></InputBox>                        
                 </div>
             </div>
 
