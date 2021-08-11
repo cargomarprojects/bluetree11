@@ -708,67 +708,67 @@ export class OthGeneralEditComponent implements OnInit {
   onBlur(field: string, rec: Tbl_cargo_container = null) {
     switch (field) {
       case 'mbl_refno': {
-        this.record.mbl_refno = this.record.mbl_refno.toUpperCase();
+        this.record.mbl_refno = this.record.mbl_refno.toUpperCase().trim();
         break;
       }
       case 'mbl_no': {
-        this.record.mbl_no = this.record.mbl_no.toUpperCase();
+        this.record.mbl_no = this.record.mbl_no.toUpperCase().trim();
         break;
       }
 
       case 'hbl_houseno': {
-        this.record.hbl_houseno = this.record.hbl_houseno.toUpperCase();
+        this.record.hbl_houseno = this.record.hbl_houseno.toUpperCase().trim();
         break;
       }
       case 'hbl_shipper_name': {
-        this.record.hbl_shipper_name = this.record.hbl_shipper_name.toUpperCase();
+        this.record.hbl_shipper_name = this.record.hbl_shipper_name.toUpperCase().trim();
         break;
       }
 
       case 'hbl_shipper_add1': {
-        this.record.hbl_shipper_add1 = this.record.hbl_shipper_add1.toUpperCase();
+        this.record.hbl_shipper_add1 = this.record.hbl_shipper_add1.toUpperCase().trim();
         break;
       }
       case 'hbl_shipper_add2': {
-        this.record.hbl_shipper_add2 = this.record.hbl_shipper_add2.toUpperCase();
+        this.record.hbl_shipper_add2 = this.record.hbl_shipper_add2.toUpperCase().trim();
         break;
       }
       case 'hbl_shipper_add3': {
-        this.record.hbl_shipper_add3 = this.record.hbl_shipper_add3.toUpperCase();
+        this.record.hbl_shipper_add3 = this.record.hbl_shipper_add3.toUpperCase().trim();
         break;
       }
       case 'hbl_shipper_add4': {
-        this.record.hbl_shipper_add4 = this.record.hbl_shipper_add4.toUpperCase();
+        this.record.hbl_shipper_add4 = this.record.hbl_shipper_add4.toUpperCase().trim();
         break;
       }
 
       case 'hbl_consignee_name': {
-        this.record.hbl_consignee_name = this.record.hbl_consignee_name.toUpperCase();
+        this.record.hbl_consignee_name = this.record.hbl_consignee_name.toUpperCase().trim();
         break;
       }
 
       case 'hbl_consignee_add1': {
-        this.record.hbl_consignee_add1 = this.record.hbl_consignee_add1.toUpperCase();
+        this.record.hbl_consignee_add1 = this.record.hbl_consignee_add1.toUpperCase().trim();
         break;
       }
       case 'hbl_consignee_add2': {
-        this.record.hbl_consignee_add2 = this.record.hbl_consignee_add2.toUpperCase();
+        this.record.hbl_consignee_add2 = this.record.hbl_consignee_add2.toUpperCase().trim();
         break;
       }
       case 'hbl_consignee_add3': {
-        this.record.hbl_consignee_add3 = this.record.hbl_consignee_add3.toUpperCase();
+        this.record.hbl_consignee_add3 = this.record.hbl_consignee_add3.toUpperCase().trim();
         break;
       }
       case 'hbl_consignee_add4': {
-        this.record.hbl_consignee_add4 = this.record.hbl_consignee_add4.toUpperCase();
+        this.record.hbl_consignee_add4 = this.record.hbl_consignee_add4.toUpperCase().trim();
         break;
       }
       case 'hbl_commodity': {
-        this.record.hbl_commodity = this.record.hbl_commodity.toUpperCase();
+        this.record.hbl_commodity = this.record.hbl_commodity.toUpperCase().trim();
         break;
       }
       case 'hbl_isf_no': {
-        this.record.hbl_isf_no = this.record.hbl_isf_no.toUpperCase();
+        this.record.hbl_isf_no = this.record.hbl_isf_no.toUpperCase().trim();
         break;
       }
 
@@ -803,37 +803,37 @@ export class OthGeneralEditComponent implements OnInit {
       }
 
       case 'hbl_it_no': {
-        this.record.hbl_it_no = this.record.hbl_it_no.toUpperCase();
+        this.record.hbl_it_no = this.record.hbl_it_no.toUpperCase().trim();
         break;
       }
       case 'hbl_it_port': {
-        this.record.hbl_it_port = this.record.hbl_it_port.toUpperCase();
+        this.record.hbl_it_port = this.record.hbl_it_port.toUpperCase().trim();
         break;
       }
 
       case 'mbl_place_delivery': {
-        this.record.mbl_place_delivery = this.record.mbl_place_delivery.toUpperCase();
+        this.record.mbl_place_delivery = this.record.mbl_place_delivery.toUpperCase().trim();
         break;
       }
       case 'mbl_vessel': {
-        this.record.mbl_vessel = this.record.mbl_vessel.toUpperCase();
+        this.record.mbl_vessel = this.record.mbl_vessel.toUpperCase().trim();
         break;
       }
       case 'mbl_voyage': {
-        this.record.mbl_voyage = this.record.mbl_voyage.toUpperCase();
+        this.record.mbl_voyage = this.record.mbl_voyage.toUpperCase().trim();
         break;
       }
 
       case 'cntr_no': {
-        rec.cntr_no = rec.cntr_no.toUpperCase();
+        rec.cntr_no = rec.cntr_no.toUpperCase().trim();
         break;
       }
       case 'cntr_type': {
-        rec.cntr_type = rec.cntr_type.toUpperCase();
+        rec.cntr_type = rec.cntr_type.toUpperCase().trim();
         break;
       }
       case 'cntr_sealno': {
-        rec.cntr_sealno = rec.cntr_sealno.toUpperCase();
+        rec.cntr_sealno = rec.cntr_sealno.toUpperCase().trim();
         break;
       }
       case 'cntr_pieces': {
@@ -841,7 +841,7 @@ export class OthGeneralEditComponent implements OnInit {
         break;
       }
       case 'cntr_packages_uom': {
-        rec.cntr_packages_uom = rec.cntr_packages_uom.toUpperCase();
+        rec.cntr_packages_uom = rec.cntr_packages_uom.toUpperCase().trim();
         break;
       }
       case 'cntr_weight': {
