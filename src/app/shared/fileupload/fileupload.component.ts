@@ -149,7 +149,7 @@ export class FileUploadComponent implements OnInit {
     this.List();
 
     $(function() {
-      $('.modal-content').draggable();
+      $('.modal-dialog').draggable();
     });
  
   }
