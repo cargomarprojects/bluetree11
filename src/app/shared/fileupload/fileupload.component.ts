@@ -149,12 +149,14 @@ export class FileUploadComponent implements OnInit {
     this.List();
 
      $(function() {
-     
+
+      
       let modalContent: any = $('.modal-content');
       modalContent.draggable(); 
     });
  
   }
+
 
   SetDefault() {
     if (this.Files_Ref_No.trim() != "" && this.Customer_Name.trim() != "")
