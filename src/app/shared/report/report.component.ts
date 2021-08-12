@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 import { HttpClient } from '@angular/common/http';
 import { GlobalService } from '../../core/services/global.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { InputBoxComponent } from '../../shared/input/inputbox.component';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-report',
@@ -17,6 +19,7 @@ export class ReportComponent implements OnInit {
   canDownload: boolean = false;
   canExcel: boolean = false;
   canEmail: boolean = false;
+  downloadfilename: string = "";
 
   @ViewChild('pdfViewerAutoLoad') pdfViewerAutoLoad;
 
@@ -82,8 +85,8 @@ export class ReportComponent implements OnInit {
     private modalservice: NgbModal,
     private http2: HttpClient,
     private gs: GlobalService) {
-      modalconfig.backdrop = 'static'; //true/false/static
-      modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
+    modalconfig.backdrop = 'static'; //true/false/static
+    modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
   }
 
   ngOnInit() {
@@ -133,7 +136,7 @@ export class ReportComponent implements OnInit {
 
 
   AutoLoad() {
-
+    this.downloadfilename = this.GetFileWithoutExtension(this._filedisplayname);
     this.gs.getFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname).subscribe(response => {
 
       this.pdfViewerAutoLoad.pdfSrc = response;
@@ -148,7 +151,11 @@ export class ReportComponent implements OnInit {
 
   report(action: string, emailmodal: any = null) {
 
+
     if (action == "email") {
+      if (!this.gs.isBlank(this.downloadfilename)) {
+        this._filedisplayname = this.gs.ProperFileName(this.downloadfilename) + ".pdf";
+      }
       this.Mail_Pkid = this.gs.getGuid();
       this.AttachList = new Array<any>();
       this.AttachList.push({ filename: this._filename, filetype: this._filetype, filedisplayname: this._filedisplayname });
@@ -157,11 +164,17 @@ export class ReportComponent implements OnInit {
     else if (action == "excel") {
       if (this._filedisplayname2 == null || this._filedisplayname2 == undefined || this._filedisplayname2 == "")
         return;
+      if (!this.gs.isBlank(this.downloadfilename)) {
+        this._filedisplayname2 = this.gs.ProperFileName(this.downloadfilename) + ".xls";
+      }
       this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename2, this._filetype2, this._filedisplayname2);
     }
     else if (action == "download") {
       if (this._filedisplayname == null || this._filedisplayname == undefined || this._filedisplayname == "")
         return;
+        if (!this.gs.isBlank(this.downloadfilename)) {
+          this._filedisplayname = this.gs.ProperFileName(this.downloadfilename) + ".pdf";
+        }
       this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname);
     }
   }
@@ -171,5 +184,16 @@ export class ReportComponent implements OnInit {
     this.AutoLoad();
   }
 
+  GetFileExtension(_fdispname: string) {
+    var temparr = _fdispname.split('.');
+    return temparr[temparr.length - 1]
+  }
 
+  GetFileWithoutExtension(_fdispname: string) {
+    let extn = this.GetFileExtension(_fdispname);
+    if (_fdispname.length > extn.length + 1)
+      return _fdispname.substring(0, (_fdispname.length - (extn.length + 1)));
+    else
+      return _fdispname;
+  }
 }

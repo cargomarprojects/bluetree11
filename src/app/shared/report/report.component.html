@@ -6,6 +6,8 @@
       <button *ngIf="canDownload" class="btn btn-primary btn-sm mr-1" (click)="report('download')">Download</button>
       <button *ngIf="canExcel" class="btn btn-primary btn-sm mr-1" (click)="report('excel')">Excel</button>
       <button *ngIf="canEmail" class="btn btn-primary btn-sm mr-1" (click)="report('email',emailmodal)">Email</button>
+      <label class="mr-1">FileName</label>
+      <InputBox [(inputModel)]="downloadfilename" [maxlength]="50" [uppercase]="true"></InputBox>
     </div>
   </div>
 
