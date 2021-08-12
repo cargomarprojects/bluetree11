@@ -37,6 +37,15 @@ export class AirImpMasterService {
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
+
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
+
+
     public getSortCol() {
         return this.record.sortcol;
     }
@@ -66,6 +75,7 @@ export class AirImpMasterService {
     }
     public ClearInit() {
         this.record = <AirImpMasterModel>{
+            selectedId : '',
             sortcol: 'mbl_refno',
             sortorder: true,
             errormessage: '',
@@ -88,6 +98,7 @@ export class AirImpMasterService {
         this.param_type = params.param_type;
 
         this.record = <AirImpMasterModel>{
+            selectedId : '',
             sortcol: 'mbl_refno',
             sortorder: true,
             errormessage: '',
@@ -142,6 +153,7 @@ export class AirImpMasterService {
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
+            selectedId : '';
             this.mdata$.next(this.record);
         }, error => {
             this.record = <AirImpMasterModel>{

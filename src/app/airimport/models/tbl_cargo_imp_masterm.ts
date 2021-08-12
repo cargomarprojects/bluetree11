@@ -101,6 +101,7 @@ export interface SearchQuery {
 }
 
 export interface AirImpMasterModel {
+    selectedId : string;
     sortcol : string ;
     sortorder : boolean;
     errormessage: string;

@@ -66,6 +66,13 @@ tr:nth-child(even) {
     background-color: var(--custom-even-color) !important; 
 }
 
+.table-hover > .mybody >  tr:hover {
+    color : var(--custom-selected-row-color) !important;   
+}
+
+.mybody{
+    cursor: pointer;
+}
 
 .navbar {
     margin-top: 1px;
@@ -91,6 +98,7 @@ tr:nth-child(even) {
 table, th, td {
     border-color: var(--custom-border-color) !important;
 }
+
 
 .page-body-tbody {
   font-size: 11px; 
