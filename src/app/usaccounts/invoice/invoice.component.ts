@@ -87,7 +87,7 @@ export class InvoiceComponent implements OnInit {
     this.canAdd = this.gs.canAdd(this.menuid);
     this.canEdit = this.gs.canEdit(this.menuid);
     this.canSave = this.canAdd || this.canEdit;
-    this.canDelete= this.gs.canDelete(this.menuid);
+    this.canDelete = this.gs.canDelete(this.menuid);
 
   }
 
@@ -298,6 +298,50 @@ export class InvoiceComponent implements OnInit {
     }
   }
 
+  getRouteDet(_format: string, _rec: Tbl_cargo_invoicem, _type: string) {
 
+    let MBLID: string = (_rec.inv_mbl_id != null) ? _rec.inv_mbl_id.toString() : "";
+    let HBLID: string = (_rec.inv_hbl_id != null) ? _rec.inv_hbl_id.toString() : "";
+    let REFNO: string = _rec.inv_mbl_refno != null ? _rec.inv_mbl_refno.toString() : "";
+    let sMode: string = "";
+    let _refno: string = _rec.inv_type != null ? _rec.inv_type.toString() : "";
+    sMode = this.getMode(_refno);
+
+    if (_type == 'MASTER')
+      return this.gs.Link2Page('REFNO', sMode, REFNO, MBLID, '', '', _format, '', '');
+    else if (_type == 'HOUSE')
+      return this.gs.Link2Page('HOUSE', sMode, REFNO, MBLID, HBLID, '', _format, '', '');
+    else
+      return null;
+  }
+
+  getMode(refno: string) {
+
+    let sMode: string = "";
+    if (refno == "OI")
+      sMode = "SEA IMPORT";
+    else if (refno == "OE")
+      sMode = "SEA EXPORT";
+    else if (refno == "AI")
+      sMode = "AIR IMPORT";
+    else if (refno == "AE")
+      sMode = "AIR EXPORT";
+    else if (refno == "OT")
+      sMode = "OTHERS";
+    else if (refno == "EX")
+      sMode = "EXTRA";
+    else if (refno == "CM")
+      sMode = "CM";
+    else if (refno == "PR")
+      sMode = "PR";
+    else if (refno == "FA")
+      sMode = "FA";
+    else if (refno == "GE")
+      sMode = "GE";
+    else if (refno == "PS")
+      sMode = "PS";
+
+    return sMode;
+  }
 
 }

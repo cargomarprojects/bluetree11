@@ -95,7 +95,7 @@ export class AgingReportComponent implements OnInit {
         this.sub = this.activatedroute.queryParams.subscribe(params => {
 
             this.gs.checkAppVersion();
-            
+
             this.urlid = params.id;
             this.menuid = params.menuid;
             this.title = this.gs.getTitle(this.menuid);
@@ -377,19 +377,19 @@ export class AgingReportComponent implements OnInit {
 
     private sort(sortcol: string) {
         this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
-      }
-    
-      public getIcon(col: string) {
+    }
+
+    public getIcon(col: string) {
         if (col == this.sortCol) {
-          if (this.sortOrder)
-            return 'fa fa-arrow-down';
-          else
-            return 'fa fa-arrow-up';
+            if (this.sortOrder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
         else
-          return null;
-      }
-      
+            return null;
+    }
+
     initLov(caption: string = '') {
 
 
@@ -449,5 +449,58 @@ export class AgingReportComponent implements OnInit {
 
     onBlur(field: string = '') {
 
+    }
+
+    getRouteDet(_format: string, _rec: Tbl_OS_REPORT, _type: string) {
+
+        let MBLID: string = (_rec.inv_mbl_id != null) ? _rec.inv_mbl_id.toString() : "";
+        let INVID: string = (_rec.inv_pkid != null) ? _rec.inv_pkid.toString() : "";
+        let HBLID: string = (_rec.inv_hbl_id != null) ? _rec.inv_hbl_id.toString() : "";
+        let REFNO: string = _rec.inv_mrefno != null ? _rec.inv_mrefno.toString() : "";
+        let branch_code: string = _rec.inv_branch_code != null ? _rec.inv_branch_code.toString() : "";
+        let sMode: string = "";
+        let _refno: string = _rec.inv_type != null ? _rec.inv_type.toString() : "";
+        sMode = this.getMode(_refno);
+
+        if (branch_code == this.gs.branch_code) {
+            if (_type == 'MASTER')
+                return this.gs.Link2Page('REFNO', sMode, REFNO, MBLID, '', '', _format, branch_code, '');
+            else if (_type == 'HOUSE')
+                return this.gs.Link2Page('HOUSE', sMode, REFNO, MBLID, HBLID, '', _format, branch_code, '');
+            else if (_type == 'INVNO')
+                return this.gs.Link2Page('INVNO', sMode, REFNO, MBLID, HBLID, INVID, _format, branch_code, '');
+            else
+                return null;
+        } else
+            return null;
+    }
+
+    getMode(refno: string) {
+
+        let sMode: string = "";
+        if (refno == "OI")
+            sMode = "SEA IMPORT";
+        else if (refno == "OE")
+            sMode = "SEA EXPORT";
+        else if (refno == "AI")
+            sMode = "AIR IMPORT";
+        else if (refno == "AE")
+            sMode = "AIR EXPORT";
+        else if (refno == "OT")
+            sMode = "OTHERS";
+        else if (refno == "EX")
+            sMode = "EXTRA";
+        else if (refno == "CM")
+            sMode = "CM";
+        else if (refno == "PR")
+            sMode = "PR";
+        else if (refno == "FA")
+            sMode = "FA";
+        else if (refno == "GE")
+            sMode = "GE";
+        else if (refno == "PS")
+            sMode = "PS";
+
+        return sMode;
     }
 }

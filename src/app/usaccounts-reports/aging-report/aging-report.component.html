@@ -177,10 +177,27 @@
                     <tr *ngFor="let rec of MainList" [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
                         [style.font-weight]="rec.ROW_TYPE=='TOTAL'?'bold':'normal'">
                         <td style="text-align:left;">{{rec.inv_branch}}</td>
-                        <td style="text-align:left;">{{rec.inv_no}}</td>
+
+                        <td *ngIf="rec.inv_branch_code==gs.branch_code" style="text-align:left;">
+                            <a class="hlink" [routerLink]="getRouteDet('L',rec,'INVNO')"
+                                [queryParams]="getRouteDet('P',rec,'INVNO')"> {{rec.inv_no}}</a>
+                        </td>
+                        <td *ngIf="rec.inv_branch_code!=gs.branch_code" style="text-align:left;">{{rec.inv_no}}</td>
+
                         <td style="text-align:left;">{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT}}</td>
-                        <td style="text-align:left;">{{rec.inv_mrefno}}</td>
-                        <td style="text-align:left;">{{rec.inv_hrefno}}</td>
+
+                        <td *ngIf="rec.inv_branch_code==gs.branch_code" style="text-align:left;">
+                            <a class="hlink" [routerLink]="getRouteDet('L',rec,'MASTER')"
+                                [queryParams]="getRouteDet('P',rec,'MASTER')">{{rec.inv_mrefno}}</a>
+                        </td>
+                        <td *ngIf="rec.inv_branch_code!=gs.branch_code" style="text-align:left;">{{rec.inv_mrefno}}</td>
+
+                        <td *ngIf="rec.inv_branch_code==gs.branch_code" style="text-align:left;">
+                            <a class="hlink" [routerLink]="getRouteDet('L',rec,'HOUSE')"
+                            [queryParams]="getRouteDet('P',rec,'HOUSE')">{{rec.inv_hrefno}}</a>
+                        </td>
+                        <td *ngIf="rec.inv_branch_code!=gs.branch_code" style="text-align:left;">{{rec.inv_hrefno}}</td>
+
                         <td style="text-align:left;">{{rec.inv_refno}}</td>
                         <td style="text-align:left;">{{rec.inv_cust_name}}</td>
                         <td style="text-align:right;">{{rec.inv_total | number : '1.2-2'}}</td>

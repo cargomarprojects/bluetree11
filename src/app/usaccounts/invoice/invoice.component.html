@@ -4,7 +4,7 @@
     <button class="btn btn-primary btn-sm mr-1" *ngIf="canAdd" (click)="NewRecord('AR')">Add A/R</button>
     <button class="btn btn-primary btn-sm mr-1" *ngIf="canAdd" (click)="NewRecord('AP')">Add A/P</button>
     <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-    
+
   </div>
 </div>
 
@@ -18,9 +18,9 @@
 
 
 
-      <div class="row">
+    <div class="row">
 
-        <div class="col-md-6 box">
+      <div class="col-md-6 box">
 
         <div class="col-md-12">
 
@@ -35,7 +35,7 @@
               <span class="ml-1">Show Deleted</span>
             </div>
             <div class="col-3">
-              <button  (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+              <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
             </div>
           </div>
 
@@ -71,9 +71,9 @@
           </div>
 
         </div>
-        </div>
+      </div>
 
-        <div class="col-md-6 box">
+      <div class="col-md-6 box">
         <div class="col-md-12">
 
           <div class="form-group row">
@@ -84,20 +84,20 @@
           </div>
 
           <div class="form-group row">
-              <label class="col-3 col-form-label col-form-label-sm"></label>
-              <div class="col-6">
-                <input type="checkbox" [(ngModel)]="MBL_PROFIT_REQ" />
-                <span  class="ml-1">Profit Requirement Met</span>
-              </div>
+            <label class="col-3 col-form-label col-form-label-sm"></label>
+            <div class="col-6">
+              <input type="checkbox" [(ngModel)]="MBL_PROFIT_REQ" />
+              <span class="ml-1">Profit Requirement Met</span>
             </div>
-  
+          </div>
+
 
 
           <div class="form-group row">
             <label class="col-3 col-form-label col-form-label-sm"></label>
             <div class="col-6">
               <input type="checkbox" [(ngModel)]="MBL_LOSS_APPROVED" />
-              <span  class="ml-1"> Loss Approved</span>
+              <span class="ml-1"> Loss Approved</span>
             </div>
           </div>
 
@@ -113,9 +113,9 @@
 
 
         </div>
-        </div>
-
       </div>
+
+    </div>
 
 
   </div>
@@ -126,7 +126,7 @@
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <th (click)="sort('inv_no')">INV.NO&nbsp;<i [ngClass]="getIcon('inv_no')"></i></th> 
+        <th (click)="sort('inv_no')">INV.NO&nbsp;<i [ngClass]="getIcon('inv_no')"></i></th>
         <th (click)="sort('inv_date')">INV.DATE&nbsp;<i [ngClass]="getIcon('inv_date')"></i></th>
         <th (click)="sort('inv_cust_name')">CUSTOMER&nbsp;<i [ngClass]="getIcon('inv_cust_name')"></i></th>
         <th (click)="sort('inv_mbl_refno')">REF#&nbsp;<i [ngClass]="getIcon('inv_mbl_refno')"></i></th>
@@ -137,7 +137,8 @@
         <th (click)="sort('inv_ar_total')" class='text-right'>AR&nbsp;<i [ngClass]="getIcon('inv_ar_total')"></i></th>
         <th (click)="sort('inv_ap_total')" class='text-right'>AP&nbsp;<i [ngClass]="getIcon('inv_ap_total')"></i></th>
         <th (click)="sort('inv_paid')" class='text-right'>PAID&nbsp;<i [ngClass]="getIcon('inv_paid')"></i></th>
-        <th (click)="sort('inv_balance')" class='text-right'>BALANCE&nbsp;<i [ngClass]="getIcon('inv_balance')"></i></th>
+        <th (click)="sort('inv_balance')" class='text-right'>BALANCE&nbsp;<i [ngClass]="getIcon('inv_balance')"></i>
+        </th>
         <th (click)="sort('inv_remarks')">REMARKS&nbsp;<i [ngClass]="getIcon('inv_remarks')"></i></th>
         <th (click)="sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="getIcon('rec_created_by')"></i></th>
         <th (click)="sort('rec_created_date')">CREATED-DATE&nbsp;<i [ngClass]="getIcon('rec_created_date')"></i></th>
@@ -145,15 +146,22 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records | sortBy: getSortCol() : getSortOrder()" [style.color]="rec.rec_deleted == 'Y' ?'Red' : 'Black'">
-        <td class='hlink2'  (click)="edit(rec)">{{rec.inv_no}}</td>
+      <tr *ngFor="let rec of records | sortBy: getSortCol() : getSortOrder()"
+        [style.color]="rec.rec_deleted == 'Y' ?'Red' : 'Black'">
+        <td class='hlink2' (click)="edit(rec)">{{rec.inv_no}}</td>
         <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td>{{rec.inv_cust_name}}</td>
-        <td>{{rec.inv_mbl_refno}}</td>
+        <td>
+          <a class="hlink" [routerLink]="getRouteDet('L',rec,'MASTER')"
+            [queryParams]="getRouteDet('P',rec,'MASTER')">{{rec.inv_mbl_refno}}</a>
+        </td>
         <td>{{rec.inv_arap}}</td>
         <td>{{rec.inv_arrnotice}}</td>
         <td>{{rec.rec_deleted}}</td>
-        <td>{{rec.inv_hbl_no}}</td>
+        <td>
+          <a class="hlink" [routerLink]="getRouteDet('L',rec,'HOUSE')"
+            [queryParams]="getRouteDet('P',rec,'HOUSE')">{{rec.inv_hbl_no}}</a>
+        </td>
         <td class='text-right'>{{rec.inv_ar_total | number : '1.2-2'}}</td>
         <td class='text-right'>{{rec.inv_ap_total | number : '1.2-2'}}</td>
         <td class='text-right'>{{rec.inv_paid | number : '1.2-2'}}</td>
@@ -163,9 +171,9 @@
         <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td *ngIf="canDelete" class='text-center' class="p-0">
           <a class="btn btn-sm" (click)="removeRow(rec)">
-              <i class="fa fa-trash-o"></i>
+            <i class="fa fa-trash-o"></i>
           </a>
-      </td>        
+        </td>
       </tr>
     </tbody>
   </table>
