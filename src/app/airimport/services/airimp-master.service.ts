@@ -124,6 +124,7 @@ export class AirImpMasterService {
         this.record.errormessage = '';
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';            
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
