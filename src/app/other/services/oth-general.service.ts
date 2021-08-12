@@ -39,6 +39,14 @@ export class OthGeneralService {
         private gs: GlobalService
     ) { }
 
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
+    
+
     public getSortCol(){
         return this.record.sortcol;
     }
@@ -69,6 +77,7 @@ export class OthGeneralService {
     }
     public ClearInit() {
         this.record = <OthGeneralModel>{
+            selectedId : '',
             sortcol : 'mbl_refno',
             sortorder : true,
             errormessage: '',
@@ -92,6 +101,7 @@ export class OthGeneralService {
         this.param_type = params.menu_param;
 
         this.record = <OthGeneralModel>{
+            selectedId : '',
             sortcol : 'mbl_refno',
             sortorder : true,
             errormessage: '',

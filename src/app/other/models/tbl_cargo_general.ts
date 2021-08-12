@@ -194,6 +194,7 @@ export interface SearchQuery {
 }
 
 export interface OthGeneralModel {
+    selectedId : string;
     sortcol: string;
     sortorder: boolean;
     errormessage: string;
