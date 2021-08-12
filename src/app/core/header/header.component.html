@@ -5,7 +5,7 @@
   </a>
 
   <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="btn">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -27,7 +27,9 @@
               <div *ngIf="rech.module_name == rec.module_name && rec.menu_hiden==='N'">
                 <!-- <a class="dropdown-item border-bottom" (click)="LoadPage(rec)">{{rec.menu_name}}</a> -->
                 <!-- <a class="dropdown-item border-bottom"  routerLink="{{getMenu(rec)}}" [queryParams]="{ appid : gs.appid, id: rec.menu_pkid, menuid: rec.menu_pkid, menu_param: rec.menu_param}">{{rec.menu_name}}</a> -->
-                <a class="dropdown-item border-bottom" [routerLink]="getLink(rec)"
+                <a class="dropdown-item border-bottom" 
+                  (click)="closeNav()"
+                  [routerLink]="getLink(rec)"
                   [queryParams]="getParam(rec)">{{rec.menu_name}}</a>
               </div>
             </div>

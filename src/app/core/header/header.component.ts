@@ -7,6 +7,8 @@ import { User_Menu } from '../models/menum';
 import { LoadingScreenService } from '../services/loadingscreen.service';
 import { Observable } from 'rxjs';
 
+declare var $: any;
+
 
 @Component({
     selector: 'app-header',
@@ -29,6 +31,18 @@ export class HeaderComponent {
             this.sub = this.loadingScreenService.loadingStatus.subscribe( value =>  this.loading = value);
     }
 
+
+    ngOnInit(){
+
+        // $('a').on('click', function(){
+        //     if ($('.navbar-toggler').is(":visible"))  $('.navbar-toggler').click();
+        // });
+
+    }
+
+    closeNav(){
+        if ($('.navbar-toggler').is(":visible"))  $('.navbar-toggler').click();
+    }
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
