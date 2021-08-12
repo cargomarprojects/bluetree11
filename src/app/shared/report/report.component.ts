@@ -172,9 +172,9 @@ export class ReportComponent implements OnInit {
     else if (action == "download") {
       if (this._filedisplayname == null || this._filedisplayname == undefined || this._filedisplayname == "")
         return;
-        if (!this.gs.isBlank(this.downloadfilename)) {
-          this._filedisplayname = this.gs.ProperFileName(this.downloadfilename) + ".pdf";
-        }
+      if (!this.gs.isBlank(this.downloadfilename)) {
+        this._filedisplayname = this.gs.ProperFileName(this.downloadfilename) + ".pdf";
+      }
       this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname);
     }
   }
@@ -195,5 +195,9 @@ export class ReportComponent implements OnInit {
       return _fdispname.substring(0, (_fdispname.length - (extn.length + 1)));
     else
       return _fdispname;
+  }
+  onBlur(_feild: string) {
+    if (_feild == "downloadfilename")
+      this.downloadfilename = this.downloadfilename.toLocaleUpperCase();
   }
 }
