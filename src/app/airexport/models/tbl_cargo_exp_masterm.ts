@@ -116,7 +116,7 @@ export interface SearchQuery {
 }
 
 export interface AirExpMasterModel {
-    selectedIndex : number;
+    selectedId : string;
     sortcol : string ;
     sortorder : boolean;
     errormessage: string;
