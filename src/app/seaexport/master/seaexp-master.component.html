@@ -45,7 +45,7 @@
       <tbody class="page-body-tbody mybody">
           <tr *ngFor="let rec of records$ | async |  sortBy: mainservice.getSortCol() : mainservice.getSortOrder()"
               (mousedown)="mainservice.selectRowId(rec.mbl_pkid)" 
-              [ngClass]="{'selectedrowcolor':rec.mbl_pkid == mainservice.getRowId()}">
+              [class.selected]="rec.mbl_pkid == mainservice.getRowId()">
               <td *ngIf="!this.mainservice.canEdit">{{rec.mbl_refno}}</td>
               <td *ngIf="this.mainservice.canEdit" >
                 <a class="hlink" [routerLink]="getLink('EDIT')" [queryParams]="getParam(rec)">{{rec.mbl_refno}}</a>

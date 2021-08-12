@@ -94,6 +94,7 @@ export interface AccPaymentModel {
 
 
 export interface vm_tbl_accPayment {
+
     mode: string;
     pkid: string;
     record: Tbl_Acc_Payment;
