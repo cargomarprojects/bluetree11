@@ -37,10 +37,11 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder() let i = index" (mousedown)="mainservice.changeRowIndex(i)" 
+      [ngClass]="{'selectedrowcolor':i == mainservice.getRowIndex()}">
         <td *ngIf="!this.mainservice.canEdit">{{rec.mbl_refno}}</td>
         <td *ngIf="this.mainservice.canEdit">
-          <a class='hlink' 
+          <a  
                   [routerLink]="['/Silver.AirExport.Trans/AirExpMasterEditPage']"
                   [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.mbl_pkid,type: '',origin: 'airexp-master-page',mode: 'EDIT'}">{{rec.mbl_refno}}</a>
         </td>

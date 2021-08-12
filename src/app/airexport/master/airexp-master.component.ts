@@ -27,6 +27,7 @@ export class AirExpMasterComponent implements OnInit {
   pageQuery$ : Observable<PageQuery>;
   searchQuery$ : Observable<SearchQuery>;
 
+
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -42,6 +43,8 @@ export class AirExpMasterComponent implements OnInit {
 
   initPage() {
     
+    console.log('init page');
+
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));    
@@ -90,6 +93,7 @@ export class AirExpMasterComponent implements OnInit {
     };
     this.gs.Naviagete2('Silver.AirExport.Trans/AirExpMasterEditPage',  parameter);
   }
+
 
   Close() {
     this.location.back();
