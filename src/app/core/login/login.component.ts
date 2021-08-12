@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
 
 
-  software_version_string = '1.118';
+
 
   username: string = '';
   password: string = '';
@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
       .subscribe(response => {
         this.CompanyList = response.list;
         this.server_software_version_string = response.version;
-        if (this.software_version_string === this.server_software_version_string) {
+        if (this.gs.software_version_string === this.server_software_version_string) {
           this.showloginbutton = true;
         }
         else {

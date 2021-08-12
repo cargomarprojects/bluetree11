@@ -119,6 +119,7 @@ export class InvoiceComponent implements OnInit {
       this.DisplayProfit();
     }, error => {
       this.errorMessage = this.gs.getError(error)
+      alert(this.errorMessage);
     });
   }
 
