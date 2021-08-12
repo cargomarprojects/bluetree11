@@ -37,8 +37,9 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder() let i = index" (mousedown)="mainservice.changeRowIndex(i)" 
-      [ngClass]="{'selectedrowcolor':i == mainservice.getRowIndex()}">
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" 
+      (mousedown)="mainservice.selectRowId(rec.mbl_pkid)" 
+      [class.selected]="rec.mbl_pkid == mainservice.getRowId()">
         <td *ngIf="!this.mainservice.canEdit">{{rec.mbl_refno}}</td>
         <td *ngIf="this.mainservice.canEdit">
           <a  

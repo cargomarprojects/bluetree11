@@ -162,6 +162,7 @@ export interface SearchQuery {
 }
 
 export interface SeaImpMasterModel {
+    selectedId : string;    
     sortcol : string ;
     sortorder : boolean;
     errormessage: string;

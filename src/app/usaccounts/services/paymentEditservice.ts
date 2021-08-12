@@ -68,12 +68,21 @@ export class PaymentEditService {
     public initlialized: boolean;
     private appid = ''
 
+    selectedId : string;
+
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
+    public selectRowId( id : string){
+        this.selectedId = id;
+    }
+    public getRowId(){
+        return this.selectedId;
+    }
 
+    
     setup() {
         this.decplace = this.gs.foreign_amt_dec;
         if (!this.gs.IS_SINGLE_CURRENCY) {
@@ -97,6 +106,9 @@ export class PaymentEditService {
             this.Customer_ID   = '';
             this.Search_Mode = '';
             this.str_id ='';
+
+            this.selectedId = '';
+
         }
 
         this.Pay_RP = "";

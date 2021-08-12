@@ -39,6 +39,14 @@ export class SeaImpMasterService {
         private gs: GlobalService
     ) { }
 
+
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
+
     public getSortCol(){
         return this.record.sortcol;
     }
@@ -70,6 +78,7 @@ export class SeaImpMasterService {
      
     public ClearInit() {
         this.record = <SeaImpMasterModel>{
+            selectedId : '',
             sortcol : 'mbl_refno',
             sortorder : true,
             errormessage: '',
@@ -94,6 +103,7 @@ export class SeaImpMasterService {
         this.menuid = params.id;
         this.param_type = params.menu_param;
         this.record = <SeaImpMasterModel>{
+            selectedId : '',
             sortcol : 'mbl_refno',
             sortorder : true,       
             errormessage: '',
@@ -122,6 +132,7 @@ export class SeaImpMasterService {
         this.record.errormessage = '';
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;

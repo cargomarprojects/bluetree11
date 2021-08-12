@@ -138,8 +138,10 @@
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
-                <tr *ngFor="let rec of ms.pendingList  |  sortBy: ms.getSortCol() : ms.getSortOrder(); let i = index">
-                    
+                <tr *ngFor="let rec of ms.pendingList  |  sortBy: ms.getSortCol() : ms.getSortOrder(); let i = index"
+                (mousedown)="ms.selectRowId(rec.inv_pkid)" 
+                [class.selected]="rec.inv_pkid == ms.getRowId()"
+                >
                     
                     <!-- <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td> -->
 

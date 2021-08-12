@@ -38,6 +38,14 @@ export class AirExpMasterService {
         private gs: GlobalService
     ) { }
 
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
+    
+
     public getSortCol(){
         return this.record.sortcol;
     }
@@ -67,17 +75,10 @@ export class AirExpMasterService {
         }
     }
 
-    public changeRowIndex( idx : number){
-        this.record.selectedIndex = idx;
-    }
-
-    public getRowIndex(){
-        return this.record.selectedIndex;
-    }
 
     public ClearInit() {
         this.record = <AirExpMasterModel>{
-            selectedIndex : -1,
+            selectedId : '',
             sortcol : 'mbl_refno',
             sortorder : true,
             errormessage: '',
@@ -100,7 +101,7 @@ export class AirExpMasterService {
         this.param_type = params.menu_param;
 
         this.record = <AirExpMasterModel>{
-            selectedIndex : -1,
+            selectedId : '',
             sortcol : 'mbl_refno',
             sortorder : true,
             errormessage: '',
@@ -126,6 +127,7 @@ export class AirExpMasterService {
         this.record.errormessage = '';
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';            
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
@@ -156,7 +158,6 @@ export class AirExpMasterService {
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
-            this.record.selectedIndex =-1;
             this.mdata$.next(this.record);
         }, error => {
             this.record = <AirExpMasterModel>{

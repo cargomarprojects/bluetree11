@@ -16,6 +16,8 @@
     --custom-icon-color:rgba(18, 134, 201, 0.918)    ;    
 
     --custom-selected-row-color:red;    
+    --custom-selected-row-back-color : rgb(214, 234, 248);    
+    
 
     /*     
     --custom-bg-color:rgba(255, 250, 250, 1);
@@ -31,7 +33,8 @@
 }
 
 .selectedrowcolor{
-    color : var(--custom-selected-row-color);
+    /* color : var(--custom-selected-row-color); */
+    background-color : var(--custom-selected-row-back-color);
 }
 
 html {
@@ -66,6 +69,19 @@ tr:nth-child(even) {
     background-color: var(--custom-even-color) !important; 
 }
 
+/* .table-hover > .mybody >  tr:hover {
+    background-color : var(--custom-selected-row-back-color) !important;
+}
+ */
+
+tr.selected {
+    background-color : var(--custom-selected-row-back-color) !important;
+}
+
+
+.mybody{
+    cursor: pointer;
+}
 
 .navbar {
     margin-top: 1px;
@@ -91,6 +107,7 @@ tr:nth-child(even) {
 table, th, td {
     border-color: var(--custom-border-color) !important;
 }
+
 
 .page-body-tbody {
   font-size: 11px; 
