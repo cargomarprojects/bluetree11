@@ -16,6 +16,7 @@ import { Tbl_Acc_Payment, vm_tbl_accPayment, AccPaymentModel } from '../models/T
 import { SearchTable } from '../../shared/models/searchtable';
 import { Tbl_cargo_invoicem } from '../models/Tbl_cargo_Invoicem';
 
+declare var $: any;
 
 @Component({
     selector: 'app-pay-final',
@@ -193,6 +194,11 @@ export class PayFinalComponent implements OnInit {
         this.initPage();
         this.actionHandler();
         */
+
+        $(function() {
+            $('.modal-dialog').draggable();
+          });
+
 
     }
 
