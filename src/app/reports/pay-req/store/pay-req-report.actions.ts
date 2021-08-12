@@ -7,6 +7,7 @@ export enum ActionTypes {
   UPDATE = '[Pay-Req-Report-new] Update Report',
   DELETE = '[Pay-Req-Report-new] Delete Report',
   SORT_DATA = '[Pay-Req-Report-new] Sort Data',
+  SELECT_ROW = '[Pay-Req-Report-new] Select Row',
 }
 
 export class Add implements Action {
@@ -29,4 +30,9 @@ export class SortData implements Action {
   constructor(public payload: {id : string, sortcol : string } ) {}
 }
 
-export type Actions = Add | Update | Delete | SortData;
+export class SelectRow implements Action {
+  readonly type = ActionTypes.SELECT_ROW;
+  constructor(public payload: {id : string, selecteId : string } ) {}
+}
+
+export type Actions = Add | Update | Delete | SortData | SelectRow;

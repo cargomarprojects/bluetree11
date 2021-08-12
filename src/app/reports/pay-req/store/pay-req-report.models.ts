@@ -12,6 +12,7 @@ export interface ReportState{
     comp_type: string;
     user_id: string ;
     user_name: string ;
+    selectedId : string;
     sortcol : string ;
     sortorder : boolean;    
     

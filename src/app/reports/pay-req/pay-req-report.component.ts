@@ -25,6 +25,7 @@ export class PayReqReportComponent implements OnInit {
 
   title = 'Payment Request Report';
 
+  selectedId  = '';
   sortCol  = '';
   sortOrder = true;  
 
@@ -133,6 +134,7 @@ export class PayReqReportComponent implements OnInit {
         // this.USERRECORD.id = this.user_id;
         // this.USERRECORD.name = this.user_name;
 
+        this.selectedId = rec.selectedId;
         this.sortCol = rec.sortcol;
         this.sortOrder = rec.sortorder;
 
@@ -166,6 +168,7 @@ export class PayReqReportComponent implements OnInit {
 
         this.currentTab = 'LIST';
 
+        this.selectedId = '';
         this.sortCol = 'rec_created_date';
         this.sortOrder = true;
         
@@ -219,6 +222,8 @@ export class PayReqReportComponent implements OnInit {
       this.SearchData.user_id = this.user_id;
       this.SearchData.user_name = this.user_name;
 
+      this.selectedId  ='';
+
 
     }
 
@@ -238,9 +243,9 @@ export class PayReqReportComponent implements OnInit {
             edate: this.SearchData.TDATE,
             mode: this.SearchData.STYPE,
             comp_type: this.SearchData.COMP_TYPE,
-
             user_id: this.SearchData.user_id,
             user_name: this.SearchData.user_name,
+            selectedId : this.selectedId,
             sortcol:'rec_created_date',
             sortorder: true,
             page_rows: response.page_rows,
@@ -268,6 +273,15 @@ export class PayReqReportComponent implements OnInit {
   private sort(sortcol : string){
     this.store.dispatch(new myActions.SortData({ id : this.urlid, sortcol : sortcol }))
   }
+
+  private selectRowId(rowid : string){
+    this.store.dispatch(new myActions.SelectRow({ id : this.urlid, selecteId : rowid }))
+  }
+
+  public getRowId(){
+    return this.selectedId;
+  }
+
 
   public getIcon(col : string){
     if ( col == this.sortCol){

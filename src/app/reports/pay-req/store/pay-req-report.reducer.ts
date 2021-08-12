@@ -23,6 +23,7 @@ export const initialState: ReportState = {
     comp_type: '',
     user_id: '',
     user_name: '',
+    selectedId : '',
     sortcol: 'rec_created_date',
     sortorder: true,
     page_rows: 0,
@@ -60,6 +61,13 @@ export function PayReqReportReducer(state: ReportState[] = [initialState], actio
             
             return [...state.filter(rec => rec.urlid != action.payload.id), st ];
         }
+        case myActions.ActionTypes.SELECT_ROW: {
+            var st = Object.assign({},state.find( rec => rec.urlid  == action.payload.id));
+            if ( st == null)
+                return [...state];
+            st.selectedId = action.payload.selecteId;
+            return [...state.filter(rec => rec.urlid != action.payload.id), st ];
+        }        
         default:
             return state;
     }
