@@ -153,7 +153,6 @@ export class AirImpMasterService {
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
-            selectedId : '';
             this.mdata$.next(this.record);
         }, error => {
             this.record = <AirImpMasterModel>{

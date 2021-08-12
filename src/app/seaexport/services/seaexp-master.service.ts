@@ -38,7 +38,14 @@ export class seaexpMasterService {
         private gs: GlobalService
     ) { }
 
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
 
+    
     public getSortCol(){
         return this.record.sortcol;
     }
@@ -70,6 +77,7 @@ export class seaexpMasterService {
     
     public ClearInit() {
         this.record = <seaExpMasterModel>{
+            selectedId : '',
             sortcol : 'mbl_refno',
             sortorder : true,
             errormessage: '',
@@ -95,6 +103,7 @@ export class seaexpMasterService {
         this.param_type = params.menu_param;
 
         this.record = <seaExpMasterModel>{
+            selectedId : '',
             sortcol : 'mbl_refno',
             sortorder : true,            
             errormessage: '',
