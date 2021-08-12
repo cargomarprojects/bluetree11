@@ -430,7 +430,7 @@ export class MessengerSlipEditComponent implements OnInit {
     this.report_searchdata = this.gs.UserInfo;
     this.report_searchdata.pkid = this.pkid;
     this.report_searchdata.DEFAULT_MESSENGER_ID = this.gs.MESSENGER_PKID;
-    this.report_searchdata.MBL_ID = '';
+    this.report_searchdata.MBL_ID = this.mbl_pkid;
     this.report_menuid = this.menuid;
     this.tab = 'report';
   }
