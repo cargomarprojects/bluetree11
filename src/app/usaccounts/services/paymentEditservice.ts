@@ -297,7 +297,7 @@ export class PaymentEditService {
         this.Pay_RP = "";
         if (nDiff > 0) {
             this.Pay_RP = "RECEIPT";
-            this.LBL_STATUS = "RECEIPT " + nDiff.toString();
+            this.LBL_STATUS = "RECEIPT " +  nDiff.toString();
         }
         else if (nDiff < 0) {
             this.Pay_RP = "PAYMENT";
