@@ -25,11 +25,10 @@ export class PayReqReportComponent implements OnInit {
 
   title = 'Payment Request Report';
 
-  selectedId  = '';
-  sortCol  = '';
-  sortOrder = true;  
-
-
+  selectedId = '';
+  sortCol = '';
+  sortOrder = true;
+  
   pkid: string;
   urlid: string;
   url: string;
@@ -137,9 +136,7 @@ export class PayReqReportComponent implements OnInit {
         this.selectedId = rec.selectedId;
         this.sortCol = rec.sortcol;
         this.sortOrder = rec.sortorder;
-
         
-
         this.comp_type = rec.comp_type;
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -147,17 +144,17 @@ export class PayReqReportComponent implements OnInit {
         this.page_rowcount = rec.page_rowcount;
 
         this.SearchData = this.gs.UserInfo;
-        
+
         this.SearchData.FDATE = this.sdate;
         this.SearchData.TDATE = this.edate;
         this.SearchData.STYPE = this.mode;
         this.SearchData.ISADMIN = 'N';
-  
+
         this.SearchData.REQUEST_ID = this.user_id;
         this.SearchData.user_id = this.user_id;
         this.SearchData.user_name = this.user_name;
 
-        
+
       } else {
         this.MainList = Array<Tbl_Cargo_Payrequest>();
 
@@ -171,7 +168,6 @@ export class PayReqReportComponent implements OnInit {
         this.selectedId = '';
         this.sortCol = 'rec_created_date';
         this.sortOrder = true;
-        
         this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
         this.edate = this.gs.defaultValues.today;
         this.mode = 'PENDING';
@@ -181,7 +177,7 @@ export class PayReqReportComponent implements OnInit {
         this.user_name = this.gs.user_name;
 
         this.SearchData = this.gs.UserInfo;
-        
+
       }
     });
 
@@ -222,9 +218,8 @@ export class PayReqReportComponent implements OnInit {
       this.SearchData.user_id = this.user_id;
       this.SearchData.user_name = this.user_name;
 
-      this.selectedId  ='';
-
-
+      this.selectedId = '';
+     
     }
 
     this.loading = true;
@@ -245,8 +240,8 @@ export class PayReqReportComponent implements OnInit {
             comp_type: this.SearchData.COMP_TYPE,
             user_id: this.SearchData.user_id,
             user_name: this.SearchData.user_name,
-            selectedId : this.selectedId,
-            sortcol:'rec_created_date',
+            selectedId: this.selectedId,
+            sortcol: 'rec_created_date',
             sortorder: true,
             page_rows: response.page_rows,
             page_count: response.page_count,
@@ -270,27 +265,27 @@ export class PayReqReportComponent implements OnInit {
 
   }
 
-  private sort(sortcol : string){
-    this.store.dispatch(new myActions.SortData({ id : this.urlid, sortcol : sortcol }))
+  private sort(sortcol: string) {
+    this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
   }
 
-  private selectRowId(rowid : string){
-    this.store.dispatch(new myActions.SelectRow({ id : this.urlid, selecteId : rowid }))
+  private selectRowId(rowid: string) {
+    this.store.dispatch(new myActions.SelectRow({ id: this.urlid, selecteId: rowid }))
   }
 
-  public getRowId(){
+  public getRowId() {
     return this.selectedId;
   }
 
 
-  public getIcon(col : string){
-    if ( col == this.sortCol){
-      if ( this.sortOrder )
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
         return 'fa fa-arrow-down';
-      else 
+      else
         return 'fa fa-arrow-up';
     }
-    else 
+    else
       return null;
   }
 
@@ -399,8 +394,10 @@ export class PayReqReportComponent implements OnInit {
       .subscribe(response => {
         if (response.retvalue) {
           var REC = this.MainList.find(rec => rec.cp_pkid == this.paypkid);
-          if (REC != null)
+          if (REC != null) {
             REC.cp_pay_status = this.paystatus;
+            this.store.dispatch(new myActions.UpdatePayStatus({ id: this.urlid,pkid:this.paypkid, updatepaystatus: this.paystatus }))
+          }
           this.modal.close();
         } else
           this.errorMessage = response.error;
