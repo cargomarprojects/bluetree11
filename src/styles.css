@@ -956,7 +956,7 @@ br {
       max-width: 766 !important;
     }
     .dropdown-menu {
-        max-height:200px;
+        max-height:100px;
         overflow-y: scroll;
      }  
 }
@@ -970,10 +970,6 @@ br {
       width: auto;
       max-width: 990px !important;
     }
-    .dropdown-menu {
-        max-height:300px;
-        overflow-y: scroll;
-     }      
 }
   
 /*Large devices (desktops, less than 1200px)*/
