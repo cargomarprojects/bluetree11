@@ -992,10 +992,23 @@ export class PayFinalComponent implements OnInit {
         if (this.paymode == "OTHERS")
             sPrefix += "OT";
 
-        var yymmdd = this.sdate.replace("-", "");
-        yymmdd = yymmdd.replace("-", "");
-        yymmdd = yymmdd.substring(2, 8);
+        // var yymmdd = this.sdate.replace("-", "");
+        // yymmdd = yymmdd.replace("-", "");
+        // yymmdd = yymmdd.substring(2, 8);
 
+
+        var tempdt = this.sdate.split('-');
+        let dtyr: string = tempdt[0];
+        let dtmn: string = tempdt[1];
+        let dtdy: string = tempdt[2];
+
+        if (dtmn.trim().length == 1)
+            dtmn = "0" + dtmn;
+        if (dtdy.trim().length == 1)
+            dtdy = "0" + dtdy;
+
+        var yymmdd = dtyr + dtmn + dtdy;
+        yymmdd = yymmdd.substring(2, 8);
 
 
         if (this.gs.isBlank(this.Txt_Next_ChqNo) || this.gs.isZero(this.Txt_Next_ChqNo))
