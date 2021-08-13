@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Tbl_shipment_close } from '../../models/Tbl_shipment_close'
+import { Tbl_Cargo_Payrequest } from '../../models/Tbl_Cargo_Payrequest';
 import { ReportState } from './pay-req-report.models';
 
 export enum ActionTypes {
@@ -40,5 +40,6 @@ export class UpdatePayStatus implements Action {
   readonly type = ActionTypes.UPDATE_PAY_STATUS;
   constructor(public payload: {id : string, pkid:string, updatepaystatus : string } ) {}
 }
+
 
 export type Actions = Add | Update | Delete | SortData | SelectRow | UpdatePayStatus;

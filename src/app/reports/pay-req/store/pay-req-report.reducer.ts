@@ -6,6 +6,7 @@ import * as myActions from './pay-req-report.actions';
 import { ReportState } from './pay-req-report.models';
 
 import * as _ from 'lodash-es';
+import { ActivationStart } from '@angular/router';
 
 export interface AppState extends thisState {
     'PayReqReport': ReportState
@@ -69,12 +70,14 @@ export function PayReqReportReducer(state: ReportState[] = [initialState], actio
             return [...state.filter(rec => rec.urlid != action.payload.id), st];
         }
         case myActions.ActionTypes.UPDATE_PAY_STATUS: {
-            var st = Object.assign({}, state.find(rec => rec.urlid == action.payload.id));
+            //var st = Object.assign({}, state.find(rec => rec.urlid == action.payload.id));
+             
+            var st = {...state.find(rec => rec.urlid == action.payload.id)};
+
             if (st == null)
                 return [...state];
-
-            const itm = st.records.find(rec => rec.cp_pkid == action.payload.pkid);
-            itm.cp_pay_status = action.payload.updatepaystatus;
+            
+            st.records =  st.records.map ( rec => rec.cp_pkid == action.payload.pkid ? { ...rec, 'cp_pay_status' : action.payload.updatepaystatus} : rec );
 
             return [...state.filter(rec => rec.urlid != action.payload.id),st];
         }
