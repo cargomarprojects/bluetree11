@@ -247,4 +247,7 @@ export class seaexpMasterService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/SeaExport/Master/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    DeleteHouseRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/SeaExport/HousePage/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

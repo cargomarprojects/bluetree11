@@ -1134,6 +1134,8 @@ export class InvoiceEditComponent implements OnInit {
       this.record.inv_cust_id = _Record.id;
       this.record.inv_cust_code = _Record.code;
       this.record.inv_cust_name = _Record.name;
+      if (_Record.col8 != "")
+        this.record.inv_cust_name = _Record.col8;
       this.inv_refno_ctrl.nativeElement.focus();
       this.showAlertMsgDDP();
     }
