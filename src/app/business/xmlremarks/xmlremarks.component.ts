@@ -65,7 +65,7 @@ export class XmlRemarksComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
     this.LoadCombo();
@@ -157,12 +157,13 @@ export class XmlRemarksComponent implements OnInit {
       return bRet;
     }
 
-    if (this.gs.isBlank(this.record.remarks)) {
-      bRet = false;
-      this.errorMessage = "Remarks Cannot be empty";
-      alert(this.errorMessage);
-      return bRet;
-    }
+    if (this.source != "SEA-HOUSE-DEVAN")
+      if (this.gs.isBlank(this.record.remarks)) {
+        bRet = false;
+        this.errorMessage = "Remarks Cannot be empty";
+        alert(this.errorMessage);
+        return bRet;
+      }
     return bRet;
   }
 
@@ -170,7 +171,7 @@ export class XmlRemarksComponent implements OnInit {
     switch (action) {
       case 'HISTORY': {
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           source: this.source,
