@@ -1331,6 +1331,39 @@ export class SeaImpMasterEditComponent implements OnInit {
       return null;
   }
 
+  DeleteHouseRow(_rec: Tbl_cargo_imp_housem) {
+    this.errorMessage = [];
+    if (this.gs.isBlank(_rec.hbl_pkid) || this.gs.isBlank(_rec.hbl_mbl_id)) {
+      this.errorMessage.push("Cannot Delete, Reference Not Found");
+      alert(this.errorMessage);
+      return;
+    }
+
+    if (!confirm("DELETE " + _rec.hbl_houseno)) {
+      return;
+    }
+
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = _rec.hbl_pkid;
+    SearchData.mblid = _rec.hbl_mbl_id;
+    SearchData.remarks = _rec.hbl_houseno;
+
+    this.mainService.DeleteHouseRecord(SearchData)
+      .subscribe(response => {
+        if (response.retvalue == false) {
+          this.errorMessage.push(response.error);
+          alert(this.errorMessage);
+        }
+        else {
+          this.hrecords.splice(this.hrecords.findIndex(rec => rec.hbl_pkid == _rec.hbl_pkid), 1);
+        }
+      }, error => {
+        this.errorMessage.push(this.gs.getError(error));
+        alert(this.errorMessage);
+      });
+  }
+
+
 }
 
 

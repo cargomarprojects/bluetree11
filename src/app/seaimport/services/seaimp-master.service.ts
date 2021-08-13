@@ -248,6 +248,10 @@ export class SeaImpMasterService {
     DeleteRecord(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/Master/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
+    
+    DeleteHouseRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/House/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
     // GetPODSeaImpRpt(SearchData: any) {
     //     return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/Master/GetPODSeaImpRpt', SearchData, this.gs.headerparam2('authorized'));
     // }

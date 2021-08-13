@@ -547,6 +547,7 @@
                         <th>TERMS</th>
                         <th>CREATED-BY</th>
                         <th>DATE</th>
+                        <th *ngIf="gs.canDelete(this.gs.MENU_SI_HOUSE)" class='text-center'>DELETE</th>
                       </tr>
                     </thead>
                     <tbody class="page-body-tbody">
@@ -566,6 +567,8 @@
                         <td>{{rec.hbl_ship_term}}</td>
                         <td>{{rec.rec_created_by}}</td>
                         <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <td *ngIf="gs.canDelete(this.gs.MENU_SI_HOUSE)" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
+                          aria-hidden="true" (click)="DeleteHouseRow(rec)"></i></td>
                       </tr>
                     </tbody>
                   </table>
