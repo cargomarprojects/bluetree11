@@ -19,7 +19,7 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Date</label>
                 <div class="col-8">
-                    <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event">
+                    <app-date #_pay_sdate [inputdate]="sdate" (ValueChanged)="sdate=$event">
                     </app-date>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Name</label>
                 <div class="col-8">
-                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('txt_bank_name')"
+                    <input  #_pay_bank_name class="form-control form-control-sm" type="text" (blur)="onBlur('txt_bank_name')"
                         [(ngModel)]="Txt_Bank_Name" maxlength="100" />
                 </div>
             </div>

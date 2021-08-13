@@ -15,6 +15,7 @@ import { User_Menu } from '../../core/models/menum';
 import { Tbl_Acc_Payment, vm_tbl_accPayment, AccPaymentModel } from '../models/Tbl_Acc_Payment';
 import { SearchTable } from '../../shared/models/searchtable';
 import { Tbl_cargo_invoicem } from '../models/Tbl_cargo_Invoicem';
+import { DateComponent } from '../../shared/date/date.component';
 
 declare var $: any;
 
@@ -28,8 +29,8 @@ export class PayFinalComponent implements OnInit {
 
 
     // @ViewChild('content') contentRef: ElementRef;
-
-
+    @ViewChild('_pay_sdate') pay_sdate_field: DateComponent;
+    @ViewChild('_pay_bank_name') pay_bank_name_field: ElementRef;
 
 
     canSave = true;
@@ -143,7 +144,7 @@ export class PayFinalComponent implements OnInit {
 
     memo_enabled = true;
 
-    
+
     amt_enabled = true;
     amt_base_enabled = true;
     currency_enabled = true;
@@ -174,14 +175,14 @@ export class PayFinalComponent implements OnInit {
         private location: Location,
         public gs: GlobalService,
         public mainService: PaymentService,
-        private modalService: NgbModal        
+        private modalService: NgbModal
     ) {
         this.decplace = this.gs.foreign_amt_dec;
         this.sdate = this.gs.defaultValues.today;
     }
 
     ngOnInit() {
-        
+
         /*
         const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
@@ -195,11 +196,16 @@ export class PayFinalComponent implements OnInit {
         this.actionHandler();
         */
 
-        $(function() {
+        $(function () {
             $('.modal-dialog').draggable();
-          });
+        });
 
 
+    }
+
+    ngAfterViewInit() {
+        if (!this.gs.isBlank(this.pay_sdate_field))
+            this.pay_sdate_field.Focus();
     }
 
     setup() {
@@ -555,13 +561,13 @@ export class PayFinalComponent implements OnInit {
                     if (this.gs.BRANCH_REGION == "USA") {
                         if (this.callbackevent != null) {
                             let data = {
-                                action : 'PRINTCHECK',
+                                action: 'PRINTCHECK',
                                 printchq: PrintChq,
                                 pkid: this.pkid,
                                 bankid: this.Txt_Bank_Id,
                                 printsignature: print_signature,
                                 printcash: 'N',
-                                payrp : pay_rp
+                                payrp: pay_rp
                             }
                             this.callbackevent.emit(data);
                         }
@@ -570,13 +576,13 @@ export class PayFinalComponent implements OnInit {
 
                         if (this.callbackevent != null) {
                             let data = {
-                                action : 'PRINTCHECK',
+                                action: 'PRINTCHECK',
                                 printchq: PrintChq,
                                 pkid: this.pkid,
                                 bankid: this.Txt_Bank_Id,
                                 printsignature: print_signature,
                                 printcash: PrintCash,
-                                payrp : pay_rp
+                                payrp: pay_rp
                             }
                             this.callbackevent.emit(data);
                         }
@@ -675,7 +681,7 @@ export class PayFinalComponent implements OnInit {
 
     Close() {
         if (this.callbackevent)
-            this.callbackevent.emit({ action: 'CLOSE'});
+            this.callbackevent.emit({ action: 'CLOSE' });
     }
 
 
@@ -689,14 +695,15 @@ export class PayFinalComponent implements OnInit {
             this.Txt_Address2 = _Record.col4;
             this.Txt_Address3 = _Record.col5;
             this.Txt_Address4 = _Record.col6;
-
+            if (!this.gs.isBlank(this.pay_bank_name_field))
+                this.pay_bank_name_field.nativeElement.focus();
             this.LoadNextChqNo();
         }
     }
 
 
     OnChange(field: string) {
-        if ( field ='paymode')   {
+        if (field = 'paymode') {
             this.LoadNextChqNo();
         }
     }
@@ -707,36 +714,36 @@ export class PayFinalComponent implements OnInit {
     onBlur(field: string) {
         //FindTotal("EXRATE");
         //FindTotal("BANKUSD");
-        if ( field == 'TxT_Bank_Paid')
+        if (field == 'TxT_Bank_Paid')
             this.FindTotal('BANK');
-        if ( field == 'Txt_Bank_Charges')
+        if (field == 'Txt_Bank_Charges')
             this.FindTotal("CHARGES");
 
 
-        if ( field == 'txt_bank_name'){
+        if (field == 'txt_bank_name') {
             this.Txt_Bank_Name = this.Txt_Bank_Name.toUpperCase();
         }
-        if ( field == 'Txt_Address1'){
+        if (field == 'Txt_Address1') {
             this.Txt_Address1 = this.Txt_Address1.toUpperCase();
         }
-        if ( field == 'Txt_Address2'){
+        if (field == 'Txt_Address2') {
             this.Txt_Address2 = this.Txt_Address2.toUpperCase();
         }
-        if ( field == 'Txt_Address3'){
+        if (field == 'Txt_Address3') {
             this.Txt_Address3 = this.Txt_Address3.toUpperCase();
         }
-        if ( field == 'Txt_Address4'){
+        if (field == 'Txt_Address4') {
             this.Txt_Address4 = this.Txt_Address4.toUpperCase();
         }
 
 
-        if ( field == 'Txt_ChqNo' ){
+        if (field == 'Txt_ChqNo') {
             this.Txt_ChqNo = this.Txt_ChqNo.toUpperCase();
-        }            
-        if ( field == 'Txt_Chq_Bank' ){
+        }
+        if (field == 'Txt_Chq_Bank') {
             this.Txt_Chq_Bank = this.Txt_Chq_Bank.toUpperCase();
-        }            
-        if ( field == 'Txt_Memo' ){
+        }
+        if (field == 'Txt_Memo') {
             this.Txt_Memo = this.Txt_Memo.toUpperCase();
         }
     }
@@ -966,7 +973,7 @@ export class PayFinalComponent implements OnInit {
 
         if (this.paymode == "CHECK") {
             this.Txt_ChqNo = (+this.Txt_Next_ChqNo + 1).toString();
-            if( this.Txt_ChqNo == 'NaN')
+            if (this.Txt_ChqNo == 'NaN')
                 this.Txt_ChqNo = '';
             return;
         }
@@ -987,7 +994,7 @@ export class PayFinalComponent implements OnInit {
 
         var yymmdd = this.sdate.replace("-", "");
         yymmdd = yymmdd.replace("-", "");
-        yymmdd = yymmdd.substring(2,8);
+        yymmdd = yymmdd.substring(2, 8);
 
 
 
@@ -1005,12 +1012,12 @@ export class PayFinalComponent implements OnInit {
                 //Txt_ChqNo.Text = sPrefix + Dt_Date.SelectedDate.Value.ToString("yyMMdd") + sChar.ToString();
                 sChar = String.fromCharCode(sCharCode);
                 //this.record.pay_chqno = sPrefix + yymmdd + sChar;
-                this.Txt_ChqNo  = sPrefix + yymmdd + sChar;
+                this.Txt_ChqNo = sPrefix + yymmdd + sChar;
             }
         }
 
     }
-      
+
 
 
 }
