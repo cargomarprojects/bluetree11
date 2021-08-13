@@ -393,11 +393,7 @@ export class PayReqReportComponent implements OnInit {
     this.mainservice.PayReqUpdate(searchData)
       .subscribe(response => {
         if (response.retvalue) {
-          var REC = this.MainList.find(rec => rec.cp_pkid == this.paypkid);
-          if (REC != null) {
-            REC.cp_pay_status = this.paystatus;
-            this.store.dispatch(new myActions.UpdatePayStatus({ id: this.urlid,pkid:this.paypkid, updatepaystatus: this.paystatus }))
-          }
+          this.store.dispatch(new myActions.UpdatePayStatus({ id: this.urlid,pkid:this.paypkid, updatepaystatus: this.paystatus }))
           this.modal.close();
         } else
           this.errorMessage = response.error;
