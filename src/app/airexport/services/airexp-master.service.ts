@@ -239,5 +239,7 @@ export class AirExpMasterService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AirExport/Master/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
 
-
+    DeleteHouseRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/AirExport/House/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

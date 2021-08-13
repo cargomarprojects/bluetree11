@@ -106,7 +106,7 @@ export class AirExpMasterEditComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.errorMessage = [];
@@ -216,7 +216,7 @@ export class AirExpMasterEditComponent implements OnInit {
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
         this.record = <Tbl_cargo_exp_masterm>response.record;
-        this.hrecords =  (response.hrecords == undefined || response.hrecords == null) ? <Tbl_cargo_exp_housem[]>[]:<Tbl_cargo_exp_housem[]>response.hrecords;
+        this.hrecords = (response.hrecords == undefined || response.hrecords == null) ? <Tbl_cargo_exp_housem[]>[] : <Tbl_cargo_exp_housem[]>response.hrecords;
         this.record.mbl_direct_bool = this.record.mbl_direct === "Y" ? true : false;
         this.record.mbl_3rdparty_bool = this.record.mbl_3rdparty === "Y" ? true : false;
         this.mode = 'EDIT';
@@ -868,4 +868,37 @@ export class AirExpMasterEditComponent implements OnInit {
       this.record.mbl_agent_id = '';
     }
   }
+
+  DeleteHouseRow(_rec: Tbl_cargo_exp_housem) {
+    this.errorMessage = [];
+    if (this.gs.isBlank(_rec.hbl_pkid) || this.gs.isBlank(_rec.hbl_mbl_id)) {
+      this.errorMessage.push("Cannot Delete, Reference Not Found");
+      alert(this.errorMessage);
+      return;
+    }
+
+    if (!confirm("DELETE " + _rec.hbl_houseno)) {
+      return;
+    }
+
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = _rec.hbl_pkid;
+    SearchData.mblid = _rec.hbl_mbl_id;
+    SearchData.remarks = _rec.hbl_houseno;
+
+    this.mainService.DeleteHouseRecord(SearchData)
+      .subscribe(response => {
+        if (response.retvalue == false) {
+          this.errorMessage.push(response.error);
+          alert(this.errorMessage);
+        }
+        else {
+          this.hrecords.splice(this.hrecords.findIndex(rec => rec.hbl_pkid == _rec.hbl_pkid), 1);
+        }
+      }, error => {
+        this.errorMessage.push(this.gs.getError(error));
+        alert(this.errorMessage);
+      });
+  }
+
 }
