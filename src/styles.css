@@ -920,13 +920,21 @@ input[type=number]::-webkit-outer-spin-button {
   
   
    
-.active {
+/* .active {
     background-color: yellow;
-}
+} */
 
 br {
     background-color: var(--custom-bg-color);
 }
+
+
+.dropdown-menu {
+    height: auto;
+    max-height: calc(100vh - 240px);
+    overflow-x: hidden;
+ }  
+
 
   
 
@@ -940,10 +948,6 @@ br {
       width: auto;
       max-width: auto !important;
     }
-    .dropdown-menu {
-        max-height:100px;
-        overflow-y: scroll;
-     }  
 }
   
 /*Small devices (landscape phones, less than 768px)*/
@@ -955,10 +959,6 @@ br {
       width: auto;
       max-width: 766 !important;
     }
-    .dropdown-menu {
-        max-height:100px;
-        overflow-y: scroll;
-     }  
 }
   
 /*Medium devices (tablets, less than 992px)*/
@@ -982,4 +982,5 @@ br {
       max-width: 1198px !important;
     }
 }
+ 
 
