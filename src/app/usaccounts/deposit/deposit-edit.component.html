@@ -1,7 +1,7 @@
 <div class="page-header">
     <div class="row align-items-center justify-content-left p-1">
         <label class="mr-3">A/R Deposit ({{msEdit.mode}})</label>
-        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(msEdit.menuid)" (click)="NewRecord()">New</button>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(msEdit.menuid)" (click)="msEdit.NewRecord()">New</button>
         <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
     </div>
 </div>
@@ -45,7 +45,7 @@
                         [(ngModel)]="msEdit.remarks" maxlength="100" />
                 </div>
                 <div class="col-6">
-                    <button (click)="pendingList()" class="btn btn-primary btn-sm mr-1">Search</button>
+                    <button (click)="msEdit.pendingList()" class="btn btn-primary btn-sm mr-1">Search</button>
                 </div>
             </div>
         </div>
@@ -100,7 +100,7 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm"></label>
                 <div class="col-8">
-                    <button class="btn btn-primary btn-sm" (click)="Save()">Save</button>
+                    <button class="btn btn-primary btn-sm" (click)="msEdit.Save()">Save</button>
                 </div>
             </div>
         </div>

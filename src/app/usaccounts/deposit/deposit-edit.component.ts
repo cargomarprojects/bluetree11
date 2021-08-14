@@ -28,60 +28,16 @@ export class DepositEditComponent implements OnInit {
         public msEdit: DepositEditService,
         public msList: DepositService,
     ) {
-        this.msEdit.decplace = this.gs.foreign_amt_dec;
+        //this.msEdit.decplace = this.gs.foreign_amt_dec;
         this.msEdit.sdate = this.gs.defaultValues.today;
     }
 
     ngOnInit() {
         this.gs.checkAppVersion();
-        if (this.route.snapshot.queryParams.parameter == null) {
-            this.msEdit.menuid = this.route.snapshot.queryParams.menuid;
-            this.msEdit.pkid = this.route.snapshot.queryParams.pkid;
-            this.msEdit.mode = this.route.snapshot.queryParams.mode;
-        } else {
-            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-            this.msEdit.menuid = options.menuid;
-            this.msEdit.pkid = options.pkid;
-            this.msEdit.mode = options.mode;
-        }
-
-        this.msEdit.setup();
-        this.msEdit.initPage();
-        if (this.msEdit.mode == 'ADD') {
-            this.actionHandler();
-            this.replaceUrlMode();
-        }
+        this.msEdit.init(this.route.snapshot.queryParams);
+        //this.replaceUrlMode();
     }
 
-    actionHandler() {
-        this.msEdit.errorMessage = '';
-        this.msEdit.isAccLocked = false;
-
-        if (this.msEdit.mode == 'ADD') {
-            this.msEdit.record = <Tbl_Acc_Payment>{};
-            this.msEdit.arPendingList = <Tbl_Acc_Payment[]>[];
-            this.msEdit.DetailList = <Tbl_Acc_Payment[]>[];
-            this.msEdit.total_amount = 0;
-            this.msEdit.pkid = this.gs.getGuid();
-            this.InitBank();
-            this.init();
-        }
-    }
-    
-    init() {
-
-        this.msEdit.record.pay_pkid = this.msEdit.pkid;
-        this.msEdit.record.pay_vrno = '';
-        this.msEdit.remarks = '';
-        this.msEdit.record.rec_created_by = this.gs.user_code;
-        this.msEdit.record.rec_created_date = this.gs.defaultValues.today;
-    }    
-
-    InitBank(){
-        this.msEdit.id = '';
-        this.msEdit.code = '';
-        this.msEdit.name = '';
-    }
 
     replaceUrlMode() {
         this.msEdit.mode = "EDIT";
@@ -94,91 +50,7 @@ export class DepositEditComponent implements OnInit {
             mode: 'EDIT'
         };
         this.location.replaceState('Silver.USAccounts.Trans/DepositEditPage', this.gs.getUrlParameter(parameter));
-
     }
-
-    NewRecord() {
-        this.msEdit.mode = 'ADD'
-        this.actionHandler();
-    }
-
-
-    ProcessData() {
-    }
-
-
-
-    Save() {
-
-        this.FindTotal();
-
-        if (!this.msEdit.Allvalid())
-            return;
-
-        this.msEdit.SaveParent();
-        const saveRecord = <vm_tbl_accPayment>{};
-        saveRecord.record = this.msEdit.record;
-        saveRecord.records = this.msEdit.DetailList;
-
-        saveRecord.pkid = this.msEdit.pkid;
-        saveRecord.mode = "ADD";
-        saveRecord.userinfo = this.gs.UserInfo;
-
-        this.msEdit.Save(saveRecord)
-            .subscribe(response => {
-                if (response.retvalue == false) {
-                    this.msEdit.errorMessage = response.error;
-                    alert(this.msEdit.errorMessage);
-                }
-                else {
-
-                    this.msEdit.record.pay_docno = response.DOCNO;
-                    this.msEdit.record.pay_date = this.msEdit.sdate;
-                    this.msEdit.record.pay_acc_name = this.msEdit.name;
-                    this.msEdit.record.pay_diff = this.msEdit.total_amount;
-                    this.msEdit.record.pay_tot_chq = this.msEdit.iTotChq;
-                    this.msEdit.record.pay_posted = "Y";
-                    this.msEdit.record.pay_narration = this.msEdit.remarks;
-                    this.msList.RefreshList(this.msEdit.record);
-                    this.msEdit.errorMessage = 'Save Complete';
-                    
-                    alert(this.msEdit.errorMessage);
-
-                    this.msEdit.mode = "ADD";
-                    
-                    this.msEdit.DetailList.forEach(_rec => {
-                        this.msEdit.arPendingList.splice(this.msEdit.arPendingList.findIndex(rec => rec.pay_pkid == _rec.pay_pkid), 1);
-                    });
-
-                    this.msEdit.errorMessage = '';
-                    this.msEdit.isAccLocked = false;
-                    this.msEdit.record = <Tbl_Acc_Payment>{};
-                    this.msEdit.DetailList = <Tbl_Acc_Payment[]>[];
-                    this.msEdit.total_amount = 0;
-                    this.msEdit.pkid = this.gs.getGuid();
-                    this.init();
-
-                }
-            }, error => {
-                this.msEdit.errorMessage = this.gs.getError(error);
-                alert(this.msEdit.errorMessage);
-            });
-    }
-
-    pendingList() {
-        var SearchData = this.gs.UserInfo;
-        SearchData.pkid = this.msEdit.pkid;
-        this.msEdit.DepositPendingList(SearchData).subscribe(
-            res => {
-                this.msEdit.arPendingList = res.list;
-            },
-            err => {
-                this.msEdit.errorMessage = this.gs.getError(err);
-                alert(this.msEdit.errorMessage);
-            });
-
-    }
-
 
     swapSelection(rec: Tbl_Acc_Payment) {
         rec.pay_flag2 = !rec.pay_flag2;
@@ -189,14 +61,11 @@ export class DepositEditComponent implements OnInit {
                 this.msEdit.total_amount = this.gs.roundNumber(this.msEdit.total_amount, 2);
             }
         })
-
     }
-
 
     Close() {
         this.location.back();
     }
-
 
     LovSelected(_Record: SearchTable) {
         if (_Record.controlname == "ACCTM") {
@@ -206,9 +75,6 @@ export class DepositEditComponent implements OnInit {
         }
     }
 
-
-
-
     OnChange(field: string) {
     }
 
@@ -217,7 +83,7 @@ export class DepositEditComponent implements OnInit {
 
     onBlur(field: string) {
         if (field === 'remarks')
-            this.msEdit.remarks = this.msEdit.remarks.toUpperCase();
+            this.msEdit.remarks = this.msEdit.remarks.toUpperCase().trim();
     }
 
     onBlur2(cb: any) {
@@ -234,7 +100,6 @@ export class DepositEditComponent implements OnInit {
     }
 
     FindTotal() {
-
         /*
         var nTot = 0;
         if (this.gs.IS_SINGLE_CURRENCY == true) {
