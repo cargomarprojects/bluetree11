@@ -35,7 +35,9 @@ export class DepositEditComponent implements OnInit {
     ngOnInit() {
         this.gs.checkAppVersion();
         this.msEdit.init(this.route.snapshot.queryParams);
-        //this.replaceUrlMode();
+        if ( this.msEdit.mode == "ADD")
+            this.msEdit.NewRecord();
+        this.replaceUrlMode();
     }
 
 
@@ -50,6 +52,22 @@ export class DepositEditComponent implements OnInit {
             mode: 'EDIT'
         };
         this.location.replaceState('Silver.USAccounts.Trans/DepositEditPage', this.gs.getUrlParameter(parameter));
+    }
+
+    Save1(){
+        if (!confirm("Save ")) {
+            return;
+        }
+        this.msEdit.savetype = "1";
+        this.msEdit.Save();
+    }
+
+    Save2(){
+        if (!confirm("Save ")) {
+            return;
+        }
+        this.msEdit.savetype = "2";
+        this.msEdit.Save();
     }
 
     swapSelection(rec: Tbl_Acc_Payment) {

@@ -97,6 +97,7 @@ export interface vm_tbl_accPayment {
 
     mode: string;
     pkid: string;
+    savetype : string ;
     record: Tbl_Acc_Payment;
     records: Tbl_Acc_Payment[];
     invoiceList: Tbl_cargo_invoicem [];

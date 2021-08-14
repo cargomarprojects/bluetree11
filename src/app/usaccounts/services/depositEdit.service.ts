@@ -23,6 +23,8 @@ export class DepositEditService {
     total_amount = 0;
     iTotChq = 0;
 
+    savetype = "";    
+
     sdate = '';
     id = '';
     code = '';
@@ -42,25 +44,25 @@ export class DepositEditService {
 
     constructor(
         private http2: HttpClient,
-        private gs: GlobalService,
-        private msList: DepositService
+        private gs: GlobalService
     ) { }
 
 
 
     public init(params: any) {
 
+        this.menuid = params.menuid;
+        this.mode = params.mode;
+
         if (this.appid != this.gs.appid) {
             this.appid = this.gs.appid;
             this.initlialized = false;
         }
+        
         if (this.initlialized)
             return;
         
         this.initlialized = true;
-        this.menuid = params.menuid;
-        this.pkid  = params.pkid;
-        this.mode = params.mode;
 
         this.NewRecord();
 
@@ -70,21 +72,19 @@ export class DepositEditService {
 
     }
 
+
     NewRecord() {
         this.initRecord();
         this.InitBank();
     }
 
     initRecord(){
-    
         this.record = <Tbl_Acc_Payment>{};
         this.arPendingList = <Tbl_Acc_Payment[]>[];
         this.DetailList = <Tbl_Acc_Payment[]>[];
         this.total_amount = 0;
         this.remarks = '';
         this.errorMessage = '';
-        
-
     }
     
     InitBank(){
@@ -188,11 +188,13 @@ export class DepositEditService {
         this.SaveParent();
 
         const saveRecord = <vm_tbl_accPayment>{};
+
         saveRecord.record = this.record;
         saveRecord.records = this.DetailList;
 
         saveRecord.pkid = this.pkid;
         saveRecord.mode = "ADD";
+        saveRecord.savetype =  this.savetype;
         saveRecord.userinfo = this.gs.UserInfo;
 
         this.SaveRecord(saveRecord)
@@ -203,6 +205,7 @@ export class DepositEditService {
                 }
                 else {
 
+                    /*
                     this.record.pay_docno = response.DOCNO;
                     this.record.pay_date = this.sdate;
                     this.record.pay_acc_name = this.name;
@@ -211,6 +214,7 @@ export class DepositEditService {
                     this.record.pay_posted = "Y";
                     this.record.pay_narration = this.remarks;
                     this.msList.RefreshList(this.record);
+                    */
                     this.errorMessage = 'Save Complete';
                     
                     alert(this.errorMessage);
