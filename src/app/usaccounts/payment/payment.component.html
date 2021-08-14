@@ -49,7 +49,10 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+        <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()"
+          (mousedown)="mainservice.selectRowId(rec.pay_pkid)" 
+          [class.selected]="rec.pay_pkid == mainservice.getRowId()">
+
           <td  class='hlink2' (click)="Print(rec,'simple')">{{rec.pay_docno}}</td>
           <td class='hlink2' (click)="upload(rec)">{{rec.rec_files_attached_chk}}</td>
           <td *ngIf="gs.BRANCH_REGION != 'USA'" class='hlink2' (click)="Print(rec,'cash')">Print</td>

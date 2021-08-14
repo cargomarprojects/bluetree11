@@ -84,6 +84,7 @@ export interface Tbl_Acc_Payment {
 }
 
 export interface AccPaymentModel {
+    selectedId : string;
     sortcol : string ;
     sortorder : boolean;
     errormessage: string;
