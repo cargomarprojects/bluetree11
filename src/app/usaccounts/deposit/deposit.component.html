@@ -42,7 +42,9 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+        <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()"
+          (mousedown)="mainservice.selectRowId(rec.pay_pkid)" 
+          [class.selected]="rec.pay_pkid == mainservice.getRowId()">        
           <td>{{rec.pay_docno}}</td>
           <td>{{rec.pay_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.pay_acc_name}} </td>
