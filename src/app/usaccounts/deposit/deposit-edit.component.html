@@ -74,7 +74,9 @@
             </tr>
         </thead>
         <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of msEdit.arPendingList">
+            <tr *ngFor="let rec of msEdit.arPendingList" 
+                (mousedown)="msEdit.selectRowId(rec.pay_pkid)" 
+                [class.selected]="rec.pay_pkid == msEdit.getRowId()">
                 <td>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" (click)="swapSelection(rec)" #chkbox

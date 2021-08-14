@@ -34,6 +34,8 @@ export class DepositEditService {
     title: string;
     isAdmin: boolean;
 
+    selectedId = '';
+
     where = " ACC_IS_PAYMENT_CODE = 'Y' AND ACC_BRANCH IN ('ALL','" + this.gs.branch_code + "')";
 
     arPendingList: Tbl_Acc_Payment[] = [];
@@ -72,6 +74,14 @@ export class DepositEditService {
 
     }
 
+    public selectRowId( id : string){
+        this.selectedId = id;
+    }
+    public getRowId(){
+        return this.selectedId;
+    }
+
+    
 
     NewRecord() {
         this.initRecord();
@@ -234,6 +244,7 @@ export class DepositEditService {
     }
 
     pendingList() {
+        this.selectedId = '';
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = this.pkid;
         this.DepositPendingList(SearchData).subscribe(
