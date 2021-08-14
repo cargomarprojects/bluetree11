@@ -222,7 +222,6 @@ export class DepositEditService {
                     this.errorMessage = '';
                     this.DetailList = <Tbl_Acc_Payment[]>[];
                     this.total_amount = 0;
-
                 }
             }, error => {
                 this.errorMessage = this.gs.getError(error);
