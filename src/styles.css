@@ -936,9 +936,6 @@ br {
  }  
 
 
-  
-
-
  /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575px) {
     .modal-dialog {
@@ -948,6 +945,13 @@ br {
       width: auto;
       max-width: auto !important;
     }
+
+    .dropdown-menu {
+        height: auto;
+        max-height: calc(100vh - 75vh);
+        overflow-x: hidden;
+     }  
+
 }
   
 /*Small devices (landscape phones, less than 768px)*/
@@ -959,6 +963,12 @@ br {
       width: auto;
       max-width: 766 !important;
     }
+
+    .dropdown-menu {
+        height: auto;
+        max-height: calc(100vh - 75vh);
+        overflow-x: hidden;
+     }  
 }
   
 /*Medium devices (tablets, less than 992px)*/
