@@ -43,7 +43,10 @@
         </thead>
         <tbody class="page-body-tbody">
             <!-- | sortBy: mainservice.getSortCol() : mainservice.getSortOrder() -->
-            <tr *ngFor="let rec of records$ | async">
+            <tr *ngFor="let rec of records$ | async"
+            (mousedown)="mainservice.selectRowId(rec.msg_pkid)" 
+            [class.selected]="rec.msg_pkid == mainservice.getRowId()">
+
                 <!-- <td class='hlink' (click)="edit(rec)">{{rec.qtnr_slno}}</td> -->
                 <td *ngIf="!(this.mainservice.canEdit)">{{rec.msg_refno}}</td>
                 <td *ngIf="(this.mainservice.canEdit)">

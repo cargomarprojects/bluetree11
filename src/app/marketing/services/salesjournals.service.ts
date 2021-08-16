@@ -37,7 +37,12 @@ export class SalesJournalService {
         private gs: GlobalService
     ) { }
 
-
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
     public getSortCol() {
         return this.record.sortcol;
     }
@@ -67,6 +72,7 @@ export class SalesJournalService {
     }
     public ClearInit() {
         this.record = <SalesJournalModel>{
+            selectedId : '',
             sortcol: 'cjm_customer_code',
             sortorder: true,
             errormessage: '',
@@ -88,6 +94,7 @@ export class SalesJournalService {
         this.menuid = params.id;
         this.param_type = "MARKETING";  //params.menu_param;
         this.record = <SalesJournalModel>{
+            selectedId : '',            
             sortcol: 'cjm_customer_code',
             sortorder: true,
             errormessage: '',
@@ -114,6 +121,7 @@ export class SalesJournalService {
 
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
