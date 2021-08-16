@@ -149,6 +149,8 @@ export class PaymentEditService {
 
         var SearchData = this.gs.UserInfo;
 
+        // str_id is search string it can be customer id or master or invno or refno
+
         SearchData.pkid = this.pkid;
         if (!this.gs.isBlank(this.cust_id)) {
             this.Customer_ID = this.cust_id;
