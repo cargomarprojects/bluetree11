@@ -75,6 +75,7 @@ export interface SearchQuery {
 }
 
 export interface ApprovedPageModel {
+    selectedId : string;
     sortcol : string ;
     sortorder : boolean;
     errormessage: string;

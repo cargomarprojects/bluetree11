@@ -36,7 +36,12 @@ export class ApprovedPageService {
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
-
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
     public getSortCol() {
         return this.record.sortcol;
     }
@@ -66,6 +71,7 @@ export class ApprovedPageService {
     }
     public ClearInit() {
         this.record = <ApprovedPageModel>{
+            selectedId : '',
             sortcol: 'ca_reqno',
             sortorder: true,
             errormessage: '',
@@ -99,6 +105,7 @@ export class ApprovedPageService {
             this.record = <ApprovedPageModel>this.db[this.param_type];
         else
             this.record = <ApprovedPageModel>{
+                selectedId : '',
                 sortcol: 'ca_reqno',
                 sortorder: true,
                 errormessage: '',
@@ -130,6 +137,7 @@ export class ApprovedPageService {
 
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;

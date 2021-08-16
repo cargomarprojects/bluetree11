@@ -42,7 +42,9 @@
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
-                <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+                <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()"
+                    (mousedown)="mainservice.selectRowId(rec.ca_pkid)" 
+                    [class.selected]="rec.ca_pkid == mainservice.getRowId()">                
 
                     <!-- <td [class]="mainservice.param_type=='APPROVED'?'hlink':'text-left'" (click)="edit(rec)">{{rec.ca_reqno}}</td> -->
 
