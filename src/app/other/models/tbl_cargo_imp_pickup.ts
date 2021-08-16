@@ -126,6 +126,7 @@ export interface SearchQuery {
 }
 
 export interface DeliveryOrderModel {
+    selectedId : string;
     sortcol : string ;
     sortorder : boolean;
     errormessage: string;

@@ -67,6 +67,7 @@ export interface SearchQuery {
 }
 
 export interface MessengerSlipModel {
+    selectedId : string;
     sortcol : string ;
     sortorder : boolean;
     errormessage: string;

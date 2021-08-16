@@ -36,6 +36,12 @@ export class FormsService {
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
 
     public getSortCol() {
         return this.record.sortcol;
@@ -66,6 +72,7 @@ export class FormsService {
     }
     public ClearInit() {
         this.record = <Tbl_cargo_genfilesModel>{
+            selectedId : '',
             sortcol: 'gf_refno',
             sortorder: true,
             errormessage: '',
@@ -91,6 +98,7 @@ export class FormsService {
             this.record = <Tbl_cargo_genfilesModel>this.db[this.param_type];
         else
             this.record = <Tbl_cargo_genfilesModel>{
+                selectedId : '',
                 sortcol: 'gf_refno',
                 sortorder: true,
                 errormessage: '',
@@ -116,6 +124,7 @@ export class FormsService {
 
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;

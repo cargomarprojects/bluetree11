@@ -36,6 +36,7 @@ export interface Tbl_cargo_genfiles {
 
 
 export interface Tbl_cargo_genfilesModel {
+    selectedId : string;
     sortcol: string;
     sortorder: boolean;
     errormessage: string;
