@@ -163,6 +163,7 @@ export interface SearchQuery {
 }
 
 export interface QtnmModel {
+    selectedId : string;
     sortcol : string ;
     sortorder : boolean;
     errormessage: string;

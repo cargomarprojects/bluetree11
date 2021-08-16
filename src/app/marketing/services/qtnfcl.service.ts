@@ -35,7 +35,12 @@ export class QtnFclService {
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
-
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
     public getSortCol() {
         return this.record.sortcol;
     }
@@ -65,6 +70,7 @@ export class QtnFclService {
     }
     public ClearInit() {
         this.record = <QtnmModel>{
+            selectedId : '',
             sortcol: 'qtnm_no',
             sortorder: true,
             errormessage: '',
@@ -88,6 +94,7 @@ export class QtnFclService {
         this.param_type = params.param_type;
 
         this.record = <QtnmModel>{
+            selectedId : '',
             sortcol: 'qtnm_no',
             sortorder: true,
             errormessage: '',
@@ -113,6 +120,7 @@ export class QtnFclService {
 
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;

@@ -53,6 +53,7 @@ export interface SearchQuery {
 }
 
 export interface MessageModel {
+    selectedId : string;
     sortcol: string;
     sortorder: boolean;
     errormessage: string;

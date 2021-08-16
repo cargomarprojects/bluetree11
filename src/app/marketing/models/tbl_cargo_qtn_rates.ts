@@ -40,6 +40,7 @@ export interface SearchQuery {
 }
 
 export interface QtnRateModel {
+    selectedId : string;
     sortcol : string ;
     sortorder : boolean;
     errormessage: string;

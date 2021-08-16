@@ -36,7 +36,9 @@
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
-                <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+                <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()"
+                    (mousedown)="mainservice.selectRowId(rec.qtnm_pkid)" 
+                    [class.selected]="rec.qtnm_pkid == mainservice.getRowId()">                
                     <!-- <td class='hlink' (click)="edit(rec)">{{rec.qtnm_no}}</td> -->
                     <td *ngIf="!this.mainservice.canEdit">{{rec.qtnm_no}}</td>
                     <td *ngIf="this.mainservice.canEdit">
