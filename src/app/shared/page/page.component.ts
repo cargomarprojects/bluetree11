@@ -18,6 +18,8 @@ export class PageComponent implements OnInit {
 
   ngOnChanges(){
     this.goto_page_no = this.PageData.page_current;
+    if( this.goto_page_no <=0)
+      this.goto_page_no =null;    
   }
   
 

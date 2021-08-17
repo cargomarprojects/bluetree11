@@ -25,6 +25,9 @@ export class Page2Component implements OnInit {
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChange) {
+    this.goto_page_no = this.pageQuery.page_current;
+    if( this.goto_page_no <=0)
+      this.goto_page_no =null;  
   }
 
   ngDoCheck() {
@@ -39,19 +42,19 @@ export class Page2Component implements OnInit {
 
     if (action == 'FIRST') {
       this.pageQuery.page_current = 1;
-      this.goto_page_no = null;
+      this.goto_page_no = this.pageQuery.page_current;
     }
     else if (action == 'PREV') {
       this.pageQuery.page_current--;
-      this.goto_page_no = null;
+      this.goto_page_no = this.pageQuery.page_current;
     }
     else if (action == 'NEXT') {
       this.pageQuery.page_current++;
-      this.goto_page_no = null;
+      this.goto_page_no = this.pageQuery.page_current;
     }
     else if (action == 'LAST') {
       this.pageQuery.page_current = this.pageQuery.page_count;
-      this.goto_page_no = null;
+      this.goto_page_no = this.pageQuery.page_current;
     }
     else if (action == 'GOTO') {
       if (this.goto_page_no == null || this.goto_page_no == undefined )
