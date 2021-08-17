@@ -93,7 +93,8 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of MainList" (click)="selectRowId(rec.cp_pkid)" 
+        <tr *ngFor="let rec of MainList" 
+        (click)="selectRowId(rec.cp_pkid)" 
         [class.selected]="rec.cp_pkid == getRowId()">
         
           <td>{{rec.rec_created_by}}</td>
