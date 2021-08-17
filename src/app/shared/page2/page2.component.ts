@@ -30,14 +30,6 @@ export class Page2Component implements OnInit {
   ngDoCheck() {
   }
 
-  onBlur(col : string){
-    if ( col =="GOTO") {
-      if (this.goto_page_no == null || this.goto_page_no == undefined )
-        return;
-      if (this.goto_page_no > 0)
-        this.List('SCREEN', 'GOTO');
-    }
-  }
 
   List(outputformat: string, action: string) {
 

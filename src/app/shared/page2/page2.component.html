@@ -14,7 +14,7 @@
             <li class="page-item"><a class="page-link" (click)="List('SCREEN','LAST')"><span
                               class="fa fa-forward"></span></a>
             <li class="page-item"><a class="page-link">
-                  <input type="number" id ="gotopage" tabindex="-1" [(ngModel)]="goto_page_no" (blur)="onBlur('GOTO')" ></a>                              
+                  <input type="number" id ="gotopage" tabindex="-1" [(ngModel)]="goto_page_no" (blur)="List('SCREEN','GOTO')" ></a>                              
                   
             <li class="page-item"><a class="page-link" (click)="List('SCREEN','GOTO')"><span
                               class="fa fa-search"></span></a>                              

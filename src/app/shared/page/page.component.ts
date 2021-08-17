@@ -9,10 +9,13 @@ export class PageComponent implements OnInit {
   @Input()  public PageData: {page_count: number, page_current : number, page_rows : number, page_rowcount : number };
   @Output() PageEvents = new EventEmitter<any>();
 
+  goto_page_no : number;
+
   constructor() { }
 
   ngOnInit() {
   }
+
 
   List(outputformat : string , action : string  ){
 
@@ -29,6 +32,15 @@ export class PageComponent implements OnInit {
       this.PageData.page_current++;
     else if (action == 'LAST')
       this.PageData.page_current = this.PageData.page_count;
+    else if (action == 'GOTO') {
+      if (this.goto_page_no == null || this.goto_page_no == undefined )
+        return;
+      if (this.goto_page_no <= 0)
+        this.goto_page_no =1;
+      if (this.goto_page_no > this.PageData.page_count)
+        this.goto_page_no = this.PageData.page_count;
+      this.PageData.page_current = this.goto_page_no;
+    }       
 
     if (this.PageData.page_current <= 0)
       this.PageData.page_current = 1;
