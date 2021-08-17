@@ -190,6 +190,9 @@ export class GenLedgerReportComponent implements OnInit {
   }
 
   PageEvents(actions) {
+    //GOTOCHANGE2
+    if( actions.action == 'GOTO')
+      this.page_current = actions.page_current;    
     this.List(actions.outputformat, actions.action);
   }
 

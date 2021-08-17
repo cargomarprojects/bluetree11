@@ -231,7 +231,9 @@ export class ShipmentLogReportComponent implements OnInit {
   }
 
   PageEvents(actions) {
-    this.page_current = actions.page_current;
+    //GOTOCHANGE2
+    if( actions.action == 'GOTO')
+      this.page_current = actions.page_current;
     this.List(actions.outputformat, actions.action);
   }
 

@@ -182,6 +182,7 @@ export class ShipHandReportComponent implements OnInit {
   }
 
   PageEvents(actions) {
+    //GOTOCHANGE2
     if( actions.action == 'GOTO')
       this.page_current = actions.page_current;
     this.List(actions.outputformat, actions.action);
@@ -207,7 +208,6 @@ export class ShipHandReportComponent implements OnInit {
     this.SearchData.page_rowcount = this.page_rowcount;
 
     if (_outputformat == "SCREEN" && _action == 'NEW') {
-      
       this.SearchData.SDATE = this.from_date;
       this.SearchData.EDATE = this.to_date;
       this.SearchData.MODE = this.job_type;
