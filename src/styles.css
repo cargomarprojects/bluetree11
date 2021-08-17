@@ -928,6 +928,16 @@ br {
     background-color: var(--custom-bg-color);
 }
 
+#gotopage {
+    height : 17px;    
+    width : 80px;    
+    margin : 0px !important;
+    padding: 0px !important;
+    text-align:center;
+    border: none;
+    
+}
+
 
 .dropdown-menu {
     height: auto;
@@ -993,4 +1003,5 @@ br {
     }
 }
  
+
 

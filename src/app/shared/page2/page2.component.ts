@@ -18,6 +18,8 @@ export class Page2Component implements OnInit {
   pageQuery: PageQuery;
   @Output() pageEvents = new EventEmitter<any>();
 
+  goto_page_no : number;
+
   constructor() {  }
 
   ngOnInit() {}
@@ -28,20 +30,46 @@ export class Page2Component implements OnInit {
   ngDoCheck() {
   }
 
+  onBlur(col : string){
+    if ( col =="GOTO") {
+      if (this.goto_page_no == null || this.goto_page_no == undefined )
+        return;
+      if (this.goto_page_no > 0)
+        this.List('SCREEN', 'GOTO');
+    }
+  }
+
   List(outputformat: string, action: string) {
 
     var oldPage = this.pageQuery.page_current;
     if (this.pageQuery.page_current == -1)
       return;
 
-    if (action == 'FIRST')
+    if (action == 'FIRST') {
       this.pageQuery.page_current = 1;
-    else if (action == 'PREV')
+      this.goto_page_no = null;
+    }
+    else if (action == 'PREV') {
       this.pageQuery.page_current--;
-    else if (action == 'NEXT')
+      this.goto_page_no = null;
+    }
+    else if (action == 'NEXT') {
       this.pageQuery.page_current++;
-    else if (action == 'LAST')
+      this.goto_page_no = null;
+    }
+    else if (action == 'LAST') {
       this.pageQuery.page_current = this.pageQuery.page_count;
+      this.goto_page_no = null;
+    }
+    else if (action == 'GOTO') {
+      if (this.goto_page_no == null || this.goto_page_no == undefined )
+        return;
+      if (this.goto_page_no <= 0)
+        this.goto_page_no =1;
+      if (this.goto_page_no > this.pageQuery.page_count)
+        this.goto_page_no = this.pageQuery.page_count;
+      this.pageQuery.page_current = this.goto_page_no;
+    } 
 
     this.pageQuery.action = action;
 

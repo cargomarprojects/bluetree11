@@ -156,6 +156,7 @@ export interface SearchQuery {
 }
 
 export interface PartyModel {
+    selectedId : string;
     sortcol : string ;
     sortorder : boolean;
     errormessage: string;
