@@ -16,6 +16,10 @@ export class PageComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnChanges(){
+    this.goto_page_no = this.PageData.page_current;
+  }
+  
 
   List(outputformat : string , action : string  ){
 
@@ -24,14 +28,22 @@ export class PageComponent implements OnInit {
     if (this.PageData.page_current == -1)
       return;
 
-    if (action == 'FIRST')
+    if (action == 'FIRST') {
       this.PageData.page_current = 1;
-    else if (action == 'PREV')
+      this.goto_page_no = this.PageData.page_current;
+    }
+    else if (action == 'PREV') {
       this.PageData.page_current--;
-    else if (action == 'NEXT')
+      this.goto_page_no = this.PageData.page_current;
+    }
+    else if (action == 'NEXT') {
       this.PageData.page_current++;
-    else if (action == 'LAST')
+      this.goto_page_no = this.PageData.page_current;
+    }
+    else if (action == 'LAST') {
       this.PageData.page_current = this.PageData.page_count;
+      this.goto_page_no = this.PageData.page_current;
+    }      
     else if (action == 'GOTO') {
       if (this.goto_page_no == null || this.goto_page_no == undefined )
         return;
@@ -39,7 +51,7 @@ export class PageComponent implements OnInit {
         this.goto_page_no =1;
       if (this.goto_page_no > this.PageData.page_count)
         this.goto_page_no = this.PageData.page_count;
-      this.PageData.page_current = this.goto_page_no;
+      this.PageData.page_current = this.goto_page_no; 
     }       
 
     if (this.PageData.page_current <= 0)
