@@ -70,8 +70,7 @@ export function PayReqReportReducer(state: ReportState[] = [initialState], actio
             return [...state.filter(rec => rec.urlid != action.payload.id), st];
         }
         case myActions.ActionTypes.UPDATE_PAY_STATUS: {
-            //var st = Object.assign({}, state.find(rec => rec.urlid == action.payload.id));
-             
+            
             var st = {...state.find(rec => rec.urlid == action.payload.id)};
 
             if (st == null)

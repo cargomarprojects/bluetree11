@@ -9,7 +9,8 @@ export enum ParamActionTypes {
     LOAD_PARAM_SUCCESS = '[PARAM PAGE] LOAD RECORDS SUCCESS',
     LOAD_PARAM_FAIL = '[PARAM PAGE] LOAD RECORDS FAIL',
     UPDATE_SEARCH = '[PARAM PAGE ] UPDATE SEARCH',
-    SORT_DATA = '[PARAM PAGE] SORT DATA'
+    SORT_DATA = '[PARAM PAGE] SORT DATA',
+    SELECT_ROW = '[Pay-Req-Report-new] Select Row',
 }
 
 export class LoadParamRequest implements Action {
@@ -36,5 +37,11 @@ export class LoadParamFail implements Action {
     constructor(public payload: { id: string, errormessage : string} ) {}
 }
 
+export class SelectRow implements Action {
+    readonly type = ParamActionTypes.SELECT_ROW;
+    constructor(public payload: {id : string, selecteId : string } ) {}
+}
+  
 
-export type ParamActions = LoadParamRequest | UpdateSearch | LoadParamSucces | LoadParamFail  | Sort ;
+
+export type ParamActions = LoadParamRequest | UpdateSearch | LoadParamSucces | LoadParamFail  | Sort | SelectRow;

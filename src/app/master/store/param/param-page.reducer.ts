@@ -32,6 +32,7 @@ export function ParamReducer(state: ParamState = initialParamState, action: Para
                 menuid :action.payload.menuid,
                 param_type :action.payload.param_type,
                 errormessage : '',
+                selectedId : '',
                 sortcol : '',
                 sortorder: true,                
                 pageQuery: <PageQuery>{ action: 'NEW', page_rows: 0, page_count: 0, page_current: -1, page_rowcount: 0 },
@@ -45,6 +46,7 @@ export function ParamReducer(state: ParamState = initialParamState, action: Para
             st.pageQuery = action.payload.pageQuery;
             st.records = action.payload.records;
             st.errormessage = '';
+            selectedId : '';
             st.sortcol = '';
             st.sortorder = true;            
             return adapter.upsertOne( st, state);
@@ -69,6 +71,13 @@ export function ParamReducer(state: ParamState = initialParamState, action: Para
             return adapter.upsertOne(st, state);
         }
 
+        case ParamActionTypes.SELECT_ROW: {
+            if ( state.entities[action.payload.id] == null )
+                return state;
+            const st = Object.assign({}, state.entities[action.payload.id]);
+            st.selectedId = action.payload.selecteId;
+            return adapter.upsertOne(st, state);
+        }
         case ParamActionTypes.LOAD_PARAM_FAIL: {
             const st =  Object.assign({}, 
                 state.entities[action.payload.id], 
@@ -182,6 +191,23 @@ export const getSortOrder = createSelector(
             if (state && router.state) {
                 if (state.entities[router.state.queryParams.id])
                     return state.entities[router.state.queryParams.id].sortorder;
+                else
+                    return null;
+            }
+        }
+        return null;
+    }
+);
+
+
+export const getSelectedId = createSelector(
+    SelectParamsState,
+    getRouterState,
+    (state: ParamState, router) => {
+        if (state && router) {
+            if (state && router.state) {
+                if (state.entities[router.state.queryParams.id])
+                    return state.entities[router.state.queryParams.id].selectedId;
                 else
                     return null;
             }

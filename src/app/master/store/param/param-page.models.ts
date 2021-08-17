@@ -7,6 +7,7 @@ export interface SearchQuery {
 
 export interface ParamModel {
     appid : string,
+    selectedId : string ,
     id: string,
     menuid: string;
     param_type : string ;
