@@ -20,6 +20,7 @@ export interface ReportState{
     filename: string;
     filetype: string;
     filedisplayname: string;
+    selectedId : string;
     sortcol : string ;
     sortorder : boolean;    
     

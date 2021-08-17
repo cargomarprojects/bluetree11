@@ -31,6 +31,7 @@ export const initialState: ReportState = {
     filename: '',
     filetype: '',
     filedisplayname: '',
+    selectedId : '',
     sortcol: 'mbl_refno',
     sortorder: true,
     page_rows: 0,
@@ -50,6 +51,13 @@ export function AgentShipReportReducer(state: ReportState[] = [initialState], ac
             return [...state.filter(rec => rec.urlid != action.payload.id)];
         case myActions.ActionTypes.DELETEALL:
             return [];
+        case myActions.ActionTypes.SELECT_ROW: {
+                var st = Object.assign({}, state.find(rec => rec.urlid == action.payload.id));
+                if (st == null)
+                    return [...state];
+                st.selectedId = action.payload.selecteId;
+                return [...state.filter(rec => rec.urlid != action.payload.id), st];
+            }            
         case myActions.ActionTypes.SORT_DATA: {
 
             var st = Object.assign({}, state.find(rec => rec.urlid == action.payload.id));

@@ -128,7 +128,10 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr  *ngFor="let rec of MainList">
+        <tr  *ngFor="let rec of MainList"
+          (click)="selectRowId(rec.mbl_pkid)" 
+          [class.selected]="rec.mbl_pkid == getRowId()">
+
           <td>{{rec.mbl_refno}}</td>
           <td>{{rec.mbl_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.hbl_shipper_name}}</td>

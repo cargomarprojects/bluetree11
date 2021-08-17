@@ -61,6 +61,7 @@ export class AgentShipReportComponent implements OnInit {
   errorMessage: string = '';
 
   SearchData: any = {};
+  selectedId = '';
   sortCol = 'mbl_refno';
   sortOrder = true;
 
@@ -117,6 +118,7 @@ export class AgentShipReportComponent implements OnInit {
         this.filename = rec.filename;
         this.filetype = rec.filetype;
         this.filedisplayname = rec.filedisplayname;
+        this.selectedId = rec.selectedId;
         this.sortCol = rec.sortcol;
         this.sortOrder = rec.sortorder;
 
@@ -173,6 +175,7 @@ export class AgentShipReportComponent implements OnInit {
         this.filename = '';
         this.filetype = '';
         this.filedisplayname = '';
+        this.selectedId = '';
         this.sortCol = 'mbl_refno';
         this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
@@ -277,6 +280,7 @@ export class AgentShipReportComponent implements OnInit {
             shipper_name: this.SearchData.SHIPPER_NAME,
             consignee_id: this.SearchData.CONSIGNEE_ID,
             consignee_name: this.SearchData.CONSIGNEE_NAME,
+            selectedId : this.selectedId,
             sortcol: 'mbl_refno',
             sortorder: true,
             page_rows: response.page_rows,
@@ -317,6 +321,16 @@ export class AgentShipReportComponent implements OnInit {
   private sort(sortcol: string) {
     this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
   }
+
+  private selectRowId(rowid: string) {
+    this.store.dispatch(new myActions.SelectRow({ id: this.urlid, selecteId: rowid }))
+  }
+
+  public getRowId() {
+    return this.selectedId;
+  }
+
+  
 
   public getIcon(col: string) {
     if (col == this.sortCol) {
