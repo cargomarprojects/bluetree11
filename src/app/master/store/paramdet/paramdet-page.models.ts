@@ -11,7 +11,7 @@ export interface ParamModel {
     menuid: string;
     param_type : string ;
     errormessage : string;
-
+selectedId : string ;
     sortcol : string ;
     sortorder : boolean;    
 

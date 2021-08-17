@@ -25,7 +25,9 @@
             </tr>
         </thead>
         <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of data$ | async">
+            <tr *ngFor="let rec of data$ | async"
+            (click)="selectRowId(rec.param_pkid)" 
+            [class.selected]="rec.param_pkid == getRowId()">            
                 <!-- <td class='hlink'  (click)="edit(rec)" >{{rec.param_code}}</td> -->
                 <td *ngIf="!gs.canEdit(menuid)" >{{rec.param_code}}</td>
                 <td *ngIf="gs.canEdit(menuid)" >

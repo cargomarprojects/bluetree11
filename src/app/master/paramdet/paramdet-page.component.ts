@@ -30,6 +30,9 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
   menuid: string;
   menu_param: string;
   sub: any;
+  
+
+  selectedId = '';
 
   sortCol  = '';
   sortOrder = true;  
@@ -47,6 +50,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
 
   sub1 : any ;
   sub2 : any;
+  sub3: any;
 
   SearchData: any;
 
@@ -91,7 +95,8 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
 
     this.sub1 = this.store.select(fromparamreducer.getSortCol).subscribe ( data => { this.sortCol = data});
     this.sub2 = this.store.select(fromparamreducer.getSortOrder).subscribe ( data => { this.sortOrder = data});
-  
+    this.sub3 = this.store.select(fromparamreducer.getSelectedId).subscribe ( data => { this.selectedId = data});    
+
   }
 
   private sort(sortcol : string){
@@ -108,6 +113,16 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
     else 
       return null;
   }
+
+  private selectRowId(rowid: string) {
+    this.store.dispatch(new fromparamactions.SelectRow({ id: this.id, selecteId: rowid }))
+  }
+
+  public getRowId() {
+    return this.selectedId;
+  }
+
+
 
   searchEvents(actions: any) {
     if (actions.outputformat == 'EXCEL') {
@@ -203,6 +218,7 @@ export class ParamDetPageComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe;
     this.sub1.unsubscribe;
     this.sub2.unsubscribe;
+    this.sub3.unsubscribe;        
   }
   Print(_code: string) {
     if (!this.gs.canPrint(this.menuid)) {
