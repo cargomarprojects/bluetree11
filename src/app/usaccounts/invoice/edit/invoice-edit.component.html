@@ -87,14 +87,19 @@
                                 <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_refno')"
                                     [(ngModel)]="mbl_refno" [disabled]="true" maxlength="15" />
                             </div>
-                            <label class="col-2 col-form-label col-form-label-sm">Arrival Notice</label>
-                            <div class="col-2">
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Arrival Notice</label>
+                            <div class="col-4">
                                 <select class="form-control form-control-sm" [(ngModel)]="record.inv_arrnotice">
                                     <option [value]="'N'">No</option>
                                     <option [value]="'Y'">Yes</option>
                                 </select>
                             </div>
                         </div>
+
+                       
                         <div class="form-group row">
                             <label class="col-4 col-form-label col-form-label-sm">Cust.Ref#</label>
                             <div class="col-4">
