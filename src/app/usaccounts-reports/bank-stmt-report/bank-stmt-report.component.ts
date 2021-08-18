@@ -286,7 +286,7 @@ export class BankStmtReportComponent implements OnInit {
   }
 
   Close() {
-    this.store.dispatch(new myActions.Delete({ id: this.urlid }));
+   // this.store.dispatch(new myActions.Delete({ id: this.urlid }));
     this.location.back();
   }
   private sort(sortcol: string) {

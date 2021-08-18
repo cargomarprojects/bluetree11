@@ -246,7 +246,7 @@ export class BankBalReportComponent implements OnInit {
     }
 
     Close() {
-        this.store.dispatch(new myActions.Delete({ id: this.urlid }));
+        //this.store.dispatch(new myActions.Delete({ id: this.urlid }));
         this.location.back();
     }
 
