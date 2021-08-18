@@ -121,6 +121,7 @@ export class FileUploadComponent implements OnInit {
   Mail_Pkid: string = '';
   modal: any;
 
+  selectedRowIndex = -1;
 
 
   constructor(
