@@ -78,8 +78,8 @@
             <th class="text-center">EMAIL</th>
           </tr>
         </thead>
-        <tbody class="page-body-tbody" >
-          <tr *ngFor="let rec of RecordList;i=index" (mousedown)="selectedRowIndex = i" [class.selected]="i == selectedRowIndex">
+        <tbody class="page-body-tbody" *ngFor="let rec of RecordList;let i=index">
+          <tr  (mousedown)="selectedRowIndex = i" [class.selected]="i == selectedRowIndex">
             <td  class="p-0 text-center" (click)="OpenFile(rec)">
               <i class="fa fa-folder-open fa-lg pointer" aria-hidden="true" ></i>
             </td> 
@@ -93,11 +93,10 @@
             <td class="p-0">{{rec.files_ref_no}}</td>
             <td class="p-0">{{rec.files_created_date | date : gs.date_display_fmt_with_time}}</td>
             <td class="text-center" (click)="RemoveRow(rec)">
-              <i class="fa fa-trash fa-lg pointer" aria-hidden="true"
-                >
-              </i></td>
-            <td class="text-center" (click)="Sendmail(rec,emailmodal)"><i class="fa fa-paper-plane fa-lg pointer" aria-hidden="true"
-                ></i>
+              <i class="fa fa-trash fa-lg pointer" aria-hidden="true"></i>
+            </td>
+            <td class="text-center" (click)="Sendmail(rec,emailmodal)">
+              <i class="fa fa-paper-plane fa-lg pointer" aria-hidden="true"></i>
             </td>
           </tr>
           <tr *ngIf="rec.files_editrow">
