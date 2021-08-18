@@ -5,7 +5,7 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
 import * as _ from 'lodash';
 
-import * as printJS from "print-js";
+//import * as printJS from "print-js";
 
 
 @Component({
@@ -186,7 +186,7 @@ export class ReportComponent implements OnInit {
       
       //window.open(url);
 
-      printJS(url);
+      //printJS(url);
 
       //this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname);
     }
