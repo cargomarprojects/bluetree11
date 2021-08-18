@@ -4,6 +4,7 @@
       <label class="mr-3">{{_title}}</label>
       <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
       <button *ngIf="canDownload" class="btn btn-primary btn-sm mr-1" (click)="report('download')">Download</button>
+      <button *ngIf="canDownload" class="btn btn-primary btn-sm mr-1" (click)="report('print')">Print</button>
       <button *ngIf="canExcel" class="btn btn-primary btn-sm mr-1" (click)="report('excel')">Excel</button>
       <button *ngIf="canEmail" class="btn btn-primary btn-sm mr-1" (click)="report('email',emailmodal)">Email</button>
       <label class="col-form-label col-form-label-sm mr-1"  >FileName</label>

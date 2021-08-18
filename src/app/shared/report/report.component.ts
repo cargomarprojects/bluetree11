@@ -177,6 +177,15 @@ export class ReportComponent implements OnInit {
       }
       this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname);
     }
+    else if (action == "print") {
+
+      var url = this.gs.WWW_ROOT_FILE_FOLDER.replace("Files_Folder","") + this._filename.replace('d:\\motherlines.us\\','');
+
+      window.open(url); 
+      
+
+      //this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname);
+    }
   }
 
   mailcallbackevent(event: any) {
