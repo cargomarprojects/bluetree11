@@ -162,6 +162,7 @@ export class Login2Component implements OnInit {
 
         await this.GLOBALCONTANTS.LoadSettings();
         await this.GLOBALCONTANTS.LoadMenu();
+        this.GLOBALCONTANTS.CheckAdminRights();
 
         this.GLOBALCONTANTS.IsAuthenticated = true;
 

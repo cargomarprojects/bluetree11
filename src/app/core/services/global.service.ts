@@ -907,6 +907,37 @@ export class GlobalService {
     return bRet;
   }
 
+  public CheckAdminRights() {
+  
+
+    this.CAN_ACCESS_GENERAL_EXPENSE = "N";
+    this.CAN_ACCESS_1099_EXPENSE = "N";
+    this.CAN_ACCESS_PAYROLL_EXPENSE = "N";
+    this.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT = "N";
+
+
+    if (this.user_isadmin == "Y")
+    {
+        this.CAN_ACCESS_GENERAL_EXPENSE = "Y";
+        this.CAN_ACCESS_1099_EXPENSE = "Y";
+        this.CAN_ACCESS_PAYROLL_EXPENSE = "Y";
+        this.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT = "Y";
+        return;
+    }
+    
+    if (this.screenExists("B839BE8E-1C3D-4FF8-BDC1-34E64B1C68FB"))
+        this.CAN_ACCESS_GENERAL_EXPENSE = "Y";
+    
+    if (this.screenExists("AECF923D-DFFF-406C-BAF4-F45685694B89"))
+        this.CAN_ACCESS_1099_EXPENSE = "Y";
+    
+    if (this.screenExists("0EFF5835-4256-4A49-B3AA-07EEF4D22AE9"))
+        this.CAN_ACCESS_PAYROLL_EXPENSE = "Y";
+    
+    if (this.screenExists("CA094B5F-5831-4D9D-9FCE-58CAF7F6F1B4"))
+        this.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT = "Y";
+    
+  }
 
 
   public InitData() {

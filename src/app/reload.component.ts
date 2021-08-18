@@ -36,6 +36,7 @@ export class ReloadComponent {
 
     await this.gs.LoadSettings();
     await this.gs.LoadMenu();
+    this.gs.CheckAdminRights();
 
     if (!this.gs.IsGlobalDataOk()) {
       this.router.navigate(['login'], { replaceUrl: true });
