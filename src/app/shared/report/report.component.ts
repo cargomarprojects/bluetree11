@@ -5,7 +5,7 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
 import * as _ from 'lodash';
 
-import * as printJS from "print-js";
+//import * as printJS from "print-js";
 
 
 @Component({
