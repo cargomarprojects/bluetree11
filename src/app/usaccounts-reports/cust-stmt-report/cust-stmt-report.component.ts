@@ -180,6 +180,9 @@ export class CustStmtReportComponent implements OnInit {
 
       } else {
 
+        // newly added line this.pkid
+        this.pkid = this.gs.getGuid();
+
         this.MainList = Array<Tbl_OS_REPORT>();
         this.invpkids = Array<any>();
         this.page_rows = this.gs.ROWS_TO_DISPLAY;
