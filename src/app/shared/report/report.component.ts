@@ -5,6 +5,9 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
 import * as _ from 'lodash';
 
+import print from 'print-js';
+
+
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
