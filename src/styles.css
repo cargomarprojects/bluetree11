@@ -94,7 +94,7 @@ tr.selected {
 }
 
 .page-body {
-    border-color: var(--custom-border-color) !important;
+    border-color: var(--custom-border-color) !important; 
 }
 
 .page-body-thead {
@@ -106,8 +106,13 @@ tr.selected {
 
 table, th, td {
     border-color: var(--custom-border-color) !important;
+ 
 }
 
+.table-scroll {
+    display: fixed;
+    overflow-x: auto;
+}
 
 .page-body-tbody {
   font-size: 11px; 
