@@ -3400,16 +3400,18 @@ export class GlobalService {
   ConvertDate2DisplayFormat(_strdate: string) {
 
     let retdate: string = '';
+    if (_strdate.includes("-")) {
+      var strdt = _strdate.split('-');
+      let dtyear: string = strdt[0];
+      let dtmonth: string = strdt[1];
+      let dtday: string = strdt[2];
 
-    var strdt = _strdate.split('-');
-    let dtyear: string = strdt[0];
-    let dtmonth: string = strdt[1];
-    let dtday: string = strdt[2];
-
-    if (this.DateFormat() == 'dd')
-      retdate = dtday + '-' + dtmonth + '-' + dtyear;
-    if (this.DateFormat() == 'mm')
-      retdate = dtmonth + '-' + dtday + '-' + dtyear;
+      if (this.DateFormat() == 'dd')
+        retdate = dtday + '-' + dtmonth + '-' + dtyear;
+      if (this.DateFormat() == 'mm')
+        retdate = dtmonth + '-' + dtday + '-' + dtyear;
+    } else
+      retdate = _strdate;
 
     return retdate;
   }
