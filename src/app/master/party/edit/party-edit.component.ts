@@ -271,12 +271,13 @@ export class PartyEditComponent implements OnInit {
     this.record.gen_poa_customs_yn_b = false;
     this.record.gen_poa_isf_yn_b = false;
     this.record.gen_bond_yn_b = false;
+    this.record.gen_carrier_email = '';
     this.gs.IsAdmin
 
-    if (this.gs.JOB_TYPE_AI.length > 0) {
-      // if (JobList.Count > 0)
-      //     Cmb_JobType.SelectedIndex = 0; 
-    }
+    // if (this.gs.JOB_TYPE_AI.length > 0) {
+    //   // if (JobList.Count > 0)
+    //   //     Cmb_JobType.SelectedIndex = 0; 
+    // }
   }
 
   GetRecord() {
@@ -291,7 +292,7 @@ export class PartyEditComponent implements OnInit {
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
         this.record = <Tbl_Mast_Partym>response.record;
-        this.records = <Tbl_Mast_Contacts[]>response.records;
+        this.records = (response.records == undefined || response.records == null) ? <Tbl_Mast_Contacts[]>[] :<Tbl_Mast_Contacts[]>response.records;
         this.mode = 'EDIT';
         this.record.gen_is_shipper_b = (this.record.gen_is_shipper == "Y") ? true : false;
         this.record.gen_is_consignee_b = (this.record.gen_is_consignee == "Y") ? true : false;
@@ -604,51 +605,6 @@ export class PartyEditComponent implements OnInit {
         this.record.gen_name = this.record.gen_short_name;
         break;
       }
-      //   case 'mbl_liner_bookingno': {
-      //     this.record.mbl_liner_bookingno = this.record.mbl_liner_bookingno.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_vessel': {
-      //     this.record.mbl_vessel = this.record.mbl_vessel.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_voyage': {
-      //     this.record.mbl_voyage = this.record.mbl_voyage.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_to_port1': {
-      //     this.record.mbl_to_port1 = this.record.mbl_to_port1.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_by_carrier1': {
-      //     this.record.mbl_by_carrier1 = this.record.mbl_by_carrier1.toUpperCase();
-      //     break;
-      //   }
-
-      //   case 'mbl_to_port2': {
-      //     this.record.mbl_to_port2 = this.record.mbl_to_port2.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_by_carrier2': {
-      //     this.record.mbl_by_carrier2 = this.record.mbl_by_carrier2.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_to_port3': {
-      //     this.record.mbl_to_port3 = this.record.mbl_to_port3.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_by_carrier3': {
-      //     this.record.mbl_by_carrier3 = this.record.mbl_by_carrier3.toUpperCase();
-      //     break;
-      //   }
-      //   case 'mbl_mawb_weight': {
-      //     this.record.mbl_mawb_weight = this.gs.roundNumber(this.record.mbl_mawb_weight, 3);
-      //     break;
-      //   }
-      //   case 'mbl_mawb_chwt': {
-      //     this.record.mbl_mawb_chwt = this.gs.roundNumber(this.record.mbl_mawb_chwt, 3);
-      //     break;
-      //   }
 
     }
   }
@@ -934,6 +890,9 @@ export class PartyEditComponent implements OnInit {
   }
 
   RemoveRow(_rec: Tbl_Mast_Contacts) {
+    if (!confirm("Delete Y/N")) {
+      return;
+    }
     this.errorMessage = '';
     this.records.splice(this.records.findIndex(rec => rec.cont_pkid == _rec.cont_pkid), 1);
   }
