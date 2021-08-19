@@ -52,6 +52,7 @@ export class MailComponent implements OnInit {
   message: string = '';
   default_cc_id: string = '';
   default_subject: string = '';
+  presetmessage: string = '';
 
   msgFontFamily: string = '';
   msgFontSize: string = '';
@@ -85,8 +86,12 @@ export class MailComponent implements OnInit {
     this.to_ids = '';
     this.subject = '';
 
+    this.presetmessage = '';
+    if (!this.gs.isBlank(this._maildata.presetmessage))
+      this.presetmessage = this._maildata.presetmessage;
+
     this.cc_ids2 = this.gs.user_email_cc.toString();
-    this.message = this.gs.user_email_signature.toString();
+    this.message = this.presetmessage + '\n' + this.gs.user_email_signature.toString();
     this.msgFontFamily = this.gs.user_email_sign_font;
     this.msgFontSize = this.gs.user_email_sign_size + "px";
     this.msgForeground = this.gs.user_email_sign_color;
@@ -106,6 +111,8 @@ export class MailComponent implements OnInit {
     if (!this.gs.isBlank(this._maildata.subject))
       this.default_subject = this._maildata.subject;
     this.subject = this.default_subject;
+
+
 
     $(function () {
       $('.modal-dialog').draggable();

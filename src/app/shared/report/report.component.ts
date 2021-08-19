@@ -82,7 +82,7 @@ export class ReportComponent implements OnInit {
   Mail_Pkid: string = '';
   AttachList: any[] = [];
   modal: any;
-  public maildata: any = { 'type': '', 'value': '', 'subject': '' };
+  public maildata: any = { 'type': '', 'value': '', 'subject': '', 'presetmessage': '' };
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -134,6 +134,11 @@ export class ReportComponent implements OnInit {
           this.maildata.subject = this._searchdata.MAIL_SUBJECT;
         } else {
           this.maildata.subject = '';
+        }
+        if (!this.gs.isBlank(response.presetmessage)) {
+          this.maildata.presetmessage = response.presetmessage;
+        } else {
+          this.maildata.presetmessage = '';
         }
 
         this.AutoLoad();
@@ -195,19 +200,19 @@ export class ReportComponent implements OnInit {
       this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname);
     }
     else if (action == "print") {
-        this.PrintPdf();
+      this.PrintPdf();
       //var url = this.gs.WWW_ROOT_FILE_FOLDER.replace("Files_Folder", "") + this._filename.replace('d:\\motherlines.us\\', '');
     }
   }
 
   PrintPdf() {
-    
+
     this.downloadfilename = this.GetFileWithoutExtension(this._filedisplayname);
     this.gs.getFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname).subscribe(response => {
 
-      var file = new Blob([response], {type: 'application/pdf'});
-       var fileURL = URL.createObjectURL(file);
-       printJS(fileURL);
+      var file = new Blob([response], { type: 'application/pdf' });
+      var fileURL = URL.createObjectURL(file);
+      printJS(fileURL);
 
     }, error => {
       this.errorMessage = this.gs.getError(error);
