@@ -25,9 +25,10 @@ export class MailComponent implements OnInit {
   @Input() set modalview(value: boolean) {
     this.ismodal = value;
   }
-  public _searchdata: any;
-  @Input() set searchdata(value: any) {
-    this._searchdata = value;
+  
+  private _maildata: any;
+  @Input() set maildata(value: any) {
+    this._maildata = value;
   }
   @Output() mailcallbackevent = new EventEmitter<any>();
   chkReadRecipt: boolean = false;
@@ -94,9 +95,9 @@ export class MailComponent implements OnInit {
       this.msgFontWeight = "normal";
       
       this.default_cc_id='';
-    if (this.searchdata.type == "CC") {
-      if (!this.gs.isBlank(this.searchdata.value))
-        this.default_cc_id = this.searchdata.value;
+    if (this._maildata.type == "CC") {
+      if (!this.gs.isBlank(this._maildata.value))
+        this.default_cc_id = this._maildata.value;
     }
     this.cc_ids = this.default_cc_id;
 
