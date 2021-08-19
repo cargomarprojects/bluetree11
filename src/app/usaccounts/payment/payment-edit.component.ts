@@ -438,7 +438,6 @@ export class PaymentEditComponent implements OnInit {
         rec.inv_flag2 = !rec.inv_flag2;
         rec.inv_flag = (rec.inv_flag2) ? 'Y' : 'N';
         this.ms.FindTotal("CHKBOX", rec);
-
     }
 
 

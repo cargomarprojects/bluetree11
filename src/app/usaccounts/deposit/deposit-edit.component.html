@@ -53,7 +53,7 @@
         <div class="col-md-4 testbox  px-0 mx-0">
             <div class="form-group row">
                 <label class="col-2 col-form-label col-form-label-sm">Total</label>
-                <label class="col-8 col-form-label col-form-label-sm">{{msEdit.total_amount}}</label>
+                <label class="col-8 col-form-label col-form-label-sm">{{msEdit.total_amount | number : '1.2-2'}}</label>
             </div>
         </div>
 
@@ -77,9 +77,9 @@
             <tr *ngFor="let rec of msEdit.arPendingList" 
                 (mousedown)="msEdit.selectRowId(rec.pay_pkid)" 
                 [class.selected]="rec.pay_pkid == msEdit.getRowId()">
-                <td>
+                <td (click)="swapSelection(rec)">
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" (click)="swapSelection(rec)" #chkbox
+                        <input type="checkbox" class="form-check-input"  #chkbox
                             [(ngModel)]="rec.pay_flag2"></div>
                 </td>
                 <td>{{rec.pay_docno}}</td>
