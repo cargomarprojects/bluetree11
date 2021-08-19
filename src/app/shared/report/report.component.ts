@@ -125,9 +125,13 @@ export class ReportComponent implements OnInit {
 
         if (!this.gs.isBlank(response.type)) {
           this.mail_searchdata.type = response.type;
-          this.mail_searchdata.value = response.value;
         } else {
           this.mail_searchdata.type = '';
+        }
+
+        if (!this.gs.isBlank(response.value)) {
+          this.mail_searchdata.value = response.value;
+        } else {
           this.mail_searchdata.value = '';
         }
 
