@@ -82,6 +82,7 @@ export class ReportComponent implements OnInit {
   Mail_Pkid: string = '';
   AttachList: any[] = [];
   modal: any;
+  mail_searchdata: any = {};
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -121,6 +122,14 @@ export class ReportComponent implements OnInit {
         this.filename2 = response.filename2;
         this.filetype2 = response.filetype2;
         this.filedisplayname2 = response.filedisplayname2;
+
+        if (!this.gs.isBlank(response.type)) {
+          this.mail_searchdata.type = response.type;
+          this.mail_searchdata.value = response.value;
+        } else {
+          this.mail_searchdata.type = '';
+          this.mail_searchdata.value = '';
+        }
 
         this.AutoLoad();
       },
@@ -182,8 +191,8 @@ export class ReportComponent implements OnInit {
     }
     else if (action == "print") {
 
-      var url = this.gs.WWW_ROOT_FILE_FOLDER.replace("Files_Folder","") + this._filename.replace('d:\\motherlines.us\\','');
-      
+      var url = this.gs.WWW_ROOT_FILE_FOLDER.replace("Files_Folder", "") + this._filename.replace('d:\\motherlines.us\\', '');
+
       //window.open(url);
 
       //printJS(url);

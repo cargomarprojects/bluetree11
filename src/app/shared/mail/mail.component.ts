@@ -25,6 +25,10 @@ export class MailComponent implements OnInit {
   @Input() set modalview(value: boolean) {
     this.ismodal = value;
   }
+  private _searchdata: any;
+  @Input() set searchdata(value: any) {
+    this._searchdata = value;
+  }
   @Output() mailcallbackevent = new EventEmitter<any>();
   chkReadRecipt: boolean = false;
   chkDelivReceipt: boolean = false;
@@ -45,6 +49,7 @@ export class MailComponent implements OnInit {
   bcc_ids: string = '';
   subject: string = '';
   message: string = '';
+  default_cc_id: string = '';
 
   msgFontFamily: string = '';
   msgFontSize: string = '';
@@ -73,10 +78,16 @@ export class MailComponent implements OnInit {
     this.chkDelivReceipt = false;
     this.chkReadRecipt = false;
     this.cc_ids = '';
+    if (this.searchdata.type == "CC") {
+      if (!this.gs.isBlank(this.searchdata.value))
+        this.default_cc_id = this.searchdata.value;
+    }
+    this.cc_ids = this.default_cc_id;
     this.cc_ids2 = '';
     this.bcc_ids = '';
     this.to_ids = '';
     this.subject = '';
+
     this.cc_ids2 = this.gs.user_email_cc.toString();
     this.message = this.gs.user_email_signature.toString();
     this.msgFontFamily = this.gs.user_email_sign_font;
@@ -322,7 +333,15 @@ export class MailComponent implements OnInit {
     })
 
     this.to_ids = Mail_To.toString().toLowerCase();
-    this.cc_ids = Mail_Cc.toString().toLowerCase();
+
+    if (this.gs.isBlank(this.default_cc_id))
+      this.cc_ids = Mail_Cc.toString().toLowerCase();
+    else {
+      this.cc_ids = this.default_cc_id;
+      if (this.cc_ids != '')
+        this.cc_ids += ','
+      this.cc_ids += Mail_Cc.toString().toLowerCase();
+    }
 
     this.EmailList = <Table_Email[]>[];
   }
