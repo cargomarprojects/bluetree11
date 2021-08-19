@@ -271,7 +271,7 @@ export class PartyEditComponent implements OnInit {
     this.record.gen_poa_customs_yn_b = false;
     this.record.gen_poa_isf_yn_b = false;
     this.record.gen_bond_yn_b = false;
-    this.record.gen_carrier_email = '';
+    // this.record.gen_carrier_email = '';
     this.gs.IsAdmin
 
     // if (this.gs.JOB_TYPE_AI.length > 0) {

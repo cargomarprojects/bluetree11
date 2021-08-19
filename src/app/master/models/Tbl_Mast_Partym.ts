@@ -104,7 +104,7 @@ export interface Tbl_Mast_Partym {
     gen_is_splac: string;
     gen_splac_memo: string;
     gen_is_blackac: string;
-    gen_carrier_email: string;
+    // gen_carrier_email: string;
     
     gen_is_shipper_b: boolean;
     gen_is_consignee_b: boolean;
