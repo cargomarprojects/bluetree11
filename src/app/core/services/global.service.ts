@@ -3397,7 +3397,7 @@ export class GlobalService {
     return true;
   }
 
-  DateDisplayformat(_strdate: string) {
+  ConvertDate2DisplayFormat(_strdate: string) {
 
     let retdate: string = '';
 

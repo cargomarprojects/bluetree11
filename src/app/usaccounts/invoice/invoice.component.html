@@ -43,29 +43,29 @@
           <div class="form-group row">
             <label class="col-3 col-form-label col-form-label-sm">AR TOTAL</label>
             <div class="col-3">
-              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="income" />
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [value]="income | number : '1.2-2'" />
             </div>
             <label class="col-3 col-form-label col-form-label-sm">AR BALANCE</label>
             <div class="col-3">
-              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="ar_bal" />
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [value]="ar_bal | number : '1.2-2'" />
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-3 col-form-label col-form-label-sm">AP TOTAL</label>
             <div class="col-3">
-              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="expense" />
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [value]="expense | number : '1.2-2'" />
             </div>
             <label class="col-3 col-form-label col-form-label-sm">AP BALANCE</label>
             <div class="col-3">
-              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="ap_bal" />
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [value]="ap_bal | number : '1.2-2'" />
             </div>
           </div>
 
           <div class="form-group row">
             <label class="col-3 col-form-label col-form-label-sm">REVENUE</label>
             <div class="col-3">
-              <input [disabled]="true" class="form-control form-control-sm" type="text" [(ngModel)]="profit" />
+              <input [disabled]="true" class="form-control form-control-sm" type="text" [value]="profit | number : '1.2-2'" />
             </div>
 
           </div>
