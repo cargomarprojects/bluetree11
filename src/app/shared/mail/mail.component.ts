@@ -87,9 +87,9 @@ export class MailComponent implements OnInit {
     else
       this.msgFontWeight = "normal";
 
-      $(function() {
-        $('.modal-dialog').draggable();
-      });
+    $(function () {
+      $('.modal-dialog').draggable();
+    });
   }
 
   LovSelected(_Record: SearchTable) {
@@ -272,6 +272,8 @@ export class MailComponent implements OnInit {
         this.EmailList = <Table_Email[]>response.list;
         if (this.gs.isBlank(this.EmailList))
           alert('Email IDs Not Found');
+        else
+          this.chkallto = true;
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
       });
@@ -296,6 +298,13 @@ export class MailComponent implements OnInit {
 
   }
 
+  EmailListChk_Click(_type: string, _rec: Table_Email) {
+    if (_type == "TO")
+      _rec.is_to = !_rec.is_to;
+    if (_type == "CC")
+      _rec.is_cc = !_rec.is_cc;
+  }
+
   SaveIds() {
     let Mail_To: string = "";
     let Mail_Cc: string = "";
@@ -312,8 +321,8 @@ export class MailComponent implements OnInit {
       }
     })
 
-    this.to_ids = Mail_To.toString();
-    this.cc_ids = Mail_Cc.toString();
+    this.to_ids = Mail_To.toString().toLowerCase();
+    this.cc_ids = Mail_Cc.toString().toLowerCase();
 
     this.EmailList = <Table_Email[]>[];
   }
