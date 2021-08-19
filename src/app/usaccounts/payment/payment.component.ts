@@ -53,7 +53,7 @@ export class PaymentComponent implements OnInit {
   }
 
   initPage() {
-     
+
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -83,7 +83,7 @@ export class PaymentComponent implements OnInit {
       origin: 'payment-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete2('Silver.USAccounts.Trans/PaymentEditPage',  parameter);
+    this.gs.Naviagete2('Silver.USAccounts.Trans/PaymentEditPage', parameter);
 
   }
 
@@ -101,7 +101,7 @@ export class PaymentComponent implements OnInit {
       origin: 'payment-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete2('Silver.USAccounts.Trans/PaymentEditPage',  parameter);
+    this.gs.Naviagete2('Silver.USAccounts.Trans/PaymentEditPage', parameter);
   }
 
   getRouteDet(_type: string, _mode: string, _record: Tbl_Acc_Payment = null) {
@@ -163,6 +163,9 @@ export class PaymentComponent implements OnInit {
       this.report_searchdata.PKID = rec.pay_pkid;
       this.report_searchdata.TYPE = rec.pay_type;
       this.report_menuid = this.gs.MENU_ACC_ARAP_SETTLMENT;
+      let sub: string = '';
+      sub = rec.pay_mode + ' - ' + rec.pay_cust_name + ' ' + rec.pay_date + ' $' + this.gs.roundNumber(rec.pay_diff,2);
+      this.report_searchdata.MAIL_SUBJECT = sub;
       this.tab = 'simple';
     }
     if (_type === 'cash') {

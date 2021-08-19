@@ -25,6 +25,11 @@ export class MailComponent implements OnInit {
   @Input() set modalview(value: boolean) {
     this.ismodal = value;
   }
+
+  private _maildata: any;
+  @Input() set maildata(value: any) {
+    this._maildata = value;
+  }
   @Output() mailcallbackevent = new EventEmitter<any>();
   chkReadRecipt: boolean = false;
   chkDelivReceipt: boolean = false;
@@ -45,6 +50,8 @@ export class MailComponent implements OnInit {
   bcc_ids: string = '';
   subject: string = '';
   message: string = '';
+  default_cc_id: string = '';
+  default_subject: string = '';
 
   msgFontFamily: string = '';
   msgFontSize: string = '';
@@ -77,6 +84,7 @@ export class MailComponent implements OnInit {
     this.bcc_ids = '';
     this.to_ids = '';
     this.subject = '';
+
     this.cc_ids2 = this.gs.user_email_cc.toString();
     this.message = this.gs.user_email_signature.toString();
     this.msgFontFamily = this.gs.user_email_sign_font;
@@ -86,6 +94,18 @@ export class MailComponent implements OnInit {
       this.msgFontWeight = "bold";
     else
       this.msgFontWeight = "normal";
+
+    this.default_cc_id = '';
+    if (this._maildata.type == "CC") {
+      if (!this.gs.isBlank(this._maildata.value))
+        this.default_cc_id = this._maildata.value;
+    }
+    this.cc_ids = this.default_cc_id;
+
+    this.default_subject = '';
+    if (!this.gs.isBlank(this._maildata.subject))
+      this.default_subject = this._maildata.subject;
+    this.subject = this.default_subject;
 
     $(function () {
       $('.modal-dialog').draggable();
@@ -273,7 +293,7 @@ export class MailComponent implements OnInit {
         if (this.gs.isBlank(this.EmailList))
           alert('Email IDs Not Found');
         else
-          this.chkallto = true;
+          this.chkallto = this.allto;
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
       });
@@ -322,7 +342,15 @@ export class MailComponent implements OnInit {
     })
 
     this.to_ids = Mail_To.toString().toLowerCase();
-    this.cc_ids = Mail_Cc.toString().toLowerCase();
+
+    if (this.gs.isBlank(this.default_cc_id))
+      this.cc_ids = Mail_Cc.toString().toLowerCase();
+    else {
+      this.cc_ids = this.default_cc_id;
+      if (this.cc_ids != '')
+        this.cc_ids += ','
+      this.cc_ids += Mail_Cc.toString().toLowerCase();
+    }
 
     this.EmailList = <Table_Email[]>[];
   }
