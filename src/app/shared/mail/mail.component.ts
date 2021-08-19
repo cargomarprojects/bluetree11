@@ -25,7 +25,7 @@ export class MailComponent implements OnInit {
   @Input() set modalview(value: boolean) {
     this.ismodal = value;
   }
-  private _searchdata: any;
+  public _searchdata: any;
   @Input() set searchdata(value: any) {
     this._searchdata = value;
   }
@@ -78,11 +78,6 @@ export class MailComponent implements OnInit {
     this.chkDelivReceipt = false;
     this.chkReadRecipt = false;
     this.cc_ids = '';
-    if (this.searchdata.type == "CC") {
-      if (!this.gs.isBlank(this.searchdata.value))
-        this.default_cc_id = this.searchdata.value;
-    }
-    this.cc_ids = this.default_cc_id;
     this.cc_ids2 = '';
     this.bcc_ids = '';
     this.to_ids = '';
@@ -97,6 +92,12 @@ export class MailComponent implements OnInit {
       this.msgFontWeight = "bold";
     else
       this.msgFontWeight = "normal";
+
+    if (this.searchdata.type == "CC") {
+      if (!this.gs.isBlank(this.searchdata.value))
+        this.default_cc_id = this.searchdata.value;
+    }
+    this.cc_ids = this.default_cc_id;
 
     $(function () {
       $('.modal-dialog').draggable();
