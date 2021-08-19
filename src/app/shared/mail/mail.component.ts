@@ -92,7 +92,8 @@ export class MailComponent implements OnInit {
       this.msgFontWeight = "bold";
     else
       this.msgFontWeight = "normal";
-
+      
+      this.default_cc_id='';
     if (this.searchdata.type == "CC") {
       if (!this.gs.isBlank(this.searchdata.value))
         this.default_cc_id = this.searchdata.value;
