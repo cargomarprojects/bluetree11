@@ -43,40 +43,43 @@
           <div *ngIf="EmailList.length>0" class="form-group row">
             <div class="offset-md-2 col-10">
               <div class="page-body table-responsive table-bordered">
-                <table class="table  table-hover table-sm">
-                  <thead class="page-body-thead">
-                    <tr>
-                      <th>
-                        <div class="form-check"> <input type="checkbox" (click)="SelectDeselect('TO')"
-                            class="form-check-input" [(ngModel)]="chkallto"><span>TO</span>
-                        </div>
-                      </th>
-                      <th>
-                        <div class="form-check"> <input type="checkbox" (click)="SelectDeselect('CC')"
-                            class="form-check-input" [(ngModel)]="chkallcc"><span>CC</span>
-                        </div>
-                      </th>
-                      <th>NAME</th>
-                      <th>TITLE</th>
-                      <th>EMAIL-ID</th>
-                    </tr>
-                  </thead>
-                  <tbody class="page-body-tbody">
-                    <tr *ngFor="let rec of EmailList">
-                      <td class="p-0" (click)="EmailListChk_Click('TO',rec)">
-                        <div class="form-check"> <input type="checkbox" class="form-check-input"
-                            [(ngModel)]="rec.is_to"><span></span></div>
-                      </td>
-                      <td class="p-0" (click)="EmailListChk_Click('CC',rec)">
-                        <div class="form-check"> <input type="checkbox" class="form-check-input"
-                            [(ngModel)]="rec.is_cc"><span></span></div>
-                      </td>
-                      <td class="p-0">{{rec.name}}</td>
-                      <td class="p-0">{{rec.title}}</td>
-                      <td class="p-0">{{rec.email}}</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div [style.height]="EmailList.length>6?'100px':'auto'"
+                  [style.overflow-y]="EmailList.length>6?'scroll':'auto'">
+                  <table class="table  table-hover table-sm">
+                    <thead class="page-body-thead">
+                      <tr>
+                        <th>
+                          <div class="form-check"> <input type="checkbox" (click)="SelectDeselect('TO')"
+                              class="form-check-input" [(ngModel)]="chkallto"><span>TO</span>
+                          </div>
+                        </th>
+                        <th>
+                          <div class="form-check"> <input type="checkbox" (click)="SelectDeselect('CC')"
+                              class="form-check-input" [(ngModel)]="chkallcc"><span>CC</span>
+                          </div>
+                        </th>
+                        <th>NAME</th>
+                        <th>TITLE</th>
+                        <th>EMAIL-ID</th>
+                      </tr>
+                    </thead>
+                    <tbody class="page-body-tbody">
+                      <tr *ngFor="let rec of EmailList">
+                        <td class="p-0" (click)="EmailListChk_Click('TO',rec)">
+                          <div class="form-check"> <input type="checkbox" class="form-check-input"
+                              [(ngModel)]="rec.is_to"><span></span></div>
+                        </td>
+                        <td class="p-0" (click)="EmailListChk_Click('CC',rec)">
+                          <div class="form-check"> <input type="checkbox" class="form-check-input"
+                              [(ngModel)]="rec.is_cc"><span></span></div>
+                        </td>
+                        <td class="p-0">{{rec.name}}</td>
+                        <td class="p-0">{{rec.title}}</td>
+                        <td class="p-0">{{rec.email}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 <div class="form-group row">
                   <div class="col-12">
                     <button class="btn btn-info btn-sm mr-1" (click)="SaveIds()">Ok</button>
