@@ -908,7 +908,7 @@ export class GlobalService {
   }
 
   public CheckAdminRights() {
-  
+
 
     this.CAN_ACCESS_GENERAL_EXPENSE = "N";
     this.CAN_ACCESS_1099_EXPENSE = "N";
@@ -916,27 +916,26 @@ export class GlobalService {
     this.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT = "N";
 
 
-    if (this.user_isadmin == "Y")
-    {
-        this.CAN_ACCESS_GENERAL_EXPENSE = "Y";
-        this.CAN_ACCESS_1099_EXPENSE = "Y";
-        this.CAN_ACCESS_PAYROLL_EXPENSE = "Y";
-        this.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT = "Y";
-        return;
+    if (this.user_isadmin == "Y") {
+      this.CAN_ACCESS_GENERAL_EXPENSE = "Y";
+      this.CAN_ACCESS_1099_EXPENSE = "Y";
+      this.CAN_ACCESS_PAYROLL_EXPENSE = "Y";
+      this.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT = "Y";
+      return;
     }
-    
+
     if (this.screenExists("B839BE8E-1C3D-4FF8-BDC1-34E64B1C68FB"))
-        this.CAN_ACCESS_GENERAL_EXPENSE = "Y";
-    
+      this.CAN_ACCESS_GENERAL_EXPENSE = "Y";
+
     if (this.screenExists("AECF923D-DFFF-406C-BAF4-F45685694B89"))
-        this.CAN_ACCESS_1099_EXPENSE = "Y";
-    
+      this.CAN_ACCESS_1099_EXPENSE = "Y";
+
     if (this.screenExists("0EFF5835-4256-4A49-B3AA-07EEF4D22AE9"))
-        this.CAN_ACCESS_PAYROLL_EXPENSE = "Y";
-    
+      this.CAN_ACCESS_PAYROLL_EXPENSE = "Y";
+
     if (this.screenExists("CA094B5F-5831-4D9D-9FCE-58CAF7F6F1B4"))
-        this.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT = "Y";
-    
+      this.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT = "Y";
+
   }
 
 
@@ -1699,14 +1698,14 @@ export class GlobalService {
   }
 
   public getPagetitle(menucode: string): string {
-    if ( this.MenuList) 
+    if (this.MenuList)
       return this.MenuList.find(f => f.menu_name == menucode).menu_name;
-    else 
+    else
       return '';
   }
 
   public getMenu(menucode: string): User_Menu {
-      return this.MenuList.find(f => f.menu_name == menucode);
+    return this.MenuList.find(f => f.menu_name == menucode);
   }
 
   public getMenuById(menuid: string): User_Menu {
@@ -1764,7 +1763,7 @@ export class GlobalService {
   public canSave(menuid: string, mode: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    if ( this.MenuList) {
+    if (this.MenuList) {
       var itm = this.MenuList.find(f => f.menu_pkid == menuid);
       if (itm) {
         if (mode == "ADD" && itm.rights_add == "Y")
@@ -1779,7 +1778,7 @@ export class GlobalService {
   public canAdd(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    if ( this.MenuList) {
+    if (this.MenuList) {
       var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_add == "Y");
       if (itm)
         bret = true;
@@ -1792,7 +1791,7 @@ export class GlobalService {
 
     bret = this.user_isadmin == 'Y';
 
-    if ( this.MenuList) {
+    if (this.MenuList) {
       var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_edit == "Y");
       if (itm)
         bret = true;
@@ -1802,7 +1801,7 @@ export class GlobalService {
   public canView(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    if ( this.MenuList) {
+    if (this.MenuList) {
       var itm = this.MenuList.find(f => f.menu_pkid == menuid && (f.rights_edit == "Y" || f.rights_view == "Y"));
       if (itm)
         bret = true;
@@ -1813,7 +1812,7 @@ export class GlobalService {
   public canDelete(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    if ( this.MenuList) {
+    if (this.MenuList) {
       var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_delete == "Y");
       if (itm)
         bret = true;
@@ -1824,7 +1823,7 @@ export class GlobalService {
   public canPrint(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    if ( this.MenuList) {
+    if (this.MenuList) {
       var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_print == "Y");
       if (itm)
         bret = true;
@@ -1835,7 +1834,7 @@ export class GlobalService {
   public screenExists(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    if ( this.MenuList) {
+    if (this.MenuList) {
       var itm = this.MenuList.find(f => f.menu_pkid == menuid && (f.rights_add == "Y" || f.rights_edit == "Y" || f.rights_view == "Y" || f.rights_print == "Y" || f.rights_delete == "Y"));
       if (itm)
         bret = true;
@@ -1846,7 +1845,7 @@ export class GlobalService {
   public canDownload(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    if ( this.MenuList) {
+    if (this.MenuList) {
       var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_print == "Y");
       if (itm)
         bret = true;
@@ -1858,7 +1857,7 @@ export class GlobalService {
   public canEmail(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    if ( this.MenuList) {
+    if (this.MenuList) {
       var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_email == "Y");
       if (itm)
         bret = true;
@@ -1869,9 +1868,9 @@ export class GlobalService {
   public canExel(menuid: string): boolean {
     var bret: boolean = false;
     bret = this.user_isadmin == 'Y';
-    if ( this.MenuList) {
+    if (this.MenuList) {
       var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_print == "Y");
-      if   (itm)
+      if (itm)
         bret = true;
     }
     return bret;
@@ -1884,7 +1883,7 @@ export class GlobalService {
     var bret2: boolean = false;
     bret1 = this.user_isadmin == 'Y';
 
-    if ( this.MenuList) {
+    if (this.MenuList) {
       var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_admin == 'Y');
       if (itm)
         bret2 = true;
@@ -1897,8 +1896,8 @@ export class GlobalService {
     var bret1: boolean = false;
     var bret2: boolean = false;
     bret1 = this.user_isadmin == 'Y';
-    
-    if ( this.MenuList) {
+
+    if (this.MenuList) {
       var itm = this.MenuList.find(f => f.menu_pkid == menuid && f.rights_company == 'Y');
       if (itm)
         bret2 = true;
@@ -3259,23 +3258,23 @@ export class GlobalService {
   }
 
 
-  getURLParamFromString(url : string, colname : string) {
+  getURLParamFromString(url: string, colname: string) {
 
     var sval = '';
     var qs = url.split('?')[1];
     if (qs) {
       var arr = qs.split('&');
       for (var i = 0; i < arr.length; i++) {
-          var data = arr[i].split('=');
-          if ( data.length >= 2) {
-            if ( data[0].toLowerCase() == colname)
-              sval = data[1];
-          }
+        var data = arr[i].split('=');
+        if (data.length >= 2) {
+          if (data[0].toLowerCase() == colname)
+            sval = data[1];
+        }
       }
     }
     return sval;
   }
-   
+
 
 
 
@@ -3396,6 +3395,23 @@ export class GlobalService {
     if (this.isBlank(this.GLOBAL_REPORT_FOLDER)) { alert('GLOBAL REPORT FOLDER Cannot Blank'); return false; }
 
     return true;
+  }
+
+  DateDisplayformat(_strdate: string) {
+
+    let retdate: string = '';
+
+    var strdt = _strdate.split('-');
+    let dtyear: string = strdt[0];
+    let dtmonth: string = strdt[1];
+    let dtday: string = strdt[2];
+
+    if (this.DateFormat() == 'dd')
+      retdate = dtday + '-' + dtmonth + '-' + dtyear;
+    if (this.DateFormat() == 'mm')
+      retdate = dtmonth + '-' + dtday + '-' + dtyear;
+
+    return retdate;
   }
 
 }

@@ -82,7 +82,7 @@ export class ReportComponent implements OnInit {
   Mail_Pkid: string = '';
   AttachList: any[] = [];
   modal: any;
-  public maildata: any = {};
+  public maildata: any = { 'type': '', 'value': '', 'subject': '' };
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -123,13 +123,19 @@ export class ReportComponent implements OnInit {
         this.filetype2 = response.filetype2;
         this.filedisplayname2 = response.filedisplayname2;
 
-        if (!this.gs.isBlank(response.type)&&!this.gs.isBlank(response.value)) {
-          this.maildata = {'type':response.type,'value':response.value};
+        if (!this.gs.isBlank(response.type) && !this.gs.isBlank(response.value)) {
+          this.maildata.type = response.type;
+          this.maildata.value = response.value;
         } else {
-          this.maildata = {'type':'','value':''};
+          this.maildata.type = '';
+          this.maildata.value = '';
+        }
+        if (!this.gs.isBlank(this._searchdata.MAIL_SUBJECT)) {
+          this.maildata.subject = this._searchdata.MAIL_SUBJECT;
+        } else {
+          this.maildata.subject = '';
         }
 
-       
         this.AutoLoad();
       },
       error => {

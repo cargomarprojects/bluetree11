@@ -25,7 +25,7 @@ export class MailComponent implements OnInit {
   @Input() set modalview(value: boolean) {
     this.ismodal = value;
   }
-  
+
   private _maildata: any;
   @Input() set maildata(value: any) {
     this._maildata = value;
@@ -51,6 +51,7 @@ export class MailComponent implements OnInit {
   subject: string = '';
   message: string = '';
   default_cc_id: string = '';
+  default_subject: string = '';
 
   msgFontFamily: string = '';
   msgFontSize: string = '';
@@ -93,13 +94,18 @@ export class MailComponent implements OnInit {
       this.msgFontWeight = "bold";
     else
       this.msgFontWeight = "normal";
-      
-      this.default_cc_id='';
+
+    this.default_cc_id = '';
     if (this._maildata.type == "CC") {
       if (!this.gs.isBlank(this._maildata.value))
         this.default_cc_id = this._maildata.value;
     }
     this.cc_ids = this.default_cc_id;
+
+    this.default_subject = '';
+    if (!this.gs.isBlank(this._maildata.subject))
+      this.default_subject = this._maildata.subject;
+    this.subject = this.default_subject;
 
     $(function () {
       $('.modal-dialog').draggable();
