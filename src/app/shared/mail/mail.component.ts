@@ -287,7 +287,7 @@ export class MailComponent implements OnInit {
         if (this.gs.isBlank(this.EmailList))
           alert('Email IDs Not Found');
         else
-          this.chkallto = true;
+          this.chkallto = this.allto;
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
       });
