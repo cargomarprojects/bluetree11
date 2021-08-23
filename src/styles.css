@@ -943,12 +943,15 @@ br {
     
 }
 
-
 .dropdown-menu {
     height: auto;
     max-height: calc(100vh - 240px);
     overflow-x: hidden;
  }  
+
+ .cntr th{
+    min-width: 120px;
+ }
 
 
  /* Extra small devices (portrait phones, less than 576px) */
@@ -1007,6 +1010,3 @@ br {
       max-width: 1198px !important;
     }
 }
- 
-
-
