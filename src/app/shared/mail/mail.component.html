@@ -134,30 +134,34 @@
 
           <div *ngIf="AttachList.length > 0" class="form-group row">
             <label class="col-md-2 col-form-label col-form-label-sm">Attachments</label>
-            <div class="col-sm-10">
+            <!-- {{lbl_msgattachfz}} -->
+            <div class="col-md-10">
               <div>
                 <label *ngFor="let rec of AttachList">
-                  <button [disabled]="loading" (click)="Downloadfile(rec.filename,rec.filetype,rec.filedisplayname)"
+                  <button (click)="Downloadfile(rec.filename,rec.filetype,rec.filedisplayname)"
                     class="btn btn-link pointer">{{rec.filedisplayname}}</button>
                   <i class="fa fa-trash pointer" aria-hidden="true" (click)="RemoveAttachment(rec.filename,'MAIL')"></i>
                 </label>
               </div>
             </div>
           </div>
-          <!-- <div *ngIf="sHtml" class="form-group row">
-            <label class="col-sm-1 col-form-label col-form-label-sm">Message</label>
-            <div class="col-sm-11">
-              <div class="page-box">
-                <div [innerHTML]="sHtml"></div>
+          <div class="form-group row">
+            <label class="col-md-2 col-form-label col-form-label-sm">Attach File</label>
+            <!-- <div style="padding-left: 2px" class="col-md-2">
+              <button [disabled]="loading" (click)="ShowHideAttach()" class="btn btn-link">Attach File</button>
+            </div> -->
+            <div class="col-md-10">
+              <div class="form-group row">
+                <div class="col-md-7">
+                  <input type="file" id="file" multiple style="width: 600px" #fileinput
+                    (change)="getFileDetails($event)">
+                </div>
+                <!-- <div class="col-1">
+                    <button (click)="uploadFiles()">Attach</button>
+                  </div> -->
               </div>
             </div>
-          </div> -->
-          <!-- <div *ngIf="sHtml" class="form-group row">
-            <label class="col-sm-1 col-form-label col-form-label-sm"></label>
-            <div class="col-sm-11">
-              <textarea rows="6" class="form-control form-control-sm" [(ngModel)]="message"></textarea>
-            </div>
-          </div> -->
+          </div>
           <div class="form-group row">
             <label class="col-sm-2 col-form-label col-form-label-sm">Message</label>
             <div class="col-sm-10">

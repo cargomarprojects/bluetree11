@@ -180,7 +180,7 @@ export class ReportComponent implements OnInit {
       }
       this.Mail_Pkid = this.gs.getGuid();
       this.AttachList = new Array<any>();
-      this.AttachList.push({ filename: this._filename, filetype: this._filetype, filedisplayname: this._filedisplayname });
+      this.AttachList.push({ filename: this._filename, filetype: this._filetype, filedisplayname: this._filedisplayname,filesize:0 });
       this.modal = this.modalservice.open(emailmodal, { centered: true });
     }
     else if (action == "excel") {

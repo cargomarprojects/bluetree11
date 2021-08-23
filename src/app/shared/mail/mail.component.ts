@@ -5,6 +5,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { LovService } from '../services/lov.service';
 import { Table_Email } from '../models/table_email';
 import { SearchTable } from '../../shared/models/searchtable';
+import { Table_Mast_Files } from '../models/table_mast_files';
 import { strictEqual } from 'assert';
 import { HtmlParser } from '@angular/compiler';
 
@@ -39,6 +40,7 @@ export class MailComponent implements OnInit {
   showattach: boolean = false;
 
   myFiles: string[] = [];
+  FileList: any[] = [];
   filesSelected: boolean = false;;
 
   disableSave = true;
@@ -63,7 +65,9 @@ export class MailComponent implements OnInit {
   chkallcc: boolean = false;
   allto: boolean = true;
   allcc: boolean = false;
-
+  lbl_msgattachfz: string = '';
+  attach_totfilesize: number = 0;
+  MultiFilesList: Table_Mast_Files[] = [];
 
   public errorMessage: string[] = [];
   constructor(
@@ -112,7 +116,7 @@ export class MailComponent implements OnInit {
       this.default_subject = this._maildata.subject;
     this.subject = this.default_subject;
 
-
+    this.GetTotfilesize();
 
     $(function () {
       $('.modal-dialog').draggable();
@@ -282,6 +286,7 @@ export class MailComponent implements OnInit {
 
   RemoveAttachment(Id: string, _type: string) {
     this.AttachList.splice(this.AttachList.findIndex(rec => rec.filename == Id), 1);
+   this.GetTotfilesize();
   }
 
   GetEmailIds() {
@@ -363,5 +368,82 @@ export class MailComponent implements OnInit {
   }
   CancelList() {
     this.EmailList = <Table_Email[]>[];
+  }
+
+  ShowHideAttach() {
+    this.showattach = !this.showattach;
+  }
+
+
+  getFileDetails(e: any) {
+    this.MultiFilesList = <Table_Mast_Files[]>[];
+    this.filesSelected = false;
+    this.myFiles = [];
+    for (var i = 0; i < e.target.files.length; i++) {
+      this.filesSelected = true;
+      this.myFiles.push(e.target.files[i]);
+    }
+    this.uploadFiles();
+  }
+
+  uploadFiles() {
+
+    if (!this.filesSelected) {
+      // alert('No File Selected');
+      return;
+    }
+
+    let frmData: FormData = new FormData();
+    frmData.append("report_folder", this.gs.GLOBAL_REPORT_FOLDER);
+    for (var i = 0; i < this.myFiles.length; i++) {
+      frmData.append("fileUpload", this.myFiles[i]);
+    }
+
+    this.http2.post<any>(
+      this.gs.baseUrl + '/api/General/AttachFiles', frmData, this.gs.headerparam2('authorized-fileupload')).subscribe(
+        data => {
+          this.filesSelected = false;
+          this.fileinput.nativeElement.value = '';
+          if (this.gs.isBlank(this.AttachList))
+            this.AttachList = new Array<any>();
+          if (!this.gs.isBlank(data.filelist))
+            for (let rec of data.filelist) {
+              this.AttachList.push({ filename: rec.filename, filetype: rec.filetype, filedisplayname: rec.filedisplayname, filesize: rec.filesize });
+            }
+           this.GetTotfilesize();
+        },
+        error => {
+          alert('Failed');
+        }
+      );
+  }
+
+  GetTotfilesize() {
+    this.attach_totfilesize = 0;
+    try {
+      this.attach_totfilesize = 0;
+      if (this.AttachList != null) {
+        for (let rec of this.AttachList) {
+          this.attach_totfilesize += rec.filesize;
+        }
+      }
+      this.lbl_msgattachfz = this.GetFileSize(this.attach_totfilesize);
+    } catch (e) {
+    }
+  }
+  GetFileSize(_fsize: number) {
+    let strsize: string = "";
+    if (_fsize < 1024)
+      strsize = _fsize.toString() + "bytes";
+    else {
+      let _newfsize = (_fsize / 1024.00);
+      _newfsize = this.gs.roundNumber(_newfsize, 2);
+      _newfsize = Math.ceil(_newfsize);
+      if (_newfsize < 1024)
+        strsize = _newfsize.toString() + "KB";
+      else
+        strsize = _newfsize.toString() + "MB";
+    }
+    return " " + strsize;
   }
 }
