@@ -25,6 +25,10 @@ export class DepositEditService {
 
     savetype = "";    
 
+    public sortcol: string = 'inv_no';
+    public sortorder: boolean = true;
+
+
     sdate = '';
     id = '';
     code = '';
@@ -256,6 +260,35 @@ export class DepositEditService {
                 alert(this.errorMessage);
             });
     }
+
+
+    getSortCol() {
+        return this.sortcol;
+    }
+    getSortOrder() {
+        return this.sortorder;
+    }
+    getIcon(col: string) {
+        if (col == this.sortcol) {
+            if (this.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
+        }
+        else
+            return null;
+    }
+
+    sort(col: string) {
+        if (col == this.sortcol) {
+            this.sortorder = !this.sortorder;
+        }
+        else {
+            this.sortcol = col;
+            this.sortorder = true;
+        }
+    }
+
 
     DepositPendingList(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Deposit/DepositPendingList', SearchData, this.gs.headerparam2('authorized'));

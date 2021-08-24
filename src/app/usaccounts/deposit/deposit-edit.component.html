@@ -65,16 +65,16 @@
         <thead class="page-body-thead">
             <tr>
                 <th>SELECT</th>
-                <th>PAYMENT#</th>
-                <th>DATE</th>
-                <th>PAY-AMT</th>
-                <th>CHECK#</th>
-                <th>BANK</th>
-                <th>CUSTOMER</th>
+                <th (click)="msEdit.sort('pay_docno')">PAYMENT#&nbsp;<i [ngClass]="msEdit.getIcon('pay_docno')"></i></th>
+                <th (click)="msEdit.sort('pay_date')">DATE&nbsp;<i [ngClass]="msEdit.getIcon('pay_date')"></i></th>
+                <th (click)="msEdit.sort('pay_total')">PAY-AMT&nbsp;<i [ngClass]="msEdit.getIcon('pay_total')"></i></th>
+                <th (click)="msEdit.sort('pay_chqno')">CHECK#&nbsp;<i [ngClass]="msEdit.getIcon('pay_chqno')"></i></th>
+                <th (click)="msEdit.sort('pay_acc_name')">BANK#&nbsp;<i [ngClass]="msEdit.getIcon('pay_acc_name')"></i></th>
+                <th (click)="msEdit.sort('pay_cust_name')">CUSTOMER#&nbsp;<i [ngClass]="msEdit.getIcon('pay_cust_name')"></i></th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of msEdit.arPendingList" 
+            <tr *ngFor="let rec of msEdit.arPendingList  |  sortBy: msEdit.getSortCol() : msEdit.getSortOrder()"  
                 (mousedown)="msEdit.selectRowId(rec.pay_pkid)" 
                 [class.selected]="rec.pay_pkid == msEdit.getRowId()">
                 <td (click)="swapSelection(rec)">
