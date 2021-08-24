@@ -5,5 +5,6 @@ export interface Table_Email {
     email: string;
     is_to: boolean;
     is_cc: boolean;  
+    cont_group:string;
 }
  

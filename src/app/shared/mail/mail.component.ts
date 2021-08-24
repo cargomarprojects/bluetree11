@@ -286,7 +286,7 @@ export class MailComponent implements OnInit {
 
   RemoveAttachment(Id: string, _type: string) {
     this.AttachList.splice(this.AttachList.findIndex(rec => rec.filename == Id), 1);
-   this.GetTotfilesize();
+    this.GetTotfilesize();
   }
 
   GetEmailIds() {
@@ -304,8 +304,19 @@ export class MailComponent implements OnInit {
         this.EmailList = <Table_Email[]>response.list;
         if (this.gs.isBlank(this.EmailList))
           alert('Email IDs Not Found');
-        else
+        else {
+          if (!this.gs.isBlank(this._maildata.cont_group)) {
+            for (let rec of this.EmailList) {
+              if (rec.cont_group == this._maildata.cont_group) {
+                rec.is_to = true;
+              } else {
+                rec.is_to = false;
+                this.allto = false;
+              }
+            }
+          }
           this.chkallto = this.allto;
+        }
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
       });
@@ -410,7 +421,7 @@ export class MailComponent implements OnInit {
             for (let rec of data.filelist) {
               this.AttachList.push({ filename: rec.filename, filetype: rec.filetype, filedisplayname: rec.filedisplayname, filesize: rec.filesize });
             }
-           this.GetTotfilesize();
+          this.GetTotfilesize();
         },
         error => {
           alert('Failed');
