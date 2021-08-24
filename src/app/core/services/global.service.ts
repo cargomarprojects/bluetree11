@@ -72,6 +72,10 @@ export class GlobalService {
   public history: Array<{ id: string, url: string }> = [];
   public HISTORY_MIN_LENGTH = 2;
 
+  //Used in Payment page Simple Print to Identify group in mailpage EmailIds
+  public FOR_REMITTANCE: string = 'FOR REMITTANCE';
+
+
   // SILVERLIGHT SOFTWARE
   public SOFTWARE_NAME = "ANGULAR";
   public DB_BACKEND = "SQLSERVER";

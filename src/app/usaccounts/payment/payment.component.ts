@@ -162,7 +162,7 @@ export class PaymentComponent implements OnInit {
       this.report_searchdata = this.gs.UserInfo;
       this.report_searchdata.PKID = rec.pay_pkid;
       this.report_searchdata.TYPE = rec.pay_type;
-      this.report_searchdata.CONT_GROUP = 'FOR REMITTANCE';
+      this.report_searchdata.CONT_GROUP = this.gs.FOR_REMITTANCE;
       this.report_menuid = this.gs.MENU_ACC_ARAP_SETTLMENT;
       let sub: string = '';
       sub = rec.pay_mode + ' - ' + rec.pay_cust_name + ' ' + this.gs.ConvertDate2DisplayFormat(rec.pay_date) + ' $' + this.gs.roundNumber(rec.pay_diff, 2);
