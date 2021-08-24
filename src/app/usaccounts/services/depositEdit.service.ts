@@ -259,7 +259,7 @@ export class DepositEditService {
             res => {
                 this.arPendingList = res.list;
                 if (this.IsRefresh == "YES")
-                    this.ReProcessInvoiceList();
+                    this.ReProcessDepositList();
                 this.IsRefresh = "";
             },
             err => {
@@ -274,7 +274,7 @@ export class DepositEditService {
         this.pendingList();
     }
 
-    ReProcessInvoiceList() {
+    ReProcessDepositList() {
         this.total_amount = 0;
         this.Old_List.forEach(mRec => {
             this.arPendingList.forEach(dRec => {
