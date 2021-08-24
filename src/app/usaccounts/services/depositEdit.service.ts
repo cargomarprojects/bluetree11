@@ -40,10 +40,14 @@ export class DepositEditService {
 
     selectedId = '';
 
+    IsRefresh = "";
+
     where = " ACC_IS_PAYMENT_CODE = 'Y' AND ACC_BRANCH IN ('ALL','" + this.gs.branch_code + "')";
 
     arPendingList: Tbl_Acc_Payment[] = [];
     DetailList: Tbl_Acc_Payment[] = [];
+
+    Old_List: Tbl_Acc_Payment[] = [];
 
     public initlialized: boolean;
     private appid = ''
@@ -254,12 +258,38 @@ export class DepositEditService {
         this.DepositPendingList(SearchData).subscribe(
             res => {
                 this.arPendingList = res.list;
+                if (this.IsRefresh == "YES")
+                    this.ReProcessInvoiceList();
+                this.IsRefresh = "";
             },
             err => {
                 this.errorMessage = this.gs.getError(err);
                 alert(this.errorMessage);
             });
     }
+
+    RefreshList(){
+        this.IsRefresh = "YES";
+        this.Old_List = this.arPendingList.filter(rec => rec.pay_flag2 == true);
+        this.pendingList();
+    }
+
+    ReProcessInvoiceList() {
+        this.total_amount = 0;
+        this.Old_List.forEach(mRec => {
+            this.arPendingList.forEach(dRec => {
+                if (mRec.pay_pkid == dRec.pay_pkid) {
+                    dRec.pay_flag2 = mRec.pay_flag2;
+                    if (dRec.pay_flag2) {
+                        this.total_amount += dRec.pay_total;
+                        this.total_amount = this.gs.roundNumber(this.total_amount, 2);
+                    }
+                }
+            });
+        });
+    }
+
+
 
 
     getSortCol() {
