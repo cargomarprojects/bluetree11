@@ -178,10 +178,10 @@ export class ReportComponent implements OnInit {
       if (!this.gs.isBlank(this.downloadfilename)) {
         this._filedisplayname = this.gs.ProperFileName(this.downloadfilename) + ".pdf";
       }
-      this.Mail_Pkid = this.gs.getGuid();
-      this.AttachList = new Array<any>();
-      this.AttachList.push({ filename: this._filename, filetype: this._filetype, filedisplayname: this._filedisplayname,filesize:0 });
-      this.modal = this.modalservice.open(emailmodal, { centered: true });
+      if (this.gs.isBlank(this._filename)) {
+        this.AttachFile2List(emailmodal, 0);
+      } else
+        this.GetFileSize(emailmodal);
     }
     else if (action == "excel") {
       if (this._filedisplayname2 == null || this._filedisplayname2 == undefined || this._filedisplayname2 == "")
@@ -244,5 +244,37 @@ export class ReportComponent implements OnInit {
   onBlur(_feild: string) {
     if (_feild == "downloadfilename")
       this.downloadfilename = this.downloadfilename.toLocaleUpperCase();
+  }
+
+  GetFileSize(emailmodal: any = null) {
+    let fsize: number = 0;
+    let SearchData = {
+      table: '',
+      pkid: '',
+      file_name: ''
+    };
+
+    SearchData.table = 'FILE-SIZE';
+    SearchData.file_name = this._filename
+    this.gs.SearchRecord(SearchData)
+      .subscribe(response => {
+
+        if (!this.gs.isBlank(response.fsize))
+          fsize = response.fsize;
+
+        this.AttachFile2List(emailmodal, fsize);
+
+      },
+        error => {
+          let err = this.gs.getError(error);
+          alert(err);
+        });
+  }
+
+  AttachFile2List(emailmodal: any = null, fsize: number) {
+    this.Mail_Pkid = this.gs.getGuid();
+    this.AttachList = new Array<any>();
+    this.AttachList.push({ filename: this._filename, filetype: this._filetype, filedisplayname: this._filedisplayname, filesize: fsize });
+    this.modal = this.modalservice.open(emailmodal, { centered: true });
   }
 }
