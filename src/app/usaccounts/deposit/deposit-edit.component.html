@@ -65,8 +65,9 @@
         <thead class="page-body-thead">
             <tr>
                 <th>SELECT</th>
+                <th (click)="msEdit.sort('pay_date,pay_docno')">DATE&nbsp;<i [ngClass]="msEdit.getIcon('pay_date,pay_docno')"></i></th>
                 <th (click)="msEdit.sort('pay_docno')">PAYMENT#&nbsp;<i [ngClass]="msEdit.getIcon('pay_docno')"></i></th>
-                <th (click)="msEdit.sort('pay_date')">DATE&nbsp;<i [ngClass]="msEdit.getIcon('pay_date')"></i></th>
+                
                 <th (click)="msEdit.sort('pay_total')">PAY-AMT&nbsp;<i [ngClass]="msEdit.getIcon('pay_total')"></i></th>
                 <th (click)="msEdit.sort('pay_chqno')">CHECK#&nbsp;<i [ngClass]="msEdit.getIcon('pay_chqno')"></i></th>
                 <th (click)="msEdit.sort('pay_acc_name')">BANK#&nbsp;<i [ngClass]="msEdit.getIcon('pay_acc_name')"></i></th>
@@ -82,8 +83,8 @@
                         <input type="checkbox" class="form-check-input"  #chkbox
                             [(ngModel)]="rec.pay_flag2"></div>
                 </td>
-                <td>{{rec.pay_docno}}</td>
                 <td>{{rec.pay_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.pay_docno}}</td>
                 <td>{{rec.pay_total | number : '1.2-2'}} </td>
                 <td>{{rec.pay_chqno}} </td>
                 <td>{{rec.pay_acc_name}} </td>
