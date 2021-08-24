@@ -137,7 +137,7 @@
           <div *ngIf="AttachList.length > 0" class="form-group row">
             <label class="col-md-2 col-form-label col-form-label-sm">Attachments{{lbl_msgattachfz}}</label>
             <!-- {{lbl_msgattachfz}} -->
-            <div class="col-md-10">
+            <div class="col-md-10 p-1">
               <div>
                 <label *ngFor="let rec of AttachList">
                   <button (click)="Downloadfile(rec.filename,rec.filetype,rec.filedisplayname)"
@@ -152,10 +152,10 @@
             <!-- <div style="padding-left: 2px" class="col-md-2">
               <button [disabled]="loading" (click)="ShowHideAttach()" class="btn btn-link">Attach File</button>
             </div> -->
-            <div class="col-md-10">
+            <div class="col-md-10 p-0">
               <div class="form-group row">
                 <div class="col-md-7">
-                  <input type="file" id="file" multiple style="width: 600px" #fileinput
+                  <input type="file" id="file" multiple style="width: 300px" #fileinput
                     (change)="getFileDetails($event)">
                 </div>
                 <!-- <div class="col-1">
