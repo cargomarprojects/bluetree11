@@ -27,6 +27,7 @@ export class PartyService {
     public canEdit: boolean;
     public canSave: boolean;
     public isCompany: boolean;
+    public canDelete: boolean;
 
     public initlialized: boolean;
     private appid = ''
@@ -38,14 +39,14 @@ export class PartyService {
         private gs: GlobalService
     ) { }
 
-    public selectRowId( id : string){
+    public selectRowId(id: string) {
         this.record.selectedId = id;
     }
-    public getRowId(){
+    public getRowId() {
         return this.record.selectedId;
     }
 
-    
+
 
     public getSortCol() {
         return this.record.sortcol;
@@ -76,7 +77,7 @@ export class PartyService {
     }
     public ClearInit() {
         this.record = <PartyModel>{
-            selectedId : '',
+            selectedId: '',
             sortcol: 'gen_code',
             sortorder: true,
             errormessage: '',
@@ -102,7 +103,7 @@ export class PartyService {
             this.record = <PartyModel>this.db[this.param_type];
         else
             this.record = <PartyModel>{
-                selectedId : '',
+                selectedId: '',
                 sortcol: 'gen_code',
                 sortorder: true,
                 errormessage: '',
@@ -119,6 +120,7 @@ export class PartyService {
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
+        this.canDelete = this.gs.canDelete(this.menuid);
     }
 
     Search(_searchdata: any, type: string = '') {
@@ -165,7 +167,7 @@ export class PartyService {
             this.mdata$.next(this.record);
 
             this.db[this.param_type] = this.record;
-            
+
         }, error => {
             this.record = <PartyModel>{
                 records: [],
@@ -198,6 +200,35 @@ export class PartyService {
         }
     }
 
+    DeleteRow(_rec: Tbl_Mast_Partym) {
+
+        if (!confirm("DELETE " + _rec.gen_short_name)) {
+            return;
+        }
+
+        this.record.errormessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = _rec.gen_pkid;
+        SearchData.remarks = _rec.gen_short_name;
+
+        this.DeleteRecord(SearchData)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.record.errormessage = response.error;
+                    alert(this.record.errormessage);
+                }
+                else {
+                    this.record.records.splice(this.record.records.findIndex(rec => rec.gen_pkid == _rec.gen_pkid), 1);
+                }
+                this.mdata$.next(this.record);
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+                alert(this.record.errormessage);
+                this.mdata$.next(this.record);
+            });
+    }
+
+
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Party/List', SearchData, this.gs.headerparam2('authorized'));
     }
@@ -213,5 +244,7 @@ export class PartyService {
     Save(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Party/Save', SearchData, this.gs.headerparam2('authorized'));
     }
-
+    DeleteRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Party/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
 }
