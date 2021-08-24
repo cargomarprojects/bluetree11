@@ -573,8 +573,8 @@ export class SeaImpHouseEditComponent implements OnInit {
       .subscribe(response => {
         if (response.retvalue) {
           this.errorMessage.push(response.retstring);
-          if (stype == 'HBL')
-            this.hbl_houseno_field.nativeElement.focus();
+          // if (stype == 'HBL')
+          //   this.hbl_houseno_field.nativeElement.focus();
         }
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
