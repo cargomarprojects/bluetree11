@@ -582,6 +582,15 @@ export class PartyEditComponent implements OnInit {
       this.record.gen_chb_fax = _Record.col7;
     }
 
+
+
+  }
+
+  LovSelected2(_Record: SearchTable,rec : Tbl_Mast_Contacts) {
+    if (_Record.controlname == "CONTACT GROUP") {
+      rec.cont_group_id = _Record.id;
+      rec.cont_group_name = _Record.name;
+    }
   }
 
   onFocusout(field: string) {

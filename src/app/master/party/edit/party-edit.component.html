@@ -805,6 +805,7 @@
                                     <tr>
                                         <th>NAME</th>
                                         <th>TITLE</th>
+                                        <th>Group</th>
                                         <th>EMAIL</th>
                                         <th>REMARKS</th>
                                         <th>TEL</th>
@@ -817,6 +818,14 @@
                                     <tr *ngFor="let rec of records">
                                         <td class="p-0"><InputBox [(inputModel)]="rec.cont_name" [field]="'cont_name'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
                                         <td class="p-0"><InputBox [(inputModel)]="rec.cont_title" [field]="'cont_title'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+
+                                        <td class="p-0">
+                                            <app-autocomplete2 [controlname]="'CONTACT GROUP'" [tabletype]="'PARAM'"
+                                            [subtype]="'CONTACT GROUP'" [displaycolumn]="'NAME'"
+                                            [displaydata]="rec.cont_group_name"
+                                            (ValueChanged)="LovSelected2($event,rec)">
+                                        </app-autocomplete2>
+                                        </td>
                                         <td class="p-0"><InputBox [(inputModel)]="rec.cont_email" [field]="'cont_email'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
                                         <td class="p-0"><InputBox [(inputModel)]="rec.cont_remarks" [field]="'cont_remarks'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
                                         <td class="p-0"><InputBox [(inputModel)]="rec.cont_tel" [field]="'cont_tel'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
