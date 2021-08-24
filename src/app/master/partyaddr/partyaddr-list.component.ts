@@ -22,7 +22,7 @@ export class PartyAddrListComponent implements OnInit {
   canAdd: boolean;
   canEdit: boolean;
   canSave: boolean;
-
+  canDelete:boolean;
 
   records: Tbl_Mast_Addressm[]
 
@@ -51,7 +51,7 @@ export class PartyAddrListComponent implements OnInit {
     this.title = 'Address';
     this.canAdd = this.gs.canAdd(this.menuid);
     this.canEdit = this.gs.canEdit(this.menuid);
-
+    this.canDelete = this.gs.canDelete(this.menuid);
     this.List('SCREEN');
   }
 
@@ -104,6 +104,32 @@ export class PartyAddrListComponent implements OnInit {
     };
     this.gs.Naviagete2('Silver.Master/PartyAddrEditPage',  parameter);
   }
+
+  DeleteRow(_rec: Tbl_Mast_Addressm) {
+
+    if (!confirm("DELETE " + _rec.add_address1)) {
+        return;
+    }
+
+    this.errorMessage = '';
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = _rec.add_pkid;
+    SearchData.remarks = _rec.add_address1;
+    this.mainservice.DeleteRecord(SearchData)
+        .subscribe(response => {
+            if (response.retvalue == false) {
+                this.errorMessage = response.error;
+                alert(this.errorMessage);
+            }
+            else {
+                this.records.splice(this.records.findIndex(rec => rec.add_pkid == _rec.add_pkid), 1);
+            }
+        }, error => {
+            this.errorMessage = this.gs.getError(error);
+            alert(this.errorMessage);
+        });
+}
+
 
   Close() {
     this.location.back();

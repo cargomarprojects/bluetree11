@@ -24,4 +24,8 @@ export class PartyAddrService {
     Save(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/PartyAddress/Save', SearchData, this.gs.headerparam2('authorized'));
     }
+    
+    DeleteRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/PartyAddress/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
 }
