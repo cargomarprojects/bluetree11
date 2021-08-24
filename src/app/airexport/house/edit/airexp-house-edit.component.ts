@@ -708,7 +708,19 @@ export class AirExpHouseEditComponent implements OnInit {
       this.bValueChanged = false;
 
   }
+  onFocusout(field: string) {
+    switch (field) {
+      case 'hbl_houseno': {
+        this.IsBLDupliation('HBL', this.record.hbl_houseno);
+        break;
+      }
+      case 'mbl_liner_bookingno': {
 
+        // this.IsBLDupliation('BOOKING', this.record.mbl_liner_bookingno);
+        // break;
+      }
+    }
+  }
   onBlur(field: string) {
 
     switch (field) {
@@ -766,12 +778,44 @@ export class AirExpHouseEditComponent implements OnInit {
         this.FindOther("C3");
         break;
       }
+      case 'hbl_houseno': {
+        this.record.hbl_houseno =  this.record.hbl_houseno.toString().toUpperCase();
+        break;
+      }
+      
 
     }
 
   }
 
+  IsBLDupliation(stype: string, no: string) {
 
+    if (no == null)
+      return;
+    if (no == '')
+      return;
+
+    this.errorMessage = [];
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = this.pkid;
+    SearchData.blno = no;
+    SearchData.stype = stype;
+    SearchData.company_code = this.gs.company_code;
+    SearchData.branch_code = this.gs.branch_code;
+    SearchData.mode = this.mode;
+
+    this.mainService.Isblnoduplication(SearchData)
+      .subscribe(response => {
+        if (response.retvalue) {
+          this.errorMessage.push(response.retstring);
+          // if (stype == 'HBL')
+          //   this.hbl_houseno_field.nativeElement.focus();
+        }
+      }, error => {
+        this.errorMessage.push(this.gs.getError(error));
+      });
+
+  }
 
   Save() {
 
