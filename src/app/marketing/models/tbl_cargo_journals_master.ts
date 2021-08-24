@@ -132,4 +132,7 @@ export interface Tbl_Mast_Contacts {
     cont_remarks: string;
     cont_oth_messenger: string;
 
+    cont_group_id: string;
+    cont_group_name: string;
+
 }
