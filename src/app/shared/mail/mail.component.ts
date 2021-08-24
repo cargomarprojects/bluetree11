@@ -89,12 +89,10 @@ export class MailComponent implements OnInit {
     this.bcc_ids = '';
     this.to_ids = '';
     this.subject = '';
-
     this.presetmessage = '';
     if (!this.gs.isBlank(this._maildata.presetmessage))
       this.presetmessage = this._maildata.presetmessage;
 
-    this.cc_ids2 = this.gs.user_email_cc.toString();
     this.message = this.presetmessage + '\n' + this.gs.user_email_signature.toString();
     this.msgFontFamily = this.gs.user_email_sign_font;
     this.msgFontSize = this.gs.user_email_sign_size + "px";
@@ -110,6 +108,11 @@ export class MailComponent implements OnInit {
         this.default_cc_id = this._maildata.value;
     }
     this.cc_ids = this.default_cc_id;
+    
+    if (!this.gs.isBlank(this.gs.user_email_cc)) {
+      if (!this.cc_ids.toLowerCase().includes(this.gs.user_email_cc.toLowerCase()))
+        this.cc_ids2 = this.gs.user_email_cc.toString();
+    }
 
     this.default_subject = '';
     if (!this.gs.isBlank(this._maildata.subject))
