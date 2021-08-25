@@ -73,7 +73,7 @@ export class GlobalService {
   public HISTORY_MIN_LENGTH = 2;
 
   //Used in Payment page Simple Print to Identify group in mailpage EmailIds
-  public FOR_REMITTANCE: string = 'FOR REMITTANCE';
+  public FOR_REMITTANCE: string = 'EMAIL-TEMPLATE-REMITTANCE';
 
 
   // SILVERLIGHT SOFTWARE

@@ -82,7 +82,7 @@ export class ReportComponent implements OnInit {
   Mail_Pkid: string = '';
   AttachList: any[] = [];
   modal: any;
-  public maildata: any = { 'type': '', 'value': '', 'subject': '', 'presetmessage': '', 'cont_group': '' };
+  public maildata: any = { 'type': '', 'value': '', 'subject': '', 'presetmessage': '', 'cont_group': '', 'customer_id': '', 'customer_name': '' };
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -130,12 +130,6 @@ export class ReportComponent implements OnInit {
           this.maildata.type = '';
           this.maildata.value = '';
         }
-        if (!this.gs.isBlank(response.presetmessage)) {
-          this.maildata.presetmessage = response.presetmessage;
-        } else {
-          this.maildata.presetmessage = '';
-        }
-
         this.AutoLoad();
       },
       error => {
@@ -159,10 +153,19 @@ export class ReportComponent implements OnInit {
       this.maildata.subject = '';
     }
     if (!this.gs.isBlank(this._searchdata.CONT_GROUP)) {
-        this.maildata.cont_group = this._searchdata.CONT_GROUP;
+      this.maildata.cont_group = this._searchdata.CONT_GROUP;
     } else {
       this.maildata.cont_group = '';
     }
+
+    if (!this.gs.isBlank(this._searchdata.CUSTOMER_ID) && !this.gs.isBlank(this._searchdata.CUSTOMER_NAME)) {
+      this.maildata.customer_id = this._searchdata.CUSTOMER_ID;
+      this.maildata.customer_name = this._searchdata.CUSTOMER_NAME;
+    } else {
+      this.maildata.customer_id = '';
+      this.maildata.customer_name = '';
+    }
+
     this.downloadfilename = this.GetFileWithoutExtension(this._filedisplayname);
     this.gs.getFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname).subscribe(response => {
 
@@ -183,10 +186,7 @@ export class ReportComponent implements OnInit {
       if (!this.gs.isBlank(this.downloadfilename)) {
         this._filedisplayname = this.gs.ProperFileName(this.downloadfilename) + ".pdf";
       }
-      if (this.gs.isBlank(this._filename)) {
-        this.AttachFile2List(emailmodal, 0);
-      } else
-        this.GetFileSize(emailmodal);
+      this.SearchRecord("EMAIL-PRESETMESSAGE", emailmodal);
     }
     else if (action == "excel") {
       if (this._filedisplayname2 == null || this._filedisplayname2 == undefined || this._filedisplayname2 == "")
@@ -228,7 +228,6 @@ export class ReportComponent implements OnInit {
 
 
 
-
   mailcallbackevent(event: any) {
     this.modal.close();
     this.AutoLoad();
@@ -251,24 +250,31 @@ export class ReportComponent implements OnInit {
       this.downloadfilename = this.downloadfilename.toLocaleUpperCase();
   }
 
-  GetFileSize(emailmodal: any = null) {
+  SearchRecord(_tablename: string, emailmodal: any = null) {
     let fsize: number = 0;
-    let SearchData = {
+    let SearchData2 = {
+      company_code: this.gs.company_code,
       table: '',
+      cont_group: '',
       pkid: '',
       file_name: ''
     };
 
-    SearchData.table = 'FILE-SIZE';
-    SearchData.file_name = this._filename
-    this.gs.SearchRecord(SearchData)
+    SearchData2.table = _tablename;
+    SearchData2.file_name = this._filename;
+    SearchData2.cont_group = this.maildata.cont_group;
+    this.gs.SearchRecord(SearchData2)
       .subscribe(response => {
-
-        if (!this.gs.isBlank(response.fsize))
+        fsize = 0;
+        this.maildata.presetmessage = '';
+        if (!this.gs.isBlank(response.fsize)) {
           fsize = response.fsize;
+        }
+        if (!this.gs.isBlank(response.presetmessage)) {
+          this.maildata.presetmessage = response.presetmessage;
+        }
 
         this.AttachFile2List(emailmodal, fsize);
-
       },
         error => {
           let err = this.gs.getError(error);

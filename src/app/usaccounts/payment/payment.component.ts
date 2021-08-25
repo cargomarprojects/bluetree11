@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy, SimpleChange } from '@angular/core
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ignoreElements, map } from 'rxjs/operators';
 
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery, Tbl_Acc_Payment, AccPaymentModel } from '../models/Tbl_Acc_Payment';
@@ -163,6 +163,14 @@ export class PaymentComponent implements OnInit {
       this.report_searchdata.PKID = rec.pay_pkid;
       this.report_searchdata.TYPE = rec.pay_type;
       this.report_searchdata.CONT_GROUP = this.gs.FOR_REMITTANCE;
+      this.report_searchdata.CUSTOMER_ID = '';
+      this.report_searchdata.CUSTOMER_NAME = '';
+      if (this.mainservice.record.searchQuery.searchCustType == "CUSTOMER") {
+        if (!this.gs.isBlank(this.mainservice.record.searchQuery.customerId))
+          this.report_searchdata.CUSTOMER_ID = this.mainservice.record.searchQuery.customerId;
+        if (!this.gs.isBlank(this.mainservice.record.searchQuery.customerName))
+          this.report_searchdata.CUSTOMER_NAME = this.mainservice.record.searchQuery.customerName;
+      }
       this.report_menuid = this.gs.MENU_ACC_ARAP_SETTLMENT;
       let sub: string = '';
       sub = rec.pay_mode + ' - ' + rec.pay_cust_name + ' ' + this.gs.ConvertDate2DisplayFormat(rec.pay_date) + ' $' + this.gs.roundNumber(rec.pay_diff, 2);
