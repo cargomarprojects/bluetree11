@@ -49,7 +49,7 @@ export class GlobalService {
 
   public appid = '';
 
-  public software_version_string = '1.125';
+  public software_version_string = '1.126';
   public baseUrl: string = "http://localhost:5000";
   //public baseUrl: string = "";
   // change this is false in production and update
@@ -73,7 +73,7 @@ export class GlobalService {
   public HISTORY_MIN_LENGTH = 2;
 
   //Used in Payment page Simple Print to Identify group in mailpage EmailIds
-  public FOR_REMITTANCE: string = 'FOR REMITTANCE';
+  public FOR_REMITTANCE: string = 'EMAIL-TEMPLATE-REMITTANCE';
 
 
   // SILVERLIGHT SOFTWARE
