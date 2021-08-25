@@ -15,7 +15,8 @@ export class PaymentService {
     get data$(): Observable<AccPaymentModel> {
         return this.mdata$.asObservable();
     }
-    private record: AccPaymentModel;
+
+    public record: AccPaymentModel;
 
     public id: string;
     public menuid: string;

@@ -64,7 +64,7 @@ export class PaymentHeaderComponent implements OnInit {
             this.searchQuery.customerId = '';
             this.searchQuery.customerCode = '';
             this.searchQuery.customerName = '';
-            if (this.searchQuery.searchType === 'CUSTOMER')
+            if (this.searchQuery.searchCustType === 'CUSTOMER')
                 this.custLovType = 'MASTER';
             else
                 this.custLovType = 'OVERSEAAGENT';

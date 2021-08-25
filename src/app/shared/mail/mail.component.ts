@@ -80,8 +80,6 @@ export class MailComponent implements OnInit {
   // Init Will be called After executing Constructor
   ngOnInit() {
     this.gs.checkAppVersion();
-    this.customer_id = '';
-    this.customer_name = '';
     this.chkDelivReceipt = false;
     this.chkReadRecipt = false;
     this.cc_ids = '';
@@ -108,7 +106,7 @@ export class MailComponent implements OnInit {
         this.default_cc_id = this._maildata.value;
     }
     this.cc_ids = this.default_cc_id;
-    
+
     if (!this.gs.isBlank(this.gs.user_email_cc)) {
       if (!this.cc_ids.toLowerCase().includes(this.gs.user_email_cc.toLowerCase()))
         this.cc_ids2 = this.gs.user_email_cc.toString();
@@ -118,6 +116,14 @@ export class MailComponent implements OnInit {
     if (!this.gs.isBlank(this._maildata.subject))
       this.default_subject = this._maildata.subject;
     this.subject = this.default_subject;
+
+    this.customer_id = '';
+    if (!this.gs.isBlank(this._maildata.customer_id))
+      this.customer_id = this._maildata.customer_id;
+
+    this.customer_name = '';
+    if (!this.gs.isBlank(this._maildata.customer_name))
+      this.customer_name = this._maildata.customer_name;
 
     this.GetTotfilesize();
 

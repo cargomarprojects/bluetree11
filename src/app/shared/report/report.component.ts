@@ -82,7 +82,7 @@ export class ReportComponent implements OnInit {
   Mail_Pkid: string = '';
   AttachList: any[] = [];
   modal: any;
-  public maildata: any = { 'type': '', 'value': '', 'subject': '', 'presetmessage': '', 'cont_group': '' };
+  public maildata: any = { 'type': '', 'value': '', 'subject': '', 'presetmessage': '', 'cont_group': '', 'customer_id': '', 'customer_name': '' };
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -157,6 +157,15 @@ export class ReportComponent implements OnInit {
     } else {
       this.maildata.cont_group = '';
     }
+
+    if (!this.gs.isBlank(this._searchdata.CUSTOMER_ID) && !this.gs.isBlank(this._searchdata.CUSTOMER_NAME)) {
+      this.maildata.customer_id = this._searchdata.CUSTOMER_ID;
+      this.maildata.customer_name = this._searchdata.CUSTOMER_NAME;
+    } else {
+      this.maildata.customer_id = '';
+      this.maildata.customer_name = '';
+    }
+
     this.downloadfilename = this.GetFileWithoutExtension(this._filedisplayname);
     this.gs.getFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname).subscribe(response => {
 
