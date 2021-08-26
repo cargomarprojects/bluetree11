@@ -35,7 +35,7 @@ export interface ReportState{
     stage:string;
     sortcol : string ;
     sortorder : boolean;    
-    
+    selectedId : string;
     page_rows :number;
     page_count :number;
     page_current :number;
