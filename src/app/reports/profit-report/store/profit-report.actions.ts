@@ -6,7 +6,7 @@ export enum ActionTypes {
   ADD = '[Profit-Report] Add Report',
   UPDATE = '[Profit-Report] Update Report',
   DELETE = '[Profit-Report] Delete Report',
-  SELECT_ROW = '[Pay-Req-Report] Select Row',
+  SELECT_ROW = '[Profit-Report] Select Row',
   SORT_DATA = '[Profit-Report] Sort Data'
 }
 

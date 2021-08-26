@@ -5,6 +5,7 @@ import { ReportState } from './proft-report-house.models';
 export enum ActionTypes {
   ADD = '[Profit-Report-House] Add Report',
   UPDATE = '[Profit-Report-House] Update Report',
+  SELECT_ROW = '[Profit-Report-House] Select Row',
   DELETE = '[Profit-Report-House] Delete Report',
 }
 
@@ -23,4 +24,9 @@ export class Delete implements Action {
   constructor(public payload : { id: string}) { }
 }
 
-export type Actions = Add | Update | Delete;
+export class SelectRow implements Action {
+  readonly type = ActionTypes.SELECT_ROW;
+  constructor(public payload: {id : string, selecteId : string } ) {}
+}
+
+export type Actions = Add | Update | Delete| SelectRow;

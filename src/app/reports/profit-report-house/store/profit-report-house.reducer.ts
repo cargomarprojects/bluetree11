@@ -35,6 +35,8 @@ export const initialState: ReportState = {
     filedisplayname2: '',
     stage: '',
 
+    selectedId : '',
+
     _report_category: '',
     _report_type: '',
     page_rows: 0,
@@ -52,6 +54,13 @@ export function ProfitReportHouseReducer(state: ReportState[] = [initialState], 
             return [...state.filter(rec => rec.urlid != action.payload.id), action.payload.changes];
         case myActions.ActionTypes.DELETE:
             return [...state.filter(rec => rec.urlid != action.payload.id)];
+        case myActions.ActionTypes.SELECT_ROW: {
+                var st = Object.assign({}, state.find(rec => rec.urlid == action.payload.id));
+                if (st == null)
+                    return [...state];
+                st.selectedId = action.payload.selecteId;
+                return [...state.filter(rec => rec.urlid != action.payload.id), st];
+            }                        
         default:
             return state;
     }

@@ -37,6 +37,9 @@ export class ProfitReportHouseComponent implements OnInit {
   comp_type: string = '';
   report_type: string = '';
 
+
+  selectedId = '';
+
   report_url: string;
   report_searchdata: any = {};
   report_menuid: string;
@@ -161,6 +164,8 @@ export class ProfitReportHouseComponent implements OnInit {
         this.sales_id = rec.sales_id;
         this.sales_name = rec.sales_name;
 
+        this.selectedId = rec.selectedId;
+
         this._report_category = rec._report_category;
         this._report_type = rec._report_type;
         this.filename = rec.filename;
@@ -228,6 +233,8 @@ export class ProfitReportHouseComponent implements OnInit {
         this.mode = 'ALL';
         this.comp_type = this.gs.branch_code;
         this.report_type = "DETAIL";
+
+        this.selectedId = '';
 
         this.filename = '';
         this.filetype = '';
@@ -424,6 +431,8 @@ export class ProfitReportHouseComponent implements OnInit {
             sales_id: this.SearchData.SALES_ID,
             sales_name: this.SearchData.SALES_NAME,
 
+            selectedId: this.selectedId,
+
             _report_category: this.SearchData.REPORT_CATEGORY,
             _report_type: this.SearchData.REPORT_TYPE,
             stage: this.SearchData.STAGES,
@@ -572,5 +581,15 @@ export class ProfitReportHouseComponent implements OnInit {
       alert("Cannot Show Details from another Branch");
     }
   }
+
+
+  private selectRowId(rowid: string) {
+    this.store.dispatch(new myActions.SelectRow({ id: this.urlid, selecteId: rowid }))
+  }
+  
+  public getRowId() {
+    return this.selectedId;
+  }
+  
 
 }

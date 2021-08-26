@@ -31,6 +31,8 @@ export interface ReportState{
     
     _report_category: string;
     _report_type: string;
+
+    selectedId : string;
     
     page_rows :number;
     page_count :number;
