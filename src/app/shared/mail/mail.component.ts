@@ -125,7 +125,7 @@ export class MailComponent implements OnInit {
     if (!this.gs.isBlank(this._maildata.customer_name))
       this.customer_name = this._maildata.customer_name;
 
-    this.GetTotfilesize();
+    this.GetPreSetMessage();
 
     $(function () {
       $('.modal-dialog').draggable();
@@ -465,5 +465,38 @@ export class MailComponent implements OnInit {
         strsize = _newfsize.toString() + "MB";
     }
     return " " + strsize;
+  }
+
+  GetPreSetMessage() {
+
+    let SearchData2 = {
+      company_code: this.gs.company_code,
+      table: '',
+      cont_group: '',
+      pkid: '',
+      file_name: ''
+    };
+
+    SearchData2.table = "EMAIL-PRESETMESSAGE";
+    SearchData2.cont_group = this._maildata.cont_group;
+    if (this.AttachList != null && this.AttachList.length == 1)
+      SearchData2.file_name = this.AttachList[0].filename;
+    this.gs.SearchRecord(SearchData2)
+      .subscribe(response => {
+
+        if (!this.gs.isBlank(response.fsize)) {
+          if (this.AttachList != null && this.AttachList.length == 1)
+            this.AttachList[0].filesize = response.fsize;
+        }
+        if (!this.gs.isBlank(response.presetmessage)) {
+          this.message = response.presetmessage + '\n' + this.gs.user_email_signature.toString();
+        }
+
+        this.GetTotfilesize();
+      },
+        error => {
+          let err = this.gs.getError(error);
+          alert(err);
+        });
   }
 }
