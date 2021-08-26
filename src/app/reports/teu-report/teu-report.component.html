@@ -153,7 +153,10 @@
           </thead>
           <tbody class="page-body-tbody" >
             <tr *ngFor="let rec of MainList" [style.color]="rec.ROW_TYPE=='TOTAL'?'Red':'Black'"
-              [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'">
+              [style.font-weight]="rec.ROW_TYPE=='TOTAL' ?'bold':'normal'" 
+              (click)="selectRowId(rec.mbl_pkid)" 
+              [class.selected]="rec.mbl_pkid == getRowId()"
+              >
               <td>{{rec.mbl_branch}}</td>
               <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
               <td *ngIf="rec.mbl_branch==gs.branch_name">

@@ -25,6 +25,7 @@ export interface ReportState{
     filedisplayname2: string;
     sortcol : string ;
     sortorder : boolean;    
+    selectedId : string;
     
     page_rows :number;
     page_count :number;
