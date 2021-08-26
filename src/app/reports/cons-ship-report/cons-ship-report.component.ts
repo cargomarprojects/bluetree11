@@ -61,6 +61,8 @@ export class ConsShipReportComponent implements OnInit {
   sortCol = 'mbl_refno';
   sortOrder = true;
 
+  selectedId = '';
+
   Reportstate1: Observable<ReportState>;
 
   MainList: TBL_MBL_REPORT[];
@@ -114,6 +116,7 @@ export class ConsShipReportComponent implements OnInit {
         this.filedisplayname = rec.filedisplayname;
         this.sortCol = rec.sortcol;
         this.sortOrder = rec.sortorder;
+        this.selectedId = rec.selectedId;
 
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -169,6 +172,7 @@ export class ConsShipReportComponent implements OnInit {
         this.filetype = '';
         this.filedisplayname = '';
         this.sortCol = 'mbl_refno';
+        this.selectedId = '';        
         this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
@@ -277,6 +281,7 @@ export class ConsShipReportComponent implements OnInit {
             reportformat: this.reportformat,
             sortcol: 'mbl_refno',
             sortorder: true,
+            selectedId : this.selectedId,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -313,6 +318,16 @@ export class ConsShipReportComponent implements OnInit {
   private sort(sortcol: string) {
     this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
   }
+
+  private selectRowId(rowid: string) {
+    this.store.dispatch(new myActions.SelectRow({ id: this.urlid, selecteId: rowid }))
+  }
+
+  public getRowId() {
+    return this.selectedId;
+  }
+
+  
 
   public getIcon(col: string) {
     if (col == this.sortCol) {
