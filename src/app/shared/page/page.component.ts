@@ -57,13 +57,17 @@ export class PageComponent implements OnInit {
       this.PageData.page_current = this.goto_page_no; 
     }       
 
-    if (this.PageData.page_current <= 0)
+    if (this.PageData.page_current <= 0) {
       this.PageData.page_current = 1;
+      this.goto_page_no = 1;
+    }
     
-      if (this.PageData.page_current > this.PageData.page_count)
+    if (this.PageData.page_current > this.PageData.page_count) {
       this.PageData.page_current = this.PageData.page_count;
+      this.goto_page_no =   this.PageData.page_count;
+    }
     
-      if (this.PageData.page_current == oldPage)
+    if (this.PageData.page_current == oldPage)
       return;
 
       

@@ -68,10 +68,15 @@ export class Page2Component implements OnInit {
 
     this.pageQuery.action = action;
 
-    if (this.pageQuery.page_current <= 0)
+    if (this.pageQuery.page_current <= 0) {
       this.pageQuery.page_current = 1;
-    if (this.pageQuery.page_current > this.pageQuery.page_count)
+      this.goto_page_no = 1;
+    }
+    if (this.pageQuery.page_current > this.pageQuery.page_count) {
       this.pageQuery.page_current = this.pageQuery.page_count;
+      this.goto_page_no =  this.pageQuery.page_count;
+    }
+
 
     if (this.pageQuery.page_current == oldPage)
       return;
