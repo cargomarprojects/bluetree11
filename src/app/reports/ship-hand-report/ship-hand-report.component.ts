@@ -66,6 +66,7 @@ export class ShipHandReportComponent implements OnInit {
   SearchData: any = {};
   sortCol = 'hbl_hand_name';
   sortOrder = true;
+  selectedId = '';
 
   mainState: ReportState;
 
@@ -118,6 +119,7 @@ export class ShipHandReportComponent implements OnInit {
         this.filedisplayname = rec.filedisplayname;
         this.sortCol = rec.sortcol;
         this.sortOrder = rec.sortorder;
+        this.selectedId = rec.selectedId;
 
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -165,7 +167,7 @@ export class ShipHandReportComponent implements OnInit {
         this.filedisplayname = '';
         this.sortCol = 'hbl_hand_name';
         this.sortOrder = true;
-
+        this.selectedId = '';
         this.SearchData = this.gs.UserInfo;
 
       }
@@ -257,6 +259,7 @@ export class ShipHandReportComponent implements OnInit {
             reporttype: this.reporttype,
             sortcol: 'hbl_hand_name',
             sortorder: true,
+            selectedId : this.selectedId,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -296,6 +299,14 @@ export class ShipHandReportComponent implements OnInit {
   private sort(sortcol: string) {
     this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
   }
+  private selectRowId(rowid: string) {
+    this.store.dispatch(new myActions.SelectRow({ id: this.urlid, selecteId: rowid }))
+  }
+
+  public getRowId() {
+    return this.selectedId;
+  }
+
 
   public getIcon(col: string) {
     if (col == this.sortCol) {
