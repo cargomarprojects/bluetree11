@@ -32,6 +32,7 @@ export const initialState: ReportState = {
     filedisplayname2: '',
     sortcol: 'mbl_refno',
     sortorder: true,
+    selectedId : '',
     page_rows: 0,
     page_count: 0,
     page_current: 0,
@@ -47,6 +48,13 @@ export function TonReportReducer(state: ReportState[] = [initialState], action: 
             return [...state.filter(rec => rec.urlid != action.payload.id), action.payload.changes];
         case myActions.ActionTypes.DELETE:
             return [...state.filter(rec => rec.urlid != action.payload.id)];
+        case myActions.ActionTypes.SELECT_ROW: {
+                var st = Object.assign({}, state.find(rec => rec.urlid == action.payload.id));
+                if (st == null)
+                    return [...state];
+                st.selectedId = action.payload.selecteId;
+                return [...state.filter(rec => rec.urlid != action.payload.id), st];
+        }                        
         case myActions.ActionTypes.SORT_DATA: {
 
             var st = Object.assign({}, state.find(rec => rec.urlid == action.payload.id));
