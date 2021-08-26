@@ -11,7 +11,8 @@ export interface ReportState{
     comp_type: string;
     sortcol : string ;
     sortorder : boolean;    
-    
+    selectedId : string;
+        
     page_rows :number;
     page_count :number;
     page_current :number;

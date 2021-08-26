@@ -50,6 +50,7 @@ export class ItShipReportComponent implements OnInit {
   SearchData: any = {};
   sortCol = 'mbl_refno';
   sortOrder = true;
+  selectedId = '';
 
   Reportstate1: Observable<ReportState>;
 
@@ -91,6 +92,8 @@ export class ItShipReportComponent implements OnInit {
         this.comp_type = rec.comp_type;
         this.sortCol = rec.sortcol;
         this.sortOrder = rec.sortorder;
+        this.selectedId = rec.selectedId;
+
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
         this.page_current = rec.page_current;
@@ -126,6 +129,7 @@ export class ItShipReportComponent implements OnInit {
         this.SearchData = this.gs.UserInfo;
         this.sortCol = 'mbl_refno';
         this.sortOrder = true;
+        this.selectedId = '';
       }
     });
 
@@ -188,6 +192,9 @@ export class ItShipReportComponent implements OnInit {
             comp_type: this.SearchData.COMP_TYPE,
             sortcol: 'mbl_refno',
             sortorder: true,
+            selectedId: this.selectedId,
+
+
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -213,6 +220,18 @@ export class ItShipReportComponent implements OnInit {
   private sort(sortcol: string) {
     this.store.dispatch(new myActions.SortData({ id: this.urlid, sortcol: sortcol }))
   }
+
+  
+private selectRowId(rowid: string) {
+	this.store.dispatch(new myActions.SelectRow({ id: this.urlid, selecteId: rowid }))
+}
+
+public getRowId() {
+	return this.selectedId;
+}
+
+
+
 
   public getIcon(col: string) {
     if (col == this.sortCol) {

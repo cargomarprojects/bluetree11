@@ -75,7 +75,10 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of MainList">
+        <tr *ngFor="let rec of MainList"
+        (click)="selectRowId(rec.mbl_pkid)" 
+        [class.selected]="rec.mbl_pkid == getRowId()"
+        >
           <td>{{rec.mbl_branch}}</td>
           <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
           <td *ngIf="rec.mbl_branch==gs.branch_name">
