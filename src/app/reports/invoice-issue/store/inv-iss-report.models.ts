@@ -26,6 +26,7 @@ export interface ReportState {
     reportformat: string;
     sortcol : string ;
     sortorder : boolean;    
+    selectedId : string;
     
     page_rows: number;
     page_count: number;

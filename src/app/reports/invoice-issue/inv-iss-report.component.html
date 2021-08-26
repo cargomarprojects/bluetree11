@@ -134,7 +134,9 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody" >
-        <tr *ngFor="let rec of MainList">
+        <tr *ngFor="let rec of MainList"        
+        (click)="selectRowId(rec.inv_pkid)" 
+        [class.selected]="rec.inv_pkid == getRowId()">
           <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
           <td *ngIf="rec.mbl_branch_code==gs.branch_code">
             <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L',rec.mbl_branch_code)"
