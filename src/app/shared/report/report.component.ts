@@ -252,43 +252,5 @@ export class ReportComponent implements OnInit {
     if (_feild == "downloadfilename")
       this.downloadfilename = this.downloadfilename.toLocaleUpperCase();
   }
-
-  // SearchRecord(_tablename: string, emailmodal: any = null) {
-  //   let fsize: number = 0;
-  //   let SearchData2 = {
-  //     company_code: this.gs.company_code,
-  //     table: '',
-  //     cont_group: '',
-  //     pkid: '',
-  //     file_name: ''
-  //   };
-
-  //   SearchData2.table = _tablename;
-  //   SearchData2.file_name = this._filename;
-  //   SearchData2.cont_group = this.maildata.cont_group;
-  //   this.gs.SearchRecord(SearchData2)
-  //     .subscribe(response => {
-  //       fsize = 0;
-  //       this.maildata.presetmessage = '';
-  //       if (!this.gs.isBlank(response.fsize)) {
-  //         fsize = response.fsize;
-  //       }
-  //       if (!this.gs.isBlank(response.presetmessage)) {
-  //         this.maildata.presetmessage = response.presetmessage;
-  //       }
-
-  //       this.AttachFile2List(emailmodal, fsize);
-  //     },
-  //       error => {
-  //         let err = this.gs.getError(error);
-  //         alert(err);
-  //       });
-  // }
-
-  // AttachFile2List(emailmodal: any = null, fsize: number) {
-  //   this.Mail_Pkid = this.gs.getGuid();
-  //   this.AttachList = new Array<any>();
-  //   this.AttachList.push({ filename: this._filename, filetype: this._filetype, filedisplayname: this._filedisplayname, filesize: fsize });
-  //   this.modal = this.modalservice.open(emailmodal, { centered: true });
-  // }
+ 
 }
