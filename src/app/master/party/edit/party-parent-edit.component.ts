@@ -19,7 +19,8 @@ export class PartyParentEditComponent implements OnInit {
   //@ViewChild('mbl_liner_bookingno') mbl_liner_bookingno_field: ElementRef;
 
   record: Tbl_Mast_Partym = <Tbl_Mast_Partym>{};
-  records: Tbl_Mast_Partym[] = [];
+  records: Tbl_Mast_Contacts[] = [];
+  records2: Tbl_Mast_Partym[] = [];
   /*
     01-07-2019 Created By Ajith  
   */
@@ -121,7 +122,8 @@ export class PartyParentEditComponent implements OnInit {
     this.is_locked = false;
     if (this.mode == 'ADD') {
       this.record = <Tbl_Mast_Partym>{};
-      this.records = <Tbl_Mast_Partym[]>[];
+      this.records = <Tbl_Mast_Contacts[]>[];
+      this.records2 = <Tbl_Mast_Partym[]>[];
       this.pkid = this.gs.getGuid();
       this.init();
     }
@@ -244,7 +246,8 @@ export class PartyParentEditComponent implements OnInit {
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
         this.record = <Tbl_Mast_Partym>response.record;
-        this.records = <Tbl_Mast_Partym[]>response.records2;
+        this.records =  (response.records == undefined || response.records == null) ? <Tbl_Mast_Contacts[]>[] :<Tbl_Mast_Contacts[]>response.records;
+        this.records2 = <Tbl_Mast_Partym[]>response.records2;
         this.mode = 'EDIT';
         this.record.gen_is_shipper_b = (this.record.gen_is_shipper == "Y") ? true : false;
         this.record.gen_is_consignee_b = (this.record.gen_is_consignee == "Y") ? true : false;
@@ -377,7 +380,7 @@ export class PartyParentEditComponent implements OnInit {
 
     const saveRecord = <vm_Tbl_Mast_Partym>{};
     saveRecord.record = this.record;
-    saveRecord.records = <Tbl_Mast_Contacts[]>[];
+    saveRecord.records = this.records;
     saveRecord.mode = this.mode;
     saveRecord.userinfo = this.gs.UserInfo;
 
@@ -684,26 +687,26 @@ export class PartyParentEditComponent implements OnInit {
   AddRow() {
     this.errorMessage = "";
     if (this.records == null)
-      this.records = <Tbl_Mast_Partym[]>[];
+      this.records = <Tbl_Mast_Contacts[]>[];
 
-    var rec = <Tbl_Mast_Partym>{};
-    //   rec.cont_pkid = this.gs.getGuid();
-    //   rec.cont_parent_id = this.pkid;
-    //   rec.cont_type = "PARTYS";
-    //   rec.cont_name = ''
-    //   rec.cont_title = ''
-    //   rec.cont_email = ''
-    //   rec.cont_remarks = ''
-    //   rec.cont_tel = ''
-    //   rec.cont_mobile = ''
-    //   rec.cont_oth_messenger = ''
+    var rec = <Tbl_Mast_Contacts>{};
+      rec.cont_pkid = this.gs.getGuid();
+      rec.cont_parent_id = this.pkid;
+      rec.cont_type = "PARTYS";
+      rec.cont_name = ''
+      rec.cont_title = ''
+      rec.cont_email = ''
+      rec.cont_remarks = ''
+      rec.cont_tel = ''
+      rec.cont_mobile = ''
+      rec.cont_oth_messenger = ''
     this.records.push(rec);
 
   }
 
-  RemoveRow(_rec: Tbl_Mast_Partym) {
+  RemoveRow(_rec: Tbl_Mast_Contacts) {
     this.errorMessage = '';
-    this.records.splice(this.records.findIndex(rec => rec.gen_pkid == _rec.gen_pkid), 1);
+    this.records.splice(this.records.findIndex(rec => rec.cont_pkid == _rec.cont_pkid), 1);
   }
 
   SetAddress() {

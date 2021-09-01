@@ -229,6 +229,58 @@
                 </div>
 
                 <div class="row">
+
+                    <div class="col-md-12  px-0 mx-0">
+                        <div class="page-body table-responsive">
+                            <div class="form-group row">
+                                <label class="col-12  pr-0 col-form-label col-form-label-sm"><strong>Other Contacts</strong></label>
+                            </div>
+                            <table class="table table-hover table-sm cntr">
+                                <thead class="page-body-thead">
+                                    <tr>
+                                        <th>NAME</th>
+                                        <th>TITLE</th>
+                                        <th>GROUP</th>
+                                        <th style="min-width:200px">EMAIL</th>
+                                        <th>REMARKS</th>
+                                        <th>TEL</th>
+                                        <th>MOBILE</th>
+                                        <th>MESSENGER</th>
+                                        <th style="text-align:center">DELETE</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="page-body-tbody">
+                                    <tr *ngFor="let rec of records">
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_name" [field]="'cont_name'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_title" [field]="'cont_title'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+
+                                        <td class="p-0">
+                                            <app-autocomplete2 [controlname]="'CONTACT GROUP'" [tabletype]="'PARAM'"
+                                            [subtype]="'CONTACT GROUP'" [displaycolumn]="'NAME'"
+                                            [displaydata]="rec.cont_group_name"
+                                            (ValueChanged)="LovSelected2($event,rec)">
+                                        </app-autocomplete2>
+                                        </td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_email" [field]="'cont_email'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_remarks" [field]="'cont_remarks'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_tel" [field]="'cont_tel'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_mobile" [field]="'cont_mobile'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_oth_messenger" [field]="'cont_oth_messenger'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0" style="text-align:center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                                            (click)="RemoveRow(rec)"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <button class="btn btn-info btn-sm mr-1" (click)="AddRow()">Add Row</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
                     <div class="col-md-12  px-0 mx-0">
                         <div class="page-body table-responsive">
                             <table class="table  table-hover table-sm">
@@ -239,7 +291,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="page-body-tbody">
-                                    <tr *ngFor="let rec of records">
+                                    <tr *ngFor="let rec of records2">
                                         <td>{{rec.gen_code}}</td>
                                         <td>{{rec.gen_short_name}}</td>
                                     </tr>
@@ -249,22 +301,22 @@
                     </div>
                 </div>
             </div>
-            <!-- <div *ngIf="mode=='EDIT'" class="col-md-2 p-1 testbox">
+            <div *ngIf="mode=='EDIT'" class="col-md-2 p-1 testbox">
 
                 <div class="col-md-12 p-2 border">
 
 
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <button class=" col-12 btn btn-info btn-sm"
                             (click)="BtnNavigation('ATTACHMENT')">Attachments</button>
-                    </div>
+                    </div> -->
 
 
                     <div class="form-group row">
                         <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('MEMO')">Memo</button>
                     </div>
 
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('SOP-MEMO')">SOP</button>
                     </div>
 
@@ -303,9 +355,9 @@
                             Information</button>
                     </div>
 
-                </div>
+                </div> -->
 
-            </div> -->
+            </div>
         </div>
     </div>
 
