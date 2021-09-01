@@ -117,7 +117,7 @@
                                     class="btn btn-primary btn-sm mr-1">Search</button>
                                 <!-- <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="Print()"
                                     class="btn btn-primary btn-sm">Print</button> -->
-                                    <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="List('PRINT')"
+                                <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="List('PRINT')"
                                     class="btn btn-primary btn-sm">Print</button>
                             </div>
                         </div>
@@ -150,36 +150,41 @@
             <table class="table  table-hover table-sm">
                 <thead class="page-body-thead">
                     <tr>
-                        <th (click)="sort('inv_branch')" >BRANCH &nbsp;<i [ngClass]="getIcon('inv_branch')"></i></th>
-                        <th (click)="sort('inv_no')"  *ngIf="gs.BRANCH_REGION != 'USA'">INV.NO&nbsp;<i [ngClass]="getIcon('inv_no')"></i></th>
-                        <th *ngIf="gs.BRANCH_REGION == 'USA'" (click)="SelectDeselect()">
-                            <div class="form-check"> <input type="checkbox" class="form-check-input"
-                                    [(ngModel)]="allchecked"><span>INV.NO</span>
-                            </div>
-                           </th>
-                        <th (click)="sort('inv_date')" >INV.DATE&nbsp;<i [ngClass]="getIcon('inv_date')"></i></th>
-                        <th (click)="sort('inv_mrefno')" >REFNO&nbsp;<i [ngClass]="getIcon('inv_mrefno')"></i></th>
-                        <th (click)="sort('inv_refno')" >CUST REFNO&nbsp;<i [ngClass]="getIcon('inv_refno')"></i></th>
-                        <th (click)="sort('inv_mblno')" >MASTER B/L&nbsp;<i [ngClass]="getIcon('inv_mblno')"></i></th>
-                        <th (click)="sort('inv_hrefno')" >HOUSE B/L&nbsp;<i [ngClass]="getIcon('inv_hrefno')"></i></th>
-                        <th (click)="sort('inv_ar')"  style="text-align:right">DR&nbsp;<i [ngClass]="getIcon('inv_ar')"></i></th>
-                        <th (click)="sort('inv_ap')" style="text-align:right">CR&nbsp;<i [ngClass]="getIcon('inv_ap')"></i></th>
-                        <th (click)="sort('inv_mbl_profit')"  *ngIf="gs.BRANCH_REGION == 'USA' && gs.company_code == '100' && showprofit"
+                        <th (click)="sort('inv_branch')">BRANCH &nbsp;<i [ngClass]="getIcon('inv_branch')"></i></th>
+                        <th *ngIf="gs.BRANCH_REGION == 'USA'" (click)="SelectDeselect()" >SELECT
+                            <!-- <div class="form-check"> 
+                                <input type="checkbox" class="form-check-input" [(ngModel)]="allchecked">
+                            </div> -->
+                        </th>
+                        <th (click)="sort('inv_no')" >INV.NO&nbsp;<i [ngClass]="getIcon('inv_no')"></i></th>
+                        <th (click)="sort('inv_date')">INV.DATE&nbsp;<i [ngClass]="getIcon('inv_date')"></i></th>
+                        <th (click)="sort('inv_mrefno')">REFNO&nbsp;<i [ngClass]="getIcon('inv_mrefno')"></i></th>
+                        <th (click)="sort('inv_refno')">CUST REFNO&nbsp;<i [ngClass]="getIcon('inv_refno')"></i></th>
+                        <th (click)="sort('inv_mblno')">MASTER B/L&nbsp;<i [ngClass]="getIcon('inv_mblno')"></i></th>
+                        <th (click)="sort('inv_hrefno')">HOUSE B/L&nbsp;<i [ngClass]="getIcon('inv_hrefno')"></i></th>
+                        <th (click)="sort('inv_ar')" style="text-align:right">DR&nbsp;<i
+                                [ngClass]="getIcon('inv_ar')"></i></th>
+                        <th (click)="sort('inv_ap')" style="text-align:right">CR&nbsp;<i
+                                [ngClass]="getIcon('inv_ap')"></i></th>
+                        <th (click)="sort('inv_mbl_profit')"
+                            *ngIf="gs.BRANCH_REGION == 'USA' && gs.company_code == '100' && showprofit"
                             style="text-align:right">M.PROFIT&nbsp;<i [ngClass]="getIcon('inv_mbl_profit')"></i></th>
-                        <th (click)="sort('inv_hbl_profit')"  *ngIf="gs.BRANCH_REGION == 'USA' && gs.company_code == '100' && showprofit"
+                        <th (click)="sort('inv_hbl_profit')"
+                            *ngIf="gs.BRANCH_REGION == 'USA' && gs.company_code == '100' && showprofit"
                             style="text-align:right">H.PROFIT&nbsp;<i [ngClass]="getIcon('inv_hbl_profit')"></i></th>
                     </tr>
                 </thead>
                 <tbody class="page-body-tbody">
-                    <tr *ngFor="let rec of MainList" [style.color]="(rec.ROW_TYPE=='TOTAL'||rec.ROW_TYPE=='BALANCE')?'Red':'Black'"
-                    [style.font-weight]="(rec.ROW_TYPE=='TOTAL'||rec.ROW_TYPE=='BALANCE') ?'bold':'normal'">
+                    <tr *ngFor="let rec of MainList"
+                        [style.color]="(rec.ROW_TYPE=='TOTAL'||rec.ROW_TYPE=='BALANCE')?'Red':'Black'"
+                        [style.font-weight]="(rec.ROW_TYPE=='TOTAL'||rec.ROW_TYPE=='BALANCE') ?'bold':'normal'">
                         <td>{{rec.inv_branch}}</td>
-                        <td *ngIf="gs.BRANCH_REGION != 'USA'">{{rec.inv_no}}</td>
                         <td *ngIf="gs.BRANCH_REGION == 'USA'">
                             <div *ngIf="rec.inv_pkid" class="form-check"> <input type="checkbox"
-                                    class="form-check-input" [(ngModel)]="rec.inv_flag_b"><span>{{rec.inv_no}}</span>
+                                    class="form-check-input" [(ngModel)]="rec.inv_flag_b">
                             </div>
                         </td>
+                        <td>{{rec.inv_no}}</td>
                         <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                         <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mrefno}}</td> -->
                         <td *ngIf="rec.inv_branch==gs.branch_name">
@@ -194,7 +199,7 @@
                             <a class="hlink" [routerLink]="getRouteDet('L',rec,'HOUSE')"
                                 [queryParams]="getRouteDet('P',rec,'HOUSE')">{{rec.inv_hrefno}}</a>
                         </td>
-                        <td  *ngIf="rec.inv_branch!=gs.branch_name">{{rec.inv_hrefno}}</td>
+                        <td *ngIf="rec.inv_branch!=gs.branch_name">{{rec.inv_hrefno}}</td>
                         <td style="text-align:right">{{rec.inv_ar | number : '1.2-2'}}</td>
                         <td style="text-align:right">{{rec.inv_ap | number : '1.2-2'}}</td>
                         <td *ngIf="gs.BRANCH_REGION == 'USA' && gs.company_code == '100' && showprofit"
@@ -220,7 +225,7 @@
 </div>
 <div *ngIf="tab == 'report'">
     <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
-        [filename]="filename" [filetype]="filetype" [filedisplayname]="filedisplayname"
-        [filename2]="filename2" [filetype2]="filetype2" [filedisplayname2]="filedisplayname2"
-        (callbackevent)="callbackevent($event)"></app-report>
+        [filename]="filename" [filetype]="filetype" [filedisplayname]="filedisplayname" [filename2]="filename2"
+        [filetype2]="filetype2" [filedisplayname2]="filedisplayname2" (callbackevent)="callbackevent($event)">
+    </app-report>
 </div>

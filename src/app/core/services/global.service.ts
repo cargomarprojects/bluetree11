@@ -1578,6 +1578,7 @@ export class GlobalService {
     //bts_settings.menulist = this.MenuList;
     bts_settings.companylist = this.CompanyList
     bts_settings.yearlist = this.YearList;
+    bts_settings.branch_codes = this.branch_codes;
 
     localStorage.setItem(this.getlocalStorageFileName(), JSON.stringify(bts_settings));
     console.log('Save Local Storage : ', this.defaultValues.today);
@@ -1653,6 +1654,7 @@ export class GlobalService {
     this.User_isParent = bts_settings.user_isparent;
     this.User_Customer_Id = bts_settings.user_customer_id;
     this.User_Customer_Parent_Id = bts_settings.user_customer_parent_id;
+    this.branch_codes = bts_settings.branch_codes;
 
     //this.MainList = bts_settings.mainlist;
 

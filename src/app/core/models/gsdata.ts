@@ -41,7 +41,8 @@ export class gsdata {
     user_isparent : string ;
     user_customer_id : string ;
     user_customer_parent_id : string ;
-
+    branch_codes:string;
+    
     mainlist: any[];
     userrecord: any;
     userinfoData: any;
