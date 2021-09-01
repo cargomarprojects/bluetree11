@@ -1597,7 +1597,7 @@ export class GlobalService {
     console.log('removing local storage Started : ', this.defaultValues.today);
     for (var key in localStorage) {
       if (localStorage.getItem(key)) {
-        if (!key.startsWith(this.defaultValues.today)) {
+        if (this.canRemoveLocalStorage(key)) {
           localStorage.removeItem(key);
           console.log('removed local storage ', key);
         }
@@ -1607,6 +1607,19 @@ export class GlobalService {
   }
 
 
+  canRemoveLocalStorage(_key: any) {
+
+    var predate = this.getPreviousDate(1).split('-');
+    var predateValue = predate[0] + predate[1] + predate[2];
+
+    var keydate = _key.split('-');
+    var keydateValue = keydate[0] + keydate[1] + keydate[2];
+
+    if (keydateValue < predateValue)
+      return true;
+    else
+      return false;
+  }
 
   ReadLocalStorage() {
 
