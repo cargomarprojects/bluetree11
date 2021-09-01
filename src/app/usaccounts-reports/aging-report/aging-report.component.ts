@@ -168,7 +168,9 @@ export class AgingReportComponent implements OnInit {
                 this.SearchData.SHOW_ADVANCE = this.show_advance == true ? 'Y' : 'N';
 
                 this.SearchData.BASEDON = this.basedon;
-
+                this.SearchData.radio_cust = this.radio_cust;
+                this.SearchData.radio_days = this.radio_days;
+                
                 this.SearchData.HIDE_PAYROLL = this.gs.user_hide_payroll;
 
                 if (this.currency == undefined || this.currency === '')

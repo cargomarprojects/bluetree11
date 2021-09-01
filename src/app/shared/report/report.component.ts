@@ -147,25 +147,26 @@ export class ReportComponent implements OnInit {
 
 
   AutoLoad() {
-    if (!this.gs.isBlank(this._searchdata.MAIL_SUBJECT)) {
-      this.maildata.subject = this._searchdata.MAIL_SUBJECT;
-    } else {
-      this.maildata.subject = '';
-    }
-    if (!this.gs.isBlank(this._searchdata.CONT_GROUP)) {
-      this.maildata.cont_group = this._searchdata.CONT_GROUP;
-    } else {
-      this.maildata.cont_group = '';
-    }
+    if (!this.gs.isBlank(this._searchdata)) {
+      if (!this.gs.isBlank(this._searchdata.MAIL_SUBJECT)) {
+        this.maildata.subject = this._searchdata.MAIL_SUBJECT;
+      } else {
+        this.maildata.subject = '';
+      }
+      if (!this.gs.isBlank(this._searchdata.CONT_GROUP)) {
+        this.maildata.cont_group = this._searchdata.CONT_GROUP;
+      } else {
+        this.maildata.cont_group = '';
+      }
 
-    if (!this.gs.isBlank(this._searchdata.CUSTOMER_ID) && !this.gs.isBlank(this._searchdata.CUSTOMER_NAME)) {
-      this.maildata.customer_id = this._searchdata.CUSTOMER_ID;
-      this.maildata.customer_name = this._searchdata.CUSTOMER_NAME;
-    } else {
-      this.maildata.customer_id = '';
-      this.maildata.customer_name = '';
+      if (!this.gs.isBlank(this._searchdata.CUSTOMER_ID) && !this.gs.isBlank(this._searchdata.CUSTOMER_NAME)) {
+        this.maildata.customer_id = this._searchdata.CUSTOMER_ID;
+        this.maildata.customer_name = this._searchdata.CUSTOMER_NAME;
+      } else {
+        this.maildata.customer_id = '';
+        this.maildata.customer_name = '';
+      }
     }
-
     this.downloadfilename = this.GetFileWithoutExtension(this._filedisplayname);
     this.gs.getFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname).subscribe(response => {
 
@@ -252,5 +253,5 @@ export class ReportComponent implements OnInit {
     if (_feild == "downloadfilename")
       this.downloadfilename = this.downloadfilename.toLocaleUpperCase();
   }
- 
+
 }
