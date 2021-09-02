@@ -111,7 +111,7 @@ export class PartyEditComponent implements OnInit {
         this.ms_name = this.ms_name.replace("#", ",");
       }
     }
-    
+
     this.closeCaption = 'Return';
     this.initPage();
     this.actionHandler();
@@ -292,7 +292,7 @@ export class PartyEditComponent implements OnInit {
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
         this.record = <Tbl_Mast_Partym>response.record;
-        this.records = (response.records == undefined || response.records == null) ? <Tbl_Mast_Contacts[]>[] :<Tbl_Mast_Contacts[]>response.records;
+        this.records = (response.records == undefined || response.records == null) ? <Tbl_Mast_Contacts[]>[] : <Tbl_Mast_Contacts[]>response.records;
         this.mode = 'EDIT';
         this.record.gen_is_shipper_b = (this.record.gen_is_shipper == "Y") ? true : false;
         this.record.gen_is_consignee_b = (this.record.gen_is_consignee == "Y") ? true : false;
@@ -586,7 +586,7 @@ export class PartyEditComponent implements OnInit {
 
   }
 
-  LovSelected2(_Record: SearchTable,rec : Tbl_Mast_Contacts) {
+  LovSelected2(_Record: SearchTable, rec: Tbl_Mast_Contacts) {
     if (_Record.controlname == "CONTACT GROUP") {
       rec.cont_group_id = _Record.id;
       rec.cont_group_name = _Record.name;
@@ -631,7 +631,20 @@ export class PartyEditComponent implements OnInit {
           title: 'Memo',
           origin: 'party-page'
         };
-    }else if (action == "SOP-MEMO") {
+    }
+   else if (action == "PARENT-MEMO") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/XmlRemarksPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.menuid,
+          pkid: this.record.gen_parent_id,
+          source: 'PARENT-MEMO',
+          title: 'Parent Memo',
+          origin: 'party-page'
+        };
+    }  else if (action == "SOP-MEMO") {
       if (_type == "L")
         return '/Silver.BusinessModule/XmlRemarksPage';
       if (_type == 'P')
@@ -643,7 +656,7 @@ export class PartyEditComponent implements OnInit {
           title: 'SOP Memo',
           origin: 'party-page'
         };
-    }else if (action == "QUOTN-MEMO") {
+    } else if (action == "QUOTN-MEMO") {
       if (_type == "L")
         return '/Silver.BusinessModule/XmlRemarksPage';
       if (_type == 'P')
@@ -655,7 +668,7 @@ export class PartyEditComponent implements OnInit {
           title: 'Quotation Memo',
           origin: 'party-page'
         };
-    }else if (action == "ACC-ALERT") {
+    } else if (action == "ACC-ALERT") {
       if (_type == "L")
         return '/Silver.BusinessModule/XmlRemarksPage';
       if (_type == 'P')
@@ -667,7 +680,7 @@ export class PartyEditComponent implements OnInit {
           title: 'Accounting Alert',
           origin: 'party-page'
         };
-    }else if (action == "DELIVERY-ADDRESS") {
+    } else if (action == "DELIVERY-ADDRESS") {
       if (_type == "L")
         return '/Silver.Master/DeliveryAddrPage';
       if (_type == 'P')
@@ -677,7 +690,7 @@ export class PartyEditComponent implements OnInit {
           pkid: this.pkid,
           origin: 'party-page'
         };
-    }else if (action == "PARTY-LOGIN") {
+    } else if (action == "PARTY-LOGIN") {
       if (_type == "L")
         return '/Silver.Master/PartyLoginPage';
       if (_type == 'P')
@@ -689,7 +702,7 @@ export class PartyEditComponent implements OnInit {
           party_name: this.record.gen_name,
           origin: 'party-page'
         };
-    }else if (action == "PARTY-ADDRESS") {
+    } else if (action == "PARTY-ADDRESS") {
       if (_type == "L")
         return '/Silver.Master/PartyAddrPage';
       if (_type == 'P')
@@ -700,7 +713,7 @@ export class PartyEditComponent implements OnInit {
           party_name: this.record.gen_short_name,
           origin: 'party-page'
         };
-    }else if (action == "BANK-INFO") {
+    } else if (action == "BANK-INFO") {
       if (_type == "L")
         return '/Silver.Master/BankInfoPage';
       if (_type == 'P')
@@ -764,88 +777,88 @@ export class PartyEditComponent implements OnInit {
         break;
       } case 'MEMO': {
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           source: 'PARTY-MEMO',
           title: 'Memo',
           origin: 'party-page'
         };
-        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage', prm);
         break;
       }
       case 'SOP-MEMO': {
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           source: 'SOP-MEMO',
           title: 'SOP Memo',
           origin: 'party-page'
         };
-        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage', prm);
         break;
       }
       case 'QUOTN-MEMO': {
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           source: 'QUOTATION-MEMO',
           title: 'Quotation Memo',
           origin: 'party-page'
         };
-        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage', prm);
         break;
       }
       case 'ACC-ALERT': {
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           source: 'ACCOUNTING-ALERT',
           title: 'Accounting Alert',
           origin: 'party-page'
         };
-        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
+        this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage', prm);
         break;
       }
       case 'DELIVERY-ADDRESS': {
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: this.menuid,
           pkid: this.pkid,
           origin: 'party-page'
         };
-        this.gs.Naviagete2('Silver.Master/DeliveryAddrPage',  prm);
+        this.gs.Naviagete2('Silver.Master/DeliveryAddrPage', prm);
         break;
       }
       case 'PARTY-LOGIN': {
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: this.menuid,
           parentid: this.pkid,
           party_code: this.record.gen_code,
           party_name: this.record.gen_name,
           origin: 'party-page'
         };
-        this.gs.Naviagete2('Silver.Master/PartyLoginPage',  prm);
+        this.gs.Naviagete2('Silver.Master/PartyLoginPage', prm);
         break;
       }
       case 'PARTY-ADDRESS': {
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: this.menuid,
           parentid: this.pkid,
           party_name: this.record.gen_short_name,
           origin: 'party-page'
         };
-        this.gs.Naviagete2('Silver.Master/PartyAddrPage',  prm);
+        this.gs.Naviagete2('Silver.Master/PartyAddrPage', prm);
         break;
       }
       case 'BANK-INFO': {
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: this.menuid,
           parentid: this.pkid,
           party_code: this.record.gen_code,
@@ -856,7 +869,7 @@ export class PartyEditComponent implements OnInit {
           party_addr3: this.record.gen_address3,
           origin: 'party-page'
         };
-        this.gs.Naviagete2('Silver.Master/BankInfoPage',  prm);
+        this.gs.Naviagete2('Silver.Master/BankInfoPage', prm);
         break;
       }
     }
@@ -887,13 +900,15 @@ export class PartyEditComponent implements OnInit {
       rec.cont_pkid = this.gs.getGuid();
       rec.cont_parent_id = this.pkid;
       rec.cont_type = "PARTYS";
-      rec.cont_name = ''
-      rec.cont_title = ''
-      rec.cont_email = ''
-      rec.cont_remarks = ''
-      rec.cont_tel = ''
-      rec.cont_mobile = ''
-      rec.cont_oth_messenger = ''
+      rec.cont_name = '';
+      rec.cont_title = '';
+      rec.cont_email = '';
+      rec.cont_remarks = '';
+      rec.cont_tel = '';
+      rec.cont_mobile = '';
+      rec.cont_oth_messenger = '';
+      rec.cont_group_id = '';
+      rec.cont_group_name = '';
       this.records.push(rec);
     }
   }

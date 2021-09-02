@@ -313,7 +313,10 @@
 
 
                     <div class="form-group row">
-                        <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('MEMO')">Memo</button>
+                        <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation2('MEMO')">Memo</button> -->
+                        <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
+                        [style.color]="record.gen_is_memo=='Y'?'red':'white'"
+                        [routerLink]="BtnNavigation2('MEMO','L')" [queryParams]="BtnNavigation2('MEMO','P')">Memo</a>
                     </div>
 
                     <!-- <div class="form-group row">

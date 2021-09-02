@@ -857,7 +857,6 @@
                             (click)="BtnNavigation('ATTACHMENT')">Attachments</button>
                     </div>
 
-
                     <div class="form-group row">
                         <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation('MEMO')">Memo</button> -->
                         <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
@@ -927,6 +926,12 @@
                             <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
                             [routerLink]="BtnNavigation2('BANK-INFO','L')" [queryParams]="BtnNavigation2('BANK-INFO','P')">Bank
                             Information</a>
+                    </div>
+
+                    <div class="form-group row">
+                        <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid) && record.gen_parent_id!=''" 
+                        [style.color]="record.gen_is_memo=='Y'?'red':'white'"
+                        [routerLink]="BtnNavigation2('PARENT-MEMO','L')" [queryParams]="BtnNavigation2('PARENT-MEMO','P')">Parent Memo</a>
                     </div>
 
                 </div>
