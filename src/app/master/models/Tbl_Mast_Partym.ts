@@ -133,6 +133,7 @@ export interface Tbl_Mast_Partym {
     gen_is_splac_b: boolean;
     gen_is_blackac_b: boolean;
     gen_is_tbd_b:boolean;
+    gen_is_parentmemo:boolean;
 
 }
 

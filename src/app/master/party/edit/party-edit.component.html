@@ -930,7 +930,7 @@
 
                     <div class="form-group row">
                         <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid) && record.gen_parent_id!=''" 
-                        [style.color]="record.gen_is_memo=='Y'?'red':'white'"
+                        [style.color]="record.gen_is_parentmemo=='Y'?'red':'white'"
                         [routerLink]="BtnNavigation2('PARENT-MEMO','L')" [queryParams]="BtnNavigation2('PARENT-MEMO','P')">Parent Memo</a>
                     </div>
 
