@@ -179,7 +179,7 @@
                         [style.color]="(rec.ROW_TYPE=='TOTAL'||rec.ROW_TYPE=='BALANCE')?'Red':'Black'"
                         [style.font-weight]="(rec.ROW_TYPE=='TOTAL'||rec.ROW_TYPE=='BALANCE') ?'bold':'normal'">
                         <td>{{rec.inv_branch}}</td>
-                        <td *ngIf="gs.BRANCH_REGION == 'USA'">
+                        <td *ngIf="gs.BRANCH_REGION == 'USA'" (click)="IsChkChecked(rec)" >
                             <div *ngIf="rec.inv_pkid" class="form-check"> <input type="checkbox"
                                     class="form-check-input" [(ngModel)]="rec.inv_flag_b">
                             </div>

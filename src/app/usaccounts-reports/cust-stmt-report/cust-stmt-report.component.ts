@@ -225,8 +225,8 @@ export class CustStmtReportComponent implements OnInit {
 
   PageEvents(actions) {
     //GOTOCHANGE2
-    if( actions.action == 'GOTO')
-      this.page_current = actions.page_current;    
+    if (actions.action == 'GOTO')
+      this.page_current = actions.page_current;
     this.List(actions.outputformat, actions.action);
   }
 
@@ -389,7 +389,7 @@ export class CustStmtReportComponent implements OnInit {
     else
       return null;
   }
-  
+
   initLov(caption: string = '') {
 
   }
@@ -486,6 +486,10 @@ export class CustStmtReportComponent implements OnInit {
     })
   }
 
+  IsChkChecked(_rec: Tbl_OS_REPORT) {
+    _rec.inv_flag_b = !_rec.inv_flag_b;
+  }
+  
   editmaster(_record: Tbl_OS_REPORT) {
 
     let sID: string = (_record.inv_mbl_id != null) ? _record.inv_mbl_id.toString() : "";
