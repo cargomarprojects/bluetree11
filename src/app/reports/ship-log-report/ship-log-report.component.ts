@@ -6,14 +6,13 @@ import { ReportService } from '../services/report.service';
 import { Tbl_cargo_general } from '../../other/models/tbl_cargo_general'
 import { Tbl_shipment_stage } from '../models/tbl_shipment_stage';
 import { SearchTable } from '../../shared/models/searchtable';
-
-
 import { Store, State, select } from '@ngrx/store';
 import *  as myActions from './store/ship-log-report.actions';
 import *  as myReducer from './store/ship-log-report.reducer';
 import { ReportState } from './store/ship-log-report.models'
-
 import { Observable } from 'rxjs';
+
+// EDIT-AJITH-03-09-2021
 
 @Component({
   selector: 'app-ship-log-report',

@@ -350,19 +350,16 @@
                 </thead>
                 <tbody class="page-body-tbody">
                     <tr *ngFor="let rec of MainList">
-                        <!-- <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
                         <td>
                             <a class="hlink"
                                 [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L')"
                                 [queryParams]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P')">{{rec.mbl_refno}}</a>
                         </td>
-                        <!-- <td class='hlink' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td> -->
                         <td *ngIf="rec.hbl_pkid!=''">
                             <a class="hlink"
                                 [routerLink]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L')"
                                 [queryParams]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'P')">{{rec.hbl_houseno}}</a>
                         </td>
-                        <!-- MBL Instruction shown in below hbl_houseno-->
                         <td *ngIf="rec.hbl_pkid==''">{{rec.hbl_houseno}}</td>
                         <td>{{rec.hbl_shipment_stage}}</td>
                         <td>{{rec.mbl_liner_name}}</td>
@@ -386,7 +383,6 @@
                 <thead class="page-body-thead">
                     <tr>
                         <th (click)="sort('mbl_refno')"> REFNO &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i> </th>
-                        <!-- <th> REF-DATE </th> -->
                         <th (click)="sort('hbl_houseno')"> MASTER/HOUSE# &nbsp;<i
                                 [ngClass]="getIcon('hbl_houseno')"></i> </th>
                         <th (click)="sort('hbl_shipment_stage')"> SHIPMENT STAGE &nbsp;<i
@@ -395,14 +391,11 @@
                                 [ngClass]="getIcon('mbl_liner_name')"></i> </th>
                         <th *ngIf="job_mode=='OCEAN EXPORT'" (click)="sort('mbl_liner_bookingno')"> BOOKING# &nbsp;<i
                                 [ngClass]="getIcon('mbl_liner_bookingno')"></i> </th>
-                        <!-- <th> SHIPPER </th> -->
                         <th (click)="sort('hbl_consignee_name')"> CONSIGNEE &nbsp;<i
                                 [ngClass]="getIcon('hbl_consignee_name')"></i> </th>
                         <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'"
                             (click)="sort('mbl_cntr_type')"> TYPE &nbsp;<i [ngClass]="getIcon('mbl_cntr_type')"></i>
                         </th>
-                        <!-- <th> PACKAGES </th>
-                        <th> FINAL DESTINATION </th> -->
                         <th (click)="sort('mbl_pol_etd')"> ETD &nbsp;<i [ngClass]="getIcon('mbl_pol_etd')"></i></th>
                         <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='OTHER OPERATION'"
                             (click)="sort('hbl_isf_no')"> ISF &nbsp;<i [ngClass]="getIcon('hbl_isf_no')"></i> </th>
@@ -442,29 +435,22 @@
                 </thead>
                 <tbody class="page-body-tbody">
                     <tr *ngFor="let rec of MainList">
-                        <!-- <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
                         <td>
                             <a class="hlink"
                                 [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L')"
                                 [queryParams]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P')">{{rec.mbl_refno}}</a>
                         </td>
-                        <!-- <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td> -->
-                        <!-- <td class='hlink' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td> -->
                         <td *ngIf="rec.hbl_pkid!=''">
                             <a class="hlink"
                                 [routerLink]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L')"
                                 [queryParams]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'P')">{{rec.hbl_houseno}}</a>
                         </td>
-                        <!-- MBL Instruction shown in below hbl_houseno-->
                         <td *ngIf="rec.hbl_pkid==''">{{rec.hbl_houseno}}</td>
                         <td>{{rec.hbl_shipment_stage}}</td>
                         <td>{{rec.mbl_liner_name}}</td>
                         <td *ngIf="job_mode=='OCEAN EXPORT'">{{rec.mbl_liner_bookingno}}</td>
-                        <!-- <td>{{rec.hbl_shipper_name}}</td> -->
                         <td>{{rec.hbl_consignee_name}}</td>
                         <td *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'">{{rec.mbl_cntr_type}}</td>
-                        <!-- <td>{{rec.hbl_packages}}</td>
-                        <td>{{rec.hbl_place_final}}</td> -->
                         <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
                         <td *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT' || job_mode=='OTHER OPERATION'">
                             {{rec.hbl_isf_no}}</td>
@@ -499,12 +485,8 @@
                 <thead class="page-body-thead">
                     <tr>
                         <th (click)="sort('mbl_refno')"> REFNO &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i> </th>
-                        <!-- <th> REF-DATE </th> -->
                         <th (click)="sort('hbl_houseno')"> MASTER/HOUSE# &nbsp;<i [ngClass]="getIcon('hbl_houseno')"></i>
                         </th>
-                        <!-- <th> SHIPMENT STAGE </th> -->
-                        <!-- <th> CARRIER </th>
-                        <th> BOOKING# </th> -->
                         <th (click)="sort('hbl_shipper_name')"> SHIPPER &nbsp;<i [ngClass]="getIcon('hbl_shipper_name')"></i> </th>
                         <th (click)="sort('hbl_consignee_name')"> CONSIGNEE &nbsp;<i [ngClass]="getIcon('hbl_consignee_name')"></i> </th>
                         <th (click)="sort('mbl_cntr_type')"> TYPE &nbsp;<i [ngClass]="getIcon('mbl_cntr_type')"></i> </th>
@@ -512,22 +494,11 @@
                         <th (click)="sort('hbl_place_final')"> FINAL DESTINATION &nbsp;<i
                                 [ngClass]="getIcon('hbl_place_final')"></i> </th>
                         <th (click)="sort('mbl_pol_etd')"> ETD &nbsp;<i [ngClass]="getIcon('mbl_pol_etd')"></i> </th>
-                        <!-- <th> ISF </th>
-                        <th> M RLS </th>
-                        <th> H RLS </th>
-                        <th> PL </th>
-                        <th> CI </th>
-                        <th> CARRIER AN </th>
-                        <th> CUSTOM RELEASE STATUS </th>
-                        <th> FREIGHT RELEASE STATUS </th> -->
                         <th (click)="sort('hbl_paid_status')"> CLIENT PAID &nbsp;<i [ngClass]="getIcon('hbl_paid_status')"></i>
                         </th>
                         <th (click)="sort('mbl_pod_eta')"> ETA &nbsp;<i [ngClass]="getIcon('mbl_pod_eta')"></i> </th>
                         <th (click)="sort('hbl_lfd_date')"> LAST FREE DATE &nbsp;<i [ngClass]="getIcon('hbl_lfd_date')"></i>
                         </th>
-                        <!-- <th> DELIVERY </th>
-                        <th> DELIVERY DATE </th>
-                        <th> REMARKS </th> -->
                         <!-- <th> A </th>
                         <th> B </th>
                         <th> C </th>
@@ -536,44 +507,26 @@
                 </thead>
                 <tbody class="page-body-tbody">
                     <tr *ngFor="let rec of MainList">
-                        <!-- <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
                         <td>
                             <a class="hlink"
                                 [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L')"
                                 [queryParams]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'P')">{{rec.mbl_refno}}</a>
                         </td>
-                        <!-- <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td> -->
-                        <!-- <td class='hlink' (click)="edithouse(rec)">{{rec.hbl_houseno}}</td> -->
                         <td *ngIf="rec.hbl_pkid!=''">
                             <a class="hlink"
                                 [routerLink]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L')"
                                 [queryParams]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'P')">{{rec.hbl_houseno}}</a>
                         </td>
-                        <!-- MBL Instruction shown in below hbl_houseno-->
                         <td *ngIf="rec.hbl_pkid==''">{{rec.hbl_houseno}}</td>
-                        <!-- <td>{{rec.hbl_shipment_stage}}</td>
-                        <td>{{rec.mbl_liner_name}}</td>
-                        <td>{{rec.mbl_liner_bookingno}}</td> -->
                         <td>{{rec.hbl_shipper_name}}</td>
                         <td>{{rec.hbl_consignee_name}}</td>
                         <td>{{rec.mbl_cntr_type}}</td>
                         <td>{{rec.hbl_packages}}</td>
                         <td>{{rec.hbl_place_final}}</td>
                         <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
-                        <!-- <td>{{rec.hbl_isf_no}}</td>
-                        <td>{{rec.mbl_is_sea_waybill}}</td>
-                        <td>{{rec.hbl_bl_status}}</td>
-                        <td>{{rec.hbl_is_pl}}</td>
-                        <td>{{rec.hbl_is_ci}}</td>
-                        <td>{{rec.hbl_is_carr_an}}</td>
-                        <td>{{rec.hbl_custom_reles_status}}</td>
-                        <td>{{rec.hbl_cargo_release_status}}</td> -->
                         <td>{{rec.hbl_paid_status}}</td>
                         <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
                         <td>{{rec.hbl_lfd_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-                        <!-- <td>{{rec.hbl_is_delivery}}</td>
-                        <td>{{rec.hbl_pld_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
-                        <td>{{rec.hbl_remark3}}</td> -->
                         <!-- <td>{{rec.mbl_inv_stage_a}}</td>
                         <td>{{rec.mbl_inv_stage_b}}</td>
                         <td>{{rec.mbl_inv_stage_c}}</td>
@@ -604,7 +557,6 @@
                 </thead>
                 <tbody class="page-body-tbody">
                     <tr *ngFor="let rec of MainList">
-                        <!-- <td class='hlink' (click)="editmaster(rec)">{{rec.mbl_refno}}</td> -->
                         <td>
                             <a class="hlink"
                                 [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,'','', 'L')"
