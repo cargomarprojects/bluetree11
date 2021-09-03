@@ -19,6 +19,8 @@ import { DateComponent } from '../../shared/date/date.component';
 
 declare var $: any;
 
+// EDIT-AJITH-03-09-2021
+
 @Component({
     selector: 'app-pay-final',
     templateUrl: './payfinal.component.html'
@@ -673,6 +675,11 @@ export class PayFinalComponent implements OnInit {
         if (MessageBox.Show("Save Payment", "Save", MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
             return false;
         */
+
+        if (!confirm("Save Payment")) {
+            return false;
+        }
+
         this.Save();
 
         return bRet;
