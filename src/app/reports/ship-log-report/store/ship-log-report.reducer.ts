@@ -35,7 +35,8 @@ export const initialState: ReportState = {
     format_type: '',
     printer_friendly: false,
     reportformat: '',
-    chklstCol2Visible:false,
+    chklstCol2Visible: false,
+    selectedId: '',
     sortcol: 'mbl_refno',
     sortorder: true,
     page_rows: 0,
@@ -76,8 +77,8 @@ export function ShipmentLogReportReducer(state: ReportState[] = [initialState], 
         }
         case myActions.ActionTypes.SORT_DATA: {
 
-            var st = Object.assign({},state.find( rec => rec.urlid  == action.payload.id));
-            if ( st == null)
+            var st = Object.assign({}, state.find(rec => rec.urlid == action.payload.id));
+            if (st == null)
                 return [...state];
 
             if (st.sortcol != action.payload.sortcol) {
@@ -91,8 +92,15 @@ export function ShipmentLogReportReducer(state: ReportState[] = [initialState], 
                 st.records = _.sortBy(st.records, st.sortcol);
             else
                 st.records = _.sortBy(st.records, st.sortcol).reverse();
-            
-            return [...state.filter(rec => rec.urlid != action.payload.id), st ];
+
+            return [...state.filter(rec => rec.urlid != action.payload.id), st];
+        }
+        case myActions.ActionTypes.SELECT_ROW: {
+            var st = Object.assign({}, state.find(rec => rec.urlid == action.payload.id));
+            if (st == null)
+                return [...state];
+            st.selectedId = action.payload.selecteId;
+            return [...state.filter(rec => rec.urlid != action.payload.id), st];
         }
         default:
             return state;
