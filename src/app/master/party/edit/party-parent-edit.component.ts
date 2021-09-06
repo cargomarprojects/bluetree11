@@ -8,6 +8,7 @@ import { User_Menu } from '../../../core/models/menum';
 import { Tbl_Mast_Partym, vm_Tbl_Mast_Partym } from '../../models/Tbl_Mast_Partym';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { Tbl_Mast_Contacts } from '../../../marketing/models/tbl_cargo_journals_master';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-party-parent-edit',
@@ -306,6 +307,9 @@ export class PartyParentEditComponent implements OnInit {
     if (!this.Allvalid())
       return;
 
+    if (!confirm("Save")) {
+      return;
+    }
     this.record.gen_is_shipper = this.record.gen_is_shipper_b ? 'Y' : 'N';
     this.record.gen_is_consignee = this.record.gen_is_consignee_b ? 'Y' : 'N';
     this.record.gen_is_importer = this.record.gen_is_importer_b ? 'Y' : 'N';
@@ -470,7 +474,7 @@ export class PartyParentEditComponent implements OnInit {
       rec.cont_group_name = _Record.name;
     }
   }
-  
+
   onFocusout(field: string) {
 
     switch (field) {
