@@ -11,6 +11,7 @@ import { strictEqual } from 'assert';
 import { Tbl_cargo_imp_masterm } from '../../models/tbl_cargo_imp_masterm';
 import { InputBoxComponent } from '../../../shared/input/inputbox.component';
 import { DateComponent } from '../../../shared/date/date.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-airimp-house-edit',
@@ -389,6 +390,10 @@ export class AirImpHouseEditComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
+
+      if (!confirm("Save")) {
+        return;
+    }
 
     //this.SaveDescList();
     const saveRecord = <vm_tbl_cargo_imp_housem>{};

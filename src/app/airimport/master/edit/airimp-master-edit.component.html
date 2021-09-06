@@ -4,8 +4,8 @@
             <label class="mr-3">{{title}} ({{mode}})</label>
             <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button> -->
             <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)"
-            [routerLink]="['/Silver.AirImport.Trans/AirImpMasterEditPage']"
-            [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.mainService.param_type,origin: 'airimp-master-page',mode: 'ADD','rnd': gs.getRandomInt()}">New</a>
+                [routerLink]="['/Silver.AirImport.Trans/AirImpMasterEditPage']"
+                [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.mainService.param_type,origin: 'airimp-master-page',mode: 'ADD','rnd': gs.getRandomInt()}">New</a>
             <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
             <!-- <a class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('LIST')" [queryParams]="getParam('LIST')">Return</a> -->
             <label class="text-danger" *ngIf="is_locked">LOCKED</label>
@@ -335,8 +335,9 @@
                                         <!-- <td class='hlink' (click)="EditHouse(rec)">{{rec.hbl_houseno}}</td> -->
                                         <td *ngIf="!gs.canEdit(this.gs.MENU_AI_HOUSE)">{{rec.hbl_houseno}}</td>
                                         <td *ngIf="gs.canEdit(this.gs.MENU_AI_HOUSE)">
-                                            <a class='hlink' [routerLink]="['/Silver.AirImport.Trans/AirImpHouseEditPage']"
-                                            [queryParams]="{appid : this.gs.appid ,menuid: this.gs.MENU_AI_HOUSE,parentid:this.pkid,pkid: rec.hbl_pkid,refno: this.record.mbl_refno ,type: 'AI',origin: 'airimp-master-page',mode: 'EDIT'}">{{rec.hbl_houseno}}</a>
+                                            <a class='hlink'
+                                                [routerLink]="['/Silver.AirImport.Trans/AirImpHouseEditPage']"
+                                                [queryParams]="{appid : this.gs.appid ,menuid: this.gs.MENU_AI_HOUSE,parentid:this.pkid,pkid: rec.hbl_pkid,refno: this.record.mbl_refno ,type: 'AI',origin: 'airimp-master-page',mode: 'EDIT'}">{{rec.hbl_houseno}}</a>
                                         </td>
                                         <td>{{rec.hbl_shipper_name}}</td>
                                         <td>{{rec.hbl_consignee_name}}</td>
@@ -346,14 +347,16 @@
                                         <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
                                         <td>{{rec.rec_created_by}}</td>
                                         <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-                                        <td *ngIf="gs.canDelete(this.gs.MENU_AI_HOUSE)" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
-                                            aria-hidden="true" (click)="DeleteHouseRow(rec)"></i></td>
+                                        <td *ngIf="gs.canDelete(this.gs.MENU_AI_HOUSE)" class="p-0 text-center"><i
+                                                class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                                                (click)="DeleteHouseRow(rec)"></i></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="form-group row">
                                 <div class="col-12">
-                                    <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_AI_HOUSE)"  [class.disabled]="is_locked"
+                                    <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_AI_HOUSE)"
+                                        [class.disabled]="is_locked"
                                         [routerLink]="['/Silver.AirImport.Trans/AirImpHouseEditPage']"
                                         [queryParams]="{appid : gs.appid, menuid: this.gs.MENU_AI_HOUSE, parentid:this.pkid, pkid: '',refno: this.record.mbl_refno ,type: 'AI',origin: 'airimp-master-page',mode: 'ADD'}">Add
                                         House</a>
@@ -383,8 +386,9 @@
 
 
                     <div class="form-group row">
-                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_MASTER_ARAP)" 
-                            [routerLink]="BtnNavigation2('ARAP','L')" [queryParams]="BtnNavigation2('ARAP','P')">AR & AP</a>
+                        <a class="col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_AI_MASTER_ARAP)" [routerLink]="BtnNavigation2('ARAP','L')"
+                            [queryParams]="BtnNavigation2('ARAP','P')">AR & AP</a>
                     </div>
 
                     <div class="form-group row">
@@ -392,8 +396,10 @@
                             *ngIf="gs.screenExists(gs.MENU_AI_MASTER_PROFIT_REPORT)"
                             (click)="BtnNavigation('PROFITREPORT')">Profit
                             Report</button> -->
-                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_MASTER_PROFIT_REPORT)" 
-                            [routerLink]="BtnNavigation2('PROFITREPORT','L')" [queryParams]="BtnNavigation2('PROFITREPORT','P')">Profit
+                        <a class="col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_AI_MASTER_PROFIT_REPORT)"
+                            [routerLink]="BtnNavigation2('PROFITREPORT','L')"
+                            [queryParams]="BtnNavigation2('PROFITREPORT','P')">Profit
                             Report</a>
                     </div>
 
@@ -409,8 +415,10 @@
                             *ngIf="gs.screenExists(gs.MENU_AI_MESSENGER_SLIP)"
                             (click)="BtnNavigation('MESSENGER-SLIP')">Messenger
                             Slip</button> -->
-                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_MESSENGER_SLIP)" 
-                            [routerLink]="BtnNavigation2('MESSENGER-SLIP','L')" [queryParams]="BtnNavigation2('MESSENGER-SLIP','P')">Messenger
+                        <a class="col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_AI_MESSENGER_SLIP)"
+                            [routerLink]="BtnNavigation2('MESSENGER-SLIP','L')"
+                            [queryParams]="BtnNavigation2('MESSENGER-SLIP','P')">Messenger
                             Slip</a>
                     </div>
 
@@ -420,8 +428,10 @@
                             *ngIf="gs.screenExists(gs.MENU_AI_PAYMENT_REQUEST)"
                             (click)="BtnNavigation('PAYMENT-REQUEST')">Payment
                             Request</button> -->
-                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_PAYMENT_REQUEST)" 
-                            [routerLink]="BtnNavigation2('PAYMENT-REQUEST','L')" [queryParams]="BtnNavigation2('PAYMENT-REQUEST','P')">Payment
+                        <a class="col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_AI_PAYMENT_REQUEST)"
+                            [routerLink]="BtnNavigation2('PAYMENT-REQUEST','L')"
+                            [queryParams]="BtnNavigation2('PAYMENT-REQUEST','P')">Payment
                             Request</a>
                     </div>
 
@@ -436,8 +446,9 @@
                         <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
                             *ngIf="gs.screenExists(gs.MENU_AI_MASTER)" (click)="BtnNavigation('FOLLOWUP')">Add To Follow
                             Up</button> -->
-                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_MASTER)" 
-                            [routerLink]="BtnNavigation2('FOLLOWUP','L')" [queryParams]="BtnNavigation2('FOLLOWUP','P')">Add To Follow
+                        <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_MASTER)"
+                            [routerLink]="BtnNavigation2('FOLLOWUP','L')"
+                            [queryParams]="BtnNavigation2('FOLLOWUP','P')">Add To Follow
                             Up</a>
                     </div>
                     <div class="form-group row">
@@ -446,9 +457,11 @@
                             [style.color]="record.mbl_ismemo_attached=='Y'?'red':black"
                             (click)="BtnNavigation('INERNALMEMO')">Internal
                             Memo</button> -->
-                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_MASTER_INTERNAL_MEMO)" 
+                        <a class="col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_AI_MASTER_INTERNAL_MEMO)"
                             [style.color]="record.mbl_ismemo_attached=='Y'?'red':'white'"
-                            [routerLink]="BtnNavigation2('INERNALMEMO','L')" [queryParams]="BtnNavigation2('INERNALMEMO','P')">Internal
+                            [routerLink]="BtnNavigation2('INERNALMEMO','L')"
+                            [queryParams]="BtnNavigation2('INERNALMEMO','P')">Internal
                             Memo</a>
                     </div>
                     <div class="form-group row">
@@ -456,11 +469,16 @@
                             *ngIf="gs.screenExists(gs.MENU_AI_MASTER_REQUEST_APPROVAL)"
                             (click)="BtnNavigation('REQUEST-APPROVAL')">Request
                             For Approval</button> -->
-                            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_MASTER_REQUEST_APPROVAL)" 
-                            [routerLink]="BtnNavigation2('REQUEST-APPROVAL','L')" [queryParams]="BtnNavigation2('REQUEST-APPROVAL','P')">Request
+                        <a class="col-12 btn btn-info btn-sm text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_AI_MASTER_REQUEST_APPROVAL)"
+                            [routerLink]="BtnNavigation2('REQUEST-APPROVAL','L')"
+                            [queryParams]="BtnNavigation2('REQUEST-APPROVAL','P')">Request
                             For Approval</a>
                     </div>
-
+                    <div class="form-group row">
+                        <button class="col-12 btn btn-primary btn-sm  text-uppercase" [disabled]="is_locked"
+                            *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
+                    </div>
                 </div>
 
             </div>
