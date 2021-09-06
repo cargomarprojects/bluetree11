@@ -13,6 +13,8 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
 
+//EDIT-AJITH-06-09-2021
+
 @Component({
   selector: 'app-airexp-master-edit',
   templateUrl: './airexp-master-edit.component.html'
@@ -276,6 +278,10 @@ export class AirExpMasterEditComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
+
+    if (!confirm("Save")) {
+      return;
+    }
 
     this.record.mbl_direct = this.record.mbl_direct_bool ? 'Y' : 'N';
     this.record.mbl_3rdparty = this.record.mbl_3rdparty_bool ? 'Y' : 'N';
