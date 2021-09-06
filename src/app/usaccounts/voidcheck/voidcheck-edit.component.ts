@@ -10,6 +10,7 @@ import { VoidCheckService } from '../services/voidcheck.service';
 import { User_Menu } from '../../core/models/menum';
 import { vm_tbl_VoidCheck, Tbl_VoidCheck } from '../models/Tbl_VoidCheck';
 import { SearchTable } from '../../shared/models/searchtable';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-voidcheck-edit',
@@ -83,7 +84,7 @@ export class VoidCheckEditComponent implements OnInit {
 
     private initPage() {
 
-        
+
 
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
@@ -151,7 +152,9 @@ export class VoidCheckEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
         const saveRecord = <vm_tbl_VoidCheck>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;
