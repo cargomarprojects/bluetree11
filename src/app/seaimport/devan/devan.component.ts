@@ -10,6 +10,7 @@ import { Tbl_Cargo_Imp_Devan_Instruction, vm_Tbl_Cargo_Imp_Devan_Instruction } f
 import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-devan',
@@ -164,7 +165,9 @@ export class DevanComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
         const saveRecord = <vm_Tbl_Cargo_Imp_Devan_Instruction>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;
@@ -179,7 +182,7 @@ export class DevanComponent implements OnInit {
                 }
                 else {
                     this.errorMessage = 'Save Complete';
-                     alert(this.errorMessage);
+                    alert(this.errorMessage);
                 }
             }, error => {
                 this.errorMessage = this.gs.getError(error);

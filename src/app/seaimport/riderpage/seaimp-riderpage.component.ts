@@ -8,6 +8,7 @@ import { User_Menu } from '../../core/models/menum';
 import { Tbl_cargo_imp_desc, vm_tbl_cargo_imp_desc } from '../models/tbl_cargo_imp_desc';
 import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-seaimp-riderpage',
@@ -31,7 +32,7 @@ export class SeaImpRiderPageComponent implements OnInit {
   IsLocked: boolean = false;
   parentid: string;
   origin: string = '';
-  
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -79,7 +80,7 @@ export class SeaImpRiderPageComponent implements OnInit {
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
         this.descrecords = response.records;
-          this.cargo_marks_field.changes
+        this.cargo_marks_field.changes
           .subscribe((queryChanges) => {
             this.cargo_marks_field.first.nativeElement.focus();
           });
@@ -110,7 +111,9 @@ export class SeaImpRiderPageComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     const saveRecord = <vm_tbl_cargo_imp_desc>{};
     saveRecord.records = this.descrecords;
     saveRecord.pkid = this.pkid;
@@ -124,8 +127,8 @@ export class SeaImpRiderPageComponent implements OnInit {
           alert(this.errorMessage);
         }
         else {
-           this.errorMessage = 'Save Complete';
-           alert(this.errorMessage);
+          this.errorMessage = 'Save Complete';
+          alert(this.errorMessage);
         }
       }, error => {
         this.errorMessage = this.gs.getError(error);

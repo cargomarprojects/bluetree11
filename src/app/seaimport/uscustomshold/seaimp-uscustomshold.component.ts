@@ -8,6 +8,7 @@ import { User_Menu } from '../../core/models/menum';
 import { Tbl_cargo_imp_custhold, vm_tbl_cargo_imp_custhold } from '../models/tbl_cargo_imp_custhold';
 import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-seaimp-uscustomshold',
@@ -152,7 +153,9 @@ export class SeaImpUsCustomsHoldComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     this.record.cust_comm_inv_yn = (this.record.IS_comm_inv == true) ? "Y" : "N";
     this.record.cust_fumi_cert_yn = (this.record.IS_fumi_cert == true) ? "Y" : "N";
     this.record.cust_insp_chrg_yn = (this.record.IS_insp_chrg == true) ? "Y" : "N";
@@ -172,7 +175,7 @@ export class SeaImpUsCustomsHoldComponent implements OnInit {
         else {
           this.mode = 'EDIT';
           this.errorMessage = 'Save Complete';
-           alert(this.errorMessage);
+          alert(this.errorMessage);
         }
       }, error => {
         this.errorMessage = this.gs.getError(error);

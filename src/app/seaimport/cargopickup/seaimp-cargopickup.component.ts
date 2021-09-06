@@ -11,6 +11,7 @@ import { strictEqual } from 'assert';
 import { Tbl_cargo_imp_container } from '../models/tbl_cargo_imp_housem';
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
 import { DateComponent } from '../../shared/date/date.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-seaimp-cargopickup',
@@ -193,7 +194,7 @@ export class SeaImpCargoPickupComponent implements OnInit {
     this.record.pick_delivery_date = '';
     this.record.pick_vessel = '';
     this.record.pick_voyage = '';
-   
+
   }
 
   GetRecord() {
@@ -205,7 +206,7 @@ export class SeaImpCargoPickupComponent implements OnInit {
       .subscribe(response => {
         this.chkallselected = false;
         this.selectdeselect = false;
-        this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_cargo_imp_container[]>[]:<Tbl_cargo_imp_container[]>response.cntrrecords;
+        this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_cargo_imp_container[]>[] : <Tbl_cargo_imp_container[]>response.cntrrecords;
         this.mode = response.mode;
         if (this.mode == 'ADD') {
           this.defaultrecord = <Tbl_cargo_imp_pickup>response.defaultrecord;
@@ -346,7 +347,9 @@ export class SeaImpCargoPickupComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     this.SaveParent();
 
     const saveRecord = <vm_tbl_cargo_imp_pickup>{};

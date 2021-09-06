@@ -7,6 +7,7 @@ import { User_Menu } from '../../core/models/menum';
 import { Tbl_cargo_imp_housem, Tbl_cargo_imp_container, vm_tbl_cargo_imp_housem } from '../models/tbl_cargo_imp_housem';
 import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-copycntrpage',
@@ -98,7 +99,9 @@ export class CopyCntrPageComponent implements OnInit {
     this.SaveParent();
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     const saveRecord = <vm_tbl_cargo_imp_housem>{};
     saveRecord.pkid = this.pkid;
     saveRecord.cntrs = this.cntrrecords;
@@ -114,7 +117,7 @@ export class CopyCntrPageComponent implements OnInit {
         }
         else {
           this.errorMessage = 'Save Complete';
-           alert(this.errorMessage);
+          alert(this.errorMessage);
         }
       }, error => {
         this.errorMessage = this.gs.getError(error);
