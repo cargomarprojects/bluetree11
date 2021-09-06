@@ -9,7 +9,7 @@ import { User_Menu } from '../../../core/models/menum';
 import { vm_tbl_cargo_imp_housem, Tbl_cargo_imp_container, Tbl_cargo_imp_desc, Tbl_cargo_imp_housem, Table_Address, Tbl_desc } from '../../models/tbl_cargo_imp_housem';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { Tbl_cargo_imp_masterm } from '../../models/tbl_cargo_imp_masterm';
-
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-seaimp-house-edit',
@@ -587,6 +587,9 @@ export class SeaImpHouseEditComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
+    if (!confirm("Save")) {
+      return;
+    }
     this.SaveContainer();
     this.SaveDescList();
     const saveRecord = <vm_tbl_cargo_imp_housem>{};

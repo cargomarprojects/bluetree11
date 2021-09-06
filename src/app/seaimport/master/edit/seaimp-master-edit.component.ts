@@ -10,10 +10,7 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
-
-
-
-
+//EDIT-AJITH-06-09-2021
 
 
 @Component({
@@ -123,13 +120,13 @@ export class SeaImpMasterEditComponent implements OnInit {
     this.actionHandler();
 
 
-/*     $(document).ready(function() {
-      let modalContent: any = $('.modal-content');
-      modalContent.draggable({
-        handle: '.modal-header'
-      });
-    });
- */    
+    /*     $(document).ready(function() {
+          let modalContent: any = $('.modal-content');
+          modalContent.draggable({
+            handle: '.modal-header'
+          });
+        });
+     */
 
   }
 
@@ -306,6 +303,9 @@ export class SeaImpMasterEditComponent implements OnInit {
   Save() {
     if (!this.Allvalid())
       return;
+    if (!confirm("Save")) {
+      return;
+    }
     this.SaveContainer();
     this.FindTotTeus();
     const saveRecord = <vm_tbl_cargo_imp_masterm>{};
@@ -1143,7 +1143,7 @@ export class SeaImpMasterEditComponent implements OnInit {
         this.attach_viewonlyid = '';
         this.attach_filespath = '';
         this.attach_filespath2 = '';
-        this.modal = this.modalservice.open(attachmodal, { centered: true});
+        this.modal = this.modalservice.open(attachmodal, { centered: true });
         break;
       }
     }
