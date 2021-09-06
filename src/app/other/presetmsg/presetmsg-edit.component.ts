@@ -11,6 +11,7 @@ import { User_Menu } from '../../core/models/menum';
 import { vm_Table_Cargo_Remarks, Table_Cargo_Remarks, Table_Cargo_RemarksModel } from '../models/table_cargo_remarks';
 import { SearchTable } from '../../shared/models/searchtable';
 
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-presetmsg-edit',
@@ -73,7 +74,7 @@ export class PreSetMsgEditComponent implements OnInit {
 
 
     private initPage() {
-        
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
@@ -127,6 +128,9 @@ export class PreSetMsgEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
         const saveRecord = <vm_Table_Cargo_Remarks>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;

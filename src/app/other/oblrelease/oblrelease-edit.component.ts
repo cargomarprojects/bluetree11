@@ -11,6 +11,7 @@ import { User_Menu } from '../../core/models/menum';
 import { vm_tbl_OblRelease, Tbl_cargo_obl_released } from '../models/tbl_cargo_obl_released';
 import { SearchTable } from '../../shared/models/searchtable';
 
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-oblrelease-edit',
@@ -86,7 +87,7 @@ export class OblReleaseEditComponent implements OnInit {
 
 
     private initPage() {
-        
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
@@ -174,7 +175,9 @@ export class OblReleaseEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
         const saveRecord = <vm_tbl_OblRelease>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;

@@ -14,7 +14,8 @@ import { Tbl_cargo_imp_pickup, vm_tbl_cargo_imp_pickup } from '../../models/tbl_
 import { Tbl_cargo_container, Tbl_cargo_general } from '../../models/tbl_cargo_general';
 import { DateComponent } from '../../../shared/date/date.component';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-
+ //EDIT-AJITH-06-09-2021
+ 
 @Component({
   selector: 'app-deliveryorder-edit',
   templateUrl: './deliveryorder-edit.component.html'
@@ -89,7 +90,7 @@ export class DeliveryOrderEditComponent implements OnInit {
   }
 
   initPage() {
-    
+
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.errorMessage = [];
@@ -256,7 +257,7 @@ export class DeliveryOrderEditComponent implements OnInit {
       .subscribe(response => {
 
         this.record = <Tbl_cargo_imp_pickup>response.record;
-        this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_cargo_container[]>[]:<Tbl_cargo_container[]>response.cntrrecords;
+        this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_cargo_container[]>[] : <Tbl_cargo_container[]>response.cntrrecords;
 
         let str: string = "";
         var sData = null;
@@ -643,7 +644,9 @@ export class DeliveryOrderEditComponent implements OnInit {
     if (!this.Allvalid())
       return;
 
-
+    if (!confirm("Save")) {
+      return;
+    }
     this.SaveParent();
 
     const saveRecord = <vm_tbl_cargo_imp_pickup>{};

@@ -9,6 +9,7 @@ import { Tbl_cargo_general, Tbl_cargo_container, vm_tbl_cargo_general } from '..
 import { SearchTable } from '../../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { Tbl_cargo_obl_released } from '../../models/tbl_cargo_obl_released';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-oth-generalexpense-edit',
@@ -77,7 +78,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.refnoFormat = "Format - " + this.EXPTYPE.trim() + "YYYYMM";
@@ -316,7 +317,9 @@ export class OthGeneralExpenseEditComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     this.SaveParent();
 
     const saveRecord = <vm_tbl_cargo_general>{};
@@ -334,7 +337,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           if (this.mode == "ADD" && response.code != '' && this.EXPTYPE.trim() == "FA")
             this.record.mbl_refno = response.code;
           this.mode = 'EDIT';
-         
+
           let parameter = {
             appid: this.gs.appid,
             menuid: this.menuid,
@@ -344,7 +347,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
             mode: 'EDIT'
           };
           this.location.replaceState('Silver.Other.Trans/OthGeneralExpenseEditPage', this.gs.getUrlParameter(parameter));
-          
+
           this.mainService.RefreshList(this.record);
           this.errorMessage.push('Save Complete');
           alert('Save Complete');
@@ -494,16 +497,16 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           mbl_type: this.EXPTYPE,
           origin: 'other-generalexpense-page',
         };
-    }else if (action == "PROFITREPORT") {
+    } else if (action == "PROFITREPORT") {
       let sid = this.gs.MENU_GENERAL_EXPENSE_PROFIT_REPORT;
-        if (this.EXPTYPE.trim() == "PR")
-          sid = this.gs.MENU_PAYROLL_EXPENSE_PROFIT_REPORT;
-        if (this.EXPTYPE.trim() == "CM")
-          sid = this.gs.MENU_1099_EXPENSE_PROFIT_REPORT;
-        if (this.EXPTYPE.trim() == "PS")
-          sid = this.gs.MENU_INTERNAL_PAYMENT_SETTLEMENT_PROFIT_REPORT;
-        if (this.EXPTYPE.trim() == "FA")
-          sid = this.gs.MENU_FILE_ADJUSTMENT_PROFIT_REPORT;
+      if (this.EXPTYPE.trim() == "PR")
+        sid = this.gs.MENU_PAYROLL_EXPENSE_PROFIT_REPORT;
+      if (this.EXPTYPE.trim() == "CM")
+        sid = this.gs.MENU_1099_EXPENSE_PROFIT_REPORT;
+      if (this.EXPTYPE.trim() == "PS")
+        sid = this.gs.MENU_INTERNAL_PAYMENT_SETTLEMENT_PROFIT_REPORT;
+      if (this.EXPTYPE.trim() == "FA")
+        sid = this.gs.MENU_FILE_ADJUSTMENT_PROFIT_REPORT;
 
       if (_type == "L")
         return '/Silver.USAccounts.Trans/ProfitReportPage';
@@ -516,7 +519,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           mbl_type: this.EXPTYPE,
           origin: 'other-generalexpense-page',
         };
-    }else if (action == "PAYROLLDET") {
+    } else if (action == "PAYROLLDET") {
       let sid = this.gs.MENU_GENERAL_EXPENSE_ARAP;
       if (this.EXPTYPE.trim() == "PR")
         sid = this.gs.MENU_PAYROLL_EXPENSE_ARAP;
@@ -565,14 +568,14 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           sid = this.gs.MENU_FILE_ADJUSTMENT_ARAP;
 
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: sid,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
           mbl_type: this.EXPTYPE,
           origin: 'other-generalexpense-page',
         };
-        this.gs.Naviagete2('Silver.USAccounts.Trans/InvoicePage',  prm);
+        this.gs.Naviagete2('Silver.USAccounts.Trans/InvoicePage', prm);
         break;
 
       }
@@ -588,14 +591,14 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           sid = this.gs.MENU_FILE_ADJUSTMENT_PROFIT_REPORT;
 
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: sid,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
           mbl_type: this.EXPTYPE,
           origin: 'other-generalexpense-page',
         };
-        this.gs.Naviagete2('Silver.USAccounts.Trans/ProfitReportPage',  prm);
+        this.gs.Naviagete2('Silver.USAccounts.Trans/ProfitReportPage', prm);
         break;
 
       }
@@ -605,14 +608,14 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           sid = this.gs.MENU_PAYROLL_EXPENSE_ARAP;
 
         let prm = {
-          appid:this.gs.appid,
+          appid: this.gs.appid,
           menuid: sid,
           mbl_pkid: this.pkid,
           mbl_refno: this.record.mbl_refno,
           mbl_type: this.EXPTYPE,
           origin: 'other-generalexpense-page',
         };
-        this.gs.Naviagete2('Silver.Other.Trans/PayrollPage',  prm);
+        this.gs.Naviagete2('Silver.Other.Trans/PayrollPage', prm);
         break;
 
       }

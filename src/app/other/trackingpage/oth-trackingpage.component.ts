@@ -9,6 +9,9 @@ import { Tbl_Cargo_Tracking_Status, vm_Tbl_Cargo_Tracking_Status } from '../mode
 import { SearchTable } from '../../shared/models/searchtable';
 // import { strictEqual } from 'assert';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+//EDIT-AJITH-06-09-2021
+
 @Component({
   selector: 'app-oth-trackingpage',
   templateUrl: './oth-trackingpage.component.html'
@@ -166,7 +169,9 @@ export class OthTrackingPageComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     const saveRecord = <vm_Tbl_Cargo_Tracking_Status>{};
     saveRecord.userinfo = this.gs.UserInfo;
     saveRecord.record = this.trackrecords;
@@ -212,7 +217,7 @@ export class OthTrackingPageComponent implements OnInit {
     //   || this.origin == "other-general-page")
     //   this.gs.LinkReturn(this.origin, this.pkid, '', this.parentid);
     // else
-      this.location.back();
+    this.location.back();
   }
   OnChange(field: string) {
     if (field == 'cmbNotes') {

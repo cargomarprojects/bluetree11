@@ -9,6 +9,7 @@ import { PayrollDetService } from '../services/payrolldet.service';
 import { User_Menu } from '../../core/models/menum';
 import { vm_Tbl_Cargo_Payrolldet, Tbl_Cargo_Payrolldet } from '../models/tbl_cargo_payrolldet';
 import { SearchTable } from '../../shared/models/searchtable';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-payrolldet-edit',
@@ -51,7 +52,7 @@ export class PayrollDetEditComponent implements OnInit {
             this.mode = this.route.snapshot.queryParams.mode;
             this.emp_name = this.route.snapshot.queryParams.emp_name;
         } else {
-            
+
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
             this.menuid = options.menuid;
@@ -144,7 +145,10 @@ export class PayrollDetEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
+        
         const saveRecord = <vm_Tbl_Cargo_Payrolldet>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;

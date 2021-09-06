@@ -11,6 +11,7 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { Table_Cargo_Payrequest } from 'src/app/business/models/table_cargo_payrequest';
 import { DateComponent } from '../../../shared/date/date.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-approvedpage-edit',
@@ -97,7 +98,7 @@ export class ApprovedPageEditComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.errorMessage = '';
@@ -256,6 +257,9 @@ export class ApprovedPageEditComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
+    if (!confirm("Save")) {
+      return;
+    }
     this.SaveParent();
     const saveRecord = <vm_tbl_cargo_approved>{};
     saveRecord.record = this.record;

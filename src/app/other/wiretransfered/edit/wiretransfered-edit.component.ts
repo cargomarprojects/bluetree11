@@ -8,6 +8,7 @@ import { WireTransferedService } from '../../services/wiretransfered.service';
 import { Tbl_Cargo_Wiretransferm, vm_Tbl_Cargo_Wiretransferm, Tbl_Cargo_Wiretransferd } from '../../models/tbl_cargo_wiretransferm';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-wiretransfered-edit',
@@ -164,6 +165,9 @@ export class WireTransferedEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
         this.SaveParent();
 
         let filepath: string = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\xmlremarks\\";
@@ -190,7 +194,7 @@ export class WireTransferedEditComponent implements OnInit {
                     this.mode = 'EDIT';
                     this.mainService.RefreshList(this.record);
                     this.errorMessage.push('Save Complete');
-                    //alert(this.errorMessage);
+                    alert(this.errorMessage);
                 }
 
             }, error => {
@@ -297,7 +301,7 @@ export class WireTransferedEditComponent implements OnInit {
 
             this.record.cwm_company_tel = _Record.col6.toString();
             this.record.cwm_company_fax = _Record.col7.toString();
-            
+
             if (!this.gs.isBlank(this.company_name_field))
                 this.company_name_field.focus();
         }

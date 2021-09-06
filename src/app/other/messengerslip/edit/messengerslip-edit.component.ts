@@ -10,6 +10,7 @@ import { vm_tbl_cargo_slip, Tbl_cargo_slip } from '../../../other/models/tbl_car
 import { SearchTable } from '../../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { DateComponent } from '../../../shared/date/date.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-messengerslip-edit',
@@ -80,7 +81,7 @@ export class MessengerSlipEditComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.chk_bl_click = false;
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
@@ -246,6 +247,10 @@ export class MessengerSlipEditComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
+    if (!confirm("Save")) {
+      return;
+    }
+    
     this.SaveParent();
     const saveRecord = <vm_tbl_cargo_slip>{};
     saveRecord.record = this.record;

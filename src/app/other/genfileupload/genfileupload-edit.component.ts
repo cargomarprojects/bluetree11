@@ -11,7 +11,7 @@ import { User_Menu } from '../../core/models/menum';
 import { vm_Tbl_cargo_genfiles, Tbl_cargo_genfiles, Tbl_cargo_genfilesModel } from '../models/Tbl_cargo_genfiles';
 import { SearchTable } from '../../shared/models/searchtable';
 
-
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-genfileupload-edit',
@@ -171,7 +171,10 @@ export class GenFileUploadEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
+        
         this.SaveParent();
         const saveRecord = <vm_Tbl_cargo_genfiles>{};
         saveRecord.record = this.record;
