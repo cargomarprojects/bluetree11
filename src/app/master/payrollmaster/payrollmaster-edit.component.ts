@@ -9,6 +9,7 @@ import { PayrollMasterService } from '../services/payrollmaster.service';
 import { User_Menu } from '../../core/models/menum';
 import { vm_Tbl_Cargo_Payrolldet, Tbl_Cargo_Payrolldet } from '../../other/models/tbl_cargo_payrolldet';
 import { SearchTable } from '../../shared/models/searchtable';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-payrollmaster-edit',
@@ -71,7 +72,7 @@ export class PayrollMasterEditComponent implements OnInit {
 
 
     private initPage() {
-        
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
@@ -154,7 +155,9 @@ export class PayrollMasterEditComponent implements OnInit {
         this.record.cpd_include_payroll = (this.record.cpd_include_payroll_b) ? "Y" : "N";
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
         const saveRecord = <vm_Tbl_Cargo_Payrolldet>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;
@@ -171,7 +174,7 @@ export class PayrollMasterEditComponent implements OnInit {
                     this.mode = 'EDIT';
                     // this.mainService.RefreshList(this.record);
                     this.errorMessage = 'Save Complete';
-                     alert(this.errorMessage);
+                    alert(this.errorMessage);
                 }
 
             }, error => {

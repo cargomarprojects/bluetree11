@@ -8,6 +8,7 @@ import { User_Menu } from '../../core/models/menum';
 import { Tbl_Party_Login, vm_Tbl_Party_Login } from '../models/Tbl_Party_Login';
 import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-partylogin',
@@ -64,7 +65,7 @@ export class PartyLoginComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.title = 'Login Details';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
@@ -177,7 +178,9 @@ export class PartyLoginComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     this.record.plogin_party_id = this.parentid;
     this.record.plogin_locked = this.record.plogin_locked_b == true ? "Y" : "N";
     this.record.plogin_isparent = this.record.plogin_isparent_b == true ? "Y" : "N";
@@ -211,7 +214,7 @@ export class PartyLoginComponent implements OnInit {
           }
           this.NewRecord();
           this.errorMessage = 'Save Complete';
-           alert(this.errorMessage);
+          alert(this.errorMessage);
         }
       }, error => {
         this.errorMessage = this.gs.getError(error);
