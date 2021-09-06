@@ -99,13 +99,13 @@
                             </div>
                         </div>
 
-                       
+
                         <div class="form-group row">
                             <label class="col-4 col-form-label col-form-label-sm">Cust.Ref#</label>
                             <div class="col-4">
-                                <input #_inv_refno class="form-control form-control-sm" type="text" (focusout)="onFocusout('inv_refno')" 
-                                    (blur)="onBlur('inv_refno')" [(ngModel)]="record.inv_refno" [disabled]="false"
-                                    maxlength="50" />
+                                <input #_inv_refno class="form-control form-control-sm" type="text"
+                                    (focusout)="onFocusout('inv_refno')" (blur)="onBlur('inv_refno')"
+                                    [(ngModel)]="record.inv_refno" [disabled]="false" maxlength="50" />
                             </div>
                         </div>
 
@@ -142,19 +142,20 @@
                             <div class="col-4 input-group input-group-sm">
                                 <input class="form-control form-control-sm" type="text" (blur)="onBlur('qtnno')"
                                     [(ngModel)]="qtnno" [disabled]="false" maxlength="50" />
-                            <!-- </div>
+                                <!-- </div>
                             <div class="col-1"> -->
                                 <button (click)="QuoteFill()"
                                     class="btn btn-info btn-sm mr-1"><span>Fill</span></button>
                             </div>
                         </div>
-                        <div *ngIf="mbl_type == 'PR'"
-                            class="form-group row">
+                        <div *ngIf="mbl_type == 'PR'" class="form-group row">
                             <label class="col-4 col-form-label col-form-label-sm"></label>
                             <div class="col-2">
-                                <app-payroll [recordexist]="records.length > 0" [mblid]="record.inv_mbl_id" [custid]="record.inv_cust_id" [refno]="mbl_refno" [empname]="record.inv_cust_name" (callbackevent)="payrollcallbackevent($event)" ></app-payroll>
+                                <app-payroll [recordexist]="records.length > 0" [mblid]="record.inv_mbl_id"
+                                    [custid]="record.inv_cust_id" [refno]="mbl_refno" [empname]="record.inv_cust_name"
+                                    (callbackevent)="payrollcallbackevent($event)"></app-payroll>
                             </div>
-                            
+
                         </div>
 
                     </div>
@@ -325,7 +326,7 @@
                                             <input #_invd_rate class="form-control form-control-sm" type="number"
                                                 style="text-align:right;" [(ngModel)]="rec.invd_rate"
                                                 (blur)="onBlur('invd_rate',rec)" />
-                                        </td>                                        
+                                        </td>
                                         <td class="p-0">
                                             <input #_invd_qty class="form-control form-control-sm" type="number"
                                                 style="text-align:right;" [(ngModel)]="rec.invd_qty"
@@ -512,7 +513,10 @@
                             [style.color]="record.rec_chkcopy_attached=='Y'?'red':'white'"
                             (click)="BtnNavigation('CHECKCOPYAP',attachmodal)">Check Copy(A/P)</button>
                     </div>
-
+                    <div class="form-group row">
+                        <button class="col-12 btn btn-info btn-sm text-uppercase" [disabled]="is_locked"
+                            *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
+                    </div>
 
                 </div>
             </div>
@@ -586,7 +590,7 @@
 </ng-template>
 
 
-<ng-template #historymodal let-c="close" let-d="dismiss" >
+<ng-template #historymodal let-c="close" let-d="dismiss">
     <div class="modal-body">
         <div class="page-body">
             <div class="row">
@@ -605,7 +609,7 @@
 </ng-template>
 
 
-<ng-template #attachmodal let-c="close" let-d="dismiss" >
+<ng-template #attachmodal let-c="close" let-d="dismiss">
     <div class="modal-body">
         <div class="page-body">
             <div class="row">
