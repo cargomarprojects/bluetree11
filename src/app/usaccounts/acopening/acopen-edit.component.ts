@@ -13,7 +13,7 @@ import { vm_tbl_accOpening, Tbl_Acc_Opening } from '../models/Tbl_Acc_Opening';
 
 import { SearchTable } from '../../shared/models/searchtable';
 
-
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-acopen-edit',
@@ -66,7 +66,7 @@ export class AcopenEditComponent implements OnInit {
     }
 
     private initPage() {
-       
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
@@ -187,7 +187,10 @@ export class AcopenEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
+        
         this.SaveParent();
 
         const saveRecord = <vm_tbl_accOpening>{};

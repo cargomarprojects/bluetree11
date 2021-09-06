@@ -10,6 +10,7 @@ import { AcctmService } from '../services/acctm.service';
 import { User_Menu } from '../../core/models/menum';
 import { vm_tbl_acctm, Tbl_acc_acctm } from '../models/tbl_acc_acctm';
 import { SearchTable } from '../../shared/models/searchtable';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-acctm-edit',
@@ -129,6 +130,9 @@ export class AcctmEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
         this.SaveParent();
         const saveRecord = <vm_tbl_acctm>{};
         saveRecord.record = this.record;

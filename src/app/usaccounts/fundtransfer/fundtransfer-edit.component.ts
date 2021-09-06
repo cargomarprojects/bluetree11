@@ -10,6 +10,7 @@ import { FundTransferService } from '../services/fundtransfer.service';
 import { User_Menu } from '../../core/models/menum';
 import { vm_tbl_accPayment, Tbl_Acc_Payment } from '../models/Tbl_Acc_Payment';
 import { SearchTable } from '../../shared/models/searchtable';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-fundtransfer-edit',
@@ -82,7 +83,7 @@ export class FundTransferEditComponent implements OnInit {
 
 
     private initPage() {
-        
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
@@ -167,7 +168,9 @@ export class FundTransferEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
         const saveRecord = <vm_tbl_accPayment>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;
@@ -379,7 +382,7 @@ export class FundTransferEditComponent implements OnInit {
 
         this.mainService.GetNextChqNo(searchData).subscribe(
             res => {
-                this.next_chqno  =  +res.chqno;
+                this.next_chqno = +res.chqno;
                 this.SetNextChqNo();
             },
             err => {
@@ -450,40 +453,40 @@ export class FundTransferEditComponent implements OnInit {
     }
 
 
-getRouteDet(_type: string, _mode: string, _record: Tbl_Acc_Payment = null) {
+    getRouteDet(_type: string, _mode: string, _record: Tbl_Acc_Payment = null) {
 
-    if (_type == "L") {
-      if ((_mode == "ADD" && this.gs.canAdd(this.menuid)) || (_mode == "EDIT" && this.gs.canEdit(this.menuid)))
-        return "/Silver.USAccounts.Trans/FundTransEditPage";
-      else
-        return null;
-    } else if (_type == "P") {
+        if (_type == "L") {
+            if ((_mode == "ADD" && this.gs.canAdd(this.menuid)) || (_mode == "EDIT" && this.gs.canEdit(this.menuid)))
+                return "/Silver.USAccounts.Trans/FundTransEditPage";
+            else
+                return null;
+        } else if (_type == "P") {
 
-      if (_record == null) {
-        if (!this.gs.canAdd(this.menuid))
-          return null;
-        return {
-          appid: this.gs.appid,
-          menuid: this.menuid,
-          pkid: '',
-          type: this.mainService.param_type,
-          origin: 'accpayment-page',
-          mode: 'ADD'
-        };
-      }
-      if (!this.gs.canEdit(this.menuid))
-        return null;
-      return {
-        appid: this.gs.appid,
-        menuid: this.menuid,
-        pkid: _record.pay_pkid,
-        type: '',
-        origin: 'acopen-page',
-        mode: 'EDIT'
-      };
-    } else
-      return null;
-  }
+            if (_record == null) {
+                if (!this.gs.canAdd(this.menuid))
+                    return null;
+                return {
+                    appid: this.gs.appid,
+                    menuid: this.menuid,
+                    pkid: '',
+                    type: this.mainService.param_type,
+                    origin: 'accpayment-page',
+                    mode: 'ADD'
+                };
+            }
+            if (!this.gs.canEdit(this.menuid))
+                return null;
+            return {
+                appid: this.gs.appid,
+                menuid: this.menuid,
+                pkid: _record.pay_pkid,
+                type: '',
+                origin: 'acopen-page',
+                mode: 'EDIT'
+            };
+        } else
+            return null;
+    }
 
 
 

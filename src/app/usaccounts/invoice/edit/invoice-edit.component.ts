@@ -15,7 +15,7 @@ import { invoiceService } from '../../services/invoice.service';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
 
-
+//EDIT-AJITH-06-09-2021
 @Component({
   selector: 'app-invoice-edit',
   templateUrl: './invoice-edit.component.html'
@@ -605,7 +605,9 @@ export class InvoiceEditComponent implements OnInit {
       alert(this.errorMessage);
       return;
     }
-
+    if (!confirm("Save")) {
+      return;
+    }
     this.errorMessage = '';
 
     var SearchData = this.gs.UserInfo;

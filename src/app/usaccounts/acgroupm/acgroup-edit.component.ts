@@ -12,7 +12,7 @@ import { vm_tbl_accgroup, Tbl_acc_groupm } from '../models/tbl_acc_groupm';
 
 import { SearchTable } from '../../shared/models/searchtable';
 
-
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-acgroup-edit',
@@ -60,7 +60,7 @@ export class AcgroupEditComponent implements OnInit {
 
     private initPage() {
 
-       
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
@@ -120,6 +120,10 @@ export class AcgroupEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
+
         this.SaveParent();
         const saveRecord = <vm_tbl_accgroup>{};
         saveRecord.record = this.record;
