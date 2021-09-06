@@ -112,7 +112,7 @@ export class AirExpHouseEditComponent implements OnInit {
 
   initPage() {
 
-    
+
 
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
@@ -465,7 +465,7 @@ export class AirExpHouseEditComponent implements OnInit {
       .subscribe(response => {
 
         this.record = <Tbl_cargo_exp_housem>response.record;
-        this.records =  (response.records == undefined || response.records == null) ? <Tbl_cargo_exp_desc[]>[]: <Tbl_cargo_exp_desc[]>response.records;
+        this.records = (response.records == undefined || response.records == null) ? <Tbl_cargo_exp_desc[]>[] : <Tbl_cargo_exp_desc[]>response.records;
         this.is_locked = this.gs.IsShipmentClosed("AIR EXPORT", this.record.mbl_ref_date, this.record.mbl_lock, this.record.mbl_unlock_date);
         this.InitDesc();
         if (this.records != null) {
@@ -780,10 +780,10 @@ export class AirExpHouseEditComponent implements OnInit {
         break;
       }
       case 'hbl_houseno': {
-        this.record.hbl_houseno =  this.record.hbl_houseno.toString().toUpperCase();
+        this.record.hbl_houseno = this.record.hbl_houseno.toString().toUpperCase();
         break;
       }
-      
+
 
     }
 
@@ -827,8 +827,8 @@ export class AirExpHouseEditComponent implements OnInit {
     if (!this.Allvalid())
       return;
 
-      if (!confirm("Save")) {
-        return;
+    if (!confirm("Save")) {
+      return;
     }
 
     this.SaveParent();

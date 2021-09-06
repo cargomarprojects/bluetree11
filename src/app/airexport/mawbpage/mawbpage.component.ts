@@ -16,6 +16,7 @@ import { Tbl_cargo_exp_mbldet, vm_Tbl_cargo_exp_mbldet, Tbl_desc } from '../mode
 import { Tbl_cargo_exp_desc } from '../models/Tbl_cargo_exp_desc';
 import { NgModel } from '@angular/forms';
 import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-mawbpage',
@@ -81,7 +82,7 @@ export class MawbPageComponent implements OnInit {
   }
 
   initPage() {
-    
+
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.errorMessage = [];
@@ -522,7 +523,9 @@ export class MawbPageComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     this.SaveParent();
     this.SaveDescList();
 
