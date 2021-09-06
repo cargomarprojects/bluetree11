@@ -12,7 +12,7 @@ import { vm_Tbl_User_Access, Tbl_User_Access, Tbl_User_Rightsm } from '../models
 
 import { SearchTable } from '../../shared/models/searchtable';
 import { UserRightsService } from '../services/userRights.service';
-
+//EDIT-AJITH-06-09-2021
 
 
 @Component({
@@ -30,8 +30,8 @@ export class RightsEditComponent implements OnInit {
     companyList: any[];
     userList: any[];
 
-    moduleList : any[];
-    
+    moduleList: any[];
+
 
     tab: string = 'main';
 
@@ -51,7 +51,7 @@ export class RightsEditComponent implements OnInit {
         private location: Location,
         public gs: GlobalService,
         public mainService: UserRightsService,
-        
+
     ) { }
 
     ngOnInit() {
@@ -75,7 +75,7 @@ export class RightsEditComponent implements OnInit {
     }
 
     LoadCompany() {
-        
+
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
         SearchData.CODE = "";
@@ -90,7 +90,7 @@ export class RightsEditComponent implements OnInit {
     }
 
     LoadUser() {
-        
+
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
         SearchData.CODE = "";
@@ -127,9 +127,9 @@ export class RightsEditComponent implements OnInit {
         this.record.comp_name = '';
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
-        
+
         let parameter = {
-            appid : this.gs.appid,
+            appid: this.gs.appid,
             menuid: this.menuid,
             pkid: this.pkid,
             type: '',
@@ -185,29 +185,32 @@ export class RightsEditComponent implements OnInit {
             rec.rights_email = rec.rights_email == 'Y' ? 'N' : 'Y';
     }
 
-      
-    getModules(list : any[]){
+
+    getModules(list: any[]) {
         this.moduleList = [];
-        list.filter( (rec) =>{
-            if ( this.moduleList.indexOf(rec.module_name) == -1)
+        list.filter((rec) => {
+            if (this.moduleList.indexOf(rec.module_name) == -1)
                 this.moduleList.push(rec.module_name);
-        })    
-        if ( this.moduleList.length > 0) {
+        })
+        if (this.moduleList.length > 0) {
             this.filterRecord(this.moduleList[0])
         }
-        else 
+        else
             this.filterRecord('');
     }
 
-    filterRecord(tagName : string){
-        this.records2  = this.records.filter( rec => rec.module_name == tagName);
+    filterRecord(tagName: string) {
+        this.records2 = this.records.filter(rec => rec.module_name == tagName);
     }
 
-    selectRecord = (rec : Tbl_User_Rightsm)  => rec.rights_company || rec.rights_admin || rec.rights_add  || rec.rights_edit || rec.rights_view || rec.rights_delete || rec.rights_print;
+    selectRecord = (rec: Tbl_User_Rightsm) => rec.rights_company || rec.rights_admin || rec.rights_add || rec.rights_edit || rec.rights_view || rec.rights_delete || rec.rights_print;
 
     Save() {
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
         this.SaveParent();
         const saveRecord = <vm_Tbl_User_Access>{};
         saveRecord.record = this.record;
@@ -251,13 +254,11 @@ export class RightsEditComponent implements OnInit {
             return bRet;
         }
 
-        if ( this.gs.isBlank(this.record.ua_company_id))
-        {
+        if (this.gs.isBlank(this.record.ua_company_id)) {
             alert("Company has to be selected");
             return false;
         }
-        if ( this.gs.isBlank(this.record.ua_usr_id))
-        {
+        if (this.gs.isBlank(this.record.ua_usr_id)) {
             alert("User has to be selected");
             return false;
         }

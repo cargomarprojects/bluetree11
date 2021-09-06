@@ -12,6 +12,7 @@ import { vm_Tbl_User_Server, Tbl_User_Server } from '../models/Tbl_User_Server';
 
 import { SearchTable } from '../../shared/models/searchtable';
 
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-mailserver-edit',
@@ -121,6 +122,10 @@ export class MailServerEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
+
         this.SaveParent();
         const saveRecord = <vm_Tbl_User_Server>{};
         saveRecord.record = this.record;

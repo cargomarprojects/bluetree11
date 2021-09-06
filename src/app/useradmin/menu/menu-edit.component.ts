@@ -11,7 +11,7 @@ import { User_Menu } from '../../core/models/menum';
 import { vm_Tbl_User_Menum, Tbl_User_Menum } from '../models/Tbl_User_Menum';
 
 import { SearchTable } from '../../shared/models/searchtable';
-
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-menu-edit',
@@ -133,9 +133,12 @@ export class MenuEditComponent implements OnInit {
 
     Save() {
 
-
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
+
         this.SaveParent();
         const saveRecord = <vm_Tbl_User_Menum>{};
         saveRecord.record = this.record;

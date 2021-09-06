@@ -11,7 +11,7 @@ import { User_Menu } from '../../core/models/menum';
 import { vm_Tbl_User_Companym, Tbl_User_Companym } from '../models/Tbl_User_Companym';
 
 import { SearchTable } from '../../shared/models/searchtable';
-
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-company-edit',
@@ -129,6 +129,10 @@ export class CompanyEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
+        
         this.SaveParent();
         const saveRecord = <vm_Tbl_User_Companym>{};
         saveRecord.record = this.record;

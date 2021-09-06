@@ -11,7 +11,7 @@ import { User_Menu } from '../../core/models/menum';
 import { vm_Tbl_User_Userm, Tbl_User_Userm } from '../models/Tbl_User_Userm';
 
 import { SearchTable } from '../../shared/models/searchtable';
-
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-user-edit',
@@ -132,6 +132,9 @@ export class UserEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
         this.SaveParent();
         const saveRecord = <vm_Tbl_User_Userm>{};
         saveRecord.record = this.record;
@@ -149,15 +152,15 @@ export class UserEditComponent implements OnInit {
                 else {
                     this.mode = 'EDIT';
                     let parameter = {
-                        appid:this.gs.appid,
+                        appid: this.gs.appid,
                         menuid: this.menuid,
-                        pkid: this.pkid ,
+                        pkid: this.pkid,
                         type: '',
                         origin: 'user-page',
                         mode: 'EDIT'
                     };
                     this.location.replaceState('Silver.UserAdmin/UserEditPage', this.gs.getUrlParameter(parameter));
-                    
+
                     this.mainService.RefreshList(this.record);
                     this.errorMessage = 'Save Complete';
                     alert(this.errorMessage);
@@ -231,10 +234,10 @@ export class UserEditComponent implements OnInit {
     }
 
     onBlur(field: string) {
-        if ( field == 'usr_code') {
+        if (field == 'usr_code') {
             this.record.usr_code = this.record.usr_code.toString().toUpperCase().trim();
         }
-        if ( field == 'usr_name') {
+        if (field == 'usr_name') {
             this.record.usr_name = this.record.usr_name.toString().toUpperCase().trim();
         }
     }
