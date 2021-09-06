@@ -13,6 +13,7 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-oth-general-edit',
@@ -341,6 +342,9 @@ export class OthGeneralEditComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
+    if (!confirm("Save")) {
+      return;
+    }
 
     this.SaveParent();
     this.SaveContainer();
@@ -486,15 +490,15 @@ export class OthGeneralEditComponent implements OnInit {
       this.errorMessage.push("A/N Handled By cannot be blank");
     }
 
-    if ( this.gs.isBlank( this.OPERATION_MODE)){
+    if (this.gs.isBlank(this.OPERATION_MODE)) {
       bRet = false;
-      this.errorMessage.push("Mode Cannot Be Blank" );
+      this.errorMessage.push("Mode Cannot Be Blank");
     }
 
-    if ( !this.gs.isBlank( this.OPERATION_MODE)){
-      if ( this.OPERATION_MODE != 'OTHERS'){
+    if (!this.gs.isBlank(this.OPERATION_MODE)) {
+      if (this.OPERATION_MODE != 'OTHERS') {
         bRet = false;
-        this.errorMessage.push("Invalid Mode " + this.OPERATION_MODE );
+        this.errorMessage.push("Invalid Mode " + this.OPERATION_MODE);
       }
     }
 
