@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { GlobalService } from '../../../core/services/global.service';
 import { vm_Tbl_Cargo_Qtnm, Tbl_Cargo_Qtnm } from '../../models/tbl_cargo_qtnm';
 import { QtnSettingService } from '../../services/qtnsetting.service';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-qtnsetting-edit',
@@ -104,7 +105,9 @@ export class QtnSettingEditComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     let sPath: string = "";
     sPath = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\quotation\\";
 

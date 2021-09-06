@@ -8,6 +8,7 @@ import { DefaultInvoiceService } from '../../marketing/services/defaultinvoice.s
 import { Tbl_Cargo_Qtnm, vm_Tbl_Cargo_Qtnd_Lcl, Tbl_Cargo_Qtnd_Lcl } from '../../marketing/models/tbl_cargo_qtnm';
 import { SearchTable } from '../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-defaultinvoice',
@@ -62,7 +63,7 @@ export class DefaultInvoiceComponent implements OnInit {
 
     }
     private initPage() {
-        
+
         this.foreign_amt_decplace = this.gs.foreign_amt_dec;
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
@@ -85,6 +86,10 @@ export class DefaultInvoiceComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
+
         this.SaveParent();
 
         const saveRecord = <vm_Tbl_Cargo_Qtnd_Lcl>{};
@@ -189,7 +194,7 @@ export class DefaultInvoiceComponent implements OnInit {
         SearchData.CLIENT_ID = this.client_id;
         this.mainService.List(SearchData)
             .subscribe(response => {
-                this.records =  (response.list == undefined || response.list == null) ? <Tbl_Cargo_Qtnd_Lcl[]>[]:  <Tbl_Cargo_Qtnd_Lcl[]>response.list;
+                this.records = (response.list == undefined || response.list == null) ? <Tbl_Cargo_Qtnd_Lcl[]>[] : <Tbl_Cargo_Qtnd_Lcl[]>response.list;
             }, error => {
                 this.errorMessage.push(this.gs.getError(error));
             });
@@ -218,7 +223,7 @@ export class DefaultInvoiceComponent implements OnInit {
     RemoveRow(_rec: Tbl_Cargo_Qtnd_Lcl) {
         if (!confirm("Delete Y/N")) {
             return;
-          }
+        }
         this.records.splice(this.records.findIndex(rec => rec.qtnd_pkid == _rec.qtnd_pkid), 1);
     }
 

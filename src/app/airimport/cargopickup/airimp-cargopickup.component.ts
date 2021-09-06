@@ -9,6 +9,7 @@ import { Tbl_cargo_imp_pickup, vm_tbl_cargo_imp_pickup } from '../models/tbl_car
 import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-airimp-cargopickup',
@@ -64,7 +65,7 @@ export class AirImpCargoPickupComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.title = 'Delivery Order';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
@@ -326,6 +327,9 @@ export class AirImpCargoPickupComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
+    if (!confirm("Save")) {
+      return;
+    }
 
     this.SaveParent();
 

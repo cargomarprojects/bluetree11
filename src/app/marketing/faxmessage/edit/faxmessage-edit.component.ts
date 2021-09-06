@@ -9,6 +9,7 @@ import { User_Menu } from '../../../core/models/menum';
 import { vm_tbl_cargo_message, Tbl_Cargo_Message } from '../../../marketing/models/tbl_cargo_message';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-faxmessage-edit',
@@ -29,7 +30,7 @@ export class FaxMessageEditComponent implements OnInit {
     report_url: string = '';
     report_searchdata: any = {};
     report_menuid: string = '';
-  
+
     attach_title: string = '';
     attach_parentid: string = '';
     attach_subid: string = '';
@@ -98,7 +99,7 @@ export class FaxMessageEditComponent implements OnInit {
     }
 
     private initPage() {
-        
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
@@ -177,7 +178,9 @@ export class FaxMessageEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
         this.SaveParent();
         let filepath: string = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\fax\\";
         let filter: any = {};

@@ -10,6 +10,7 @@ import { Tbl_Cargo_Qtnm, vm_Tbl_Cargo_Qtnd_Fcl, Tbl_Cargo_Qtnd_Fcl } from '../..
 import { SearchTable } from '../../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-qtnfcl-edit',
@@ -126,7 +127,7 @@ export class QtnFclEditComponent implements OnInit {
         }
     }
     private initPage() {
-        
+
         this.foreign_amt_decplace = this.gs.foreign_amt_dec;
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
@@ -270,7 +271,7 @@ export class QtnFclEditComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_Cargo_Qtnm>response.record;
-                this.records = (response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Fcl[]>[]:<Tbl_Cargo_Qtnd_Fcl[]>response.records;
+                this.records = (response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Fcl[]>[] : <Tbl_Cargo_Qtnd_Fcl[]>response.records;
                 this.mode = 'EDIT';
                 if (this.record.rec_files_attached == "Y")
                     this.Foregroundcolor = "red";
@@ -290,6 +291,10 @@ export class QtnFclEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
+        
         this.FindGrandTotal();
         this.SaveParent();
 
@@ -586,7 +591,7 @@ export class QtnFclEditComponent implements OnInit {
     RemoveRow(_rec: Tbl_Cargo_Qtnd_Fcl) {
         if (!confirm("Delete Y/N")) {
             return;
-          }
+        }
         this.records.splice(this.records.findIndex(rec => rec.qtnd_pkid == _rec.qtnd_pkid), 1);
     }
 
@@ -648,7 +653,7 @@ export class QtnFclEditComponent implements OnInit {
             .subscribe(response => {
                 this.NewRecord();
                 this.record = <Tbl_Cargo_Qtnm>response.record;
-                this.records = (response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Fcl[]>[]:<Tbl_Cargo_Qtnd_Fcl[]>response.records;
+                this.records = (response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Fcl[]>[] : <Tbl_Cargo_Qtnd_Fcl[]>response.records;
 
                 this.record.qtnm_cfno = 0;
                 this.record.qtnm_no = "";

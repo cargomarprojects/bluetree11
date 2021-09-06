@@ -8,6 +8,7 @@ import { User_Menu } from '../../core/models/menum';
 import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { AnyFn } from '@ngrx/store/src/selector';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-xmlremarks',
@@ -122,6 +123,9 @@ export class XmlRemarksComponent implements OnInit {
     if (!this.Allvalid())
       return;
 
+    if (!confirm("Save")) {
+      return;
+    }
     let sPath: string = "";
     sPath = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\xmlremarks\\";
 

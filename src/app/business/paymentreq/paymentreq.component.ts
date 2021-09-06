@@ -7,6 +7,7 @@ import { SearchTable } from '../../shared/models/searchtable';
 import { Table_Cargo_Payrequest, vm_Table_Cargo_Payrequest } from '../models/table_cargo_payrequest';
 import { PaymentReqService } from '../services/paymentreq.service';
 import { DateComponent } from '../../shared/date/date.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-paymentreq',
@@ -176,6 +177,9 @@ export class PaymentReqComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
+    if (!confirm("Save")) {
+      return;
+    }
 
     this.payrecord.cp_master_id = this.cp_master_id;
     this.payrecord.cp_source = this.cp_source;

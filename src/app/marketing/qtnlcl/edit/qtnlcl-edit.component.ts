@@ -10,6 +10,7 @@ import { Tbl_Cargo_Qtnm, vm_Tbl_Cargo_Qtnd_Lcl, Tbl_Cargo_Qtnd_Lcl } from '../..
 import { SearchTable } from '../../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-qtnlcl-edit',
@@ -200,7 +201,7 @@ export class QtnLclEditComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_Cargo_Qtnm>response.record;
-                this.records = (response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Lcl[]>[]:<Tbl_Cargo_Qtnd_Lcl[]>response.records;
+                this.records = (response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Lcl[]>[] : <Tbl_Cargo_Qtnd_Lcl[]>response.records;
                 this.mode = 'EDIT';
 
                 if (this.record.rec_files_attached == "Y")
@@ -227,6 +228,9 @@ export class QtnLclEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
         this.FindGrandTotal();
         this.SaveParent();
 
@@ -589,7 +593,7 @@ export class QtnLclEditComponent implements OnInit {
             .subscribe(response => {
                 this.NewRecord();
                 this.record = <Tbl_Cargo_Qtnm>response.record;
-                this.records =(response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Lcl[]>[]: <Tbl_Cargo_Qtnd_Lcl[]>response.records;
+                this.records = (response.records == undefined || response.records == null) ? <Tbl_Cargo_Qtnd_Lcl[]>[] : <Tbl_Cargo_Qtnd_Lcl[]>response.records;
 
                 this.record.qtnm_cfno = 0;
                 this.record.qtnm_no = "";

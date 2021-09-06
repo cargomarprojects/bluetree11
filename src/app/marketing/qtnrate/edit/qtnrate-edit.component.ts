@@ -11,6 +11,7 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { Tbl_Cargo_Qtnd_Lcl } from '../../models/tbl_cargo_qtnm';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-qtnrate-edit',
@@ -90,7 +91,7 @@ export class QtnRateEditComponent implements OnInit {
         }
     }
     private initPage() {
-        
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
@@ -163,6 +164,10 @@ export class QtnRateEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
+
         this.SaveParent();
         const saveRecord = <vm_tbl_cargo_qtn_rates>{};
         saveRecord.record = this.record;

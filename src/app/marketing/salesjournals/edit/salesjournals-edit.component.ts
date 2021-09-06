@@ -10,6 +10,7 @@ import { User_Menu } from '../../../core/models/menum';
 import { vm_Tbl_Cargo_Journals_Master, Tbl_Cargo_Journals_Master, Tbl_Mark_Contacts, Tbl_Mast_Contacts } from '../../../marketing/models/tbl_cargo_journals_master';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { strictEqual } from 'assert';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-salesjournals-edit',
@@ -83,7 +84,7 @@ export class SalesJournalsEditComponent implements OnInit {
     }
 
     private initPage() {
-        
+
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
@@ -190,6 +191,9 @@ export class SalesJournalsEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
+        if (!confirm("Save")) {
+            return;
+        }
         this.SaveParent();
         const saveRecord = <vm_Tbl_Cargo_Journals_Master>{};
         saveRecord.record = this.record;
@@ -291,25 +295,25 @@ export class SalesJournalsEditComponent implements OnInit {
                 this.attach_viewonlyid = '';
                 this.attach_filespath = '';
                 this.attach_filespath2 = '';
-               // this.tab = 'attachment';
+                // this.tab = 'attachment';
                 this.modal = this.modalservice.open(attachmodal, { centered: true });
                 break;
             }
             case 'MEMO': {
                 let prm = {
-                    appid:this.gs.appid,
+                    appid: this.gs.appid,
                     menuid: this.menuid,
                     pkid: this.pkid,
                     source: 'CONTACT-MEMO',
                     title: 'Memo',
                     origin: 'sales-journal-page'
                 };
-                this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage',  prm);
+                this.gs.Naviagete2('Silver.BusinessModule/XmlRemarksPage', prm);
                 break;
             }
             case 'FOLLOWUP': {
                 let prm = {
-                    appid:this.gs.appid,
+                    appid: this.gs.appid,
                     menuid: this.menuid,
                     master_id: this.customer_id,
                     master_refno: this.customer_name,
@@ -317,7 +321,7 @@ export class SalesJournalsEditComponent implements OnInit {
                     is_locked: false,
                     origin: 'sales-journal-page'
                 };
-                this.gs.Naviagete2('Silver.BusinessModule/FollowUpPage',  prm);
+                this.gs.Naviagete2('Silver.BusinessModule/FollowUpPage', prm);
                 break;
             }
         }

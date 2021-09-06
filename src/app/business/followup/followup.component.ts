@@ -9,6 +9,7 @@ import { Table_Cargo_Followup, vm_Table_Cargo_Followup } from '../models/table_c
 import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { DateComponent } from '../../shared/date/date.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-followup',
@@ -214,6 +215,10 @@ export class FollowupComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
+
+      if (!confirm("Save")) {
+        return;
+    }
 
     const saveRecord = <vm_Table_Cargo_Followup>{};
     saveRecord.userinfo = this.gs.UserInfo;

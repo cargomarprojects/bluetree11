@@ -10,6 +10,7 @@ import { Tbl_Cargo_Qtnm, vm_Tbl_Cargo_Qtnd_Air, Tbl_Cargo_Qtnd_Air } from '../..
 import { SearchTable } from '../../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-qtnair-edit',
@@ -241,7 +242,9 @@ export class QtnAirEditComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
         this.FindGrandTotal();
         this.SaveParent();
 
