@@ -13,7 +13,7 @@ import { Tbl_cargo_exp_bookingm, vm_Tbl_cargo_exp_bookingm } from '../models/Tbl
 import { DateComponent } from '../../shared/date/date.component';
 import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
 
-
+//EDIT-AJITH-06-09-2021
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html'
@@ -167,7 +167,9 @@ export class BookingComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     const saverec = <vm_Tbl_cargo_exp_bookingm>{};
     saverec.mode = this.mode;
     saverec.record = this.record;

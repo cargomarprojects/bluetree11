@@ -8,6 +8,7 @@ import { Tbl_cargo_exp_housem, vm_Tbl_cargo_exp_housem } from '../models/tbl_car
 import { Tbl_cargo_exp_container } from '../models/Tbl_cargo_exp_container';
 import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-copyexpcntrpage',
@@ -96,7 +97,9 @@ export class CopyExpCntrPageComponent implements OnInit {
     this.SaveParent();
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     const saveRecord = <vm_Tbl_cargo_exp_housem>{};
     saveRecord.pkid = this.pkid;
     saveRecord.cntrs = this.cntrrecords;

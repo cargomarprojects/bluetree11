@@ -16,6 +16,7 @@ import { Tbl_cargo_exp_mbldet, vm_Tbl_cargo_exp_mbldet } from '../models/Tbl_car
 import { Tbl_cargo_exp_desc } from '../models/Tbl_cargo_exp_desc';
 import { Tbl_cargo_container } from 'src/app/other/models/tbl_cargo_general';
 import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-certorgpage',
@@ -397,6 +398,9 @@ export class CertOrgPageComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
+    if (!confirm("Save")) {
+      return;
+    }
 
     this.record.mbld_is_cntrized = (this.record._mbld_is_cntrized) ? "Y" : "N";
     this.record.mbld_print_kgs = (this.record._mbld_print_kgs) ? "Y" : "N";
