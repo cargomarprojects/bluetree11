@@ -15,6 +15,7 @@ import { Tbl_cargo_exp_desc } from '../../models/Tbl_cargo_exp_desc';
 import { Tbl_cargo_exp_masterm } from '../../models/tbl_cargo_exp_masterm';
 import { NgModel } from '@angular/forms';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-airexp-house-edit',
@@ -825,6 +826,10 @@ export class AirExpHouseEditComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
+
+      if (!confirm("Save")) {
+        return;
+    }
 
     this.SaveParent();
     this.SaveDescList();
