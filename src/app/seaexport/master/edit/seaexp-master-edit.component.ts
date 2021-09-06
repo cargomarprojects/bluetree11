@@ -17,7 +17,7 @@ import { InputBoxNumberComponent } from '../../../shared/inputnumber/inputboxnum
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
-
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-seaexp-master-edit',
@@ -319,6 +319,9 @@ export class SeaexpMasterEditComponent implements OnInit {
     if (!this.Allvalid())
       return;
 
+      if (!confirm("Save")) {
+        return;
+    }
     this.SaveContainer();
     this.FindTotTeus();
     this.record.mbl_direct = this.record.mbl_direct_bool ? 'Y' : 'N';

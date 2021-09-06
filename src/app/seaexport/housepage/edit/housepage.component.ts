@@ -16,6 +16,7 @@ import { Tbl_cargo_exp_housem, vm_Tbl_cargo_exp_housem } from '../../models/Tbl_
 import { Tbl_cargo_exp_desc } from '../../models/Tbl_cargo_exp_desc';
 import { Tbl_cargo_exp_container } from '../../models/tbl_cargo_exp_masterm';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-housepage',
@@ -263,7 +264,7 @@ export class HousePageComponent implements OnInit {
         this.record.mbl_cntr_type = this.ShipmentType;
         this.is_locked = this.gs.IsShipmentClosed("SEA EXPORT", rec.mbl_ref_date, rec.mbl_lock, rec.mbl_unlock_date);
 
-        this.cntrs = (response.cntrs == undefined || response.cntrs == null) ? <Tbl_cargo_exp_container[]>[]:  <Tbl_cargo_exp_container[]>response.cntrs;
+        this.cntrs = (response.cntrs == undefined || response.cntrs == null) ? <Tbl_cargo_exp_container[]>[] : <Tbl_cargo_exp_container[]>response.cntrs;
 
         this.cntrs.forEach(rec => {
           rec.cntr_pkid = this.gs.getGuid();
@@ -293,9 +294,9 @@ export class HousePageComponent implements OnInit {
       .subscribe(response => {
 
         this.record = <Tbl_cargo_exp_housem>response.record;
-        this.cntrs = (response.cntrs == undefined || response.cntrs == null) ? <Tbl_cargo_exp_container[]>[]: <Tbl_cargo_exp_container[]>response.cntrs;
-        this.records = (response.records == undefined || response.records == null) ? <Tbl_cargo_exp_desc[]>[]: <Tbl_cargo_exp_desc[]>response.records;
-       
+        this.cntrs = (response.cntrs == undefined || response.cntrs == null) ? <Tbl_cargo_exp_container[]>[] : <Tbl_cargo_exp_container[]>response.cntrs;
+        this.records = (response.records == undefined || response.records == null) ? <Tbl_cargo_exp_desc[]>[] : <Tbl_cargo_exp_desc[]>response.records;
+
 
         this.ShipmentType = this.record.mbl_cntr_type;
 
@@ -681,6 +682,10 @@ export class HousePageComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
+
+    if (!confirm("Save")) {
+      return;
+    }
 
     this.record.hbl_is_cntrized = (this.record._hbl_is_cntrized) ? "Y" : "N";
     this.record.hbl_is_arranged = (this.record._hbl_is_arranged) ? "Y" : "N";

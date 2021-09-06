@@ -4,7 +4,8 @@
     <div class="row  align-items-center justify-content-left p-1">
       <label class="mr-3">{{title}} ({{mode}})</label>
       <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button> -->
-      <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" [routerLink]="getLink('ADD')" [queryParams]="getParam(null,'ADD')">New</a>
+      <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" [routerLink]="getLink('ADD')"
+        [queryParams]="getParam(null,'ADD')">New</a>
 
       <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
       <!-- <a class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('LIST')" [queryParams]="getParam(null,'LIST')">Return</a> -->
@@ -57,7 +58,8 @@
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Ref Date</label>
                   <div class="col-9">
-                    <app-date #_mbl_ref_date [inputdate]="record.mbl_ref_date" (ValueChanged)="record.mbl_ref_date=$event"></app-date>
+                    <app-date #_mbl_ref_date [inputdate]="record.mbl_ref_date"
+                      (ValueChanged)="record.mbl_ref_date=$event"></app-date>
                   </div>
                 </div>
               </div>
@@ -128,8 +130,9 @@
                   <label class="col-3 col-form-label col-form-label-sm">Carrier</label>
                   <div class="col-9">
 
-                    <app-autocomplete2 #_mbl_liner_name [controlname]="'CARRIER'" [tabletype]="'SEA CARRIER'" [displaycolumn]="'NAME'"
-                      [displaydata]="record.mbl_liner_name" (ValueChanged)="LovSelected($event)">
+                    <app-autocomplete2 #_mbl_liner_name [controlname]="'CARRIER'" [tabletype]="'SEA CARRIER'"
+                      [displaycolumn]="'NAME'" [displaydata]="record.mbl_liner_name"
+                      (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
 
                   </div>
@@ -139,8 +142,8 @@
                   <label class="col-3 col-form-label col-form-label-sm">Handled.By</label>
                   <div class="col-9">
 
-                    <app-autocomplete2 #_mbl_handled_name [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
-                      [displaycolumn]="'NAME'" [displaydata]="record.mbl_handled_name"
+                    <app-autocomplete2 #_mbl_handled_name [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'"
+                      [subtype]="'SALESMAN'" [displaycolumn]="'NAME'" [displaydata]="record.mbl_handled_name"
                       (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
 
@@ -152,8 +155,8 @@
                   <label class="col-3 col-form-label col-form-label-sm">Sales.Rep</label>
                   <div class="col-9">
 
-                    <app-autocomplete2 #_mbl_salesman_name [controlname]="'SALESMAN'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
-                      [displaycolumn]="'NAME'" [displaydata]="record.mbl_salesman_name"
+                    <app-autocomplete2 #_mbl_salesman_name [controlname]="'SALESMAN'" [tabletype]="'PARAM'"
+                      [subtype]="'SALESMAN'" [displaycolumn]="'NAME'" [displaydata]="record.mbl_salesman_name"
                       (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
 
@@ -228,7 +231,8 @@
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Pol.ETD</label>
                   <div class="col-9">
-                    <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd" (ValueChanged)="record.mbl_pol_etd=$event"></app-date>
+                    <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd" (ValueChanged)="record.mbl_pol_etd=$event">
+                    </app-date>
                   </div>
                 </div>
 
@@ -248,7 +252,8 @@
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Pod.ETA</label>
                   <div class="col-9">
-                    <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta" (ValueChanged)="record.mbl_pod_eta=$event"></app-date>
+                    <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta" (ValueChanged)="record.mbl_pod_eta=$event">
+                    </app-date>
                   </div>
                 </div>
 
@@ -267,7 +272,8 @@
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Final.ETA</label>
                   <div class="col-9">
-                    <app-date #_mbl_pofd_eta [inputdate]="record.mbl_pofd_eta" (ValueChanged)="record.mbl_pofd_eta=$event"></app-date>
+                    <app-date #_mbl_pofd_eta [inputdate]="record.mbl_pofd_eta"
+                      (ValueChanged)="record.mbl_pofd_eta=$event"></app-date>
                   </div>
                 </div>
 
@@ -317,7 +323,8 @@
 
 
                   </div>
-                  <label *ngIf="gs.BRANCH_REGION!='USA'" class="col-2 col-form-label col-form-label-sm">Rotation#</label>
+                  <label *ngIf="gs.BRANCH_REGION!='USA'"
+                    class="col-2 col-form-label col-form-label-sm">Rotation#</label>
                   <div *ngIf="gs.BRANCH_REGION!='USA'" class="col-3 pl-0">
                     <InputBoxNumber [(inputModel)]="record.mbl_rotation_no" [field]="'mbl_rotation_no'" [dec]="0"
                       [maxlength]="15" (blur)="onBlur($event)"></InputBoxNumber>
@@ -344,7 +351,7 @@
         <div class="row">
 
           <div class="col-md-12  px-0 mx-0">
-            <div class="page-body table-responsive-xl" style="overflow-x:auto" >
+            <div class="page-body table-responsive-xl" style="overflow-x:auto">
               <table class="table table-bordered table-hover table-sm text-nowrap cntr">
                 <thead class="page-body-thead">
                   <tr>
@@ -361,9 +368,9 @@
                 </thead>
                 <tbody class="page-body-tbody">
                   <tr *ngFor="let rec of records; let i = index">
-                    <td class="p-0" >
-                      <InputBox #_cntr_no [(inputModel)]="rec.cntr_no" [field]="'cntr_no'" [maxlength]="11" [uppercase]="true"
-                        (blur)="onBlur($event)"></InputBox>
+                    <td class="p-0">
+                      <InputBox #_cntr_no [(inputModel)]="rec.cntr_no" [field]="'cntr_no'" [maxlength]="11"
+                        [uppercase]="true" (blur)="onBlur($event)"></InputBox>
                     </td>
                     <td class="p-0">
                       <app-autocomplete2 [controlname]="'CONTAINER TYPE'" [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
@@ -372,7 +379,7 @@
                       </app-autocomplete2>
                     </td>
                     <td class="p-0">
-                      <InputBox  #_cntr_sealno [(inputModel)]="rec.cntr_sealno" [field]="'cntr_sealno'" [maxlength]="25"
+                      <InputBox #_cntr_sealno [(inputModel)]="rec.cntr_sealno" [field]="'cntr_sealno'" [maxlength]="25"
                         [uppercase]="true" (blur)="onBlur($event)"></InputBox>
                     </td>
                     <td class="p-0">
@@ -404,7 +411,8 @@
               <div class="form-group row">
                 <div class="col-12 pl-1 pb-1">
                   <button class="btn btn-info btn-sm mr-1" [disabled]="is_locked" (click)="AddRow()">Add Cntr</button>
-                  <button class="btn btn-info btn-sm mr-1" [disabled]="is_locked" (click)="BtnNavigation('COPY-CNTR')">Copy Cntr to
+                  <button class="btn btn-info btn-sm mr-1" [disabled]="is_locked"
+                    (click)="BtnNavigation('COPY-CNTR')">Copy Cntr to
                     House</button>
                   <button class="btn btn-info btn-sm mr-1" (click)="CopyCntrClipboard()">Copy Containers</button>
                 </div>
@@ -442,7 +450,7 @@
                     <td *ngIf="!gs.canEdit(this.gs.MENU_SE_HOUSE)">{{rec.hbl_houseno}}</td>
                     <td *ngIf="gs.canEdit(this.gs.MENU_SE_HOUSE)">
                       <a class='hlink' [routerLink]="['/Silver.SeaExport.Trans/SeaExpHouseEditPage']"
-                      [queryParams]="{appid : this.gs.appid ,menuid: this.gs.MENU_SE_HOUSE,parentid:this.pkid,pkid: rec.hbl_pkid,refno: this.record.mbl_refno ,type: 'OE',origin: 'seaexp-master-page',mode: 'EDIT'}">{{rec.hbl_houseno}}</a>
+                        [queryParams]="{appid : this.gs.appid ,menuid: this.gs.MENU_SE_HOUSE,parentid:this.pkid,pkid: rec.hbl_pkid,refno: this.record.mbl_refno ,type: 'OE',origin: 'seaexp-master-page',mode: 'EDIT'}">{{rec.hbl_houseno}}</a>
                     </td>
                     <td>{{rec.hbl_shipper_name}}</td>
                     <td>{{rec.hbl_consignee_name}}</td>
@@ -452,8 +460,8 @@
                     <td>{{rec.hbl_ship_term}}</td>
                     <td>{{rec.rec_created_by}}</td>
                     <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-                    <td *ngIf="gs.canDelete(this.gs.MENU_SE_HOUSE)" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
-                      aria-hidden="true" (click)="DeleteHouseRow(rec)"></i></td>
+                    <td *ngIf="gs.canDelete(this.gs.MENU_SE_HOUSE)" class="p-0 text-center"><i
+                        class="fa fa-trash  fa-lg pointer" aria-hidden="true" (click)="DeleteHouseRow(rec)"></i></td>
                   </tr>
                 </tbody>
               </table>
@@ -462,8 +470,8 @@
                 <div class="col-12 pl-0 pb-1">
                   <!-- <button *ngIf="gs.screenExists(gs.MENU_SE_HOUSE)"  class="btn btn-info btn-sm mr-1"  [disabled]="is_locked"
                     (click)="AddHouse()">Add House</button> -->
-                    <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_SE_HOUSE)" [class.disabled]="is_locked"
-                    [routerLink]="['/Silver.SeaExport.Trans/SeaExpHouseEditPage']"
+                  <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_SE_HOUSE)"
+                    [class.disabled]="is_locked" [routerLink]="['/Silver.SeaExport.Trans/SeaExpHouseEditPage']"
                     [queryParams]="{appid : gs.appid, menuid: this.gs.MENU_SE_HOUSE, parentid:this.pkid, pkid: '',refno: this.record.mbl_refno ,type: 'OE',origin: 'seaexp-master-page',mode: 'ADD'}">Add
                     House</a>
                 </div>
@@ -486,38 +494,40 @@
           <div class="form-group row">
             <!-- <button class="col-12 btn  btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_BOOKING)"
               (click)="BtnNavigation('BOOKING')">Booking</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_BOOKING)" 
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_BOOKING)"
               [routerLink]="BtnNavigation2('BOOKING','L')" [queryParams]="BtnNavigation2('BOOKING','P')">Booking</a>
           </div>
 
           <div class="form-group row">
             <!-- <button class=" col-12 btn  btn-info btn-sm text-uppercase " *ngIf="gs.screenExists(gs.MENU_SE_MASTER_MBL_INSTRUCTION)"
               (click)="BtnNavigation('MBLPAGE')">MBL Instruction</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MASTER_MBL_INSTRUCTION)" 
-              [routerLink]="BtnNavigation2('MBLPAGE','L')" [queryParams]="BtnNavigation2('MBLPAGE','P')">MBL Instruction</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_SE_MASTER_MBL_INSTRUCTION)" [routerLink]="BtnNavigation2('MBLPAGE','L')"
+              [queryParams]="BtnNavigation2('MBLPAGE','P')">MBL Instruction</a>
           </div>
 
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase " *ngIf="gs.screenExists(gs.MENU_SE_MASTER_DOCK_RECEIPT)"
               (click)="BtnNavigation('DOCKPAGE')">Dock Receipt</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MASTER_DOCK_RECEIPT)" 
-              [routerLink]="BtnNavigation2('DOCKPAGE','L')" [queryParams]="BtnNavigation2('DOCKPAGE','P')">Dock Receipt</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MASTER_DOCK_RECEIPT)"
+              [routerLink]="BtnNavigation2('DOCKPAGE','L')" [queryParams]="BtnNavigation2('DOCKPAGE','P')">Dock
+              Receipt</a>
 
           </div>
 
           <div class="form-group row">
 
-            <button class=" col-12 btn btn-info btn-sm text-uppercase " *ngIf="gs.screenExists(gs.MENU_SE_MASTER_MANIFEST)"
-              (click)="BtnNavigation('MANIFEST')">Manifest</button>
+            <button class=" col-12 btn btn-info btn-sm text-uppercase "
+              *ngIf="gs.screenExists(gs.MENU_SE_MASTER_MANIFEST)" (click)="BtnNavigation('MANIFEST')">Manifest</button>
 
           </div>
 
           <div class="form-group row">
-            
+
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase " *ngIf="gs.screenExists(gs.MENU_SE_MASTER_ARAP)"
               (click)="BtnNavigation('ARAP')">AR & AP</button> -->
-              
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MASTER_ARAP)" 
+
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MASTER_ARAP)"
               [routerLink]="BtnNavigation2('ARAP','L')" [queryParams]="BtnNavigation2('ARAP','P')">AR & AP</a>
 
           </div>
@@ -525,8 +535,9 @@
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase " *ngIf="gs.screenExists(gs.MENU_SE_MASTER_PROFIT_REPORT)"
               (click)="BtnNavigation('PROFITREPORT')">Profit Report</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MASTER_PROFIT_REPORT)" 
-              [routerLink]="BtnNavigation2('PROFITREPORT','L')" [queryParams]="BtnNavigation2('PROFITREPORT','P')">Profit Report</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_SE_MASTER_PROFIT_REPORT)" [routerLink]="BtnNavigation2('PROFITREPORT','L')"
+              [queryParams]="BtnNavigation2('PROFITREPORT','P')">Profit Report</a>
 
           </div>
 
@@ -539,8 +550,9 @@
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase " *ngIf="gs.screenExists(gs.MENU_SE_MESSENGER_SLIP)"
               (click)="BtnNavigation('MESSENGER-SLIP')">Messenger
               Slip</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MESSENGER_SLIP)" 
-              [routerLink]="BtnNavigation2('MESSENGER-SLIP','L')" [queryParams]="BtnNavigation2('MESSENGER-SLIP','P')">Messenger
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MESSENGER_SLIP)"
+              [routerLink]="BtnNavigation2('MESSENGER-SLIP','L')"
+              [queryParams]="BtnNavigation2('MESSENGER-SLIP','P')">Messenger
               Slip</a>
           </div>
 
@@ -549,8 +561,9 @@
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase " *ngIf="gs.screenExists(gs.MENU_SE_PAYMENT_REQUEST)"
               (click)="BtnNavigation('PAYMENT-REQUEST')">Payment
               Request</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_PAYMENT_REQUEST)" 
-              [routerLink]="BtnNavigation2('PAYMENT-REQUEST','L')" [queryParams]="BtnNavigation2('PAYMENT-REQUEST','P')">Payment
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_PAYMENT_REQUEST)"
+              [routerLink]="BtnNavigation2('PAYMENT-REQUEST','L')"
+              [queryParams]="BtnNavigation2('PAYMENT-REQUEST','P')">Payment
               Request</a>
           </div>
 
@@ -564,8 +577,9 @@
             <!-- <button class="col-12 btn btn-info btn-sm text-uppercase " *ngIf="gs.screenExists(gs.MENU_SE_MASTER)"
               (click)="BtnNavigation('FOLLOWUP')">Add To Follow Up</button> -->
 
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MASTER)" 
-              [routerLink]="BtnNavigation2('FOLLOWUP','L')" [queryParams]="BtnNavigation2('FOLLOWUP','P')">Add To Follow Up</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MASTER)"
+              [routerLink]="BtnNavigation2('FOLLOWUP','L')" [queryParams]="BtnNavigation2('FOLLOWUP','P')">Add To Follow
+              Up</a>
 
           </div>
           <div class="form-group row">
@@ -573,27 +587,37 @@
               [style.color]="record.mbl_ismemo_attached=='Y'?'red':'white'"
               (click)="BtnNavigation('INERNALMEMO')">Internal Memo</button> -->
 
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MASTER_INTERNAL_MEMO)" 
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_SE_MASTER_INTERNAL_MEMO)"
               [style.color]="record.mbl_ismemo_attached=='Y'?'red':'white'"
-              [routerLink]="BtnNavigation2('INERNALMEMO','L')" [queryParams]="BtnNavigation2('INERNALMEMO','P')">Internal Memo</a>
+              [routerLink]="BtnNavigation2('INERNALMEMO','L')"
+              [queryParams]="BtnNavigation2('INERNALMEMO','P')">Internal Memo</a>
           </div>
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase " *ngIf="gs.screenExists(gs.MENU_SE_MASTER_REQUEST_APPROVAL)"
               (click)="BtnNavigation('REQUEST-APPROVAL')">Request For
               Approval</button> -->
 
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MASTER_REQUEST_APPROVAL)" 
-              [routerLink]="BtnNavigation2('REQUEST-APPROVAL','L')" [queryParams]="BtnNavigation2('REQUEST-APPROVAL','P')">Request For
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_SE_MASTER_REQUEST_APPROVAL)"
+              [routerLink]="BtnNavigation2('REQUEST-APPROVAL','L')"
+              [queryParams]="BtnNavigation2('REQUEST-APPROVAL','P')">Request For
               Approval</a>
 
           </div>
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase " *ngIf="gs.screenExists(gs.MENU_SE_MASTER_CERTIFICATE_ORIGIN)"
               (click)="BtnNavigation('CERTIFICATE-ORIGIN')">Certificate Of Origin</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SE_MASTER_CERTIFICATE_ORIGIN)" 
-              [routerLink]="BtnNavigation2('CERTIFICATE-ORIGIN','L')" [queryParams]="BtnNavigation2('CERTIFICATE-ORIGIN','P')">Certificate Of Origin</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_SE_MASTER_CERTIFICATE_ORIGIN)"
+              [routerLink]="BtnNavigation2('CERTIFICATE-ORIGIN','L')"
+              [queryParams]="BtnNavigation2('CERTIFICATE-ORIGIN','P')">Certificate Of Origin</a>
           </div>
 
+          <div class="form-group row">
+            <button class="col-12 btn btn-primary btn-sm  text-uppercase" [disabled]="is_locked" *ngIf="gs.canSave(menuid,mode)"
+              (click)="Save()">Save</button>
+          </div>
         </div>
 
 
