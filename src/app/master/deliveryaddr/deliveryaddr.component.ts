@@ -9,6 +9,7 @@ import { User_Menu } from '../../core/models/menum';
 import { Tbl_Mast_Addressm, vm_Tbl_Mast_Addressm } from '../models/Tbl_Mast_Addressm';
 import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-deliveryaddr',
@@ -57,7 +58,7 @@ export class DeliveryAddrComponent implements OnInit {
     }
 
     private initPage() {
-        
+
         this.title = '';
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.errorMessage = '';
@@ -124,7 +125,10 @@ export class DeliveryAddrComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
+        
         this.record.add_pkid = this.gs.getGuid();
         this.record.add_parent_id = this.pkid;
 
@@ -141,7 +145,7 @@ export class DeliveryAddrComponent implements OnInit {
                 }
                 else {
                     this.errorMessage = 'Save Complete';
-                     alert(this.errorMessage);
+                    alert(this.errorMessage);
                 }
             }, error => {
                 this.errorMessage = this.gs.getError(error);

@@ -7,7 +7,7 @@ import { User_Menu } from '../../core/models/menum';
 import { SearchTable } from '../../shared/models/searchtable';
 import { SettingsService } from '../services/settings.service';
 import { TBL_MAST_PARAM, VM_TBL_MAST_SETTINGS } from '../models/Tbl_Mast_Param';
-
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-globalsettings',
@@ -115,22 +115,22 @@ export class GlobalSettingsComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.title = 'Global Settings';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
   }
 
-  LoadCombo(){
+  LoadCombo() {
     this.errorMessage = '';
     var SearchData = this.gs.UserInfo;
     SearchData.CODE = "";
     SearchData.TYPE = "";
 
     this.mainService.MailServerList(SearchData).subscribe(response => {
-        this.serverList = <any>response.list;
+      this.serverList = <any>response.list;
     }, error => {
-        this.errorMessage = this.gs.getError(error);
+      this.errorMessage = this.gs.getError(error);
     });
   }
 
@@ -234,7 +234,10 @@ export class GlobalSettingsComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
+    
     this.saveList = <TBL_MAST_PARAM[]>[];
 
     this.saveList.push(this.AddRecord("SOFTWARE VERSION", this.gs.branch_pkid, this.version));
@@ -451,7 +454,7 @@ export class GlobalSettingsComponent implements OnInit {
       return;
     }
 
-    
+
     this.saveList = <TBL_MAST_PARAM[]>[];
     this.SaveStageList();
 
@@ -480,7 +483,7 @@ export class GlobalSettingsComponent implements OnInit {
 
   }
 
-  SaveStageList(){
+  SaveStageList() {
     if (this.Txt_Stage1 != "")
       this.saveList.push(this.AddRecord(this.LBL_STAGES_ID + "1", this.gs.branch_pkid, this.Txt_Stage1, this.Txt_Seq1, this.STAGE_CODE, "STAGE1"));
 
@@ -530,11 +533,11 @@ export class GlobalSettingsComponent implements OnInit {
 
 
 
-  sortList(){
+  sortList() {
 
     this.saveList = <TBL_MAST_PARAM[]>[];
     this.SaveStageList();
-    this.sortedList = this.saveList.sort( (a,b) => (a.param_value1  > b.param_value1 ? 1 : -1)  )
+    this.sortedList = this.saveList.sort((a, b) => (a.param_value1 > b.param_value1 ? 1 : -1))
 
   }
 
@@ -549,7 +552,7 @@ export class GlobalSettingsComponent implements OnInit {
     this.location.back();
   }
 
-  changeTab(_tab : string ){
+  changeTab(_tab: string) {
     this.tab = _tab;
     this.errorMessage = '';
   }

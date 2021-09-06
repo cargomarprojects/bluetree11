@@ -9,6 +9,7 @@ import { User_Menu } from '../../core/models/menum';
 import { Tbl_cargo_ehbld, vm_Tbl_cargo_ehbl, Tbl_cargo_ehbl } from '../models/Tbl_cargo_ehbl';
 import { SearchTable } from '../../shared/models/searchtable';
 import { PageQuery } from '../../shared/models/pageQuery';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-ehbl',
@@ -63,7 +64,7 @@ export class EhblComponent implements OnInit {
     }
 
     private initPage() {
-        
+
         this.title = 'E-hbl Setting';
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.errorMessage = '';
@@ -127,7 +128,7 @@ export class EhblComponent implements OnInit {
             page_rows: 0,
             page_current: -1
         };
-        
+
         if (_type == 'PAGE') {
             SearchData.action = this.pageQuery.action;
             SearchData.page_count = this.pageQuery.page_count;
@@ -143,7 +144,7 @@ export class EhblComponent implements OnInit {
             .subscribe(response => {
 
                 this.records = response.list;
-                this.pageQuery = <PageQuery>{ action: response.action, page_count: response.page_count, page_current:response.page_current, page_rows:response.page_rows };
+                this.pageQuery = <PageQuery>{ action: response.action, page_count: response.page_count, page_current: response.page_current, page_rows: response.page_rows };
             },
                 error => {
                     this.errorMessage = this.gs.getError(error);
@@ -168,7 +169,9 @@ export class EhblComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
         // this.record.add_pkid = this.gs.getGuid();
         // this.record.add_parent_id = this.pkid;
         this.record.rec_mode = this.mode;
@@ -187,7 +190,7 @@ export class EhblComponent implements OnInit {
                 else {
                     this.mode = 'EDIT';
                     this.errorMessage = 'Save Complete';
-                     alert(this.errorMessage);
+                    alert(this.errorMessage);
                 }
             }, error => {
                 this.errorMessage = this.gs.getError(error);
@@ -280,9 +283,9 @@ export class EhblComponent implements OnInit {
     }
 
     pageEvents(actions: any) {
-        
-        this.pageQuery = <PageQuery>{ action: actions.action, page_count: actions.pageQuery.page_count, page_current:actions.pageQuery.page_current, page_rows:actions.pageQuery.page_rows }
-         this.List('PAGE');
+
+        this.pageQuery = <PageQuery>{ action: actions.action, page_count: actions.pageQuery.page_count, page_current: actions.pageQuery.page_current, page_rows: actions.pageQuery.page_rows }
+        this.List('PAGE');
     }
 
 }

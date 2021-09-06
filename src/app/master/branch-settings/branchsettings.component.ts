@@ -7,6 +7,7 @@ import { User_Menu } from '../../core/models/menum';
 import { SearchTable } from '../../shared/models/searchtable';
 import { SettingsService } from '../services/settings.service';
 import { TBL_MAST_PARAM, VM_TBL_MAST_SETTINGS } from '../models/Tbl_Mast_Param';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-branchsettings',
@@ -251,7 +252,7 @@ export class BranchSettingsComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.title = 'Company Settings';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
@@ -728,11 +729,15 @@ export class BranchSettingsComponent implements OnInit {
     if (!this.Allvalid())
       return;
 
+    if (!confirm("Save")) {
+      return;
+    }
+
     this.saveList = <TBL_MAST_PARAM[]>[];
-    
 
 
-    this.saveList.push( this.AddRecord ("A/C RECEIVABLE", this.Txt_AR_id, this.Txt_AR));
+
+    this.saveList.push(this.AddRecord("A/C RECEIVABLE", this.Txt_AR_id, this.Txt_AR));
     this.saveList.push(this.AddRecord("A/C PAYABLE", this.Txt_AP_id, this.Txt_AP));
     this.saveList.push(this.AddRecord("PETTY CASH", this.Txt_PettyCash_id, this.Txt_PettyCash));
 
@@ -764,7 +769,7 @@ export class BranchSettingsComponent implements OnInit {
     this.saveList.push(this.AddRecord("VAT-ACCOUNT", this.Txt_VatAccount_id, this.Txt_VatAccount));
 
     this.saveList.push(this.AddRecord("VAT-INVOICE-DESCRIPTION", this.Txt_Code_id, this.Txt_Code));
-    
+
 
     this.saveList.push(this.AddRecord("VAT-PERCENTAGE", this.gs.branch_pkid, this.Txt_Vat_Per));
 
@@ -781,7 +786,7 @@ export class BranchSettingsComponent implements OnInit {
     this.saveList.push(this.AddRecord("ISSUE-AGENT-ADDRESS", this.gs.branch_pkid, this.Txt_Agent_Address));
     this.saveList.push(this.AddRecord("IATA-CODE", this.gs.branch_pkid, this.Txt_IATA));
 
-    this.saveList.push(this.AddRecord("RESOURCE URL",this.gs.branch_pkid , this.TxtImageUrl));
+    this.saveList.push(this.AddRecord("RESOURCE URL", this.gs.branch_pkid, this.TxtImageUrl));
     this.saveList.push(this.AddRecord("FILES URL", this.gs.branch_pkid, this.TxtFileUrl));
     this.saveList.push(this.AddRecord("FILES FOLDER", this.gs.branch_pkid, this.TxtFileFolder));
 
@@ -800,27 +805,27 @@ export class BranchSettingsComponent implements OnInit {
 
 
     this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX", this.gs.branch_pkid, this.Txt_Sea_Prefix));
-    if (this.Chk_Sea_Prefix_Pol == 'Y') 
-        this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX-POL", this.gs.branch_pkid, "Y"));
+    if (this.Chk_Sea_Prefix_Pol == 'Y')
+      this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX-POL", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX-POL", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX-POL", this.gs.branch_pkid, "N"));
     if (this.Chk_Sea_Prefix_Pod == 'Y')
-        this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX-POD", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX-POD", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX-POD", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-PREFIX-POD", this.gs.branch_pkid, "N"));
     this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-STARTING-NO", this.gs.branch_pkid, this.Txt_Sea_Prefix2));
     this.saveList.push(this.AddRecord("SEA-EXPORT-HOUSE-INCREMENT-BY", this.gs.branch_pkid, this.Txt_Sea_Prefix3));
 
-    
+
     this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX", this.gs.branch_pkid, this.Txt_Air_Prefix));
     if (this.Chk_Air_Prefix_Pol == 'Y')
-        this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX-POL", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX-POL", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX-POL", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX-POL", this.gs.branch_pkid, "N"));
     if (this.Chk_Air_Prefix_Pod == 'Y')
-        this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX-POD", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX-POD", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX-POD", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-PREFIX-POD", this.gs.branch_pkid, "N"));
 
     this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-STARTING-NO", this.gs.branch_pkid, this.Txt_Air_Prefix2));
     this.saveList.push(this.AddRecord("AIR-EXPORT-HOUSE-INCREMENT-BY", this.gs.branch_pkid, this.Txt_Air_Prefix3));
@@ -836,7 +841,7 @@ export class BranchSettingsComponent implements OnInit {
     this.saveList.push(this.AddRecord("AIR-EXPORT-REFNO-STARTING-NO", this.gs.branch_pkid, this.TXT_AE_PREFIX2));
     this.saveList.push(this.AddRecord("AIR-IMPORT-REFNO-PREFIX", this.gs.branch_pkid, this.TXT_AI_PREFIX1));
     this.saveList.push(this.AddRecord("AIR-IMPORT-REFNO-STARTING-NO", this.gs.branch_pkid, this.TXT_AI_PREFIX2));
-    
+
     this.saveList.push(this.AddRecord("OTHER-OPERATION-REFNO-PREFIX", this.gs.branch_pkid, this.TXT_OP_PREFIX1));
     this.saveList.push(this.AddRecord("OTHER-OPERATION-REFNO-STARTING-NO", this.gs.branch_pkid, this.TXT_OP_PREFIX2));
 
@@ -846,7 +851,7 @@ export class BranchSettingsComponent implements OnInit {
 
     this.saveList.push(this.AddRecord("AR-INVOICE-PREFIX", this.gs.branch_pkid, this.TXT_AR_PREFIX1));
     this.saveList.push(this.AddRecord("AR-INVOICE-STARTING-NO", this.gs.branch_pkid, this.TXT_AR_PREFIX2));
-    
+
     this.saveList.push(this.AddRecord("AP-INVOICE-PREFIX", this.gs.branch_pkid, this.TXT_AP_PREFIX1));
     this.saveList.push(this.AddRecord("AP-INVOICE-STARTING-NO", this.gs.branch_pkid, this.TXT_AP_PREFIX2));
 
@@ -857,36 +862,36 @@ export class BranchSettingsComponent implements OnInit {
 
     this.saveList.push(this.AddRecord("AUTO-BCC-EMAIL-ID", this.gs.branch_pkid, this.Txt_Auto_Bcc));
 
-    if ( this.Chk_Home_Logo == 'Y') 
-        this.saveList.push(this.AddRecord("SHOW-LOGO-HOME-PAGE", this.gs.branch_pkid, "Y"));
-    else 
-        this.saveList.push(this.AddRecord("SHOW-LOGO-HOME-PAGE", this.gs.branch_pkid, "N"));
+    if (this.Chk_Home_Logo == 'Y')
+      this.saveList.push(this.AddRecord("SHOW-LOGO-HOME-PAGE", this.gs.branch_pkid, "Y"));
+    else
+      this.saveList.push(this.AddRecord("SHOW-LOGO-HOME-PAGE", this.gs.branch_pkid, "N"));
 
-    if ( this.Chk_Home_Name == 'Y') 
-        this.saveList.push(this.AddRecord("SHOW-NAME-HOME-PAGE", this.gs.branch_pkid, "Y"));
-    else 
-        this.saveList.push(this.AddRecord("SHOW-NAME-HOME-PAGE", this.gs.branch_pkid, "N"));
+    if (this.Chk_Home_Name == 'Y')
+      this.saveList.push(this.AddRecord("SHOW-NAME-HOME-PAGE", this.gs.branch_pkid, "Y"));
+    else
+      this.saveList.push(this.AddRecord("SHOW-NAME-HOME-PAGE", this.gs.branch_pkid, "N"));
 
     if (this.Chk_CTPAT == 'Y')
-        this.saveList.push(this.AddRecord("SHOW-CTPAT", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("SHOW-CTPAT", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("SHOW-CTPAT", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("SHOW-CTPAT", this.gs.branch_pkid, "N"));
 
     if (this.Chk_Parent_Address == 'Y')
-        this.saveList.push(this.AddRecord("PARENT-ADDRESS", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("PARENT-ADDRESS", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("PARENT-ADDRESS", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("PARENT-ADDRESS", this.gs.branch_pkid, "N"));
 
 
     if (this.Chk_PrintCheck == 'Y')
-        this.saveList.push(this.AddRecord("AUTO-CLOSE-CHECK-PRINT", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("AUTO-CLOSE-CHECK-PRINT", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("AUTO-CLOSE-CHECK-PRINT", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("AUTO-CLOSE-CHECK-PRINT", this.gs.branch_pkid, "N"));
 
     if (this.Chk_RePrintCheck == 'Y')
-        this.saveList.push(this.AddRecord("RE-PRINT-CHECK", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("RE-PRINT-CHECK", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("RE-PRINT-CHECK", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("RE-PRINT-CHECK", this.gs.branch_pkid, "N"));
 
 
     this.saveList.push(this.AddRecord("LOCK-DAYS-SEA", this.gs.branch_pkid, this.Txt_Lock_Sea));
@@ -895,65 +900,65 @@ export class BranchSettingsComponent implements OnInit {
     this.saveList.push(this.AddRecord("LOCK-DAYS-ADMIN", this.gs.branch_pkid, this.Txt_Lock_Admin));
 
     if (this.Chk_Boe == 'Y')
-        this.saveList.push(this.AddRecord("SHOW-BOE", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("SHOW-BOE", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("SHOW-BOE", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("SHOW-BOE", this.gs.branch_pkid, "N"));
 
     if (this.Chk_Arap_Code_Selection == 'Y')
-        this.saveList.push(this.AddRecord("ARAP-CODE-SELECTION", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("ARAP-CODE-SELECTION", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("ARAP-CODE-SELECTION", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("ARAP-CODE-SELECTION", this.gs.branch_pkid, "N"));
 
     if (this.Chk_ShowChkDate == 'Y')
-        this.saveList.push(this.AddRecord("SHOW-CHECK-DATE", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("SHOW-CHECK-DATE", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("SHOW-CHECK-DATE", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("SHOW-CHECK-DATE", this.gs.branch_pkid, "N"));
 
 
     if (this.Chk_Remove_Zero_Format == 'Y')
-        this.saveList.push(this.AddRecord("REMOVE-ZERO-FORMAT", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("REMOVE-ZERO-FORMAT", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("REMOVE-ZERO-FORMAT", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("REMOVE-ZERO-FORMAT", this.gs.branch_pkid, "N"));
 
     if (this.Chk_Extra == 'Y')
-        this.saveList.push(this.AddRecord("SHOW-EXTRA-OPTION", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("SHOW-EXTRA-OPTION", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("SHOW-EXTRA-OPTION", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("SHOW-EXTRA-OPTION", this.gs.branch_pkid, "N"));
 
 
     if (this.Chk_Package_Total_Button == 'Y')
-        this.saveList.push(this.AddRecord("PACKAGE-TOTAL-BUTTON", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("PACKAGE-TOTAL-BUTTON", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("PACKAGE-TOTAL-BUTTON", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("PACKAGE-TOTAL-BUTTON", this.gs.branch_pkid, "N"));
 
     if (this.Chk_Description == 'Y')
-        this.saveList.push(this.AddRecord("OPTIONAL-DESCRIPTION", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("OPTIONAL-DESCRIPTION", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("OPTIONAL-DESCRIPTION", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("OPTIONAL-DESCRIPTION", this.gs.branch_pkid, "N"));
 
 
     this.saveList.push(this.AddRecord("REGION", this.gs.branch_pkid, this.Txt_Region));
 
-    this.saveList.push(this.AddRecord("SEA_ARVL_FORMAT", this.gs.branch_pkid,this.Cmb_Sea_Arr_Format));
+    this.saveList.push(this.AddRecord("SEA_ARVL_FORMAT", this.gs.branch_pkid, this.Cmb_Sea_Arr_Format));
 
     this.saveList.push(this.AddRecord("PAYROLL-INVOICE-CODE", this.gs.branch_pkid, this.Txt_Payroll_Invoice_Code));
     this.saveList.push(this.AddRecord("PAYROLL-ACC-CODE", this.gs.branch_pkid, this.Txt_Payroll_Ac_Code));
-    
-    if ( this.Chk_Enable_Payroll == 'Y')
-        this.saveList.push(this.AddRecord("PAYROLL-ENABLED", this.gs.branch_pkid, "Y"));
+
+    if (this.Chk_Enable_Payroll == 'Y')
+      this.saveList.push(this.AddRecord("PAYROLL-ENABLED", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("PAYROLL-ENABLED", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("PAYROLL-ENABLED", this.gs.branch_pkid, "N"));
 
 
     if (this.Chk_HideDocType == 'Y')
-        this.saveList.push(this.AddRecord("HIDE-DOCTYPE-INVOICE", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("HIDE-DOCTYPE-INVOICE", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("HIDE-DOCTYPE-INVOICE", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("HIDE-DOCTYPE-INVOICE", this.gs.branch_pkid, "N"));
 
     if (this.chk_dummy_Invoice == 'Y')
-        this.saveList.push(this.AddRecord("DUMMY-INVOICE", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("DUMMY-INVOICE", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("DUMMY-INVOICE", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("DUMMY-INVOICE", this.gs.branch_pkid, "N"));
 
 
     this.saveList.push(this.AddRecord("DOC-FOOTER1", this.gs.branch_pkid, this.Txt_Terms1));
@@ -970,24 +975,24 @@ export class BranchSettingsComponent implements OnInit {
 
 
     if (this.Chk_SI_OVERRIDE_POD_ETA == 'Y')
-        this.saveList.push(this.AddRecord("SEA-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("SEA-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("SEA-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("SEA-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "N"));
 
     if (this.Chk_AI_OVERRIDE_POD_ETA == 'Y')
-        this.saveList.push(this.AddRecord("AIR-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "Y"));
+      this.saveList.push(this.AddRecord("AIR-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "Y"));
     else
-        this.saveList.push(this.AddRecord("AIR-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "N"));
+      this.saveList.push(this.AddRecord("AIR-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "N"));
 
     if (this.Chk_ShipLogFormat == 'Y')
-        this.saveList.push(this.AddRecord("SHIPMENT-LOG-FORMAT", this.gs.branch_pkid, "NEW"));
+      this.saveList.push(this.AddRecord("SHIPMENT-LOG-FORMAT", this.gs.branch_pkid, "NEW"));
     else
-        this.saveList.push(this.AddRecord("SHIPMENT-LOG-FORMAT", this.gs.branch_pkid, "OLD"));
+      this.saveList.push(this.AddRecord("SHIPMENT-LOG-FORMAT", this.gs.branch_pkid, "OLD"));
 
     if (this.gs.isBlank(this.Dt_Locked))
-        this.saveList.push(this.AddRecord("SHIPMENT-LOCKED-DATE", this.gs.branch_pkid, ""));
+      this.saveList.push(this.AddRecord("SHIPMENT-LOCKED-DATE", this.gs.branch_pkid, ""));
     else
-        this.saveList.push(this.AddRecord("SHIPMENT-LOCKED-DATE", this.gs.branch_pkid, this.Dt_Locked));
+      this.saveList.push(this.AddRecord("SHIPMENT-LOCKED-DATE", this.gs.branch_pkid, this.Dt_Locked));
 
 
     const saveRecord = <VM_TBL_MAST_SETTINGS>{};

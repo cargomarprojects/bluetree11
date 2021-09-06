@@ -8,6 +8,7 @@ import { User_Menu } from '../../core/models/menum';
 import { Tbl_Mast_Addressm, vm_Tbl_Mast_Addressm } from '../models/Tbl_Mast_Addressm';
 import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-partyaddr-edit',
@@ -64,7 +65,7 @@ export class PartyAddrEditComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.title = 'Address Details';
     if (this.gs.BRANCH_REGION == "USA")
       this.checkAddress = "Use this address while printing check.";
@@ -174,7 +175,9 @@ export class PartyAddrEditComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     this.record.add_is_chk_address = this.record.add_is_chk_address_b ? 'Y' : 'N';
     this.record.add_parent_id = this.parentid;
     this.record.add_type = 'PARTYS';
@@ -194,7 +197,7 @@ export class PartyAddrEditComponent implements OnInit {
         else {
           this.mode = "EDIT"
           this.errorMessage = 'Save Complete';
-           alert(this.errorMessage);
+          alert(this.errorMessage);
         }
       }, error => {
         this.errorMessage = this.gs.getError(error);

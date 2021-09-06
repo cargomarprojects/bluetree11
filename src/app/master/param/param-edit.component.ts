@@ -9,7 +9,7 @@ import { User_Menu } from '../../core/models/menum';
 import { TBL_MAST_PARAM, VM_TBL_MAST_PARAM } from '../models/Tbl_Mast_Param';
 
 import { SearchTable } from '../../shared/models/searchtable';
-
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-param-edit',
@@ -72,7 +72,7 @@ export class ParamEditComponent implements OnInit {
     this.sub = this.route.queryParams.subscribe(params => {
 
       this.gs.checkAppVersion();
-      
+
       if (this.route.snapshot.queryParams.parameter == null) {
         this.pkid = this.route.snapshot.queryParams.pkid;
         this.menuid = this.route.snapshot.queryParams.menuid;
@@ -100,11 +100,11 @@ export class ParamEditComponent implements OnInit {
       this.showHideControls();
       this.actionHandler();
     });
-    
+
   }
 
   private initPage() {
-    
+
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.errorMessage = '';
@@ -222,7 +222,9 @@ export class ParamEditComponent implements OnInit {
 
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     const saveRecord = <VM_TBL_MAST_PARAM>{};
     saveRecord.record = this.record;
     saveRecord.userinfo = this.gs.UserInfo;

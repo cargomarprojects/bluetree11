@@ -9,6 +9,7 @@ import { User_Menu } from '../../core/models/menum';
 import { Tbl_cargo_ehbld, vm_Tbl_cargo_ehbld, vm_Tbl_cargo_ehbl, Tbl_cargo_ehbl } from '../models/Tbl_cargo_ehbl';
 import { SearchTable } from '../../shared/models/searchtable';
 import { PageQuery } from '../../shared/models/pageQuery';
+//EDIT-AJITH-06-09-2021
 
 @Component({
     selector: 'app-ehbl-req',
@@ -87,7 +88,7 @@ export class EhblReqComponent implements OnInit {
     }
 
     private initPage() {
-        
+
         this.title = 'E-hbl Request';
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.canDelete = this.gs.canDelete(this.menuid);
@@ -204,7 +205,9 @@ export class EhblReqComponent implements OnInit {
 
         if (!this.Allvalid())
             return;
-
+        if (!confirm("Save")) {
+            return;
+        }
         // this.record.add_pkid = this.gs.getGuid();
         // this.record.add_parent_id = this.pkid;
         this.record.rec_mode = this.mode;

@@ -7,6 +7,7 @@ import { BankInfoService } from '../services/bankinfo.service';
 import { User_Menu } from '../../core/models/menum';
 import { Tbl_Party_BankAddress, vm_Tbl_Party_BankAddress } from '../models/Tbl_Party_BankAddress';
 import { SearchTable } from '../../shared/models/searchtable';
+//EDIT-AJITH-06-09-2021
 
 @Component({
   selector: 'app-bankinfo',
@@ -74,7 +75,7 @@ export class BankInfoComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.title = 'Login Details';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
@@ -191,7 +192,9 @@ export class BankInfoComponent implements OnInit {
   Save() {
     if (!this.Allvalid())
       return;
-
+    if (!confirm("Save")) {
+      return;
+    }
     this.record.pb_parent_id = this.parentid;
 
     const saveRecord = <vm_Tbl_Party_BankAddress>{};
@@ -223,7 +226,7 @@ export class BankInfoComponent implements OnInit {
           }
           this.NewRecord();
           this.errorMessage = 'Save Complete';
-           alert(this.errorMessage);
+          alert(this.errorMessage);
         }
       }, error => {
         this.errorMessage = this.gs.getError(error);
