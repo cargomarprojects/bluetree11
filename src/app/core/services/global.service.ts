@@ -49,7 +49,7 @@ export class GlobalService {
 
   public appid = '';
 
-  public software_version_string = '1.130';
+  public software_version_string = '1.131';
   public baseUrl: string = "http://localhost:5000";
   //public baseUrl: string = "";
   // change this is false in production and update
