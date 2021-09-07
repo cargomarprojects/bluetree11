@@ -18,7 +18,7 @@ import { Companym } from '../models/company';
 import { Modulem } from '../models/modulem';
 import { gsdata } from '../models/gsdata';
 
-
+//EDIT-AJITH-07-09-2021
 
 
 @Injectable({
@@ -2157,8 +2157,8 @@ export class GlobalService {
     var dt = new Date();
 
     this.defaultValues = new DefaultValues;
-    this.defaultValues.today = dt.toISOString().slice(0, 10);
-
+    // this.defaultValues.today = dt.toISOString().slice(0, 10);
+    this.defaultValues.today = this.getNewdate(0);
     this.defaultValues.yy = dt.getFullYear();
     this.defaultValues.mm = dt.getMonth() + 1;
     this.defaultValues.dd = dt.getDate();
@@ -2173,16 +2173,24 @@ export class GlobalService {
 
   public getNewdate(_days: number) {
     var nDate = new Date();
-    if (_days <= 0)
-      nDate.setDate(1);
-    else
-      nDate.setDate(nDate.getDate() - _days);
+    if (_days > 0)
+      nDate.setDate(nDate.getDate() + _days);
+    if (_days < 0)
+      nDate.setDate(nDate.getDate() - Math.abs(_days));
 
-    return nDate.toISOString().slice(0, 10);
+    let yy = nDate.getFullYear();
+    let mm = nDate.getMonth() + 1;
+    let dd = nDate.getDate();
+
+    let sRet = yy.toString();
+    sRet += "-" + (mm <= 9 ? "0" + mm.toString() : mm.toString());
+    sRet += "-" + (dd <= 9 ? "0" + dd.toString() : dd.toString());
+    return sRet;
   }
 
+
   public getPreviousDate(_days: number) {
-    return this.getNewdate(_days);
+    return this.getNewdate(_days * -1);
   }
 
   public roundWeight(_number: number, _category: string) {
