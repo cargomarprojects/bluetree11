@@ -2163,15 +2163,15 @@ export class GlobalService {
     this.defaultValues.mm = dt.getMonth() + 1;
     this.defaultValues.dd = dt.getDate();
 
-    this.defaultValues.monthbegindate = this.getNewdate(0);
-    this.defaultValues.lastmonthdate = this.getNewdate(30);//get today -30 days
-    this.defaultValues.print_cheque_only_after_ho_approved = 'N';
+    // this.defaultValues.monthbegindate = this.getNewdate(0);
+    this.defaultValues.lastmonthdate = this.getPreviousDate(30);
+    // this.defaultValues.print_cheque_only_after_ho_approved = 'N';
 
     console.log('To Date : ', this.defaultValues.today);
 
   }
 
-  public getNewdate(_days: number) {
+  private getNewdate(_days: number) {
     var nDate = new Date();
     if (_days > 0)
       nDate.setDate(nDate.getDate() + _days);
@@ -2191,6 +2191,9 @@ export class GlobalService {
 
   public getPreviousDate(_days: number) {
     return this.getNewdate(_days * -1);
+  }
+  public getNextDate(_days: number) {
+    return this.getNewdate(_days);
   }
 
   public roundWeight(_number: number, _category: string) {
