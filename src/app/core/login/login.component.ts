@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 
 import { environment } from  '../../../environments/environment';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -60,9 +61,6 @@ export class LoginComponent implements OnInit {
     //this.username = 'CUST-VIRTRA'; // consignee
     //this.username = 'CUST-CLUHOU'; // consignee
     //this.username = 'CUST-PARGRA'; // agent
-      
-    console.log('Production ',environment.production);
-    
 
     this.LoadCombo();
   }
@@ -107,6 +105,7 @@ export class LoginComponent implements OnInit {
   }
 
   Login() {
+
     if (!this.username) {
       this.errorMessage = 'Login ID Cannot Be Blank';
       return;

@@ -49,6 +49,8 @@ export class GlobalService {
 
   public appid = '';
 
+  public tab = ' 	';
+
   public software_version_string = '1.131';
   public baseUrl: string = "http://localhost:5000";
   //public baseUrl: string = "";
@@ -3434,5 +3436,28 @@ export class GlobalService {
 
     return retdate;
   }
+
+  public ascii (a : any) { return a.charCodeAt(0); }
+
+  async readClipboard() {
+    var text = '';
+    try {
+      text = await navigator.clipboard.readText();
+    } catch (err) {
+      console.error('Failed to read clipboard contents: ', err);
+      return null;
+    }
+    return text;
+  }
+  async writeClipboard(text : any) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (err) {
+      console.error('Failed to write to clipboard : ', err);
+      return false;
+    }
+    return true;
+  }
+
 
 }
