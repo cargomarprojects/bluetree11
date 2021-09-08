@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/Tbl_User_Rights';
+//EDIT-AJITH-08-09-2021
 
 @Component({
     selector: 'app-rights-header',
@@ -28,5 +29,9 @@ export class RightsHeaderComponent implements OnInit {
         if (this.gs.isBlank(this.searchQuery.searchString))
             this.searchQuery.searchString = '';
         this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.searchQuery });
+    }
+
+    onBlur(field: string) {
+        this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase();
     }
 }
