@@ -3439,15 +3439,17 @@ export class GlobalService {
 
   public ascii (a : any) { return a.charCodeAt(0); }
 
-  async readClipboard() {
+  async readClipboard() : Promise<string> {
     var text = '';
     try {
-      text = await navigator.clipboard.readText();
+
+      text =  await navigator.clipboard.readText();
+
     } catch (err) {
       console.error('Failed to read clipboard contents: ', err);
-      return null;
+      return '';
     }
-    return text;
+    return text.toString();
   }
   async writeClipboard(text : any) {
     try {

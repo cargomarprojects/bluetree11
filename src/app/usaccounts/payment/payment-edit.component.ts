@@ -435,24 +435,37 @@ export class PaymentEditComponent implements OnInit {
 
 
     importExport(_flag : string ){
-        var str = "INVO" + this.gs.tab + "INV-AMT" + this.gs.tab + "AR" + this.gs.tab + "AP" + this.gs.tab + "SELECTED" + this.gs.tab + "PAY-AMT" + "\n";
-        this.ms.pendingList.forEach( rec =>{
-            str += this.gs.isBlank(rec.inv_no) ? "" : rec.inv_no.toString() ;
-            str += this.gs.tab;
-            str += this.gs.isBlank(rec.inv_total) ? "" : rec.inv_total.toString() ;
-            str += this.gs.tab;
-            str += this.gs.isBlank(rec.inv_ar_total) ? "" : rec.inv_ar_total.toString();
-            str += this.gs.tab;
-            str += this.gs.isBlank(rec.inv_ap_total) ? "" : rec.inv_ap_total.toString();
-            str += this.gs.tab;
-            str +=  rec.inv_flag2 ? "Y"  : "N" ;
-            str += this.gs.tab;
-            str += this.gs.isBlank(rec.inv_pay_amt) ? "" : rec.inv_pay_amt.toString();
-            str += "\n";
-        })
-        this.gs.writeClipboard(str);
-        alert('Copying Completed');
+        if ( _flag == "COPY") {
+            let str = "INVO\tINV-AMT\tAR\tAP\tSELECTED\tPAY-AMT\n";
+            this.ms.pendingList.forEach( rec =>{
+                str += this.gs.isBlank(rec.inv_no) ? "" : rec.inv_no.toString() ;str += "\t";
+                str += this.gs.isBlank(rec.inv_total) ? "" : rec.inv_total.toString() ;str += "\t";
+                str += this.gs.isBlank(rec.inv_ar_total) ? "" : rec.inv_ar_total.toString();str += "\t";
+                str += this.gs.isBlank(rec.inv_ap_total) ? "" : rec.inv_ap_total.toString();str += "\t";
+                str +=  rec.inv_flag2 ? "Y"  : "N" ;str += "\t";
+                str += this.gs.isBlank(rec.inv_pay_amt) ? "" : rec.inv_pay_amt.toString();
+                str += "\n";
+            });
+            this.gs.writeClipboard(str);
+            alert('Copying Completed');
+        }
+        if ( _flag == "PASTE") {
+            const str1 = this.gs.readClipboard().then ( value =>{
+                value.split('\n').forEach( row =>{
+                    var rec = row.split('\t');
+
+                    var itm = this.ms.pendingList.find( r => r.inv_no == rec[0].toString());
+                    if ( itm) {
+                        itm.inv_flag2 =itm[4] == "Y" ? true : false;
+                        itm.inv_flag = itm[4] == "Y" ? "Y" : "N";
+                    }
+                })
+            })
+            
+            
+        }
     }
+
 
     swapSelection(rec: Tbl_cargo_invoicem) {
         rec.inv_flag2 = !rec.inv_flag2;
