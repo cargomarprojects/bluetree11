@@ -24,18 +24,17 @@
       <div class="col-md-4">
         <div class="form-group row">
           <div class="col-4">
-            <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchCustType" (change)="onChange('searchCustType')">
+            <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchCustType"
+              (change)="onChange('searchCustType')">
               <option [value]="'CUSTOMER'">CUSTOMER</option>
               <option [value]="'PARENT'">PARENT</option>
             </select>
           </div>
           <div class="col-8">
-            <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="custLovType"
-            [displaycolumn]="'NAME'" [displaydata]="searchQuery.customerName" 
-            (ValueChanged)="LovSelected($event)">
-        </app-autocomplete2>
-
-        <!-- <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+            <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="custLovType" [displaycolumn]="'NAME'"
+              [displaydata]="searchQuery.customerName" (ValueChanged)="LovSelected($event)">
+            </app-autocomplete2>
+            <!-- <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
         [displaydata]="cust_code" (ValueChanged)="LovSelected($event)">
     </app-autocomplete2> -->
 

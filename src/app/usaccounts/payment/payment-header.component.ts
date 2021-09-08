@@ -6,12 +6,12 @@ import { SearchTable } from '../../shared/models/searchtable';
 @Component({
     selector: 'acc-payment-header',
     templateUrl: './payment-header.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentHeaderComponent implements OnInit {
     // Call By Value using Input Parameters
     searchQuery: SearchQuery;
-
+     
     custLovType: string = 'MASTER';
 
     @Input() set _query(value: SearchQuery) {
