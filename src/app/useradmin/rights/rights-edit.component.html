@@ -47,16 +47,13 @@
 
             <div *ngIf="isAdmin && mode=='EDIT'" class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Copy Rights From </label>
-                <div class="col-8">
+                <div class="col-6">
                     <select class="form-control form-control-sm" [(ngModel)]="ua_usr_id">
                         <option *ngFor="let rec of userList" [value]="rec.pkid">{{rec.name}}</option>
                     </select>
                 </div>
-            </div>
-            <div *ngIf="isAdmin && mode=='EDIT'" class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm"></label>
-                <div class="col-8">
-                    <button class="btn btn-primary btn-sm" (click)="LoadUserRights()">Search</button>
+                <div class="col-2">
+                    <button class="btn btn-primary btn-sm" (click)="LoadUserRights()">Load UserRights</button>
                 </div>
             </div>
 
@@ -103,34 +100,52 @@
                                 <h5><small>{{rec.menu_name}}</small></h5>
                             </td>
                             <td (click)="swap(rec,'all')" style="text-align:center">
-                                <button class="btn btn-sm" [ngClass]="rec.rights_all ? 'btn-success' : 'btn-info'">{{rec.rights_all ? 'Y' :'N'}}</button>
+                                <button class="btn btn-sm"
+                                    [ngClass]="rec.rights_all ? 'btn-success' : 'btn-info'">{{rec.rights_all ? 'Y'
+                                    :'N'}}</button>
                                 <!-- <div class="form-check"><input class="form-check-input" type="checkbox"  [checked]="rec.all" (change)="swap(rec,'all')"></div> -->
                             </td>
                             <td (click)="swap(rec,'company')" style="text-align:center">
-                                <button class="btn btn-sm" [ngClass]="rec.rights_company == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_company == 'Y' ? 'Y' : 'N'}}</button>
+                                <button class="btn btn-sm"
+                                    [ngClass]="rec.rights_company == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_company
+                                    == 'Y' ? 'Y' : 'N'}}</button>
                                 <!-- <div class="form-check"><input class="form-check-input" type="checkbox" [checked]="rec.rights_company == 'Y'" (change)="swap(rec,'company')"></div> -->
                             </td>
                             <td (click)="swap(rec,'admin')" style="text-align:center">
-                                <button class="btn btn-sm" [ngClass]="rec.rights_admin == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_admin == 'Y' ? 'Y' : 'N'}}</button>
+                                <button class="btn btn-sm"
+                                    [ngClass]="rec.rights_admin == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_admin
+                                    == 'Y' ? 'Y' : 'N'}}</button>
                                 <!-- <div class="form-check"><input class="form-check-input" type="checkbox" [checked]="rec.rights_admin == 'Y'" (change)="swap(rec,'admin')"></div> -->
                             </td>
                             <td (click)="swap(rec,'add')" style="text-align:center">
-                                <button class="btn btn-sm" [ngClass]="rec.rights_add == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_add == 'Y' ? 'Y' : 'N'}}</button>
+                                <button class="btn btn-sm"
+                                    [ngClass]="rec.rights_add == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_add ==
+                                    'Y' ? 'Y' : 'N'}}</button>
                             </td>
                             <td (click)="swap(rec,'edit')" style="text-align:center">
-                                <button class="btn btn-sm" [ngClass]="rec.rights_edit == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_edit == 'Y' ? 'Y' : 'N'}}</button>
+                                <button class="btn btn-sm"
+                                    [ngClass]="rec.rights_edit == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_edit ==
+                                    'Y' ? 'Y' : 'N'}}</button>
                             </td>
                             <td (click)="swap(rec,'view')" style="text-align:center">
-                                <button class="btn btn-sm" [ngClass]="rec.rights_view == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_view == 'Y' ? 'Y' : 'N'}}</button>
+                                <button class="btn btn-sm"
+                                    [ngClass]="rec.rights_view == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_view ==
+                                    'Y' ? 'Y' : 'N'}}</button>
                             </td>
                             <td (click)="swap(rec,'delete')" style="text-align:center">
-                                <button class="btn btn-sm" [ngClass]="rec.rights_delete == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_delete == 'Y' ? 'Y' : 'N'}}</button>
+                                <button class="btn btn-sm"
+                                    [ngClass]="rec.rights_delete == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_delete
+                                    == 'Y' ? 'Y' : 'N'}}</button>
                             </td>
                             <td (click)="swap(rec,'print')" style="text-align:center">
-                                <button class="btn btn-sm" [ngClass]="rec.rights_print == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_print == 'Y' ? 'Y' : 'N'}}</button>
+                                <button class="btn btn-sm"
+                                    [ngClass]="rec.rights_print == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_print
+                                    == 'Y' ? 'Y' : 'N'}}</button>
                             </td>
                             <td (click)="swap(rec,'email')" style="text-align:center">
-                                <button class="btn btn-sm" [ngClass]="rec.rights_email == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_email == 'Y' ? 'Y' : 'N'}}</button>
+                                <button class="btn btn-sm"
+                                    [ngClass]="rec.rights_email == 'Y' ? 'btn-success' : 'btn-info'">{{rec.rights_email
+                                    == 'Y' ? 'Y' : 'N'}}</button>
                             </td>
 
                         </tr>
