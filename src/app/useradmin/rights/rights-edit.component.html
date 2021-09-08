@@ -57,19 +57,26 @@
                 </div>
             </div>
 
-            <div class="form-group row">
+            <!-- <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm"></label>
                 <div class="col-8">
                     <button class="btn btn-primary btn-sm" (click)="Save()">Save</button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
 </div>
 <div class="page-body" *ngIf="mode == 'EDIT'">
-    <button *ngFor="let rec of moduleList" type="button" class="btn btn-success mr-1"
-        (click)="filterRecord(rec)">{{rec}}</button>
+    <div class="row">
+        <div class="col-md-6 testbox  px-0 mx-0">
+            <button *ngFor="let rec of moduleList" type="button" class="btn btn-success mr-1"
+                (click)="filterRecord(rec)">{{rec}}</button>
+        </div>
+        <div class="col-md-6 testbox  px-0 mx-0">
+            <button class="btn btn-primary " (click)="Save()">Save</button>
+        </div>
+    </div>
 </div>
 <div *ngIf="mode == 'EDIT'">
     <div class="row">
