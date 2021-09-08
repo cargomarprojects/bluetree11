@@ -434,6 +434,26 @@ export class PaymentEditComponent implements OnInit {
     }
 
 
+    importExport(_flag : string ){
+        var str = "INVO" + this.gs.tab + "INV-AMT" + this.gs.tab + "AR" + this.gs.tab + "AP" + this.gs.tab + "SELECTED" + this.gs.tab + "PAY-AMT" + "\n";
+        this.ms.pendingList.forEach( rec =>{
+            str += this.gs.isBlank(rec.inv_no) ? "" : rec.inv_no.toString() ;
+            str += this.gs.tab;
+            str += this.gs.isBlank(rec.inv_total) ? "" : rec.inv_total.toString() ;
+            str += this.gs.tab;
+            str += this.gs.isBlank(rec.inv_ar_total) ? "" : rec.inv_ar_total.toString();
+            str += this.gs.tab;
+            str += this.gs.isBlank(rec.inv_ap_total) ? "" : rec.inv_ap_total.toString();
+            str += this.gs.tab;
+            str +=  rec.inv_flag2 ? "Y"  : "N" ;
+            str += this.gs.tab;
+            str += this.gs.isBlank(rec.inv_pay_amt) ? "" : rec.inv_pay_amt.toString();
+            str += "\n";
+        })
+        this.gs.writeClipboard(str);
+        alert('Copying Completed');
+    }
+
     swapSelection(rec: Tbl_cargo_invoicem) {
         rec.inv_flag2 = !rec.inv_flag2;
         rec.inv_flag = (rec.inv_flag2) ? 'Y' : 'N';

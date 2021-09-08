@@ -80,42 +80,43 @@
                     </div>
                     <div class="col-9">
                         <button (click)="ms.FindInvoice()" class="btn btn-primary btn-sm mr-1">Search</button>
+                        <button class="btn btn-primary btn-sm" (click)="importExport('COPY')">Copy</button>
+                        <button class="btn btn-primary btn-sm ml-1" (click)="importExport('PASTE')">Paste</button>
                     </div>
                 </div>
 
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-5">
 
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">TYPE</label>
-                    <label class="col-2 col-form-label col-form-label-sm">A/R</label>
-                    <label class="col-2 col-form-label col-form-label-sm">A/P</label>
-                    <label class="col-4 col-form-label col-form-label-sm">A/R - A/P</label>
+                    <label class="col-3 col-form-label col-form-label-sm">TYPE</label>
+                    <label class="col-3 col-form-label col-form-label-sm">A/R</label>
+                    <label class="col-3 col-form-label col-form-label-sm">A/P</label>
+                    <label class="col-3 col-form-label col-form-label-sm">A/R - A/P</label>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">BALANCE</label>
-                    <label class="col-2 form-control form-control-sm">{{ms.txt_Bal_AR | number : '1.2-2'}}</label>
-                    <label class="col-2 form-control form-control-sm">{{ms.txt_Bal_AP | number : '1.2-2'}}</label>
-                    <label class="col-4 form-control form-control-sm">{{ms.txt_Bal_diff | number : '1.2-2'}}</label>
+                    <label class="col-3 col-form-label col-form-label-sm">BALANCE</label>
+                    <label class="col-3 form-control form-control-sm">{{ms.txt_Bal_AR | number : '1.2-2'}}</label>
+                    <label class="col-3 form-control form-control-sm">{{ms.txt_Bal_AP | number : '1.2-2'}}</label>
+                    <label class="col-3 form-control form-control-sm">{{ms.txt_Bal_diff | number : '1.2-2'}}</label>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">SELECTED</label>
-                    <label class="col-2 form-control form-control-sm">{{ms.txt_tot_AR | number : '1.2-2'}}</label>
-                    <label class="col-2 form-control form-control-sm">{{ms.txt_tot_AP | number : '1.2-2'}}</label>
-                    <label class="col-4 form-control form-control-sm">{{ms.txt_tot_diff | number : '1.2-2'}}</label>
-                </div>
-                <div class="form-group row">
-
-                    <label class="col-6 col-form-label col-form-label-sm">BALANCE LEFT</label>
-                    <label class="col-4 form-control form-control-sm">{{ms.txt_diff | number : '1.2-2'}}</label>
+                    <label class="col-3 col-form-label col-form-label-sm">SELECTED</label>
+                    <label class="col-3 form-control form-control-sm">{{ms.txt_tot_AR | number : '1.2-2'}}</label>
+                    <label class="col-3 form-control form-control-sm">{{ms.txt_tot_AP | number : '1.2-2'}}</label>
+                    <label class="col-3 form-control form-control-sm">{{ms.txt_tot_diff | number : '1.2-2'}}</label>
                 </div>
                 <div class="form-group row">
 
-                    <label class="col-6 col-form-label col-form-label-sm">COUNT - {{ms.LBL_COUNT}}</label>
-                    <label class="col-4 form-control form-control-sm">{{ms.LBL_STATUS}}</label>
+                    <label class="col-9 col-form-label col-form-label-sm">BALANCE LEFT</label>
+                    <label class="col-3 form-control form-control-sm">{{ms.txt_diff | number : '1.2-2'}}</label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-9 col-form-label col-form-label-sm">COUNT - {{ms.LBL_COUNT}}</label>
+                    <label class="col-3 form-control form-control-sm">{{ms.LBL_STATUS}}</label>
                 </div>
             </div>
         </div>
