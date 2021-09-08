@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SearchTable } from '../models/searchtable';
 import { LoginService } from '../../core/services/login.service';
 import { GlobalService } from '../../core/services/global.service';
-
+//EDIT-AJITH-08-09-2021
 
 @Component({
   selector: 'app-autocomplete2',
@@ -81,9 +81,9 @@ export class AutoComplete2Component {
 
   private inputdata: SearchTable = new SearchTable();
 
-  
 
-  
+
+
 
   focuselement: number = 0;
   rows_to_display: number = 0;
@@ -249,10 +249,12 @@ export class AutoComplete2Component {
 
           this._selectedItem = this.RecList[0];
 
-          setTimeout(() => {
-            this.lov.nativeElement.focus();
-            this.lov.nativeElement.scrollTop = this.lov.nativeElement.scrollHeight;
-          }, 0);
+          if (!this.gs.isBlank(this.lov)) {
+            setTimeout(() => {
+              this.lov.nativeElement.focus();
+              this.lov.nativeElement.scrollTop = this.lov.nativeElement.scrollHeight;
+            }, 0);
+          }
         }
       },
         error => {
@@ -263,12 +265,12 @@ export class AutoComplete2Component {
       );
   }
 
-  ChangeSelection(item: SearchTable, index : number = 0) {
+  ChangeSelection(item: SearchTable, index: number = 0) {
     this._selectedItem = item;
     setTimeout(() => {
       //this.lov.nativeElement.focus();
       this.inputs.toArray()[index].nativeElement.focus();
-      
+
     }, 0);
   }
 
@@ -399,7 +401,7 @@ export class AutoComplete2Component {
   }
 
   ListKeydown(event: KeyboardEvent, _rec: SearchTable) {
-    
+
     if (event.key === 'Tab') {
       event.preventDefault();
     }

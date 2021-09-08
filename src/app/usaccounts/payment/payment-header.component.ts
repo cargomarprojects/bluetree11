@@ -2,16 +2,17 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDet
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/Tbl_Acc_Payment';
 import { SearchTable } from '../../shared/models/searchtable';
+//EDIT-AJITH-08-09-2021
 
 @Component({
     selector: 'acc-payment-header',
     templateUrl: './payment-header.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentHeaderComponent implements OnInit {
     // Call By Value using Input Parameters
     searchQuery: SearchQuery;
-
+     
     custLovType: string = 'MASTER';
 
     @Input() set _query(value: SearchQuery) {
