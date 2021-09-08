@@ -9,6 +9,7 @@ import { Companym } from '../models/company';
 import { logoutAction, AppState } from 'src/app/reducer';
 import { Store } from '@ngrx/store';
 
+import { environment } from  '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -60,7 +61,7 @@ export class LoginComponent implements OnInit {
     //this.username = 'CUST-CLUHOU'; // consignee
     //this.username = 'CUST-PARGRA'; // agent
       
-
+    console.log('Production ',environment.production);
     
 
     this.LoadCombo();
