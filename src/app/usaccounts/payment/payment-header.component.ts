@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDet
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/Tbl_Acc_Payment';
 import { SearchTable } from '../../shared/models/searchtable';
+//EDIT-AJITH-08-09-2021
 
 @Component({
     selector: 'acc-payment-header',

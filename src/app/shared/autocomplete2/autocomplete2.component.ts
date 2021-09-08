@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SearchTable } from '../models/searchtable';
 import { LoginService } from '../../core/services/login.service';
 import { GlobalService } from '../../core/services/global.service';
-
+//EDIT-AJITH-08-09-2021
 
 @Component({
   selector: 'app-autocomplete2',
