@@ -327,7 +327,13 @@ export class RightsEditComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.records = <Tbl_User_Rightsm[]>response.records;
-                this.getModules(this.records);
+                if (!this.gs.isBlank(this.records)) {
+                    this.records.forEach(Rec => {
+                        Rec.rights_pkid = this.gs.getGuid();
+                    })
+                    this.getModules(this.records);
+                }
+
             }, error => {
                 this.errorMessage = this.gs.getError(error);
             });

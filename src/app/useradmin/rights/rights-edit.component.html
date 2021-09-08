@@ -47,13 +47,13 @@
 
             <div *ngIf="isAdmin && mode=='EDIT'" class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Copy Rights From </label>
-                <div class="col-6">
+                <div class="col-4">
                     <select class="form-control form-control-sm" [(ngModel)]="ua_usr_id">
                         <option *ngFor="let rec of userList" [value]="rec.pkid">{{rec.name}}</option>
                     </select>
                 </div>
-                <div class="col-2">
-                    <button class="btn btn-primary btn-sm" (click)="LoadUserRights()">Load UserRights</button>
+                <div class="col-4">
+                    <button class="btn btn-primary btn-sm" (click)="LoadUserRights()">Load Rights</button>
                 </div>
             </div>
 
