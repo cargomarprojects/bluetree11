@@ -435,10 +435,17 @@ export class PaymentEditComponent implements OnInit {
 
 
     importExport(_flag : string ){
+        var iCtr = 0;
         if ( _flag == "COPY") {
-            let str = "INVO\tINV-AMT\tAR\tAP\tSELECTED\tPAY-AMT\n";
+            let str = "INVNO\tDATE\tCUST-NAME\tREF-NO\tCUST-REFNO\tINV-AMT\tAR\tAP\tSELECTED\tPAY-AMT\n";
             this.ms.pendingList.forEach( rec =>{
                 str += this.gs.isBlank(rec.inv_no) ? "" : rec.inv_no.toString() ;str += "\t";
+                str += this.gs.isBlank(rec.inv_date) ? "" : rec.inv_date.toString() ;str += "\t";
+
+                str += this.gs.isBlank(rec.inv_cust_name) ? "" : rec.inv_cust_name.toString() ;str += "\t";
+                str += this.gs.isBlank(rec.inv_mbl_refno) ? "" : rec.inv_mbl_refno.toString() ;str += "\t";
+                str += this.gs.isBlank(rec.inv_refno) ? "" : rec.inv_refno.toString() ;str += "\t";
+
                 str += this.gs.isBlank(rec.inv_total) ? "" : rec.inv_total.toString() ;str += "\t";
                 str += this.gs.isBlank(rec.inv_ar_total) ? "" : rec.inv_ar_total.toString();str += "\t";
                 str += this.gs.isBlank(rec.inv_ap_total) ? "" : rec.inv_ap_total.toString();str += "\t";
@@ -447,22 +454,61 @@ export class PaymentEditComponent implements OnInit {
                 str += "\n";
             });
             this.gs.writeClipboard(str);
-            alert('Copying Completed');
+            alert('Copy Completed');
         }
         if ( _flag == "PASTE") {
+            var data = "";
             const str1 = this.gs.readClipboard().then ( value =>{
-                value.split('\n').forEach( row =>{
-                    var rec = row.split('\t');
+                if( value == null)
+                {
+                    alert('Data Invalid');
+                    return;
+                }
+                var lines = value.split('\n');
 
+                for ( let i =0; i< lines.length ; i++ ){
+                    var rec  = lines[i].split('\t');
+                    if ( iCtr == 0)
+                    {
+                        if ( rec.length !=10){
+                            alert('Invalid List(INVNO,DATE,INV-AMT,AR,AP,SELECTED,PAY-AMT)');
+                            break;
+                        }
+                        data = rec[0];
+                        if ( this.gs.isBlank( data)){
+                            alert('Invalid Data List ( column INVNO not found)');
+                            break;
+                        }
+                        if ( data != "INVNO" ){
+                            alert('Invalid Data List ( column INVNO not found)');
+                            break;
+                        }
+                        data = rec[8];
+                        if ( this.gs.isBlank( data)){
+                            alert('Invalid Data List ( column SELECTED not found)');
+                            break;
+                        }
+                        if ( data != "SELECTED"){
+                            alert('Invalid Data List ( SELECTED Column not found)');
+                            break;
+                        }
+                    }
+                    iCtr++;
                     var itm = this.ms.pendingList.find( r => r.inv_no == rec[0].toString());
                     if ( itm) {
-                        itm.inv_flag2 =itm[4] == "Y" ? true : false;
-                        itm.inv_flag = itm[4] == "Y" ? "Y" : "N";
+                        data = rec[8];
+                        if ( this.gs.isBlank( data)){
+                            alert('Invalid Data, no Data In Column-Selected Row Number ' + iCtr.toString());
+                            break;
+                        }
+                        data = data.toString().toUpperCase();
+                        itm.inv_flag2 = data.startsWith("Y") ? true : false;
+                        itm.inv_flag  = data.startsWith("Y") ? "Y" : "N";
+                        this.ms.FindTotal("CHKBOX", itm);
                     }
-                })
-            })
-            
-            
+                }
+                alert('Paste Completed');
+            });
         }
     }
 
