@@ -13,7 +13,7 @@ import { vm_Tbl_User_Access, Tbl_User_Access, Tbl_User_Rightsm } from '../models
 import { SearchTable } from '../../shared/models/searchtable';
 import { UserRightsService } from '../services/userRights.service';
 //EDIT-AJITH-06-09-2021
-
+//EDIT-AJITH-08-09-2021
 
 @Component({
     selector: 'app-rights-edit',
@@ -44,6 +44,7 @@ export class RightsEditComponent implements OnInit {
     title: string;
     isAdmin: boolean;
     refno: string = "";
+    ua_usr_id: string = "";
 
     constructor(
         private router: Router,
@@ -289,7 +290,47 @@ export class RightsEditComponent implements OnInit {
 
     }
 
+    LoadUserRights() {
+        if (this.gs.isBlank(this.ua_usr_id)) {
+            alert("Please Select a User and Continue.....");
+            return;
+        }
 
+        let SearchData2 = {
+            company_code: this.gs.company_code,
+            table: '',
+            pkid: '',
+            ua_company_id: '',
+            ua_usr_id: ''
+        };
 
+        SearchData2.table = "USER-ACCESS-ID";
+        SearchData2.ua_company_id = this.record.ua_company_id;
+        SearchData2.ua_usr_id = this.ua_usr_id;
+        this.gs.SearchRecord(SearchData2)
+            .subscribe(response => {
+
+                if (!this.gs.isBlank(response.ua_pkid))
+                    this.LoadUserRightsDetails(response.ua_pkid);
+            },
+                error => {
+                    let err = this.gs.getError(error);
+                    alert(err);
+                });
+    }
+
+    LoadUserRightsDetails(_Id: string) {
+
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = _Id;
+        this.mainService.GetRecord(SearchData)
+            .subscribe(response => {
+                this.records = <Tbl_User_Rightsm[]>response.records;
+                this.getModules(this.records);
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+            });
+    }
 
 }
