@@ -860,60 +860,84 @@
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Lbs</label>
-                <div class="col-6">
+                <!-- <div class="col-6">
                   <InputBoxNumber [(inputModel)]="record.hbl_lbs" [maxlength]="15" [dec]="3"></InputBoxNumber>
                 </div>
                 <div class="col-2">
                   <span style="cursor:pointer" (click)="FindWeight('Lbs2Kgs')"> <i class="fa fa-arrow-down"> </i>
                   </span>
+                </div> -->
+                <div class="col-8 input-group input-group-sm">
+                  <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_lbs')"
+                    [(ngModel)]="record.hbl_lbs" maxlength="14" />
+                  <button class="btn btn-info btn-sm" (click)="FindWeight('Lbs2Kgs')"><span><i class="fa fa-arrow-down">
+                      </i></span> </button>
                 </div>
               </div>
 
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Kgs</label>
-                <div class="col-6">
+                <!-- <div class="col-6">
                   <InputBoxNumber [(inputModel)]="record.hbl_weight" [maxlength]="15" [dec]="3"></InputBoxNumber>
                 </div>
                 <div class="col-2">
                   <span style="cursor:pointer" (click)="FindWeight('Kgs2Lbs')"> <i class="fa fa-arrow-up"> </i> </span>
+                </div> -->
+                <div class="col-8 input-group input-group-sm">
+                  <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_weight')"
+                    [(ngModel)]="record.hbl_weight" [disabled]="false" maxlength="14" />
+                  <button class="btn btn-info btn-sm" (click)="FindWeight('Kgs2Lbs')"><span><i class="fa fa-arrow-up">
+                      </i></span></button>
                 </div>
               </div>
 
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Cft</label>
-                <div class="col-6">
+                <!-- <div class="col-6">
                   <InputBoxNumber [(inputModel)]="record.hbl_cft" [maxlength]="15" [dec]="3"></InputBoxNumber>
                 </div>
                 <div class="col-2">
                   <span style="cursor:pointer" (click)="FindWeight('Cft2Cbm')"> <i class="fa fa-arrow-down"> </i>
                   </span>
+                </div> -->
+                <div class="col-8 input-group input-group-sm">
+                  <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_cft')"
+                    [(ngModel)]="record.hbl_cft" maxlength="14" />
+                  <button class="btn btn-info btn-sm" (click)="FindWeight('Cft2Cbm')"><span><i class="fa fa-arrow-down">
+                      </i></span> </button>
                 </div>
               </div>
 
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Cbm</label>
-                <div class="col-6">
+                <!-- <div class="col-6">
                   <InputBoxNumber [(inputModel)]="record.hbl_cbm" [maxlength]="15" [dec]="3"></InputBoxNumber>
                 </div>
                 <div class="col-2">
                   <span style="cursor:pointer" (click)="FindWeight('Cbm2Cft')"> <i class="fa fa-arrow-up"> </i> </span>
+                </div> -->
+                <div class="col-8 input-group input-group-sm">
+                  <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_cbm')"
+                    [(ngModel)]="record.hbl_cbm" maxlength="14" />
+                  <button class="btn btn-info btn-sm" (click)="FindWeight('Cbm2Cft')"><span><i class="fa fa-arrow-up">
+                      </i></span> </button>
                 </div>
               </div>
 
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Pcs</label>
-                <div class="col-6">
+                <div class="col-8">
                   <InputBoxNumber [(inputModel)]="record.hbl_pcs" [maxlength]="15" [dec]="0"></InputBoxNumber>
                 </div>
               </div>
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Pkgs</label>
-                <div class="col-6">
+                <div class="col-8">
                   <InputBoxNumber [(inputModel)]="record.hbl_packages" [maxlength]="15" [dec]="0"></InputBoxNumber>
                 </div>
               </div>
@@ -921,7 +945,7 @@
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Uom</label>
-                <div class="col-6">
+                <div class="col-8">
                   <InputBox [(inputModel)]="record.hbl_uom" [maxlength]="4" [uppercase]="true" #notify_add4>
                   </InputBox>
                 </div>
@@ -934,14 +958,14 @@
                 <label class="col-4 col-form-label col-form-label-sm"></label>
 
 
-                <div class="col-3">
+                <div class="col-4">
                   <div class="form-check">
                     <input type="checkbox" class="form-check-input" [(ngModel)]="record._hbl_print_kgs" />
                     <span> Print KGS</span>
                   </div>
                 </div>
 
-                <div class="col-3">
+                <div class="col-4">
                   <div class="form-check">
                     <input type="checkbox" class="form-check-input" [(ngModel)]="record._hbl_print_lbs" />
                     <span>Print LBS</span>
@@ -953,7 +977,7 @@
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Clean On Board</label>
-                <div class="col-6">
+                <div class="col-8">
                   <InputBox [(inputModel)]="record.hbl_clean" [maxlength]="10" [uppercase]="true" #notify_add4>
                   </InputBox>
                 </div>
@@ -964,7 +988,7 @@
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Remarks</label>
-                <div class="col-6">
+                <div class="col-8">
                   <InputBox [(inputModel)]="record.hbl_remark1" [maxlength]="60" [uppercase]="true" #remark1>
                   </InputBox>
                 </div>
@@ -973,7 +997,7 @@
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm"></label>
-                <div class="col-6">
+                <div class="col-8">
                   <InputBox [(inputModel)]="record.hbl_remark2" [maxlength]="60" [uppercase]="true" #remark2>
                   </InputBox>
                 </div>
@@ -981,14 +1005,14 @@
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm"></label>
-                <div class="col-6">
+                <div class="col-8">
                   <InputBox [(inputModel)]="record.hbl_remark3" [maxlength]="60" [uppercase]="true" #remark3></InputBox>
                 </div>
               </div>
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">By</label>
-                <div class="col-6">
+                <div class="col-8">
                   <InputBox [(inputModel)]="record.hbl_by1" [maxlength]="60" [uppercase]="true" #by1>
                   </InputBox>
                 </div>
@@ -997,7 +1021,7 @@
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm"></label>
-                <div class="col-6">
+                <div class="col-8">
                   <InputBox [(inputModel)]="record.hbl_by2" [maxlength]="60" [uppercase]="true" #by2>
                   </InputBox>
                 </div>
@@ -1005,7 +1029,7 @@
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Issued Place</label>
-                <div class="col-6">
+                <div class="col-8">
                   <InputBox [(inputModel)]="record.hbl_issued_place" [maxlength]="60" [uppercase]="true" #issplace>
                   </InputBox>
                 </div>
@@ -1015,24 +1039,26 @@
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Issue Date</label>
                 <div class="col-4">
-                  <app-date #_hbl_issue_date [colName]="Hbl_Issue_Date" [inputdate]="record.hbl_issued_date" (ValueChanged)="record.hbl_issued_date=$event">
+                  <app-date #_hbl_issue_date [colName]="Hbl_Issue_Date" [inputdate]="record.hbl_issued_date"
+                    (ValueChanged)="record.hbl_issued_date=$event">
                   </app-date>
                 </div>
-                 <label class="col-1 col-form-label col-form-label-sm pl-0">Originals</label>
-                <div class="col-1 pl-0">
+                <label class="col-2 col-form-label col-form-label-sm pl-0">Originals</label>
+                <div class="col-2 pl-0">
                   <InputBoxNumber [(inputModel)]="record.hbl_originals" [maxlength]="60" [dec]="0" #originals>
                   </InputBoxNumber>
-                </div> 
+                </div>
               </div>
 
 
-               <div class="form-group row">
+              <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Actual Delivery Date</label>
                 <div class="col-4">
-                  <app-date #_hbl_delivery_date [colName]="Hbl_Delivery_Date" [inputdate]="record.hbl_delivery_date" (ValueChanged)="record.hbl_delivery_date=$event">
+                  <app-date #_hbl_delivery_date [colName]="Hbl_Delivery_Date" [inputdate]="record.hbl_delivery_date"
+                    (ValueChanged)="record.hbl_delivery_date=$event">
                   </app-date>
                 </div>
-              </div> 
+              </div>
 
             </div>
 
@@ -1071,7 +1097,8 @@
           </div>
           <div class="form-group row">
             <div class="col-12 form-check mr-1">
-              <input type="checkbox" class="form-check-input" [(ngModel)]="cntr_seal_hrzprint" /><span>Cntr#/ Seal#</span>
+              <input type="checkbox" class="form-check-input" [(ngModel)]="cntr_seal_hrzprint" /><span>Cntr#/
+                Seal#</span>
             </div>
           </div>
           <div class="form-group row">
@@ -1092,7 +1119,8 @@
               HBL</button>
           </div>
           <div class="form-group row">
-            <button class="col-12 btn btn-info btn-sm text-uppercase" [disabled]="is_locked" *ngIf="canSave" (click)="Save()">Save</button>
+            <button class="col-12 btn btn-info btn-sm text-uppercase" [disabled]="is_locked" *ngIf="canSave"
+              (click)="Save()">Save</button>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery, Tbl_Acc_Payment, AccPaymentModel } from '../models/Tbl_Acc_Payment';
 import { PageQuery } from '../../shared/models/pageQuery';
 import { PaymentService } from '../services/payment.service';
+//EDIT-AJITH-09-09-2021
 
 @Component({
   selector: 'app-payment',
@@ -168,7 +169,11 @@ export class PaymentComponent implements OnInit {
 
       this.report_menuid = this.gs.MENU_ACC_ARAP_SETTLMENT;
       let sub: string = '';
-      sub = rec.pay_mode + ' - ' + rec.pay_cust_name + ' ' + this.gs.ConvertDate2DisplayFormat(rec.pay_date) + ' $' + this.gs.roundNumber(rec.pay_diff, 2);
+      if (this.gs.company_code === 'MNYC' && rec.pay_mode === 'ONLINE/ACH PAYMENT')
+        sub = 'MOTHERLINES ACH PAYMENT'
+      else
+        sub = rec.pay_mode;
+      sub += ' - ' + rec.pay_cust_name + ' ' + this.gs.ConvertDate2DisplayFormat(rec.pay_date) + ' $' + this.gs.roundNumber(rec.pay_diff, 2);
       this.report_searchdata.MAIL_SUBJECT = sub;
       this.tab = 'simple';
     }

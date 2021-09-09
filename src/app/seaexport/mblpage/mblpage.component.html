@@ -713,44 +713,68 @@
 
         <div class="form-group row">
           <label class="col-4 col-form-label col-form-label-sm">Lbs</label>
-          <div class="col-6">
+          <!-- <div class="col-6">
             <InputBoxNumber [(inputModel)]="record.mbld_lbs" [maxlength]="15" [dec]="3"></InputBoxNumber>
           </div>
           <div class="col-2">
             <span style="cursor:pointer" (click)="FindWeight('Lbs2Kgs')"> <i class="fa fa-arrow-down"> </i> </span>
+          </div> -->
+          <div class="col-8 input-group input-group-sm">
+            <input class="form-control form-control-sm" type="number" (blur)="onBlur('mbld_lbs')"
+              [(ngModel)]="record.mbld_lbs" maxlength="14" />
+            <button class="btn btn-info btn-sm" (click)="FindWeight('Lbs2Kgs')"><span><i class="fa fa-arrow-down">
+                </i></span> </button>
           </div>
         </div>
 
 
         <div class="form-group row">
           <label class="col-4 col-form-label col-form-label-sm">Kgs</label>
-          <div class="col-6">
+          <!-- <div class="col-6">
             <InputBoxNumber [(inputModel)]="record.mbld_weight" [maxlength]="15" [dec]="3"></InputBoxNumber>
           </div>
           <div class="col-2">
             <span style="cursor:pointer" (click)="FindWeight('Kgs2Lbs')"> <i class="fa fa-arrow-up"> </i> </span>
+          </div> -->
+          <div class="col-8 input-group input-group-sm">
+            <input class="form-control form-control-sm" type="number" (blur)="onBlur('mbld_weight')"
+              [(ngModel)]="record.mbld_weight" [disabled]="false" maxlength="14" />
+            <button class="btn btn-info btn-sm" (click)="FindWeight('Kgs2Lbs')"><span><i class="fa fa-arrow-up">
+                </i></span></button>
           </div>
         </div>
 
 
         <div class="form-group row">
           <label class="col-4 col-form-label col-form-label-sm">Cft</label>
-          <div class="col-6">
+          <!-- <div class="col-6">
             <InputBoxNumber [(inputModel)]="record.mbld_cft" [maxlength]="15" [dec]="3"></InputBoxNumber>
           </div>
           <div class="col-2">
             <span style="cursor:pointer" (click)="FindWeight('Cft2Cbm')"> <i class="fa fa-arrow-down"> </i> </span>
+          </div> -->
+          <div class="col-8 input-group input-group-sm">
+            <input class="form-control form-control-sm" type="number" (blur)="onBlur('mbld_cft')"
+              [(ngModel)]="record.mbld_cft" maxlength="14" />
+            <button class="btn btn-info btn-sm" (click)="FindWeight('Cft2Cbm')"><span><i class="fa fa-arrow-down">
+                </i></span> </button>
           </div>
         </div>
 
 
         <div class="form-group row">
           <label class="col-4 col-form-label col-form-label-sm">Cbm</label>
-          <div class="col-6">
+          <!-- <div class="col-6">
             <InputBoxNumber [(inputModel)]="record.mbld_cbm" [maxlength]="15" [dec]="3"></InputBoxNumber>
           </div>
           <div class="col-2">
             <span style="cursor:pointer" (click)="FindWeight('Cbm2Cft')"> <i class="fa fa-arrow-up"> </i> </span>
+          </div> -->
+          <div class="col-8 input-group input-group-sm">
+            <input class="form-control form-control-sm" type="number" (blur)="onBlur('mbld_cbm')"
+              [(ngModel)]="record.mbld_cbm" maxlength="14" />
+            <button class="btn btn-info btn-sm" (click)="FindWeight('Cbm2Cft')"><span><i class="fa fa-arrow-up">
+                </i></span> </button>
           </div>
         </div>
 
@@ -778,7 +802,7 @@
 
         <div class="form-group row">
           <label class="col-4 col-form-label col-form-label-sm">Clean On Board</label>
-          <div class="col-6">
+          <div class="col-8">
             <InputBox [(inputModel)]="record.mbld_clean" [maxlength]="10" [uppercase]="true" #notify_add4>
             </InputBox>
           </div>
