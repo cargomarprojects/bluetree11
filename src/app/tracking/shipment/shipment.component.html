@@ -46,8 +46,8 @@
                 <th>ETA</th>
             </tr>
         </thead>
-        <tbody class="page-body-tbody" *ngFor="let rec of records$ | async" >
-            <tr [style.color]="rec.border == 'Y' ? 'green' : 'blue'" >
+        <tbody class="page-body-tbody" *ngFor="let rec of records$ | async">
+            <tr  >
                 <td>{{rec.mbl_refno}}</td>
                 <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.mbl_mode}}</td>
