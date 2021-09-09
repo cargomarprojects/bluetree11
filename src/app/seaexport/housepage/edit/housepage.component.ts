@@ -17,6 +17,7 @@ import { Tbl_cargo_exp_desc } from '../../models/Tbl_cargo_exp_desc';
 import { Tbl_cargo_exp_container } from '../../models/tbl_cargo_exp_masterm';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-09-09-2021
 
 @Component({
   selector: 'app-housepage',
@@ -672,7 +673,24 @@ export class HousePageComponent implements OnInit {
   }
 
   onBlur(field: string) {
-
+    switch (field) {
+      case 'hbl_weight': {
+        this.record.hbl_weight = this.gs.roundNumber(this.record.hbl_weight, 3);
+        break;
+      }
+      case 'hbl_lbs': {
+        this.record.hbl_lbs = this.gs.roundNumber(this.record.hbl_lbs, 3);
+        break;
+      }
+      case 'hbl_cbm': {
+        this.record.hbl_cbm = this.gs.roundNumber(this.record.hbl_cbm, 3);
+        break;
+      }
+      case 'hbl_cft': {
+        this.record.hbl_cft = this.gs.roundNumber(this.record.hbl_cft, 3);
+        break;
+      }
+    }
   }
 
 
