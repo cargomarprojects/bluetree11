@@ -498,18 +498,22 @@ export class PaymentEditComponent implements OnInit {
                     if ( itm) {
                         data = rec[8];
                         if ( this.gs.isBlank( data)){
-                            alert('Invalid Data, no Data In Column-Selected Row Number ' + iCtr.toString());
+                            alert('Invalid Data, no Data In Column(SELECTED) Row Number ' + iCtr.toString());
                             break;
                         }
                         data = data.toString().toUpperCase();
                         itm.inv_flag2 = data.startsWith("Y") ? true : false;
                         itm.inv_flag  = data.startsWith("Y") ? "Y" : "N";
+                        this.ms.FindTotal("CHKBOX", itm);
 
                         data = rec[9];
                         if ( !this.gs.isBlank( data)){
                             var  paid_amt = this.gs.conv2Number(data,2);
+                            if ( paid_amt > 0   ) {
+                                itm.inv_pay_amt = paid_amt;
+                                this.ms.FindTotal("", itm);
+                            }
                         }
-                        this.ms.FindTotal("CHKBOX", itm);
                     }
                 }
                 alert('Paste Completed');
