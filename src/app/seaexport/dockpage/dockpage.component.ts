@@ -17,6 +17,8 @@ import { Tbl_cargo_exp_desc } from '../models/Tbl_cargo_exp_desc';
 import { Tbl_cargo_container } from 'src/app/other/models/tbl_cargo_general';
 import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-09-09-2021
+
 
 @Component({
   selector: 'app-dockpage',
@@ -313,7 +315,24 @@ export class DockPageComponent implements OnInit {
   }
 
   onBlur(field: string) {
-
+    switch (field) {
+      case 'mbld_weight': {
+        this.record.mbld_weight = this.gs.roundNumber(this.record.mbld_weight, 3);
+        break;
+      }
+      case 'mbld_lbs': {
+        this.record.mbld_lbs = this.gs.roundNumber(this.record.mbld_lbs, 3);
+        break;
+      }
+      case 'mbld_cbm': {
+        this.record.mbld_cbm = this.gs.roundNumber(this.record.mbld_cbm, 3);
+        break;
+      }
+      case 'mbld_cft': {
+        this.record.mbld_cft = this.gs.roundNumber(this.record.mbld_cft, 3);
+        break;
+      }
+    }
   }
 
 
