@@ -107,7 +107,7 @@ export class LoginComponent implements OnInit {
 
   Login() {
 
-    this.test();
+
 
     if (!this.username) {
       this.errorMessage = 'Login ID Cannot Be Blank';
