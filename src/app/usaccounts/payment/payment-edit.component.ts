@@ -504,6 +504,11 @@ export class PaymentEditComponent implements OnInit {
                         data = data.toString().toUpperCase();
                         itm.inv_flag2 = data.startsWith("Y") ? true : false;
                         itm.inv_flag  = data.startsWith("Y") ? "Y" : "N";
+
+                        data = rec[9];
+                        if ( !this.gs.isBlank( data)){
+                            var  paid_amt = this.gs.conv2Number(data,2);
+                        }
                         this.ms.FindTotal("CHKBOX", itm);
                     }
                 }

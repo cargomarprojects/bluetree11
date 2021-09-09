@@ -2096,6 +2096,15 @@ export class GlobalService {
     return object;
   }
 
+
+  public conv2Number(_number: any, _precision: number) {
+    var _data = 0;
+    if ( !this.isBlank(_number))
+      _data = Number(_number);
+    return this.roundNumber2(_data, _precision);
+  };
+
+
   public roundNumber(_number: number, _precision: number) {
     var factor = Math.pow(10, _precision);
     var tempNumber = _number * factor;

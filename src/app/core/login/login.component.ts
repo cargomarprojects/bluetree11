@@ -12,6 +12,7 @@ import { Store } from '@ngrx/store';
 import { environment } from  '../../../environments/environment';
 
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -106,6 +107,8 @@ export class LoginComponent implements OnInit {
 
   Login() {
 
+    this.test();
+
     if (!this.username) {
       this.errorMessage = 'Login ID Cannot Be Blank';
       return;
@@ -186,5 +189,8 @@ export class LoginComponent implements OnInit {
     this.gs.IsAuthenticated = true;
   }
 
+  test(){
+    // this function will be called when login button pressed
+  }
 
 }
