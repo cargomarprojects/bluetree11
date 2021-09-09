@@ -19,7 +19,7 @@ import { Modulem } from '../models/modulem';
 import { gsdata } from '../models/gsdata';
 
 //EDIT-AJITH-07-09-2021
-
+//EDIT-AJITH-09-09-2021
 
 @Injectable({
   providedIn: 'root'
@@ -1541,7 +1541,7 @@ export class GlobalService {
     bts_settings.user_category = this.User_Category;
     bts_settings.user_role = this.User_Role;
     bts_settings.user_isparent = this.User_isParent;
-    bts_settings.user_customer_id = this.User_Customer_Parent_Id;
+    bts_settings.user_customer_id = this.User_Customer_Id;
     bts_settings.user_customer_parent_id = this.User_Customer_Parent_Id;
 
 

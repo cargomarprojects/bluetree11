@@ -7,7 +7,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { cargo_masterm, ShipmentModel  } from '../models/cargo_masterm';
 import { SearchQuery } from '../models/cargo_masterm';
 import { PageQuery } from '../../shared/models/pageQuery';
-
+//EDIT-AJITH-09-09-2021
 
 @Injectable({
     providedIn: 'root'
@@ -38,6 +38,12 @@ export class ShipmentService {
         private gs: GlobalService
     ) { }
 
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
     public getSortCol(){
         return this.record.sortcol;
     }
@@ -69,6 +75,7 @@ export class ShipmentService {
      
     public ClearInit() {
         this.record = <ShipmentModel>{
+            selectedId : '',
             sortcol : 'mbl_refno',
             sortorder : true,
             errormessage: '',
@@ -93,6 +100,7 @@ export class ShipmentService {
         this.menuid = params.id;
         this.param_type = params.menu_param;
         this.record = <ShipmentModel>{
+            selectedId : '',
             sortcol : 'mbl_refno',
             sortorder : true,       
             errormessage: '',
@@ -121,6 +129,7 @@ export class ShipmentService {
         this.record.errormessage = '';
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';     
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;

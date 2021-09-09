@@ -10,6 +10,7 @@ export interface SearchQuery {
 }
 
 export interface ShipmentModel {
+    selectedId : string;
     sortcol : string ;
     sortorder : boolean;
     errormessage: string;

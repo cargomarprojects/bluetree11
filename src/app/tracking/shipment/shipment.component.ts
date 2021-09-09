@@ -11,7 +11,7 @@ import { SearchQuery } from '../models/cargo_masterm';
 import { PageQuery } from '../../shared/models/pageQuery';
 
 import { ShipmentService } from '../services/shipment.service';
-
+//EDIT-AJITH-09-09-2021
 
 @Component({
   selector: 'app-shipment',
