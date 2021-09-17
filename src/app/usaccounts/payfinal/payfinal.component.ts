@@ -20,6 +20,7 @@ import { DateComponent } from '../../shared/date/date.component';
 declare var $: any;
 
 // EDIT-AJITH-03-09-2021
+// EDIT-AJITH-17-09-2021
 
 @Component({
     selector: 'app-pay-final',
@@ -30,10 +31,10 @@ export class PayFinalComponent implements OnInit {
     bSave = true;
 
 
-    // @ViewChild('content') contentRef: ElementRef;
+
     @ViewChild('_pay_sdate') pay_sdate_field: DateComponent;
     @ViewChild('_pay_bank_name') pay_bank_name_field: ElementRef;
-
+    @ViewChild('_paymode') paymode_field: ElementRef;
 
     canSave = true;
 
@@ -726,9 +727,10 @@ export class PayFinalComponent implements OnInit {
         if (field == 'Txt_Bank_Charges')
             this.FindTotal("CHARGES");
 
-
         if (field == 'txt_bank_name') {
             this.Txt_Bank_Name = this.Txt_Bank_Name.toUpperCase();
+            if (!this.gs.isBlank(this.paymode_field))
+                this.paymode_field.nativeElement.focus();
         }
         if (field == 'Txt_Address1') {
             this.Txt_Address1 = this.Txt_Address1.toUpperCase();
