@@ -3,7 +3,7 @@
         <div class="col">
             <label class="mr-3"> {{hideTracking=='N' ?'Tracking':'Internal Memo'}}</label>
             <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-            <label class="text-danger" *ngIf="is_locked">LOCKED</label>
+            <!-- <label class="text-danger" *ngIf="is_locked">LOCKED</label> -->
         </div>
     </div>
 
@@ -39,7 +39,8 @@
                             <div class="row">
                                 <div class="col-md-12 testbox  px-0 mx-0">
                                     <div class="page-list">
-                                        <div class="page-body table-responsive table-bordered"  style="overflow: visible">
+                                        <div class="page-body table-responsive table-bordered"
+                                            style="overflow: visible">
                                             <table class="table  table-hover table-sm">
                                                 <thead class="page-body-thead">
                                                     <tr>
@@ -127,7 +128,9 @@
                                         Add a New Line.)</label>
                                     <div class="col-4 p-0">
                                         <div class="row row justify-content-center p-1">
-                                            <button class="btn btn-primary btn-md mr-1" [disabled]="is_locked"
+                                            <!-- <button class="btn btn-primary btn-md mr-1" [disabled]="is_locked"
+                                                (click)="SaveMemo()">{{lblSaveMemo}}</button> -->
+                                            <button class="btn btn-primary btn-md mr-1"
                                                 (click)="SaveMemo()">{{lblSaveMemo}}</button>
                                             <button class="btn btn-primary btn-md mr-1"
                                                 (click)="NewRecord('MEMO')">New</button>
@@ -161,8 +164,8 @@
                                                     <td class="p-0">{{rec.rec_created_by}} </td>
                                                     <td class="p-0">{{rec.date | date : gs.date_display_fmt_with_time}}
                                                     </td>
-                                                    <td class="hlink2 p-0"
-                                                        (blur)="onBlur('remarks',rec)" (click)="EditRow(rec)">
+                                                    <td class="hlink2 p-0" (blur)="onBlur('remarks',rec)"
+                                                        (click)="EditRow(rec)">
                                                         {{rec.remarks}}</td>
                                                     <td class='p-0 text-center'><i
                                                             class="fa fa-paperclip  fa-lg pointer"

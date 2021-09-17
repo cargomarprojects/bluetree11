@@ -11,6 +11,7 @@ import { SearchTable } from '../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-17-09-2021
 
 @Component({
   selector: 'app-oth-trackingpage',
