@@ -9,7 +9,10 @@ import { User_Menu } from '../../core/models/menum';
 import { Tbl_cargo_ehbld, vm_Tbl_cargo_ehbld, vm_Tbl_cargo_ehbl, Tbl_cargo_ehbl } from '../models/Tbl_cargo_ehbl';
 import { SearchTable } from '../../shared/models/searchtable';
 import { PageQuery } from '../../shared/models/pageQuery';
+import * as printJS from "print-js";
+
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-17-09-2021
 
 @Component({
     selector: 'app-ehbl-req',
@@ -41,6 +44,7 @@ export class EhblReqComponent implements OnInit {
     public title: string = '';
     public isAdmin: boolean;
     public canDelete: boolean;
+    public canPrint: boolean;
     errorMessage: string;
 
     filename: string = '';
@@ -92,6 +96,7 @@ export class EhblReqComponent implements OnInit {
         this.title = 'E-hbl Request';
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.canDelete = this.gs.canDelete(this.menuid);
+        this.canPrint = this.gs.canPrint(this.menuid);
         this.errorMessage = '';
         this.pageQuery = <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 };
         if (this.gs.User_Role == "AGENT") {
@@ -501,4 +506,20 @@ export class EhblReqComponent implements OnInit {
         if (!this.gs.isBlank(this.download_agent_id))
             this.GetBalanceBL(this.download_agent_id);
     }
+
+    PrintPdf() {
+
+        this.gs.getFile(this.gs.GLOBAL_REPORT_FOLDER, this.filename, this.filetype, this.filedisplayname).subscribe(response => {
+   
+         var file = new Blob([response], { type: 'application/pdf' });
+         var fileURL = URL.createObjectURL(file);
+         printJS(fileURL);
+   
+       }, error => {
+         this.errorMessage = this.gs.getError(error);
+         alert(this.errorMessage);
+       });
+   
+     }
 }
+
