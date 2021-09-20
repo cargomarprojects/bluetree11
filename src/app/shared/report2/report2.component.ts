@@ -170,5 +170,6 @@ export class Report2Component implements OnInit {
     // this.AutoLoad();
   }
    
+  
 
 }

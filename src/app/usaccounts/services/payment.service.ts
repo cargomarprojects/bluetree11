@@ -5,6 +5,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { Tbl_Acc_Payment, AccPaymentModel } from '../models/Tbl_Acc_Payment';
 import { SearchQuery } from '../models/Tbl_Acc_Payment';
 import { PageQuery } from '../../shared/models/pageQuery';
+//EDIT-AJITH-20-09-2021
 
 @Injectable({
     providedIn: 'root'
@@ -37,12 +38,12 @@ export class PaymentService {
         private gs: GlobalService
     ) { }
 
-    public selectRowId( id : string){
+    public selectRowId(id: string) {
         this.record.selectedId = id;
     }
-    public getRowId(){
+    public getRowId() {
         return this.record.selectedId;
-    }    
+    }
 
     public getSortCol() {
         return this.record.sortcol;
@@ -84,7 +85,7 @@ export class PaymentService {
         this.param_type = params.param_type;
 
         this.record = <AccPaymentModel>{
-            selectedId : '',            
+            selectedId: '',
             sortcol: 'pay_docno',
             sortorder: true,
             errormessage: '',
@@ -111,9 +112,13 @@ export class PaymentService {
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
             this.record.selectedId = '';
+            this.record.sortcol = 'pay_docno';
+            this.record.sortorder = true;
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
+            this.record.sortcol = 'pay_docno';
+            this.record.sortorder = true;
         }
 
         var SearchData = this.gs.UserInfo;
@@ -185,18 +190,16 @@ export class PaymentService {
 
         this.record.errormessage = '';
 
-        if (_rec.rec_closed == "Y")
-        {
+        if (_rec.rec_closed == "Y") {
             alert("Record Locked Cannot Delete");
             return;
         }
-    
-        if (_rec.pay_depositno.toString().length > 0)
-        {
+
+        if (_rec.pay_depositno.toString().length > 0) {
             alert("Deposited Payments Cannot Be Removed");
             return;
         }
-    
+
         if (!confirm("DELETE " + _rec.pay_docno)) {
             return;
         }
