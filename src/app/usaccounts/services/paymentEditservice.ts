@@ -5,8 +5,9 @@ import { GlobalService } from '../../core/services/global.service';
 import { Tbl_Acc_Payment, AccPaymentModel } from '../models/Tbl_Acc_Payment';
 import { SearchQuery } from '../models/Tbl_Acc_Payment';
 import { PageQuery } from '../../shared/models/pageQuery';
-
 import { Tbl_cargo_invoicem } from '../models/Tbl_cargo_Invoicem';
+
+//EDIT-AJITH-20-09-2021
 
 @Injectable({
     providedIn: 'root'
@@ -23,12 +24,12 @@ export class PaymentEditService {
     public errorMessage: string;
 
     public custType = 'MASTER';
-    
+
     public sortcol: string = 'inv_no';
     public sortorder: boolean = true;
 
     public title: string;
-    
+
     public isAdmin: boolean;
 
     public IsRefresh = "";
@@ -68,21 +69,21 @@ export class PaymentEditService {
     public initlialized: boolean;
     private appid = ''
 
-    selectedId : string;
+    selectedId: string;
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    public selectRowId( id : string){
+    public selectRowId(id: string) {
         this.selectedId = id;
     }
-    public getRowId(){
+    public getRowId() {
         return this.selectedId;
     }
 
-    
+
     setup() {
         this.decplace = this.gs.foreign_amt_dec;
         if (!this.gs.IS_SINGLE_CURRENCY) {
@@ -95,17 +96,17 @@ export class PaymentEditService {
 
     init() {
 
-        if ( this.mode == "ADD") {
+        if (this.mode == "ADD") {
             this.cust_id = "";
             this.cust_code = "";
             this.cust_name = "";
             this.refno = '';
             this.invno = '';
-            this.custrefno = '';        
+            this.custrefno = '';
 
-            this.Customer_ID   = '';
+            this.Customer_ID = '';
             this.Search_Mode = '';
-            this.str_id ='';
+            this.str_id = '';
 
             this.selectedId = '';
 
@@ -125,7 +126,7 @@ export class PaymentEditService {
         this.LBL_COUNT = 0;
         this.LBL_STATUS = '';
     }
-        
+
 
     RefreshList() {
         this.IsRefresh = "YES";
@@ -173,6 +174,10 @@ export class PaymentEditService {
             alert("Search Data Not Found");
             return;
         }
+
+        this.sortcol = "inv_no";
+        this.sortorder  = true;
+
         SearchData.PKID = this.str_id;
         SearchData.MODE = this.Search_Mode;
         SearchData.SHOWALL = (this.showall) ? "Y" : "N";
@@ -299,7 +304,7 @@ export class PaymentEditService {
         this.Pay_RP = "";
         if (nDiff > 0) {
             this.Pay_RP = "RECEIPT";
-            this.LBL_STATUS = "RECEIPT " +  nDiff.toString();
+            this.LBL_STATUS = "RECEIPT " + nDiff.toString();
         }
         else if (nDiff < 0) {
             this.Pay_RP = "PAYMENT";

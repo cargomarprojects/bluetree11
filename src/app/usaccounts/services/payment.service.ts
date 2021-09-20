@@ -113,10 +113,12 @@ export class PaymentService {
             this.record.searchQuery = _searchdata.searchQuery;
             this.record.selectedId = '';
             this.record.sortcol = 'pay_docno';
+            this.record.sortorder = true;
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
             this.record.sortcol = 'pay_docno';
+            this.record.sortorder = true;
         }
 
         var SearchData = this.gs.UserInfo;
