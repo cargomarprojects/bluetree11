@@ -8,6 +8,7 @@ import { Table_Cargo_Payrequest, vm_Table_Cargo_Payrequest } from '../models/tab
 import { PaymentReqService } from '../services/paymentreq.service';
 import { DateComponent } from '../../shared/date/date.component';
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-21-09-2021
 
 @Component({
   selector: 'app-paymentreq',
@@ -304,11 +305,11 @@ export class PaymentReqComponent implements OnInit {
   RemoveRow(_rec: Table_Cargo_Payrequest) {
     this.errorMessage = '';
 
-    if (this.is_locked) {
-      this.errorMessage = "Cannot Delete, Locked";
-      alert(this.errorMessage);
-      return;
-    }
+    // if (this.is_locked) {
+    //   this.errorMessage = "Cannot Delete, Locked";
+    //   alert(this.errorMessage);
+    //   return;
+    // }
 
     if (_rec.cp_pay_status.toString().trim() == "PAID") {
       this.errorMessage = "Cannot Delete, Paid";

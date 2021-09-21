@@ -10,6 +10,7 @@ import { SearchTable } from '../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { DateComponent } from '../../shared/date/date.component';
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-21-09-2021
 
 @Component({
   selector: 'app-followup',
