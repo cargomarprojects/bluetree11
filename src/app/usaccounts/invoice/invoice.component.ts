@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { GlobalService } from '../../core/services/global.service';
 import { Tbl_cargo_invoicem } from '../models/Tbl_cargo_Invoicem';
 import { invoiceService } from '../services/invoice.service';
-
+//EDIT-AJITH-21-09-2021
 
 @Component({
   selector: 'app-invoice',
@@ -342,6 +342,15 @@ export class InvoiceComponent implements OnInit {
       sMode = "PS";
 
     return sMode;
+  }
+
+  onBlur(field: string) {
+    switch (field) {
+      case 'MBL_LOSS_MEMO': {
+        this.MBL_LOSS_MEMO = this.MBL_LOSS_MEMO.toUpperCase();
+        break;
+      }
+    }
   }
 
 }
