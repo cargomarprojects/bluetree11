@@ -3,6 +3,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/tbl_search';
 import { SearchPageService } from '../services/searchpage.service';
 //EDIT-AJITH-21-09-2021
+//EDIT-AJITH-23-09-2021
 
 @Component({
   selector: 'app-searchpage-header',
@@ -33,7 +34,7 @@ export class SearchPageHeaderComponent implements OnInit {
   OnChange(field: string) {
     if (field == 'searchType') {
       this.mainservice.ClearList();
-      this.searchQuery.searchString = '';
+      // this.searchQuery.searchString = '';
       this.searchQuery.isParentChecked = false;
       this.searchQuery.isHouseChecked = false;
       this.mainservice.search_type = this.searchQuery.searchType;
