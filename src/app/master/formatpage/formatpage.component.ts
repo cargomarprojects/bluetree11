@@ -14,6 +14,7 @@ import { map } from 'rxjs/operators';
 import { SearchQuery } from '../models/Tbl_cargo_hblformat';
 import { PageQuery } from '../../shared/models/pageQuery';
 
+
 @Component({
     selector: 'app-formatpage',
     templateUrl: './formatpage.component.html'
@@ -33,6 +34,8 @@ export class FormatPageComponent implements OnInit {
     report_menuid: string = '';
     modal: any;
 
+    record :  Tbl_cargo_hblformat;
+
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -45,6 +48,9 @@ export class FormatPageComponent implements OnInit {
     ) {
         modalconfig.backdrop = 'static'; //true/false/static
         modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
+
+        console.log(window.devicePixelRatio);
+
     }
 
     ngOnInit() {
@@ -153,6 +159,53 @@ export class FormatPageComponent implements OnInit {
         // this.report_searchdata.FORMAT_TYPE = _searchdata.searchQuery.fromdate;
         // this.report_menuid = this.mainservice.menuid;
         // this.tab = 'report';
+    }
+
+    getPos( x : number, factor : number = 0)
+    {   
+        let tot = x * factor;
+        return tot.toString() + "px";
+    }
+
+
+
+
+    onKeydown(event : KeyboardEvent, _rec  : Tbl_cargo_hblformat) {
+        console.log(event.key);
+        var factor = 1;
+        if (event.key === "ArrowDown") {
+            _rec.blf_col_y +=factor;
+        }
+        if (event.key === "ArrowUp") {
+            _rec.blf_col_y -=factor;
+        }
+        if (event.key === "ArrowLeft") {
+            _rec.blf_col_x -=factor;
+        }
+        if (event.key === "ArrowRight") {
+            _rec.blf_col_x +=factor;
+        }
+    }
+
+    btnClick(event  , _rec  : Tbl_cargo_hblformat)
+    {
+     
+    }
+    
+    onDragStart($event,_rec  : Tbl_cargo_hblformat){
+        this.record = _rec;        
+        console.log( 'drag start',_rec.blf_col_x, _rec.blf_col_y);
+        console.log( 'drag start', $event);
+    }
+
+    allowDrop(ev) {
+        ev.preventDefault();
+    }
+   
+    onDrop($event) {
+        console.log( 'Drop', $event);
+        this.record.blf_col_x += $event.offsetX;
+        this.record.blf_col_y += $event.offsetY;
     }
 
 }

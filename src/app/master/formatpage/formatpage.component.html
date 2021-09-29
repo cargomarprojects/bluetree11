@@ -12,7 +12,19 @@
 
       <app-formatpage-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-formatpage-header>
   
+    
       <!-- <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2> -->
+
+    <div class="page-body" style="position:relative;min-height: 2000px;min-width: 1000px;"  (drop)="onDrop($event)" (dragover)="allowDrop($event)" >
+      <button *ngFor="let rec of  records$ | async" class="abspos" 
+        draggable="true"
+        [style.left]="getPos(rec.blf_col_x,2)"  
+        [style.top]="getPos(rec.blf_col_y,2)" 
+        [style.text-align]="'left'" 
+        (keydown)="onKeydown($event,rec)"
+        (dragstart)="onDragStart($event,rec)"
+        (click)="btnClick($event,rec)"> {{rec.blf_col_name}} </button>
+    </div>
     
     <div class="page-body">
         <div class="row">

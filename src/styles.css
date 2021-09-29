@@ -922,7 +922,15 @@ input[type=number]::-webkit-outer-spin-button {
     object-fit: cover;
     
   }
+
   
+.abspos {
+        position: absolute;
+        border: 0 !important;
+        padding : 0 !important;
+        margin : 0 !important;
+        border-color: green;
+  }
   
    
 /* .active {
