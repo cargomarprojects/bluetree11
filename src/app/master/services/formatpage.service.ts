@@ -6,6 +6,8 @@ import { GlobalService } from '../../core/services/global.service';
 import { Tbl_cargo_hblformat, FormatModel, vm_Tbl_cargo_hblformat } from '../models/Tbl_cargo_hblformat';
 import { SearchQuery } from '../models/Tbl_cargo_hblformat';
 import { PageQuery } from '../../shared/models/pageQuery';
+import { Tbl_Cargo_Payrequest } from 'src/app/reports/models/Tbl_Cargo_Payrequest';
+import { __exportStar } from 'tslib';
 
 @Injectable({
     providedIn: 'root'
@@ -29,6 +31,10 @@ export class FormatPageService {
     public canSave: boolean;
     public isCompany: boolean;
     public canPrint: boolean;
+    
+    public zoom = 1.5;
+
+    _records: Tbl_cargo_hblformat[];
     
     public initlialized: boolean;
     private appid = ''
@@ -123,8 +129,29 @@ export class FormatPageService {
         this.SaveParent();
         const saveRecord = <vm_Tbl_cargo_hblformat>{};
         saveRecord.format_id = this.record.searchQuery.format_id;
-        saveRecord.records = this.record.records;
         saveRecord.userinfo = this.gs.UserInfo;
+
+        this._records = [];
+        
+        
+
+        this.record.records.forEach( (mrec : Tbl_cargo_hblformat ) =>{
+                const  rec : Tbl_cargo_hblformat = {
+                    blf_format_id: mrec.blf_format_id,
+                    blf_col_name : mrec.blf_col_name ,
+                    blf_col_x:  mrec.blf_col_x,
+                    blf_col_y:   mrec.blf_col_y,
+                    blf_width:   mrec.blf_width,
+                    blf_enabled:   mrec.blf_enabled,
+                    blf_enabled_b: mrec.blf_enabled_b,
+                    rec_company_code: mrec.rec_company_code,
+                    rec_branch_code: mrec.rec_branch_code,
+                    blf_col_order: mrec.blf_col_order,
+                };
+                this._records.push(rec);
+        });
+
+        saveRecord.records = this._records;
 
         this.Save(saveRecord)
             .subscribe(response => {

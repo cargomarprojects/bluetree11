@@ -39,8 +39,7 @@ export class FormatPageComponent implements OnInit {
 
     record :  Tbl_cargo_hblformat;
 
-    zoom = 1.5;
-
+    
     selectedItem = -1;
     btnx = 0;
     btny =0;
@@ -197,7 +196,7 @@ export class FormatPageComponent implements OnInit {
 
     getPos( x : number)
     {   
-        let tot = x *  this.zoom;
+        let tot = x *  this.mainservice.zoom;
         return tot.toString() + "px";
     }
 
@@ -260,20 +259,20 @@ export class FormatPageComponent implements OnInit {
         var x = 0;
         var y = 0;
         if (evt.x > this.btnx) {
-            x = (evt.x - this.btnx ) / this.zoom;
+            x = (evt.x - this.btnx ) / this.mainservice.zoom;
             this.record.blf_col_x = this.record.blf_col_x + x;
         }
         if (evt.x < this.btnx) {
-            x = (this.btnx - evt.x) / this.zoom;
+            x = (this.btnx - evt.x) / this.mainservice.zoom;
             this.record.blf_col_x = this.record.blf_col_x - x;
         }
 
         if (evt.y > this.btny) {
-            y = (evt.y - this.btny) / this.zoom;
+            y = (evt.y - this.btny) / this.mainservice.zoom;
             this.record.blf_col_y = this.record.blf_col_y + y;
         }
         if (evt.y < this.btny) {
-            y = (this.btny - evt.y) / this.zoom;
+            y = (this.btny - evt.y) / this.mainservice.zoom;
             this.record.blf_col_y = this.record.blf_col_y - y;
         }
         this.destX = x;
@@ -315,5 +314,7 @@ export class FormatPageComponent implements OnInit {
     enableScrolling(){
         window.onscroll=function(){};
     }
+
+
 
 }
