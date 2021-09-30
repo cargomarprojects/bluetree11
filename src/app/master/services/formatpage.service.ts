@@ -6,8 +6,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { Tbl_cargo_hblformat, FormatModel, vm_Tbl_cargo_hblformat } from '../models/Tbl_cargo_hblformat';
 import { SearchQuery } from '../models/Tbl_cargo_hblformat';
 import { PageQuery } from '../../shared/models/pageQuery';
-import { Tbl_Cargo_Payrequest } from 'src/app/reports/models/Tbl_Cargo_Payrequest';
-import { __exportStar } from 'tslib';
+
 
 @Injectable({
     providedIn: 'root'
@@ -32,7 +31,7 @@ export class FormatPageService {
     public isCompany: boolean;
     public canPrint: boolean;
     
-    public zoom = 1.5;
+    public zoom = 1;
 
     _records: Tbl_cargo_hblformat[];
     
@@ -133,14 +132,22 @@ export class FormatPageService {
 
         this._records = [];
         
+        var x1 = 0;
+        var y1 =0;
         
 
         this.record.records.forEach( (mrec : Tbl_cargo_hblformat ) =>{
+                x1 = mrec.blf_col_x /this.zoom;
+                x1 = this.gs.roundNumber2(x1,0);
+
+                y1 = mrec.blf_col_y /this.zoom;
+                y1 = this.gs.roundNumber2(y1,0);
+
                 const  rec : Tbl_cargo_hblformat = {
                     blf_format_id: mrec.blf_format_id,
                     blf_col_name : mrec.blf_col_name ,
-                    blf_col_x:  mrec.blf_col_x,
-                    blf_col_y:   mrec.blf_col_y,
+                    blf_col_x:   x1,
+                    blf_col_y:   y1,
                     blf_width:   mrec.blf_width,
                     blf_enabled:   mrec.blf_enabled,
                     blf_enabled_b: mrec.blf_enabled_b,

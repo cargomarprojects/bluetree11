@@ -23,6 +23,7 @@
                     <div class="col-3 input-group input-group-sm">
                         <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
                         <button (click)="List('PRINT')" *ngIf="mainservice.canPrint" class="btn btn-primary btn-sm">Print</button>
+                        <button (click)="mainservice.SaveRecords()" *ngIf="mainservice.canSave" class="btn btn-primary btn-md">Save</button>                        
                     </div>
                     <div class="col-3">
                         <app-formatpagedet [formatid]="searchQuery.format_id" [formatname]="searchQuery.format_name"
