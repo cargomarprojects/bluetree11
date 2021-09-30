@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,  Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +21,9 @@ import { PageQuery } from '../../shared/models/pageQuery';
 })
 export class FormatPageComponent implements OnInit {
 
+    @ViewChild('canvas', { static: false }) canvas: ElementRef<HTMLCanvasElement>;
+    private ctx: CanvasRenderingContext2D;  
+
     @ViewChild('_btnretf') btnretf_ctrl: ElementRef;
     errorMessage$: Observable<string>;
     records$: Observable<Tbl_cargo_hblformat[]>;
@@ -36,6 +39,24 @@ export class FormatPageComponent implements OnInit {
 
     record :  Tbl_cargo_hblformat;
 
+    zoom = 1.5;
+
+    selectedItem = -1;
+    btnx = 0;
+    btny =0;
+
+    mouseX = 0;
+    mouseY = 0;
+
+    destX = 0;
+    destY = 0;
+
+    remarks = '';
+
+    ht = 2000;
+    wd = 1500;
+
+
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -48,16 +69,21 @@ export class FormatPageComponent implements OnInit {
     ) {
         modalconfig.backdrop = 'static'; //true/false/static
         modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
-
-        console.log(window.devicePixelRatio);
-
     }
 
     ngOnInit() {
         this.gs.checkAppVersion();
         this.mainservice.init(this.route.snapshot.queryParams);
         this.initPage();
+
+        this.getCanvas();
+        this.drawPage();
+
     }
+
+
+
+
 
     private initPage() {
         
@@ -68,15 +94,20 @@ export class FormatPageComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-        if (!this.gs.isBlank(this.btnretf_ctrl))
+        if (!this.gs.isBlank(this.btnretf_ctrl)) {
             this.btnretf_ctrl.nativeElement.focus();
+        }
+        this.getCanvas();
+        this.drawPage();
     }
     searchEvents(actions: any) {
         if (actions.outputformat === "PRINT")
             this.PrintFormat(actions);
-        else
+        else {
             this.mainservice.Search(actions, 'SEARCH');
+        }
     }
+
 
     pageEvents(actions: any) {
         this.mainservice.Search(actions, 'PAGE');
@@ -163,48 +194,122 @@ export class FormatPageComponent implements OnInit {
     }
 
 
-    getPos( x : number, factor : number = 0)
+    getPos( x : number)
     {   
-        let tot = x * factor;
+        let tot = x *  this.zoom;
         return tot.toString() + "px";
     }
 
     onKeydown(event : KeyboardEvent, _rec  : Tbl_cargo_hblformat) {
         console.log(event.key);
-        var factor = 1;
+        this.disableScrolling();
+        var _factor = 1;
         if (event.key === "ArrowDown") {
-            _rec.blf_col_y +=factor;
+            _rec.blf_col_y += _factor;
         }
         if (event.key === "ArrowUp") {
-            _rec.blf_col_y -=factor;
+            _rec.blf_col_y -= _factor;
         }
         if (event.key === "ArrowLeft") {
-            _rec.blf_col_x -=factor;
+            _rec.blf_col_x -= _factor;
         }
         if (event.key === "ArrowRight") {
-            _rec.blf_col_x +=factor;
+            _rec.blf_col_x += _factor;
         }
     }
+    onKeyup(event : KeyboardEvent, _rec  : Tbl_cargo_hblformat) {
+        this.enableScrolling();
+    }
 
-    btnClick(event  , _rec  : Tbl_cargo_hblformat)
+
+    btnClick(evt  , _rec  : Tbl_cargo_hblformat)
     {
-     
+        this.btnx = evt.x;
+        this.btny = evt.y;
+        this.setRemarks();     
     }
     
-    onDragStart($event,_rec  : Tbl_cargo_hblformat){
+    setRemarks(){
+        var str = "";
+        str = "(" + this.btnx.toString() + "," + this.btny.toString();
+        str += ")-(" + this.mouseX.toString() + "," + this.mouseY.toString() + ")";
+
+        this.remarks = str;
+    }
+    onDragStart(evt,_rec  : Tbl_cargo_hblformat, i :number){
         this.record = _rec;        
-        console.log( 'drag start',_rec.blf_col_x, _rec.blf_col_y);
-        console.log( 'drag start', $event);
+        this.selectedItem = i; 
+        this.btnx = evt.x;
+        this.btny = evt.y;
+
+        this.setRemarks();
     }
 
-    allowDrop(ev) {
-        ev.preventDefault();
+    allowDrop(evt) {
+        this.mouseX =  evt.x;
+        this.mouseY =  evt.y;
+        this.setRemarks();
+        evt.preventDefault();
     }
    
-    onDrop($event) {
-        console.log( 'Drop', $event);
-        this.record.blf_col_x += $event.offsetX;
-        this.record.blf_col_y += $event.offsetY;
+    onDrop(evt) {
+        if ( this.selectedItem == -1)
+            return;
+        this.setRemarks();
+        var x = 0;
+        var y = 0;
+        if (evt.x > this.btnx) {
+            x = (evt.x - this.btnx ) / this.zoom;
+            this.record.blf_col_x = this.record.blf_col_x + x;
+        }
+        if (evt.x < this.btnx) {
+            x = (this.btnx - evt.x) / this.zoom;
+            this.record.blf_col_x = this.record.blf_col_x - x;
+        }
+
+        if (evt.y > this.btny) {
+            y = (evt.y - this.btny) / this.zoom;
+            this.record.blf_col_y = this.record.blf_col_y + y;
+        }
+        if (evt.y < this.btny) {
+            y = (this.btny - evt.y) / this.zoom;
+            this.record.blf_col_y = this.record.blf_col_y - y;
+        }
+        this.destX = x;
+        this.destY = y;
+        this.setRemarks();
+        this.selectedItem = -1;
+    }
+
+    getCanvas(){
+        this.ctx = this.canvas.nativeElement.getContext('2d');
+    }
+
+    drawPage(){
+        this.ctx.beginPath();
+        //this.ctx.fillStyle = 'gray';
+        this.ctx.lineWidth = 0.1;
+        for ( var k=0; k <= this.wd ; k+=50){
+            this.ctx.moveTo(k, 0);
+            this.ctx.lineTo(k,this.ht);
+        }
+
+        for ( var k=0; k <= this.ht ; k+=50){
+            this.ctx.moveTo(0, k);
+            this.ctx.lineTo(this.wd,k);
+        }
+
+        this.ctx.stroke();
+    }
+
+    disableScrolling(){
+        var x=window.scrollX;
+        var y=window.scrollY;
+        window.onscroll=function(){window.scrollTo(x, y);};
+    }
+    
+    enableScrolling(){
+        window.onscroll=function(){};
     }
 
 }

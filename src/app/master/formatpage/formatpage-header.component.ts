@@ -16,7 +16,15 @@ export class FormatPageHeaderComponent implements OnInit {
     this.searchQuery = Object.assign({}, value);
   }
 
+  remarks = '';
+  @Input() set _remarks(value: string) {
+    this.remarks = value ;
+  }
+
+
   @Output() searchEvents = new EventEmitter<any>();
+
+  @Output() scrollEvents = new EventEmitter<boolean>();
 
   constructor(public gs: GlobalService,
     public mainservice: FormatPageService
@@ -30,6 +38,7 @@ export class FormatPageHeaderComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChange) {
   }
+
 
 
   List(outputformat: string) {

@@ -18,18 +18,20 @@
                     </div>
                 </div> -->
             </div>
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm"></label>
-                    <div class="col-4 input-group input-group-sm">
+                    <div class="col-3 input-group input-group-sm">
                         <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
-                        <button (click)="List('PRINT')" *ngIf="mainservice.canPrint"
-                            class="btn btn-primary btn-sm">Print</button>
+                        <button (click)="List('PRINT')" *ngIf="mainservice.canPrint" class="btn btn-primary btn-sm">Print</button>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <app-formatpagedet [formatid]="searchQuery.format_id" [formatname]="searchQuery.format_name"
                             [formattype]="mainservice.param_type" [title]="mainservice.title"
                             (callbackevent)="detpagecallbackevent($event)"></app-formatpagedet>
+                    </div>
+
+                    <div class="col-3">
+                        <label> {{remarks}}</label>
                     </div>
                 </div>
             </div>

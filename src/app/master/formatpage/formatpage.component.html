@@ -10,21 +10,31 @@
         {{errorMessage}}
       </div>
 
-    <app-formatpage-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-formatpage-header>
+    <app-formatpage-header [_query]="searchQuery$ | async" 
+    (searchEvents)="searchEvents($event)" 
+    [_remarks]="remarks" ></app-formatpage-header>
     
     <!-- <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2> -->
 
-    <div class="page-body" style="position:relative;min-height: 2000px;min-width: 1000px;"  (drop)="onDrop($event)" (dragover)="allowDrop($event)" >
-      <button *ngFor="let rec of  records$ | async" class="abspos" 
+    <div class="page-body" style="position:relative;min-height: 2100px;min-width: 1100px;z-index:0"  (drop)="onDrop($event)" (dragover)="allowDrop($event)">
+
+      <canvas id="canvas" #canvas [height]="ht" [width]="wd"  style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+      </canvas>
+
+      <button *ngFor="let rec of  records$ | async ; let i=index" class="abspos" 
         draggable="true"
-        [style.left]="getPos(rec.blf_col_x,2)"  
-        [style.top]="getPos(rec.blf_col_y,2)" 
+        [id] = "i"
+        [style.left]="getPos(rec.blf_col_x)"  
+        [style.top]="getPos(rec.blf_col_y)" 
         [style.text-align]="'left'" 
         (keydown)="onKeydown($event,rec)"
-        (dragstart)="onDragStart($event,rec)"
+        (keyup)="onKeyup($event,rec)"
+        (dragstart)="onDragStart($event,rec,i)"
         (click)="btnClick($event,rec)"> {{rec.blf_col_name}} </button>
     </div>
     
+    <!-- 
     <div class="page-body">
         <div class="row">
             <div class="col-md-8  p-1 testbox">
@@ -43,7 +53,6 @@
                                             <th>RIGHT</th>
                                             <th>UP</th>
                                             <th>DOWN</th>
-                                            <!-- <th>VISIBLE</th> -->
                                         </tr>
                                     </thead>
                                     <tbody class="page-body-tbody">
@@ -73,9 +82,6 @@
                                               <td>
                                                 <button class="btn btn-info btn-sm" (click)="changepos('down',rec)">DOWN</button>
                                               </td>
-                                              <!-- <td>
-                                                {{rec.blf_col_enabled}}
-                                              </td> -->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -86,11 +92,10 @@
             </div>
         </div>
     </div>
-
     <div class="page-footer">
         <div class="row justify-content-center p-1">
             <button class="btn btn-primary btn-md" *ngIf="mainservice.canSave" (click)="mainservice.SaveRecords()">Save</button>
-
         </div>
     </div>
+    -->
 </div>
