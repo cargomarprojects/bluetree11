@@ -283,10 +283,13 @@ export class FormatPageComponent implements OnInit {
     }
 
     getCanvas(){
-        this.ctx = this.canvas.nativeElement.getContext('2d');
+        if ( this.canvas)
+            this.ctx = this.canvas.nativeElement.getContext('2d');
     }
 
     drawPage(){
+        if ( !this.ctx)
+            return;
         this.ctx.beginPath();
         //this.ctx.fillStyle = 'gray';
         this.ctx.lineWidth = 0.1;

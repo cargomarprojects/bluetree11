@@ -265,8 +265,8 @@ export class AutoComplete2Component {
     this._selectedItem = item;
     setTimeout(() => {
       //this.lov.nativeElement.focus();
-      this.inputs.toArray()[index].nativeElement.focus();
-
+      if ( this.inputs.toArray()[index])
+        this.inputs.toArray()[index].nativeElement.focus();
     }, 0);
   }
 

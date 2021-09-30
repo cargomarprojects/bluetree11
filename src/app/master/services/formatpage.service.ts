@@ -56,7 +56,7 @@ export class FormatPageService {
             this.record = <FormatModel>{
                 errorMessage: '',
                 records: [],
-                searchQuery: <SearchQuery>{ searchString: '',format_id:'' },
+                searchQuery: <SearchQuery>{ searchString: '',format_id:'', format_name : '' },
                 pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
             };
 
