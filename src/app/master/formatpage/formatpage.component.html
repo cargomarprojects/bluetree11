@@ -3,6 +3,9 @@
         <div class="row align-items-center justify-content-left p-1">
             <label class="mr-3">{{mainservice.title}}</label>
             <button  #_btnretf class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+
+            <App-Dialog [id]="{name :'name', msg:'msg', buttons:'yn'}"></App-Dialog>
+
         </div>
     </div>
 
@@ -10,8 +13,9 @@
         {{errorMessage}}
       </div>
 
-      <app-formatpage-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-formatpage-header>
+    <app-formatpage-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-formatpage-header>
   
+    <App-Dscreen> </App-Dscreen>
     
       <!-- <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2> -->
 

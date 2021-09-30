@@ -1,0 +1,15 @@
+<ng-template #content let-c="close" let-d="dismiss">
+
+  <div class="modal-body">
+
+    <p>Hello</p>
+
+  </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Y')">Close</button>
+  </div>
+
+</ng-template>
+
+<button (click)="open(content)" class="btn btn-primary btn-sm mr-1"></button>

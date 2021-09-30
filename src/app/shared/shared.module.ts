@@ -60,6 +60,7 @@ import { SortByPipe } from './pipe/orderby';
 import { ResizableDirective } from './directive/resizable';
 import { ResizableComponent } from './directive/resizable.component';
 import { Report2Component } from './report2/report2.component';
+import { DscreenComponent } from './designscreen/dscreen.component';
 
 @NgModule({
   imports: [
@@ -101,7 +102,8 @@ import { Report2Component } from './report2/report2.component';
     SortByPipe,
     ResizableComponent,
     ResizableDirective,
-    Report2Component
+    Report2Component,
+    DscreenComponent,
   ],
   exports: [
     CommonModule,
@@ -138,7 +140,8 @@ import { Report2Component } from './report2/report2.component';
     SortByPipe,
     ResizableComponent,
     ResizableDirective,
-    Report2Component
+    Report2Component,
+    DscreenComponent
   ]
 
 })
