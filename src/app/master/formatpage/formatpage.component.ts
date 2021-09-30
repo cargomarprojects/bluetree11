@@ -52,8 +52,8 @@ export class FormatPageComponent implements OnInit {
 
     remarks = '';
 
-    ht = 2000;
-    wd = 1500;
+    ht = 1200;
+    wd = 900;
 
 
 

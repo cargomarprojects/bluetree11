@@ -106,6 +106,7 @@ export class FormatPageService {
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
+            this.record.errorMessage = '';
             this.mdata$.next(this.record);
 
             this.db[this.param_type] = this.record;
