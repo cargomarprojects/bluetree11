@@ -104,6 +104,7 @@ export class FormatPageComponent implements OnInit {
         if (actions.outputformat === "PRINT")
             this.PrintFormat(actions);
         else {
+            this.remarks = '';
             this.mainservice.Search(actions, 'SEARCH');
         }
     }
@@ -231,11 +232,11 @@ export class FormatPageComponent implements OnInit {
     
     setRemarks(){
         var str = "";
-        str = "(" + this.btnx.toString() + "," + this.btny.toString();
+        str = "Pos : (" + this.btnx.toString() + "," + this.btny.toString();
         str += ")-(" + this.mouseX.toString() + "," + this.mouseY.toString() + ")";
-
         this.remarks = str;
     }
+
     onDragStart(evt,_rec  : Tbl_cargo_hblformat, i :number){
         this.record = _rec;        
         this.selectedItem = i; 
