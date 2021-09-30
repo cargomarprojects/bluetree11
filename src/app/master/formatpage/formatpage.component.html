@@ -98,4 +98,10 @@
         </div>
     </div>
     -->
+
+    <div class="page-footer">
+      <div class="row justify-content-center p-1">
+          <button class="btn btn-primary btn-md" *ngIf="mainservice.canSave" (click)="mainservice.SaveRecords()">Save</button>
+      </div>
+  </div>
 </div>
