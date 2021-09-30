@@ -129,20 +129,6 @@ export class FormatPageComponent implements OnInit {
     CloseModal() {
         this.modal.close();
     }
-    changepos(pos: string, rec: Tbl_cargo_hblformat) {
-        if (pos == 'left') {
-            rec.blf_col_x = rec.blf_col_x - 8;
-        }
-        if (pos == 'right') {
-            rec.blf_col_x = rec.blf_col_x + 8;
-        }
-        if (pos == 'up') {
-            rec.blf_col_y = rec.blf_col_y - 15;
-        }
-        if (pos == 'down') {
-            rec.blf_col_y = rec.blf_col_y + 15;
-        }
-    }
 
     PrintFormat(_searchdata: any) {
 
@@ -161,14 +147,27 @@ export class FormatPageComponent implements OnInit {
         // this.tab = 'report';
     }
 
+    changepos(pos: string, rec: Tbl_cargo_hblformat) {
+        if (pos == 'left') {
+            rec.blf_col_x = rec.blf_col_x - 8;
+        }
+        if (pos == 'right') {
+            rec.blf_col_x = rec.blf_col_x + 8;
+        }
+        if (pos == 'up') {
+            rec.blf_col_y = rec.blf_col_y - 15;
+        }
+        if (pos == 'down') {
+            rec.blf_col_y = rec.blf_col_y + 15;
+        }
+    }
+
+
     getPos( x : number, factor : number = 0)
     {   
         let tot = x * factor;
         return tot.toString() + "px";
     }
-
-
-
 
     onKeydown(event : KeyboardEvent, _rec  : Tbl_cargo_hblformat) {
         console.log(event.key);
