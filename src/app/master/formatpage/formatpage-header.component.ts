@@ -6,8 +6,7 @@ import { SearchTable } from '../../shared/models/searchtable';
 
 @Component({
   selector: 'app-formatpage-header',
-  templateUrl: './formatpage-header.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './formatpage-header.component.html'
 })
 export class FormatPageHeaderComponent implements OnInit {
   // Call By Value using Input Parameters
