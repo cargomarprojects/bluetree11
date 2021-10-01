@@ -130,36 +130,7 @@ export class FormatPageService {
         const saveRecord = <vm_Tbl_cargo_hblformat>{};
         saveRecord.format_id = this.record.searchQuery.format_id;
         saveRecord.userinfo = this.gs.UserInfo;
-
-        this._records = [];
-        
-        var x1 = 0;
-        var y1 =0;
-        
-
-        this.record.records.forEach( (mrec : Tbl_cargo_hblformat ) =>{
-                x1 = mrec.blf_col_x /this.zoom;
-                x1 = this.gs.roundNumber2(x1,0);
-
-                y1 = mrec.blf_col_y /this.zoom;
-                y1 = this.gs.roundNumber2(y1,0);
-
-                const  rec : Tbl_cargo_hblformat = {
-                    blf_format_id: mrec.blf_format_id,
-                    blf_col_name : mrec.blf_col_name ,
-                    blf_col_x:   x1,
-                    blf_col_y:   y1,
-                    blf_width:   mrec.blf_width,
-                    blf_enabled:   mrec.blf_enabled,
-                    blf_enabled_b: mrec.blf_enabled_b,
-                    rec_company_code: mrec.rec_company_code,
-                    rec_branch_code: mrec.rec_branch_code,
-                    blf_col_order: mrec.blf_col_order,
-                };
-                this._records.push(rec);
-        });
-
-        saveRecord.records = this._records;
+        saveRecord.records = this.record.records;
 
         this.Save(saveRecord)
             .subscribe(response => {
