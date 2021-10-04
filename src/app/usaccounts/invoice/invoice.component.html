@@ -143,6 +143,7 @@
         <th (click)="sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="getIcon('rec_created_by')"></i></th>
         <th (click)="sort('rec_created_date')">CREATED-DATE&nbsp;<i [ngClass]="getIcon('rec_created_date')"></i></th>
         <th *ngIf="canDelete" class='text-center'>REMOVE</th>
+        <th *ngIf="isAdmin" class='text-center'>RESTORE</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
@@ -172,6 +173,11 @@
         <td *ngIf="canDelete" class='text-center' class="p-0">
           <a class="btn btn-sm" (click)="removeRow(rec)">
             <i class="fa fa-trash-o"></i>
+          </a>
+        </td>
+        <td *ngIf="isAdmin" class='text-center' class="p-0">
+          <a *ngIf="rec.rec_deleted =='Y'" class="btn btn-sm" (click)="restoreRow(rec)">
+            <i class="fa fa-undo"></i>
           </a>
         </td>
       </tr>
