@@ -9,6 +9,7 @@ import { Tbl_Mast_Partym, vm_Tbl_Mast_Partym } from '../../models/Tbl_Mast_Party
 import { SearchTable } from '../../../shared/models/searchtable';
 import { Tbl_Mast_Contacts } from '../../../marketing/models/tbl_cargo_journals_master';
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-04-10-2021
 
 @Component({
   selector: 'app-party-edit',
@@ -575,7 +576,7 @@ export class PartyEditComponent implements OnInit {
     if (_Record.controlname == "CHB") {
       this.record.gen_cha_id = _Record.id;
       this.record.gen_cha_code = _Record.code;
-      this.record.gen_cha_name = _Record.name;
+      this.record.gen_chb_name = _Record.name;
       this.record.gen_chb_add1 = _Record.col1;
       this.record.gen_chb_add2 = _Record.col2;
       this.record.gen_chb_add3 = _Record.col3;

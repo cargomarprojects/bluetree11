@@ -8,6 +8,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { Tbl_cargo_invoicem } from '../models/Tbl_cargo_Invoicem';
 import { invoiceService } from '../services/invoice.service';
 //EDIT-AJITH-21-09-2021
+//EDIT-AJITH-04-10-2021
 
 @Component({
   selector: 'app-invoice',
@@ -261,7 +262,40 @@ export class InvoiceComponent implements OnInit {
 
   }
 
+  restoreRow(rec: Tbl_cargo_invoicem) {
 
+    if (rec.rec_closed == "Y") {
+      alert("Record Locked Cannot Restore");
+      return;
+    }
+
+    if (rec.rec_deleted == "N") {
+      return;
+    }
+
+    var remarks = "";
+    if (rec.rec_deleted == "Y" && this.isAdmin) {
+      remarks = "Restore Invoice " + rec.inv_no;
+      if (!confirm(remarks))
+        return;
+    } else
+      return;
+
+
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = rec.inv_pkid;
+    SearchData.IS_ADMIN = (this.isAdmin) ? 'Y' : 'N';
+    SearchData.DELETE_STATUS = rec.rec_deleted == "Y" ? "Y" : "N";
+    SearchData.REMARKS = remarks;
+
+    this.mainservice.RestoreRecord(SearchData).subscribe(response => {
+        rec.rec_deleted = "N";
+    }, error => {
+      this.errorMessage = this.gs.getError(error);
+      alert(this.errorMessage);
+    });
+
+  }
 
   Close() {
     // if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
