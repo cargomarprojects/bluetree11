@@ -1,40 +1,34 @@
 <div *ngIf="tab=='main'">
-    <div class="page-header">
-        <div class="row align-items-center justify-content-left p-1">
-            <label class="mr-3">{{mainservice.title}}</label>
-            <button  #_btnretf class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-        </div>
+  <div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+      <label class="mr-3">{{mainservice.title}}</label>
+      <button #_btnretf class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
     </div>
+  </div>
 
-    <div *ngIf="errorMessage$ | async as errorMessage" class="alert alert-primary">
-        {{errorMessage}}
-      </div>
+  <div *ngIf="errorMessage$ | async as errorMessage" class="alert alert-primary">
+    {{errorMessage}}
+  </div>
 
-    <app-formatpage-header [_query]="searchQuery$ | async" 
-    (searchEvents)="searchEvents($event)" 
-    [_remarks]="remarks" ></app-formatpage-header>
-    
-    <!-- <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2> -->
+  <app-formatpage-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" [_remarks]="remarks">
+  </app-formatpage-header>
 
-    <div class="page-body" style="position:relative;min-height: 2100px;min-width: 1100px;z-index:0"  (drop)="onDrop($event)" (dragover)="allowDrop($event)">
+  <!-- <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2> -->
 
-      <canvas id="canvas" #canvas [height]="ht" [width]="wd"  style="border:1px solid #c3c3c3;">
-        Your browser does not support the canvas element.
-      </canvas>
+  <div class="page-body" style="position:relative;min-height: 2100px;min-width: 1100px;z-index:0"
+    (drop)="onDrop($event)" (dragover)="allowDrop($event)">
 
-      <button *ngFor="let rec of  records$ | async ; let i=index" class="abspos" 
-        draggable="true"
-        [id] = "i"
-        [style.left]="getPos(rec.blf_col_x)"  
-        [style.top]="getPos(rec.blf_col_y)" 
-        [style.text-align]="'left'" 
-        (keydown)="onKeydown($event,rec)"
-        (keyup)="onKeyup($event,rec)"
-        (dragstart)="onDragStart($event,rec,i)"
-        (click)="btnClick($event,rec)"> {{rec.blf_col_name}} </button>
-    </div>
-    
-    <!-- 
+    <canvas id="canvas" #canvas [height]="ht" [width]="wd" style="border:1px solid #c3c3c3;">
+      Your browser does not support the canvas element.
+    </canvas>
+
+    <button *ngFor="let rec of  records$ | async ; let i=index" class="abspos" draggable="true" [id]="i"
+      [style.left]="getPos(rec.blf_col_x)" [style.top]="getPos(rec.blf_col_y)" [style.text-align]="'left'"
+      (keydown)="onKeydown($event,rec)" (keyup)="onKeyup($event,rec)" (dragstart)="onDragStart($event,rec,i)"
+      (click)="btnClick($event,rec)"> {{rec.blf_col_name}} </button>
+  </div>
+
+  <!-- 
     <div class="page-body">
         <div class="row">
             <div class="col-md-8  p-1 testbox">
@@ -99,9 +93,10 @@
     </div>
     -->
 
-    <div class="page-footer">
-      <div class="row justify-content-center p-1">
-          <button class="btn btn-primary btn-md" *ngIf="mainservice.canSave" (click)="mainservice.SaveRecords()">Save</button>
-      </div>
+  <div class="page-footer">
+    <div class="row justify-content-center p-1">
+      <button class="btn btn-primary btn-md" *ngIf="mainservice.canSave"
+        (click)="mainservice.SaveRecords()">Save</button>
+    </div>
   </div>
 </div>
