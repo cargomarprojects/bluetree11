@@ -73,6 +73,7 @@ export class FormatPageService {
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
+        // this.canPrint = this.gs.canPrint(this.menuid);
     }
 
     Search(_searchdata: any, type: string = '') {
