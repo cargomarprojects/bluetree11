@@ -7,6 +7,7 @@ import { LoginService } from '../../core/services/login.service';
 import { GlobalService } from '../../core/services/global.service';
 //EDIT-AJITH-08-09-2021
 //EDIT-AJITH-17-09-2021
+//EDIT-AJITH-07-10-2021
 
 @Component({
   selector: 'app-autocomplete2',
@@ -413,6 +414,7 @@ export class AutoComplete2Component {
     if (event.key === 'PageDown') {
       this.List('NEXT');
     }
+    
   }
   MoreKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {

@@ -2,7 +2,7 @@
     position: absolute;       
     z-index: 9999;
 
-    width:auto;
+    max-width:450px;
     height:auto;
                 
     cursor: pointer;
