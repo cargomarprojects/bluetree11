@@ -99,6 +99,7 @@ export interface Tbl_cargo_imp_masterm {
     mbl_coloader_id:string;
     mbl_coloader_name:string;
     mbl_coloader_code:string;
+    mbl_incoterm:string;
 }
 
 export interface Tbl_cargo_imp_container {

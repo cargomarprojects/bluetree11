@@ -11,7 +11,7 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
 //EDIT-AJITH-06-09-2021
-
+//EDIT-AJITH-07-10-2021
 
 @Component({
   selector: 'app-seaimp-master-edit',
@@ -242,7 +242,7 @@ export class SeaImpMasterEditComponent implements OnInit {
       this.record.mbl_ombl_sent_ampm = "PM";
     else
       this.record.mbl_ombl_sent_ampm = "AM";
-
+      this.record.mbl_incoterm = 'NA';
     if (!this.gs.isBlank(this.mbl_ref_date_field))
       this.mbl_ref_date_field.Focus();
   }
