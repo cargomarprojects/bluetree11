@@ -398,7 +398,7 @@ export class AutoComplete2Component {
   }
 
   ListKeydown(event: KeyboardEvent, _rec: SearchTable) {
-
+   
     if (event.key === 'Tab') {
       event.preventDefault();
     }
