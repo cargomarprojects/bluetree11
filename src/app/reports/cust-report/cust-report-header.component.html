@@ -1,0 +1,53 @@
+<div class="page-list">
+    <div class="page-search">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Category</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchCategory">
+                            <option [value]="'S'"> SHIPPER </option>
+                            <option [value]="'C'"> CONSIGNEE </option>
+                            <option [value]="'I'"> IMPORTER </option>
+                            <option [value]="'X'"> EXPORTER </option>
+                            <option [value]="'B'"> CUSTOMS BROKER </option>
+                            <option [value]="'F'"> DOMESTIC FORWARDER </option>
+                            <option [value]="'A'"> OVERSEAS AGENT </option>
+                            <option [value]="'L'"> AIR CARRIER </option>
+                            <option [value]="'R'"> SEA CARRIER </option>
+                            <option [value]="'T'"> TRUCKER </option>
+                            <option [value]="'W'"> WAREHOUSE </option>
+                            <option [value]="'N'"> TERMINAL SEA/RAIL </option>
+                            <option [value]="'P'"> TERMINAL AIR </option>
+                            <option [value]="'H'"> SHIPPER VENDOR </option>
+                            <option [value]="'V'"> GENERAL VENDOR </option>
+                            <option [value]="'E'"> EMPLOYEES </option>
+                            <option [value]="'O'"> CONTRACTOR </option>
+                            <option [value]="'M'"> MISCELLANEOUS </option>
+                            <option [value]="'D'"> TBD </option>
+                            <option [value]="'K'"> BANK/FINANCIAL INSTITUE </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text"
+                            [(ngModel)]="searchQuery.searchString" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+                        <!-- <button [disabled]="loading" (click)="List('EXCEL')" class="btn btn-primary btn-sm">Excel</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -45,6 +45,8 @@ import { NomReportComponent } from './nom-report/nom-report.component';
 import { NomReportHeaderComponent} from './nom-report/nom-report-header.component';
 import { LogRegisterHeaderComponent } from './log-register/logregister-header.component';
 import { LogRegisterComponent } from './log-register/logregister.component';
+import { CustReportHeaderComponent } from './cust-report/cust-report-header.component';
+import { CustReportComponent } from './cust-report/cust-report.component';
 
 @NgModule({
     declarations :[
@@ -69,7 +71,9 @@ import { LogRegisterComponent } from './log-register/logregister.component';
     NomReportComponent,
     NomReportHeaderComponent,
     LogRegisterHeaderComponent,
-    LogRegisterComponent
+    LogRegisterComponent,
+    CustReportHeaderComponent,
+    CustReportComponent
   ],
   imports: [
     SharedModule,

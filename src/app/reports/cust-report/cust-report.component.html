@@ -1,0 +1,58 @@
+<div class="page-header">
+    <div class="col">
+      <label class="mr-1">{{mainservice.title}}</label>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+  </div>
+  
+  <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage$ | async}}
+  </div>
+  
+  <app-cust-report-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-cust-report-header>
+  
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th (click)="mainservice.sort('cust_name')">NAME&nbsp;<i [ngClass]="mainservice.getIcon('cust_name')"></i></th>
+          <th (click)="mainservice.sort('cust_official_name')">OFFICIAL NAME&nbsp;<i [ngClass]="mainservice.getIcon('cust_official_name')"></i></th>        
+          <th (click)="mainservice.sort('cust_address1')">ADDRESS1&nbsp;<i [ngClass]="mainservice.getIcon('cust_address1')"></i></th>
+          <th (click)="mainservice.sort('cust_address2')">ADDRESS2&nbsp;<i [ngClass]="mainservice.getIcon('cust_address2')"></i></th>
+          <th (click)="mainservice.sort('cust_address3')">ADDRESS3&nbsp;<i [ngClass]="mainservice.getIcon('cust_address3')"></i></th>
+          <th (click)="mainservice.sort('cust_category')">CATEGORY&nbsp;<i [ngClass]="mainservice.getIcon('cust_category')"></i></th>
+          <th (click)="mainservice.sort('cust_contact')">CONTACT&nbsp;<i [ngClass]="mainservice.getIcon('cust_contact')"></i></th>
+          <th (click)="mainservice.sort('cust_telephone')">TELEPHONE&nbsp;<i [ngClass]="mainservice.getIcon('cust_telephone')"></i></th> 
+          <th (click)="mainservice.sort('cust_mobile')">MOBILE&nbsp;<i [ngClass]="mainservice.getIcon('cust_mobile')"></i></th>
+          <th (click)="mainservice.sort('cust_email')">EMAIL&nbsp;<i [ngClass]="mainservice.getIcon('cust_email')"></i></th>
+          <th (click)="mainservice.sort('cust_city')">CITY&nbsp;<i [ngClass]="mainservice.getIcon('cust_city')"></i></th>
+          <th (click)="mainservice.sort('cust_state')">STATE&nbsp;<i [ngClass]="mainservice.getIcon('cust_state')"></i></th>
+          <th (click)="mainservice.sort('cust_country')">COUNTRY&nbsp;<i [ngClass]="mainservice.getIcon('cust_country')"></i></th>               
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+          <td>{{rec.cust_name}}</td>
+          <td>{{rec.cust_official_name}}</td>
+          <td>{{rec.cust_address1}}</td>
+          <td>{{rec.cust_address2}}</td>
+          <td>{{rec.cust_address3}}</td>
+          <td>{{rec.cust_category}}</td>
+          <td>{{rec.cust_contact}}</td>
+          <td>{{rec.cust_telephone}}</td>
+          <td>{{rec.cust_mobile}}</td>
+          <td>{{rec.cust_email}}</td>
+          <td>{{rec.cust_city}}</td>
+          <td>{{rec.cust_state}}</td>
+          <td>{{rec.cust_country}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <br />
