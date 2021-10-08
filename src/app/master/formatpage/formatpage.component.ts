@@ -332,9 +332,6 @@ export class FormatPageComponent implements OnInit {
         //this.DrawXYLines(evt.x, evt.y);
         //if ( this.inputs.toArray()[index])
         //this.inputs.toArray()[index].nativeElement.focus();
-        var x = this.btns.toArray()[i].nativeElement.style.left;
-        var y = this.btns.toArray()[i].nativeElement.style.top;
-        this.findXy(x,y);
     }
 
     findXy(x : number, y : number){
@@ -357,7 +354,7 @@ export class FormatPageComponent implements OnInit {
             y = (this.btny - y) / this.mainservice.zoom;
             y = this.record.blf_col_y - y;
         }
-        //this.DrawXYLines(x,y);
+        this.DrawXYLines(x,y, 'blue');
     }
 
 
