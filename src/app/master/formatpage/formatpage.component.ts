@@ -1,4 +1,4 @@
-import { Component, OnInit,  Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,  Input, Output, EventEmitter, ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -21,10 +21,15 @@ import { PageQuery } from '../../shared/models/pageQuery';
 })
 export class FormatPageComponent implements OnInit {
 
+    
     @ViewChild('canvas', { static: false }) canvas: ElementRef<HTMLCanvasElement>;
     private ctx: CanvasRenderingContext2D;  
 
     @ViewChild('_btnretf') btnretf_ctrl: ElementRef;
+    @ViewChildren('btn') btns: QueryList<ElementRef>;
+    
+    selected_btn: ElementRef;
+
     errorMessage$: Observable<string>;
     records$: Observable<Tbl_cargo_hblformat[]>;
     pageQuery$: Observable<PageQuery>;
@@ -56,6 +61,9 @@ export class FormatPageComponent implements OnInit {
     wd = 900;
 
 
+    last_x = 0;
+    last_y = 0;
+
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -77,7 +85,6 @@ export class FormatPageComponent implements OnInit {
 
         this.getCanvas();
         this.drawPage();
-
     }
 
 
@@ -96,6 +103,8 @@ export class FormatPageComponent implements OnInit {
         if (!this.gs.isBlank(this.btnretf_ctrl)) {
             this.btnretf_ctrl.nativeElement.focus();
         }
+
+
         this.getCanvas();
         this.drawPage();
     }
@@ -216,18 +225,15 @@ export class FormatPageComponent implements OnInit {
         if (event.key === "ArrowRight") {
             _rec.blf_col_x += _factor;
         }
+
+        
     }
     onKeyup(event : KeyboardEvent, _rec  : Tbl_cargo_hblformat) {
         this.enableScrolling();
     }
 
 
-    btnClick(evt  , _rec  : Tbl_cargo_hblformat)
-    {
-        this.btnx = evt.x;
-        this.btny = evt.y;
-        this.setRemarks();     
-    }
+ 
     
     setRemarks(){
         var str = "";
@@ -236,12 +242,24 @@ export class FormatPageComponent implements OnInit {
         this.remarks = str;
     }
 
+    btnClick(evt  , _rec  : Tbl_cargo_hblformat)
+    {
+        this.btnx = evt.x;
+        this.btny = evt.y;
+        this.setRemarks();     
+
+        this.last_x = _rec.blf_col_x;
+        this.last_y = _rec.blf_col_y;
+        this.DrawXYLines(_rec.blf_col_x, _rec.blf_col_y);
+        //#btn
+
+    }
+
     onDragStart(evt,_rec  : Tbl_cargo_hblformat, i :number){
         this.record = _rec;        
         this.selectedItem = i; 
         this.btnx = evt.x;
         this.btny = evt.y;
-
         this.setRemarks();
     }
 
@@ -289,9 +307,13 @@ export class FormatPageComponent implements OnInit {
     drawPage(){
         if ( !this.ctx)
             return;
+        this.ctx.clearRect(0, 0, this.wd, this.ht);
+
         this.ctx.beginPath();
         //this.ctx.fillStyle = 'gray';
-        this.ctx.lineWidth = 0.1;
+
+        this.ctx.strokeStyle = "gray";
+        this.ctx.lineWidth = 0.2;
         for ( var k=0; k <= this.wd ; k+=50){
             this.ctx.moveTo(k, 0);
             this.ctx.lineTo(k,this.ht);
@@ -304,6 +326,62 @@ export class FormatPageComponent implements OnInit {
 
         this.ctx.stroke();
     }
+
+    
+    onDrag(evt : MouseEvent,_rec  : Tbl_cargo_hblformat, i=0){
+        //this.DrawXYLines(evt.x, evt.y);
+        //if ( this.inputs.toArray()[index])
+        //this.inputs.toArray()[index].nativeElement.focus();
+        var x = this.btns.toArray()[i].nativeElement.style.left;
+        var y = this.btns.toArray()[i].nativeElement.style.top;
+        this.findXy(x,y);
+    }
+
+    findXy(x : number, y : number){
+
+
+        if (x > this.btnx) {
+            x = (x - this.btnx ) / this.mainservice.zoom;
+            x = this.record.blf_col_x + x;
+        }
+        if (x < this.btnx) {
+            x = (this.btnx - x) / this.mainservice.zoom;
+            x = this.record.blf_col_x - x;
+        }
+
+        if (y > this.btny) {
+            y = (y - this.btny) / this.mainservice.zoom;
+            y = this.record.blf_col_y + y;
+        }
+        if (y < this.btny) {
+            y = (this.btny - y) / this.mainservice.zoom;
+            y = this.record.blf_col_y - y;
+        }
+        //this.DrawXYLines(x,y);
+    }
+
+
+    DrawXYLines(x : number, y : number, color : string = 'blue'){
+        if ( !this.ctx)
+            return;
+        
+        x -= 3;
+        y -= 3;
+
+        this.drawPage();            
+        this.ctx.beginPath();
+        this.ctx.lineWidth = 0.4;
+        this.ctx.strokeStyle = "blue";
+        
+        this.ctx.moveTo(x, 0);
+        this.ctx.lineTo(x,this.ht);
+
+        this.ctx.moveTo(0, y);
+        this.ctx.lineTo(this.wd,y);
+
+        this.ctx.stroke();
+    }
+
 
     disableScrolling(){
         var x=window.scrollX;
