@@ -26,48 +26,48 @@ export class CustReportService {
     public canAdd: boolean;
     public canEdit: boolean;
     public canSave: boolean;
+    public canPrint: boolean;
 
     public initlialized: boolean;
-    private appid ='';
-
+    private appid = '';
+     
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    public getSortCol(){
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
 
     public ClearInit() {
         this.record = <Cust_Report_Model>{
-            sortcol : 'cust_name',
-            sortorder : true,
+            sortcol: 'cust_name',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I' },
@@ -75,7 +75,7 @@ export class CustReportService {
         };
         this.mdata$.next(this.record);
     }
-    
+
     public init(params: any) {
         if (this.appid != this.gs.appid) {
             this.appid = this.gs.appid;
@@ -89,8 +89,8 @@ export class CustReportService {
         this.param_type = params.param_type;
 
         this.record = <Cust_Report_Model>{
-            sortcol : 'cust_name',
-            sortorder : true,
+            sortcol: 'cust_name',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I' },
@@ -102,6 +102,7 @@ export class CustReportService {
         this.title = this.gs.getTitle(this.menuid);
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
+        this.canPrint = this.gs.canPrint(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
         this.initlialized = true;
     }
@@ -116,13 +117,13 @@ export class CustReportService {
         }
 
         var SearchData = this.gs.UserInfo;
-        SearchData.outputformat = 'SCREEN';
+        SearchData.outputformat = _searchdata.outputformat;
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.CATEGORY = this.record.searchQuery.searchCategory;
         SearchData.CODE = this.record.searchQuery.searchString;
-        
+
         SearchData.page_count = 0;
         SearchData.page_rows = 30;
         SearchData.page_current = -1;
@@ -135,10 +136,15 @@ export class CustReportService {
         }
 
         this.List(SearchData).subscribe(response => {
-            this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
-            this.record.records = response.list;
-            this.record.errormessage = '';
-            this.mdata$.next(this.record);
+            if (_searchdata.outputformat == "SCREEN") {
+                this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
+                this.record.records = response.list;
+                this.record.errormessage = '';
+                this.mdata$.next(this.record);
+            }
+            else if (_searchdata.outputformat == "EXCEL") {
+                this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+            }
         }, error => {
             this.record = <Cust_Report_Model>{
                 records: [],
@@ -148,6 +154,9 @@ export class CustReportService {
         });
     }
 
+    Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+        this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
+    }
 
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Report/CustomerReport', SearchData, this.gs.headerparam2('authorized'));

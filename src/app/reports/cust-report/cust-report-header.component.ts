@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/tbl_cust_report';
+import { CustReportService } from '../services/cust_report.service';
 //CREATE-AJITH-08-10-2021
 
 @Component({
@@ -16,7 +17,8 @@ export class CustReportHeaderComponent implements OnInit {
     }
     @Output() searchEvents = new EventEmitter<any>();
 
-    constructor(public gs: GlobalService
+    constructor(public gs: GlobalService,
+        public mainservice: CustReportService
     ) { }
 
     ngOnInit() {
