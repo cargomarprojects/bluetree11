@@ -21,6 +21,7 @@ import { PayDueReportComponent } from './pay-due/pay-due-report.component';
 import { GenSearchReportComponent } from './gen-search-report/gen-search-report.component';
 import { NomReportComponent } from './nom-report/nom-report.component';
 import { LogRegisterComponent } from './log-register/logregister.component';
+import { CustReportComponent } from './cust-report/cust-report.component';
 
 const routes: Routes = [
    { path :'ShipmentHandledReport', component : ShipHandReportComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
    { path :'GeneralSearchReport', component : GenSearchReportComponent },   
    { path :'NominationListPage', component : NomReportComponent },   
    { path :'LogRegister', component : LogRegisterComponent },   
+   { path :'CustReport', component : CustReportComponent },   
 ];
 
 @NgModule({
