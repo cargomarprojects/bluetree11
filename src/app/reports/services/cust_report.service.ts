@@ -71,7 +71,7 @@ export class CustReportService {
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I' },
-            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 30 }
+            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
     }
@@ -94,7 +94,7 @@ export class CustReportService {
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I' },
-            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 30 }
+            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
         this.mdata$.next(this.record);
@@ -125,7 +125,7 @@ export class CustReportService {
         SearchData.CODE = this.record.searchQuery.searchString;
 
         SearchData.page_count = 0;
-        SearchData.page_rows = 30;
+        SearchData.page_rows = 0;
         SearchData.page_current = -1;
 
         if (type == 'PAGE') {
