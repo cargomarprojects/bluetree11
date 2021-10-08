@@ -27,6 +27,15 @@ export class CustReportHeaderComponent implements OnInit {
     ngOnChanges(changes: SimpleChange) {
     }
 
+    onBlur(field: string) {
+        switch (field) {
+          case 'searchString': {
+            this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase();
+            break;
+          }
+        }
+    }
+
     List(outputformat: string) {
         if (this.gs.isBlank(this.searchQuery.searchString))
             this.searchQuery.searchString = '';
