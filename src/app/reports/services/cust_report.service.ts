@@ -119,12 +119,10 @@ export class CustReportService {
         SearchData.outputformat = 'SCREEN';
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
-        SearchData.TYPE = this.param_type;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
-        // SearchData.CODE = this.record.searchQuery.searchString;
-        // SearchData.SDATE = this.record.searchQuery.fromdate;
-        // SearchData.EDATE = this.record.searchQuery.todate;
-        // SearchData.SEARCH_TYPE = this.record.searchQuery.searchtype;        
+        SearchData.CATEGORY = this.record.searchQuery.searchCategory;
+        SearchData.CODE = this.record.searchQuery.searchString;
+        
         SearchData.page_count = 0;
         SearchData.page_rows = 30;
         SearchData.page_current = -1;
@@ -152,7 +150,7 @@ export class CustReportService {
 
 
     List(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/Report/CustReport', SearchData, this.gs.headerparam2('authorized'));
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Report/CustomerReport', SearchData, this.gs.headerparam2('authorized'));
     }
 
 
