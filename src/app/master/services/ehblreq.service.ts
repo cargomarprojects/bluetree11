@@ -49,4 +49,8 @@ export class EhblReqService {
     GetBLBackside(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/EhblReq/GetBLBackside', SearchData, this.gs.headerparam2('authorized'));
     }
+    
+    GetBLPending(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/EhblReq/GetBLPending', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

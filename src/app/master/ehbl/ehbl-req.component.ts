@@ -535,6 +535,26 @@ export class EhblReqComponent implements OnInit {
             });
 
     }
+    GetBLPending()
+    {
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = this.gs.getGuid();
+        this.mainService.GetBLPending(SearchData)
+            .subscribe(response => {
+                this.filename = response.filename;
+                this.filetype = response.filetype;
+                this.filedisplayname = response.filedisplayname;
+                this.now_printing_no = response.now_printing_no;
+                this.tab = 'report2';
+                //  this.PrintPdf();
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+
+            });
+
+    }
 
     PrintPdf() {
 
