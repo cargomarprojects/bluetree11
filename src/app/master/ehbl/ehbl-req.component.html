@@ -39,7 +39,7 @@
       <div class="page-search">
         <div class="row">
           <label class="col-2">Search</label>
-          <div class="col">
+          <div class="col-4">
             <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring"
               (blur)="onBlur('searchstring')" />
           </div>
@@ -103,8 +103,8 @@
       <div class="row">
         <div class="col-sm-4 mx-0 px-0">
           <div class="form-group row">
-            <label class="col-6 col-form-label  col-form-label-sm">Agent</label>
-            <div class="col-6">
+            <label class="col-4 col-form-label  col-form-label-sm">Agent</label>
+            <div class="col-8">
               <app-autocomplete2 #_agent_lov_req [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
                 [disabled]="record.ebld_approved||gs.User_Role=='AGENT'" [displaydata]="record.ebld_agent_name"
                 (ValueChanged)="LovSelected($event)">
@@ -114,8 +114,8 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-6 col-form-label  col-form-label-sm">Total No of BLs Required</label>
-            <div class="col-6">
+            <label class="col-4 col-form-label  col-form-label-sm">Total No of BLs Required</label>
+            <div class="col-8">
               <input type="number" #_ebld_req_nos [disabled]="record.ebld_approved" class="form-control form-control-sm"
                 [(ngModel)]="record.ebld_req_nos" required maxlength="10" />
             </div>
@@ -126,7 +126,7 @@
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group row">
-              <div class="offset-6 col-6">
+              <div class="offset-4 col-8">
                 <button [hidden]="disableSave" [disabled]="loading" (click)="Save()"
                   class="btn btn-primary btn-sm">Save</button>
               </div>
@@ -148,8 +148,8 @@
       <div class="row">
         <div class="col-sm-6 mx-0 px-0">
           <div class="form-group row">
-            <label class="col-4 col-form-label  col-form-label-sm">Status</label>
-            <label class="col-sm-8 col-form-label col-form-label-sm">
+            <label class="col-3 col-form-label  col-form-label-sm">Status</label>
+            <label class="col-sm-9 col-form-label col-form-label-sm">
               <font color="black">
                 Starting#&nbsp;
               </font>
@@ -202,8 +202,8 @@
             </div> -->
           </div>
           <div class="form-group row">
-            <label class="col-4 col-form-label  col-form-label-sm">Agent</label>
-            <div class="col-6">
+            <label class="col-3 col-form-label  col-form-label-sm">Agent</label>
+            <div class="col-7">
               <app-autocomplete2 #_agent_lov_dwn [controlname]="'AGENT2'" [tabletype]="'MASTER'"
                 [displaycolumn]="'NAME'" [disabled]="gs.User_Role=='AGENT'||tab == 'report2'" [displaydata]="download_agent_name"
                 (ValueChanged)="LovSelected($event)">
@@ -212,17 +212,12 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-4 col-form-label  col-form-label-sm">No of BLs to download</label>
-            <div class="col-6">
+            <label class="col-3 col-form-label  col-form-label-sm">No of BLs to download</label>
+            <div class="col-2">
               <input type="number" [disabled]="tab == 'report2'" class="form-control form-control-sm" [(ngModel)]="download_req_nos" required
                 maxlength="10" />
             </div>
-          </div>
-        </div>
-        <div class="col-sm-6 mx-0 px-0">
-          <label></label>
-          <div class="form-group row">
-            <div class="col-4 mt-5">
+            <div class="col-7">
               <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
                 (click)="GenerateValid()">Generate</button>
                 <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
@@ -232,7 +227,22 @@
               <button *ngIf="tab=='report2'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
                 (click)="Cancel()">Return</button>
             </div>
-            <div class="col-4 mt-5">
+          </div>
+        </div>
+        <div class="col-sm-6 mx-0 px-0">
+          <!-- <label></label> -->
+          <div class="form-group row">
+            <!-- <div class="col-4 mt-5">
+              <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
+                (click)="GenerateValid()">Generate</button>
+                <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
+                (click)="GetBLBackside()">Print Backside</button>
+              <button *ngIf="tab=='report2' && canPrint" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
+                (click)="PrintPdf()">Print</button>
+              <button *ngIf="tab=='report2'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
+                (click)="Cancel()">Return</button>
+            </div> -->
+            <div class="col-4">
               <label *ngIf="tab=='report2'" class="col col-form-label col-form-label-sm">
                 <font color="black">
                   Now Printing#&nbsp;
