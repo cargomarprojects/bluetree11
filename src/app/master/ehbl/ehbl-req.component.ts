@@ -62,6 +62,7 @@ export class EhblReqComponent implements OnInit {
     running_no: number = 0;
     ending_no: number = 0;
     balance_no: number = 0;
+    now_printing_no: string = '';
     pageQuery: PageQuery;
 
     constructor(
@@ -402,7 +403,7 @@ export class EhblReqComponent implements OnInit {
             return;
         }
         if (this.gs.isZero(this.download_req_nos) || this.download_req_nos < 0) {
-            this.errorMessage = "Invalid, BL Nos To Download";
+            this.errorMessage = "Invalid, No. of BLs to download";
             alert(this.errorMessage);
             return;
         }
@@ -456,6 +457,7 @@ export class EhblReqComponent implements OnInit {
                 this.filename2 = response.filename2;
                 this.filetype2 = response.filetype2;
                 this.filedisplayname2 = response.filedisplayname2;
+                this.now_printing_no = response.now_printing_no;
                 this.tab = 'report2';
 
 
@@ -512,6 +514,26 @@ export class EhblReqComponent implements OnInit {
         this.tab = 'main';
         if (!this.gs.isBlank(this.download_agent_id))
             this.GetBalanceBL(this.download_agent_id);
+    }
+
+    GetBLBackside() {
+
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = this.gs.getGuid();
+        this.mainService.GetBLBackside(SearchData)
+            .subscribe(response => {
+                this.filename = response.filename;
+                this.filetype = response.filetype;
+                this.filedisplayname = response.filedisplayname;
+                // this.tab = 'report2';
+                this.PrintPdf();
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+
+            });
+
     }
 
     PrintPdf() {

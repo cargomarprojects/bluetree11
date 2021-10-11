@@ -1,7 +1,7 @@
 <div class="page-header">
   <div class="row  align-items-center justify-content-left p-1">
     <label class="mr-3">{{title}}</label>
-    <button class="btn btn-primary btn-sm m-1 p-1" (click)="Close()">Return</button>
+    <button class="btn btn-primary btn-sm m-1 p-1" (click)="Close()">Close</button>
   </div>
 </div>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -148,27 +148,35 @@
       <div class="row">
         <div class="col-sm-6 mx-0 px-0">
           <div class="form-group row">
-            <label class="col-4 col-form-label  col-form-label-sm">Agent</label>
-            <div class="col-8">
-              <app-autocomplete2 #_agent_lov_dwn [controlname]="'AGENT2'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
-                [disabled]="gs.User_Role=='AGENT'" [displaydata]="download_agent_name"
-                (ValueChanged)="LovSelected($event)">
-              </app-autocomplete2>
-            </div>
-            <!-- <label class="col-5 col-form-label  col-form-label-sm p-1">{{download_agent_name}}</label> -->
-          </div>
+            <label class="col-4 col-form-label  col-form-label-sm">Status</label>
+            <label class="col-sm-8 col-form-label col-form-label-sm">
+              <font color="black">
+                Starting#&nbsp;
+              </font>
+              <font color="orange">
+                {{starting_no}}&nbsp;
+              </font>
+              <font color="black">
+                Running#&nbsp;
+              </font>
+              <font color="green">
+                {{running_no}}&nbsp;
+              </font>
+              <font color="black">
+                Ending#&nbsp;
+              </font>
+              <font color="blue">
+                {{ending_no}}&nbsp;
+              </font>
+              <font color="black">
+                Balance#&nbsp;
+              </font>
+              <font color="red">
+                {{balance_no}}
+              </font>
+            </label>
 
-          <div class="form-group row">
-            <label class="col-4 col-form-label  col-form-label-sm">BL Nos To Download</label>
-            <div class="col-8">
-              <input type="number" class="form-control form-control-sm" [(ngModel)]="download_req_nos" required
-                maxlength="10" />
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 mx-0 px-0">
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label col-form-label-sm">STARTING#</label>
+            <!-- <label class="col-sm-2 col-form-label col-form-label-sm">STARTING#</label>
             <div class="col-sm-1">
               <label class="col-form-label  col-form-label-sm">
                 <font color="orange">{{starting_no}}</font>
@@ -191,24 +199,51 @@
               <label class="col-form-label  col-form-label-sm">
                 <font color="red">{{balance_no}}</font>
               </label>
-            </div>
+            </div> -->
           </div>
           <div class="form-group row">
-
+            <label class="col-4 col-form-label  col-form-label-sm">Agent</label>
             <div class="col-6">
-              <button *ngIf="tab=='main'" class="btn btn-primary btn-md mr-1" [disabled]="tab == 'report2'"
-                (click)="GenerateValid()">Generate</button>
-              <button *ngIf="tab=='report2' && canPrint" class="btn btn-primary btn-md mr-1" [disabled]="tab == 'main'"
-                (click)="PrintPdf()">Print</button>
-              <button *ngIf="tab=='report2'" class="btn btn-primary btn-md mr-1" [disabled]="tab == 'main'"
-                (click)="Cancel()">Close</button>
-
-              <!-- <button class="btn btn-primary btn-md mr-1" [disabled]="tab == 'main'" (click)="Cancel()">Close</button> -->
+              <app-autocomplete2 #_agent_lov_dwn [controlname]="'AGENT2'" [tabletype]="'MASTER'"
+                [displaycolumn]="'NAME'" [disabled]="gs.User_Role=='AGENT'||tab == 'report2'" [displaydata]="download_agent_name"
+                (ValueChanged)="LovSelected($event)">
+              </app-autocomplete2>
             </div>
           </div>
 
+          <div class="form-group row">
+            <label class="col-4 col-form-label  col-form-label-sm">No of BLs to download</label>
+            <div class="col-6">
+              <input type="number" [disabled]="tab == 'report2'" class="form-control form-control-sm" [(ngModel)]="download_req_nos" required
+                maxlength="10" />
+            </div>
+          </div>
         </div>
-
+        <div class="col-sm-6 mx-0 px-0">
+          <label></label>
+          <div class="form-group row">
+            <div class="col-4 mt-5">
+              <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
+                (click)="GenerateValid()">Generate</button>
+                <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
+                (click)="GetBLBackside()">Print Backside</button>
+              <button *ngIf="tab=='report2' && canPrint" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
+                (click)="PrintPdf()">Print</button>
+              <button *ngIf="tab=='report2'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
+                (click)="Cancel()">Return</button>
+            </div>
+            <div class="col-4 mt-5">
+              <label *ngIf="tab=='report2'" class="col col-form-label col-form-label-sm">
+                <font color="black">
+                  Now Printing#&nbsp;
+                </font>
+                <font color="red">
+                  {{now_printing_no}}&nbsp;
+                </font>
+              </label>
+            </div>
+          </div>
+        </div>
 
       </div>
       <div *ngIf="tab=='main'" class="row">
