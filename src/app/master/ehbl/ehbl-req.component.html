@@ -11,7 +11,7 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" id="bldownload-tab" data-toggle="tab" href="#bldownload" role="tab" aria-controls="bldownload"
-      aria-selected="false">Generate/Download</a>
+      aria-selected="false">Generate/Print</a>
   </li>
   <!-- <li class="nav-item">
     <button class="btn btn-primary btn-sm m-1 p-1" (click)="Close()">Return</button>
@@ -114,7 +114,7 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-4 col-form-label  col-form-label-sm">Total No of BLs Required</label>
+            <label class="col-4 col-form-label  col-form-label-sm">No of BLs Required</label>
             <div class="col-8">
               <input type="number" #_ebld_req_nos [disabled]="record.ebld_approved" class="form-control form-control-sm"
                 [(ngModel)]="record.ebld_req_nos" required maxlength="10" />
@@ -151,28 +151,28 @@
             <label class="col-3 col-form-label  col-form-label-sm">Status</label>
             <label class="col-sm-9 col-form-label col-form-label-sm">
               <font color="black">
-                Starting#&nbsp;
+                STARTING#&nbsp;
               </font>
               <font color="orange">
                 {{starting_no}}&nbsp;
               </font>
               <font color="black">
-                Running#&nbsp;
+                RUNNING#&nbsp;
               </font>
               <font color="green">
                 {{running_no}}&nbsp;
               </font>
               <font color="black">
-                Ending#&nbsp;
-              </font>
-              <font color="blue">
-                {{ending_no}}&nbsp;
-              </font>
-              <font color="black">
-                Balance#&nbsp;
+                BALANCE&nbsp;
               </font>
               <font color="red">
-                {{balance_no}}
+                {{balance_no}}&nbsp;
+              </font>
+              <font color="black">
+                ENDING#&nbsp;
+              </font>
+              <font color="blue">
+                {{ending_no}}
               </font>
             </label>
 
@@ -212,7 +212,7 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-3 col-form-label  col-form-label-sm">No of BLs to download</label>
+            <label class="col-3 col-form-label  col-form-label-sm">No of BLs to print</label>
             <div class="col-2">
               <input type="number" [disabled]="tab == 'report2'" class="form-control form-control-sm" [(ngModel)]="download_req_nos" required
                 maxlength="10" />
@@ -242,10 +242,18 @@
               <button *ngIf="tab=='report2'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
                 (click)="Cancel()">Return</button>
             </div> -->
-            <div class="col-4">
-              <label *ngIf="tab=='report2'" class="col col-form-label col-form-label-sm">
+            <div class="col-12  mt-5">
+              <!-- <label class="col col-form-label col-form-label-sm">
                 <font color="black">
-                  Now Printing#&nbsp;
+                  ENDING#&nbsp;
+                </font>
+                <font color="blue">
+                  {{ending_no}}&nbsp;
+                </font>
+              </label> -->
+               <label *ngIf="tab=='report2'" class="col col-form-label col-form-label-sm">
+                <font color="black">
+                  NOW PRINTING#&nbsp;
                 </font>
                 <font color="red">
                   {{now_printing_no}}&nbsp;

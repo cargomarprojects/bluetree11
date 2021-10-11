@@ -267,13 +267,12 @@ export class EhblReqComponent implements OnInit {
 
         var bRet = true;
         this.errorMessage = "";
-        // if (this.gs.isBlank(this.record.add_address1)) {
-        //     bRet = false;
-        //     this.errorMessage = "Address cannot be empty";
-        //     alert(this.errorMessage);
-        //     //  this.request_to_code_ctrl.Focus();
-        //     return bRet;
-        // }
+        if (this.gs.isZero(this.record.ebld_req_nos)) {
+            bRet = false;
+            this.errorMessage = "No of BLs Required Cannot be Blank";
+            alert(this.errorMessage);
+            return bRet;
+        }
 
         return bRet;
     }
