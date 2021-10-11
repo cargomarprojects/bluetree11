@@ -191,8 +191,8 @@
                 (click)="GenerateValid()">Generate</button>
               <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
                 (click)="GetBLBackside()">Print Backside</button>
-                <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
-                (click)="GetBLPending()">Pending</button>
+                <!-- <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
+                (click)="GetBLPending()">Pending</button> -->
               <button *ngIf="tab=='report2' && canPrint" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
                 (click)="PrintPdf()">Print</button>
               <button *ngIf="tab=='report2'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
