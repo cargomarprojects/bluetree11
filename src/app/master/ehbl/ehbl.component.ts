@@ -3,13 +3,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { GlobalService } from '../../core/services/global.service';
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
-//import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
+import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
 import { EhblService } from '../services/ehbl.service';
 import { User_Menu } from '../../core/models/menum';
 import { Tbl_cargo_ehbld, vm_Tbl_cargo_ehbl, Tbl_cargo_ehbl } from '../models/Tbl_cargo_ehbl';
 import { SearchTable } from '../../shared/models/searchtable';
 import { PageQuery } from '../../shared/models/pageQuery';
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-11-10-2021
 
 @Component({
     selector: 'app-ehbl',
@@ -17,9 +18,9 @@ import { PageQuery } from '../../shared/models/pageQuery';
 })
 export class EhblComponent implements OnInit {
 
-    // @ViewChild('request_to_code') request_to_code_ctrl: AutoComplete2Component;
-    // @ViewChild('request_to_name') request_to_name_ctrl: InputBoxComponent;
-    // @ViewChild('cargo_loc_name') cargo_loc_name_ctrl: InputBoxComponent;
+    @ViewChild('_agent_lov') agent_lov_ctrl: AutoComplete2Component;
+    @ViewChild('_start_no') start_no_ctrl: ElementRef;
+
     record: Tbl_cargo_ehbl = <Tbl_cargo_ehbl>{};
     records: Tbl_cargo_ehbl[] = [];
     // 15-07-2019 Created By Ajith  
@@ -112,7 +113,8 @@ export class EhblComponent implements OnInit {
         this.record.ebl_download_max_no = 0;
         this.record.ebl_start_no = 0;
         this.record.rec_mode = this.mode;
-
+        if (!this.gs.isBlank(this.agent_lov_ctrl))
+            this.agent_lov_ctrl.Focus();
     }
 
 
@@ -142,7 +144,6 @@ export class EhblComponent implements OnInit {
         SearchData.branch_code = this.gs.branch_code;
         this.mainService.List(SearchData)
             .subscribe(response => {
-
                 this.records = response.list;
                 this.pageQuery = <PageQuery>{ action: response.action, page_count: response.page_count, page_current: response.page_current, page_rows: response.page_rows };
             },
@@ -159,6 +160,8 @@ export class EhblComponent implements OnInit {
             .subscribe(response => {
                 this.record = <Tbl_cargo_ehbl>response.record;
                 this.mode = 'EDIT';
+                if (!this.gs.isBlank(this.agent_lov_ctrl))
+                    this.agent_lov_ctrl.Focus();
             }, error => {
                 this.errorMessage = this.gs.getError(error);
             });
@@ -254,7 +257,8 @@ export class EhblComponent implements OnInit {
         if (_Record.controlname == "AGENT") {
             this.record.ebl_agent_id = _Record.id;
             this.record.ebl_agent_name = _Record.name;
-            // this.liner_lov_field.Focus();
+            if (!this.gs.isBlank(this.start_no_ctrl))
+                this.start_no_ctrl.nativeElement.focus();
         }
     }
 
