@@ -528,8 +528,8 @@ export class EhblReqComponent implements OnInit {
                 this.filetype = response.filetype;
                 this.filedisplayname = response.filedisplayname;
                 this.now_printing_no = "";
-                //this.tab = 'report2';
-                 this.PrintPdf();
+                this.tab = 'report2';
+                // this.PrintPdf();
             }, error => {
                 this.errorMessage = this.gs.getError(error);
                 alert(this.errorMessage);
