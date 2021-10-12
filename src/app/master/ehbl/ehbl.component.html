@@ -1,15 +1,15 @@
 <div class="page-header">
   <div class="row  align-items-center justify-content-left p-1">
-      <label class="mr-3">{{title}}</label>
-      <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm mr-1">List</button>
-       <button (click)="actionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
-      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    <label class="mr-3">{{title}}</label>
+    <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm mr-1">List</button>
+    <button (click)="actionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
   </div>
 </div>
 
 <div *ngIf="errorMessage">
   <div class="alert alert-primary">
-      {{errorMessage}}
+    {{errorMessage}}
   </div>
 </div>
 
@@ -19,7 +19,8 @@
     <div class="row">
       <label class="col-2">Search</label>
       <div class="col">
-        <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring" (blur)="onBlur('searchstring')" />
+        <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring"
+          (blur)="onBlur('searchstring')" />
       </div>
       <!--<div class="col-2">
         <input type="checkbox" [(ngModel)]="sortby" />
@@ -46,47 +47,48 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of records;  let i = index" >
+        <tr *ngFor="let rec of records;  let i = index">
           <td class="hlink2" (click)="actionHandler('EDIT',rec.ebl_pkid, i)">{{rec.ebl_agent_name}}</td>
           <td>{{rec.ebl_start_no}}</td>
           <td>{{rec.ebl_running_no}}</td>
           <td>{{rec.ebl_ending_no}}</td>
-          <td>{{rec.ebl_download_max_no}}</td>  
+          <td>{{rec.ebl_download_max_no}}</td>
           <!-- <td>{{rec.ebl_color==true?'YES':'NO'}}</td>         -->
         </tr>
       </tbody>
     </table>
   </div>
-  
-<App-Page2 [_pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page2>
+
+  <App-Page2 [_pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page2>
 
 </div>
 
 
 <div *ngIf="currentTab=='DETAILS'" class="page-body">
-  <div class="row">
+  <div class="row border">
     <div class="col-sm-4">
       <div class="form-group row">
         <label class="col-5 col-form-label  col-form-label-sm">Agent</label>
         <div class="col-7">
-          <app-autocomplete2 #_agent_lov [controlname]="'AGENT'" [tabletype]="'MASTER'"
-                      [displaycolumn]="'NAME'" [displaydata]="record.ebl_agent_name"
-                      (ValueChanged)="LovSelected($event)">
-                    </app-autocomplete2>
+          <app-autocomplete2 #_agent_lov [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+            [displaydata]="record.ebl_agent_name" (ValueChanged)="LovSelected($event)">
+          </app-autocomplete2>
         </div>
       </div>
 
       <div class="form-group row">
         <label class="col-5 col-form-label  col-form-label-sm">Starting#</label>
         <div class="col-7">
-          <input type="number" #_start_no class="form-control form-control-sm" [(ngModel)]="record.ebl_start_no" required maxlength="10" />
+          <input type="number" #_start_no class="form-control form-control-sm" [(ngModel)]="record.ebl_start_no"
+            required maxlength="10" />
         </div>
       </div>
 
       <div class="form-group row">
         <label class="col-5 col-form-label  col-form-label-sm">Max.Download (at a time)</label>
         <div class="col-7">
-          <input type="number" class="form-control form-control-sm" [(ngModel)]="record.ebl_download_max_no" required maxlength="10" />
+          <input type="number" class="form-control form-control-sm" [(ngModel)]="record.ebl_download_max_no" required
+            maxlength="10" />
         </div>
       </div>
       <!-- <div class="form-group row">
@@ -98,24 +100,67 @@
     </div> -->
     </div>
   </div>
+
   <div class="page-footer">
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="form-group row">
-        <div class="offset-5 col-6">
-          <button [hidden]="disableSave" [disabled]="loading" (click)="Save()" class="btn btn-primary btn-sm">Save</button>
-          <!-- <button [disabled]="loading" (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm">Return</button>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <div class="offset-5 col-6">
+            <button [hidden]="disableSave" [disabled]="loading" (click)="Save()"
+              class="btn btn-primary btn-sm">Save</button>
+            <!-- <button [disabled]="loading" (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm">Return</button>
           <i *ngIf="loading" class="fa fa-spinner"></i> -->
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- <div class="page-footer">
-  <div class="row row justify-content-center p-1">
-      <button class="btn btn-primary btn-md mr-1" (click)="Save()">Save</button>
+  <br>
+  <div class="row">
+    <div class="col-sm-6 mx-0 px-0">
+      <div class="page-body table-responsive">
+        <table class="table  table-hover table-sm">
+          <thead class="page-body-thead">
+            <tr>
+              <th>DATE</th>
+              <th>USER</th>
+              <th>REMARKS</th>
+            </tr>
+          </thead>
+          <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of precords">
+              <td>{{rec.audit_server_date | date : gs.date_display_fmt_with_time}}</td>
+              <td>{{rec.audit_user_code}}</td>
+              <td>{{rec.audit_remarks}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-</div> -->
+
+  <div class="page-footer">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-5 col-form-label  col-form-label-sm">Pending#</label>
+          <div class="col-7">
+            <input type="text" #_start_no class="form-control form-control-sm" [(ngModel)]="record.ebl_pending_nos"
+              required maxlength="100" />
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <div class="col-6">
+            <button [hidden]="disableSave" [disabled]="loading" (click)="SavePendingNos()"
+              class="btn btn-primary btn-sm">Save</button>
+            <!-- <button [disabled]="loading" (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm">Return</button>
+          <i *ngIf="loading" class="fa fa-spinner"></i> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>

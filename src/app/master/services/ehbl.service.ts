@@ -28,5 +28,8 @@ export class EhblService {
     Save(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Ehbl/Save', SearchData, this.gs.headerparam2('authorized'));
     }
-    
+
+    SavePendingNos(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Ehbl/SavePendingNos', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

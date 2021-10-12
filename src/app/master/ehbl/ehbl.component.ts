@@ -9,8 +9,10 @@ import { User_Menu } from '../../core/models/menum';
 import { Tbl_cargo_ehbld, vm_Tbl_cargo_ehbl, Tbl_cargo_ehbl } from '../models/Tbl_cargo_ehbl';
 import { SearchTable } from '../../shared/models/searchtable';
 import { PageQuery } from '../../shared/models/pageQuery';
+import { Tbl_Audit } from '../../reports/models/Tbl_Audit';
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-11-10-2021
+//EDIT-AJITH-12-10-2021
 
 @Component({
     selector: 'app-ehbl',
@@ -23,6 +25,7 @@ export class EhblComponent implements OnInit {
 
     record: Tbl_cargo_ehbl = <Tbl_cargo_ehbl>{};
     records: Tbl_cargo_ehbl[] = [];
+    precords: Tbl_Audit[] = [];
     // 15-07-2019 Created By Ajith  
     currentTab = 'LIST';
     private pkid: string;
@@ -112,6 +115,7 @@ export class EhblComponent implements OnInit {
         this.record.ebl_agent_name = "";
         this.record.ebl_download_max_no = 0;
         this.record.ebl_start_no = 0;
+        this.record.ebl_pending_nos = '';
         this.record.rec_mode = this.mode;
         if (!this.gs.isBlank(this.agent_lov_ctrl))
             this.agent_lov_ctrl.Focus();
@@ -159,6 +163,7 @@ export class EhblComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_cargo_ehbl>response.record;
+                this.precords = (response.precords == undefined || response.precords == null) ? <Tbl_Audit[]>[] : <Tbl_Audit[]>response.precords;
                 this.mode = 'EDIT';
                 if (!this.gs.isBlank(this.agent_lov_ctrl))
                     this.agent_lov_ctrl.Focus();
@@ -292,4 +297,32 @@ export class EhblComponent implements OnInit {
         this.List('PAGE');
     }
 
+    SavePendingNos() {
+
+        if (!confirm("Save pending Nos")) {
+            return;
+        }
+
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.ebl_pending_nos = this.record.ebl_pending_nos;
+        SearchData.ebl_agent_id = this.record.ebl_agent_id;
+        this.mainService.SavePendingNos(SearchData)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.errorMessage = response.error;
+                    alert(this.errorMessage);
+                }
+                else {
+                    this.precords = (response.precords == undefined || response.precords == null) ? <Tbl_Audit[]>[] : <Tbl_Audit[]>response.precords;
+                    // this.errorMessage = 'Save Complete';
+                    // alert(this.errorMessage);
+                    this.record.ebl_pending_nos='';
+                }
+
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+            });
+    }
 }
