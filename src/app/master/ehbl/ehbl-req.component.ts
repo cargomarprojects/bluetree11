@@ -63,6 +63,7 @@ export class EhblReqComponent implements OnInit {
     ending_no: number = 0;
     balance_no: number = 0;
     now_printing_no: string = '';
+    pending_nos: string = '';
     pageQuery: PageQuery;
 
     constructor(
@@ -494,6 +495,7 @@ export class EhblReqComponent implements OnInit {
                     this.running_no = response.running_no;
                     this.ending_no = response.ending_no;
                     this.balance_no = response.balance_no;
+                    this.pending_nos =response.pending_nos;
                 }
 
             }, error => {
@@ -540,12 +542,14 @@ export class EhblReqComponent implements OnInit {
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = this.gs.getGuid();
+        SearchData.pending_nos = this.pending_nos;
         this.mainService.GetBLPending(SearchData)
             .subscribe(response => {
                 this.filename = response.filename;
                 this.filetype = response.filetype;
                 this.filedisplayname = response.filedisplayname;
                 this.now_printing_no = response.now_printing_no;
+                this.pending_nos='';
                 this.tab = 'report2';
                 //  this.PrintPdf();
             }, error => {
