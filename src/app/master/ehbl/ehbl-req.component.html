@@ -65,6 +65,7 @@
               <th>BL REQUESTED</th>
               <th>STARTING#</th>
               <th>ENDING#</th>
+              <th>COMPLETED</th>
               <th>REQUESTED.BY</th>
               <th>REQUESTED.DATE</th>
               <th *ngIf="gs.User_Category=='EMPLOYEE'&&isAdmin">APPROVE</th>
@@ -80,6 +81,7 @@
               <td>{{rec.ebld_req_nos}}</td>
               <td>{{rec.ebld_req_start_no}}</td>
               <td>{{rec.ebld_req_end_no}}</td>
+              <td>{{rec.ebld_req_completed}}</td>
               <td>{{rec.rec_created_by}}</td>
               <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
               <td *ngIf="gs.User_Category=='EMPLOYEE'&&isAdmin" class="hlink2" (click)="Approve(rec)">APPROVE</td>

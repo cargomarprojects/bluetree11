@@ -170,7 +170,7 @@ export class EhblReqComponent implements OnInit {
             user_category: this.gs.User_Category,
             user_role: this.gs.User_Role,
             user_customer_id: this.gs.User_Customer_Id,
-            page_rowcount: this.gs.ROWS_TO_DISPLAY,
+            page_rowcount: 10,
             action: 'NEW',
             page_count: 0,
             page_rows: 0,
