@@ -298,6 +298,12 @@ export class EhblComponent implements OnInit {
     }
 
     SavePendingNos() {
+        this.errorMessage = '';
+        if (this.gs.isBlank(this.record.ebl_agent_id)) {
+            this.errorMessage = "Agent cannot be empty";
+            alert(this.errorMessage);
+            return;
+        }
 
         if (!confirm("Save pending Nos")) {
             return;
@@ -317,7 +323,7 @@ export class EhblComponent implements OnInit {
                     this.precords = (response.precords == undefined || response.precords == null) ? <Tbl_Audit[]>[] : <Tbl_Audit[]>response.precords;
                     // this.errorMessage = 'Save Complete';
                     // alert(this.errorMessage);
-                    this.record.ebl_pending_nos='';
+                    this.record.ebl_pending_nos = '';
                 }
 
             }, error => {
