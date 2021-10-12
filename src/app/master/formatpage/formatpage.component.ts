@@ -20,8 +20,6 @@ import { PageQuery } from '../../shared/models/pageQuery';
     templateUrl: './formatpage.component.html'
 })
 export class FormatPageComponent implements OnInit {
-
-    
     @ViewChild('canvas', { static: false }) canvas: ElementRef<HTMLCanvasElement>;
     private ctx: CanvasRenderingContext2D;  
 
@@ -231,9 +229,6 @@ export class FormatPageComponent implements OnInit {
     onKeyup(event : KeyboardEvent, _rec  : Tbl_cargo_hblformat) {
         this.enableScrolling();
     }
-
-
- 
     
     setRemarks(){
         var str = "";
@@ -242,33 +237,44 @@ export class FormatPageComponent implements OnInit {
         this.remarks = str;
     }
 
-    btnClick(evt  , _rec  : Tbl_cargo_hblformat)
-    {
-        this.btnx = evt.x;
-        this.btny = evt.y;
-        this.setRemarks();     
-
-        this.last_x = _rec.blf_col_x;
-        this.last_y = _rec.blf_col_y;
-        this.DrawXYLines(_rec.blf_col_x, _rec.blf_col_y);
-        //#btn
-
+    getCanvas(){
+        if ( this.canvas)
+            this.ctx = this.canvas.nativeElement.getContext('2d');
     }
 
-    onDragStart(evt,_rec  : Tbl_cargo_hblformat, i :number){
-        this.record = _rec;        
-        this.selectedItem = i; 
-        this.btnx = evt.x;
-        this.btny = evt.y;
-        this.setRemarks();
-    }
 
     allowDrop(evt) {
         this.mouseX =  evt.x;
         this.mouseY =  evt.y;
         this.setRemarks();
+        this.findXy(evt);
         evt.preventDefault();
     }
+
+    findXy(evt){
+        var x = 0;
+        var y = 0;
+        if (evt.x > this.btnx) {
+            x = (evt.x - this.btnx ) / this.mainservice.zoom;
+            x = this.record.blf_col_x + x;
+        }
+        if (evt.x < this.btnx) {
+            x = (this.btnx - evt.x) / this.mainservice.zoom;
+            x = this.record.blf_col_x - x;
+        }
+
+        if (evt.y > this.btny) {
+            y = (evt.y - this.btny) / this.mainservice.zoom;
+            y = this.record.blf_col_y + y;
+        }
+        if (evt.y < this.btny) {
+            y = (this.btny - evt.y) / this.mainservice.zoom;
+            y = this.record.blf_col_y - y;
+        }
+        this.DrawXYLines(x,y, 'blue');
+    }
+
+
    
     onDrop(evt) {
         if ( this.selectedItem == -1)
@@ -297,12 +303,35 @@ export class FormatPageComponent implements OnInit {
         this.destY = y;
         this.setRemarks();
         this.selectedItem = -1;
+
+        this.DrawXYLines(this.record.blf_col_x,this.record.blf_col_y,'blue');
+
     }
 
-    getCanvas(){
-        if ( this.canvas)
-            this.ctx = this.canvas.nativeElement.getContext('2d');
+
+
+    btnClick(evt  , _rec  : Tbl_cargo_hblformat)
+    {
+        this.btnx = evt.x;
+        this.btny = evt.y;
+        this.setRemarks();     
+
+        this.last_x = _rec.blf_col_x;
+        this.last_y = _rec.blf_col_y;
+        this.DrawXYLines(_rec.blf_col_x, _rec.blf_col_y);
+        //#btn
+
     }
+
+    onDragStart(evt,_rec  : Tbl_cargo_hblformat, i :number){
+        this.record = _rec;        
+        this.selectedItem = i; 
+        this.btnx = evt.x;
+        this.btny = evt.y;
+        this.setRemarks();
+    }
+
+
 
     drawPage(){
         if ( !this.ctx)
@@ -334,28 +363,6 @@ export class FormatPageComponent implements OnInit {
         //this.inputs.toArray()[index].nativeElement.focus();
     }
 
-    findXy(x : number, y : number){
-
-
-        if (x > this.btnx) {
-            x = (x - this.btnx ) / this.mainservice.zoom;
-            x = this.record.blf_col_x + x;
-        }
-        if (x < this.btnx) {
-            x = (this.btnx - x) / this.mainservice.zoom;
-            x = this.record.blf_col_x - x;
-        }
-
-        if (y > this.btny) {
-            y = (y - this.btny) / this.mainservice.zoom;
-            y = this.record.blf_col_y + y;
-        }
-        if (y < this.btny) {
-            y = (this.btny - y) / this.mainservice.zoom;
-            y = this.record.blf_col_y - y;
-        }
-        this.DrawXYLines(x,y, 'blue');
-    }
 
 
     DrawXYLines(x : number, y : number, color : string = 'blue'){
