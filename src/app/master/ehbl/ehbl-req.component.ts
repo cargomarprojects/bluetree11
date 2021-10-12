@@ -543,6 +543,7 @@ export class EhblReqComponent implements OnInit {
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = this.gs.getGuid();
         SearchData.pending_nos = this.pending_nos;
+        SearchData.download_agent_id = this.download_agent_id;
         this.mainService.GetBLPending(SearchData)
             .subscribe(response => {
                 this.filename = response.filename;
