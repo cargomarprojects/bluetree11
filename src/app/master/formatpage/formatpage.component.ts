@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SearchQuery } from '../models/Tbl_cargo_hblformat';
 import { PageQuery } from '../../shared/models/pageQuery';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 
 @Component({
@@ -22,6 +23,8 @@ import { PageQuery } from '../../shared/models/pageQuery';
 export class FormatPageComponent implements OnInit {
     @ViewChild('canvas', { static: false }) canvas: ElementRef<HTMLCanvasElement>;
     private ctx: CanvasRenderingContext2D;  
+
+    draggingEle : ElementRef;
 
     @ViewChild('_btnretf') btnretf_ctrl: ElementRef;
     @ViewChildren('btn') btns: QueryList<ElementRef>;
@@ -230,12 +233,6 @@ export class FormatPageComponent implements OnInit {
         this.enableScrolling();
     }
     
-    setRemarks(){
-        var str = "";
-        str = "Pos : (" + this.btnx.toString() + "," + this.btny.toString();
-        str += ")-(" + this.mouseX.toString() + "," + this.mouseY.toString() + ")";
-        this.remarks = str;
-    }
 
     getCanvas(){
         if ( this.canvas)
@@ -243,93 +240,35 @@ export class FormatPageComponent implements OnInit {
     }
 
 
-    allowDrop(evt) {
-        this.mouseX =  evt.x;
-        this.mouseY =  evt.y;
-        this.setRemarks();
-        this.findXy(evt);
-        evt.preventDefault();
-    }
 
-    findXy(evt){
-        var x = 0;
-        var y = 0;
-        if (evt.x > this.btnx) {
-            x = (evt.x - this.btnx ) / this.mainservice.zoom;
-            x = this.record.blf_col_x + x;
-        }
-        if (evt.x < this.btnx) {
-            x = (this.btnx - evt.x) / this.mainservice.zoom;
-            x = this.record.blf_col_x - x;
-        }
-
-        if (evt.y > this.btny) {
-            y = (evt.y - this.btny) / this.mainservice.zoom;
-            y = this.record.blf_col_y + y;
-        }
-        if (evt.y < this.btny) {
-            y = (this.btny - evt.y) / this.mainservice.zoom;
-            y = this.record.blf_col_y - y;
-        }
-        this.DrawXYLines(x,y, 'blue');
-    }
-
-
-   
-    onDrop(evt) {
-        if ( this.selectedItem == -1)
+    DrawXYLines(x : number, y : number, color : string = 'blue'){
+        if ( !this.ctx)
             return;
-        this.setRemarks();
-        var x = 0;
-        var y = 0;
-        if (evt.x > this.btnx) {
-            x = (evt.x - this.btnx ) / this.mainservice.zoom;
-            this.record.blf_col_x = this.record.blf_col_x + x;
-        }
-        if (evt.x < this.btnx) {
-            x = (this.btnx - evt.x) / this.mainservice.zoom;
-            this.record.blf_col_x = this.record.blf_col_x - x;
-        }
+        else 
+            return ;
+            
+        x -= 3;
+        y -= 3;
 
-        if (evt.y > this.btny) {
-            y = (evt.y - this.btny) / this.mainservice.zoom;
-            this.record.blf_col_y = this.record.blf_col_y + y;
-        }
-        if (evt.y < this.btny) {
-            y = (this.btny - evt.y) / this.mainservice.zoom;
-            this.record.blf_col_y = this.record.blf_col_y - y;
-        }
-        this.destX = x;
-        this.destY = y;
-        this.setRemarks();
-        this.selectedItem = -1;
+        this.drawPage();            
+        this.ctx.beginPath();
+        this.ctx.lineWidth = 0.4;
+        this.ctx.strokeStyle = "blue";
+        
+        this.ctx.moveTo(x, 0);
+        this.ctx.lineTo(x,this.ht);
 
-        this.DrawXYLines(this.record.blf_col_x,this.record.blf_col_y,'blue');
+        this.ctx.moveTo(0, y);
+        this.ctx.lineTo(this.wd,y);
 
+        this.ctx.stroke();
     }
 
 
 
-    btnClick(evt  , _rec  : Tbl_cargo_hblformat)
-    {
-        this.btnx = evt.x;
-        this.btny = evt.y;
-        this.setRemarks();     
 
-        this.last_x = _rec.blf_col_x;
-        this.last_y = _rec.blf_col_y;
-        this.DrawXYLines(_rec.blf_col_x, _rec.blf_col_y);
-        //#btn
 
-    }
 
-    onDragStart(evt,_rec  : Tbl_cargo_hblformat, i :number){
-        this.record = _rec;        
-        this.selectedItem = i; 
-        this.btnx = evt.x;
-        this.btny = evt.y;
-        this.setRemarks();
-    }
 
 
 
@@ -357,34 +296,10 @@ export class FormatPageComponent implements OnInit {
     }
 
     
-    onDrag(evt : MouseEvent,_rec  : Tbl_cargo_hblformat, i=0){
-        //this.DrawXYLines(evt.x, evt.y);
-        //if ( this.inputs.toArray()[index])
-        //this.inputs.toArray()[index].nativeElement.focus();
-    }
+    
 
 
 
-    DrawXYLines(x : number, y : number, color : string = 'blue'){
-        if ( !this.ctx)
-            return;
-        
-        x -= 3;
-        y -= 3;
-
-        this.drawPage();            
-        this.ctx.beginPath();
-        this.ctx.lineWidth = 0.4;
-        this.ctx.strokeStyle = "blue";
-        
-        this.ctx.moveTo(x, 0);
-        this.ctx.lineTo(x,this.ht);
-
-        this.ctx.moveTo(0, y);
-        this.ctx.lineTo(this.wd,y);
-
-        this.ctx.stroke();
-    }
 
 
     disableScrolling(){
@@ -396,6 +311,77 @@ export class FormatPageComponent implements OnInit {
     enableScrolling(){
         window.onscroll=function(){};
     }
+
+    
+
+    allowDrop(evt) {
+        this.getXy();
+        evt.preventDefault();
+    }
+
+   
+   
+    onDrop(e : MouseEvent) {
+
+        if ( this.btns.toArray()[this.selectedItem]) {
+            this.moveAt( e.pageX, e.pageY);
+        }
+
+    }
+
+    moveAt(pageX, pageY) {
+        this.record.blf_col_x = pageX - this.btnx;
+        this.record.blf_col_y = pageY - this.btny;
+      }
+
+      
+
+    onMouseMove(e, _rec  : Tbl_cargo_hblformat, i :number){
+
+    }
+
+
+    btnClick(e, _rec  : Tbl_cargo_hblformat, i :number)
+    {
+        this.selectItem(e,_rec, i);
+    }
+    onDragStart(e,_rec  : Tbl_cargo_hblformat, i :number){
+        this.selectItem(e,_rec, i);
+    }
+
+    selectItem(e : MouseEvent,_rec  : Tbl_cargo_hblformat, i :number){
+        this.record = _rec;        
+        this.selectedItem = i;         
+        this.btnx = this.record.blf_col_x;
+        this.btny = this.record.blf_col_x;
+        this.setRemarks();
+    }
+
+
+    getXy(){
+
+        var x= 0;
+        var y =0;
+
+        if ( this.btns.toArray()[this.selectedItem]) {
+            x = this.btns.toArray()[this.selectedItem].nativeElement.style.left.toString().replace("px","");
+            y = this.btns.toArray()[this.selectedItem].nativeElement.style.top.toString().replace("px","");
+
+            this.btnx = x;
+            this.btny = y;
+
+            this.setRemarks();
+        }
+
+    }
+    setRemarks(){
+        var str = "";
+        str = "Pos : " + this.btnx.toString() + "," + this.btny.toString();
+        str += " org  " + this.record.blf_col_x + "-" + this.record.blf_col_y;
+        this.remarks = str;
+    }
+
+
 
 
 
