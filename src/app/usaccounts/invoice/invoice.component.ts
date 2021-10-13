@@ -402,7 +402,7 @@ export class InvoiceComponent implements OnInit {
     this.errorMessage = '';
     this.mainservice.BO_Status_Save(SearchData).subscribe(response => {
       this.MBL_BO_ATTENDED_CODE=this.gs.user_code;
-      alert('Update Complete');
+      // alert('Update Complete');
     }, error => {
       alert(this.gs.getError(error));
     });
