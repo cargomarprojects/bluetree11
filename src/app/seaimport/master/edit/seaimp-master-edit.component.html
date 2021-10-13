@@ -156,23 +156,29 @@
 
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Frt.Status</label>
-                  <div class="col-9">
+                  <div class="col-3 pr-0 m-0">
                     <select #_mbl_frt_status class="form-control form-control-sm" [(ngModel)]="record.mbl_frt_status">
                       <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.name">{{rec.name}}</option>
                     </select>
                   </div>
+                  <label class="col-3 col-form-label col-form-label-sm">Shipping Term</label>
+                  <div class="col-3  pl-0 m-0">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.mbl_ship_term_id">
+                      <option *ngFor="let rec of gs.PARAM_CARGO_MOVEMENT" [value]="rec.code">{{rec.name}}</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Shipping Term</label>
                   <div class="col-9">
                     <select class="form-control form-control-sm" [(ngModel)]="record.mbl_ship_term_id">
                       <option *ngFor="let rec of gs.PARAM_CARGO_MOVEMENT" [value]="rec.code">{{rec.name}}</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Shipping Type</label>
-                  <div class="col-9">
+                  <div class="col-3 pr-0 m-0">
                     <select class="form-control form-control-sm" [(ngModel)]="record.mbl_cntr_type">
                       <option [value]="'FCL'">FCL</option>
                       <option [value]="'LCL'">LCL</option>
@@ -180,8 +186,17 @@
                       <option [value]="'OTHERS'">OTHERS</option>
                     </select>
                   </div>
+                  <label class="col-3 col-form-label col-form-label-sm">Inco Term</label>
+                  <div class="col-3 pl-0 m-0">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.mbl_incoterm">
+                      <option [value]="'NA'">NA</option>
+                      <option [value]="'DAP'">DAP</option>
+                      <option [value]="'DDP'">DDP</option>
+                      <option [value]="'DDU'">DDU</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Inco Term</label>
                   <div class="col-9">
                     <select class="form-control form-control-sm" [(ngModel)]="record.mbl_incoterm">
@@ -191,7 +206,7 @@
                       <option [value]="'DDU'">DDU</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
                 <!-- <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm"></label>
                   <div class="col-9">
@@ -204,69 +219,69 @@
               </div>
               <div class="col-md-6 testbox  px-0 mx-0">
 
-
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Pol</label>
-                  <div class="col-9">
-
+                  <div class="col-5 pr-0">
                     <app-autocomplete2 [controlname]="'POL'" [tabletype]="'SEA PORT'" [displaycolumn]="'NAME'"
                       [displaydata]="record.mbl_pol_name" (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
-
                   </div>
-                </div>
-
-                <div class="form-group row">
-                  <label class="col-3 col-form-label col-form-label-sm">Pol.ETD</label>
-                  <div class="col-9">
+                  <label class="col-1 col-form-label col-form-label-sm m-0 pr-0">ETD</label>
+                  <div class="col-3 pl-0 m-0">
                     <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd" (ValueChanged)="record.mbl_pol_etd=$event">
                     </app-date>
                   </div>
                 </div>
 
+                <!-- <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Pol.ETD</label>
+                  <div class="col-9">
+                    <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd" (ValueChanged)="record.mbl_pol_etd=$event">
+                    </app-date>
+                  </div>
+                </div> -->
+
 
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Port.Discharge</label>
-                  <div class="col-9">
-
+                  <div class="col-5 pr-0">
                     <app-autocomplete2 [controlname]="'POD'" [tabletype]="'SEA PORT'" [displaycolumn]="'NAME'"
                       [displaydata]="record.mbl_pod_name" (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
                   </div>
-                </div>
-
-                <div class="form-group row">
-                  <label class="col-3 col-form-label col-form-label-sm">Pod.ETA</label>
-                  <div class="col-9">
+                  <label class="col-1 col-form-label col-form-label-sm">ETA</label>
+                  <div class="col-3 pl-0 m-0">
                     <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta" (ValueChanged)="record.mbl_pod_eta=$event">
                     </app-date>
                   </div>
                 </div>
 
-                <div class="form-group row">
-                  <label class="col-3 col-form-label col-form-label-sm">Place.Delivery</label>
-                  <div class="col-9">
-                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_place_delivery')"
-                      [(ngModel)]="record.mbl_place_delivery" maxlength="60" />
-                  </div>
-                </div>
                 <!-- <div class="form-group row">
-                  <label class="col-3 col-form-label col-form-label-sm">Port.Final</label>
+                  <label class="col-3 col-form-label col-form-label-sm">Pod.ETA</label>
                   <div class="col-9">
-                    <app-autocomplete2 [controlname]="'POFD'" [tabletype]="'SEA PORT'" [displaycolumn]="'NAME'"
-                      [displaydata]="record.mbl_pofd_name" (ValueChanged)="LovSelected($event)">
-                    </app-autocomplete2>
-  
-  
+                    <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta" (ValueChanged)="record.mbl_pod_eta=$event">
+                    </app-date>
                   </div>
                 </div> -->
 
                 <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Place.Delivery</label>
+                  <div class="col-5 pr-0">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_place_delivery')"
+                      [(ngModel)]="record.mbl_place_delivery" maxlength="60" />
+                  </div>
+                  <label class="col-1 col-form-label col-form-label-sm">ETA</label>
+                  <div class="col-3 pl-0 m-0">
+                    <app-date [inputdate]="record.mbl_pofd_eta" (ValueChanged)="record.mbl_pofd_eta=$event"></app-date>
+                  </div>
+                </div>
+       
+                <!-- <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Final.ETA</label>
                   <div class="col-9">
                     <app-date [inputdate]="record.mbl_pofd_eta" (ValueChanged)="record.mbl_pofd_eta=$event"></app-date>
                   </div>
-                </div>
+                </div> -->
 
 
 
@@ -300,14 +315,14 @@
                 </div>
 
                 <div class="form-group row">
-                  <label class="col-3 col-form-label col-form-label-sm">MBL Status</label>
+                  <label class="col-3 col-form-label col-form-label-sm">MBL.Status</label>
                   <div class="col-4 pr-0">
                     <select [disabled]="mode=='EDIT' && this.gs.USER_DISABLE_EDIT_SI_MBLSTATUS=='Y'"
                       class="form-control form-control-sm" [(ngModel)]="record.mbl_status">
                       <option *ngFor="let rec of MblStatusList" [value]="rec.name">{{rec.name}}</option>
                     </select>
                   </div>
-                  <label class="col-2 col-form-label col-form-label-sm">BL Status</label>
+                  <label class="col-2 col-form-label col-form-label-sm">BL.Status</label>
                   <div class="col-3 pl-0">
                     <select class="form-control form-control-sm" [(ngModel)]="record.mbl_is_sea_waybill">
                       <option *ngFor="let rec of BlStatusList" [value]="rec.name">{{rec.name}}</option>
@@ -438,12 +453,12 @@
               </div>
             </div>
 
-            <div class="row" >
-              
+            <div class="row">
+
               <div class="col-md-12 px-0 mx-0">
-                
-                <div class="page-body table-responsive" >
-                  <table class="table table-bordered table-hover table-sm cntr" >
+
+                <div class="page-body table-responsive">
+                  <table class="table table-bordered table-hover table-sm cntr">
                     <thead class="page-body-thead">
                       <tr>
                         <th>CNTR.NO</th>
@@ -580,8 +595,9 @@
                         <td>{{rec.hbl_ship_term}}</td>
                         <td>{{rec.rec_created_by}}</td>
                         <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-                        <td *ngIf="gs.canDelete(this.gs.MENU_SI_HOUSE)" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
-                          aria-hidden="true" (click)="DeleteHouseRow(rec)"></i></td>
+                        <td *ngIf="gs.canDelete(this.gs.MENU_SI_HOUSE)" class="p-0 text-center"><i
+                            class="fa fa-trash  fa-lg pointer" aria-hidden="true" (click)="DeleteHouseRow(rec)"></i>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -708,8 +724,8 @@
               [queryParams]="BtnNavigation2('CARGOPICKUP','P')">Delivery Order</a>
           </div>
           <div class="form-group row">
-              <button class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.canSave(menuid,mode)" [disabled]="is_locked"
-              (click)="Save()">Save</button>
+            <button class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.canSave(menuid,mode)"
+              [disabled]="is_locked" (click)="Save()">Save</button>
           </div>
         </div>
 
