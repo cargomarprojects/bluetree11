@@ -146,6 +146,8 @@ export interface Tbl_cargo_general {
     hbl_location_name: string;
     pick_is_delivery_sent: string;
     pick_delivery_date: string;
+    mbl_bo_status: string;
+    mbl_bo_attended_code: string;
 }
 
 export interface Tbl_cargo_container {

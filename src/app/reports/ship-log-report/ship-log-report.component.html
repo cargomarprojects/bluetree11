@@ -332,6 +332,8 @@
                                 [ngClass]="getIcon('mbl_liner_name')"></i></th>
                         <th *ngIf="job_mode=='OCEAN EXPORT'" (click)="sort('mbl_liner_bookingno')"> BOOKING# &nbsp;<i
                                 [ngClass]="getIcon('mbl_liner_bookingno')"></i> </th>
+                        <th (click)="sort('hbl_is_itshipment')"> AGENT &nbsp;<i
+                                [ngClass]="getIcon('hbl_is_itshipment')"></i> </th>
                         <th (click)="sort('hbl_consignee_name')"> CONSIGNEE &nbsp;<i
                                 [ngClass]="getIcon('hbl_consignee_name')"></i> </th>
                         <th *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'"
@@ -341,6 +343,10 @@
                         <th (click)="sort('mbl_cargo_loc_firmcode')"> FIRM.CODE &nbsp;<i
                                 [ngClass]="getIcon('mbl_cargo_loc_firmcode')"></i> </th>
                         <th (click)="sort('hbl_is_itshipment')"> IT.SHIPMENT &nbsp;<i
+                                [ngClass]="getIcon('hbl_is_itshipment')"></i> </th>
+                        <th (click)="sort('hbl_is_itshipment')"> STATUS &nbsp;<i
+                                [ngClass]="getIcon('hbl_is_itshipment')"></i> </th>
+                        <th (click)="sort('hbl_is_itshipment')"> BY &nbsp;<i
                                 [ngClass]="getIcon('hbl_is_itshipment')"></i> </th>
                         <!-- <th> A </th>
                         <th> B </th>
@@ -365,11 +371,14 @@
                         <td>{{rec.hbl_shipment_stage}}</td>
                         <td>{{rec.mbl_liner_name}}</td>
                         <td *ngIf="job_mode=='OCEAN EXPORT'">{{rec.mbl_liner_bookingno}}</td>
+                        <td>{{rec.mbl_agent_name}}</td>
                         <td>{{rec.hbl_consignee_name}}</td>
                         <td *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'">{{rec.mbl_cntr_type}}</td>
                         <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
                         <td>{{rec.mbl_cargo_loc_firmcode}}</td>
                         <td>{{rec.hbl_is_itshipment}}</td>
+                        <td>{{rec.mbl_bo_status}}</td>
+                        <td>{{rec.mbl_bo_attended_code}}</td>
                         <!-- <td>{{rec.mbl_inv_stage_a}}</td>
                         <td>{{rec.mbl_inv_stage_b}}</td>
                         <td>{{rec.mbl_inv_stage_c}}</td>
