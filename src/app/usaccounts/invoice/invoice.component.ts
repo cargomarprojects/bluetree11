@@ -9,6 +9,7 @@ import { Tbl_cargo_invoicem } from '../models/Tbl_cargo_Invoicem';
 import { invoiceService } from '../services/invoice.service';
 //EDIT-AJITH-21-09-2021
 //EDIT-AJITH-04-10-2021
+//EDIT-AJITH-13-10-2021
 
 @Component({
   selector: 'app-invoice',
@@ -43,6 +44,9 @@ export class InvoiceComponent implements OnInit {
   MBL_LOSS_APPROVED: boolean = false;
   MBL_PROFIT_REQ: boolean = false;
   MBL_LOSS_MEMO: string = '';
+  MBL_BO_STATUS: string = 'NA';
+  MBL_BO_ATTENDED_CODE: string = '';
+
   inv_verson: string = "9";
   origin: string;
   records: Tbl_cargo_invoicem[]
@@ -116,6 +120,8 @@ export class InvoiceComponent implements OnInit {
       this.MBL_LOSS_APPROVED = response.MBL_LOSS_APPROVED;
       this.MBL_PROFIT_REQ = response.MBL_PROFIT_REQ;
       this.MBL_LOSS_MEMO = response.MBL_LOSS_MEMO;
+      this.MBL_BO_STATUS = response.MBL_BO_STATUS;
+      this.MBL_BO_ATTENDED_CODE = response.MBL_BO_ATTENDED_CODE;
 
       this.DisplayProfit();
     }, error => {
@@ -385,6 +391,22 @@ export class InvoiceComponent implements OnInit {
         break;
       }
     }
+  }
+
+  UpdateBOStatus() {
+
+    var SearchData = this.gs.UserInfo;
+    SearchData.MBL_PKID = this.mbl_pkid;
+    SearchData.MBL_BO_STATUS = this.MBL_BO_STATUS;
+    SearchData.MBL_BO_ATTENDED_CODE =  this.gs.user_code;
+    this.errorMessage = '';
+    this.mainservice.BO_Status_Save(SearchData).subscribe(response => {
+      this.MBL_BO_ATTENDED_CODE=this.gs.user_code;
+      alert('Update Complete');
+    }, error => {
+      alert(this.gs.getError(error));
+    });
+
   }
 
 }
