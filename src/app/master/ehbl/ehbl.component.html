@@ -118,7 +118,11 @@
   <br>
   <div *ngIf="mode == 'EDIT'" class="page-header">
     <div class="row  align-items-center justify-content-left">
-      <label class="mr-3">Pending List</label>
+      <label class="mr-3">Pending List &nbsp;
+        <font color="red">
+          BL nos. can be separated by comma or hyphen. (1001,1002,1003 or 1001-1003)
+        </font>
+      </label>
     </div>
   </div>
   <div *ngIf="mode == 'EDIT'" class="row">
@@ -143,9 +147,8 @@
       </div>
     </div>
     <div class="col-sm-6 mx-0 px-0">
-      <label class="col-8 col-form-label  col-form-label-sm" style="color: red;">BL nos. should be separated by comma
-        only. Use hyphen to show range. (1001,1002,1003 or 1001-1005)
-      </label>
+      <!-- <label class="col-8 col-form-label  col-form-label-sm" style="color: red;">BL nos. can be separated by comma or hyphen. (1001,1002,1003 or 1001-1003)
+      </label> -->
     </div>
   </div>
 

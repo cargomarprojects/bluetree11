@@ -11,9 +11,11 @@ import { SearchTable } from '../../shared/models/searchtable';
 import { PageQuery } from '../../shared/models/pageQuery';
 import * as printJS from "print-js";
 
+declare var $: any;
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-17-09-2021
 //EDIT-AJITH-11-10-2021
+//EDIT-AJITH-13-10-2021
 
 @Component({
     selector: 'app-ehbl-req',
@@ -63,6 +65,7 @@ export class EhblReqComponent implements OnInit {
     ending_no: number = 0;
     balance_no: number = 0;
     now_printing_no: string = '';
+    print_caption: string = 'Print BL';
     pending_nos: string = '';
     pageQuery: PageQuery;
 
@@ -90,9 +93,7 @@ export class EhblReqComponent implements OnInit {
 
         this.initPage();
         this.List("NEW");
-
-
-
+        this.actionHandler('ADD', '');
     }
 
     private initPage() {
@@ -155,9 +156,11 @@ export class EhblReqComponent implements OnInit {
             this.record.ebld_agent_id = this.gs.User_Customer_Id;
             this.record.ebld_agent_name = this.gs.user_name;
             this.record.ebld_agent_code = this.gs.user_code;
-        }
-        if (!this.gs.isBlank(this.agent_lov_req_ctrl))
-            this.agent_lov_req_ctrl.Focus();
+            if (!this.gs.isBlank(this.ebld_req_nos_ctrl))
+                this.ebld_req_nos_ctrl.nativeElement.focus();
+        } else
+            if (!this.gs.isBlank(this.agent_lov_req_ctrl))
+                this.agent_lov_req_ctrl.Focus();
     }
 
 
@@ -439,7 +442,11 @@ export class EhblReqComponent implements OnInit {
         // this.report_searchdata.download_req_nos = this.download_req_nos;
         // this.report_menuid = this.menuid;
         // this.tab = 'report2';
+        if (!confirm("Do you want to Generate BL ")) {
+            return;
+        }
 
+        this.print_caption = 'Print BL';
         this.errorMessage = '';
 
         let remarks: string = '';
@@ -495,7 +502,7 @@ export class EhblReqComponent implements OnInit {
                     this.running_no = response.running_no;
                     this.ending_no = response.ending_no;
                     this.balance_no = response.balance_no;
-                    this.pending_nos =response.pending_nos;
+                    this.pending_nos = response.pending_nos;
                 }
 
             }, error => {
@@ -518,7 +525,7 @@ export class EhblReqComponent implements OnInit {
     }
 
     GetBLBackside() {
-
+        this.print_caption = 'Print Backside';
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = this.gs.getGuid();
@@ -537,8 +544,8 @@ export class EhblReqComponent implements OnInit {
             });
 
     }
-    GetBLPending()
-    {
+    GetBLPending() {
+        this.print_caption = 'Print Pending BL';
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = this.gs.getGuid();
@@ -550,7 +557,7 @@ export class EhblReqComponent implements OnInit {
                 this.filetype = response.filetype;
                 this.filedisplayname = response.filedisplayname;
                 this.now_printing_no = response.now_printing_no;
-                this.pending_nos='';
+                this.pending_nos = '';
                 this.tab = 'report2';
                 //  this.PrintPdf();
             }, error => {
@@ -574,6 +581,16 @@ export class EhblReqComponent implements OnInit {
             alert(this.errorMessage);
         });
 
+    }
+
+    ShowDownload(_rec: Tbl_cargo_ehbld) {
+        if (!_rec.ebld_approved)
+            return;
+        this.download_agent_id = _rec.ebld_agent_id;
+        this.download_agent_name = _rec.ebld_agent_name;
+        this.download_agent_code = _rec.ebld_agent_code;
+        this.GetBalanceBL(this.download_agent_id)
+        $('#myTab a[href="#bldownload"]').tab('show');
     }
 }
 

@@ -19,14 +19,12 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active  commonbgcolor2" id="blrequest" role="tabpanel" aria-labelledby="blrequest-tab">
-    <div class="page-header">
+    <!-- <div class="page-header">
       <div class="row  align-items-center justify-content-left p-1">
-        <!-- <label class="mr-3">{{title}}</label> -->
         <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm mr-1">List</button>
         <button (click)="actionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
-        <!-- <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button> -->
       </div>
-    </div>
+    </div> -->
 
     <div *ngIf="errorMessage">
       <div class="alert alert-primary">
@@ -34,7 +32,7 @@
       </div>
     </div>
 
-    <div *ngIf="currentTab=='LIST'" class="page-list">
+    <div class="page-list">
 
       <div class="page-search">
         <div class="row">
@@ -43,10 +41,6 @@
             <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring"
               (blur)="onBlur('searchstring')" />
           </div>
-          <!--<div class="col-2">
-          <input type="checkbox" [(ngModel)]="sortby" />
-          <span>Sort By Code</span>
-        </div>-->
           <div class="col">
             <button (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
           </div>
@@ -62,6 +56,8 @@
           <thead class="page-body-thead">
             <tr>
               <th>AGENT</th>
+              <!-- <th>EDIT</th> -->
+              <th>DOWNLOAD</th>
               <th>BL REQUESTED</th>
               <th>STARTING#</th>
               <th>ENDING#</th>
@@ -78,6 +74,10 @@
           <tbody class="page-body-tbody">
             <tr *ngFor="let rec of records;  let i = index">
               <td class="hlink2" (click)="actionHandler('EDIT',rec.ebld_pkid, i)">{{rec.ebld_agent_name}}</td>
+              <!-- <td class="text-center"><i *ngIf="!rec.ebld_approved"  class="fa fa-edit fa-lg pointer" (click)="actionHandler('EDIT',rec.ebld_pkid, i)"  aria-hidden="true"></i> </td> -->
+              <td class="text-center" (click)="ShowDownload(rec)">
+                <i *ngIf="rec.ebld_approved" class="fa fa-download fa-lg pointer" aria-hidden="true"></i>
+              </td>
               <td>{{rec.ebld_req_nos}}</td>
               <td>{{rec.ebld_req_start_no}}</td>
               <td>{{rec.ebld_req_end_no}}</td>
@@ -99,9 +99,8 @@
 
     </div>
 
-
-    <div *ngIf="currentTab=='DETAILS'" class="page-body mx-0 px-0">
-
+    <br>
+    <div class="page-body mx-0 px-0">
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group row">
@@ -114,28 +113,32 @@
             </div>
             <!-- <label class="col-7 col-form-label  col-form-label-sm">{{record.ebld_agent_name}}</label> -->
           </div>
-
+        </div>
+        <div class="col-sm-4">
           <div class="form-group row">
             <label class="col-4 col-form-label  col-form-label-sm">No of BLs Required</label>
-            <div class="col-8">
+            <div class="col-4">
               <input type="number" #_ebld_req_nos [disabled]="record.ebld_approved" class="form-control form-control-sm"
                 [(ngModel)]="record.ebld_req_nos" required maxlength="10" />
+            </div>
+            <div class="col-4">
+              <button (click)="Save()" class="btn btn-primary btn-sm mr-1">Save</button>
+              <button (click)="actionHandler('ADD','')" class="btn btn-primary btn-sm">New</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="page-footer">
+      <!-- <div class="page-footer">
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group row">
               <div class="offset-4 col-8">
-                <button [hidden]="disableSave" [disabled]="loading" (click)="Save()"
-                  class="btn btn-primary btn-sm">Save</button>
+                <button (click)="Save()" class="btn btn-primary btn-sm">Save</button>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="tab-pane fade commonbgcolor2" id="bldownload" role="tabpanel" aria-labelledby="bldownload-tab">
@@ -183,46 +186,49 @@
           </div>
 
           <div class="form-group row">
-            <label class="col-3 col-form-label  col-form-label-sm">No of BLs to print</label>
+            <label *ngIf="tab=='main'" class="col-3 col-form-label  col-form-label-sm">No of BLs to print</label>
             <div class="col-2">
-              <input type="number" [disabled]="tab == 'report2'" class="form-control form-control-sm"
-                [(ngModel)]="download_req_nos" required maxlength="10" />
+              <input *ngIf="tab=='main'" type="number" [disabled]="tab == 'report2'"
+                class="form-control form-control-sm" [(ngModel)]="download_req_nos" required maxlength="10" />
             </div>
             <div class="col-7">
               <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
                 (click)="GenerateValid()">Generate</button>
               <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
                 (click)="GetBLBackside()">Backside</button>
-                <button *ngIf="tab=='main'&&pending_nos!=''" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
-                (click)="GetBLPending()">Pending</button>
-              <button *ngIf="tab=='report2' && canPrint" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
-                (click)="PrintPdf()">Print</button>
-              <button *ngIf="tab=='report2'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
-                (click)="Cancel()">Return</button>
+              <button *ngIf="tab=='main'&&pending_nos!=''" class="btn btn-primary btn-sm mr-1"
+                [disabled]="tab == 'report2'" (click)="GetBLPending()">Pending</button>
             </div>
           </div>
         </div>
         <div class="col-sm-6 mx-0 px-0">
           <div class="form-group row">
-            <div class="col-12  mt-5">
-              <label *ngIf="tab=='report2'&&now_printing_no!=''" class="col col-form-label col-form-label-sm">
-                <font color="black">
-                  NOW PRINTING#&nbsp;
-                </font>
-                <font color="red">
-                  {{now_printing_no}}&nbsp;
-                </font>
-              </label>
-              <label *ngIf="tab=='main'&&pending_nos!=''" class="col col-form-label col-form-label-sm">
-                <font color="black">
-                  PENDING#&nbsp;
-                </font>
-                <font color="red">
-                  {{pending_nos}}&nbsp;
-                </font>
-              </label>
+            <label *ngIf="tab=='report2'&&now_printing_no!=''" class="col-12 col-form-label col-form-label-sm">
+              <font color="black">
+                NOW PRINTING#&nbsp;
+              </font>
+              <font color="red">
+                {{now_printing_no}}&nbsp;
+              </font>
+            </label>
+            <label *ngIf="tab=='main'&&pending_nos!=''" class="col-12 col-form-label col-form-label-sm">
+              <font color="black">
+                PENDING#&nbsp;
+              </font>
+              <font color="red">
+                {{pending_nos}}&nbsp;
+              </font>
+            </label>
+          </div>
+          <div class="form-group row">
+            <div class="col-12 ">
+              <button *ngIf="tab=='report2' && canPrint" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
+                (click)="PrintPdf()">{{print_caption}}</button>
+              <button *ngIf="tab=='report2'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
+                (click)="Cancel()">Return</button>
             </div>
           </div>
+
         </div>
 
       </div>
