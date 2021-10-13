@@ -170,7 +170,7 @@
           </div>
 
           <div class="form-group row">
-            <label *ngIf="tab=='main'" class="col-3 col-form-label  col-form-label-sm">No of BLs to print</label>
+            <label *ngIf="tab=='main'" class="col-3 col-form-label  col-form-label-sm">No of BLs to Generate</label>
             <div class="col-2">
               <input *ngIf="tab=='main'" type="number" [disabled]="tab == 'report2'"
                 class="form-control form-control-sm" [(ngModel)]="download_req_nos" required maxlength="10" />
