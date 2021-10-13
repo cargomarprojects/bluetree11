@@ -13,19 +13,9 @@
     <a class="nav-link" id="bldownload-tab" data-toggle="tab" href="#bldownload" role="tab" aria-controls="bldownload"
       aria-selected="false">Generate/Print</a>
   </li>
-  <!-- <li class="nav-item">
-    <button class="btn btn-primary btn-sm m-1 p-1" (click)="Close()">Return</button>
-  </li> -->
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active  commonbgcolor2" id="blrequest" role="tabpanel" aria-labelledby="blrequest-tab">
-    <!-- <div class="page-header">
-      <div class="row  align-items-center justify-content-left p-1">
-        <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm mr-1">List</button>
-        <button (click)="actionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
-      </div>
-    </div> -->
-
     <div *ngIf="errorMessage">
       <div class="alert alert-primary">
         {{errorMessage}}
@@ -46,16 +36,13 @@
           </div>
         </div>
 
-
         <App-Page2 [_pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page2>
-
 
         <div class="page-body table-responsive table-bordered">
           <table class="table table-hover table-sm">
             <thead class="page-body-thead">
               <tr>
                 <th>AGENT</th>
-                <!-- <th>EDIT</th> -->
                 <th>GENERATE</th>
                 <th>BL REQUESTED</th>
                 <th>STARTING#</th>
@@ -73,7 +60,6 @@
             <tbody class="page-body-tbody">
               <tr *ngFor="let rec of records;  let i = index">
                 <td class="hlink2" (click)="actionHandler('EDIT',rec.ebld_pkid, i)">{{rec.ebld_agent_name}}</td>
-                <!-- <td class="text-center"><i *ngIf="!rec.ebld_approved"  class="fa fa-edit fa-lg pointer" (click)="actionHandler('EDIT',rec.ebld_pkid, i)"  aria-hidden="true"></i> </td> -->
                 <td class="hlink2" (click)="ShowDownload(rec)">
                   <span *ngIf="rec.ebld_approved"> GENERATE BL </span>
                 </td>
