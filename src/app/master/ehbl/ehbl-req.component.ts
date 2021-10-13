@@ -241,9 +241,12 @@ export class EhblReqComponent implements OnInit {
                 }
                 else {
                     this.mode = 'EDIT';
-                    this.errorMessage = 'Save Complete';
-                    alert(this.errorMessage);
-                    this.RefreshList(this.record);
+                    // this.errorMessage = 'Save Complete';
+                    //alert(this.errorMessage);
+                    //alert('Save Complete');
+                    // this.RefreshList(this.record);
+                    this.List("NEW");
+                    this.actionHandler('ADD', '');
                 }
             }, error => {
                 this.errorMessage = this.gs.getError(error);
@@ -351,8 +354,9 @@ export class EhblReqComponent implements OnInit {
                 }
                 else {
 
-                    this.errorMessage = 'Save Complete';
+                    // this.errorMessage = 'Save Complete';
                     // alert(this.errorMessage);
+                    alert('Save Complete');
                     _rec.ebld_approved = true;
                     _rec.ebld_req_start_no = response.req_startno;
                     _rec.ebld_req_end_no = response.req_endno;
@@ -367,8 +371,9 @@ export class EhblReqComponent implements OnInit {
     DeleteRow(_rec: Tbl_cargo_ehbld) {
 
         if (_rec.ebld_approved) {
-            this.errorMessage = "Cannot Delete, Approved";
-            alert(this.errorMessage);
+            // this.errorMessage = "Cannot Delete, Approved";
+            // alert(this.errorMessage);
+            alert('Cannot Delete, Approved');
             return;
         }
         if (!confirm("DELETE " + _rec.ebld_agent_name + "(TOTAL BL REQUESTED " + _rec.ebld_req_nos + ")")) {
@@ -401,13 +406,15 @@ export class EhblReqComponent implements OnInit {
 
         this.errorMessage = '';
         if (this.gs.isBlank(this.download_agent_id)) {
-            this.errorMessage = "Agent cannot be blank";
-            alert(this.errorMessage);
+            // this.errorMessage = "Agent cannot be blank";
+            // alert(this.errorMessage);
+            alert('Agent cannot be blank');
             return;
         }
         if (this.gs.isZero(this.download_req_nos) || this.download_req_nos < 0) {
-            this.errorMessage = "Invalid, No. of BLs to download";
-            alert(this.errorMessage);
+            // this.errorMessage = "Invalid, No. of BLs to download";
+            // alert(this.errorMessage);
+            alert('Invalid, No. of BLs to download');
             return;
         }
 

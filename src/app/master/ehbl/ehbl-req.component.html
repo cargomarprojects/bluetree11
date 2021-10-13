@@ -31,115 +31,113 @@
         {{errorMessage}}
       </div>
     </div>
-
-    <div class="page-list">
-
-      <div class="page-search">
-        <div class="row">
-          <label class="col-2">Search</label>
-          <div class="col-4">
-            <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring"
-              (blur)="onBlur('searchstring')" />
-          </div>
-          <div class="col">
-            <button (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
+    <div >
+      <div class="page-list">
+        <div class="page-search">
+          <div class="row">
+            <label class="col-2">Search</label>
+            <div class="col-4">
+              <input type="text" class="col form-control form-control-sm" name="Search" [(ngModel)]="searchstring"
+                (blur)="onBlur('searchstring')" />
+            </div>
+            <div class="col">
+              <button (click)="List('NEW')" class="btn btn-primary btn-sm">Search</button>
+            </div>
           </div>
         </div>
+
+
+        <App-Page2 [_pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page2>
+
+
+        <div class="page-body table-responsive table-bordered">
+          <table class="table table-hover table-sm">
+            <thead class="page-body-thead">
+              <tr>
+                <th>AGENT</th>
+                <!-- <th>EDIT</th> -->
+                <th>GENERATE</th>
+                <th>BL REQUESTED</th>
+                <th>STARTING#</th>
+                <th>ENDING#</th>
+                <th>COMPLETED</th>
+                <th>REQUESTED.BY</th>
+                <th>REQUESTED.DATE</th>
+                <th *ngIf="gs.User_Category=='EMPLOYEE'&&isAdmin">APPROVE</th>
+                <th>APPROVED</th>
+                <th>APPROVED.BY</th>
+                <th>APPROVED.DATE</th>
+                <th *ngIf="gs.User_Category=='EMPLOYEE'&&canDelete" class='text-center'>DELETE</th>
+              </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+              <tr *ngFor="let rec of records;  let i = index">
+                <td class="hlink2" (click)="actionHandler('EDIT',rec.ebld_pkid, i)">{{rec.ebld_agent_name}}</td>
+                <!-- <td class="text-center"><i *ngIf="!rec.ebld_approved"  class="fa fa-edit fa-lg pointer" (click)="actionHandler('EDIT',rec.ebld_pkid, i)"  aria-hidden="true"></i> </td> -->
+                <td class="hlink2" (click)="ShowDownload(rec)">
+                  <span *ngIf="rec.ebld_approved"> GENERATE BL </span>
+                </td>
+                <td>{{rec.ebld_req_nos}}</td>
+                <td>{{rec.ebld_req_start_no}}</td>
+                <td>{{rec.ebld_req_end_no}}</td>
+                <td>{{rec.ebld_req_completed}}</td>
+                <td>{{rec.rec_created_by}}</td>
+                <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td *ngIf="gs.User_Category=='EMPLOYEE'&&isAdmin" class="hlink2" (click)="Approve(rec)">APPROVE</td>
+                <td [style.color]="rec.ebld_approved?'Red': 'Black'">{{rec.ebld_approved==true?'YES':'NO'}}</td>
+                <td>{{rec.ebld_approved_by}}</td>
+                <td>{{rec.ebld_approved_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td *ngIf="gs.User_Category=='EMPLOYEE'&&canDelete" class="p-0 text-center"><i
+                    class="fa fa-trash  fa-lg pointer" aria-hidden="true" (click)="DeleteRow(rec)"></i></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <App-Page2 [_pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page2>
+
       </div>
-
-
-      <App-Page2 [_pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page2>
-
-
-      <div class="page-body table-responsive table-bordered">
-        <table class="table table-hover table-sm">
-          <thead class="page-body-thead">
-            <tr>
-              <th>AGENT</th>
-              <!-- <th>EDIT</th> -->
-              <th>DOWNLOAD</th>
-              <th>BL REQUESTED</th>
-              <th>STARTING#</th>
-              <th>ENDING#</th>
-              <th>COMPLETED</th>
-              <th>REQUESTED.BY</th>
-              <th>REQUESTED.DATE</th>
-              <th *ngIf="gs.User_Category=='EMPLOYEE'&&isAdmin">APPROVE</th>
-              <th>APPROVED</th>
-              <th>APPROVED.BY</th>
-              <th>APPROVED.DATE</th>
-              <th *ngIf="gs.User_Category=='EMPLOYEE'&&canDelete" class='text-center'>DELETE</th>
-            </tr>
-          </thead>
-          <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of records;  let i = index">
-              <td class="hlink2" (click)="actionHandler('EDIT',rec.ebld_pkid, i)">{{rec.ebld_agent_name}}</td>
-              <!-- <td class="text-center"><i *ngIf="!rec.ebld_approved"  class="fa fa-edit fa-lg pointer" (click)="actionHandler('EDIT',rec.ebld_pkid, i)"  aria-hidden="true"></i> </td> -->
-              <td class="text-center" (click)="ShowDownload(rec)">
-                <i *ngIf="rec.ebld_approved" class="fa fa-download fa-lg pointer" aria-hidden="true"></i>
-              </td>
-              <td>{{rec.ebld_req_nos}}</td>
-              <td>{{rec.ebld_req_start_no}}</td>
-              <td>{{rec.ebld_req_end_no}}</td>
-              <td>{{rec.ebld_req_completed}}</td>
-              <td>{{rec.rec_created_by}}</td>
-              <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-              <td *ngIf="gs.User_Category=='EMPLOYEE'&&isAdmin" class="hlink2" (click)="Approve(rec)">APPROVE</td>
-              <td [style.color]="rec.ebld_approved?'Red': 'Black'">{{rec.ebld_approved==true?'YES':'NO'}}</td>
-              <td>{{rec.ebld_approved_by}}</td>
-              <td>{{rec.ebld_approved_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-              <td *ngIf="gs.User_Category=='EMPLOYEE'&&canDelete" class="p-0 text-center"><i
-                  class="fa fa-trash  fa-lg pointer" aria-hidden="true" (click)="DeleteRow(rec)"></i></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <App-Page2 [_pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page2>
-
     </div>
-
-    <br>
-    <div class="page-body mx-0 px-0">
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="form-group row">
-            <label class="col-4 col-form-label  col-form-label-sm">Agent</label>
-            <div class="col-8">
-              <app-autocomplete2 #_agent_lov_req [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
-                [disabled]="record.ebld_approved||gs.User_Role=='AGENT'" [displaydata]="record.ebld_agent_name"
-                (ValueChanged)="LovSelected($event)">
-              </app-autocomplete2>
-            </div>
-            <!-- <label class="col-7 col-form-label  col-form-label-sm">{{record.ebld_agent_name}}</label> -->
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="form-group row">
-            <label class="col-4 col-form-label  col-form-label-sm">No of BLs Required</label>
-            <div class="col-4">
-              <input type="number" #_ebld_req_nos [disabled]="record.ebld_approved" class="form-control form-control-sm"
-                [(ngModel)]="record.ebld_req_nos" required maxlength="10" />
-            </div>
-            <div class="col-4">
-              <button (click)="Save()" class="btn btn-primary btn-sm mr-1">Save</button>
-              <button (click)="actionHandler('ADD','')" class="btn btn-primary btn-sm">New</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- <div class="page-footer">
+    <h6  class="mt-2" style=" border-bottom: solid; border-width: thin; border-color:black; "></h6>
+    <h6  class="mt-2" style=" border-bottom: solid; border-width: thin; border-color:black; ">BL REQUEST</h6>
+    <div >
+      <div class="page-body mx-0 px-0">
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group row">
-              <div class="offset-4 col-8">
-                <button (click)="Save()" class="btn btn-primary btn-sm">Save</button>
+              <label class="col-4 col-form-label  col-form-label-sm">Agent</label>
+              <div class="col-8">
+                <app-autocomplete2 #_agent_lov_req [controlname]="'AGENT'" [tabletype]="'MASTER'"
+                  [displaycolumn]="'NAME'" [disabled]="record.ebld_approved||gs.User_Role=='AGENT'"
+                  [displaydata]="record.ebld_agent_name" (ValueChanged)="LovSelected($event)">
+                </app-autocomplete2>
+              </div>
+              <!-- <label class="col-7 col-form-label  col-form-label-sm">{{record.ebld_agent_name}}</label> -->
+            </div>
+            <div class="form-group row">
+              <label class="col-4 col-form-label  col-form-label-sm">No of BLs Required</label>
+              <div class="col-4">
+                <input type="number" #_ebld_req_nos [disabled]="record.ebld_approved"
+                  class="form-control form-control-sm" [(ngModel)]="record.ebld_req_nos" required maxlength="10" />
               </div>
             </div>
           </div>
         </div>
-      </div> -->
+        <div class="page-footer">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group row">
+                <div class="offset-4 col-8">
+                  <button (click)="Save()" class="btn btn-primary btn-sm mr-1">Save</button>
+                  <button (click)="actionHandler('ADD','')" class="btn btn-primary btn-sm">New</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <h6  class="mt-1" style=" border-bottom: solid; border-width: thin; border-color:black; "></h6>
   </div>
   <div class="tab-pane fade commonbgcolor2" id="bldownload" role="tabpanel" aria-labelledby="bldownload-tab">
     <div class="page-body">
