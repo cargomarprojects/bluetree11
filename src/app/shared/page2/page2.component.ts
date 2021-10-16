@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDet
 import { PageQuery } from '../models/pageQuery';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+//EDIT-AJITH-16-10-2021
 
 @Component({
   selector: 'App-Page2',
@@ -78,10 +78,8 @@ export class Page2Component implements OnInit {
     }
 
 
-    if (this.pageQuery.page_current == oldPage)
-      return;
-
-
+    // if (this.pageQuery.page_current == oldPage)
+    //   return;
     
     this.pageEvents.emit({ outputformat: outputformat, action: action, pageQuery: this.pageQuery });
   }

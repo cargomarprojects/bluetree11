@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
+//EDIT-AJITH-16-10-2021
 
 @Component({
   selector: 'App-Page',
@@ -67,8 +68,8 @@ export class PageComponent implements OnInit {
       this.goto_page_no =   this.PageData.page_count;
     }
     
-    if (this.PageData.page_current == oldPage)
-      return;
+    // if (this.PageData.page_current == oldPage)
+    //   return;
 
       
     this.PageEvents.emit({outputformat:outputformat,action:action,page_current:this.PageData.page_current});
