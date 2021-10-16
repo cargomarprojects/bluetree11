@@ -16,6 +16,7 @@ declare var $: any;
 //EDIT-AJITH-17-09-2021
 //EDIT-AJITH-11-10-2021
 //EDIT-AJITH-13-10-2021
+//EDIT-AJITH-16-10-2021
 
 @Component({
     selector: 'app-ehbl-req',
@@ -510,6 +511,7 @@ export class EhblReqComponent implements OnInit {
                     this.ending_no = response.ending_no;
                     this.balance_no = response.balance_no;
                     this.pending_nos = response.pending_nos;
+                    this.download_req_nos = response.download_req_nos;
                 }
 
             }, error => {
