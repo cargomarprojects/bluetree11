@@ -12,6 +12,7 @@ import { vm_Tbl_User_Menum, Tbl_User_Menum } from '../models/Tbl_User_Menum';
 
 import { SearchTable } from '../../shared/models/searchtable';
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-16-10-2021
 
 @Component({
     selector: 'app-menu-edit',
@@ -175,7 +176,8 @@ export class MenuEditComponent implements OnInit {
         if (gRec)
             this.record.menu_group_name = mRec.name;
 
-
+            this.record.menu_type = "MENU";
+            this.record.menu_parent_id = this.record.menu_module_id;
     }
     private Allvalid(): boolean {
 
