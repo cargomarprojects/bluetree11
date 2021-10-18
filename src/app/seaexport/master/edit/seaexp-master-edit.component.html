@@ -140,18 +140,26 @@
 
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Handled.By</label>
-                  <div class="col-9">
+                  <div class="col-3 pr-0 m-0">
 
                     <app-autocomplete2 #_mbl_handled_name [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'"
                       [subtype]="'SALESMAN'" [displaycolumn]="'NAME'" [displaydata]="record.mbl_handled_name"
                       (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
 
+                  </div>
+                  <label class="col-3 col-form-label col-form-label-sm">Sales.Rep</label>
+                  <div class="col-3 pl-0 m-0">
+
+                    <app-autocomplete2 #_mbl_salesman_name [controlname]="'SALESMAN'" [tabletype]="'PARAM'"
+                      [subtype]="'SALESMAN'" [displaycolumn]="'NAME'" [displaydata]="record.mbl_salesman_name"
+                      (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
 
                   </div>
                 </div>
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Sales.Rep</label>
                   <div class="col-9">
 
@@ -161,7 +169,7 @@
                     </app-autocomplete2>
 
                   </div>
-                </div>
+                </div> -->
 
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Frt.Status</label>
