@@ -237,17 +237,22 @@
                 </div>
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Handled.By</label>
-                  <div class="col-9">
-
+                  <div class="col-3 pr-0">
                     <app-autocomplete2 [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
                       [displaycolumn]="'NAME'" [displaydata]="record.mbl_handled_name"
                       (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
-
+                  </div>
+                  <label class="col-2 col-form-label col-form-label-sm">Sales.Rep</label>
+                  <div class="col-4 pl-0">
+                    <app-autocomplete2 #_mbl_salesman_name [controlname]="'SALESMAN'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
+                      [displaycolumn]="'NAME'" [displaydata]="record.mbl_salesman_name"
+                      (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
                   </div>
                 </div>
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Sales.Rep</label>
                   <div class="col-9">
                     <app-autocomplete2 #_mbl_salesman_name [controlname]="'SALESMAN'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
@@ -255,7 +260,7 @@
                       (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Mawb GrWt</label>
@@ -276,7 +281,7 @@
                     <span>&nbsp;3rd Party Booking</span>
                   </div>
                   <label class="col-2 col-form-label col-form-label-sm"></label>
-                  <div class="col-4">
+                  <div class="col-4 pl-0">
                     <input type="checkbox" [(ngModel)]="record.mbl_direct_bool" (change)="DirectAgent()"/>
                     <span>&nbsp;Direct Shipment</span>
                   </div>

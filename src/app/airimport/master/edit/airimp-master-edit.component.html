@@ -153,19 +153,9 @@
                                             (ValueChanged)="record.mbl_pod_eta=$event"></app-date>
                                     </div>
                                 </div> -->
-                                <div class="form-group row">
-                                    <label class="col-3 col-form-label col-form-label-sm">Carrier</label>
-                                    <div class="col-9">
+                                
 
-                                        <app-autocomplete2 [controlname]="'CARRIER'" [tabletype]="'AIR CARRIER'"
-                                            [displaycolumn]="'NAME'" [displaydata]="record.mbl_liner_name"
-                                            (ValueChanged)="LovSelected($event)">
-                                        </app-autocomplete2>
-
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Flight No</label>
                                     <div class="col-9 ">
                                         <InputBox [(inputModel)]="record.mbl_vessel" [maxlength]="15" [uppercase]="true"
@@ -173,33 +163,54 @@
                                         </InputBox>
 
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-md-6 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Carrier</label>
+                                    <div class="col-4 pr-0">
+                                        <app-autocomplete2 [controlname]="'CARRIER'" [tabletype]="'AIR CARRIER'"
+                                            [displaycolumn]="'NAME'" [displaydata]="record.mbl_liner_name"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                    <label class="col-2 col-form-label col-form-label-sm m-0 pr-0">Flight.No</label>
+                                    <div class="col-3  pl-0 m-0 ">
+                                        <InputBox [(inputModel)]="record.mbl_vessel" [maxlength]="15" [uppercase]="true"
+                                            #_mbl_vessel>
+                                        </InputBox>
 
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Frt.Status</label>
-                                    <div class="col-9">
+                                    <div class="col-4 pr-0">
                                         <select class="form-control form-control-sm"
                                             [(ngModel)]="record.mbl_frt_status">
                                             <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.name">
                                                 {{rec.name}}</option>
                                         </select>
                                     </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-3 col-form-label col-form-label-sm">Origin.Country</label>
-                                    <div class="col-9">
-
+                                    <label class="col-2 col-form-label col-form-label-sm m-0 pr-0">Origin.Country</label>
+                                    <div class="col-3 pl-0 m-0">
                                         <app-autocomplete2 [controlname]="'COUNTRY'" [tabletype]="'PARAM'"
                                             [subtype]="'COUNTRY'" [displaycolumn]="'NAME'"
                                             [displaydata]="record.mbl_country_name"
                                             (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
-
                                     </div>
                                 </div>
+
+                                <!-- <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Origin.Country</label>
+                                    <div class="col-9">
+                                        <app-autocomplete2 [controlname]="'COUNTRY'" [tabletype]="'PARAM'"
+                                            [subtype]="'COUNTRY'" [displaycolumn]="'NAME'"
+                                            [displaydata]="record.mbl_country_name"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                </div> -->
 
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Handled.By</label>
