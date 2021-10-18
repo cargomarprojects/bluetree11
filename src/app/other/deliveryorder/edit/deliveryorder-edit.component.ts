@@ -15,7 +15,8 @@ import { Tbl_cargo_container, Tbl_cargo_general } from '../../models/tbl_cargo_g
 import { DateComponent } from '../../../shared/date/date.component';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
  //EDIT-AJITH-06-09-2021
- 
+ //EDIT-AJITH-18-10-2021
+
 @Component({
   selector: 'app-deliveryorder-edit',
   templateUrl: './deliveryorder-edit.component.html'
@@ -805,7 +806,7 @@ export class DeliveryOrderEditComponent implements OnInit {
         this.report_searchdata.parentid = this.parentid;
         this.report_searchdata.pickcategory = this.pickCategory;
         this.report_searchdata.cntrstoprint = this.deliveryCntrsToPrint;
-        this.report_menuid = this.gs.MENU_OT_PICKUP_DELIVERY_ORDER;
+        this.report_menuid = this.gs.MENU_OT_OPERATION_DELIVERY_ORDER;
         this.tab = 'report';
         break;
       }
