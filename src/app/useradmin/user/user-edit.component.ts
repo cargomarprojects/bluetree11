@@ -163,8 +163,9 @@ export class UserEditComponent implements OnInit {
                     this.location.replaceState('Silver.UserAdmin/UserEditPage', this.gs.getUrlParameter(parameter));
 
                     this.mainService.RefreshList(this.record);
-                    this.errorMessage = 'Save Complete';
-                    alert(this.errorMessage);
+                    // this.errorMessage = 'Save Complete';
+                    // alert(this.errorMessage);
+                    alert('Save Complete');
                 }
 
             }, error => {
