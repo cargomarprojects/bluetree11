@@ -109,48 +109,50 @@
 
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Pol</label>
-                                    <div class="col-9">
-
+                                    <div class="col-5 pr-0">
                                         <app-autocomplete2 #_mbl_pol_name [controlname]="'POL'" [tabletype]="'AIR PORT'"
                                             [displaycolumn]="'NAME'" [displaydata]="record.mbl_pol_name"
                                             (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
-
                                     </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-3 col-form-label col-form-label-sm">Pol.ETD</label>
-                                    <div class="col-9">
+                                    <label class="col-1 col-form-label col-form-label-sm m-0 pr-0">ETD</label>
+                                    <div class="col-3 pl-0 m-0">
                                         <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd"
                                             (ValueChanged)="record.mbl_pol_etd=$event"></app-date>
                                     </div>
                                 </div>
 
+                                <!-- <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Pol.ETD</label>
+                                    <div class="col-9">
+                                        <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd"
+                                            (ValueChanged)="record.mbl_pol_etd=$event"></app-date>
+                                    </div>
+                                </div> -->
+
 
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Port.Discharge</label>
-                                    <div class="col-9">
-
+                                    <div class="col-5 pr-0">
                                         <app-autocomplete2 [controlname]="'POD'" [tabletype]="'AIR PORT'"
                                             [displaycolumn]="'NAME'" [displaydata]="record.mbl_pod_name"
                                             (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
-
-
                                     </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-3 col-form-label col-form-label-sm">Pod.ETA</label>
-                                    <div class="col-9">
+                                    <label class="col-1 col-form-label col-form-label-sm m-0 pr-0">ETA</label>
+                                    <div class="col-3 pl-0 m-0">
                                         <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta"
                                             (ValueChanged)="record.mbl_pod_eta=$event"></app-date>
                                     </div>
                                 </div>
 
-                            </div>
-                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <!-- <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Pod.ETA</label>
+                                    <div class="col-9">
+                                        <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta"
+                                            (ValueChanged)="record.mbl_pod_eta=$event"></app-date>
+                                    </div>
+                                </div> -->
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Carrier</label>
                                     <div class="col-9">
@@ -166,15 +168,14 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Flight No</label>
                                     <div class="col-9 ">
-                                        <!-- <input class="form-control form-control-sm" type="text"
-                                        (blur)="onBlur('mbl_vessel')" [(ngModel)]="record.mbl_vessel" maxlength="15" /> -->
                                         <InputBox [(inputModel)]="record.mbl_vessel" [maxlength]="15" [uppercase]="true"
                                             #_mbl_vessel>
                                         </InputBox>
 
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="col-md-6 testbox  px-0 mx-0">
 
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Frt.Status</label>
