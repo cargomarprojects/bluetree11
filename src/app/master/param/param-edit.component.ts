@@ -10,6 +10,7 @@ import { TBL_MAST_PARAM, VM_TBL_MAST_PARAM } from '../models/Tbl_Mast_Param';
 
 import { SearchTable } from '../../shared/models/searchtable';
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-18-10-2021
 
 @Component({
   selector: 'app-param-edit',
@@ -195,7 +196,11 @@ export class ParamEditComponent implements OnInit {
         break;
       }
       case 'param_name2': {
-        this.record.param_name2 = this.record.param_name2.toUpperCase();
+        if (this.menu_param == 'SALESMAN') {
+          this.record.param_name2 = this.record.param_name2.toLowerCase();
+        } else {
+          this.record.param_name2 = this.record.param_name2.toUpperCase();
+        }
         break;
       }
 
@@ -241,8 +246,9 @@ export class ParamEditComponent implements OnInit {
           if (this.mode == "ADD" && response.code != '')
             this.record.param_code = response.code;
           this.mode = 'EDIT';
-          this.errorMessage = 'Save Complete';
-          alert(this.errorMessage);
+          // this.errorMessage = 'Save Complete';
+          // alert(this.errorMessage);
+          alert('Save Complete');
         }
       }, error => {
         this.errorMessage = this.gs.getError(error);
