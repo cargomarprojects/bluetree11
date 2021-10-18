@@ -180,43 +180,51 @@
 
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Pol</label>
-                                    <div class="col-9">
-
+                                    <div class="col-5 pr-0">
                                         <app-autocomplete2 [controlname]="'POL'" [tabletype]="'PORT'"
                                             [displaycolumn]="'NAME'" [displaydata]="record.mbl_pol_name"
                                             (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
-
                                     </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-3 col-form-label col-form-label-sm">Pol.ETD</label>
-                                    <div class="col-9">
+                                    <label class="col-1 col-form-label col-form-label-sm">ETD</label>
+                                    <div class="col-3 pl-0 m-0">
                                         <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd"
                                             (ValueChanged)="record.mbl_pol_etd=$event"></app-date>
                                     </div>
                                 </div>
 
+                                <!-- <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Pol.ETD</label>
+                                    <div class="col-9">
+                                        <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd"
+                                            (ValueChanged)="record.mbl_pol_etd=$event"></app-date>
+                                    </div>
+                                </div> -->
+
 
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Port.Discharge</label>
-                                    <div class="col-9">
+                                    <div class="col-5 pr-0">
 
                                         <app-autocomplete2 [controlname]="'POD'" [tabletype]="'PORT'"
                                             [displaycolumn]="'NAME'" [displaydata]="record.mbl_pod_name"
                                             (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
                                     </div>
+                                    <label class="col-1 col-form-label col-form-label-sm">ETA</label>
+                                    <div class="col-3 pl-0 m-0">
+                                        <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta"
+                                            (ValueChanged)="record.mbl_pod_eta=$event"></app-date>
+                                    </div>
                                 </div>
 
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Pod.ETA</label>
                                     <div class="col-9">
                                         <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta"
                                             (ValueChanged)="record.mbl_pod_eta=$event"></app-date>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Destination</label>
