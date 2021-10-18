@@ -14,6 +14,7 @@ import { SearchTable } from '../../shared/models/searchtable';
 import { UserRightsService } from '../services/userRights.service';
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-08-09-2021
+//EDIT-AJITH-18-10-2021
 
 @Component({
     selector: 'app-rights-edit',
@@ -44,7 +45,7 @@ export class RightsEditComponent implements OnInit {
     title: string;
     isAdmin: boolean;
     refno: string = "";
-    ua_usr_id: string = "";
+    public ua_usr_id: string = "''";
 
     constructor(
         private router: Router,
@@ -82,7 +83,6 @@ export class RightsEditComponent implements OnInit {
         SearchData.CODE = "";
         SearchData.TYPE = "USR_BRANCH";
         SearchData.PKID = this.gs.company_pkid;
-
         this.mainService.getCompanyList(SearchData).subscribe(response => {
             this.companyList = <any>response.list;
         }, error => {
@@ -91,7 +91,7 @@ export class RightsEditComponent implements OnInit {
     }
 
     LoadUser() {
-
+        this.ua_usr_id = '';
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
         SearchData.CODE = "";
@@ -137,8 +137,8 @@ export class RightsEditComponent implements OnInit {
             origin: 'rights-page',
             mode: 'EDIT'
         };
+        this.location.replaceState('Silver.UserAdmin/RightsEditPage', this.gs.getUrlParameter(parameter));
 
-        this.location.replaceState('Silver.UserAdmin/BranchEditPage', this.gs.getUrlParameter(parameter));
     }
 
     GetRecord() {
