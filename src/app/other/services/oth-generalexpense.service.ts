@@ -29,6 +29,7 @@ export class OthGeneralExpenseService {
     public canAdd: boolean;
     public canEdit: boolean;
     public canSave: boolean;
+    public canDelete: boolean;
 
     public initlialized: boolean;
     private appid = ''
@@ -39,13 +40,13 @@ export class OthGeneralExpenseService {
         private gs: GlobalService
     ) { }
 
-    public selectRowId( id : string){
+    public selectRowId(id: string) {
         this.record.selectedId = id;
     }
-    public getRowId(){
+    public getRowId() {
         return this.record.selectedId;
     }
-    
+
 
     public getSortCol() {
         return this.record.sortcol;
@@ -76,7 +77,7 @@ export class OthGeneralExpenseService {
     }
     public ClearInit() {
         this.record = <OthGeneralModel>{
-            selectedId : '',
+            selectedId: '',
             sortcol: 'mbl_refno',
             sortorder: true,
             errormessage: '',
@@ -101,7 +102,7 @@ export class OthGeneralExpenseService {
             this.record = <OthGeneralModel>this.db[this.param_type];
         else
             this.record = <OthGeneralModel>{
-                selectedId : '',                
+                selectedId: '',
                 sortcol: 'mbl_refno',
                 sortorder: true,
                 errormessage: '',
@@ -118,11 +119,11 @@ export class OthGeneralExpenseService {
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
-
+        this.canDelete = this.gs.canDelete(this.menuid);
     }
 
     Search(_searchdata: any, type: string = '') {
-
+        this.record.errormessage = '';
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
             this.record.selectedId = '';
@@ -187,6 +188,35 @@ export class OthGeneralExpenseService {
             REC.rec_created_by = _rec.rec_created_by;
         }
     }
+
+    DeleteRow(_rec: Tbl_cargo_general) {
+
+        if (!confirm("DELETE " + _rec.mbl_refno)) {
+            return;
+        }
+
+        this.record.errormessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = _rec.mbl_pkid;
+        SearchData.remarks = _rec.mbl_refno;
+        SearchData.EXPTYPE = this.param_type;
+        this.DeleteRecord(SearchData)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.record.errormessage = response.error;
+                    alert(this.record.errormessage);
+                }
+                else {
+                    this.record.records.splice(this.record.records.findIndex(rec => rec.mbl_pkid == _rec.mbl_pkid), 1);
+                }
+                this.mdata$.next(this.record);
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+                alert(this.record.errormessage);
+                this.mdata$.next(this.record);
+            });
+    }
+
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/GeneralExpense/List', SearchData, this.gs.headerparam2('authorized'));
     }
@@ -211,5 +241,7 @@ export class OthGeneralExpenseService {
     GetHouseDetails(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/GeneralExpense/GetHouseDetails', SearchData, this.gs.headerparam2('authorized'));
     }
-
+    DeleteRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Other/GeneralExpense/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

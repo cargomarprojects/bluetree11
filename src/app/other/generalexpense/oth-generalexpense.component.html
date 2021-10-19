@@ -9,7 +9,7 @@
   </div>
   
   <div *ngIf="errorMessage$ | async" class="alert alert-danger">
-    {{errorMessage}}
+    {{errorMessage$ | async}}
   </div>
   
   <app-oth-generalexpense-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)" ></app-oth-generalexpense-header>
@@ -29,6 +29,7 @@
                 <th (click)="mainservice.sort('mbl_ap_total')" class="text-right" >AP-TOTAL&nbsp;<i [ngClass]="mainservice.getIcon('mbl_ap_total')"></i></th>     
                 <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
                 <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>              
+                <th *ngIf="mainservice.canDelete" class='text-center'>DELETE</th>       
             </tr>
         </thead>
         <tbody class="page-body-tbody">
@@ -48,6 +49,8 @@
                 <td class="text-right">{{rec.mbl_ap_total | number : '1.2-2'}}</td>
                 <td>{{rec.rec_created_by}}</td>
                 <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td *ngIf="mainservice.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                    (click)="mainservice.DeleteRow(rec)"></i></td>
             </tr>
         </tbody>
     </table>
