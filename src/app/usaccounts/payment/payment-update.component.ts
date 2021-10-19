@@ -35,10 +35,11 @@ export class PaymentUpdateComponent implements OnInit {
     }
 
     onBlur(field: string) {
-
+        if (field == 'Txt_ChqNo')
+            this.Txt_ChqNo = this.Txt_ChqNo.toUpperCase();
     }
 
-    
+
     Showmodal(paymodal: any = null) {
         this.Txt_ChqNo = this.record.pay_chqno;
         this.modal = this.modalservice.open(paymodal, { centered: true });
@@ -60,8 +61,10 @@ export class PaymentUpdateComponent implements OnInit {
 
         this.mainservice.PaymentUpdate(searchData)
             .subscribe(response => {
-                this.record.pay_chqno = this.Txt_ChqNo;
-                this.modal.close();
+                if (response.retvalue) {
+                    this.record.pay_chqno = this.Txt_ChqNo;
+                    this.modal.close();
+                }
             }, error => {
                 alert(this.gs.getError(error));
             });
