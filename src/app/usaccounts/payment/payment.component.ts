@@ -9,6 +9,7 @@ import { SearchQuery, Tbl_Acc_Payment, AccPaymentModel } from '../models/Tbl_Acc
 import { PageQuery } from '../../shared/models/pageQuery';
 import { PaymentService } from '../services/payment.service';
 //EDIT-AJITH-09-09-2021
+//EDIT-AJITH-19-10-2021
 
 @Component({
   selector: 'app-payment',
@@ -209,6 +210,11 @@ export class PaymentComponent implements OnInit {
     this.tab = 'main';
   }
 
+  payupdatecallbackevent(event: any) {
+
+    
+
+  }
 
 
 }

@@ -69,7 +69,8 @@
           <td>{{rec.pay_depositno}} </td>
           <td>{{rec.pay_deposit_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.pay_mode}} </td>
-          <td>{{rec.pay_chqno}} </td>
+          <!-- <td>{{rec.pay_chqno}} </td> -->
+          <td class='hlink2' ><app-payment-update  [record]="rec"  (callbackevent)="payupdatecallbackevent($event)"></app-payment-update></td>
           <td>{{rec.pay_chq_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td *ngIf="gs.RE_PRINT_CHECK == 'Y'" class='hlink2' (click)="Print(rec,'chq')">Print</td>
           <td>{{rec.pay_narration}} </td>

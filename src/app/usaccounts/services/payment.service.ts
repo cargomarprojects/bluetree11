@@ -261,4 +261,7 @@ export class PaymentService {
         return this.http2.post<any>(this.gs.baseUrl + "/api/UsAccRptArApList/PayReqArApList", SearchData, this.gs.headerparam2('authorized'));
     }
 
+    PaymentUpdate(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + "/api/Payment/PaymentUpdate", SearchData, this.gs.headerparam2('authorized'));
+    }
 }
