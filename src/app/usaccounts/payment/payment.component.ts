@@ -8,6 +8,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery, Tbl_Acc_Payment, AccPaymentModel } from '../models/Tbl_Acc_Payment';
 import { PageQuery } from '../../shared/models/pageQuery';
 import { PaymentService } from '../services/payment.service';
+
 //EDIT-AJITH-09-09-2021
 //EDIT-AJITH-19-10-2021
 
@@ -50,8 +51,6 @@ export class PaymentComponent implements OnInit {
     this.gs.checkAppVersion();
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
-
-
   }
 
   initPage() {

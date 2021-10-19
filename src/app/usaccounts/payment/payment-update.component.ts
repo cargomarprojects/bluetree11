@@ -5,6 +5,8 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Tbl_Acc_Payment } from '../models/Tbl_Acc_Payment';
 import { PaymentService } from '../services/payment.service';
 
+declare var $: any;
+
 @Component({
     selector: 'app-payment-update',
     templateUrl: './payment-update.component.html'
@@ -32,6 +34,9 @@ export class PaymentUpdateComponent implements OnInit {
 
     ngOnInit() {
         this.gs.checkAppVersion();
+        $(function () {
+            $('.modal-dialog').draggable();
+        });
     }
 
     onBlur(field: string) {
