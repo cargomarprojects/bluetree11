@@ -13,6 +13,7 @@ import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomple
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-07-10-2021
 //EDIT-AJITH-13-10-2021
+//EDIT-AJITH-23-10-2021
 @Component({
   selector: 'app-seaimp-master-edit',
   templateUrl: './seaimp-master-edit.component.html'
@@ -336,7 +337,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           this.location.replaceState('Silver.SeaImport/SeaImpMasterEditPage', this.gs.getUrlParameter(parameter));
 
           this.mainService.RefreshList(this.record);
-          this.errorMessage.push('Save Complete');
+          // this.errorMessage.push('Save Complete');
           alert('Save Complete');
         }
       }, error => {

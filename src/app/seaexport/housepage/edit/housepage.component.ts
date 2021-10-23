@@ -756,7 +756,7 @@ export class HousePageComponent implements OnInit {
         if (this.origin === "seaexp-house-page")
           this.mainService.RefreshList(this.record);
 
-        this.errorMessage.push('Save Complete');
+        // this.errorMessage.push('Save Complete');
         alert('Save Complete');
       }
 

@@ -313,7 +313,7 @@ export class AirExpMasterEditComponent implements OnInit {
           };
           this.location.replaceState('Silver.AirExport.Trans/AirExpMasterEditPage', this.gs.getUrlParameter(parameter));
 
-          this.errorMessage.push('Save Complete');
+          // this.errorMessage.push('Save Complete');
           alert('Save Complete');
           this.mainService.RefreshList(this.record);
         }

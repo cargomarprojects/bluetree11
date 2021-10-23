@@ -19,6 +19,7 @@ import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-18-10-2021
+//EDIT-AJITH-23-10-2021
 
 @Component({
   selector: 'app-seaexp-master-edit',
@@ -356,7 +357,7 @@ export class SeaexpMasterEditComponent implements OnInit {
           this.location.replaceState('Silver.SeaExport.Trans/SeaExpMasterEditPage', this.gs.getUrlParameter(parameter));
 
           this.mainService.RefreshList(this.record);
-          this.errorMessage.push('Save Complete');
+          // this.errorMessage.push('Save Complete');
           alert('Save Complete');
         }
       }, error => {

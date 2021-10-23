@@ -312,7 +312,7 @@ export class AirImpMasterEditComponent implements OnInit {
           this.location.replaceState('Silver.AirImport.Trans/AirImpMasterEditPage', this.gs.getUrlParameter(parameter));
 
           this.mainService.RefreshList(this.record);
-          this.errorMessage.push('Save Complete');
+          // this.errorMessage.push('Save Complete');
           alert('Save Complete');
         }
       }, error => {

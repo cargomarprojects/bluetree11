@@ -868,8 +868,8 @@ export class AirExpHouseEditComponent implements OnInit {
 
         if (this.origin === "airexp-house-page")
           this.mainService.RefreshList(this.record);
-        this.errorMessage.push('Save Complete');
-        alert(this.errorMessage);
+        // this.errorMessage.push('Save Complete');
+        alert('Save Complete');
       }
     }, error => {
       this.errorMessage.push(this.gs.getError(error));
