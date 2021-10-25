@@ -47,6 +47,8 @@ import { LogRegisterHeaderComponent } from './log-register/logregister-header.co
 import { LogRegisterComponent } from './log-register/logregister.component';
 import { CustReportHeaderComponent } from './cust-report/cust-report-header.component';
 import { CustReportComponent } from './cust-report/cust-report.component';
+import { DataEntryReportHeaderComponent } from './data-entry-report/data-entry-report-header.component';
+import { DataEntryReportComponent } from './data-entry-report/data-entry-report.component';
 
 @NgModule({
     declarations :[
@@ -73,7 +75,9 @@ import { CustReportComponent } from './cust-report/cust-report.component';
     LogRegisterHeaderComponent,
     LogRegisterComponent,
     CustReportHeaderComponent,
-    CustReportComponent
+    CustReportComponent,
+    DataEntryReportHeaderComponent,
+    DataEntryReportComponent
   ],
   imports: [
     SharedModule,

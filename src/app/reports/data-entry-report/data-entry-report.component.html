@@ -1,0 +1,40 @@
+<div class="page-header">
+    <div class="col">
+      <label class="mr-1">{{mainservice.title}}</label>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+  </div>
+  
+  <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage$ | async}}
+  </div>
+  
+  <app-data-entry-report-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-data-entry-report-header>
+  
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th (click)="mainservice.sort('de_category')">CATEGORY&nbsp;<i [ngClass]="mainservice.getIcon('de_category')"></i></th>
+          <th (click)="mainservice.sort('de_type')">TYPE&nbsp;<i [ngClass]="mainservice.getIcon('de_type')"></i></th>        
+          <th (click)="mainservice.sort('de_created_by')">CREATED.BY&nbsp;<i [ngClass]="mainservice.getIcon('de_created_by')"></i></th>
+          <th (click)="mainservice.sort('de_created_count')">COUNT&nbsp;<i [ngClass]="mainservice.getIcon('de_created_count')"></i></th>           
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+          <td>{{rec.de_category}}</td>
+          <td>{{rec.de_type}}</td>
+          <td>{{rec.de_created_by}}</td>
+          <td>{{rec.de_created_count}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <br />
