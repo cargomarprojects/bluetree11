@@ -66,7 +66,7 @@ export class DataEntryReportService {
 
     public ClearInit() {
         this.record = <Data_Entry_Report_Model>{
-            sortcol: 'de_created_by',
+            sortcol: '',
             sortorder: true,
             errormessage: '',
             records: [],
@@ -89,7 +89,7 @@ export class DataEntryReportService {
         this.param_type = params.param_type;
 
         this.record = <Data_Entry_Report_Model>{
-            sortcol: 'de_created_by',
+            sortcol: '',
             sortorder: true,
             errormessage: '',
             records: [],
@@ -122,7 +122,9 @@ export class DataEntryReportService {
         SearchData.pkid = this.id;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.CATEGORY = this.record.searchQuery.category;
-        SearchData.CODE = this.record.searchQuery.searchString;
+        SearchData.TYPE = this.record.searchQuery.type;
+        SearchData.SDATE = this.record.searchQuery.fromdate;
+        SearchData.EDATE = this.record.searchQuery.todate;
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
