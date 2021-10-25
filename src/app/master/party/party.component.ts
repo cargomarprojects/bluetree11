@@ -10,6 +10,7 @@ import { SearchQuery } from '../models/Tbl_Mast_Partym';
 import { PageQuery } from '../../shared/models/pageQuery';
 
 import { PartyService } from '../services/party.service';
+//EDIT-AJITH-25-10-2021
 
 @Component({
   selector: 'app-party',
