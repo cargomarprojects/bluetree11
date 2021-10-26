@@ -14,7 +14,7 @@
   
   <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
   
-  <div class="page-body table-responsive table-bordered">
+  <div  *ngIf="!mainservice.isDetail" class="page-body table-responsive table-bordered">
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
@@ -24,7 +24,7 @@
           <th (click)="mainservice.sort('de_created_count')">COUNT&nbsp;<i [ngClass]="mainservice.getIcon('de_created_count')"></i></th>            -->
           <th>CATEGORY</th>
           <th>TYPE</th> 
-          <th>CREATED.BY</th>      
+          <th>CREATED-BY</th>      
           <th>COUNT</th>  
         </tr>
       </thead>
@@ -38,7 +38,36 @@
       </tbody>
     </table>
   </div>
-  
+  <div  *ngIf="mainservice.isDetail" class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th>CATEGORY</th>
+          <th>TYPE</th> 
+          <th>CREATED-BY</th>      
+          <th>BRANCH</th>  
+          <th>REF#</th>  
+          <th>REF-DATE</th>  
+          <th *ngIf="mainservice.record.searchQuery.category=='INVOICE'">INV#</th>  
+          <th>AGENT-NAME</th>  
+          <th>HANDLED-BY</th>  
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+          <td>{{rec.de_category}}</td>
+          <td>{{rec.de_type}}</td>
+          <td>{{rec.de_created_by}}</td>
+          <td>{{rec.de_branch}}</td>
+          <td>{{rec.de_refno}}</td>
+          <td>{{rec.de_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td *ngIf="mainservice.record.searchQuery.category=='INVOICE'">{{rec.de_inv_no}}</td>
+          <td>{{rec.de_agent_name}}</td>
+          <td>{{rec.de_handled_name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
   
   <br />

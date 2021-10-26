@@ -10,6 +10,7 @@ import { SearchQuery } from '../models/tbl_data_entry_report';
 import { PageQuery } from '../../shared/models/pageQuery';
 import {  DataEntryReportService } from '../services/data_entry_report.service';
 //CREATE-AJITH-25-10-2021
+//EDIT-AJITH-26-10-2021
 
 @Component({
   selector: 'app-data-entry-report',

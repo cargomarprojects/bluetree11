@@ -27,6 +27,7 @@ export class DataEntryReportService {
     public canEdit: boolean;
     public canSave: boolean;
     public canPrint: boolean;
+    public isDetail: boolean;
 
     public initlialized: boolean;
     private appid = '';
@@ -70,7 +71,7 @@ export class DataEntryReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', category: 'ALL', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL', isDetail: false },
+            searchQuery: <SearchQuery>{ searchString: '', category: 'SHIPMENTS', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL', isDetail: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -93,7 +94,7 @@ export class DataEntryReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', category: 'ALL', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL', isDetail: false },
+            searchQuery: <SearchQuery>{ searchString: '', category: 'SHIPMENTS', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL', isDetail: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -105,6 +106,7 @@ export class DataEntryReportService {
         this.canPrint = this.gs.canPrint(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
         this.initlialized = true;
+        this.isDetail = false;
     }
 
     Search(_searchdata: any, type: string = '') {
@@ -112,10 +114,12 @@ export class DataEntryReportService {
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
         }
-        
+
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
         }
+
+        this.isDetail = this.record.searchQuery.isDetail;
 
         var SearchData = this.gs.UserInfo;
         SearchData.outputformat = _searchdata.outputformat;
