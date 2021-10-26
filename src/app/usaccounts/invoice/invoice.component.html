@@ -88,55 +88,66 @@
             </div>
           </div>
           <div class="row mx-0 px-0">
-          <div class="col-md-7">
-            <div class="form-group row ml-2">
-              <label class="col-5 col-form-label col-form-label-sm"></label>
-              <div class="col-7">
-                <input type="checkbox" [(ngModel)]="MBL_PROFIT_REQ" />
-                <span class="ml-1">Profit Requirement Met</span>
+            <div class="col-md-7">
+              <div class="form-group row ml-2">
+                <label class="col-5 col-form-label col-form-label-sm"></label>
+                <div class="col-7">
+                  <input type="checkbox" [(ngModel)]="MBL_PROFIT_REQ" />
+                  <span class="ml-1">Profit Requirement Met</span>
+                </div>
               </div>
+
+              <div class="form-group row  ml-2">
+                <label class="col-5 col-form-label col-form-label-sm"></label>
+                <div class="col-7">
+                  <input type="checkbox" [(ngModel)]="MBL_LOSS_APPROVED" />
+                  <span class="ml-1"> Loss Approved</span>
+                </div>
+              </div>
+
+              <div class="form-group row  ml-2">
+                <label class="col-5 col-form-label col-form-label-sm"></label>
+                <div class="col-7">
+                  <button (click)="UpdateStatus()" class="btn btn-primary btn-sm mr-1">Update Status</button>
+                </div>
+              </div>
+
             </div>
 
-            <div class="form-group row  ml-2">
-              <label class="col-5 col-form-label col-form-label-sm"></label>
-              <div class="col-7">
-                <input type="checkbox" [(ngModel)]="MBL_LOSS_APPROVED" />
-                <span class="ml-1"> Loss Approved</span>
+            <div class="col-md-5">
+              <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">STATUS</label>
+                <div class="col-6 pr-0">
+                  <select class="form-control form-control-sm mr-1 " [(ngModel)]="MBL_BO_STATUS">
+                    <option [value]="'NA'">NA</option>
+                    <option [value]="'ATTENDED'">ATTENDED</option>
+                    <option [value]="'INPROGRESS'">INPROGRESS</option>
+                    <option [value]="'COMPLETED'">COMPLETED</option>
+                  </select>
+                </div>
+                <label class="col-2 col-form-label col-form-label-sm pl-1">{{MBL_BO_ATTENDED_CODE}}</label>
               </div>
-            </div>
 
-            <div class="form-group row  ml-2">
-              <label class="col-5 col-form-label col-form-label-sm"></label>
-              <div class="col-7">
-                <button (click)="UpdateStatus()" class="btn btn-primary btn-sm mr-1">Update Status</button>
+              <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-4">
+                  <button (click)="UpdateBOStatus()" class="btn btn-primary btn-sm mr-1">Update</button>
+                </div>
+                <!-- <div class="col-4">
+                  <app-genrem [pkid]="mbl_pkid" [source]="'CARGO-MASTER-ARAP-DATAENTRY-REMARKS'"
+                    [refno]="mbl_refno"></app-genrem>
+                </div> -->
               </div>
-            </div>
+              <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-4">
+                  <app-genrem [pkid]="mbl_pkid" [source]="'CARGO-MASTER-ARAP-DATAENTRY-REMARKS'"
+                    [refno]="mbl_refno"></app-genrem>
+                </div>
+              </div>
 
+            </div>
           </div>
-
-          <div class="col-md-5">
-            <div class="form-group row">
-              <label class="col-4 col-form-label col-form-label-sm">STATUS</label>
-              <div class="col-6 pr-0">
-                <select class="form-control form-control-sm mr-1 " [(ngModel)]="MBL_BO_STATUS">
-                  <option [value]="'NA'">NA</option>
-                  <option [value]="'ATTENDED'">ATTENDED</option>
-                  <option [value]="'INPROGRESS'">INPROGRESS</option>
-                  <option [value]="'COMPLETED'">COMPLETED</option>
-                </select>
-              </div>
-              <label class="col-2 col-form-label col-form-label-sm pl-1">{{MBL_BO_ATTENDED_CODE}}</label>
-            </div>
-             
-            <div class="form-group row">
-              <label class="col-4 col-form-label col-form-label-sm"></label>
-              <div class="col-8">
-                <button (click)="UpdateBOStatus()" class="btn btn-primary btn-sm mr-1">Update</button>
-              </div>
-            </div>
-
-          </div>
-        </div>
 
         </div>
       </div>

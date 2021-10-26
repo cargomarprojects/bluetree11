@@ -23,5 +23,12 @@ export class GenService {
   GenerateXmlEdiMexico(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Xml/XmlEdi/GenerateXmlEdiMexico', SearchData, this.gs.headerparam2('authorized'));
   }
+
+  GenRemarksGet(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/GenRemarksGet', SearchData, this.gs.headerparam2('authorized'));
+  }
+  GenRemarksSave(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/GenRemarksSave', SearchData, this.gs.headerparam2('authorized'));
+  }
 }
 

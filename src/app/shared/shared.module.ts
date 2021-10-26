@@ -60,7 +60,7 @@ import { SortByPipe } from './pipe/orderby';
 import { ResizableDirective } from './directive/resizable';
 import { ResizableComponent } from './directive/resizable.component';
 import { Report2Component } from './report2/report2.component';
-
+import { GenRemarkComponent } from './genrem/genrem.component';
 
 @NgModule({
   imports: [
@@ -103,7 +103,7 @@ import { Report2Component } from './report2/report2.component';
     ResizableComponent,
     ResizableDirective,
     Report2Component,
-
+    GenRemarkComponent
   ],
   exports: [
     CommonModule,
@@ -141,7 +141,7 @@ import { Report2Component } from './report2/report2.component';
     ResizableComponent,
     ResizableDirective,
     Report2Component,
-
+    GenRemarkComponent
   ]
 
 })
