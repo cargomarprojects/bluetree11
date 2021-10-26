@@ -31,6 +31,13 @@ export class DataEntryReportService {
 
     public initlialized: boolean;
     private appid = '';
+    public tab: string = 'main';
+    public filename: string = '';
+    public filetype: string = '';
+    public filedisplayname: string = '';
+    public filename2: string = '';
+    public filetype2: string = '';
+    public filedisplayname2: string = '';
 
     constructor(
         private http2: HttpClient,
@@ -133,6 +140,7 @@ export class DataEntryReportService {
         SearchData.SDATA = this.record.searchQuery.searchString;
         SearchData.COMP_CODE = this.record.searchQuery.compCode;
         SearchData.IS_DETAIL = this.record.searchQuery.isDetail == true ? 'Y' : 'N';
+        SearchData.COMP_NAME = this.GetCompName(this.record.searchQuery.compCode);
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
@@ -152,8 +160,16 @@ export class DataEntryReportService {
                 this.record.errormessage = '';
                 this.mdata$.next(this.record);
             }
-            else if (_searchdata.outputformat == "EXCEL") {
-                this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+            else if (_searchdata.outputformat == "PRINT") {
+
+                this.filename = response.filename;
+                this.filetype = response.filetype;
+                this.filedisplayname = response.filedisplayname;
+                this.filename2 = response.filename2;
+                this.filetype2 = response.filetype2;
+                this.filedisplayname2 = response.filedisplayname2;
+                this.tab = 'report';
+                // this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
             }
         }, error => {
             this.record = <Data_Entry_Report_Model>{
@@ -164,6 +180,16 @@ export class DataEntryReportService {
         });
     }
 
+    GetCompName(_code: string) {
+        let _sName = '';
+        if (this.gs.CompanyList != null) {
+            var REC = this.gs.CompanyList.find(rec => rec.comp_pkid == _code);
+            if (REC != null) {
+                _sName = REC.comp_name;
+            }
+        }
+        return _sName;
+    }
     Downloadfile(filename: string, filetype: string, filedisplayname: string) {
         this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
     }

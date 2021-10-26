@@ -58,5 +58,7 @@ export class DataEntryReportComponent implements OnInit {
     this.location.back();
   }
 
-
+  callbackevent() {
+    this.mainservice.tab = 'main';
+  }
 }
