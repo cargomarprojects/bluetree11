@@ -183,7 +183,7 @@ export class DataEntryReportService {
     GetCompName(_code: string) {
         let _sName = '';
         if (this.gs.CompanyList != null) {
-            var REC = this.gs.CompanyList.find(rec => rec.comp_pkid == _code);
+            var REC = this.gs.CompanyList.find(rec => rec.comp_code == _code);
             if (REC != null) {
                 _sName = REC.comp_name;
             }

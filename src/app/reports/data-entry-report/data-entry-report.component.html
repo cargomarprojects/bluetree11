@@ -44,28 +44,28 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
+          <th>BRANCH</th>
           <th>CATEGORY</th>
           <th>TYPE</th>
-          <th>CREATED-BY</th>
-          <th>BRANCH</th>
           <th>REF#</th>
           <th>REF-DATE</th>
-          <th *ngIf="mainservice.record.searchQuery.category=='INVOICE'">INV#</th>
+          <!-- <th *ngIf="mainservice.record.searchQuery.category=='INVOICE'">INV#</th> -->
           <th>AGENT-NAME</th>
           <th>HANDLED-BY</th>
+          <th>CREATED-BY</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+        <tr *ngFor="let rec of records$ | async">
+          <td>{{rec.de_branch}}</td>
           <td>{{rec.de_category}}</td>
           <td>{{rec.de_type}}</td>
-          <td>{{rec.de_created_by}}</td>
-          <td>{{rec.de_branch}}</td>
           <td>{{rec.de_refno}}</td>
           <td>{{rec.de_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td *ngIf="mainservice.record.searchQuery.category=='INVOICE'">{{rec.de_inv_no}}</td>
+          <!-- <td *ngIf="mainservice.record.searchQuery.category=='INVOICE'">{{rec.de_inv_no}}</td> -->
           <td>{{rec.de_agent_name}}</td>
           <td>{{rec.de_handled_name}}</td>
+          <td>{{rec.de_created_by}}</td>
         </tr>
       </tbody>
     </table>
