@@ -27,6 +27,7 @@ export class GenService {
   GenRemarksGet(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/GenRemarksGet', SearchData, this.gs.headerparam2('authorized'));
   }
+  
   GenRemarksSave(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/GenRemarksSave', SearchData, this.gs.headerparam2('authorized'));
   }

@@ -29,6 +29,11 @@ export class GenRemarkComponent implements OnInit {
         this._refno = value;
     }
 
+    private _title: string;
+    @Input() set title(value: string) {
+        this._title = value;
+    }
+
     @Output() callbackevent = new EventEmitter<any>();
 
     modal: any;
