@@ -44,15 +44,36 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Branch</label>
+                    <div class="col-8">
+                      <select class="form-control form-control-sm" [(ngModel)]="searchQuery.compCode">
+                        <option *ngFor="let rec of gs.CompanyList" [value]="rec.comp_code">{{rec.comp_name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Created.By</label>
+                    <div class="col-8">
+                        <input class="form-control form-control-sm" type="text"
+                            [(ngModel)]="searchQuery.searchString" (blur)="onBlur('searchString')" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                      <input type="checkbox" [(ngModel)]="searchQuery.isDetail" />
+                      <span>&nbsp;Detail</span>
+                    </div>
+                  </div>
+                <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm"></label>
                     <div class="col-8">
                         <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
                         <button (click)="List('PRINT')"  *ngIf="mainservice.canPrint" class="btn btn-primary btn-sm mr-1">Print</button>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-
             </div>
         </div>
     </div>

@@ -6,6 +6,8 @@ export interface SearchQuery {
     type: string;
     fromdate: string;
     todate: string;
+    compCode:string;
+    isDetail:boolean;
 }
 
 export class Tbl_Data_Entry_Report {

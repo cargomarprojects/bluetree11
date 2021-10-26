@@ -70,7 +70,7 @@ export class DataEntryReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', category: 'ALL', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today },
+            searchQuery: <SearchQuery>{ searchString: '', category: 'ALL', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL', isDetail: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -93,7 +93,7 @@ export class DataEntryReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', category: 'ALL', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today },
+            searchQuery: <SearchQuery>{ searchString: '', category: 'ALL', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL', isDetail: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -112,6 +112,7 @@ export class DataEntryReportService {
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
         }
+        
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
         }
@@ -125,6 +126,9 @@ export class DataEntryReportService {
         SearchData.TYPE = this.record.searchQuery.type;
         SearchData.SDATE = this.record.searchQuery.fromdate;
         SearchData.EDATE = this.record.searchQuery.todate;
+        SearchData.SDATA = this.record.searchQuery.searchString;
+        SearchData.COMP_CODE = this.record.searchQuery.compCode;
+        SearchData.IS_DETAIL = this.record.searchQuery.isDetail == true ? 'Y' : 'N';
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
