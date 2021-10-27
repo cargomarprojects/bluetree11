@@ -49,10 +49,10 @@
           <th>TYPE</th>
           <th>REF#</th>
           <th>REF-DATE</th>
-          <!-- <th *ngIf="mainservice.record.searchQuery.category=='INVOICE'">INV#</th> -->
           <th>AGENT-NAME</th>
           <th>HANDLED-BY</th>
           <th>CREATED-BY</th>
+          <th *ngIf="mainservice.record.searchQuery.category=='INVOICE'">REMARKS</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody">
@@ -62,10 +62,10 @@
           <td>{{rec.de_type}}</td>
           <td>{{rec.de_refno}}</td>
           <td>{{rec.de_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <!-- <td *ngIf="mainservice.record.searchQuery.category=='INVOICE'">{{rec.de_inv_no}}</td> -->
           <td>{{rec.de_agent_name}}</td>
           <td>{{rec.de_handled_name}}</td>
           <td>{{rec.de_created_by}}</td>
+          <td *ngIf="mainservice.record.searchQuery.category=='INVOICE'">{{rec.de_remarks}}</td>
         </tr>
       </tbody>
     </table>

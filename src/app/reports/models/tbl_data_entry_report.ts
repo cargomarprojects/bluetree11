@@ -22,6 +22,7 @@ export class Tbl_Data_Entry_Report {
     de_agent_name: string;
     de_handled_name: string;
     de_inv_no: string;
+    de_remarks: string;
 }
 
 export interface Data_Entry_Report_Model {
