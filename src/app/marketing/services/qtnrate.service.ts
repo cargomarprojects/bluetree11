@@ -148,6 +148,7 @@ export class QtnRateService {
         }, error => {
             this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 
