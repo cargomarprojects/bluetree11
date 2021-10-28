@@ -208,8 +208,8 @@ export class AirImpMasterService {
                 this.mdata$.next(this.record);
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
-                alert(this.record.errormessage);
                 this.mdata$.next(this.record);
+                alert(this.record.errormessage);
             });
     }
 
