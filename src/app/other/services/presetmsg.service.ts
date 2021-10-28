@@ -141,11 +141,9 @@ export class PreSetMsgService {
             this.record.records = response.list;
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <Table_Cargo_RemarksModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 

@@ -32,54 +32,53 @@ export class OthGeneralService {
     public canDelete: boolean;
 
     public initlialized: boolean;
-    private appid =''
+    private appid = ''
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    public selectRowId( id : string){
+    public selectRowId(id: string) {
         this.record.selectedId = id;
     }
-    public getRowId(){
+    public getRowId() {
         return this.record.selectedId;
     }
-    
 
-    public getSortCol(){
+
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
     public ClearInit() {
         this.record = <OthGeneralModel>{
-            selectedId : '',
-            sortcol : 'mbl_refno',
-            sortorder : true,
+            selectedId: '',
+            sortcol: 'mbl_refno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today },
@@ -87,7 +86,7 @@ export class OthGeneralService {
         };
         this.mdata$.next(this.record);
     }
-    
+
     public init(params: any) {
         if (this.appid != this.gs.appid) {
             this.appid = this.gs.appid;
@@ -101,9 +100,9 @@ export class OthGeneralService {
         this.param_type = params.menu_param;
 
         this.record = <OthGeneralModel>{
-            selectedId : '',
-            sortcol : 'mbl_refno',
-            sortorder : true,
+            selectedId: '',
+            sortcol: 'mbl_refno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today },
@@ -126,7 +125,7 @@ export class OthGeneralService {
         this.record.errormessage = '';
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
-            this.record.selectedId = '';            
+            this.record.selectedId = '';
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
@@ -157,11 +156,9 @@ export class OthGeneralService {
             this.record.records = response.list;
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <OthGeneralModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 
@@ -209,8 +206,8 @@ export class OthGeneralService {
                 this.mdata$.next(this.record);
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
-                alert(this.record.errormessage);
                 this.mdata$.next(this.record);
+                alert(this.record.errormessage);
             });
     }
 

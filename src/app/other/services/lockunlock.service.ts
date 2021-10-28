@@ -139,11 +139,9 @@ export class LockUnlockService {
                 })
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <OthGeneralModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 
@@ -236,8 +234,8 @@ export class LockUnlockService {
                 }
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
-                alert(this.record.errormessage);
                 this.mdata$.next(this.record);
+                alert(this.record.errormessage);
             });
     }
 

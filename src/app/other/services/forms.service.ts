@@ -164,11 +164,9 @@ export class FormsService {
             this.mdata$.next(this.record);
             this.db[this.param_type] = this.record;
         }, error => {
-            this.record = <Tbl_cargo_genfilesModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 
