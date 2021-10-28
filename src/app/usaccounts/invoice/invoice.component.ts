@@ -47,6 +47,7 @@ export class InvoiceComponent implements OnInit {
   MBL_LOSS_MEMO: string = '';
   MBL_BO_STATUS: string = 'NA';
   MBL_BO_ATTENDED_CODE: string = '';
+  MBL_BO_REMARKS_EXIST: string = 'N';
 
   inv_verson: string = "9";
   origin: string;
@@ -123,6 +124,7 @@ export class InvoiceComponent implements OnInit {
       this.MBL_LOSS_MEMO = response.MBL_LOSS_MEMO;
       this.MBL_BO_STATUS = response.MBL_BO_STATUS;
       this.MBL_BO_ATTENDED_CODE = response.MBL_BO_ATTENDED_CODE;
+      this.MBL_BO_REMARKS_EXIST = response.MBL_BO_REMARKS_EXIST;
 
       this.DisplayProfit();
     }, error => {

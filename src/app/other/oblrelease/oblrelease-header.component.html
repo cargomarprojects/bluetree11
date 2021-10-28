@@ -4,16 +4,18 @@
 
 
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="form-group row">
-          <label class="col-4 col-form-label col-form-label-sm">From Date</label>
+          <label class="col-4 col-form-label col-form-label-sm">From</label>
           <div class="col-8">
             <app-date [inputdate]="searchQuery.sdate" (ValueChanged)="searchQuery.sdate=$event">
             </app-date>
           </div>
         </div>
+      </div>
+      <div class="col-md-3">
         <div class="form-group row">
-          <label class="col-4 col-form-label col-form-label-sm">To Date</label>
+          <label class="col-4 col-form-label col-form-label-sm">To</label>
           <div class="col-8">
             <app-date [inputdate]="searchQuery.edate" (ValueChanged)="searchQuery.edate=$event">
             </app-date>
@@ -21,8 +23,7 @@
         </div>
       </div>
 
-
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="form-group row">
           <label class="col-4 col-form-label col-form-label-sm">Code/Name</label>
           <div class="col-8">
@@ -33,10 +34,10 @@
 
       
 
-      <div class="col-md-6">
+      <div class="col-md-3">
         <div class="form-group row">
-          <label class="col-8 col-form-label col-form-label-sm"></label>
-          <div class="col-4">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
             <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
             <!-- <button [disabled]="loading" (click)="List('EXCEL')" class="btn btn-primary btn-sm">Excel</button> -->
           </div>

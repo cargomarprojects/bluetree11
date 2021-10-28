@@ -34,11 +34,16 @@ export class GenRemarkComponent implements OnInit {
         this._title = value;
     }
 
+    private _remarksaved: string = 'N';
+    @Input() set remarksaved(value: string) {
+        this._remarksaved = value;
+    }
+
     @Output() callbackevent = new EventEmitter<any>();
 
     modal: any;
-    _remarks:string; 
-
+    _remarks: string;
+     
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -64,7 +69,7 @@ export class GenRemarkComponent implements OnInit {
             alert('Invalid Source ID');
             return;
         }
- 
+
         var SearchData = this.gs.UserInfo;
         SearchData.PKID = this._pkid;
         SearchData.SOURCE = this._source;
@@ -97,6 +102,7 @@ export class GenRemarkComponent implements OnInit {
         this.mainservice.GenRemarksSave(SearchData)
             .subscribe(response => {
                 if (response.retvalue) {
+                    this._remarksaved = 'Y';
                     this.modal.close();
                 }
             }, error => {

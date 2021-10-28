@@ -1,4 +1,4 @@
-<button class="btn btn-primary btn-sm" (click)="GenRemarkFill(remmodal)">Remarks</button>
+<button class="btn btn-primary btn-sm" [style.color]="_remarksaved=='Y'?'red':'white'" (click)="GenRemarkFill(remmodal)">Remarks</button>
 <ng-template #remmodal let-c="close" let-d="dismiss">
     <div class="modal-body">
         <div class="page-body">
