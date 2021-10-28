@@ -172,6 +172,7 @@ export class ShipDataPageService {
         }, error => {
             this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
     RefreshList(_rec: Tbl_edi_master) {
@@ -255,8 +256,8 @@ export class ShipDataPageService {
                 this.mdata$.next(this.record);
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
-                alert(this.record.errormessage);
                 this.mdata$.next(this.record);
+                alert(this.record.errormessage);
             });
     }
 

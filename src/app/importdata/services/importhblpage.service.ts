@@ -175,6 +175,7 @@ export class ImportHblPageService {
         }, error => {
             this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 
@@ -209,8 +210,8 @@ export class ImportHblPageService {
                 this.ImportMultipleXmlFiles();
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
-                alert(this.record.errormessage);
                 this.mdata$.next(this.record);
+                alert(this.record.errormessage);
             });
     }
 
@@ -234,8 +235,8 @@ export class ImportHblPageService {
                 this.Search(this.record, 'SEARCH');
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
-                alert(this.record.errormessage);
                 this.mdata$.next(this.record);
+                alert(this.record.errormessage);
             });
     }
 
