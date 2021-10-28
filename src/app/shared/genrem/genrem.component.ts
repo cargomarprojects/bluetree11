@@ -34,7 +34,7 @@ export class GenRemarkComponent implements OnInit {
         this._title = value;
     }
 
-    private _remarksaved: string = 'N';
+    public _remarksaved: string = 'N';
     @Input() set remarksaved(value: string) {
         this._remarksaved = value;
     }
