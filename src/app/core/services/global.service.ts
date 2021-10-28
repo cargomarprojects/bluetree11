@@ -52,6 +52,7 @@ export class GlobalService {
   public tab = ' 	';
 
   public software_version_string = '1.142';
+  
   public baseUrl: string = "http://localhost:5000";
   //public baseUrl: string = "";
   // change this is false in production and update
