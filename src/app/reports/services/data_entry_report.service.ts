@@ -5,6 +5,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { Data_Entry_Report_Model, Tbl_Data_Entry_Report } from '../models/tbl_data_entry_report';
 import { SearchQuery } from '../models/tbl_data_entry_report';
 import { PageQuery } from '../../shared/models/pageQuery';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
     providedIn: 'root'
@@ -172,10 +173,12 @@ export class DataEntryReportService {
                 // this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
             }
         }, error => {
-            this.record = <Data_Entry_Report_Model>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            // this.record = <Data_Entry_Report_Model>{
+            //     records: [],
+            //     errormessage: this.gs.getError(error),
+            // }
+            this.record.records = <Tbl_Data_Entry_Report[]>[];
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
         });
     }
