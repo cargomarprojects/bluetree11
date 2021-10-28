@@ -146,11 +146,9 @@ export class CustReportService {
                 this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
             }
         }, error => {
-            this.record = <Cust_Report_Model>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 

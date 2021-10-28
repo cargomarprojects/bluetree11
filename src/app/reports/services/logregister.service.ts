@@ -148,11 +148,9 @@ export class LogRegisterService {
             this.record.errormessage = '';
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <Audit_Model>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 

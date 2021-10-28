@@ -162,11 +162,9 @@ export class NomReportService {
             this.mdata$.next(this.record);
 
         }, error => {
-            this.record = <NomReportModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 
