@@ -134,11 +134,9 @@ export class AcOpeningService {
             this.record.searchQuery.balance = `DR:${response.TotDr} - CR:${response.TotCr} BAL:${nBal}`;
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <AccOpeningModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 
