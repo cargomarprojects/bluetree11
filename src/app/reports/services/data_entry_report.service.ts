@@ -173,11 +173,6 @@ export class DataEntryReportService {
                 // this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
             }
         }, error => {
-            // this.record = <Data_Entry_Report_Model>{
-            //     records: [],
-            //     errormessage: this.gs.getError(error),
-            // }
-            this.record.records = <Tbl_Data_Entry_Report[]>[];
             this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
         });

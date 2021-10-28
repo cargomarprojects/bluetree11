@@ -166,10 +166,7 @@ export class SearchPageService {
             // else
             //     alert("Search Complete");
         }, error => {
-            this.record = <SearchPageModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
         });
     }
