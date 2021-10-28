@@ -144,11 +144,9 @@ export class HouseService {
             this.record.records = response.list;
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <SeaExpHouseModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            };
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 
@@ -206,8 +204,8 @@ export class HouseService {
                 this.mdata$.next(this.record);
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
-                alert(this.record.errormessage);
                 this.mdata$.next(this.record);
+                alert(this.record.errormessage);
             });
     }
 
