@@ -170,10 +170,7 @@ export class ShipDataPageService {
             })
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <ShipDataPageModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
         });
     }

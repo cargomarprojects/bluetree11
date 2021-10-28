@@ -173,10 +173,7 @@ export class ImportHblPageService {
             }
 
         }, error => {
-            this.record = <ImportHblPageModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
         });
     }

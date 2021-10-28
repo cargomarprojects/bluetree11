@@ -116,10 +116,7 @@ export class SettingPageService {
             this.record.records = response.list;
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <SettingPageModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
         });
     }
@@ -150,41 +147,6 @@ export class SettingPageService {
             });
     }
 
-    // DeleteRow(_rec: Tbl_cargo_exp_housem) {
-
-    //     if (this.gs.isBlank(_rec.hbl_pkid) || this.gs.isBlank(_rec.hbl_mbl_id)) {
-    //         this.record.errormessage = "Cannot Delete, Reference Not Found";
-    //         alert(this.record.errormessage);
-    //         this.mdata$.next(this.record);
-    //         return;
-    //     }
-
-    //     if (!confirm("DELETE " + _rec.hbl_houseno)) {
-    //         return;
-    //     }
-
-    //     this.record.errormessage = '';
-    //     var SearchData = this.gs.UserInfo;
-    //     SearchData.pkid = _rec.hbl_pkid;
-    //     SearchData.mblid = _rec.hbl_mbl_id;
-    //     SearchData.remarks = _rec.hbl_houseno;
-
-    //     this.DeleteRecord(SearchData)
-    //         .subscribe(response => {
-    //             if (response.retvalue == false) {
-    //                 this.record.errormessage = response.error;
-    //                 alert(this.record.errormessage);
-    //             }
-    //             else {
-    //                 this.record.records.splice(this.record.records.findIndex(rec => rec.hbl_pkid == _rec.hbl_pkid), 1);
-    //             }
-    //             this.mdata$.next(this.record);
-    //         }, error => {
-    //             this.record.errormessage = this.gs.getError(error);
-    //             alert(this.record.errormessage);
-    //             this.mdata$.next(this.record);
-    //         });
-    // }
 
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/settingpage/List', SearchData, this.gs.headerparam2('authorized'));
@@ -193,25 +155,5 @@ export class SettingPageService {
     DeleteRecord(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/settingpage/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
-
-    // GetRecord(SearchData: any) {
-    //     return this.http2.post<any>(this.gs.baseUrl + '/api/AirExport/House/GetRecord', SearchData, this.gs.headerparam2('authorized'));
-    // }
-
-    // Isblnoduplication(SearchData: any) {
-    //     return this.http2.post<any>(this.gs.baseUrl + '/api/AirExport/House/Isblnoduplication', SearchData, this.gs.headerparam2('authorized'));
-    // }
-
-    // Save(SearchData: any) {
-    //     return this.http2.post<any>(this.gs.baseUrl + '/api/AirExport/House/Save', SearchData, this.gs.headerparam2('authorized'));
-    // }
-
-    // LoadMasterData(SearchData: any) {
-    //     return this.http2.post<any>(this.gs.baseUrl + '/api/AirExport/House/LoadMasterData', SearchData, this.gs.headerparam2('authorized'));
-    // }
-
-    // DeleteRecord(SearchData: any) {
-    //     return this.http2.post<any>(this.gs.baseUrl + '/api/AirExport/House/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
-    // }
 
 }

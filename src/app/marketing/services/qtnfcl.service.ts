@@ -153,10 +153,7 @@ export class QtnFclService {
             this.record.records = response.list;
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <QtnmModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
         });
     }

@@ -105,10 +105,7 @@ export class LinkPageService {
             this.mdata$.next(this.record);
 
         }, error => {
-            this.record = <LinkPageModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
         });
     }
