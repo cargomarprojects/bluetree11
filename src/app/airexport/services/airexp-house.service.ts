@@ -151,6 +151,7 @@ export class AirExpHouseService {
         }, error => {
             this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
     RefreshList(_rec: Tbl_cargo_exp_housem) {
