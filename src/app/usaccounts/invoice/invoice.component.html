@@ -80,130 +80,130 @@
 
       <div class="col-md-6 box">
         <div class="row">
-        <div class="col-md-6">
-          <div class="form-group row">
-            <label class="col-3 col-form-label col-form-label-sm">MEMO</label>
-            <div class="col-9">
-              <input class="form-control form-control-sm" type="text" [(ngModel)]="MBL_LOSS_MEMO" maxlength="100"
-                (blur)="onBlur('MBL_LOSS_MEMO')" />
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-3 col-form-label col-form-label-sm">MEMO</label>
+              <div class="col-9">
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="MBL_LOSS_MEMO" maxlength="100"
+                  (blur)="onBlur('MBL_LOSS_MEMO')" />
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-3 col-form-label col-form-label-sm"></label>
-            <div class="col-9">
-              <input type="checkbox" [(ngModel)]="MBL_PROFIT_REQ" />
-              <span class="ml-1">Profit Requirement Met</span>
+            <div class="form-group row">
+              <label class="col-3 col-form-label col-form-label-sm"></label>
+              <div class="col-9">
+                <input type="checkbox" [(ngModel)]="MBL_PROFIT_REQ" />
+                <span class="ml-1">Profit Requirement Met</span>
+              </div>
             </div>
-          </div>
 
-          <div class="form-group row">
-            <label class="col-3 col-form-label col-form-label-sm"></label>
-            <div class="col-9">
-              <input type="checkbox" [(ngModel)]="MBL_LOSS_APPROVED" />
-              <span class="ml-1"> Loss Approved</span>
+            <div class="form-group row">
+              <label class="col-3 col-form-label col-form-label-sm"></label>
+              <div class="col-9">
+                <input type="checkbox" [(ngModel)]="MBL_LOSS_APPROVED" />
+                <span class="ml-1"> Loss Approved</span>
+              </div>
             </div>
-          </div>
 
-          <div class="form-group row">
-            <label class="col-3 col-form-label col-form-label-sm"></label>
-            <div class="col-9">
-              <button (click)="UpdateStatus()" class="btn btn-primary btn-sm mr-1">Update Status</button>
+            <div class="form-group row">
+              <label class="col-3 col-form-label col-form-label-sm"></label>
+              <div class="col-9">
+                <button (click)="UpdateStatus()" class="btn btn-primary btn-sm mr-1">Update Status</button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group row">
-            <label class="col-3 col-form-label col-form-label-sm">STATUS</label>
-            <div class="col-6">
-              <select class="form-control form-control-sm mr-1 " [(ngModel)]="MBL_BO_STATUS">
-                <option [value]="'NA'">NA</option>
-                <option [value]="'ATTENDED'">ATTENDED</option>
-                <option [value]="'INPROGRESS'">INPROGRESS</option>
-                <option [value]="'COMPLETED'">COMPLETED</option>
-              </select>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-3 col-form-label col-form-label-sm">STATUS</label>
+              <div class="col-6">
+                <select class="form-control form-control-sm mr-1 " [(ngModel)]="MBL_BO_STATUS">
+                  <option [value]="'NA'">NA</option>
+                  <option [value]="'ATTENDED'">ATTENDED</option>
+                  <option [value]="'INPROGRESS'">INPROGRESS</option>
+                  <option [value]="'COMPLETED'">COMPLETED</option>
+                </select>
+              </div>
+              <label class="col-3 col-form-label col-form-label-sm pl-1">{{MBL_BO_ATTENDED_CODE}}</label>
             </div>
-            <label class="col-3 col-form-label col-form-label-sm pl-1">{{MBL_BO_ATTENDED_CODE}}</label>
-          </div>
 
-          <div class="form-group row">
-            <label class="col-3 col-form-label col-form-label-sm"></label>
-            <div class="col-9">
-              <button (click)="UpdateBOStatus()" class="btn btn-primary btn-sm mr-1">Update</button>
-              <app-genrem [pkid]="mbl_pkid" [title]="title" [source]="'MASTER-ARAP-DATAENTRY-REMARKS'"
-              [refno]="mbl_refno"></app-genrem>
+            <div class="form-group row">
+              <label class="col-3 col-form-label col-form-label-sm"></label>
+              <div class="col-9">
+                <button (click)="UpdateBOStatus()" class="btn btn-primary btn-sm mr-1">Update</button>
+                <app-genrem [pkid]="mbl_pkid" [title]="title" [source]="'MASTER-ARAP-DATAENTRY-REMARKS'"
+                  [refno]="mbl_refno"></app-genrem>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
 
-<div class="page-body table-responsive table-bordered">
-  <table class="table  table-hover table-sm">
-    <thead class="page-body-thead">
-      <tr>
-        <th (click)="sort('inv_no')">INV.NO&nbsp;<i [ngClass]="getIcon('inv_no')"></i></th>
-        <th (click)="sort('inv_date')">INV.DATE&nbsp;<i [ngClass]="getIcon('inv_date')"></i></th>
-        <th (click)="sort('inv_cust_name')">CUSTOMER&nbsp;<i [ngClass]="getIcon('inv_cust_name')"></i></th>
-        <th (click)="sort('inv_mbl_refno')">REF#&nbsp;<i [ngClass]="getIcon('inv_mbl_refno')"></i></th>
-        <th (click)="sort('inv_arap')">AR/AP&nbsp;<i [ngClass]="getIcon('inv_arap')"></i></th>
-        <th (click)="sort('inv_arrnotice')">AN&nbsp;<i [ngClass]="getIcon('inv_arrnotice')"></i></th>
-        <th (click)="sort('rec_deleted')">DELETED&nbsp;<i [ngClass]="getIcon('rec_deleted')"></i></th>
-        <th (click)="sort('inv_hbl_no')">HOUSE&nbsp;<i [ngClass]="getIcon('inv_hbl_no')"></i></th>
-        <th (click)="sort('inv_ar_total')" class='text-right'>AR&nbsp;<i [ngClass]="getIcon('inv_ar_total')"></i></th>
-        <th (click)="sort('inv_ap_total')" class='text-right'>AP&nbsp;<i [ngClass]="getIcon('inv_ap_total')"></i></th>
-        <th (click)="sort('inv_paid')" class='text-right'>PAID&nbsp;<i [ngClass]="getIcon('inv_paid')"></i></th>
-        <th (click)="sort('inv_balance')" class='text-right'>BALANCE&nbsp;<i [ngClass]="getIcon('inv_balance')"></i>
-        </th>
-        <th (click)="sort('inv_remarks')">REMARKS&nbsp;<i [ngClass]="getIcon('inv_remarks')"></i></th>
-        <th (click)="sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="getIcon('rec_created_by')"></i></th>
-        <th (click)="sort('rec_created_date')">CREATED-DATE&nbsp;<i [ngClass]="getIcon('rec_created_date')"></i></th>
-        <th *ngIf="canDelete" class='text-center'>REMOVE</th>
-        <th *ngIf="isAdmin" class='text-center'>RESTORE</th>
-      </tr>
-    </thead>
-    <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records | sortBy: getSortCol() : getSortOrder()"
-        [style.color]="rec.rec_deleted == 'Y' ?'Red' : 'Black'">
-        <td class='hlink2' (click)="edit(rec)">{{rec.inv_no}}</td>
-        <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-        <td>{{rec.inv_cust_name}}</td>
-        <td>
-          <a class="hlink" [routerLink]="getRouteDet('L',rec,'MASTER')"
-            [queryParams]="getRouteDet('P',rec,'MASTER')">{{rec.inv_mbl_refno}}</a>
-        </td>
-        <td>{{rec.inv_arap}}</td>
-        <td>{{rec.inv_arrnotice}}</td>
-        <td>{{rec.rec_deleted}}</td>
-        <td>
-          <a class="hlink" [routerLink]="getRouteDet('L',rec,'HOUSE')"
-            [queryParams]="getRouteDet('P',rec,'HOUSE')">{{rec.inv_hbl_no}}</a>
-        </td>
-        <td class='text-right'>{{rec.inv_ar_total | number : '1.2-2'}}</td>
-        <td class='text-right'>{{rec.inv_ap_total | number : '1.2-2'}}</td>
-        <td class='text-right'>{{rec.inv_paid | number : '1.2-2'}}</td>
-        <td class='text-right'>{{rec.inv_balance | number : '1.2-2'}}</td>
-        <td>{{rec.inv_remarks}}</td>
-        <td>{{rec.rec_created_by}}</td>
-        <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-        <td *ngIf="canDelete" class='text-center' class="p-0">
-          <a class="btn btn-sm" (click)="removeRow(rec)">
-            <i class="fa fa-trash-o"></i>
-          </a>
-        </td>
-        <td *ngIf="isAdmin" class='text-center' class="p-0">
-          <a *ngIf="rec.rec_deleted =='Y'" class="btn btn-sm" (click)="restoreRow(rec)">
-            <i class="fa fa-undo"></i>
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th (click)="sort('inv_no')">INV.NO&nbsp;<i [ngClass]="getIcon('inv_no')"></i></th>
+          <th (click)="sort('inv_date')">INV.DATE&nbsp;<i [ngClass]="getIcon('inv_date')"></i></th>
+          <th (click)="sort('inv_cust_name')">CUSTOMER&nbsp;<i [ngClass]="getIcon('inv_cust_name')"></i></th>
+          <th (click)="sort('inv_mbl_refno')">REF#&nbsp;<i [ngClass]="getIcon('inv_mbl_refno')"></i></th>
+          <th (click)="sort('inv_arap')">AR/AP&nbsp;<i [ngClass]="getIcon('inv_arap')"></i></th>
+          <th (click)="sort('inv_arrnotice')">AN&nbsp;<i [ngClass]="getIcon('inv_arrnotice')"></i></th>
+          <th (click)="sort('rec_deleted')">DELETED&nbsp;<i [ngClass]="getIcon('rec_deleted')"></i></th>
+          <th (click)="sort('inv_hbl_no')">HOUSE&nbsp;<i [ngClass]="getIcon('inv_hbl_no')"></i></th>
+          <th (click)="sort('inv_ar_total')" class='text-right'>AR&nbsp;<i [ngClass]="getIcon('inv_ar_total')"></i></th>
+          <th (click)="sort('inv_ap_total')" class='text-right'>AP&nbsp;<i [ngClass]="getIcon('inv_ap_total')"></i></th>
+          <th (click)="sort('inv_paid')" class='text-right'>PAID&nbsp;<i [ngClass]="getIcon('inv_paid')"></i></th>
+          <th (click)="sort('inv_balance')" class='text-right'>BALANCE&nbsp;<i [ngClass]="getIcon('inv_balance')"></i>
+          </th>
+          <th (click)="sort('inv_remarks')">REMARKS&nbsp;<i [ngClass]="getIcon('inv_remarks')"></i></th>
+          <th (click)="sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="getIcon('rec_created_by')"></i></th>
+          <th (click)="sort('rec_created_date')">CREATED-DATE&nbsp;<i [ngClass]="getIcon('rec_created_date')"></i></th>
+          <th *ngIf="canDelete" class='text-center'>REMOVE</th>
+          <th *ngIf="isAdmin" class='text-center'>RESTORE</th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of records | sortBy: getSortCol() : getSortOrder()"
+          [style.color]="rec.rec_deleted == 'Y' ?'Red' : 'Black'">
+          <td class='hlink2' (click)="edit(rec)">{{rec.inv_no}}</td>
+          <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td>{{rec.inv_cust_name}}</td>
+          <td>
+            <a class="hlink" [routerLink]="getRouteDet('L',rec,'MASTER')"
+              [queryParams]="getRouteDet('P',rec,'MASTER')">{{rec.inv_mbl_refno}}</a>
+          </td>
+          <td>{{rec.inv_arap}}</td>
+          <td>{{rec.inv_arrnotice}}</td>
+          <td>{{rec.rec_deleted}}</td>
+          <td>
+            <a class="hlink" [routerLink]="getRouteDet('L',rec,'HOUSE')"
+              [queryParams]="getRouteDet('P',rec,'HOUSE')">{{rec.inv_hbl_no}}</a>
+          </td>
+          <td class='text-right'>{{rec.inv_ar_total | number : '1.2-2'}}</td>
+          <td class='text-right'>{{rec.inv_ap_total | number : '1.2-2'}}</td>
+          <td class='text-right'>{{rec.inv_paid | number : '1.2-2'}}</td>
+          <td class='text-right'>{{rec.inv_balance | number : '1.2-2'}}</td>
+          <td>{{rec.inv_remarks}}</td>
+          <td>{{rec.rec_created_by}}</td>
+          <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td *ngIf="canDelete" class='text-center' class="p-0">
+            <a class="btn btn-sm" (click)="removeRow(rec)">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </td>
+          <td *ngIf="isAdmin" class='text-center' class="p-0">
+            <a *ngIf="rec.rec_deleted =='Y'" class="btn btn-sm" (click)="restoreRow(rec)">
+              <i class="fa fa-undo"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 
 
 
-<br />
+  <br />
