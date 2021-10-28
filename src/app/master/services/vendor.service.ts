@@ -26,7 +26,7 @@ export class VendorService {
     public isCompany: boolean;
 
     public initlialized: boolean;
-    private appid =''
+    private appid = ''
 
     constructor(
         private http2: HttpClient,
@@ -103,11 +103,9 @@ export class VendorService {
             this.record.records = response.list;
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <PartyModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 

@@ -113,10 +113,7 @@ export class FormatPageService {
             this.db[this.param_type] = this.record;
 
         }, error => {
-            this.record = <FormatModel>{
-                records: [],
-                errorMessage: this.gs.getError(error),
-            }
+            this.record.errorMessage = this.gs.getError(error);
             this.mdata$.next(this.record);
         });
     }
