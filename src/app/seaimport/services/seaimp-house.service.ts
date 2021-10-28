@@ -32,46 +32,45 @@ export class SeaImpHouseService {
     public canDelete: boolean;
 
     public initlialized: boolean;
-    private appid =''
+    private appid = ''
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    public getSortCol(){
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
 
-   public ClearInit() {
+    public ClearInit() {
         this.record = <SeaImpHouseModel>{
-            sortcol : 'mbl_refno',
-            sortorder : true,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, mblid: '' },
@@ -82,12 +81,12 @@ export class SeaImpHouseService {
     }
 
     public init(params: any) {
-   
+
         if (this.appid != this.gs.appid) {
             this.appid = this.gs.appid;
             this.initlialized = false;
         }
-        
+
         if (this.initlialized)
             return;
 
@@ -95,8 +94,8 @@ export class SeaImpHouseService {
         this.menuid = params.id;
         this.param_type = params.menu_param;
         this.record = <SeaImpHouseModel>{
-            sortcol : 'mbl_refno',
-            sortorder : true,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, mblid: '' },
@@ -151,11 +150,9 @@ export class SeaImpHouseService {
             this.record.records = response.list;
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <SeaImpHouseModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            };
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 
@@ -214,8 +211,8 @@ export class SeaImpHouseService {
                 this.mdata$.next(this.record);
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
-                alert(this.record.errormessage);
                 this.mdata$.next(this.record);
+                alert(this.record.errormessage);
             });
     }
 

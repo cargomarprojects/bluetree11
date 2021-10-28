@@ -33,54 +33,53 @@ export class SeaImpMasterService {
     public canDelete: boolean;
 
     public initlialized: boolean;
-    private appid =''
+    private appid = ''
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
 
-    public selectRowId( id : string){
+    public selectRowId(id: string) {
         this.record.selectedId = id;
     }
-    public getRowId(){
+    public getRowId() {
         return this.record.selectedId;
     }
 
-    public getSortCol(){
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
-     
+
     public ClearInit() {
         this.record = <SeaImpMasterModel>{
-            selectedId : '',
-            sortcol : 'mbl_refno',
-            sortorder : true,
+            selectedId: '',
+            sortcol: 'mbl_refno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today },
@@ -95,7 +94,7 @@ export class SeaImpMasterService {
             this.appid = this.gs.appid;
             this.initlialized = false;
         }
-        
+
         if (this.initlialized)
             return;
 
@@ -103,9 +102,9 @@ export class SeaImpMasterService {
         this.menuid = params.id;
         this.param_type = params.menu_param;
         this.record = <SeaImpMasterModel>{
-            selectedId : '',
-            sortcol : 'mbl_refno',
-            sortorder : true,       
+            selectedId: '',
+            sortcol: 'mbl_refno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today },
@@ -164,11 +163,9 @@ export class SeaImpMasterService {
             this.record.records = response.list;
             this.mdata$.next(this.record);
         }, error => {
-            this.record = <SeaImpMasterModel>{
-                records: [],
-                errormessage: this.gs.getError(error),
-            }
+            this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
+            alert(this.record.errormessage);
         });
     }
 
@@ -194,7 +191,7 @@ export class SeaImpMasterService {
             REC.rec_created_by = _rec.rec_created_by;
         }
     }
-    
+
     DeleteRow(_rec: Tbl_cargo_imp_masterm) {
         if (!confirm("DELETE " + _rec.mbl_refno)) {
             return;
@@ -217,8 +214,8 @@ export class SeaImpMasterService {
                 this.mdata$.next(this.record);
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
-                alert(this.record.errormessage);
                 this.mdata$.next(this.record);
+                alert(this.record.errormessage);
             });
     }
 
@@ -248,7 +245,7 @@ export class SeaImpMasterService {
     DeleteRecord(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/Master/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
-    
+
     DeleteHouseRecord(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/House/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
