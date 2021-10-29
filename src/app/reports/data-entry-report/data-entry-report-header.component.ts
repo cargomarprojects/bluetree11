@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
+import { now } from 'lodash';
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/tbl_data_entry_report';
 import { DataEntryReportService } from '../services/data_entry_report.service';
@@ -38,6 +39,10 @@ export class DataEntryReportHeaderComponent implements OnInit {
     }
 
     List(outputformat: string) {
+
+        // let nowDate = new Date();
+        // alert(nowDate.toLocaleTimeString('it-IT'));
+      
         if (this.gs.isBlank(this.searchQuery.fromdate))
             this.searchQuery.fromdate = this.gs.defaultValues.today;
         if (this.gs.isBlank(this.searchQuery.todate))

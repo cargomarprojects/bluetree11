@@ -10,7 +10,7 @@ import { invoiceService } from '../services/invoice.service';
 //EDIT-AJITH-21-09-2021
 //EDIT-AJITH-04-10-2021
 //EDIT-AJITH-13-10-2021
-//EDIT-AJITH-28-10-2021
+//EDIT-AJITH-29-10-2021
 
 @Component({
   selector: 'app-invoice',
@@ -298,7 +298,7 @@ export class InvoiceComponent implements OnInit {
     SearchData.REMARKS = remarks;
 
     this.mainservice.RestoreRecord(SearchData).subscribe(response => {
-        rec.rec_deleted = "N";
+      rec.rec_deleted = "N";
     }, error => {
       this.errorMessage = this.gs.getError(error);
       alert(this.errorMessage);
@@ -401,15 +401,28 @@ export class InvoiceComponent implements OnInit {
     var SearchData = this.gs.UserInfo;
     SearchData.MBL_PKID = this.mbl_pkid;
     SearchData.MBL_BO_STATUS = this.MBL_BO_STATUS;
-    SearchData.MBL_BO_ATTENDED_CODE =  this.gs.user_code;
+    SearchData.MBL_BO_ATTENDED_CODE = this.gs.user_code;
+    SearchData.MBL_BO_ATTENDED_DATE = this.getBoAttendedDate();
     this.errorMessage = '';
     this.mainservice.BO_Status_Save(SearchData).subscribe(response => {
-      this.MBL_BO_ATTENDED_CODE=this.gs.user_code;
+      this.MBL_BO_ATTENDED_CODE = this.gs.user_code;
       // alert('Update Complete');
     }, error => {
       alert(this.gs.getError(error));
     });
 
+  }
+
+  getBoAttendedDate() {
+    let adate: string = this.gs.defaultValues.today;
+    try {
+      let nowDate = new Date();
+      adate = this.gs.defaultValues.today + ' ' + nowDate.toLocaleTimeString('it-IT',{ hour12: false });
+    }
+    catch (Exception) {
+      adate = this.gs.defaultValues.today;
+    }
+    return adate;
   }
 
 }
