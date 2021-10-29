@@ -18,6 +18,7 @@
     <table class="table  table-hover table-sm">
       <thead class="page-body-thead">
         <tr>
+          <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
           <th (click)="mainservice.sort('cust_name')">NAME&nbsp;<i [ngClass]="mainservice.getIcon('cust_name')"></i></th>
           <th (click)="mainservice.sort('cust_official_name')">OFFICIAL NAME&nbsp;<i [ngClass]="mainservice.getIcon('cust_official_name')"></i></th>        
           <th (click)="mainservice.sort('cust_address1')">ADDRESS1&nbsp;<i [ngClass]="mainservice.getIcon('cust_address1')"></i></th>
@@ -35,6 +36,7 @@
       </thead>
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+          <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT}}</td>
           <td>{{rec.cust_name}}</td>
           <td>{{rec.cust_official_name}}</td>
           <td>{{rec.cust_address1}}</td>

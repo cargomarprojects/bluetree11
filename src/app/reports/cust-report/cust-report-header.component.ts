@@ -29,16 +29,20 @@ export class CustReportHeaderComponent implements OnInit {
 
     onBlur(field: string) {
         switch (field) {
-          case 'searchString': {
-            this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase();
-            break;
-          }
+            case 'searchString': {
+                this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase();
+                break;
+            }
         }
     }
 
     List(outputformat: string) {
         if (this.gs.isBlank(this.searchQuery.searchString))
             this.searchQuery.searchString = '';
+        // if (this.gs.isBlank(this.searchQuery.fromdate))
+        //     this.searchQuery.fromdate = this.gs.year_start_date;
+        // if (this.gs.isBlank(this.searchQuery.todate))
+        //     this.searchQuery.todate = this.gs.defaultValues.today;
         this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.searchQuery });
     }
 }

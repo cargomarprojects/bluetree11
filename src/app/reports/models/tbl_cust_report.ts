@@ -2,7 +2,9 @@ import { PageQuery } from '../../shared/models/pageQuery';
 
 export interface SearchQuery {
     searchString: string;
-    searchCategory: string;    
+    searchCategory: string;
+    fromdate:string;
+    todate:string;    
 }
 
 export class Tbl_Cust_Report {

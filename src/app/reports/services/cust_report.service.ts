@@ -66,11 +66,11 @@ export class CustReportService {
 
     public ClearInit() {
         this.record = <Cust_Report_Model>{
-            sortcol: 'cust_name',
+            sortcol: 'rec_created_date',
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I' },
+            searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I',fromdate: '', todate: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -89,11 +89,11 @@ export class CustReportService {
         this.param_type = params.param_type;
 
         this.record = <Cust_Report_Model>{
-            sortcol: 'cust_name',
+            sortcol: 'rec_created_date',
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I' },
+            searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I',fromdate: '', todate: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -123,7 +123,9 @@ export class CustReportService {
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.CATEGORY = this.record.searchQuery.searchCategory;
         SearchData.CODE = this.record.searchQuery.searchString;
-
+        SearchData.SDATE = this.record.searchQuery.fromdate;
+        SearchData.EDATE = this.record.searchQuery.todate;
+        
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
