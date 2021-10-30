@@ -27,6 +27,7 @@ export class Tbl_Data_Entry_Report {
 }
 
 export interface Data_Entry_Report_Model {
+    selectedId : string;
     sortcol: string;
     sortorder: boolean;
     errormessage: string;

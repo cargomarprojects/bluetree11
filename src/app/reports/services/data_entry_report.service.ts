@@ -45,6 +45,12 @@ export class DataEntryReportService {
         private gs: GlobalService
     ) { }
 
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
     public getSortCol() {
         return this.record.sortcol;
     }
@@ -75,6 +81,7 @@ export class DataEntryReportService {
 
     public ClearInit() {
         this.record = <Data_Entry_Report_Model>{
+            selectedId : '',
             sortcol: '',
             sortorder: true,
             errormessage: '',
@@ -98,6 +105,7 @@ export class DataEntryReportService {
         this.param_type = params.param_type;
 
         this.record = <Data_Entry_Report_Model>{
+            selectedId : '',
             sortcol: '',
             sortorder: true,
             errormessage: '',
@@ -121,6 +129,7 @@ export class DataEntryReportService {
 
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';        
         }
 
         if (type == 'PAGE') {

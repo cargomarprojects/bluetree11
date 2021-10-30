@@ -31,7 +31,8 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+        <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()"
+          (mousedown)="mainservice.selectRowId(rec.de_created_by)" [class.selected]="rec.de_created_by == mainservice.getRowId()">
           <td>{{rec.de_category}}</td>
           <td>{{rec.de_type}}</td>
           <td>{{rec.de_created_by}}</td>
@@ -57,7 +58,8 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of records$ | async">
+        <tr *ngFor="let rec of records$ | async" (mousedown)="mainservice.selectRowId(rec.de_refno)"
+          [class.selected]="rec.de_refno == mainservice.getRowId()">
           <td>{{rec.de_branch}}</td>
           <td>{{rec.de_category}}</td>
           <td>{{rec.de_type}}</td>
@@ -75,7 +77,8 @@
   <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 </div>
 <div *ngIf="mainservice.tab == 'report'">
-  <app-report [title]="mainservice.title" [url]="" [searchdata]="" [menuid]="mainservice.menuid" [filename]="mainservice.filename"
-    [filetype]="mainservice.filetype" [filedisplayname]="mainservice.filedisplayname" [filename2]="mainservice.filename2" [filetype2]="mainservice.filetype2"
+  <app-report [title]="mainservice.title" [url]="" [searchdata]="" [menuid]="mainservice.menuid"
+    [filename]="mainservice.filename" [filetype]="mainservice.filetype" [filedisplayname]="mainservice.filedisplayname"
+    [filename2]="mainservice.filename2" [filetype2]="mainservice.filetype2"
     [filedisplayname2]="mainservice.filedisplayname2" (callbackevent)="callbackevent($event)"></app-report>
 </div>
