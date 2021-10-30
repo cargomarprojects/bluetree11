@@ -23,6 +23,7 @@ export class Tbl_Data_Entry_Report {
     de_handled_name: string;
     de_inv_no: string;
     de_remarks: string;
+    de_mbl_no:string;
 }
 
 export interface Data_Entry_Report_Model {
