@@ -198,7 +198,7 @@ export class AirImpMasterEditComponent implements OnInit {
     // this.record.mbl_salesman_name = '';
     // this.record.mbl_3rdparty = 'N';
     // this.record.mbl_3rdparty_bool = false;
-
+    this.record.mbl_incoterm = 'NA';
     if (this.gs.JOB_TYPE_AI.length > 0) {
       this.record.mbl_jobtype_id = this.gs.JOB_TYPE_AI[0].code;
       this.record.mbl_jobtype_name = this.gs.JOB_TYPE_AI[0].name;

@@ -36,6 +36,7 @@ export class OthGeneralEditComponent implements OnInit {
   @ViewChild('_hbl_consignee_name') hbl_consignee_name_field: ElementRef;
   @ViewChildren('_cntr_no') cntr_no_field: QueryList<ElementRef>;
   @ViewChildren('_cntr_sealno') cntr_sealno_field: QueryList<ElementRef>;
+  @ViewChild('_mbl_cargo_locname') mbl_cargo_locname_field: ElementRef;
 
   record: Tbl_cargo_general = <Tbl_cargo_general>{};
   records: Tbl_cargo_container[] = [];
@@ -573,6 +574,10 @@ export class OthGeneralEditComponent implements OnInit {
     // rec.cntr_return_date = '';
     rec.cntr_weight_uom = '';
     rec.cntr_order = 1;
+    rec.cntr_pick_date = '';
+    rec.cntr_return_date = '';
+    rec.cntr_lfd = '';
+    rec.cntr_discharge_date = '';
     this.records.push(rec);
     this.cntr_no_field.changes
       .subscribe((queryChanges) => {
@@ -698,7 +703,7 @@ export class OthGeneralEditComponent implements OnInit {
       this.record.mbl_cargo_locaddr2 = _Record.col2;
       this.record.mbl_cargo_locaddr3 = _Record.col3;
       this.record.mbl_cargo_locaddr4 = this.gs.GetTelFax(_Record.col6.toString(), _Record.col7.toString());
-      // this.mbl_cargo_locname_field.nativeElement.focus();
+      this.mbl_cargo_locname_field.nativeElement.focus();
     }
 
 

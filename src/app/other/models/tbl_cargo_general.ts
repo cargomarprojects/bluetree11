@@ -176,6 +176,10 @@ export interface Tbl_cargo_container {
     rec_year: number;
     cntr_yn: string;
     cntr_selected: boolean;
+    cntr_pick_date: string;
+    cntr_return_date: string;
+    cntr_lfd:string;
+    cntr_discharge_date:string;
 }
 
 export interface vm_tbl_cargo_general {

@@ -66,7 +66,7 @@ export interface Tbl_cargo_imp_masterm {
     mbl_salesman_name: string;
     rec_files_attached: string;
     mbl_ismemo_attached: string;
-
+    mbl_incoterm:string;
 }
 
 export interface Tbl_cargo_imp_housem {

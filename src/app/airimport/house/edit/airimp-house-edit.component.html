@@ -379,11 +379,14 @@
                     <option *ngFor="let rec of gs.PARAM_NOMINATION" [value]="rec.name">{{rec.name}}</option>
                   </select>
                 </div>
-                <label class="col-3 col-form-label col-form-label-sm">Inco</label>
+                <label class="col-3 col-form-label col-form-label-sm">Inco Term</label>
                 <div class="col-3">
                   <select class="form-control form-control-sm" [(ngModel)]="record.hbl_incoterm">
                     <option [value]="'NA'">NA</option>
+                    <option [value]="'CUSTOMS ONLY'">CUSTOMS ONLY</option>
+                    <option [value]="'DAP'">DAP</option>
                     <option [value]="'DDP'">DDP</option>
+                    <option [value]="'DDU'">DDU</option>
                   </select>
                 </div>
               </div>
