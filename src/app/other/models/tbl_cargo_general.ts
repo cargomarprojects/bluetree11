@@ -148,6 +148,13 @@ export interface Tbl_cargo_general {
     pick_delivery_date: string;
     mbl_bo_status: string;
     mbl_bo_attended_code: string;
+     
+    mbl_cargo_loccode: string;
+    mbl_cargo_locname: string;
+    mbl_cargo_locaddr1: string;
+    mbl_cargo_locaddr2: string;
+    mbl_cargo_locaddr3: string;
+    mbl_cargo_locaddr4: string;
 }
 
 export interface Tbl_cargo_container {

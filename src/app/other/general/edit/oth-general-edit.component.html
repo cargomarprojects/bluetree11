@@ -468,6 +468,54 @@
                                                 &lt;</span> </button>
                                     </div>
                                 </div>
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Cargo Location</label>
+                                    <div class="col-9">
+                                      <app-autocomplete2 [controlname]="'CARGO-LOC'" [tabletype]="'MASTER'" [subtype]="'LOCATION'"
+                                        [displaycolumn]="'NAME'" [displaydata]="record.mbl_cargo_loccode"
+                                        (ValueChanged)="LovSelected($event)">
+                                      </app-autocomplete2>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                      <input #_mbl_cargo_locname class="form-control form-control-sm" type="text"
+                                        (blur)="onBlur('mbl_cargo_locname')" [(ngModel)]="record.mbl_cargo_locname" maxlength="60" />
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                      <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_cargo_locaddr1')"
+                                        [(ngModel)]="record.mbl_cargo_locaddr1" maxlength="60" />
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                      <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_cargo_locaddr2')"
+                                        [(ngModel)]="record.mbl_cargo_locaddr2" maxlength="60" />
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                      <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_cargo_locaddr3')"
+                                        [(ngModel)]="record.mbl_cargo_locaddr3" maxlength="60" />
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                      <input class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_cargo_locaddr4')"
+                                        [(ngModel)]="record.mbl_cargo_locaddr4" maxlength="60" />
+                                    </div>
+                                  </div>
+
+
+
                             </div>
                         </div>
 

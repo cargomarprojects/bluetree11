@@ -14,6 +14,7 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-30-10-2021
 
 @Component({
   selector: 'app-oth-general-edit',
@@ -196,6 +197,13 @@ export class OthGeneralEditComponent implements OnInit {
     this.record.rec_created_date = this.gs.defaultValues.today;
     this.record.mbl_type = '';
     this.record.mbl_place_delivery = '';
+    this.record.mbl_cargo_loc_id = '';
+    this.record.mbl_cargo_loccode = '';
+    this.record.mbl_cargo_locname = '';
+    this.record.mbl_cargo_locaddr1 = '';
+    this.record.mbl_cargo_locaddr2 = '';
+    this.record.mbl_cargo_locaddr3 = '';
+    this.record.mbl_cargo_locaddr4 = '';
     this.record.hbl_pkid = '';
     this.record.hbl_mbl_id = '';
     this.record.hbl_houseno = '';
@@ -679,6 +687,20 @@ export class OthGeneralEditComponent implements OnInit {
         this.hbl_consignee_name_field.nativeElement.focus();
     }
 
+    if (_Record.controlname == "CARGO-LOC") {
+      this.record.mbl_cargo_loc_id = _Record.id;
+
+      this.record.mbl_cargo_locname = _Record.name;
+      if (_Record.col8 != "")
+        this.record.mbl_cargo_locname = _Record.col8;
+
+      this.record.mbl_cargo_locaddr1 = _Record.col1;
+      this.record.mbl_cargo_locaddr2 = _Record.col2;
+      this.record.mbl_cargo_locaddr3 = _Record.col3;
+      this.record.mbl_cargo_locaddr4 = this.gs.GetTelFax(_Record.col6.toString(), _Record.col7.toString());
+      // this.mbl_cargo_locname_field.nativeElement.focus();
+    }
+
 
     // Container
     if (_Record.controlname == "CONTAINER TYPE") {
@@ -825,6 +847,27 @@ export class OthGeneralEditComponent implements OnInit {
       }
       case 'mbl_voyage': {
         this.record.mbl_voyage = this.record.mbl_voyage.toUpperCase().trim();
+        break;
+      }
+
+      case 'mbl_cargo_locname': {
+        this.record.mbl_cargo_locname = this.record.mbl_cargo_locname.toUpperCase().trim();
+        break;
+      }
+      case 'mbl_cargo_locaddr1': {
+        this.record.mbl_cargo_locaddr1 = this.record.mbl_cargo_locaddr1.toUpperCase().trim();
+        break;
+      }
+      case 'mbl_cargo_locaddr2': {
+        this.record.mbl_cargo_locaddr2 = this.record.mbl_cargo_locaddr2.toUpperCase().trim();
+        break;
+      }
+      case 'mbl_cargo_locaddr3': {
+        this.record.mbl_cargo_locaddr3 = this.record.mbl_cargo_locaddr3.toUpperCase().trim();
+        break;
+      }
+      case 'mbl_cargo_locaddr4': {
+        this.record.mbl_cargo_locaddr4 = this.record.mbl_cargo_locaddr4.toUpperCase().trim();
         break;
       }
 
