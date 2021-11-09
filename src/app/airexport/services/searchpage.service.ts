@@ -5,7 +5,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { Tbl_Search, SearchPageModel } from '../models/tbl_search';
 import { SearchQuery } from '../models/tbl_search';
 import { PageQuery } from '../../shared/models/pageQuery';
-
+//EDIT-AJITH-09-11-2021
 @Injectable({
     providedIn: 'root'
 })
@@ -110,7 +110,7 @@ export class SearchPageService {
 
     }
     public ClearList() {
-        this.record.records= <Tbl_Search[]>[];
+        this.record.records = <Tbl_Search[]>[];
         this.mdata$.next(this.record);
     }
     Search(_searchdata: any, type: string = '') {
@@ -150,21 +150,13 @@ export class SearchPageService {
             SearchData.action = this.record.pageQuery.action;
             SearchData.page_count = this.record.pageQuery.page_count;
             SearchData.page_rows = this.record.pageQuery.page_rows;
-            SearchData.page_current = this.record.pageQuery.page_current;;
+            SearchData.page_current = this.record.pageQuery.page_current;
         }
 
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
-            // if (this.gs.isBlank(this.record.records))
-            //     this.record.errormessage = "No Search Results";
-            // else
-            //     this.record.errormessage = "Search Complete";
             this.mdata$.next(this.record);
-            // if (this.gs.isBlank(this.record.records))
-            //     alert("No Search Results");
-            // else
-            //     alert("Search Complete");
         }, error => {
             this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
@@ -176,5 +168,5 @@ export class SearchPageService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AirExport/SearchPage/List', SearchData, this.gs.headerparam2('authorized'));
     }
 
-    
+
 }
