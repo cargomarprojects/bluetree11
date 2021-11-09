@@ -11,7 +11,7 @@ import { SearchQuery } from '../models/tbl_cargo_general';
 import { PageQuery } from '../../shared/models/pageQuery';
 
 import { OthGeneralService } from '../services/oth-general.service';
-
+//EDIT-AJITH-09-11-2021
 
 @Component({
   selector: 'app-oth-general',

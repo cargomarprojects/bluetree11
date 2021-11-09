@@ -56,7 +56,7 @@
         <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td>{{rec.mbl_handled_name}}</td>
         <td>{{rec.rec_created_by}}</td>
-        <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+        <td>{{rec.rec_created_date | date : gs.date_display_fmt_with_time }}</td>
         <td *ngIf="mainservice.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
           (click)="mainservice.DeleteRow(rec)"></i></td>
       </tr>
