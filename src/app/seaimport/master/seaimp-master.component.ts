@@ -11,7 +11,7 @@ import { SearchQuery } from '../models/tbl_cargo_imp_masterm';
 import { PageQuery } from '../../shared/models/pageQuery';
 
 import { SeaImpMasterService } from '../services/seaimp-master.service';
-
+//EDIT-AJITH-09-11-2021
 
 @Component({
   selector: 'app-seaimp-master',

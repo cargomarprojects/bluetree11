@@ -21,36 +21,50 @@
     <table class="table table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
-                <th (click)="mainservice.sort('mbl_refno')">REF.NO&nbsp;<i [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
-                <th (click)="mainservice.sort('mbl_ref_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_ref_date')"></i></th>
-                <th (click)="mainservice.sort('mbl_no')">MBL#&nbsp;<i [ngClass]="mainservice.getIcon('mbl_no')"></i></th>
-                <th (click)="mainservice.sort('mbl_agent_name')">AGENT&nbsp;<i [ngClass]="mainservice.getIcon('mbl_agent_name')"></i></th>
-                <th (click)="mainservice.sort('mbl_liner_name')">CARRIER&nbsp;<i [ngClass]="mainservice.getIcon('mbl_liner_name')"></i></th>
-                <th (click)="mainservice.sort('mbl_pol_name')">POL&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_name')"></i></th>
-                <th (click)="mainservice.sort('mbl_pol_etd')">ETD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_etd')"></i></th>
-                <th (click)="mainservice.sort('mbl_pod_name')">POD&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_name')"></i></th>
-                <th (click)="mainservice.sort('mbl_pod_eta')">ETA&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_eta')"></i></th>
-                <th (click)="mainservice.sort('mbl_cntr_type')">TYPE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_cntr_type')"></i></th>
-                <th (click)="mainservice.sort('mbl_teu')">TEU&nbsp;<i [ngClass]="mainservice.getIcon('mbl_teu')"></i></th>
-                <th (click)="mainservice.sort('mbl_cntr_cbm')">CBM&nbsp;<i [ngClass]="mainservice.getIcon('mbl_cntr_cbm')"></i></th>
-                <th (click)="mainservice.sort('mbl_handled_name')">HANDLED-BY&nbsp;<i [ngClass]="mainservice.getIcon('mbl_handled_name')"></i></th>
-                <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
-                <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
+                <th (click)="mainservice.sort('mbl_refno')">REF.NO&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
+                <th (click)="mainservice.sort('mbl_ref_date')">DATE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_ref_date')"></i></th>
+                <th (click)="mainservice.sort('mbl_no')">MBL#&nbsp;<i [ngClass]="mainservice.getIcon('mbl_no')"></i>
+                </th>
+                <th (click)="mainservice.sort('mbl_agent_name')">AGENT&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_agent_name')"></i></th>
+                <th (click)="mainservice.sort('mbl_liner_name')">CARRIER&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_liner_name')"></i></th>
+                <th (click)="mainservice.sort('mbl_pol_name')">POL&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_pol_name')"></i></th>
+                <th (click)="mainservice.sort('mbl_pol_etd')">ETD&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_pol_etd')"></i></th>
+                <th (click)="mainservice.sort('mbl_pod_name')">POD&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_pod_name')"></i></th>
+                <th (click)="mainservice.sort('mbl_pod_eta')">ETA&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_pod_eta')"></i></th>
+                <th (click)="mainservice.sort('mbl_cntr_type')">TYPE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_cntr_type')"></i></th>
+                <th (click)="mainservice.sort('mbl_teu')">TEU&nbsp;<i [ngClass]="mainservice.getIcon('mbl_teu')"></i>
+                </th>
+                <th (click)="mainservice.sort('mbl_cntr_cbm')">CBM&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_cntr_cbm')"></i></th>
+                <th (click)="mainservice.sort('mbl_handled_name')">HANDLED-BY&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_handled_name')"></i></th>
+                <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i
+                        [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+                <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
                 <th *ngIf="mainservice.canDelete" class='text-center'>DELETE</th>
             </tr>
         </thead>
         <tbody class="page-body-tbody mybody">
             <tr *ngFor="let rec of records$ | async |  sortBy: mainservice.getSortCol() : mainservice.getSortOrder()"
-            (mousedown)="mainservice.selectRowId(rec.mbl_pkid)" 
-            [class.selected]="rec.mbl_pkid == mainservice.getRowId()">
+                (mousedown)="mainservice.selectRowId(rec.mbl_pkid)"
+                [class.selected]="rec.mbl_pkid == mainservice.getRowId()">
 
                 <td *ngIf="!this.mainservice.canEdit">{{rec.mbl_refno}}</td>
                 <td *ngIf="this.mainservice.canEdit">
-                    <a  [routerLink]="['/Silver.SeaImport/SeaImpMasterEditPage']"
+                    <a [routerLink]="['/Silver.SeaImport/SeaImpMasterEditPage']"
                         [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.mbl_pkid,type: '',origin: 'seaimp-master-page',mode: 'EDIT'}"
-                        class="hlink"
-                        >
-                            {{rec.mbl_refno}}
+                        class="hlink">
+                        {{rec.mbl_refno}}
                     </a>
                 </td>
                 <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
@@ -66,7 +80,7 @@
                 <td>{{rec.mbl_cntr_cbm}}</td>
                 <td>{{rec.mbl_handled_name}}</td>
                 <td>{{rec.rec_created_by}}</td>
-                <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.rec_created_date | date : gs.date_display_fmt_with_time }}</td>
                 <td *ngIf="mainservice.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
                         aria-hidden="true" (click)="mainservice.DeleteRow(rec)"></i></td>
             </tr>
@@ -74,4 +88,3 @@
     </table>
 </div>
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
-
