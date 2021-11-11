@@ -9,10 +9,12 @@
     --custom-border-color:rgba(0,0,0,.125)
 
     --custom-bg-color:rgba(242, 242, 242, 1);
+    --custom-bg-color:#D3D3D3;
+    --custom-bg-color: rgba(0, 177, 106, 0.2);
 
     */
-    
     --custom-bg-color:#D3D3D3;
+    
     --custom-even-color :rgba(0,0,0,.125)    ;
     --custom-fg-color: #c9c2c2; 
     --custom-border-color:rgba(0,0,0,.125) ;   
@@ -31,6 +33,15 @@
     */
   
 }
+
+.commonbgcolor {
+    background-color: var(--custom-bg-color) !important;
+}
+
+.commonbgcolor2 {
+    background-color: var(--custom-bg-color) !important;
+}
+
 
 .iconcolor{
     color : var(--custom-icon-color);
@@ -60,13 +71,7 @@ body {
 }
 
 
-.commonbgcolor {
-    background-color: var(--custom-bg-color);
-}
 
-.commonbgcolor2 {
-    background-color: var(--custom-bg-color) !important;
-}
 
 
 tr:nth-child(even) {
@@ -98,7 +103,7 @@ tr.selected {
 }
 
 .page-body {
-    border-color: var(--custom-border-color) !important; 
+    border-color: var(--custom-bg-color) !important; 
 }
 
 .page-body-thead {
@@ -109,7 +114,7 @@ tr.selected {
 }
 
 table, th, td {
-    border-color: var(--custom-border-color) !important;
+    border-color: var(--custom-bg-color) !important;
  
 }
 

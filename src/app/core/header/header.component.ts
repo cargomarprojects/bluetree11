@@ -23,6 +23,7 @@ export class HeaderComponent {
     sub : any ;
 
     constructor(
+    
         private router: Router,
         private location: Location,
         public gs: GlobalService,
@@ -30,6 +31,8 @@ export class HeaderComponent {
         private loginservice: LoginService) {
             this.sub = this.loadingScreenService.loadingStatus.subscribe( value =>  this.loading = value);
     }
+
+    
 
 
     ngOnInit(){
