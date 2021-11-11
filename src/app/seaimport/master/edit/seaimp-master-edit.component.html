@@ -106,14 +106,13 @@
 
 
                 <div class="form-group row">
-                  <label class="col-3 col-form-label col-form-label-sm">Carrier</label>
+                  <label *ngIf="record.mbl_liner_web!=''" class="hlink2 col-3 col-form-label col-form-label-sm" (click)="openWebSite(record.mbl_liner_web)">Carrier</label>
+                  <label *ngIf="record.mbl_liner_web==''" class="col-3 col-form-label col-form-label-sm" >Carrier</label>
                   <div class="col-9">
-
                     <app-autocomplete2 #_liner_lov [controlname]="'CARRIER'" [tabletype]="'SEA CARRIER'"
                       [displaycolumn]="'NAME'" [displaydata]="record.mbl_liner_name"
                       (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
-
                   </div>
                 </div>
 

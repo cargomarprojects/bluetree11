@@ -16,6 +16,7 @@ import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomple
 //EDIT-AJITH-23-10-2021
 //EDIT-AJITH-28-10-2021
 //EDIT-AJITH-30-10-2021
+//EDIT-AJITH-11-11-2021
 
 @Component({
   selector: 'app-seaimp-master-edit',
@@ -247,6 +248,7 @@ export class SeaImpMasterEditComponent implements OnInit {
     else
       this.record.mbl_ombl_sent_ampm = "AM";
       this.record.mbl_incoterm = 'NA';
+      this.record.mbl_liner_web = '';
     if (!this.gs.isBlank(this.mbl_ref_date_field))
       this.mbl_ref_date_field.Focus();
   }
@@ -1367,6 +1369,11 @@ export class SeaImpMasterEditComponent implements OnInit {
       });
   }
 
+  openWebSite(_url: string) {
+    if (this.gs.isBlank(_url))
+      return;
+    window.open(_url, "_blank");
+  }
 
 }
 
