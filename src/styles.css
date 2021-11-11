@@ -7,9 +7,12 @@
     --custom-even-color : #a7a1a1; 
     --custom-fg-color: #c9c2c2; 
     --custom-border-color:rgba(0,0,0,.125)
+
+    --custom-bg-color:rgba(242, 242, 242, 1);
+
     */
     
-    --custom-bg-color:rgba(242, 242, 242, 1);
+    --custom-bg-color:#D3D3D3;
     --custom-even-color :rgba(0,0,0,.125)    ;
     --custom-fg-color: #c9c2c2; 
     --custom-border-color:rgba(0,0,0,.125) ;   
