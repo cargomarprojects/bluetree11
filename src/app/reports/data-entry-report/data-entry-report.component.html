@@ -28,6 +28,7 @@
           <th>TYPE</th>
           <th>CREATED-BY</th>
           <th>COUNT</th>
+          <th *ngIf="mainservice.record.searchQuery.category=='SHIPMENTS'">HBL-TOT</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody">
@@ -37,6 +38,7 @@
           <td>{{rec.de_type}}</td>
           <td>{{rec.de_created_by}}</td>
           <td>{{rec.de_created_count}}</td>
+          <td *ngIf="mainservice.record.searchQuery.category=='SHIPMENTS'">{{rec.de_mbl_house_tot}}</td>
         </tr>
       </tbody>
     </table>
@@ -51,6 +53,7 @@
           <th>REF#</th>
           <th>REF-DATE</th>
           <th>MASTER#</th>
+          <th>HOUSE#</th>
           <th>AGENT-NAME</th>
           <th>HANDLED-BY</th>
           <th>CREATED-BY</th>
@@ -66,6 +69,7 @@
           <td>{{rec.de_refno}}</td>
           <td>{{rec.de_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.de_mbl_no}}</td>
+          <td>{{rec.de_mbl_house_nos}}</td>
           <td>{{rec.de_agent_name}}</td>
           <td>{{rec.de_handled_name}}</td>
           <td>{{rec.de_created_by}}</td>

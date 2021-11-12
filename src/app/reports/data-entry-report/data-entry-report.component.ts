@@ -11,6 +11,7 @@ import { PageQuery } from '../../shared/models/pageQuery';
 import {  DataEntryReportService } from '../services/data_entry_report.service';
 //CREATE-AJITH-25-10-2021
 //EDIT-AJITH-26-10-2021
+//EDIT-AJITH-12-11-2021
 
 @Component({
   selector: 'app-data-entry-report',

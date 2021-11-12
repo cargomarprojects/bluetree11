@@ -23,11 +23,13 @@ export class Tbl_Data_Entry_Report {
     de_handled_name: string;
     de_inv_no: string;
     de_remarks: string;
-    de_mbl_no:string;
+    de_mbl_no: string;
+    de_mbl_house_nos: string;
+    de_mbl_house_tot: number;
 }
 
 export interface Data_Entry_Report_Model {
-    selectedId : string;
+    selectedId: string;
     sortcol: string;
     sortorder: boolean;
     errormessage: string;
