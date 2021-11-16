@@ -26,6 +26,7 @@ export class Tbl_Data_Entry_Report {
     de_mbl_no: string;
     de_mbl_house_nos: string;
     de_mbl_house_tot: number;
+    de_created_date: string;
 }
 
 export interface Data_Entry_Report_Model {
