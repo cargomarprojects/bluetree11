@@ -13,6 +13,7 @@ import { vm_Tbl_User_Userm, Tbl_User_Userm } from '../models/Tbl_User_Userm';
 import { SearchTable } from '../../shared/models/searchtable';
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-18-10-2021
+//EDIT-AJITH-18-11-2021
 
 @Component({
     selector: 'app-user-edit',
@@ -110,6 +111,7 @@ export class UserEditComponent implements OnInit {
         this.record.usr_sign_color = 'BLACK';
 
         this.record.usr_sign_bold = 'N';
+        this.record.usr_timezone = 'NA';
 
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;

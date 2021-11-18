@@ -20,6 +20,7 @@ import { gsdata } from '../models/gsdata';
 
 //EDIT-AJITH-07-09-2021
 //EDIT-AJITH-09-09-2021
+//EDIT-AJITH-18-11-2021
 
 @Injectable({
   providedIn: 'root'
@@ -138,6 +139,7 @@ export class GlobalService {
   public user_party_name = "";
   public user_party_type = "";
   public user_hide_payroll: string = '';
+  public user_timezone: string = 'NA';
 
   public USER_DISABLE_EDIT_SI_MBLSTATUS: string = '';
 
@@ -726,6 +728,8 @@ export class GlobalService {
     if (this.UserRecord.usr_code == "ADMIN")
       this.user_isadmin = "Y";
 
+     this.user_timezone = this.UserRecord.user_timezone; 
+
     if (this.UserRecord.usr_confirm_onexit == "Y")
       this.Confirm_On_Exit = true;
     else
@@ -829,8 +833,8 @@ export class GlobalService {
       "~MESSENGER_SLIP_DROP_AT": this.MESSENGER_SLIP_DROP_AT,
       "~HBL_INSTR1": this.HBL_INSTR1,
       "~HBL_INSTR2": this.HBL_INSTR2,
-      "~DATE_DISPLAY_FMT_WITH_TIME": this.date_display_fmt_with_time
-
+      "~DATE_DISPLAY_FMT_WITH_TIME": this.date_display_fmt_with_time,
+      "~USR_TIMEZONE": this.user_timezone
     }
 
   }

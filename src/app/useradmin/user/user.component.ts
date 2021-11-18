@@ -9,6 +9,7 @@ import { Tbl_User_Userm } from '../models/Tbl_User_Userm';
 import { SearchQuery } from '../models/Tbl_User_Userm';
 import { PageQuery } from '../../shared/models/pageQuery';
 import { UserService } from '../services/userm.service';
+//EDIT-AJITH-18-11-2021
 
 @Component({
   selector: 'app-userm',

@@ -34,7 +34,8 @@ export class Tbl_User_Userm {
     usr_sign_bold : string;
     usr_hide_payroll : string;
     usr_disable_edit_si_mblstatus : string;
-    
+    usr_timezone : string;
+
     rec_created_by: string;
     rec_created_date: string;
     rec_closed: string;
