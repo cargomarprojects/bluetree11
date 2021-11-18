@@ -728,7 +728,7 @@ export class GlobalService {
     if (this.UserRecord.usr_code == "ADMIN")
       this.user_isadmin = "Y";
 
-     this.user_timezone = this.UserRecord.user_timezone; 
+     this.user_timezone = this.UserRecord.usr_timezone; 
 
     if (this.UserRecord.usr_confirm_onexit == "Y")
       this.Confirm_On_Exit = true;
