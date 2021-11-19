@@ -53,7 +53,7 @@ export class GlobalService {
   public tab = ' 	';
 
   public software_version_string = '1.147';
-  
+
   public baseUrl: string = "http://localhost:5000";
   //public baseUrl: string = "";
   // change this is false in production and update
@@ -728,7 +728,7 @@ export class GlobalService {
     if (this.UserRecord.usr_code == "ADMIN")
       this.user_isadmin = "Y";
 
-     this.user_timezone = this.UserRecord.usr_timezone; 
+    this.user_timezone = this.UserRecord.usr_timezone;
 
     if (this.UserRecord.usr_confirm_onexit == "Y")
       this.Confirm_On_Exit = true;
@@ -2104,7 +2104,7 @@ export class GlobalService {
 
   public conv2Number(_number: any, _precision: number) {
     var _data = 0;
-    if ( !this.isBlank(_number))
+    if (!this.isBlank(_number))
       _data = Number(_number);
     return this.roundNumber2(_data, _precision);
   };
@@ -2740,8 +2740,10 @@ export class GlobalService {
       MBLMODE = MBLMODE.replace("OCEAN", "SEA");
 
       if (MBLMODE == "SEA EXPORT" || MBLMODE == "SEA IMPORT" || MBLMODE == "AIR EXPORT" || MBLMODE == "AIR IMPORT" || MBLMODE == "OTHERS" || MBLMODE == "EXTRA") {
-        if (REFNO.length >= 2 && MBLID.trim().length > 0)
-          sType = REFNO.substring(0, 2);
+        if (REFNO.length >= 2 && MBLID.trim().length > 0) {
+          // sType = REFNO.substring(0, 2);
+          sType = this.getStype(MBLMODE);
+        }
         else
           sType = "";
       }
@@ -3277,6 +3279,23 @@ export class GlobalService {
 
   }
 
+  getStype(_mode: string) {
+    let sMode: string = "";
+    if (_mode == "SEA IMPORT")
+      sMode = "OI";
+    else if (_mode == "SEA EXPORT")
+      sMode = "OE";
+    else if (_mode == "AIR IMPORT")
+      sMode = "AI";
+    else if (_mode == "AIR EXPORT")
+      sMode = "AE";
+    else if (_mode == "OTHERS")
+      sMode = "OT";
+    else if (_mode == "EXTRA")
+      sMode = "EX";
+    return sMode;
+  }
+
   public copyToClipboard(val: string) {
     try {
       const txtBox = document.createElement('textarea');
@@ -3462,13 +3481,13 @@ export class GlobalService {
     return retdate;
   }
 
-  public ascii (a : any) { return a.charCodeAt(0); }
+  public ascii(a: any) { return a.charCodeAt(0); }
 
-  async readClipboard() : Promise<string> {
+  async readClipboard(): Promise<string> {
     var text = '';
     try {
 
-      text =  await navigator.clipboard.readText();
+      text = await navigator.clipboard.readText();
 
     } catch (err) {
       console.error('Failed to read clipboard contents: ', err);
@@ -3476,7 +3495,7 @@ export class GlobalService {
     }
     return text.toString();
   }
-  async writeClipboard(text : any) {
+  async writeClipboard(text: any) {
     try {
       await navigator.clipboard.writeText(text);
     } catch (err) {

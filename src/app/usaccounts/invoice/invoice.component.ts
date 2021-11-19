@@ -11,6 +11,7 @@ import { invoiceService } from '../services/invoice.service';
 //EDIT-AJITH-04-10-2021
 //EDIT-AJITH-13-10-2021
 //EDIT-AJITH-29-10-2021
+//EDIT-AJITH-19-11-2021
 
 @Component({
   selector: 'app-invoice',
@@ -346,14 +347,15 @@ export class InvoiceComponent implements OnInit {
     let MBLID: string = (_rec.inv_mbl_id != null) ? _rec.inv_mbl_id.toString() : "";
     let HBLID: string = (_rec.inv_hbl_id != null) ? _rec.inv_hbl_id.toString() : "";
     let REFNO: string = _rec.inv_mbl_refno != null ? _rec.inv_mbl_refno.toString() : "";
+    let shbl_mode: string = _rec.inv_hbl_mode != null ? _rec.inv_hbl_mode.toString() : "";
     let sMode: string = "";
     let _refno: string = _rec.inv_type != null ? _rec.inv_type.toString() : "";
     sMode = this.getMode(_refno);
-
+    
     if (_type == 'MASTER')
       return this.gs.Link2Page('REFNO', sMode, REFNO, MBLID, '', '', _format, '', '');
     else if (_type == 'HOUSE')
-      return this.gs.Link2Page('HOUSE', sMode, REFNO, MBLID, HBLID, '', _format, '', '');
+      return this.gs.Link2Page('HOUSE', shbl_mode, REFNO, MBLID, HBLID, '', _format, '', '');
     else
       return null;
   }

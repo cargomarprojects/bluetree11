@@ -10,6 +10,7 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { strictEqual } from 'assert';
 import { Tbl_cargo_obl_released } from '../../models/tbl_cargo_obl_released';
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-19-11-2021
 
 @Component({
   selector: 'app-oth-generalexpense-edit',
@@ -298,8 +299,9 @@ export class OthGeneralExpenseEditComponent implements OnInit {
     this.mainService.GetHouseDetails(SearchData)
       .subscribe(response => {
         this.HouseList = <Tbl_cargo_obl_released[]>response.list;
-
         this.HouseList.forEach(rec => {
+          if (this.gs.isBlank(this.record.mbl_devan_loc_id)) //first house to assign default
+            this.record.mbl_devan_loc_id = rec.obl_hbl_id;
           if (!this.gs.isBlank(rec.obl_mbl_id))
             this.record.mbl_cargo_loc_id = rec.obl_mbl_id;
         });
