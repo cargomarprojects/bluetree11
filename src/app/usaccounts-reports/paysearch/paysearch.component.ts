@@ -33,7 +33,7 @@ export class PaySearchComponent implements OnInit {
 
   ngOnInit() {
     this.gs.checkAppVersion();
-    
+
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
   }
@@ -68,7 +68,7 @@ export class PaySearchComponent implements OnInit {
       origin: 'mblusage-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete2('Silver.Other.Trans/MblUsageEditPage',  parameter);
+    this.gs.Naviagete2('Silver.Other.Trans/MblUsageEditPage', parameter);
 
   }
   edit(_record: Tbl_Acc_Payment) {
@@ -78,14 +78,14 @@ export class PaySearchComponent implements OnInit {
     }
 
     let parameter = {
-      appid : this.gs.appid,
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.pay_pkid,
       type: '',
       origin: 'mblusage-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete2('Silver.Other.Trans/MblUsageEditPage',  parameter);
+    this.gs.Naviagete2('Silver.Other.Trans/MblUsageEditPage', parameter);
   }
 
   Close() {
@@ -159,6 +159,8 @@ export class PaySearchComponent implements OnInit {
       sMode = "AIR EXPORT";
     else if (REFNO == "OT")
       sMode = "OTHERS";
+    else
+      sMode = REFNO;
 
     if (_type == 'MASTER')
       return this.gs.Link2Page('REFNO', sMode, REFNO, sID, '', '', _format);
