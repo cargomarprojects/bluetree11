@@ -1,8 +1,8 @@
 import { Tbl_cargo_general } from '../../../other/models/tbl_cargo_general'
 export interface ReportState {
 
-    pkid: string,
-    urlid: string,
+    pkid: string;
+    urlid: string;
     menuid: string;
     currentTab: string;
 
