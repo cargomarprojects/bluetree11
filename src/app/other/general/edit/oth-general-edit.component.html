@@ -53,7 +53,7 @@
                                     <label class="col-3 col-form-label col-form-label-sm">Ref Date</label>
                                     <div class="col-9">
                                         <app-date #_mbl_ref_date [inputdate]="record.mbl_ref_date"
-                                            (ValueChanged)="sdate=$event">
+                                            (ValueChanged)="record.mbl_ref_date=$event">
                                         </app-date>
                                     </div>
                                 </div>
