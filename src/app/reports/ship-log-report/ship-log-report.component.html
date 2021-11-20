@@ -326,6 +326,8 @@
                         <th (click)="sort('mbl_refno')"> REFNO &nbsp;<i [ngClass]="getIcon('mbl_refno')"></i></th>
                         <th (click)="sort('hbl_houseno')"> MASTER/HOUSE# &nbsp;<i
                                 [ngClass]="getIcon('hbl_houseno')"></i></th>
+                        <th (click)="sort('mbl_handled_name')"> HANDLED.BY &nbsp;<i
+                                [ngClass]="getIcon('mbl_handled_name')"></i></th>
                         <th (click)="sort('hbl_shipment_stage')"> SHIPMENT STAGE &nbsp;<i
                                 [ngClass]="getIcon('hbl_shipment_stage')"></i></th>
                         <th (click)="sort('mbl_liner_name')"> CARRIER &nbsp;<i
@@ -368,6 +370,7 @@
                                 [queryParams]="gs.Link2Page('HOUSE', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'P')">{{rec.hbl_houseno}}</a>
                         </td>
                         <td *ngIf="rec.hbl_pkid==''">{{rec.hbl_houseno}}</td>
+                        <td>{{rec.mbl_handled_name}}</td>
                         <td>{{rec.hbl_shipment_stage}}</td>
                         <td>{{rec.mbl_liner_name}}</td>
                         <td *ngIf="job_mode=='OCEAN EXPORT'">{{rec.mbl_liner_bookingno}}</td>

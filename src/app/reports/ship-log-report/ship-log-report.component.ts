@@ -253,7 +253,8 @@ export class ShipmentLogReportComponent implements OnInit {
       alert(this.errorMessage);
       return;
     }
-
+ 
+    
     if (this.format_type == "FORMAT-4") {
       this.report_masterwise = false;
       this.report_housewise = true;
