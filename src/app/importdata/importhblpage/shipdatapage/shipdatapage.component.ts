@@ -10,7 +10,8 @@ import { SearchQuery } from '../../models/tbl_edi_master';
 import { PageQuery } from '../../../shared/models/pageQuery';
 import { ShipDataPageService } from '../../services/shipdatapage.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Tbl_acc_ledger } from 'src/app/usaccounts-reports/models/Tbl_acc_ledger';
+
+//EDIT-AJITH-20-11-2021
 
 @Component({
     selector: 'app-shipdatapage',
@@ -45,7 +46,7 @@ export class ShipDataPageComponent implements OnInit {
     }
 
     initPage() {
-        
+
         this.records$ = this.mainservice.data$.pipe(map(res => res.records));
         this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
         this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -88,6 +89,7 @@ export class ShipDataPageComponent implements OnInit {
         this.mainservice.CheckMaster(_record.masterid);
     }
 
+    //not in use
     editmaster(_record: Tbl_edi_master) {
         let sID: string = (_record.mbl_pkid != null) ? _record.mbl_pkid.toString() : "";
         let REFNO: string = _record.mbl_refno != null ? _record.mbl_refno.toString() : "";
@@ -115,5 +117,14 @@ export class ShipDataPageComponent implements OnInit {
     ModifiedRecords(params: any) {
         if (params.saction == "CLOSE")
             this.modal.close();
+    }
+
+    getRouteDet(_format: string, _rec: Tbl_edi_master, _type: string) {
+        let sID: string = (_rec.mbl_pkid != null) ? _rec.mbl_pkid.toString() : "";
+        let REFNO: string = _rec.mbl_refno != null ? _rec.mbl_refno.toString() : "";
+        let BranchCode: string = _rec.mbl_branch_code != null ? _rec.mbl_branch_code.toString() : "";
+        let sMode: string = "SEA IMPORT";
+
+        return this.gs.Link2Page('REFNO', sMode, REFNO, sID, '', '', _format, BranchCode);
     }
 }
