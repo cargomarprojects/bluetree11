@@ -176,6 +176,7 @@ export class seaexpMasterService {
         }
         else {
             REC.mbl_refno = _rec.mbl_refno;
+            REC.mbl_ref_date = _rec.mbl_ref_date;
             REC.mbl_no = _rec.mbl_no;
             REC.mbl_agent_name = _rec.mbl_agent_name;
             REC.mbl_liner_name = _rec.mbl_liner_name;

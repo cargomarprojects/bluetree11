@@ -177,6 +177,7 @@ export class OthGeneralExpenseService {
         }
         else {
             REC.mbl_refno = _rec.mbl_refno;
+            REC.mbl_ref_date = _rec.mbl_ref_date;
             REC.mbl_no = _rec.mbl_no;
             REC.mbl_cargo_loc_name = _rec.mbl_cargo_loc_name;
             REC.mbl_devan_loc_name = _rec.mbl_devan_loc_name;
