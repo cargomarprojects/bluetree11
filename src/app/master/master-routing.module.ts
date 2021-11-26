@@ -23,6 +23,7 @@ import { BranchSettingsComponent } from './branch-settings/branchsettings.compon
 import { FormatPageComponent } from './formatpage/formatpage.component';
 import { EhblComponent } from './ehbl/ehbl.component';
 import { EhblReqComponent } from './ehbl/ehbl-req.component';
+import { BulkmailComponent } from './bulkmail/bulkmail.component';
 
 const routes: Routes = [
   {path:'ParamPage', component: ParamPageComponent},
@@ -45,7 +46,8 @@ const routes: Routes = [
   {path:'SettingsPage', component: BranchSettingsComponent}, 
   {path:'FormatPage', component: FormatPageComponent},
   {path:'EhblPage', component: EhblComponent},  
-  {path:'EhblReqPage', component: EhblReqComponent}, 
+  {path:'EhblReqPage', component: EhblReqComponent},
+  {path:'BulkMailPage', component: BulkmailComponent},  
 ];
 
 @NgModule({

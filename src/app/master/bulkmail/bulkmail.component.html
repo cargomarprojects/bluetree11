@@ -1,0 +1,33 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-3">{{mainservice.title}}</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage$ | async}}
+</div>
+<div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th>
+                    <div class="form-check"> <input type="checkbox" (click)="mainservice.SelectDeselect()"
+                            class="form-check-input" [(ngModel)]="mainservice.chkall"><span>SELECTED</span>
+                    </div>
+                </th>
+                <th>CLIENT CATEGORY</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records$ | async">
+                <td (click)="mainservice.ClientCategoryChk_Click(rec)">
+                    <div class="form-check"> <input type="checkbox" class="form-check-input" [(ngModel)]="rec.cat_yn_b">
+                    </div>
+                </td>
+                <td>{{rec.cat_name}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

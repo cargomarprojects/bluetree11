@@ -6,7 +6,7 @@
 </div>
 
 <div *ngIf="errorMessage$ | async" class="alert alert-danger">
-    {{errorMessage}}
+    {{errorMessage$ | async}}
 </div>
 <div class="page-body table-responsive table-bordered">
     <table class="table  table-hover table-sm">
