@@ -5,13 +5,15 @@ export interface SearchQuery {
 }
 
 export class Tbl_User_Server {
-    mail_pkid : string;
+    mail_pkid: string;
     mail_name: string;
-    mail_smtp_name : string;
-    mail_smtp_port : string;
-    mail_is_ssl_required : string;
-    mail_is_auth_required : string;
-    mail_is_spa_required : string;
+    mail_smtp_name: string;
+    mail_smtp_port: string;
+    mail_is_ssl_required: string;
+    mail_is_auth_required: string;
+    mail_is_spa_required: string;
+    mail_bulk_tot: number;
+    mail_bulk_sub: number;
     
     rec_created_by: string;
     rec_created_date: string;

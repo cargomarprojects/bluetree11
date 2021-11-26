@@ -13,6 +13,7 @@ import { vm_Tbl_User_Server, Tbl_User_Server } from '../models/Tbl_User_Server';
 import { SearchTable } from '../../shared/models/searchtable';
 
 //EDIT-AJITH-06-09-2021
+//EDIT-AJITH-26-11-2021
 
 @Component({
     selector: 'app-mailserver-edit',
@@ -98,7 +99,8 @@ export class MailServerEditComponent implements OnInit {
         this.record.mail_is_auth_required = 'Y';
         this.record.mail_is_spa_required = 'Y';
         this.record.mail_is_ssl_required = 'Y';
-
+        this.record.mail_bulk_sub = 100;
+        this.record.mail_bulk_tot = 1000;
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
     }
@@ -118,7 +120,6 @@ export class MailServerEditComponent implements OnInit {
 
 
     Save() {
-
 
         if (!this.Allvalid())
             return;
@@ -186,6 +187,13 @@ export class MailServerEditComponent implements OnInit {
             return bRet;
         }
 
+        if (+this.record.mail_bulk_sub > +this.record.mail_bulk_tot) {
+            bRet = false;
+            this.errorMessage = " Bulkmail Subtotal must be less than Btachtotal";
+            alert(this.errorMessage);
+            return bRet;
+        }
+
         return bRet;
     }
 
@@ -197,8 +205,6 @@ export class MailServerEditComponent implements OnInit {
 
     LovSelected(_Record: SearchTable) {
 
-        if (_Record.controlname == "ACC_GROUPM") {
-        }
 
     }
 
