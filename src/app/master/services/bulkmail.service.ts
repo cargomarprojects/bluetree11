@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GlobalService } from '../../core/services/global.service';
 import { BulkmailModel, Tbl_Addr_Catgory } from '../models/Tbl_Addr_Catgory';
+import { SearchQuery } from '../models/Tbl_Addr_Catgory';
+import { PageQuery } from '../../shared/models/pageQuery';
+
 
 @Injectable({
     providedIn: 'root'
@@ -32,16 +35,67 @@ export class BulkmailService {
     public chkall: boolean = true;
     public all: boolean = true;
 
+    public Txt_Subject: string = "";
+    public Txt_Message: string = "";
+    public Txt_Error: string = "";
+    public msgFontFamily: string = "";
+    public msgFontSize: string = "";
+    public msgForeground: string = "";
+    public msgFontWeight: string = "";
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
+    public selectRowId(id: string) {
+        this.record.selectedId = id;
+    }
+    public getRowId() {
+        return this.record.selectedId;
+    }
+
+
+
+    public getSortCol() {
+        return this.record.sortcol;
+    }
+    public getSortOrder() {
+        return this.record.sortorder;
+    }
+
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
+        }
+        else
+            return null;
+    }
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
+        }
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
+        }
+    }
+
+
     public ClearInit() {
         this.record = <BulkmailModel>{
+            selectedId: '',
+            sortcol: '',
+            sortorder: true,
             errormessage: '',
-            records: []
+            records: [],
+            records2: [],
+            searchQuery: <SearchQuery>{ searchString: '', fromdate: '', todate: '', fromid: '', password: '' },
+            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
     }
@@ -59,8 +113,14 @@ export class BulkmailService {
         this.param_type = params.param_type;
 
         this.record = <BulkmailModel>{
+            selectedId: '',
+            sortcol: '',
+            sortorder: true,
             errormessage: '',
-            records: []
+            records: [],
+            records2: [],
+            searchQuery: <SearchQuery>{ searchString: '', fromdate: '', todate: '', fromid: '', password: '' },
+            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
         this.mdata$.next(this.record);
@@ -71,6 +131,14 @@ export class BulkmailService {
         this.canEdit = this.gs.canEdit(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
         this.canDelete = this.gs.canDelete(this.menuid);
+
+        this.msgFontFamily = this.gs.user_email_sign_font;
+        this.msgFontSize = this.gs.user_email_sign_size + "px";
+        this.msgForeground = this.gs.user_email_sign_color;
+        if (this.gs.user_email_sign_bold == "Y")
+            this.msgFontWeight = "bold";
+        else
+            this.msgFontWeight = "normal";
 
         this.initlialized = true;
         this.LoadList();
@@ -108,6 +176,7 @@ export class BulkmailService {
         Rec.cat_id = FldId;
         Rec.cat_name = FldName;
         Rec.cat_yn = "Y";
+        Rec.cat_yn_b = true;
         this.MainList.push(Rec)
     }
 
@@ -131,12 +200,58 @@ export class BulkmailService {
         else
             _rec.cat_yn = 'N';
     }
+
+    Search(_searchdata: any, type: string = '') {
+
+        if (type == 'SEARCH') {
+            this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';
+        }
+        if (type == 'PAGE') {
+            this.record.pageQuery = _searchdata.pageQuery;
+        }
+
+        var SearchData = this.gs.UserInfo;
+        SearchData.outputformat = 'SCREEN';
+        SearchData.action = 'NEW';
+        SearchData.pkid = this.id;
+        SearchData.TYPE = this.param_type;
+        SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
+        SearchData.CODE = this.record.searchQuery.searchString;
+        SearchData.ISADMIN = this.isAdmin == true ? 'Y' : 'N';
+      
+        SearchData.page_count = 0;
+        SearchData.page_rows = 0;
+        SearchData.page_current = -1;
+
+        if (type == 'PAGE') {
+            SearchData.action = this.record.pageQuery.action;
+            SearchData.page_count = this.record.pageQuery.page_count;
+            SearchData.page_rows = this.record.pageQuery.page_rows;
+            SearchData.page_current = this.record.pageQuery.page_current;;
+        }
+
+        this.List(SearchData).subscribe(response => {
+            this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
+            this.record.records2 = response.list;
+            this.mdata$.next(this.record);
+        }, error => {
+            this.record.errormessage = this.gs.getError(error);
+            this.mdata$.next(this.record);
+            alert(this.record.errormessage);
+        });
+    }
+
+    List(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Bulkmail/List', SearchData, this.gs.headerparam2('authorized'));
+    }
+
     // GetRecord(SearchData: any) {
-    //     return this.http2.post<any>(this.gs.baseUrl + '/api/Marketing/QtnSetting/GetRecord', SearchData, this.gs.headerparam2('authorized'));
+    //     return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Bulkmail/GetRecord', SearchData, this.gs.headerparam2('authorized'));
     // }
 
     // Save(SearchData: any) {
-    //     return this.http2.post<any>(this.gs.baseUrl + '/api/Marketing/QtnSetting/Save', SearchData, this.gs.headerparam2('authorized'));
+    //     return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Bulkmail/Save', SearchData, this.gs.headerparam2('authorized'));
     // }
 
 

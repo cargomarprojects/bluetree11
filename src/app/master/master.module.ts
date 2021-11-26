@@ -42,6 +42,7 @@ import { FormatPageDetComponent } from './formatpage/formatpagedet.component';
 import { EhblComponent } from './ehbl/ehbl.component';
 import { EhblReqComponent } from './ehbl/ehbl-req.component';
 import { BulkmailComponent } from './bulkmail/bulkmail.component';
+import { BulkmailHeaderComponent } from './bulkmail/bulkmail-header.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { BulkmailComponent } from './bulkmail/bulkmail.component';
     FormatPageDetComponent,
     EhblComponent,
     EhblReqComponent,
-    BulkmailComponent
+    BulkmailComponent,
+    BulkmailHeaderComponent
   ],
   imports: [
     SharedModule,
