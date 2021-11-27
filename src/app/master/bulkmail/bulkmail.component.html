@@ -59,8 +59,10 @@
                                     <div class="form-group row">
                                         <label class="col-2 col-form-label col-form-label-sm"></label>
                                         <div class="col-10">
-                                            <button class="btn btn-info btn-sm mr-1" (click)="Valid_Click()">Validate IDs</button>
-                                            <button class="btn btn-info btn-sm mr-1" (click)="mainservice.CreateMails('MAIL')">Create Emails</button>
+                                            <button class="btn btn-info btn-sm mr-1" (click)="Valid_Click()">Validate
+                                                IDs</button>
+                                            <button class="btn btn-info btn-sm mr-1"
+                                                (click)="mainservice.CreateMails('MAIL')">Create Emails</button>
                                             <button class="btn btn-info btn-sm mr-1">Download Email IDs</button>
                                         </div>
                                     </div>
@@ -110,8 +112,10 @@
                                     <div class="form-group row">
                                         <label class="col-2 col-form-label col-form-label-sm"></label>
                                         <div class="col-10">
-                                            <button class="btn btn-info btn-sm mr-1" (click)="Valid_Click()">Validate IDs</button>
-                                            <button class="btn btn-info btn-sm mr-1" (click)="mainservice.CreateMails('MAIL')">Create Emails</button>
+                                            <button class="btn btn-info btn-sm mr-1" (click)="Valid_Click()">Validate
+                                                IDs</button>
+                                            <button class="btn btn-info btn-sm mr-1"
+                                                (click)="mainservice.CreateMails('MAIL')">Create Emails</button>
                                         </div>
                                     </div>
                                 </div>
@@ -120,9 +124,6 @@
                     </div>
                 </div>
                 <div class="tab-pane fade commonbgcolor2" id="sendmail" role="tabpanel" aria-labelledby="sendmail-tab">
-
-                    <!-- <app-bulkmail-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
-                    </app-bulkmail-header> -->
                     <div class="page-list">
                         <div class="page-search">
                             <div class="row">
@@ -130,16 +131,19 @@
                                     <div class="form-group row">
                                         <label class="col-2 col-form-label col-form-label-sm">From ID</label>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm" type="text" [(ngModel)]="mainservice.fromemailid" />
+                                            <input class="form-control form-control-sm" type="text"
+                                                [(ngModel)]="mainservice.fromemailid" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-2 col-form-label col-form-label-sm">Password</label>
                                         <div class="col-8">
-                                            <input class="form-control form-control-sm" type="text" [(ngModel)]="mainservice.emailpassword" />
+                                            <input class="form-control form-control-sm" type="text"
+                                                [(ngModel)]="mainservice.emailpassword" />
                                         </div>
                                         <div class="col-2 input-group input-group-sm">
-                                            <button (click)="List('SCREEN')" class="btn btn-info btn-sm mr-1">Search</button>
+                                            <button (click)="List('SCREEN')"
+                                                class="btn btn-info btn-sm mr-1">Search</button>
                                         </div>
                                     </div>
                                 </div>
@@ -164,8 +168,9 @@
                                 </tr>
                             </thead>
                             <tbody class="page-body-tbody">
-                                <tr *ngFor="let rec of records2$ | async" (mousedown)="mainservice.selectRowId(rec.bm_pkid)"
-                                [class.selected]="rec.bm_pkid == mainservice.getRowId()">
+                                <tr *ngFor="let rec of records2$ | async"
+                                    (mousedown)="mainservice.selectRowId(rec.bm_pkid)"
+                                    [class.selected]="rec.bm_pkid == mainservice.getRowId()">
                                     <td>{{rec.bm_slno}}</td>
                                     <td>{{rec.bm_filecount}}</td>
                                     <td>{{rec.bm_subctr}}</td>

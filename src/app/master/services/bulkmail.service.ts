@@ -122,7 +122,7 @@ export class BulkmailService {
             errormessage: '',
             records: [],
             records2: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate: '', todate: ''},
+            searchQuery: <SearchQuery>{ searchString: '', fromdate: '', todate: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -323,26 +323,41 @@ export class BulkmailService {
         return bRet;
     }
 
-    SendMails(_rec:Tbl_Cargo_BulkMail)
-    {
-        if (_rec.bm_send_status == "S")
-        {
-           alert("Already Sent");
+    SendMails(_rec: Tbl_Cargo_BulkMail) {
+        if (_rec.bm_send_status == "S") {
+            alert("Already Sent");
             return;
         }
-        if (this.gs.isBlank(this.fromemailid))
-        {
+        if (this.gs.isBlank(this.fromemailid)) {
             alert("From ID cannot be empty");
-            return ;
+            return;
         }
-        if ( this.gs.isBlank(this.emailpassword))
-        {
+        if (this.gs.isBlank(this.emailpassword)) {
             alert("Password cannot be empty");
             return;
         }
 
         if (!confirm("Send Mail"))
             return;
+
+        let filePath: string = "";
+        filePath = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\Temp\\BULKMAIL\\";
+        this.record.errormessage = "";
+        var SearchData = this.gs.UserInfo;
+        SearchData.EMAILID = this.fromemailid;
+        SearchData.EMAILPWD = this.emailpassword;
+        SearchData.PATH = filePath;
+        SearchData.BM_PKID = _rec.bm_pkid;
+        SearchData.BM_FILECOUNT = _rec.bm_filecount;
+        this.SendMail(SearchData)
+            .subscribe(response => {
+                this.Txt_Error = response.error;
+                if (response.retvalue == true) {
+                    alert('Mail Sent Successfully');
+                }
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+            });
 
     }
 
@@ -354,6 +369,9 @@ export class BulkmailService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/LoginService/Bulkmail/CreateMail', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    SendMail(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/LoginService/Bulkmail/SendMail', SearchData, this.gs.headerparam2('authorized'));
+    }
 
     // GetRecord(SearchData: any) {
     //     return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Bulkmail/GetRecord', SearchData, this.gs.headerparam2('authorized'));
