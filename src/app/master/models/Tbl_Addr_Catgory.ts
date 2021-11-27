@@ -37,3 +37,11 @@ export interface BulkmailModel {
     records: Tbl_Addr_Catgory[];
     records2: Tbl_Cargo_BulkMail[];
 }
+
+export interface vm_Tbl_Addr_Catgory {
+    mode: string;
+    pkid: string;
+    records: Tbl_Addr_Catgory[];
+    userinfo: any;
+    filter: any;
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GlobalService } from '../../core/services/global.service';
-import { BulkmailModel, Tbl_Addr_Catgory } from '../models/Tbl_Addr_Catgory';
+import { BulkmailModel, Tbl_Addr_Catgory, vm_Tbl_Addr_Catgory } from '../models/Tbl_Addr_Catgory';
 import { SearchQuery } from '../models/Tbl_Addr_Catgory';
 import { PageQuery } from '../../shared/models/pageQuery';
 
@@ -219,7 +219,7 @@ export class BulkmailService {
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.CODE = this.record.searchQuery.searchString;
         SearchData.ISADMIN = this.isAdmin == true ? 'Y' : 'N';
-      
+
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
@@ -242,9 +242,96 @@ export class BulkmailService {
         });
     }
 
+    IscatgorySelect() {
+        let Iscatgory = false;
+        try {
+            this.record.records.forEach(Rec => {
+                if (Rec.cat_yn == "Y") {
+                    Iscatgory = true;
+                }
+            })
+        }
+        catch (Exception) {
+            Iscatgory = false;
+        }
+        return Iscatgory;
+    }
+
+    CreateMails(InvokType: string) {
+        if (InvokType == "MAIL") {
+            if (!this.Allvalid())
+                return;
+            if (!confirm("Create Mail"))
+                return;
+        }
+
+        let filePath: string = "";
+        filePath = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\Temp\\";
+        this.Txt_Error = "";
+        this.record.errormessage = "";
+        var SearchData = <any>{};
+        SearchData.MAIL_SUB = this.gs.isBlank(this.Txt_Subject) ? '' : this.Txt_Subject;
+        SearchData.MAIL_MSG = this.gs.isBlank(this.Txt_Message) ? '' : this.Txt_Message;
+        SearchData.MSG_FONT = this.gs.user_email_sign_font;
+        SearchData.MSG_COLOR = this.gs.user_email_sign_color;
+        SearchData.MSG_SIZE = this.gs.user_email_sign_size;
+        SearchData.MSG_BOLD = this.gs.user_email_sign_bold;
+        SearchData.PATH = filePath;
+        SearchData.INVOKE_FRM_VALIDBTN = InvokType;
+
+        const mailRecord = <vm_Tbl_Addr_Catgory>{};
+        mailRecord.records = this.MainList;
+        mailRecord.userinfo = this.gs.UserInfo;
+        mailRecord.filter = SearchData;
+
+        this.CreateMail(mailRecord)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.Txt_Error = response.error;
+                }
+                else {
+                    let msg = "Validation Completed";
+                    if (InvokType == "MAIL")
+                        msg = "Emails Created";
+                    alert(msg);
+                }
+
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+            });
+
+    }
+
+    private Allvalid(): boolean {
+        var bRet = true;
+        let str: string = "";
+        if (!this.IscatgorySelect()) {
+            bRet = false;
+            str += " | Client Category not selected";
+        }
+
+        if (this.gs.isBlank(this.Txt_Subject)) {
+            bRet = false;
+            str += " | Subject cannot be empty";
+        }
+
+        if (this.gs.isBlank(this.Txt_Message)) {
+            bRet = false;
+            str += " | Message body cannot be empty";
+        }
+        if (bRet == false)
+            alert(str);
+        return bRet;
+    }
+
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Bulkmail/List', SearchData, this.gs.headerparam2('authorized'));
     }
+
+    CreateMail(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/LoginService/Bulkmail/CreateMail', SearchData, this.gs.headerparam2('authorized'));
+    }
+
 
     // GetRecord(SearchData: any) {
     //     return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Bulkmail/GetRecord', SearchData, this.gs.headerparam2('authorized'));
