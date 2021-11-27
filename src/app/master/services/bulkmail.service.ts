@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GlobalService } from '../../core/services/global.service';
-import { BulkmailModel, Tbl_Addr_Catgory, vm_Tbl_Addr_Catgory } from '../models/Tbl_Addr_Catgory';
+import { BulkmailModel, Tbl_Addr_Catgory, Tbl_Cargo_BulkMail, vm_Tbl_Addr_Catgory } from '../models/Tbl_Addr_Catgory';
 import { SearchQuery } from '../models/Tbl_Addr_Catgory';
 import { PageQuery } from '../../shared/models/pageQuery';
 
@@ -21,6 +21,9 @@ export class BulkmailService {
     public id: string;
     public menuid: string;
     public param_type: string;
+
+    public fromemailid: string = "";
+    public emailpassword: string = "";
 
     public title: string;
     public isAdmin: boolean;
@@ -94,7 +97,7 @@ export class BulkmailService {
             errormessage: '',
             records: [],
             records2: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate: '', todate: '', fromid: '', password: '' },
+            searchQuery: <SearchQuery>{ searchString: '', fromdate: '', todate: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -119,7 +122,7 @@ export class BulkmailService {
             errormessage: '',
             records: [],
             records2: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate: '', todate: '', fromid: '', password: '' },
+            searchQuery: <SearchQuery>{ searchString: '', fromdate: '', todate: ''},
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -215,11 +218,7 @@ export class BulkmailService {
         SearchData.outputformat = 'SCREEN';
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
-        SearchData.TYPE = this.param_type;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
-        SearchData.CODE = this.record.searchQuery.searchString;
-        SearchData.ISADMIN = this.isAdmin == true ? 'Y' : 'N';
-
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
@@ -322,6 +321,29 @@ export class BulkmailService {
         if (bRet == false)
             alert(str);
         return bRet;
+    }
+
+    SendMails(_rec:Tbl_Cargo_BulkMail)
+    {
+        if (_rec.bm_send_status == "S")
+        {
+           alert("Already Sent");
+            return;
+        }
+        if (this.gs.isBlank(this.fromemailid))
+        {
+            alert("From ID cannot be empty");
+            return ;
+        }
+        if ( this.gs.isBlank(this.emailpassword))
+        {
+            alert("Password cannot be empty");
+            return;
+        }
+
+        if (!confirm("Send Mail"))
+            return;
+
     }
 
     List(SearchData: any) {

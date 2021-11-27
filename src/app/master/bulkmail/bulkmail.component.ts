@@ -23,7 +23,7 @@ export class BulkmailComponent implements OnInit {
   records2$: Observable<Tbl_Cargo_BulkMail[]>;
   pageQuery$: Observable<PageQuery>;
   searchQuery$: Observable<SearchQuery>;
-
+   
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -46,7 +46,7 @@ export class BulkmailComponent implements OnInit {
     this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errormessage));
   }
 
-  searchEvents(actions: any) {
+  List(actions: any) {
     this.mainservice.Search(actions, 'SEARCH');
   }
 

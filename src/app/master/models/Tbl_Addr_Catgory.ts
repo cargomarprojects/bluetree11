@@ -24,8 +24,6 @@ export interface SearchQuery {
     searchString: string;
     fromdate: string;
     todate: string;
-    fromid: string;
-    password: string;
 }
 export interface BulkmailModel {
     selectedId: string;
