@@ -9,7 +9,7 @@ import { InputBoxComponent } from '../../shared/input/inputbox.component';
 import { UserService } from '../services/userm.service';
 import { User_Menu } from '../../core/models/menum';
 import { vm_Tbl_User_Userm, Tbl_User_Userm } from '../models/Tbl_User_Userm';
-
+import { Tbl_User_Server } from '../models/Tbl_User_Server';
 import { SearchTable } from '../../shared/models/searchtable';
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-18-10-2021
@@ -36,7 +36,7 @@ export class UserEditComponent implements OnInit {
     refno: string = "";
 
     where = " ACC_TYPE = 'BANK' ";
-
+    serverlist: Tbl_User_Server[] = [];
 
     constructor(
         private router: Router,
@@ -67,7 +67,16 @@ export class UserEditComponent implements OnInit {
     }
 
     LoadCombo() {
-
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.company_code = this.gs.company_code;
+        SearchData.branch_code = this.gs.branch_code;
+        this.mainService.getServerList(SearchData)
+            .subscribe(response => {
+                this.serverlist = (response.list == undefined || response.list == null) ? <Tbl_User_Server[]>[] : <Tbl_User_Server[]>response.list;
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+            });
 
     }
 
@@ -94,11 +103,12 @@ export class UserEditComponent implements OnInit {
         this.record.usr_name = '';
 
         this.record.usr_isadmin = 'N';
-        this.record.usr_hide_payroll = 'N'
-        this.record.usr_confirm = 'N'
-        this.record.usr_islocked = 'N'
-        this.record.usr_disable_edit_si_mblstatus = 'N'
-        this.record.usr_email_auto_bcc = 'N'
+        this.record.usr_hide_payroll = 'N';
+        this.record.usr_confirm = 'N';
+        this.record.usr_islocked = 'N';
+        this.record.usr_disable_edit_si_mblstatus = 'N';
+        this.record.usr_email_auto_bcc = 'N';
+        this.record.usr_mail_server_id = '';
 
         this.record.usr_scolor = 'WHITE';
         this.record.usr_ecolor = 'GREEN';

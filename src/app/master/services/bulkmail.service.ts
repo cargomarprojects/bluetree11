@@ -332,10 +332,10 @@ export class BulkmailService {
             alert("From ID cannot be empty");
             return;
         }
-        if (this.gs.isBlank(this.emailpassword)) {
-            alert("Password cannot be empty");
-            return;
-        }
+        // if (this.gs.isBlank(this.emailpassword)) {
+        //     alert("Password cannot be empty");
+        //     return;
+        // }
 
         if (!confirm("Send Mail"))
             return;
@@ -351,9 +351,12 @@ export class BulkmailService {
         SearchData.BM_FILECOUNT = _rec.bm_filecount;
         this.SendMail(SearchData)
             .subscribe(response => {
-                this.Txt_Error = response.error;
-                if (response.retvalue == true) {
-                    // alert('Mail Sent Successfully');
+                if (!this.gs.isBlank(response.error)) {
+                    alert(response.error);
+                }
+                if (response.retvalue == true && this.gs.isBlank(response.error)) {
+                    _rec.bm_send_status = "S";
+                    alert('Mail Sent Successfully');
                 }
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
