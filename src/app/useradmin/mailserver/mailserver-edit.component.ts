@@ -101,6 +101,8 @@ export class MailServerEditComponent implements OnInit {
         this.record.mail_is_ssl_required = 'Y';
         this.record.mail_bulk_sub = 100;
         this.record.mail_bulk_tot = 1000;
+        this.record.mail_smtp_user = '';
+        this.record.mail_smtp_pwd = '';
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
     }

@@ -14,7 +14,9 @@ export class Tbl_User_Server {
     mail_is_spa_required: string;
     mail_bulk_tot: number;
     mail_bulk_sub: number;
-    
+    mail_smtp_user: string;
+    mail_smtp_pwd: string;
+
     rec_created_by: string;
     rec_created_date: string;
     rec_closed: string;
