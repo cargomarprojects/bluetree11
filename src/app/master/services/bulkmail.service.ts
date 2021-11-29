@@ -353,7 +353,7 @@ export class BulkmailService {
             .subscribe(response => {
                 this.Txt_Error = response.error;
                 if (response.retvalue == true) {
-                    alert('Mail Sent Successfully');
+                    // alert('Mail Sent Successfully');
                 }
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
