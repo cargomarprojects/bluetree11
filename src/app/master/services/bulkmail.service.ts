@@ -364,6 +364,82 @@ export class BulkmailService {
 
     }
 
+    DownloadEmails() {
+        if (!this.IscatgorySelect()) {
+            alert("Client Category not selected");
+            return;
+        }
+
+        this.record.errormessage = "";
+        var SearchData = this.gs.UserInfo;
+        SearchData.USERNAME = this.gs.user_code;
+        SearchData.USERID = this.gs.MACADDRESS;
+        SearchData.PARTY_CATEGORYS = this.GetCategories();
+        this.DownloadEmail(SearchData)
+            .subscribe(response => {
+                this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+            });
+
+    }
+
+    GetCategories() {
+        let sCategorys = "";
+        this.record.records.forEach(Rec => {
+            if (Rec.cat_yn == "Y") {
+                if (sCategorys != "")
+                    sCategorys += " or ";
+                if (Rec.cat_id == "SHIPPER")
+                    sCategorys += "gen_is_shipper ='Y' ";
+                else if (Rec.cat_id == "CONSIGNEE")
+                    sCategorys += "gen_is_consignee ='Y' ";
+                else if (Rec.cat_id == "IMPORTER")
+                    sCategorys += "gen_is_importer ='Y' ";
+                else if (Rec.cat_id == "EXPORTER")
+                    sCategorys += "gen_is_exporter ='Y' ";
+                else if (Rec.cat_id == "CHA")
+                    sCategorys += "gen_is_cha ='Y' ";
+                else if (Rec.cat_id == "FORWARDER")
+                    sCategorys += "gen_is_forwarder ='Y' ";
+                else if (Rec.cat_id == "AGENT")
+                    sCategorys += "gen_is_agent ='Y' ";
+                else if (Rec.cat_id == "CARRIER")
+                    sCategorys += "gen_is_carrier ='Y' ";
+                else if (Rec.cat_id == "CARRIER2_SEA")
+                    sCategorys += "gen_is_carrier2_sea ='Y' ";
+                else if (Rec.cat_id == "TRUCKER")
+                    sCategorys += "gen_is_trucker ='Y' ";
+                else if (Rec.cat_id == "WAREHOUSE")
+                    sCategorys += "gen_is_warehouse ='Y' ";
+                else if (Rec.cat_id == "TERMINAL")
+                    sCategorys += "gen_is_terminal ='Y' ";
+                else if (Rec.cat_id == "TERMINAL2")
+                    sCategorys += "gen_is_terminal2 ='Y' ";
+                else if (Rec.cat_id == "SHIPPER_VENDOR")
+                    sCategorys += "gen_is_shipper_vendor ='Y' ";
+                else if (Rec.cat_id == "VENDOR")
+                    sCategorys += "gen_is_vendor ='Y' ";
+                else if (Rec.cat_id == "EMPLOYEE")
+                    sCategorys += "gen_is_employee ='Y' ";
+                else if (Rec.cat_id == "CONTRACTOR")
+                    sCategorys += "gen_is_contractor ='Y' ";
+                else if (Rec.cat_id == "MISCELLANEOUS")
+                    sCategorys += "gen_is_miscellaneous ='Y' ";
+                else if (Rec.cat_id == "TBD")
+                    sCategorys += "gen_is_tbd ='Y' ";
+                else if (Rec.cat_id == "BANK")
+                    sCategorys += "gen_is_bank ='Y' ";
+            }
+        })
+
+        return sCategorys;
+    }
+
+    Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+        this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
+    }
+
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Bulkmail/List', SearchData, this.gs.headerparam2('authorized'));
     }
@@ -376,13 +452,9 @@ export class BulkmailService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/LoginService/Bulkmail/SendMail', SearchData, this.gs.headerparam2('authorized'));
     }
 
-    // GetRecord(SearchData: any) {
-    //     return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Bulkmail/GetRecord', SearchData, this.gs.headerparam2('authorized'));
-    // }
-
-    // Save(SearchData: any) {
-    //     return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Bulkmail/Save', SearchData, this.gs.headerparam2('authorized'));
-    // }
+    DownloadEmail(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/LoginService/Bulkmail/DownloadEmail', SearchData, this.gs.headerparam2('authorized'));
+    }
 
 
 
