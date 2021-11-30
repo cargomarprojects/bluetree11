@@ -352,7 +352,8 @@ export class BulkmailService {
         this.SendMail(SearchData)
             .subscribe(response => {
                 if (!this.gs.isBlank(response.error)) {
-                    alert(response.error);
+                    _rec.bm_failed_seq = response.error;
+                    alert("Failed Batches: " + response.error);
                 }
                 if (response.retvalue == true && this.gs.isBlank(response.error)) {
                     _rec.bm_send_status = "S";
@@ -369,6 +370,9 @@ export class BulkmailService {
             alert("Client Category not selected");
             return;
         }
+
+        if (!confirm("Download Emails"))
+        return;
 
         this.record.errormessage = "";
         var SearchData = this.gs.UserInfo;
