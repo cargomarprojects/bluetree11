@@ -37,6 +37,7 @@ export class BulkmailService {
     MainList: Tbl_Addr_Catgory[] = [];
     public chkall: boolean = true;
     public all: boolean = true;
+    public EmailIdsOnly: boolean = false;
 
     public Txt_Subject: string = "";
     public Txt_Message: string = "";
@@ -372,13 +373,14 @@ export class BulkmailService {
         }
 
         if (!confirm("Download Emails"))
-        return;
+            return;
 
         this.record.errormessage = "";
         var SearchData = this.gs.UserInfo;
         SearchData.USERNAME = this.gs.user_code;
         SearchData.USERID = this.gs.MACADDRESS;
         SearchData.PARTY_CATEGORYS = this.GetCategories();
+        SearchData.EMAILIDS_ONLY = this.EmailIdsOnly ? 'Y' : 'N';
         this.DownloadEmail(SearchData)
             .subscribe(response => {
                 this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
