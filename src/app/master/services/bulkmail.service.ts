@@ -367,12 +367,14 @@ export class BulkmailService {
     }
 
     DownloadEmails() {
+        
         if (!this.IscatgorySelect()) {
             alert("Client Category not selected");
             return;
         }
 
-        if (!confirm("Download Emails"))
+        let smsg = "Download " + (this.EmailIdsOnly ? "Email IDs" : "Contacts Details");
+        if (!confirm(smsg))
             return;
 
         this.record.errormessage = "";
