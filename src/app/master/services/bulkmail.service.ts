@@ -31,6 +31,7 @@ export class BulkmailService {
     public canEdit: boolean;
     public canSave: boolean;
     public canDelete: boolean;
+    public pwdRequired: boolean;
 
     public initlialized: boolean;
     private appid = '';
@@ -144,6 +145,7 @@ export class BulkmailService {
         else
             this.msgFontWeight = "normal";
 
+        this.pwdRequired = false;
         this.initlialized = true;
         this.LoadList();
     }
@@ -235,6 +237,7 @@ export class BulkmailService {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records2 = response.list;
             this.mdata$.next(this.record);
+            this.pwdRequired = response.pwdRequired;
         }, error => {
             this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
@@ -333,10 +336,10 @@ export class BulkmailService {
             alert("From ID cannot be empty");
             return;
         }
-        // if (this.gs.isBlank(this.emailpassword)) {
-        //     alert("Password cannot be empty");
-        //     return;
-        // }
+        if (this.pwdRequired && this.gs.isBlank(this.emailpassword)) {
+            alert("Password cannot be empty");
+            return;
+        }
 
         if (!confirm("Send Mail"))
             return;
@@ -367,7 +370,7 @@ export class BulkmailService {
     }
 
     DownloadEmails() {
-        
+
         if (!this.IscatgorySelect()) {
             alert("Client Category not selected");
             return;
