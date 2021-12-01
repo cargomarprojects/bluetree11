@@ -175,6 +175,7 @@
                                         <ul>
                                             <li> {{rec.houseno}} / </li>
                                             <li> {{rec.shipper}} / </li>
+                                            <li *ngIf="rec.consignee_code" > {{rec.consignee_code}} : </li>
                                             <li> {{rec.consignee}} </li>
                                         </ul>
                                     </option>

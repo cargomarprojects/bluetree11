@@ -13,5 +13,6 @@ export interface Tbl_House {
     cft: string;
     consignee_id:string;
     incoterm:string;
+    consignee_code:string;
 }
 
