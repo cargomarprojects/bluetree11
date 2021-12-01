@@ -74,6 +74,10 @@ export class UserEditComponent implements OnInit {
         this.mainService.getServerList(SearchData)
             .subscribe(response => {
                 this.serverlist = (response.list == undefined || response.list == null) ? <Tbl_User_Server[]>[] : <Tbl_User_Server[]>response.list;
+                // if (!this.gs.isBlank(this.serverlist))
+                //     if (this.serverlist.length > 0) {
+                //         this.record.usr_mail_server_id = this.serverlist[0].mail_pkid;
+                //     }
             }, error => {
                 this.errorMessage = this.gs.getError(error);
             });
@@ -108,7 +112,6 @@ export class UserEditComponent implements OnInit {
         this.record.usr_islocked = 'N';
         this.record.usr_disable_edit_si_mblstatus = 'N';
         this.record.usr_email_auto_bcc = 'N';
-        this.record.usr_mail_server_id = '';
 
         this.record.usr_scolor = 'WHITE';
         this.record.usr_ecolor = 'GREEN';
@@ -125,6 +128,7 @@ export class UserEditComponent implements OnInit {
 
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
+
     }
 
     GetRecord() {
