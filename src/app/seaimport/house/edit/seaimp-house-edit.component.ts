@@ -12,6 +12,7 @@ import { Tbl_cargo_imp_masterm } from '../../models/tbl_cargo_imp_masterm';
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-07-10-2021
 //EDIT-AJITH-30-10-2021
+//EDIT-AJITH-1-12-2021
 
 @Component({
   selector: 'app-seaimp-house-edit',

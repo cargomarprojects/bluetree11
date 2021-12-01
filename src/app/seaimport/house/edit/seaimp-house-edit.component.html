@@ -329,7 +329,7 @@
                 </div>
 
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Delivery.Place</label>
                   <div class="col-9">
                     <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_place_delivery')"
@@ -343,9 +343,22 @@
                   <div class="col-9">
                     <app-date [inputdate]="record.hbl_pld_eta" (ValueChanged)="record.hbl_pld_eta=$event"></app-date>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Delivery.Place</label>
+                  <div class="col-5 pr-0">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_place_delivery')"
+                      [(ngModel)]="record.hbl_place_delivery" maxlength="60" />
+                  </div>
+                  <label class="col-1 col-form-label col-form-label-sm m-0 pr-0">Date</label>
+                  <div class="col-3 pl-0 m-0">
+                    <app-date [inputdate]="record.hbl_pld_eta" (ValueChanged)="record.hbl_pld_eta=$event"></app-date>
+                  </div>
+                </div>
+
+
+                <!-- <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Final.Destination</label>
                   <div class="col-9">
                     <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_place_final')"
@@ -359,8 +372,19 @@
                   <div class="col-9">
                     <app-date [inputdate]="record.hbl_plf_eta" (ValueChanged)="record.hbl_plf_eta=$event"></app-date>
                   </div>
-                </div>
+                </div> -->
 
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Final.Destination</label>
+                  <div class="col-5 pr-0">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_place_final')"
+                      [(ngModel)]="record.hbl_place_final" maxlength="60" />
+                  </div>
+                  <label class="col-1 col-form-label col-form-label-sm m-0 pr-0">Date</label>
+                  <div class="col-3 pl-0 m-0">
+                    <app-date [inputdate]="record.hbl_plf_eta" (ValueChanged)="record.hbl_plf_eta=$event"></app-date>
+                  </div>
+                </div>
 
 
               </div>
@@ -653,7 +677,7 @@
 
             <div class="row border">
               <div class="col-md-12  px-0 mx-0">
-                <div class="page-body table-responsive"  style="overflow-x:auto">
+                <div class="page-body table-responsive" style="overflow-x:auto">
                   <table class="table table-bordered table-hover table-sm cntr">
                     <thead class="page-body-thead">
                       <tr>
@@ -1145,8 +1169,8 @@
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_DELIVERY_ORDER)" (click)="BtnNavigation('CARGOPICKUP')">Delivery
               Order</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_DELIVERY_ORDER)"
-              [routerLink]="BtnNavigation2('CARGOPICKUP','L')"
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_DELIVERY_ORDER)" [routerLink]="BtnNavigation2('CARGOPICKUP','L')"
               [queryParams]="BtnNavigation2('CARGOPICKUP','P')">Delivery
               Order</a>
           </div>
@@ -1155,8 +1179,8 @@
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_US_CUSTOM_HOLD)" (click)="BtnNavigation('CUSTOMSHOLD')">US Custom
               Hold</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_US_CUSTOM_HOLD)"
-              [routerLink]="BtnNavigation2('CUSTOMSHOLD','L')"
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_US_CUSTOM_HOLD)" [routerLink]="BtnNavigation2('CUSTOMSHOLD','L')"
               [queryParams]="BtnNavigation2('CUSTOMSHOLD','P')">US Custom
               Hold</a>
           </div>
@@ -1165,7 +1189,8 @@
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_DEVAN_INSTRUCTION)"
               (click)="BtnNavigation('HOUSE-DEVAN')">Devan/Instructions</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_DEVAN_INSTRUCTION)"
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_DEVAN_INSTRUCTION)"
               [routerLink]="BtnNavigation2('HOUSE-DEVAN','L')"
               [queryParams]="BtnNavigation2('HOUSE-DEVAN','P')">Devan/Instructions</a>
           </div>
@@ -1175,9 +1200,8 @@
               *ngIf="gs.screenExists(gs.MENU_SI_SHIPMENT_MOVEMENT)" (click)="BtnNavigation('SHIPMOVEMENT')">House
               Internal
               Memo</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_SHIPMENT_MOVEMENT)"
-              [routerLink]="BtnNavigation2('SHIPMOVEMENT','L')"
-              [queryParams]="BtnNavigation2('SHIPMOVEMENT','P')">House
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_SHIPMENT_MOVEMENT)"
+              [routerLink]="BtnNavigation2('SHIPMOVEMENT','L')" [queryParams]="BtnNavigation2('SHIPMOVEMENT','P')">House
               Internal
               Memo</a>
           </div>
@@ -1185,13 +1209,13 @@
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE)"
               (click)="BtnNavigation('RIDERPAGE')">Rider Page</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE)"
-              [routerLink]="BtnNavigation2('RIDERPAGE','L')"
-              [queryParams]="BtnNavigation2('RIDERPAGE','P')">Rider Page</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_SI_HOUSE)"
+              [routerLink]="BtnNavigation2('RIDERPAGE','L')" [queryParams]="BtnNavigation2('RIDERPAGE','P')">Rider
+              Page</a>
           </div>
           <div class="form-group row">
-              <button class="col-12 btn btn-info btn-sm  text-uppercase" *ngIf="gs.canSave(menuid,mode)" [disabled]="is_locked"
-              (click)="Save()">Save</button>
+            <button class="col-12 btn btn-info btn-sm  text-uppercase" *ngIf="gs.canSave(menuid,mode)"
+              [disabled]="is_locked" (click)="Save()">Save</button>
           </div>
         </div>
 
