@@ -152,6 +152,7 @@ export interface Tbl_cargo_imp_housem {
     hbl_delivery_date:string;
     hbl_custom_clear_date:string;
     hbl_incoterm:string;
+    hbl_time_diff:string;
 }
 export interface Tbl_desc {
    
@@ -255,6 +256,7 @@ export interface SearchQuery {
     fromdate: string;
     todate: string;
     mblid: string;
+    searchtype:string;
 }
 
 export interface SeaImpHouseModel {
