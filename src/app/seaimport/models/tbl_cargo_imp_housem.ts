@@ -257,6 +257,7 @@ export interface SearchQuery {
     todate: string;
     mblid: string;
     searchtype:string;
+    searchdatetype:string;
 }
 
 export interface SeaImpHouseModel {

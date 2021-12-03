@@ -69,11 +69,11 @@ export class SeaImpHouseService {
 
     public ClearInit() {
         this.record = <SeaImpHouseModel>{
-            sortcol: 'mbl_refno',
+            sortcol: '',
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, mblid: '', searchtype: 'REFNO' },
+            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, mblid: '', searchtype: 'REFNO',searchdatetype:'REFDATE'  },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -94,11 +94,11 @@ export class SeaImpHouseService {
         this.menuid = params.id;
         this.param_type = params.menu_param;
         this.record = <SeaImpHouseModel>{
-            sortcol: 'mbl_refno',
+            sortcol: '',
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, mblid: '', searchtype: 'REFNO' },
+            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, mblid: '', searchtype: 'REFNO',searchdatetype:'REFDATE' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -131,6 +131,7 @@ export class SeaImpHouseService {
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.CODE = this.record.searchQuery.searchString;
         SearchData.SEARCH_TYPE = this.record.searchQuery.searchtype;
+        SearchData.SEARCH_DATE_TYPE = this.record.searchQuery.searchdatetype;
         SearchData.SDATE = this.record.searchQuery.fromdate;
         SearchData.EDATE = this.record.searchQuery.todate;
         SearchData.OVERRIDE_POD_ETA = this.gs.SEA_IMP_OVERRIDE_POD_ETA;

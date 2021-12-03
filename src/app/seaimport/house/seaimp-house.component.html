@@ -30,7 +30,7 @@
                 <th (click)="mainservice.sort('mbl_pod_eta')">ETA&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pod_eta')"></i></th>
                 <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
                 <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
-                <th *ngIf="mainservice.show_time" (click)="mainservice.sort('hbl_time_diff')">TIME&nbsp;<i [ngClass]="mainservice.getIcon('hbl_time_diff')"></i></th>
+                <th *ngIf="mainservice.show_time" (click)="mainservice.sort('hbl_time_diff')">MINUTES&nbsp;<i [ngClass]="mainservice.getIcon('hbl_time_diff')"></i></th>
                 <th *ngIf="mainservice.canDelete" class='text-center'>DELETE</th>
             </tr>
         </thead>

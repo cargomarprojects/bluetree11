@@ -24,7 +24,11 @@ export class SeaImpHouseHeaderComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChange) {
   }
+  onBlur(feild: string) {
+    this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase();
+  }
 
+  
   List(outputformat: string) {
 
     if (this.gs.isBlank(this.searchQuery.fromdate))
