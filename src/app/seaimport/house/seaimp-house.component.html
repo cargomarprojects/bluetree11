@@ -35,7 +35,8 @@
             </tr>
         </thead>
         <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+            <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" (mousedown)="mainservice.selectRowId(rec.hbl_pkid)"
+            [class.selected]="rec.hbl_pkid == mainservice.getRowId()">
                 <td *ngIf="!(this.gs.canEdit(this.gs.MENU_SI_MASTER) || this.gs.canView(this.gs.MENU_SI_MASTER))">{{rec.mbl_refno}}</td>
                 <td *ngIf="(this.gs.canEdit(this.gs.MENU_SI_MASTER) || this.gs.canView(this.gs.MENU_SI_MASTER))">
                     <a class='hlink' [routerLink]="['/Silver.SeaImport/SeaImpMasterEditPage']"

@@ -261,6 +261,7 @@ export interface SearchQuery {
 }
 
 export interface SeaImpHouseModel {
+    selectedId:string;
     sortcol : string ;
     sortorder : boolean;
     errormessage: string;

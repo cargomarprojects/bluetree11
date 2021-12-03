@@ -39,6 +39,12 @@ export class SeaImpHouseService {
         private gs: GlobalService
     ) { }
 
+    public selectRowId(id: string) {
+        this.record.selectedId = id;
+    }
+    public getRowId() {
+        return this.record.selectedId;
+    }
     public getSortCol() {
         return this.record.sortcol;
     }
@@ -69,6 +75,7 @@ export class SeaImpHouseService {
 
     public ClearInit() {
         this.record = <SeaImpHouseModel>{
+            selectedId: '',
             sortcol: '',
             sortorder: true,
             errormessage: '',
@@ -94,6 +101,7 @@ export class SeaImpHouseService {
         this.menuid = params.id;
         this.param_type = params.menu_param;
         this.record = <SeaImpHouseModel>{
+            selectedId: '',
             sortcol: '',
             sortorder: true,
             errormessage: '',
@@ -118,6 +126,7 @@ export class SeaImpHouseService {
         this.record.errormessage = '';
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
