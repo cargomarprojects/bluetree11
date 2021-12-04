@@ -10,6 +10,7 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
+
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-07-10-2021
 //EDIT-AJITH-13-10-2021
@@ -89,6 +90,8 @@ export class SeaImpMasterEditComponent implements OnInit {
 
   is_cntr_addrow: boolean = false;
   is_locked: boolean = false;
+  bChanged = false;
+
   constructor(
     private modalconfig: NgbModalConfig,
     private modalservice: NgbModal,
@@ -247,8 +250,8 @@ export class SeaImpMasterEditComponent implements OnInit {
       this.record.mbl_ombl_sent_ampm = "PM";
     else
       this.record.mbl_ombl_sent_ampm = "AM";
-      this.record.mbl_incoterm = 'NA';
-      this.record.mbl_liner_web = '';
+    this.record.mbl_incoterm = 'NA';
+    this.record.mbl_liner_web = '';
     if (!this.gs.isBlank(this.mbl_ref_date_field))
       this.mbl_ref_date_field.Focus();
   }
@@ -690,7 +693,59 @@ export class SeaImpMasterEditComponent implements OnInit {
         // this.IsBLDupliation('BOOKING', this.record.mbl_liner_bookingno);
         // break;
       }
+      case 'mbl_pol_etd': {
+        if (this.bChanged) {
+          this.bChanged = false;
+          if (this.isDate1GreaterDate2(this.record.mbl_ref_date, this.record.mbl_pol_etd)) {
+            alert('ETD is less than Reference Date');
+          }
+          break;
+        }
+      }
+      case 'mbl_pod_eta': {
+        if (this.bChanged) {
+          this.bChanged = false;
+          if (this.isDate1GreaterDate2(this.record.mbl_ref_date, this.record.mbl_pod_eta)) {
+            alert('Pod ETA is less than Reference Date');
+          }
+          break;
+        }
+      }
+      case 'mbl_pofd_eta': {
+        if (this.bChanged) {
+          this.bChanged = false;
+          if (this.isDate1GreaterDate2(this.record.mbl_ref_date, this.record.mbl_pofd_eta)) {
+            alert('Pofd ETA is less than Reference Date');
+          }
+          break;
+        }
+      }
     }
+  }
+
+  isDate1GreaterDate2(_date1: string, _date2: string) {
+    if (!this.gs.isBlank(_date1) && !this.gs.isBlank(_date2)) {
+      var date1 = new Date(_date1);
+      // date1.setDate(date1.getDate() - 30);
+      var date2 = new Date(_date2);
+      if (date1 > date2) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  onChange(field: string) {
+    if (field == 'mbl_pol_etd') {
+      this.bChanged = true;
+    }
+    if (field == 'mbl_pod_eta') {
+      this.bChanged = true;
+    }
+    if (field == 'mbl_pofd_eta') {
+      this.bChanged = true;
+    }
+
   }
 
 

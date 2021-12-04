@@ -236,7 +236,7 @@
                   </div>
                   <label class="col-1 col-form-label col-form-label-sm m-0 pr-0">ETD</label>
                   <div class="col-3 pl-0 m-0">
-                    <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd" (ValueChanged)="record.mbl_pol_etd=$event">
+                    <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd" (ValueChanged)="record.mbl_pol_etd=$event" (change)="onChange('mbl_pol_etd')" (focusout)="onFocusout('mbl_pol_etd')">
                     </app-date>
                   </div>
                 </div>
@@ -259,7 +259,7 @@
                   </div>
                   <label class="col-1 col-form-label col-form-label-sm">ETA</label>
                   <div class="col-3 pl-0 m-0">
-                    <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta" (ValueChanged)="record.mbl_pod_eta=$event">
+                    <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta" (ValueChanged)="record.mbl_pod_eta=$event" (change)="onChange('mbl_pod_eta')" (focusout)="onFocusout('mbl_pod_eta')">
                     </app-date>
                   </div>
                 </div>
@@ -280,7 +280,7 @@
                   </div>
                   <label class="col-1 col-form-label col-form-label-sm">ETA</label>
                   <div class="col-3 pl-0 m-0">
-                    <app-date [inputdate]="record.mbl_pofd_eta" (ValueChanged)="record.mbl_pofd_eta=$event"></app-date>
+                    <app-date [inputdate]="record.mbl_pofd_eta" (ValueChanged)="record.mbl_pofd_eta=$event" (change)="onChange('mbl_pofd_eta')" (focusout)="onFocusout('mbl_pofd_eta')"></app-date>
                   </div>
                 </div>
        
