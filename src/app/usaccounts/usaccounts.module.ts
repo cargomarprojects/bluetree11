@@ -36,6 +36,7 @@ import { AccSettingsEditComponent } from './accsettings/accsettings-edit.compone
 import { AccSettingsHeaderComponent } from './accsettings/accsettings-header.component';
 import { PayrollComponent } from './invoice/payroll/payroll.component';
 import { PaymentUpdateComponent } from './payment/payment-update.component';
+import { PaymentDateUpdateComponent } from './payment/payment-date-update.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { PaymentUpdateComponent } from './payment/payment-update.component';
   AccSettingsEditComponent,
   AccSettingsHeaderComponent,
   PayrollComponent,
-  PaymentUpdateComponent
+  PaymentUpdateComponent,
+  PaymentDateUpdateComponent
 ],
   imports: [
     SharedModule,

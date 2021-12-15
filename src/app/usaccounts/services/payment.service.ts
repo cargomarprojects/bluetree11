@@ -262,4 +262,5 @@ export class PaymentService {
     PaymentUpdate(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + "/api/Payment/PaymentUpdate", SearchData, this.gs.headerparam2('authorized'));
     }
+
 }

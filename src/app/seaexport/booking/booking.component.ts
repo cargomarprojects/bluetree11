@@ -240,7 +240,7 @@ export class BookingComponent implements OnInit {
         this.record.book_cntr_pickupat1 = rec.col8;
       this.record.book_cntr_pickupat2 = rec.col1;
       this.record.book_cntr_pickupat3 = rec.col2;
-      this.record.book_cntr_pickupat4 = rec.col1;
+      this.record.book_cntr_pickupat4 = rec.col3;
       if (!this.gs.isBlank(this.book_cntr_pickupat1_ctrl))
         this.book_cntr_pickupat1_ctrl.focus();
     }
@@ -252,7 +252,7 @@ export class BookingComponent implements OnInit {
         this.record.book_cntr_returnat1 = rec.col8;
       this.record.book_cntr_returnat2 = rec.col1;
       this.record.book_cntr_returnat3 = rec.col2;
-      this.record.book_cntr_returnat4 = rec.col1;
+      this.record.book_cntr_returnat4 = rec.col3;
       if (!this.gs.isBlank(this.book_cntr_returnat1_ctrl))
         this.book_cntr_returnat1_ctrl.focus();
     }

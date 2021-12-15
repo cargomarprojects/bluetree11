@@ -209,9 +209,11 @@ export class PaymentComponent implements OnInit {
     this.tab = 'main';
   }
 
-  payupdatecallbackevent(event: any) {
+  paydateupdatecallbackevent(event: any) {
 
-    
+  }
+
+  payupdatecallbackevent(event: any) {
 
   }
 
