@@ -6,7 +6,7 @@ import { AiDocsService } from '../services/aidocs.service';
 
 @Component({
   selector: 'app-aidocs',
-  templateUrl: './app-aidocs.component.html',
+  templateUrl: './aidocs.component.html',
   providers: [AiDocsService]
 })
 export class AiDocsComponent {
