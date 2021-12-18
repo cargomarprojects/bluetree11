@@ -34,6 +34,7 @@ const routes: Routes = [
   { path: 'reports', loadChildren: () => import('./reports/reports.module').then( m => m.ReportsModule) },  
   { path: 'seaexport', loadChildren: () => import('./seaexport/seaexport.module').then( m => m.SeaExportModule) },
   { path: 'tracking', loadChildren: () => import('./tracking/tracking.module').then( m => m.TrackingModule) },
+  { path: 'Ai', loadChildren: () => import('./Ai/Ai.module').then( m => m.AiModule) },
   // { path: 'accounts', loadChildren: './accounts/accounts.module#AccountsModule' },
   
   { path: '', redirectTo: '', pathMatch: 'full' }
