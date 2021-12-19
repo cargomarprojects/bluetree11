@@ -89,8 +89,7 @@ export class aidocsEditComponent implements OnInit {
     init() {
 
         this.record.file_pkid = this.pkid;
-        this.record.file_name = '';
-        this.record.file_type = 'BL';
+        this.record.file_type = 'AI-BL';
         this.record.file_date = '';
 
         this.record.rec_created_by = this.gs.user_code;

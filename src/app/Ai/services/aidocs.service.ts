@@ -23,7 +23,7 @@ export class AiDocsService {
 
     public id: string;
     public menuid: string;
-    public file_type: string = 'Ai-BL';
+    public file_type: string = 'AI-BL';
 
     public title: string;
     public isAdmin: boolean;
@@ -43,7 +43,7 @@ export class AiDocsService {
         this.record = <Mast_Filesm_Model>{
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '' },
+            searchQuery: <SearchQuery>{ searchString: '', file_type : this.file_type },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -64,7 +64,7 @@ export class AiDocsService {
         this.record = <Mast_Filesm_Model>{
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '' },
+            searchQuery: <SearchQuery>{ searchString: '' , file_type : this.file_type },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -126,7 +126,7 @@ export class AiDocsService {
             this.record.records.push(_rec);
         }
         else {
-            REC.file_name = _rec.file_name;
+            REC.file_remarks = _rec.file_remarks;
             REC.rec_created_by = _rec.rec_created_by;
         }
     }
