@@ -66,11 +66,11 @@ export class aidocsComponent implements OnInit {
       appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
-      type: this.mainservice.file_type,
+      type: '',
       origin: 'aidocs-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete2('Silver.UserAdmin/ModulemEditPage',  parameter);
+    this.gs.Naviagete2('Ai/AiDocsEditPage',  parameter);
 
   }
   edit(_record: Tbl_Mast_Filesm) {
@@ -87,7 +87,7 @@ export class aidocsComponent implements OnInit {
       origin: 'aidocs-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete2('Silver.UserAdmin/ModulemEditPage',  parameter);
+    this.gs.Naviagete2('Ai/AiDocsEditPage',  parameter);
   }
 
   Close() {
