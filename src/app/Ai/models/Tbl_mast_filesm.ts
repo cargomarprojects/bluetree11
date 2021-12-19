@@ -2,6 +2,7 @@ import { PageQuery } from '../../shared/models/pageQuery';
 
 export interface SearchQuery {
     searchString: string;
+    file_type : string;
 }
 export class Tbl_Mast_Filesm {
     file_pkid: string;
