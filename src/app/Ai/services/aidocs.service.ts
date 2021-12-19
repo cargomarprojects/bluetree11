@@ -127,6 +127,7 @@ export class AiDocsService {
         }
         else {
             REC.file_remarks = _rec.file_remarks;
+            REC.rec_files_attached = _rec.rec_files_attached;
             REC.rec_created_by = _rec.rec_created_by;
         }
     }

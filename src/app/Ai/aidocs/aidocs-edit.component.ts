@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { GlobalService } from '../../core/services/global.service';
 
 import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
@@ -10,6 +12,7 @@ import { AiDocsService } from '../services/aidocs.service';
 import { vm_Tbl_Mast_Filesm, Tbl_Mast_Filesm } from '../models/Tbl_mast_filesm';
 
 import { SearchTable } from '../../shared/models/searchtable';
+
 
 
 @Component({
@@ -22,6 +25,8 @@ export class aidocsEditComponent implements OnInit {
 
     tab: string = 'main';
 
+    modal: any;
+    
     pkid: string;
     menuid: string;
     public mode: string = '';
@@ -32,11 +37,29 @@ export class aidocsEditComponent implements OnInit {
     isAdmin: boolean;
     refno: string = "";
 
+    attach_title: string = '';
+    attach_parentid: string = '';
+    attach_subid: string = '';
+    attach_type: string = '';
+    attach_typelist: any = {};
+    attach_tablename: string = '';
+    attach_tablepkcolumn: string = '';
+    attach_refno: string = '';
+    attach_customername: string = '';
+    attach_updatecolumn: string = '';
+    attach_viewonlysource: string = '';
+    attach_viewonlyid: string = '';
+    attach_filespath: string = '';
+    attach_filespath2: string = '';
+  
+
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private location: Location,
         public gs: GlobalService,
+        private modalservice: NgbModal,
         public mainService: AiDocsService,
     ) { }
 
@@ -91,6 +114,8 @@ export class aidocsEditComponent implements OnInit {
         this.record.file_pkid = this.pkid;
         this.record.file_type = 'AI-BL';
         this.record.file_date = '';
+
+        this.record.rec_files_attached = 'N';
 
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
@@ -192,7 +217,33 @@ export class aidocsEditComponent implements OnInit {
 
 
 
-
+    BtnNavigation(action: string, attachmodal: any = null) {
+        switch (action) {
+        case 'ATTACHMENT': {
+            let TypeList: any[] = [];
+            TypeList = [{ "code": "MBL", "name": "MBL" }, { "code": "HBL", "name": "HBL" }, { "code": "SHIPMENT-INVOICE", "name": "SHIPMENT-INVOICE" }, { "code": "PACKING LIST", "name": "PACKING LIST" }];
+            this.attach_title = 'Documents';
+            this.attach_parentid = this.pkid;
+            this.attach_subid = '';
+            this.attach_type = this.record.file_type;
+            this.attach_typelist = TypeList;
+            this.attach_tablename = 'mast_filesm';
+            this.attach_tablepkcolumn = 'file_pkid';
+            this.attach_refno = '';
+            this.attach_customername = '';
+            this.attach_updatecolumn = 'REC_FILES_ATTACHED';
+            this.attach_viewonlysource = '';
+            this.attach_viewonlyid = '';
+            this.attach_filespath = '';
+            this.attach_filespath2 = '';
+            this.modal = this.modalservice.open(attachmodal, { centered: true });
+            break;
+          }
+        }
+    }
+    CloseModal(){
+        this.modal.close();
+    }
 
 
 }

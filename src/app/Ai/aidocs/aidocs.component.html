@@ -20,12 +20,14 @@
     <thead class="page-body-thead">
       <tr>
         <th>NAME</th>
-
+        <th>DOCS</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of records$ | async">
         <td class='hlink2' (click)="edit(rec)">{{rec.file_remarks}}</td>
+        <td >{{rec.rec_files_attached}}</td>
+        
 
     </tbody>
   </table>

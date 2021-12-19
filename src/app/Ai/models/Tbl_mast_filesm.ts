@@ -12,6 +12,7 @@ export class Tbl_Mast_Filesm {
     rec_created_by: string;
     rec_created_date: string;
     rec_closed: string;
+    rec_files_attached : string ;
 }
 export interface Mast_Filesm_Model {
     errormessage: string;
