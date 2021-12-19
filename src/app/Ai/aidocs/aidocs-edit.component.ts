@@ -49,8 +49,6 @@ export class aidocsEditComponent implements OnInit {
             this.mode = this.route.snapshot.queryParams.mode;
         } else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-
-
             this.menuid = options.menuid;
             this.pkid = options.pkid;
             this.mode = options.mode;
@@ -92,6 +90,7 @@ export class aidocsEditComponent implements OnInit {
 
         this.record.file_pkid = this.pkid;
         this.record.file_name = '';
+        this.record.file_type = 'BL';
         this.record.file_date = '';
 
         this.record.rec_created_by = this.gs.user_code;

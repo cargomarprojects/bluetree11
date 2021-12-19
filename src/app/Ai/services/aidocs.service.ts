@@ -136,11 +136,11 @@ export class AiDocsService {
     }
 
     GetRecord(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/AiDocs/GetRecord', SearchData, this.gs.headerparam2('authorized'));
+        return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/GetRecord', SearchData, this.gs.headerparam2('authorized'));
     }
 
     Save(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiSave', SearchData, this.gs.headerparam2('authorized'));
+        return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/Save', SearchData, this.gs.headerparam2('authorized'));
     }
 
 }
