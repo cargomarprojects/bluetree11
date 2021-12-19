@@ -23,7 +23,7 @@ export class AiDocsService {
 
     public id: string;
     public menuid: string;
-    public param_type: string;
+    public file_type: string = 'Ai-BL';
 
     public title: string;
     public isAdmin: boolean;
@@ -59,7 +59,7 @@ export class AiDocsService {
 
         this.id = params.id;
         this.menuid = params.id;
-        this.param_type = params.param_type;
+        //this.file_type = params.param_type;
 
         this.record = <Mast_Filesm_Model>{
             errormessage: '',
@@ -93,7 +93,7 @@ export class AiDocsService {
         SearchData.outputformat = 'SCREEN';
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
-        SearchData.TYPE = this.param_type;
+        SearchData.TYPE = this.file_type;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.CODE = this.record.searchQuery.searchString;
         SearchData.page_count = 0;
@@ -132,7 +132,7 @@ export class AiDocsService {
     }
 
     List(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/AiDocs/List', SearchData, this.gs.headerparam2('authorized'));
+        return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/List', SearchData, this.gs.headerparam2('authorized'));
     }
 
     GetRecord(SearchData: any) {

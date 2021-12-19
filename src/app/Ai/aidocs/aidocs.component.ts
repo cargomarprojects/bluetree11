@@ -66,7 +66,7 @@ export class aidocsComponent implements OnInit {
       appid:this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
-      type: this.mainservice.param_type,
+      type: this.mainservice.file_type,
       origin: 'aidocs-page',
       mode: 'ADD'
     };
