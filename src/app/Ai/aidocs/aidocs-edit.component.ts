@@ -225,7 +225,7 @@ export class aidocsEditComponent implements OnInit {
             this.attach_title = 'Documents';
             this.attach_parentid = this.pkid;
             this.attach_subid = '';
-            this.attach_type = this.record.file_type;
+            this.attach_type = '';
             this.attach_typelist = TypeList;
             this.attach_tablename = 'mast_filesm';
             this.attach_tablepkcolumn = 'file_pkid';

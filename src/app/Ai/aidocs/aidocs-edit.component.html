@@ -1,6 +1,6 @@
 <div class="page-header">
     <div class="row align-items-center justify-content-left p-1">
-        <label class="mr-3">Docs Master ({{mode}})</label>
+        <label class="mr-3">AI Documents({{mode}})</label>
         <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
         <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
     </div>
@@ -47,7 +47,7 @@
     <div class="col-md-6 testbox  px-0 mx-0">   
         <div class="text-center">
             <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
-            <button class="btn btn-info btn-sm text-uppercase"
+            <button class="btn btn-primary btn-sm"
                 [style.color]="record.rec_files_attached=='Y'?'red':'white'"
                 (click)="BtnNavigation('ATTACHMENT',attachmodal)">Attachments
             </button>

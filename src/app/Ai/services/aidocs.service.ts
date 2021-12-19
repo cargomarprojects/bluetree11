@@ -94,7 +94,7 @@ export class AiDocsService {
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
         SearchData.TYPE = this.file_type;
-        SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
+        SearchData.page_rowcount = 10;
         SearchData.CODE = this.record.searchQuery.searchString;
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
