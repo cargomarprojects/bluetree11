@@ -15,6 +15,7 @@ export class Tbl_Mast_Filesm {
     rec_files_attached : string ;
 }
 export interface Mast_Filesm_Model {
+    selectedId : string;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

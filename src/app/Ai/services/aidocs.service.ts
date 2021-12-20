@@ -39,6 +39,14 @@ export class AiDocsService {
         private gs: GlobalService
     ) { }
 
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
+    
+
     public ClearInit() {
         this.record = <Mast_Filesm_Model>{
             errormessage: '',

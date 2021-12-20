@@ -19,16 +19,21 @@
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <th>NAME</th>
+        <th>CREATED-BY</th>
+        <th>CREATED-DATE</th>
+        <th>SUBJECT</th>
         <th>DOCS</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async">
-        <td class='hlink2' (click)="edit(rec)">{{rec.file_remarks}}</td>
-        <td >{{rec.rec_files_attached}}</td>
-        
-
+      <tr *ngFor="let rec of records$ | async"
+      (mousedown)="mainservice.selectRowId(rec.file_pkid)" 
+      [class.selected]="rec.file_pkid == mainservice.getRowId()"
+      >
+        <td class='hlink2' (click)="edit(rec)">{{rec.rec_created_by}}</td>
+        <td>{{rec.rec_created_date}}</td>
+        <td>{{rec.file_remarks}}</td>
+        <td>{{rec.rec_files_attached}}</td>
     </tbody>
   </table>
 </div>
