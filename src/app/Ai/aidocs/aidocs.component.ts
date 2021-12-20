@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { GlobalService } from '../../core/services/global.service';
-import { Tbl_Mast_Filesm } from '../models/Tbl_mast_filesm';
+import { DB_Tbl_Mast_Files, Tbl_Mast_Filesm } from '../models/Tbl_mast_filesm';
 import { SearchQuery } from '../models/Tbl_mast_filesm';
 import { PageQuery } from '../../shared/models/pageQuery';
 import { AiDocsService } from '../services/aidocs.service';
@@ -26,6 +26,8 @@ export class aidocsComponent implements OnInit {
   pageQuery$: Observable<PageQuery>;
   searchQuery$: Observable<SearchQuery>;
 
+  docList$: Observable<DB_Tbl_Mast_Files []>;
+
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -42,6 +44,7 @@ export class aidocsComponent implements OnInit {
   initPage() {
 
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
+    this.docList$ = this.mainservice.data$.pipe(map(res => res.DocList));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
     this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errormessage));
@@ -89,6 +92,11 @@ export class aidocsComponent implements OnInit {
     };
     this.gs.Naviagete2('Ai/AiDocsEditPage',  parameter);
   }
+
+  ShowDocumentList(_DocID : string){
+    this.mainservice.ShowDocumentList(_DocID);
+  }
+
 
   Close() {
     this.location.back();

@@ -112,6 +112,7 @@ export class aidocsEditComponent implements OnInit {
     init() {
 
         this.record.file_pkid = this.pkid;
+        this.record.file_slno = 0;
         this.record.file_type = 'AI-BL';
         this.record.file_date = '';
 
@@ -155,6 +156,7 @@ export class aidocsEditComponent implements OnInit {
                 }
                 else {
                     this.mode = 'EDIT';
+                    this.record.file_slno = response.slno;
                     this.mainService.RefreshList(this.record);
                     this.errorMessage = 'Save Complete';
                     alert(this.errorMessage);

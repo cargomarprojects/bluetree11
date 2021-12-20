@@ -39,11 +39,16 @@ export class AiDocsService {
         private gs: GlobalService
     ) { }
 
-    public selectRowId( id : string){
-        this.record.selectedId = id;
+    public selectRowId( rec : Tbl_Mast_Filesm){
+        this.record.selectedId = rec.file_pkid;
+        this.record.selectedSlNo = rec.file_slno;
     }
     public getRowId(){
         return this.record.selectedId;
+    }
+
+    public getRowSlNo(){
+        return this.record.selectedSlNo;
     }
     
 
@@ -117,7 +122,10 @@ export class AiDocsService {
 
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
+            this.record.selectedId= null;
+            this.record.selectedSlNo= null;
             this.record.records = response.list;
+            this.record.DocList = [];
             this.mdata$.next(this.record);
         }, error => {
             this.record.errormessage = this.gs.getError(error);
@@ -135,14 +143,37 @@ export class AiDocsService {
         }
         else {
             REC.file_remarks = _rec.file_remarks;
+            REC.file_slno = _rec.file_slno;
             REC.rec_files_attached = _rec.rec_files_attached;
             REC.rec_created_by = _rec.rec_created_by;
         }
     }
 
-    List(SearchData: any) {
+    ShowDocumentList(_docID : string) {
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = _docID;
+        this._ShowDocumentList(SearchData).subscribe(response => {
+            this.record.DocList = response.list;
+            this.mdata$.next(this.record);
+        }, error => {
+            this.record.errormessage = this.gs.getError(error);
+            this.record.DocList = [];
+            this.mdata$.next(this.record);
+            alert(this.record.errormessage);
+        });
+    }
+
+
+
+    private List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/List', SearchData, this.gs.headerparam2('authorized'));
     }
+
+    private _ShowDocumentList(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/GetDocList', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+
 
     GetRecord(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/GetRecord', SearchData, this.gs.headerparam2('authorized'));
