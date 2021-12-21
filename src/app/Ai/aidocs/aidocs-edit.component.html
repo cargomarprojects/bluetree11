@@ -18,8 +18,8 @@
         <div class="col-md-6 testbox  px-0 mx-0">
 
             <div class="form-group row" *ngIf="mode=='EDIT'">
-                <label class="col-4 col-form-label col-form-label-sm">SL#</label>
-                <div class="col-8">
+                <label class="col-2 col-form-label col-form-label-sm">SL#</label>
+                <div class="col-10">
                     <input class="form-control form-control-sm" type="text" (blur)="onBlur('file_slno')"
                         [(ngModel)]="record.file_slno" maxlength="250" disabled />
                 </div>
@@ -27,16 +27,16 @@
 
 
             <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Name</label>
-                <div class="col-8">
+                <label class="col-2 col-form-label col-form-label-sm">Name</label>
+                <div class="col-10">
                     <input class="form-control form-control-sm" type="text" (blur)="onBlur('file_remarks')"
                         [(ngModel)]="record.file_remarks" maxlength="250" />
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-4 col-form-label col-form-label-sm">Type</label>
-                <div class="col-8">
+                <label class="col-2 col-form-label col-form-label-sm">Type</label>
+                <div class="col-10">
                     <select class="form-control form-control-sm" [(ngModel)]="record.file_type">
                         <option [value]="'AI-BL'">Ai-BL</option>
                         <option [value]="'AI-INVOICE'">Ai-INVOICE</option>
@@ -56,14 +56,25 @@
     <div class="col-md-6 testbox  px-0 mx-0">   
         <div class="text-center">
             <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
-            <button class="btn btn-primary btn-sm"
+<!--             <button class="btn btn-primary btn-sm" 
                 [style.color]="record.rec_files_attached=='Y'?'red':'white'"
                 (click)="BtnNavigation('ATTACHMENT',attachmodal)">Attachments
-            </button>
+            </button> -->
         </div>
     </div>
 
 </div>
+
+<div *ngIf="showAttachment">
+    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+    [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+    [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
+    [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+    [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
+    [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
+    (callbackevent)="callbackevent($event)"></app-fileupload>
+</div>
+
 
 
 <ng-template #attachmodal let-c="close" let-d="dismiss">

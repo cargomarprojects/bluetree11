@@ -15,6 +15,7 @@ import { SearchTable } from '../../shared/models/searchtable';
 
 
 
+
 @Component({
     selector: 'app-aidocs-edit',
     templateUrl: './aidocs-edit.component.html'
@@ -32,6 +33,8 @@ export class aidocsEditComponent implements OnInit {
     public mode: string = '';
     errorMessage: string;
     Foregroundcolor: string;
+
+    showAttachment = false;
 
     title: string;
     isAdmin: boolean;
@@ -111,6 +114,8 @@ export class aidocsEditComponent implements OnInit {
 
     init() {
 
+        this.showAttachment = false;
+        
         this.record.file_pkid = this.pkid;
         this.record.file_slno = 0;
         this.record.file_type = 'AI-BL';
@@ -120,6 +125,8 @@ export class aidocsEditComponent implements OnInit {
 
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
+
+        
     }
 
     GetRecord() {
@@ -129,6 +136,8 @@ export class aidocsEditComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_Mast_Filesm>response.record;
+                this.initAttachment();
+                this.showAttachment = true;
                 this.mode = 'EDIT';
             }, error => {
                 this.errorMessage = this.gs.getError(error);
@@ -155,6 +164,11 @@ export class aidocsEditComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
+                    if ( this.mode == 'ADD') {
+                        this.showAttachment = true;
+                        this.initAttachment();
+                    }
+
                     this.mode = 'EDIT';
                     this.record.file_slno = response.slno;
                     this.mainService.RefreshList(this.record);
@@ -222,27 +236,32 @@ export class aidocsEditComponent implements OnInit {
     BtnNavigation(action: string, attachmodal: any = null) {
         switch (action) {
         case 'ATTACHMENT': {
-            let TypeList: any[] = [];
-            TypeList = [{ "code": "MBL", "name": "MBL" }, { "code": "HBL", "name": "HBL" }, { "code": "SHIPMENT-INVOICE", "name": "SHIPMENT-INVOICE" }, { "code": "PACKING LIST", "name": "PACKING LIST" }];
-            this.attach_title = 'Documents';
-            this.attach_parentid = this.pkid;
-            this.attach_subid = '';
-            this.attach_type = '';
-            this.attach_typelist = TypeList;
-            this.attach_tablename = 'mast_filesm';
-            this.attach_tablepkcolumn = 'file_pkid';
-            this.attach_refno = '';
-            this.attach_customername = '';
-            this.attach_updatecolumn = 'REC_FILES_ATTACHED';
-            this.attach_viewonlysource = '';
-            this.attach_viewonlyid = '';
-            this.attach_filespath = '';
-            this.attach_filespath2 = '';
+            this.initAttachment();
             this.modal = this.modalservice.open(attachmodal, { centered: true });
             break;
           }
         }
     }
+
+    initAttachment(){
+        let TypeList: any[] = [];
+        TypeList = [{ "code": "MBL", "name": "MBL" }, { "code": "HBL", "name": "HBL" }, { "code": "SHIPMENT-INVOICE", "name": "SHIPMENT-INVOICE" }, { "code": "PACKING LIST", "name": "PACKING LIST" }];
+        this.attach_title = 'Documents';
+        this.attach_parentid = this.pkid;
+        this.attach_subid = '';
+        this.attach_type = '';
+        this.attach_typelist = TypeList;
+        this.attach_tablename = 'mast_filesm';
+        this.attach_tablepkcolumn = 'file_pkid';
+        this.attach_refno = '';
+        this.attach_customername = '';
+        this.attach_updatecolumn = 'REC_FILES_ATTACHED';
+        this.attach_viewonlysource = '';
+        this.attach_viewonlyid = '';
+        this.attach_filespath = '';
+        this.attach_filespath2 = '';
+    }
+
     CloseModal(){
         this.modal.close();
     }
