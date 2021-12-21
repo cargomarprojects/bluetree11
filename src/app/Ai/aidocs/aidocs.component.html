@@ -42,11 +42,26 @@
 
 <div class="page-footer"> 
   <div class="text-center">
-    <p>Document List # {{mainservice.getRowSlNo()}}</p>
+    <p>Document SL# {{mainservice.getRowSlNo()}}</p>
   </div>
+
+  <div *ngIf="showAttachment">
+    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+    [refreshlist]="attach_parentid"
+    [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+    [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
+    [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+    [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
+    [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
+    (callbackevent)="callbackevent($event)"></app-fileupload>
 </div>
 
-<div class="page-body table-responsive">
+
+</div>
+
+
+
+<!-- <div class="page-body table-responsive">
   <table class="table table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
@@ -61,6 +76,6 @@
     </tbody>
   </table>
 </div>
-
+ -->
 
 <br />

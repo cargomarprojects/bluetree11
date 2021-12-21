@@ -95,6 +95,23 @@ export class FileUploadComponent implements OnInit {
     this.canupload = value;
   }
 
+
+  private _s3upload: boolean = true;
+  @Input() set s3upload(value: boolean) {
+    this._s3upload = value;
+  }
+
+  private _extractdata: boolean = true;
+  @Input() set extractdata(value: boolean) {
+    this._extractdata = value;
+  }
+
+
+
+  @Input() set refreshlist(value: string) {
+    this.List();
+  }
+
   public ismodal: boolean = false;
   @Input() set modalview(value: boolean) {
     this.ismodal = value;
@@ -471,6 +488,15 @@ export class FileUploadComponent implements OnInit {
 
   mailcallbackevent(event: any) {
     this.modal.close();
+  }
+
+
+  awss3upload(){
+    alert('s3');
+  }
+
+  awsextractdata(){
+    alert('extract');
   }
 
 }

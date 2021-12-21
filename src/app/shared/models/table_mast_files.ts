@@ -11,6 +11,9 @@ export interface Table_Mast_Files {
     files_sizewithunit: string;
     files_path: string;
     files_editrow: boolean;
+    files_aws_bucket : string ;
+    files_aws_job_id : string ;
+    files_aws_job_status : string ;
 }
 
 export interface vm_table_mast_files {

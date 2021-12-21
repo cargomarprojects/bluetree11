@@ -34,12 +34,13 @@ export class aidocsEditComponent implements OnInit {
     errorMessage: string;
     Foregroundcolor: string;
 
-    showAttachment = false;
+    
 
     title: string;
     isAdmin: boolean;
     refno: string = "";
 
+    showAttachment = false;
     attach_title: string = '';
     attach_parentid: string = '';
     attach_subid: string = '';
@@ -173,7 +174,6 @@ export class aidocsEditComponent implements OnInit {
                     this.record.file_slno = response.slno;
                     this.mainService.RefreshList(this.record);
                     this.errorMessage = 'Save Complete';
-                    alert(this.errorMessage);
                 }
 
             }, error => {

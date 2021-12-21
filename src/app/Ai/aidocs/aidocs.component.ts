@@ -28,6 +28,26 @@ export class aidocsComponent implements OnInit {
 
   docList$: Observable<DB_Tbl_Mast_Files []>;
 
+
+  showAttachment = false;
+  attach_title: string = '';
+  attach_parentid: string = '';
+  attach_subid: string = '';
+  attach_type: string = '';
+  attach_typelist: any = {};
+  attach_tablename: string = '';
+  attach_tablepkcolumn: string = '';
+  attach_refno: string = '';
+  attach_customername: string = '';
+  attach_updatecolumn: string = '';
+  attach_viewonlysource: string = '';
+  attach_viewonlyid: string = '';
+  attach_filespath: string = '';
+  attach_filespath2: string = '';
+
+
+
+
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -52,10 +72,12 @@ export class aidocsComponent implements OnInit {
   }
 
   searchEvents(actions: any) {
+    this.showAttachment =false;
     this.mainservice.Search(actions, 'SEARCH');
   }
 
   pageEvents(actions: any) {
+    this.showAttachment =false;
     this.mainservice.Search(actions, 'PAGE');
   }
 
@@ -93,9 +115,32 @@ export class aidocsComponent implements OnInit {
     this.gs.Naviagete2('Ai/AiDocsEditPage',  parameter);
   }
 
-  ShowDocumentList(_DocID : string){
-    this.mainservice.ShowDocumentList(_DocID);
+  ShowDocumentList(_docid : string){
+    //this.mainservice.ShowDocumentList(_DocID);
+    this.initAttachment(_docid);
   }
+
+  initAttachment(_docid : string ){
+    let TypeList: any[] = [];
+    TypeList = [{ "code": "MBL", "name": "MBL" }, { "code": "HBL", "name": "HBL" }, { "code": "SHIPMENT-INVOICE", "name": "SHIPMENT-INVOICE" }, { "code": "PACKING LIST", "name": "PACKING LIST" }];
+    this.attach_title = 'Documents';
+    this.attach_parentid = _docid;
+    this.attach_subid = '';
+    this.attach_type = '';
+    this.attach_typelist = TypeList;
+    this.attach_tablename = 'mast_filesm';
+    this.attach_tablepkcolumn = 'file_pkid';
+    this.attach_refno = '';
+    this.attach_customername = '';
+    this.attach_updatecolumn = 'REC_FILES_ATTACHED';
+    this.attach_viewonlysource = '';
+    this.attach_viewonlyid = '';
+    this.attach_filespath = '';
+    this.attach_filespath2 = '';
+    this.showAttachment = true;
+    
+}
+
 
 
   Close() {
