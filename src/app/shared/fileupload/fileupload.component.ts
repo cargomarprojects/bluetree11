@@ -6,6 +6,7 @@ import { Table_Mast_Files } from '../models/table_mast_files';
 // import { stringify } from 'querystring';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+
 declare var $: any;
 
 
@@ -96,12 +97,12 @@ export class FileUploadComponent implements OnInit {
   }
 
 
-  private _s3upload: boolean = true;
+  public _s3upload: boolean = false;
   @Input() set s3upload(value: boolean) {
     this._s3upload = value;
   }
 
-  private _extractdata: boolean = true;
+  public _extractdata: boolean = false;
   @Input() set extractdata(value: boolean) {
     this._extractdata = value;
   }
@@ -491,12 +492,71 @@ export class FileUploadComponent implements OnInit {
   }
 
 
-  awss3upload(){
-    alert('s3');
+  awss3upload(_rec: Table_Mast_Files){
+    
+    if (!confirm("Upload File to S3 " + _rec.file_desc)) {
+      return;
+    }
+
+    this.loading = true;
+    let filename = this.gs.FS_APP_FOLDER + _rec.files_path + _rec.file_id;
+    let SearchData = {
+      filename  : filename,
+      justfilename : _rec.file_desc,
+      fileid: _rec.file_id,
+    };
+    
+    this.errorMessage = '';
+    this.lovService.Save2S3(SearchData)
+      .subscribe(response => {
+        this.loading = false;
+        if (response.retvalue == false) {
+          this.errorMessage = response.error;
+          alert(this.errorMessage);
+        }
+        else 
+        {
+          _rec.files_aws_bucket = response.bucket;
+        }
+
+      }, error => {
+        this.loading = false;
+        this.errorMessage = this.gs.getError(error);
+      }
+    );
   }
 
-  awsextractdata(){
-    alert('extract');
+
+  awsextractdata(_rec: Table_Mast_Files){
+
+    this.loading = true;
+    let filename = this.gs.FS_APP_FOLDER + _rec.files_path + _rec.file_id;
+    let SearchData = {
+      filename  : filename,
+      justfilename : _rec.file_desc,
+      fileid: _rec.file_id,
+    };
+    
+    this.errorMessage = '';
+    this.lovService.StartExtractDataProcess(SearchData)
+      .subscribe(response => {
+        this.loading = false;
+        if (response.retvalue == false) {
+          this.errorMessage = response.error;
+          alert(this.errorMessage);
+        }
+        else 
+        {
+          _rec.files_aws_job_id = response.jobid;
+          _rec.files_aws_job_status = response.jobstatus;
+        }
+
+      }, error => {
+        this.loading = false;
+        this.errorMessage = this.gs.getError(error);
+      }
+    );
+
   }
 
 }

@@ -32,6 +32,15 @@ export class LovService {
     DeleteRecord(SearchData: any) {
       return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/DeleteDocument', SearchData, this.gs.headerparam2('authorized'));
     }
+
+    Save2S3(SearchData: any) {
+      return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/Save2S3', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+    StartExtractDataProcess(SearchData: any) {
+      return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/StartExtractDataProcess', SearchData, this.gs.headerparam2('authorized'));
+    }
+
     
     Save(SearchData: any) {
       return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/Save', SearchData, this.gs.headerparam2('authorized'));

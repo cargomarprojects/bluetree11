@@ -48,6 +48,7 @@
   <div *ngIf="showAttachment">
     <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
     [refreshlist]="attach_parentid"
+    [s3upload]= "true" [extractdata]= "true"
     [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
     [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
     [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
