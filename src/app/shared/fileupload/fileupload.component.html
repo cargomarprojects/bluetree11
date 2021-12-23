@@ -78,7 +78,7 @@
             <th *ngIf="_s3upload">UPLOADTOS3</th>
             <th>AWS-BUCKET</th>
             <th *ngIf="_extractdata">EXTRACT-DATA</th>
-            <!-- <th *ngIf="_extractdata">AWSJOB#</th> -->
+            <th *ngIf="_extractdata">AWSJOB#</th>
 
             <th class="text-center">REMOVE</th>
             <th class="text-center">EMAIL</th>
@@ -103,7 +103,7 @@
             <td class="p-0 hlink2" (click)="awss3upload(rec)"  *ngIf="_s3upload">Upload</td>
             <td class="p-0" >{{rec.files_aws_bucket}}</td>
             <td class="p-0 hlink2" (click)="awsextractdata(rec)" *ngIf="_extractdata">{{rec.files_aws_job_status}}</td>
-            <!-- <td class="p-0" *ngIf="_extractdata">{{rec.files_aws_job_id}}</td> -->
+            <td class="p-0" *ngIf="_extractdata">{{rec.files_aws_job_id}}</td>
 
             <td class="text-center" (click)="RemoveRow(rec)">
               <i class="fa fa-trash fa-lg pointer" aria-hidden="true"></i>
