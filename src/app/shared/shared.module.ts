@@ -110,6 +110,7 @@ import { GenRemarkComponent } from './genrem/genrem.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
+    PdfJsViewerModule,
     AutoCompleteComponent,
     AutoComplete2Component,
     DateComponent,

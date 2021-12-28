@@ -266,5 +266,9 @@ export class aidocsEditComponent implements OnInit {
         this.modal.close();
     }
 
+    callbackparent(rec : any){
+        alert( rec.file_desc);
+    }
+
 
 }

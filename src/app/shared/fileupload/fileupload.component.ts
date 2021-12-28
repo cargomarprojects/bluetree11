@@ -7,6 +7,7 @@ import { Table_Mast_Files } from '../models/table_mast_files';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
+
 declare var $: any;
 
 
@@ -118,6 +119,10 @@ export class FileUploadComponent implements OnInit {
     this.ismodal = value;
   }
   @Output() callbackevent = new EventEmitter<any>();
+
+  @Output() callbackparent = new EventEmitter<Table_Mast_Files>();
+
+  
 
   txt_fileName: string = "";
   txt_fileRefno: string = "";
@@ -557,6 +562,12 @@ export class FileUploadComponent implements OnInit {
       }
     );
 
+  }
+
+
+  preview(rec : Table_Mast_Files){
+    if( this.callbackparent )
+      this.callbackparent.emit(rec);
   }
 
 }

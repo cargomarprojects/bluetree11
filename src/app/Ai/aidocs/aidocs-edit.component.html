@@ -74,7 +74,8 @@
     [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
     [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
     [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
-    (callbackevent)="callbackevent($event)"></app-fileupload>
+    (callbackevent)="callbackevent($event)" (callbackparent)="callbackparent($event)"
+    ></app-fileupload>
 </div>
 
 
@@ -90,7 +91,8 @@
                         [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
                         [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
                         [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
-                        (callbackevent)="callbackevent($event)"></app-fileupload>
+                        (callbackevent)="callbackevent($event)">
+                    </app-fileupload>
                 </div>
             </div>
             <div class="page-footer">
