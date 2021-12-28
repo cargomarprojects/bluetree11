@@ -66,13 +66,15 @@ export class FormatPageDetComponent implements OnInit {
         var SearchData = this.gs.UserInfo;
         SearchData.FORMAT_ID = this._formatid;
         this.mainservice.ListDet(SearchData).subscribe(response => {
-            this.records = response.list;
-            this.records.forEach(rec => {
-                if (rec.blf_enabled == 'Y')
-                    rec.blf_enabled_b = true;
-                else
-                    rec.blf_enabled_b = false;
-            });
+            this.records = (response.list == undefined || response.list == null) ? <Tbl_cargo_hblformat[]>[] : <Tbl_cargo_hblformat[]>response.list;
+            if (!this.gs.isBlank(this.records)) {
+                this.records.forEach(rec => {
+                    if (rec.blf_enabled == 'Y')
+                        rec.blf_enabled_b = true;
+                    else
+                        rec.blf_enabled_b = false;
+                });
+            }
             this.modal = this.modalservice.open(formatmodal, { centered: true });
 
         }, error => {

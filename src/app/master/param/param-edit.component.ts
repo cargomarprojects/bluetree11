@@ -316,7 +316,7 @@ export class ParamEditComponent implements OnInit {
 
 
     if (this.menu_param == "HBL-FORMAT") {
-      if (Name6.length <= 0) {
+      if (this.record.param_name6.length <= 0) {
         this.errorMessage = "Type Has to be selected";
         return false;
       }
@@ -375,7 +375,7 @@ export class ParamEditComponent implements OnInit {
     this.name1 = 'Name';
 
     if (this.menu_param == 'HBL-FORMAT') {
-      this.cmbList = ['BLANK', 'DRAFT'];
+      this.cmbList = ['BLANK', 'DRAFT','PDF'];
       this.name6 = 'Type';
       this.record.param_name6 = 'BLANK'
       this.bname6 = true;
