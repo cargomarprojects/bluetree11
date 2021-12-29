@@ -1,0 +1,47 @@
+<div class="page-header">
+  <div class="col">
+    <label class="mr-1">{{mainservice.title}}</label>
+    <button class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" (click)="NewRecord()">New</button>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+  </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+  {{errorMessage}}
+</div>
+
+<app-aiformat-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-aiformat-header>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive">
+  <table class="table  table-hover table-sm">
+    <thead class="page-body-thead">
+      <tr>
+        <th>FORMAT</th>
+        <th>TYPE</th>
+        <th>CREATED-BY</th>
+        <th>CREATED-DATE</th>
+      </tr>
+    </thead>
+    <tbody class="page-body-tbody">
+      <tr *ngFor="let rec of records$ | async"
+      (mousedown)="mainservice.selectRowId(rec)" 
+      [class.selected]="rec.fmt_pkid == mainservice.getRowId()"
+      >
+        <td class='hlink2' (click)="edit(rec)">{{rec.fmt_name}}</td>
+        <td class='hlink2' (click)="edit(rec)">{{rec.fmt_type}}</td>
+        <td (click)="ShowDocumentList(rec.fmt_pkid)" >{{rec.rec_created_by}}</td>
+        <td (click)="ShowDocumentList(rec.fmt_pkid)" >{{rec.rec_created_date}}</td>
+    </tbody>
+  </table>
+</div>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+
+
+
+
+<br />

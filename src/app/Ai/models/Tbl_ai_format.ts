@@ -8,6 +8,7 @@ export interface SearchQuery {
 export class Tbl_Ai_Formatm {
     fmt_pkid: string;
 	fmt_name : string;
+    fmt_type : string;
     rec_created_by: string;
     rec_created_date: string;
 }
@@ -28,7 +29,6 @@ export class Tbl_Ai_Formatd {
 
 export interface Ai_Formatm_Model {
     selectedId : string;
-    selectedSlNo : number;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

@@ -1,0 +1,58 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">Ai Format({{mode}})</label>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Name</label>
+                <div class="col-10">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('fmt_name')"
+                        [(ngModel)]="record.fmt_name" maxlength="100" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Type</label>
+                <div class="col-10">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.fmt_type">
+                        <option [value]="'MBL'">MBL</option>
+                        <option [value]="'HBL'">HBL</option>
+                    </select>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+        </div>
+    </div>
+</div>
+<div class="page-footer">
+    <div class="col-md-6 testbox  px-0 mx-0">   
+        <div class="text-center">
+            <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
+<!--             <button class="btn btn-primary btn-sm" 
+                [style.color]="record.rec_files_attached=='Y'?'red':'white'"
+                (click)="BtnNavigation('ATTACHMENT',attachmodal)">Attachments
+            </button> -->
+        </div>
+    </div>
+
+</div>
+
