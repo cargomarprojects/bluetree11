@@ -19,9 +19,9 @@ export class Tbl_Mast_Filesm {
 
 export class DB_Tbl_Mast_Files
 {
-    files_id : string;
-    files_desc  : string;
-    files_uri  : string;
+    file_id : string;
+    file_desc  : string;
+    file_uri  : string;
     files_type  : string;
     files_ref_no  : string;
     files_created_by  : string;
@@ -30,6 +30,8 @@ export class DB_Tbl_Mast_Files
     files_size : number;
     files_sizewithunit  : string;
     files_path  : string;
+    files_width : number;
+    files_height : number;
 }
 
 

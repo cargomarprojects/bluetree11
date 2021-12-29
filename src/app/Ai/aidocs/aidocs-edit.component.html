@@ -79,28 +79,19 @@
     ></app-fileupload>
 </div>
 
-
-
-<ng-template #attachmodal let-c="close" let-d="dismiss">
-    <div class="modal-body">
-        <div class="page-body">
-            <div class="row">
-                <div class="col-md-12 testbox  px-0 mx-0">
-                    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
-                        [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
-                        [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
-                        [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
-                        [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
-                        [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
-                        (callbackevent)="callbackevent($event)">
-                    </app-fileupload>
-                </div>
-            </div>
-            <div class="page-footer">
-                <div class="row justify-content-center p-1">
-                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
-                </div>
+<div *ngIf="showAttachment && showpdf" class="page-body" >
+    <div class="row" >
+        <div class="col-md-6 px-1 mx-1 border" >
+            <div [style.height]="'800px'" >
+                <ng2-pdfjs-viewer [showSpinner]="true" [print]="canPrint" [download]="false" [openFile]="false"  [zoom]="75" 
+                    [cursor]="'pointer'" [scroll]="'V'" #pdfViewerAutoLoad>
+                </ng2-pdfjs-viewer>
             </div>
         </div>
-    </div>
-</ng-template>
+        <div class="col-md-6 testbox  px-0 mx-0">
+            
+        </div>
+    </div>                
+</div>
+
+

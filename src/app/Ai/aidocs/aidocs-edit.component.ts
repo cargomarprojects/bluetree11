@@ -9,11 +9,9 @@ import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
 
 import { AiDocsService } from '../services/aidocs.service';
-import { vm_Tbl_Mast_Filesm, Tbl_Mast_Filesm } from '../models/Tbl_mast_filesm';
+import { vm_Tbl_Mast_Filesm, Tbl_Mast_Filesm, DB_Tbl_Mast_Files } from '../models/Tbl_mast_filesm';
 
 import { SearchTable } from '../../shared/models/searchtable';
-
-
 
 
 @Component({
@@ -21,6 +19,8 @@ import { SearchTable } from '../../shared/models/searchtable';
     templateUrl: './aidocs-edit.component.html'
 })
 export class aidocsEditComponent implements OnInit {
+
+    @ViewChild('pdfViewerAutoLoad') pdfViewerAutoLoad;
 
     record: Tbl_Mast_Filesm = <Tbl_Mast_Filesm>{};
 
@@ -34,7 +34,11 @@ export class aidocsEditComponent implements OnInit {
     errorMessage: string;
     Foregroundcolor: string;
 
-    
+
+    showpdf = false;
+    width = "";
+    height = "";
+
 
     title: string;
     isAdmin: boolean;
@@ -104,6 +108,7 @@ export class aidocsEditComponent implements OnInit {
 
     actionHandler() {
         this.errorMessage = '';
+        this.showpdf = false;
         if (this.mode == 'ADD') {
             this.record = <Tbl_Mast_Filesm>{};
             this.pkid = this.gs.getGuid();
@@ -267,9 +272,24 @@ export class aidocsEditComponent implements OnInit {
         this.modal.close();
     }
 
-    callbackparent(rec : any){
-        
-        alert( rec.file_desc);
+
+    callbackparent(rec : DB_Tbl_Mast_Files){
+        this.width = rec.files_width + "px";
+        this.height = rec.files_height + "px";
+        this.showpdf = true;
+
+        let fname = this.gs.FS_APP_FOLDER + rec.files_path  +  rec.file_id;
+
+        this.gs.getFile(this.gs.WWW_FILES_URL , fname, "pdf", rec.file_desc).subscribe(response => {
+
+            this.pdfViewerAutoLoad.pdfSrc = response;
+            this.pdfViewerAutoLoad.refresh();
+      
+          }, error => {
+            this.errorMessage = this.gs.getError(error);
+            alert(this.errorMessage);
+          });
+
     }
 
 
