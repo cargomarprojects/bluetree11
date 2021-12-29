@@ -99,6 +99,7 @@ export class aiformatEditComponent implements OnInit {
 
         this.record.fmt_pkid = this.pkid;
         this.record.fmt_name = '';
+        this.record.fmt_type = 'HBL';
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
         
