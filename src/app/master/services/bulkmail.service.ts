@@ -355,8 +355,8 @@ export class BulkmailService {
         SearchData.BM_FILECOUNT = _rec.bm_filecount;
         this.SendMail(SearchData)
             .subscribe(response => {
+                _rec.bm_failed_seq = response.failseq;
                 if (!this.gs.isBlank(response.error)) {
-                    _rec.bm_failed_seq = response.error;
                     alert("Failed Batches: " + response.error);
                 }
                 if (response.retvalue == true && this.gs.isBlank(response.error)) {
