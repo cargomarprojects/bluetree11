@@ -55,6 +55,7 @@ export class aidocsEditComponent implements OnInit {
     attach_viewonlyid: string = '';
     attach_filespath: string = '';
     attach_filespath2: string = '';
+
   
 
 
@@ -267,6 +268,7 @@ export class aidocsEditComponent implements OnInit {
     }
 
     callbackparent(rec : any){
+        
         alert( rec.file_desc);
     }
 

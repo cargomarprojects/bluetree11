@@ -24,6 +24,11 @@ export class FileUploadComponent implements OnInit {
     this.Doc_title = value;
   }
 
+  public bshow = true;
+  @Input() set show(value: boolean) {
+    this.bshow = value;
+  }
+
 
   private Files_Parent_Id: string = "";
   @Input() set parentid(value: string) {
@@ -568,6 +573,10 @@ export class FileUploadComponent implements OnInit {
   preview(rec : Table_Mast_Files){
     if( this.callbackparent )
       this.callbackparent.emit(rec);
+  }
+
+  showHide(){
+    this.bshow = !this.bshow;
   }
 
 }

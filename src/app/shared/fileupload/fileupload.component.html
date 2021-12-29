@@ -6,8 +6,9 @@
 </div>
 
 <div class="page-body" *ngIf="canupload">
-  <div class="row border">
-    <div class="col-md-6 testbox  px-0 mx-0">
+  <div class="row border" >
+    <div class="col-md-6 testbox  px-0 mx-0" >
+      <div *ngIf="bshow">
       <div class="form-group row">
         <label class="col-2 col-form-label col-form-label-sm">File</label>
         <div class="col-10">
@@ -52,10 +53,12 @@
         </div>
       </div>
 
-
     </div>
-    <div class="col-md-6 testbox  px-0 mx-0">
+    
+    </div>
 
+    <div class="col-md-6 testbox  px-0 mx-0">
+      <!-- <button class="btn btn-info btn-sm" (click)="showHide()">Show/Hide</button> -->
     </div>
   </div>
 </div>
