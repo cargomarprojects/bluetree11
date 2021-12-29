@@ -38,17 +38,96 @@
 
 
 
+
         </div>
 
         <div class="col-md-6 testbox  px-0 mx-0">
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12 testbox  px-0 mx-0">
+            <div class="page-body table-responsive">
+                <table class="table table-hover table-sm  table-bordered cntr">
+                    <thead class="page-body-thead">
+                        <tr>
+                            <th>CAPTION</th>
+                            <th>TEXT</th>
+                            <th>TYPE</th>
+                            <th>BETWEEN-1</th>
+                            <th>BETWEEN-2</th>
+                            <th>POSITION</th>
+                            <th>ORDER</th>
+                            <th style="text-align:center">DELETE</th>
+                        </tr>
+                    </thead>
+                    <tbody class="page-body-tbody">
+                        <tr *ngFor="let rec of records">
+                            <td>
+                                <select class="form-control form-control-sm" [(ngModel)]="rec.fmt_caption">
+                                    <option [value]="'CAPTION'">CAPTION</option>               
+                                    <option [value]="'FORMAT'">FORMAT</option>
+                                    <option [value]="'BLNO'">BLNO</option>
+                                    <option [value]="'CONSIGNOR'">CONSIGNOR</option>
+                                    <option [value]="'CONSIGNEE'">CONSIGNEE</option>
+                                    <option [value]="'POL'">POL</option>                                    
+                                    <option [value]="'POD'">POD</option>                                    
+                                                         
+                                </select>
+                            </td>
+                            <td >
+                                <InputBox [(inputModel)]="rec.fmt_text" [field]="'fmt_text'" [maxlength]="100"
+                                    (blur)="onBlur($event)"></InputBox>
+                            </td>
+
+                            <td>
+                                <select class="form-control form-control-sm" [(ngModel)]="rec.fmt_type">
+                                    <option [value]="'NA'">NA</option>
+                                    <option [value]="'BETWEEN'">BETWEEN</option>
+                                    <option [value]="'SINGLE-VALUE'">SINGLE-VALUE</option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <InputBox [(inputModel)]="rec.fmt_bet1" [field]="'fmt_bet1'" [maxlength]="100"
+                                    (blur)="onBlur($event)"></InputBox>
+                            </td>
+
+                            <td>
+                                <InputBox [(inputModel)]="rec.fmt_bet2" [field]="'fmt_bet2'" [maxlength]="100"
+                                    (blur)="onBlur($event)"></InputBox>
+                            </td>
+                            <td>
+                                <select class="form-control form-control-sm" [(ngModel)]="rec.fmt_position">
+                                    <option [value]="'NA'">NA</option>
+                                    <option [value]="'BELOW'">BELOW</option>
+                                    <option [value]="'RIGHT'">RIGHT</option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <input class="form-control form-control-sm" type="nuber" [(ngModel)]="rec.fmt_order" />    
+                            </td>
+
+                            <td class="p-0" style="text-align:center" (click)="RemoveRow(rec)">
+                                <i class="fa fa-trash  fa-lg pointer"
+                                    aria-hidden="true" ></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <button class="btn btn-info btn-sm mr-1" (click)="AddRow()">Add Row</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="page-footer">
-    <div class="col-md-6 testbox  px-0 mx-0">   
+    <div class="col-md-6 testbox  px-0 mx-0">
         <div class="text-center">
             <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
-<!--             <button class="btn btn-primary btn-sm" 
+            <!--             <button class="btn btn-primary btn-sm" 
                 [style.color]="record.rec_files_attached=='Y'?'red':'white'"
                 (click)="BtnNavigation('ATTACHMENT',attachmodal)">Attachments
             </button> -->
@@ -56,4 +135,3 @@
     </div>
 
 </div>
-

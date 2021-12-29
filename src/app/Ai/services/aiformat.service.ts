@@ -30,6 +30,7 @@ export class AiFormatService {
     public canAdd: boolean;
     public canEdit: boolean;
     public canSave: boolean;
+    public canDelete: boolean;
 
     public initlialized: boolean;
     private appid ='';
@@ -86,6 +87,7 @@ export class AiFormatService {
         this.title = this.gs.getTitle(this.menuid);
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
+        this.canDelete = this.gs.canDelete(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
 
         this.initlialized = true;
@@ -144,6 +146,34 @@ export class AiFormatService {
         }
     }
 
+    DeleteRow(_rec: Tbl_Ai_Formatm) {
+
+        if (!confirm("DELETE " + _rec.fmt_name)) {
+            return;
+        }
+
+        this.record.errormessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = _rec.fmt_pkid;
+        this.DeleteRecord(SearchData)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.record.errormessage = response.error;
+                    alert(this.record.errormessage);
+                }
+                else {
+                    this.record.records.splice(this.record.records.findIndex(rec => rec.fmt_pkid == _rec.fmt_pkid), 1);
+                }
+                this.mdata$.next(this.record);
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+                this.mdata$.next(this.record);
+                alert(this.record.errormessage);
+            });
+    }
+
+
+
 
     private List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiFormat/List', SearchData, this.gs.headerparam2('authorized'));
@@ -156,6 +186,10 @@ export class AiFormatService {
 
     Save(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiFormat/Save', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+    DeleteRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiFormat/Delete', SearchData, this.gs.headerparam2('authorized'));
     }
 
 }
