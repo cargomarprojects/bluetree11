@@ -1,0 +1,28 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">AI Verify Documents</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body" >
+    <div class="row" >
+        <div class="col-md-6 px-1 mx-1 border" >
+            <div [style.height]="'80vh'" >
+                <ng2-pdfjs-viewer [showSpinner]="true" [print]="canPrint" [download]="false" [openFile]="false"  [zoom]="75" 
+                    [cursor]="'pointer'" [scroll]="'V'" #pdfViewerAutoLoad>
+                </ng2-pdfjs-viewer>
+            </div>
+        </div>
+        <div class="col-md-6 testbox  px-0 mx-0">
+        </div>
+    </div>                
+</div>
+
+

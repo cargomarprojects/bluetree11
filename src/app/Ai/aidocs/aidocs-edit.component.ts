@@ -276,19 +276,16 @@ export class aidocsEditComponent implements OnInit {
     callbackparent(rec : DB_Tbl_Mast_Files){
         this.width = rec.files_width + "px";
         this.height = rec.files_height + "px";
-        this.showpdf = true;
 
-        let fname = this.gs.FS_APP_FOLDER + rec.files_path  +  rec.file_id;
-
-        this.gs.getFile(this.gs.WWW_FILES_URL , fname, "pdf", rec.file_desc).subscribe(response => {
-
-            this.pdfViewerAutoLoad.pdfSrc = response;
-            this.pdfViewerAutoLoad.refresh();
-      
-          }, error => {
-            this.errorMessage = this.gs.getError(error);
-            alert(this.errorMessage);
-          });
+        let parameter = {
+            appid:this.gs.appid,
+            menuid: this.menuid,
+            pkid: rec.file_id ,
+            type: '',
+            origin: 'aidocs-page',
+            mode: 'EDIT'
+          };
+          this.gs.Naviagete2('Ai/AiVerifyPage',  parameter);
 
     }
 

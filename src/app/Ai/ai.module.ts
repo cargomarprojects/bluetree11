@@ -8,6 +8,7 @@ import { aiformatComponent } from './aidata/aiformat.component';
 import { aidocsEditComponent } from './aidocs/aidocs-edit.component';
 import { aidocsHeaderComponent } from './aidocs/aidocs-header.component';
 import { aidocsComponent } from './aidocs/aidocs.component';
+import { aiverifyComponent } from './aiverifiy/aiverify.component';
 
 
 
@@ -20,7 +21,8 @@ import { aidocsComponent } from './aidocs/aidocs.component';
 
     aiformatHeaderComponent,
     aiformatEditComponent,
-    aiformatComponent
+    aiformatComponent,
+    aiverifyComponent
 
   ],
   imports: [

@@ -183,4 +183,9 @@ export class AiDocsService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/Save', SearchData, this.gs.headerparam2('authorized'));
     }
 
+
+    GetDocumentRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiVerify/GetRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
+
 }
