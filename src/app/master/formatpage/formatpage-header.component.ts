@@ -17,7 +17,7 @@ export class FormatPageHeaderComponent implements OnInit {
 
   remarks = '';
   @Input() set _remarks(value: string) {
-    this.remarks = value ;
+    this.remarks = value;
   }
 
 
@@ -58,7 +58,7 @@ export class FormatPageHeaderComponent implements OnInit {
     }
   }
 
-  detpagecallbackevent(params:any) {
-
+  detpagecallbackevent(params: any) {
+    this.List('SCREEN');
   }
 }

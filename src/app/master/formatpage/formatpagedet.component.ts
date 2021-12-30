@@ -75,7 +75,9 @@ export class FormatPageDetComponent implements OnInit {
                         rec.blf_enabled_b = false;
                 });
             }
-            this.modal = this.modalservice.open(formatmodal, { centered: true });
+
+            if (formatmodal != null)
+                this.modal = this.modalservice.open(formatmodal, { centered: true });
 
         }, error => {
             alert(this.gs.getError(error));
@@ -120,6 +122,8 @@ export class FormatPageDetComponent implements OnInit {
             else {
                 this.errorMessage = "Save Complete";
                 // alert(this.errorMessage);
+                if (this.callbackevent)
+                    this.callbackevent.emit({ action: 'SAVE' });
                 this.modal.close();
             }
         }, error => {
@@ -151,7 +155,10 @@ export class FormatPageDetComponent implements OnInit {
             else {
                 this.errorMessage = "Save Complete";
                 // alert(this.errorMessage);
-                this.modal.close();
+                // if (this.callbackevent)
+                //     this.callbackevent.emit({ action: 'SAVE' });
+                // this.modal.close();
+                this.FormatUpdate(null);
             }
         }, error => {
             alert(this.gs.getError(error));
