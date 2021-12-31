@@ -48,7 +48,7 @@ export class aiHblComponent implements OnInit {
     @Input() set _pkid(value: string) {
       this.pkid = value;
       if ( this.pkid != "")
-        this.GetRecord();
+        this.GetRecord("");
     }
 
 
@@ -75,11 +75,16 @@ export class aiHblComponent implements OnInit {
 
 
 
-    GetRecord() {
+    GetRecord( _type : string) {
         this.initPage();
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
+        SearchData.type = _type;
         SearchData.pkid = this.pkid;
+        if ( this.gs.isBlank(this.record.hbl_format_id))
+            SearchData.format_id = "";
+        else 
+            SearchData.format_id = this.record.hbl_format_id;
 
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
@@ -183,6 +188,8 @@ export class aiHblComponent implements OnInit {
     callbackparent(rec : any){
         alert( rec.file_desc);
     }
+
+
 
 
 }
