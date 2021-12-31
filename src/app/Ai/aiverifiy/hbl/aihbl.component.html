@@ -106,9 +106,6 @@
                     </div>
                 </div>
 
-            </div>
-            <div class="col-md-6 testbox  px-0 mx-0">
-
 
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">Consignee</label>
@@ -163,18 +160,7 @@
                     </div>
                 </div>
 
-            </div>
 
-        </div>
-    </div>
-
-
-    <div class="page-body">
-
-        <div class="row">
-
-
-            <div class="col-md-6 testbox  px-0 mx-0">
 
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">Notify</label>
@@ -228,12 +214,15 @@
                     </div>
                 </div>
 
+
+
+
             </div>
 
             <div class="col-md-6 testbox  px-0 mx-0">
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Carriage</label>
+                    <label class="col-2 col-form-label col-form-label-sm">P.Carriage</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pre_carriage')"
                             [(ngModel)]="record.hbl_pre_carriage" maxlength="100" />
@@ -264,6 +253,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Delivery</label>
+                    <div class="col-10">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_place_of_delivery')"
+                            [(ngModel)]="record.hbl_place_of_delivery" maxlength="100" />
+                    </div>
+                </div>                
+
+                <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">Pofd</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pofd')"
@@ -284,6 +281,69 @@
                             [(ngModel)]="record.hbl_voyage" maxlength="100" />
                     </div>
                 </div>
+
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Frt-Stat</label>
+                    <div class="col-10">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_frt_status')"
+                            [(ngModel)]="record.hbl_frt_status" maxlength="100" />
+                    </div>
+                </div>                
+
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Gr-Wt</label>
+                    <div class="col-10">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_gr_wt')"
+                            [(ngModel)]="record.hbl_gr_wt" maxlength="100" />
+                    </div>
+                </div>                
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">CBM</label>
+                    <div class="col-10">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_cbm')"
+                            [(ngModel)]="record.hbl_cbm" maxlength="100" />
+                    </div>
+                </div>                                
+
+                
+
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">P.Issue</label>
+                    <div class="col-10">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_place_of_issue')"
+                            [(ngModel)]="record.hbl_place_of_issue" maxlength="100" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">D.Issue</label>
+                    <div class="col-10">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_date_of_issue')"
+                            [(ngModel)]="record.hbl_date_of_issue" maxlength="100" />
+                    </div>
+                </div>                
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="page-body">
+
+        <div class="row">
+
+            <div class="col-md-6 testbox  px-0 mx-0">
+
+
+            </div>
+
+            <div class="col-md-6 testbox  px-0 mx-0">
+
 
             </div>
 

@@ -46,6 +46,7 @@ export class Tbl_Ai_Hblm {
     hbl_vessel: string;
     hbl_voyage: string;
 
+    hbl_place_of_delivery: string;
     hbl_place_of_issue: string;
     hbl_date_of_issue: string;
 
