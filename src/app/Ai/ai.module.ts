@@ -9,6 +9,7 @@ import { aidocsEditComponent } from './aidocs/aidocs-edit.component';
 import { aidocsHeaderComponent } from './aidocs/aidocs-header.component';
 import { aidocsComponent } from './aidocs/aidocs.component';
 import { aiverifyComponent } from './aiverifiy/aiverify.component';
+import { aiHblComponent } from './aiverifiy/hbl/aihbl.component';
 
 
 
@@ -22,7 +23,9 @@ import { aiverifyComponent } from './aiverifiy/aiverify.component';
     aiformatHeaderComponent,
     aiformatEditComponent,
     aiformatComponent,
-    aiverifyComponent
+    aiverifyComponent,
+    aiHblComponent
+
 
   ],
   imports: [
