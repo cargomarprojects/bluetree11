@@ -1,6 +1,20 @@
 <div class="page-header">
     <div class="row align-items-center p-1">
-        <label class="mr-3">BL</label>
+
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Format</label>
+                <div class="col-7">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.hbl_format_id">
+                        <option *ngFor="let rec of formats" [value]="rec.fmt_pkid">{{rec.fmt_name}}</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary btn-sm" (click)="GetRecord('PROCESS')">Process</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -12,20 +26,8 @@
 
 <div class="page-body">
     <div class="row">
+        
         <div class="col-md-6 testbox  px-0 mx-0">
-
-            <div class="form-group row">
-                <label class="col-2 col-form-label col-form-label-sm">Format</label>
-                <div class="col-7">
-                  <select class="form-control form-control-sm" [(ngModel)]="record.hbl_format_id">
-                    <option *ngFor="let rec of formats" [value]="rec.fmt_pkid">{{rec.fmt_name}}</option>
-                  </select>
-                </div>
-                <div class="col-3">
-                    <button class="btn btn-primary btn-sm" (click)="GetRecord('PROCESS')">Process</button>
-                </div>                
-            </div>
-
 
             <div class="form-group row">
                 <label class="col-2 col-form-label col-form-label-sm">Shipper</label>
@@ -69,10 +71,59 @@
                     <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_Shipper_add5')"
                         [(ngModel)]="record.hbl_shipper_add5" maxlength="100" />
                 </div>
-            </div>            
+            </div>
+
+        </div>
+        <div class="col-md-6 testbox  px-0 mx-0">
+
+            
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Shipper</label>
+                <div class="col-10">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_Shipper_name')"
+                        [(ngModel)]="record.hbl_shipper_name" maxlength="100" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Address</label>
+                <div class="col-10">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_Shipper_add1')"
+                        [(ngModel)]="record.hbl_shipper_add1" maxlength="100" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm"></label>
+                <div class="col-10">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_Shipper_add2')"
+                        [(ngModel)]="record.hbl_shipper_add2" maxlength="100" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm"></label>
+                <div class="col-10">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_Shipper_add3')"
+                        [(ngModel)]="record.hbl_shipper_add3" maxlength="100" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm"></label>
+                <div class="col-10">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_Shipper_add4')"
+                        [(ngModel)]="record.hbl_shipper_add4" maxlength="100" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm"></label>
+                <div class="col-10">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_Shipper_add5')"
+                        [(ngModel)]="record.hbl_shipper_add5" maxlength="100" />
+                </div>
+            </div>
 
 
         </div>
+
     </div>
 </div>
 <div class="page-footer">
