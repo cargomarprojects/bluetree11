@@ -46,11 +46,12 @@ export class Tbl_Ai_Hblm {
     hbl_vessel: string;
     hbl_voyage: string;
 
+    hbl_place_of_issue: string;
+    hbl_date_of_issue: string;
+
     hbl_frt_status: string;
     hbl_gr_wt: string;
     hbl_cbm: string;
-
-
 
 
 

@@ -119,6 +119,7 @@ export class aiHblComponent implements OnInit {
                 else {
                     this.mode = 'EDIT';
                     this.errorMessage = 'Save Complete';
+                    alert(this.errorMessage);
                 }
 
             }, error => {
@@ -138,6 +139,13 @@ export class aiHblComponent implements OnInit {
         if (this.gs.isBlank(this.pkid)) {
             bRet = false;
             this.errorMessage = "Invalid ID";
+            alert(this.errorMessage);
+            return bRet;
+        }
+
+        if (this.gs.isBlank(this.record.hbl_format_id)) {
+            bRet = false;
+            this.errorMessage = "Invalid Format";
             alert(this.errorMessage);
             return bRet;
         }
