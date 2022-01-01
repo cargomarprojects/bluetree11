@@ -258,7 +258,7 @@
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_place_of_delivery')"
                             [(ngModel)]="record.hbl_place_of_delivery" maxlength="100" />
                     </div>
-                </div>                
+                </div>
 
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">Pofd</label>
@@ -289,7 +289,7 @@
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_frt_status')"
                             [(ngModel)]="record.hbl_frt_status" maxlength="100" />
                     </div>
-                </div>                
+                </div>
 
 
                 <div class="form-group row">
@@ -298,16 +298,16 @@
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_gr_wt')"
                             [(ngModel)]="record.hbl_gr_wt" maxlength="100" />
                     </div>
-                </div>                
+                </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">CBM</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_cbm')"
                             [(ngModel)]="record.hbl_cbm" maxlength="100" />
                     </div>
-                </div>                                
+                </div>
 
-                
+
 
 
                 <div class="form-group row">
@@ -324,7 +324,7 @@
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_date_of_issue')"
                             [(ngModel)]="record.hbl_date_of_issue" maxlength="100" />
                     </div>
-                </div>                
+                </div>
 
 
             </div>
@@ -337,19 +337,45 @@
 
         <div class="row">
 
-            <div class="col-md-6 testbox  px-0 mx-0">
+            <div class="col-md-12 testbox  px-0 mx-0">
 
+                <div class="page-body table-responsive">
+                    <table class="table table-bordered table-hover table-sm">
+                        <thead class="page-body-thead">
+                            <tr>
+                                <th>DESC1</th>
+                                <th>TYPE</th>
+                                <th>DESC2</th>
+                                <th style="text-align:center">REMOVE</th>
+                            </tr>
+                        </thead>
+                        <tbody class="page-body-tbody">
+                            <tr *ngFor="let rec of desc; let i = index">
+                                <td >
+                                    <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_desc1"
+                                        maxlength="100" />
+                                </td>
+                                <td width="100px">
+                                    <input class="form-control form-control-sm" type="text"
+                                        [(ngModel)]="rec.hbl_desc2_type" maxlength="50" />
+                                </td>
+                                <td >
+                                    <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_desc2"
+                                        maxlength="100" />
+                                </td>
 
+                                <td style="text-align:center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                                        (click)="RemoveDescRow(rec)"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <button class="btn btn-info btn-sm mr-1" (click)="AddDescRow()">Add Row</button>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-md-6 testbox  px-0 mx-0">
-
-
-            </div>
-
-
-
-
 
         </div>
     </div>

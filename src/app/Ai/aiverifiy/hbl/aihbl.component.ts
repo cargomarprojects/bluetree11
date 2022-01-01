@@ -191,8 +191,6 @@ export class aiHblComponent implements OnInit {
 
 
 
-
-
     CloseModal(){
         this.modal.close();
     }
@@ -201,7 +199,15 @@ export class aiHblComponent implements OnInit {
         alert( rec.file_desc);
     }
 
+    AddDescRow()
+    {
+        let rec = <Tbl_Ai_HblDesc>{};
+        this.desc.push(rec);
+    }
+    
+    RemoveDescRow(rec : Tbl_Ai_HblDesc){
 
+    }
 
 
 }
