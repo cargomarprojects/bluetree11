@@ -660,7 +660,7 @@
                                 <div class="form-group row">
                                     <label class="col-2 col-form-label col-form-label-sm">Email</label>
                                     <div class="col-10">
-                                        <InputBox [(inputModel)]="record.gen_chb_email" maxlength="60" [uppercase]="true"
+                                        <InputBox [(inputModel)]="record.gen_chb_email" maxlength="60" [uppercase]="false"
                                             #_gen_chb_email>
                                         </InputBox>
                                     </div>
@@ -825,7 +825,7 @@
                                             (ValueChanged)="LovSelected2($event,rec)">
                                         </app-autocomplete2>
                                         </td>
-                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_email" [field]="'cont_email'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_email" [field]="'cont_email'" [maxlength]="60" [uppercase]="false" (blur)="onBlur($event)"></InputBox></td>
                                         <td class="p-0"><InputBox [(inputModel)]="rec.cont_remarks" [field]="'cont_remarks'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
                                         <td class="p-0"><InputBox [(inputModel)]="rec.cont_tel" [field]="'cont_tel'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
                                         <td class="p-0"><InputBox [(inputModel)]="rec.cont_mobile" [field]="'cont_mobile'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
