@@ -61,6 +61,15 @@ export class Tbl_Ai_Hblm {
 }
 
 
+export class Tbl_Ai_HblDesc {
+    hbl_pkid: string;
+    hbl_file_id: string;
+    hbl_desc1: string;
+    hbl_desc2: string;
+    hbl_desc_type: string;
+}
+
+
 
 export interface Ai_Hblm_Model {
     selectedId: string;
@@ -73,6 +82,7 @@ export interface vm_Tbl_Ai_Hblm {
     mode: string;
     pkid: string;
     record: Tbl_Ai_Hblm;
+    desc: Tbl_Ai_HblDesc[];
     userinfo: any,
     filter: any;
 }

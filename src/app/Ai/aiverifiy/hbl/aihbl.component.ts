@@ -9,7 +9,7 @@ import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomple
 import { InputBoxComponent } from '../../../shared/input/inputbox.component';
 
 import { AiHblService } from '../../services/aihbl.service';
-import { vm_Tbl_Ai_Hblm, Ai_Hblm_Model, Tbl_Ai_Hblm } from '../../models/Tbl_ai_hbl';
+import { vm_Tbl_Ai_Hblm, Ai_Hblm_Model, Tbl_Ai_Hblm, Tbl_Ai_HblDesc } from '../../models/Tbl_ai_hbl';
 
 import { SearchTable } from '../../../shared/models/searchtable';
 import { Tbl_Ai_Formatm } from '../../models/Tbl_Ai_Format';
@@ -24,6 +24,8 @@ export class aiHblComponent implements OnInit {
     record: Tbl_Ai_Hblm = <Tbl_Ai_Hblm>{};
 
     formats: Tbl_Ai_Formatm [] = <Tbl_Ai_Formatm []>[];
+
+    desc: Tbl_Ai_HblDesc [] = <Tbl_Ai_HblDesc []>[];
 
     tab: string = 'main';
 
@@ -89,7 +91,9 @@ export class aiHblComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_Ai_Hblm>response.record;
+                this.desc = <Tbl_Ai_HblDesc []> response.desc;            
                 this.formats = <Tbl_Ai_Formatm []> response.formats;
+
                 this.mode = 'EDIT';
                 this.bLoaded = true;
             }, error => {
