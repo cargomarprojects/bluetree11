@@ -9,10 +9,11 @@ import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomple
 import { InputBoxComponent } from '../../../shared/input/inputbox.component';
 
 import { AiHblService } from '../../services/aihbl.service';
-import { vm_Tbl_Ai_Hblm, Ai_Hblm_Model, Tbl_Ai_Hblm, Tbl_Ai_HblDesc } from '../../models/Tbl_ai_hbl';
+import { vm_Tbl_Ai_Hblm, Ai_Hblm_Model, Tbl_Ai_Hblm, Tbl_Ai_HblDesc, Tbl_Ai_Cntr   } from '../../models/Tbl_ai_hbl';
 
 import { SearchTable } from '../../../shared/models/searchtable';
 import { Tbl_Ai_Formatm } from '../../models/Tbl_Ai_Format';
+
 
 
 @Component({
@@ -25,11 +26,14 @@ export class aiHblComponent implements OnInit {
 
     formats: Tbl_Ai_Formatm [] = <Tbl_Ai_Formatm []>[];
 
-    desc: Tbl_Ai_HblDesc [] = <Tbl_Ai_HblDesc []>[];
+    records: Tbl_Ai_HblDesc [] = <Tbl_Ai_HblDesc []>[];
+
+    cntrs: Tbl_Ai_Cntr [] = <Tbl_Ai_Cntr []>[];
 
     tab: string = 'main';
 
     modal: any;
+    
     
     
     menuid: string;
@@ -91,13 +95,19 @@ export class aiHblComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_Ai_Hblm>response.record;
-                this.desc = <Tbl_Ai_HblDesc []> response.desc;            
+                this.records = <Tbl_Ai_HblDesc []> response.records;            
+                this.cntrs = <Tbl_Ai_Cntr []> response.cntrs;            
                 this.formats = <Tbl_Ai_Formatm []> response.formats;
+
+                if ( response.cntrs == null) {
+                    this.cntrs = <Tbl_Ai_Cntr []> [];
+                }
 
                 this.mode = 'EDIT';
                 this.bLoaded = true;
             }, error => {
                 this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
             });
     }
 
@@ -110,6 +120,8 @@ export class aiHblComponent implements OnInit {
         this.SaveParent();
         const saveRecord = <vm_Tbl_Ai_Hblm>{};
         saveRecord.record = this.record;
+        saveRecord.records = this.records;
+        saveRecord.cntrs = this.cntrs;
         saveRecord.pkid = this.pkid;
         saveRecord.mode = this.mode;
         saveRecord.userinfo = this.gs.UserInfo;
@@ -202,11 +214,42 @@ export class aiHblComponent implements OnInit {
     AddDescRow()
     {
         let rec = <Tbl_Ai_HblDesc>{};
-        this.desc.push(rec);
+        rec.hbl_pkid = this.gs.getGuid();        
+        rec.hbl_parent_id = this.pkid;  
+        this.records.push(rec);
     }
     
-    RemoveDescRow(rec : Tbl_Ai_HblDesc){
+    RemoveDescRow(rec : Tbl_Ai_HblDesc, i : number){
 
+        if ( this.gs.isBlank( rec.hbl_desc1)  && this.gs.isBlank( rec.hbl_desc2))
+        {
+            if (!confirm("Delete Y/N")) 
+                return;
+            this.records.splice( i , 1);
+        }
+        else {
+            alert('Only blank row can be removed');
+        }
+
+    }
+
+    AddCntrRow()
+    {
+        let rec = <Tbl_Ai_Cntr>{};
+        rec.hbl_pkid = this.gs.getGuid();
+        rec.hbl_parent_id = this.pkid;  
+        this.cntrs.push(rec);
+    }
+    
+    RemoveCntrRow(rec : Tbl_Ai_Cntr, i : number){
+        if (!confirm("Delete Y/N")) 
+            return;
+        //const id = this.cntrs.findIndex(rec => rec.hbl_pkid == rec.hbl_pkid);
+        this.cntrs.splice(i, 1);
+    }
+
+    ChangeTab(_tab){
+        this.tab = _tab;
     }
 
 
