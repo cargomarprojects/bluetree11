@@ -1374,7 +1374,7 @@ export class GlobalService {
     this.MainList.filter(a => a.param_type == 'FREIGHT STATUS').sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
-      this.PARAM_FREIGHT_STATUS.push({ "code": a.param_pkid, "name": a.param_name1 })
+      this.PARAM_FREIGHT_STATUS.push({ "code": a.param_code, "name": a.param_name1 })
     });
 
     this.PARAM_CARGO_MOVEMENT = [];

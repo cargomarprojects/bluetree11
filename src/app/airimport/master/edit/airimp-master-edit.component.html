@@ -187,8 +187,8 @@
                                     <div class="col-4 pr-0">
                                         <select class="form-control form-control-sm"
                                             [(ngModel)]="record.mbl_frt_status">
-                                            <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.name">
-                                                {{rec.name}}</option>
+                                            <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.code">
+                                                {{rec.code}}</option>
                                         </select>
                                     </div>
                                     <label class="col-2 col-form-label col-form-label-sm m-0 pr-0">Origin.Country</label>

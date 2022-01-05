@@ -159,8 +159,8 @@
                                     <div class="col-9">
                                         <select #_mbl_frt_status class="form-control form-control-sm"
                                             [(ngModel)]="record.mbl_frt_status">
-                                            <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.name">
-                                                {{rec.name}}</option>
+                                            <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.code">
+                                                {{rec.code}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -386,8 +386,8 @@
                                     <div class="col-9">
                                         <select class="form-control form-control-sm"
                                             [(ngModel)]="record.hbl_frt_status">
-                                            <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.name">
-                                                {{rec.name}}</option>
+                                            <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.code">
+                                                {{rec.code}}</option>
                                         </select>
                                     </div>
                                 </div>
