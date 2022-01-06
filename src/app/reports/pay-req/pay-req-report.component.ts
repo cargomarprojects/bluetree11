@@ -367,8 +367,38 @@ export class PayReqReportComponent implements OnInit {
 
   }
 
-
   UpdatePayStatus(_record: Tbl_Cargo_Payrequest, paymodal: any) {
+    if (this.gs.user_isadmin == "Y" || this.gs.canEdit(this.menuid)) {
+      if (_record.cp_mode == "SEA IMPORT")
+        this.SearchRecord("OMBL-STATUS", _record, paymodal);
+      else
+        this.UpdatePaymentStatus(_record, paymodal);
+    } else
+      alert("Insufficient Rights");
+  }
+
+  SearchRecord(controlname: string, _record: Tbl_Cargo_Payrequest, paymodal: any) {
+    this.errorMessage = '';
+    let SearchData = {
+      table: '',
+      mbl_pkid: ''
+    };
+    if (controlname == "OMBL-STATUS") {
+      SearchData.table = 'OMBL-STATUS';
+      SearchData.mbl_pkid = _record.cp_master_id;
+    }
+    this.gs.SearchRecord(SearchData)
+      .subscribe(response => {
+        _record.cp_mbl_status = response.mbl_status;
+        this.UpdatePaymentStatus(_record, paymodal);
+      },
+        error => {
+          this.errorMessage = this.gs.getError(error);
+          alert(this.errorMessage);
+        });
+  }
+
+  UpdatePaymentStatus(_record: Tbl_Cargo_Payrequest, paymodal: any) {
 
     if (this.gs.user_isadmin == "Y" || this.gs.canEdit(this.menuid)) {
       this.paypkid = _record.cp_pkid;
@@ -383,7 +413,6 @@ export class PayReqReportComponent implements OnInit {
     } else
       alert("Insufficient Rights");
   }
-
   UpdatePayment() {
 
     if (this.paystatus == undefined || this.paystatus == null || this.paystatus == '') {
