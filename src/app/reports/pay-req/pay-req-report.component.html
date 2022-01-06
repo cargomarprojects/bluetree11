@@ -154,6 +154,13 @@
                 maxlength="25" />
             </div>
           </div>
+          <div *ngIf="paymbl_mode=='SEA IMPORT'" class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">MBL Status</label>
+            <div class="col-8">
+              <input class="form-control form-control-sm" type="text" [(ngModel)]="paymbl_status" [disabled]="'true'"
+                maxlength="500" />
+            </div>
+          </div>
           <div class="form-group row">
             <label class="col-4 col-form-label col-form-label-sm">Payment Status</label>
             <div class="col-8">
@@ -166,14 +173,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="paymbl_mode=='SEA IMPORT'" class="col-md-6 testbox  px-0 mx-0">
-          <div class="form-group row">
-            <label class="col-4 col-form-label col-form-label-sm">MBL Status</label>
-            <div class="col-8">
-              <input class="form-control form-control-sm" type="text" [(ngModel)]="paymbl_status" [disabled]="'true'"
-                maxlength="500" />
-            </div>
-          </div>
+        <div class="col-md-6 testbox  px-0 mx-0">
         </div>
       </div>
     </div>
