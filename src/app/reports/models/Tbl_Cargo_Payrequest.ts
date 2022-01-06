@@ -16,4 +16,5 @@ export class Tbl_Cargo_Payrequest {
     cp_cust_name: string;
     cp_inv_no: string;
     cp_inv_id: string;
+    cp_mbl_status:string;
 }

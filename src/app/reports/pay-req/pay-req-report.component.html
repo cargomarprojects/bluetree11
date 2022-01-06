@@ -93,10 +93,9 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of MainList" 
-        (click)="selectRowId(rec.cp_pkid)" 
-        [class.selected]="rec.cp_pkid == getRowId()">
-        
+        <tr *ngFor="let rec of MainList" (click)="selectRowId(rec.cp_pkid)"
+          [class.selected]="rec.cp_pkid == getRowId()">
+
           <td>{{rec.rec_created_by}}</td>
           <td>{{rec.rec_created_date | date : gs.date_display_fmt_with_time }}</td>
           <td>
@@ -152,7 +151,7 @@
             <label class="col-4 col-form-label col-form-label-sm">Reference#</label>
             <div class="col-8">
               <input class="form-control form-control-sm" type="text" [(ngModel)]="payrefno" [disabled]="'true'"
-                maxlength="15" />
+                maxlength="25" />
             </div>
           </div>
           <div class="form-group row">
@@ -164,6 +163,15 @@
                 <option [value]="'CANCELLED'">CANCELLED</option>
                 <option [value]="'DELETED'">DELETED</option>
               </select>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="paymbl_mode=='SEA IMPORT'" class="col-md-6 testbox  px-0 mx-0">
+          <div class="form-group row">
+            <label class="col-4 col-form-label col-form-label-sm">MBL Status</label>
+            <div class="col-8">
+              <input class="form-control form-control-sm" type="text" [(ngModel)]="paymbl_status" [disabled]="'true'"
+                maxlength="500" />
             </div>
           </div>
         </div>

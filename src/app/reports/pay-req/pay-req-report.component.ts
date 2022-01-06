@@ -16,6 +16,7 @@ import { ReportState } from './store/pay-req-report.models'
 import { Observable } from 'rxjs';
 import { map, tap, filter } from 'rxjs/operators';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//EDIT-AJITH-06-01-2021
 
 @Component({
   selector: 'app-pay-req-report',
@@ -28,7 +29,7 @@ export class PayReqReportComponent implements OnInit {
   selectedId = '';
   sortCol = '';
   sortOrder = true;
-  
+
   pkid: string;
   urlid: string;
   url: string;
@@ -60,6 +61,8 @@ export class PayReqReportComponent implements OnInit {
   payrefno = "";
   paystatus = "";
   paypkid = "";
+  paymbl_status = "";
+  paymbl_mode = "";
   modal: any;
 
   page_count: number = 0;
@@ -136,7 +139,7 @@ export class PayReqReportComponent implements OnInit {
         this.selectedId = rec.selectedId;
         this.sortCol = rec.sortcol;
         this.sortOrder = rec.sortorder;
-        
+
         this.comp_type = rec.comp_type;
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -221,7 +224,7 @@ export class PayReqReportComponent implements OnInit {
       this.SearchData.user_name = this.user_name;
 
       this.selectedId = '';
-     
+
     }
 
     this.loading = true;
@@ -371,6 +374,8 @@ export class PayReqReportComponent implements OnInit {
       this.paypkid = _record.cp_pkid;
       this.payrefno = _record.cp_master_refno;
       this.paystatus = _record.cp_pay_status;
+      this.paymbl_mode = _record.cp_mode;
+      this.paymbl_status = _record.cp_mbl_status;
       if (this.paypkid.length > 0) {
         this.modal = this.modalservice.open(paymodal, { centered: true });
       } else
@@ -385,6 +390,13 @@ export class PayReqReportComponent implements OnInit {
       alert('Payment update status cannot be blank')
       return;
     }
+    if (this.paymbl_mode == "SEA IMPORT" && this.paystatus == "PAID" &&
+      (this.paymbl_status == "NIL" || this.paymbl_status == "OMBL WITH ACCOUNTING" || this.paymbl_status == "OMBL WITH LAX OFFICE"
+        || this.paymbl_status == "OMBL WITH NYC OFFICE" || this.paymbl_status == "PAPERLESS")) {
+      if (!confirm("Are You sure to change the Payment Request Status to PAID ?")) {
+        return;
+      }
+    }
     this.errorMessage = '';
     var searchData = this.gs.UserInfo;
     searchData.CP_PKID = this.paypkid;
@@ -395,7 +407,7 @@ export class PayReqReportComponent implements OnInit {
     this.mainservice.PayReqUpdate(searchData)
       .subscribe(response => {
         if (response.retvalue) {
-          this.store.dispatch(new myActions.UpdatePayStatus({ id: this.urlid,pkid:this.paypkid, updatepaystatus: this.paystatus }))
+          this.store.dispatch(new myActions.UpdatePayStatus({ id: this.urlid, pkid: this.paypkid, updatepaystatus: this.paystatus }))
           this.modal.close();
         } else
           this.errorMessage = response.error;
