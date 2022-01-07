@@ -389,7 +389,8 @@ export class PayReqReportComponent implements OnInit {
     }
     this.gs.SearchRecord(SearchData)
       .subscribe(response => {
-        _record.cp_mbl_status = response.mbl_status;
+        if (!this.gs.isBlank(response.mbl_status))
+          _record.cp_mbl_status = response.mbl_status;
         this.UpdatePaymentStatus(_record, paymodal);
       },
         error => {
