@@ -16,6 +16,8 @@ export interface TBL_MAST_PARAM {
     rec_status: string;
     rec_created_by: string;
     rec_created_date: string
+    rec_history_id:string;
+    
     userInfo : any ;
 }
 
