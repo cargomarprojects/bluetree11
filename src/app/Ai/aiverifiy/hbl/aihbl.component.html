@@ -307,7 +307,19 @@
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pod_eta')"
                             [(ngModel)]="record.hbl_pod_eta" maxlength="100" />
                     </div>
+                </div>
 
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Pofd</label>
+                    <div class="col-4 mr-0 pr-0">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pofd')"
+                            [(ngModel)]="record.hbl_pofd" maxlength="100" />
+                    </div>
+                    <label class="col-2 col-form-label col-form-label-sm">ETA</label>
+                    <div class="col-4  ml-0 pl-0">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pofd_eta')"
+                            [(ngModel)]="record.hbl_pofd_eta" maxlength="100" />
+                    </div>                    
                 </div>
 
                 <div class="form-group row">
@@ -323,13 +335,6 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Pofd</label>
-                    <div class="col-10">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pofd')"
-                            [(ngModel)]="record.hbl_pofd" maxlength="100" />
-                    </div>
-                </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">Vessel</label>
                     <div class="col-10">
@@ -376,6 +381,16 @@
                             [(ngModel)]="record.hbl_movement" maxlength="100" />
                     </div>
                 </div>
+
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Type</label>
+                    <div class="col-10">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_movement_type')"
+                            [(ngModel)]="record.hbl_movement_type" maxlength="100" />
+                    </div>
+                </div>
+                
 
 
 
