@@ -1,4 +1,4 @@
-import { PageQuery } from '../../shared/models/pageQuery';
+import { PageQuery } from './pageQuery';
 export interface SearchQuery {
     searchString: string;
 }
@@ -15,13 +15,4 @@ export interface Table_User_Edit_History {
     rec_created_by: string;
     rec_created_date: string;
 }
-
-export interface UserEditHistoryModel {
-    selectedId: string;
-    sortcol: string;
-    sortorder: boolean;
-    errormessage: string;
-    searchQuery: SearchQuery;
-    pageQuery: PageQuery;
-    records: Table_User_Edit_History[];
-}
+ 

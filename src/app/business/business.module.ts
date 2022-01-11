@@ -7,17 +7,13 @@ import { PaymentReqComponent } from './paymentreq/paymentreq.component';
 import { FollowupComponent } from './followup/followup.component';
 import { XmlRemarksComponent } from './xmlremarks/xmlremarks.component';
 import { LogBookComponent } from './logbook/logbook.component';
-import { UserEditHistoryComponent } from './edithistory/edithistory.component';
-import { UserEditHistoryHeaderComponent } from './edithistory/edithistory-header.component';
 
 @NgModule({
   declarations: [
     PaymentReqComponent,
     FollowupComponent,
     XmlRemarksComponent,
-    LogBookComponent,
-    UserEditHistoryComponent,
-    UserEditHistoryHeaderComponent
+    LogBookComponent
   ],
   imports: [
     SharedModule,    
@@ -27,9 +23,7 @@ import { UserEditHistoryHeaderComponent } from './edithistory/edithistory-header
     PaymentReqComponent,
     FollowupComponent,
     XmlRemarksComponent,
-    LogBookComponent,
-    UserEditHistoryComponent,
-    UserEditHistoryHeaderComponent
+    LogBookComponent
   ]
 })
 export class BusinessModule { }

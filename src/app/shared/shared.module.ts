@@ -61,6 +61,9 @@ import { ResizableDirective } from './directive/resizable';
 import { ResizableComponent } from './directive/resizable.component';
 import { Report2Component } from './report2/report2.component';
 import { GenRemarkComponent } from './genrem/genrem.component';
+import { UserEditHistoryComponent } from './edithistory/edithistory.component';
+import { UserEditHistoryHeaderComponent } from './edithistory/edithistory-header.component';
+
 
 @NgModule({
   imports: [
@@ -103,7 +106,9 @@ import { GenRemarkComponent } from './genrem/genrem.component';
     ResizableComponent,
     ResizableDirective,
     Report2Component,
-    GenRemarkComponent
+    GenRemarkComponent,
+    UserEditHistoryComponent,
+    UserEditHistoryHeaderComponent
   ],
   exports: [
     CommonModule,
@@ -142,7 +147,9 @@ import { GenRemarkComponent } from './genrem/genrem.component';
     ResizableComponent,
     ResizableDirective,
     Report2Component,
-    GenRemarkComponent
+    GenRemarkComponent,
+    UserEditHistoryComponent,
+    UserEditHistoryHeaderComponent
   ]
 
 })

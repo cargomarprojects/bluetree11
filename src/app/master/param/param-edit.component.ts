@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { GlobalService } from '../../core/services/global.service';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ParamService } from '../services/master.service';
 
 import { User_Menu } from '../../core/models/menum';
@@ -59,20 +58,15 @@ export class ParamEditComponent implements OnInit {
   cmbList = {};
 
   USERRECORD: SearchTable = new SearchTable();
-  modal: any;
+
 
   constructor(
-    private modalconfig: NgbModalConfig,
-    private modalservice: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     public gs: GlobalService,
     private mainService: ParamService,
-  ) {
-    modalconfig.backdrop = 'static'; //true/false/static
-    modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
-  }
+  ) { }
 
   ngOnInit() {
 
@@ -472,10 +466,4 @@ export class ParamEditComponent implements OnInit {
 
 
   }
-
-  editHistory(_modal: any = null) {
-    
-    this.modal = this.modalservice.open(_modal, { centered: true });
-  }
-
 }

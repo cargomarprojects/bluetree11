@@ -4,14 +4,12 @@ import { PaymentReqComponent } from './paymentreq/paymentreq.component';
 import { FollowupComponent } from './followup/followup.component';
 import { XmlRemarksComponent } from './xmlremarks/xmlremarks.component';
 import { LogBookComponent } from './logbook/logbook.component';
-import { UserEditHistoryComponent } from './edithistory/edithistory.component';
 
 const routes: Routes = [
-  { path : 'PaymentRequestPage', component : PaymentReqComponent },
-  { path : 'FollowUpPage', component : FollowupComponent },
-  { path : 'XmlRemarksPage', component : XmlRemarksComponent },
-  { path : 'LogBookPage', component : LogBookComponent },
-  { path : 'EditHistoryPage', component : UserEditHistoryComponent }
+  { path: 'PaymentRequestPage', component: PaymentReqComponent },
+  { path: 'FollowUpPage', component: FollowupComponent },
+  { path: 'XmlRemarksPage', component: XmlRemarksComponent },
+  { path: 'LogBookPage', component: LogBookComponent }
 ];
 
 
