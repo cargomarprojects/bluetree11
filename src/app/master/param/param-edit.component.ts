@@ -474,6 +474,7 @@ export class ParamEditComponent implements OnInit {
   }
 
   editHistory(_modal: any = null) {
+    
     this.modal = this.modalservice.open(_modal, { centered: true });
   }
 
