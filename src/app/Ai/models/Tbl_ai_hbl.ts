@@ -49,6 +49,7 @@ export class Tbl_Ai_Hblm {
     hbl_pod: string;
     hbl_pod_eta: string;
     hbl_pofd: string;
+    hbl_pofd_eta: string;
     hbl_vessel: string;
     hbl_voyage: string;
 
@@ -62,6 +63,7 @@ export class Tbl_Ai_Hblm {
     hbl_invno: string;
 
     hbl_movement: string;
+    hbl_movement_type: string;
     hbl_frt_status: string;
     hbl_pkgs: string;
     hbl_gr_wt: string;
