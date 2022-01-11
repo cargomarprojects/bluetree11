@@ -124,7 +124,7 @@ export class ParamEditComponent implements OnInit {
     this.record.param_lookup_id = '';
     this.record.param_lookup_code = '';
     this.record.param_lookup_name = '';
-
+    this.record.rec_history_id = this.gs.getGuid();
     if (this.menu_param == "HBL-FORMAT")
       this.record.param_name6 = 'BLANK';
 
@@ -375,7 +375,7 @@ export class ParamEditComponent implements OnInit {
     this.name1 = 'Name';
 
     if (this.menu_param == 'HBL-FORMAT') {
-      this.cmbList = ['BLANK', 'DRAFT','PDF'];
+      this.cmbList = ['BLANK', 'DRAFT', 'PDF'];
       this.name6 = 'Type';
       this.record.param_name6 = 'BLANK'
       this.bname6 = true;
