@@ -113,7 +113,7 @@ export class EditHistoryService {
         SearchData.outputformat = 'SCREEN';
         SearchData.action = 'NEW';
         SearchData.pkid =  this.gs.getGuid();
-        SearchData.page_rowcount = 2;
+        SearchData.page_rowcount = 10;
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;

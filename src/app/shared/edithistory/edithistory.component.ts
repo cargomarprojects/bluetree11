@@ -26,7 +26,11 @@ export class UserEditHistoryComponent implements OnInit {
   @Input() set parentid(value: string) {
     this._parentid = value;
   }
-  
+  public _btnblock: boolean = false;
+  @Input() set btnblock(value: boolean) {
+    this._btnblock = value;
+  }
+
   public records: Table_User_Edit_History[] = [];
 
   constructor(
@@ -67,7 +71,6 @@ export class UserEditHistoryComponent implements OnInit {
       alert('Invalid ID');
       return;
     }
-    
     this.mainservice.parentid = this._parentid;
     this.mainservice.Search(actions, 'SEARCH',_modal);
   }
