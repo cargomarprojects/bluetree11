@@ -1,4 +1,5 @@
-<button class="btn btn-info btn-sm mr-1" (click)="HistoryFill('SCREEN',edithistorymodal)">History</button>
+<button *ngIf="_btnblock" class="col-12 btn btn-info btn-sm text-uppercase" (click)="HistoryFill('SCREEN',edithistorymodal)">History</button>
+<button *ngIf="!_btnblock" class="btn btn-info btn-sm mr-1" (click)="HistoryFill('SCREEN',edithistorymodal)">History</button>
 <ng-template #edithistorymodal let-c="close" let-d="dismiss">
     <div class="modal-body">
         <div class="page-body">

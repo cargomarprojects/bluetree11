@@ -106,8 +106,9 @@
 
 
                 <div class="form-group row">
-                  <label *ngIf="record.mbl_liner_web!=''" class="hlink2 col-3 col-form-label col-form-label-sm" (click)="openWebSite(record.mbl_liner_web)">Carrier</label>
-                  <label *ngIf="record.mbl_liner_web==''" class="col-3 col-form-label col-form-label-sm" >Carrier</label>
+                  <label *ngIf="record.mbl_liner_web!=''" class="hlink2 col-3 col-form-label col-form-label-sm"
+                    (click)="openWebSite(record.mbl_liner_web)">Carrier</label>
+                  <label *ngIf="record.mbl_liner_web==''" class="col-3 col-form-label col-form-label-sm">Carrier</label>
                   <div class="col-9">
                     <app-autocomplete2 #_liner_lov [controlname]="'CARRIER'" [tabletype]="'SEA CARRIER'"
                       [displaycolumn]="'NAME'" [displaydata]="record.mbl_liner_name"
@@ -236,7 +237,8 @@
                   </div>
                   <label class="col-1 col-form-label col-form-label-sm m-0 pr-0">ETD</label>
                   <div class="col-3 pl-0 m-0">
-                    <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd" (ValueChanged)="record.mbl_pol_etd=$event" (change)="onChange('mbl_pol_etd')" (focusout)="onFocusout('mbl_pol_etd')">
+                    <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd" (ValueChanged)="record.mbl_pol_etd=$event"
+                      (change)="onChange('mbl_pol_etd')" (focusout)="onFocusout('mbl_pol_etd')">
                     </app-date>
                   </div>
                 </div>
@@ -259,7 +261,8 @@
                   </div>
                   <label class="col-1 col-form-label col-form-label-sm">ETA</label>
                   <div class="col-3 pl-0 m-0">
-                    <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta" (ValueChanged)="record.mbl_pod_eta=$event" (change)="onChange('mbl_pod_eta')" (focusout)="onFocusout('mbl_pod_eta')">
+                    <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta" (ValueChanged)="record.mbl_pod_eta=$event"
+                      (change)="onChange('mbl_pod_eta')" (focusout)="onFocusout('mbl_pod_eta')">
                     </app-date>
                   </div>
                 </div>
@@ -280,10 +283,11 @@
                   </div>
                   <label class="col-1 col-form-label col-form-label-sm">ETA</label>
                   <div class="col-3 pl-0 m-0">
-                    <app-date [inputdate]="record.mbl_pofd_eta" (ValueChanged)="record.mbl_pofd_eta=$event" (change)="onChange('mbl_pofd_eta')" (focusout)="onFocusout('mbl_pofd_eta')"></app-date>
+                    <app-date [inputdate]="record.mbl_pofd_eta" (ValueChanged)="record.mbl_pofd_eta=$event"
+                      (change)="onChange('mbl_pofd_eta')" (focusout)="onFocusout('mbl_pofd_eta')"></app-date>
                   </div>
                 </div>
-       
+
                 <!-- <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Final.ETA</label>
                   <div class="col-9">
@@ -734,12 +738,13 @@
               [queryParams]="BtnNavigation2('CARGOPICKUP','P')">Delivery Order</a>
           </div>
           <div class="form-group row">
+            <app-edithistory class="col-12 mx-0 px-0" [parentid]="record.mbl_pkid" [btnblock]="true"></app-edithistory>
+          </div>
+          <div class="form-group row">
             <button class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.canSave(menuid,mode)"
               [disabled]="is_locked" (click)="Save()">Save</button>
           </div>
         </div>
-
-
       </div>
 
     </div>
