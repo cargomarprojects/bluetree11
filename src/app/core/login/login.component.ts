@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit {
     this.gs.IsAuthenticated = false;
     this.showloginbutton = false;
 
-    this.username = '';
-    this.password = '';
+    this.username = 'admin';
+    this.password = '123';
     //this.username = 'CUST-VIRTRA'; // consignee
     //this.username = 'CUST-CLUHOU'; // consignee
     //this.username = 'CUST-PARGRA'; // agent
