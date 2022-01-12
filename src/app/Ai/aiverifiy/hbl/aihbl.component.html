@@ -282,6 +282,7 @@
                             [(ngModel)]="record.hbl_por" maxlength="100" />
                     </div>
                 </div>
+                
 
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">Pol</label>
@@ -295,6 +296,19 @@
                             [(ngModel)]="record.hbl_pol_etd" maxlength="100" />
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-4 mr-0 pr-0">
+                      <app-autocomplete2 [controlname]="'POL'" [tabletype]="'SEA PORT'" [displaycolumn]="'NAME'"
+                        [displaydata]="record.hbl_pol_code" (ValueChanged)="LovSelected($event)">
+                      </app-autocomplete2>
+                    </div>
+                    <div class="col-6 ml-0 pl-0">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pol_name')"
+                            [(ngModel)]="record.hbl_pol_name" maxlength="100" disabled />
+                    </div>
+                </div>
+
 
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">Pod</label>
@@ -306,6 +320,19 @@
                     <div class="col-4  ml-0 pl-0">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pod_eta')"
                             [(ngModel)]="record.hbl_pod_eta" maxlength="100" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-4 mr-0 pr-0">
+                      <app-autocomplete2 [controlname]="'POD'" [tabletype]="'SEA PORT'" [displaycolumn]="'NAME'"
+                        [displaydata]="record.hbl_pod_code" (ValueChanged)="LovSelected($event)">
+                      </app-autocomplete2>
+                    </div>
+                    <div class="col-6 ml-0 pl-0">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pod_name')"
+                            [(ngModel)]="record.hbl_pod_name" maxlength="100" disabled />
                     </div>
                 </div>
 
@@ -323,12 +350,25 @@
                 </div>
 
                 <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-4 mr-0 pr-0">
+                      <app-autocomplete2 [controlname]="'POFD'" [tabletype]="'SEA PORT'" [displaycolumn]="'NAME'"
+                        [displaydata]="record.hbl_pofd_code" (ValueChanged)="LovSelected($event)">
+                      </app-autocomplete2>
+                    </div>
+                    <div class="col-6 ml-0 pl-0">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pofd_name')"
+                            [(ngModel)]="record.hbl_pofd_name" maxlength="100" disabled />
+                    </div>
+                </div>                
+
+                <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">Delivery</label>
                     <div class="col-4 mr-0 pr-0">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_place_of_delivery')"
                             [(ngModel)]="record.hbl_place_of_delivery" maxlength="100" />
                     </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Dt</label>
+                    <label class="col-2 col-form-label col-form-label-sm">ETA</label>
                     <div class="col-4  ml-0 pl-0">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_delivery_date')"
                             [(ngModel)]="record.hbl_delivery_date" maxlength="100" />
@@ -401,21 +441,26 @@
 
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">Pkgs</label>
-                    <div class="col-10">
+                    <div class="col-4 mr-0 pr-0">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pkgs')"
                             [(ngModel)]="record.hbl_pkgs" maxlength="100" />
                     </div>
+                    <label class="col-2 col-form-label col-form-label-sm">Unit</label>
+                    <div class="col-4 ml-0 pl-0">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_unit')"
+                            [(ngModel)]="record.hbl_unit" maxlength="100" />
+                    </div>                    
                 </div>
 
 
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">Gr-Wt</label>
-                    <div class="col-4">
+                    <div class="col-4 mr-0 pr-0">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_gr_wt')"
                             [(ngModel)]="record.hbl_gr_wt" maxlength="100" />
                     </div>
                     <label class="col-2 col-form-label col-form-label-sm">Nt-Wt</label>
-                    <div class="col-4">
+                    <div class="col-4 ml-0 pl-0">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_nt_wt')"
                             [(ngModel)]="record.hbl_nt_wt" maxlength="100" />
                     </div>
@@ -525,9 +570,10 @@
                             <th>CNTR#</th>
                             <th>TYPE</th>
                             <th>SEAL#</th>
-                            <th>CBM</th>
                             <th>PKGS</th>
-                            <th>GRWT</th>
+                            <th>UNIT</th>
+                            <th>CBM</th>
+                            <th>WT</th>
                             <th style="text-align:center">REMOVE</th>
                         </tr>
                     </thead>
@@ -549,19 +595,24 @@
                             </td>
 
                             <td class="m-0 p-0">
-                                <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_cbm"
+                                <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_pkgs"
                                     maxlength="100" />
                             </td>
 
                             <td class="m-0 p-0">
-                                <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_pkgs"
+                                <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_unit"
                                     maxlength="100" />
                             </td>
+                            
+                            <td class="m-0 p-0">
+                                <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_cbm"
+                                    maxlength="100" />
+                            </td>                            
+                            
                             <td class="m-0 p-0">
                                 <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_grwt"
                                     maxlength="100" />
                             </td>
-
 
                             <td style="text-align:center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
                                     (click)="RemoveCntrRow(rec,i)"></i></td>

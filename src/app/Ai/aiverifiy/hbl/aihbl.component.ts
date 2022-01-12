@@ -181,6 +181,21 @@ export class aiHblComponent implements OnInit {
         if (_Record.controlname == "ACC_GROUPM") {
         }
 
+        if (_Record.controlname == "POL") {
+            this.record.hbl_pol_id = _Record.id;
+            this.record.hbl_pol_code = _Record.code;
+            this.record.hbl_pol_name = _Record.name;
+        }
+        if (_Record.controlname == "POD") {
+            this.record.hbl_pod_id = _Record.id;
+            this.record.hbl_pod_code = _Record.code;
+            this.record.hbl_pod_name = _Record.name;
+        }
+        if (_Record.controlname == "POFD") {
+            this.record.hbl_pofd_id = _Record.id;
+            this.record.hbl_pofd_code = _Record.code;
+            this.record.hbl_pofd_name = _Record.name;
+        }      
     }
 
     OnChange(field: string) {
