@@ -44,12 +44,24 @@ export class Tbl_Ai_Hblm {
 
     hbl_pre_carriage: string;
     hbl_por: string;
+    hbl_pol_id: string;
+    hbl_pol_code: string;
+    hbl_pol_name: string;
     hbl_pol: string;
     hbl_pol_etd: string;
+
+    hbl_pod_id: string;
+    hbl_pod_code: string;
+    hbl_pod_name: string;
     hbl_pod: string;
     hbl_pod_eta: string;
+
+    hbl_pofd_id: string;
+    hbl_pofd_code: string;
+    hbl_pofd_name: string;
     hbl_pofd: string;
     hbl_pofd_eta: string;
+
     hbl_vessel: string;
     hbl_voyage: string;
 
@@ -66,6 +78,7 @@ export class Tbl_Ai_Hblm {
     hbl_movement_type: string;
     hbl_frt_status: string;
     hbl_pkgs: string;
+    hbl_unit: string;
     hbl_gr_wt: string;
     hbl_nt_wt: string;
     hbl_cbm: string;
@@ -96,6 +109,7 @@ export class Tbl_Ai_Cntr {
     hbl_cntr_cbm: string;
     hbl_cntr_grwt: string;
     hbl_cntr_pkgs: string;
+    hbl_cntr_unit: string;
 }
 
 
