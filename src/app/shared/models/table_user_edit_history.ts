@@ -16,3 +16,12 @@ export interface Table_User_Edit_History {
     rec_created_date: string;
 }
  
+export interface UserEditHistoryModel {
+    selectedId : string;
+    sortcol : string ;
+    sortorder : boolean;
+    errormessage: string;
+    searchQuery: SearchQuery;
+    pageQuery: PageQuery;
+    records: Table_User_Edit_History[]
+}
