@@ -17,6 +17,27 @@ export class Tbl_Ai_Hblm {
     hbl_hbl_no: string;
     hbl_hbl_date: string;
 
+    hbl_carrier_id: string;
+    hbl_carrier_code: string;
+    hbl_carrier_name: string;
+
+    hbl_agent_id: string;
+    hbl_agent_code: string;
+    hbl_agent_name: string;
+
+    hbl_coloader_id: string;
+    hbl_coloader_code: string;
+    hbl_coloader_name: string;
+
+    hbl_handled_id: string;
+    hbl_handled_code: string;
+    hbl_handled_name: string;
+
+    hbl_country_id: string;
+    hbl_country_code: string;
+    hbl_country_name: string;
+
+
     hbl_shipper_name: string;
     hbl_shipper_add1: string;
     hbl_shipper_add2: string;
@@ -83,6 +104,7 @@ export class Tbl_Ai_Hblm {
     hbl_nt_wt: string;
     hbl_cbm: string;
     hbl_ams: string;
+    hbl_inco_term: string;
 
 
 
