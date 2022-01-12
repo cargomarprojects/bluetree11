@@ -101,6 +101,7 @@ export interface Tbl_cargo_imp_masterm {
     mbl_coloader_code:string;
     mbl_incoterm:string;
     mbl_liner_web:string;
+    rec_history_id:string;
 }
 
 export interface Tbl_cargo_imp_container {

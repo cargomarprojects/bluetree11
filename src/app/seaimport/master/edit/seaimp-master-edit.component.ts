@@ -252,6 +252,7 @@ export class SeaImpMasterEditComponent implements OnInit {
       this.record.mbl_ombl_sent_ampm = "AM";
     this.record.mbl_incoterm = 'NA';
     this.record.mbl_liner_web = '';
+    this.record.rec_history_id = this.gs.getGuid();
     if (!this.gs.isBlank(this.mbl_ref_date_field))
       this.mbl_ref_date_field.Focus();
   }
