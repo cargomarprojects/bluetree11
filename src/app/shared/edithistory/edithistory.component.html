@@ -1,4 +1,4 @@
-<button class="btn btn-info btn-sm mr-1" (click)="HistoryFill(edithistorymodal)">History</button>
+<button class="btn btn-info btn-sm mr-1" (click)="HistoryFill('SCREEN',edithistorymodal)">History</button>
 <ng-template #edithistorymodal let-c="close" let-d="dismiss">
     <div class="modal-body">
         <div class="page-body">
@@ -33,7 +33,7 @@
                     </div> -->
                     <div class="row border">
                         <div class="col-md-12  px-0 mx-0">
-                            <App-Page2 [_pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page2>
+                            <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
                             <div class="page-body table-responsive table-bordered">
                                 <table class="table  table-hover table-sm">
                                     <thead class="page-body-thead">
@@ -47,7 +47,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="page-body-tbody">
-                                        <tr *ngFor="let rec of records">
+                                        <tr *ngFor="let rec of records$ | async">
                                             <td>{{rec.log_action}}</td>
                                             <td>{{rec.rec_created_date | date : gs.date_display_fmt_with_time }}</td>
                                             <td>{{rec.rec_created_by}}</td>
@@ -58,7 +58,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <App-Page2 [_pageQuery]="pageQuery" (pageEvents)="pageEvents($event)"></App-Page2>
+                            <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
                         </div>
                     </div>
 
@@ -66,8 +66,8 @@
             </div>
             <div class="page-footer">
                 <div class="row justify-content-center p-1">
-                    <button class="btn btn-primary btn-sm mr-1" (click)="CloseModal('OK')">Ok</button>
-                    <button class="btn btn-primary btn-sm mr-1" (click)="CloseModal('CLOSE')">Cancel</button>
+                    <!-- <button class="btn btn-primary btn-sm mr-1" (click)="mainservice.CloseModal('OK')">Ok</button> -->
+                    <button class="btn btn-primary btn-sm mr-1" (click)="mainservice.CloseModal('CLOSE')">Close</button>
                 </div>
             </div>
         </div>
