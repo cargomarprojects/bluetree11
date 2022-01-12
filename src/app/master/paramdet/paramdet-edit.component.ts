@@ -57,7 +57,20 @@ export class ParamDetEditComponent implements OnInit {
 
 
   cmbList = {};
-
+  FilterData = {
+    name1: '',
+    bname1: false,
+    name2: '',
+    bname2: false,
+    name3: '',
+    bname3: false,
+    name4: '',
+    bname4: false,
+    name5: '',
+    bname5: false,
+    name6: '',
+    bname6: false
+  };
 
 
   constructor(
@@ -217,11 +230,21 @@ export class ParamDetEditComponent implements OnInit {
     if (!confirm("Save")) {
       return;
     }
-
+    this.FilterData.name1 = this.name1;
+    this.FilterData.bname1 = this.bname1;
+    this.FilterData.name2 = this.name2;
+    this.FilterData.bname2 = this.bname2;
+    this.FilterData.name3 = this.name3;
+    this.FilterData.bname3 = this.bname3;
+    this.FilterData.name4 = this.name4;
+    this.FilterData.bname4 = this.bname4;
+    this.FilterData.name5 = this.name5;
+    this.FilterData.bname5 = this.bname5;
     const saveRecord = <VM_TBL_MAST_PARAM>{};
     saveRecord.record = this.record;
     saveRecord.userinfo = this.gs.UserInfo;
     saveRecord.mode = this.mode;
+    saveRecord.filter = this.FilterData;
 
     this.mainService.Save(saveRecord)
       .subscribe(response => {
