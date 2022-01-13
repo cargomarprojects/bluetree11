@@ -324,6 +324,7 @@ export class SeaImpHouseEditComponent implements OnInit {
     this.record.hbl_delivery_date = '';
     this.record.hbl_custom_clear_date = '';
     this.record.hbl_incoterm = 'NA';
+    this.record.rec_history_id = this.gs.getGuid();
   }
 
   LoadData() {

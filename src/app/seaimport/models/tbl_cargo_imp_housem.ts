@@ -153,6 +153,7 @@ export interface Tbl_cargo_imp_housem {
     hbl_custom_clear_date:string;
     hbl_incoterm:string;
     hbl_time_diff:string;
+    rec_history_id:string;
 }
 export interface Tbl_desc {
    

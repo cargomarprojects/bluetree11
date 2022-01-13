@@ -129,6 +129,7 @@ export class ParamDetEditComponent implements OnInit {
     this.record.param_name3 = '';
     this.record.param_name4 = '';
     this.record.param_name5 = '';
+    this.record.rec_history_id = this.gs.getGuid();
   }
 
 
