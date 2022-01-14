@@ -250,6 +250,7 @@ export interface vm_tbl_cargo_imp_housem {
     filter: any;
     pickup_date: string;
     empty_ret_date: string;
+    rec_history_id: string;
 }
 
 export interface SearchQuery {
