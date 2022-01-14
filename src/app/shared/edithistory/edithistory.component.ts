@@ -10,7 +10,7 @@ import { Table_User_Edit_History } from '../models/table_user_edit_history';
 import { EditHistoryService } from '../services/edithistory.service';
 import { PageQuery } from '../../shared/models/pageQuery';
 import { SearchQuery } from '../models/table_user_edit_history';
-
+// declare var $: any;
 
 @Component({
   selector: 'app-edithistory',
@@ -45,6 +45,16 @@ export class UserEditHistoryComponent implements OnInit {
     this.gs.checkAppVersion();
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
+    // $(function () {
+    //   $('.modal-dialog').draggable();
+    // });
+
+    // $(document).ready(function() {
+    //   let modalContent: any = $('.modal-content');
+    //   modalContent.draggable({
+    //     handle: '.modal-header'
+    //   });
+    // });
   }
 
   initPage() {
