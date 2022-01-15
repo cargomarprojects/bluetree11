@@ -133,6 +133,12 @@
                   [refno]="mbl_refno" [remarksaved]="MBL_BO_REMARKS_EXIST"></app-genrem>
               </div>
             </div>
+            <div *ngIf="MBL_STAGE" class="form-group row">
+              <label class="col-3 col-form-label col-form-label-sm">STAGE</label>
+              <div class="col-9">
+                <label class="col-form-label col-form-label-sm">{{MBL_STAGE}}</label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
