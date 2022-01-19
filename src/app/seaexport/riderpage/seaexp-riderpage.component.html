@@ -1,6 +1,6 @@
 <div class="page-header">
     <div class="row align-items-center justify-content-left p-1">
-        <label class="mr-3">Rider Page</label>
+        <label class="mr-3">{{title}}</label>
         <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
         <!-- <a class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('EDIT')" [queryParams]="getParam('EDIT')">Return</a> -->
         <label class="text-danger" *ngIf="is_locked">LOCKED</label>
@@ -13,9 +13,9 @@
     </div>
 </div>
 <div class="page-body">
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6 testbox  px-0 mx-0">
+    <div class="row ">
+        <div class="col-md-6  px-0 mx-0">
+            <div class="page-body">
                 <div class="form-group row">
                     <!-- <label class="col-2 col-form-label col-form-label-sm"></label> -->
                     <div class="col-12">
@@ -24,23 +24,11 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<div class="page-body">
-    <div class="row">
-        <div class="col-md-12  px-0 mx-0">
             <div class="page-body table-responsive table-bordered">
                 <table class="table  table-hover table-sm">
                     <thead class="page-body-thead">
                         <tr>
-                            <th>
-                                <div class="form-check"> <input #_cntr_chked type="checkbox"
-                                        (click)="SelectDeselect('CNTR')" class="form-check-input"
-                                        [(ngModel)]="chkallselected_cntr"><span>CNTR.NO</span>
-                                </div>
-                            </th>
+                            <th>CNTR.NO</th>
                             <th>SEAL NO</th>
                             <th>PCS</th>
                             <th>KGS</th>
