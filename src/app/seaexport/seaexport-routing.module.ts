@@ -10,6 +10,7 @@ import { HousePageComponent } from './housepage/edit/housepage.component';
 import { HousePageListComponent } from './housepage/housepage-list.component';
 import { CopyExpCntrPageComponent } from './copyexpcntrpage/copyexpcntrpage.component';
 import { CertOrgPageComponent } from './certorgpage/certorgpage.component';
+import { SeaExpRiderPageComponent } from './riderpage/seaexp-riderpage.component';
 
 const routes: Routes = [
   { path : 'SeaExpMasterPage', component : SeaexpMasterComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path : 'SeaExpHouseEditPage', component : HousePageComponent },
   { path : 'SeaExpHousePage', component : HousePageListComponent },
   { path : 'CopyCntrPage', component : CopyExpCntrPageComponent },
-  { path : 'CertOriginPage', component : CertOrgPageComponent }
+  { path : 'CertOriginPage', component : CertOrgPageComponent },
+  { path : 'SeaExpRiderPage', component : SeaExpRiderPageComponent }
 ];
 
 

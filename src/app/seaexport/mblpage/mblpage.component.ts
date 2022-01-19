@@ -619,4 +619,19 @@ export class MblPageComponent implements OnInit {
     };
   }
 
+  ShowRiderPage() {
+    let prm = {
+      appid: this.gs.appid,
+      menuid: this.gs.MENU_SE_MASTER,
+      pkid: this.pkid,
+      source : 'MBL-RIDER',
+      refno : this.record.mbld_refno,
+      canPrint : true,
+      canCopyMbl :false,
+      origin: 'seaexp-mbl-page',
+      is_locked: this.is_locked
+    };
+    this.gs.Naviagete2('Silver.SeaExport.Trans/SeaExpRiderPage', prm);
+
+  }
 }
