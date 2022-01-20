@@ -39,7 +39,7 @@
                         <tr *ngFor="let rec of cntrrecords">
                             <td>
                                 <div class="form-check"> <input type="checkbox" class="form-check-input"
-                                        [(ngModel)]="rec.cntr_selected"><span>{{rec.cntr_no}}</span></div>
+                                        [(ngModel)]="rec.cntr_selected" (change)="OnChange('cntr_selected',rec)"><span>{{rec.cntr_no}}</span></div>
                             </td>
                             <td>{{rec.cntr_sealno}}
                             </td>

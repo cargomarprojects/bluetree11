@@ -622,7 +622,7 @@ export class MblPageComponent implements OnInit {
   ShowRiderPage() {
     let prm = {
       appid: this.gs.appid,
-      menuid: this.gs.MENU_SE_MASTER,
+      menuid: this.gs.MENU_SE_MASTER_MBL_INSTRUCTION,
       pkid: this.pkid,
       source : 'MBL-RIDER',
       refno : this.record.mbld_refno,
