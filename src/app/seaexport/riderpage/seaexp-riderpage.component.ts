@@ -29,7 +29,9 @@ export class SeaExpRiderPageComponent implements OnInit {
     isAdmin: boolean;
     canPrint: boolean;
     canCopyMbl: boolean;
-    bookno: string;
+    bookno: string ='';
+    mbl_pkid: string = '';
+    houseno:string ='';
 
     errorMessage: string;
     remarks: string;
@@ -59,6 +61,8 @@ export class SeaExpRiderPageComponent implements OnInit {
             this.canCopyMbl = JSON.parse(this.route.snapshot.queryParams.canCopyMbl);
             this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
             this.bookno = this.route.snapshot.queryParams.bookno;
+            this.mbl_pkid = this.route.snapshot.queryParams.mbl_pkid;
+            this.houseno = this.route.snapshot.queryParams.houseno;
         } else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
             this.pkid = options.pkid;
@@ -69,6 +73,8 @@ export class SeaExpRiderPageComponent implements OnInit {
             this.canCopyMbl = options.canCopyMbl;
             this.is_locked = options.is_locked;
             this.bookno = options.bookno;
+            this.mbl_pkid = options.mbl_pkid;
+            this.houseno = options.houseno;
         }
         this.initPage();
         this.actionHandler();
@@ -253,14 +259,14 @@ export class SeaExpRiderPageComponent implements OnInit {
     Print() {
         let sPath: string = "";
         sPath = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\xmlremarks\\";
-        this.report_title =  "Rider [ " + this.refno + " ]";
+        this.report_title = "Rider [ " + this.refno + " ]";
         this.report_url = '/api/SeaExport/RiderPage/GetRiderSeaExpRpt';
         this.report_searchdata = this.gs.UserInfo;
         this.report_searchdata.pkid = this.pkid;
         this.report_searchdata.source = this.source;
         this.report_searchdata.refno = this.refno;
         this.report_searchdata.bookno = this.bookno;
-        
+        this.report_searchdata.houseno = this.houseno;
         this.report_searchdata.SPATH = sPath;
         this.report_menuid = this.gs.MENU_SE_MASTER_MBL_INSTRUCTION;
         this.tab = 'report';
@@ -268,4 +274,27 @@ export class SeaExpRiderPageComponent implements OnInit {
     callbackevent(event: any) {
         this.tab = 'main';
     }
+
+    CopyMbl() {
+        if (this.gs.isBlank(this.mbl_pkid))
+            return;
+
+        this.errorMessage = '';
+        let filePath: string = "";
+        filePath = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\xmlremarks\\";
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = this.mbl_pkid;
+        SearchData.source = 'MBL-RIDER';
+        SearchData.SPATH = filePath;
+
+        this.mainService.CopyMbl(SearchData)
+            .subscribe(response => {
+                this.remarks = response.remarks;
+               
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+            });
+    }
+
+    
 }

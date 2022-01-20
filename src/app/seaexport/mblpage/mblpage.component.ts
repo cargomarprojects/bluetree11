@@ -630,7 +630,9 @@ export class MblPageComponent implements OnInit {
       canCopyMbl :false,
       origin: 'seaexp-mbl-page',
       is_locked: this.is_locked,
-      bookno:this.record.mbld_booking_no
+      bookno:this.record.mbld_booking_no,
+      mbl_pkid:'',
+      houseno:''
     };
     this.gs.Naviagete2('Silver.SeaExport.Trans/SeaExpRiderPage', prm);
 

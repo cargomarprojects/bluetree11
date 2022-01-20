@@ -63,6 +63,8 @@
 
     <div class="page-footer">
         <div class="row row justify-content-center p-1">
+            <button class="btn btn-primary btn-md mr-1"  *ngIf="canCopyMbl"
+            (click)="CopyMbl()">Copy MBL</button>
             <button class="btn btn-primary btn-md mr-1" [disabled]="is_locked" *ngIf="gs.canSave(menuid,'ADD')"
                 (click)="Save()">Save</button>
             <button class="btn btn-primary btn-md mr-1" *ngIf="canPrint" (click)="Print()">Print</button>

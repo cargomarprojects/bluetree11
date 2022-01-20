@@ -21,6 +21,8 @@ export class RiderPageService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/SeaExport/RiderPage/Save', SearchData, this.gs.headerparam2('authorized'));
     }
 
-    
+    CopyMbl(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/SeaExport/RiderPage/CopyMbl', SearchData, this.gs.headerparam2('authorized'));
+    }
     
 }
