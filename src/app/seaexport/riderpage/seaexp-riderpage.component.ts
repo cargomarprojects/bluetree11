@@ -29,10 +29,15 @@ export class SeaExpRiderPageComponent implements OnInit {
     isAdmin: boolean;
     canPrint: boolean;
     canCopyMbl: boolean;
-    
+    bookno: string;
+
     errorMessage: string;
     remarks: string;
-
+    tab: string = 'main';
+    report_title: string = '';
+    report_url: string = '';
+    report_searchdata: any = {};
+    report_menuid: string = '';
     is_locked: boolean = false;
 
     constructor(
@@ -53,6 +58,7 @@ export class SeaExpRiderPageComponent implements OnInit {
             this.canPrint = JSON.parse(this.route.snapshot.queryParams.canPrint);
             this.canCopyMbl = JSON.parse(this.route.snapshot.queryParams.canCopyMbl);
             this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
+            this.bookno = this.route.snapshot.queryParams.bookno;
         } else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
             this.pkid = options.pkid;
@@ -62,6 +68,7 @@ export class SeaExpRiderPageComponent implements OnInit {
             this.canPrint = options.canPrint;
             this.canCopyMbl = options.canCopyMbl;
             this.is_locked = options.is_locked;
+            this.bookno = options.bookno;
         }
         this.initPage();
         this.actionHandler();
@@ -89,7 +96,7 @@ export class SeaExpRiderPageComponent implements OnInit {
 
         this.mainService.List(SearchData)
             .subscribe(response => {
-                 
+
                 this.cntrrecords = (response.cntrlist == undefined || response.cntrlist == null) ? <Tbl_cargo_exp_container[]>[] : response.cntrlist;
                 this.remarks = response.remarks;
                 for (let rec of this.cntrrecords) {
@@ -152,14 +159,14 @@ export class SeaExpRiderPageComponent implements OnInit {
         //     Rec.cntr_packages = 0;
         //     Rec.cntr_yn = Rec.cntr_selected ? "Y" : "N";
         // })
- 
+
     }
 
     private Allvalid(): boolean {
 
         var bRet = true;
         this.errorMessage = "";
-         
+
 
         return bRet;
     }
@@ -171,7 +178,7 @@ export class SeaExpRiderPageComponent implements OnInit {
 
 
     LovSelected(_Record: SearchTable) {
- 
+
     }
 
     onFocusout(field: string) {
@@ -187,7 +194,7 @@ export class SeaExpRiderPageComponent implements OnInit {
 
     onBlur(field: string, rec: Tbl_cargo_exp_container = null) {
         switch (field) {
-            
+
 
             case 'cntr_no': {
                 rec.cntr_no = rec.cntr_no.toUpperCase();
@@ -228,7 +235,7 @@ export class SeaExpRiderPageComponent implements OnInit {
         }
     }
 
-     
+
     OnChange(field: string, _rec: Tbl_cargo_exp_container = null) {
         if (field == 'cntr_selected') {
             try {
@@ -242,5 +249,23 @@ export class SeaExpRiderPageComponent implements OnInit {
             }
         }
 
+    }
+    Print() {
+        let sPath: string = "";
+        sPath = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\xmlremarks\\";
+        this.report_title =  "Rider [ " + this.refno + " ]";
+        this.report_url = '/api/SeaExport/RiderPage/GetRiderSeaExpRpt';
+        this.report_searchdata = this.gs.UserInfo;
+        this.report_searchdata.pkid = this.pkid;
+        this.report_searchdata.source = this.source;
+        this.report_searchdata.refno = this.refno;
+        this.report_searchdata.bookno = this.bookno;
+        
+        this.report_searchdata.SPATH = sPath;
+        this.report_menuid = this.gs.MENU_SE_MASTER_MBL_INSTRUCTION;
+        this.tab = 'report';
+    }
+    callbackevent(event: any) {
+        this.tab = 'main';
     }
 }
