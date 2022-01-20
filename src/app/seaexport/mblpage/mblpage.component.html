@@ -835,7 +835,9 @@
       <button class="btn btn-primary btn-md mr-1" *ngIf="canPrint && mode =='EDIT'" (click)="Print('')">Print</button>
       <button class="btn btn-primary btn-md mr-1" *ngIf="canPrint && mode =='EDIT'" (click)="Print('MBLDOCK')">Dock
         Receipt</button>
-        <button class="btn btn-primary btn-md mr-1" *ngIf="mode =='EDIT'" (click)="ShowRiderPage()">Rider</button>
+      <!-- <button class="btn btn-primary btn-md mr-1" *ngIf="mode =='EDIT'" (click)="ShowRiderPage()">Rider</button> -->
+      <a class="btn btn-primary btn-md mr-1" *ngIf="mode =='EDIT'" [routerLink]="BtnNavigation2('RIDERPAGE','L')"
+        [queryParams]="BtnNavigation2('RIDERPAGE','P')">Rider</a>
     </div>
   </div>
 

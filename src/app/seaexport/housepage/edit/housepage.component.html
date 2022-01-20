@@ -1119,7 +1119,9 @@
               HBL</button>
           </div>
           <div class="form-group row">
-            <button class="col-12 btn btn-info btn-sm text-uppercase" (click)="ShowRider()">Rider</button>
+            <!-- <button class="col-12 btn btn-info btn-sm text-uppercase" (click)="ShowRider()">Rider</button> -->
+            <a class="col-12 btn btn-info btn-sm text-uppercase" [routerLink]="BtnNavigation2('RIDERPAGE','L')"
+              [queryParams]="BtnNavigation2('RIDERPAGE','P')">Rider</a>
           </div>
           <div class="form-group row">
             <button class="col-12 btn btn-info btn-sm text-uppercase" [disabled]="is_locked" *ngIf="canSave"

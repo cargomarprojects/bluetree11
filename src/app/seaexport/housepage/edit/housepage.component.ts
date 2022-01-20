@@ -1075,24 +1075,44 @@ export class HousePageComponent implements OnInit {
       return null;
   }
 
-  ShowRider()
-    {
-      let prm = {
-        appid: this.gs.appid,
-        menuid: this.gs.MENU_SE_HOUSE,
-        pkid: this.pkid,
-        source : 'HBL-RIDER',
-        refno : this.record.mbl_refno,
-        canPrint : true,
-        canCopyMbl :true,
-        origin: 'seaexp-hbl-page',
-        is_locked: this.is_locked,
-        bookno:'',
-        mbl_pkid:this.record.hbl_mbl_id,
-        houseno:this.record.hbl_houseno
-      };
-      this.gs.Naviagete2('Silver.SeaExport.Trans/SeaExpRiderPage', prm);
-  
+  ShowRider() {
+    let prm = {
+      appid: this.gs.appid,
+      menuid: this.gs.MENU_SE_HOUSE,
+      pkid: this.pkid,
+      source: 'HBL-RIDER',
+      refno: this.record.mbl_refno,
+      canPrint: true,
+      canCopyMbl: true,
+      origin: 'seaexp-hbl-page',
+      is_locked: this.is_locked,
+      bookno: '',
+      mbl_pkid: this.record.hbl_mbl_id,
+      houseno: this.record.hbl_houseno
+    };
+    this.gs.Naviagete2('Silver.SeaExport.Trans/SeaExpRiderPage', prm);
+
+  }
+  BtnNavigation2(action: string, _type: string, attachmodal: any = null) {
+    if (action == "RIDERPAGE") {
+      if (_type == "L")
+        return '/Silver.SeaExport.Trans/SeaExpRiderPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SE_HOUSE,
+          pkid: this.pkid,
+          source: 'HBL-RIDER',
+          refno: this.record.mbl_refno,
+          canPrint: true,
+          canCopyMbl: true,
+          origin: 'seaexp-hbl-page',
+          is_locked: this.is_locked,
+          bookno: '',
+          mbl_pkid: this.record.hbl_mbl_id,
+          houseno: this.record.hbl_houseno
+        };
     }
+  }
 
 }

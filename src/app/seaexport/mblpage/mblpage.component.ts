@@ -624,17 +624,40 @@ export class MblPageComponent implements OnInit {
       appid: this.gs.appid,
       menuid: this.gs.MENU_SE_MASTER_MBL_INSTRUCTION,
       pkid: this.pkid,
-      source : 'MBL-RIDER',
-      refno : this.record.mbld_refno,
-      canPrint : true,
-      canCopyMbl :false,
+      source: 'MBL-RIDER',
+      refno: this.record.mbld_refno,
+      canPrint: true,
+      canCopyMbl: false,
       origin: 'seaexp-mbl-page',
       is_locked: this.is_locked,
-      bookno:this.record.mbld_booking_no,
-      mbl_pkid:'',
-      houseno:''
+      bookno: this.record.mbld_booking_no,
+      mbl_pkid: '',
+      houseno: ''
     };
     this.gs.Naviagete2('Silver.SeaExport.Trans/SeaExpRiderPage', prm);
 
   }
+
+  BtnNavigation2(action: string, _type: string, attachmodal: any = null) {
+    if (action == "RIDERPAGE") {
+      if (_type == "L")
+        return '/Silver.SeaExport.Trans/SeaExpRiderPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SE_MASTER_MBL_INSTRUCTION,
+          pkid: this.pkid,
+          source: 'MBL-RIDER',
+          refno: this.record.mbld_refno,
+          canPrint: true,
+          canCopyMbl: false,
+          origin: 'seaexp-mbl-page',
+          is_locked: this.is_locked,
+          bookno: this.record.mbld_booking_no,
+          mbl_pkid: '',
+          houseno: ''
+        };
+    }
+  }
+
 }
