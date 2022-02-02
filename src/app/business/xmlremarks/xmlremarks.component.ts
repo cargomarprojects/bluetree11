@@ -161,13 +161,13 @@ export class XmlRemarksComponent implements OnInit {
       return bRet;
     }
 
-    if (this.source != "SEA-HOUSE-DEVAN")
-      if (this.gs.isBlank(this.record.remarks)) {
-        bRet = false;
-        this.errorMessage = "Remarks Cannot be empty";
-        alert(this.errorMessage);
-        return bRet;
-      }
+    // if (this.source != "SEA-HOUSE-DEVAN")
+    //   if (this.gs.isBlank(this.record.remarks)) {
+    //     bRet = false;
+    //     this.errorMessage = "Remarks Cannot be empty";
+    //     alert(this.errorMessage);
+    //     return bRet;
+    //   }
     return bRet;
   }
 
