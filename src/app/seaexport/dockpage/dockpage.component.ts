@@ -204,21 +204,21 @@ export class DockPageComponent implements OnInit {
     if (this.cntrs.length > 2)
       this.record.mark9 = this.GetCntrInfo(this.cntrs[2].cntr_no, this.cntrs[2].cntr_sealno);
     if (this.cntrs.length > 3)
-      this.record.mark10 = this.GetCntrInfo(this.cntrs[10].cntr_no, this.cntrs[10].cntr_sealno);
+      this.record.mark10 = this.GetCntrInfo(this.cntrs[3].cntr_no, this.cntrs[3].cntr_sealno);
     if (this.cntrs.length > 4)
-      this.record.mark11 = this.GetCntrInfo(this.cntrs[11].cntr_no, this.cntrs[11].cntr_sealno);
+      this.record.mark11 = this.GetCntrInfo(this.cntrs[4].cntr_no, this.cntrs[4].cntr_sealno);
     if (this.cntrs.length > 5)
-      this.record.mark12 = this.GetCntrInfo(this.cntrs[12].cntr_no, this.cntrs[12].cntr_sealno);
+      this.record.mark12 = this.GetCntrInfo(this.cntrs[5].cntr_no, this.cntrs[5].cntr_sealno);
     if (this.cntrs.length > 6)
-      this.record.mark13 = this.GetCntrInfo(this.cntrs[13].cntr_no, this.cntrs[13].cntr_sealno);
+      this.record.mark13 = this.GetCntrInfo(this.cntrs[6].cntr_no, this.cntrs[6].cntr_sealno);
     if (this.cntrs.length > 7)
-      this.record.mark14 = this.GetCntrInfo(this.cntrs[14].cntr_no, this.cntrs[14].cntr_sealno);
+      this.record.mark14 = this.GetCntrInfo(this.cntrs[7].cntr_no, this.cntrs[7].cntr_sealno);
     if (this.cntrs.length > 8)
-      this.record.mark15 = this.GetCntrInfo(this.cntrs[15].cntr_no, this.cntrs[15].cntr_sealno);
+      this.record.mark15 = this.GetCntrInfo(this.cntrs[8].cntr_no, this.cntrs[8].cntr_sealno);
     if (this.cntrs.length > 9)
-      this.record.mark16 = this.GetCntrInfo(this.cntrs[16].cntr_no, this.cntrs[16].cntr_sealno);
+      this.record.mark16 = this.GetCntrInfo(this.cntrs[9].cntr_no, this.cntrs[9].cntr_sealno);
     if (this.cntrs.length > 10)
-      this.record.mark17 = this.GetCntrInfo(this.cntrs[17].cntr_no, this.cntrs[17].cntr_sealno);
+      this.record.mark17 = this.GetCntrInfo(this.cntrs[10].cntr_no, this.cntrs[10].cntr_sealno);
   }
 
   ShowDesc(Rec: Tbl_cargo_exp_desc) {

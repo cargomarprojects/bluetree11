@@ -228,7 +228,8 @@ export class HousePageComponent implements OnInit {
         this.record.hbl_pod_name = rec.mbl_pod_name;
         this.record.hbl_pofd_id = rec.mbl_pofd_id;
         this.record.hbl_pofd_code = rec.mbl_pofd_code;
-        this.record.hbl_pofd_name = rec.mbl_pofd_name;
+        //this.record.hbl_pofd_name = rec.mbl_pofd_name;
+        this.record.hbl_place_delivery = rec.mbl_pofd_name;
         this.record.hbl_pofd_eta = rec.mbl_pofd_eta;
 
         this.record.mbl_no = rec.mbl_no;
