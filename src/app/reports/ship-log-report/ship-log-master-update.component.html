@@ -1,5 +1,6 @@
 <div class="p-0 m-0">
-    <button class="btn btn-link btn-sm p-0" (click)="Showmodal(mastermodal)">{{record.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT}}</button>
+    <button class="btn btn-link btn-sm p-0" (click)="Showmodal(mastermodal)">{{record.mbl_pod_eta | date :
+        gs.FRONTEND_DATEFORMAT}}</button>
 </div>
 
 <ng-template #mastermodal let-c="close" let-d="dismiss">
@@ -16,16 +17,28 @@
                         <div class="row border">
                             <div class="col-md-12 testbox  px-0 mx-0">
                                 <div class="form-group row">
-                                    <label class="col-2 col-form-label col-form-label-sm">Ref# </label>
-                                    <div class="col-10">
+                                    <label class="col-2 col-form-label col-form-label-sm">RefNo </label>
+                                    <div class="col-4">
                                         <input class="form-control form-control-sm text-danger" disabled type="text"
                                             [(ngModel)]="record.mbl_refno" maxlength="250" />
+                                    </div>
+                                    <label class="col-2 col-form-label col-form-label-sm">Carrier</label>
+                                    <div class="col-4">
+                                        <input class="form-control form-control-sm" disabled type="text"
+                                            [(ngModel)]="record.mbl_liner_name" maxlength="250" />
+                                    </div>
+                                </div>
+                                <div  class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm">ETD </label>
+                                    <div class="col-4">
+                                        <app-date tabindex="-1" disabled [inputdate]="record.mbl_pol_etd"
+                                            (ValueChanged)="record.mbl_pol_etd=$event"></app-date>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-2 col-form-label col-form-label-sm">ETA</label>
-                                    <div class="col-10">
-                                        <app-date [inputdate]="Dt_Eta" (ValueChanged)="Dt_Eta=$event"></app-date>
+                                    <div class="col-4">
+                                        <app-date #_mbl_pod_eta [inputdate]="Dt_Eta" (ValueChanged)="Dt_Eta=$event"></app-date>
                                     </div>
                                 </div>
                             </div>

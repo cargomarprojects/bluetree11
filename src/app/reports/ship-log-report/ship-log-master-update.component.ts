@@ -4,7 +4,7 @@ import { GlobalService } from '../../core/services/global.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReportService } from '../services/report.service';
 import { Tbl_cargo_general } from '../../other/models/tbl_cargo_general'
-
+import { DateComponent } from '../../shared/date/date.component';
 // declare var $: any;
 
 @Component({
@@ -12,6 +12,8 @@ import { Tbl_cargo_general } from '../../other/models/tbl_cargo_general'
     templateUrl: './ship-log-master-update.component.html'
 })
 export class ShipLogMasterUpdateComponent implements OnInit {
+
+    @ViewChild('_mbl_pod_eta') mbl_eta_field: DateComponent;
 
     public errorMessage: string = '';
     public tab: string = 'main';
@@ -39,7 +41,7 @@ export class ShipLogMasterUpdateComponent implements OnInit {
         //     $('.modal-dialog').draggable();
         // });
     }
-
+    
     onBlur(field: string) {
         // if (field == 'Dt_Eta')
         //     this.Dt_Eta = this.Dt_Eta.toUpperCase();
@@ -48,6 +50,8 @@ export class ShipLogMasterUpdateComponent implements OnInit {
 
     Showmodal(mastermodal: any = null) {
         this.Dt_Eta = this.record.mbl_pod_eta;
+        // if (!this.gs.isBlank(this.mbl_eta_field))
+        //     this.mbl_eta_field.Focus();
         this.modal = this.modalservice.open(mastermodal, { centered: true });
     }
 
