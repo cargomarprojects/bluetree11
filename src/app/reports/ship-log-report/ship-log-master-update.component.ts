@@ -61,6 +61,7 @@ export class ShipLogMasterUpdateComponent implements OnInit {
 
         var searchData = this.gs.UserInfo;
         searchData.MBL_PKID = this.record.mbl_pkid;
+        searchData.ETD = this.record.mbl_pol_etd;
         searchData.ETA = this.Dt_Eta;
         searchData.company_code = this.gs.company_code;
         searchData.branch_code = this.gs.branch_code;
