@@ -102,6 +102,17 @@ export function ShipmentLogReportReducer(state: ReportState[] = [initialState], 
             st.selectedId = action.payload.selecteId;
             return [...state.filter(rec => rec.urlid != action.payload.id), st];
         }
+        case myActions.ActionTypes.UPDATE_ETA: {
+            
+            var st = {...state.find(rec => rec.urlid == action.payload.id)};
+
+            if (st == null)
+                return [...state];
+            
+            st.records =  st.records.map ( rec => rec.mbl_pkid == action.payload.pkid ? { ...rec, 'mbl_pod_eta' : action.payload.updateETA} : rec );
+
+            return [...state.filter(rec => rec.urlid != action.payload.id),st];
+        }
         default:
             return state;
     }

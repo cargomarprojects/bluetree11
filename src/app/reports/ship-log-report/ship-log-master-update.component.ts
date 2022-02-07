@@ -68,7 +68,8 @@ export class ShipLogMasterUpdateComponent implements OnInit {
         this.mainservice.MasterUpdate(searchData)
             .subscribe(response => {
                 if (response.retvalue) {
-                    this.record.mbl_pod_eta = this.Dt_Eta;
+                    if (this.callbackevent)
+                        this.callbackevent.emit({ action: 'SAVE', pkid: this.record.mbl_pkid, eta: this.Dt_Eta });
                     this.modal.close();
                 }
             }, error => {

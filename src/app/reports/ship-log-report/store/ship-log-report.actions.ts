@@ -9,7 +9,8 @@ export enum ActionTypes {
   SELECTDESELECT = '[Ship-Log-Report] Select Deselect Report',
   SINGLESELECTDESELECT = '[Ship-Log-Report] Single Select Deselect Report',
   SELECT_ROW = '[Ship-Log-Report] Select Row',
-  SORT_DATA = '[Ship-Log-Report] Sort Data'
+  SORT_DATA = '[Ship-Log-Report] Sort Data',
+  UPDATE_ETA= '[Ship-Log-Report] Update ETA'
 }
 
 export class Add implements Action {
@@ -47,4 +48,9 @@ export class SelectRow implements Action {
   constructor(public payload: {id : string, selecteId : string } ) {}
 }
 
-export type Actions = Add | Update | Delete | SelectDeselect | SingleSelectDeselect | SortData | SelectRow;
+export class UpdateETA implements Action {
+  readonly type = ActionTypes.UPDATE_ETA;
+  constructor(public payload: {id : string, pkid:string, updateETA : string } ) {}
+}
+
+export type Actions = Add | Update | Delete | SelectDeselect | SingleSelectDeselect | SortData | SelectRow | UpdateETA;

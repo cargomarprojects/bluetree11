@@ -605,5 +605,9 @@ export class ShipmentLogReportComponent implements OnInit {
 
   masterupdatecallbackevent (event: any) {
 
+    if(event.action=='SAVE')
+    {
+      this.store.dispatch(new myActions.UpdateETA({ id: this.urlid, pkid: event.pkid, updateETA : event.eta }))
+    }
   }
 }
