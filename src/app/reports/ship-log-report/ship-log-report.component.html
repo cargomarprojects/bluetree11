@@ -284,6 +284,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm">Within ETA</label>
+                            <div class="col-8">
+                                <input class="form-control form-control-sm" type="number"
+                                [(ngModel)]="within_eta" maxlength="5" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-4 col-form-label col-form-label-sm">Formats</label>
                             <div class="col-4">
                                 <select class="form-control form-control-sm" [(ngModel)]="format_type">
@@ -299,6 +306,7 @@
                                 <span>Printer Friendly</span>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label class="col-4 col-form-label col-form-label-sm"></label>
                             <div class="col-8">

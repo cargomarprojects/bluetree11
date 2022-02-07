@@ -75,7 +75,7 @@ export class ShipmentLogReportComponent implements OnInit {
   sort_order: string = "mbl_refno";
   format_type: string = "FORMAT-1";
   printer_friendly: boolean = false;
-
+  within_eta: number = 0;
   reportformat: string = '';
 
   selectedId = '';
@@ -152,6 +152,7 @@ export class ShipmentLogReportComponent implements OnInit {
         this.selectedId = rec.selectedId;
         this.sortCol = rec.sortcol;
         this.sortOrder = rec.sortorder;
+        this.within_eta = rec.within_eta;
 
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -179,6 +180,7 @@ export class ShipmentLogReportComponent implements OnInit {
         this.SearchData.EDATE = this.edate;
         this.SearchData.FORMAT_TYPE = this.format_type;
         this.SearchData.PRINTER_FRIENDLY = this.printer_friendly == true ? "Y" : "N";
+        this.SearchData.WITHIN_ETA = this.within_eta;
 
       }
       else {
@@ -218,6 +220,7 @@ export class ShipmentLogReportComponent implements OnInit {
         this.selectedId = '';
         this.sortCol = '';
         this.sortOrder = true;
+        this.within_eta = 0;
         this.SetStages();
       }
 
@@ -253,8 +256,8 @@ export class ShipmentLogReportComponent implements OnInit {
       alert(this.errorMessage);
       return;
     }
- 
-    
+
+
     if (this.format_type == "FORMAT-4") {
       this.report_masterwise = false;
       this.report_housewise = true;
@@ -289,6 +292,7 @@ export class ShipmentLogReportComponent implements OnInit {
       this.SearchData.EDATE = this.edate;
       this.SearchData.FORMAT_TYPE = this.format_type;
       this.SearchData.PRINTER_FRIENDLY = this.printer_friendly == true ? "Y" : "N";
+      this.SearchData.WITHIN_ETA = this.within_eta;
 
       this.reportformat = this.format_type;
       this.selectedId = '';
@@ -337,6 +341,7 @@ export class ShipmentLogReportComponent implements OnInit {
             selectedId: this.selectedId,
             sortcol: _action == "NEW" ? "" : this.sortCol,
             sortorder: true,
+            within_eta: this.within_eta,
 
             page_rows: response.page_rows,
             page_count: response.page_count,
@@ -517,6 +522,8 @@ export class ShipmentLogReportComponent implements OnInit {
     this.report_searchdata.CONSIGNEE_NAME = this.consignee_name;
     this.report_searchdata.AGENT_NAME = this.agent_name;
     this.report_searchdata.HANDLED_NAME = this.handled_name;
+    this.report_searchdata.WITHIN_ETA = this.within_eta;
+
 
     this.tab = 'report';
   }
@@ -603,11 +610,10 @@ export class ShipmentLogReportComponent implements OnInit {
     this.gs.LinkPage("HOUSE", sMode, REFNO, sID, HBLID);
   }
 
-  masterupdatecallbackevent (event: any) {
+  masterupdatecallbackevent(event: any) {
 
-    if(event.action=='SAVE')
-    {
-      this.store.dispatch(new myActions.UpdateETA({ id: this.urlid, pkid: event.pkid, updateETA : event.eta }))
+    if (event.action == 'SAVE') {
+      this.store.dispatch(new myActions.UpdateETA({ id: this.urlid, pkid: event.pkid, updateETA: event.eta }))
     }
   }
 }

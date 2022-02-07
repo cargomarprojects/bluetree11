@@ -39,6 +39,7 @@ export const initialState: ReportState = {
     selectedId: '',
     sortcol: 'mbl_refno',
     sortorder: true,
+    within_eta:0,
     page_rows: 0,
     page_count: 0,
     page_current: 0,

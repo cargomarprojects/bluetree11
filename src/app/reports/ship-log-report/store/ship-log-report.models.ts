@@ -30,6 +30,7 @@ export interface ReportState {
     selectedId : string;
     sortcol : string ;
     sortorder : boolean;    
+    within_eta:number;
     
     page_rows: number;
     page_count: number;
