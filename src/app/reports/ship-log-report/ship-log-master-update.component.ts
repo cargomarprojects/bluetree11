@@ -41,7 +41,7 @@ export class ShipLogMasterUpdateComponent implements OnInit {
         //     $('.modal-dialog').draggable();
         // });
     }
-    
+
     onBlur(field: string) {
         // if (field == 'Dt_Eta')
         //     this.Dt_Eta = this.Dt_Eta.toUpperCase();
@@ -49,10 +49,27 @@ export class ShipLogMasterUpdateComponent implements OnInit {
 
 
     Showmodal(mastermodal: any = null) {
-        this.Dt_Eta = this.record.mbl_pod_eta;
-        // if (!this.gs.isBlank(this.mbl_eta_field))
-        //     this.mbl_eta_field.Focus();
-        this.modal = this.modalservice.open(mastermodal, { centered: true });
+
+        let SMENU_ID = '';
+        let sType: string = this.record.mbl_mode != null ? this.record.mbl_mode.toString() : "";
+        if (sType == "SEA IMPORT")
+            SMENU_ID = this.gs.MENU_SI_MASTER;
+        else if (sType == "SEA EXPORT")
+            SMENU_ID = this.gs.MENU_SE_MASTER;
+        else if (sType == "AIR IMPORT")
+            SMENU_ID = this.gs.MENU_AI_MASTER;
+        else if (sType == "AIR EXPORT")
+            SMENU_ID = this.gs.MENU_AE_MASTER;
+        else if (sType == "OTHERS")
+            SMENU_ID = this.gs.MENU_OT_OPERATION;
+
+        if (this.gs.canEdit(SMENU_ID)) {
+            this.Dt_Eta = this.record.mbl_pod_eta;
+            // if (!this.gs.isBlank(this.mbl_eta_field))
+            //     this.mbl_eta_field.Focus();
+            this.modal = this.modalservice.open(mastermodal, { centered: true });
+        } else
+            alert('Insufficient User Rights');
     }
 
 
