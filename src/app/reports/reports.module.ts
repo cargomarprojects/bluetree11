@@ -11,6 +11,7 @@ import { ProfitReportHouseComponent } from './profit-report-house/profit-report-
 import { ShipLabelReportComponent } from './ship-label-report/ship-label-report.component';
 import { TopCustomerReportComponent } from './top-customer-report/top-customer-report.component';
 import { ShipmentLogReportComponent } from './ship-log-report/ship-log-report.component';
+import { ShipLogMasterUpdateComponent } from './ship-log-report/ship-log-master-update.component';
 
 import { ShipHandReportReducer } from './ship-hand-report/store/ship-hand-report.reducer';
 import { TeuReportReducer } from './teu-report/store/teu-report.reducer';
@@ -77,7 +78,8 @@ import { DataEntryReportComponent } from './data-entry-report/data-entry-report.
     CustReportHeaderComponent,
     CustReportComponent,
     DataEntryReportHeaderComponent,
-    DataEntryReportComponent
+    DataEntryReportComponent,
+    ShipLogMasterUpdateComponent
   ],
   imports: [
     SharedModule,

@@ -89,6 +89,9 @@ export class ReportService {
       return this.http2.post<any>(this.gs.baseUrl + "/api/Report/AgentShipmentReport", SearchData, this.gs.headerparam2('authorized'));
     }
 
+    MasterUpdate(SearchData: any) {
+      return this.http2.post<any>(this.gs.baseUrl + "/api/Other/Report/MasterUpdate", SearchData, this.gs.headerparam2('authorized'));
+    }
 }
 
 

@@ -377,7 +377,7 @@
                         <td>{{rec.mbl_agent_name}}</td>
                         <td>{{rec.hbl_consignee_name}}</td>
                         <td *ngIf="job_mode=='OCEAN EXPORT' || job_mode=='OCEAN IMPORT'">{{rec.mbl_cntr_type}}</td>
-                        <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+                        <td  class='hlink2'> <app-ship-log-master-update [record]="rec"  (callbackevent)="masterupdatecallbackevent($event)"></app-ship-log-master-update></td>
                         <td>{{rec.mbl_cargo_loc_firmcode}}</td>
                         <td>{{rec.hbl_is_itshipment}}</td>
                         <td>{{rec.mbl_bo_status}}</td>

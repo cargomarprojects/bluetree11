@@ -602,4 +602,8 @@ export class ShipmentLogReportComponent implements OnInit {
     }
     this.gs.LinkPage("HOUSE", sMode, REFNO, sID, HBLID);
   }
+
+  masterupdatecallbackevent (event: any) {
+
+  }
 }
