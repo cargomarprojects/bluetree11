@@ -1,6 +1,6 @@
 <div class="page-list">
     <div class="page-search">
-        <div  *ngIf="searchQuery.menuType == 'PARTYS'"  class="row">
+        <div *ngIf="searchQuery.menuType == 'PARTYS'" class="row">
             <div class="col-md-3">
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Sort Order</label>
@@ -21,60 +21,95 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Code/Name/FirmCode</label>
+                    <div class="col-4">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchDateBasedon">
+                            <option [value]="'NA'">NA</option>
+                            <option [value]="'CREATED-DATE'">Created Date</option>
+                            <option [value]="'EDITED-DATE'">Edited Date</option>
+                        </select>
+                    </div>
                     <div class="col-8">
-                      <InputBox [(inputModel)]="searchQuery.searchString" maxlength="1000" [uppercase]="true" ></InputBox>
+                        <app-date [inputdate]="searchQuery.searchSdate" (ValueChanged)="searchQuery.searchSdate=$event"></app-date>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">To</label>
+                    <div class="col-8">
+                        <app-date [inputdate]="searchQuery.searchEdate" (ValueChanged)="searchQuery.searchEdate=$event"></app-date>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-
+              
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Created By</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="searchQuery.searchCreatedBy" maxlength="1000" [uppercase]="true">
+                        </InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Edited By</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="searchQuery.searchEditedBy" maxlength="1000" [uppercase]="true">
+                        </InputBox>
+                    </div>
+                </div>
+              
+              
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Code/Name/FirmCode</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="searchQuery.searchString" maxlength="1000" [uppercase]="true">
+                        </InputBox>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">State</label>
                     <div class="col-8">
-                        <InputBox [(inputModel)]="searchQuery.searchState" maxlength="1000" [uppercase]="true" ></InputBox>
+                        <InputBox [(inputModel)]="searchQuery.searchState" maxlength="1000" [uppercase]="true">
+                        </InputBox>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">City</label>
                     <div class="col-8">
-                        <InputBox [(inputModel)]="searchQuery.searchCity" maxlength="1000" [uppercase]="true" ></InputBox>
+                        <InputBox [(inputModel)]="searchQuery.searchCity" maxlength="1000" [uppercase]="true">
+                        </InputBox>
                     </div>
                 </div>
-
-
-
-            </div>
-            <div class="col-md-3">
-
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Telephone</label>
                     <div class="col-8">
-                        <InputBox [(inputModel)]="searchQuery.searchTel" maxlength="1000" [uppercase]="true" ></InputBox>
+                        <InputBox [(inputModel)]="searchQuery.searchTel" maxlength="1000" [uppercase]="true"></InputBox>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Zip</label>
-                    <div class="col-8">
-                        <InputBox [(inputModel)]="searchQuery.searchZip" maxlength="1000" [uppercase]="true" ></InputBox>
-                    </div>
-                </div>
+
 
             </div>
             <div class="col-md-3">
                 <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Zip</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="searchQuery.searchZip" maxlength="1000" [uppercase]="true"></InputBox>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Fax</label>
                     <div class="col-8">
-                        <InputBox [(inputModel)]="searchQuery.searchFax" maxlength="1000" [uppercase]="true" ></InputBox>
+                        <InputBox [(inputModel)]="searchQuery.searchFax" maxlength="1000" [uppercase]="true"></InputBox>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm"></label>
                     <div class="col-8 input-group input-group-sm">
                         <div class="form-check mr-1">
-                            <input type="checkbox" class="form-check-input"   [(ngModel)]="searchQuery.searchBlackAc"><span>Black Account</span>
+                            <input type="checkbox" class="form-check-input"
+                                [(ngModel)]="searchQuery.searchBlackAc"><span>Black Account</span>
                         </div>
                         <button [disabled]="loading" (click)="List('SCREEN')"
                             class="btn btn-primary btn-sm mr-1">Search</button>
@@ -84,7 +119,7 @@
 
         </div>
 
-        <div  *ngIf="searchQuery.menuType == 'OVERSEAAGENT'"  class="row">
+        <div *ngIf="searchQuery.menuType == 'OVERSEAAGENT'" class="row">
             <div class="col-md-3">
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Sort Order</label>
@@ -98,7 +133,8 @@
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Code/Name</label>
                     <div class="col-8">
-                      <InputBox [(inputModel)]="searchQuery.searchString" maxlength="1000" [uppercase]="true" ></InputBox>
+                        <InputBox [(inputModel)]="searchQuery.searchString" maxlength="1000" [uppercase]="true">
+                        </InputBox>
                     </div>
                 </div>
             </div>

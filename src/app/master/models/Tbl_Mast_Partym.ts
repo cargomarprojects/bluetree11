@@ -105,7 +105,7 @@ export interface Tbl_Mast_Partym {
     gen_splac_memo: string;
     gen_is_blackac: string;
     // gen_carrier_email: string;
-    
+
     gen_is_shipper_b: boolean;
     gen_is_consignee_b: boolean;
     gen_is_cha_b: boolean;
@@ -132,8 +132,8 @@ export interface Tbl_Mast_Partym {
     gen_is_actual_vendor_b: boolean;
     gen_is_splac_b: boolean;
     gen_is_blackac_b: boolean;
-    gen_is_tbd_b:boolean;
-    gen_is_parentmemo:boolean;
+    gen_is_tbd_b: boolean;
+    gen_is_parentmemo: boolean;
     rec_edited_by: string;
     rec_edited_date: string;
 
@@ -157,12 +157,17 @@ export interface SearchQuery {
     searchFax: string;
     searchBlackAc: boolean;
     menuType: string;
+    searchDateBasedon: string;
+    searchSdate: string;
+    searchEdate: string;
+    searchCreatedBy: string;
+    searchEditedBy: string;
 }
 
 export interface PartyModel {
-    selectedId : string;
-    sortcol : string ;
-    sortorder : boolean;
+    selectedId: string;
+    sortcol: string;
+    sortorder: boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
