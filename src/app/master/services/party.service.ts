@@ -111,8 +111,10 @@ export class PartyService {
                 sortorder: true,
                 errormessage: '',
                 records: [],
-                searchQuery: <SearchQuery>{ searchString: '', searchSort: 'gen_short_name', searchState: '', searchCity: '', searchTel: '', searchFax: '', searchZip: '', searchBlackAc: false, menuType: this.param_type,
-                searchDateBasedon: 'NA', searchSdate: '', searchEdate: '', searchCreatedBy: '', searchEditedBy: '' },
+                searchQuery: <SearchQuery>{
+                    searchString: '', searchSort: 'gen_short_name', searchState: '', searchCity: '', searchTel: '', searchFax: '', searchZip: '', searchBlackAc: false, menuType: this.param_type,
+                    searchDateBasedon: 'NA', searchSdate: '', searchEdate: '', searchCreatedBy: '', searchEditedBy: ''
+                },
                 pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
             };
 
@@ -138,7 +140,7 @@ export class PartyService {
         }
 
         var SearchData = this.gs.UserInfo;
-        SearchData.outputformat = 'SCREEN';
+        SearchData.outputformat = _searchdata.outputformat;
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
         // SearchData.TYPE = 'PARTYS';
@@ -157,9 +159,9 @@ export class PartyService {
         SearchData.DATE_BASEDON = this.record.searchQuery.searchDateBasedon;
         SearchData.SDATE = this.record.searchQuery.searchSdate;
         SearchData.EDATE = this.record.searchQuery.searchEdate;
-        SearchData.CREATED_BY  = this.record.searchQuery.searchCreatedBy;
+        SearchData.CREATED_BY = this.record.searchQuery.searchCreatedBy;
         SearchData.EDITED_BY = this.record.searchQuery.searchEditedBy;
-        
+
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
@@ -172,11 +174,15 @@ export class PartyService {
         }
 
         this.List(SearchData).subscribe(response => {
-            this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
-            this.record.records = response.list;
-            this.mdata$.next(this.record);
+            if (_searchdata.outputformat == "EXCEL") {
+                this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+            } else {
+                this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
+                this.record.records = response.list;
+                this.mdata$.next(this.record);
 
-            this.db[this.param_type] = this.record;
+                this.db[this.param_type] = this.record;
+            }
 
         }, error => {
             this.record.errormessage = this.gs.getError(error);
@@ -185,6 +191,9 @@ export class PartyService {
         });
     }
 
+    Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+        this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
+    }
     RefreshList(_rec: Tbl_Mast_Partym) {
         if (this.gs.isBlank(this.record))
             return;
