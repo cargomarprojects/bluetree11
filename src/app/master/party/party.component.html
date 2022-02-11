@@ -26,6 +26,7 @@
                 <th (click)="mainservice.sort('gen_firm_code')">FIRM CODE&nbsp;<i [ngClass]="mainservice.getIcon('gen_firm_code')"></i></th>
                 <th (click)="mainservice.sort('gen_type2')">CATEGORY&nbsp;<i [ngClass]="mainservice.getIcon('gen_type2')"></i></th>
                 <th (click)="mainservice.sort('gen_address1')">ADDRESS-1&nbsp;<i [ngClass]="mainservice.getIcon('gen_address1')"></i></th>
+                <th (click)="mainservice.sort('gen_address2')">ADDRESS-2&nbsp;<i [ngClass]="mainservice.getIcon('gen_address2')"></i></th>
                 <th (click)="mainservice.sort('gen_location')">CITY&nbsp;<i [ngClass]="mainservice.getIcon('gen_location')"></i></th>
                 <th (click)="mainservice.sort('gen_state')">STATE&nbsp;<i [ngClass]="mainservice.getIcon('gen_state')"></i></th>
                 <th (click)="mainservice.sort('gen_country_name')">COUNTRY&nbsp;<i [ngClass]="mainservice.getIcon('gen_country_name')"></i></th>              
@@ -54,6 +55,7 @@
                 <td>{{rec.gen_firm_code}}</td>
                 <td>{{rec.gen_type2}}</td>
                 <td>{{rec.gen_address1}}</td>
+                <td>{{rec.gen_address2}}</td>
                 <td>{{rec.gen_location}}</td>
                 <td>{{rec.gen_state}}</td>
                 <td>{{rec.gen_country_name}}</td>              
