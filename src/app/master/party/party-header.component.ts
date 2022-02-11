@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/Tbl_Mast_Partym';
+import { PartyService } from '../services/party.service';
 
 @Component({
   selector: 'app-party-header',
@@ -16,7 +17,8 @@ export class PartyHeaderComponent implements OnInit {
 
   @Output() searchEvents = new EventEmitter<any>();
 
-  constructor(public gs: GlobalService
+  constructor(public gs: GlobalService,
+    public mainservice: PartyService
   ) { }
 
   ngOnInit() {

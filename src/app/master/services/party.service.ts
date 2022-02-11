@@ -28,7 +28,7 @@ export class PartyService {
     public canSave: boolean;
     public isCompany: boolean;
     public canDelete: boolean;
-
+    public canPrint: boolean;
     public initlialized: boolean;
     private appid = ''
     // private menutype: string = '';
@@ -127,6 +127,7 @@ export class PartyService {
         this.canEdit = this.gs.canEdit(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
         this.canDelete = this.gs.canDelete(this.menuid);
+        this.canPrint = this.gs.canPrint(this.menuid);
     }
 
     Search(_searchdata: any, type: string = '') {
