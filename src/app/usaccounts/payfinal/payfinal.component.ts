@@ -969,7 +969,7 @@ export class PayFinalComponent implements OnInit {
         )
     }
 
-    SetNextChqNo() {
+    SetNextChqNo_Old() {
 
         let nChq = 0;
         let sPrefix = "";
@@ -1040,6 +1040,81 @@ export class PayFinalComponent implements OnInit {
 
     }
 
+    SetNextChqNo() {
 
+        let nChq = 0;
+        let sPrefix = "";
+
+        //if (Cmb_Mode.SelectedItem.ToString() == "NA" || Cmb_Mode.SelectedItem.ToString() == "CHECK")
+        //  return;
+
+        if (this.paymode == "NA")
+            return;
+
+        if (this.paymode == "CHECK") {
+            this.Txt_ChqNo = (+this.Txt_Next_ChqNo + 1).toString();
+            if (this.Txt_ChqNo == 'NaN')
+                this.Txt_ChqNo = '';
+            return;
+        }
+
+        if (this.TOT_DIFF > 0)
+            sPrefix = "R";
+
+        if (this.paymode == "WIRE TRANSFER")
+            sPrefix += "TT";
+        if (this.paymode == "CASH")
+            sPrefix += "CH";
+        if (this.paymode == "ONLINE/ACH PAYMENT")
+            sPrefix += "OP";
+        if (this.paymode == "CREDIT CARD")
+            sPrefix += "CC";
+        if (this.paymode == "OTHERS")
+            sPrefix += "OT";
+
+        // var yymmdd = this.sdate.replace("-", "");
+        // yymmdd = yymmdd.replace("-", "");
+        // yymmdd = yymmdd.substring(2, 8);
+
+
+        var tempdt = this.sdate.split('-');
+        let dtyr: string = tempdt[0];
+        let dtmn: string = tempdt[1];
+        let dtdy: string = tempdt[2];
+
+        if (dtmn.trim().length == 1)
+            dtmn = "0" + dtmn;
+        if (dtdy.trim().length == 1)
+            dtdy = "0" + dtdy;
+
+        var yymmdd = dtyr + dtmn + dtdy;
+        yymmdd = yymmdd.substring(2, 8);
+
+
+        if (this.gs.isBlank(this.Txt_Next_ChqNo) || this.gs.isZero(this.Txt_Next_ChqNo))
+            this.Txt_ChqNo = sPrefix + yymmdd;
+        else {
+            var chqno = this.Txt_Next_ChqNo;
+            var sChar = chqno.charAt(chqno.length - 1);
+            var sCharCode = chqno.charCodeAt(chqno.length - 1) + 1;
+            if (sChar >= '0' && sChar <= '9')
+                //this.record.pay_chqno = sPrefix + yymmdd + "A"; // Dt_Date.SelectedDate.Value.ToString("yyMMdd") + "A";
+                this.Txt_ChqNo = sPrefix + yymmdd + "A"; // Dt_Date.SelectedDate.Value.ToString("yyMMdd") + "A";
+            else {
+
+                if (sChar >= 'Z') {
+
+
+                } else {
+                    //sChar++;
+                    //Txt_ChqNo.Text = sPrefix + Dt_Date.SelectedDate.Value.ToString("yyMMdd") + sChar.ToString();
+                    sChar = String.fromCharCode(sCharCode);
+                    //this.record.pay_chqno = sPrefix + yymmdd + sChar;
+                    this.Txt_ChqNo = sPrefix + yymmdd + sChar;
+                }
+            }
+        }
+
+    }
 
 }
