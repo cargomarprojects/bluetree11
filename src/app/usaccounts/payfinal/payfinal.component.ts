@@ -186,6 +186,7 @@ export class PayFinalComponent implements OnInit {
 
     ngOnInit() {
 
+        this.pkid = this.gs.getGuid();
         /*
         const options = JSON.parse(this.route.snapshot.queryParams.parameter);
 
@@ -372,7 +373,7 @@ export class PayFinalComponent implements OnInit {
 
 
 
-        this.pkid = this.gs.getGuid();
+        //this.pkid = this.gs.getGuid();
 
         this.ParentRec = <Tbl_Acc_Payment>{};
 
