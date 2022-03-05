@@ -1098,23 +1098,35 @@ export class PayFinalComponent implements OnInit {
             var sChar = chqno.charAt(chqno.length - 1);
             var sCharCode = chqno.charCodeAt(chqno.length - 1) + 1;
             if (sChar >= '0' && sChar <= '9')
-                //this.record.pay_chqno = sPrefix + yymmdd + "A"; // Dt_Date.SelectedDate.Value.ToString("yyMMdd") + "A";
-                this.Txt_ChqNo = sPrefix + yymmdd + "A"; // Dt_Date.SelectedDate.Value.ToString("yyMMdd") + "A";
+                this.Txt_ChqNo = sPrefix + yymmdd + "A";
             else {
 
-                if (sChar >= 'Z') {
+                var predecessor_sChar = chqno.charAt(chqno.length - 2);
+                var predecessor_sCharCode = chqno.charCodeAt(chqno.length - 2);
 
+                if (predecessor_sChar >= '0' && predecessor_sChar <= '9') {
+                    if (sChar >= 'Z') {
+                        this.Txt_ChqNo = sPrefix + yymmdd + "AA";
+                    } else {
+                        sChar = String.fromCharCode(sCharCode);
+                        this.Txt_ChqNo = sPrefix + yymmdd + sChar;
+                    }
 
                 } else {
-                    //sChar++;
-                    //Txt_ChqNo.Text = sPrefix + Dt_Date.SelectedDate.Value.ToString("yyMMdd") + sChar.ToString();
-                    sChar = String.fromCharCode(sCharCode);
-                    //this.record.pay_chqno = sPrefix + yymmdd + sChar;
-                    this.Txt_ChqNo = sPrefix + yymmdd + sChar;
+
+                    if (sChar >= 'Z') {
+                        predecessor_sCharCode = chqno.charCodeAt(chqno.length - 2) + 1;
+                        predecessor_sChar = String.fromCharCode(predecessor_sCharCode);
+                        this.Txt_ChqNo = sPrefix + yymmdd + predecessor_sChar + "A";
+                    } else {
+                        sChar = String.fromCharCode(sCharCode);
+                        predecessor_sChar = String.fromCharCode(predecessor_sCharCode);
+                        this.Txt_ChqNo = sPrefix + yymmdd + predecessor_sChar + sChar;
+                    }
                 }
             }
+
         }
 
     }
-
 }
