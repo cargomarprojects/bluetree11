@@ -37,7 +37,14 @@ export class Tbl_Ai_Hblm {
     hbl_country_code: string;
     hbl_country_name: string;
 
+    mbl_frt_status: string;
+    mbl_ship_term_id : string;
+    mbl_cntr_type : string ;
+    mbl_incoterm : string ;
+    
 
+    hbl_shipper_id: string;
+    hbl_shipper_code: string;
     hbl_shipper_name: string;
     hbl_shipper_add1: string;
     hbl_shipper_add2: string;
@@ -46,6 +53,8 @@ export class Tbl_Ai_Hblm {
     hbl_shipper_add5: string;
     hbl_shipper_add6: string;
 
+    hbl_consignee_id: string;
+    hbl_consignee_code: string;
     hbl_consignee_name: string;
     hbl_consignee_add1: string;
     hbl_consignee_add2: string;
@@ -54,7 +63,8 @@ export class Tbl_Ai_Hblm {
     hbl_consignee_add5: string;
     hbl_consignee_add6: string;
 
-
+    hbl_notify_id: string;
+    hbl_notify_code: string;
     hbl_notify_name: string;
     hbl_notify_add1: string;
     hbl_notify_add2: string;
@@ -95,16 +105,17 @@ export class Tbl_Ai_Hblm {
     hbl_po: string;
     hbl_invno: string;
 
-    hbl_movement: string;
-    hbl_movement_type: string;
     hbl_frt_status: string;
+    hbl_ship_term_id: string;
+    hbl_inco_term: string;
+    
     hbl_pkgs: string;
     hbl_unit: string;
     hbl_gr_wt: string;
     hbl_nt_wt: string;
     hbl_cbm: string;
     hbl_ams: string;
-    hbl_inco_term: string;
+    
 
 
 

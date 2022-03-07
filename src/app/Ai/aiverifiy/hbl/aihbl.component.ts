@@ -9,7 +9,7 @@ import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomple
 import { InputBoxComponent } from '../../../shared/input/inputbox.component';
 
 import { AiHblService } from '../../services/aihbl.service';
-import { vm_Tbl_Ai_Hblm, Ai_Hblm_Model, Tbl_Ai_Hblm, Tbl_Ai_HblDesc, Tbl_Ai_Cntr   } from '../../models/Tbl_ai_hbl';
+import { vm_Tbl_Ai_Hblm, Ai_Hblm_Model, Tbl_Ai_Hblm, Tbl_Ai_HblDesc, Tbl_Ai_Cntr } from '../../models/Tbl_ai_hbl';
 
 import { SearchTable } from '../../../shared/models/searchtable';
 import { Tbl_Ai_Formatm } from '../../models/Tbl_Ai_Format';
@@ -24,24 +24,24 @@ export class aiHblComponent implements OnInit {
 
     record: Tbl_Ai_Hblm = <Tbl_Ai_Hblm>{};
 
-    formats: Tbl_Ai_Formatm [] = <Tbl_Ai_Formatm []>[];
+    formats: Tbl_Ai_Formatm[] = <Tbl_Ai_Formatm[]>[];
 
-    records: Tbl_Ai_HblDesc [] = <Tbl_Ai_HblDesc []>[];
+    records: Tbl_Ai_HblDesc[] = <Tbl_Ai_HblDesc[]>[];
 
-    cntrs: Tbl_Ai_Cntr [] = <Tbl_Ai_Cntr []>[];
+    cntrs: Tbl_Ai_Cntr[] = <Tbl_Ai_Cntr[]>[];
 
     tab: string = 'main';
 
     modal: any;
-    
-    
-    
+
+
+
     menuid: string;
     public mode: string = '';
     errorMessage: string;
     Foregroundcolor: string;
 
-    
+
 
     title: string;
     isAdmin: boolean;
@@ -52,11 +52,12 @@ export class aiHblComponent implements OnInit {
 
     private pkid: string;
     @Input() set _pkid(value: string) {
-      this.pkid = value;
-      if ( this.pkid != "")
-        this.GetRecord("");
+        this.pkid = value;
+        if (this.pkid != "")
+            this.GetRecord("");
     }
 
+    bChanged = false;
 
 
     constructor(
@@ -81,26 +82,26 @@ export class aiHblComponent implements OnInit {
 
 
 
-    GetRecord( _type : string) {
+    GetRecord(_type: string) {
         this.initPage();
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
         SearchData.type = _type;
         SearchData.pkid = this.pkid;
-        if ( this.gs.isBlank(this.record.hbl_format_id))
+        if (this.gs.isBlank(this.record.hbl_format_id))
             SearchData.format_id = "";
-        else 
+        else
             SearchData.format_id = this.record.hbl_format_id;
 
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_Ai_Hblm>response.record;
-                this.records = <Tbl_Ai_HblDesc []> response.records;            
-                this.cntrs = <Tbl_Ai_Cntr []> response.cntrs;            
-                this.formats = <Tbl_Ai_Formatm []> response.formats;
+                this.records = <Tbl_Ai_HblDesc[]>response.records;
+                this.cntrs = <Tbl_Ai_Cntr[]>response.cntrs;
+                this.formats = <Tbl_Ai_Formatm[]>response.formats;
 
-                if ( response.cntrs == null) {
-                    this.cntrs = <Tbl_Ai_Cntr []> [];
+                if (response.cntrs == null) {
+                    this.cntrs = <Tbl_Ai_Cntr[]>[];
                 }
 
                 this.mode = 'EDIT';
@@ -177,6 +178,22 @@ export class aiHblComponent implements OnInit {
 
 
     LovSelected(_Record: SearchTable) {
+
+        if (_Record.controlname == "SHIPPER") {
+            this.record.hbl_shipper_id = _Record.id;
+            this.record.hbl_shipper_code = _Record.code;
+        }
+
+        if (_Record.controlname == "CONSIGNEE") {
+            this.record.hbl_consignee_id = _Record.id;
+            this.record.hbl_consignee_code = _Record.code;
+        }
+
+        if (_Record.controlname == "NOTIFY-TO") {
+            this.record.hbl_notify_id = _Record.id;
+            this.record.hbl_notify_code = _Record.code;
+        }
+
         if (_Record.controlname == "CARRIER") {
             this.record.hbl_carrier_id = _Record.id;
             this.record.hbl_carrier_code = _Record.code;
@@ -217,52 +234,105 @@ export class aiHblComponent implements OnInit {
             this.record.hbl_pofd_id = _Record.id;
             this.record.hbl_pofd_code = _Record.code;
             this.record.hbl_pofd_name = _Record.name;
-        }      
+        }
     }
 
-    OnChange(field: string) {
+    onChange(field: string) {
+        if (field == 'hbl_pol_etd') {
+            this.bChanged = true;
+        }
+        if (field == 'hbl_pod_eta') {
+            this.bChanged = true;
+        }
+        if (field == 'hbl_pofd_eta') {
+            this.bChanged = true;
+        }
+
     }
+
 
     onFocusout(field: string) {
+
+        switch (field) {
+            case 'hbl_pol_etd': {
+                if (this.bChanged) {
+                    this.bChanged = false;
+                    if (this.isDate1GreaterDate2(this.record.hbl_pol_etd, this.record.hbl_pod_eta)) {
+                        alert('ETD is less than pod eta');
+                    }
+                    break;
+                }
+            }
+            case 'hbl_pod_eta': {
+                if (this.bChanged) {
+                    this.bChanged = false;
+                    if (this.isDate1GreaterDate2(this.record.hbl_pol_etd, this.record.hbl_pod_eta)) {
+                        alert('ETD is less than pod eta');
+                    }
+                    break;
+                }
+            }
+            case 'hbl_pofd_eta': {
+                if (this.bChanged) {
+                    this.bChanged = false;
+                    if (this.isDate1GreaterDate2(this.record.hbl_pod_eta, this.record.hbl_pofd_eta)) {
+                        alert('POFD ETA is less than pod eta');
+                    }
+                    break;
+                }
+            }
+        }
     }
+
+    isDate1GreaterDate2(_date1: string, _date2: string) {
+        if (!this.gs.isBlank(_date1) && !this.gs.isBlank(_date2)) {
+            var date1 = new Date(_date1);
+            var date2 = new Date(_date2);
+            if (date1 > date2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
 
     onBlur(field: string) {
         switch (field) {
-          case 'gen_pincode': {
-            break;
-          }
-          case 'gen_short_name': {
-            break;
-          }
-    
+            case 'gen_pincode': {
+                break;
+            }
+            case 'gen_short_name': {
+                break;
+            }
+
         }
     }
 
 
 
-    CloseModal(){
+    CloseModal() {
         this.modal.close();
     }
 
-    callbackparent(rec : any){
-        alert( rec.file_desc);
+    callbackparent(rec: any) {
+        alert(rec.file_desc);
     }
 
-    AddDescRow()
-    {
+    AddDescRow() {
         let rec = <Tbl_Ai_HblDesc>{};
-        rec.hbl_pkid = this.gs.getGuid();        
-        rec.hbl_parent_id = this.pkid;  
+        rec.hbl_pkid = this.gs.getGuid();
+        rec.hbl_parent_id = this.pkid;
         this.records.push(rec);
     }
-    
-    RemoveDescRow(rec : Tbl_Ai_HblDesc, i : number){
 
-        if ( this.gs.isBlank( rec.hbl_desc1)  && this.gs.isBlank( rec.hbl_desc2))
-        {
-            if (!confirm("Delete Y/N")) 
+    RemoveDescRow(rec: Tbl_Ai_HblDesc, i: number) {
+
+        if (this.gs.isBlank(rec.hbl_desc1) && this.gs.isBlank(rec.hbl_desc2)) {
+            if (!confirm("Delete Y/N"))
                 return;
-            this.records.splice( i , 1);
+            this.records.splice(i, 1);
         }
         else {
             alert('Only blank row can be removed');
@@ -270,22 +340,21 @@ export class aiHblComponent implements OnInit {
 
     }
 
-    AddCntrRow()
-    {
+    AddCntrRow() {
         let rec = <Tbl_Ai_Cntr>{};
         rec.hbl_pkid = this.gs.getGuid();
-        rec.hbl_parent_id = this.pkid;  
+        rec.hbl_parent_id = this.pkid;
         this.cntrs.push(rec);
     }
-    
-    RemoveCntrRow(rec : Tbl_Ai_Cntr, i : number){
-        if (!confirm("Delete Y/N")) 
+
+    RemoveCntrRow(rec: Tbl_Ai_Cntr, i: number) {
+        if (!confirm("Delete Y/N"))
             return;
         //const id = this.cntrs.findIndex(rec => rec.hbl_pkid == rec.hbl_pkid);
         this.cntrs.splice(i, 1);
     }
 
-    ChangeTab(_tab){
+    ChangeTab(_tab) {
         this.tab = _tab;
     }
 
