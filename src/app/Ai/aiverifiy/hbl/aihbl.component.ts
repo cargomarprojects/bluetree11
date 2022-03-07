@@ -300,12 +300,170 @@ export class aiHblComponent implements OnInit {
 
     onBlur(field: string) {
         switch (field) {
-            case 'gen_pincode': {
+            case 'hbl_book_no': {
+                this.record.hbl_book_no = this.record.hbl_book_no.toUpperCase().trim();
                 break;
             }
-            case 'gen_short_name': {
+            case 'hbl_mbl_no': {
+                this.record.hbl_mbl_no = this.record.hbl_mbl_no.toUpperCase().trim();
                 break;
             }
+            case 'hbl_carrier_name': {
+                this.record.hbl_carrier_name = this.record.hbl_carrier_name.toUpperCase().trim();
+                break;
+            }
+            case 'hbl_agent_name': {
+                this.record.hbl_agent_name = this.record.hbl_agent_name.toUpperCase().trim();
+                break;
+            }            
+            case 'hbl_coloader_name': {
+                this.record.hbl_coloader_name = this.record.hbl_coloader_name.toUpperCase().trim();
+                break;
+            }            
+            case 'hbl_hbl_no': {
+                this.record.hbl_hbl_no = this.record.hbl_hbl_no.toUpperCase().trim();
+                break;
+            }            
+            case 'hbl_ams': {
+                this.record.hbl_ams = this.record.hbl_ams.toUpperCase().trim();
+                break;
+            }            
+            case 'hbl_shipper_name': {
+                this.record.hbl_shipper_name = this.record.hbl_shipper_name.toUpperCase().trim();
+                break;
+            }            
+            case 'hbl_shipper_add1': {
+                this.record.hbl_shipper_add1 = this.record.hbl_shipper_add1.toUpperCase().trim();
+                break;
+            }            
+            case 'hbl_shipper_add2': {
+                this.record.hbl_shipper_add2 = this.record.hbl_shipper_add2.toUpperCase().trim();
+                break;
+            }            
+            case 'hbl_shipper_add3': {
+                this.record.hbl_shipper_add3 = this.record.hbl_shipper_add3.toUpperCase().trim();
+                break;
+            }            
+            case 'hbl_shipper_add4': {
+                this.record.hbl_shipper_add4 = this.record.hbl_shipper_add4.toUpperCase().trim();
+                break;
+            }            
+            case 'hbl_shipper_add5': {
+                this.record.hbl_shipper_add5 = this.record.hbl_shipper_add5.toUpperCase().trim();
+                break;
+            }            
+            case 'hbl_shipper_add6': {
+                this.record.hbl_shipper_add6 = this.record.hbl_shipper_add6.toUpperCase().trim();
+                break;
+            }            
+            case 'hbl_consignee_name': {
+                this.record.hbl_consignee_name = this.record.hbl_consignee_name.toUpperCase().trim();
+                break;
+            }                        
+            case 'hbl_consignee_add1': {
+                this.record.hbl_consignee_add1 = this.record.hbl_consignee_add1.toUpperCase().trim();
+                break;
+            }                        
+            case 'hbl_consignee_add2': {
+                this.record.hbl_consignee_add2 = this.record.hbl_consignee_add2.toUpperCase().trim();
+                break;
+            }                        
+            case 'hbl_consignee_add3': {
+                this.record.hbl_consignee_add3 = this.record.hbl_consignee_add3.toUpperCase().trim();
+                break;
+            }                                    
+            case 'hbl_consignee_add4': {
+                this.record.hbl_consignee_add4 = this.record.hbl_consignee_add4.toUpperCase().trim();
+                break;
+            }                                    
+            case 'hbl_consignee_add5': {
+                this.record.hbl_consignee_add5 = this.record.hbl_consignee_add5.toUpperCase().trim();
+                break;
+            }                                    
+            case 'hbl_consignee_add6': {
+                this.record.hbl_consignee_add6 = this.record.hbl_consignee_add6.toUpperCase().trim();
+                break;
+            }                           
+            case 'hbl_notify_name': {
+                this.record.hbl_notify_name = this.record.hbl_notify_name.toUpperCase().trim();
+                break;
+            }                                 
+            case 'hbl_notify_add1': {
+                this.record.hbl_notify_add1 = this.record.hbl_notify_add1.toUpperCase().trim();
+                break;
+            }                        
+            case 'hbl_notify_add2': {
+                this.record.hbl_notify_add2 = this.record.hbl_notify_add2.toUpperCase().trim();
+                break;
+            }                        
+            case 'hbl_notify_add3': {
+                this.record.hbl_notify_add3 = this.record.hbl_notify_add3.toUpperCase().trim();
+                break;
+            }                                    
+            case 'hbl_notify_add4': {
+                this.record.hbl_notify_add4 = this.record.hbl_notify_add4.toUpperCase().trim();
+                break;
+            }                                    
+            case 'hbl_notify_add5': {
+                this.record.hbl_notify_add5 = this.record.hbl_notify_add5.toUpperCase().trim();
+                break;
+            }                                    
+            case 'hbl_notify_add6': {
+                this.record.hbl_notify_add6 = this.record.hbl_notify_add6.toUpperCase().trim();
+                break;
+            }                                    
+            case 'hbl_pre_carriage': {
+                this.record.hbl_pre_carriage = this.record.hbl_pre_carriage.toUpperCase().trim();
+                break;
+            }   
+            case 'hbl_por': {
+                this.record.hbl_por = this.record.hbl_por.toUpperCase().trim();
+                break;
+            }                                                         
+            case 'hbl_pol': {
+                this.record.hbl_pol = this.record.hbl_pol.toUpperCase().trim();
+                break;
+            }                
+            case 'hbl_pod': {
+                this.record.hbl_pod = this.record.hbl_pod.toUpperCase().trim();
+                break;
+            }                
+            case 'hbl_pofd': {
+                this.record.hbl_pofd = this.record.hbl_pofd.toUpperCase().trim();
+                break;
+            }                
+            case 'hbl_place_of_delivery': {
+                this.record.hbl_place_of_delivery = this.record.hbl_place_of_delivery.toUpperCase().trim();
+                break;
+            }                            
+            case 'hbl_vessel': {
+                this.record.hbl_vessel = this.record.hbl_vessel.toUpperCase().trim();
+                break;
+            }                            
+            case 'hbl_voyage': {
+                this.record.hbl_voyage = this.record.hbl_voyage.toUpperCase().trim();
+                break;
+            }                   
+            case 'hbl_commodity': {
+                this.record.hbl_commodity = this.record.hbl_commodity.toUpperCase().trim();
+                break;
+            }                               
+            case 'hbl_invno': {
+                this.record.hbl_invno = this.record.hbl_invno.toUpperCase().trim();
+                break;
+            }                               
+            case 'hbl_po': {
+                this.record.hbl_po = this.record.hbl_po.toUpperCase().trim();
+                break;
+            }         
+            case 'hbl_unit': {
+                this.record.hbl_unit = this.record.hbl_unit.toUpperCase().trim();
+                break;
+            }         
+            case 'hbl_place_of_issue': {
+                this.record.hbl_place_of_issue = this.record.hbl_place_of_issue.toUpperCase().trim();
+                break;
+            }                                                                           
 
         }
     }
