@@ -10,6 +10,8 @@ export class Tbl_Ai_Hblm {
     hbl_file_id: string;
     hbl_format_id: string;
 
+    hbl_branch_code: string;
+
     hbl_mbl_no: string;
     hbl_mbl_date: string;
     hbl_book_no: string;
@@ -40,7 +42,7 @@ export class Tbl_Ai_Hblm {
     mbl_frt_status: string;
     mbl_ship_term_id : string;
     mbl_cntr_type : string ;
-    mbl_incoterm : string ;
+    mbl_inco_term : string ;
     
 
     hbl_shipper_id: string;
@@ -109,11 +111,11 @@ export class Tbl_Ai_Hblm {
     hbl_ship_term_id: string;
     hbl_inco_term: string;
     
-    hbl_pkgs: string;
+    hbl_pkgs: number;
     hbl_unit: string;
-    hbl_gr_wt: string;
-    hbl_nt_wt: string;
-    hbl_cbm: string;
+    hbl_gr_wt: number;
+    hbl_nt_wt: number;
+    hbl_cbm: number;
     hbl_ams: string;
     
 
@@ -139,9 +141,9 @@ export class Tbl_Ai_Cntr {
     hbl_cntr_type: string;
     hbl_cntr_seal: string;
 
-    hbl_cntr_cbm: string;
-    hbl_cntr_grwt: string;
-    hbl_cntr_pkgs: string;
+    hbl_cntr_cbm: number;
+    hbl_cntr_grwt: number;
+    hbl_cntr_pkgs: number;
     hbl_cntr_unit: string;
 }
 

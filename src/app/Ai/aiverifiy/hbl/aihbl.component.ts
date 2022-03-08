@@ -30,6 +30,8 @@ export class aiHblComponent implements OnInit {
 
     cntrs: Tbl_Ai_Cntr[] = <Tbl_Ai_Cntr[]>[];
 
+    CompList: any[];
+
     tab: string = 'main';
 
     modal: any;
@@ -71,6 +73,7 @@ export class aiHblComponent implements OnInit {
 
     ngOnInit() {
         this.gs.checkAppVersion();
+        this.LoadCompany();
         //Route Change 29072021
     }
 
@@ -79,6 +82,14 @@ export class aiHblComponent implements OnInit {
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = '';
     }
+    LoadCompany() {
+        this.CompList = <any[]>[];
+        this.gs.CompanyList.forEach(Rec => {
+            if (Rec.comp_code != 'ALL')
+                this.CompList.push(Rec);
+        });
+    }
+
 
 
 
@@ -88,6 +99,7 @@ export class aiHblComponent implements OnInit {
         var SearchData = this.gs.UserInfo;
         SearchData.type = _type;
         SearchData.pkid = this.pkid;
+        SearchData.branch_code = this.gs.branch_code;
         if (this.gs.isBlank(this.record.hbl_format_id))
             SearchData.format_id = "";
         else
@@ -150,6 +162,8 @@ export class aiHblComponent implements OnInit {
     }
     private Allvalid(): boolean {
 
+        var bOk = true;
+        var error=  "";
         var bRet = true;
         this.errorMessage = "";
 
@@ -167,6 +181,116 @@ export class aiHblComponent implements OnInit {
             return bRet;
         }
 
+        /*
+        if (this.gs.isBlank(this.record.hbl_mbl_no)) {
+            bRet = false;
+            this.errorMessage = "Invalid MBLNO";
+            alert(this.errorMessage);
+            return bRet;
+        }
+
+        if (this.gs.isBlank(this.record.hbl_carrier_id)) {
+            bRet = false;
+            this.errorMessage = "Invalid Carrier";
+            alert(this.errorMessage);
+            return bRet;
+        }
+        if (this.gs.isBlank(this.record.hbl_agent_id)) {
+            bRet = false;
+            this.errorMessage = "Invalid Agent";
+            alert(this.errorMessage);
+            return bRet;
+        }
+        if (this.gs.isBlank(this.record.hbl_handled_id)) {
+            bRet = false;
+            this.errorMessage = "Invalid CSD";
+            alert(this.errorMessage);
+            return bRet;
+        }
+        if (this.gs.isBlank(this.record.mbl_frt_status)) {
+            bRet = false;
+            this.errorMessage = "Invalid Master Freight Status";
+            alert(this.errorMessage);
+            return bRet;
+        }
+
+        if (this.gs.isBlank(this.record.mbl_ship_term_id)) {
+            bRet = false;
+            this.errorMessage = "Invalid Master Terms";
+            alert(this.errorMessage);
+            return bRet;
+        }        
+        if (this.gs.isBlank(this.record.mbl_cntr_type)) {
+            bRet = false;
+            this.errorMessage = "Invalid Master Shipment Type";
+            alert(this.errorMessage);
+            return bRet;
+        }        
+        if (this.gs.isBlank(this.record.mbl_inco_term)) {
+            bRet = false;
+            this.errorMessage = "Invalid Master Inco Terms";
+            alert(this.errorMessage);
+            return bRet;
+        }        
+        if (this.gs.isBlank(this.record.hbl_hbl_no)) {
+            bRet = false;
+            this.errorMessage = "Invalid Hbl#";
+            alert(this.errorMessage);
+            return bRet;
+        }        
+
+        if (this.gs.isBlank(this.record.hbl_shipper_name)) {
+            bRet = false;
+            this.errorMessage = "Invalid Shipper";
+            alert(this.errorMessage);
+            return bRet;
+        }       
+        if (this.gs.isBlank(this.record.hbl_shipper_add1)) {
+            bRet = false;
+            this.errorMessage = "Invalid Shipper Address";
+            alert(this.errorMessage);
+            return bRet;
+        }                 
+        if (this.gs.isBlank(this.record.hbl_consignee_name)) {
+            bRet = false;
+            this.errorMessage = "Invalid Consignee";
+            alert(this.errorMessage);
+            return bRet;
+        }        
+        if (this.gs.isBlank(this.record.hbl_consignee_add1)) {
+            bRet = false;
+            this.errorMessage = "Invalid Consignee Address";
+            alert(this.errorMessage);
+            return bRet;
+        }                         
+
+        */
+        
+
+
+        this.cntrs.forEach( rec =>{
+            if ( rec.hbl_cntr_no.length !=11){
+                error = "Invalid Container";
+                bOk = false;
+            }
+            if ( this.gs.isBlank(rec.hbl_cntr_type)){
+                error = "Invalid Container Type";
+                bOk = false;
+            }
+            if  ( this.gs.isZero( rec.hbl_cntr_pkgs)){
+                error = "Invalid Container Pkgs";
+                bOk = false;
+            }
+            if ( this.gs.isBlank(rec.hbl_cntr_unit)){
+                error = "Invalid Container Unit";
+                bOk = false;
+            }
+        });
+
+        if ( !bOk){
+            alert(error);
+        }
+
 
         return bRet;
     }
@@ -177,7 +301,7 @@ export class aiHblComponent implements OnInit {
     }
 
 
-    LovSelected(_Record: SearchTable) {
+    LovSelected(_Record: SearchTable, idx: number = 0) {
 
         if (_Record.controlname == "SHIPPER") {
             this.record.hbl_shipper_id = _Record.id;
@@ -235,6 +359,13 @@ export class aiHblComponent implements OnInit {
             this.record.hbl_pofd_code = _Record.code;
             this.record.hbl_pofd_name = _Record.name;
         }
+        if (_Record.controlname == "CONTAINER TYPE") {
+            this.cntrs.forEach(rec => {
+              if (rec.hbl_pkid == _Record.uid) {
+                rec.hbl_cntr_type = _Record.code;
+              }
+            });
+          }        
     }
 
     onChange(field: string) {
@@ -464,9 +595,62 @@ export class aiHblComponent implements OnInit {
                 this.record.hbl_place_of_issue = this.record.hbl_place_of_issue.toUpperCase().trim();
                 break;
             }                                                                           
+            case 'hbl_pkgs': {
+                this.record.hbl_pkgs = this.gs.roundNumber(this.record.hbl_pkgs, 0);
+                break;
+            }         
+            case 'hbl_gr_wt': {
+                this.record.hbl_gr_wt = this.gs.roundNumber(this.record.hbl_gr_wt, 3);
+                break;
+            }                                    
+            case 'hbl_nt_wt': {
+                this.record.hbl_nt_wt = this.gs.roundNumber(this.record.hbl_nt_wt, 3);
+                break;
+            }                              
+            case 'hbl_cbm': {
+                this.record.hbl_cbm = this.gs.roundNumber(this.record.hbl_cbm, 3);
+                break;
+            }                      
 
         }
     }
+
+    onBlurCntr(field: string, rec : Tbl_Ai_Cntr) {
+
+        switch (field) {
+
+            case 'hbl_cntr_no': {
+                rec.hbl_cntr_no = rec.hbl_cntr_no.toUpperCase().trim();
+                break;
+            }                   
+            case 'hbl_cntr_type': {
+                rec.hbl_cntr_type = rec.hbl_cntr_type.toUpperCase().trim();
+                break;
+            }                                        
+            case 'hbl_cntr_seal': {
+                rec.hbl_cntr_seal = rec.hbl_cntr_seal.toUpperCase().trim();
+                break;
+            }                    
+            case 'hbl_cntr_unit': {
+                rec.hbl_cntr_unit = rec.hbl_cntr_unit.toUpperCase().trim();
+                break;
+            }                    
+            case 'hbl_cntr_pkgs': {
+                rec.hbl_cntr_pkgs= this.gs.roundNumber(rec.hbl_cntr_pkgs, 0);
+                break;
+            }
+            case 'hbl_cntr_cbm': {
+                rec.hbl_cntr_cbm= this.gs.roundNumber(rec.hbl_cntr_cbm, 3);
+                break;
+            }                        
+            case 'hbl_cntr_grwt': {
+                rec.hbl_cntr_grwt= this.gs.roundNumber(rec.hbl_cntr_grwt, 3);
+                break;
+            }            
+        }
+    }
+
+
 
 
 

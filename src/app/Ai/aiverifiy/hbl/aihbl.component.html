@@ -5,13 +5,16 @@
 
             <div class="form-group row">
                 <label class="col-2 col-form-label col-form-label-sm">Format</label>
-                <div class="col-7">
+                <div class="col-6">
                     <select class="form-control form-control-sm" [(ngModel)]="record.hbl_format_id">
                         <option *ngFor="let rec of formats" [value]="rec.fmt_pkid">{{rec.fmt_name}}</option>
                     </select>
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <button class="btn btn-primary btn-sm" (click)="GetRecord('PROCESS')">Process</button>
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
                 </div>
 
             </div>
@@ -40,8 +43,23 @@
 
         <div class="row">
             <div class="col-md-6 testbox  px-0 mx-0">
+
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Book#</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Mbl#</label>
+                    <div class="col-4 mr-0 pr-0">
+                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_mbl_no')"
+                            [(ngModel)]="record.hbl_mbl_no" maxlength="100" />
+                    </div>
+                    <label class="col-2 col-form-label col-form-label-sm">Dt</label>
+                    <div class="col-4 ml-0 pl-0">
+                        <app-date  [inputdate]="record.hbl_mbl_date" (ValueChanged)="record.hbl_mbl_date=$event"
+                        (change)="onChange('hbl_mbl_date')" (focusout)="onFocusout('hbl_mbl_date')">
+                        </app-date>
+                    </div>
+                </div>                
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm ">Book#</label>
                     <div class="col-4 mr-0 pr-0">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_book_no')"
                             [(ngModel)]="record.hbl_book_no" maxlength="100" />
@@ -55,22 +73,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Mbl#</label>
-                    <div class="col-4 mr-0 pr-0">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_mbl_no')"
-                            [(ngModel)]="record.hbl_mbl_no" maxlength="100" />
-                    </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Dt</label>
-                    <div class="col-4 ml-0 pl-0">
-                        <app-date  [inputdate]="record.hbl_mbl_date" (ValueChanged)="record.hbl_mbl_date=$event"
-                        (change)="onChange('hbl_mbl_date')" (focusout)="onFocusout('hbl_mbl_date')">
-                        </app-date>
-                    </div>
-                </div>
-
-
-                <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Carrier</label>
+                    <label class="col-2 col-form-label col-form-label-sm  ">Carrier</label>
                     <div class="col-4 mr-0 pr-0">
                         <app-autocomplete2 [controlname]="'CARRIER'" [tabletype]="'SEA CARRIER'"
                             [displaycolumn]="'CODE'" [displaydata]="record.hbl_carrier_code"
@@ -84,7 +87,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Agent</label>
+                    <label class="col-2 col-form-label col-form-label-sm  ">Agent</label>
                     <div class="col-4  mr-0 pr-0">
                         <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
                             [displaydata]="record.hbl_agent_code" (ValueChanged)="LovSelected($event)">
@@ -100,7 +103,7 @@
 
             <div class="col-md-6 testbox  px-0 mx-0">
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">CoLoader</label>
+                    <label class="col-2 col-form-label col-form-label-sm  ">CoLoader</label>
                     <div class="col-4  mr-0 pr-0">
                         <app-autocomplete2 [controlname]="'COLOADER'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
                             [displaydata]="record.hbl_coloader_code" (ValueChanged)="LovSelected($event)">
@@ -113,8 +116,18 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">CSD</label>
-                    <div class="col-4   mr-0 pr-0">
+
+                    
+                    <label class="col-2 col-form-label col-form-label-sm">Branch</label>
+                    <div class="col-4 pr-0 m-0">
+                        <select #_branch_code class="form-control form-control-sm" [(ngModel)]="record.hbl_branch_code">
+                            <option *ngFor="let rec of CompList" [value]="rec.comp_code">{{rec.comp_name}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <label class="col-2 col-form-label col-form-label-sm ">CSD</label>
+                    <div class="col-4  pl-0 m-0">
                         <app-autocomplete2 [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
                             [displaycolumn]="'NAME'" [displaydata]="record.hbl_handled_name"
                             (ValueChanged)="LovSelected($event)">
@@ -122,14 +135,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Frt.Status</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Frt.Status</label>
                     <div class="col-4 pr-0 m-0">
                         <select #_mbl_frt_status class="form-control form-control-sm"
                             [(ngModel)]="record.mbl_frt_status">
                             <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.code">{{rec.code}}</option>
                         </select>
                     </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Term</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Term</label>
                     <div class="col-4  pl-0 m-0">
                         <select class="form-control form-control-sm" [(ngModel)]="record.mbl_ship_term_id">
                             <option *ngFor="let rec of gs.PARAM_CARGO_MOVEMENT" [value]="rec.code">{{rec.name}}</option>
@@ -138,7 +151,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Type</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Type</label>
                     <div class="col-4 pr-0 m-0">
                         <select class="form-control form-control-sm" [(ngModel)]="record.mbl_cntr_type">
                             <option [value]="'FCL'">FCL</option>
@@ -147,7 +160,7 @@
                             <option [value]="'OTHERS'">OTHERS</option>
                         </select>
                     </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Inco</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Inco</label>
                     <div class="col-4 pl-0 m-0">
                         <select class="form-control form-control-sm" [(ngModel)]="record.mbl_inco_term">
                             <option [value]="'NA'">NA</option>
@@ -174,13 +187,15 @@
             <div class="col-md-6 testbox  px-0 mx-0">
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Hbl#</label>
-                    <div class="col-4 ">
+                    <label class="col-2 col-form-label col-form-label-sm ">Hbl#</label>
+                    <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_hbl_no')"
                             [(ngModel)]="record.hbl_hbl_no" maxlength="100" />
                     </div>
-                    <label class="col-2 col-form-label col-form-label-sm">AMS#</label>
-                    <div class="col-4 ">
+                </div>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm ">AMS#</label>
+                    <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_ams')"
                             [(ngModel)]="record.hbl_ams" maxlength="100" />
                     </div>
@@ -190,12 +205,12 @@
                     <label class="col-2 col-form-label col-form-label-sm">Shipper</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_shipper_name')"
-                            [(ngModel)]="record.hbl_shipper_name" maxlength="100" />
+                            [(ngModel)]="record.hbl_shipper_name" maxlength="60" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Code</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Code</label>
                     <div class="col-10">
                       <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'MASTER'" [subtype]="'SHIPPER'"
                         [displaycolumn]="'CODE'" [displaydata]="record.hbl_shipper_code" #hbl_shipper_code
@@ -208,42 +223,42 @@
                     <label class="col-2 col-form-label col-form-label-sm">Address</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_shipper_add1')"
-                            [(ngModel)]="record.hbl_shipper_add1" maxlength="100" />
+                            [(ngModel)]="record.hbl_shipper_add1" maxlength="60" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_shipper_add2')"
-                            [(ngModel)]="record.hbl_shipper_add2" maxlength="100" />
+                            [(ngModel)]="record.hbl_shipper_add2" maxlength="60" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_shipper_add3')"
-                            [(ngModel)]="record.hbl_shipper_add3" maxlength="100" />
+                            [(ngModel)]="record.hbl_shipper_add3" maxlength="60" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_shipper_add4')"
-                            [(ngModel)]="record.hbl_shipper_add4" maxlength="100" />
+                            [(ngModel)]="record.hbl_shipper_add4" maxlength="60" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_shipper_add5')"
-                            [(ngModel)]="record.hbl_shipper_add5" maxlength="100" />
+                            [(ngModel)]="record.hbl_shipper_add5" maxlength="60" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_shipper_add6')"
-                            [(ngModel)]="record.hbl_shipper_add6" maxlength="100" />
+                            [(ngModel)]="record.hbl_shipper_add6" maxlength="60" />
                     </div>
                 </div>
 
@@ -252,12 +267,12 @@
                     <label class="col-2 col-form-label col-form-label-sm">Consignee</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_consignee_name')"
-                            [(ngModel)]="record.hbl_consignee_name" maxlength="100" />
+                            [(ngModel)]="record.hbl_consignee_name" maxlength="60" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Code</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Code</label>
                     <div class="col-10">
                       <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'MASTER'" [subtype]="'CONSIGNEE'"
                         [displaycolumn]="'CODE'" [displaydata]="record.hbl_consignee_code"
@@ -271,7 +286,7 @@
                     <label class="col-2 col-form-label col-form-label-sm">Address</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_consignee_add1')"
-                            [(ngModel)]="record.hbl_consignee_add1" maxlength="100" />
+                            [(ngModel)]="record.hbl_consignee_add1" maxlength="60" />
                     </div>
                 </div>
 
@@ -279,7 +294,7 @@
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_consignee_add2')"
-                            [(ngModel)]="record.hbl_consignee_add2" maxlength="100" />
+                            [(ngModel)]="record.hbl_consignee_add2" maxlength="60" />
                     </div>
                 </div>
 
@@ -287,28 +302,28 @@
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_consignee_add3')"
-                            [(ngModel)]="record.hbl_consignee_add3" maxlength="100" />
+                            [(ngModel)]="record.hbl_consignee_add3" maxlength="60" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_consignee_add4')"
-                            [(ngModel)]="record.hbl_consignee_add4" maxlength="100" />
+                            [(ngModel)]="record.hbl_consignee_add4" maxlength="60" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_consignee_add5')"
-                            [(ngModel)]="record.hbl_consignee_add5" maxlength="100" />
+                            [(ngModel)]="record.hbl_consignee_add5" maxlength="60" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_consignee_add6')"
-                            [(ngModel)]="record.hbl_consignee_add6" maxlength="100" />
+                            [(ngModel)]="record.hbl_consignee_add6" maxlength="60" />
                     </div>
                 </div>
 
@@ -318,12 +333,12 @@
                     <label class="col-2 col-form-label col-form-label-sm">Notify</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_notify_name')"
-                            [(ngModel)]="record.hbl_notify_name" maxlength="100" />
+                            [(ngModel)]="record.hbl_notify_name" maxlength="60" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Code</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Code</label>
                     <div class="col-10">
                       <app-autocomplete2 [controlname]="'NOTIFY-TO'" [tabletype]="'MASTER'" [subtype]="'LOCATION'"
                         [displaycolumn]="'CODE'" [displaydata]="record.hbl_notify_code"
@@ -336,7 +351,7 @@
                     <label class="col-2 col-form-label col-form-label-sm">Address</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_notify_add1')"
-                            [(ngModel)]="record.hbl_notify_add1" maxlength="100" />
+                            [(ngModel)]="record.hbl_notify_add1" maxlength="60" />
                     </div>
                 </div>
 
@@ -344,43 +359,42 @@
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_notify_add2')"
-                            [(ngModel)]="record.hbl_notify_add2" maxlength="100" />
+                            [(ngModel)]="record.hbl_notify_add2" maxlength="60" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_notify_add3')"
-                            [(ngModel)]="record.hbl_notify_add3" maxlength="100" />
+                            [(ngModel)]="record.hbl_notify_add3" maxlength="60" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_notify_add4')"
-                            [(ngModel)]="record.hbl_notify_add4" maxlength="100" />
+                            [(ngModel)]="record.hbl_notify_add4" maxlength="60" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_notify_add5')"
-                            [(ngModel)]="record.hbl_notify_add5" maxlength="100" />
+                            [(ngModel)]="record.hbl_notify_add5" maxlength="60" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_notify_add6')"
-                            [(ngModel)]="record.hbl_notify_add6" maxlength="100" />
+                            [(ngModel)]="record.hbl_notify_add6" maxlength="60" />
                     </div>
                 </div>
-
             </div>
 
             <div class="col-md-6 testbox  px-0 mx-0">
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">P.Carriage</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">P.Carriage</label>
                     <div class="col-4 mr-0 pr-0">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pre_carriage')"
                             [(ngModel)]="record.hbl_pre_carriage" maxlength="100" />
@@ -399,7 +413,7 @@
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pol')"
                             [(ngModel)]="record.hbl_pol" maxlength="100" />
                     </div>
-                    <label class="col-2 col-form-label col-form-label-sm">ETD</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">ETD</label>
                     <div class="col-4  ml-0 pl-0">
                         <app-date  [inputdate]="record.hbl_pol_etd" (ValueChanged)="record.hbl_pol_etd=$event"
                         (change)="onChange('hbl_pol_etd')" (focusout)="onFocusout('hbl_pol_etd')">
@@ -408,7 +422,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Code</label>
                     <div class="col-4 mr-0 pr-0">
                         <app-autocomplete2 [controlname]="'POL'" [tabletype]="'SEA PORT'" [displaycolumn]="'CODE'"
                             [displaydata]="record.hbl_pol_code" (ValueChanged)="LovSelected($event)">
@@ -427,7 +441,7 @@
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pod')"
                             [(ngModel)]="record.hbl_pod" maxlength="100" />
                     </div>
-                    <label class="col-2 col-form-label col-form-label-sm">ETA</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">ETA</label>
                     <div class="col-4  ml-0 pl-0">
                         <app-date  [inputdate]="record.hbl_pod_eta" (ValueChanged)="record.hbl_pod_eta=$event"
                         (change)="onChange('hbl_pod_eta')" (focusout)="onFocusout('hbl_pod_eta')">
@@ -436,7 +450,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Code</label>
                     <div class="col-4 mr-0 pr-0">
                         <app-autocomplete2 [controlname]="'POD'" [tabletype]="'SEA PORT'" [displaycolumn]="'CODE'"
                             [displaydata]="record.hbl_pod_code" (ValueChanged)="LovSelected($event)">
@@ -454,7 +468,7 @@
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pofd')"
                             [(ngModel)]="record.hbl_pofd" maxlength="100" />
                     </div>
-                    <label class="col-2 col-form-label col-form-label-sm">ETA</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">ETA</label>
                     <div class="col-4  ml-0 pl-0">
                         <app-date  [inputdate]="record.hbl_pofd_eta" (ValueChanged)="record.hbl_pofd_eta=$event"
                         (change)="onChange('hbl_pofd_eta')" (focusout)="onFocusout('hbl_pofd_eta')">
@@ -463,7 +477,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Code</label>
                     <div class="col-4 mr-0 pr-0">
                         <app-autocomplete2 [controlname]="'POFD'" [tabletype]="'SEA PORT'" [displaycolumn]="'CODE'"
                             [displaydata]="record.hbl_pofd_code" (ValueChanged)="LovSelected($event)">
@@ -476,12 +490,12 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Delivery</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Delivery</label>
                     <div class="col-4 mr-0 pr-0">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_place_of_delivery')"
                             [(ngModel)]="record.hbl_place_of_delivery" maxlength="100" />
                     </div>
-                    <label class="col-2 col-form-label col-form-label-sm">ETA</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">ETA</label>
                     <div class="col-4  ml-0 pl-0">
                         <app-date  [inputdate]="record.hbl_delivery_date" (ValueChanged)="record.hbl_delivery_date=$event"
                         (change)="onChange('hbl_delivery_date')" (focusout)="onFocusout('hbl_delivery_date')">
@@ -489,7 +503,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">O.Country</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">O.Country</label>
                     <div class="col-4 mr-0 pr-0">
                         <app-autocomplete2 [controlname]="'COUNTRY'" [tabletype]="'PARAM'" [subtype]="'COUNTRY'"
                             [displaycolumn]="'NAME'" [displaydata]="record.hbl_country_name"
@@ -499,14 +513,14 @@
                 </div>                
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Vessel</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Vessel</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_vessel')"
                             [(ngModel)]="record.hbl_vessel" maxlength="100" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Voyage</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Voyage</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_voyage')"
                             [(ngModel)]="record.hbl_voyage" maxlength="100" />
@@ -514,7 +528,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Commodity</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Commodity</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_commodity')"
                             [(ngModel)]="record.hbl_commodity" maxlength="100" />
@@ -522,7 +536,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Inv#</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Inv#</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_invno')"
                             [(ngModel)]="record.hbl_invno" maxlength="100" />
@@ -530,7 +544,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Po#</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Po#</label>
                     <div class="col-10">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_po')"
                             [(ngModel)]="record.hbl_po" maxlength="100" />
@@ -538,14 +552,14 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Frt.Status</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Frt.Status</label>
                     <div class="col-4 pr-0 m-0">
                         <select #_mbl_frt_status class="form-control form-control-sm"
                             [(ngModel)]="record.hbl_frt_status">
                             <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.code">{{rec.code}}</option>
                         </select>
                     </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Term</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Term</label>
                     <div class="col-4  pl-0 m-0">
                         <select class="form-control form-control-sm" [(ngModel)]="record.hbl_ship_term_id">
                             <option *ngFor="let rec of gs.PARAM_CARGO_MOVEMENT" [value]="rec.code">{{rec.name}}</option>
@@ -554,7 +568,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Inco</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Inco</label>
                     <div class="col-4 pr-0 m-0">
                         <select class="form-control form-control-sm" [(ngModel)]="record.hbl_inco_term">
                             <option [value]="'NA'">NA</option>
@@ -568,12 +582,12 @@
 
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Pkgs</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Pkgs</label>
                     <div class="col-4 mr-0 pr-0">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_pkgs')"
+                        <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_pkgs')"
                             [(ngModel)]="record.hbl_pkgs" maxlength="100" />
                     </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Unit</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Unit</label>
                     <div class="col-4 ml-0 pl-0">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_unit')"
                             [(ngModel)]="record.hbl_unit" maxlength="100" />
@@ -582,22 +596,22 @@
 
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">Gr-Wt</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Gr-Wt</label>
                     <div class="col-4 mr-0 pr-0">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_gr_wt')"
+                        <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_gr_wt')"
                             [(ngModel)]="record.hbl_gr_wt" maxlength="100" />
                     </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Nt-Wt</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Nt-Wt</label>
                     <div class="col-4 ml-0 pl-0">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_nt_wt')"
+                        <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_nt_wt')"
                             [(ngModel)]="record.hbl_nt_wt" maxlength="100" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">CBM</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">CBM</label>
                     <div class="col-10">
-                        <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_cbm')"
+                        <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_cbm')"
                             [(ngModel)]="record.hbl_cbm" maxlength="100" />
                     </div>
                 </div>
@@ -606,12 +620,12 @@
 
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm">P.Issue</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">P.Issue</label>
                     <div class="col-4 mr-0 pr-0">
                         <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_place_of_issue')"
                             [(ngModel)]="record.hbl_place_of_issue" maxlength="100" />
                     </div>
-                    <label class="col-2 col-form-label col-form-label-sm">Dt</label>
+                    <label class="col-2 col-form-label col-form-label-sm ">Dt</label>
                     <div class="col-4 ml-0 pl-0">
                             <app-date  [inputdate]="record.hbl_date_of_issue" (ValueChanged)="record.hbl_date_of_issue=$event"
                             (change)="onChange('hbl_date_of_issue')" (focusout)="onFocusout('hbl_date_of_issue')">
@@ -709,37 +723,42 @@
                         <tr *ngFor="let rec of cntrs; let i = index">
                             <td class="m-0 p-0">
                                 <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_no"
-                                    maxlength="100" />
+                                    maxlength="11" (blur)="onBlurCntr('hbl_cntr_no',rec)" />
                             </td>
 
                             <td class="m-0 p-0">
-                                <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_type"
-                                    maxlength="100" />
+
+                                    <app-autocomplete2 [controlname]="'CONTAINER TYPE'" [displaycolumn]="'CODE'"
+                                    [tabletype]="'PARAM'" [subtype]="'CONTAINER TYPE'" [uid]="rec.hbl_pkid"
+                                    [displaydata]="rec.hbl_cntr_type" (ValueChanged)="LovSelected($event,i)">
+                                  </app-autocomplete2>
+
+
                             </td>
 
                             <td class="m-0 p-0">
                                 <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_seal"
-                                    maxlength="100" />
+                                    maxlength="100" (blur)="onBlurCntr('hbl_cntr_seal',rec)" />
                             </td>
 
                             <td class="m-0 p-0">
-                                <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_pkgs"
-                                    maxlength="100" />
+                                <input class="form-control form-control-sm" type="number" [(ngModel)]="rec.hbl_cntr_pkgs"
+                                    maxlength="100"  (blur)="onBlurCntr('hbl_cntr_pkgs',rec)" />
                             </td>
 
                             <td class="m-0 p-0">
                                 <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_unit"
-                                    maxlength="100" />
+                                    maxlength="100" (blur)="onBlurCntr('hbl_cntr_unit',rec)" />
                             </td>
 
                             <td class="m-0 p-0">
-                                <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_cbm"
-                                    maxlength="100" />
+                                <input class="form-control form-control-sm" type="number" [(ngModel)]="rec.hbl_cntr_cbm"
+                                    maxlength="100" (blur)="onBlurCntr('hbl_cntr_cbm',rec)" />
                             </td>
 
                             <td class="m-0 p-0">
-                                <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_grwt"
-                                    maxlength="100" />
+                                <input class="form-control form-control-sm" type="number" [(ngModel)]="rec.hbl_cntr_grwt"
+                                    maxlength="100" (blur)="onBlurCntr('hbl_cntr_grwt',rec)" />
                             </td>
 
                             <td style="text-align:center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
@@ -757,7 +776,6 @@
 
     </div>
 </div>
-
 
 
 <div class="page-footer">
