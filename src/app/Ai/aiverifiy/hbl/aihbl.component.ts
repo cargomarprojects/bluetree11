@@ -14,8 +14,6 @@ import { vm_Tbl_Ai_Hblm, Ai_Hblm_Model, Tbl_Ai_Hblm, Tbl_Ai_HblDesc, Tbl_Ai_Cntr
 import { SearchTable } from '../../../shared/models/searchtable';
 import { Tbl_Ai_Formatm } from '../../models/Tbl_Ai_Format';
 
-
-
 @Component({
     selector: 'app-ai-hbl',
     templateUrl: './aihbl.component.html'
@@ -670,7 +668,6 @@ export class aiHblComponent implements OnInit {
     }
 
     RemoveDescRow(rec: Tbl_Ai_HblDesc, i: number) {
-
         if (this.gs.isBlank(rec.hbl_desc1) && this.gs.isBlank(rec.hbl_desc2)) {
             if (!confirm("Delete Y/N"))
                 return;
@@ -679,7 +676,6 @@ export class aiHblComponent implements OnInit {
         else {
             alert('Only blank row can be removed');
         }
-
     }
 
     AddCntrRow() {
@@ -699,6 +695,5 @@ export class aiHblComponent implements OnInit {
     ChangeTab(_tab) {
         this.tab = _tab;
     }
-
 
 }
