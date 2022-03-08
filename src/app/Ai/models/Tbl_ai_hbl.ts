@@ -53,7 +53,7 @@ export class Tbl_Ai_Hblm {
     hbl_shipper_add3: string;
     hbl_shipper_add4: string;
     hbl_shipper_add5: string;
-    hbl_shipper_add6: string;
+    
 
     hbl_consignee_id: string;
     hbl_consignee_code: string;
@@ -63,7 +63,7 @@ export class Tbl_Ai_Hblm {
     hbl_consignee_add3: string;
     hbl_consignee_add4: string;
     hbl_consignee_add5: string;
-    hbl_consignee_add6: string;
+
 
     hbl_notify_id: string;
     hbl_notify_code: string;
@@ -73,7 +73,7 @@ export class Tbl_Ai_Hblm {
     hbl_notify_add3: string;
     hbl_notify_add4: string;
     hbl_notify_add5: string;
-    hbl_notify_add6: string;
+    
 
     hbl_pre_carriage: string;
     hbl_por: string;

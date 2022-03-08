@@ -481,10 +481,7 @@ export class aiHblComponent implements OnInit {
                 this.record.hbl_shipper_add5 = this.record.hbl_shipper_add5.toUpperCase().trim();
                 break;
             }            
-            case 'hbl_shipper_add6': {
-                this.record.hbl_shipper_add6 = this.record.hbl_shipper_add6.toUpperCase().trim();
-                break;
-            }            
+
             case 'hbl_consignee_name': {
                 this.record.hbl_consignee_name = this.record.hbl_consignee_name.toUpperCase().trim();
                 break;
@@ -509,10 +506,7 @@ export class aiHblComponent implements OnInit {
                 this.record.hbl_consignee_add5 = this.record.hbl_consignee_add5.toUpperCase().trim();
                 break;
             }                                    
-            case 'hbl_consignee_add6': {
-                this.record.hbl_consignee_add6 = this.record.hbl_consignee_add6.toUpperCase().trim();
-                break;
-            }                           
+
             case 'hbl_notify_name': {
                 this.record.hbl_notify_name = this.record.hbl_notify_name.toUpperCase().trim();
                 break;
@@ -537,10 +531,7 @@ export class aiHblComponent implements OnInit {
                 this.record.hbl_notify_add5 = this.record.hbl_notify_add5.toUpperCase().trim();
                 break;
             }                                    
-            case 'hbl_notify_add6': {
-                this.record.hbl_notify_add6 = this.record.hbl_notify_add6.toUpperCase().trim();
-                break;
-            }                                    
+            
             case 'hbl_pre_carriage': {
                 this.record.hbl_pre_carriage = this.record.hbl_pre_carriage.toUpperCase().trim();
                 break;
