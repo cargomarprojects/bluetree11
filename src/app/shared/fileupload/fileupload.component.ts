@@ -337,7 +337,7 @@ export class FileUploadComponent implements OnInit {
   }
 
 
-  List() {
+  List(_type:string="") {
     let fTypeName: string = "";
     this.errorMessage = '';
     var SearchData = this.gs.UserInfo;
@@ -346,6 +346,7 @@ export class FileUploadComponent implements OnInit {
     SearchData.FILES_SUB_ID = this.Files_Sub_Id;
     SearchData.VIEW_ONLY_SOURCE = this.VIEW_ONLY_SOURCE
     SearchData.VIEW_ONLY_ID = this.VIEW_ONLY_ID;
+    SearchData.TYPE = _type;
     this.lovService.DocumentList(SearchData)
       .subscribe(response => {
         this.RecordList = <Table_Mast_Files[]>response.list;

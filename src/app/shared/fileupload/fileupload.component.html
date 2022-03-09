@@ -49,7 +49,8 @@
         <label class="col-2 col-form-label col-form-label-sm"></label>
         <div class="col-10">
           <!-- <button (click)="uploadFiles()">Upload</button> -->
-          <button class="btn btn-info btn-sm" (click)="uploadFiles()">Upload</button>
+          <button class="btn btn-info btn-sm mr-1" (click)="uploadFiles()">Upload</button>
+          <button class="btn btn-info btn-sm" (click)="List('SHOW-DELETED')">Show Deleted</button>
         </div>
       </div>
 
@@ -91,7 +92,7 @@
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of RecordList;let i=index">
-          <tr  (mousedown)="selectedRowIndex = i" [class.selected]="i == selectedRowIndex">
+          <tr [style.color]="rec.files_status=='D'?'Red':'Black'"  (mousedown)="selectedRowIndex = i" [class.selected]="i == selectedRowIndex">
             <td  class="p-0 text-center" (click)="OpenFile(rec)">
               <i class="fa fa-folder-open fa-lg pointer" aria-hidden="true" ></i>
             </td> 

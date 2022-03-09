@@ -16,6 +16,7 @@ export interface Table_Mast_Files {
     files_aws_job_status : string ;
     files_width : number;
     files_height : number;
+    files_status:string;
 }
 
 export interface vm_table_mast_files {
