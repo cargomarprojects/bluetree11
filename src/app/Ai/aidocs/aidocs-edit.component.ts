@@ -281,6 +281,7 @@ export class aidocsEditComponent implements OnInit {
             appid:this.gs.appid,
             menuid: this.menuid,
             pkid: rec.file_id ,
+            parentid : rec.files_parent_id,
             type: '',
             origin: 'aidocs-page',
             mode: 'EDIT'

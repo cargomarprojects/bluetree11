@@ -40,6 +40,7 @@ export class aiverifyComponent implements OnInit {
     
     pkid: string;
     menuid: string;
+    parentid: string;
     
     errorMessage: string;
     Foregroundcolor: string;
@@ -68,10 +69,12 @@ export class aiverifyComponent implements OnInit {
         if (this.route.snapshot.queryParams.parameter == null) {
             this.menuid = this.route.snapshot.queryParams.menuid;
             this.pkid = this.route.snapshot.queryParams.pkid;
+            this.parentid = this.route.snapshot.queryParams.parentid;
         } else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
             this.menuid = options.menuid;
             this.pkid = options.pkid;
+            this.parentid = options.parentid;
         }
         this.initPage();
         this.GetRecord();

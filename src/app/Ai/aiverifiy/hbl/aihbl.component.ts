@@ -317,24 +317,24 @@ export class aiHblComponent implements OnInit {
         }
 
         if (_Record.controlname == "CARRIER") {
-            this.record.hbl_carrier_id = _Record.id;
-            this.record.hbl_carrier_code = _Record.code;
-            this.record.hbl_carrier_name = _Record.name;
+            this.record.mbl_carrier_id = _Record.id;
+            this.record.mbl_carrier_code = _Record.code;
+            this.record.mbl_carrier_name = _Record.name;
         }
         if (_Record.controlname == "AGENT") {
-            this.record.hbl_agent_id = _Record.id;
-            this.record.hbl_agent_code = _Record.code;
-            this.record.hbl_agent_name = _Record.name;
+            this.record.mbl_agent_id = _Record.id;
+            this.record.mbl_agent_code = _Record.code;
+            this.record.mbl_agent_name = _Record.name;
         }
         if (_Record.controlname == "COLOADER") {
-            this.record.hbl_coloader_id = _Record.id;
-            this.record.hbl_coloader_code = _Record.code;
-            this.record.hbl_coloader_name = _Record.name;
+            this.record.mbl_coloader_id = _Record.id;
+            this.record.mbl_coloader_code = _Record.code;
+            this.record.mbl_coloader_name = _Record.name;
         }
         if (_Record.controlname == "HANDLEDBY") {
-            this.record.hbl_handled_id = _Record.id;
-            this.record.hbl_handled_code = _Record.code;
-            this.record.hbl_handled_name = _Record.name;
+            this.record.mbl_handled_id = _Record.id;
+            this.record.mbl_handled_code = _Record.code;
+            this.record.mbl_handled_name = _Record.name;
         }
         if (_Record.controlname == "COUNTRY") {
             this.record.hbl_country_id = _Record.id;
@@ -429,24 +429,24 @@ export class aiHblComponent implements OnInit {
 
     onBlur(field: string) {
         switch (field) {
-            case 'hbl_book_no': {
-                this.record.hbl_book_no = this.record.hbl_book_no.toUpperCase().trim();
+            case 'mbl_book_no': {
+                this.record.mbl_book_no = this.record.mbl_book_no.toUpperCase().trim();
                 break;
             }
-            case 'hbl_mbl_no': {
-                this.record.hbl_mbl_no = this.record.hbl_mbl_no.toUpperCase().trim();
+            case 'mbl_no': {
+                this.record.mbl_no = this.record.mbl_no.toUpperCase().trim();
                 break;
             }
-            case 'hbl_carrier_name': {
-                this.record.hbl_carrier_name = this.record.hbl_carrier_name.toUpperCase().trim();
+            case 'mbl_carrier_name': {
+                this.record.mbl_carrier_name = this.record.mbl_carrier_name.toUpperCase().trim();
                 break;
             }
-            case 'hbl_agent_name': {
-                this.record.hbl_agent_name = this.record.hbl_agent_name.toUpperCase().trim();
+            case 'mbl_agent_name': {
+                this.record.mbl_agent_name = this.record.mbl_agent_name.toUpperCase().trim();
                 break;
             }            
-            case 'hbl_coloader_name': {
-                this.record.hbl_coloader_name = this.record.hbl_coloader_name.toUpperCase().trim();
+            case 'mbl_coloader_name': {
+                this.record.mbl_coloader_name = this.record.mbl_coloader_name.toUpperCase().trim();
                 break;
             }            
             case 'hbl_hbl_no': {

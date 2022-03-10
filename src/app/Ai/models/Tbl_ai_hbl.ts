@@ -10,40 +10,42 @@ export class Tbl_Ai_Hblm {
     hbl_file_id: string;
     hbl_format_id: string;
 
-    hbl_branch_code: string;
+    mbl_branch_code: string;
 
-    hbl_mbl_no: string;
-    hbl_mbl_date: string;
-    hbl_book_no: string;
-    hbl_book_date: string;
-    hbl_hbl_no: string;
-    hbl_hbl_date: string;
+    mbl_no: string;
+    mbl_date: string;
+    mbl_book_no: string;
+    mbl_book_date: string;
 
-    hbl_carrier_id: string;
-    hbl_carrier_code: string;
-    hbl_carrier_name: string;
 
-    hbl_agent_id: string;
-    hbl_agent_code: string;
-    hbl_agent_name: string;
+    mbl_carrier_id: string;
+    mbl_carrier_code: string;
+    mbl_carrier_name: string;
 
-    hbl_coloader_id: string;
-    hbl_coloader_code: string;
-    hbl_coloader_name: string;
+    mbl_agent_id: string;
+    mbl_agent_code: string;
+    mbl_agent_name: string;
 
-    hbl_handled_id: string;
-    hbl_handled_code: string;
-    hbl_handled_name: string;
+    mbl_coloader_id: string;
+    mbl_coloader_code: string;
+    mbl_coloader_name: string;
 
-    hbl_country_id: string;
-    hbl_country_code: string;
-    hbl_country_name: string;
+    mbl_handled_id: string;
+    mbl_handled_code: string;
+    mbl_handled_name: string;
 
     mbl_frt_status: string;
     mbl_ship_term_id : string;
     mbl_cntr_type : string ;
     mbl_inco_term : string ;
+
     
+    hbl_hbl_no: string;
+    hbl_hbl_date: string;
+
+    hbl_country_id: string;
+    hbl_country_code: string;
+    hbl_country_name: string;
 
     hbl_shipper_id: string;
     hbl_shipper_code: string;
