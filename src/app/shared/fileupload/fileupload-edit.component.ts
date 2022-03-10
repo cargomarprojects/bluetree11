@@ -14,9 +14,13 @@ export class FileUploadEditComponent implements OnInit {
     title = '';
 
     @Input() record: Table_Mast_Files;
+    Files_TypeList: any;
+    @Input() set typelist(value: any) {
+        this.Files_TypeList = value;
+    }
 
     errorMessage: string = '';
-
+    txt_fileDocType: string = "";
     loading = false;
 
     constructor(
@@ -31,8 +35,16 @@ export class FileUploadEditComponent implements OnInit {
     // Init Will be called After executing Constructor
     ngOnInit() {
         this.gs.checkAppVersion();
+        if (!this.gs.isBlank(this.Files_TypeList)) {
+            var Rec = this.Files_TypeList.find(rec => rec.name == this.record.files_type);
+            if (Rec != null) {
+                this.txt_fileDocType = Rec.code;
+            }
+        }
     }
+    ngAfterViewInit() {
 
+    }
     InitComponent() {
 
     }
@@ -59,7 +71,7 @@ export class FileUploadEditComponent implements OnInit {
                 }
                 else {
                     this.record.files_editrow = false;
-                    
+
                     // this.errorMessage='Save Complete';
                     // alert(this.errorMessage);
                 }
@@ -75,11 +87,11 @@ export class FileUploadEditComponent implements OnInit {
 
     onBlur(field: string) {
         switch (field) {
-          case 'file_desc': {
-            this.record.file_desc = this.record.file_desc.toUpperCase();
-            break;
-          }
+            case 'file_desc': {
+                this.record.file_desc = this.record.file_desc.toUpperCase();
+                break;
+            }
         }
-      }
+    }
 
 }

@@ -8,6 +8,14 @@
                         [(ngModel)]="record.file_desc" maxlength="50" />
                 </div>
             </div>
+            <div *ngIf="Files_TypeList.length>1" class="form-group row">
+              <label class="col-2 col-form-label col-form-label-sm">DocType</label>
+              <div class="col-10">
+                <select class="form-control form-control-sm" [(ngModel)]="txt_fileDocType">
+                  <option *ngFor="let rec of Files_TypeList" [value]="rec.code">{{rec.name}}</option>
+                </select>
+              </div>
+            </div>
         </div>
         <div class="col-md-6 testbox  px-0 mx-0">
         </div>
