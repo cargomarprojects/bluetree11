@@ -17,7 +17,7 @@ declare var $: any;
 })
 export class FileUploadComponent implements OnInit {
 
-  
+
 
   public Doc_title: string = "";
   @Input() set title(value: string) {
@@ -127,7 +127,7 @@ export class FileUploadComponent implements OnInit {
 
   @Output() callbackparent = new EventEmitter<Table_Mast_Files>();
 
-  
+
 
   txt_fileName: string = "";
   txt_fileRefno: string = "";
@@ -150,7 +150,7 @@ export class FileUploadComponent implements OnInit {
   modal: any;
 
   selectedRowIndex = -1;
-
+  showDeleted: boolean = false;
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -177,10 +177,10 @@ export class FileUploadComponent implements OnInit {
     this.LoadCombo();
     this.List();
 
-    $(function() {
+    $(function () {
       $('.modal-dialog').draggable();
     });
- 
+
   }
 
 
@@ -337,9 +337,10 @@ export class FileUploadComponent implements OnInit {
   }
 
 
-  List(_type:string="") {
+  List(_type: string = "") {
     let fTypeName: string = "";
     this.errorMessage = '';
+    this.showDeleted = false;
     var SearchData = this.gs.UserInfo;
     SearchData.PKID = this.Files_Parent_Id;
     SearchData.FILES_TYPE = this.Files_Type;
@@ -349,6 +350,10 @@ export class FileUploadComponent implements OnInit {
     SearchData.TYPE = _type;
     this.lovService.DocumentList(SearchData)
       .subscribe(response => {
+
+        if (_type === 'SHOW-DELETED')
+          this.showDeleted = true;
+          
         this.RecordList = <Table_Mast_Files[]>response.list;
 
         this.RecordList.forEach(Rec => {
@@ -448,14 +453,19 @@ export class FileUploadComponent implements OnInit {
       return;
     }
 
+    let nowDate = new Date();
     this.loading = true;
 
     let SearchData = {
       fileid: '',
-      filelocation: ''
+      filelocation: '',
+      files_deleted_by: '',
+      files_deleted_date: ''
     };
     SearchData.fileid = _rec.file_id;
     SearchData.filelocation = this.gs.FS_APP_FOLDER + _rec.files_path;
+    SearchData.files_deleted_by = this.gs.user_code;
+    SearchData.files_deleted_date = this.gs.defaultValues.today + ' ' + nowDate.toLocaleTimeString('it-IT', { hour12: false });
     this.errorMessage = '';
     this.lovService.DeleteRecord(SearchData)
       .subscribe(response => {
@@ -503,8 +513,8 @@ export class FileUploadComponent implements OnInit {
   }
 
 
-  awss3upload(_rec: Table_Mast_Files){
-    
+  awss3upload(_rec: Table_Mast_Files) {
+
     if (!confirm("Upload File to S3 " + _rec.file_desc)) {
       return;
     }
@@ -512,11 +522,11 @@ export class FileUploadComponent implements OnInit {
     this.loading = true;
     let filename = this.gs.FS_APP_FOLDER + _rec.files_path + _rec.file_id;
     let SearchData = {
-      filename  : filename,
-      justfilename : _rec.file_desc,
+      filename: filename,
+      justfilename: _rec.file_desc,
       fileid: _rec.file_id,
     };
-    
+
     this.errorMessage = '';
     this.lovService.Save2S3(SearchData)
       .subscribe(response => {
@@ -525,8 +535,7 @@ export class FileUploadComponent implements OnInit {
           this.errorMessage = response.error;
           alert(this.errorMessage);
         }
-        else 
-        {
+        else {
           _rec.files_aws_bucket = response.bucket;
         }
 
@@ -534,20 +543,20 @@ export class FileUploadComponent implements OnInit {
         this.loading = false;
         this.errorMessage = this.gs.getError(error);
       }
-    );
+      );
   }
 
 
-  awsextractdata(_rec: Table_Mast_Files){
+  awsextractdata(_rec: Table_Mast_Files) {
 
     this.loading = true;
     let filename = this.gs.FS_APP_FOLDER + _rec.files_path + _rec.file_id;
     let SearchData = {
-      filename  : filename,
-      justfilename : _rec.file_desc,
+      filename: filename,
+      justfilename: _rec.file_desc,
       fileid: _rec.file_id,
     };
-    
+
     this.errorMessage = '';
     this.lovService.StartExtractDataProcess(SearchData)
       .subscribe(response => {
@@ -556,8 +565,7 @@ export class FileUploadComponent implements OnInit {
           this.errorMessage = response.error;
           alert(this.errorMessage);
         }
-        else 
-        {
+        else {
           _rec.files_aws_job_id = response.jobid;
           _rec.files_aws_job_status = response.jobstatus;
         }
@@ -566,17 +574,17 @@ export class FileUploadComponent implements OnInit {
         this.loading = false;
         this.errorMessage = this.gs.getError(error);
       }
-    );
+      );
 
   }
 
 
-  preview(rec : Table_Mast_Files){
-    if( this.callbackparent )
+  preview(rec: Table_Mast_Files) {
+    if (this.callbackparent)
       this.callbackparent.emit(rec);
   }
 
-  showHide(){
+  showHide() {
     this.bshow = !this.bshow;
   }
 
