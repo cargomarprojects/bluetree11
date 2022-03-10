@@ -6,56 +6,58 @@
 </div>
 
 <div class="page-body" *ngIf="canupload">
-  <div class="row border" >
-    <div class="col-md-6 testbox  px-0 mx-0" >
+  <div class="row border">
+    <div class="col-md-6 testbox  px-0 mx-0">
       <div *ngIf="bshow">
-      <div class="form-group row">
-        <label class="col-2 col-form-label col-form-label-sm">File</label>
-        <div class="col-10">
-          <input type="file" id="file"  multiple style="width: 600px" #fileinput (change)="getFileDetails($event)">
-          <!-- <input type="file" id="file"  style="width: 600px" #fileinput (change)="getFileDetails($event)"> -->
-          <!-- <label class="input-group-btn sm">
+        <div class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm">File</label>
+          <div class="col-10">
+            <input type="file" id="file" multiple style="width: 600px" #fileinput (change)="getFileDetails($event)">
+            <!-- <input type="file" id="file"  style="width: 600px" #fileinput (change)="getFileDetails($event)"> -->
+            <!-- <label class="input-group-btn sm">
             <span class="btn btn-info sm"> Choose File
               <input type="file" id="file" style="display: none;" #fileinput (change)="getFileDetails($event)">
             </span>{{txt_fileName}}
           </label> -->
+          </div>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-2 col-form-label col-form-label-sm">FileName</label>
-        <div class="col-10">
-          <input class="form-control form-control-sm" type="text" (blur)="onBlur('txt_fileName')"
-            [(ngModel)]="txt_fileName" maxlength="50" />
+        <div class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm">FileName</label>
+          <div class="col-10">
+            <input class="form-control form-control-sm" type="text" (blur)="onBlur('txt_fileName')"
+              [(ngModel)]="txt_fileName" maxlength="50" />
+          </div>
         </div>
+
+        <div class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm">Ref# </label>
+          <div class="col-10">
+            <input class="form-control form-control-sm" type="text" (blur)="onBlur('txt_fileRefno')"
+              [(ngModel)]="txt_fileRefno" maxlength="50" />
+          </div>
+        </div>
+
+        <div *ngIf="Files_TypeList.length>1" class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm">DocType</label>
+          <div class="col-10">
+            <select class="form-control form-control-sm" [(ngModel)]="txt_fileDocType">
+              <option *ngFor="let rec of Files_TypeList" [value]="rec.code">{{rec.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm"></label>
+          <div class="col-10">
+            <!-- <button (click)="uploadFiles()">Upload</button> -->
+            <button class="btn btn-info btn-sm mr-4" (click)="uploadFiles()">Upload</button>
+            <input type="checkbox" class="form-check-input  mt-2 ml-2 mr-2" [(ngModel)]="isDeleted" #is_deleted />
+            <span class="mt-2 ml-4 mr-2">Deleted</span>
+            <button class="btn btn-info btn-sm ml-2" (click)="List()">Refresh</button>
+          </div>
+        </div>
+
       </div>
 
-      <div class="form-group row">
-        <label class="col-2 col-form-label col-form-label-sm">Ref# </label>
-        <div class="col-10">
-          <input class="form-control form-control-sm" type="text" (blur)="onBlur('txt_fileRefno')"
-            [(ngModel)]="txt_fileRefno" maxlength="50" />
-        </div>
-      </div>
-
-      <div *ngIf="Files_TypeList.length>1" class="form-group row">
-        <label class="col-2 col-form-label col-form-label-sm">DocType</label>
-        <div class="col-10">
-          <select class="form-control form-control-sm" [(ngModel)]="txt_fileDocType">
-            <option *ngFor="let rec of Files_TypeList" [value]="rec.code">{{rec.name}}</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-2 col-form-label col-form-label-sm"></label>
-        <div class="col-10">
-          <!-- <button (click)="uploadFiles()">Upload</button> -->
-          <button class="btn btn-info btn-sm mr-1" (click)="uploadFiles()">Upload</button>
-          <button class="btn btn-info btn-sm" (click)="List('SHOW-DELETED')">Show Deleted</button>
-        </div>
-      </div>
-
-    </div>
-    
     </div>
 
     <div class="col-md-6 testbox  px-0 mx-0">
@@ -94,29 +96,30 @@
           </tr>
         </thead>
         <tbody class="page-body-tbody" *ngFor="let rec of RecordList;let i=index">
-          <tr [style.color]="rec.files_status=='D'?'Red':'Black'"  (mousedown)="selectedRowIndex = i" [class.selected]="i == selectedRowIndex">
-            <td  class="p-0 text-center" (click)="OpenFile(rec)">
-              <i class="fa fa-folder-open fa-lg pointer" aria-hidden="true" ></i>
-            </td> 
-             <td  class="p-0 text-center" (click)="ShowFile(rec)">
-               <i class="fa fa-download fa-lg pointer"   aria-hidden="true"></i> 
-            </td> 
+          <tr [style.color]="rec.files_status=='D'?'Red':'Black'" (mousedown)="selectedRowIndex = i"
+            [class.selected]="i == selectedRowIndex">
+            <td class="p-0 text-center" (click)="OpenFile(rec)">
+              <i class="fa fa-folder-open fa-lg pointer" aria-hidden="true"></i>
+            </td>
+            <td class="p-0 text-center" (click)="ShowFile(rec)">
+              <i class="fa fa-download fa-lg pointer" aria-hidden="true"></i>
+            </td>
 
             <td *ngIf="Files_TypeList.length>1" class="p-0">{{rec.files_type}}</td>
-            <td class="p-0 hlink2" (click)="editrow(rec)" >{{rec.file_desc}}</td>
+            <td class="p-0 hlink2" (click)="editrow(rec)">{{rec.file_desc}}</td>
             <td class="p-0">{{rec.files_sizewithunit}}</td>
             <td class="p-0">{{rec.files_ref_no}}</td>
             <td class="p-0">{{rec.files_created_by}}</td>
             <td class="p-0">{{rec.files_created_date | date : gs.date_display_fmt_with_time}}</td>
-            <td class="p-0"  *ngIf="showDeleted">{{rec.files_deleted_by}}</td>
-            <td class="p-0"  *ngIf="showDeleted">{{rec.files_deleted_date | date : gs.date_display_fmt_with_time}}</td>
+            <td class="p-0" *ngIf="showDeleted">{{rec.files_deleted_by}}</td>
+            <td class="p-0" *ngIf="showDeleted">{{rec.files_deleted_date | date : gs.date_display_fmt_with_time}}</td>
 
-            <td class="p-0 hlink2" (click)="awss3upload(rec)"  *ngIf="_s3upload">Upload</td>
-            <td class="p-0" >{{rec.files_aws_bucket}}</td>
+            <td class="p-0 hlink2" (click)="awss3upload(rec)" *ngIf="_s3upload">Upload</td>
+            <td class="p-0">{{rec.files_aws_bucket}}</td>
             <td class="p-0 hlink2" (click)="awsextractdata(rec)" *ngIf="_extractdata">{{rec.files_aws_job_status}}</td>
 
             <td class="p-0 hlink2" (click)="preview(rec)" *ngIf="_extractdata">Preview</td>
-            
+
             <td class="p-0" *ngIf="_extractdata">{{rec.files_aws_job_id}}</td>
 
             <td class="text-center" (click)="RemoveRow(rec)">
@@ -128,7 +131,7 @@
           </tr>
           <tr *ngIf="rec.files_editrow">
             <td colspan="8">
-              <app-fileupload-edit [record]="rec"  [typelist]="Files_TypeList"></app-fileupload-edit>
+              <app-fileupload-edit [record]="rec" [typelist]="Files_TypeList"></app-fileupload-edit>
             </td>
           </tr>
         </tbody>
@@ -144,7 +147,7 @@
   </div>
 </div>
 <ng-template #emailmodal let-c="close" let-d="dismiss">
-  
+
   <div class="modal-body">
     <div class="page-body">
       <div class="row">
@@ -157,4 +160,3 @@
   </div>
 
 </ng-template>
-

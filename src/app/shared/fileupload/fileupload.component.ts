@@ -151,7 +151,7 @@ export class FileUploadComponent implements OnInit {
 
   selectedRowIndex = -1;
   showDeleted: boolean = false;
-
+  isDeleted: boolean = false;
   constructor(
     private modalconfig: NgbModalConfig,
     private modalservice: NgbModal,
@@ -347,13 +347,13 @@ export class FileUploadComponent implements OnInit {
     SearchData.FILES_SUB_ID = this.Files_Sub_Id;
     SearchData.VIEW_ONLY_SOURCE = this.VIEW_ONLY_SOURCE
     SearchData.VIEW_ONLY_ID = this.VIEW_ONLY_ID;
-    SearchData.TYPE = _type;
+    SearchData.TYPE = this.isDeleted ? 'SHOW-DELETED' : _type;
     this.lovService.DocumentList(SearchData)
       .subscribe(response => {
 
         if (_type === 'SHOW-DELETED')
           this.showDeleted = true;
-          
+
         this.RecordList = <Table_Mast_Files[]>response.list;
 
         this.RecordList.forEach(Rec => {
