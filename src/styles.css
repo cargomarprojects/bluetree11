@@ -938,8 +938,13 @@ input[type=number]::-webkit-outer-spin-button {
     border: 1 !important;
     padding : 0 !important;
     margin : 0 !important;
-  }
+    border-style: groove;
+    border-width: thin;
+    font-size: 1rem !important;
+    line-height: 1!important;
+}
 
+  
   canvas{
     position:absolute;
     left:0;

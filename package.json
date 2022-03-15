@@ -33,6 +33,7 @@
     "jquery": "^3.6.0",
     "jquery-ui": "^1.12.1",
     "jquery-ui-dist": "^1.12.1",
+    "jspdf": "^2.5.1",
     "lodash-es": "^4.17.21",
     "ng2-pdfjs-viewer": "^6.0.1",
     "ngrx-store-freeze": "^0.2.4",

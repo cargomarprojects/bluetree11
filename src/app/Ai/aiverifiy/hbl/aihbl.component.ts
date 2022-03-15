@@ -687,4 +687,14 @@ export class aiHblComponent implements OnInit {
         this.tab = _tab;
     }
 
+    onDrop(event, _rec : Tbl_Ai_Cntr) {
+        let dataTransfer = event.dataTransfer.getData('data');
+        _rec.hbl_cntr_no = dataTransfer;
+        console.log('drop ', dataTransfer);
+        event.preventDefault();
+      }
+      allowDrop(event) {
+        event.preventDefault();
+      }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,6 +13,9 @@ import { vm_Tbl_Mast_Filesm, Tbl_Mast_Filesm, DB_Tbl_Mast_Files } from '../model
 
 import { SearchTable } from '../../shared/models/searchtable';
 
+import { jsPDF } from 'jspdf';
+import { Tbl_aws_data } from '../models/Tbl_aws_data';
+
 
 @Component({
     selector: 'app-aiveryfy',
@@ -22,16 +25,26 @@ export class aiverifyComponent implements OnInit {
 
     public mode: string = '';
 
-    @ViewChild('pdfViewerAutoLoad') pdfViewerAutoLoad;
+    @ViewChild('pdfViewer') pdfViewer;
+    @ViewChild("pdfViewer") pdf1: ElementRef;
 
+    @ViewChild('canvas', { static: false }) canvas: ElementRef<HTMLCanvasElement>;
+    private ctx: CanvasRenderingContext2D;  
+
+    tab= 0;
+
+    selectedid = "";
     
     record: DB_Tbl_Mast_Files = <DB_Tbl_Mast_Files>{};
+    records: Tbl_aws_data [] = <Tbl_aws_data[]>[];
 
-    tab: string = 'main';
+    paged_records: Tbl_aws_data [] = <Tbl_aws_data[]>[];
+
+
+    wd = 0;
+    ht = 0;
 
     modal: any;
-
-
     canPrint: boolean = false;
     canDownload: boolean = false;
     canExcel: boolean = false;
@@ -61,6 +74,7 @@ export class aiverifyComponent implements OnInit {
         public gs: GlobalService,
         private modalservice: NgbModal,
         public mainService: AiDocsService,
+        private changeDetector : ChangeDetectorRef
     ) { }
 
     ngOnInit() {
@@ -76,8 +90,14 @@ export class aiverifyComponent implements OnInit {
             this.pkid = options.pkid;
             this.parentid = options.parentid;
         }
+     
         this.initPage();
         this.GetRecord();
+    }
+
+    getCanvas(){
+        if ( this.canvas)
+            this.ctx = this.canvas.nativeElement.getContext('2d');
     }
 
     private initPage() {
@@ -90,9 +110,14 @@ export class aiverifyComponent implements OnInit {
         this.errorMessage = '';
     }
 
+    ngAfterViewInit() {
+            this.init();
+            this.getCanvas();
+    }
+
 
     init() {
-        
+
     }
 
     GetRecord() {
@@ -102,12 +127,50 @@ export class aiverifyComponent implements OnInit {
         this.mainService.GetDocumentRecord(SearchData)
             .subscribe(response => {
                 this.record = <DB_Tbl_Mast_Files>response.record;
+                this.records =<Tbl_aws_data[]>response.records;
+
+                if ( this.records.length > 0) {
+                    this.wd =  this.records[0].file_width ;
+                    this.ht =  this.records[0].file_height;
+                }
+
                 this.showPreview(this.record);
 
             }, error => {
                 this.errorMessage = this.gs.getError(error);
             });
     }
+
+
+    changeTab( _tab : number){
+        
+        if ( _tab == 0) {
+            this.showPreview(this.record);
+        }
+        if ( _tab == 1){
+            this.paged_records = this.records.filter( rec => rec.data_page == 1);
+            //this.showData(1);
+        }
+        this.tab =  _tab;
+        
+    }
+
+    getPos( x : number)
+    {   
+        let tot = x;
+        return tot.toString() + "pt";
+    }
+
+    btnClick(evt  , _rec  : Tbl_aws_data)
+    {
+        this.selectedid= _rec.data_pkid;
+        navigator.clipboard.writeText(_rec.data_text);
+
+ 
+    }
+
+     
+
 
 
     Close() {
@@ -145,8 +208,8 @@ export class aiverifyComponent implements OnInit {
 
         this.gs.getFile(this.gs.WWW_FILES_URL , fname, "pdf", rec.file_desc).subscribe(response => {
 
-            this.pdfViewerAutoLoad.pdfSrc = response;
-            this.pdfViewerAutoLoad.refresh();
+            this.pdfViewer.pdfSrc = response;
+            this.pdfViewer.refresh();
       
           }, error => {
             this.errorMessage = this.gs.getError(error);
@@ -154,6 +217,58 @@ export class aiverifyComponent implements OnInit {
           });
 
     }
+
+    Generate(){
+
+        var ipage= 1;
+        let doc = new jsPDF( {
+            orientation: "portrait",
+            unit: "pt" ,
+            format:[this.wd,this.ht]
+        });
+        doc.setFontSize(8);
+        for ( var rec of this.records){
+            if ( rec.data_page !=  ipage){
+                ipage = rec.data_page;
+                doc.addPage();
+            }
+            doc.text(rec.data_text, rec.data_left, rec.data_top);
+        }
+        this.pdfViewer.pdfSrc =  doc.output('blob');
+        this.pdfViewer.refresh();
+    }
+
+    showData(_page : number){
+        this.changeDetector.detectChanges();
+        this.paged_records = this.records.filter( rec => rec.data_page == _page);
+
+        this.getCanvas();
+
+        if ( !this.ctx) {
+            alert('! ctx');
+            return;
+        }
+        this.ctx.clearRect(0, 0, this.wd, this.ht);
+        for ( var rec of this.paged_records){
+            this.ctx.font = "10px Arial";
+            this.ctx.fillText(rec.data_text, rec.data_left * 2, rec.data_top * 2);
+        }
+    }
+
+
+    onDragStart(event, data) {
+        event.dataTransfer.setData('data', data);
+        console.log('drag ',data);
+      }
+      onDrop(event, _rec : Tbl_aws_data) {
+        let dataTransfer = event.dataTransfer.getData('data');
+        _rec.data_text = dataTransfer;
+        console.log('drop ', dataTransfer);
+        event.preventDefault();
+      }
+      allowDrop(event) {
+        event.preventDefault();
+      }
 
 
 }

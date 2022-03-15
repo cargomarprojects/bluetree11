@@ -701,6 +701,8 @@
                         <tr *ngFor="let rec of cntrs; let i = index">
                             <td class="m-0 p-0">
                                 <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.hbl_cntr_no"
+                                    (drop)="onDrop($event,rec)" 
+                                    (dragover)="allowDrop($event)"
                                     maxlength="11" (blur)="onBlurCntr('hbl_cntr_no',rec)" />
                             </td>
 

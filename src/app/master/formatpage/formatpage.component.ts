@@ -85,12 +85,7 @@ export class FormatPageComponent implements OnInit {
         this.drawPage();
     }
 
-
-
-
-
     private initPage() {
-        
         this.records$ = this.mainservice.data$.pipe(map(res => res.records));
         this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
         this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -101,8 +96,6 @@ export class FormatPageComponent implements OnInit {
         if (!this.gs.isBlank(this.btnretf_ctrl)) {
             this.btnretf_ctrl.nativeElement.focus();
         }
-
-
         this.getCanvas();
         this.drawPage();
     }

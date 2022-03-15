@@ -22,6 +22,8 @@ export class Tbl_Ai_Formatd {
     fmt_bet1 : string;
     fmt_bet2 : string;
     fmt_position : string;
+    fmt_exclude : string;
+    fmt_page : number;
     fmt_order : number;
     rec_created_by: string;
     rec_created_date: string;
