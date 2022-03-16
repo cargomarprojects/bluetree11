@@ -31,9 +31,16 @@
 <div class="row">
     <div class="col-md-6 px-0 mx-0 border">
         <div class="form-group row border py-1">
-            <div class="col-12">
+            <div class="col-6">
                 <button class="btn btn-info btn-sm mr-1" (click)="changeTab(0)">Document</button>
                 <button class="btn btn-info btn-sm mr-1" (click)="changeTab(1)">Preview</button>
+
+            </div>
+            <div class="col-6">
+                <label class="col-2 col-form-label col-form-label-sm" *ngIf="tab==1">Page</label>
+                <button class="btn btn-info btn-sm" (click)="changePage('prev')" *ngIf="tab==1">Prev</button>
+                <label class="col-2 col-form-label col-form-label-sm" *ngIf="tab==1">{{pageno}}</label>
+                <button class="btn btn-info btn-sm" (click)="changePage('next')" *ngIf="tab==1">Next</button>
             </div>
         </div>
         <div [style.height]="'85vh'" *ngIf="tab==0">
@@ -44,13 +51,12 @@
         <div *ngIf="tab==1">
             
                 <div  style="position:relative;z-index:0;overflow: scroll;" [style.height]="'80vh'">
-                    <label #btn *ngFor="let rec of paged_records; let i=index" class="abspos" [id]="i" draggable="true"
+                    <label #btn *ngFor="let rec of paged_records; let i=index" class="abspos" [id]="i" 
                         [style.left]="getPos(rec.data_left)" [style.top]="getPos(rec.data_top)"
                         [style.background-color]="rec.data_pkid == selectedid ? 'grey': null"
+                        [style.color]="rec.data_confidence <90  ? 'red': null"
                         [style.text-align]="'left'" (click)="btnClick($event,rec)"
-                        (dragstart)="onDragStart($event, rec.data_text)"
-                        (drop)="onDrop($event,rec)" 
-                        (dragover)="allowDrop($event)"
+                        draggable="true" (dragstart)="onDragStart($event,rec)"
                         > {{rec.data_text}} 
                     </label>
                 </div>

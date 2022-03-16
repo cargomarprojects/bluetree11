@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, SimpleChanges , HostListener} from '@angular/core';
+import { GlobalService } from 'src/app/core/services/global.service';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class InputBoxComponent {
     @Input() uppercase: boolean = false;
     @Input() lowercase: boolean = false;
 
+    @Input() whitespace: boolean = true;
+
 
     @Input() field: string;
     @Input() rec: any;
@@ -24,7 +27,7 @@ export class InputBoxComponent {
 
     @ViewChild('inputbox') private inputbox: ElementRef;
 
-    constructor() {
+    constructor(private gs: GlobalService) {
     }
 
     ngOnInit() {
@@ -41,6 +44,8 @@ export class InputBoxComponent {
             else if (this.lowercase) {
                 this.inputModel = this.inputModel.toLowerCase();
             }
+            if ( !this.whitespace)
+                this.inputModel = this.gs.RemoveWhiteSpace(this.inputModel);
         }
         this.inputModelChange.emit(this.inputModel);        
         if ( this.blur)
@@ -53,5 +58,35 @@ export class InputBoxComponent {
         if (!this.disabled)
           this.inputbox.nativeElement.focus();
       }
+
+
+      onDrop(event) {
+        if (this.inputModel == null) 
+            return;
+        var _case = "";
+        let data = event.dataTransfer.getData('data');
+        if ( !this.whitespace)
+            data = this.gs.RemoveWhiteSpace(data, "");
+        if ( this.uppercase)
+            data = data.toUpperCase();
+        if ( this.lowercase)
+            data = data.toLoserCase();            
+
+        this.inputModel = data;
+        event.preventDefault();
+        event.target.style.background = null;
+      }
+      
+      allowDrop(event) {
+        event.preventDefault();
+        event.target.style.background = "orange";
+      } 
+
+      onDragLeave(event) {
+        event.preventDefault();
+        event.target.style.background = null;
+      }
+
+
 
 }

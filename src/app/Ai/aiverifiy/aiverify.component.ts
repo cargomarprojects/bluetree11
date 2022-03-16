@@ -29,16 +29,17 @@ export class aiverifyComponent implements OnInit {
     @ViewChild("pdfViewer") pdf1: ElementRef;
 
     @ViewChild('canvas', { static: false }) canvas: ElementRef<HTMLCanvasElement>;
-    private ctx: CanvasRenderingContext2D;  
+    private ctx: CanvasRenderingContext2D;
 
-    tab= 0;
+    tab = 0;
+    pageno =1;
 
     selectedid = "";
-    
-    record: DB_Tbl_Mast_Files = <DB_Tbl_Mast_Files>{};
-    records: Tbl_aws_data [] = <Tbl_aws_data[]>[];
 
-    paged_records: Tbl_aws_data [] = <Tbl_aws_data[]>[];
+    record: DB_Tbl_Mast_Files = <DB_Tbl_Mast_Files>{};
+    records: Tbl_aws_data[] = <Tbl_aws_data[]>[];
+
+    paged_records: Tbl_aws_data[] = <Tbl_aws_data[]>[];
 
 
     wd = 0;
@@ -50,11 +51,11 @@ export class aiverifyComponent implements OnInit {
     canExcel: boolean = false;
     canEmail: boolean = false;
 
-    
+
     pkid: string;
     menuid: string;
     parentid: string;
-    
+
     errorMessage: string;
     Foregroundcolor: string;
 
@@ -74,7 +75,7 @@ export class aiverifyComponent implements OnInit {
         public gs: GlobalService,
         private modalservice: NgbModal,
         public mainService: AiDocsService,
-        private changeDetector : ChangeDetectorRef
+        private changeDetector: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
@@ -90,13 +91,13 @@ export class aiverifyComponent implements OnInit {
             this.pkid = options.pkid;
             this.parentid = options.parentid;
         }
-     
+
         this.initPage();
         this.GetRecord();
     }
 
-    getCanvas(){
-        if ( this.canvas)
+    getCanvas() {
+        if (this.canvas)
             this.ctx = this.canvas.nativeElement.getContext('2d');
     }
 
@@ -111,8 +112,8 @@ export class aiverifyComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-            this.init();
-            this.getCanvas();
+        this.init();
+        this.getCanvas();
     }
 
 
@@ -127,11 +128,11 @@ export class aiverifyComponent implements OnInit {
         this.mainService.GetDocumentRecord(SearchData)
             .subscribe(response => {
                 this.record = <DB_Tbl_Mast_Files>response.record;
-                this.records =<Tbl_aws_data[]>response.records;
+                this.records = <Tbl_aws_data[]>response.records;
 
-                if ( this.records.length > 0) {
-                    this.wd =  this.records[0].file_width ;
-                    this.ht =  this.records[0].file_height;
+                if (this.records.length > 0) {
+                    this.wd = this.records[0].file_width;
+                    this.ht = this.records[0].file_height;
                 }
 
                 this.showPreview(this.record);
@@ -142,34 +143,32 @@ export class aiverifyComponent implements OnInit {
     }
 
 
-    changeTab( _tab : number){
-        
-        if ( _tab == 0) {
+    changeTab(_tab: number) {
+
+        if (_tab == 0) {
             this.showPreview(this.record);
         }
-        if ( _tab == 1){
-            this.paged_records = this.records.filter( rec => rec.data_page == 1);
-            //this.showData(1);
+        if (_tab == 1) {
+            this.loadPageData();
         }
-        this.tab =  _tab;
-        
+        this.tab = _tab;
     }
 
-    getPos( x : number)
-    {   
+    loadPageData(){
+        this.paged_records = this.records.filter(rec => rec.data_page == this.pageno);
+    }
+
+    getPos(x: number) {
         let tot = x;
         return tot.toString() + "pt";
     }
 
-    btnClick(evt  , _rec  : Tbl_aws_data)
-    {
-        this.selectedid= _rec.data_pkid;
+    btnClick(evt, _rec: Tbl_aws_data) {
+        this.selectedid = _rec.data_pkid;
         navigator.clipboard.writeText(_rec.data_text);
-
- 
     }
 
-     
+
 
 
 
@@ -195,80 +194,80 @@ export class aiverifyComponent implements OnInit {
 
     }
 
-    CloseModal(){
+    CloseModal() {
         this.modal.close();
     }
 
 
-    showPreview(rec : DB_Tbl_Mast_Files){
+    showPreview(rec: DB_Tbl_Mast_Files) {
         this.width = rec.files_width + "px";
         this.height = rec.files_height + "px";
 
-        let fname = this.gs.FS_APP_FOLDER + rec.files_path  +  rec.file_id;
+        let fname = this.gs.FS_APP_FOLDER + rec.files_path + rec.file_id;
 
-        this.gs.getFile(this.gs.WWW_FILES_URL , fname, "pdf", rec.file_desc).subscribe(response => {
+        this.gs.getFile(this.gs.WWW_FILES_URL, fname, "pdf", rec.file_desc).subscribe(response => {
 
             this.pdfViewer.pdfSrc = response;
             this.pdfViewer.refresh();
-      
-          }, error => {
+
+        }, error => {
             this.errorMessage = this.gs.getError(error);
             alert(this.errorMessage);
-          });
+        });
 
     }
 
-    Generate(){
+    Generate() {
 
-        var ipage= 1;
-        let doc = new jsPDF( {
+        var ipage = 1;
+        let doc = new jsPDF({
             orientation: "portrait",
-            unit: "pt" ,
-            format:[this.wd,this.ht]
+            unit: "pt",
+            format: [this.wd, this.ht]
         });
         doc.setFontSize(8);
-        for ( var rec of this.records){
-            if ( rec.data_page !=  ipage){
+        for (var rec of this.records) {
+            if (rec.data_page != ipage) {
                 ipage = rec.data_page;
                 doc.addPage();
             }
             doc.text(rec.data_text, rec.data_left, rec.data_top);
         }
-        this.pdfViewer.pdfSrc =  doc.output('blob');
+        this.pdfViewer.pdfSrc = doc.output('blob');
         this.pdfViewer.refresh();
     }
 
-    showData(_page : number){
+    showData(_page: number) {
         this.changeDetector.detectChanges();
-        this.paged_records = this.records.filter( rec => rec.data_page == _page);
+        this.paged_records = this.records.filter(rec => rec.data_page == _page);
 
         this.getCanvas();
 
-        if ( !this.ctx) {
+        if (!this.ctx) {
             alert('! ctx');
             return;
         }
         this.ctx.clearRect(0, 0, this.wd, this.ht);
-        for ( var rec of this.paged_records){
+        for (var rec of this.paged_records) {
             this.ctx.font = "10px Arial";
             this.ctx.fillText(rec.data_text, rec.data_left * 2, rec.data_top * 2);
         }
     }
 
+    onDragStart(event, _rec: Tbl_aws_data) {
+        this.selectedid = _rec.data_pkid;
+        event.dataTransfer.setData('data', _rec.data_text);
+        navigator.clipboard.writeText(_rec.data_text);
+    }
 
-    onDragStart(event, data) {
-        event.dataTransfer.setData('data', data);
-        console.log('drag ',data);
-      }
-      onDrop(event, _rec : Tbl_aws_data) {
-        let dataTransfer = event.dataTransfer.getData('data');
-        _rec.data_text = dataTransfer;
-        console.log('drop ', dataTransfer);
-        event.preventDefault();
-      }
-      allowDrop(event) {
-        event.preventDefault();
-      }
+    changePage(_type : string ){
+        if ( _type == 'next')
+            this.pageno++;
+        if ( _type == 'prev')
+            this.pageno--;   
+        if ( this.pageno <=0)         
+            this.pageno =1;
 
-
+        this.paged_records = this.records.filter(rec => rec.data_page == this.pageno);
+    }   
 }

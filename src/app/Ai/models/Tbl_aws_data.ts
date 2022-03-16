@@ -6,7 +6,7 @@ export class Tbl_aws_data {
     data_id: string;
     data_block_type: string;
 
-    data_confidence: string;
+    data_confidence: number;
     data_text: string;
     data_text_type: string;
 

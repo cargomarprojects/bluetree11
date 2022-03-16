@@ -41,4 +41,27 @@ export class InputBoxNumberComponent {
         if (!this.disabled)
           this.inputbox.nativeElement.focus();
       }
+
+      onDrop(event) {
+        if (this.inputModel == null) 
+            return;
+        let data = event.dataTransfer.getData('data');
+        data = this.gs.ExtractNumber(this.gs.RemoveWhiteSpace(data));            
+        this.inputModel = data;
+        this.inputModel = this.gs.roundNumber(this.inputModel, this.dec);            
+        event.preventDefault();
+        event.target.style.background = null;
+      }
+      
+      allowDrop(event) {
+        event.preventDefault();
+        event.target.style.background = "orange";
+      }
+      onDragLeave(event) {
+        event.preventDefault();
+        event.target.style.background = null;
+      }
+
+
+
 }

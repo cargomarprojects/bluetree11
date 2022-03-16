@@ -7,5 +7,7 @@ type="number"
 [maxlength]="maxlength"
 (ngModelChange)="inputModelChange.emit(inputModel)" 
 (blur)="onBlur1($event)"
+(drop)="onDrop($event)"  (dragover)="allowDrop($event)"
+(dragleave)="onDragLeave($event)"
 #inputbox
 />

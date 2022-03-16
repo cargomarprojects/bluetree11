@@ -428,6 +428,7 @@ export class aiHblComponent implements OnInit {
 
 
     onBlur(field: string) {
+        return;
         switch (field) {
             case 'mbl_book_no': {
                 this.record.mbl_book_no = this.record.mbl_book_no.toUpperCase().trim();
@@ -604,42 +605,6 @@ export class aiHblComponent implements OnInit {
         }
     }
 
-    onBlurCntr(field: string, rec : Tbl_Ai_Cntr) {
-
-        switch (field) {
-
-            case 'hbl_cntr_no': {
-                rec.hbl_cntr_no = rec.hbl_cntr_no.toUpperCase().trim();
-                break;
-            }                   
-            case 'hbl_cntr_type': {
-                rec.hbl_cntr_type = rec.hbl_cntr_type.toUpperCase().trim();
-                break;
-            }                                        
-            case 'hbl_cntr_seal': {
-                rec.hbl_cntr_seal = rec.hbl_cntr_seal.toUpperCase().trim();
-                break;
-            }                    
-            case 'hbl_cntr_unit': {
-                rec.hbl_cntr_unit = rec.hbl_cntr_unit.toUpperCase().trim();
-                break;
-            }                    
-            case 'hbl_cntr_pkgs': {
-                rec.hbl_cntr_pkgs= this.gs.roundNumber(rec.hbl_cntr_pkgs, 0);
-                break;
-            }
-            case 'hbl_cntr_cbm': {
-                rec.hbl_cntr_cbm= this.gs.roundNumber(rec.hbl_cntr_cbm, 3);
-                break;
-            }                        
-            case 'hbl_cntr_grwt': {
-                rec.hbl_cntr_grwt= this.gs.roundNumber(rec.hbl_cntr_grwt, 3);
-                break;
-            }            
-        }
-    }
-
-
 
 
 
@@ -654,6 +619,8 @@ export class aiHblComponent implements OnInit {
     AddDescRow() {
         let rec = <Tbl_Ai_HblDesc>{};
         rec.hbl_pkid = this.gs.getGuid();
+        rec.hbl_desc1 = "";
+        rec.hbl_desc2 = "";
         rec.hbl_parent_id = this.pkid;
         this.records.push(rec);
     }
@@ -672,6 +639,13 @@ export class aiHblComponent implements OnInit {
     AddCntrRow() {
         let rec = <Tbl_Ai_Cntr>{};
         rec.hbl_pkid = this.gs.getGuid();
+        rec.hbl_cntr_no = '';
+        rec.hbl_cntr_type = '';
+        rec.hbl_cntr_seal = '';
+        rec.hbl_cntr_unit = '';
+        rec.hbl_cntr_pkgs = 0;
+        rec.hbl_cntr_grwt = 0;
+        rec.hbl_cntr_cbm = 0
         rec.hbl_parent_id = this.pkid;
         this.cntrs.push(rec);
     }
@@ -686,15 +660,5 @@ export class aiHblComponent implements OnInit {
     ChangeTab(_tab) {
         this.tab = _tab;
     }
-
-    onDrop(event, _rec : Tbl_Ai_Cntr) {
-        let dataTransfer = event.dataTransfer.getData('data');
-        _rec.hbl_cntr_no = dataTransfer;
-        console.log('drop ', dataTransfer);
-        event.preventDefault();
-      }
-      allowDrop(event) {
-        event.preventDefault();
-      }
 
 }

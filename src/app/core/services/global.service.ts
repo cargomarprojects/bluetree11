@@ -1749,6 +1749,25 @@ export class GlobalService {
       return '';
   }
 
+  public RemoveWhiteSpace(iData : string, _type : string = 'UPPER') : string {
+    if (iData == null || iData == undefined || iData == '')
+      return '';
+    var str = iData.replace(/ /gi,'');
+    if ( _type.toUpperCase() == "UPPER")
+      str = str.toUpperCase();
+    if ( _type.toUpperCase() == "LOWER")
+      str = str.toLowerCase();
+    return str;
+  }
+
+  public ExtractNumber(iData : string) : number {
+    if (iData == null || iData == undefined || iData == '')
+      return null;
+    var str = Number(iData.replace(/[^0-9\.]+/g,""));
+    return str;
+  }
+
+
   public isNull(iData: any): boolean {
     if (iData == null || iData == undefined)
       return true;
@@ -2108,6 +2127,9 @@ export class GlobalService {
       _data = Number(_number);
     return this.roundNumber2(_data, _precision);
   };
+
+
+
 
 
   public roundNumber(_number: number, _precision: number) {
