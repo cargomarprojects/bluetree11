@@ -24,7 +24,7 @@
                     <label class="col-4 col-form-label col-form-label-sm">Ref#</label>
                     <div class="col-8">
                         <input class="form-control form-control-sm" type="text"
-                            [(ngModel)]="searchQuery.searchString" />
+                            [(ngModel)]="searchQuery.searchString"  (blur)="onBlur('searchString')" />
                     </div>
                 </div>
             </div>
