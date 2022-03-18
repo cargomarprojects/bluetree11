@@ -25,7 +25,7 @@ export class SeaImpHouseHeaderComponent implements OnInit {
   ngOnChanges(changes: SimpleChange) {
   }
   onBlur(feild: string) {
-    this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase();
+    this.searchQuery.searchString = this.gs.trimAll(this.searchQuery.searchString.toUpperCase());
   }
 
   
