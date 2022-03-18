@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter,SimpleChange, ChangeDetectionStrategy } from '@angular/core';
+import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../store/paramdet/paramdet-page.models';
 
 @Component({
@@ -15,7 +16,7 @@ export class ParamDetHeaderComponent implements OnInit {
   
   @Output() searchEvents = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(public gs: GlobalService) { }
 
   ngOnInit() {
   }
@@ -25,5 +26,13 @@ export class ParamDetHeaderComponent implements OnInit {
 
   List(outputformat: string) {
     this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.query });
+  }
+  onBlur(field: string) {
+    switch (field) {
+      case 'searchString': {
+        this.query.searchString = this.gs.trimAll(this.query.searchString.toUpperCase())
+        break;
+      }
+    }
   }
 }

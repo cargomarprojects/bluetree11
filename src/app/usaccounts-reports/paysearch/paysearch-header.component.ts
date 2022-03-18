@@ -34,4 +34,13 @@ export class PaySearchHeaderComponent implements OnInit {
             this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase();
         this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.searchQuery });
     }
+    onBlur(field: string) {
+        switch (field) {
+            case 'searchString': {
+                this.searchQuery.searchString = this.gs.trimAll(this.searchQuery.searchString.toUpperCase())
+                break;
+            }
+        }
+    }
+    
 }
