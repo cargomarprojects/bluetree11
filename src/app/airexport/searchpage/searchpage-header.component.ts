@@ -4,6 +4,7 @@ import { SearchQuery } from '../models/tbl_search';
 import { SearchPageService } from '../services/searchpage.service';
 //EDIT-AJITH-21-09-2021
 //EDIT-AJITH-23-09-2021
+//EDIT-AJITH-18-03-2022
 
 @Component({
   selector: 'app-searchpage-header',
