@@ -35,4 +35,13 @@ export class AirExpMasterHeaderComponent implements OnInit {
       this.searchQuery.todate = this.gs.defaultValues.today;
     this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.searchQuery });
   }
+  
+  onBlur(field: string) {
+    switch (field) {
+      case 'searchString': {
+        this.searchQuery.searchString = this.gs.trimAll(this.searchQuery.searchString.toUpperCase())
+        break;
+      }
+    }
+  }
 }
