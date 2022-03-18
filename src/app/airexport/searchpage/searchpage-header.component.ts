@@ -47,7 +47,7 @@ export class SearchPageHeaderComponent implements OnInit {
   onBlur(field: string) {
     switch (field) {
       case 'searchString': {
-        this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase()
+        this.searchQuery.searchString = this.gs.trimAll(this.searchQuery.searchString.toUpperCase())
         break;
       }
     }
