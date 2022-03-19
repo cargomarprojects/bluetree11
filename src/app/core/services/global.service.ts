@@ -21,6 +21,7 @@ import { gsdata } from '../models/gsdata';
 //EDIT-AJITH-07-09-2021
 //EDIT-AJITH-09-09-2021
 //EDIT-AJITH-18-11-2021
+//EDIT-AJITH-18-03-2022
 
 @Injectable({
   providedIn: 'root'
@@ -1427,14 +1428,14 @@ export class GlobalService {
     });
 
     this.PARAM_HBL_FORMAT_BLANK = [];
-    this.MainList.filter(a => a.param_type == 'HBL-FORMAT' && (a.param_name6 == 'BLANK'||a.param_name6 == 'PDF')).sort(function (a, b) {
+    this.MainList.filter(a => a.param_type == 'HBL-FORMAT' && (a.param_name6 == 'BLANK' || a.param_name6 == 'PDF')).sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_HBL_FORMAT_BLANK.push({ "code": a.param_pkid, "name": a.param_name1 })
     });
 
     this.PARAM_HBL_FORMAT_DRAFT = [];
-    this.MainList.filter(a => a.param_type == 'HBL-FORMAT' && (a.param_name6 == 'DRAFT'||a.param_name6 == 'PDF')).sort(function (a, b) {
+    this.MainList.filter(a => a.param_type == 'HBL-FORMAT' && (a.param_name6 == 'DRAFT' || a.param_name6 == 'PDF')).sort(function (a, b) {
       return b.param_name1 < a.param_name1 ? 1 : -1;
     }).forEach(a => {
       this.PARAM_HBL_FORMAT_DRAFT.push({ "code": a.param_pkid, "name": a.param_name1 })
@@ -1749,21 +1750,21 @@ export class GlobalService {
       return '';
   }
 
-  public RemoveWhiteSpace(iData : string, _type : string = 'UPPER') : string {
+  public RemoveWhiteSpace(iData: string, _type: string = 'UPPER'): string {
     if (iData == null || iData == undefined || iData == '')
       return '';
-    var str = iData.replace(/ /gi,'');
-    if ( _type.toUpperCase() == "UPPER")
+    var str = iData.replace(/ /gi, '');
+    if (_type.toUpperCase() == "UPPER")
       str = str.toUpperCase();
-    if ( _type.toUpperCase() == "LOWER")
+    if (_type.toUpperCase() == "LOWER")
       str = str.toLowerCase();
     return str;
   }
 
-  public ExtractNumber(iData : string) : number {
+  public ExtractNumber(iData: string): number {
     if (iData == null || iData == undefined || iData == '')
       return null;
-    var str = Number(iData.replace(/[^0-9\.]+/g,""));
+    var str = Number(iData.replace(/[^0-9\.]+/g, ""));
     return str;
   }
 
@@ -3532,5 +3533,10 @@ export class GlobalService {
     return true;
   }
 
+  trimAll(obj: any) {
+    if (obj == null || obj == undefined)
+      return obj;
+    return obj.toString().trim();
+  }
 
 }

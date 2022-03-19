@@ -4,6 +4,7 @@ import { SearchQuery } from '../models/tbl_search';
 import { SearchPageService } from '../services/searchpage.service';
 //EDIT-AJITH-21-09-2021
 //EDIT-AJITH-23-09-2021
+//EDIT-AJITH-18-03-2022
 
 @Component({
   selector: 'app-searchpage-header',
@@ -47,7 +48,7 @@ export class SearchPageHeaderComponent implements OnInit {
   onBlur(field: string) {
     switch (field) {
       case 'searchString': {
-        this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase()
+        this.searchQuery.searchString = this.gs.trimAll(this.searchQuery.searchString.toUpperCase())
         break;
       }
     }

@@ -30,7 +30,7 @@ export class SeaImpMasterHeaderComponent implements OnInit {
   }
 
   onBlur(feild: string) {
-    this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase();
+    this.searchQuery.searchString = this.gs.trimAll( this.searchQuery.searchString.toUpperCase());
   }
 
   List(outputformat: string) {
