@@ -15,12 +15,15 @@
     <div class="col-md-6 px-0 mx-0 border">
         <div class="row align-items-center justify-content-left p-1 m-1 border">
             <label class="col-form-label col-form-label-sm mr-1">Page#</label>
-            <label class="col-form-label col-form-label-sm mr-1">{{pageno}}</label>
+            <label class="col-form-label col-form-label-sm mr-1">{{pageno}}/{{totpages}}</label>
+            <button class="btn btn-info btn-sm mr-1" (click)="changePage('first')">First</button>
             <button class="btn btn-info btn-sm mr-1" (click)="changePage('prev')">Prev</button>
             <button class="btn btn-info btn-sm mr-1" (click)="changePage('next')">Next</button>
+            <button class="btn btn-info btn-sm mr-1" (click)="changePage('last')">Last</button>
             <label class="col-form-label col-form-label-sm mr-1">Zoom</label>
-            <button class="btn btn-info btn-sm mr-1" (click)="zoom('+')">+</button>
             <button class="btn btn-info btn-sm mr-1" (click)="zoom('-')">-</button>
+            <button class="btn btn-info btn-sm mr-1" (click)="zoom('+')">+</button>
+            <button class="btn btn-info btn-sm mr-1" (click)="printpdf()">Print</button>
             <label class="col-form-label col-form-label-sm mr-1 font-weight-bold">{{selecteddata}}</label>
         </div>
         <div style="position:relative;z-index:0;overflow: scroll;" [style.height]="'80vh'">

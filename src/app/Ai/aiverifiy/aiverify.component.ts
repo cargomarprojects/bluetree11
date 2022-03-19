@@ -17,6 +17,8 @@ import { Tbl_aws_data } from '../models/Tbl_aws_data';
 
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf';
 
+import * as printJS from "print-js";
+
 
 @Component({
     selector: 'app-aiveryfy',
@@ -28,16 +30,12 @@ export class aiverifyComponent implements OnInit {
 
     pdf: any;
     scale = 1;
+    fileURL : any;
 
     xy = "";
     mousedata = "";
     selecteddata = "";
 
-    //@ViewChild('pdfViewer') pdfViewer;
-    //@ViewChild("pdfViewer") pdf1: ElementRef;
-
-    //@ViewChild('canvas', { static: false }) canvas: ElementRef<HTMLCanvasElement>;
-    //private ctx: CanvasRenderingContext2D;
 
     @ViewChild('pdfCanvas') pdfCanvas: { nativeElement: HTMLCanvasElement };
     @ViewChild('pdfCanvas2') pdfCanvas2: { nativeElement: HTMLCanvasElement };
@@ -45,6 +43,7 @@ export class aiverifyComponent implements OnInit {
 
     tab = 2;
     pageno = 1;
+    totpages = 1;
 
     selectedid = "";
 
@@ -172,6 +171,8 @@ export class aiverifyComponent implements OnInit {
     }
 
 
+
+
     onDragStart(event, _rec: Tbl_aws_data) {
         this.selectedid = _rec.data_pkid;
         event.dataTransfer.setData('data', _rec.data_text);
@@ -179,12 +180,20 @@ export class aiverifyComponent implements OnInit {
     }
 
     changePage(_type: string) {
+        if (_type == 'first')
+        this.pageno =1;      
         if (_type == 'next')
             this.pageno++;
         if (_type == 'prev')
             this.pageno--;
+        if (_type == 'last')
+            this.pageno = this.totpages;            
+        
         if (this.pageno <= 0)
             this.pageno = 1;
+        if ( this.pageno > this.totpages)
+            this.pageno--;
+
         this.showPdfPage(this.scale, this.pageno);
     }
 
@@ -198,12 +207,18 @@ export class aiverifyComponent implements OnInit {
 
     // pdf js
 
+    printpdf(){
+        printJS(this.fileURL);
+    }
+
 
     async showPDf(rec: DB_Tbl_Mast_Files): Promise<void> {
         let fname = this.gs.FS_APP_FOLDER + rec.files_path + rec.file_id;
         const data = await this.gs.getFileaSync(this.gs.WWW_FILES_URL, fname, "pdf", rec.file_desc);
-        var fileURL = URL.createObjectURL(data);
-        this.pdf = await pdfjs.getDocument(fileURL).promise;
+        this.fileURL = URL.createObjectURL(data);
+        this.pdf = await pdfjs.getDocument(this.fileURL).promise;
+        this.totpages = this.pdf._pdfInfo.numPages;
+        
         this.showPdfPage(this.scale, 1);
     }
 
