@@ -1,9 +1,7 @@
 <div class="page-header">
     <div class="row align-items-center justify-content-left p-1">
         <label class="mr-3">AI Verify Documents</label>
-        <button class="btn btn-primary btn-sm mr-1" (click)="Generate()">Generate</button>
         <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-
     </div>
 </div>
 
@@ -13,54 +11,23 @@
     </div>
 </div>
 
-<!-- <div class="page-body" >
-    <div class="row" >
-        <div class="col-md-6 px-0 mx-0 border" >
-            <div [style.height]="'85vh'" >
-                <ng2-pdfjs-viewer [showSpinner]="true" [print]="canPrint" [download]="false" [openFile]="false"  [zoom]="100" 
-                    [cursor]="'pointer'" [scroll]="'V'" #pdfViewer>
-                </ng2-pdfjs-viewer>
-            </div>
-        </div>
-        <div class="col-md-6 testbox px-0 mx-0 border">
-            <app-ai-hbl [_pkid]="pkid"></app-ai-hbl>
-        </div>
-    </div>                
-</div> -->
-
 <div class="row">
     <div class="col-md-6 px-0 mx-0 border">
-        <div class="form-group row border py-1">
-            <div class="col-6">
-                <button class="btn btn-info btn-sm mr-1" (click)="changeTab(0)">Document</button>
-                <button class="btn btn-info btn-sm mr-1" (click)="changeTab(1)">Preview</button>
-
-            </div>
-            <div class="col-6">
-                <label class="col-2 col-form-label col-form-label-sm" *ngIf="tab==1">Page</label>
-                <button class="btn btn-info btn-sm" (click)="changePage('prev')" *ngIf="tab==1">Prev</button>
-                <label class="col-2 col-form-label col-form-label-sm" *ngIf="tab==1">{{pageno}}</label>
-                <button class="btn btn-info btn-sm" (click)="changePage('next')" *ngIf="tab==1">Next</button>
-            </div>
+        <div class="row align-items-center justify-content-left p-1 m-1 border">
+            <label class="col-form-label col-form-label-sm mr-1">Page#</label>
+            <label class="col-form-label col-form-label-sm mr-1">{{pageno}}</label>
+            <button class="btn btn-info btn-sm mr-1" (click)="changePage('prev')">Prev</button>
+            <button class="btn btn-info btn-sm mr-1" (click)="changePage('next')">Next</button>
+            <label class="col-form-label col-form-label-sm mr-1">Zoom</label>
+            <button class="btn btn-info btn-sm mr-1" (click)="zoom('+')">+</button>
+            <button class="btn btn-info btn-sm mr-1" (click)="zoom('-')">-</button>
+            <label class="col-form-label col-form-label-sm mr-1 font-weight-bold">{{selecteddata}}</label>
         </div>
-        <div [style.height]="'85vh'" *ngIf="tab==0">
-            <ng2-pdfjs-viewer [showSpinner]="true" [print]="canPrint" [download]="false" [openFile]="false" [zoom]="100"
-                [cursor]="'pointer'" [scroll]="'V'" #pdfViewer>
-            </ng2-pdfjs-viewer>
-        </div>
-        <div *ngIf="tab==1">
-            
-                <div  style="position:relative;z-index:0;overflow: scroll;" [style.height]="'80vh'">
-                    <label #btn *ngFor="let rec of paged_records; let i=index" class="abspos" [id]="i" 
-                        [style.left]="getPos(rec.data_left)" [style.top]="getPos(rec.data_top)"
-                        [style.background-color]="rec.data_pkid == selectedid ? 'grey': null"
-                        [style.color]="rec.data_confidence <90  ? 'red': null"
-                        [style.text-align]="'left'" (click)="btnClick($event,rec)"
-                        draggable="true" (dragstart)="onDragStart($event,rec)"
-                        > {{rec.data_text}} 
-                    </label>
-                </div>
-            
+        <div style="position:relative;z-index:0;overflow: scroll;" [style.height]="'80vh'">
+            <canvas style="border:0px solid;z-index:1" #pdfCanvas></canvas>
+            <canvas style="border:0px solid;z-index:2" (mousemove)="onCanvasMove($event)"
+                (mousedown)="onCanvasClick($event)" draggable="true" (dragstart)="onDragStartCanvas($event)"
+                #pdfCanvas2></canvas>
         </div>
     </div>
     <div class="col-md-6 testbox px-0 mx-0 border">

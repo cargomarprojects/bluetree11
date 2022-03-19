@@ -15,6 +15,10 @@ export class Tbl_aws_data {
     data_width: number;
     data_height: number;
 
+    data_right: number;
+    data_bottom: number;
+
+
     data_x1: number;
     data_y1:number;
     data_x2:number;
@@ -22,7 +26,7 @@ export class Tbl_aws_data {
     data_x3: number;
     data_y3: number;
     data_x4: number;
-    data_y5: number;
+    data_y4: number;
 
     data_child_text: string;
     data_search_key: string;

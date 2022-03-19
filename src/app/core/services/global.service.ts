@@ -2019,6 +2019,11 @@ export class GlobalService {
     return this.http2.get(this.baseUrl + '/api/Master/Param/DownloadFile?' + body, { responseType: 'blob' })
   }
 
+  public async getFileaSync(report_folder: string, filename: string, filetype: string, filedisplayname: string = 'N')  {
+    let body = 'report_folder=' + report_folder + '&filename=' + filename + '&filetype=' + filetype + '&filedisplayname=' + filedisplayname;
+    return this.http2.get(this.baseUrl + '/api/Master/Param/DownloadFile?' + body, { responseType: 'blob' }).toPromise();
+  }
+
 
   public SendEmail(SearchData: any) {
     return this.http2.post<any>(this.baseUrl + "/api/Email/Common", SearchData, this.headerparam2('authorized'));

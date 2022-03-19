@@ -13,8 +13,9 @@ import { vm_Tbl_Mast_Filesm, Tbl_Mast_Filesm, DB_Tbl_Mast_Files } from '../model
 
 import { SearchTable } from '../../shared/models/searchtable';
 
-import { jsPDF } from 'jspdf';
 import { Tbl_aws_data } from '../models/Tbl_aws_data';
+
+import * as pdfjs from 'pdfjs-dist/legacy/build/pdf';
 
 
 @Component({
@@ -25,14 +26,25 @@ export class aiverifyComponent implements OnInit {
 
     public mode: string = '';
 
-    @ViewChild('pdfViewer') pdfViewer;
-    @ViewChild("pdfViewer") pdf1: ElementRef;
+    pdf: any;
+    scale = 1;
 
-    @ViewChild('canvas', { static: false }) canvas: ElementRef<HTMLCanvasElement>;
-    private ctx: CanvasRenderingContext2D;
+    xy = "";
+    mousedata = "";
+    selecteddata = "";
 
-    tab = 0;
-    pageno =1;
+    //@ViewChild('pdfViewer') pdfViewer;
+    //@ViewChild("pdfViewer") pdf1: ElementRef;
+
+    //@ViewChild('canvas', { static: false }) canvas: ElementRef<HTMLCanvasElement>;
+    //private ctx: CanvasRenderingContext2D;
+
+    @ViewChild('pdfCanvas') pdfCanvas: { nativeElement: HTMLCanvasElement };
+    @ViewChild('pdfCanvas2') pdfCanvas2: { nativeElement: HTMLCanvasElement };
+
+
+    tab = 2;
+    pageno = 1;
 
     selectedid = "";
 
@@ -96,10 +108,6 @@ export class aiverifyComponent implements OnInit {
         this.GetRecord();
     }
 
-    getCanvas() {
-        if (this.canvas)
-            this.ctx = this.canvas.nativeElement.getContext('2d');
-    }
 
     private initPage() {
         this.canPrint = this.gs.canPrint(this.menuid);
@@ -112,14 +120,8 @@ export class aiverifyComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-        this.init();
-        this.getCanvas();
     }
 
-
-    init() {
-
-    }
 
     GetRecord() {
         this.errorMessage = '';
@@ -134,41 +136,12 @@ export class aiverifyComponent implements OnInit {
                     this.wd = this.records[0].file_width;
                     this.ht = this.records[0].file_height;
                 }
-
-                this.showPreview(this.record);
+                this.showPDf(this.record);
 
             }, error => {
                 this.errorMessage = this.gs.getError(error);
             });
     }
-
-
-    changeTab(_tab: number) {
-
-        if (_tab == 0) {
-            this.showPreview(this.record);
-        }
-        if (_tab == 1) {
-            this.loadPageData();
-        }
-        this.tab = _tab;
-    }
-
-    loadPageData(){
-        this.paged_records = this.records.filter(rec => rec.data_page == this.pageno);
-    }
-
-    getPos(x: number) {
-        let tot = x;
-        return tot.toString() + "pt";
-    }
-
-    btnClick(evt, _rec: Tbl_aws_data) {
-        this.selectedid = _rec.data_pkid;
-        navigator.clipboard.writeText(_rec.data_text);
-    }
-
-
 
 
 
@@ -199,75 +172,127 @@ export class aiverifyComponent implements OnInit {
     }
 
 
-    showPreview(rec: DB_Tbl_Mast_Files) {
-        this.width = rec.files_width + "px";
-        this.height = rec.files_height + "px";
-
-        let fname = this.gs.FS_APP_FOLDER + rec.files_path + rec.file_id;
-
-        this.gs.getFile(this.gs.WWW_FILES_URL, fname, "pdf", rec.file_desc).subscribe(response => {
-
-            this.pdfViewer.pdfSrc = response;
-            this.pdfViewer.refresh();
-
-        }, error => {
-            this.errorMessage = this.gs.getError(error);
-            alert(this.errorMessage);
-        });
-
-    }
-
-    Generate() {
-
-        var ipage = 1;
-        let doc = new jsPDF({
-            orientation: "portrait",
-            unit: "pt",
-            format: [this.wd, this.ht]
-        });
-        doc.setFontSize(8);
-        for (var rec of this.records) {
-            if (rec.data_page != ipage) {
-                ipage = rec.data_page;
-                doc.addPage();
-            }
-            doc.text(rec.data_text, rec.data_left, rec.data_top);
-        }
-        this.pdfViewer.pdfSrc = doc.output('blob');
-        this.pdfViewer.refresh();
-    }
-
-    showData(_page: number) {
-        this.changeDetector.detectChanges();
-        this.paged_records = this.records.filter(rec => rec.data_page == _page);
-
-        this.getCanvas();
-
-        if (!this.ctx) {
-            alert('! ctx');
-            return;
-        }
-        this.ctx.clearRect(0, 0, this.wd, this.ht);
-        for (var rec of this.paged_records) {
-            this.ctx.font = "10px Arial";
-            this.ctx.fillText(rec.data_text, rec.data_left * 2, rec.data_top * 2);
-        }
-    }
-
     onDragStart(event, _rec: Tbl_aws_data) {
         this.selectedid = _rec.data_pkid;
         event.dataTransfer.setData('data', _rec.data_text);
         navigator.clipboard.writeText(_rec.data_text);
     }
 
-    changePage(_type : string ){
-        if ( _type == 'next')
+    changePage(_type: string) {
+        if (_type == 'next')
             this.pageno++;
-        if ( _type == 'prev')
-            this.pageno--;   
-        if ( this.pageno <=0)         
-            this.pageno =1;
+        if (_type == 'prev')
+            this.pageno--;
+        if (this.pageno <= 0)
+            this.pageno = 1;
+        this.showPdfPage(this.scale, this.pageno);
+    }
 
-        this.paged_records = this.records.filter(rec => rec.data_page == this.pageno);
-    }   
+    zoom(_type: string) {
+        if (_type == "+")
+            this.scale += .10;
+        if (_type == "-")
+            this.scale -= .10;
+        this.showPdfPage(this.scale, this.pageno);
+    }
+
+    // pdf js
+
+
+    async showPDf(rec: DB_Tbl_Mast_Files): Promise<void> {
+        let fname = this.gs.FS_APP_FOLDER + rec.files_path + rec.file_id;
+        const data = await this.gs.getFileaSync(this.gs.WWW_FILES_URL, fname, "pdf", rec.file_desc);
+        var fileURL = URL.createObjectURL(data);
+        this.pdf = await pdfjs.getDocument(fileURL).promise;
+        this.showPdfPage(this.scale, 1);
+    }
+
+
+    private async showPdfPage(
+        scale: number,
+        pageNumber: number
+    ): Promise<void> {
+
+        this.paged_records = this.records.filter(rec => rec.data_page == pageNumber);
+
+        var canvas1 = this.pdfCanvas.nativeElement;
+        var canvas2 = this.pdfCanvas2.nativeElement;
+
+        const page = await this.pdf.getPage(pageNumber);
+        const viewport = page.getViewport({ scale });
+        const canvasContext = canvas1.getContext('2d');
+
+        canvas1.height = viewport.height;
+        canvas1.width = viewport.width;
+        canvas1.style.height = this.ht.toString();
+        canvas1.style.width = this.wd.toString();
+
+        canvas2.height = viewport.height;
+        canvas2.width = viewport.width;
+        canvas2.style.height = this.ht.toString();
+        canvas2.style.width = this.wd.toString();
+
+        await page.render({ canvasContext, viewport }).promise;
+    }
+
+    onCanvasMove(evt: MouseEvent) {
+
+        var str = "";
+        const canvas1 = this.pdfCanvas.nativeElement;
+        const canvas2 = this.pdfCanvas2.nativeElement;
+        const ctx = canvas2.getContext('2d');
+
+        for (var rec of this.paged_records) {
+            if (evt.offsetX >= rec.data_left * this.scale && evt.offsetX <= rec.data_right * this.scale && evt.offsetY >= rec.data_top * this.scale && evt.offsetY <= rec.data_bottom * this.scale) {
+                str = rec.data_text;
+                break;
+            }
+        }
+        if (str != "") {
+            this.mousedata = str;
+            canvas2.style.cursor = "pointer";
+        }
+        else {
+            this.mousedata = "";
+            canvas2.style.cursor = "default";
+        }
+    }
+
+    onCanvasClick(evt: MouseEvent) {
+        this.selectCanvasText(evt);
+    }
+
+    selectCanvasText(evt: MouseEvent) {
+        var str = "";
+        const canvas2 = this.pdfCanvas2.nativeElement;
+        var ctx = canvas2.getContext('2d');
+        ctx.clearRect(0, 0, canvas2.width, canvas2.height);
+        for (var rec of this.paged_records) {
+            if (evt.offsetX >= rec.data_left * this.scale && evt.offsetX <= rec.data_right * this.scale && evt.offsetY >= rec.data_top * this.scale && evt.offsetY <= rec.data_bottom * this.scale) {
+                str = rec.data_text;
+                navigator.clipboard.writeText(str);
+                ctx.beginPath();
+                ctx.moveTo(rec.data_x1 * this.scale, rec.data_y1 * this.scale);
+                ctx.lineTo(rec.data_x2 * this.scale, rec.data_y2 * this.scale);
+                ctx.lineTo(rec.data_x3 * this.scale, rec.data_y3 * this.scale);
+                ctx.lineTo(rec.data_x4 * this.scale, rec.data_y4 * this.scale);
+
+                ctx.closePath();
+                ctx.stroke();
+                break;
+            }
+        }
+        if (str != "")
+            this.selecteddata = str;
+        else
+            this.selecteddata = "";
+
+        return this.selecteddata;
+    }
+
+    onDragStartCanvas(event) {
+        var str = this.selectCanvasText(event);
+        event.dataTransfer.setData('data', str);
+    }
+
 }
