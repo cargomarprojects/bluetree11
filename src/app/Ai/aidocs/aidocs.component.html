@@ -27,36 +27,30 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async"
-      (mousedown)="mainservice.selectRowId(rec)" 
-      [class.selected]="rec.file_pkid == mainservice.getRowId()"
-      >
+      <tr *ngFor="let rec of records$ | async" (mousedown)="mainservice.selectRowId(rec)"
+        [class.selected]="rec.file_pkid == mainservice.getRowId()">
         <td class='hlink2' (click)="edit(rec)">{{rec.file_slno}}</td>
-        <td (click)="ShowDocumentList(rec.file_pkid)" >{{rec.rec_created_by}}</td>
-        <td (click)="ShowDocumentList(rec.file_pkid)" >{{rec.rec_created_date}}</td>
-        <td (click)="ShowDocumentList(rec.file_pkid)" >{{rec.file_remarks}}</td>
-        <td (click)="ShowDocumentList(rec.file_pkid)" >{{rec.rec_files_attached}}</td>
+        <td (click)="ShowDocumentList(rec.file_pkid)">{{rec.rec_created_by}}</td>
+        <td (click)="ShowDocumentList(rec.file_pkid)">{{rec.rec_created_date}}</td>
+        <td (click)="ShowDocumentList(rec.file_pkid)">{{rec.file_remarks}}</td>
+        <td (click)="ShowDocumentList(rec.file_pkid)">{{rec.rec_files_attached}}</td>
     </tbody>
   </table>
 </div>
 
-<div class="page-footer"> 
+<div class="page-footer">
   <div class="text-center">
     <p>Document SL# {{mainservice.getRowSlNo()}}</p>
   </div>
 
   <div *ngIf="showAttachment">
     <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
-    [refreshlist]="attach_parentid"
-    [s3upload]= "true" [extractdata]= "true"
-    [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
-    [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
-    [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
-    [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
-    [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
-    (callbackevent)="callbackevent($event)"></app-fileupload>
-</div>
-
+      [refreshlist]="attach_parentid" [s3upload]="true" [extractdata]="true" [type]="attach_type"
+      [typelist]="attach_typelist" [tablename]="attach_tablename" [tablepkcolumn]="attach_tablepkcolumn"
+      [refno]="attach_refno" [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+      [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid" [filespath]="attach_filespath"
+      [filespath2]="attach_filespath2" [modalview]="true" (callbackevent)="callbackevent($event)"></app-fileupload>
+  </div>
 
 </div>
 

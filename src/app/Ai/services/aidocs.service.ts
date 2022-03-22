@@ -32,36 +32,36 @@ export class AiDocsService {
     public canSave: boolean;
 
     public initlialized: boolean;
-    private appid ='';
+    private appid = '';
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    public selectRowId( rec : Tbl_Mast_Filesm){
+    public selectRowId(rec: Tbl_Mast_Filesm) {
         this.record.selectedId = rec.file_pkid;
         this.record.selectedSlNo = rec.file_slno;
     }
-    public getRowId(){
+    public getRowId() {
         return this.record.selectedId;
     }
 
-    public getRowSlNo(){
+    public getRowSlNo() {
         return this.record.selectedSlNo;
     }
-    
+
 
     public ClearInit() {
         this.record = <Mast_Filesm_Model>{
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', file_type : this.file_type },
+            searchQuery: <SearchQuery>{ searchString: '', file_type: this.file_type },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
     }
-    
+
     public init(params: any) {
         if (this.appid != this.gs.appid) {
             this.appid = this.gs.appid;
@@ -77,7 +77,7 @@ export class AiDocsService {
         this.record = <Mast_Filesm_Model>{
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '' , file_type : this.file_type },
+            searchQuery: <SearchQuery>{ searchString: '', file_type: this.file_type },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -122,8 +122,8 @@ export class AiDocsService {
 
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
-            this.record.selectedId= null;
-            this.record.selectedSlNo= null;
+            this.record.selectedId = null;
+            this.record.selectedSlNo = null;
             this.record.records = response.list;
             this.record.DocList = [];
             this.mdata$.next(this.record);
@@ -149,7 +149,7 @@ export class AiDocsService {
         }
     }
 
-    ShowDocumentList(_docID : string) {
+    ShowDocumentList(_docID: string) {
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = _docID;
         this._ShowDocumentList(SearchData).subscribe(response => {
@@ -163,8 +163,6 @@ export class AiDocsService {
         });
     }
 
-
-
     private List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/List', SearchData, this.gs.headerparam2('authorized'));
     }
@@ -172,8 +170,6 @@ export class AiDocsService {
     private _ShowDocumentList(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/GetDocList', SearchData, this.gs.headerparam2('authorized'));
     }
-
-
 
     GetRecord(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/GetRecord', SearchData, this.gs.headerparam2('authorized'));
@@ -188,4 +184,7 @@ export class AiDocsService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiVerify/GetRecord', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    TransferAiData(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/TransferData/TransferAiData', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

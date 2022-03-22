@@ -27,7 +27,7 @@ export class aidocsEditComponent implements OnInit {
     tab: string = 'main';
 
     modal: any;
-    
+
     pkid: string;
     menuid: string;
     public mode: string = '';
@@ -60,7 +60,7 @@ export class aidocsEditComponent implements OnInit {
     attach_filespath: string = '';
     attach_filespath2: string = '';
 
-  
+
 
 
     constructor(
@@ -122,7 +122,7 @@ export class aidocsEditComponent implements OnInit {
     init() {
 
         this.showAttachment = false;
-        
+
         this.record.file_pkid = this.pkid;
         this.record.file_slno = 0;
         this.record.file_type = 'AI-BL';
@@ -133,7 +133,7 @@ export class aidocsEditComponent implements OnInit {
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
 
-        
+
     }
 
     GetRecord() {
@@ -171,7 +171,7 @@ export class aidocsEditComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
-                    if ( this.mode == 'ADD') {
+                    if (this.mode == 'ADD') {
                         this.showAttachment = true;
                         this.initAttachment();
                     }
@@ -241,15 +241,15 @@ export class aidocsEditComponent implements OnInit {
 
     BtnNavigation(action: string, attachmodal: any = null) {
         switch (action) {
-        case 'ATTACHMENT': {
-            this.initAttachment();
-            this.modal = this.modalservice.open(attachmodal, { centered: true });
-            break;
-          }
+            case 'ATTACHMENT': {
+                this.initAttachment();
+                this.modal = this.modalservice.open(attachmodal, { centered: true });
+                break;
+            }
         }
     }
 
-    initAttachment(){
+    initAttachment() {
         let TypeList: any[] = [];
         TypeList = [{ "code": "MBL", "name": "MBL" }, { "code": "HBL", "name": "HBL" }, { "code": "SHIPMENT-INVOICE", "name": "SHIPMENT-INVOICE" }, { "code": "PACKING LIST", "name": "PACKING LIST" }];
         this.attach_title = 'Documents';
@@ -268,27 +268,57 @@ export class aidocsEditComponent implements OnInit {
         this.attach_filespath2 = '';
     }
 
-    CloseModal(){
+    CloseModal() {
         this.modal.close();
     }
 
 
-    callbackparent(rec : DB_Tbl_Mast_Files){
+    callbackparent(rec: DB_Tbl_Mast_Files) {
         this.width = rec.files_width + "px";
         this.height = rec.files_height + "px";
 
         let parameter = {
-            appid:this.gs.appid,
+            appid: this.gs.appid,
             menuid: this.menuid,
-            pkid: rec.file_id ,
-            parentid : rec.files_parent_id,
+            pkid: rec.file_id,
+            parentid: rec.files_parent_id,
             type: '',
             origin: 'aidocs-page',
             mode: 'EDIT'
-          };
-          this.gs.Naviagete2('Ai/AiVerifyPage',  parameter);
+        };
+        this.gs.Naviagete2('Ai/AiVerifyPage', parameter);
 
     }
 
+    ImportAiData(chkMblDup: boolean) {
+
+        if (!confirm("Transfer Data Y/N")) {
+            return;
+          }
+
+        var SearchData = this.gs.UserInfo;
+        if (this.gs.isBlank(this.pkid))
+            SearchData.MASTERID = '';
+        else
+            SearchData.MASTERID = this.pkid;
+        SearchData.REC_COMPANY_CODE = this.gs.company_code;
+        SearchData.CHK_MBL_DUP = chkMblDup == true ? "Y" : "N";
+        this.mainService.TransferAiData(SearchData).subscribe(response => {
+            if (response.retvalue == true) {
+                if (response.warningmsg.trim().length > 0) {
+                    if (confirm(response.warningmsg)) {
+                        this.ImportAiData(false);
+                    }
+                }else
+                {
+                    alert('Save Complete');
+                }
+            }
+
+        }, error => {
+            this.errorMessage = this.gs.getError(error);
+            alert(this.errorMessage);
+        });
+    }
 
 }
