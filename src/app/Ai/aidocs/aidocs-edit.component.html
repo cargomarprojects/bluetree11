@@ -56,7 +56,7 @@
     <div class="col-md-6 testbox  px-0 mx-0">   
         <div class="text-center">
             <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
-            <button *ngIf="mode=='EDIT'" class="btn btn-primary btn-sm mr-1" (click)="ImportAiData(true)">Import Data</button>
+            <button *ngIf="mode=='EDIT'" class="btn btn-primary btn-sm mr-1" (click)="ImportData()">Import Data</button>
 <!--             <button class="btn btn-primary btn-sm" 
                 [style.color]="record.rec_files_attached=='Y'?'red':'white'"
                 (click)="BtnNavigation('ATTACHMENT',attachmodal)">Attachments

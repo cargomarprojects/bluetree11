@@ -290,11 +290,14 @@ export class aidocsEditComponent implements OnInit {
 
     }
 
-    ImportAiData(chkMblDup: boolean) {
-
+    ImportData() {
         if (!confirm("Transfer Data Y/N")) {
             return;
-          }
+        }
+        this.ImportAiData(true);
+    }
+
+    ImportAiData(chkMblDup: boolean) {
 
         var SearchData = this.gs.UserInfo;
         if (this.gs.isBlank(this.pkid))
@@ -309,9 +312,8 @@ export class aidocsEditComponent implements OnInit {
                     if (confirm(response.warningmsg)) {
                         this.ImportAiData(false);
                     }
-                }else
-                {
-                    alert('Save Complete');
+                } else {
+                    alert("New Reference " + response.refno + " Generated Successfully");
                 }
             }
 
