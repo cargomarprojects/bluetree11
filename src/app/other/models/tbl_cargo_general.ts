@@ -148,6 +148,7 @@ export interface Tbl_cargo_general {
     pick_delivery_date: string;
     mbl_bo_status: string;
     mbl_bo_attended_code: string;
+    mbl_incoterm:string;
      
     mbl_cargo_loccode: string;
     mbl_cargo_locname: string;

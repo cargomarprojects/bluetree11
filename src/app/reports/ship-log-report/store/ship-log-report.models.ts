@@ -31,6 +31,7 @@ export interface ReportState {
     sortcol : string ;
     sortorder : boolean;    
     within_eta:number;
+    inco_term:string;
     
     page_rows: number;
     page_count: number;

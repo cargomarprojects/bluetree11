@@ -77,6 +77,7 @@ export class ShipmentLogReportComponent implements OnInit {
   printer_friendly: boolean = false;
   within_eta: number = 0;
   reportformat: string = '';
+  inco_term: string = 'ALL';
 
   selectedId = '';
   sortCol = '';
@@ -153,7 +154,7 @@ export class ShipmentLogReportComponent implements OnInit {
         this.sortCol = rec.sortcol;
         this.sortOrder = rec.sortorder;
         this.within_eta = rec.within_eta;
-
+        this.inco_term = rec.inco_term;
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
         this.page_current = rec.page_current;
@@ -181,7 +182,7 @@ export class ShipmentLogReportComponent implements OnInit {
         this.SearchData.FORMAT_TYPE = this.format_type;
         this.SearchData.PRINTER_FRIENDLY = this.printer_friendly == true ? "Y" : "N";
         this.SearchData.WITHIN_ETA = this.within_eta;
-
+        this.SearchData.INCO_TERM = this.inco_term;
       }
       else {
         this.isRecStored = false;
@@ -221,6 +222,7 @@ export class ShipmentLogReportComponent implements OnInit {
         this.sortCol = '';
         this.sortOrder = true;
         this.within_eta = 0;
+        this.inco_term = 'ALL';
         this.SetStages();
       }
 
@@ -293,6 +295,7 @@ export class ShipmentLogReportComponent implements OnInit {
       this.SearchData.FORMAT_TYPE = this.format_type;
       this.SearchData.PRINTER_FRIENDLY = this.printer_friendly == true ? "Y" : "N";
       this.SearchData.WITHIN_ETA = this.within_eta;
+      this.SearchData.INCO_TERM = this.inco_term;
 
       this.reportformat = this.format_type;
       this.selectedId = '';
@@ -342,6 +345,7 @@ export class ShipmentLogReportComponent implements OnInit {
             sortcol: _action == "NEW" ? "" : this.sortCol,
             sortorder: true,
             within_eta: this.within_eta,
+            inco_term: this.inco_term,
 
             page_rows: response.page_rows,
             page_count: response.page_count,
@@ -523,7 +527,7 @@ export class ShipmentLogReportComponent implements OnInit {
     this.report_searchdata.AGENT_NAME = this.agent_name;
     this.report_searchdata.HANDLED_NAME = this.handled_name;
     this.report_searchdata.WITHIN_ETA = this.within_eta;
-
+    this.report_searchdata.INCO_TERM = this.inco_term;
 
     this.tab = 'report';
   }
