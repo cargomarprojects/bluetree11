@@ -2027,6 +2027,12 @@ export class SeaImpHouseEditComponent implements OnInit {
     this.mainService.GetArrivalNotice(SearchData)
       .subscribe(response => {
 
+        if (response.warningmsg.trim().length > 0) {//While printing Arrival Notice, If Freight Invoice exist them Warning msg as  Print ARRIVAL NOTICE With Freight Invoice
+          if (confirm(response.warningmsg)) {
+            this.GetArrivalNotice('FREIGHT INVOICE');
+            return;
+          }
+        }
         this.filename = response.filename;
         this.filedisplayname = response.filedisplayname;
         this.filetype = response.filetype;
