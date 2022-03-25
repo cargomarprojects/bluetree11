@@ -259,9 +259,10 @@ export class SeaImpHouseService {
     UpdatePuEr(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/House/UpdatePuEr', SearchData, this.gs.headerparam2('authorized'));
     }
-    // GetArrivalNotice(SearchData: any) {
-    //     return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/House/GetArrivalNotice', SearchData, this.gs.headerparam2('authorized'));
-    // }
+    
+    GetArrivalNotice(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/House/GetArrivalNotice', SearchData, this.gs.headerparam2('authorized'));
+    }
 
     // GetPreAlertReport(SearchData: any) {
     //     return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/House/GetPreAlertReport', SearchData, this.gs.headerparam2('authorized'));

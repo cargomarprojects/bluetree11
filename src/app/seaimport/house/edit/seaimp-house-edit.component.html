@@ -1180,19 +1180,28 @@
               *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_INVOICE)">Invoice</button>
           </div> -->
 
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_ARRIVAL_NOTICE)" (click)="BtnNavigation('ARRIVAL-NOTICE')">Arrival
               Notice</button>
-          </div>
-
+          </div> -->
           <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_ARRIVAL_NOTICE)" (click)="GetArrivalNotice('ARRIVAL NOTICE')">Arrival
+              Notice</button>
+          </div>
+          <!-- <div class="form-group row">
             <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_ARRIVAL_NOTICE)"
               (click)="BtnNavigation('FREIGHT-INVOICE')">Arrival Notice(Frt
               Invoice)</button>
+          </div> -->
+          <div class="form-group row">
+            <button class=" col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_ARRIVAL_NOTICE)"
+              (click)="GetArrivalNotice('FREIGHT INVOICE')">Arrival Notice(Frt
+              Invoice)</button>
           </div>
-
           <div class="form-group row">
             <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_PRE_ADVISE)"
@@ -1283,8 +1292,9 @@
   </div>
 </div>
 <div *ngIf="tab=='report'">
-  <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
-    (callbackevent)="callbackevent($event)"></app-report>
+  <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid" 
+  [filename]="filename" [filetype]="filetype" [filedisplayname]="filedisplayname" [filename2]="filename2" [filetype2]="filetype2" 
+  [filedisplayname2]="filedisplayname2" (callbackevent)="callbackevent($event)"></app-report>
 </div>
 <!-- <div *ngIf="tab=='attachment'">
   <app-fileupload [title]="'File Upload Page'" [parentid]="attach_pkid" [subid]="" [type]="attach_type" [typelist]=""

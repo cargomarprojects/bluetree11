@@ -71,6 +71,13 @@ export class SeaImpHouseEditComponent implements OnInit {
   attach_refno: string = '';
   attach_update_column: string = '';
 
+  filename: string = '';
+  filetype: string = '';
+  filedisplayname: string = '';
+  filename2: string = '';
+  filetype2: string = '';
+  filedisplayname2: string = '';
+
   ISFBtnForegroundcolor: string;
   OHBLBtnForegroundcolor: string;
 
@@ -2009,58 +2016,75 @@ export class SeaImpHouseEditComponent implements OnInit {
   CloseModal() {
     this.modal.close();
   }
+
+  GetArrivalNotice(_type: string) {
+
+    this.errorMessage = [];
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = this.pkid;
+    SearchData.type = _type;
+
+    this.mainService.GetArrivalNotice(SearchData)
+      .subscribe(response => {
+
+        this.filename = response.filename;
+        this.filedisplayname = response.filedisplayname;
+        this.filetype = response.filetype;
+        this.filename2 = response.filename2;
+        this.filedisplayname2 = response.filedisplayname2;
+        this.filetype2 = response.filetype2;
+
+        this.report_title = _type == "ARRIVAL NOTICE" ? 'ARRIVAL NOTICE' : 'ARRIVAL NOTICE FREIGHT INVOICE';
+        this.report_url = undefined;
+        this.report_searchdata = this.gs.UserInfo;
+        this.report_searchdata.pkid = this.pkid;
+        this.report_searchdata.type = _type == "ARRIVAL NOTICE" ? 'ARRIVAL NOTICE' : 'FREIGHT INVOICE';
+        this.report_searchdata.PARAM_TYPE = response.type;
+        this.report_searchdata.PARAM_VALUE = response.value;
+        this.report_menuid = this.gs.MENU_SI_HOUSE_ARRIVAL_NOTICE;
+        this.tab = 'report';
+
+      }, error => {
+        // this.errorMessage.push(this.gs.getError(error));
+        alert(this.gs.getError(error));
+      });
+  }
+
   /*
-    GetArrivalNotice(_type:string) {
-      this.errorMessage = '';
-      var SearchData = this.gs.UserInfo;
-      SearchData.pkid = this.pkid;
-      SearchData.type =_type;
-                                  
-      this.mainService.GetArrivalNotice(SearchData)
-        .subscribe(response => {
-          
-          this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
-  
-          
-        }, error => {
-          this.errorMessage = this.gs.getError(error);
-        });
-    }
-  
-    Downloadfile(filename: string, filetype: string, filedisplayname: string) {
-      this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
-    }
-  
-    GetPreAlert() {
-      this.errorMessage = '';
-      var SearchData = this.gs.UserInfo;
-      SearchData.pkid = this.pkid;
-          
-      this.mainService.GetPreAlertReport(SearchData)
-        .subscribe(response => {
-          
-          this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
-  
-          
-        }, error => {
-          this.errorMessage = this.gs.getError(error);
-        });
-    }
-    GetTurnOver() {
-      this.errorMessage = '';
-      var SearchData = this.gs.UserInfo;
-      SearchData.pkid = this.pkid;
-          
-      this.mainService.GetTurnOverReport(SearchData)
-        .subscribe(response => {
-          
-          this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
-  
-          
-        }, error => {
-          this.errorMessage = this.gs.getError(error);
-        });
-    }*/
+  Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+    this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
+  }
+ 
+  GetPreAlert() {
+    this.errorMessage = '';
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = this.pkid;
+        
+    this.mainService.GetPreAlertReport(SearchData)
+      .subscribe(response => {
+        
+        this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+ 
+        
+      }, error => {
+        this.errorMessage = this.gs.getError(error);
+      });
+  }
+  GetTurnOver() {
+    this.errorMessage = '';
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = this.pkid;
+        
+    this.mainService.GetTurnOverReport(SearchData)
+      .subscribe(response => {
+        
+        this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+ 
+        
+      }, error => {
+        this.errorMessage = this.gs.getError(error);
+      });
+  }*/
 
   getLink(_mode: string) {
 
