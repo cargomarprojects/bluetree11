@@ -166,6 +166,17 @@ export class ReportComponent implements OnInit {
         this.maildata.customer_id = '';
         this.maildata.customer_name = '';
       }
+
+      if (!this.gs.isBlank(this._searchdata.PARAM_TYPE) && !this.gs.isBlank(this._searchdata.PARAM_VALUE)) {
+        this.maildata.type = this._searchdata.PARAM_TYPE;
+        this.maildata.value = this._searchdata.PARAM_VALUE;
+      } else {
+        if (this.gs.isBlank(this.maildata.type))
+          this.maildata.type = '';
+        if (this.gs.isBlank(this.maildata.value))
+          this.maildata.value = '';
+      }
+
     }
     this.downloadfilename = this.GetFileWithoutExtension(this._filedisplayname);
     this.gs.getFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname).subscribe(response => {
