@@ -13,6 +13,7 @@ import { vm_Tbl_Ai_Hblm, Ai_Hblm_Model, Tbl_Ai_Hblm, Tbl_Ai_HblDesc, Tbl_Ai_Cntr
 
 import { SearchTable } from '../../../shared/models/searchtable';
 import { Tbl_Ai_Formatm } from '../../models/Tbl_Ai_Format';
+import { Tbl_File_Details } from '../../models/Tbl_mast_filesm';
 
 @Component({
     selector: 'app-ai-hbl',
@@ -27,6 +28,8 @@ export class aiHblComponent implements OnInit {
     records: Tbl_Ai_HblDesc[] = <Tbl_Ai_HblDesc[]>[];
 
     cntrs: Tbl_Ai_Cntr[] = <Tbl_Ai_Cntr[]>[];
+
+    FileList: Tbl_File_Details[] = <Tbl_File_Details[]>[];
 
     CompList: any[];
 
@@ -161,7 +164,7 @@ export class aiHblComponent implements OnInit {
     private Allvalid(): boolean {
 
         var bOk = true;
-        var error=  "";
+        var error = "";
         var bRet = true;
         this.errorMessage = "";
 
@@ -263,29 +266,29 @@ export class aiHblComponent implements OnInit {
         }                         
 
         */
-        
 
 
-        this.cntrs.forEach( rec =>{
-            if ( rec.hbl_cntr_no.length !=11){
+
+        this.cntrs.forEach(rec => {
+            if (rec.hbl_cntr_no.length != 11) {
                 error = "Invalid Container";
                 bOk = false;
             }
-            if ( this.gs.isBlank(rec.hbl_cntr_type)){
+            if (this.gs.isBlank(rec.hbl_cntr_type)) {
                 error = "Invalid Container Type";
                 bOk = false;
             }
-            if  ( this.gs.isZero( rec.hbl_cntr_pkgs)){
+            if (this.gs.isZero(rec.hbl_cntr_pkgs)) {
                 error = "Invalid Container Pkgs";
                 bOk = false;
             }
-            if ( this.gs.isBlank(rec.hbl_cntr_unit)){
+            if (this.gs.isBlank(rec.hbl_cntr_unit)) {
                 error = "Invalid Container Unit";
                 bOk = false;
             }
         });
 
-        if ( !bOk){
+        if (!bOk) {
             alert(error);
         }
 
@@ -359,11 +362,11 @@ export class aiHblComponent implements OnInit {
         }
         if (_Record.controlname == "CONTAINER TYPE") {
             this.cntrs.forEach(rec => {
-              if (rec.hbl_pkid == _Record.uid) {
-                rec.hbl_cntr_type = _Record.code;
-              }
+                if (rec.hbl_pkid == _Record.uid) {
+                    rec.hbl_cntr_type = _Record.code;
+                }
             });
-          }        
+        }
     }
 
     onChange(field: string) {
@@ -445,162 +448,162 @@ export class aiHblComponent implements OnInit {
             case 'mbl_agent_name': {
                 this.record.mbl_agent_name = this.record.mbl_agent_name.toUpperCase().trim();
                 break;
-            }            
+            }
             case 'mbl_coloader_name': {
                 this.record.mbl_coloader_name = this.record.mbl_coloader_name.toUpperCase().trim();
                 break;
-            }            
+            }
             case 'hbl_hbl_no': {
                 this.record.hbl_hbl_no = this.record.hbl_hbl_no.toUpperCase().trim();
                 break;
-            }            
+            }
             case 'hbl_ams': {
                 this.record.hbl_ams = this.record.hbl_ams.toUpperCase().trim();
                 break;
-            }            
+            }
             case 'hbl_shipper_name': {
                 this.record.hbl_shipper_name = this.record.hbl_shipper_name.toUpperCase().trim();
                 break;
-            }            
+            }
             case 'hbl_shipper_add1': {
                 this.record.hbl_shipper_add1 = this.record.hbl_shipper_add1.toUpperCase().trim();
                 break;
-            }            
+            }
             case 'hbl_shipper_add2': {
                 this.record.hbl_shipper_add2 = this.record.hbl_shipper_add2.toUpperCase().trim();
                 break;
-            }            
+            }
             case 'hbl_shipper_add3': {
                 this.record.hbl_shipper_add3 = this.record.hbl_shipper_add3.toUpperCase().trim();
                 break;
-            }            
+            }
             case 'hbl_shipper_add4': {
                 this.record.hbl_shipper_add4 = this.record.hbl_shipper_add4.toUpperCase().trim();
                 break;
-            }            
+            }
             case 'hbl_shipper_add5': {
                 this.record.hbl_shipper_add5 = this.record.hbl_shipper_add5.toUpperCase().trim();
                 break;
-            }            
+            }
 
             case 'hbl_consignee_name': {
                 this.record.hbl_consignee_name = this.record.hbl_consignee_name.toUpperCase().trim();
                 break;
-            }                        
+            }
             case 'hbl_consignee_add1': {
                 this.record.hbl_consignee_add1 = this.record.hbl_consignee_add1.toUpperCase().trim();
                 break;
-            }                        
+            }
             case 'hbl_consignee_add2': {
                 this.record.hbl_consignee_add2 = this.record.hbl_consignee_add2.toUpperCase().trim();
                 break;
-            }                        
+            }
             case 'hbl_consignee_add3': {
                 this.record.hbl_consignee_add3 = this.record.hbl_consignee_add3.toUpperCase().trim();
                 break;
-            }                                    
+            }
             case 'hbl_consignee_add4': {
                 this.record.hbl_consignee_add4 = this.record.hbl_consignee_add4.toUpperCase().trim();
                 break;
-            }                                    
+            }
             case 'hbl_consignee_add5': {
                 this.record.hbl_consignee_add5 = this.record.hbl_consignee_add5.toUpperCase().trim();
                 break;
-            }                                    
+            }
 
             case 'hbl_notify_name': {
                 this.record.hbl_notify_name = this.record.hbl_notify_name.toUpperCase().trim();
                 break;
-            }                                 
+            }
             case 'hbl_notify_add1': {
                 this.record.hbl_notify_add1 = this.record.hbl_notify_add1.toUpperCase().trim();
                 break;
-            }                        
+            }
             case 'hbl_notify_add2': {
                 this.record.hbl_notify_add2 = this.record.hbl_notify_add2.toUpperCase().trim();
                 break;
-            }                        
+            }
             case 'hbl_notify_add3': {
                 this.record.hbl_notify_add3 = this.record.hbl_notify_add3.toUpperCase().trim();
                 break;
-            }                                    
+            }
             case 'hbl_notify_add4': {
                 this.record.hbl_notify_add4 = this.record.hbl_notify_add4.toUpperCase().trim();
                 break;
-            }                                    
+            }
             case 'hbl_notify_add5': {
                 this.record.hbl_notify_add5 = this.record.hbl_notify_add5.toUpperCase().trim();
                 break;
-            }                                    
-            
+            }
+
             case 'hbl_pre_carriage': {
                 this.record.hbl_pre_carriage = this.record.hbl_pre_carriage.toUpperCase().trim();
                 break;
-            }   
+            }
             case 'hbl_por': {
                 this.record.hbl_por = this.record.hbl_por.toUpperCase().trim();
                 break;
-            }                                                         
+            }
             case 'hbl_pol': {
                 this.record.hbl_pol = this.record.hbl_pol.toUpperCase().trim();
                 break;
-            }                
+            }
             case 'hbl_pod': {
                 this.record.hbl_pod = this.record.hbl_pod.toUpperCase().trim();
                 break;
-            }                
+            }
             case 'hbl_pofd': {
                 this.record.hbl_pofd = this.record.hbl_pofd.toUpperCase().trim();
                 break;
-            }                
+            }
             case 'hbl_place_of_delivery': {
                 this.record.hbl_place_of_delivery = this.record.hbl_place_of_delivery.toUpperCase().trim();
                 break;
-            }                            
+            }
             case 'hbl_vessel': {
                 this.record.hbl_vessel = this.record.hbl_vessel.toUpperCase().trim();
                 break;
-            }                            
+            }
             case 'hbl_voyage': {
                 this.record.hbl_voyage = this.record.hbl_voyage.toUpperCase().trim();
                 break;
-            }                   
+            }
             case 'hbl_commodity': {
                 this.record.hbl_commodity = this.record.hbl_commodity.toUpperCase().trim();
                 break;
-            }                               
+            }
             case 'hbl_invno': {
                 this.record.hbl_invno = this.record.hbl_invno.toUpperCase().trim();
                 break;
-            }                               
+            }
             case 'hbl_po': {
                 this.record.hbl_po = this.record.hbl_po.toUpperCase().trim();
                 break;
-            }         
+            }
             case 'hbl_unit': {
                 this.record.hbl_unit = this.record.hbl_unit.toUpperCase().trim();
                 break;
-            }         
+            }
             case 'hbl_place_of_issue': {
                 this.record.hbl_place_of_issue = this.record.hbl_place_of_issue.toUpperCase().trim();
                 break;
-            }                                                                           
+            }
             case 'hbl_pkgs': {
                 this.record.hbl_pkgs = this.gs.roundNumber(this.record.hbl_pkgs, 0);
                 break;
-            }         
+            }
             case 'hbl_gr_wt': {
                 this.record.hbl_gr_wt = this.gs.roundNumber(this.record.hbl_gr_wt, 3);
                 break;
-            }                                    
+            }
             case 'hbl_nt_wt': {
                 this.record.hbl_nt_wt = this.gs.roundNumber(this.record.hbl_nt_wt, 3);
                 break;
-            }                              
+            }
             case 'hbl_cbm': {
                 this.record.hbl_cbm = this.gs.roundNumber(this.record.hbl_cbm, 3);
                 break;
-            }                      
+            }
 
         }
     }
@@ -659,6 +662,40 @@ export class aiHblComponent implements OnInit {
 
     ChangeTab(_tab) {
         this.tab = _tab;
+    }
+
+    GenerateXml() {
+        
+        if (this.gs.isBlank(this.record.hbl_format_id)) {
+            alert('Format Cannot be Blank');
+            return;
+        }
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.hbl_id = this.pkid;
+        if (this.gs.isBlank(this.record.mbl_pkid))
+            SearchData.mbl_id = '';
+        else
+            SearchData.mbl_id = this.record.mbl_pkid;
+        SearchData.branch_code = this.gs.branch_code;
+        SearchData.format_id = this.record.hbl_format_id;
+
+        this.mainService.GenerateXml(SearchData)
+            .subscribe(response => {
+
+                this.FileList = response.filelist;
+                for (let rec of this.FileList) {
+                    this.Downloadfile(rec.filename, rec.filetype, rec.filedisplayname);
+                }
+
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+            });
+    }
+
+    Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+        this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
     }
 
 }

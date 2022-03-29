@@ -52,3 +52,12 @@ export interface vm_Tbl_Mast_Filesm {
     userinfo: any,
     filter: any;
 }
+
+export class Tbl_File_Details {
+    filename: string;
+    filetype: string;
+    filedisplayname: string;
+    filecategory: string;
+    fileprocessid:string;
+    filesize:number;
+}

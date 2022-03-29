@@ -12,6 +12,7 @@ export class Tbl_Ai_Hblm {
 
     mbl_branch_code: string;
 
+    mbl_pkid: string;
     mbl_no: string;
     mbl_date: string;
     mbl_book_no: string;

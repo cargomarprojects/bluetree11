@@ -190,4 +190,7 @@ export class AiHblService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiHbl/Delete', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    GenerateXml(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Xml/AiDocPage/GenerateXml', SearchData, this.gs.headerparam2('authorized'));
+    }
 }
