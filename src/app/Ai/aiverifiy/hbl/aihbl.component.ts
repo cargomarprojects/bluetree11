@@ -665,7 +665,7 @@ export class aiHblComponent implements OnInit {
     }
 
     GenerateXml() {
-        
+
         if (this.gs.isBlank(this.record.hbl_format_id)) {
             alert('Format Cannot be Blank');
             return;
@@ -677,6 +677,7 @@ export class aiHblComponent implements OnInit {
             SearchData.mbl_id = '';
         else
             SearchData.mbl_id = this.record.mbl_pkid;
+        SearchData.company_code = this.gs.company_code;
         SearchData.branch_code = this.gs.branch_code;
         SearchData.format_id = this.record.hbl_format_id;
 
