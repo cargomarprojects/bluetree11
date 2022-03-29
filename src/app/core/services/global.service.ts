@@ -860,6 +860,7 @@ export class GlobalService {
     await this.http2.post<any>(this.baseUrl + "/api/Auth/LoadSettings", SearchData, this.headerparam2('anonymous')).toPromise().then((response) => {
       console.log('MainList Loaded 2');
       this.MainList = response.list;
+      this.AccGroupList = response.accgrouplist;
       this.InitData();
       this.InitUserInfo();
       //this.GLOBALCONTANTS.InitMonths();
