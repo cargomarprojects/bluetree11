@@ -15,7 +15,9 @@ import { SearchTable } from '../../shared/models/searchtable';
 
 import { Tbl_aws_data } from '../models/Tbl_aws_data';
 
-import * as pdfjs from 'pdfjs-dist/legacy/build/pdf';
+//import * as pdfjs from 'pdfjs-dist/legacy/build/pdf';
+
+import * as pdfjs from 'pdfjs-dist';
 
 import * as printJS from "print-js";
 
@@ -217,6 +219,7 @@ export class aiverifyComponent implements OnInit {
         const data = await this.gs.getFileaSync(this.gs.WWW_FILES_URL, fname, "pdf", rec.file_desc);
         this.fileURL = URL.createObjectURL(data);
         this.pdf = await pdfjs.getDocument(this.fileURL).promise;
+        //this.pdf = null;
         this.totpages = this.pdf._pdfInfo.numPages;
         
         this.showPdfPage(this.scale, 1);
