@@ -670,6 +670,9 @@ export class aiHblComponent implements OnInit {
             alert('Format Cannot be Blank');
             return;
         }
+        if (!confirm("Generate Xml Data Y/N")) {
+            return;
+        }
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
         SearchData.hbl_id = this.pkid;
