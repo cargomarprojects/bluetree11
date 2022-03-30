@@ -683,7 +683,8 @@ export class aiHblComponent implements OnInit {
         SearchData.company_code = this.gs.company_code;
         SearchData.branch_code = this.gs.branch_code;
         SearchData.format_id = this.record.hbl_format_id;
-
+        SearchData.report_folder = this.gs.globalVariables.report_folder;
+        
         this.mainService.GenerateXml(SearchData)
             .subscribe(response => {
 
