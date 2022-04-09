@@ -131,7 +131,7 @@ export class AutoComplete2Component {
   ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
 
   }
-   
+
   Focus() {
     if (!this.disabled) {
       setTimeout(() => {
@@ -242,16 +242,16 @@ export class AutoComplete2Component {
           this.showDiv = true;
 
           this._selectedItem = this.RecList[0];
-          
+
           if (!this.gs.isBlank(this.lov)) {
             setTimeout(() => {
               this.lov.nativeElement.focus();
               this.lov.nativeElement.scrollTop = this.lov.nativeElement.scrollHeight;
             }, 0);
           }
-          
+
           this.ChangeSelection(this._selectedItem)
-          
+
         }
       },
         error => {
@@ -266,7 +266,7 @@ export class AutoComplete2Component {
     this._selectedItem = item;
     setTimeout(() => {
       //this.lov.nativeElement.focus();
-      if ( this.inputs.toArray()[index])
+      if (this.inputs.toArray()[index])
         this.inputs.toArray()[index].nativeElement.focus();
     }, 0);
   }
@@ -344,6 +344,7 @@ export class AutoComplete2Component {
 
   onBlur() {
     let localdata: string = "";
+    this._displaydata = this.gs.trimAll(this._displaydata);
     if (this._displaydata === null)
       localdata = '';
     else
@@ -398,7 +399,7 @@ export class AutoComplete2Component {
   }
 
   ListKeydown(event: KeyboardEvent, _rec: SearchTable) {
-   
+
     if (event.key === 'Tab') {
       event.preventDefault();
     }
@@ -414,7 +415,7 @@ export class AutoComplete2Component {
     if (event.key === 'PageDown') {
       this.List('NEXT');
     }
-    
+
   }
   MoreKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
