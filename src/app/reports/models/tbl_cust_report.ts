@@ -4,7 +4,8 @@ export interface SearchQuery {
     searchString: string;
     searchCategory: string;
     fromdate:string;
-    todate:string;    
+    todate:string;  
+    formatType:string;
 }
 
 export class Tbl_Cust_Report {

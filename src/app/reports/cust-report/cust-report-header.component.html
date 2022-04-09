@@ -55,6 +55,15 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Formats</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.formatType">
+                            <option [value]="'STANDARD'">STANDARD</option>
+                            <option [value]="'SPECIAL-ACCOUNT'">CREDIT/SPECIAL ACCOUNT</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm"></label>
                     <div class="col-8">
                         <button (click)="List('SCREEN')" class="btn btn-info btn-sm mr-1">Search</button>

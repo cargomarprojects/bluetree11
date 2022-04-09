@@ -70,7 +70,7 @@ export class CustReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I',fromdate: '', todate: '' },
+            searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I',fromdate: '', todate: '',formatType:'STANDARD' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -93,7 +93,7 @@ export class CustReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I',fromdate: '', todate: '' },
+            searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I',fromdate: '', todate: '',formatType:'STANDARD'},
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
