@@ -27,6 +27,7 @@ export class CustReportService {
     public canEdit: boolean;
     public canSave: boolean;
     public canPrint: boolean;
+    public formatType: string="STANDARD";
 
     public initlialized: boolean;
     private appid = '';
@@ -116,6 +117,7 @@ export class CustReportService {
             this.record.pageQuery = _searchdata.pageQuery;
         }
 
+        
         var SearchData = this.gs.UserInfo;
         SearchData.outputformat = _searchdata.outputformat;
         SearchData.action = 'NEW';
@@ -125,6 +127,8 @@ export class CustReportService {
         SearchData.CODE = this.record.searchQuery.searchString;
         SearchData.SDATE = this.record.searchQuery.fromdate;
         SearchData.EDATE = this.record.searchQuery.todate;
+        this.formatType =this.record.searchQuery.formatType;
+        SearchData.FORMAT_TYPE = this.formatType;
         
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
