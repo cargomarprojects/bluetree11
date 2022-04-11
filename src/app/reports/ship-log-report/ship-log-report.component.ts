@@ -487,18 +487,8 @@ export class ShipmentLogReportComponent implements OnInit {
 
 
 
-  Print() {
+  Print(_type: string) {
     this.errorMessage = "";
-    // if (this.MainList.length <= 0) {
-    //   this.errorMessage = "List Not Found";
-    //   alert(this.errorMessage);
-    //   return;
-    // }
-    // this.report_url = '';
-    // this.report_searchdata = this.gs.UserInfo;
-    // this.report_searchdata.pkid = '';
-    // this.report_menuid = this.menuid;
-
     this.report_url = '/api/Other/Report/ShipmentLogPrint';
     this.report_menuid = this.menuid;
     this.report_searchdata.pkid = '';
@@ -528,10 +518,25 @@ export class ShipmentLogReportComponent implements OnInit {
     this.report_searchdata.HANDLED_NAME = this.handled_name;
     this.report_searchdata.WITHIN_ETA = this.within_eta;
     this.report_searchdata.INCO_TERM = this.inco_term;
+    this.report_searchdata.PRINT_TYPE = _type;
 
-    this.tab = 'report';
+    if (_type == 'PDF') {
+      this.tab = 'report';
+    } else if (_type == 'EXCEL') {
+      this.mainservice.ShipmentLogPrint(this.report_searchdata)
+        .subscribe(response => {
+          this.Downloadfile(response.filename2, response.filetype2, response.filedisplayname2);
+        }, error => {
+          this.errorMessage = this.gs.getError(error);
+        });
+    }
+
   }
 
+
+  Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+    this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
+  }
   callbackevent() {
     this.tab = 'main';
   }

@@ -92,6 +92,10 @@ export class ReportService {
     MasterUpdate(SearchData: any) {
       return this.http2.post<any>(this.gs.baseUrl + "/api/Other/Report/MasterUpdate", SearchData, this.gs.headerparam2('authorized'));
     }
+
+    ShipmentLogPrint(SearchData: any) {
+      return this.http2.post<any>(this.gs.baseUrl + "/api/Other/Report/ShipmentLogPrint", SearchData, this.gs.headerparam2('authorized'));
+    }
 }
 
 
