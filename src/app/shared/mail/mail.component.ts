@@ -433,7 +433,13 @@ export class MailComponent implements OnInit {
           this.GetTotfilesize();
         },
         error => {
-          alert('Failed');
+          // alert('Failed');
+          let emsg = this.gs.getError(error);;
+          if (!this.gs.isBlank(emsg))
+            emsg = 'Failed, ' + emsg;
+          else
+            emsg = 'Failed';
+          alert(emsg);
         }
       );
   }
