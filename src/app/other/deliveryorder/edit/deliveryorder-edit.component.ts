@@ -662,14 +662,15 @@ export class DeliveryOrderEditComponent implements OnInit {
 
         if (response.retvalue == false) {
           this.errorMessage.push(response.error);
+          alert(this.errorMessage);
         }
         else {
           if (this.mode == 'ADD')
             this.record.pick_orderno = response.code;
           this.mode = 'EDIT';
-          this.errorMessage.push('Save Complete');
+          //this.errorMessage.push('Save Complete');
           this.mainService.RefreshList(this.record);
-          // alert(this.errorMessage);
+          alert('Save Complete');
         }
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
