@@ -357,8 +357,8 @@
                                 [ngClass]="getIcon('mbl_liner_name')"></i></th>
                         <th *ngIf="job_mode=='OCEAN EXPORT'" (click)="sort('mbl_liner_bookingno')"> BOOKING# &nbsp;<i
                                 [ngClass]="getIcon('mbl_liner_bookingno')"></i> </th>
-                        <th (click)="sort('hbl_is_itshipment')"> AGENT &nbsp;<i
-                                [ngClass]="getIcon('hbl_is_itshipment')"></i> </th>
+                        <th (click)="sort('mbl_agent_name')"> AGENT &nbsp;<i
+                                [ngClass]="getIcon('mbl_agent_name')"></i> </th>
                         <th (click)="sort('hbl_consignee_name')"> CONSIGNEE &nbsp;<i
                                 [ngClass]="getIcon('hbl_consignee_name')"></i> </th>
                         <th *ngIf="job_mode=='OCEAN IMPORT'" (click)="sort('mbl_incoterm')"> INCO.TERM &nbsp;<i
@@ -371,10 +371,10 @@
                                 [ngClass]="getIcon('mbl_cargo_loc_firmcode')"></i> </th>
                         <th (click)="sort('hbl_is_itshipment')"> IT.SHIPMENT &nbsp;<i
                                 [ngClass]="getIcon('hbl_is_itshipment')"></i> </th>
-                        <th (click)="sort('hbl_is_itshipment')"> STATUS &nbsp;<i
-                                [ngClass]="getIcon('hbl_is_itshipment')"></i> </th>
-                        <th (click)="sort('hbl_is_itshipment')"> BY &nbsp;<i
-                                [ngClass]="getIcon('hbl_is_itshipment')"></i> </th>
+                        <th (click)="sort('mbl_bo_status')"> STATUS &nbsp;<i
+                                [ngClass]="getIcon('mbl_bo_status')"></i> </th>
+                        <th (click)="sort('mbl_bo_attended_code')"> BY &nbsp;<i
+                                [ngClass]="getIcon('mbl_bo_attended_code')"></i> </th>
                         <!-- <th> A </th>
                         <th> B </th>
                         <th> C </th>
