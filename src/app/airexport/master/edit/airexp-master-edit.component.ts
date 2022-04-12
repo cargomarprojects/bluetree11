@@ -409,9 +409,11 @@ export class AirExpMasterEditComponent implements OnInit {
       this.errorMessage.push("Invalid Ch.Weight");
     }
 
-    if (!this.IsValidAWB(this.record.mbl_no)) {
-      bRet = false;
-      this.errorMessage.push("Invalid Master BL#");
+    if (!this.gs.isBlank(this.record.mbl_no)) {
+      if (!this.IsValidAWB(this.record.mbl_no)) {
+        bRet = false;
+        this.errorMessage.push("Invalid Master BL#");
+      }
     }
 
     if (!bRet)
