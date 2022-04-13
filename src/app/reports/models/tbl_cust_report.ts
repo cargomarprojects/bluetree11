@@ -9,6 +9,7 @@ export interface SearchQuery {
 }
 
 export class Tbl_Cust_Report {
+    cust_pkid: string;
     cust_name: string;
     cust_official_name: string;
     cust_address1: string;

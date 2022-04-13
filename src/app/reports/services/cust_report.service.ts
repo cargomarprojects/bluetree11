@@ -27,11 +27,12 @@ export class CustReportService {
     public canEdit: boolean;
     public canSave: boolean;
     public canPrint: boolean;
-    public formatType: string="STANDARD";
+    public formatType: string = "STANDARD";
+    public canLinkAddressBook: boolean = false;
 
     public initlialized: boolean;
     private appid = '';
-     
+
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
@@ -71,7 +72,7 @@ export class CustReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I',fromdate: '', todate: '',formatType:'STANDARD' },
+            searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I', fromdate: '', todate: '', formatType: 'STANDARD' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -94,7 +95,7 @@ export class CustReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I',fromdate: '', todate: '',formatType:'STANDARD'},
+            searchQuery: <SearchQuery>{ searchString: '', searchCategory: 'I', fromdate: '', todate: '', formatType: 'STANDARD' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -105,6 +106,7 @@ export class CustReportService {
         this.canEdit = this.gs.canEdit(this.menuid);
         this.canPrint = this.gs.canPrint(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
+        this.canLinkAddressBook = this.gs.canEdit(this.gs.MENU_MASTER_DATA) || this.gs.canView(this.gs.MENU_MASTER_DATA);
         this.initlialized = true;
     }
 
@@ -117,7 +119,7 @@ export class CustReportService {
             this.record.pageQuery = _searchdata.pageQuery;
         }
 
-        
+
         var SearchData = this.gs.UserInfo;
         SearchData.outputformat = _searchdata.outputformat;
         SearchData.action = 'NEW';
@@ -127,9 +129,9 @@ export class CustReportService {
         SearchData.CODE = this.record.searchQuery.searchString;
         SearchData.SDATE = this.record.searchQuery.fromdate;
         SearchData.EDATE = this.record.searchQuery.todate;
-        this.formatType =this.record.searchQuery.formatType;
+        this.formatType = this.record.searchQuery.formatType;
         SearchData.FORMAT_TYPE = this.formatType;
-        
+
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;

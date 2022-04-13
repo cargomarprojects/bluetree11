@@ -22,7 +22,7 @@ export class CustReportComponent implements OnInit {
  */
 
   errorMessage$: Observable<string>;
-  records$: Observable<Tbl_Cust_Report []>;
+  records$: Observable<Tbl_Cust_Report[]>;
   pageQuery$: Observable<PageQuery>;
   searchQuery$: Observable<SearchQuery>;
 
@@ -56,10 +56,35 @@ export class CustReportComponent implements OnInit {
     this.mainservice.Search(actions, 'PAGE');
   }
 
-  
+
   Close() {
     this.location.back();
   }
 
+  getRouteDet(_format: string, _rec: Tbl_Cust_Report) {
+    let gen_pkid: string = (_rec.cust_pkid != null) ? _rec.cust_pkid.toString() : "";
+    let sMenuID = this.gs.MENU_MASTER_DATA;
+
+    if (this.gs.isBlank(gen_pkid))
+      return null;
+
+    if (this.gs.canEdit(sMenuID) || this.gs.canView(sMenuID)) {
+      if (_format == "P") {
+        return {
+          appid: this.gs.appid,
+          menuid: sMenuID,
+          pkid: gen_pkid,
+          type: 'PARTYS',
+          origin: 'cust-report-page',
+          mode: 'EDIT'
+        };
+      } else if (_format == "L") {
+        return "/Silver.Master/PartyEditPage";
+      } else
+        return null;
+    }
+    else
+      return null;
+  }
 
 }

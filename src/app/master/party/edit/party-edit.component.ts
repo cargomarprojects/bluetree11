@@ -443,8 +443,9 @@ export class PartyEditComponent implements OnInit {
           if (this.mode == "ADD" && response.code != '')
             this.record.gen_code = response.code;
           this.mode = 'EDIT';
-          this.errorMessage = 'Save Complete';
-          alert(this.errorMessage);
+          // this.errorMessage = 'Save Complete';
+          // alert(this.errorMessage);
+          alert('Save Complete');
           this.mainService.RefreshList(this.record);
         }
       }, error => {
