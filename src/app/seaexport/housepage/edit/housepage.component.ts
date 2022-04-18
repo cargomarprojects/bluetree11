@@ -1010,6 +1010,7 @@ export class HousePageComponent implements OnInit {
         this.report_searchdata.format_type = 'DRAFT';
         this.report_searchdata.bl_format_for = this.bl_format_for;
         this.report_searchdata.bl_backside = this.bl_backside == true ? 'Y' : 'N';
+        this.report_searchdata.bl_new_format = this.bl_new_format == true ? 'Y' : 'N';
         this.report_searchdata.bl_colour = this.bl_colour == true ? '2' : '0';
         this.report_searchdata.cntr_seal_hrzprint = this.cntr_seal_hrzprint == true ? 'Y' : 'N';
         this.report_menuid = this.gs.MENU_SE_HOUSE_HBL_LASER;
@@ -1024,6 +1025,7 @@ export class HousePageComponent implements OnInit {
         this.report_searchdata.format_type = 'TELEX';
         this.report_searchdata.bl_format_for = this.bl_format_for;
         this.report_searchdata.bl_backside = this.bl_backside == true ? 'Y' : 'N';
+        this.report_searchdata.bl_new_format = this.bl_new_format == true ? 'Y' : 'N';
         this.report_searchdata.bl_colour = this.bl_colour == true ? '2' : '0';
         this.report_searchdata.cntr_seal_hrzprint = this.cntr_seal_hrzprint == true ? 'Y' : 'N';
         this.report_menuid = this.gs.MENU_SE_HOUSE_HBL_LASER;
