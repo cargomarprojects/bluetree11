@@ -7,6 +7,7 @@ export interface SearchQuery {
     status : string ;
     sdate : string ;
     edate : string;
+    showdeleted: boolean;
 }
 
 export class Tbl_Acc_Payment {
@@ -108,7 +109,7 @@ export class Tbl_Acc_Payment {
     pay_invtype: string;
     pay_hblid: string;
     row_type:string;
-
+    pay_inv_deleted:string;
 }
 
 

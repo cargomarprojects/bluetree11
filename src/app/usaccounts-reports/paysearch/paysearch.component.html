@@ -46,7 +46,7 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" [style.color]="rec.pay_inv_deleted == 'Y' ?'Red' : 'Black'">
         <!-- <td class='hlink2' (click)="editinvoice(rec)">{{rec.pay_invno}}</td> -->
         <td>
           <a class="hlink" [routerLink]="getRouteDet('L',rec,'INVNO')"

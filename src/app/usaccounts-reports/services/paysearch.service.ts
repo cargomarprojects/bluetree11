@@ -76,7 +76,7 @@ export class PaySearchService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchType: 'CHECK NO', status: 'PAID' },
+            searchQuery: <SearchQuery>{ searchString: '', searchType: 'CHECK NO', status: 'PAID',showdeleted:false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -111,7 +111,7 @@ export class PaySearchService {
         SearchData.DATA = this.record.searchQuery.searchString;
         SearchData.STATUS = this.record.searchQuery.status;
         SearchData.HIDE_PAYROLL = this.gs.user_hide_payroll;
-
+        SearchData.SHOWDELETED = (this.record.searchQuery.showdeleted) ? 'Y' : 'N';
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
