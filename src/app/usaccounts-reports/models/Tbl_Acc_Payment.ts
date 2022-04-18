@@ -110,6 +110,7 @@ export class Tbl_Acc_Payment {
     pay_hblid: string;
     row_type:string;
     pay_inv_deleted:string;
+    pay_inv_files_attached:string;
 }
 
 

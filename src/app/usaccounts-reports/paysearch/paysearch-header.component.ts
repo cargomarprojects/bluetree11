@@ -33,8 +33,10 @@ export class PaySearchHeaderComponent implements OnInit {
         if (this.searchQuery.searchString != null)
             this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase();
         if (this.searchQuery.searchType == "CHECK AMOUNT" || this.searchQuery.searchType == "INVOICE AMOUNT") {
-            alert('Search Amount Cannot be Blank');
-            return;
+            if (this.gs.isBlank(this.searchQuery.searchString)) {
+                alert('Search Amount Cannot be Blank');
+                return;
+            }
         }
         this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.searchQuery });
     }
