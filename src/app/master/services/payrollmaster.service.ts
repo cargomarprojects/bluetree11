@@ -115,7 +115,7 @@ export class PayrollMasterService {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
             this.mdata$.next(this.record);
-            alert(this.record.errormessage);
+            // alert(this.record.errormessage);
         }, error => {
             this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
