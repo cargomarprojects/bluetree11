@@ -2047,6 +2047,8 @@ export class SeaImpHouseEditComponent implements OnInit {
         this.report_searchdata.type = _type == "ARRIVAL NOTICE" ? 'ARRIVAL NOTICE' : 'FREIGHT INVOICE';
         this.report_searchdata.PARAM_TYPE = response.type;
         this.report_searchdata.PARAM_VALUE = response.value;
+        this.report_searchdata.CUSTOMER_ID = response.consigneeid;
+        this.report_searchdata.CUSTOMER_NAME = response.consigneename;
         this.report_menuid = this.gs.MENU_SI_HOUSE_ARRIVAL_NOTICE;
         this.tab = 'report';
 
