@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import { HostListener,Component } from '@angular/core';
 import { environment } from '../environments/environment';
 
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, ActivatedRoute } from '@angular/router';
 
 import { LoadingScreenService } from './core/services/loadingscreen.service';
 import { GlobalService } from './core/services/global.service';
-
-
+ 
 
 @Component({
   selector: 'app-root',
@@ -17,7 +16,7 @@ export class AppComponent {
   title = 'my App';
 
   sub: any;
-
+     
   constructor(
     public gs: GlobalService,
     public loadingservice: LoadingScreenService,
@@ -81,5 +80,8 @@ export class AppComponent {
     this.sub.unsusbscribe();
   }
 
+  // @HostListener('mouseenter') onMouseEnter() {
+  //   alert("Mouse Enter!");
+  // }
 
 }
