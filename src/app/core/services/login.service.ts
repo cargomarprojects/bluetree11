@@ -66,6 +66,7 @@ export class LoginService {
     var SearchData = this.gs.UserInfo;
     SearchData.company_pkid = this.gs.company_pkid;
     SearchData.company_code = this.gs.company_code;
+    SearchData.company_name = this.gs.company_name;
     SearchData.branch_code = this.gs.branch_code;
     SearchData.user_pkid = this.gs.user_pkid;
     SearchData.user_code = this.gs.user_code;
