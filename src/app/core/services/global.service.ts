@@ -72,7 +72,7 @@ export class GlobalService {
   public AccGroupList: any[];
 
 
-
+  public timeoutCount:number = 900; // 15 * 60 =900  seconds
   public branch_codes: string = '';
   public history: Array<{ id: string, url: string }> = [];
   public HISTORY_MIN_LENGTH = 2;
