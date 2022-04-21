@@ -87,7 +87,7 @@ export class AppComponent {
   }
 
 
-  @HostListener('keydown', ['$event'])
+  @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
     this.startTime = Date.now();
   }
