@@ -49,8 +49,8 @@ export class LoginService {
     this.gs.IsLoginSuccess = false;
     this.gs.IsAuthenticated = false;
     this.gs.Access_Token = '';
+    this.Logout2(this.gs.appid);
     this.gs.GenerateAppID();
-    this.Logout2();
   }
 
 
@@ -62,7 +62,7 @@ export class LoginService {
     return this.http2.post<any>(this.gs.baseUrl + "/api/Admin/User/LoadYear", SearchData, this.gs.headerparam2('authorized'));
   }
 
-  Logout2() {
+  Logout2(_appid:string) {
     var SearchData = this.gs.UserInfo;
     SearchData.company_pkid = this.gs.company_pkid;
     SearchData.company_code = this.gs.company_code;
@@ -70,7 +70,7 @@ export class LoginService {
     SearchData.branch_code = this.gs.branch_code;
     SearchData.user_pkid = this.gs.user_pkid;
     SearchData.user_code = this.gs.user_code;
-
+    SearchData.appid = _appid;
     this.PageLogout(SearchData)
       .subscribe(response => {
 
