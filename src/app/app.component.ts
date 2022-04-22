@@ -99,7 +99,9 @@ export class AppComponent {
 
   @HostListener('window:unload', ['$event']) //On Browser closing
   unloadHandler(event) {
-    this.loginservice.Logout();
+    if (this.gs.IsLoginSuccess) {
+      this.loginservice.Logout();
+    }
   }
 
 
