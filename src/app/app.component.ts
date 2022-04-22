@@ -97,13 +97,19 @@ export class AppComponent {
     this.startTime = Date.now();
   }
 
-  @HostListener('window:unload', ['$event']) //On Browser closing
-  unloadHandler(event) {
+  // @HostListener('window:unload', ['$event']) //On Browser closing
+  // unloadHandler(event) {
+  //   if (this.gs.IsLoginSuccess) {
+  //     this.loginservice.Logout();
+  //   }
+  // }
+  
+  @HostListener('window:beforeunload', ['$event']) //On Browser closing
+  beforeUnloadHandler(event) {
     if (this.gs.IsLoginSuccess) {
       this.loginservice.Logout();
     }
   }
-
 
   startTimer() {
 
