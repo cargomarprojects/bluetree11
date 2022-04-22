@@ -14,6 +14,7 @@ export class InterceptorService implements HttpInterceptor {
 
     skippUrls = [
         '/to',
+        '/api/Auth/ActiveUser'
     ];
 
     

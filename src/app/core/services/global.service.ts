@@ -856,6 +856,8 @@ export class GlobalService {
     SearchData.PARAM_TYPE = "ALL SETTINGS";
     SearchData.SCREEN = "LOGIN2";
     SearchData["SET-LOGIN"] = "Y";
+    SearchData.USER_PKID = this.user_pkid;
+    SearchData.APPID = this.appid;
     console.log('MainList Begin 1');
     await this.http2.post<any>(this.baseUrl + "/api/Auth/LoadSettings", SearchData, this.headerparam2('anonymous')).toPromise().then((response) => {
       console.log('MainList Loaded 2');

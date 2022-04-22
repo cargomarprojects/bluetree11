@@ -18,6 +18,7 @@ export class AppComponent {
   sub: any;
   startTime = Date.now();
   endTime = Date.now();
+  isActive: string = "N";
 
   constructor(
     public gs: GlobalService,
@@ -90,11 +91,13 @@ export class AppComponent {
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
     this.startTime = Date.now();
+    this.isActive = "Y";
   }
 
   @HostListener('mousemove')
   mousemove() {
     this.startTime = Date.now();
+    this.isActive = "Y";
   }
 
   // @HostListener('window:unload', ['$event']) //On Browser closing
@@ -103,7 +106,7 @@ export class AppComponent {
   //     this.loginservice.Logout();
   //   }
   // }
-  
+
   @HostListener('window:beforeunload', ['$event']) //On Browser closing
   beforeUnloadHandler(event) {
     if (this.gs.IsLoginSuccess) {
@@ -117,6 +120,9 @@ export class AppComponent {
 
       if (this.gs.IsLoginSuccess) {
 
+        this.loginservice.SaveActiveUser(this.isActive);
+        this.isActive="N";
+        
         let storeStartTime = this.readtimerLocalStorage();
         if (this.startTime > +storeStartTime)
           this.savetimerLocalStorage();
@@ -135,7 +141,7 @@ export class AppComponent {
             this.Logout();
           }
         }
-
+        
       }
     }, 5000)
 

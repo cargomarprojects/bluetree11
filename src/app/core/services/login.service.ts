@@ -83,6 +83,22 @@ export class LoginService {
     return this.http2.post<any>(this.gs.baseUrl + "/api/Auth/Logout", SearchData, this.gs.headerparam2('authorized'));
   }
 
+  SaveActiveUser(_isActive:string) {
+    var SearchData = this.gs.UserInfo;
+    SearchData.user_pkid = this.gs.user_pkid;
+    SearchData.appid = this.gs.appid;
+    SearchData.isactive = _isActive;
+    this.ActiveUser(SearchData)
+      .subscribe(response => {
+
+      }, error => {
+      });
+  }
+
+  ActiveUser(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + "/api/Auth/ActiveUser", SearchData, this.gs.headerparam2('authorized'));
+  }
+
 }
 
 
