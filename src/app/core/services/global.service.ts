@@ -44,7 +44,7 @@ export class GlobalService {
   public globalData: GlobalData;
   public globalVariables: GlobalVariables;
   public defaultValues: DefaultValues;
-  public timeoutCount:number = 900; // 15 * 60 =900  seconds
+  public timeoutCount:number =900 ; // 15 * 60 = 900  seconds
   
   public reload_url = '';
 

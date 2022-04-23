@@ -114,6 +114,7 @@ export class AppComponent {
     }
   }
 
+  /*
   startTimer() {
 
     this.interval = setInterval(() => {
@@ -143,10 +144,33 @@ export class AppComponent {
         }
         
       }
-    }, 5000)
+    }, 60000) //time tick interval
 
   }
+*/
 
+  startTimer() {
+
+    this.interval = setInterval(() => {
+
+      if (this.gs.IsLoginSuccess) {
+
+        this.loginservice.SaveActiveUser(this.isActive);
+        this.isActive = "N";
+
+        var timeDiff = Date.now() - this.startTime; //in ms
+        // strip the ms
+        timeDiff /= 1000;
+        // get seconds 
+        var seconds = Math.round(timeDiff);
+        if (seconds >= this.gs.timeoutCount) {
+          this.Logout();
+        }
+
+      }
+    }, 60000) //time tick interval
+
+  }
   savetimerLocalStorage() {
     try {
       localStorage.setItem('timer', this.startTime.toString());
