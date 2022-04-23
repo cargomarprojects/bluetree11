@@ -238,6 +238,8 @@ export class GlobalService {
   public date_display_fmt: string = ""; // System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern.ToString(); 
   public date_display_fmt_with_time = "MM/dd/yyyy HH:mm:ss";
 
+  public date_display_fmt_with_month_time = "dd-MMMM-yyyy HH:mm:ss";
+
   public ROWS_TO_DISPLAY = 20;
 
   public LOCK_DAYS_SEA = 0;

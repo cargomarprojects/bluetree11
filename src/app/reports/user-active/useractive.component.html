@@ -29,9 +29,9 @@
         <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
           <td>{{rec.user_username}}</td>
           <td>{{rec.user_status}}</td>
-          <td>{{rec.user_time_in}}</td>
-          <td>{{rec.user_time_out}}</td>
-          <td>{{rec.user_time_last}}</td>
+          <td>{{rec.user_time_in | date : gs.date_display_fmt_with_month_time }}</td>
+          <td>{{rec.user_time_out | date : gs.date_display_fmt_with_month_time }}</td>
+          <td>{{rec.user_time_last | date : gs.date_display_fmt_with_month_time }}</td>
         </tr>
       </tbody>
     </table>
