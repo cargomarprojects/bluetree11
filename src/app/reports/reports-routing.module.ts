@@ -23,6 +23,7 @@ import { NomReportComponent } from './nom-report/nom-report.component';
 import { LogRegisterComponent } from './log-register/logregister.component';
 import { CustReportComponent } from './cust-report/cust-report.component';
 import { DataEntryReportComponent } from './data-entry-report/data-entry-report.component';
+import { UserActiveComponent } from './user-active/useractive.component';
 
 const routes: Routes = [
    { path :'ShipmentHandledReport', component : ShipHandReportComponent },
@@ -44,7 +45,8 @@ const routes: Routes = [
    { path :'NominationListPage', component : NomReportComponent },   
    { path :'LogRegister', component : LogRegisterComponent },   
    { path :'CustReport', component : CustReportComponent },   
-   { path :'DataEntryReport', component : DataEntryReportComponent },   
+   { path :'DataEntryReport', component : DataEntryReportComponent }, 
+   { path :'UserActive', component : UserActiveComponent },   
 ];
 
 @NgModule({

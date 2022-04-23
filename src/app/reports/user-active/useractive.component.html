@@ -1,0 +1,42 @@
+<div class="page-header">
+    <div class="col">
+      <label class="mr-1">{{mainservice.title}}</label>
+      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+  </div>
+  
+  <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage$ | async}}
+  </div>
+  
+  <app-useractive-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-useractive-header>
+  
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+      <thead class="page-body-thead">
+        <tr>
+          <th (click)="mainservice.sort('user_username')">USER&nbsp;<i [ngClass]="mainservice.getIcon('user_username')"></i></th>
+          <th (click)="mainservice.sort('user_status')">STATUS&nbsp;<i [ngClass]="mainservice.getIcon('user_status')"></i></th>        
+          <th (click)="mainservice.sort('user_time_in')">LOGIN&nbsp;<i [ngClass]="mainservice.getIcon('user_time_in')"></i></th>
+          <th (click)="mainservice.sort('user_time_out')">LOGOUT&nbsp;<i [ngClass]="mainservice.getIcon('user_time_out')"></i></th>
+          <th (click)="mainservice.sort('user_time_last')">LAST ACTIVITY&nbsp;<i [ngClass]="mainservice.getIcon('user_time_last')"></i></th>
+        </tr>
+      </thead>
+      <tbody class="page-body-tbody">
+        <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+          <td>{{rec.user_username}}</td>
+          <td>{{rec.user_status}}</td>
+          <td>{{rec.user_time_in}}</td>
+          <td>{{rec.user_time_out}}</td>
+          <td>{{rec.user_time_last}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+  
+  <br />
