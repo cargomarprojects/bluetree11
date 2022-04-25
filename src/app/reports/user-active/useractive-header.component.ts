@@ -15,10 +15,17 @@ export class UserActiveHeaderComponent implements OnInit {
     }
     @Output() searchEvents = new EventEmitter<any>();
 
+    interval: any;
+    report_auto_refresh: boolean = false;
+
     constructor(public gs: GlobalService
     ) { }
 
     ngOnInit() {
+    }
+
+    ngOnDestroy() {
+        this.stopTimer();
     }
 
     ngOnChanges(changes: SimpleChange) {
@@ -28,5 +35,32 @@ export class UserActiveHeaderComponent implements OnInit {
         if (this.gs.isBlank(this.searchQuery.searchString))
             this.searchQuery.searchString = '';
         this.searchEvents.emit({ outputformat: outputformat, searchQuery: this.searchQuery });
+    }
+
+    setAutoRefresh() {
+        this.report_auto_refresh = !this.report_auto_refresh;
+    }
+
+    onChange(_field: string) {
+
+        if (_field == 'report_auto_refresh') {
+
+            if (this.report_auto_refresh) {
+                this.startTimer();
+            } else {
+                this.stopTimer();
+            }
+        }
+
+    }
+
+    startTimer() {
+        this.interval = setInterval(() => {
+            this.List('SCREEN');
+        }, 60000) //time tick interval per one minute
+    }
+    
+    stopTimer() {
+        clearInterval(this.interval);
     }
 }

@@ -190,7 +190,7 @@ export class AppComponent {
   }
 
   stopTimer() {
-    localStorage.removeItem('timer');
+    // localStorage.removeItem('timer');
     clearInterval(this.interval);
   }
 
