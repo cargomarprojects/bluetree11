@@ -7,7 +7,7 @@ import { InvoiceReportService } from '../services/invoicereport.service';
 @Component({
     selector: 'app-invoice-report-header',
     templateUrl: './invoice-report-header.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InvoiceReportHeaderComponent implements OnInit {
     // Call By Value using Input Parameters
