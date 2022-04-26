@@ -67,7 +67,7 @@ export class InvoiceReportComponent implements OnInit {
 
   PrintInvoice(_searchdata: any) {
 
-    let compids = "";
+    let comp_codes = "";
     if (!this.mainservice.canPrint) {
       alert('Insufficient User Rights')
       return;
@@ -77,18 +77,20 @@ export class InvoiceReportComponent implements OnInit {
     this.report_url = '/api/Report/InvoiceReport/GetInvoiceRpt';
     this.report_searchdata = this.gs.UserInfo;
     this.report_searchdata.pkid = this.gs.getGuid();
-    this.report_searchdata.HANDLED_ID = _searchdata.searchQuery.handled_id;
+    this.report_searchdata.SDATE = _searchdata.searchQuery.fromdate;
+    this.report_searchdata.EDATE = _searchdata.searchQuery.todate;
+    this.report_searchdata.ARAP = _searchdata.searchQuery.type;
     if (_searchdata.searchQuery.comp_code == 'ALL') {
-      compids = "";
+      comp_codes = "";
       this.gs.CompanyList.forEach(Rec => {
         if (Rec.comp_code != "ALL") {
-          if (compids != "")
-            compids += ",";
-          compids += "'" + Rec.comp_pkid.toString() + "'";
+          if (comp_codes != "")
+          comp_codes += ",";
+          comp_codes += "'" + Rec.comp_code.toString() + "'";
         }
       })
       this.report_searchdata.COMP_TYPE = "ALL";
-      this.report_searchdata.COMP_CODE = compids;
+      this.report_searchdata.COMP_CODE = comp_codes;
       this.report_searchdata.COMP_NAME = "ALL";
     }
     else {
@@ -96,6 +98,8 @@ export class InvoiceReportComponent implements OnInit {
       this.report_searchdata.COMP_CODE = _searchdata.searchQuery.comp_code;
       this.report_searchdata.COMP_NAME = this.GetCompName(_searchdata.searchQuery.comp_code);
     }
+    this.report_searchdata.CUST_ID = _searchdata.searchQuery.cust_id;
+    this.report_searchdata.HIDE_PAYROLL = this.gs.user_hide_payroll;
     this.report_menuid = this.mainservice.menuid;
     this.tab = 'report';
   }
@@ -107,7 +111,7 @@ export class InvoiceReportComponent implements OnInit {
   GetCompName(_code: string) {
     let _sName = '';
     if (this.gs.CompanyList != null) {
-      var REC = this.gs.CompanyList.find(rec => rec.comp_pkid == _code);
+      var REC = this.gs.CompanyList.find(rec => rec.comp_code == _code);
       if (REC != null) {
         _sName = REC.comp_name;
       }

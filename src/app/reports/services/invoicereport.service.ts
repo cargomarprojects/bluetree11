@@ -113,7 +113,7 @@ export class InvoiceReportService {
     }
 
     Search(_searchdata: any, type: string = '') {
-        let compids = "";
+        let comp_codes = "";
         this.record.errormessage = '';
         this.mdata$.next(this.record);
         if (type == 'SEARCH') {
@@ -133,16 +133,16 @@ export class InvoiceReportService {
         SearchData.EDATE = this.record.searchQuery.todate;
         SearchData.ARAP = this.record.searchQuery.type;
         if (this.record.searchQuery.comp_code == 'ALL') {
-            compids = "";
+            comp_codes = "";
             this.gs.CompanyList.forEach(Rec => {
                 if (Rec.comp_code != "ALL") {
-                    if (compids != "")
-                        compids += ",";
-                    compids += "'" + Rec.comp_pkid.toString() + "'";
+                    if (comp_codes != "")
+                    comp_codes += ",";
+                    comp_codes += "'" + Rec.comp_code.toString() + "'";
                 }
             })
             SearchData.COMP_TYPE = "ALL";
-            SearchData.COMP_CODE = compids;
+            SearchData.COMP_CODE = comp_codes;
         }
         else {
             SearchData.COMP_TYPE = "SINGLE";
