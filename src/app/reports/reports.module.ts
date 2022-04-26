@@ -52,6 +52,8 @@ import { DataEntryReportHeaderComponent } from './data-entry-report/data-entry-r
 import { DataEntryReportComponent } from './data-entry-report/data-entry-report.component';
 import { UserActiveHeaderComponent } from './user-active/useractive-header.component';
 import { UserActiveComponent } from './user-active/useractive.component';
+import { InvoiceReportComponent } from './invoice-report/invoice-report.component';
+import { InvoiceReportHeaderComponent} from './invoice-report/invoice-report-header.component';
 
 @NgModule({
     declarations :[
@@ -83,7 +85,9 @@ import { UserActiveComponent } from './user-active/useractive.component';
     DataEntryReportComponent,
     ShipLogMasterUpdateComponent,
     UserActiveHeaderComponent,
-    UserActiveComponent
+    UserActiveComponent,
+    InvoiceReportComponent,
+    InvoiceReportHeaderComponent
   ],
   imports: [
     SharedModule,

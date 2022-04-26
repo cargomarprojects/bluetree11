@@ -1,0 +1,56 @@
+<div *ngIf="tab=='main'">
+    <div class="page-header">
+        <div class="col">
+          <label class="mr-1">{{mainservice.title}}</label>
+          <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        </div>
+      </div>
+      
+      <div *ngIf="errorMessage$ | async as errorMessage" class="alert alert-danger">
+        {{errorMessage$ | async}}
+      </div>
+      
+      <app-invoice-report-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+        </app-invoice-report-header>
+          
+      
+      <div class="page-body table-responsive table-bordered">
+        <table class="table  table-hover table-sm">
+          <thead class="page-body-thead">
+            <tr>
+              <th>BRANCH</th>   
+              <th>INV-NO</th>
+              <th>INV-DATE</th>
+              <th>TYPE</th>
+              <th>REFNO</th>
+              <th>REF-DATE</th>
+              <th>HANDLEDBY</th>
+              <th>INVOICE-TO</th>
+              <th class='text-right'>INVOICE-AMT</th>
+              <th class='text-right'>PAID</th>
+              <th class='text-right'>BALANCE</th>
+            </tr>
+          </thead>
+          <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records$ | async">
+              <td >{{rec.mbl_branch}}</td>
+              <td >{{rec.inv_no}}</td>
+              <td >{{rec.inv_date}}</td>  
+              <td >{{rec.inv_arap}}</td>
+              <td >{{rec.mbl_refno}}</td>        
+              <td >{{rec.mbl_ref_date}}</td>
+              <td >{{rec.handled_name}}</td>        
+              <td >{{rec.customer_name}}</td>
+              <td class='text-right'>{{rec.inv_total | number : '1.2-2'}}</td>        
+              <td class='text-right'>{{rec.inv_paid | number : '1.2-2'}}</td>
+              <td class='text-right'>{{rec.inv_bal | number : '1.2-2'}}</td>                    
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br />
+    </div>
+    <div *ngIf="tab=='report'">
+      <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+          (callbackevent)="callbackevent($event)"></app-report>
+    </div>

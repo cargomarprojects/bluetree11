@@ -24,6 +24,7 @@ import { LogRegisterComponent } from './log-register/logregister.component';
 import { CustReportComponent } from './cust-report/cust-report.component';
 import { DataEntryReportComponent } from './data-entry-report/data-entry-report.component';
 import { UserActiveComponent } from './user-active/useractive.component';
+import { InvoiceReportComponent } from './invoice-report/invoice-report.component';
 
 const routes: Routes = [
    { path :'ShipmentHandledReport', component : ShipHandReportComponent },
@@ -46,7 +47,8 @@ const routes: Routes = [
    { path :'LogRegister', component : LogRegisterComponent },   
    { path :'CustReport', component : CustReportComponent },   
    { path :'DataEntryReport', component : DataEntryReportComponent }, 
-   { path :'UserActive', component : UserActiveComponent },   
+   { path :'UserActive', component : UserActiveComponent }, 
+   { path :'InvoiceListPage', component : InvoiceReportComponent },     
 ];
 
 @NgModule({
