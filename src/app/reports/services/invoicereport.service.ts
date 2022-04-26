@@ -73,7 +73,7 @@ export class InvoiceReportService {
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today,type:'AR', cust_id: '', cust_name: '', comp_code: this.gs.branch_code, comp_type: '' },
-            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
+            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 30 }
         };
         this.mdata$.next(this.record);
     }
@@ -95,7 +95,7 @@ export class InvoiceReportService {
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today,type:'AR', cust_id: '', cust_name: '', comp_code: this.gs.branch_code, comp_type: '' },
-            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
+            pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 30 }
         };
 
         this.mdata$.next(this.record);
@@ -152,13 +152,13 @@ export class InvoiceReportService {
         SearchData.HIDE_PAYROLL = this.gs.user_hide_payroll;
 
         SearchData.page_count = 0;
-        SearchData.page_rows = 0;
+        SearchData.page_rows = 30;
         SearchData.page_current = -1;
         if (type == 'PAGE') {
             SearchData.action = this.record.pageQuery.action;
             SearchData.page_count = this.record.pageQuery.page_count;
             SearchData.page_rows = this.record.pageQuery.page_rows;
-            SearchData.page_current = this.record.pageQuery.page_current;;
+            SearchData.page_current = this.record.pageQuery.page_current
         }
 
         this.List(SearchData).subscribe(response => {

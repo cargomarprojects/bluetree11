@@ -12,7 +12,7 @@
       
       <app-invoice-report-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
         </app-invoice-report-header>
-          
+        <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>   
       
       <div class="page-body table-responsive table-bordered">
         <table class="table  table-hover table-sm">
@@ -54,3 +54,4 @@
       <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
           (callbackevent)="callbackevent($event)"></app-report>
     </div>
+    <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
