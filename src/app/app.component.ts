@@ -20,6 +20,8 @@ export class AppComponent {
   endTime = Date.now();
   isActive: string = "N";
 
+  enableTimer: boolean = true;
+
   constructor(
     public gs: GlobalService,
     public loadingservice: LoadingScreenService,
@@ -36,7 +38,8 @@ export class AppComponent {
 
     this.gs.RemoveLocalStorage();
 
-    this.startTimer();
+    if (this.enableTimer)
+      this.startTimer();
 
     this.sub = this.router.events.subscribe((event) => {
       if (this.gs.IsAuthenticated) {
@@ -84,7 +87,8 @@ export class AppComponent {
 
   ngOnDestroy() {
     this.sub.unsusbscribe();
-    this.stopTimer();
+    if (this.enableTimer)
+      this.stopTimer();
   }
 
 
