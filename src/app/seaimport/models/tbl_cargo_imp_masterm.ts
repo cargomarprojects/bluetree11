@@ -149,6 +149,9 @@ export interface Tbl_cargo_imp_housem {
     rec_created_date: string;
     hbl_packages: number;
     hbl_consignee_category:string;
+    hbl_an_sent: string;
+    hbl_an_sent_by: string;
+    hbl_an_sent_date: string;
 }
 
 export interface vm_tbl_cargo_imp_masterm {

@@ -581,6 +581,9 @@
                         <th>{{(gs.company_code=='MNYC')?'HBL STATUS':'TELEX RELEASED'}}</th>
                         <th>FREIGHT</th>
                         <th>TERMS</th>
+                        <th>AN-SENT</th>
+                        <th>AN-SENT-BY</th>
+                        <th>AN-SENT-DATE</th>
                         <th>CREATED-BY</th>
                         <th>DATE</th>
                         <th *ngIf="gs.canDelete(this.gs.MENU_SI_HOUSE)" class='text-center'>DELETE</th>
@@ -602,6 +605,9 @@
                         <td>{{rec.hbl_telex_released}}</td>
                         <td>{{rec.hbl_frt_status}}</td>
                         <td>{{rec.hbl_ship_term}}</td>
+                        <td>{{rec.hbl_an_sent}}</td>
+                        <td>{{rec.hbl_an_sent_by}}</td>
+                        <td>{{rec.hbl_an_sent_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                         <td>{{rec.rec_created_by}}</td>
                         <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                         <td *ngIf="gs.canDelete(this.gs.MENU_SI_HOUSE)" class="p-0 text-center"><i
