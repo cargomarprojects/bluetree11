@@ -260,6 +260,7 @@ export class MailComponent implements OnInit {
       customer_name: this._maildata.customer_name
     };
 
+    SearchData = this.gs.UserInfo;
     SearchData.table = controlname;
     SearchData.pkid = this.pkid;
     SearchData.to_ids = this.to_ids;
