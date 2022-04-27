@@ -20,7 +20,7 @@ export class AppComponent {
   endTime = Date.now();
   isActive: string = "N";
 
-  enableTimer: boolean = true;
+  enableTimer: boolean = false;
 
   constructor(
     public gs: GlobalService,
