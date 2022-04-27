@@ -254,7 +254,10 @@ export class MailComponent implements OnInit {
       user_name: this.gs.user_name,
       user_code: this.gs.user_code,
       read_receipt: this.chkReadRecipt ? "YES" : "NO",
-      delivery_receipt: this.chkDelivReceipt ? "YES" : "NO"
+      delivery_receipt: this.chkDelivReceipt ? "YES" : "NO",
+      update_ref_type: this._maildata.update_ref_type,
+      update_ref_id: this._maildata.update_ref_id,
+      customer_name: this._maildata.customer_name
     };
 
     SearchData.table = controlname;
@@ -272,6 +275,9 @@ export class MailComponent implements OnInit {
     SearchData.user_pkid = this.gs.user_pkid;
     SearchData.user_name = this.gs.user_name;
     SearchData.user_code = this.gs.user_code;
+    SearchData.update_ref_type = this._maildata.update_ref_type;
+    SearchData.update_ref_id = this._maildata.update_ref_id;
+    SearchData.customer_name = this._maildata.customer_name;
 
     this.gs.SearchRecord(SearchData)
       .subscribe(response => {

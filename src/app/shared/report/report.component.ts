@@ -82,7 +82,7 @@ export class ReportComponent implements OnInit {
   Mail_Pkid: string = '';
   AttachList: any[] = [];
   modal: any;
-  public maildata: any = { 'type': '', 'value': '', 'subject': '', 'presetmessage': '', 'cont_group': '', 'customer_id': '', 'customer_name': '' };
+  public maildata: any = { 'type': '', 'value': '', 'subject': '', 'presetmessage': '', 'cont_group': '', 'customer_id': '', 'customer_name': '' , 'update_ref_type': '', 'update_ref_id': '' };
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -175,6 +175,13 @@ export class ReportComponent implements OnInit {
           this.maildata.type = '';
         if (this.gs.isBlank(this.maildata.value))
           this.maildata.value = '';
+      }
+      if (!this.gs.isBlank(this._searchdata.UPDATE_REF_TYPE) && !this.gs.isBlank(this._searchdata.UPDATE_REF_ID)) {
+        this.maildata.update_ref_type = this._searchdata.UPDATE_REF_TYPE;
+        this.maildata.update_ref_id = this._searchdata.UPDATE_REF_ID;
+      } else {
+        this.maildata.update_ref_type = '';
+        this.maildata.update_ref_id = '';
       }
 
     }
