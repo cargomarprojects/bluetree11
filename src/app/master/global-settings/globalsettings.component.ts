@@ -158,7 +158,7 @@ export class GlobalSettingsComponent implements OnInit {
       if (Rec.param_name1 == "COMPANY_STRING_ID") {
         this.Txt_Company_ID = Rec.param_name3;
       }
-      if (Rec.param_name1 == "SOFTWARE_IDLE_TIME") {
+      if (Rec.param_name1 == "TIMEOUT_IN_MINUTES") {
         this.Txt_Idle_Time = Rec.param_name3;
       }
 
@@ -246,7 +246,7 @@ export class GlobalSettingsComponent implements OnInit {
     this.saveList.push(this.AddRecord("SOFTWARE VERSION", this.gs.branch_pkid, this.version));
 
     this.saveList.push(this.AddRecord("COMPANY_STRING_ID", this.gs.branch_pkid, this.Txt_Company_ID));
-    this.saveList.push(this.AddRecord("SOFTWARE_IDLE_TIME", this.gs.branch_pkid, this.Txt_Idle_Time));
+    this.saveList.push(this.AddRecord("TIMEOUT_IN_MINUTES", this.gs.branch_pkid, this.Txt_Idle_Time));
     this.saveList.push(this.AddRecord("GENERAL_EMAIL_NAME", this.gs.branch_pkid, this.Txt_Name));
     this.saveList.push(this.AddRecord("GENERAL_EMAIL_DISPLAY_NAME", this.gs.branch_pkid, this.Txt_Display_Name));
     this.saveList.push(this.AddRecord("GENERAL_EMAIL", this.gs.branch_pkid, this.Txt_Email));

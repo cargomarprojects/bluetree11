@@ -20,7 +20,7 @@ export class AppComponent {
   endTime = Date.now();
   isActive: string = "N";
 
-  enableTimer: boolean = false;
+  enableTimer: boolean = true;
 
   constructor(
     public gs: GlobalService,
@@ -138,7 +138,7 @@ export class AppComponent {
         // get seconds 
         var seconds = Math.round(timeDiff);
 
-        if (seconds >= this.gs.timeoutCount) {
+        if (seconds >= this.gs.TIMEOUT_IN_MINUTES) {
           storeStartTime = this.readtimerLocalStorage();
           if (+storeStartTime > this.startTime)
             this.startTime = +storeStartTime;
@@ -167,7 +167,7 @@ export class AppComponent {
         timeDiff /= 1000;
         // get seconds 
         var seconds = Math.round(timeDiff);
-        if (seconds >= this.gs.timeoutCount) {
+        if (seconds >= this.gs.TIMEOUT_IN_MINUTES) {
           this.Logout();
         }
 

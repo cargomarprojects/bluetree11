@@ -44,8 +44,8 @@ export class GlobalService {
   public globalData: GlobalData;
   public globalVariables: GlobalVariables;
   public defaultValues: DefaultValues;
-  public timeoutCount:number =900 ; // 15 * 60 = 900  seconds
-  
+  public TIMEOUT_IN_MINUTES: number = 900; // 15 * 60 = 900  seconds
+
   public reload_url = '';
 
   mRec: Modulem = null;
@@ -72,7 +72,7 @@ export class GlobalService {
   public YearList: any[];
   public AccGroupList: any[];
 
-  
+
   public branch_codes: string = '';
   public history: Array<{ id: string, url: string }> = [];
   public HISTORY_MIN_LENGTH = 2;
@@ -141,6 +141,7 @@ export class GlobalService {
   public user_party_type = "";
   public user_hide_payroll: string = '';
   public user_timezone: string = 'NA';
+  public user_disable_timer = "N";
 
   public USER_DISABLE_EDIT_SI_MBLSTATUS: string = '';
 
@@ -732,7 +733,7 @@ export class GlobalService {
       this.user_isadmin = "Y";
 
     this.user_timezone = this.UserRecord.usr_timezone;
-
+    this.user_disable_timer = this.UserRecord.usr_disable_timer;
     if (this.UserRecord.usr_confirm_onexit == "Y")
       this.Confirm_On_Exit = true;
     else
@@ -779,7 +780,7 @@ export class GlobalService {
 
       "~USER_CATEGORY": this.User_Category,
       "~USER_ROLE": this.User_Role,
-
+      "~USER_DISABLE_TIMER": this.user_disable_timer,
       "~COMPANY_CODE": this.company_code,
       "~COMPANY_PKID": this.company_pkid,
       "~COMPANY_PARENT_ID": this.company_parent_id,
@@ -1285,7 +1286,10 @@ export class GlobalService {
           this.COMPANY_STRING_ID = Rec.param_name3;
         if (Rec.param_name1 == "GENERAL_BRANCH_CODE")
           this.GENERAL_BRANCH_CODE = Rec.param_name3;
-
+        if (Rec.param_name1 == "TIMEOUT_IN_MINUTES") {
+          let tim: number = +Rec.param_name3;
+          this.TIMEOUT_IN_MINUTES = tim * 60;
+        }
       }
     });
 
@@ -2025,7 +2029,7 @@ export class GlobalService {
     return this.http2.get(this.baseUrl + '/api/Master/Param/DownloadFile?' + body, { responseType: 'blob' })
   }
 
-  public async getFileaSync(report_folder: string, filename: string, filetype: string, filedisplayname: string = 'N')  {
+  public async getFileaSync(report_folder: string, filename: string, filetype: string, filedisplayname: string = 'N') {
     let body = 'report_folder=' + report_folder + '&filename=' + filename + '&filetype=' + filetype + '&filedisplayname=' + filedisplayname;
     return this.http2.get(this.baseUrl + '/api/Master/Param/DownloadFile?' + body, { responseType: 'blob' }).toPromise();
   }
