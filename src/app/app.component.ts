@@ -23,6 +23,7 @@ export class AppComponent {
   password: string = '';
   modal: any;
   @ViewChild('pwdmodal') pwdmodal_Cntrl: ElementRef;
+  @ViewChild('usr_pwd') usr_pwd_Cntrl: ElementRef;
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -61,6 +62,7 @@ export class AppComponent {
 
 
   }
+
 
 
   async ngOnInit() {
@@ -162,7 +164,7 @@ export class AppComponent {
   startTimer() {
 
     this.interval = setInterval(() => {
-
+     
       if (this.gs.IsLoginSuccess) {
 
         this.loginservice.SaveActiveUser(this.isActive);
@@ -209,12 +211,15 @@ export class AppComponent {
     this.gs.Modules = null;
 
     this.router.navigate(['/login'], { replaceUrl: true });
-  } 
+  }
 
   ShowValidateUser() {
+    this.stopTimer();
+    this.modalconfig.backdrop = 'static'; //true/false/static
+    this.modalconfig.keyboard = false;
     this.modal = this.modalservice.open(this.pwdmodal_Cntrl, { centered: true });
   }
-  
+
   validUser() {
     var SearchData = this.gs.UserInfo;
     SearchData.company_pkid = this.gs.company_pkid;
@@ -222,9 +227,13 @@ export class AppComponent {
     SearchData.user_pwd = this.password.toString().toUpperCase();
     this.loginservice.ValidUser(SearchData)
       .subscribe(response => {
-        if (response.blogin)
+        if (response.blogin) {
           this.CloseModal();
+          this.startTimer();
+        }
         else {
+          if (!this.gs.isBlank(this.usr_pwd_Cntrl))
+            this.usr_pwd_Cntrl.nativeElement.focus();
           alert('Invalid Password');
         }
 
@@ -236,4 +245,6 @@ export class AppComponent {
   CloseModal() {
     this.modal.close();
   }
+
+   
 }
