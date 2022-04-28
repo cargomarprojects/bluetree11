@@ -1,4 +1,4 @@
-import { HostListener, Component } from '@angular/core';
+import { HostListener, Component, ViewChild, ElementRef } from '@angular/core';
 import { environment } from '../environments/environment';
 
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, ActivatedRoute } from '@angular/router';
@@ -6,6 +6,7 @@ import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationErr
 import { LoadingScreenService } from './core/services/loadingscreen.service';
 import { GlobalService } from './core/services/global.service';
 import { LoginService } from './core/services/login.service';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -19,16 +20,21 @@ export class AppComponent {
   startTime = Date.now();
   endTime = Date.now();
   isActive: string = "N";
-
-  enableTimer: boolean = true;
+  password: string = '';
+  modal: any;
+  @ViewChild('pwdmodal') pwdmodal_Cntrl: ElementRef;
 
   constructor(
+    private modalconfig: NgbModalConfig,
+    private modalservice: NgbModal,
     public gs: GlobalService,
     public loadingservice: LoadingScreenService,
     private router: Router,
     private loginservice: LoginService,
     private route: ActivatedRoute
   ) {
+    modalconfig.backdrop = 'static'; //true/false/static
+    modalconfig.keyboard = false; //true Closes the modal when escape key is pressed
 
     console.log('app constructor');
     this.gs.InitdefaultValues();
@@ -38,7 +44,7 @@ export class AppComponent {
 
     this.gs.RemoveLocalStorage();
 
-    if (this.enableTimer)
+    if (this.gs.user_disable_timer == "N")
       this.startTimer();
 
     this.sub = this.router.events.subscribe((event) => {
@@ -87,7 +93,7 @@ export class AppComponent {
 
   ngOnDestroy() {
     this.sub.unsusbscribe();
-    if (this.enableTimer)
+    if (this.gs.user_disable_timer == "N")
       this.stopTimer();
   }
 
@@ -168,9 +174,8 @@ export class AppComponent {
         // get seconds 
         var seconds = Math.round(timeDiff);
         if (seconds >= this.gs.TIMEOUT_IN_MINUTES) {
-          this.Logout();
+          this.ShowValidateUser();
         }
-
       }
     }, 60000) //time tick interval
 
@@ -204,9 +209,31 @@ export class AppComponent {
     this.gs.Modules = null;
 
     this.router.navigate(['/login'], { replaceUrl: true });
+  } 
+
+  ShowValidateUser() {
+    this.modal = this.modalservice.open(this.pwdmodal_Cntrl, { centered: true });
+  }
+  
+  validUser() {
+    var SearchData = this.gs.UserInfo;
+    SearchData.company_pkid = this.gs.company_pkid;
+    SearchData.user_code = this.gs.user_code;
+    SearchData.user_pwd = this.password.toString().toUpperCase();
+    this.loginservice.ValidUser(SearchData)
+      .subscribe(response => {
+        if (response.blogin)
+          this.CloseModal();
+        else {
+          alert('Invalid Password');
+        }
+
+      }, error => {
+        alert(this.gs.getError(error));
+      });
 
   }
-
-
-
+  CloseModal() {
+    this.modal.close();
+  }
 }

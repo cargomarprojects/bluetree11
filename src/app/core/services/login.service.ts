@@ -99,6 +99,10 @@ export class LoginService {
     return this.http2.post<any>(this.gs.baseUrl + "/api/Auth/ActiveUser", SearchData, this.gs.headerparam2('authorized'));
   }
 
+  ValidUser(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + "/api/Auth/ValidUser", SearchData, this.gs.headerparam2('authorized'));
+  }
+  
 }
 
 
