@@ -21,7 +21,8 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Code</label>
                 <div class="col-8">
-                    <InputBox [(inputModel)]="record.usr_code" [maxlength]="15" [uppercase]="true" [disabled]="mode!='ADD'" ></InputBox>
+                    <InputBox [(inputModel)]="record.usr_code" [maxlength]="15" [uppercase]="true"
+                        [disabled]="mode!='ADD'"></InputBox>
                 </div>
             </div>
 
@@ -29,7 +30,8 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Name</label>
                 <div class="col-8">
-                    <InputBox [(inputModel)]="record.usr_name" [maxlength]="60" [uppercase]="true" [disabled]="!isAdmin" ></InputBox>                        
+                    <InputBox [(inputModel)]="record.usr_name" [maxlength]="60" [uppercase]="true"
+                        [disabled]="!isAdmin"></InputBox>
                 </div>
             </div>
 
@@ -37,14 +39,15 @@
                 <label class="col-4 col-form-label col-form-label-sm">Password</label>
                 <div class="col-8">
                     <input class="form-control form-control-sm" type="password" (blur)="onBlur('usr_pwd')"
-                        [(ngModel)]="record.usr_pwd" maxlength="15"  [disabled]="!isAdmin"/>
+                        [(ngModel)]="record.usr_pwd" maxlength="15" [disabled]="!isAdmin" />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Email</label>
                 <div class="col-8">
-                    <InputBox [(inputModel)]="record.usr_email" [maxlength]="100" [lowercase]="true"  [disabled]="!isAdmin"></InputBox>                        
+                    <InputBox [(inputModel)]="record.usr_email" [maxlength]="100" [lowercase]="true"
+                        [disabled]="!isAdmin"></InputBox>
                 </div>
             </div>
 
@@ -52,7 +55,7 @@
                 <label class="col-4 col-form-label col-form-label-sm">Email-Password</label>
                 <div class="col-8">
                     <input class="form-control form-control-sm" type="password" (blur)="onBlur('usr_email_pwd')"
-                        [(ngModel)]="record.usr_email_pwd" maxlength="100"  [disabled]="!isAdmin" />
+                        [(ngModel)]="record.usr_email_pwd" maxlength="100" [disabled]="!isAdmin" />
                 </div>
             </div>
 
@@ -60,14 +63,15 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Display Name</label>
                 <div class="col-8">
-                    <InputBox [(inputModel)]="record.usr_email_display_name" [maxlength]="100" [uppercase]="false"  [disabled]="!isAdmin" ></InputBox>
+                    <InputBox [(inputModel)]="record.usr_email_display_name" [maxlength]="100" [uppercase]="false"
+                        [disabled]="!isAdmin"></InputBox>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">CC-Ids</label>
                 <div class="col-8">
-                    <InputBox [(inputModel)]="record.usr_email_cc" [maxlength]="500" [lowercase]="true" ></InputBox>                                                
+                    <InputBox [(inputModel)]="record.usr_email_cc" [maxlength]="500" [lowercase]="true"></InputBox>
                 </div>
             </div>
 
@@ -91,7 +95,7 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Tel</label>
                 <div class="col-8">
-                        <InputBox [(inputModel)]="record.usr_tel" [maxlength]="60" [uppercase]="true" ></InputBox>                        
+                    <InputBox [(inputModel)]="record.usr_tel" [maxlength]="60" [uppercase]="true"></InputBox>
                 </div>
             </div>
 
@@ -99,7 +103,7 @@
                 <label class="col-4 col-form-label col-form-label-sm">Mobile</label>
                 <div class="col-8">
 
-                        <InputBox [(inputModel)]="record.usr_mobile" [maxlength]="60" [uppercase]="true" ></InputBox>                        
+                    <InputBox [(inputModel)]="record.usr_mobile" [maxlength]="60" [uppercase]="true"></InputBox>
                 </div>
             </div>
 
@@ -152,6 +156,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Time Zone</label>
                 <div class="col-8">
@@ -161,7 +166,15 @@
                     </select>
                 </div>
             </div>
-
+            <div *ngIf="gs.IsAdmin(menuid)" class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Disable Timeout</label>
+                <div class="col-8">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.usr_disable_timer">
+                        <option [value]="'Y'">YES</option>
+                        <option [value]="'N'">NO</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
         <div class="col-md-6 testbox  px-0 mx-0">
@@ -201,8 +214,6 @@
                         <option [value]="'26'">26</option>
                         <option [value]="'28'">27</option>
                         <option [value]="'30'">30</option>
-
-
                     </select>
                 </div>
             </div>
@@ -243,7 +254,7 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Singature</label>
                 <div class="col-8">
-                    <textarea rows="16" cols="50" class="form-control form-control-sm" 
+                    <textarea rows="16" cols="50" class="form-control form-control-sm"
                         (blur)="onBlur('usr_email_signature')" [(ngModel)]="record.usr_email_signature"
                         maxlength="500"> </textarea>
                 </div>
