@@ -45,8 +45,8 @@ export class AppComponent {
 
     this.gs.RemoveLocalStorage();
 
-    if (this.gs.user_disable_timer == "N")
-      this.startTimer();
+
+    this.startTimer();
 
     this.sub = this.router.events.subscribe((event) => {
       if (this.gs.IsAuthenticated) {
@@ -95,8 +95,7 @@ export class AppComponent {
 
   ngOnDestroy() {
     this.sub.unsusbscribe();
-    if (this.gs.user_disable_timer == "N")
-      this.stopTimer();
+    this.stopTimer();
   }
 
 
@@ -164,19 +163,21 @@ export class AppComponent {
   startTimer() {
 
     this.interval = setInterval(() => {
-     
+
       if (this.gs.IsLoginSuccess) {
 
         this.loginservice.SaveActiveUser(this.isActive);
         this.isActive = "N";
 
-        var timeDiff = Date.now() - this.startTime; //in ms
-        // strip the ms
-        timeDiff /= 1000;
-        // get seconds 
-        var seconds = Math.round(timeDiff);
-        if (seconds >= this.gs.TIMEOUT_IN_MINUTES) {
-          this.ShowValidateUser();
+        if (this.gs.user_disable_timer == "N") {
+          var timeDiff = Date.now() - this.startTime; //in ms
+          // strip the ms
+          timeDiff /= 1000;
+          // get seconds 
+          var seconds = Math.round(timeDiff);
+          if (seconds >= this.gs.TIMEOUT_IN_MINUTES) {
+            this.ShowValidateUser();
+          }
         }
       }
     }, 60000) //time tick interval
@@ -246,5 +247,5 @@ export class AppComponent {
     this.modal.close();
   }
 
-   
+
 }
