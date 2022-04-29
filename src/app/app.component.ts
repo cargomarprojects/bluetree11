@@ -161,7 +161,7 @@ export class AppComponent {
 */
 
   startTimer() {
-
+    
     this.interval = setInterval(() => {
 
       if (this.gs.IsLoginSuccess) {
@@ -229,6 +229,7 @@ export class AppComponent {
     this.loginservice.ValidUser(SearchData)
       .subscribe(response => {
         if (response.blogin) {
+          this.password = '';
           this.CloseModal();
           this.startTimer();
         }
