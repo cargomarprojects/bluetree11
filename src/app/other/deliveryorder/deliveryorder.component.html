@@ -27,6 +27,7 @@
                 <th (click)="mainservice.sort('pick_truk_name')">TRUKER&nbsp;<i [ngClass]="mainservice.getIcon('pick_truk_name')"></i></th>
                 <th (click)="mainservice.sort('pick_fromname')">FROM&nbsp;<i [ngClass]="mainservice.getIcon('pick_fromname')"></i></th>
                 <th (click)="mainservice.sort('pick_toname')">TO&nbsp;<i [ngClass]="mainservice.getIcon('pick_toname')"></i></th>
+                <th style="text-align:center">COPY</th>
                 <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
                 <th (click)="mainservice.sort('rec_created_date')">CREATED-DT&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
             </tr>
@@ -44,6 +45,8 @@
                 <td>{{rec.pick_truk_name}}</td>
                 <td>{{rec.pick_fromname}}</td>
                 <td>{{rec.pick_toname}}</td>
+                <td style="text-align:center"><i class="fa fa-copy  fa-lg pointer" aria-hidden="true"
+                    (click)="CopyRecord(rec)"></i></td>
                 <td>{{rec.rec_created_by}}</td>
                 <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
             </tr>

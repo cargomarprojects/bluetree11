@@ -91,6 +91,29 @@ export class DeliveryOrderComponent implements OnInit {
     this.gs.Naviagete2('Silver.Other.Trans/DeliveryOrderEdit',  parameter);
   }
 
+  CopyRecord(_record: Tbl_cargo_imp_pickup) {
+
+    if (!this.mainservice.canAdd) {
+      alert('Insufficient User Rights')
+      return;
+    }
+
+    if (!confirm("Copy Record " + _record.pick_orderno)) {
+      return;
+    }
+
+    let parameter = {
+      appid:this.gs.appid,
+      menuid: this.mainservice.menuid,
+      pkid: _record.pick_pkid,
+      mode: 'COPY',
+      parentid: '',
+      pickCategory: 'GENERAL',
+      origin: 'oth-deliveryorder-page'
+    };
+    this.gs.Naviagete2('Silver.Other.Trans/DeliveryOrderEdit',  parameter);
+  }
+
   Close() {
     this.location.back();
   }

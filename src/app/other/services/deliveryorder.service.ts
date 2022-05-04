@@ -153,6 +153,7 @@ export class DeliveryOrderService {
 
     
     RefreshList(_rec: Tbl_cargo_imp_pickup) {
+        
         if (this.record.records == null)
             return;
         var REC = this.record.records.find(rec => rec.pick_pkid == _rec.pick_pkid);

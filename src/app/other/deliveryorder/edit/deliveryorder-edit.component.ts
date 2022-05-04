@@ -14,8 +14,8 @@ import { Tbl_cargo_imp_pickup, vm_tbl_cargo_imp_pickup } from '../../models/tbl_
 import { Tbl_cargo_container, Tbl_cargo_general } from '../../models/tbl_cargo_general';
 import { DateComponent } from '../../../shared/date/date.component';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
- //EDIT-AJITH-06-09-2021
- //EDIT-AJITH-18-10-2021
+//EDIT-AJITH-06-09-2021
+//EDIT-AJITH-18-10-2021
 
 @Component({
   selector: 'app-deliveryorder-edit',
@@ -116,7 +116,9 @@ export class DeliveryOrderEditComponent implements OnInit {
     }
     if (this.mode == 'EDIT')
       this.GetRecord();
-
+    if (this.mode == 'COPY') {
+      this.CopyRecord();
+    }
   }
   InitRecord() {
     this.record.pick_pkid = this.pkid;
@@ -259,36 +261,7 @@ export class DeliveryOrderEditComponent implements OnInit {
 
         this.record = <Tbl_cargo_imp_pickup>response.record;
         this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_cargo_container[]>[] : <Tbl_cargo_container[]>response.cntrrecords;
-
-        let str: string = "";
-        var sData = null;
-
-        str = this.record.pick_freight.toString();
-        this.record.IS_EXW = (str.includes("EXW")) ? true : false;
-        this.record.IS_FOB = (str.includes("FOB")) ? true : false;
-        this.record.IS_FCA = (str.includes("FCA")) ? true : false;
-        this.record.IS_CPU = (str.includes("CPU")) ? true : false;
-        this.record.IS_DDU = (str.includes("DDU")) ? true : false;
-        this.record.IS_FRT_OTH = (str.includes("Others")) ? true : false;
-        this.record.freightothers = '';
-        if (this.record.IS_FRT_OTH) {
-          sData = str.split(':');
-          this.record.freightothers = sData[1];
-        }
-
-        str = this.record.pick_export_doc.toString();
-        this.record.IS_Commercial = (str.includes("CINV")) ? true : false;
-        this.record.IS_CopyLC = (str.includes("CLC")) ? true : false;
-        this.record.IS_Certificate = (str.includes("CORG")) ? true : false;
-        this.record.IS_PktList = (str.includes("PLST")) ? true : false;
-        this.record.IS_ExDeclaration = (str.includes("EDEC")) ? true : false;
-        this.record.IS_Export_OTH = (str.includes("OTH")) ? true : false;
-        this.record.exportothers = '';
-        if (this.record.IS_Export_OTH) {
-          sData = str.split(':');
-          this.record.exportothers = sData[1];
-        }
-
+        this.setFrtExpDocs();
         if (!this.gs.isBlank(this.pick_order_date_ctrl))
           this.pick_order_date_ctrl.Focus();
 
@@ -665,11 +638,12 @@ export class DeliveryOrderEditComponent implements OnInit {
           alert(this.errorMessage);
         }
         else {
-          if (this.mode == 'ADD')
+          if (this.mode == 'ADD' && this.pickCategory == "GENERAL")
             this.record.pick_orderno = response.code;
           this.mode = 'EDIT';
           //this.errorMessage.push('Save Complete');
-          this.mainService.RefreshList(this.record);
+          if (this.pickCategory == "GENERAL")
+            this.mainService.RefreshList(this.record);
           alert('Save Complete');
         }
       }, error => {
@@ -852,4 +826,60 @@ export class DeliveryOrderEditComponent implements OnInit {
     this.BtnNavigation('DELIVERYORDER-PRINT');
   }
 
+  CopyRecord() {
+
+    this.errorMessage = [];
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = this.pkid;
+    SearchData.parentid = this.parentid;
+    this.mainService.GetRecord(SearchData)
+      .subscribe(response => {
+        this.mode = "ADD";
+        this.actionHandler();
+
+        this.record = <Tbl_cargo_imp_pickup>response.record;
+        this.setFrtExpDocs();
+        this.record.rec_created_by = this.gs.user_code;
+        this.record.rec_created_date = this.gs.defaultValues.today;
+        this.record.pick_pkid = this.pkid;
+        this.record.pick_parentid = this.parentid;
+        this.record.pick_orderno = "";
+        this.record.pick_order_date = this.gs.defaultValues.today;
+
+        if (!this.gs.isBlank(this.pick_order_date_ctrl))
+          this.pick_order_date_ctrl.Focus();
+
+      }, error => {
+        this.errorMessage.push(this.gs.getError(error));
+      });
+  }
+
+  setFrtExpDocs() {
+    let str: string = "";
+    var sData = null;
+    str = this.record.pick_freight.toString();
+    this.record.IS_EXW = (str.includes("EXW")) ? true : false;
+    this.record.IS_FOB = (str.includes("FOB")) ? true : false;
+    this.record.IS_FCA = (str.includes("FCA")) ? true : false;
+    this.record.IS_CPU = (str.includes("CPU")) ? true : false;
+    this.record.IS_DDU = (str.includes("DDU")) ? true : false;
+    this.record.IS_FRT_OTH = (str.includes("Others")) ? true : false;
+    this.record.freightothers = '';
+    if (this.record.IS_FRT_OTH) {
+      sData = str.split(':');
+      this.record.freightothers = sData[1];
+    }
+    str = this.record.pick_export_doc.toString();
+    this.record.IS_Commercial = (str.includes("CINV")) ? true : false;
+    this.record.IS_CopyLC = (str.includes("CLC")) ? true : false;
+    this.record.IS_Certificate = (str.includes("CORG")) ? true : false;
+    this.record.IS_PktList = (str.includes("PLST")) ? true : false;
+    this.record.IS_ExDeclaration = (str.includes("EDEC")) ? true : false;
+    this.record.IS_Export_OTH = (str.includes("OTH")) ? true : false;
+    this.record.exportothers = '';
+    if (this.record.IS_Export_OTH) {
+      sData = str.split(':');
+      this.record.exportothers = sData[1];
+    }
+  }
 }
