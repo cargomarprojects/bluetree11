@@ -148,8 +148,8 @@ export interface Tbl_cargo_general {
     pick_delivery_date: string;
     mbl_bo_status: string;
     mbl_bo_attended_code: string;
-    mbl_incoterm:string;
-     
+    mbl_incoterm: string;
+
     mbl_cargo_loccode: string;
     mbl_cargo_locname: string;
     mbl_cargo_locaddr1: string;
@@ -179,8 +179,8 @@ export interface Tbl_cargo_container {
     cntr_selected: boolean;
     cntr_pick_date: string;
     cntr_return_date: string;
-    cntr_lfd:string;
-    cntr_discharge_date:string;
+    cntr_lfd: string;
+    cntr_discharge_date: string;
 }
 
 export interface vm_tbl_cargo_general {
@@ -195,6 +195,7 @@ export interface vm_tbl_cargo_general {
 
 export interface SearchQuery {
     searchString: string;
+    searchtype: string;
     fromdate: string;
     todate: string;
     mode: string;
@@ -208,7 +209,7 @@ export interface SearchQuery {
 }
 
 export interface OthGeneralModel {
-    selectedId : string;
+    selectedId: string;
     sortcol: string;
     sortorder: boolean;
     errormessage: string;

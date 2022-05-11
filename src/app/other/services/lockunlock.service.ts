@@ -41,7 +41,7 @@ export class LockUnlockService {
         this.record = <OthGeneralModel>{
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, mode: 'ALL', cust_id: '', cust_name: '', branch: this.gs.branch_code, lock_type: 'ALL' },
+            searchQuery: <SearchQuery>{ searchString: '', searchtype: 'REFNO', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, mode: 'ALL', cust_id: '', cust_name: '', branch: this.gs.branch_code, lock_type: 'ALL' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -65,7 +65,7 @@ export class LockUnlockService {
         this.record = <OthGeneralModel>{
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, mode: 'ALL', cust_id: '', cust_name: '', branch: this.gs.branch_code, lock_type: 'ALL' },
+            searchQuery: <SearchQuery>{ searchString: '', searchtype: 'REFNO', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, mode: 'ALL', cust_id: '', cust_name: '', branch: this.gs.branch_code, lock_type: 'ALL' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -104,6 +104,7 @@ export class LockUnlockService {
         SearchData.MODE = this.record.searchQuery.mode;
         SearchData.CUST_ID = this.record.searchQuery.cust_id;
         SearchData.REF_NO = this.record.searchQuery.searchString;
+        SearchData.SEARCH_TYPE = this.record.searchQuery.searchtype;
         SearchData.LOCK_TYPE = this.record.searchQuery.lock_type;
         SearchData.COMP_TYPE = this.record.searchQuery.branch;
         if (this.record.searchQuery.branch === 'ALL') {

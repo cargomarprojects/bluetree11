@@ -5,8 +5,8 @@ import { SearchTable } from '../../shared/models/searchtable';
 
 @Component({
   selector: 'app-lockunlock-header',
-  templateUrl: './lockunlock-header.component.html',
-  changeDetection : ChangeDetectionStrategy.OnPush
+  templateUrl: './lockunlock-header.component.html'
+  // changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class LockUnlockHeaderComponent implements OnInit {
   // Call By Value using Input Parameters
@@ -41,6 +41,15 @@ export class LockUnlockHeaderComponent implements OnInit {
     if (_Record.controlname == "AGENT") {
       this.searchQuery.cust_id = _Record.id;
       this.searchQuery.cust_name = _Record.name;
+    }
+  }
+
+  onBlur(field: string) {
+    switch (field) {
+      case 'searchString': {
+        this.searchQuery.searchString = this.gs.trimAll(this.searchQuery.searchString.toUpperCase())
+        break;
+      }
     }
   }
 }

@@ -61,9 +61,18 @@
       </div>
       <div class="col-md-3">
         <div class="form-group row">
-          <label class="col-4 col-form-label col-form-label-sm">Ref#</label>
+          <!-- <label class="col-4 col-form-label col-form-label-sm">Ref#</label> -->
+          <div class="col-4">
+            <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchtype">
+              <option [value]="'REFNO'">Ref# :</option>
+              <option [value]="'CNTRNO'">Container# :</option>
+              <option [value]="'HBLNO'">HBL# :</option>
+              <option [value]="'MBLNO'">MBL# :</option>
+            </select>
+          </div>
           <div class="col-8">
-            <input class="form-control form-control-sm" type="text" [(ngModel)]="searchQuery.searchString" />
+            <input class="form-control form-control-sm" type="text" [(ngModel)]="searchQuery.searchString"
+              (blur)="onBlur('searchString')" />
           </div>
         </div>
         <div class="form-group row">
