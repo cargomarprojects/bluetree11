@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, SimpleChanges , HostListener} from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ElementRef, EventEmitter, SimpleChanges, HostListener } from '@angular/core';
 import { GlobalService } from 'src/app/core/services/global.service';
 
 
@@ -23,7 +23,7 @@ export class InputBoxComponent {
 
     @Input() field: string;
     @Input() rec: any;
-    @Output() blur = new EventEmitter<{field : string , rec : any}>();
+    @Output() blur = new EventEmitter<{ field: string, rec: any }>();
 
     @ViewChild('inputbox') private inputbox: ElementRef;
 
@@ -44,48 +44,54 @@ export class InputBoxComponent {
             else if (this.lowercase) {
                 this.inputModel = this.inputModel.toLowerCase();
             }
-            if ( !this.whitespace)
+            if (!this.whitespace)
                 this.inputModel = this.gs.RemoveWhiteSpace(this.inputModel);
         }
-        this.inputModelChange.emit(this.inputModel);        
-        if ( this.blur)
-        {
-            this.blur.emit({ field: this.field,rec: this.rec});        
+        this.inputModelChange.emit(this.inputModel);
+        if (this.blur) {
+            this.blur.emit({ field: this.field, rec: this.rec });
         }
     }
 
     public focus() {
         if (!this.disabled)
-          this.inputbox.nativeElement.focus();
-      }
+            this.inputbox.nativeElement.focus();
+    }
 
 
-      onDrop(event) {
-        if (this.inputModel == null) 
+    onDrop(event) {
+        if (this.inputModel == null)
             return;
-        var _case = "";
-        let data = event.dataTransfer.getData('data');
-        if ( !this.whitespace)
-            data = this.gs.RemoveWhiteSpace(data, "");
-        if ( this.uppercase)
-            data = data.toUpperCase();
-        if ( this.lowercase)
-            data = data.toLoserCase();            
+        if (event.dataTransfer.types.includes('data')) {
+            var _case = "";
+            let str = event.dataTransfer.items.type;
+            let data = event.dataTransfer.getData('data');
+            if (!this.whitespace)
+                data = this.gs.RemoveWhiteSpace(data, "");
+            if (this.uppercase)
+                data = data.toUpperCase();
+            if (this.lowercase)
+                data = data.toLoserCase();
 
-        this.inputModel = data;
-        event.preventDefault();
-        event.target.style.background = null;
-      }
-      
-      allowDrop(event) {
-        event.preventDefault();
-        event.target.style.background = "orange";
-      } 
+            this.inputModel = data;
+            event.preventDefault();
+            event.target.style.background = null;
+        }
+    }
 
-      onDragLeave(event) {
-        event.preventDefault();
-        event.target.style.background = null;
-      }
+    allowDrop(event) {
+        if (event.dataTransfer.types.includes('data')) {
+            event.preventDefault();
+            event.target.style.background = "orange";
+        }
+    }
+
+    onDragLeave(event) {
+        if (event.dataTransfer.types.includes('data')) {
+            event.preventDefault();
+            event.target.style.background = null;
+        }
+    }
 
 
 
