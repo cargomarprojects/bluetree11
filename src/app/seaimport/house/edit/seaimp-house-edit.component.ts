@@ -2049,6 +2049,7 @@ export class SeaImpHouseEditComponent implements OnInit {
         this.report_searchdata.PARAM_VALUE = response.value;
         this.report_searchdata.CUSTOMER_ID = response.consigneeid;
         this.report_searchdata.CUSTOMER_NAME = response.consigneename;
+        this.report_searchdata.MAIL_SUBJECT = response.subject;
         this.report_searchdata.UPDATE_REF_TYPE = "ARRIVAL-NOTICE";
         this.report_searchdata.UPDATE_REF_ID = this.pkid;
         this.report_menuid = this.gs.MENU_SI_HOUSE_ARRIVAL_NOTICE;
