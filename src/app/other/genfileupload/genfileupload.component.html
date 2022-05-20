@@ -28,7 +28,7 @@
         <th (click)="mainservice.sort('gf_file_name')">FILE&nbsp;<i [ngClass]="mainservice.getIcon('gf_file_name')"></i></th>
         <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
         <th (click)="mainservice.sort('rec_created_date')">CREATE-DT&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
-        <th>DELETE</th>
+        <th *ngIf="mainservice.canDelete" style="text-align:center">DELETE</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
