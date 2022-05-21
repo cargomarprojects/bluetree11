@@ -25,6 +25,7 @@
                         <option [value]="'ADD TO FOLLOW UP JOURNALS'">ADD TO FOLLOW UP JOURNALS</option>
                         <option [value]="'INTERNAL MEMO MESSAGE'">INTERNAL MEMO MESSAGE</option>
                         <option [value]="'EMAIL-TEMPLATE-REMITTANCE'">EMAIL-TEMPLATE-REMITTANCE</option>
+                        <option [value]="'EMAIL-TEMPLATE-AN'">EMAIL-TEMPLATE-AN</option>
                     </select>
                 </div>
             </div>
@@ -33,7 +34,7 @@
                 <label class="col-2 col-form-label col-form-label-sm">Messages</label>
                 <div class="col-10">
                     <textarea rows="15" class="form-control form-control-sm" [(ngModel)]="record.remarks"
-                        (blur)="onBlur('remarks')" required maxlength="200"></textarea>
+                        (blur)="onBlur('remarks')" required maxlength="500"></textarea>
                 </div>
             </div>
 
