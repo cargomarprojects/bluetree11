@@ -73,6 +73,7 @@ export interface SearchQuery {
 }
 
 export interface SearchPageModel {
+    selectedId: string;
     sortcol: string;
     sortorder: boolean;
     errormessage: string;

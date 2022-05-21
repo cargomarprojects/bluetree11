@@ -50,7 +50,8 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" 
+      (mousedown)="mainservice.selectRowId(rec.mbl_refno)" [class.selected]="rec.mbl_refno == mainservice.getRowId()">
         <td>
           <a class="hlink"
             [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L',rec.rec_branch_code)"
@@ -103,7 +104,8 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()"
+      (mousedown)="mainservice.selectRowId(rec.cntr_no)" [class.selected]="rec.cntr_no == mainservice.getRowId()">
         <!-- <td>{{rec.mbl_refno}}</td> -->
         <td>
           <a class="hlink"
@@ -164,7 +166,8 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" 
+      (mousedown)="mainservice.selectRowId(rec.mbl_refno)" [class.selected]="rec.mbl_refno == mainservice.getRowId()">
         <td>
           <a class="hlink"
             [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L',rec.rec_branch_code)"
@@ -222,7 +225,8 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" 
+      (mousedown)="mainservice.selectRowId(rec.mbl_refno)" [class.selected]="rec.mbl_refno == mainservice.getRowId()">
         <td>
           <a class="hlink"
             [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L',rec.rec_branch_code)"
@@ -271,7 +275,8 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" 
+      (mousedown)="mainservice.selectRowId(rec.gen_code)" [class.selected]="rec.gen_code == mainservice.getRowId()">
         <td>{{rec.gen_code}}</td>
         <td>{{rec.gen_short_name}}</td>
         <td>{{rec.gen_type2}}</td>

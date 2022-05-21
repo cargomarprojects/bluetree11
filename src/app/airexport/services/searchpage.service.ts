@@ -38,6 +38,12 @@ export class SearchPageService {
         private gs: GlobalService
     ) { }
 
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
     public getSortCol() {
         return this.record.sortcol;
     }
@@ -67,6 +73,7 @@ export class SearchPageService {
     }
     public ClearInit() {
         this.record = <SearchPageModel>{
+            selectedId : '',
             sortcol: this.search_type == "PARENT" ? 'gen_code' : 'mbl_refno',
             sortorder: true,
             errormessage: '',
@@ -89,6 +96,7 @@ export class SearchPageService {
         this.param_type = params.param_type;
 
         this.record = <SearchPageModel>{
+            selectedId : '',
             sortcol: this.search_type == "PARENT" ? 'gen_code' : 'mbl_refno',
             sortorder: true,
             errormessage: '',
@@ -118,6 +126,7 @@ export class SearchPageService {
         this.mdata$.next(this.record);
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';   
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
