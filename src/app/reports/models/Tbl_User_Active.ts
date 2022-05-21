@@ -17,6 +17,7 @@ export class Tbl_User_Active {
 }
 
 export interface Tbl_User_Active_Model {
+    selectedId: string;
     sortcol: string;
     sortorder: boolean;
     errormessage: string;
