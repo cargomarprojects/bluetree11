@@ -124,7 +124,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
       this.CanArAp = true;
 
     this.CanPaymentRequest = false;
-    if (this.gs.screenExists(this.gs.MENU_GENERAL_EXPENSE_ARAP) && this.EXPTYPE.trim() == "FA")
+    if (this.gs.screenExists(this.gs.MENU_FA_PAYMENT_REQUEST) && this.EXPTYPE.trim() == "FA")
       this.CanPaymentRequest = true;
 
     this.CanPayroll = false;
