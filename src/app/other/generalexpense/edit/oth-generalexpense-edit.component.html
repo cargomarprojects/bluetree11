@@ -12,14 +12,14 @@
 </div>
 
 <div *ngIf="errorMessage.length >0">
-  <div class="alert alert-success">
-    <a (click)="errorMessage=[]" class="close" aria-label="close">&times;</a>
-    <ul>
-      <li *ngFor="let str of errorMessage">
-        <p class="h4"> {{str}}</p>
-      </li>
-    </ul>
-  </div>
+    <div class="alert alert-success">
+        <a (click)="errorMessage=[]" class="close" aria-label="close">&times;</a>
+        <ul>
+            <li *ngFor="let str of errorMessage">
+                <p class="h4"> {{str}}</p>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <div class="page-body">
@@ -31,8 +31,9 @@
                     <div class="col-6">
                         <!-- <InputBox [(inputModel)]="record.mbl_refno" [maxlength]="refnoMaxLength" [disabled]="refnoDisabled" [uppercase]="true" #refno>
                         </InputBox> -->
-                        <input class="form-control form-control-sm" type="text" [maxlength]="refnoMaxLength" [disabled]="refnoDisabled"  (blur)="onBlur('mbl_refno')"
-                                        #mbl_refno (focusout)="onFocusout('mbl_refno')" [(ngModel)]="record.mbl_refno" />
+                        <input class="form-control form-control-sm" type="text" [maxlength]="refnoMaxLength"
+                            [disabled]="refnoDisabled" (blur)="onBlur('mbl_refno')" #mbl_refno
+                            (focusout)="onFocusout('mbl_refno')" [(ngModel)]="record.mbl_refno" />
                     </div>
                     <label class="col-4 col-form-label col-form-label-sm p-1">{{refnoFormat}}</label>
                 </div>
@@ -50,9 +51,10 @@
                         <!-- <InputBox [(inputModel)]="record.mbl_cargo_loc_name" [maxlength]="15" [disabled]="mode=='EDIT'" [uppercase]="true"
                             #cargo_loc_name>
                         </InputBox> -->
-                        <input class="form-control form-control-sm" type="text" [disabled]="mode=='EDIT'"  (blur)="onBlur('mbl_cargo_loc_name')"
-                        #cargo_loc_name (focusout)="onFocusout('mbl_cargo_loc_name')" [(ngModel)]="record.mbl_cargo_loc_name"
-                        maxlength="15" />
+                        <input class="form-control form-control-sm" type="text" [disabled]="mode=='EDIT'"
+                            (blur)="onBlur('mbl_cargo_loc_name')" #cargo_loc_name
+                            (focusout)="onFocusout('mbl_cargo_loc_name')" [(ngModel)]="record.mbl_cargo_loc_name"
+                            maxlength="15" />
                     </div>
                     <label class="col-4 text-danger col-form-label col-form-label-sm p-1"> {{FALockStatus}}</label>
                 </div>
@@ -60,7 +62,8 @@
                 <div *ngIf="EXPTYPE=='FA'" class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
                     <div class="col-6 ">
-                        <button class="btn btn-info btn-sm mr-1" (click)="GetHouseDetails(record.mbl_cargo_loc_name)">Fill HBL#</button>
+                        <button class="btn btn-info btn-sm mr-1"
+                            (click)="GetHouseDetails(record.mbl_cargo_loc_name)">Fill HBL#</button>
                     </div>
                 </div>
                 <div *ngIf="EXPTYPE=='FA'" class="form-group row">
@@ -68,7 +71,7 @@
                     <div class="col-6 ">
                         <select class="form-control form-control-sm" [(ngModel)]="record.mbl_devan_loc_id" #bltype>
                             <option *ngFor="let rec of HouseList" [value]="rec.obl_hbl_id">{{rec.obl_houseno}}</option>
-                          </select>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -85,18 +88,27 @@
             <div class="col-md-12 p-2 border">
                 <div class="form-group row">
                     <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanArAp"
-                    [routerLink]="BtnNavigation2('ARAP','L')" [queryParams]="BtnNavigation2('ARAP','P')">AR & AP</a>
+                        [routerLink]="BtnNavigation2('ARAP','L')" [queryParams]="BtnNavigation2('ARAP','P')">AR & AP</a>
                 </div>
 
                 <div class="form-group row">
                     <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanProfitReport" (click)="BtnNavigation('PROFITREPORT')">Profit Report</button> -->
                     <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanProfitReport"
-                    [routerLink]="BtnNavigation2('PROFITREPORT','L')" [queryParams]="BtnNavigation2('PROFITREPORT','P')">Profit Report</a>
+                        [routerLink]="BtnNavigation2('PROFITREPORT','L')"
+                        [queryParams]="BtnNavigation2('PROFITREPORT','P')">Profit Report</a>
                 </div>
-                <div  *ngIf="gs.PAYROLL_ENABLED == 'Y' && EXPTYPE == 'PR'" class="form-group row">
+                <div class="form-group row">
+                    <a class="col-12 btn btn-info btn-sm text-uppercase"
+                        *ngIf="CanPaymentRequest"
+                        [routerLink]="BtnNavigation2('PAYMENT-REQUEST','L')"
+                        [queryParams]="BtnNavigation2('PAYMENT-REQUEST','P')">Payment
+                        Request</a>
+                </div>
+                <div *ngIf="gs.PAYROLL_ENABLED == 'Y' && EXPTYPE == 'PR'" class="form-group row">
                     <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanPayroll" (click)="BtnNavigation('PAYROLLDET')">Payroll</button> -->
                     <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanPayroll"
-                    [routerLink]="BtnNavigation2('PAYROLLDET','L')" [queryParams]="BtnNavigation2('PAYROLLDET','P')">Payroll</a>
+                        [routerLink]="BtnNavigation2('PAYROLLDET','L')"
+                        [queryParams]="BtnNavigation2('PAYROLLDET','P')">Payroll</a>
                 </div>
             </div>
         </div>
@@ -105,11 +117,12 @@
 
 <div class="page-footer">
     <div class="row justify-content-center p-1">
-        <button class="btn btn-primary btn-md" [disabled]="is_locked" *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
+        <button class="btn btn-primary btn-md" [disabled]="is_locked" *ngIf="gs.canSave(menuid,mode)"
+            (click)="Save()">Save</button>
     </div>
 </div>
 
-<div  class="page-footer">
+<div class="page-footer">
     <label class="col-form-label col-form-label-sm" *ngIf="record.rec_created_by"> CREATED BY:
         {{record.rec_created_by}}
         /

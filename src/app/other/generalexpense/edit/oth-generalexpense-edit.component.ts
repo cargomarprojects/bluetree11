@@ -40,6 +40,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
   CanArAp: boolean = false;
   CanProfitReport: boolean = false;
   CanPayroll: boolean = false;
+  CanPaymentRequest: boolean = false;
 
   cmbList = {};
   EXPTYPE: string = "";
@@ -121,6 +122,10 @@ export class OthGeneralExpenseEditComponent implements OnInit {
       this.CanArAp = true;
     if (this.gs.screenExists(this.gs.MENU_FILE_ADJUSTMENT_ARAP) && this.EXPTYPE.trim() == "FA")
       this.CanArAp = true;
+
+    this.CanPaymentRequest = false;
+    if (this.gs.screenExists(this.gs.MENU_GENERAL_EXPENSE_ARAP) && this.EXPTYPE.trim() == "FA")
+      this.CanPaymentRequest = true;
 
     this.CanPayroll = false;
     if (this.gs.PAYROLL_ENABLED == "Y") {
@@ -536,6 +541,20 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           mbl_refno: this.record.mbl_refno,
           mbl_type: this.EXPTYPE,
           origin: 'other-generalexpense-page',
+        };
+    }else if (action == "PAYMENT-REQUEST") {
+      if (_type == "L")
+        return '/Silver.BusinessModule/PaymentRequestPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_FA_PAYMENT_REQUEST,
+          cp_master_id: this.pkid,
+          cp_source: 'GE',
+          cp_mode: 'FA',
+          cp_ref_no: this.record.mbl_refno,
+          is_locked: this.is_locked,
+          origin: 'other-generalexpense-page'
         };
     }
   }
