@@ -5,7 +5,7 @@ import { GlobalService } from '../../core/services/global.service';
 
 import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
-
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GenFileUploadService } from '../services/genfileupload.service';
 import { User_Menu } from '../../core/models/menum';
 import { vm_Tbl_cargo_genfiles, Tbl_cargo_genfiles, Tbl_cargo_genfilesModel } from '../models/Tbl_cargo_genfiles';
@@ -40,7 +40,7 @@ export class GenFileUploadEditComponent implements OnInit {
     decplace = 0;
 
     isAccLocked = false;
-
+    modal: any;
     showchqdt = true;
 
     where = " ACC_TYPE = 'BANK' ";
@@ -50,6 +50,8 @@ export class GenFileUploadEditComponent implements OnInit {
     HouseList: Tbl_cargo_genfiles[] = [];
 
     constructor(
+        private modalconfig: NgbModalConfig,
+        private modalservice: NgbModal,
         private router: Router,
         private route: ActivatedRoute,
         private location: Location,
@@ -174,7 +176,7 @@ export class GenFileUploadEditComponent implements OnInit {
         if (!confirm("Save")) {
             return;
         }
-        
+
         this.SaveParent();
         const saveRecord = <vm_Tbl_cargo_genfiles>{};
         saveRecord.record = this.record;
@@ -262,6 +264,7 @@ export class GenFileUploadEditComponent implements OnInit {
     LovSelected(_Record: SearchTable) {
         if (_Record.controlname == "ACCTM") {
             this.record.gf_name = _Record.name;
+            this.record.gf_accno = _Record.col5;
         }
     }
 
@@ -306,12 +309,16 @@ export class GenFileUploadEditComponent implements OnInit {
         */
     }
 
-    Upload() {
-        this.tab = 'attachment';
+    Upload(attachmodal: any = null) {
+        //this.tab = 'attachment';
+        this.modal = this.modalservice.open(attachmodal, { centered: true });
     }
 
     callbackevent(event: any) {
-        this.tab = 'main';
+        // this.tab = 'main';
     }
 
+    CloseModal() {
+        this.modal.close();
+    }
 }
