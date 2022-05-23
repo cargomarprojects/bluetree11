@@ -167,7 +167,7 @@
     </thead>
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" 
-      (mousedown)="mainservice.selectRowId(rec.mbl_refno)" [class.selected]="rec.mbl_refno == mainservice.getRowId()">
+      (mousedown)="mainservice.selectRowId(rec.hbl_houseno)" [class.selected]="rec.hbl_houseno == mainservice.getRowId()">
         <td>
           <a class="hlink"
             [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L',rec.rec_branch_code)"
@@ -226,7 +226,7 @@
     </thead>
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" 
-      (mousedown)="mainservice.selectRowId(rec.mbl_refno)" [class.selected]="rec.mbl_refno == mainservice.getRowId()">
+      (mousedown)="mainservice.selectRowId(rec.inv_no)" [class.selected]="rec.inv_no == mainservice.getRowId()">
         <td>
           <a class="hlink"
             [routerLink]="gs.Link2Page('REFNO', rec.mbl_mode, rec.mbl_refno, rec.mbl_pkid,rec.hbl_pkid,'', 'L',rec.rec_branch_code)"
