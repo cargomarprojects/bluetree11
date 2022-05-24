@@ -3,6 +3,7 @@ import { PageQuery } from '../../shared/models/pageQuery';
 export interface SearchQuery {
     searchString: string;
     searchDatetype: string;
+    serverDate: string;
 }
 
 export class Tbl_User_Active {

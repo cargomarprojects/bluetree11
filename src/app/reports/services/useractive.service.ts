@@ -31,61 +31,60 @@ export class UserActiveService {
     public canSave: boolean;
 
     public initlialized: boolean;
-    private appid ='';
+    private appid = '';
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    public selectRowId( id : string){
+    public selectRowId(id: string) {
         this.record.selectedId = id;
     }
-    public getRowId(){
+    public getRowId() {
         return this.record.selectedId;
     }
-    public getSortCol(){
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
 
     public ClearInit() {
         this.record = <Tbl_User_Active_Model>{
-            selectedId : '',
-            sortcol : '',
-            sortorder : true,
+            selectedId: '',
+            sortcol: '',
+            sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '',searchDatetype:'NA' },
+            searchQuery: <SearchQuery>{ searchString: '', searchDatetype: 'NA', serverDate: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 30 }
         };
         this.mdata$.next(this.record);
     }
-    
+
     public init(params: any) {
         if (this.appid != this.gs.appid) {
             this.appid = this.gs.appid;
@@ -99,12 +98,12 @@ export class UserActiveService {
         this.param_type = params.param_type;
 
         this.record = <Tbl_User_Active_Model>{
-            selectedId : '',
-            sortcol : '',
-            sortorder : true,
+            selectedId: '',
+            sortcol: '',
+            sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '',searchDatetype:'NA'},
+            searchQuery: <SearchQuery>{ searchString: '', searchDatetype: 'NA', serverDate: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 30 }
         };
 
@@ -124,7 +123,7 @@ export class UserActiveService {
 
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
-            this.record.selectedId = '';  
+            this.record.selectedId = '';
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
@@ -135,7 +134,7 @@ export class UserActiveService {
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
-        SearchData.SEARCH_DATETYPE = this.record.searchQuery.searchDatetype;        
+        SearchData.SEARCH_DATETYPE = this.record.searchQuery.searchDatetype;
         SearchData.page_count = 0;
         SearchData.page_rows = 30;
         SearchData.page_current = -1;
@@ -150,6 +149,7 @@ export class UserActiveService {
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
+            this.record.searchQuery.serverDate = response.server_date;
             this.record.errormessage = '';
             this.mdata$.next(this.record);
         }, error => {

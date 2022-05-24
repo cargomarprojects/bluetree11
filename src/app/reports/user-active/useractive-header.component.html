@@ -1,31 +1,36 @@
 <div class="page-list">
-    <div class="page-search">
-      <div class="row">
+  <div class="page-search">
+    <div class="row">
 
-        <div class="col-md-4">
-          <div class="form-group row">
-            <label class="col-4 col-form-label col-form-label-sm">Time Zone</label>
-            <div class="col-8">
-              <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchDatetype">
-                <option [value]="'NA'">Default</option>
-                <option [value]="'PST-Pacific Standard Time'">PST - Pacific Standard Time</option>
+      <div class="col-md-4">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm">Time Zone</label>
+          <div class="col-8">
+            <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchDatetype">
+              <option [value]="'NA'">Default</option>
+              <option [value]="'PST-Pacific Standard Time'">PST - Pacific Standard Time</option>
             </select>
-            </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="form-group row">
-            <label class="col-4 col-form-label col-form-label-sm"></label>
-            <div class="col-8">
-              <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-4">Search</button>
-               
-                <input class="form-check-input mt-2" type="checkbox" [(ngModel)]="report_auto_refresh" (change)="onChange('report_auto_refresh')">
-                <label class="form-check-label mt-1" (click)="setAutoRefresh()">Auto Refresh</label>
-               
-              <!-- <button [disabled]="loading" (click)="List('EXCEL')" class="btn btn-primary btn-sm">Excel</button> -->
-            </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group row">
+          <label class="col-4 col-form-label col-form-label-sm"></label>
+          <div class="col-8">
+            <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-4">Search</button>
+            <input class="form-check-input mt-2" type="checkbox" [(ngModel)]="report_auto_refresh"
+              (change)="onChange('report_auto_refresh')">
+            <label class="form-check-label mt-1" (click)="setAutoRefresh()">Auto Refresh</label>
+            <!-- <button [disabled]="loading" (click)="List('EXCEL')" class="btn btn-primary btn-sm">Excel</button> -->
           </div>
+
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div *ngIf="searchQuery.serverDate" class="form-group row">
+          <label class="offset-4 col-8 col-form-label col-form-label-sm"><b>Server Datetime</b>&nbsp;{{searchQuery.serverDate}}</label>
         </div>
       </div>
     </div>
   </div>
+</div>
