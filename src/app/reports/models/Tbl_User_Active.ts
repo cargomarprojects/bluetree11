@@ -15,6 +15,7 @@ export class Tbl_User_Active {
     user_time_in: string;
     user_time_out: string;
     user_time_last: string;
+    row_color: string;
 }
 
 export interface Tbl_User_Active_Model {

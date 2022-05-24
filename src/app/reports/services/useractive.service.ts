@@ -32,6 +32,7 @@ export class UserActiveService {
 
     public initlialized: boolean;
     private appid = '';
+    private oldrecords: Tbl_User_Active[] = [];
 
     constructor(
         private http2: HttpClient,
@@ -151,7 +152,20 @@ export class UserActiveService {
             this.record.records = response.list;
             this.record.searchQuery.serverDate = response.server_date;
             this.record.errormessage = '';
+            // if (!this.gs.isBlank(this.oldrecords)) {
+            //     this.record.records.forEach(rec => {
+            //         for (let rec2 of this.oldrecords.filter(rec2 => rec2.user_username == rec.user_username)) {
+            //             if (rec2.user_time_last != rec.user_time_last)
+            //                 rec.row_color = 'Green';
+            //         }
+            //     });
+            // }
+
             this.mdata$.next(this.record);
+
+            // this.oldrecords = <Tbl_User_Active[]>[];
+            // this.record.records.forEach(rec => this.oldrecords.push(Object.assign({}, rec)));
+
         }, error => {
             this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
