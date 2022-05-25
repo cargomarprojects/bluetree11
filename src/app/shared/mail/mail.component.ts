@@ -501,8 +501,12 @@ export class MailComponent implements OnInit {
           if (this.AttachList != null && this.AttachList.length == 1)
             this.AttachList[0].filesize = response.fsize;
         }
+        
         if (!this.gs.isBlank(response.presetmessage)) {
-          this.message = response.presetmessage + '\n' + this.gs.user_email_signature.toString();
+          if (this._maildata.cont_group == 'EMAIL-TEMPLATE-AN-COMMON')
+            this.message = response.presetmessage;
+          else
+            this.message = response.presetmessage + '\n' + this.gs.user_email_signature.toString();
         }
 
         this.GetTotfilesize();
