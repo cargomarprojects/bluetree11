@@ -210,7 +210,7 @@ export class AppComponent {
     this.loginservice.Logout();
     this.gs.MenuList = null;
     this.gs.Modules = null;
-
+    
     this.router.navigate(['/login'], { replaceUrl: true });
   }
 
