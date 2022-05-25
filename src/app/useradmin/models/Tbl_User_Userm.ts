@@ -36,7 +36,9 @@ export class Tbl_User_Userm {
     usr_disable_edit_si_mblstatus : string;
     usr_timezone : string;
     usr_disable_timer:string;
-    
+    usr_timeout:number;
+    usr_an_common_mail:string;
+
     rec_created_by: string;
     rec_created_date: string;
     rec_closed: string;
