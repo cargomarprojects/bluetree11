@@ -142,6 +142,7 @@ export class GlobalService {
   public user_hide_payroll: string = '';
   public user_timezone: string = 'NA';
   public user_disable_timer = "N";
+  public user_timeout: number = 0;
 
   public USER_DISABLE_EDIT_SI_MBLSTATUS: string = '';
 
@@ -761,6 +762,7 @@ export class GlobalService {
     this.ADDRESS_LINE4 = this.UserRecord.comp_line4;
 
     this.company_sow = this.UserRecord.comp_sow;
+    this.user_timeout = this.UserRecord.usr_timeout;
     this.branch_pkid = "";
     this.InitUserInfo();
   }
@@ -1287,7 +1289,11 @@ export class GlobalService {
         if (Rec.param_name1 == "GENERAL_BRANCH_CODE")
           this.GENERAL_BRANCH_CODE = Rec.param_name3;
         if (Rec.param_name1 == "TIMEOUT_IN_MINUTES") {
-          let tim: number = +Rec.param_name3;
+          let tim: number = +Rec.param_name3; //Company setting
+          if (this.user_timeout > 0)
+            tim = this.user_timeout; //User wise
+          if (tim <= 0)
+            tim = 30;
           this.TIMEOUT_IN_MINUTES = tim * 60;
         }
       }

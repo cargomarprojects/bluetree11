@@ -8,7 +8,7 @@ export class GlobalVariables {
     user_company_code: string;
     user_branch_id: string;
     user_branch_user: string;
-
+    
     hide_ho_entries: string;
 
     comp_pkid: string;
