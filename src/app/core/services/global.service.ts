@@ -143,6 +143,7 @@ export class GlobalService {
   public user_timezone: string = 'NA';
   public user_disable_timer = "N";
   public user_timeout: number = 0;
+  public user_an_common_mail: string = 'N';
 
   public USER_DISABLE_EDIT_SI_MBLSTATUS: string = '';
 
@@ -763,6 +764,7 @@ export class GlobalService {
 
     this.company_sow = this.UserRecord.comp_sow;
     this.user_timeout = this.UserRecord.usr_timeout;
+    this.user_an_common_mail = this.UserRecord.usr_an_common_mail;
     this.branch_pkid = "";
     this.InitUserInfo();
   }
