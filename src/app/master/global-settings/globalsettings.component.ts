@@ -57,7 +57,9 @@ export class GlobalSettingsComponent implements OnInit {
   Txt_ISF_Order = 0;
   Txt_Branch_Code = '';
   mailServer = "";
-  Txt_Idle_Time='';
+  Txt_Idle_Time = '';
+  Txt_AN_Email = '';
+  Txt_AN_Password = '';
 
   LBL_STAGES_ID = '';
   LBL_STAGES = '';
@@ -211,7 +213,10 @@ export class GlobalSettingsComponent implements OnInit {
       if (Rec.param_name1 == "GENERAL_BRANCH_CODE")
         this.Txt_Branch_Code = Rec.param_name3;
 
-
+      if (Rec.param_name1 == "AN_EMAIL_ID")
+        this.Txt_AN_Email = Rec.param_name3;
+      if (Rec.param_name1 == "AN_EMAIL_PWD")
+        this.Txt_AN_Password = Rec.param_name3;
 
 
     });
@@ -240,7 +245,7 @@ export class GlobalSettingsComponent implements OnInit {
     if (!confirm("Save")) {
       return;
     }
-    
+
     this.saveList = <TBL_MAST_PARAM[]>[];
 
     this.saveList.push(this.AddRecord("SOFTWARE VERSION", this.gs.branch_pkid, this.version));
@@ -272,7 +277,8 @@ export class GlobalSettingsComponent implements OnInit {
     this.saveList.push(this.AddRecord("GENERAL_FCL_QUOT_LABEL_HAULAGE", this.gs.branch_pkid, this.Txt_Haulage, this.Txt_Haulage_Order));
     this.saveList.push(this.AddRecord("GENERAL_FCL_QUOT_LABEL_IFS", this.gs.branch_pkid, this.Txt_ISF, this.Txt_ISF_Order));
     this.saveList.push(this.AddRecord("GENERAL_BRANCH_CODE", this.gs.branch_pkid, this.Txt_Branch_Code));
-
+    this.saveList.push(this.AddRecord("AN_EMAIL_ID", this.gs.branch_pkid, this.Txt_AN_Email));
+    this.saveList.push(this.AddRecord("AN_EMAIL_PWD", this.gs.branch_pkid, this.Txt_AN_Password));
 
     const saveRecord = <VM_TBL_MAST_SETTINGS>{};
     saveRecord.userinfo = this.gs.UserInfo;
