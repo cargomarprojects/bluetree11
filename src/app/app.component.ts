@@ -166,7 +166,7 @@ export class AppComponent {
 
       if (this.gs.IsLoginSuccess) {
 
-        this.loginservice.SaveActiveUser(this.isActive);
+        this.loginservice.SaveActiveUser(this.isActive,'ACTIVE');
         this.isActive = "N";
 
         if (this.gs.user_disable_timer == "N") {
@@ -175,7 +175,7 @@ export class AppComponent {
           timeDiff /= 1000;
           // get seconds 
           var seconds = Math.round(timeDiff);
-          if (seconds >= this.gs.TIMEOUT_IN_MINUTES) {
+          if (seconds >= this.gs.TIMEOUT_IN_MINUTES) { //TIMEOUT_IN_MINUTES convert to seconds while loading from globalsettings
             this.ShowValidateUser();
           }
         }
@@ -210,12 +210,13 @@ export class AppComponent {
     this.loginservice.Logout();
     this.gs.MenuList = null;
     this.gs.Modules = null;
-    
+
     this.router.navigate(['/login'], { replaceUrl: true });
   }
 
   ShowValidateUser() {
     this.stopTimer();
+    this.loginservice.SaveActiveUser(this.isActive,'LOGOUT');
     this.modalconfig.backdrop = 'static'; //true/false/static
     this.modalconfig.keyboard = false;
     this.modal = this.modalservice.open(this.pwdmodal_Cntrl, { centered: true });
@@ -226,6 +227,9 @@ export class AppComponent {
     SearchData.company_pkid = this.gs.company_pkid;
     SearchData.user_code = this.gs.user_code;
     SearchData.user_pwd = this.password.toString().toUpperCase();
+    SearchData.user_pkid = this.gs.user_pkid;
+    SearchData.appid = this.gs.appid;
+   
     this.loginservice.ValidUser(SearchData)
       .subscribe(response => {
         if (response.blogin) {
