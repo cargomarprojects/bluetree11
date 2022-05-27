@@ -1,8 +1,10 @@
 import { PageQuery } from '../../shared/models/pageQuery';
 export interface SearchQuery {
     searchString: string;
+    searchDatetype:string
     fromdate: string;
     todate: string;
+    userId:string;
 }
 
 export interface Tbl_User_Actived {
@@ -12,6 +14,7 @@ export interface Tbl_User_Actived {
 	user_username: string;
 	user_time_in: string;
     user_time_last: string;
+    user_duration:number;
 }
  
 export interface UserActiveDetModel {

@@ -33,58 +33,58 @@ export class UserActiveDetService {
 
     public initlialized: boolean;
     private appid = '';
+    public userList: any[];
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    public selectRowId( id : string){
+    public selectRowId(id: string) {
         this.record.selectedId = id;
     }
-    public getRowId(){
+    public getRowId() {
         return this.record.selectedId;
     }
-    
 
-    public getSortCol(){
+
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
 
 
     public ClearInit() {
         this.record = <UserActiveDetModel>{
-            selectedId : '',
-            sortcol : '',
-            sortorder : true,
+            selectedId: '',
+            sortcol: '',
+            sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate:  this.gs.defaultValues.today, todate: this.gs.defaultValues.today, searchtype: 'REFNO' },
+            searchQuery: <SearchQuery>{ searchString: '', searchDatetype: 'NA', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, userId: this.userid },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -94,21 +94,24 @@ export class UserActiveDetService {
             this.appid = this.gs.appid;
             this.initlialized = false;
         }
+        if (this.userid != params.userid) {
+            this.initlialized = false;
+        }
+
         if (this.initlialized)
             return;
 
         this.id = params.id;
         this.menuid = params.id;
-        // this.param_type = params.menu_param;
         this.userid = params.userid;
 
         this.record = <UserActiveDetModel>{
-            selectedId : '',
-            sortcol : '',
-            sortorder : true,
+            selectedId: '',
+            sortcol: '',
+            sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, searchtype: 'REFNO' },
+            searchQuery: <SearchQuery>{ searchString: '', searchDatetype: 'NA', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, userId: this.userid },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -120,16 +123,28 @@ export class UserActiveDetService {
         this.canEdit = this.gs.canEdit(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
         this.canDelete = this.gs.canDelete(this.menuid);
+        this.LoadUser();
 
         this.initlialized = true;
 
     }
-
+    LoadUser() {
+        var SearchData = this.gs.UserInfo;
+        SearchData.CODE = "";
+        SearchData.TYPE = "";
+        SearchData.showall = "N";
+        this.getUserList(SearchData).subscribe(response => {
+            this.userList = <any>response.list;
+        }, error => {
+            this.record.errormessage = this.gs.getError(error);
+            alert(this.record.errormessage);
+        });
+    }
     Search(_searchdata: any, type: string = '') {
         this.record.errormessage = '';
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
-            this.record.selectedId = '';            
+            this.record.selectedId = '';
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
@@ -141,14 +156,14 @@ export class UserActiveDetService {
         SearchData.pkid = this.id;
         SearchData.TYPE = this.param_type;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
-        SearchData.USER_ID = this.userid;
+        SearchData.USER_ID = this.record.searchQuery.userId;
         SearchData.SDATE = this.record.searchQuery.fromdate;
         SearchData.EDATE = this.record.searchQuery.todate;
-        //SearchData.SEARCH_TYPE = this.record.searchQuery.searchtype;
+        SearchData.SEARCH_DATETYPE = this.record.searchQuery.searchDatetype;
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
-
+           
 
         if (type == 'PAGE') {
             SearchData.action = this.record.pageQuery.action;
@@ -172,4 +187,7 @@ export class UserActiveDetService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Report/UserActiveDetRpt', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    getUserList(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/UserList', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

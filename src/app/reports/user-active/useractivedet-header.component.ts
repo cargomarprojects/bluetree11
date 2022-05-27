@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/Tbl_User_Actived';
+import { UserActiveDetService  } from '../services/useractived.service';
 
 @Component({
   selector: 'app-useractivedet-header',
@@ -15,10 +16,12 @@ export class UserActiveDetHeaderComponent implements OnInit {
 
   @Output() searchEvents = new EventEmitter<any>();
 
-  constructor(public gs: GlobalService
+  constructor(public gs: GlobalService,
+    public mainservice: UserActiveDetService
   ) { }
 
   ngOnInit() {
+    this.List('SCREEN');
   }
 
   ngOnChanges(changes: SimpleChange) {
