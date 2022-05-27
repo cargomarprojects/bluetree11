@@ -5,66 +5,58 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { GlobalService } from '../../core/services/global.service';
-import { Tbl_User_Active } from '../models/Tbl_User_Active';
-import { SearchQuery } from '../models/Tbl_User_Active';
+import { Tbl_User_Actived  } from '../models/Tbl_User_Actived';
+import { SearchQuery } from '../models/Tbl_User_Actived';
 import { PageQuery } from '../../shared/models/pageQuery';
-import { UserActiveService } from '../services/useractive.service';
+import { UserActiveDetService  } from '../services/useractived.service';
 
 @Component({
-  selector: 'app-useractive',
-  templateUrl: './useractive.component.html'
+  selector: 'app-useractivedet',
+  templateUrl: './useractivedet.component.html'
 })
-export class UserActiveComponent implements OnInit {
- 
-  errorMessage$: Observable<string>;
-  records$: Observable<Tbl_User_Active []>;
-  pageQuery$: Observable<PageQuery>;
-  searchQuery$: Observable<SearchQuery>;
+export class UserActiveDetComponent implements OnInit {
+
+   
+  errorMessage$ : Observable<string> ;
+  records$ :  Observable<Tbl_User_Actived[]>;
+  pageQuery$ : Observable<PageQuery>;
+  searchQuery$ : Observable<SearchQuery>;
+
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     public gs: GlobalService,
-    public mainservice: UserActiveService
+    public mainservice: UserActiveDetService
   ) { }
 
   ngOnInit() {
     this.gs.checkAppVersion();
-    
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
   }
 
   initPage() {
-
+   
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
-    this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
+    this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));    
     this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errormessage));
 
   }
 
   searchEvents(actions: any) {
-    this.mainservice.Search(actions, 'SEARCH');
+    this.mainservice.Search(actions,  'SEARCH');
   }
 
   pageEvents(actions: any) {
-    this.mainservice.Search(actions, 'PAGE');
+    this.mainservice.Search(actions,'PAGE');
   }
 
-  edit(_rec:Tbl_User_Active)
-  {
-    let parameter = {
-      appid: this.gs.appid,
-      id: this.mainservice.menuid,
-      userid: _rec.user_userid,
-      origin: 'user-active-page'
-    };
-    this.gs.Naviagete2('Silver.Reports.General/UserActiveDet',  parameter);
-  }
+
   Close() {
     this.location.back();
   }
 
-
+ 
 }

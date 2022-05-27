@@ -34,7 +34,7 @@
       <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()"
         (mousedown)="mainservice.selectRowId(rec.user_username)"
         [class.selected]="rec.user_username == mainservice.getRowId()" [style.color]="rec.row_color">
-        <td>{{rec.user_username}}</td>
+        <td (click)="edit(rec)" >{{rec.user_username}}</td>
         <td>{{rec.user_status}}</td>
         <td>{{rec.user_time_in}}</td>
         <td>{{rec.user_time_out}}</td>

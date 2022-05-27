@@ -24,6 +24,7 @@ import { LogRegisterComponent } from './log-register/logregister.component';
 import { CustReportComponent } from './cust-report/cust-report.component';
 import { DataEntryReportComponent } from './data-entry-report/data-entry-report.component';
 import { UserActiveComponent } from './user-active/useractive.component';
+import { UserActiveDetComponent } from './user-active/useractivedet.component';
 import { InvoiceReportComponent } from './invoice-report/invoice-report.component';
 
 const routes: Routes = [
@@ -48,6 +49,7 @@ const routes: Routes = [
    { path :'CustReport', component : CustReportComponent },   
    { path :'DataEntryReport', component : DataEntryReportComponent }, 
    { path :'UserActive', component : UserActiveComponent }, 
+   { path :'UserActiveDet', component : UserActiveDetComponent }, 
    { path :'InvoiceListPage', component : InvoiceReportComponent },     
 ];
 
