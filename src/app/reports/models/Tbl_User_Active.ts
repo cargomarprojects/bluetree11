@@ -4,6 +4,7 @@ export interface SearchQuery {
     searchString: string;
     searchDatetype: string;
     serverDate: string;
+    activeusers:boolean;
 }
 
 export class Tbl_User_Active {

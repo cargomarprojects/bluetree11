@@ -33,7 +33,7 @@ export class UserActiveService {
     public initlialized: boolean;
     private appid = '';
     private oldrecords: Tbl_User_Active[] = [];
-    public datetype='NA';
+    public datetype = 'NA';
 
     constructor(
         private http2: HttpClient,
@@ -81,7 +81,7 @@ export class UserActiveService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchDatetype: 'NA', serverDate: '' },
+            searchQuery: <SearchQuery>{ searchString: '', searchDatetype: 'NA', serverDate: '', activeusers: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 30 }
         };
         this.mdata$.next(this.record);
@@ -105,7 +105,7 @@ export class UserActiveService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchDatetype: 'NA', serverDate: '' },
+            searchQuery: <SearchQuery>{ searchString: '', searchDatetype: 'NA', serverDate: '', activeusers: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 30 }
         };
 
@@ -130,7 +130,7 @@ export class UserActiveService {
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
         }
-        
+
         this.datetype = this.record.searchQuery.searchDatetype;
         var SearchData = this.gs.UserInfo;
         SearchData.outputformat = 'SCREEN';
@@ -138,6 +138,7 @@ export class UserActiveService {
         SearchData.pkid = this.id;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.SEARCH_DATETYPE = this.record.searchQuery.searchDatetype;
+        SearchData.ACTIVE_USERS = this.record.searchQuery.activeusers ? "Y" : "N";
         SearchData.page_count = 0;
         SearchData.page_rows = 30;
         SearchData.page_current = -1;
