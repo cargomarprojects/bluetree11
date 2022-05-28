@@ -15,9 +15,9 @@ import { UserActiveService } from '../services/useractive.service';
   templateUrl: './useractive.component.html'
 })
 export class UserActiveComponent implements OnInit {
- 
+
   errorMessage$: Observable<string>;
-  records$: Observable<Tbl_User_Active []>;
+  records$: Observable<Tbl_User_Active[]>;
   pageQuery$: Observable<PageQuery>;
   searchQuery$: Observable<SearchQuery>;
 
@@ -30,7 +30,7 @@ export class UserActiveComponent implements OnInit {
 
   ngOnInit() {
     this.gs.checkAppVersion();
-    
+
     this.mainservice.init(this.route.snapshot.queryParams);
     this.initPage();
   }
@@ -52,8 +52,7 @@ export class UserActiveComponent implements OnInit {
     this.mainservice.Search(actions, 'PAGE');
   }
 
-  edit(_rec:Tbl_User_Active)
-  {
+  edit(_rec: Tbl_User_Active) {
     let parameter = {
       appid: this.gs.appid,
       id: this.mainservice.menuid,
@@ -61,7 +60,32 @@ export class UserActiveComponent implements OnInit {
       datetype: this.mainservice.datetype,
       origin: 'user-active-page'
     };
-    this.gs.Naviagete2('Silver.Reports.General/UserActiveDet',  parameter);
+    this.gs.Naviagete2('Silver.Reports.General/UserActiveDet', parameter);
+  }
+
+  getRouteDet(_format: string, _rec: Tbl_User_Active) {
+    let user_userid: string = (_rec.user_userid != null) ? _rec.user_userid.toString() : "";
+    let sMenuID = this.mainservice.menuid;
+
+    if (this.gs.isBlank(user_userid))
+      return null;
+
+    if (this.gs.canEdit(sMenuID) || this.gs.canView(sMenuID)) {
+      if (_format == "P") {
+        return {
+          appid: this.gs.appid,
+          menuid: sMenuID,
+          userid: user_userid,
+          datetype: this.mainservice.datetype,
+          origin: 'user-active-page'
+        };
+      } else if (_format == "L") {
+        return "/Silver.Reports.General/UserActiveDet";
+      } else
+        return null;
+    }
+    else
+      return null;
   }
   Close() {
     this.location.back();

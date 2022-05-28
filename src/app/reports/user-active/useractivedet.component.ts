@@ -5,10 +5,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { GlobalService } from '../../core/services/global.service';
-import { Tbl_User_Actived  } from '../models/Tbl_User_Actived';
+import { Tbl_User_Actived } from '../models/Tbl_User_Actived';
 import { SearchQuery } from '../models/Tbl_User_Actived';
 import { PageQuery } from '../../shared/models/pageQuery';
-import { UserActiveDetService  } from '../services/useractived.service';
+import { UserActiveDetService } from '../services/useractived.service';
 
 @Component({
   selector: 'app-useractivedet',
@@ -16,11 +16,11 @@ import { UserActiveDetService  } from '../services/useractived.service';
 })
 export class UserActiveDetComponent implements OnInit {
 
-   
-  errorMessage$ : Observable<string> ;
-  records$ :  Observable<Tbl_User_Actived[]>;
-  pageQuery$ : Observable<PageQuery>;
-  searchQuery$ : Observable<SearchQuery>;
+
+  errorMessage$: Observable<string>;
+  records$: Observable<Tbl_User_Actived[]>;
+  pageQuery$: Observable<PageQuery>;
+  searchQuery$: Observable<SearchQuery>;
 
 
   constructor(
@@ -37,26 +37,24 @@ export class UserActiveDetComponent implements OnInit {
   }
 
   initPage() {
-   
+
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
-    this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));    
+    this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
     this.errorMessage$ = this.mainservice.data$.pipe(map(res => res.errormessage));
 
   }
 
   searchEvents(actions: any) {
-    this.mainservice.Search(actions,  'SEARCH');
+      this.mainservice.Search(actions, 'SEARCH');
   }
 
   pageEvents(actions: any) {
-    this.mainservice.Search(actions,'PAGE');
+    this.mainservice.Search(actions, 'PAGE');
   }
-
-
+  
   Close() {
     this.location.back();
   }
 
- 
 }

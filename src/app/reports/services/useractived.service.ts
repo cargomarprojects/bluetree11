@@ -146,16 +146,18 @@ export class UserActiveDetService {
     }
     Search(_searchdata: any, type: string = '') {
         this.record.errormessage = '';
-        if (type == 'SEARCH') {
-            this.record.searchQuery = _searchdata.searchQuery;
-            this.record.selectedId = '';
-        }
-        if (type == 'PAGE') {
-            this.record.pageQuery = _searchdata.pageQuery;
+        if (_searchdata.outputformat == "SCREEN") {
+            if (type == 'SEARCH') {
+                this.record.searchQuery = _searchdata.searchQuery;
+                this.record.selectedId = '';
+            }
+            if (type == 'PAGE') {
+                this.record.pageQuery = _searchdata.pageQuery;
+            }
         }
 
         var SearchData = this.gs.UserInfo;
-        SearchData.outputformat = 'SCREEN';
+        SearchData.outputformat = _searchdata.outputformat;
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
         SearchData.TYPE = this.param_type;
@@ -168,23 +170,32 @@ export class UserActiveDetService {
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
 
-
-        if (type == 'PAGE') {
-            SearchData.action = this.record.pageQuery.action;
-            SearchData.page_count = this.record.pageQuery.page_count;
-            SearchData.page_rows = this.record.pageQuery.page_rows;
-            SearchData.page_current = this.record.pageQuery.page_current;;
+        if (_searchdata.outputformat == "SCREEN") {
+            if (type == 'PAGE') {
+                SearchData.action = this.record.pageQuery.action;
+                SearchData.page_count = this.record.pageQuery.page_count;
+                SearchData.page_rows = this.record.pageQuery.page_rows;
+                SearchData.page_current = this.record.pageQuery.page_current;;
+            }
         }
 
         this.List(SearchData).subscribe(response => {
-            this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
-            this.record.records = response.list;
-            this.mdata$.next(this.record);
+            if (_searchdata.outputformat == "SCREEN") {
+                this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
+                this.record.records = response.list;
+                this.mdata$.next(this.record);
+            } else {
+                if (_searchdata.outputformat == "EXCEL")
+                    this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+            }
         }, error => {
             this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
             alert(this.record.errormessage);
         });
+    }
+    Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+        this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
     }
 
     List(SearchData: any) {

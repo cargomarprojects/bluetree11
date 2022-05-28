@@ -34,7 +34,9 @@
       <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()"
         (mousedown)="mainservice.selectRowId(rec.user_username)"
         [class.selected]="rec.user_username == mainservice.getRowId()" [style.color]="rec.row_color">
-        <td (click)="edit(rec)" >{{rec.user_username}}</td>
+        <!-- <td (click)="edit(rec)" >{{rec.user_username}}</td> -->
+        <td><a class="hlink" [routerLink]="getRouteDet('L',rec)"
+          [queryParams]="getRouteDet('P',rec)">{{rec.user_username}}</a></td>
         <td>{{rec.user_status}}</td>
         <td>{{rec.user_time_in}}</td>
         <td>{{rec.user_time_out}}</td>
