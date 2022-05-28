@@ -58,6 +58,7 @@ export class UserActiveComponent implements OnInit {
       appid: this.gs.appid,
       id: this.mainservice.menuid,
       userid: _rec.user_userid,
+      datetype: this.mainservice.datetype,
       origin: 'user-active-page'
     };
     this.gs.Naviagete2('Silver.Reports.General/UserActiveDet',  parameter);

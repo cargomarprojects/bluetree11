@@ -18,11 +18,12 @@
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <th (click)="mainservice.sort('mbl_refno')">USER&nbsp;<i [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
-        <th (click)="mainservice.sort('mbl_ref_date')">FROM&nbsp;<i [ngClass]="mainservice.getIcon('mbl_ref_date')"></i>
+        <th (click)="mainservice.sort('user_username')">USER&nbsp;<i [ngClass]="mainservice.getIcon('user_username')"></i></th>
+        <th (click)="mainservice.sort('user_time_in')">FROM&nbsp;<i [ngClass]="mainservice.getIcon('user_time_in')"></i>
         </th>
-        <th (click)="mainservice.sort('mbl_no')">TO&nbsp;<i [ngClass]="mainservice.getIcon('mbl_no')"></i></th>
-        <th (click)="mainservice.sort('mbl_no')">DURATION&nbsp;<i [ngClass]="mainservice.getIcon('mbl_no')"></i></th>
+        <th (click)="mainservice.sort('user_time_last')">TO&nbsp;<i [ngClass]="mainservice.getIcon('user_time_last')"></i></th>
+        <th (click)="mainservice.sort('user_duration_hh')">HOURS&nbsp;<i [ngClass]="mainservice.getIcon('user_duration_hh')"></i></th>
+        <th (click)="mainservice.sort('user_duration_mm')">MINUTES&nbsp;<i [ngClass]="mainservice.getIcon('user_duration_mm')"></i></th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
@@ -31,7 +32,8 @@
         <td>{{rec.user_username}}</td>
         <td>{{rec.user_time_in}}</td>
         <td>{{rec.user_time_last}}</td>
-        <td>{{rec.user_duration}}</td>
+        <td>{{rec.user_duration_hh}}</td>
+        <td>{{rec.user_duration_mm}}</td>
       </tr>
     </tbody>
   </table>

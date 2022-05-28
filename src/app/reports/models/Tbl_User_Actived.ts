@@ -5,6 +5,7 @@ export interface SearchQuery {
     fromdate: string;
     todate: string;
     userId:string;
+    allusers:boolean;
 }
 
 export interface Tbl_User_Actived {
@@ -14,7 +15,8 @@ export interface Tbl_User_Actived {
 	user_username: string;
 	user_time_in: string;
     user_time_last: string;
-    user_duration:number;
+    user_duration_hh:number;
+    user_duration_mm:number;
 }
  
 export interface UserActiveDetModel {

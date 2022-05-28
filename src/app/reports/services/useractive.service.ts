@@ -33,6 +33,7 @@ export class UserActiveService {
     public initlialized: boolean;
     private appid = '';
     private oldrecords: Tbl_User_Active[] = [];
+    public datetype='NA';
 
     constructor(
         private http2: HttpClient,
@@ -129,7 +130,8 @@ export class UserActiveService {
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
         }
-
+        
+        this.datetype = this.record.searchQuery.searchDatetype;
         var SearchData = this.gs.UserInfo;
         SearchData.outputformat = 'SCREEN';
         SearchData.action = 'NEW';

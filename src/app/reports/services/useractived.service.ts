@@ -23,6 +23,7 @@ export class UserActiveDetService {
     public menuid: string;
     public param_type: string;
     public userid: string;
+    public datetype: string;
 
     public title: string;
     public isAdmin: boolean;
@@ -84,7 +85,7 @@ export class UserActiveDetService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchDatetype: 'NA', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, userId: this.userid },
+            searchQuery: <SearchQuery>{ searchString: '', searchDatetype: this.datetype, fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, userId: this.userid, allusers: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -97,13 +98,16 @@ export class UserActiveDetService {
         if (this.userid != params.userid) {
             this.initlialized = false;
         }
-
+        if (this.datetype != params.datetype) {
+            this.initlialized = false;
+        }
         if (this.initlialized)
             return;
 
         this.id = params.id;
         this.menuid = params.id;
         this.userid = params.userid;
+        this.datetype = params.datetype;
 
         this.record = <UserActiveDetModel>{
             selectedId: '',
@@ -111,7 +115,7 @@ export class UserActiveDetService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchDatetype: 'NA', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, userId: this.userid },
+            searchQuery: <SearchQuery>{ searchString: '', searchDatetype: this.datetype, fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, userId: this.userid, allusers: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -156,14 +160,14 @@ export class UserActiveDetService {
         SearchData.pkid = this.id;
         SearchData.TYPE = this.param_type;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
-        SearchData.USER_ID = this.record.searchQuery.userId;
+        SearchData.USER_ID = this.record.searchQuery.allusers ? "" : this.record.searchQuery.userId;
         SearchData.SDATE = this.record.searchQuery.fromdate;
         SearchData.EDATE = this.record.searchQuery.todate;
         SearchData.SEARCH_DATETYPE = this.record.searchQuery.searchDatetype;
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
-           
+
 
         if (type == 'PAGE') {
             SearchData.action = this.record.pageQuery.action;

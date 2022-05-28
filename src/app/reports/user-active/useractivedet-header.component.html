@@ -40,6 +40,8 @@
           <div class="form-group row">
             <label class="col-4 col-form-label col-form-label-sm"></label>
             <div class="col-8">
+              <input class="form-check-input mt-2" type="checkbox" [(ngModel)]="searchQuery.allusers">
+              <label class="form-check-label mt-1 mr-1">All Users</label>
               <button  (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
             </div>
           </div>
