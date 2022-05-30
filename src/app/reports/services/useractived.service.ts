@@ -95,14 +95,13 @@ export class UserActiveDetService {
             this.appid = this.gs.appid;
             this.initlialized = false;
         }
-        if (this.userid != params.userid) {
+
+        if (this.userid != params.userid || this.datetype != params.datetype) {
             this.initlialized = false;
         }
-        if (this.datetype != params.datetype) {
-            this.initlialized = false;
-        }
-        if (this.initlialized)
-            return;
+
+        // if (this.initlialized)
+        //     return;
 
         this.id = params.id;
         this.menuid = params.id;
@@ -146,6 +145,13 @@ export class UserActiveDetService {
     }
     Search(_searchdata: any, type: string = '') {
         this.record.errormessage = '';
+        if (_searchdata.outputformat == "EXCEL") {
+            if (this.gs.isBlank(this.record.records)) {
+                this.record.errormessage = 'List Not Found';
+                alert(this.record.errormessage);
+                return;
+            }
+        }
         if (_searchdata.outputformat == "SCREEN") {
             if (type == 'SEARCH') {
                 this.record.searchQuery = _searchdata.searchQuery;
