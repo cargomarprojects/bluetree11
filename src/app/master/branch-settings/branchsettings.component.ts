@@ -230,7 +230,8 @@ export class BranchSettingsComponent implements OnInit {
   Chk_ShipLogFormat_id = '';
   Chk_ShipLogFormat = 'Y';
   Dt_Locked = "";
-
+  Txt_AN_RO_Comments_id='';
+  Txt_AN_RO_Comments='';
 
 
 
@@ -253,7 +254,8 @@ export class BranchSettingsComponent implements OnInit {
 
   private initPage() {
 
-    this.title = 'Company Settings';
+    // this.title = 'Company Settings';
+    this.title = this.gs.getTitle(this.menuid);
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
   }
@@ -702,6 +704,10 @@ export class BranchSettingsComponent implements OnInit {
         this.Chk_ShipLogFormat_id = Rec.param_name2;
         this.Chk_ShipLogFormat = Rec.param_name3;
       }
+      else if (Rec.param_name1 == "AN-RO-COMMENTS") {
+        this.Txt_AN_RO_Comments_id = Rec.param_name2;
+        this.Txt_AN_RO_Comments = Rec.param_name3;
+      }
       else if (Rec.param_name1 == "SHIPMENT-LOCKED-DATE") {
         this.Dt_Locked = Rec.param_name3;
         /*if (Rec.param_name3 != "") {
@@ -994,6 +1000,7 @@ export class BranchSettingsComponent implements OnInit {
     else
       this.saveList.push(this.AddRecord("SHIPMENT-LOCKED-DATE", this.gs.branch_pkid, this.Dt_Locked));
 
+      this.saveList.push(this.AddRecord("AN-RO-COMMENTS", this.gs.branch_pkid, this.Txt_AN_RO_Comments));
 
     const saveRecord = <VM_TBL_MAST_SETTINGS>{};
     saveRecord.userinfo = this.gs.UserInfo;

@@ -412,6 +412,7 @@ export class GlobalService {
 
   public HBL_INSTR1 = "";
   public HBL_INSTR2 = "";
+  public AN_RO_COMMENTS = "";
 
   public SEA_EXPORT_HOUSE_PREFIX = "";
   public SEA_EXPORT_HOUSE_PREFIX_POL = "N";
@@ -842,7 +843,8 @@ export class GlobalService {
       "~HBL_INSTR1": this.HBL_INSTR1,
       "~HBL_INSTR2": this.HBL_INSTR2,
       "~DATE_DISPLAY_FMT_WITH_TIME": this.date_display_fmt_with_time,
-      "~USR_TIMEZONE": this.user_timezone
+      "~USR_TIMEZONE": this.user_timezone,
+      "~AN_RO_COMMENTS": this.AN_RO_COMMENTS
     }
 
   }
@@ -1282,6 +1284,8 @@ export class GlobalService {
             this.ACCOUNTS_LOCKED_DATE = Rec.param_name3;
           }
         }
+        else if (Rec.param_name1 == "AN-RO-COMMENTS")
+          this.AN_RO_COMMENTS = Rec.param_name3;
       }
       else if (Rec.param_type == "GLOBAL SETTINGS") {
         if (Rec.param_name1 == "SOFTWARE VERSION")
