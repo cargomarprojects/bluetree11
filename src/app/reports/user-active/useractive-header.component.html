@@ -17,6 +17,7 @@
             <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchDatetype">
               <option [value]="'NA'">Default</option>
               <option [value]="'PST-Pacific Standard Time'">PST - Pacific Standard Time</option>
+              <option [value]="'IST-India Standard Time'">IST - India Standard Time</option>
             </select>
           </div>
         </div>
@@ -33,11 +34,12 @@
           </div>
 
         </div>
+        <div *ngIf="searchQuery.serverDate" class="form-group row">
+          <label class="offset-4 col-8 col-form-label col-form-label-sm"><b>Server Date</b>&nbsp;{{searchQuery.serverDate}}</label>
+        </div>
       </div>
       <div class="col-md-4">
-        <div *ngIf="searchQuery.serverDate" class="form-group row">
-          <label class="offset-4 col-8 col-form-label col-form-label-sm"><b>Server Datetime</b>&nbsp;{{searchQuery.serverDate}}</label>
-        </div>
+        
       </div>
     </div>
   </div>
