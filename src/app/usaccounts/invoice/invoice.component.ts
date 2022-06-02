@@ -420,7 +420,7 @@ export class InvoiceComponent implements OnInit {
     let adate: string = this.gs.defaultValues.today;
     try {
       let nowDate = new Date();
-      adate = this.gs.defaultValues.today + ' ' + nowDate.toLocaleTimeString('it-IT',{ hour12: false });
+      adate = this.gs.defaultValues.today + ' ' + nowDate.toLocaleTimeString('en-US',{ hour12: false });
     }
     catch (Exception) {
       adate = this.gs.defaultValues.today;

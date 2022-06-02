@@ -465,7 +465,7 @@ export class FileUploadComponent implements OnInit {
     SearchData.fileid = _rec.file_id;
     SearchData.filelocation = this.gs.FS_APP_FOLDER + _rec.files_path;
     SearchData.files_deleted_by = this.gs.user_code;
-    SearchData.files_deleted_date = this.gs.defaultValues.today + ' ' + nowDate.toLocaleTimeString('it-IT', { hour12: false });
+    SearchData.files_deleted_date = this.gs.defaultValues.today + ' ' + nowDate.toLocaleTimeString('en-US', { hour12: false });
     this.errorMessage = '';
     this.lovService.DeleteRecord(SearchData)
       .subscribe(response => {

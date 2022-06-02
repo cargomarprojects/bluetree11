@@ -169,8 +169,8 @@ export class UserActiveDetService {
         SearchData.TYPE = this.param_type;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.USER_ID = this.record.searchQuery.allusers ? "" : this.record.searchQuery.userId;
-        SearchData.SDATE = this.record.searchQuery.fromdate;
-        SearchData.EDATE = this.record.searchQuery.todate;
+        SearchData.SDATE = this.getDateTime(this.record.searchQuery.fromdate);
+        SearchData.EDATE = this.getDateTime(this.record.searchQuery.todate);
         SearchData.SEARCH_DATETYPE = this.record.searchQuery.searchDatetype;
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
@@ -200,6 +200,19 @@ export class UserActiveDetService {
             alert(this.record.errormessage);
         });
     }
+
+    getDateTime(_sDate) {
+        let thisdate = _sDate;
+        try {
+            let nowDate = new Date();
+            thisdate = _sDate + ' ' + nowDate.toLocaleTimeString('en-US', { hour12: false });
+        }
+        catch (Exception) {
+            thisdate = _sDate;
+        }
+        return thisdate;
+    }
+
     Downloadfile(filename: string, filetype: string, filedisplayname: string) {
         this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
     }
