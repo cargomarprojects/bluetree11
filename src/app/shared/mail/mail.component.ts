@@ -6,8 +6,6 @@ import { LovService } from '../services/lov.service';
 import { Table_Email } from '../models/table_email';
 import { SearchTable } from '../../shared/models/searchtable';
 import { Table_Mast_Files } from '../models/table_mast_files';
-import { strictEqual } from 'assert';
-import { HtmlParser } from '@angular/compiler';
 
 declare var $: any;
 
@@ -369,26 +367,58 @@ export class MailComponent implements OnInit {
     let Mail_Cc: string = "";
     this.EmailList.forEach(Rec => {
       if (Rec.is_to == true && Rec.email.toString().trim().length > 0) {
-        if (Mail_To != "")
-          Mail_To += ",";
-        Mail_To += Rec.email.toString();
+        if (!this.to_ids.includes(Rec.email.toString().toLowerCase())) {
+          if (Mail_To != "")
+            Mail_To += ",";
+          Mail_To += Rec.email.toString();
+        }
       }
       if (Rec.is_cc == true && Rec.email.toString().trim().length > 0) {
-        if (Mail_Cc != "")
-          Mail_Cc += ",";
-        Mail_Cc += Rec.email.toString();
+        if (!this.cc_ids.includes(Rec.email.toString().toLowerCase())) {
+          if (Mail_Cc != "")
+            Mail_Cc += ",";
+          Mail_Cc += Rec.email.toString();
+        }
       }
     })
 
-    this.to_ids = Mail_To.toString().toLowerCase();
+    if (this.gs.isBlank(this.to_ids))
+      this.to_ids = Mail_To.toString().toLowerCase();
+    else {
+      if (!this.gs.isBlank(Mail_To)) {
+        if (this.to_ids != '')
+          this.to_ids += ','
+        this.to_ids += Mail_To.toString().toLowerCase();
+      }
+    }
 
-    if (this.gs.isBlank(this.default_cc_id))
+    // if (this.gs.isBlank(this.default_cc_id))
+    //   this.cc_ids = Mail_Cc.toString().toLowerCase();
+    // else {
+    //   this.cc_ids = this.default_cc_id;
+    //   if (!this.gs.isBlank(Mail_Cc)) {
+    //     if (this.cc_ids != '')
+    //       this.cc_ids += ','
+    //     this.cc_ids += Mail_Cc.toString().toLowerCase();
+    //   }
+    // }
+
+    if (this.gs.isBlank(this.cc_ids))
       this.cc_ids = Mail_Cc.toString().toLowerCase();
     else {
-      this.cc_ids = this.default_cc_id;
-      if (this.cc_ids != '')
-        this.cc_ids += ','
-      this.cc_ids += Mail_Cc.toString().toLowerCase();
+      if (!this.gs.isBlank(Mail_Cc)) {
+        if (this.cc_ids != '')
+          this.cc_ids += ','
+        this.cc_ids += Mail_Cc.toString().toLowerCase();
+      }
+    }
+
+    if (!this.gs.isBlank(this.default_cc_id)) {
+      if (!this.cc_ids.includes(this.default_cc_id.toString().toLowerCase())) {
+        if (this.cc_ids != '')
+          this.cc_ids += ','
+        this.cc_ids += this.default_cc_id.toString().toLowerCase();
+      }
     }
 
     this.EmailList = <Table_Email[]>[];
@@ -501,7 +531,7 @@ export class MailComponent implements OnInit {
           if (this.AttachList != null && this.AttachList.length == 1)
             this.AttachList[0].filesize = response.fsize;
         }
-        
+
         if (!this.gs.isBlank(response.presetmessage)) {
           if (this._maildata.cont_group == 'EMAIL-TEMPLATE-AN-COMMON')
             this.message = response.presetmessage;
