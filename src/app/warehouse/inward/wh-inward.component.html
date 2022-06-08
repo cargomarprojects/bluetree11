@@ -1,0 +1,72 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-3">{{mainservice.title}}</label>
+        <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd"
+            [routerLink]="['/warehouse/WhInwardEditPage']"
+            [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid,pkid: '',type: this.mainservice.param_type,origin: 'wh-inward-page',mode: 'ADD'}">New</a>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage$ | async}}
+</div>
+
+<app-wh-inward-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+</app-wh-inward-header>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive table-bordered">
+    <table class="table table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th (click)="mainservice.sort('inm_doc_no')">DOC#&nbsp;<i
+                        [ngClass]="mainservice.getIcon('inm_doc_no')"></i> </th>
+                <th (click)="mainservice.sort('inm_doc_date')">DATE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('inm_doc_date')"></i></th>
+                <th (click)="mainservice.sort('inm_refno')">REF#&nbsp;<i
+                        [ngClass]="mainservice.getIcon('inm_refno')"></i></th>
+                <th (click)="mainservice.sort('inm_cust_name')">CUSTOMER&nbsp;<i
+                        [ngClass]="mainservice.getIcon('inm_cust_name')"></i></th>
+                <th (click)="mainservice.sort('inm_supplier_name')">SUPPLIER&nbsp;<i
+                        [ngClass]="mainservice.getIcon('inm_supplier_name')"></i></th>
+                <th (click)="mainservice.sort('inm_wh_name')">WAREHOUSE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('inm_wh_name')"></i></th>
+                <th (click)="mainservice.sort('inm_transport_name')">TRANSPORT&nbsp;<i
+                        [ngClass]="mainservice.getIcon('inm_transport_name')"></i></th>
+                <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i
+                        [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+                <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
+                <th *ngIf="mainservice.canDelete" class='text-center'>DELETE</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody mybody">
+            <tr *ngFor="let rec of records$ | async |  sortBy: mainservice.getSortCol() : mainservice.getSortOrder()"
+                (mousedown)="mainservice.selectRowId(rec.inm_pkid)"
+                [class.selected]="rec.inm_pkid == mainservice.getRowId()">
+
+                <td *ngIf="!this.mainservice.canEdit">{{rec.inm_doc_no}}</td>
+                <td *ngIf="this.mainservice.canEdit">
+                    <a [routerLink]="['/Silver.SeaImport/SeaImpMasterEditPage']"
+                        [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.mbl_pkid,type: '',origin: 'seaimp-master-page',mode: 'EDIT'}"
+                        class="hlink">
+                        {{rec.inm_doc_no}}
+                    </a>
+                </td>
+                <td>{{rec.inm_doc_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.inm_refno}}</td>
+                <td>{{rec.inm_cust_name}}</td>
+                <td>{{rec.inm_supplier_name}}</td>
+                <td>{{rec.inm_wh_name}}</td>
+                <td>{{rec.inm_transport_name}}</td>
+                <td>{{rec.rec_created_by}}</td>
+                <td>{{rec.rec_created_date | date : gs.date_display_fmt_with_time }}</td>
+                <td *ngIf="mainservice.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
+                        aria-hidden="true" (click)="mainservice.DeleteRow(rec)"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
