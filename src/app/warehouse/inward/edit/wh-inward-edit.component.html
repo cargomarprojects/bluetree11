@@ -89,7 +89,7 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Customer</label>
                                     <div class="col-9">
-                                        <app-autocomplete2 [controlname]="'CARGO-LOC'" [tabletype]="'MASTER'"
+                                        <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'"
                                             [subtype]="'LOCATION'" [displaycolumn]="'CODE'"
                                             [displaydata]="record.inm_cust_code" (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
@@ -141,7 +141,7 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Supplier</label>
                                     <div class="col-9">
-                                        <app-autocomplete2 [controlname]="'DEVAN-LOC'" [tabletype]="'MASTER'"
+                                        <app-autocomplete2 [controlname]="'SUPPLIER'" [tabletype]="'MASTER'"
                                             [subtype]="'LOCATION'" [displaycolumn]="'CODE'"
                                             [displaydata]="record.inm_supplier_code"
                                             (ValueChanged)="LovSelected($event)">
@@ -193,7 +193,7 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Transport</label>
                                     <div class="col-9">
-                                        <app-autocomplete2 [controlname]="'DEVAN-LOC'" [tabletype]="'MASTER'"
+                                        <app-autocomplete2 [controlname]="'TRANSPORT'" [tabletype]="'MASTER'"
                                             [subtype]="'LOCATION'" [displaycolumn]="'CODE'"
                                             [displaydata]="record.inm_supplier_code"
                                             (ValueChanged)="LovSelected($event)">
