@@ -331,6 +331,14 @@ export class WhInwardEditComponent implements OnInit {
             Rec.cntr_order = iCtr;
         })
     }
+    private SaveDetails() {
+        let iCtr: number = 0;
+        this.detrecords.forEach(Rec => {
+            iCtr++;
+            Rec.ind_parent_id = this.pkid.toString();
+            Rec.ind_slno = iCtr;
+        })
+    }
 
     private Allvalid(): boolean {
 
@@ -486,7 +494,7 @@ export class WhInwardEditComponent implements OnInit {
         rec.cntr_weight_uom = '';
         rec.cntr_order = 1;
         rec.cntr_pallets = 0;
-         this.cntrrecords.push(rec);
+        this.cntrrecords.push(rec);
 
         // this.cntr_no_field.changes
         //     .subscribe((queryChanges) => {
@@ -552,7 +560,7 @@ export class WhInwardEditComponent implements OnInit {
             // this.mbl_devan_locname_field.nativeElement.focus();
         }
 
-        if (_Record.controlname == "TRANSPORT") {
+        if (_Record.controlname == "TRANSPORTER") {
             this.record.inm_transport_id = _Record.id;
 
             this.record.inm_transport_name = _Record.name;
@@ -565,13 +573,30 @@ export class WhInwardEditComponent implements OnInit {
             this.record.inm_transport_add4 = this.gs.GetTelFax(_Record.col6.toString(), _Record.col7.toString());
             // this.mbl_devan_locname_field.nativeElement.focus();
         }
-
+        if (_Record.controlname == "WAREHOUSE") {
+            this.record.inm_wh_id = _Record.id;
+            this.record.inm_wh_code = _Record.code;
+            this.record.inm_wh_name = _Record.name;
+        }
 
         //Container
         if (_Record.controlname == "CONTAINER TYPE") {
             this.cntrrecords.forEach(rec => {
                 if (rec.cntr_pkid == _Record.uid) {
                     rec.cntr_type = _Record.code;
+                    // if (idx < this.cntr_sealno_field.toArray().length)
+                    //     this.cntr_sealno_field.toArray()[idx].nativeElement.focus();
+                }
+            });
+        }
+
+        //Details
+        if (_Record.controlname == "PRODUCT") {
+            this.detrecords.forEach(rec => {
+                if (rec.ind_pkid == _Record.uid) {
+                    rec.ind_code_id = _Record.id;
+                    rec.ind_code = _Record.code;
+                    rec.ind_product = _Record.name;
                     // if (idx < this.cntr_sealno_field.toArray().length)
                     //     this.cntr_sealno_field.toArray()[idx].nativeElement.focus();
                 }
@@ -738,7 +763,7 @@ export class WhInwardEditComponent implements OnInit {
                 rec2.cntr_packages_uom = rec2.cntr_packages_uom.toUpperCase().trim();
                 break;
             }
-             
+
 
             case 'ind_product': {
                 rec.ind_product = rec.ind_product.toUpperCase().trim();

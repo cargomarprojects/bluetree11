@@ -95,7 +95,7 @@
           <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
           <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>           -->
           <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" [routerLink]="['/Silver.Master/ParamEdit']"
-            [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.menu_param,origin: 'param-page',mode: 'ADD'}">New</a>
+            [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.menu_param,origin: 'param-page',mode: 'ADD',rnd: gs.getRandomInt()}">New</a>
             <app-edithistory [parentid]="record.param_pkid" ></app-edithistory>
             <button class="btn btn-primary btn-sm mr-1" (click)="Close()">{{closeCaption}}</button>
         </div>

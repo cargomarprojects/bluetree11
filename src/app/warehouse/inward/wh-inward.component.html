@@ -1,8 +1,7 @@
 <div class="page-header">
     <div class="col">
         <label class="mr-3">{{mainservice.title}}</label>
-        <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd"
-            [routerLink]="['/warehouse/WhInwardEditPage']"
+        <a class="btn btn-primary btn-sm mr-1" *ngIf="mainservice.canAdd" [routerLink]="['/warehouse/WhInwardEditPage']"
             [queryParams]="{appid : gs.appid, menuid: this.mainservice.menuid,pkid: '',type: this.mainservice.param_type,origin: 'wh-inward-page',mode: 'ADD'}">New</a>
         <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
     </div>
@@ -27,6 +26,8 @@
                         [ngClass]="mainservice.getIcon('inm_doc_date')"></i></th>
                 <th (click)="mainservice.sort('inm_refno')">REF#&nbsp;<i
                         [ngClass]="mainservice.getIcon('inm_refno')"></i></th>
+                <th (click)="mainservice.sort('inm_arrival_date')">ARRIVAL-DATE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('inm_arrival_date')"></i></th>
                 <th (click)="mainservice.sort('inm_cust_name')">CUSTOMER&nbsp;<i
                         [ngClass]="mainservice.getIcon('inm_cust_name')"></i></th>
                 <th (click)="mainservice.sort('inm_supplier_name')">SUPPLIER&nbsp;<i
@@ -49,14 +50,15 @@
 
                 <td *ngIf="!this.mainservice.canEdit">{{rec.inm_doc_no}}</td>
                 <td *ngIf="this.mainservice.canEdit">
-                    <a [routerLink]="['/Silver.SeaImport/SeaImpMasterEditPage']"
-                        [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.mbl_pkid,type: '',origin: 'seaimp-master-page',mode: 'EDIT'}"
+                    <a [routerLink]="['/warehouse/WhInwardEditPage']"
+                        [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.inm_pkid,type: '',origin: 'wh-inward-page',mode: 'EDIT'}"
                         class="hlink">
                         {{rec.inm_doc_no}}
                     </a>
                 </td>
                 <td>{{rec.inm_doc_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.inm_refno}}</td>
+                <td>{{rec.inm_arrival_date | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.inm_cust_name}}</td>
                 <td>{{rec.inm_supplier_name}}</td>
                 <td>{{rec.inm_wh_name}}</td>

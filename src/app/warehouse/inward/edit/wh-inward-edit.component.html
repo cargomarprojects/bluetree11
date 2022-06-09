@@ -69,13 +69,19 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Warehouse</label>
                                     <div class="col-9">
-                                        <app-autocomplete2 [controlname]="'POL'" [tabletype]="'SEA PORT'"
-                                            [displaycolumn]="'NAME'" [displaydata]="record.inm_wh_name"
-                                            (ValueChanged)="LovSelected($event)">
+                                        <app-autocomplete2 [controlname]="'WAREHOUSE'" [tabletype]="'PARAM'"
+                                            [subtype]="'WAREHOUSE'" [displaycolumn]="'CODE'"
+                                            [displaydata]="record.inm_wh_code" (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
                                     </div>
                                 </div>
-
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [disabled]="true" [(inputModel)]="record.inm_wh_name" [maxlength]="100" [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -89,8 +95,8 @@
                                     <label class="col-3 col-form-label col-form-label-sm">Customer</label>
                                     <div class="col-9">
                                         <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'"
-                                            [subtype]="'LOCATION'" [displaycolumn]="'CODE'"
-                                            [displaydata]="record.inm_cust_code" (ValueChanged)="LovSelected($event)">
+                                            [displaycolumn]="'CODE'" [displaydata]="record.inm_cust_code"
+                                            (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
                                     </div>
                                 </div>
@@ -141,8 +147,7 @@
                                     <label class="col-3 col-form-label col-form-label-sm">Supplier</label>
                                     <div class="col-9">
                                         <app-autocomplete2 [controlname]="'SUPPLIER'" [tabletype]="'MASTER'"
-                                            [subtype]="'LOCATION'" [displaycolumn]="'CODE'"
-                                            [displaydata]="record.inm_supplier_code"
+                                            [displaycolumn]="'CODE'" [displaydata]="record.inm_supplier_code"
                                             (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
                                     </div>
@@ -190,11 +195,10 @@
                             </div>
                             <div class="col-md-4 testbox  px-0 mx-0">
                                 <div class="form-group row">
-                                    <label class="col-3 col-form-label col-form-label-sm">Transport</label>
+                                    <label class="col-3 col-form-label col-form-label-sm">Transporter</label>
                                     <div class="col-9">
-                                        <app-autocomplete2 [controlname]="'TRANSPORT'" [tabletype]="'MASTER'"
-                                            [subtype]="'LOCATION'" [displaycolumn]="'CODE'"
-                                            [displaydata]="record.inm_supplier_code"
+                                        <app-autocomplete2 [controlname]="'TRANSPORTER'" [tabletype]="'MASTER'"
+                                            [displaycolumn]="'CODE'" [displaydata]="record.inm_transport_code"
                                             (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
                                     </div>
@@ -337,8 +341,8 @@
                                             <tr>
                                                 <td class="p-0">
 
-                                                    <app-autocomplete2 #_ind_code_code [controlname]="'PROD-CODE'"
-                                                        [tabletype]="'PARAM'" [uid]="rec.ind_pkid"
+                                                    <app-autocomplete2 #_ind_code_code [controlname]="'PRODUCT'"
+                                                        [tabletype]="'PARAM'" [subtype]="'PRODUCT'" [uid]="rec.ind_pkid"
                                                         [displaycolumn]="'CODE'" [displaydata]="rec.ind_code"
                                                         (ValueChanged)="LovSelected($event,i)">
                                                     </app-autocomplete2>
@@ -433,7 +437,7 @@
 
                         </div>
 
-                      
+
 
                         <!-- <div *ngIf="mode=='EDIT'" class="row">
 
