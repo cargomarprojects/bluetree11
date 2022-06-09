@@ -94,7 +94,7 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Customer</label>
                                     <div class="col-9">
-                                        <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'"
+                                        <app-autocomplete2 #_customer_lov [controlname]="'CUSTOMER'" [tabletype]="'MASTER'"
                                             [displaycolumn]="'CODE'" [displaydata]="record.inm_cust_code"
                                             (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
@@ -104,7 +104,7 @@
 
                                     <label class="col-3 col-form-label col-form-label-sm"></label>
                                     <div class="col-9">
-                                        <InputBox [(inputModel)]="record.inm_cust_name" [maxlength]="60"
+                                        <InputBox  [(inputModel)]="record.inm_cust_name" [maxlength]="60"
                                             [uppercase]="true">
                                         </InputBox>
                                     </div>
@@ -112,7 +112,7 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm"></label>
                                     <div class="col-9">
-                                        <InputBox [(inputModel)]="record.inm_cust_add1" [maxlength]="60"
+                                        <InputBox  [(inputModel)]="record.inm_cust_add1" [maxlength]="60"
                                             [uppercase]="true">
                                         </InputBox>
                                     </div>
@@ -298,7 +298,7 @@
                                                         (blur)="onBlur('cntr_pallets',null,rec)" />
                                                 </td>
                                                 <td class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
-                                                        aria-hidden="true" (click)="RemoveRow(rec)"></i></td>
+                                                        aria-hidden="true" (click)="RemoveCntrRow(rec)"></i></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -341,7 +341,7 @@
                                             <tr>
                                                 <td class="p-0">
 
-                                                    <app-autocomplete2 #_ind_code_code [controlname]="'PRODUCT'"
+                                                    <app-autocomplete2 #_ind_code_field [controlname]="'PRODUCT'"
                                                         [tabletype]="'PARAM'" [subtype]="'PRODUCT'" [uid]="rec.ind_pkid"
                                                         [displaycolumn]="'CODE'" [displaydata]="rec.ind_code"
                                                         (ValueChanged)="LovSelected($event,i)">
@@ -351,75 +351,75 @@
                                                 <td class="p-0">
                                                     <input #_ind_product class="form-control form-control-sm"
                                                         type="text" [(ngModel)]="rec.ind_product"
-                                                        (blur)="onBlur('ind_product',rec)" />
+                                                        (blur)="onBlur('ind_product',rec)"  maxlength="100"/>
                                                 </td>
 
                                                 <td class="p-0">
                                                     <input class="form-control form-control-sm" type="text"
-                                                        [(ngModel)]="rec.ind_desc" (blur)="onBlur('ind_desc',rec)" />
+                                                        [(ngModel)]="rec.ind_desc" (blur)="onBlur('ind_desc',rec)" maxlength="100" />
                                                 </td>
                                                 <td class="p-0">
                                                     <input #_ind_refno class="form-control form-control-sm" type="text"
-                                                        [(ngModel)]="rec.ind_refno" (blur)="onBlur('ind_refno',rec)" />
+                                                        [(ngModel)]="rec.ind_refno" (blur)="onBlur('ind_refno',rec)" maxlength="60" />
                                                 </td>
                                                 <td class="p-0">
                                                     <input #_invd_qty class="form-control form-control-sm" type="number"
                                                         style="text-align:right;" [(ngModel)]="rec.ind_qty"
-                                                        (blur)="onBlur('ind_qty',rec)" />
+                                                        (blur)="onBlur('ind_qty',rec)" maxlength="15"/>
                                                 </td>
                                                 <td class="p-0">
                                                     <input #_ind_qty_uom class="form-control form-control-sm"
                                                         type="text" style="text-align:left;"
                                                         [(ngModel)]="rec.ind_qty_uom"
-                                                        (blur)="onBlur('ind_qty_uom',rec)" />
+                                                        (blur)="onBlur('ind_qty_uom',rec)" maxlength="5" />
                                                 </td>
 
                                                 <td class="p-0">
                                                     <input #_ind_packages class="form-control form-control-sm"
                                                         type="number" style="text-align:right;"
                                                         [(ngModel)]="rec.ind_packages"
-                                                        (blur)="onBlur('ind_packages',rec)" />
+                                                        (blur)="onBlur('ind_packages',rec)" maxlength="15"/>
                                                 </td>
                                                 <td class="p-0">
                                                     <input #_ind_packages_uom class="form-control form-control-sm"
                                                         type="text" style="text-align:left;"
                                                         [(ngModel)]="rec.ind_packages_uom"
-                                                        (blur)="onBlur('ind_packages_uom',rec)" />
+                                                        (blur)="onBlur('ind_packages_uom',rec)" maxlength="5" />
                                                 </td>
                                                 <td class="p-0">
                                                     <input #_ind_weight class="form-control form-control-sm"
                                                         type="number" style="text-align:right;"
                                                         [(ngModel)]="rec.ind_weight"
-                                                        (blur)="onBlur('ind_weight',rec)" />
+                                                        (blur)="onBlur('ind_weight',rec)" maxlength="15"/>
                                                 </td>
                                                 <td class="p-0">
                                                     <input #_ind_weight_uom class="form-control form-control-sm"
                                                         type="text" style="text-align:left;"
                                                         [(ngModel)]="rec.ind_weight_uom"
-                                                        (blur)="onBlur('ind_weight_uom',rec)" />
+                                                        (blur)="onBlur('ind_weight_uom',rec)" maxlength="5" />
                                                 </td>
 
                                                 <td class="p-0">
                                                     <input class="form-control form-control-sm" type="number"
                                                         style="text-align:right;" [(ngModel)]="rec.ind_pallets"
-                                                        (blur)="onBlur('ind_pallets',rec)" />
+                                                        (blur)="onBlur('ind_pallets',rec)" maxlength="15"/>
                                                 </td>
 
                                                 <td class="p-0">
                                                     <input #_ind_volume class="form-control form-control-sm"
                                                         type="number" style="text-align:right;"
                                                         [(ngModel)]="rec.ind_volume"
-                                                        (blur)="onBlur('ind_volume',rec)" />
+                                                        (blur)="onBlur('ind_volume',rec)" maxlength="15"/>
                                                 </td>
                                                 <td class="p-0">
                                                     <input #_ind_volume_uom class="form-control form-control-sm"
                                                         type="text" style="text-align:left;"
                                                         [(ngModel)]="rec.ind_volume_uom"
-                                                        (blur)="onBlur('ind_volume_uom',rec)" />
+                                                        (blur)="onBlur('ind_volume_uom',rec)" maxlength="5"/>
                                                 </td>
 
                                                 <td class="p-0">
-                                                    <a class="btn btn-sm" (click)="removeRow(rec)">
+                                                    <a class="btn btn-sm" (click)="RemoveDetRow(rec)">
                                                         <i class="fa fa-trash-o"></i>
                                                     </a>
                                                 </td>
@@ -516,12 +516,12 @@
 
                 <div class="col-md-12 p-2 border">
 
-                    <div *ngIf="mode=='EDIT'" class="form-group row">
+                    <!-- <div *ngIf="mode=='EDIT'" class="form-group row">
                         <button class=" col-12 btn btn-info btn-sm  text-uppercase"
                             *ngIf="gs.screenExists(gs.MENU_SI_ATTACHMENTS)"
                             [style.color]="record.rec_files_attached=='Y'?'red':'white'"
                             (click)="BtnNavigation('ATTACHMENT',attachmodal)">Attachments</button>
-                    </div>
+                    </div> -->
                     <div class="form-group row">
                         <button class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.canSave(menuid,mode)"
                             [disabled]="is_locked" (click)="Save()">Save</button>

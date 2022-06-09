@@ -16,30 +16,20 @@ import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomple
     templateUrl: './wh-inward-edit.component.html'
 })
 export class WhInwardEditComponent implements OnInit {
-
-    //   @ViewChild('mbl_no') mbl_no_field: ElementRef;
-    //   @ViewChild('mbl_liner_bookingno') mbl_liner_bookingno_field: ElementRef;
-    //   @ViewChild('_mbl_ref_date') mbl_ref_date_field: DateComponent;
-    //   @ViewChild('_agent_lov') agent_lov_field: AutoComplete2Component;
-    //   @ViewChild('_liner_lov') liner_lov_field: AutoComplete2Component;
-    //   @ViewChild('_coloader_lov') coloader_lov_field: AutoComplete2Component;
-    //   @ViewChild('_handled_lov') handled_lov_field: AutoComplete2Component;
-    //   @ViewChild('_salesman_lov') salesman_lov_field: AutoComplete2Component;
-    //   @ViewChild('_mbl_frt_status') mbl_frt_status_field: ElementRef;
-    //   @ViewChild('_mbl_pol_etd') mbl_pol_etd_field: DateComponent;
-    //   @ViewChild('_mbl_pod_eta') mbl_pod_eta_field: DateComponent;
-    //   @ViewChild('_mbl_vessel') mbl_vessel_field: ElementRef;
-    //   @ViewChild('_mbl_cargo_locname') mbl_cargo_locname_field: ElementRef;
-    //   @ViewChild('_mbl_devan_locname') mbl_devan_locname_field: ElementRef;
-    //   @ViewChildren('_cntr_no') cntr_no_field: QueryList<ElementRef>;
-    //   @ViewChildren('_cntr_sealno') cntr_sealno_field: QueryList<ElementRef>;
+    
+    @ViewChild('_inm_doc_date') inm_doc_date_field: DateComponent;
+    @ViewChild('_customer_lov') customer_lov_field: AutoComplete2Component;
+    @ViewChildren('_cntr_no') cntr_no_field: QueryList<ElementRef>;
+    @ViewChildren('_cntr_sealno') cntr_sealno_field: QueryList<ElementRef>;
+    @ViewChildren('_ind_code_field') ind_code_field: QueryList<AutoComplete2Component>;
+    @ViewChildren('_ind_product') ind_product_field:  QueryList<ElementRef>;
 
     record: Tbl_wh_inwardm = <Tbl_wh_inwardm>{};
 
     detrecords: Tbl_wh_inwardd[] = [];
     cntrrecords: Tbl_wh_container[] = [];
 
-    // 24-05-2019 Created By Joy  
+    
     tab: string = 'main';
     report_title: string = '';
     report_url: string = '';
@@ -98,11 +88,7 @@ export class WhInwardEditComponent implements OnInit {
         modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
     }
 
-
-
     ngOnInit() {
-
-
 
         this.gs.checkAppVersion();
         if (this.route.snapshot.queryParams.parameter == null) {
@@ -143,8 +129,8 @@ export class WhInwardEditComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-        // if (!this.gs.isBlank(this.mbl_ref_date_field))
-        //   this.mbl_ref_date_field.Focus();
+        if (!this.gs.isBlank(this.inm_doc_date_field))
+            this.inm_doc_date_field.Focus();
     }
 
     NewRecord() {
@@ -216,8 +202,8 @@ export class WhInwardEditComponent implements OnInit {
                 this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_wh_container[]>[] : <Tbl_wh_container[]>response.cntrrecords;
                 this.mode = 'EDIT';
 
-                // if (!this.gs.isBlank(this.mbl_ref_date_field))
-                //   this.mbl_ref_date_field.Focus();
+                if (!this.gs.isBlank(this.inm_doc_date_field))
+                    this.inm_doc_date_field.Focus();
             }, error => {
                 this.errorMessage.push(this.gs.getError(error));
             });
@@ -230,6 +216,7 @@ export class WhInwardEditComponent implements OnInit {
             return;
         }
         this.SaveContainer();
+        this.SaveDetails();
         this.FindTotTeus();
         const saveRecord = <vm_tbl_wh_inwardm>{};
         saveRecord.record = this.record;
@@ -426,28 +413,28 @@ export class WhInwardEditComponent implements OnInit {
         //     }
         // }
 
-        // if (this.record.mbl_cntr_type != "OTHERS") {
-        //     if (!this.gs.isBlank(this.records)) {
-        //         this.records.forEach(Rec => {
-        //             if (Rec.cntr_no.length != 11) {
-        //                 bRet = false;
-        //                 this.errorMessage.push("Container( " + Rec.cntr_no + " ) Invalid");
-        //             }
-        //             if (Rec.cntr_type.length <= 0) {
-        //                 bRet = false;
-        //                 this.errorMessage.push("Container( " + Rec.cntr_no + " ) type has to be selected");
-        //             }
-        //             if (Rec.cntr_type == "LCL") {
-        //                 if (Rec.cntr_cbm <= 0) {
-        //                     bRet = false;
-        //                     this.errorMessage.push("Container( " + Rec.cntr_no + " ) CBM cannot be zero");
-        //                 }
-        //             }
-        //         })
-        //     }
-        // }
-        // if (!bRet)
-        //     alert(this.errorMessage);
+        
+            if (!this.gs.isBlank(this.cntrrecords)) {
+                this.cntrrecords.forEach(Rec => {
+                    if (Rec.cntr_no.length != 11) {
+                        bRet = false;
+                        this.errorMessage.push("Container( " + Rec.cntr_no + " ) Invalid");
+                    }
+                    if (Rec.cntr_type.length <= 0) {
+                        bRet = false;
+                        this.errorMessage.push("Container( " + Rec.cntr_no + " ) type has to be selected");
+                    }
+                    // if (Rec.cntr_type == "LCL") {
+                    //     if (Rec.cntr_cbm <= 0) {
+                    //         bRet = false;
+                    //         this.errorMessage.push("Container( " + Rec.cntr_no + " ) CBM cannot be zero");
+                    //     }
+                    // }
+                })
+            }
+        
+        if (!bRet)
+            alert(this.errorMessage);
 
         return bRet;
     }
@@ -473,7 +460,7 @@ export class WhInwardEditComponent implements OnInit {
             id: this.gs.MENU_SI_MASTER,
             menuid: this.gs.MENU_SI_MASTER,
             menu_param: '',
-            origin: 'seaimp-master-page',
+            origin: 'wh-inward-page',
             rnd: this.gs.getRandomInt()
         };
         this.gs.AutoReloadReturn(prm);
@@ -496,10 +483,10 @@ export class WhInwardEditComponent implements OnInit {
         rec.cntr_pallets = 0;
         this.cntrrecords.push(rec);
 
-        // this.cntr_no_field.changes
-        //     .subscribe((queryChanges) => {
-        //         this.cntr_no_field.last.nativeElement.focus();
-        //     });
+        this.cntr_no_field.changes
+            .subscribe((queryChanges) => {
+                this.cntr_no_field.last.nativeElement.focus();
+            });
     }
 
     AddDetRow() {
@@ -524,10 +511,10 @@ export class WhInwardEditComponent implements OnInit {
 
         this.detrecords.push(rec);
 
-        // this.invd_desc_code_ctrl.changes
-        //   .subscribe((queryChanges) => {
-        //     this.invd_desc_code_ctrl.last.Focus();
-        //   });
+        this.ind_code_field.changes
+          .subscribe((queryChanges) => {
+            this.ind_code_field.last.Focus();
+          });
     }
 
     LovSelected(_Record: SearchTable, idx: number = 0) {
@@ -584,8 +571,8 @@ export class WhInwardEditComponent implements OnInit {
             this.cntrrecords.forEach(rec => {
                 if (rec.cntr_pkid == _Record.uid) {
                     rec.cntr_type = _Record.code;
-                    // if (idx < this.cntr_sealno_field.toArray().length)
-                    //     this.cntr_sealno_field.toArray()[idx].nativeElement.focus();
+                    if (idx < this.cntr_sealno_field.toArray().length)
+                        this.cntr_sealno_field.toArray()[idx].nativeElement.focus();
                 }
             });
         }
@@ -597,8 +584,8 @@ export class WhInwardEditComponent implements OnInit {
                     rec.ind_code_id = _Record.id;
                     rec.ind_code = _Record.code;
                     rec.ind_product = _Record.name;
-                    // if (idx < this.cntr_sealno_field.toArray().length)
-                    //     this.cntr_sealno_field.toArray()[idx].nativeElement.focus();
+                    if (idx < this.ind_product_field.toArray().length)
+                        this.ind_product_field.toArray()[idx].nativeElement.focus();
                 }
             });
         }
@@ -660,15 +647,15 @@ export class WhInwardEditComponent implements OnInit {
     }
 
     onChange(field: string) {
-        if (field == 'mbl_pol_etd') {
-            this.bChanged = true;
-        }
-        if (field == 'mbl_pod_eta') {
-            this.bChanged = true;
-        }
-        if (field == 'mbl_pofd_eta') {
-            this.bChanged = true;
-        }
+        // if (field == 'mbl_pol_etd') {
+        //     this.bChanged = true;
+        // }
+        // if (field == 'mbl_pod_eta') {
+        //     this.bChanged = true;
+        // }
+        // if (field == 'mbl_pofd_eta') {
+        //     this.bChanged = true;
+        // }
 
     }
 
@@ -821,28 +808,8 @@ export class WhInwardEditComponent implements OnInit {
         }
     }
 
-    AddHouse() {
-        if (!this.gs.canAdd(this.gs.MENU_SI_HOUSE)) {
-            alert('Insufficient User Rights')
-            return;
-        }
-
-        this.hbl_pkid = "";
-        this.hbl_mode = "ADD";
-        this.BtnNavigation('HOUSE')
-    }
-
-    // EditHouse(_record: Tbl_wh) {
-
-    //     if (!this.gs.canEdit(this.gs.MENU_SI_HOUSE)) {
-    //         alert('Insufficient User Rights')
-    //         return;
-    //     }
-
-    //     this.hbl_pkid = _record.hbl_pkid;
-    //     this.hbl_mode = "EDIT";
-    //     this.BtnNavigation('HOUSE')
-    // }
+    
+    
 
     BtnNavigation2(action: string, _type: string, attachmodal: any = null) {
         // if (action == "ARAP") {
@@ -903,13 +870,19 @@ export class WhInwardEditComponent implements OnInit {
     }
 
 
-    RemoveRow(_rec: Tbl_wh_container) {
-        // if (!confirm("Delete Y/N")) {
-        //     return;
-        // }
-        // this.records.splice(this.records.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
+    RemoveCntrRow(_rec: Tbl_wh_container) {
+        if (!confirm("Delete Y/N")) {
+            return;
+        }
+        this.cntrrecords.splice(this.cntrrecords.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
     }
 
+    RemoveDetRow(_rec: Tbl_wh_inwardd) {
+        if (!confirm("Delete Y/N")) {
+            return;
+        }
+        this.detrecords.splice(this.detrecords.findIndex(rec => rec.ind_pkid == _rec.ind_pkid), 1);
+    }
 
     CloseModal() {
         this.modal.close();
