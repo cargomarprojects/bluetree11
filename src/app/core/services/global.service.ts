@@ -449,6 +449,8 @@ export class GlobalService {
   public DEBIT_NOTE_PREFIX = "";
   public DEBIT_NOTE_STARTING_NO = "";
 
+  public WH_INWARD_DOCNO_PREFIX = "WH";
+  public WH_INWARD_DOCNO_STARTING_NO = "1001";
 
   //EXTRA 
   public EXTRA_OPERATION_REFNO_PREFIX = "EX";

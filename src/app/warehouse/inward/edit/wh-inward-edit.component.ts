@@ -186,7 +186,8 @@ export class WhInwardEditComponent implements OnInit {
         this.record.inm_transport_add4 = '';
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
-
+        this.record.inm_prefix = this.gs.WH_INWARD_DOCNO_PREFIX;
+        this.record.inm_startingno = this.gs.WH_INWARD_DOCNO_STARTING_NO;
     }
 
     GetRecord() {

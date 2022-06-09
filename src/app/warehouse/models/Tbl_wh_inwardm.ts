@@ -33,6 +33,8 @@ export interface Tbl_wh_inwardm {
     inm_transport_add4: string;
     rec_created_date: string;
     rec_created_by: string;
+    inm_prefix: string;
+    inm_startingno: string;
 }
 
 export interface Tbl_wh_container {
@@ -88,9 +90,9 @@ export interface SearchQuery {
 }
 
 export interface WhInwardModel {
-    selectedId : string;    
-    sortcol : string ;
-    sortorder : boolean;
+    selectedId: string;
+    sortcol: string;
+    sortorder: boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

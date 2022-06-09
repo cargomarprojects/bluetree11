@@ -69,8 +69,8 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Warehouse</label>
                                     <div class="col-9">
-                                        <app-autocomplete2 [controlname]="'WAREHOUSE'" [tabletype]="'PARAM'"
-                                            [subtype]="'WAREHOUSE'" [displaycolumn]="'CODE'"
+                                        <app-autocomplete2 [controlname]="'WAREHOUSE'" [tabletype]="'MASTER'"
+                                            [displaycolumn]="'CODE'"
                                             [displaydata]="record.inm_wh_code" (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
                                     </div>
