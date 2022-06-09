@@ -36,8 +36,8 @@ export class WhInwardEditComponent implements OnInit {
 
     record: Tbl_wh_inwardm = <Tbl_wh_inwardm>{};
 
-    //   hrecords: Tbl_cargo_imp_housem[] = [];
-    //   records: Tbl_cargo_imp_container[] = [];
+    detrecords: Tbl_wh_inwardd[] = [];
+    cntrrecords: Tbl_wh_container[] = [];
 
     // 24-05-2019 Created By Joy  
     tab: string = 'main';
@@ -157,8 +157,8 @@ export class WhInwardEditComponent implements OnInit {
         this.is_locked = false;
         if (this.mode == 'ADD') {
             this.record = <Tbl_wh_inwardm>{};
-            //   this.records = <Tbl_cargo_imp_container[]>[];
-            //   this.hrecords = <Tbl_cargo_imp_housem[]>[];
+            this.detrecords = <Tbl_wh_inwardd[]>[];
+            this.cntrrecords = <Tbl_wh_container[]>[];
             this.pkid = this.gs.getGuid();
             this.init();
         }
@@ -212,8 +212,8 @@ export class WhInwardEditComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_wh_inwardm>response.record;
-                // this.records = (response.records == undefined || response.records == null) ? <Tbl_cargo_imp_container[]>[] : <Tbl_cargo_imp_container[]>response.records;
-                // this.hrecords = (response.hrecords == undefined || response.hrecords == null) ? <Tbl_cargo_imp_housem[]>[] : <Tbl_cargo_imp_housem[]>response.hrecords;
+                this.detrecords = (response.detrecords == undefined || response.detrecords == null) ? <Tbl_wh_inwardd[]>[] : <Tbl_wh_inwardd[]>response.detrecords;
+                this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_wh_container[]>[] : <Tbl_wh_container[]>response.cntrrecords;
                 this.mode = 'EDIT';
 
                 // if (!this.gs.isBlank(this.mbl_ref_date_field))
@@ -233,7 +233,8 @@ export class WhInwardEditComponent implements OnInit {
         this.FindTotTeus();
         const saveRecord = <vm_tbl_wh_inwardm>{};
         saveRecord.record = this.record;
-        // saveRecord.cntrs = this.records;
+        saveRecord.detrecords = this.detrecords;
+        saveRecord.cntrrecords = this.cntrrecords;
         saveRecord.mode = this.mode;
         saveRecord.userinfo = this.gs.UserInfo;
 
@@ -248,15 +249,15 @@ export class WhInwardEditComponent implements OnInit {
                         this.record.inm_doc_no = response.code;
                     this.mode = 'EDIT';
 
-                    // let parameter = {
-                    //     appid: this.gs.appid,
-                    //     menuid: this.menuid,
-                    //     pkid: this.pkid,
-                    //     type: '',
-                    //     origin: 'seaimp-master-page',
-                    //     mode: 'EDIT'
-                    // };
-                    // this.location.replaceState('Silver.SeaImport/SeaImpMasterEditPage', this.gs.getUrlParameter(parameter));
+                    let parameter = {
+                        appid: this.gs.appid,
+                        menuid: this.menuid,
+                        pkid: this.pkid,
+                        type: '',
+                        origin: 'wh-inward-page',
+                        mode: 'EDIT'
+                    };
+                    this.location.replaceState('warehouse/WhInwardEditPage', this.gs.getUrlParameter(parameter));
 
                     this.mainService.RefreshList(this.record);
                     // this.errorMessage.push('Save Complete');
@@ -324,14 +325,11 @@ export class WhInwardEditComponent implements OnInit {
     }
     private SaveContainer() {
         let iCtr: number = 0;
-        // this.records.forEach(Rec => {
-        //     iCtr++;
-        //     Rec.cntr_hblid = this.pkid.toString();
-        //     Rec.cntr_catg = "M";
-        //     Rec.cntr_order = iCtr;
-        //     Rec.cntr_weight_uom = "";
-        //     Rec.cntr_packages = 0;
-        // })
+        this.cntrrecords.forEach(Rec => {
+            iCtr++;
+            Rec.cntr_parent_id = this.pkid.toString();
+            Rec.cntr_order = iCtr;
+        })
     }
 
     private Allvalid(): boolean {
@@ -474,7 +472,7 @@ export class WhInwardEditComponent implements OnInit {
     }
 
 
-    AddRow() {
+    AddCntrRow() {
         var rec = <Tbl_wh_container>{};
         rec.cntr_pkid = this.gs.getGuid();
         rec.cntr_parent_id = this.pkid.toString();
@@ -484,11 +482,11 @@ export class WhInwardEditComponent implements OnInit {
         rec.cntr_packages_uom = '';
         rec.cntr_packages = 0;
         rec.cntr_weight = 0;
-       rec.cntr_cbm = 0;
+        rec.cntr_cbm = 0;
         rec.cntr_weight_uom = '';
         rec.cntr_order = 1;
-        
-        // this.records.push(rec);
+        rec.cntr_pallets = 0;
+         this.cntrrecords.push(rec);
 
         // this.cntr_no_field.changes
         //     .subscribe((queryChanges) => {
@@ -496,9 +494,36 @@ export class WhInwardEditComponent implements OnInit {
         //     });
     }
 
+    AddDetRow() {
+
+        var rec = <Tbl_wh_inwardd>{};
+        rec.ind_pkid = this.gs.getGuid();
+        rec.ind_parent_id = this.pkid;
+        rec.ind_code_id = '';
+        rec.ind_code = '';
+        rec.ind_product = '';
+        rec.ind_desc = '';
+        rec.ind_refno = '';
+        rec.ind_qty = 0;
+        rec.ind_qty_uom = '';
+        rec.ind_packages = 0;
+        rec.ind_packages_uom = '';
+        rec.ind_weight = 0;
+        rec.ind_weight_uom = '';
+        rec.ind_pallets = 0;
+        rec.ind_volume = 0;
+        rec.ind_volume_uom = '';
+
+        this.detrecords.push(rec);
+
+        // this.invd_desc_code_ctrl.changes
+        //   .subscribe((queryChanges) => {
+        //     this.invd_desc_code_ctrl.last.Focus();
+        //   });
+    }
 
     LovSelected(_Record: SearchTable, idx: number = 0) {
- 
+
         if (_Record.controlname == "CUSTOMER") {
             this.record.inm_cust_id = _Record.id;
 
@@ -542,16 +567,16 @@ export class WhInwardEditComponent implements OnInit {
         }
 
 
-        // Container
-        // if (_Record.controlname == "CONTAINER TYPE") {
-        //     this.records.forEach(rec => {
-        //         if (rec.cntr_pkid == _Record.uid) {
-        //             rec.cntr_type = _Record.code;
-        //             if (idx < this.cntr_sealno_field.toArray().length)
-        //                 this.cntr_sealno_field.toArray()[idx].nativeElement.focus();
-        //         }
-        //     });
-        // }
+        //Container
+        if (_Record.controlname == "CONTAINER TYPE") {
+            this.cntrrecords.forEach(rec => {
+                if (rec.cntr_pkid == _Record.uid) {
+                    rec.cntr_type = _Record.code;
+                    // if (idx < this.cntr_sealno_field.toArray().length)
+                    //     this.cntr_sealno_field.toArray()[idx].nativeElement.focus();
+                }
+            });
+        }
     }
 
     onFocusout(field: string) {
@@ -623,7 +648,7 @@ export class WhInwardEditComponent implements OnInit {
     }
 
 
-    onBlur(field: string, rec: Tbl_wh_container) {
+    onBlur(field: string, rec: Tbl_wh_inwardd = null, rec2: Tbl_wh_container = null) {
         switch (field) {
             // case 'mbl_refno': {
             //     this.record.mbl_refno = this.record.mbl_refno.toUpperCase().trim();
@@ -691,43 +716,83 @@ export class WhInwardEditComponent implements OnInit {
             //     this.record.mbl_devan_locaddr3 = this.record.mbl_devan_locaddr3.toUpperCase().trim();
             //     break;
             // }
-            // case 'mbl_devan_locaddr4': {
-            //     this.record.mbl_devan_locaddr4 = this.record.mbl_devan_locaddr4.toUpperCase().trim();
-            //     break;
-            // }
 
-            // case 'cntr_no': {
-            //     rec.cntr_no = rec.cntr_no.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'cntr_type': {
-            //     rec.cntr_type = rec.cntr_type.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'cntr_sealno': {
-            //     rec.cntr_sealno = rec.cntr_sealno.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'cntr_pieces': {
-            //     rec.cntr_pieces = this.gs.roundNumber(rec.cntr_pieces, 0);
-            //     break;
-            // }
-            // case 'cntr_packages_uom': {
-            //     rec.cntr_packages_uom = rec.cntr_packages_uom.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'cntr_weight': {
-            //     rec.cntr_weight = this.gs.roundNumber(rec.cntr_weight, 3);
-            //     break;
-            // }
-            // case 'cntr_cbm': {
-            //     rec.cntr_cbm = this.gs.roundNumber(rec.cntr_cbm, 3);
-            //     break;
-            // }
-            // case 'cntr_tare_weight': {
-            //     rec.cntr_tare_weight = this.gs.roundNumber(rec.cntr_tare_weight, 0);
-            //     break;
-            // }
+
+            case 'cntr_no': {
+                rec2.cntr_no = rec2.cntr_no.toUpperCase().trim();
+                break;
+            }
+            case 'cntr_type': {
+                rec2.cntr_type = rec2.cntr_type.toUpperCase().trim();
+                break;
+            }
+            case 'cntr_sealno': {
+                rec2.cntr_sealno = rec2.cntr_sealno.toUpperCase().trim();
+                break;
+            }
+            case 'cntr_packages': {
+                rec2.cntr_packages = this.gs.roundNumber(rec2.cntr_packages, 0);
+                break;
+            }
+            case 'cntr_packages_uom': {
+                rec2.cntr_packages_uom = rec2.cntr_packages_uom.toUpperCase().trim();
+                break;
+            }
+             
+
+            case 'ind_product': {
+                rec.ind_product = rec.ind_product.toUpperCase().trim();
+                break;
+            }
+            case 'ind_desc': {
+                rec.ind_desc = rec.ind_desc.toUpperCase().trim();
+                break;
+            }
+            case 'ind_refno': {
+                rec.ind_refno = rec.ind_refno.toUpperCase().trim();
+                break;
+            }
+            case 'ind_qty': {
+                rec.ind_qty = this.gs.roundNumber(rec.ind_qty, 3);
+                // this.findRowTotal(field, rec);
+                break;
+            }
+            case 'ind_qty_uom': {
+                rec.ind_qty_uom = rec.ind_qty_uom.toUpperCase().trim();
+                break;
+            }
+            case 'ind_packages': {
+                rec.ind_packages = this.gs.roundNumber(rec.ind_packages, 0);
+                // this.findRowTotal(field, rec);
+                break;
+            }
+            case 'ind_packages_uom': {
+                rec.ind_packages_uom = rec.ind_packages_uom.toUpperCase().trim();
+                break;
+            }
+            case 'ind_weight': {
+                rec.ind_weight = this.gs.roundNumber(rec.ind_weight, 3);
+                // this.findRowTotal(field, rec);
+                break;
+            }
+            case 'ind_weight_uom': {
+                rec.ind_weight_uom = rec.ind_weight_uom.toUpperCase().trim();
+                break;
+            }
+            case 'ind_pallets': {
+                rec.ind_pallets = this.gs.roundNumber(rec.ind_pallets, 3);
+                // this.findRowTotal(field, rec);
+                break;
+            }
+            case 'ind_volume': {
+                rec.ind_volume = this.gs.roundNumber(rec.ind_volume, 3);
+                // this.findRowTotal(field, rec);
+                break;
+            }
+            case 'ind_volume_uom': {
+                rec.ind_volume_uom = rec.ind_volume_uom.toUpperCase().trim();
+                break;
+            }
         }
     }
 
@@ -785,7 +850,7 @@ export class WhInwardEditComponent implements OnInit {
     BtnNavigation(action: string, attachmodal: any = null) {
 
         switch (action) {
-             
+
             // case 'ATTACHMENT': {
             //     let TypeList: any[] = [];
             //     TypeList = [{ "code": "EMAIL", "name": "E-MAIL" }, { "code": "HOUSEBL", "name": "HOUSE B/L" }, { "code": "MASTER", "name": "MASTER" }, { "code": "PAYMENT SETTLEMENT", "name": "OTHERS" }];
@@ -812,7 +877,7 @@ export class WhInwardEditComponent implements OnInit {
         this.tab = 'main';
     }
 
-    
+
     RemoveRow(_rec: Tbl_wh_container) {
         // if (!confirm("Delete Y/N")) {
         //     return;
@@ -820,16 +885,16 @@ export class WhInwardEditComponent implements OnInit {
         // this.records.splice(this.records.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
     }
 
-    
+
     CloseModal() {
         this.modal.close();
     }
 
     getLink(_mode: string) {
         if (_mode == "LIST")
-            return "/Silver.SeaImport/SeaImpMasterPage";
+            return "/warehouse/WhInwardPage";
         else
-            return "/Silver.SeaImport/SeaImpMasterEditPage";
+            return "/warehouse/WhInwardEditPage";
     }
 
     getParam(_mode: string = "") {
@@ -840,7 +905,7 @@ export class WhInwardEditComponent implements OnInit {
                 id: this.gs.MENU_SI_MASTER,
                 menuid: this.gs.MENU_SI_MASTER,
                 menu_param: '',
-                origin: 'seaimp-master-page',
+                origin: 'wh-inward-page',
                 rnd: this.gs.getRandomInt()
             };
         } else {
@@ -849,7 +914,7 @@ export class WhInwardEditComponent implements OnInit {
                 menuid: this.menuid,
                 pkid: '',
                 type: this.mainService.param_type,
-                origin: 'seaimp-master-page',
+                origin: 'wh-inward-page',
                 mode: 'ADD',
                 rnd: this.gs.getRandomInt()
             };
@@ -878,7 +943,7 @@ export class WhInwardEditComponent implements OnInit {
             return null;
     }
 
-     
+
 
     openWebSite(_url: string) {
         if (this.gs.isBlank(_url))

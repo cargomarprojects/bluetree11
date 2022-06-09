@@ -56,7 +56,7 @@ export interface Tbl_wh_inwardd {
     ind_pkid: string;
     ind_parent_id: string;
     ind_code_id: string;
-    ind_code_code: string;
+    ind_code: string;
     ind_product: string;
     ind_desc: string;
     ind_refno: string;
@@ -75,8 +75,8 @@ export interface Tbl_wh_inwardd {
 export interface vm_tbl_wh_inwardm {
     mode: string;
     record: Tbl_wh_inwardm;
-    records: Tbl_wh_inwardd[];
-    cntrs: Tbl_wh_container[];
+    detrecords: Tbl_wh_inwardd[];
+    cntrrecords: Tbl_wh_container[];
     userinfo: any,
     filter: any;
 }
