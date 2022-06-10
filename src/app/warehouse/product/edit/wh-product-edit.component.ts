@@ -153,19 +153,7 @@ export class WhProductEditComponent implements OnInit {
                 }
                 else {
                     this._mode = 'EDIT';
-                    // let parameter = {
-                    //     appid: this.gs.appid,
-                    //     menuid: this.menuid,
-                    //     pkid: this.pkid,
-                    //     type: '',
-                    //     origin: 'user-page',
-                    //     mode: 'EDIT'
-                    // };
-                    // this.location.replaceState('Silver.UserAdmin/UserEditPage', this.gs.getUrlParameter(parameter));
-
                     this.mainService.RefreshList(this.record);
-                    // this.errorMessage = 'Save Complete';
-                    // alert(this.errorMessage);
                     alert('Save Complete');
                 }
 

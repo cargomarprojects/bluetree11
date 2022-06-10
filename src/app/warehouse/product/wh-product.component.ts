@@ -65,21 +65,9 @@ export class WhProductComponent implements OnInit {
       alert('Insufficient User Rights')
       return;
     }
-   
-    // let parameter = {
-    //   appid: this.gs.appid,
-    //   menuid: this.mainservice.menuid,
-    //   pkid: '',
-    //   type: '',
-    //   origin: 'wh-product-page',
-    //   mode: 'ADD'
-    // };
-    // this.gs.Naviagete2('warehouse/WhProductEditPage', parameter);
-
     this.pkid = '';
     this.mode = 'ADD';
     this.modal = this.modalservice.open(editmodal, { centered: true });
-
   }
 
   edit(_record: Tbl_wh_productm, editmodal: any = null) {
@@ -87,17 +75,7 @@ export class WhProductComponent implements OnInit {
       alert('Insufficient User Rights')
       return;
     }
-    // let parameter = {
-    //   appid: this.gs.appid,
-    //   menuid: this.mainservice.menuid,
-    //   pkid: _record.prod_pkid,
-    //   type: '',
-    //   origin: 'wh-product-page',
-    //   mode: 'EDIT'
-    // };
-    // this.gs.Naviagete2('warehouse/WhProductEditPage', parameter);
-
-    this.pkid =  _record.prod_pkid;
+    this.pkid = _record.prod_pkid;
     this.mode = 'EDIT';
     this.modal = this.modalservice.open(editmodal, { centered: true });
   }
