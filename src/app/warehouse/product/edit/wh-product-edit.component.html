@@ -20,7 +20,7 @@
                 <label class="col-4 col-form-label col-form-label-sm">Code</label>
                 <div class="col-8">
                     <InputBox [(inputModel)]="record.prod_code" [maxlength]="60" [uppercase]="true"
-                        [disabled]="mode!='ADD'"></InputBox>
+                        [disabled]="_mode!='ADD'"></InputBox>
                 </div>
             </div>
             <div class="form-group row">
