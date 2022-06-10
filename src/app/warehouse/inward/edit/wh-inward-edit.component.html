@@ -322,18 +322,18 @@
                                         <thead class="page-body-thead">
                                             <tr>
                                                 <th width='8%'>CODE</th>
-                                                <th width='12%'>PRODUCT</th>
+                                                <th width='13%'>PRODUCT</th>
                                                 <th width='15%'>DESCRIPTION</th>
                                                 <th width='10%'>REFNO</th>
                                                 <th width='5%'>QTY</th>
-                                                <th width='5%'>UOM</th>
-                                                <th width='8%'>PACKAGES</th>
-                                                <th width='8%'>UOM</th>
+                                                <th width='6%'>UOM</th>
+                                                <th width='7%'>PACKAGES</th>
+                                                <th width='6%'>UOM</th>
                                                 <th width='5%'>WEIGHT</th>
-                                                <th width='8%'>UOM</th>
+                                                <th width='6%'>UOM</th>
                                                 <th width='5%'>PALLETS</th>
                                                 <th width='5%'>VOLUME</th>
-                                                <th width='5%'>UOM</th>
+                                                <th width='6%'>UOM</th>
                                                 <th width='2%'></th>
                                             </tr>
                                         </thead>
@@ -368,10 +368,16 @@
                                                         (blur)="onBlur('ind_qty',rec)" maxlength="15"/>
                                                 </td>
                                                 <td class="p-0">
-                                                    <input #_ind_qty_uom class="form-control form-control-sm"
+                                                    <!-- <input #_ind_qty_uom class="form-control form-control-sm"
                                                         type="text" style="text-align:left;"
                                                         [(ngModel)]="rec.ind_qty_uom"
-                                                        (blur)="onBlur('ind_qty_uom',rec)" maxlength="5" />
+                                                        (blur)="onBlur('ind_qty_uom',rec)" maxlength="5" /> -->
+                                                        <app-autocomplete2 [controlname]="'QTY-UOM'"
+                                                        [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                                                        [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
+                                                        [displaydata]="rec.ind_qty_uom"
+                                                        (ValueChanged)="LovSelected($event,i)">
+                                                    </app-autocomplete2>
                                                 </td>
 
                                                 <td class="p-0">
@@ -381,10 +387,16 @@
                                                         (blur)="onBlur('ind_packages',rec)" maxlength="15"/>
                                                 </td>
                                                 <td class="p-0">
-                                                    <input #_ind_packages_uom class="form-control form-control-sm"
+                                                    <!-- <input #_ind_packages_uom class="form-control form-control-sm"
                                                         type="text" style="text-align:left;"
                                                         [(ngModel)]="rec.ind_packages_uom"
-                                                        (blur)="onBlur('ind_packages_uom',rec)" maxlength="5" />
+                                                        (blur)="onBlur('ind_packages_uom',rec)" maxlength="5" /> -->
+                                                        <app-autocomplete2 [controlname]="'PACKAGES-UOM'"
+                                                        [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                                                        [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
+                                                        [displaydata]="rec.ind_packages_uom"
+                                                        (ValueChanged)="LovSelected($event,i)">
+                                                    </app-autocomplete2>
                                                 </td>
                                                 <td class="p-0">
                                                     <input #_ind_weight class="form-control form-control-sm"
@@ -393,10 +405,16 @@
                                                         (blur)="onBlur('ind_weight',rec)" maxlength="15"/>
                                                 </td>
                                                 <td class="p-0">
-                                                    <input #_ind_weight_uom class="form-control form-control-sm"
+                                                    <!-- <input #_ind_weight_uom class="form-control form-control-sm"
                                                         type="text" style="text-align:left;"
                                                         [(ngModel)]="rec.ind_weight_uom"
-                                                        (blur)="onBlur('ind_weight_uom',rec)" maxlength="5" />
+                                                        (blur)="onBlur('ind_weight_uom',rec)" maxlength="5" /> -->
+                                                        <app-autocomplete2 [controlname]="'WEIGHT-UOM'"
+                                                        [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                                                        [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
+                                                        [displaydata]="rec.ind_weight_uom"
+                                                        (ValueChanged)="LovSelected($event,i)">
+                                                    </app-autocomplete2>
                                                 </td>
 
                                                 <td class="p-0">
@@ -412,10 +430,16 @@
                                                         (blur)="onBlur('ind_volume',rec)" maxlength="15"/>
                                                 </td>
                                                 <td class="p-0">
-                                                    <input #_ind_volume_uom class="form-control form-control-sm"
+                                                    <!-- <input #_ind_volume_uom class="form-control form-control-sm"
                                                         type="text" style="text-align:left;"
                                                         [(ngModel)]="rec.ind_volume_uom"
-                                                        (blur)="onBlur('ind_volume_uom',rec)" maxlength="5"/>
+                                                        (blur)="onBlur('ind_volume_uom',rec)" maxlength="5"/> -->
+                                                        <app-autocomplete2 [controlname]="'VOLUME-UOM'"
+                                                        [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                                                        [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
+                                                        [displaydata]="rec.ind_volume_uom"
+                                                        (ValueChanged)="LovSelected($event,i)">
+                                                    </app-autocomplete2>
                                                 </td>
 
                                                 <td class="p-0">
