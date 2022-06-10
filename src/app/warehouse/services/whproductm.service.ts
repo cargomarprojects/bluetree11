@@ -78,7 +78,7 @@ export class WhProductService {
     }
 
     Search(_searchdata: any, type: string = '' ) {
-
+        this.record.errormessage ='';
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
         }
