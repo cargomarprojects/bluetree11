@@ -1,0 +1,50 @@
+<div class="page-header">
+    <div class="row align-items-center justify-content-left p-1">
+        <label class="mr-3">{{title}} ({{mode}})</label>
+        <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+
+        <div class="col-md-4 testbox  px-0 mx-0">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Code</label>
+                <div class="col-8">
+                    <InputBox [(inputModel)]="record.prod_code" [maxlength]="60" [uppercase]="true"
+                        [disabled]="mode!='ADD'"></InputBox>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Name</label>
+                <div class="col-8">
+                    <InputBox [(inputModel)]="record.prod_name" [maxlength]="100" [uppercase]="true"></InputBox>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 testbox  px-0 mx-0">
+
+        </div>
+    </div>
+</div>
+<div class="page-footer">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
