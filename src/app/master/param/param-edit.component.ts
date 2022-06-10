@@ -45,6 +45,7 @@ export class ParamEditComponent implements OnInit {
   name6: string = 'Name6';
 
   bcodeenabled: boolean = true;
+  bname3enabled: boolean = true;
 
   bcode: boolean = true;
   bname1: boolean = true;
@@ -171,6 +172,11 @@ export class ParamEditComponent implements OnInit {
       this.bcodeenabled = true;
     else
       this.bcodeenabled = false;
+
+    if (this.mode == "EDIT" && this.menu_param == "UNIT MASTER")
+      this.bname3enabled = false;
+    else
+      this.bname3enabled = true;
   }
 
   GetRecord() {
@@ -238,8 +244,10 @@ export class ParamEditComponent implements OnInit {
 
   Save() {
 
-    if (!this.Allvalid())
+    if (!this.Allvalid()) {
+      alert(this.errorMessage);
       return;
+    }
     if (!confirm("Save")) {
       return;
     }
@@ -348,12 +356,37 @@ export class ParamEditComponent implements OnInit {
       }
     }
 
+    if (this.menu_param == "UNIT MASTER") {
+
+      if (!this.isValidNumber(this.record.param_name3)) {
+        this.errorMessage = "Invalid Unit Per Value";
+        return false;
+      }
+    }
+
 
     return true;
   }
 
 
-
+  isValidNumber(_str: string) {
+    let bOk = false;
+    let str2: string = "0123456789";
+    for (var i = 0; i < _str.length; i++) {
+      if (str2.includes(_str[i])) {
+        bOk = true;
+      } else {
+        bOk = false;
+        break;
+      }
+    }
+    if (bOk) {
+      let _num: number = +_str;
+      if (_num <= 0)
+        bOk = false;
+    }
+    return bOk;
+  }
 
   initLov(caption: string = '') {
 
@@ -490,6 +523,12 @@ export class ParamEditComponent implements OnInit {
       this.bname2 = true;
     }
 
+    if (this.menu_param == 'UNIT MASTER') {
+      this.name2 = "Unit";
+      this.bname2 = true;
+      this.name3 = "Unit Per";
+      this.bname3 = true;
+    }
 
   }
 }
