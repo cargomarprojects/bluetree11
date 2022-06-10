@@ -10,19 +10,34 @@ import { WhProductService } from '../../services/whproductm.service';
 import { vm_Tbl_wh_productm, Tbl_wh_productm } from '../../models/Tbl_wh_productm';
 import { SearchTable } from '../../../shared/models/searchtable';
 
+declare var $: any;
+
 @Component({
     selector: 'app-wh-product-edit',
     templateUrl: './wh-product-edit.component.html'
 })
 export class WhProductEditComponent implements OnInit {
 
+    public _pkid: string = "";
+    @Input() set pkid(value: string) {
+        this._pkid = value;
+    }
+
+    public _menuid: string = "";
+    @Input() set menuid(value: string) {
+        this._menuid = value;
+    }
+
+    public _mode: string = "";
+    @Input() set mode(value: string) {
+        this._mode = value;
+    }
+
+
     record: Tbl_wh_productm = <Tbl_wh_productm>{};
 
     tab: string = 'main';
 
-    pkid: string;
-    menuid: string;
-    public mode: string = '';
     errorMessage: string;
 
     title: string = 'Product Master';
@@ -40,31 +55,31 @@ export class WhProductEditComponent implements OnInit {
         public mainService: WhProductService,
     ) { }
 
+
     ngOnInit() {
         this.gs.checkAppVersion();
-        if (this.route.snapshot.queryParams.parameter == null) {
-            this.pkid = this.route.snapshot.queryParams.pkid;
-            this.menuid = this.route.snapshot.queryParams.menuid;
-            this.mode = this.route.snapshot.queryParams.mode;
-        }
-        else {
-            const options = JSON.parse(this.route.snapshot.queryParams.parameter);
-            this.pkid = options.pkid;
-            this.menuid = options.menuid;
-            this.mode = options.mode;
-        }
-        // const options = this.route.snapshot.queryParams;
-        // this.menuid = options.menuid;
-        // this.pkid = options.pkid;
-        // this.mode = options.mode;
-
+        // if (this.route.snapshot.queryParams.parameter == null) {
+        //     this.pkid = this.route.snapshot.queryParams.pkid;
+        //     this.menuid = this.route.snapshot.queryParams.menuid;
+        //     this.mode = this.route.snapshot.queryParams.mode;
+        // }
+        // else {
+        //     const options = JSON.parse(this.route.snapshot.queryParams.parameter);
+        //     this.pkid = options.pkid;
+        //     this.menuid = options.menuid;
+        //     this.mode = options.mode;
+        // }
         this.initPage();
         this.actionHandler();
+
+        $(function () {
+            $('.modal-dialog').draggable();
+        });
     }
 
     private initPage() {
-        this.isAdmin = this.gs.IsAdmin(this.menuid);
-        this.title = this.gs.getTitle(this.menuid);
+        this.isAdmin = this.gs.IsAdmin(this._menuid);
+        this.title = this.gs.getTitle(this._menuid);
         this.errorMessage = '';
         this.LoadCombo();
     }
@@ -74,25 +89,25 @@ export class WhProductEditComponent implements OnInit {
     }
 
     NewRecord() {
-        this.mode = 'ADD'
+        this._mode = 'ADD'
         this.actionHandler();
     }
 
     actionHandler() {
         this.errorMessage = '';
-        if (this.mode == 'ADD') {
+        if (this._mode == 'ADD') {
             this.record = <Tbl_wh_productm>{};
-            this.pkid = this.gs.getGuid();
+            this._pkid = this.gs.getGuid();
             this.init();
         }
-        if (this.mode == 'EDIT') {
+        if (this._mode == 'EDIT') {
             this.GetRecord();
         }
     }
 
     init() {
 
-        this.record.prod_pkid = this.pkid;
+        this.record.prod_pkid = this._pkid;
         this.record.prod_code = '';
         this.record.prod_name = '';
 
@@ -104,11 +119,11 @@ export class WhProductEditComponent implements OnInit {
     GetRecord() {
         this.errorMessage = '';
         var SearchData = this.gs.UserInfo;
-        SearchData.pkid = this.pkid;
+        SearchData.pkid = this._pkid;
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_wh_productm>response.record;
-                this.mode = 'EDIT';
+                this._mode = 'EDIT';
             }, error => {
                 this.errorMessage = this.gs.getError(error);
             });
@@ -125,8 +140,8 @@ export class WhProductEditComponent implements OnInit {
         this.SaveParent();
         const saveRecord = <vm_Tbl_wh_productm>{};
         saveRecord.record = this.record;
-        saveRecord.pkid = this.pkid;
-        saveRecord.mode = this.mode;
+        saveRecord.pkid = this._pkid;
+        saveRecord.mode = this._mode;
         saveRecord.userinfo = this.gs.UserInfo;
 
 
@@ -137,7 +152,7 @@ export class WhProductEditComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
-                    this.mode = 'EDIT';
+                    this._mode = 'EDIT';
                     // let parameter = {
                     //     appid: this.gs.appid,
                     //     menuid: this.menuid,
@@ -169,7 +184,7 @@ export class WhProductEditComponent implements OnInit {
         var bRet = true;
         this.errorMessage = "";
 
-        if (this.gs.isBlank(this.pkid)) {
+        if (this.gs.isBlank(this._pkid)) {
             bRet = false;
             this.errorMessage = "Invalid ID";
             alert(this.errorMessage);

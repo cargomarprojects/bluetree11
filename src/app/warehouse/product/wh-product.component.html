@@ -1,7 +1,7 @@
 <div class="page-header">
     <div class="col">
       <label class="mr-1">{{mainservice.title}}</label>
-      <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(mainservice.menuid)" (click)="NewRecord()">New</button>
+      <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(mainservice.menuid)" (click)="NewRecord(editmodal)">New</button>
       <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
     </div>
   </div>
@@ -25,7 +25,7 @@
       </thead>
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of records$ | async">
-          <td class='hlink2' (click)="edit(rec)">{{rec.prod_code}}</td>
+          <td class='hlink2' (click)="edit(rec,editmodal)">{{rec.prod_code}}</td>
           <td>{{rec.prod_name}}</td>
         </tr>
       </tbody>
@@ -35,3 +35,19 @@
   <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
   
   <br />
+  <ng-template #editmodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+      <div class="page-body">
+        <div class="row">
+          <div class="col-md-12 testbox  px-0 mx-0">
+              <app-wh-product-edit [pkid]="pkid" [mode]="mode" [menuid]="mainservice.menuid">  </app-wh-product-edit>
+          </div>
+        </div>
+        <div class="page-footer">
+          <div class="row justify-content-center p-1">
+            <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
