@@ -458,8 +458,8 @@ export class WhInwardEditComponent implements OnInit {
 
         let prm = {
             appid: this.gs.appid,
-            id: this.gs.MENU_SI_MASTER,
-            menuid: this.gs.MENU_SI_MASTER,
+            id: this.gs.MENU_WH_INWARD,
+            menuid: this.gs.MENU_WH_INWARD,
             menu_param: '',
             origin: 'wh-inward-page',
             rnd: this.gs.getRandomInt()
@@ -901,8 +901,8 @@ export class WhInwardEditComponent implements OnInit {
         if (_mode == "LIST") {
             return {
                 appid: this.gs.appid,
-                id: this.gs.MENU_SI_MASTER,
-                menuid: this.gs.MENU_SI_MASTER,
+                id: this.gs.MENU_WH_INWARD,
+                menuid: this.gs.MENU_WH_INWARD,
                 menu_param: '',
                 origin: 'wh-inward-page',
                 rnd: this.gs.getRandomInt()
@@ -922,22 +922,22 @@ export class WhInwardEditComponent implements OnInit {
 
     getRouteDet(_format: string, _type: string) {
         if (_format == "L") {
-            if (_type == "DEVANING")
-                return "/Silver.SeaImport/DevanInstructionPage";
-            else
-                return null;
+            // if (_type == "DEVANING")
+            //     return "/Silver.SeaImport/DevanInstructionPage";
+            // else
+            //     return null;
         } else if (_format == "P") {
-            if (_type == "DEVANING") {
-                return {
-                    appid: this.gs.appid,
-                    menuid: this.gs.MENU_SI_MASTER_DEVANNING_INSTRUCTION,
-                    pkid: this.pkid,
-                    mbl_refno: this.record.inm_refno,
-                    origin: 'seaimp-master-page',
-                    is_locked: this.is_locked
-                };
-            } else
-                return null;
+            // if (_type == "DEVANING") {
+            //     return {
+            //         appid: this.gs.appid,
+            //         menuid: this.gs.MENU_SI_MASTER_DEVANNING_INSTRUCTION,
+            //         pkid: this.pkid,
+            //         mbl_refno: this.record.inm_refno,
+            //         origin: 'seaimp-master-page',
+            //         is_locked: this.is_locked
+            //     };
+            // } else
+            //     return null;
         } else
             return null;
     }
