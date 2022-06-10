@@ -119,7 +119,7 @@ export class WhProductService {
     }
 
     RefreshList(_rec: Tbl_wh_productm) {
-        if (this.record.records == null)
+        if (this.gs.isBlank(this.record.records))
             return;
         var REC = this.record.records.find(rec => rec.prod_pkid == _rec.prod_pkid);
         if (REC == null) {
