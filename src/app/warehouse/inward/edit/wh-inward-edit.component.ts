@@ -29,6 +29,7 @@ export class WhInwardEditComponent implements OnInit {
     @ViewChildren('_ind_packages') ind_packages_field: QueryList<ElementRef>;
     @ViewChildren('_ind_weight') ind_weight_field: QueryList<ElementRef>;
     @ViewChildren('_ind_pallets') ind_pallets_field: QueryList<ElementRef>;
+    @ViewChildren('_ind_cqty') ind_cqty_field: QueryList<ElementRef>;
 
     record: Tbl_wh_inwardm = <Tbl_wh_inwardm>{};
 
@@ -339,86 +340,37 @@ export class WhInwardEditComponent implements OnInit {
         var bRet = true;
         this.errorMessage = [];
 
-        // if (this.gs.isBlank(this.record.mbl_no)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Master BL# cannot be blank");;
-        // }
-        // if (this.gs.isBlank(this.record.mbl_ref_date)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Ref Date cannot be blank");;
-        // }
-        // if (this.gs.JOB_TYPE_OI.length > 0 && this.gs.isBlank(this.record.mbl_jobtype_id)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Job Type cannot be blank");;
-        // }
-        // if (this.gs.isBlank(this.record.mbl_shipment_stage)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Shipment Stage cannot be blank");;
-        // }
-        // if (this.gs.isBlank(this.record.mbl_agent_id)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Master Agent cannot be blank");
-        // }
-        // if (this.gs.isBlank(this.record.mbl_liner_id)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Carrier cannot be blank");
-        // }
+        if (this.gs.isBlank(this.record.inm_refno)) {
+            bRet = false;
+            this.errorMessage.push("Ref# cannot be blank");;
+        }
+        if (this.gs.isBlank(this.record.inm_doc_date)) {
+            bRet = false;
+            this.errorMessage.push("Doc Date cannot be blank");;
+        }
+        if (this.gs.isBlank(this.record.inm_arrival_date)) {
+            bRet = false;
+            this.errorMessage.push("Arrival Date cannot be blank");;
+        }
 
-        // if (this.gs.isBlank(this.record.mbl_handled_id)) {
-        //     bRet = false;
-        //     this.errorMessage.push("A/N Handled By cannot be blank");
-        // }
+        if (this.gs.isBlank(this.record.inm_wh_id)) {
+            bRet = false;
+            this.errorMessage.push("Warehouse cannot be blank");
+        }
 
-        // if (this.gs.isBlank(this.record.mbl_frt_status)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Freight status cannot be blank");
-        // }
+        if (this.gs.isBlank(this.record.inm_cust_id)) {
+            bRet = false;
+            this.errorMessage.push("Customer cannot be blank");
+        }
+        if (this.gs.isBlank(this.record.inm_supplier_id)) {
+            bRet = false;
+            this.errorMessage.push("Supplier cannot be blank");
+        }
 
-        // if (this.gs.isBlank(this.record.mbl_ship_term_id)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Shipping Term cannot be blank");
-        // }
-        // if (this.gs.isBlank(this.record.mbl_cntr_type)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Container Type cannot be blank");
-        // }
-        // if (this.gs.isBlank(this.record.mbl_pol_id)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Port of Loading cannot be blank");
-        // }
-        // if (this.gs.isBlank(this.record.mbl_pol_etd)) {
-        //     bRet = false;
-        //     this.errorMessage.push("ETD cannot be blank");
-        // }
-        // if (this.gs.isBlank(this.record.mbl_pod_id)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Port of Discharge cannot be blank");
-        // }
-        // if (this.gs.isBlank(this.record.mbl_pod_eta)) {
-        //     bRet = false;
-        //     this.errorMessage.push("ETA cannot be blank");
-        // }
-
-        // if (this.gs.isBlank(this.record.mbl_country_id)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Country Cannot be blank");
-        // }
-
-        // if (this.gs.isBlank(this.record.mbl_vessel)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Vessel cannot be blank");
-        // }
-        // if (this.gs.isBlank(this.record.mbl_voyage)) {
-        //     bRet = false;
-        //     this.errorMessage.push("Voyage cannot be blank");
-        // }
-
-        // if (this.record.mbl_status.toString().trim() == "OMBL SENT TO CARRIER") {
-        //     if (this.gs.isBlank(this.record.mbl_ombl_sent_on.toString().trim())) {
-        //         bRet = false;
-        //         this.errorMessage.push("OMBL Sent Date cannot be blank");
-        //     }
-        // }
+        if (this.gs.isBlank(this.record.inm_transport_id)) {
+            bRet = false;
+            this.errorMessage.push("Transporter cannot be blank");
+        }
 
 
         if (!this.gs.isBlank(this.cntrrecords)) {
@@ -431,14 +383,47 @@ export class WhInwardEditComponent implements OnInit {
                     bRet = false;
                     this.errorMessage.push("Container( " + Rec.cntr_no + " ) type has to be selected");
                 }
-                // if (Rec.cntr_type == "LCL") {
-                //     if (Rec.cntr_cbm <= 0) {
-                //         bRet = false;
-                //         this.errorMessage.push("Container( " + Rec.cntr_no + " ) CBM cannot be zero");
-                //     }
+
+                // if (Rec.cntr_packages <= 0) {
+                //     bRet = false;
+                //     this.errorMessage.push("Container( " + Rec.cntr_no + " ) Packages cannot be zero");
                 // }
+
             })
         }
+
+        let iCtr: number = 0;
+        if (!this.gs.isBlank(this.detrecords)) {
+            this.detrecords.forEach(Rec => {
+                iCtr++;
+                if (this.gs.isBlank(Rec.ind_product)) {
+                    bRet = false;
+                    this.errorMessage.push("Product cannot be blank, Row" + iCtr.toString());
+                }
+                if (this.gs.isBlank(Rec.ind_cqty)) {
+                    bRet = false;
+                    this.errorMessage.push("Qty cannot be blank, Row" + iCtr.toString());
+                }
+
+                if (!this.isValidCqty(Rec.ind_cqty)) {
+                    bRet = false;
+                    this.errorMessage.push("Invalid Qty, Row" + iCtr.toString());
+                }
+                else
+                    if (!this.isValidUnitFactor(Rec.ind_cqty, Rec.ind_unit_factor)) {
+                        bRet = false;
+                        this.errorMessage.push("Invalid Fractional Part, Qty " + Rec.ind_cqty);
+                    }
+
+                if (this.gs.isBlank(Rec.ind_qty_uom_id)) {
+                    bRet = false;
+                    this.errorMessage.push("Qty Unit cannot be blank, Row" + iCtr.toString());
+                }
+
+            })
+        }
+
+
 
         if (!bRet)
             alert(this.errorMessage);
@@ -510,6 +495,7 @@ export class WhInwardEditComponent implements OnInit {
         rec.ind_qty_uom_id = '';
         rec.ind_qty_uom_code = '';
         rec.ind_qty_uom_name = '';
+        rec.ind_unit_factor = 0;
         rec.ind_packages = 0;
         rec.ind_packages_uom_id = '';
         rec.ind_packages_uom_code = '';
@@ -523,13 +509,21 @@ export class WhInwardEditComponent implements OnInit {
         rec.ind_volume_uom_id = '';
         rec.ind_volume_uom_code = '';
         rec.ind_volume_uom_name = '';
-
+        rec.ind_slno = this.findDetNextCtr();
         this.detrecords.push(rec);
 
         this.ind_code_field.changes
             .subscribe((queryChanges) => {
                 this.ind_code_field.last.Focus();
             });
+    }
+
+    findDetNextCtr() {
+        let max: number = 0;
+        this.detrecords.forEach(Rec => {
+            max = Rec.ind_slno > max ? Rec.ind_slno : max;
+        })
+        return max + 1;
     }
 
     LovSelected(_Record: SearchTable, idx: number = 0) {
@@ -612,6 +606,9 @@ export class WhInwardEditComponent implements OnInit {
                     rec.ind_qty_uom_code = _Record.code;
                     rec.ind_qty_uom_name = _Record.name;
                     rec.ind_unit_factor = +_Record.col3;
+                    if (!this.isValidUnitFactor(rec.ind_cqty, rec.ind_unit_factor)) {
+                        alert('Loose quantity should be less than ' + rec.ind_unit_factor);
+                    }
                     if (idx < this.ind_packages_field.toArray().length)
                         this.ind_packages_field.toArray()[idx].nativeElement.focus();
                 }
@@ -653,12 +650,16 @@ export class WhInwardEditComponent implements OnInit {
         }
     }
 
-    onFocusout(field: string) {
+    onFocusout(field: string, rec: Tbl_wh_inwardd = null, idx: number = 0) {
 
         switch (field) {
-            case 'mbl_no': {
+            case 'ind_cqty': {
 
-                // this.IsBLDupliation('MBL', this.record.mbl_no);
+                // if (!this.isValidUnitFactor(rec.ind_cqty, rec.ind_unit_factor)) {
+                //     alert('ind_unit_factor ' + rec.ind_cqty);
+                //     if (idx < this.ind_cqty_field.toArray().length)
+                //         this.ind_cqty_field.toArray()[idx].nativeElement.focus();
+                // }
                 break;
             }
             case 'mbl_liner_bookingno': {
@@ -722,75 +723,8 @@ export class WhInwardEditComponent implements OnInit {
     }
 
 
-    onBlur(field: string, rec: Tbl_wh_inwardd = null, rec2: Tbl_wh_container = null) {
+    onBlur(field: string, rec: Tbl_wh_inwardd = null, rec2: Tbl_wh_container = null, idx: number = 0) {
         switch (field) {
-            // case 'mbl_refno': {
-            //     this.record.mbl_refno = this.record.mbl_refno.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'mbl_no': {
-            //     this.record.mbl_no = this.record.mbl_no.toUpperCase().trim();
-            //     break;
-            // }
-
-            //   case 'mbl_sub_houseno': {
-            //     this.record.mbl_sub_houseno = this.record.mbl_sub_houseno.toUpperCase();
-            //     break;
-            //   }
-            //   case 'mbl_liner_bookingno': {
-            //     this.record.mbl_liner_bookingno = this.record.mbl_liner_bookingno.toUpperCase();
-            //     break;
-            //   }
-            // case 'mbl_place_delivery': {
-            //     this.record.mbl_place_delivery = this.record.mbl_place_delivery.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'mbl_vessel': {
-            //     this.record.mbl_vessel = this.record.mbl_vessel.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'mbl_voyage': {
-            //     this.record.mbl_voyage = this.record.mbl_voyage.toUpperCase().trim();
-            //     break;
-            // }
-
-            // case 'mbl_cargo_locname': {
-            //     this.record.mbl_cargo_locname = this.record.mbl_cargo_locname.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'mbl_cargo_locaddr1': {
-            //     this.record.mbl_cargo_locaddr1 = this.record.mbl_cargo_locaddr1.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'mbl_cargo_locaddr2': {
-            //     this.record.mbl_cargo_locaddr2 = this.record.mbl_cargo_locaddr2.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'mbl_cargo_locaddr3': {
-            //     this.record.mbl_cargo_locaddr3 = this.record.mbl_cargo_locaddr3.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'mbl_cargo_locaddr4': {
-            //     this.record.mbl_cargo_locaddr4 = this.record.mbl_cargo_locaddr4.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'mbl_devan_locname': {
-            //     this.record.mbl_devan_locname = this.record.mbl_devan_locname.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'mbl_devan_locaddr1': {
-            //     this.record.mbl_devan_locaddr1 = this.record.mbl_devan_locaddr1.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'mbl_devan_locaddr2': {
-            //     this.record.mbl_devan_locaddr2 = this.record.mbl_devan_locaddr2.toUpperCase().trim();
-            //     break;
-            // }
-            // case 'mbl_devan_locaddr3': {
-            //     this.record.mbl_devan_locaddr3 = this.record.mbl_devan_locaddr3.toUpperCase().trim();
-            //     break;
-            // }
-
 
             case 'cntr_no': {
                 rec2.cntr_no = rec2.cntr_no.toUpperCase().trim();
@@ -827,8 +761,12 @@ export class WhInwardEditComponent implements OnInit {
                 break;
             }
             case 'ind_cqty': {
-                //rec.ind_cqty = this.gs.roundNumber(rec.ind_cqty, 3);
-                // this.findRowTotal(field, rec);
+                if (!this.isValidCqty(rec.ind_cqty))
+                    alert('Invalid Qty ' + rec.ind_cqty);
+                else
+                    if (!this.isValidUnitFactor(rec.ind_cqty, rec.ind_unit_factor)) {
+                        alert('Loose quantity should be less than ' + rec.ind_unit_factor);
+                    }
                 break;
             }
             // case 'ind_qty_uom': {
@@ -1004,11 +942,50 @@ export class WhInwardEditComponent implements OnInit {
     }
 
 
-
     openWebSite(_url: string) {
         if (this.gs.isBlank(_url))
             return;
         window.open(_url, "_blank");
+    }
+
+    isValidCqty(_str: string) {
+        let bOk = false;
+        let str2: string = "0123456789.";
+        for (var i = 0; i < _str.length; i++) {
+            if (str2.includes(_str[i])) {
+                bOk = true;
+            } else {
+                bOk = false;
+                break;
+            }
+        }
+        if (bOk) {
+            let _num: number = +_str;
+            if (_num <= 0)
+                bOk = false;
+        }
+        return bOk;
+    }
+
+    isValidUnitFactor(_cQty: string, _factor: number) {
+        let bOk = true;
+
+        if (_cQty.includes(".")) {
+            var nStr = _cQty.split('.');
+            if (nStr.length > 2)
+                bOk = false;
+            else {
+                if (this.gs.isBlank(nStr[1]))
+                    bOk = false;
+                else {
+                    let _dNum: number = +nStr[1];
+                    if (_dNum > (_factor - 1))
+                        bOk = false;
+                }
+            }
+        }
+
+        return bOk;
     }
 
 }
