@@ -62,15 +62,25 @@ export interface Tbl_wh_inwardd {
     ind_product: string;
     ind_desc: string;
     ind_refno: string;
+    ind_cqty: string;
     ind_qty: number;
-    ind_qty_uom: string;
+    ind_qty_uom_id: string;
+    ind_qty_uom_code: string;
+    ind_qty_uom_name: string;
+    ind_unit_factor: number;
     ind_packages: number;
-    ind_packages_uom: string;
+    ind_packages_uom_id: string;
+    ind_packages_uom_code: string;
+    ind_packages_uom_name: string;
     ind_weight: number;
-    ind_weight_uom: string;
+    ind_weight_uom_id: string;
+    ind_weight_uom_code: string;
+    ind_weight_uom_name: string;
     ind_pallets: number;
     ind_volume: number;
-    ind_volume_uom: string;
+    ind_volume_uom_id: string;
+    ind_volume_uom_code: string;
+    ind_volume_uom_name: string;
     ind_slno: number;
 }
 

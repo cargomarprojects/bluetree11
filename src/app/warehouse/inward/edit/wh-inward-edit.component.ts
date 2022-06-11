@@ -16,20 +16,26 @@ import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomple
     templateUrl: './wh-inward-edit.component.html'
 })
 export class WhInwardEditComponent implements OnInit {
-    
+
     @ViewChild('_inm_doc_date') inm_doc_date_field: DateComponent;
     @ViewChild('_customer_lov') customer_lov_field: AutoComplete2Component;
+    @ViewChild('_btn_Add_product') btn_Add_product_field: ElementRef;
+
     @ViewChildren('_cntr_no') cntr_no_field: QueryList<ElementRef>;
     @ViewChildren('_cntr_sealno') cntr_sealno_field: QueryList<ElementRef>;
     @ViewChildren('_ind_code_field') ind_code_field: QueryList<AutoComplete2Component>;
-    @ViewChildren('_ind_product') ind_product_field:  QueryList<ElementRef>;
+    @ViewChildren('_ind_product') ind_product_field: QueryList<ElementRef>;
+
+    @ViewChildren('_ind_packages') ind_packages_field: QueryList<ElementRef>;
+    @ViewChildren('_ind_weight') ind_weight_field: QueryList<ElementRef>;
+    @ViewChildren('_ind_pallets') ind_pallets_field: QueryList<ElementRef>;
 
     record: Tbl_wh_inwardm = <Tbl_wh_inwardm>{};
 
     detrecords: Tbl_wh_inwardd[] = [];
     cntrrecords: Tbl_wh_container[] = [];
 
-    
+
     tab: string = 'main';
     report_title: string = '';
     report_url: string = '';
@@ -414,26 +420,26 @@ export class WhInwardEditComponent implements OnInit {
         //     }
         // }
 
-        
-            if (!this.gs.isBlank(this.cntrrecords)) {
-                this.cntrrecords.forEach(Rec => {
-                    if (Rec.cntr_no.length != 11) {
-                        bRet = false;
-                        this.errorMessage.push("Container( " + Rec.cntr_no + " ) Invalid");
-                    }
-                    if (Rec.cntr_type.length <= 0) {
-                        bRet = false;
-                        this.errorMessage.push("Container( " + Rec.cntr_no + " ) type has to be selected");
-                    }
-                    // if (Rec.cntr_type == "LCL") {
-                    //     if (Rec.cntr_cbm <= 0) {
-                    //         bRet = false;
-                    //         this.errorMessage.push("Container( " + Rec.cntr_no + " ) CBM cannot be zero");
-                    //     }
-                    // }
-                })
-            }
-        
+
+        if (!this.gs.isBlank(this.cntrrecords)) {
+            this.cntrrecords.forEach(Rec => {
+                if (Rec.cntr_no.length != 11) {
+                    bRet = false;
+                    this.errorMessage.push("Container( " + Rec.cntr_no + " ) Invalid");
+                }
+                if (Rec.cntr_type.length <= 0) {
+                    bRet = false;
+                    this.errorMessage.push("Container( " + Rec.cntr_no + " ) type has to be selected");
+                }
+                // if (Rec.cntr_type == "LCL") {
+                //     if (Rec.cntr_cbm <= 0) {
+                //         bRet = false;
+                //         this.errorMessage.push("Container( " + Rec.cntr_no + " ) CBM cannot be zero");
+                //     }
+                // }
+            })
+        }
+
         if (!bRet)
             alert(this.errorMessage);
 
@@ -500,22 +506,30 @@ export class WhInwardEditComponent implements OnInit {
         rec.ind_product = '';
         rec.ind_desc = '';
         rec.ind_refno = '';
-        rec.ind_qty = 0;
-        rec.ind_qty_uom = '';
+        rec.ind_cqty = '0';
+        rec.ind_qty_uom_id = '';
+        rec.ind_qty_uom_code = '';
+        rec.ind_qty_uom_name = '';
         rec.ind_packages = 0;
-        rec.ind_packages_uom = '';
+        rec.ind_packages_uom_id = '';
+        rec.ind_packages_uom_code = '';
+        rec.ind_packages_uom_name = '';
         rec.ind_weight = 0;
-        rec.ind_weight_uom = '';
+        rec.ind_weight_uom_id = '';
+        rec.ind_weight_uom_code = '';
+        rec.ind_weight_uom_name = '';
         rec.ind_pallets = 0;
         rec.ind_volume = 0;
-        rec.ind_volume_uom = '';
+        rec.ind_volume_uom_id = '';
+        rec.ind_volume_uom_code = '';
+        rec.ind_volume_uom_name = '';
 
         this.detrecords.push(rec);
 
         this.ind_code_field.changes
-          .subscribe((queryChanges) => {
-            this.ind_code_field.last.Focus();
-          });
+            .subscribe((queryChanges) => {
+                this.ind_code_field.last.Focus();
+            });
     }
 
     LovSelected(_Record: SearchTable, idx: number = 0) {
@@ -587,6 +601,53 @@ export class WhInwardEditComponent implements OnInit {
                     rec.ind_product = _Record.name;
                     if (idx < this.ind_product_field.toArray().length)
                         this.ind_product_field.toArray()[idx].nativeElement.focus();
+                }
+            });
+        }
+
+        if (_Record.controlname == "QTY-UOM") {
+            this.detrecords.forEach(rec => {
+                if (rec.ind_pkid == _Record.uid) {
+                    rec.ind_qty_uom_id = _Record.id;
+                    rec.ind_qty_uom_code = _Record.code;
+                    rec.ind_qty_uom_name = _Record.name;
+                    rec.ind_unit_factor = +_Record.col3;
+                    if (idx < this.ind_packages_field.toArray().length)
+                        this.ind_packages_field.toArray()[idx].nativeElement.focus();
+                }
+            });
+        }
+
+        if (_Record.controlname == "PACKAGES-UOM") {
+            this.detrecords.forEach(rec => {
+                if (rec.ind_pkid == _Record.uid) {
+                    rec.ind_packages_uom_id = _Record.id;
+                    rec.ind_packages_uom_code = _Record.code;
+                    rec.ind_packages_uom_name = _Record.name;
+                    if (idx < this.ind_weight_field.toArray().length)
+                        this.ind_weight_field.toArray()[idx].nativeElement.focus();
+                }
+            });
+        }
+        if (_Record.controlname == "WEIGHT-UOM") {
+            this.detrecords.forEach(rec => {
+                if (rec.ind_pkid == _Record.uid) {
+                    rec.ind_weight_uom_id = _Record.id;
+                    rec.ind_weight_uom_code = _Record.code;
+                    rec.ind_weight_uom_name = _Record.name;
+                    if (idx < this.ind_pallets_field.toArray().length)
+                        this.ind_pallets_field.toArray()[idx].nativeElement.focus();
+                }
+            });
+        }
+        if (_Record.controlname == "VOLUME-UOM") {
+            this.detrecords.forEach(rec => {
+                if (rec.ind_pkid == _Record.uid) {
+                    rec.ind_volume_uom_id = _Record.id;
+                    rec.ind_volume_uom_code = _Record.code;
+                    rec.ind_volume_uom_name = _Record.name;
+                    if (!this.gs.isBlank(this.btn_Add_product_field))
+                        this.btn_Add_product_field.nativeElement.focus();
                 }
             });
         }
@@ -765,33 +826,33 @@ export class WhInwardEditComponent implements OnInit {
                 rec.ind_refno = rec.ind_refno.toUpperCase().trim();
                 break;
             }
-            case 'ind_qty': {
-                rec.ind_qty = this.gs.roundNumber(rec.ind_qty, 3);
+            case 'ind_cqty': {
+                //rec.ind_cqty = this.gs.roundNumber(rec.ind_cqty, 3);
                 // this.findRowTotal(field, rec);
                 break;
             }
-            case 'ind_qty_uom': {
-                rec.ind_qty_uom = rec.ind_qty_uom.toUpperCase().trim();
-                break;
-            }
+            // case 'ind_qty_uom': {
+            //     rec.ind_qty_uom = rec.ind_qty_uom.toUpperCase().trim();
+            //     break;
+            // }
             case 'ind_packages': {
                 rec.ind_packages = this.gs.roundNumber(rec.ind_packages, 0);
                 // this.findRowTotal(field, rec);
                 break;
             }
-            case 'ind_packages_uom': {
-                rec.ind_packages_uom = rec.ind_packages_uom.toUpperCase().trim();
-                break;
-            }
+            // case 'ind_packages_uom': {
+            //     rec.ind_packages_uom = rec.ind_packages_uom.toUpperCase().trim();
+            //     break;
+            // }
             case 'ind_weight': {
                 rec.ind_weight = this.gs.roundNumber(rec.ind_weight, 3);
                 // this.findRowTotal(field, rec);
                 break;
             }
-            case 'ind_weight_uom': {
-                rec.ind_weight_uom = rec.ind_weight_uom.toUpperCase().trim();
-                break;
-            }
+            // case 'ind_weight_uom': {
+            //     rec.ind_weight_uom = rec.ind_weight_uom.toUpperCase().trim();
+            //     break;
+            // }
             case 'ind_pallets': {
                 rec.ind_pallets = this.gs.roundNumber(rec.ind_pallets, 3);
                 // this.findRowTotal(field, rec);
@@ -802,15 +863,15 @@ export class WhInwardEditComponent implements OnInit {
                 // this.findRowTotal(field, rec);
                 break;
             }
-            case 'ind_volume_uom': {
-                rec.ind_volume_uom = rec.ind_volume_uom.toUpperCase().trim();
-                break;
-            }
+            // case 'ind_volume_uom': {
+            //     rec.ind_volume_uom = rec.ind_volume_uom.toUpperCase().trim();
+            //     break;
+            // }
         }
     }
 
-    
-    
+
+
 
     BtnNavigation2(action: string, _type: string, attachmodal: any = null) {
         // if (action == "ARAP") {

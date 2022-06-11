@@ -526,7 +526,7 @@ export class ParamEditComponent implements OnInit {
     if (this.menu_param == 'UNIT MASTER') {
       this.name2 = "Unit";
       this.bname2 = true;
-      this.name3 = "Unit Per";
+      this.name3 = "Unit Factor";
       this.bname3 = true;
     }
 
