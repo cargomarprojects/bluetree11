@@ -1,0 +1,591 @@
+<div *ngIf="tab=='main'">
+    <div class="page-header">
+        <div class="row align-items-center justify-content-left p-1">
+            <label class="mr-3">{{title}} ({{mode}})</label>
+            <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" [routerLink]="getLink('ADD')"
+                [queryParams]="getParam('ADD')">New</a>
+            <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+            <label class="text-danger" *ngIf="is_locked">LOCKED</label>
+        </div>
+    </div>
+    <div *ngIf="errorMessage.length >0">
+        <div class="alert alert-success">
+            <a (click)="errorMessage=[]" class="close" aria-label="close">&times;</a>
+            <ul>
+                <li *ngFor="let str of errorMessage">
+                    <p class="h4"> {{str}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="page-body">
+
+        <div class="row">
+
+            <div class="col-md-12 p-1">
+
+                <div class="row border">
+
+                    <!-- First row -->
+                    <div class="col-md-12 px-0 mx-0">
+                        <div class="row border">
+                            <div class="col-md-4 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Doc#</label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('inm_doc_no')" [(ngModel)]="record.inm_doc_no"
+                                            [disabled]="true" maxlength="25" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Doc Date</label>
+                                    <div class="col-9">
+                                        <app-date #_inm_doc_date [inputdate]="record.inm_doc_date"
+                                            (ValueChanged)="record.inm_doc_date=$event"></app-date>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 testbox  px-0 mx-0">
+
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Ref#</label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_refno" [maxlength]="60" [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Arrival Date</label>
+                                    <div class="col-9">
+                                        <app-date #_inm_arrival_date [inputdate]="record.inm_arrival_date"
+                                            (ValueChanged)="record.inm_arrival_date=$event"></app-date>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Warehouse</label>
+                                    <div class="col-9">
+                                        <app-autocomplete2 [controlname]="'WAREHOUSE'" [tabletype]="'MASTER'"
+                                            [displaycolumn]="'CODE'"
+                                            [displaydata]="record.inm_wh_code" (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [disabled]="true" [(inputModel)]="record.inm_wh_name" [maxlength]="100" [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Second row -->
+                    <div class="col-md-12 px-0 mx-0">
+                        <div class="row border">
+                            <div class="col-md-4 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Customer</label>
+                                    <div class="col-9">
+                                        <app-autocomplete2 #_customer_lov [controlname]="'CUSTOMER'" [tabletype]="'MASTER'"
+                                            [displaycolumn]="'CODE'" [displaydata]="record.inm_cust_code"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox  [(inputModel)]="record.inm_cust_name" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox  [(inputModel)]="record.inm_cust_add1" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_cust_add2" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_cust_add3" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_cust_add4" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Supplier</label>
+                                    <div class="col-9">
+                                        <app-autocomplete2 [controlname]="'SUPPLIER'" [tabletype]="'MASTER'"
+                                            [displaycolumn]="'CODE'" [displaydata]="record.inm_supplier_code"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_supplier_name" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_supplier_add1" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_supplier_add2" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_supplier_add3" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_supplier_add4" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 testbox  px-0 mx-0">
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Transporter</label>
+                                    <div class="col-9">
+                                        <app-autocomplete2 [controlname]="'TRANSPORTER'" [tabletype]="'MASTER'"
+                                            [displaycolumn]="'CODE'" [displaydata]="record.inm_transport_code"
+                                            (ValueChanged)="LovSelected($event)">
+                                        </app-autocomplete2>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_transport_name" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_transport_add1" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_transport_add2" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_transport_add3" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm"></label>
+                                    <div class="col-9">
+                                        <InputBox [(inputModel)]="record.inm_transport_add4" [maxlength]="60"
+                                            [uppercase]="true">
+                                        </InputBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row border p-1">
+                            <div class="col-md-12 px-1 mx-1">
+
+                                <div class="page-body table-responsive">
+                                    <table class="table table-bordered table-hover table-sm cntr">
+                                        <thead class="page-body-thead">
+                                            <tr>
+                                                <th>CNTR.NO</th>
+                                                <th>TYPE</th>
+                                                <th>SEAL NO</th>
+                                                <th>PCS</th>
+                                                <th>UNIT</th>
+                                                <th>PALLETS</th>
+                                                <th class='text-center'>REMOVE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="page-body-tbody">
+                                            <tr *ngFor="let rec of cntrrecords; let i = index">
+                                                <td class="p-0">
+                                                    <input #_cntr_no class="form-control form-control-sm" type="text"
+                                                        [(ngModel)]="rec.cntr_no" maxlength="11"
+                                                        (blur)="onBlur('cntr_no',null,rec)" />
+                                                </td>
+                                                <td class="p-0">
+                                                    <app-autocomplete2 [controlname]="'CONTAINER TYPE'"
+                                                        [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                                                        [subtype]="'CONTAINER TYPE'" [uid]="rec.cntr_pkid"
+                                                        [displaydata]="rec.cntr_type"
+                                                        (ValueChanged)="LovSelected($event,i)">
+                                                    </app-autocomplete2>
+                                                </td>
+                                                <td class="p-0">
+                                                    <input #_cntr_sealno class="form-control form-control-sm"
+                                                        type="text" [(ngModel)]="rec.cntr_sealno" maxlength="25"
+                                                        (blur)="onBlur('cntr_sealno',null,rec)" />
+                                                </td>
+                                                <td class="p-0">
+                                                    <input class="form-control form-control-sm" type="number"
+                                                        [(ngModel)]="rec.cntr_packages"
+                                                        (blur)="onBlur('cntr_packages',null,rec)" />
+                                                </td>
+                                                <td class="p-0">
+                                                    <input class="form-control form-control-sm" type="text"
+                                                        [(ngModel)]="rec.cntr_packages_uom" maxlength="5"
+                                                        (blur)="onBlur('cntr_packages_uom',null,rec)" />
+                                                </td>
+                                                <td class="p-0">
+                                                    <input class="form-control form-control-sm" type="number"
+                                                        [(ngModel)]="rec.cntr_pallets"
+                                                        (blur)="onBlur('cntr_pallets',null,rec)" />
+                                                </td>
+                                                <td class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
+                                                        aria-hidden="true" (click)="RemoveCntrRow(rec)"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="form-group row">
+                                        <div class="col-12  px-0 mx-0">
+                                            <button class="btn btn-info btn-sm mr-1" [disabled]="is_locked"
+                                                (click)="AddCntrRow()">Add
+                                                Container</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row border p-1">
+                            <div class="col-md-12 px-1 mx-1">
+                                <div class="page-body table-responsive table-bordered">
+                                    <table class="table  table-hover table-sm">
+                                        <thead class="page-body-thead">
+                                            <tr>
+                                                <th width='8%'>CODE</th>
+                                                <th width='13%'>PRODUCT</th>
+                                                <th width='15%'>DESCRIPTION</th>
+                                                <th width='10%'>REFNO</th>
+                                                <th width='5%'>QTY</th>
+                                                <th width='6%'>UOM</th>
+                                                <!-- <th width='7%'>PACKAGES</th>
+                                                <th width='6%'>UOM</th>
+                                                <th width='5%'>WEIGHT</th>
+                                                <th width='6%'>UOM</th>
+                                                <th width='5%'>PALLETS</th>
+                                                <th width='5%'>VOLUME</th>
+                                                <th width='6%'>UOM</th>
+                                                <th width='2%'></th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody class="page-body-tbody" *ngFor="let rec of detrecords; let i = index">
+                                            <tr>
+                                                <td class="p-0">
+
+                                                    <app-autocomplete2 #_ind_code_field [controlname]="'PRODUCT'"
+                                                        [tabletype]="'PRODUCT'"  [uid]="rec.ind_pkid"
+                                                        [displaycolumn]="'CODE'" [displaydata]="rec.ind_code"
+                                                        (ValueChanged)="LovSelected($event,i)">
+                                                    </app-autocomplete2>
+
+                                                </td>
+                                                <td class="p-0">
+                                                    <input #_ind_product class="form-control form-control-sm"
+                                                        type="text" [(ngModel)]="rec.ind_product"
+                                                        (blur)="onBlur('ind_product',rec)"  maxlength="100"/>
+                                                </td>
+
+                                                <td class="p-0">
+                                                    <input class="form-control form-control-sm" type="text"
+                                                        [(ngModel)]="rec.ind_desc" (blur)="onBlur('ind_desc',rec)" maxlength="100" />
+                                                </td>
+                                                <td class="p-0">
+                                                    <input #_ind_refno class="form-control form-control-sm" type="text"
+                                                        [(ngModel)]="rec.ind_refno" (blur)="onBlur('ind_refno',rec)" maxlength="60" />
+                                                </td>
+                                                <td class="p-0">
+                                                    <input #_ind_cqty class="form-control form-control-sm" type="text"
+                                                        style="text-align:right;" [(ngModel)]="rec.ind_cqty"
+                                                        (blur)="onBlur('ind_cqty',rec,i)"  maxlength="15"/>
+                                                </td>
+                                                <td class="p-0">
+                                                    <!-- <input #_ind_qty_uom class="form-control form-control-sm"
+                                                        type="text" style="text-align:left;"
+                                                        [(ngModel)]="rec.ind_qty_uom"
+                                                        (blur)="onBlur('ind_qty_uom',rec)" maxlength="5" /> -->
+                                                        <app-autocomplete2 [controlname]="'QTY-UOM'"
+                                                        [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                                                        [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
+                                                        [displaydata]="rec.ind_qty_uom_code"
+                                                        (ValueChanged)="LovSelected($event,i)">
+                                                    </app-autocomplete2>
+                                                </td>
+
+                                                <!-- <td class="p-0">
+                                                    <input #_ind_packages class="form-control form-control-sm"
+                                                        type="number" style="text-align:right;"
+                                                        [(ngModel)]="rec.ind_packages"
+                                                        (blur)="onBlur('ind_packages',rec)" maxlength="15"/>
+                                                </td>
+                                                <td class="p-0">
+                                                    
+                                                        <app-autocomplete2 [controlname]="'PACKAGES-UOM'"
+                                                        [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                                                        [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
+                                                        [displaydata]="rec.ind_packages_uom_code"
+                                                        (ValueChanged)="LovSelected($event,i)">
+                                                    </app-autocomplete2>
+                                                </td>
+                                                <td class="p-0">
+                                                    <input #_ind_weight class="form-control form-control-sm"
+                                                        type="number" style="text-align:right;"
+                                                        [(ngModel)]="rec.ind_weight"
+                                                        (blur)="onBlur('ind_weight',rec)" maxlength="15"/>
+                                                </td>
+                                                <td class="p-0">
+                                                    
+                                                        <app-autocomplete2 [controlname]="'WEIGHT-UOM'"
+                                                        [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                                                        [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
+                                                        [displaydata]="rec.ind_weight_uom_code"
+                                                        (ValueChanged)="LovSelected($event,i)">
+                                                    </app-autocomplete2>
+                                                </td>
+
+                                                <td class="p-0">
+                                                    <input #_ind_pallets class="form-control form-control-sm" type="number"
+                                                        style="text-align:right;" [(ngModel)]="rec.ind_pallets"
+                                                        (blur)="onBlur('ind_pallets',rec)" maxlength="15"/>
+                                                </td>
+
+                                                <td class="p-0">
+                                                    <input #_ind_volume class="form-control form-control-sm"
+                                                        type="number" style="text-align:right;"
+                                                        [(ngModel)]="rec.ind_volume"
+                                                        (blur)="onBlur('ind_volume',rec)" maxlength="15"/>
+                                                </td>
+                                                <td class="p-0">
+                                                     
+                                                        <app-autocomplete2 [controlname]="'VOLUME-UOM'"
+                                                        [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                                                        [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
+                                                        [displaydata]="rec.ind_volume_uom_code"
+                                                        (ValueChanged)="LovSelected($event,i)">
+                                                    </app-autocomplete2>
+                                                </td>
+
+                                                <td class="p-0">
+                                                    <a class="btn btn-sm" (click)="RemoveDetRow(rec)">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button #_btn_Add_product class="btn btn-info btn-sm" (click)="AddDetRow()">Add Product</button>
+
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- <div *ngIf="mode=='EDIT'" class="row">
+
+                            <div class="col-md-12 px-0 mx-0">
+                                <div class="page-body table-responsive">
+                                    <table class="table table-bordered table-hover table-sm">
+                                        <thead class="page-body-thead">
+                                            <tr>
+                                                <th>HOUSE</th>
+                                                <th>SHIPPER</th>
+                                                <th>CONSIGNEE</th>
+                                                <th>CLIENT-CATEGORY</th>
+                                                <th>CLIENT-TYPE</th>
+                                                <th>PCS</th>
+                                                <th>HANDLED-BY</th>
+                                                <th>{{(gs.company_code=='MNYC')?'HBL STATUS':'TELEX RELEASED'}}</th>
+                                                <th>FREIGHT</th>
+                                                <th>TERMS</th>
+                                                <th>AN-SENT</th>
+                                                <th>AN-SENT-BY</th>
+                                                <th>AN-SENT-DATE</th>
+                                                <th>CREATED-BY</th>
+                                                <th>DATE</th>
+                                                <th *ngIf="gs.canDelete(this.gs.MENU_SI_HOUSE)" class='text-center'>
+                                                    DELETE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="page-body-tbody">
+                                            <tr *ngFor="let rec of hrecords">
+                                                <td *ngIf="!gs.canEdit(this.gs.MENU_SI_HOUSE)">{{rec.hbl_houseno}}</td>
+                                                <td *ngIf="gs.canEdit(this.gs.MENU_SI_HOUSE)">
+                                                    <a class='hlink'
+                                                        [routerLink]="['/Silver.SeaImport/SeaImpHouseEditPage']"
+                                                        [queryParams]="{appid : this.gs.appid ,menuid: this.gs.MENU_SI_HOUSE,parentid:this.pkid,pkid: rec.hbl_pkid,refno: this.record.mbl_refno ,type: 'OI',origin: 'seaimp-master-page',mode: 'EDIT',invokefrom:'MASTER'}">{{rec.hbl_houseno}}</a>
+                                                </td>
+                                                <td>{{rec.hbl_shipper_name}}</td>
+                                                <td>{{rec.hbl_consignee_name}}</td>
+                                                <td>{{rec.hbl_consignee_category}}</td>
+                                                <td>{{rec.hbl_bltype}}</td>
+                                                <td>{{rec.hbl_packages}}</td>
+                                                <td>{{rec.hbl_handled_name}}</td>
+                                                <td>{{rec.hbl_telex_released}}</td>
+                                                <td>{{rec.hbl_frt_status}}</td>
+                                                <td>{{rec.hbl_ship_term}}</td>
+                                                <td>{{rec.hbl_an_sent}}</td>
+                                                <td>{{rec.hbl_an_sent_by}}</td>
+                                                <td>{{rec.hbl_an_sent_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                                                <td>{{rec.rec_created_by}}</td>
+                                                <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                                                <td *ngIf="gs.canDelete(this.gs.MENU_SI_HOUSE)" class="p-0 text-center">
+                                                    <i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                                                        (click)="DeleteHouseRow(rec)"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="form-group row">
+                                        <div class="col-12 mx-0 px-0">
+                                            <a class="btn btn-info btn-sm mr-1"
+                                                *ngIf="gs.screenExists(gs.MENU_SI_HOUSE)" [class.disabled]="is_locked"
+                                                [routerLink]="['/Silver.SeaImport/SeaImpHouseEditPage']"
+                                                [queryParams]="{appid : gs.appid, menuid: this.gs.MENU_SI_HOUSE, parentid:this.pkid, pkid: '',refno: this.record.mbl_refno ,type: 'OI',origin: 'seaimp-master-page',mode: 'ADD'}">Add
+                                                House</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div> -->
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- <div class="col-md-2 p-1 testbox">
+
+                <div class="col-md-12 p-2 border">
+
+                    <div *ngIf="mode=='EDIT'" class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm  text-uppercase"
+                            *ngIf="gs.screenExists(gs.MENU_SI_ATTACHMENTS)"
+                            [style.color]="record.rec_files_attached=='Y'?'red':'white'"
+                            (click)="BtnNavigation('ATTACHMENT',attachmodal)">Attachments</button>
+                    </div>
+                    <div class="form-group row">
+                        <button class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.canSave(menuid,mode)"
+                            [disabled]="is_locked" (click)="Save()">Save</button>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+
+    <div class="page-footer">
+        <div class="row justify-content-center p-1">
+            <button class="btn btn-primary btn-md" *ngIf="gs.canSave(menuid,mode)" [disabled]="is_locked"
+                (click)="Save()">Save</button>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <label class="col-form-label col-form-label-sm" *ngIf="record.rec_created_by"> CREATED BY:
+            {{record.rec_created_by}}
+            /
+            {{record.rec_created_date}} </label>
+    </div>
+</div>
+
+<!-- <div *ngIf="tab=='report'">
+    <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+        (callbackevent)="callbackevent($event)"></app-report>
+</div>
+
+<ng-template #attachmodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+                        [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+                        [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno"
+                        [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
+                        [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid"
+                        [filespath]="attach_filespath" [filespath2]="attach_filespath2" [modalview]="true"
+                        (callbackevent)="callbackevent($event)"></app-fileupload>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template> -->
