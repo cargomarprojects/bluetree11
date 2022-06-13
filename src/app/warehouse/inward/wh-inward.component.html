@@ -51,7 +51,7 @@
                 <td *ngIf="!this.mainservice.canEdit">{{rec.inm_doc_no}}</td>
                 <td *ngIf="this.mainservice.canEdit">
                     <a [routerLink]="['/warehouse/WhInwardEditPage']"
-                        [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.inm_pkid,type: '',origin: 'wh-inward-page',mode: 'EDIT'}"
+                        [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.inm_pkid,type: this.mainservice.param_type,origin: 'wh-inward-page',mode: 'EDIT'}"
                         class="hlink">
                         {{rec.inm_doc_no}}
                     </a>

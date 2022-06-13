@@ -65,6 +65,7 @@ export class WhInwardEditComponent implements OnInit {
     private hbl_pkid: string = '';
     private hbl_mode: string = '';
     private mode: string;
+    private type: string;
 
     modal: any;
     // private errorMessage: string;
@@ -102,12 +103,14 @@ export class WhInwardEditComponent implements OnInit {
             this.pkid = this.route.snapshot.queryParams.pkid;
             this.menuid = this.route.snapshot.queryParams.menuid;
             this.mode = this.route.snapshot.queryParams.mode;
+            this.type = this.route.snapshot.queryParams.type;
         }
         else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
             this.pkid = options.pkid;
             this.menuid = options.menuid;
             this.mode = options.mode;
+            this.type = options.type;
         }
         this.closeCaption = 'Return';
         this.initPage();
@@ -163,6 +166,7 @@ export class WhInwardEditComponent implements OnInit {
     init() {
 
         this.record.inm_pkid = this.pkid;
+        this.record.inm_type = this.type;
         this.record.inm_refno = '';
         this.record.inm_doc_date = this.gs.defaultValues.today;
 
@@ -226,6 +230,7 @@ export class WhInwardEditComponent implements OnInit {
         this.SaveContainer();
         this.SaveDetails();
         this.FindTotTeus();
+        this.record.inm_type = this.type;
         const saveRecord = <vm_tbl_wh_inwardm>{};
         saveRecord.record = this.record;
         saveRecord.detrecords = this.detrecords;
@@ -396,6 +401,10 @@ export class WhInwardEditComponent implements OnInit {
         if (!this.gs.isBlank(this.detrecords)) {
             this.detrecords.forEach(Rec => {
                 iCtr++;
+                if (this.gs.isBlank(Rec.ind_code_id)) {
+                    bRet = false;
+                    this.errorMessage.push("Code cannot be blank, Row" + iCtr.toString());
+                }
                 if (this.gs.isBlank(Rec.ind_product)) {
                     bRet = false;
                     this.errorMessage.push("Product cannot be blank, Row" + iCtr.toString());

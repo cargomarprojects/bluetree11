@@ -2,6 +2,7 @@ import { PageQuery } from '../../shared/models/pageQuery';
 
 export interface Tbl_wh_inwardm {
     inm_pkid: string;
+    inm_type: string;
     inm_refno: string;
     inm_doc_slno: number;
     inm_doc_no: string;

@@ -82,7 +82,7 @@ export class WhInwardComponent implements OnInit {
       appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.inm_pkid,
-      type: '',
+      type: this.mainservice.param_type,
       origin: 'wh-inward-page',
       mode: 'EDIT'
     };
