@@ -409,33 +409,32 @@ export class WhOutwardEditComponent implements OnInit {
                     bRet = false;
                     this.errorMessage.push("Product cannot be blank, Row" + iCtr.toString());
                 }
-                if (this.gs.isBlank(Rec.ind_cqty)) {
+                if (this.gs.isBlank(Rec.ind_req_cqty)) {
                     bRet = false;
                     this.errorMessage.push("Qty cannot be blank, Row" + iCtr.toString());
                 }
 
-                if (!this.isValidCqty(Rec.ind_cqty)) {
+                if (!this.isValidCqty(Rec.ind_req_cqty)) {
                     bRet = false;
                     this.errorMessage.push("Invalid Qty, Row" + iCtr.toString());
                 }
                 else
-                    if (!this.isValidUnitFactor(Rec.ind_cqty, Rec.ind_unit_factor)) {
+                    if (!this.isValidUnitFactor(Rec.ind_req_cqty, Rec.ind_unit_factor)) {
                         bRet = false;
-                        this.errorMessage.push("Invalid Fractional Part, Qty " + Rec.ind_cqty);
+                        this.errorMessage.push("Loose quantity should be less than " + Rec.ind_unit_factor+", Row" + iCtr.toString());
                     }
 
-                if (this.gs.isBlank(Rec.ind_qty_uom_id)) {
-                    bRet = false;
-                    this.errorMessage.push("Qty Unit cannot be blank, Row" + iCtr.toString());
-                }
+                // if (this.gs.isBlank(Rec.ind_qty_uom_id)) {
+                //     bRet = false;
+                //     this.errorMessage.push("Qty Unit cannot be blank, Row" + iCtr.toString());
+                // }
 
             })
         }
 
 
 
-        if (!bRet)
-        {
+        if (!bRet) {
             alert(this.errorMessage);
             this.errorMessage = [];
         }
@@ -504,6 +503,7 @@ export class WhOutwardEditComponent implements OnInit {
         rec.ind_desc = '';
         rec.ind_refno = '';
         rec.ind_cqty = '0';
+        rec.ind_req_cqty = '0';
         rec.ind_qty_uom_id = '';
         rec.ind_qty_uom_code = '';
         rec.ind_qty_uom_name = '';
@@ -605,6 +605,9 @@ export class WhOutwardEditComponent implements OnInit {
                     rec.ind_code_id = _Record.id;
                     rec.ind_code = _Record.code;
                     rec.ind_product = _Record.name;
+                    rec.ind_unit_factor = +_Record.col4;
+                    rec.ind_qty_uom_code = _Record.col1;
+                    rec.ind_qty_uom_id = _Record.col5;
                     if (idx < this.ind_product_field.toArray().length)
                         this.ind_product_field.toArray()[idx].nativeElement.focus();
                 }
@@ -772,11 +775,11 @@ export class WhOutwardEditComponent implements OnInit {
                 rec.ind_refno = rec.ind_refno.toUpperCase().trim();
                 break;
             }
-            case 'ind_cqty': {
-                if (!this.isValidCqty(rec.ind_cqty))
-                    alert('Invalid Qty ' + rec.ind_cqty);
+            case 'ind_req_cqty': {
+                if (!this.isValidCqty(rec.ind_req_cqty))
+                    alert('Invalid Qty ' + rec.ind_req_cqty);
                 else
-                    if (!this.isValidUnitFactor(rec.ind_cqty, rec.ind_unit_factor)) {
+                    if (!this.isValidUnitFactor(rec.ind_req_cqty, rec.ind_unit_factor)) {
                         alert('Loose quantity should be less than ' + rec.ind_unit_factor);
                     }
                 break;

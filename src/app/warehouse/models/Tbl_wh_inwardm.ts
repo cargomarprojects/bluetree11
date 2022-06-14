@@ -83,6 +83,8 @@ export interface Tbl_wh_inwardd {
     ind_volume_uom_code: string;
     ind_volume_uom_name: string;
     ind_slno: number;
+    ind_req_cqty: string;
+    ind_set_qty: number;
 }
 
 export interface vm_tbl_wh_inwardm {
