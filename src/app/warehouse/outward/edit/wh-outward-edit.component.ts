@@ -197,8 +197,8 @@ export class WhOutwardEditComponent implements OnInit {
         this.record.inm_transport_add4 = '';
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
-        this.record.inm_prefix = this.gs.WH_INWARD_DOCNO_PREFIX;
-        this.record.inm_startingno = this.gs.WH_INWARD_DOCNO_STARTING_NO;
+        this.record.inm_prefix = this.gs.WH_OUTWARD_DOCNO_PREFIX;
+        this.record.inm_startingno = this.gs.WH_OUTWARD_DOCNO_STARTING_NO;
     }
 
     GetRecord() {
@@ -253,11 +253,11 @@ export class WhOutwardEditComponent implements OnInit {
                         appid: this.gs.appid,
                         menuid: this.menuid,
                         pkid: this.pkid,
-                        type: '',
-                        origin: 'wh-inward-page',
+                        type: this.type,
+                        origin: 'wh-outward-page',
                         mode: 'EDIT'
                     };
-                    this.location.replaceState('warehouse/WhInwardEditPage', this.gs.getUrlParameter(parameter));
+                    this.location.replaceState('warehouse/WhOutwardEditPage', this.gs.getUrlParameter(parameter));
 
                     this.mainService.RefreshList(this.record);
                     // this.errorMessage.push('Save Complete');
@@ -458,10 +458,10 @@ export class WhOutwardEditComponent implements OnInit {
 
         let prm = {
             appid: this.gs.appid,
-            id: this.gs.MENU_WH_INWARD,
-            menuid: this.gs.MENU_WH_INWARD,
-            menu_param: '',
-            origin: 'wh-inward-page',
+            id: this.gs.MENU_WH_OUTWARD,
+            menuid: this.gs.MENU_WH_OUTWARD,
+            menu_param: this.mainService.param_type,
+            origin: 'wh-outward-page',
             rnd: this.gs.getRandomInt()
         };
         this.gs.AutoReloadReturn(prm);
@@ -909,9 +909,9 @@ export class WhOutwardEditComponent implements OnInit {
         if (_mode == "LIST") {
             return {
                 appid: this.gs.appid,
-                id: this.gs.MENU_WH_INWARD,
-                menuid: this.gs.MENU_WH_INWARD,
-                menu_param: '',
+                id: this.gs.MENU_WH_OUTWARD,
+                menuid: this.gs.MENU_WH_OUTWARD,
+                menu_param: this.mainService.param_type,
                 origin: 'wh-outward-page',
                 rnd: this.gs.getRandomInt()
             };

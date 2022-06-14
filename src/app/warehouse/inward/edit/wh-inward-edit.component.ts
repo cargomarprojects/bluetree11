@@ -460,7 +460,7 @@ export class WhInwardEditComponent implements OnInit {
             appid: this.gs.appid,
             id: this.gs.MENU_WH_INWARD,
             menuid: this.gs.MENU_WH_INWARD,
-            menu_param: '',
+            menu_param: this.mainService.param_type,
             origin: 'wh-inward-page',
             rnd: this.gs.getRandomInt()
         };
@@ -911,7 +911,7 @@ export class WhInwardEditComponent implements OnInit {
                 appid: this.gs.appid,
                 id: this.gs.MENU_WH_INWARD,
                 menuid: this.gs.MENU_WH_INWARD,
-                menu_param: '',
+                menu_param: this.mainService.param_type,
                 origin: 'wh-inward-page',
                 rnd: this.gs.getRandomInt()
             };
