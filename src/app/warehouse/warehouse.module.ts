@@ -11,6 +11,7 @@ import { WhProductEditComponent } from './product/edit/wh-product-edit.component
 import { WhOutwardComponent } from './outward/wh-outward.component';
 import { WhOutwardHeaderComponent } from './outward/wh-outward-header.component';
 import { WhOutwardEditComponent } from './outward/edit/wh-outward-edit.component';
+import { WhOutwardDetComponent } from './outward/edit/wh-outward-det.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { WhOutwardEditComponent } from './outward/edit/wh-outward-edit.component
     WhProductEditComponent,
     WhOutwardComponent,
     WhOutwardHeaderComponent,
-    WhOutwardEditComponent
+    WhOutwardEditComponent,
+    WhOutwardDetComponent
   ],
   imports: [
     SharedModule,

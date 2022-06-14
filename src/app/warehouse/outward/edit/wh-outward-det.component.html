@@ -1,4 +1,4 @@
-<div >
+<div>
     <button class="btn btn-link btn-sm" (click)="LoadList(detmodal)">SELECT</button>
 </div>
 
@@ -18,19 +18,26 @@
                                 <table class="table  table-hover table-sm">
                                     <thead class="page-body-thead">
                                         <tr>
+
+                                            <th>CODE</th>
+                                            <th>PRODUCT</th>
+                                            <th>UNIT</th>
+                                            <th>QTY</th>
+                                            <th>QTY-DESPACTCHED</th>
                                             <th class="text-center">SELECT</th>
-                                            <th>DATE</th>
-                                            <th>AMOUNT</th>
                                         </tr>
                                     </thead>
                                     <tbody class="page-body-tbody" *ngFor="let rec of records">
                                         <tr>
-                                            <!-- <td  (click)="SelectRecord(rec)"><input type="checkbox" [(ngModel)]="rec.invd_payroll_b"></td>
-                                            <td>{{rec.ind_payroll_date}}</td>
-                                            <td>{{rec.ind_frate}}</td> -->
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{rec.ind_code}}</td>
+                                            <td>{{rec.ind_product}}</td>
+                                            <td>{{rec.ind_qty_uom_code}}</td>
+                                            <td>{{rec.ind_cqty}}</td>
+                                            <td> <input #_ind_qty_uom_code class="form-control form-control-sm"
+                                                    type="text" style="text-align:left;"
+                                                    [(ngModel)]="rec.ind_cqty" maxlength="15" /></td>
+                                            <td (click)="SelectRecord(rec)"><input type="checkbox"
+                                                    [(ngModel)]="rec.ind_selected"></td>
                                         </tr>
                                     </tbody>
                                 </table>

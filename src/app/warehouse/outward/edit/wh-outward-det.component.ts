@@ -14,29 +14,14 @@ export class WhOutwardDetComponent implements OnInit {
     public errorMessage: string = '';
     public tab: string = 'main';
 
-    private _mblid: string;
-    @Input() set mblid(value: string) {
-        this._mblid = value;
+    private _prodid: string;
+    @Input() set prodid(value: string) {
+        this._prodid = value;
     }
 
-    private _custid: string = '';
-    @Input() set custid(value: string) {
-        this._custid = value;
-    }
-
-    private _refno: string;
-    @Input() set refno(value: string) {
-        this._refno = value;
-    }
-
-    private _empname: string;
-    @Input() set empname(value: string) {
-        this._empname = value;
-    }
-    
-    private _recordexist: boolean;
-    @Input() set recordexist(value: boolean) {
-        this._recordexist = value;
+    private _uomid: string = '';
+    @Input() set uomid(value: string) {
+        this._uomid = value;
     }
 
     @Output() callbackevent = new EventEmitter<any>();
@@ -44,7 +29,6 @@ export class WhOutwardDetComponent implements OnInit {
     modal: any;
     public records: Tbl_wh_inwardd[] = [];
     public SelectedRecord: Tbl_wh_inwardd = <Tbl_wh_inwardd>{};
-
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -60,24 +44,15 @@ export class WhOutwardDetComponent implements OnInit {
         this.gs.checkAppVersion();
     }
 
-    LoadList(payrollmodal: any = null) {
-
-        if (this.gs.isBlank(this._custid)) {
-            alert('Invalid Customer');
-            return;
-        }
-
-        if (this._recordexist)
-        {
-            alert('Cannot Copy, Record Exists');
+    LoadList(detmodal: any = null) {
+        if (this.gs.isBlank(this._prodid)||this.gs.isBlank(this._uomid)) {
+            alert('Invalid ID');
             return;
         }
 
         var SearchData = this.gs.UserInfo;
-        SearchData.DCODE = this.gs.PAYROLL_INVOICE_CODE;
-        SearchData.ACODE = this.gs.PAYROLL_ACC_CODE;
-        SearchData.MBL_ID = this._mblid;
-        SearchData.CUST_ID = this._custid;
+        SearchData.PROD_ID = this._prodid;
+        SearchData.UOM_ID = this._uomid;
         this.mainservice.GetProductdetails(SearchData).subscribe(response => {
             this.records = response.list;
             // this.records.forEach(rec => {
@@ -86,7 +61,7 @@ export class WhOutwardDetComponent implements OnInit {
             //     else
             //         rec.invd_payroll_b = false;
             // });
-            this.modal = this.modalservice.open(payrollmodal, { centered: true });
+            this.modal = this.modalservice.open(detmodal, { centered: true });
 
         }, error => {
             alert(this.gs.getError(error));

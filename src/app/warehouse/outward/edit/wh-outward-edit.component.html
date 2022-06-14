@@ -389,7 +389,10 @@
                                                         style="text-align:left;" [(ngModel)]="rec.ind_qty_uom_code"
                                                         maxlength="15" />
                                                 </td>
-                                                <td class="p-0 hlink2" (click)="SelectRow(rec)"> SELECT
+                                                <td class="p-0 hlink2"> 
+                                                    <app-wh-outward-det [prodid]="rec.ind_code_id"
+                                                        [uomid]="rec.ind_qty_uom_id" 
+                                                        (callbackevent)="detcallbackevent($event)"></app-wh-outward-det>
                                                 </td>  
                                                 <!-- <td class="p-0">
                                                     <input #_ind_packages class="form-control form-control-sm"

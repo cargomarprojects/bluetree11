@@ -85,6 +85,7 @@ export interface Tbl_wh_inwardd {
     ind_slno: number;
     ind_req_cqty: string;
     ind_set_qty: number;
+    ind_selected:boolean;
 }
 
 export interface vm_tbl_wh_inwardm {
