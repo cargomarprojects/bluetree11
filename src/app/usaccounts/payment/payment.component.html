@@ -32,8 +32,10 @@
           <th (click)="mainservice.sort('pay_ap_total')" class='text-right'>AP&nbsp;<i [ngClass]="mainservice.getIcon('pay_ap_total')"></i></th>
           <th (click)="mainservice.sort('pay_acc_name')">BANK&nbsp;<i [ngClass]="mainservice.getIcon('pay_acc_name')"></i></th>
           <th (click)="mainservice.sort('pay_diff')" class='text-right'>AMOUNT&nbsp;<i [ngClass]="mainservice.getIcon('pay_diff')"></i></th>
+          
           <th (click)="mainservice.sort('pay_bank_charges')" *ngIf="!gs.IS_SINGLE_CURRENCY" >CHARGES&nbsp;<i [ngClass]="mainservice.getIcon('pay_bank_charges')"></i></th>
           <th (click)="mainservice.sort('pay_exchange_diff')" *ngIf="!gs.IS_SINGLE_CURRENCY" >EX.DIFF&nbsp;<i [ngClass]="mainservice.getIcon('pay_exchange_diff')"></i></th>
+
           <th (click)="mainservice.sort('pay_posted')">POSTED&nbsp;<i [ngClass]="mainservice.getIcon('pay_posted')"></i></th>
           <th (click)="mainservice.sort('pay_depositno')">DEPOSIT#&nbsp;<i [ngClass]="mainservice.getIcon('pay_depositno')"></i></th>
           <th (click)="mainservice.sort('pay_deposit_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('pay_deposit_date')"></i></th>          

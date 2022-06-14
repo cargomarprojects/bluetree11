@@ -122,7 +122,8 @@ export class PaymentService {
         }
 
         var SearchData = this.gs.UserInfo;
-        SearchData.outputformat = 'SCREEN';
+        //SearchData.outputformat = 'SCREEN';
+        SearchData.outputformat = _searchdata.outputformat
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
         SearchData.TYPE = 'PAYMENT';
