@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDet
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/Tbl_Acc_Payment';
 import { SearchTable } from '../../shared/models/searchtable';
+import { PaymentService } from '../services/payment.service';
 //EDIT-AJITH-08-09-2021
 
 @Component({
@@ -22,7 +23,9 @@ export class PaymentHeaderComponent implements OnInit {
     }
     @Output() searchEvents = new EventEmitter<any>();
 
-    constructor(public gs: GlobalService
+    constructor(
+        public gs: GlobalService,
+        public mainservice: PaymentService
     ) { }
 
     ngOnInit() {

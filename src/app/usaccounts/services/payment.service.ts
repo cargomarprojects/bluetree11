@@ -29,6 +29,7 @@ export class PaymentService {
     public canEdit: boolean;
     public canSave: boolean;
     public canDelete: boolean;
+    public canPrint: boolean;
 
     public initlialized: boolean;
     private appid = ''
@@ -102,6 +103,7 @@ export class PaymentService {
         this.canEdit = this.gs.canEdit(this.menuid);
         this.canDelete = this.gs.canDelete(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
+        this.canPrint = this.gs.canPrint(this.menuid);        
 
         this.initlialized = true;
 
@@ -166,7 +168,11 @@ export class PaymentService {
     }
 
     Downloadfile(filename: string, filetype: string, filedisplayname: string) {
-        this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
+        if ( filename == "")
+            alert('No Data Found')
+        else 
+            this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
+
     }
 
 
