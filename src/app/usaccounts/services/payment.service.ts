@@ -150,15 +150,24 @@ export class PaymentService {
         }
 
         this.List(SearchData).subscribe(response => {
-            this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
-            this.record.records = response.list;
-            this.mdata$.next(this.record);
+            if (_searchdata.outputformat == "EXCEL") {
+                this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+            } else {
+                this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
+                this.record.records = response.list;
+                this.mdata$.next(this.record);
+            }
         }, error => {
             this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
             alert(this.record.errormessage);
         });
     }
+
+    Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+        this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
+    }
+
 
     RefreshList(_rec: Tbl_Acc_Payment) {
         if (this.gs.isBlank(this.record))
