@@ -434,8 +434,10 @@ export class WhInwardEditComponent implements OnInit {
 
 
 
-        if (!bRet)
+        if (!bRet) {
             alert(this.errorMessage);
+            this.errorMessage = [];
+        }
 
         return bRet;
     }
