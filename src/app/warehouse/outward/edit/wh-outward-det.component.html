@@ -1,0 +1,52 @@
+<div >
+    <button class="btn btn-link btn-sm" (click)="LoadList(detmodal)">SELECT</button>
+</div>
+
+<ng-template #detmodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <div class="page-header">
+                        <div class="row align-items-center justify-content-left p-1">
+                            <label class="mr-3">Product Register</label>
+                        </div>
+                    </div>
+                    <div class="row border">
+                        <div class="col-md-12  px-0 mx-0">
+                            <div class="page-body table-responsive table-bordered">
+                                <table class="table  table-hover table-sm">
+                                    <thead class="page-body-thead">
+                                        <tr>
+                                            <th class="text-center">SELECT</th>
+                                            <th>DATE</th>
+                                            <th>AMOUNT</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="page-body-tbody" *ngFor="let rec of records">
+                                        <tr>
+                                            <!-- <td  (click)="SelectRecord(rec)"><input type="checkbox" [(ngModel)]="rec.invd_payroll_b"></td>
+                                            <td>{{rec.ind_payroll_date}}</td>
+                                            <td>{{rec.ind_frate}}</td> -->
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-sm mr-1" (click)="CloseModal('OK')">Ok</button>
+                    <button class="btn btn-primary btn-sm mr-1" (click)="CloseModal('CLOSE')">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

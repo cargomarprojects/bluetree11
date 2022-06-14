@@ -230,6 +230,10 @@ export class WhOutwardService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Warehouse/Outward/Save', SearchData, this.gs.headerparam2('authorized'));
     }
      
+    GetProductdetails(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Warehouse/Outward/GetProductdetails', SearchData, this.gs.headerparam2('authorized'));
+    }
+
     DeleteRecord(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Warehouse/Outward/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
