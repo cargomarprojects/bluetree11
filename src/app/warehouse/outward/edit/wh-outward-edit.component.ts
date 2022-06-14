@@ -1003,6 +1003,11 @@ export class WhOutwardEditComponent implements OnInit {
         return bOk;
     }
 
+    SelectRow(_rec: Tbl_wh_inwardd)
+    {
+
+    }
+
 }
 
 

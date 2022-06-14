@@ -70,15 +70,16 @@
                                     <label class="col-3 col-form-label col-form-label-sm">Warehouse</label>
                                     <div class="col-9">
                                         <app-autocomplete2 [controlname]="'WAREHOUSE'" [tabletype]="'MASTER'"
-                                            [displaycolumn]="'CODE'"
-                                            [displaydata]="record.inm_wh_code" (ValueChanged)="LovSelected($event)">
+                                            [displaycolumn]="'CODE'" [displaydata]="record.inm_wh_code"
+                                            (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm"></label>
                                     <div class="col-9">
-                                        <InputBox [disabled]="true" [(inputModel)]="record.inm_wh_name" [maxlength]="100" [uppercase]="true">
+                                        <InputBox [disabled]="true" [(inputModel)]="record.inm_wh_name"
+                                            [maxlength]="100" [uppercase]="true">
                                         </InputBox>
                                     </div>
                                 </div>
@@ -94,9 +95,9 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Customer</label>
                                     <div class="col-9">
-                                        <app-autocomplete2 #_customer_lov [controlname]="'CUSTOMER'" [tabletype]="'MASTER'"
-                                            [displaycolumn]="'CODE'" [displaydata]="record.inm_cust_code"
-                                            (ValueChanged)="LovSelected($event)">
+                                        <app-autocomplete2 #_customer_lov [controlname]="'CUSTOMER'"
+                                            [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                                            [displaydata]="record.inm_cust_code" (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
                                     </div>
                                 </div>
@@ -104,7 +105,7 @@
 
                                     <label class="col-3 col-form-label col-form-label-sm"></label>
                                     <div class="col-9">
-                                        <InputBox  [(inputModel)]="record.inm_cust_name" [maxlength]="60"
+                                        <InputBox [(inputModel)]="record.inm_cust_name" [maxlength]="60"
                                             [uppercase]="true">
                                         </InputBox>
                                     </div>
@@ -112,7 +113,7 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm"></label>
                                     <div class="col-9">
-                                        <InputBox  [(inputModel)]="record.inm_cust_add1" [maxlength]="60"
+                                        <InputBox [(inputModel)]="record.inm_cust_add1" [maxlength]="60"
                                             [uppercase]="true">
                                         </InputBox>
                                     </div>
@@ -328,7 +329,7 @@
                                                 <th width='5%'>QTY-REQUESTED</th>
                                                 <th width='5%'>QTY-DESPATCHED</th>
                                                 <th width='6%'>UOM</th>
-
+                                                <th width='5%'>SELECT</th>
                                                 <!-- <th width='7%'>PACKAGES</th>
                                                 <th width='6%'>UOM</th>
                                                 <th width='5%'>WEIGHT</th>
@@ -344,7 +345,7 @@
                                                 <td class="p-0">
 
                                                     <app-autocomplete2 #_ind_code_field [controlname]="'PRODUCT'"
-                                                        [tabletype]="'PRODUCT-BATCHWISE'"  [uid]="rec.ind_pkid"
+                                                        [tabletype]="'PRODUCT-BATCHWISE'" [uid]="rec.ind_pkid"
                                                         [displaycolumn]="'CODE'" [displaydata]="rec.ind_code"
                                                         (ValueChanged)="LovSelected($event,i)">
                                                     </app-autocomplete2>
@@ -353,39 +354,43 @@
                                                 <td class="p-0">
                                                     <input #_ind_product class="form-control form-control-sm"
                                                         type="text" [(ngModel)]="rec.ind_product"
-                                                        (blur)="onBlur('ind_product',rec)"  maxlength="100"/>
+                                                        (blur)="onBlur('ind_product',rec)" maxlength="100" />
                                                 </td>
 
                                                 <td class="p-0">
                                                     <input class="form-control form-control-sm" type="text"
-                                                        [(ngModel)]="rec.ind_desc" (blur)="onBlur('ind_desc',rec)" maxlength="100" />
+                                                        [(ngModel)]="rec.ind_desc" (blur)="onBlur('ind_desc',rec)"
+                                                        maxlength="100" />
                                                 </td>
                                                 <td class="p-0">
                                                     <input #_ind_refno class="form-control form-control-sm" type="text"
-                                                        [(ngModel)]="rec.ind_refno" (blur)="onBlur('ind_refno',rec)" maxlength="60" />
+                                                        [(ngModel)]="rec.ind_refno" (blur)="onBlur('ind_refno',rec)"
+                                                        maxlength="60" />
                                                 </td>
                                                 <td class="p-0">
                                                     <input #_ind_cqty class="form-control form-control-sm" type="text"
                                                         style="text-align:right;" [(ngModel)]="rec.ind_req_cqty"
-                                                        (blur)="onBlur('ind_req_cqty',rec,i)"  maxlength="15"/>
+                                                        (blur)="onBlur('ind_req_cqty',rec,i)" maxlength="15" />
                                                 </td>
                                                 <td class="p-0">
-                                                    <input #_ind_cqty disabled class="form-control form-control-sm" type="text"
-                                                        style="text-align:right;" [(ngModel)]="rec.ind_cqty"
-                                                        (blur)="onBlur('ind_cqty',rec,i)"  maxlength="15"/>
+                                                    <input #_ind_cqty disabled class="form-control form-control-sm"
+                                                        type="text" style="text-align:right;" [(ngModel)]="rec.ind_cqty"
+                                                        (blur)="onBlur('ind_cqty',rec,i)" maxlength="15" />
                                                 </td>
                                                 <td class="p-0">
-                                                        <!-- <app-autocomplete2 disabled [controlname]="'QTY-UOM'"
+                                                    <!-- <app-autocomplete2 disabled [controlname]="'QTY-UOM'"
                                                         [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
                                                         [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
                                                         [displaydata]="rec.ind_qty_uom_code"
                                                         (ValueChanged)="LovSelected($event,i)">
                                                     </app-autocomplete2> -->
-                                                    <input #_ind_qty_uom_code disabled class="form-control form-control-sm" type="text"
+                                                    <input #_ind_qty_uom_code disabled
+                                                        class="form-control form-control-sm" type="text"
                                                         style="text-align:left;" [(ngModel)]="rec.ind_qty_uom_code"
-                                                         maxlength="15"/>
+                                                        maxlength="15" />
                                                 </td>
-
+                                                <td class="p-0 hlink2" (click)="SelectRow(rec)"> SELECT
+                                                </td>  
                                                 <!-- <td class="p-0">
                                                     <input #_ind_packages class="form-control form-control-sm"
                                                         type="number" style="text-align:right;"
@@ -444,10 +449,12 @@
                                                         <i class="fa fa-trash-o"></i>
                                                     </a>
                                                 </td> -->
+
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button #_btn_Add_product class="btn btn-info btn-sm" (click)="AddDetRow()">Add Product</button>
+                                    <button #_btn_Add_product class="btn btn-info btn-sm" (click)="AddDetRow()">Add
+                                        Product</button>
 
 
                                 </div>
