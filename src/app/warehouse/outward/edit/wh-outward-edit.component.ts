@@ -82,6 +82,7 @@ export class WhOutwardEditComponent implements OnInit {
     is_cntr_addrow: boolean = false;
     is_locked: boolean = false;
     bChanged = false;
+    product_lov_where: string = "";
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -214,8 +215,10 @@ export class WhOutwardEditComponent implements OnInit {
                 this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_wh_container[]>[] : <Tbl_wh_container[]>response.cntrrecords;
                 this.mode = 'EDIT';
 
+                this.product_lov_where = " inm_cust_id='" + this.record.inm_cust_id + "' "
                 if (!this.gs.isBlank(this.inm_doc_date_field))
                     this.inm_doc_date_field.Focus();
+
             }, error => {
                 this.errorMessage.push(this.gs.getError(error));
             });
@@ -421,7 +424,7 @@ export class WhOutwardEditComponent implements OnInit {
                 else
                     if (!this.isValidUnitFactor(Rec.ind_req_cqty, Rec.ind_unit_factor)) {
                         bRet = false;
-                        this.errorMessage.push("Loose quantity should be less than " + Rec.ind_unit_factor+", Row" + iCtr.toString());
+                        this.errorMessage.push("Loose quantity should be less than " + Rec.ind_unit_factor + ", Row" + iCtr.toString());
                     }
 
                 // if (this.gs.isBlank(Rec.ind_qty_uom_id)) {
@@ -551,6 +554,7 @@ export class WhOutwardEditComponent implements OnInit {
             this.record.inm_cust_add2 = _Record.col2;
             this.record.inm_cust_add3 = _Record.col3;
             this.record.inm_cust_add4 = this.gs.GetTelFax(_Record.col6.toString(), _Record.col7.toString());
+            this.product_lov_where = " inm_cust_id='" + this.record.inm_cust_id + "' "
             // this.mbl_cargo_locname_field.nativeElement.focus();
         }
 
@@ -1006,10 +1010,10 @@ export class WhOutwardEditComponent implements OnInit {
     detcallbackevent(event: any) {
 
         if (event.action == 'OK') {
-         
+
         }
-    
-      }
+
+    }
 }
 
 
