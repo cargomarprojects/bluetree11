@@ -34,6 +34,7 @@ export class WhOutwardDetComponent implements OnInit {
         this._parentid = value;
     }
 
+    @Input() public detrecords: Tbl_wh_inwarddet[];
     @Output() callbackevent = new EventEmitter<any>();
 
     modal: any;
@@ -66,6 +67,16 @@ export class WhOutwardDetComponent implements OnInit {
         SearchData.UOM_ID = this._uomid;
         this.mainservice.GetProductdetails(SearchData).subscribe(response => {
             this.records = response.list;
+
+              this.detrecords.forEach(Rec => {
+                this.records.forEach(Rec2 => {
+                  if (Rec.indd_parent_id == Rec2.indd_parent_id) {
+                    Rec2.indd_despatch_cqty = Rec.indd_despatch_cqty;
+                    Rec2.indd_selected = true;
+                  }
+                });
+              });
+
             this.modal = this.modalservice.open(detmodal, { centered: true });
 
         }, error => {
