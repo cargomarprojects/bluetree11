@@ -233,7 +233,7 @@ export class WhInwardEditComponent implements OnInit {
         this.record.inm_type = this.type;
         const saveRecord = <vm_tbl_wh_inwardm>{};
         saveRecord.record = this.record;
-        saveRecord.detrecords = this.detrecords;
+        saveRecord.drecords = this.detrecords;
         saveRecord.cntrrecords = this.cntrrecords;
         saveRecord.mode = this.mode;
         saveRecord.userinfo = this.gs.UserInfo;

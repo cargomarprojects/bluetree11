@@ -85,13 +85,26 @@ export interface Tbl_wh_inwardd {
     ind_slno: number;
     ind_req_cqty: string;
     ind_set_qty: number;
-    ind_selected:boolean;
+    ind_selected: boolean;
+}
+
+
+export interface Tbl_wh_inwarddet {
+    indd_pkid: string;
+    indd_parent_id: string;
+    indd_cust_id: string;
+    indd_code_id: string;
+    indd_unit_id: string;
+    indd_xref_id: string;
+    indd_despatch_cqty: string;
+    indd_qty: number;
 }
 
 export interface vm_tbl_wh_inwardm {
     mode: string;
     record: Tbl_wh_inwardm;
-    detrecords: Tbl_wh_inwardd[];
+    drecords: Tbl_wh_inwardd[];
+    detrecords: Tbl_wh_inwarddet[];
     cntrrecords: Tbl_wh_container[];
     userinfo: any,
     filter: any;

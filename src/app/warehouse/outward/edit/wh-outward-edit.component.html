@@ -247,7 +247,7 @@
                             </div>
                         </div>
 
-                        <div class="row border p-1">
+                        <div *ngIf="mode=='EDIT'" class="row border p-1">
                             <div class="col-md-12 px-1 mx-1">
 
                                 <div class="page-body table-responsive">
@@ -316,7 +316,7 @@
 
                         </div>
 
-                        <div class="row border p-1">
+                        <div *ngIf="mode=='EDIT'" class="row border p-1">
                             <div class="col-md-12 px-1 mx-1">
                                 <div class="page-body table-responsive table-bordered">
                                     <table class="table  table-hover table-sm">
@@ -340,7 +340,7 @@
                                                 <th width='2%'></th> -->
                                             </tr>
                                         </thead>
-                                        <tbody class="page-body-tbody" *ngFor="let rec of detrecords; let i = index">
+                                        <tbody class="page-body-tbody" *ngFor="let rec of drecords; let i = index">
                                             <tr>
                                                 <td class="p-0">
 

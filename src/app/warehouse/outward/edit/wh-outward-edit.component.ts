@@ -5,7 +5,7 @@ import { GlobalService } from '../../../core/services/global.service';
 
 import { WhOutwardService } from '../../services/whoutward.service';
 import { User_Menu } from '../../../core/models/menum';
-import { Tbl_wh_inwardm, Tbl_wh_inwardd, Tbl_wh_container, vm_tbl_wh_inwardm } from '../../models/Tbl_wh_inwardm';
+import { Tbl_wh_inwardm, Tbl_wh_inwardd,Tbl_wh_inwarddet, Tbl_wh_container, vm_tbl_wh_inwardm } from '../../models/Tbl_wh_inwardm';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
@@ -33,9 +33,9 @@ export class WhOutwardEditComponent implements OnInit {
 
     record: Tbl_wh_inwardm = <Tbl_wh_inwardm>{};
 
-    detrecords: Tbl_wh_inwardd[] = [];
+    drecords: Tbl_wh_inwardd[] = [];
     cntrrecords: Tbl_wh_container[] = [];
-
+    //detrecords: Tbl_wh_inwarddet[] = [];
 
     tab: string = 'main';
     report_title: string = '';
@@ -154,7 +154,7 @@ export class WhOutwardEditComponent implements OnInit {
         this.is_locked = false;
         if (this.mode == 'ADD') {
             this.record = <Tbl_wh_inwardm>{};
-            this.detrecords = <Tbl_wh_inwardd[]>[];
+            this.drecords = <Tbl_wh_inwardd[]>[];
             this.cntrrecords = <Tbl_wh_container[]>[];
             this.pkid = this.gs.getGuid();
             this.init();
@@ -211,7 +211,7 @@ export class WhOutwardEditComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_wh_inwardm>response.record;
-                this.detrecords = (response.detrecords == undefined || response.detrecords == null) ? <Tbl_wh_inwardd[]>[] : <Tbl_wh_inwardd[]>response.detrecords;
+                this.drecords = (response.drecords == undefined || response.drecords == null) ? <Tbl_wh_inwardd[]>[] : <Tbl_wh_inwardd[]>response.drecords;
                 this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_wh_container[]>[] : <Tbl_wh_container[]>response.cntrrecords;
                 this.mode = 'EDIT';
 
@@ -236,7 +236,7 @@ export class WhOutwardEditComponent implements OnInit {
         this.record.inm_type = this.type;
         const saveRecord = <vm_tbl_wh_inwardm>{};
         saveRecord.record = this.record;
-        saveRecord.detrecords = this.detrecords;
+        saveRecord.drecords = this.drecords;
         saveRecord.cntrrecords = this.cntrrecords;
         saveRecord.mode = this.mode;
         saveRecord.userinfo = this.gs.UserInfo;
@@ -336,7 +336,7 @@ export class WhOutwardEditComponent implements OnInit {
     }
     private SaveDetails() {
         let iCtr: number = 0;
-        this.detrecords.forEach(Rec => {
+        this.drecords.forEach(Rec => {
             iCtr++;
             Rec.ind_parent_id = this.pkid.toString();
             Rec.ind_slno = iCtr;
@@ -401,8 +401,8 @@ export class WhOutwardEditComponent implements OnInit {
         }
 
         let iCtr: number = 0;
-        if (!this.gs.isBlank(this.detrecords)) {
-            this.detrecords.forEach(Rec => {
+        if (!this.gs.isBlank(this.drecords)) {
+            this.drecords.forEach(Rec => {
                 iCtr++;
                 if (this.gs.isBlank(Rec.ind_code_id)) {
                     bRet = false;
@@ -525,7 +525,7 @@ export class WhOutwardEditComponent implements OnInit {
         rec.ind_volume_uom_code = '';
         rec.ind_volume_uom_name = '';
         rec.ind_slno = this.findDetNextCtr();
-        this.detrecords.push(rec);
+        this.drecords.push(rec);
 
         this.ind_code_field.changes
             .subscribe((queryChanges) => {
@@ -535,7 +535,7 @@ export class WhOutwardEditComponent implements OnInit {
 
     findDetNextCtr() {
         let max: number = 0;
-        this.detrecords.forEach(Rec => {
+        this.drecords.forEach(Rec => {
             max = Rec.ind_slno > max ? Rec.ind_slno : max;
         })
         return max + 1;
@@ -604,7 +604,7 @@ export class WhOutwardEditComponent implements OnInit {
 
         //Details
         if (_Record.controlname == "PRODUCT") {
-            this.detrecords.forEach(rec => {
+            this.drecords.forEach(rec => {
                 if (rec.ind_pkid == _Record.uid) {
                     rec.ind_code_id = _Record.id;
                     rec.ind_code = _Record.code;
@@ -619,7 +619,7 @@ export class WhOutwardEditComponent implements OnInit {
         }
 
         if (_Record.controlname == "QTY-UOM") {
-            this.detrecords.forEach(rec => {
+            this.drecords.forEach(rec => {
                 if (rec.ind_pkid == _Record.uid) {
                     rec.ind_qty_uom_id = _Record.id;
                     rec.ind_qty_uom_code = _Record.code;
@@ -635,7 +635,7 @@ export class WhOutwardEditComponent implements OnInit {
         }
 
         if (_Record.controlname == "PACKAGES-UOM") {
-            this.detrecords.forEach(rec => {
+            this.drecords.forEach(rec => {
                 if (rec.ind_pkid == _Record.uid) {
                     rec.ind_packages_uom_id = _Record.id;
                     rec.ind_packages_uom_code = _Record.code;
@@ -646,7 +646,7 @@ export class WhOutwardEditComponent implements OnInit {
             });
         }
         if (_Record.controlname == "WEIGHT-UOM") {
-            this.detrecords.forEach(rec => {
+            this.drecords.forEach(rec => {
                 if (rec.ind_pkid == _Record.uid) {
                     rec.ind_weight_uom_id = _Record.id;
                     rec.ind_weight_uom_code = _Record.code;
@@ -657,7 +657,7 @@ export class WhOutwardEditComponent implements OnInit {
             });
         }
         if (_Record.controlname == "VOLUME-UOM") {
-            this.detrecords.forEach(rec => {
+            this.drecords.forEach(rec => {
                 if (rec.ind_pkid == _Record.uid) {
                     rec.ind_volume_uom_id = _Record.id;
                     rec.ind_volume_uom_code = _Record.code;
@@ -900,7 +900,7 @@ export class WhOutwardEditComponent implements OnInit {
         if (!confirm("Delete Y/N")) {
             return;
         }
-        this.detrecords.splice(this.detrecords.findIndex(rec => rec.ind_pkid == _rec.ind_pkid), 1);
+        this.drecords.splice(this.drecords.findIndex(rec => rec.ind_pkid == _rec.ind_pkid), 1);
     }
 
     CloseModal() {
