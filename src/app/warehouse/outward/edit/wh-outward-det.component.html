@@ -40,7 +40,6 @@
                                 <table class="table  table-hover table-sm">
                                     <thead class="page-body-thead">
                                         <tr>
-
                                             <th>DOC#</th>
                                             <th>DATE</th>
                                             <th>REF#</th>
@@ -51,15 +50,15 @@
                                     </thead>
                                     <tbody class="page-body-tbody" *ngFor="let rec of records">
                                         <tr>
-                                            <td>{{rec.ind_code}}</td>
-                                            <td>{{rec.ind_product}}</td>
-                                            <td>{{rec.ind_qty_uom_code}}</td>
-                                            <td>{{rec.ind_cqty}}</td>
-                                            <td> <input #_ind_qty_uom_code class="form-control form-control-sm"
+                                            <td>{{rec.indd_doc_no}}</td>
+                                            <td>{{rec.indd_doc_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                                            <td>{{rec.indd_refno}}</td>
+                                            <td>{{rec.indd_bal_cqty}}</td>
+                                            <td class="p-0"> <input #_ind_qty_uom_code class="form-control form-control-sm"
                                                     type="text" style="text-align:left;"
-                                                    [(ngModel)]="rec.ind_cqty" maxlength="15" /></td>
+                                                    [(ngModel)]="rec.indd_despatch_cqty" maxlength="15" /></td>
                                             <td (click)="SelectRecord(rec)"><input type="checkbox"
-                                                    [(ngModel)]="rec.ind_selected"></td>
+                                                    [(ngModel)]="rec.indd_selected"></td>
                                         </tr>
                                     </tbody>
                                 </table>

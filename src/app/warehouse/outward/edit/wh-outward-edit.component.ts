@@ -5,7 +5,7 @@ import { GlobalService } from '../../../core/services/global.service';
 
 import { WhOutwardService } from '../../services/whoutward.service';
 import { User_Menu } from '../../../core/models/menum';
-import { Tbl_wh_inwardm, Tbl_wh_inwardd,Tbl_wh_inwarddet, Tbl_wh_container, vm_tbl_wh_inwardm } from '../../models/Tbl_wh_inwardm';
+import { Tbl_wh_inwardm, Tbl_wh_inwardd, Tbl_wh_inwarddet, Tbl_wh_container, vm_tbl_wh_inwardm } from '../../models/Tbl_wh_inwardm';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
@@ -156,10 +156,12 @@ export class WhOutwardEditComponent implements OnInit {
             this.record = <Tbl_wh_inwardm>{};
             this.drecords = <Tbl_wh_inwardd[]>[];
             this.cntrrecords = <Tbl_wh_container[]>[];
+            this.detrecords = <Tbl_wh_inwarddet[]>[];
             this.pkid = this.gs.getGuid();
             this.init();
         }
         if (this.mode == 'EDIT') {
+            this.detrecords = <Tbl_wh_inwarddet[]>[];
             this.GetRecord();
         }
     }
@@ -213,6 +215,7 @@ export class WhOutwardEditComponent implements OnInit {
                 this.record = <Tbl_wh_inwardm>response.record;
                 this.drecords = (response.drecords == undefined || response.drecords == null) ? <Tbl_wh_inwardd[]>[] : <Tbl_wh_inwardd[]>response.drecords;
                 this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_wh_container[]>[] : <Tbl_wh_container[]>response.cntrrecords;
+                this.detrecords = (response.detrecords == undefined || response.detrecords == null) ? <Tbl_wh_inwarddet[]>[] : <Tbl_wh_inwarddet[]>response.detrecords;
                 this.mode = 'EDIT';
 
                 this.product_lov_where = " inm_cust_id='" + this.record.inm_cust_id + "' "
@@ -238,6 +241,7 @@ export class WhOutwardEditComponent implements OnInit {
         saveRecord.record = this.record;
         saveRecord.drecords = this.drecords;
         saveRecord.cntrrecords = this.cntrrecords;
+        saveRecord.detrecords = this.detrecords;
         saveRecord.mode = this.mode;
         saveRecord.userinfo = this.gs.UserInfo;
 
@@ -340,6 +344,13 @@ export class WhOutwardEditComponent implements OnInit {
             iCtr++;
             Rec.ind_parent_id = this.pkid.toString();
             Rec.ind_slno = iCtr;
+        })
+
+       iCtr = 0;
+        this.detrecords.forEach(Rec => {
+            iCtr++;
+            Rec.indd_xref_id = this.pkid.toString();
+            Rec.indd_slno = iCtr;
         })
     }
 
@@ -1011,7 +1022,20 @@ export class WhOutwardEditComponent implements OnInit {
 
         if (event.action == 'OK') {
 
-            
+            var i;
+            for (i = this.detrecords.length - 1; i >= 0; i -= 1) {
+              if (this.detrecords[i].indd_parent_id === event.parentid) {
+                this.detrecords.splice(i, 1);
+              }
+            }
+
+            event.records.forEach(Rec => {
+                if (Rec.indd_despatch_cqty > 0) {
+                    Rec.indd_pkid = this.gs.getGuid();
+                    Rec.indd_parent_id = event.parentid;
+                    this.detrecords.push(Rec)
+                }
+            })
         }
 
     }

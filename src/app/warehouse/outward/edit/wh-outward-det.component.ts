@@ -14,6 +14,11 @@ export class WhOutwardDetComponent implements OnInit {
     public errorMessage: string = '';
     public tab: string = 'main';
 
+    private _custid: string;
+    @Input() set custid(value: string) {
+        this._custid = value;
+    }
+
     private _prodid: string;
     @Input() set prodid(value: string) {
         this._prodid = value;
@@ -24,11 +29,15 @@ export class WhOutwardDetComponent implements OnInit {
         this._uomid = value;
     }
 
-    @Input() detrecords: Tbl_wh_inwarddet[] = [];
+    private _parentid: string = '';
+    @Input() set parentid(value: string) {
+        this._parentid = value;
+    }
+
     @Output() callbackevent = new EventEmitter<any>();
 
     modal: any;
-    public records: Tbl_wh_inwardd[] = [];
+    public records: Tbl_wh_inwarddet[] = [];
     public SelectedRecord: Tbl_wh_inwardd = <Tbl_wh_inwardd>{};
 
     constructor(
@@ -46,22 +55,17 @@ export class WhOutwardDetComponent implements OnInit {
     }
 
     LoadList(detmodal: any = null) {
-        if (this.gs.isBlank(this._prodid) || this.gs.isBlank(this._uomid)) {
+        if (this.gs.isBlank(this._prodid) || this.gs.isBlank(this._uomid)|| this.gs.isBlank(this._custid)) {
             alert('Invalid ID');
             return;
         }
 
         var SearchData = this.gs.UserInfo;
+        SearchData.CUST_ID = this._custid;
         SearchData.PROD_ID = this._prodid;
         SearchData.UOM_ID = this._uomid;
         this.mainservice.GetProductdetails(SearchData).subscribe(response => {
             this.records = response.list;
-            // this.records.forEach(rec => {
-            //     if (rec.invd_payroll_yn == 'Y')
-            //         rec.invd_payroll_b = true;
-            //     else
-            //         rec.invd_payroll_b = false;
-            // });
             this.modal = this.modalservice.open(detmodal, { centered: true });
 
         }, error => {
@@ -71,39 +75,13 @@ export class WhOutwardDetComponent implements OnInit {
     }
 
     SelectRecord(_rec: Tbl_wh_inwardd) {
-        // _rec.invd_payroll_yn = 'Y';
-        // this.SelectedRecord = _rec;
 
-        // this.records.forEach(Rec => {
-        //     if (Rec.invd_payroll_date == _rec.invd_payroll_date) {
-        //         Rec.invd_payroll_yn = 'Y';
-        //         Rec.invd_payroll_b = true;
-        //     } else {
-        //         Rec.invd_payroll_yn = 'N';
-        //         Rec.invd_payroll_b = false;
-        //     }
-        // })
     }
 
     CloseModal(_type: string) {
 
-        if (_type == "Ok") {
-
-// this.records.forEach(Rec => {
-//             if (Rec.invd_payroll_date == _rec.invd_payroll_date) {
-//                 Rec.invd_payroll_yn = 'Y';
-//                 Rec.invd_payroll_b = true;
-//             } else {
-//                 Rec.invd_payroll_yn = 'N';
-//                 Rec.invd_payroll_b = false;
-//             }
-//         })
-
-
-        }
-
         if (this.callbackevent)
-            this.callbackevent.emit({ action: _type });
+            this.callbackevent.emit({ action: _type, parentid: this._parentid, records: this.records });
 
         this.modal.close();
     }

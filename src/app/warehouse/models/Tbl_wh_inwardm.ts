@@ -92,12 +92,19 @@ export interface Tbl_wh_inwardd {
 export interface Tbl_wh_inwarddet {
     indd_pkid: string;
     indd_parent_id: string;
+    indd_doc_no: string;
+    indd_doc_date: string;
+    indd_refno: string;
     indd_cust_id: string;
     indd_code_id: string;
     indd_unit_id: string;
     indd_xref_id: string;
+    indd_bal_cqty: string;
     indd_despatch_cqty: string;
     indd_qty: number;
+    indd_selected:boolean;
+    indd_unit_factor: number;
+    indd_slno: number;
 }
 
 export interface vm_tbl_wh_inwardm {
