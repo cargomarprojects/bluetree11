@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 import { HttpClient } from '@angular/common/http';
 import { GlobalService } from '../../../core/services/global.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Tbl_wh_inwardd } from '../../models/Tbl_wh_inwardm';
+import { Tbl_wh_inwardd, Tbl_wh_inwarddet } from '../../models/Tbl_wh_inwardm';
 import { WhOutwardService } from '../../services/whoutward.service';
 
 @Component({
@@ -24,6 +24,7 @@ export class WhOutwardDetComponent implements OnInit {
         this._uomid = value;
     }
 
+    @Input() detrecords: Tbl_wh_inwarddet[] = [];
     @Output() callbackevent = new EventEmitter<any>();
 
     modal: any;
@@ -45,7 +46,7 @@ export class WhOutwardDetComponent implements OnInit {
     }
 
     LoadList(detmodal: any = null) {
-        if (this.gs.isBlank(this._prodid)||this.gs.isBlank(this._uomid)) {
+        if (this.gs.isBlank(this._prodid) || this.gs.isBlank(this._uomid)) {
             alert('Invalid ID');
             return;
         }
@@ -86,8 +87,23 @@ export class WhOutwardDetComponent implements OnInit {
 
     CloseModal(_type: string) {
 
+        if (_type == "Ok") {
+
+// this.records.forEach(Rec => {
+//             if (Rec.invd_payroll_date == _rec.invd_payroll_date) {
+//                 Rec.invd_payroll_yn = 'Y';
+//                 Rec.invd_payroll_b = true;
+//             } else {
+//                 Rec.invd_payroll_yn = 'N';
+//                 Rec.invd_payroll_b = false;
+//             }
+//         })
+
+
+        }
+
         if (this.callbackevent)
-            this.callbackevent.emit({ action: _type, rec: this.SelectedRecord });
+            this.callbackevent.emit({ action: _type });
 
         this.modal.close();
     }

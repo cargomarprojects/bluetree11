@@ -35,7 +35,7 @@ export class WhOutwardEditComponent implements OnInit {
 
     drecords: Tbl_wh_inwardd[] = [];
     cntrrecords: Tbl_wh_container[] = [];
-    //detrecords: Tbl_wh_inwarddet[] = [];
+    detrecords: Tbl_wh_inwarddet[] = [];
 
     tab: string = 'main';
     report_title: string = '';
@@ -1011,6 +1011,7 @@ export class WhOutwardEditComponent implements OnInit {
 
         if (event.action == 'OK') {
 
+            
         }
 
     }
