@@ -346,7 +346,7 @@ export class WhOutwardEditComponent implements OnInit {
             Rec.ind_slno = iCtr;
         })
 
-       iCtr = 0;
+        iCtr = 0;
         this.detrecords.forEach(Rec => {
             iCtr++;
             Rec.indd_header_id = this.pkid.toString();
@@ -423,21 +423,18 @@ export class WhOutwardEditComponent implements OnInit {
                     bRet = false;
                     this.errorMessage.push("Product cannot be blank, Row" + iCtr.toString());
                 }
-                if (this.gs.isBlank(Rec.ind_req_cqty)) {
-                    bRet = false;
-                    this.errorMessage.push("Qty cannot be blank, Row" + iCtr.toString());
-                }
 
-                if (!this.gs.isValidCqty(Rec.ind_req_cqty)) {
-                    bRet = false;
-                    this.errorMessage.push("Invalid Qty, Row" + iCtr.toString());
-                }
-                else
-                    if (!this.gs.isValidLooseCqty(Rec.ind_req_cqty, Rec.ind_unit_factor)) {
+                if (!this.gs.isBlank(Rec.ind_req_cqty)) {
+                    if (!this.gs.isValidCqty(Rec.ind_req_cqty)) {
                         bRet = false;
-                        this.errorMessage.push("Loose quantity should be less than " + Rec.ind_unit_factor + ", Row" + iCtr.toString());
+                        this.errorMessage.push("Invalid Qty, Row" + iCtr.toString());
                     }
-
+                    else
+                        if (!this.gs.isValidLooseCqty(Rec.ind_req_cqty, Rec.ind_unit_factor)) {
+                            bRet = false;
+                            this.errorMessage.push("Loose quantity should be less than " + Rec.ind_unit_factor + ", Row" + iCtr.toString());
+                        }
+                }
                 // if (this.gs.isBlank(Rec.ind_qty_uom_id)) {
                 //     bRet = false;
                 //     this.errorMessage.push("Qty Unit cannot be blank, Row" + iCtr.toString());
@@ -791,12 +788,14 @@ export class WhOutwardEditComponent implements OnInit {
                 break;
             }
             case 'ind_req_cqty': {
-                if (!this.gs.isValidCqty(rec.ind_req_cqty))
-                    alert('Invalid Qty ' + rec.ind_req_cqty);
-                else
-                    if (!this.gs.isValidLooseCqty(rec.ind_req_cqty, rec.ind_unit_factor)) {
-                        alert('Loose quantity should be less than ' + rec.ind_unit_factor);
-                    }
+                if (!this.gs.isBlank(rec.ind_req_cqty)) {
+                    if (!this.gs.isValidCqty(rec.ind_req_cqty))
+                        alert('Invalid Qty ' + rec.ind_req_cqty);
+                    else
+                        if (!this.gs.isValidLooseCqty(rec.ind_req_cqty, rec.ind_unit_factor)) {
+                            alert('Loose quantity should be less than ' + rec.ind_unit_factor);
+                        }
+                }
                 break;
             }
             // case 'ind_qty_uom': {
@@ -1022,7 +1021,12 @@ export class WhOutwardEditComponent implements OnInit {
     detcallbackevent(event: any) {
 
         if (event.action == 'OK') {
-           this.detrecords=event.detrecords;
+            var rec = this.drecords.find(rec => rec.ind_pkid == event.parentid);
+            if (rec != null) {
+                rec.ind_cqty = event.totcqty;
+            }
+
+            this.detrecords = event.detrecords;
         }
 
     }

@@ -199,6 +199,7 @@ export class WhInwardEditComponent implements OnInit {
         this.record.rec_created_date = this.gs.defaultValues.today;
         this.record.inm_prefix = this.gs.WH_INWARD_DOCNO_PREFIX;
         this.record.inm_startingno = this.gs.WH_INWARD_DOCNO_STARTING_NO;
+         
     }
 
     GetRecord() {
@@ -209,6 +210,7 @@ export class WhInwardEditComponent implements OnInit {
 
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
+                this.is_locked = response.islocked;
                 this.record = <Tbl_wh_inwardm>response.record;
                 this.detrecords = (response.detrecords == undefined || response.detrecords == null) ? <Tbl_wh_inwardd[]>[] : <Tbl_wh_inwardd[]>response.detrecords;
                 this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_wh_container[]>[] : <Tbl_wh_container[]>response.cntrrecords;

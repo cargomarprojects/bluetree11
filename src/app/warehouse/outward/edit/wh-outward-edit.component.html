@@ -247,7 +247,7 @@
                             </div>
                         </div>
 
-                        <div *ngIf="mode=='EDIT'" class="row border p-1">
+                        <div class="row border p-1">
                             <div class="col-md-12 px-1 mx-1">
 
                                 <div class="page-body table-responsive">
@@ -316,7 +316,7 @@
 
                         </div>
 
-                        <div *ngIf="mode=='EDIT'" class="row border p-1">
+                        <div  class="row border p-1">
                             <div class="col-md-12 px-1 mx-1">
                                 <div class="page-body table-responsive table-bordered">
                                     <table class="table  table-hover table-sm">
@@ -456,7 +456,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button #_btn_Add_product class="btn btn-info btn-sm" (click)="AddDetRow()">Add
+                                    <button #_btn_Add_product class="btn btn-info btn-sm" (click)="AddDetRow()" [disabled]="is_locked">Add
                                         Product</button>
 
 
