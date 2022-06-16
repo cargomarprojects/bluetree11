@@ -3569,4 +3569,55 @@ export class GlobalService {
     return obj.toString().trim();
   }
 
+  isValidCqty(_str: string) {
+    let bOk = false;
+    let str2: string = "0123456789.";
+    for (var i = 0; i < _str.length; i++) {
+        if (str2.includes(_str[i])) {
+            bOk = true;
+        } else {
+            bOk = false;
+            break;
+        }
+    }
+    if (bOk) {
+        let _num: number = +_str;
+        if (_num <= 0)
+            bOk = false;
+    }
+    return bOk;
+}
+
+isValidLooseCqty(_cQty: string, _factor: number) {
+    let bOk = true;
+
+    if (_cQty.includes(".")) {
+        var nStr = _cQty.split('.');
+        if (nStr.length > 2)
+            bOk = false;
+        else {
+            if (this.isBlank(nStr[1]))
+                bOk = false;
+            else {
+                let _dNum: number = +nStr[1];
+                if (_dNum > (_factor - 1))
+                    bOk = false;
+            }
+        }
+    }
+
+    return bOk;
+}
+
+convertToPieces(_qty: string, _factor: number): number {
+    var tempItem = _qty.split('.');
+    let pcs: number = 0;
+    if (tempItem.length > 0)
+        pcs = +tempItem[0] * _factor;
+    if (tempItem.length > 1)
+        pcs += +tempItem[1];
+
+    return pcs;
+}
+
 }
