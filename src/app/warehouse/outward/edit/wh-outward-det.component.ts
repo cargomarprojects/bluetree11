@@ -65,7 +65,7 @@ export class WhOutwardDetComponent implements OnInit {
         SearchData.CUST_ID = this._custid;
         SearchData.PROD_ID = this._prodid;
         SearchData.UOM_ID = this._uomid;
-        this.mainservice.GetProductdetails(SearchData).subscribe(response => {
+        this.mainservice.GetPendingProductdetails(SearchData).subscribe(response => {
             this.records = response.list;
 
             this.detrecords.forEach(Rec => {

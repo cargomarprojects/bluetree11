@@ -95,7 +95,7 @@
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Customer</label>
                                     <div class="col-9">
-                                        <app-autocomplete2 #_customer_lov [controlname]="'CUSTOMER'"
+                                        <app-autocomplete2 #_customer_lov [disabled]="drecords.length>0" [controlname]="'CUSTOMER'"
                                             [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
                                             [displaydata]="record.inm_cust_code" (ValueChanged)="LovSelected($event)">
                                         </app-autocomplete2>
@@ -105,7 +105,7 @@
 
                                     <label class="col-3 col-form-label col-form-label-sm"></label>
                                     <div class="col-9">
-                                        <InputBox [(inputModel)]="record.inm_cust_name" [maxlength]="60"
+                                        <InputBox [(inputModel)]="record.inm_cust_name" [disabled]="drecords.length>0" [maxlength]="60"
                                             [uppercase]="true">
                                         </InputBox>
                                     </div>
