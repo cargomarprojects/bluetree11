@@ -1021,21 +1021,7 @@ export class WhOutwardEditComponent implements OnInit {
     detcallbackevent(event: any) {
 
         if (event.action == 'OK') {
-
-            var i;
-            for (i = this.detrecords.length - 1; i >= 0; i -= 1) {
-              if (this.detrecords[i].indd_parent_id === event.parentid) {
-                this.detrecords.splice(i, 1);
-              }
-            }
-
-            event.records.forEach(Rec => {
-                if (Rec.indd_despatch_cqty > 0) {
-                    Rec.indd_pkid = this.gs.getGuid();
-                    Rec.indd_parent_id = event.parentid;
-                    this.detrecords.push(Rec)
-                }
-            })
+           this.detrecords=event.detrecords;
         }
 
     }

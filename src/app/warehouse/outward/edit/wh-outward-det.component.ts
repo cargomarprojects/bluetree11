@@ -142,12 +142,28 @@ export class WhOutwardDetComponent implements OnInit {
                     }
                 })
             }
-        }
-        if (!bRet)
-            return;
 
+            if (!bRet)
+                return;
+
+            var i;
+            for (i = this.detrecords.length - 1; i >= 0; i -= 1) {
+                if (this.detrecords[i].indd_parent_id === this._parentid) {
+                    this.detrecords.splice(i, 1);
+                }
+            }
+
+            this.records.forEach(Rec => {
+                if (+Rec.indd_despatch_cqty > 0) {
+                    Rec.indd_pkid = this.gs.getGuid();
+                    Rec.indd_parent_id = this._parentid;
+                    this.detrecords.push(Rec)
+                }
+            })
+        }
+        
         if (this.callbackevent)
-            this.callbackevent.emit({ action: _type, parentid: this._parentid, records: this.records });
+            this.callbackevent.emit({ action: _type, parentid: this._parentid, detrecords: this.detrecords });
 
         this.modal.close();
     }
