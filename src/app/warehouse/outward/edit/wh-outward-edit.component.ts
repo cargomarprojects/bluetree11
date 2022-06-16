@@ -424,9 +424,9 @@ export class WhOutwardEditComponent implements OnInit {
                     this.errorMessage.push("Product cannot be blank, Row" + iCtr.toString());
                 }
 
-                if (this.gs.isBlank(Rec.ind_cqty)) {
+                if (this.gs.isZero(Rec.ind_cqty)) {
                     bRet = false;
-                    this.errorMessage.push("Out Qty cannot be blank, Row" + iCtr.toString());
+                    this.errorMessage.push("Qty-Out cannot be blank, Row" + iCtr.toString());
                 }
 
                 if (!this.gs.isBlank(Rec.ind_req_cqty)) {
