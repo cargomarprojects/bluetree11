@@ -414,14 +414,16 @@ export class WhInwardEditComponent implements OnInit {
                     this.errorMessage.push("Qty cannot be blank, Row" + iCtr.toString());
                 }
 
-                if (!this.isValidCqty(Rec.ind_cqty)) {
+                if (!this.gs.isValidCqty(Rec.ind_cqty)) {
                     bRet = false;
                     this.errorMessage.push("Invalid Qty, Row" + iCtr.toString());
                 }
                 else
-                    if (!this.isValidUnitFactor(Rec.ind_cqty, Rec.ind_unit_factor)) {
-                        bRet = false;
-                        this.errorMessage.push("Invalid Fractional Part, Qty " + Rec.ind_cqty);
+                    if (!this.gs.isBlank(Rec.ind_qty_uom_id)) {
+                        if (!this.gs.isValidLooseCqty(Rec.ind_cqty, Rec.ind_unit_factor)) {
+                            bRet = false;
+                            this.errorMessage.push("Loose quantity should be less than " + Rec.ind_unit_factor);
+                        }
                     }
 
                 if (this.gs.isBlank(Rec.ind_qty_uom_id)) {
@@ -772,11 +774,13 @@ export class WhInwardEditComponent implements OnInit {
                 break;
             }
             case 'ind_cqty': {
-                if (!this.isValidCqty(rec.ind_cqty))
+                if (!this.gs.isValidCqty(rec.ind_cqty))
                     alert('Invalid Qty ' + rec.ind_cqty);
                 else
-                    if (!this.isValidUnitFactor(rec.ind_cqty, rec.ind_unit_factor)) {
-                        alert('Loose quantity should be less than ' + rec.ind_unit_factor);
+                    if (!this.gs.isBlank(rec.ind_qty_uom_id)) {
+                        if (!this.gs.isValidLooseCqty(rec.ind_cqty, rec.ind_unit_factor)) {
+                            alert('Loose quantity should be less than ' + rec.ind_unit_factor);
+                        }
                     }
                 break;
             }

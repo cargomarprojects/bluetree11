@@ -80,17 +80,19 @@ export class WhOutwardDetComponent implements OnInit {
         SearchData.PROD_ID = this._prodid;
         SearchData.UOM_ID = this._uomid;
         SearchData.HEADER_ID = this._headerid;
-        
+
         this.mainservice.GetPendingProductdetails(SearchData).subscribe(response => {
             this.records = response.list;
 
             this.detrecords.forEach(Rec => {
-                this.records.forEach(Rec2 => {
-                    if (Rec.indd_xref_id == Rec2.indd_xref_id) {
-                        Rec2.indd_despatch_cqty = Rec.indd_despatch_cqty;
-                        Rec2.indd_selected = true;
-                    }
-                });
+                if (Rec.indd_parent_id === this._parentid) {
+                    this.records.forEach(Rec2 => {
+                        if (Rec.indd_xref_id == Rec2.indd_xref_id) {
+                            Rec2.indd_despatch_cqty = Rec.indd_despatch_cqty;
+                            Rec2.indd_selected = true;
+                        }
+                    });
+                }
             });
 
             this.modal = this.modalservice.open(detmodal, { centered: true });

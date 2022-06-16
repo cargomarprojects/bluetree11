@@ -912,6 +912,7 @@ export class WhOutwardEditComponent implements OnInit {
             return;
         }
         this.drecords.splice(this.drecords.findIndex(rec => rec.ind_pkid == _rec.ind_pkid), 1);
+        this.detrecords.splice(this.detrecords.findIndex(rec => rec.indd_parent_id == _rec.ind_pkid), 1);
     }
 
     CloseModal() {
