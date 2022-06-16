@@ -29,6 +29,16 @@ export class WhOutwardDetComponent implements OnInit {
         this._uomid = value;
     }
 
+    public _prodname: string;
+    @Input() set prodname(value: string) {
+        this._prodname = value;
+    }
+
+    public _uomname: string = '';
+    @Input() set uomname(value: string) {
+        this._uomname = value;
+    }
+
     private _parentid: string = '';
     @Input() set parentid(value: string) {
         this._parentid = value;
@@ -70,7 +80,7 @@ export class WhOutwardDetComponent implements OnInit {
 
             this.detrecords.forEach(Rec => {
                 this.records.forEach(Rec2 => {
-                    if (Rec.indd_parent_id == Rec2.indd_parent_id) {
+                    if (Rec.indd_xref_id == Rec2.indd_xref_id) {
                         Rec2.indd_despatch_cqty = Rec.indd_despatch_cqty;
                         Rec2.indd_selected = true;
                     }
@@ -161,7 +171,7 @@ export class WhOutwardDetComponent implements OnInit {
                 }
             })
         }
-        
+
         if (this.callbackevent)
             this.callbackevent.emit({ action: _type, parentid: this._parentid, detrecords: this.detrecords });
 

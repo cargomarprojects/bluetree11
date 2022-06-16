@@ -98,11 +98,13 @@ export interface Tbl_wh_inwarddet {
     indd_cust_id: string;
     indd_code_id: string;
     indd_unit_id: string;
+    indd_header_id: string
     indd_xref_id: string;
+    indd_xref_header_id: string;
     indd_bal_cqty: string;
     indd_despatch_cqty: string;
     indd_qty: number;
-    indd_selected:boolean;
+    indd_selected: boolean;
     indd_unit_factor: number;
     indd_slno: number;
 }

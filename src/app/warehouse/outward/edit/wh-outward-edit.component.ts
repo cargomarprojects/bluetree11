@@ -349,7 +349,7 @@ export class WhOutwardEditComponent implements OnInit {
        iCtr = 0;
         this.detrecords.forEach(Rec => {
             iCtr++;
-            Rec.indd_xref_id = this.pkid.toString();
+            Rec.indd_header_id = this.pkid.toString();
             Rec.indd_slno = iCtr;
         })
     }
