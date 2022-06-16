@@ -58,7 +58,7 @@
                                                     type="text" style="text-align:left;"
                                                     [(ngModel)]="rec.indd_despatch_cqty" (blur)="onBlur('indd_despatch_cqty',rec,i)" maxlength="15" /></td>
                                             <td (click)="SelectRecord(rec)"><input type="checkbox"
-                                                    [(ngModel)]="rec.indd_selected"></td>
+                                                    [(ngModel)]="rec.indd_selected" (change)="onChange('indd_selected',rec)"></td>
                                         </tr>
                                     </tbody>
                                 </table>

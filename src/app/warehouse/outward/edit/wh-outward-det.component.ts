@@ -85,26 +85,37 @@ export class WhOutwardDetComponent implements OnInit {
 
     }
 
-    SelectRecord(_rec: Tbl_wh_inwardd) {
+    SelectRecord(_rec: Tbl_wh_inwarddet) {
+
+        _rec.indd_selected = !_rec.indd_selected;
 
     }
 
     onBlur(field: string, rec: Tbl_wh_inwarddet = null, idx: number = 0) {
         switch (field) {
             case 'indd_despatch_cqty': {
+                rec.indd_selected = false;
                 if (!this.gs.isBlank(rec.indd_despatch_cqty)) {
-                    if (!this.isValidCqty(rec.indd_despatch_cqty))
+                    if (!this.gs.isValidCqty(rec.indd_despatch_cqty))
                         alert('Invalid despatch Qty ' + rec.indd_despatch_cqty);
-                    else
-                        if (!this.isValidUnitFactor(rec.indd_despatch_cqty, rec.indd_unit_factor)) {
-                            alert('Loose quantity should be less than ' + rec.indd_unit_factor);
-                        }
+                    else if (!this.gs.isValidLooseCqty(rec.indd_despatch_cqty, rec.indd_unit_factor)) {
+                        alert('Loose quantity should be less than ' + rec.indd_unit_factor);
+                    }
+                    else {
+                        if (+rec.indd_despatch_cqty > 0)
+                            rec.indd_selected = true;
+                    }
                 }
                 break;
             }
         }
     }
-
+    onChange(field: string, rec: Tbl_wh_inwarddet = null) {
+        if (rec.indd_selected)
+            rec.indd_despatch_cqty = rec.indd_bal_cqty;
+        else
+            rec.indd_despatch_cqty = "";
+    }
     CloseModal(_type: string) {
 
         let bRet: boolean = true;
@@ -114,15 +125,15 @@ export class WhOutwardDetComponent implements OnInit {
                 this.records.forEach(Rec => {
                     iCtr++;
                     if (!this.gs.isBlank(Rec.indd_despatch_cqty)) {
-                        if (!this.isValidCqty(Rec.indd_despatch_cqty)) {
+                        if (!this.gs.isValidCqty(Rec.indd_despatch_cqty)) {
                             bRet = false;
                             alert("Invalid Qty, Row" + iCtr.toString())
                         }
-                        else if (!this.isValidUnitFactor(Rec.indd_despatch_cqty, Rec.indd_unit_factor)) {
+                        else if (!this.gs.isValidLooseCqty(Rec.indd_despatch_cqty, Rec.indd_unit_factor)) {
                             bRet = false;
                             alert("Loose quantity should be less than " + Rec.indd_unit_factor + ", Row" + iCtr.toString());
                         } else {
-                            let pcs = this.convertToPieces(Rec.indd_despatch_cqty, Rec.indd_unit_factor);
+                            let pcs = this.gs.convertToPieces(Rec.indd_despatch_cqty, Rec.indd_unit_factor);
                             if (pcs > Rec.indd_qty) {
                                 bRet = false;
                                 alert("Insufficient quantity, Row" + iCtr.toString())
@@ -141,54 +152,5 @@ export class WhOutwardDetComponent implements OnInit {
         this.modal.close();
     }
 
-    isValidCqty(_str: string) {
-        let bOk = false;
-        let str2: string = "0123456789.";
-        for (var i = 0; i < _str.length; i++) {
-            if (str2.includes(_str[i])) {
-                bOk = true;
-            } else {
-                bOk = false;
-                break;
-            }
-        }
-        if (bOk) {
-            let _num: number = +_str;
-            if (_num <= 0)
-                bOk = false;
-        }
-        return bOk;
-    }
 
-    isValidUnitFactor(_cQty: string, _factor: number) {
-        let bOk = true;
-
-        if (_cQty.includes(".")) {
-            var nStr = _cQty.split('.');
-            if (nStr.length > 2)
-                bOk = false;
-            else {
-                if (this.gs.isBlank(nStr[1]))
-                    bOk = false;
-                else {
-                    let _dNum: number = +nStr[1];
-                    if (_dNum > (_factor - 1))
-                        bOk = false;
-                }
-            }
-        }
-
-        return bOk;
-    }
-
-    convertToPieces(_qty: string, _factor: number): number {
-        var tempItem = _qty.split('.');
-        let pcs: number = 0;
-        if (tempItem.length > 0)
-            pcs = +tempItem[0] * _factor;
-        if (tempItem.length > 1)
-            pcs += +tempItem[1];
-
-        return pcs;
-    }
 }
