@@ -48,7 +48,7 @@
                                             <th class="text-center">SELECT</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="page-body-tbody" *ngFor="let rec of records">
+                                    <tbody class="page-body-tbody" *ngFor="let rec of records; let i = index">
                                         <tr>
                                             <td>{{rec.indd_doc_no}}</td>
                                             <td>{{rec.indd_doc_date | date : gs.FRONTEND_DATEFORMAT }}</td>
@@ -56,7 +56,7 @@
                                             <td>{{rec.indd_bal_cqty}}</td>
                                             <td class="p-0"> <input #_ind_qty_uom_code class="form-control form-control-sm"
                                                     type="text" style="text-align:left;"
-                                                    [(ngModel)]="rec.indd_despatch_cqty" maxlength="15" /></td>
+                                                    [(ngModel)]="rec.indd_despatch_cqty" (blur)="onBlur('indd_despatch_cqty',rec,i)" maxlength="15" /></td>
                                             <td (click)="SelectRecord(rec)"><input type="checkbox"
                                                     [(ngModel)]="rec.indd_selected"></td>
                                         </tr>
