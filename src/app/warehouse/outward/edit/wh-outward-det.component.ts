@@ -19,6 +19,10 @@ export class WhOutwardDetComponent implements OnInit {
         this._custid = value;
     }
 
+    private _headerid: string;
+    @Input() set headerid(value: string) {
+        this._headerid = value;
+    }
     private _prodid: string;
     @Input() set prodid(value: string) {
         this._prodid = value;
@@ -75,6 +79,8 @@ export class WhOutwardDetComponent implements OnInit {
         SearchData.CUST_ID = this._custid;
         SearchData.PROD_ID = this._prodid;
         SearchData.UOM_ID = this._uomid;
+        SearchData.HEADER_ID = this._headerid;
+        
         this.mainservice.GetPendingProductdetails(SearchData).subscribe(response => {
             this.records = response.list;
 
