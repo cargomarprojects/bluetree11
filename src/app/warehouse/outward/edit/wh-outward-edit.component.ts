@@ -428,12 +428,12 @@ export class WhOutwardEditComponent implements OnInit {
                     this.errorMessage.push("Qty cannot be blank, Row" + iCtr.toString());
                 }
 
-                if (!this.isValidCqty(Rec.ind_req_cqty)) {
+                if (!this.gs.isValidCqty(Rec.ind_req_cqty)) {
                     bRet = false;
                     this.errorMessage.push("Invalid Qty, Row" + iCtr.toString());
                 }
                 else
-                    if (!this.isValidUnitFactor(Rec.ind_req_cqty, Rec.ind_unit_factor)) {
+                    if (!this.gs.isValidLooseCqty(Rec.ind_req_cqty, Rec.ind_unit_factor)) {
                         bRet = false;
                         this.errorMessage.push("Loose quantity should be less than " + Rec.ind_unit_factor + ", Row" + iCtr.toString());
                     }
@@ -636,7 +636,7 @@ export class WhOutwardEditComponent implements OnInit {
                     rec.ind_qty_uom_code = _Record.code;
                     rec.ind_qty_uom_name = _Record.name;
                     rec.ind_unit_factor = +_Record.col3;
-                    if (!this.isValidUnitFactor(rec.ind_cqty, rec.ind_unit_factor)) {
+                    if (!this.gs.isValidLooseCqty(rec.ind_cqty, rec.ind_unit_factor)) {
                         alert('Loose quantity should be less than ' + rec.ind_unit_factor);
                     }
                     if (idx < this.ind_packages_field.toArray().length)
@@ -791,10 +791,10 @@ export class WhOutwardEditComponent implements OnInit {
                 break;
             }
             case 'ind_req_cqty': {
-                if (!this.isValidCqty(rec.ind_req_cqty))
+                if (!this.gs.isValidCqty(rec.ind_req_cqty))
                     alert('Invalid Qty ' + rec.ind_req_cqty);
                 else
-                    if (!this.isValidUnitFactor(rec.ind_req_cqty, rec.ind_unit_factor)) {
+                    if (!this.gs.isValidLooseCqty(rec.ind_req_cqty, rec.ind_unit_factor)) {
                         alert('Loose quantity should be less than ' + rec.ind_unit_factor);
                     }
                 break;
