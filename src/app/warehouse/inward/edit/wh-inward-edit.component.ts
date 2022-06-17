@@ -215,7 +215,7 @@ export class WhInwardEditComponent implements OnInit {
                 this.detrecords = (response.detrecords == undefined || response.detrecords == null) ? <Tbl_wh_inwardd[]>[] : <Tbl_wh_inwardd[]>response.detrecords;
                 this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_wh_container[]>[] : <Tbl_wh_container[]>response.cntrrecords;
                 this.mode = 'EDIT';
-                this.is_locked=false;
+               
                 if (!this.gs.isBlank(this.inm_doc_date_field))
                     this.inm_doc_date_field.Focus();
             }, error => {
