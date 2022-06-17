@@ -3573,51 +3573,79 @@ export class GlobalService {
     let bOk = false;
     let str2: string = "0123456789.";
     for (var i = 0; i < _str.length; i++) {
-        if (str2.includes(_str[i])) {
-            bOk = true;
-        } else {
-            bOk = false;
-            break;
-        }
+      if (str2.includes(_str[i])) {
+        bOk = true;
+      } else {
+        bOk = false;
+        break;
+      }
     }
     if (bOk) {
-        let _num: number = +_str;
-        if (_num <= 0)
-            bOk = false;
+      let _num: number = +_str;
+      if (_num <= 0)
+        bOk = false;
     }
     return bOk;
-}
+  }
 
-isValidLooseCqty(_cQty: string, _factor: number) {
+  isValidLooseCqty(_cQty: string, _factor: number) {
     let bOk = true;
 
     if (_cQty.includes(".")) {
-        var nStr = _cQty.split('.');
-        if (nStr.length > 2)
-            bOk = false;
+      var nStr = _cQty.split('.');
+      if (nStr.length > 2)
+        bOk = false;
+      else {
+        if (this.isBlank(nStr[1]))
+          bOk = false;
         else {
-            if (this.isBlank(nStr[1]))
-                bOk = false;
-            else {
-                let _dNum: number = +nStr[1];
-                if (_dNum > (_factor - 1))
-                    bOk = false;
-            }
+          let _dNum: number = +nStr[1];
+          if (_dNum > (_factor - 1))
+            bOk = false;
         }
+      }
     }
 
     return bOk;
-}
+  }
 
-convertToPieces(_qty: string, _factor: number): number {
+  convertToPieces(_qty: string, _factor: number): number {
     var tempItem = _qty.split('.');
     let pcs: number = 0;
     if (tempItem.length > 0)
-        pcs = +tempItem[0] * _factor;
+      pcs = +tempItem[0] * _factor;
     if (tempItem.length > 1)
-        pcs += +tempItem[1];
+      pcs += +tempItem[1];
 
     return pcs;
-}
+  }
+
+  isValidVolume(_str: string) {
+    if (this.isBlank(_str))
+      return true;
+    var tempItem = _str.toString().toUpperCase().split('X');
+    if (tempItem.length != 3)
+      return false;
+    var i;
+    for (i = 0; i < tempItem.length; i++) {
+      if (!this.isValidNumber(tempItem[i]))
+        return false
+    }
+    return true;
+  }
+
+  isValidNumber(_str: string) {
+    let bOk = false;
+    let str2: string = "0123456789.";
+    for (var i = 0; i < _str.length; i++) {
+      if (str2.includes(_str[i])) {
+        bOk = true;
+      } else {
+        bOk = false;
+        break;
+      }
+    }
+    return bOk;
+  }
 
 }

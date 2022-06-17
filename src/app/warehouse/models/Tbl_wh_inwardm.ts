@@ -57,6 +57,7 @@ export interface Tbl_wh_container {
 export interface Tbl_wh_inwardd {
 
     ind_pkid: string;
+    ind_type: string;
     ind_parent_id: string;
     ind_code_id: string;
     ind_code: string;
@@ -78,7 +79,7 @@ export interface Tbl_wh_inwardd {
     ind_weight_uom_code: string;
     ind_weight_uom_name: string;
     ind_pallets: number;
-    ind_volume: number;
+    ind_volume: string;
     ind_volume_uom_id: string;
     ind_volume_uom_code: string;
     ind_volume_uom_name: string;

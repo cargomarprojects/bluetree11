@@ -533,7 +533,7 @@ export class WhOutwardEditComponent implements OnInit {
         rec.ind_weight_uom_code = '';
         rec.ind_weight_uom_name = '';
         rec.ind_pallets = 0;
-        rec.ind_volume = 0;
+        rec.ind_volume = '';
         rec.ind_volume_uom_id = '';
         rec.ind_volume_uom_code = '';
         rec.ind_volume_uom_name = '';
@@ -831,7 +831,7 @@ export class WhOutwardEditComponent implements OnInit {
                 break;
             }
             case 'ind_volume': {
-                rec.ind_volume = this.gs.roundNumber(rec.ind_volume, 3);
+                //rec.ind_volume = this.gs.roundNumber(rec.ind_volume, 3);
                 // this.findRowTotal(field, rec);
                 break;
             }

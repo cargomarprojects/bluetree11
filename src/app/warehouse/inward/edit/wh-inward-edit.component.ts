@@ -199,7 +199,7 @@ export class WhInwardEditComponent implements OnInit {
         this.record.rec_created_date = this.gs.defaultValues.today;
         this.record.inm_prefix = this.gs.WH_INWARD_DOCNO_PREFIX;
         this.record.inm_startingno = this.gs.WH_INWARD_DOCNO_STARTING_NO;
-         
+
     }
 
     GetRecord() {
@@ -215,7 +215,7 @@ export class WhInwardEditComponent implements OnInit {
                 this.detrecords = (response.detrecords == undefined || response.detrecords == null) ? <Tbl_wh_inwardd[]>[] : <Tbl_wh_inwardd[]>response.detrecords;
                 this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_wh_container[]>[] : <Tbl_wh_container[]>response.cntrrecords;
                 this.mode = 'EDIT';
-
+                this.is_locked=false;
                 if (!this.gs.isBlank(this.inm_doc_date_field))
                     this.inm_doc_date_field.Focus();
             }, error => {
@@ -338,6 +338,7 @@ export class WhInwardEditComponent implements OnInit {
         this.detrecords.forEach(Rec => {
             iCtr++;
             Rec.ind_parent_id = this.pkid.toString();
+            Rec.ind_type = this.type.toString();
             Rec.ind_slno = iCtr;
         })
     }
@@ -433,6 +434,20 @@ export class WhInwardEditComponent implements OnInit {
                     this.errorMessage.push("Qty Unit cannot be blank, Row" + iCtr.toString());
                 }
 
+                if (!this.gs.isBlank(Rec.ind_volume) && !this.gs.isBlank(Rec.ind_volume_uom_code)) {
+                    if (Rec.ind_volume_uom_code != "CBM") {
+                        if (!this.gs.isValidVolume(Rec.ind_volume)) {
+                            bRet = false;
+                            this.errorMessage.push('Invalid Volume ' + Rec.ind_volume);
+                        }
+                    } else {
+                        if (!this.gs.isValidNumber(Rec.ind_volume)) {
+                            bRet = false;
+                            this.errorMessage.push('Invalid Volume ' + Rec.ind_volume);
+                        }
+                    }
+                }
+
             })
         }
 
@@ -520,7 +535,7 @@ export class WhInwardEditComponent implements OnInit {
         rec.ind_weight_uom_code = '';
         rec.ind_weight_uom_name = '';
         rec.ind_pallets = 0;
-        rec.ind_volume = 0;
+        rec.ind_volume = '';
         rec.ind_volume_uom_id = '';
         rec.ind_volume_uom_code = '';
         rec.ind_volume_uom_name = '';
@@ -621,7 +636,7 @@ export class WhInwardEditComponent implements OnInit {
                     rec.ind_qty_uom_code = _Record.code;
                     rec.ind_qty_uom_name = _Record.name;
                     rec.ind_unit_factor = +_Record.col3;
-                    if (!this.isValidUnitFactor(rec.ind_cqty, rec.ind_unit_factor)) {
+                    if (!this.gs.isValidLooseCqty(rec.ind_cqty, rec.ind_unit_factor)) {
                         alert('Loose quantity should be less than ' + rec.ind_unit_factor);
                     }
                     if (idx < this.ind_packages_field.toArray().length)
@@ -658,6 +673,7 @@ export class WhInwardEditComponent implements OnInit {
                     rec.ind_volume_uom_id = _Record.id;
                     rec.ind_volume_uom_code = _Record.code;
                     rec.ind_volume_uom_name = _Record.name;
+                    this.validateVolume(rec.ind_volume, rec.ind_volume_uom_code);
                     if (!this.gs.isBlank(this.btn_Add_product_field))
                         this.btn_Add_product_field.nativeElement.focus();
                 }
@@ -814,7 +830,8 @@ export class WhInwardEditComponent implements OnInit {
                 break;
             }
             case 'ind_volume': {
-                rec.ind_volume = this.gs.roundNumber(rec.ind_volume, 3);
+                this.validateVolume(rec.ind_volume, rec.ind_volume_uom_code);
+                //rec.ind_volume = this.gs.roundNumber(rec.ind_volume, 3);
                 // this.findRowTotal(field, rec);
                 break;
             }
@@ -825,7 +842,19 @@ export class WhInwardEditComponent implements OnInit {
         }
     }
 
-
+    validateVolume(_strVol: string, _strVolUnit: string) {
+        if (!this.gs.isBlank(_strVol) && !this.gs.isBlank(_strVolUnit)) {
+            if (_strVolUnit != "CBM") {
+                if (!this.gs.isValidVolume(_strVol)) {
+                    alert('Invalid Volume ' + _strVol);
+                }
+            } else {
+                if (!this.gs.isValidNumber(_strVol)) {
+                    alert('Invalid Volume ' + _strVol);
+                }
+            }
+        }
+    }
 
 
     BtnNavigation2(action: string, _type: string, attachmodal: any = null) {
@@ -965,45 +994,6 @@ export class WhInwardEditComponent implements OnInit {
         window.open(_url, "_blank");
     }
 
-    isValidCqty(_str: string) {
-        let bOk = false;
-        let str2: string = "0123456789.";
-        for (var i = 0; i < _str.length; i++) {
-            if (str2.includes(_str[i])) {
-                bOk = true;
-            } else {
-                bOk = false;
-                break;
-            }
-        }
-        if (bOk) {
-            let _num: number = +_str;
-            if (_num <= 0)
-                bOk = false;
-        }
-        return bOk;
-    }
-
-    isValidUnitFactor(_cQty: string, _factor: number) {
-        let bOk = true;
-
-        if (_cQty.includes(".")) {
-            var nStr = _cQty.split('.');
-            if (nStr.length > 2)
-                bOk = false;
-            else {
-                if (this.gs.isBlank(nStr[1]))
-                    bOk = false;
-                else {
-                    let _dNum: number = +nStr[1];
-                    if (_dNum > (_factor - 1))
-                        bOk = false;
-                }
-            }
-        }
-
-        return bOk;
-    }
 
 }
 
