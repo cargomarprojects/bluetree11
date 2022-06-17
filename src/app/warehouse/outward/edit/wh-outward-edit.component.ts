@@ -510,6 +510,10 @@ export class WhOutwardEditComponent implements OnInit {
     }
 
     AddDetRow() {
+        if (this.gs.isBlank(this.record.inm_cust_id)) {
+            alert('Customer cannot be blank');
+            return;
+        }
 
         var rec = <Tbl_wh_inwardd>{};
         rec.ind_pkid = this.gs.getGuid();
@@ -984,7 +988,7 @@ export class WhOutwardEditComponent implements OnInit {
         window.open(_url, "_blank");
     }
 
-     
+
 
     detcallbackevent(event: any) {
 
