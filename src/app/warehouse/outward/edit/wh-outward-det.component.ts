@@ -136,6 +136,7 @@ export class WhOutwardDetComponent implements OnInit {
     }
     CloseModal(_type: string) {
         let tot_cqty = 0;
+        let unit_factor = 0;
         let bRet: boolean = true;
         if (_type == "OK") {
             let iCtr = 0;
@@ -174,6 +175,7 @@ export class WhOutwardDetComponent implements OnInit {
             tot_cqty = 0;
             this.records.forEach(Rec => {
                 if (+Rec.indd_despatch_cqty > 0) {
+                    unit_factor = Rec.indd_unit_factor;
                     tot_cqty += +Rec.indd_despatch_cqty;
                     Rec.indd_pkid = this.gs.getGuid();
                     Rec.indd_parent_id = this._parentid;
@@ -181,6 +183,9 @@ export class WhOutwardDetComponent implements OnInit {
                 }
             })
         }
+
+        unit_factor = unit_factor - 1;
+        tot_cqty = this.gs.roundNumber(tot_cqty, unit_factor.toString().length);
 
         if (this.callbackevent)
             this.callbackevent.emit({ action: _type, parentid: this._parentid, detrecords: this.detrecords, totcqty: tot_cqty });

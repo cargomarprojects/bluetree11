@@ -21,7 +21,7 @@
           <td class="hlink2" (click)="SelectedItem('LIST',item)">{{item.name}}</td>
           <td (click)="ChangeSelection(item,i)">{{item.col1}}</td>
           <td *ngIf="_tabletype=='MASTER'||_tabletype=='PRODUCT-BATCHWISE'" (click)="ChangeSelection(item,i)">{{item.col2}}</td>
-          <td *ngIf="_tabletype=='MASTER'||_tabletype=='PRODUCT-BATCHWISE'" (click)="ChangeSelection(item,i)">{{item.col3}}</td>
+          <td *ngIf="_tabletype=='MASTER'" (click)="ChangeSelection(item,i)">{{item.col3}}</td>
         </tr>
       </tbody>
     </table>

@@ -794,7 +794,7 @@ export class WhOutwardEditComponent implements OnInit {
                 break;
             }
             case 'ind_req_cqty': {
-                if (!this.gs.isBlank(rec.ind_req_cqty)) {
+                if (!this.gs.isBlank(rec.ind_req_cqty) && rec.ind_req_cqty != "0") {
                     if (!this.gs.isValidCqty(rec.ind_req_cqty))
                         alert('Invalid Qty ' + rec.ind_req_cqty);
                     else
