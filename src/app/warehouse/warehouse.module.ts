@@ -12,6 +12,8 @@ import { WhOutwardComponent } from './outward/wh-outward.component';
 import { WhOutwardHeaderComponent } from './outward/wh-outward-header.component';
 import { WhOutwardEditComponent } from './outward/edit/wh-outward-edit.component';
 import { WhOutwardDetComponent } from './outward/edit/wh-outward-det.component';
+import { StockReportHeaderComponent } from './stockreport/stock-report-header.component';
+import { StockReportComponent } from './stockreport/stock-report.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { WhOutwardDetComponent } from './outward/edit/wh-outward-det.component';
     WhOutwardComponent,
     WhOutwardHeaderComponent,
     WhOutwardEditComponent,
-    WhOutwardDetComponent
+    WhOutwardDetComponent,
+    StockReportHeaderComponent,
+    StockReportComponent
   ],
   imports: [
     SharedModule,

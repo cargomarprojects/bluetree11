@@ -1,0 +1,54 @@
+<div *ngIf="mainservice.tab == 'main'">
+    <div class="page-header">
+        <div class="col">
+            <label class="mr-1">{{mainservice.title}}</label>
+            <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+        {{errorMessage$ | async}}
+    </div>
+
+    <app-stock-report-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+    </app-stock-report-header>
+
+
+    <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+    <div class="page-body table-responsive table-bordered">
+        <table class="table  table-hover table-sm">
+            <thead class="page-body-thead">
+                <tr>
+                    <th>CODE</th>
+                    <th>PRODUCT</th>
+                    <th>UNIT</th>
+                    <th>CUSTOMER</th>
+                    <th>IN</th>
+                    <th>OUT</th>
+                    <th>BALANCE</th>
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody">
+                <tr *ngFor="let rec of records$ | async" (mousedown)="mainservice.selectRowId(rec.inm_pkid)"
+                    [class.selected]="rec.inm_pkid == mainservice.getRowId()">
+                    <td>{{rec.prod_code}}</td>
+                    <td>{{rec.prod_name}}</td>
+                    <td>{{rec.unit}}</td>
+                    <td>{{rec.cust_name}}</td>
+                    <td>{{rec.in_qty}}</td>
+                    <td>{{rec.out_qty}}</td>
+                    <td>{{rec.bal_qty}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+</div>
+<div *ngIf="mainservice.tab == 'report'">
+    <app-report [title]="mainservice.title" [url]="" [searchdata]="" [menuid]="mainservice.menuid"
+        [filename]="mainservice.filename" [filetype]="mainservice.filetype"
+        [filedisplayname]="mainservice.filedisplayname" [filename2]="mainservice.filename2"
+        [filetype2]="mainservice.filetype2" [filedisplayname2]="mainservice.filedisplayname2"
+        (callbackevent)="callbackevent($event)"></app-report>
+</div>
