@@ -342,6 +342,7 @@ export class WhOutwardEditComponent implements OnInit {
         let iCtr: number = 0;
         this.drecords.forEach(Rec => {
             iCtr++;
+            Rec.ind_type = this.type.toString();
             Rec.ind_parent_id = this.pkid.toString();
             Rec.ind_slno = iCtr;
         })
@@ -983,45 +984,7 @@ export class WhOutwardEditComponent implements OnInit {
         window.open(_url, "_blank");
     }
 
-    isValidCqty(_str: string) {
-        let bOk = false;
-        let str2: string = "0123456789.";
-        for (var i = 0; i < _str.length; i++) {
-            if (str2.includes(_str[i])) {
-                bOk = true;
-            } else {
-                bOk = false;
-                break;
-            }
-        }
-        if (bOk) {
-            let _num: number = +_str;
-            if (_num <= 0)
-                bOk = false;
-        }
-        return bOk;
-    }
-
-    isValidUnitFactor(_cQty: string, _factor: number) {
-        let bOk = true;
-
-        if (_cQty.includes(".")) {
-            var nStr = _cQty.split('.');
-            if (nStr.length > 2)
-                bOk = false;
-            else {
-                if (this.gs.isBlank(nStr[1]))
-                    bOk = false;
-                else {
-                    let _dNum: number = +nStr[1];
-                    if (_dNum > (_factor - 1))
-                        bOk = false;
-                }
-            }
-        }
-
-        return bOk;
-    }
+     
 
     detcallbackevent(event: any) {
 
