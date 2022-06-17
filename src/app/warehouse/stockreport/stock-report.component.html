@@ -20,19 +20,28 @@
         <table class="table  table-hover table-sm">
             <thead class="page-body-thead">
                 <tr>
-                    <th>DOC#</th>
-                    <th>DATE</th>
-                    <th>CUSTOMER</th>
-                    <th>CODE</th>
-                    <th>PRODUCT</th>
-                    <th>UNIT</th>
-                    <th>IN</th>
-                    <th>OUT</th>
-                    <th>BALANCE</th>
+                    <th (click)="mainservice.sort('doc_no')">DOC#&nbsp;<i
+                            [ngClass]="mainservice.getIcon('doc_no')"></i></th>
+                    <th (click)="mainservice.sort('doc_date')">DATE&nbsp;<i
+                            [ngClass]="mainservice.getIcon('doc_date')"></i></th>
+                    <th (click)="mainservice.sort('cust_name,prod_name')">CUSTOMER&nbsp;<i
+                            [ngClass]="mainservice.getIcon('cust_name,prod_name')"></i></th>
+                    <th (click)="mainservice.sort('prod_code')">CODE&nbsp;<i
+                            [ngClass]="mainservice.getIcon('prod_code')"></i></th>
+                    <th (click)="mainservice.sort('prod_name,cust_name')">PRODUCT&nbsp;<i
+                            [ngClass]="mainservice.getIcon('prod_name,cust_name')"></i></th>
+                    <th (click)="mainservice.sort('unit')">UNIT&nbsp;<i
+                            [ngClass]="mainservice.getIcon('unit')"></i></th>
+                    <th (click)="mainservice.sort('in_qty')">IN&nbsp;<i
+                            [ngClass]="mainservice.getIcon('in_qty')"></i></th>
+                    <th (click)="mainservice.sort('out_qty')">OUT&nbsp;<i
+                            [ngClass]="mainservice.getIcon('out_qty')"></i></th>
+                    <th (click)="mainservice.sort('bal_qty')">BALANCE&nbsp;<i
+                            [ngClass]="mainservice.getIcon('bal_qty')"></i></th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
-                <tr *ngFor="let rec of records$ | async" (mousedown)="mainservice.selectRowId(rec.inm_pkid)"
+                <tr *ngFor="let rec of records$ | async |  sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" (mousedown)="mainservice.selectRowId(rec.inm_pkid)"
                     [class.selected]="rec.inm_pkid == mainservice.getRowId()">
                     <td>{{rec.doc_no}}</td>
                     <td>{{rec.doc_date | date : gs.FRONTEND_DATEFORMAT }}</td>
