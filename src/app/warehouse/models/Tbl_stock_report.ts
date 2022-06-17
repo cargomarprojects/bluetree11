@@ -9,6 +9,9 @@ export interface SearchQuery {
 
 export class Tbl_Stock_Report {
     row_type: string;
+    inm_pkid:string;
+    doc_no:string;
+    doc_date:string;
     prod_code: string;
     prod_name: string;
     unit: string;

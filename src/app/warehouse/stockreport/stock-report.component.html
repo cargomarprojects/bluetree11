@@ -20,10 +20,12 @@
         <table class="table  table-hover table-sm">
             <thead class="page-body-thead">
                 <tr>
+                    <th>DOC#</th>
+                    <th>DATE</th>
+                    <th>CUSTOMER</th>
                     <th>CODE</th>
                     <th>PRODUCT</th>
                     <th>UNIT</th>
-                    <th>CUSTOMER</th>
                     <th>IN</th>
                     <th>OUT</th>
                     <th>BALANCE</th>
@@ -32,10 +34,12 @@
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of records$ | async" (mousedown)="mainservice.selectRowId(rec.inm_pkid)"
                     [class.selected]="rec.inm_pkid == mainservice.getRowId()">
+                    <td>{{rec.doc_no}}</td>
+                    <td>{{rec.doc_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                    <td>{{rec.cust_name}}</td>
                     <td>{{rec.prod_code}}</td>
                     <td>{{rec.prod_name}}</td>
                     <td>{{rec.unit}}</td>
-                    <td>{{rec.cust_name}}</td>
                     <td>{{rec.in_qty}}</td>
                     <td>{{rec.out_qty}}</td>
                     <td>{{rec.bal_qty}}</td>
