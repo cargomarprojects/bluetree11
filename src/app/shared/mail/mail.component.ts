@@ -534,7 +534,7 @@ export class MailComponent implements OnInit {
 
         if (!this.gs.isBlank(response.presetmessage)) {
           if (this._maildata.cont_group == 'EMAIL-TEMPLATE-AN-COMMON')
-            this.message = response.presetmessage + '\n' + this.gs.user_email_signature.toString();
+            this.message = response.presetmessage ;
           else
             this.message = response.presetmessage + '\n' + this.gs.user_email_signature.toString();
         }
