@@ -66,7 +66,7 @@
         <td>{{rec.pay_cust_name}}</td>
         <td class="hlink2" [style.color]="rec.pay_inv_files_attached=='Y'?'red':'#007ee9'"
           (click)="BtnNavigation('CHECKCOPY',rec,attachmodal)">CHECK COPY</td>
-        <td class="hlink2" (click)="BtnNavigation('ATTACHMENT',rec,attachmodal)">ATTACHMENT</td>
+        <td class="hlink2" [style.color]="rec.pay_inv_files_attached2=='Y'?'red':'#007ee9'" (click)="BtnNavigation('ATTACHMENT',rec,attachmodal)">ATTACHMENT</td>
         <td>{{rec.pay_acc_name}}</td>
         <td>{{rec.pay_docno}}</td>
         <td>{{rec.pay_date | date : gs.FRONTEND_DATEFORMAT }}</td>
