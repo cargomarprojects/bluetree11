@@ -167,22 +167,23 @@ export class PaySearchComponent implements OnInit {
 
   getRouteDet(_format: string, _rec: Tbl_Acc_Payment, _type: string) {
     let sID: string = (_rec.pay_mblid != null) ? _rec.pay_mblid.toString() : "";
-    let REFNO: string = _rec.pay_invtype != null ? _rec.pay_invtype.toString() : "";
+    let INVTYPE: string = _rec.pay_invtype != null ? _rec.pay_invtype.toString() : "";
+    let REFNO: string = _rec.pay_mblrefno != null ? _rec.pay_mblrefno.toString() : "";
     let INVID: string = (_rec.pay_invid != null) ? _rec.pay_invid.toString() : "";
     let HBLID: string = (_rec.pay_hblid != null) ? _rec.pay_hblid.toString() : "";
     let sMode: string = "";
-    if (REFNO == "OI")
+    if (INVTYPE == "OI")
       sMode = "SEA IMPORT";
-    else if (REFNO == "OE")
+    else if (INVTYPE == "OE")
       sMode = "SEA EXPORT";
-    else if (REFNO == "AI")
+    else if (INVTYPE == "AI")
       sMode = "AIR IMPORT";
-    else if (REFNO == "AE")
+    else if (INVTYPE == "AE")
       sMode = "AIR EXPORT";
-    else if (REFNO == "OT")
+    else if (INVTYPE == "OT")
       sMode = "OTHERS";
     else
-      sMode = REFNO;
+      sMode = INVTYPE;
 
     if (_type == 'MASTER')
       return this.gs.Link2Page('REFNO', sMode, REFNO, sID, '', '', _format);
