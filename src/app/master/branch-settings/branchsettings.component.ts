@@ -230,9 +230,10 @@ export class BranchSettingsComponent implements OnInit {
   Chk_ShipLogFormat_id = '';
   Chk_ShipLogFormat = 'Y';
   Dt_Locked = "";
-  Txt_AN_RO_Comments_id='';
-  Txt_AN_RO_Comments='';
-
+  Txt_AN_RO_Comments_id = '';
+  Txt_AN_RO_Comments = '';
+  chk_AN_Guarantee_Ltr_Attached_id = '';
+  chk_AN_Guarantee_Ltr_Attached = 'N';
 
 
   constructor(
@@ -708,6 +709,10 @@ export class BranchSettingsComponent implements OnInit {
         this.Txt_AN_RO_Comments_id = Rec.param_name2;
         this.Txt_AN_RO_Comments = Rec.param_name3;
       }
+      else if (Rec.param_name1 == "AN-GUARANTEE-LTR-ATTACHED") {
+        this.chk_AN_Guarantee_Ltr_Attached_id = Rec.param_name2;
+        this.chk_AN_Guarantee_Ltr_Attached = Rec.param_name3;
+      }
       else if (Rec.param_name1 == "SHIPMENT-LOCKED-DATE") {
         this.Dt_Locked = Rec.param_name3;
         /*if (Rec.param_name3 != "") {
@@ -966,6 +971,10 @@ export class BranchSettingsComponent implements OnInit {
     else
       this.saveList.push(this.AddRecord("DUMMY-INVOICE", this.gs.branch_pkid, "N"));
 
+    if (this.chk_AN_Guarantee_Ltr_Attached == 'Y')
+      this.saveList.push(this.AddRecord("AN-GUARANTEE-LTR-ATTACHED", this.gs.branch_pkid, "Y"));
+    else
+      this.saveList.push(this.AddRecord("AN-GUARANTEE-LTR-ATTACHED", this.gs.branch_pkid, "N"));
 
     this.saveList.push(this.AddRecord("DOC-FOOTER1", this.gs.branch_pkid, this.Txt_Terms1));
     this.saveList.push(this.AddRecord("DOC-FOOTER2", this.gs.branch_pkid, this.Txt_Terms2));
@@ -1000,7 +1009,7 @@ export class BranchSettingsComponent implements OnInit {
     else
       this.saveList.push(this.AddRecord("SHIPMENT-LOCKED-DATE", this.gs.branch_pkid, this.Dt_Locked));
 
-      this.saveList.push(this.AddRecord("AN-RO-COMMENTS", this.gs.branch_pkid, this.Txt_AN_RO_Comments));
+    this.saveList.push(this.AddRecord("AN-RO-COMMENTS", this.gs.branch_pkid, this.Txt_AN_RO_Comments));
 
     const saveRecord = <VM_TBL_MAST_SETTINGS>{};
     saveRecord.userinfo = this.gs.UserInfo;

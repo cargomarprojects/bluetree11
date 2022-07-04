@@ -127,7 +127,7 @@
     <div class="row">
 
         <div class="col-md-6">
-            
+
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">A/c Receivable</label>
                 <div class="col-8">
@@ -148,8 +148,8 @@
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Petty Cash</label>
                 <div class="col-8">
-                    <app-autocomplete2 [controlname]="'TXT_PETTYCASH'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
-                        [displaydata]="Txt_PettyCash" (ValueChanged)="LovSelected($event)">
+                    <app-autocomplete2 [controlname]="'TXT_PETTYCASH'" [tabletype]="'ACC_ACCTM'"
+                        [displaycolumn]="'NAME'" [displaydata]="Txt_PettyCash" (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
                 </div>
             </div>
@@ -158,8 +158,7 @@
                 <label class="col-4 col-form-label col-form-label-sm">INTERNAL.PAY.SETTLEMENT A/R</label>
                 <div class="col-8">
                     <app-autocomplete2 [controlname]="'TXT_IPS_AR'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
-                        [where]="where_ips_ar"
-                        [displaydata]="TXT_IPS_AR" (ValueChanged)="LovSelected($event)">
+                        [where]="where_ips_ar" [displaydata]="TXT_IPS_AR" (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
                 </div>
             </div>
@@ -167,29 +166,28 @@
                 <label class="col-4 col-form-label col-form-label-sm">INTERNAL.PAY.SETTLEMENT A/P</label>
                 <div class="col-8">
                     <app-autocomplete2 [controlname]="'TXT_IPS_AP'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
-                        [where]="where_ips_ap"
-                        [displaydata]="TXT_IPS_AP" (ValueChanged)="LovSelected($event)">
+                        [where]="where_ips_ap" [displaydata]="TXT_IPS_AP" (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
                 </div>
             </div>
         </div>
 
         <div class="col-md-6">
-            
+
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Direct Bill Agent</label>
                 <div class="col-8">
-                    <app-autocomplete2 [controlname]="'TXT_DIRECT_AGENT'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
-                        [displaydata]="Txt_Direct_Agent" (ValueChanged)="LovSelected($event)">
+                    <app-autocomplete2 [controlname]="'TXT_DIRECT_AGENT'" [tabletype]="'ACC_ACCTM'"
+                        [displaycolumn]="'NAME'" [displaydata]="Txt_Direct_Agent" (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Bank Charges</label>
                 <div class="col-8">
-                    <app-autocomplete2 [controlname]="'TXT_BANK_CHARGES'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
-                        [where]="where_bank_charges"
-                        [displaydata]="Txt_Bank_Charges" (ValueChanged)="LovSelected($event)">
+                    <app-autocomplete2 [controlname]="'TXT_BANK_CHARGES'" [tabletype]="'ACC_ACCTM'"
+                        [displaycolumn]="'NAME'" [where]="where_bank_charges" [displaydata]="Txt_Bank_Charges"
+                        (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
                 </div>
             </div>
@@ -198,14 +196,13 @@
                 <label class="col-4 col-form-label col-form-label-sm">Ex.Diff.</label>
                 <div class="col-8">
                     <app-autocomplete2 [controlname]="'TXT_EX_DIFF'" [tabletype]="'ACC_ACCTM'" [displaycolumn]="'NAME'"
-                        [where]="where_ex_diff"
-                        [displaydata]="Txt_Ex_Diff" (ValueChanged)="LovSelected($event)">
+                        [where]="where_ex_diff" [displaydata]="Txt_Ex_Diff" (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
                 </div>
             </div>
 
         </div>
-    
+
 
 
     </div>
@@ -829,7 +826,7 @@
                         (click)="Chk_SI_OVERRIDE_POD_ETA=Chk_SI_OVERRIDE_POD_ETA == 'Y' ? 'N' : 'Y'">{{Chk_SI_OVERRIDE_POD_ETA}}</button>
                 </div>
             </div>
-            
+
             <div class="form-group row" *ngIf="false">
                 <label class="col-4 col-form-label col-form-label-sm"></label>
                 <label class="col-6 col-form-label col-form-label-sm">Air Import-Override Pod ETA with Place Delivery
@@ -854,10 +851,14 @@
                 <div class="col-2">
                     <app-date [inputdate]="Dt_Locked" (ValueChanged)="Dt_Locked=$event"></app-date>
                 </div>
+                <label class="col-4 col-form-label col-form-label-sm">A/N Guarantee Letter Attached</label>
+                <div class="col-1">
+                    <button class="btn btn-info btn-sm"
+                        (click)="chk_AN_Guarantee_Ltr_Attached=chk_AN_Guarantee_Ltr_Attached == 'Y' ? 'N' : 'Y'">{{chk_AN_Guarantee_Ltr_Attached}}</button>
+                </div>
             </div>
 
         </div>
-
 
 
         <div class="col-md-6">
