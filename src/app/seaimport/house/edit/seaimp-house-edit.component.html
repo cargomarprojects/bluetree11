@@ -1294,7 +1294,8 @@
 <div *ngIf="tab=='report'">
   <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid" 
   [filename]="filename" [filetype]="filetype" [filedisplayname]="filedisplayname" [filename2]="filename2" [filetype2]="filetype2" 
-  [filedisplayname2]="filedisplayname2" (callbackevent)="callbackevent($event)"></app-report>
+  [filedisplayname2]="filedisplayname2" [filename3]="filename3" [filetype3]="filetype3" 
+  [filedisplayname3]="filedisplayname3" (callbackevent)="callbackevent($event)"></app-report>
 </div>
 <!-- <div *ngIf="tab=='attachment'">
   <app-fileupload [title]="'File Upload Page'" [parentid]="attach_pkid" [subid]="" [type]="attach_type" [typelist]=""

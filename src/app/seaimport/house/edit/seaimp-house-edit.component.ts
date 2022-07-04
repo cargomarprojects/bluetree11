@@ -77,6 +77,9 @@ export class SeaImpHouseEditComponent implements OnInit {
   filename2: string = '';
   filetype2: string = '';
   filedisplayname2: string = '';
+  filename3: string = '';
+  filetype3: string = '';
+  filedisplayname3: string = '';
 
   ISFBtnForegroundcolor: string;
   OHBLBtnForegroundcolor: string;
@@ -2039,6 +2042,9 @@ export class SeaImpHouseEditComponent implements OnInit {
         this.filename2 = response.filename2;
         this.filedisplayname2 = response.filedisplayname2;
         this.filetype2 = response.filetype2;
+        this.filename3 = response.filename3;
+        this.filedisplayname3 = response.filedisplayname3;
+        this.filetype3 = response.filetype3;
 
         this.report_title = _type == "ARRIVAL NOTICE" ? 'ARRIVAL NOTICE' : 'ARRIVAL NOTICE FREIGHT INVOICE';
         this.report_url = undefined;

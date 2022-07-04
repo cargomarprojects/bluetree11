@@ -77,12 +77,28 @@ export class ReportComponent implements OnInit {
   @Input() set filedisplayname2(value: any) {
     this._filedisplayname2 = value;
   }
+
+  private _filename3: string;
+  @Input() set filename3(value: any) {
+    this._filename3 = value;
+  }
+
+  private _filetype3: string;
+  @Input() set filetype3(value: any) {
+    this._filetype3 = value;
+  }
+
+  private _filedisplayname3: string;
+  @Input() set filedisplayname3(value: any) {
+    this._filedisplayname3 = value;
+  }
+
   @Output() callbackevent = new EventEmitter<any>();
 
   Mail_Pkid: string = '';
   AttachList: any[] = [];
   modal: any;
-  public maildata: any = { 'type': '', 'value': '', 'subject': '', 'presetmessage': '', 'cont_group': '', 'customer_id': '', 'customer_name': '' , 'update_ref_type': '', 'update_ref_id': '' };
+  public maildata: any = { 'type': '', 'value': '', 'subject': '', 'presetmessage': '', 'cont_group': '', 'customer_id': '', 'customer_name': '', 'update_ref_type': '', 'update_ref_id': '' };
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -208,6 +224,8 @@ export class ReportComponent implements OnInit {
       this.Mail_Pkid = this.gs.getGuid();
       this.AttachList = new Array<any>();
       this.AttachList.push({ filename: this._filename, filetype: this._filetype, filedisplayname: this._filedisplayname, filesize: 0 });
+      if (!this.gs.isBlank(this._filename3))
+        this.AttachList.push({ filename: this._filename3, filetype: this._filetype3, filedisplayname: this._filedisplayname3, filesize: 0 });
       this.modal = this.modalservice.open(emailmodal, { centered: true });
     }
     else if (action == "excel") {
