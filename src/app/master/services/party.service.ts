@@ -131,7 +131,8 @@ export class PartyService {
     }
 
     Search(_searchdata: any, type: string = '') {
-
+        this.record.errormessage = '';
+        
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
             this.record.selectedId = '';
@@ -228,6 +229,7 @@ export class PartyService {
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = _rec.gen_pkid;
         SearchData.remarks = _rec.gen_short_name;
+        SearchData.type = this.param_type;
 
         this.DeleteRecord(SearchData)
             .subscribe(response => {

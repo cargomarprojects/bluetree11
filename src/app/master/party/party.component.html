@@ -81,6 +81,7 @@
             <tr>
                 <th (click)="mainservice.sort('gen_code')">CODE&nbsp;<i [ngClass]="mainservice.getIcon('gen_code')"></i></th>
                 <th (click)="mainservice.sort('gen_short_name')">NAME&nbsp;<i [ngClass]="mainservice.getIcon('gen_short_name')"></i></th>
+                <th *ngIf="mainservice.canDelete" class='text-center'>DELETE</th>  
             </tr>
         </thead>
         <tbody class="page-body-tbody">
@@ -92,6 +93,8 @@
                     [queryParams]="{appid : this.gs.appid ,menuid: this.mainservice.menuid,pkid: rec.gen_pkid,type: this.mainservice.param_type,origin: 'partymaster-page',mode: 'EDIT'}">{{rec.gen_code}}</a>
                 </td>
                 <td>{{rec.gen_short_name}}</td>
+                <td *ngIf="mainservice.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                    (click)="mainservice.DeleteRow(rec)"></i></td>
             </tr>
         </tbody>
     </table>
@@ -109,7 +112,8 @@
                 <th>TEL</th>
                 <th>FAX</th>          
                 <th>CREATED-BY</th>
-                <th>DATE</th>      
+                <th>DATE</th>  
+                <th *ngIf="mainservice.canDelete" class='text-center'>DELETE</th>      
             </tr>
         </thead>
         <tbody class="page-body-tbody">
@@ -124,6 +128,8 @@
                 <td>{{rec.gen_fax}}</td>
                 <td>{{rec.rec_created_by}}</td>
                 <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td *ngIf="mainservice.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                    (click)="mainservice.DeleteRow(rec)"></i></td>
             </tr>
         </tbody>
     </table>
