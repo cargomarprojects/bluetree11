@@ -30,6 +30,7 @@ export class WhInwardEditComponent implements OnInit {
     @ViewChildren('_ind_weight') ind_weight_field: QueryList<ElementRef>;
     @ViewChildren('_ind_pallets') ind_pallets_field: QueryList<ElementRef>;
     @ViewChildren('_ind_cqty') ind_cqty_field: QueryList<ElementRef>;
+    @ViewChildren('_ind_volume') ind_volume_field: QueryList<ElementRef>;
 
     record: Tbl_wh_inwardm = <Tbl_wh_inwardm>{};
 
@@ -639,8 +640,8 @@ export class WhInwardEditComponent implements OnInit {
                     if (!this.gs.isValidLooseCqty(rec.ind_cqty, rec.ind_unit_factor)) {
                         alert('Loose quantity should be less than ' + rec.ind_unit_factor);
                     }
-                    if (idx < this.ind_packages_field.toArray().length)
-                        this.ind_packages_field.toArray()[idx].nativeElement.focus();
+                    if (idx < this.ind_cqty_field.toArray().length)
+                        this.ind_cqty_field.toArray()[idx].nativeElement.focus();
                 }
             });
         }
@@ -662,8 +663,8 @@ export class WhInwardEditComponent implements OnInit {
                     rec.ind_weight_uom_id = _Record.id;
                     rec.ind_weight_uom_code = _Record.code;
                     rec.ind_weight_uom_name = _Record.name;
-                    if (idx < this.ind_pallets_field.toArray().length)
-                        this.ind_pallets_field.toArray()[idx].nativeElement.focus();
+                    if (idx < this.ind_weight_field.toArray().length)
+                        this.ind_weight_field.toArray()[idx].nativeElement.focus();
                 }
             });
         }
@@ -674,8 +675,8 @@ export class WhInwardEditComponent implements OnInit {
                     rec.ind_volume_uom_code = _Record.code;
                     rec.ind_volume_uom_name = _Record.name;
                     this.validateVolume(rec.ind_volume, rec.ind_volume_uom_code);
-                    if (!this.gs.isBlank(this.btn_Add_product_field))
-                        this.btn_Add_product_field.nativeElement.focus();
+                    if (idx < this.ind_volume_field.toArray().length)
+                        this.ind_volume_field.toArray()[idx].nativeElement.focus();
                 }
             });
         }
@@ -957,7 +958,7 @@ export class WhInwardEditComponent implements OnInit {
                 appid: this.gs.appid,
                 menuid: this.menuid,
                 pkid: '',
-                type: this.mainService.param_type,
+                type: 'IN',
                 origin: 'wh-inward-page',
                 mode: 'ADD',
                 rnd: this.gs.getRandomInt()
