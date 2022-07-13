@@ -1,5 +1,6 @@
 <div *ngIf="ms.tab == 'main'">
 
+
     <div class="page-header">
         <div class="row align-items-center justify-content-left p-1">
             <label class="mr-3">AR/AP Settlement ({{ms.mode}})</label>
@@ -121,22 +122,19 @@
             </div>
         </div>
     </div>
+    
 
+    
     <div class="page-body table-responsive">
-        <table class="table table-hover table-sm table-bordered">
+        <table class="table table-hover table-sm table-bordered fixed_header">
             <thead class="page-body-thead">
                 <tr>
                     <th (click)="ms.sort('inv_no')">INV-NO&nbsp;<i [ngClass]="ms.getIcon('inv_no')"></i></th>
                     <th (click)="ms.sort('inv_date')">INV-DATE&nbsp;<i [ngClass]="ms.getIcon('inv_date')"></i></th>
-
                     <th (click)="ms.sort('inv_cust_name')">CUST-NAME&nbsp;<i [ngClass]="ms.getIcon('inv_cust_name')"></i></th>
-
                     <th (click)="ms.sort('inv_mbl_refno')">REFNO&nbsp;<i [ngClass]="ms.getIcon('inv_mbl_refno')"></i></th>
                     <th>ARAP</th>
                     <th (click)="ms.sort('inv_refno')">CUST-REFNO&nbsp;<i [ngClass]="ms.getIcon('inv_refno')"></i></th>
-
-                    
-
                     <th (click)="ms.sort('inv_total')" style="text-align:right">INV-AMT&nbsp;<i [ngClass]="ms.getIcon('inv_total')"></i></th>
                     <th (click)="ms.sort('inv_ar_total')" style="text-align:right">A/R&nbsp;<i [ngClass]="ms.getIcon('inv_ar_total')"></i></th>
                     <th (click)="ms.sort('inv_ap_total')" style="text-align:right">A/P&nbsp;<i [ngClass]="ms.getIcon('inv_ap_total')"></i></th>
@@ -191,6 +189,7 @@
             </tbody>
         </table>
     </div>
+
 
     <div class="page-footer">
         <div class="row">
