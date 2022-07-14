@@ -738,7 +738,6 @@ select option:hover {
  .fixed_header thead tr th td {
     display:block;
     width:100%;    
-    overflow: scroll;
 }
 .fixed_header tbody {
     display:block;
@@ -751,24 +750,26 @@ select option:hover {
     table-layout: fixed;
     width: 100%;    
     border-collapse: collapse;
+    height: 400px;
 }
-.fixed_header thead tr {
-    display: block;
- }
- .fixed_header tbody{
+
+.fixed_header tbody{
   display:block;
   width: 100%;
   overflow: auto;
- 
-}
-/* .fixed_header thead {
+  height: 400px;
+ }
+.fixed_header thead tr {
+    display: block;
+ }
+ .fixed_header thead {
   color:#fff;
 } 
-*/
+
 .fixed_header th, .fixed_header td {
   padding: 5px;
   text-align: left;
-  width: 160px;
+  width: 200px;
 }
 
 
