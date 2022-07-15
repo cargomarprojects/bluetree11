@@ -701,6 +701,11 @@
               [queryParams]="BtnNavigation2('CARGOPICKUP','P')">Delivery Order</a>
           </div>
           <div class="form-group row">
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_SI_MASTER_DELIVERY_ORDER)" [routerLink]="BtnNavigation2('STOCK','L')"
+              [queryParams]="BtnNavigation2('STOCK','P')">Products</a>
+          </div>
+          <div class="form-group row">
             <app-edithistory class="col-12 mx-0 px-0" [parentid]="record.mbl_pkid" [btnblock]="true"></app-edithistory>
           </div>
           <div class="form-group row">

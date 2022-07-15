@@ -19,6 +19,7 @@ import { SeaImpCargoPickupComponent } from './cargopickup/seaimp-cargopickup.com
 import { SeaImpRiderPageComponent } from './riderpage/seaimp-riderpage.component';
 import { DevanComponent } from './devan/devan.component';
 import { CopyCntrPageComponent } from './copycntrpage/copycntrpage.component';
+import { WhStockComponent } from './whstock/whstock.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CopyCntrPageComponent } from './copycntrpage/copycntrpage.component';
     SeaImpCargoPickupComponent,
     SeaImpRiderPageComponent,
     DevanComponent,
-    CopyCntrPageComponent
+    CopyCntrPageComponent,
+    WhStockComponent
   ],
   imports: [
     SharedModule,    

@@ -1,28 +1,28 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { GlobalService } from '../../../core/services/global.service';
+import { GlobalService } from '../../core/services/global.service';
 
-import { WhInwardService } from '../../services/whinward.service';
-import { User_Menu } from '../../../core/models/menum';
-import { Tbl_wh_inwardm, Tbl_wh_inwardd, Tbl_wh_container, vm_tbl_wh_inwardm } from '../../models/Tbl_wh_inwardm';
-import { SearchTable } from '../../../shared/models/searchtable';
+import { WhStockService } from '../services/whstock.service';
+ 
+import { Tbl_cargo_whstock,vm_tbl_cargo_whstock } from '../models/tbl_cargo_whstock';
+import { SearchTable } from '../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DateComponent } from '../../../shared/date/date.component';
-import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
+import { DateComponent } from '../../shared/date/date.component';
+import { AutoComplete2Component } from '../../shared/autocomplete2/autocomplete2.component';
 
 @Component({
-    selector: 'app-wh-inward-edit',
-    templateUrl: './wh-inward-edit.component.html'
+    selector: 'app-whstock',
+    templateUrl: './whstock.component.html'
 })
-export class WhInwardEditComponent implements OnInit {
+export class WhStockComponent implements OnInit {
 
-    @ViewChild('_inm_doc_date') inm_doc_date_field: DateComponent;
-    @ViewChild('_customer_lov') customer_lov_field: AutoComplete2Component;
+    // @ViewChild('_inm_doc_date') inm_doc_date_field: DateComponent;
+    // @ViewChild('_customer_lov') customer_lov_field: AutoComplete2Component;
     @ViewChild('_btn_Add_product') btn_Add_product_field: ElementRef;
 
-    @ViewChildren('_cntr_no') cntr_no_field: QueryList<ElementRef>;
-    @ViewChildren('_cntr_sealno') cntr_sealno_field: QueryList<ElementRef>;
+    // @ViewChildren('_cntr_no') cntr_no_field: QueryList<ElementRef>;
+    // @ViewChildren('_cntr_sealno') cntr_sealno_field: QueryList<ElementRef>;
     @ViewChildren('_ind_code_field') ind_code_field: QueryList<AutoComplete2Component>;
     @ViewChildren('_ind_product') ind_product_field: QueryList<ElementRef>;
 
@@ -32,40 +32,14 @@ export class WhInwardEditComponent implements OnInit {
     @ViewChildren('_ind_cqty') ind_cqty_field: QueryList<ElementRef>;
     @ViewChildren('_ind_volume') ind_volume_field: QueryList<ElementRef>;
 
-    record: Tbl_wh_inwardm = <Tbl_wh_inwardm>{};
-
-    detrecords: Tbl_wh_inwardd[] = [];
-    cntrrecords: Tbl_wh_container[] = [];
-
-
+    detrecords: Tbl_cargo_whstock[] = [];
     tab: string = 'main';
-    report_title: string = '';
-    report_url: string = '';
-    report_searchdata: any = {};
-    report_menuid: string = '';
-
-    attach_title: string = '';
-    attach_parentid: string = '';
-    attach_subid: string = '';
-    attach_type: string = '';
-    attach_typelist: any = {};
-    attach_tablename: string = '';
-    attach_tablepkcolumn: string = '';
-    attach_refno: string = '';
-    attach_customername: string = '';
-    attach_updatecolumn: string = '';
-    attach_viewonlysource: string = '';
-    attach_viewonlyid: string = '';
-    attach_filespath: string = '';
-    attach_filespath2: string = '';
-
-
-    showPayReq: boolean = false;
+     
     private pkid: string;
-    private menuid: string;
+    menuid: string;
     private hbl_pkid: string = '';
     private hbl_mode: string = '';
-    private mode: string;
+     mode: string;
     private type: string;
 
     modal: any;
@@ -77,10 +51,9 @@ export class WhInwardEditComponent implements OnInit {
     private isAdmin: boolean;
 
     private cmbList = {};
-    MblStatusList: any[] = [];
-    BlStatusList: any[] = [];
+     
 
-    is_cntr_addrow: boolean = false;
+     
     is_locked: boolean = false;
     bChanged = false;
 
@@ -91,7 +64,7 @@ export class WhInwardEditComponent implements OnInit {
         private route: ActivatedRoute,
         private location: Location,
         public gs: GlobalService,
-        private mainService: WhInwardService,
+        private mainService: WhStockService,
     ) {
         modalconfig.backdrop = 'static'; //true/false/static
         modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
@@ -115,7 +88,7 @@ export class WhInwardEditComponent implements OnInit {
         }
         this.closeCaption = 'Return';
         this.initPage();
-        this.actionHandler();
+        
 
 
         /*     $(document).ready(function() {
@@ -140,85 +113,19 @@ export class WhInwardEditComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-        if (!this.gs.isBlank(this.inm_doc_date_field))
-            this.inm_doc_date_field.Focus();
+        
     }
-
-    NewRecord() {
-        this.mode = 'ADD'
-        this.actionHandler();
-    }
-
-    actionHandler() {
-        this.errorMessage = [];
-        this.is_locked = false;
-        if (this.mode == 'ADD') {
-            this.record = <Tbl_wh_inwardm>{};
-            this.detrecords = <Tbl_wh_inwardd[]>[];
-            this.cntrrecords = <Tbl_wh_container[]>[];
-            this.pkid = this.gs.getGuid();
-            this.init();
-        }
-        if (this.mode == 'EDIT') {
-            this.GetRecord();
-        }
-    }
-
-    init() {
-
-        this.record.inm_pkid = this.pkid;
-        this.record.inm_type = this.type;
-        this.record.inm_refno = '';
-        this.record.inm_doc_date = this.gs.defaultValues.today;
-
-        this.record.inm_arrival_date = '';
-        this.record.inm_cust_id = '';
-        this.record.inm_cust_code = '';
-        this.record.inm_cust_name = '';
-        this.record.inm_cust_add1 = '';
-        this.record.inm_cust_add2 = '';
-        this.record.inm_cust_add3 = '';
-        this.record.inm_cust_add4 = '';
-        this.record.inm_wh_id = '';
-        this.record.inm_wh_code = '';
-        this.record.inm_wh_name = '';
-        this.record.inm_supplier_id = '';
-        this.record.inm_supplier_code = '';
-        this.record.inm_supplier_name = '';
-        this.record.inm_supplier_add1 = '';
-        this.record.inm_supplier_add2 = '';
-        this.record.inm_supplier_add3 = '';
-        this.record.inm_supplier_add4 = '';
-        this.record.inm_transport_id = '';
-        this.record.inm_transport_code = '';
-        this.record.inm_transport_name = '';
-        this.record.inm_transport_add1 = '';
-        this.record.inm_transport_add2 = '';
-        this.record.inm_transport_add3 = '';
-        this.record.inm_transport_add4 = '';
-        this.record.rec_created_by = this.gs.user_code;
-        this.record.rec_created_date = this.gs.defaultValues.today;
-        this.record.inm_prefix = this.gs.WH_INWARD_DOCNO_PREFIX;
-        this.record.inm_startingno = this.gs.WH_INWARD_DOCNO_STARTING_NO;
-
-    }
+ 
 
     GetRecord() {
-
         this.errorMessage = [];
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = this.pkid;
-
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.is_locked = response.islocked;
-                this.record = <Tbl_wh_inwardm>response.record;
-                this.detrecords = (response.detrecords == undefined || response.detrecords == null) ? <Tbl_wh_inwardd[]>[] : <Tbl_wh_inwardd[]>response.detrecords;
-                this.cntrrecords = (response.cntrrecords == undefined || response.cntrrecords == null) ? <Tbl_wh_container[]>[] : <Tbl_wh_container[]>response.cntrrecords;
+                this.detrecords = (response.detrecords == undefined || response.detrecords == null) ? <Tbl_cargo_whstock[]>[] : <Tbl_cargo_whstock[]>response.detrecords;
                 this.mode = 'EDIT';
-               
-                if (!this.gs.isBlank(this.inm_doc_date_field))
-                    this.inm_doc_date_field.Focus();
             }, error => {
                 this.errorMessage.push(this.gs.getError(error));
             });
@@ -230,14 +137,11 @@ export class WhInwardEditComponent implements OnInit {
         if (!confirm("Save")) {
             return;
         }
-        this.SaveContainer();
+       
         this.SaveDetails();
-        this.FindTotTeus();
-        this.record.inm_type = this.type;
-        const saveRecord = <vm_tbl_wh_inwardm>{};
-        saveRecord.record = this.record;
+       
+        const saveRecord = <vm_tbl_cargo_whstock>{};
         saveRecord.drecords = this.detrecords;
-        saveRecord.cntrrecords = this.cntrrecords;
         saveRecord.mode = this.mode;
         saveRecord.userinfo = this.gs.UserInfo;
 
@@ -248,22 +152,8 @@ export class WhInwardEditComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
-                    if (this.mode == "ADD" && response.code != '')
-                        this.record.inm_doc_no = response.code;
+                     
                     this.mode = 'EDIT';
-
-                    let parameter = {
-                        appid: this.gs.appid,
-                        menuid: this.menuid,
-                        pkid: this.pkid,
-                        type: '',
-                        origin: 'wh-inward-page',
-                        mode: 'EDIT'
-                    };
-                    this.location.replaceState('warehouse/WhInwardEditPage', this.gs.getUrlParameter(parameter));
-
-                    this.mainService.RefreshList(this.record);
-                    // this.errorMessage.push('Save Complete');
                     alert('Save Complete');
                 }
             }, error => {
@@ -272,68 +162,7 @@ export class WhInwardEditComponent implements OnInit {
             });
     }
 
-    private FindTotTeus() {
-        // var Tot_Teu = 0, Teu = 0, Tot_Cbm = 0;
-        // var Tot_20 = 0, Tot_40 = 0, Tot_40HQ = 0, Tot_45 = 0;
-        // var Cntr_Tot = 0;
-        // let sCntrType: string = "";
-        // this.records.forEach(Rec => {
-        //     Cntr_Tot++;
-        //     Teu = 0;
-        //     if (Rec.cntr_type.indexOf("20") >= 0)
-        //         Teu = 1;
-        //     else if (Rec.cntr_type.indexOf("40") >= 0) {
-        //         if (Rec.cntr_type.indexOf("HC") >= 0)
-        //             Teu = 2.25;
-        //         else
-        //             Teu = 2;
-        //     }
-        //     else if (Rec.cntr_type.indexOf("45") >= 0)
-        //         Teu = 2.50;
-
-        //     if (this.record.mbl_cntr_type.toString() == "LCL")
-        //         Teu = 0;
-        //     Tot_Teu += Teu;
-        //     Tot_Cbm += Rec.cntr_cbm;
-        //     Rec.cntr_teu = Teu;
-        //     if (Teu > 0) {
-        //         if (Rec.cntr_type.indexOf("20") >= 0)
-        //             Tot_20 += 1;
-        //         else if (Rec.cntr_type.indexOf("40HC") >= 0 || Rec.cntr_type.indexOf("40HQ") >= 0)
-        //             Tot_40HQ += 1;
-        //         else if (Rec.cntr_type.indexOf("40") >= 0)
-        //             Tot_40 += 1;
-        //         else if (Rec.cntr_type.indexOf("45") >= 0)
-        //             Tot_45 += 1;
-        //     }
-
-        //     if (sCntrType.indexOf(Rec.cntr_type) < 0) {
-        //         if (sCntrType != "")
-        //             sCntrType += ",";
-        //         sCntrType += Rec.cntr_type;
-        //     }
-
-        // })
-        // this.record.mbl_teu = Tot_Teu;
-        // this.record.mbl_20 = Tot_20;
-        // this.record.mbl_40 = Tot_40;
-        // this.record.mbl_40HQ = Tot_40HQ;
-        // this.record.mbl_45 = Tot_45;
-        // this.record.mbl_cntr_cbm = Tot_Cbm;
-        // this.record.mbl_container_tot = Cntr_Tot;
-        // if (sCntrType.length > 100)
-        //     sCntrType = sCntrType.substring(0, 100);
-
-        // this.record.mbl_cntr_desc = sCntrType;
-    }
-    private SaveContainer() {
-        let iCtr: number = 0;
-        this.cntrrecords.forEach(Rec => {
-            iCtr++;
-            Rec.cntr_parent_id = this.pkid.toString();
-            Rec.cntr_order = iCtr;
-        })
-    }
+     
     private SaveDetails() {
         let iCtr: number = 0;
         this.detrecords.forEach(Rec => {
@@ -349,57 +178,7 @@ export class WhInwardEditComponent implements OnInit {
         var bRet = true;
         this.errorMessage = [];
 
-        if (this.gs.isBlank(this.record.inm_refno)) {
-            bRet = false;
-            this.errorMessage.push("Ref# cannot be blank");;
-        }
-        if (this.gs.isBlank(this.record.inm_doc_date)) {
-            bRet = false;
-            this.errorMessage.push("Doc Date cannot be blank");;
-        }
-        if (this.gs.isBlank(this.record.inm_arrival_date)) {
-            bRet = false;
-            this.errorMessage.push("Arrival Date cannot be blank");;
-        }
-
-        if (this.gs.isBlank(this.record.inm_wh_id)) {
-            bRet = false;
-            this.errorMessage.push("Warehouse cannot be blank");
-        }
-
-        if (this.gs.isBlank(this.record.inm_cust_id)) {
-            bRet = false;
-            this.errorMessage.push("Customer cannot be blank");
-        }
-        if (this.gs.isBlank(this.record.inm_supplier_id)) {
-            bRet = false;
-            this.errorMessage.push("Supplier cannot be blank");
-        }
-
-        if (this.gs.isBlank(this.record.inm_transport_id)) {
-            bRet = false;
-            this.errorMessage.push("Transporter cannot be blank");
-        }
-
-
-        if (!this.gs.isBlank(this.cntrrecords)) {
-            this.cntrrecords.forEach(Rec => {
-                if (Rec.cntr_no.length != 11) {
-                    bRet = false;
-                    this.errorMessage.push("Container( " + Rec.cntr_no + " ) Invalid");
-                }
-                if (Rec.cntr_type.length <= 0) {
-                    bRet = false;
-                    this.errorMessage.push("Container( " + Rec.cntr_no + " ) type has to be selected");
-                }
-
-                // if (Rec.cntr_packages <= 0) {
-                //     bRet = false;
-                //     this.errorMessage.push("Container( " + Rec.cntr_no + " ) Packages cannot be zero");
-                // }
-
-            })
-        }
+        
 
         let iCtr: number = 0;
         if (!this.gs.isBlank(this.detrecords)) {
@@ -478,43 +257,22 @@ export class WhInwardEditComponent implements OnInit {
         // } else
         //   this.location.back();
 
-        let prm = {
-            appid: this.gs.appid,
-            id: this.gs.MENU_WH_INWARD,
-            menuid: this.gs.MENU_WH_INWARD,
-            menu_param: this.mainService.param_type,
-            origin: 'wh-inward-page',
-            rnd: this.gs.getRandomInt()
-        };
-        this.gs.AutoReloadReturn(prm);
+        // let prm = {
+        //     appid: this.gs.appid,
+        //     id: this.gs.MENU_WH_INWARD,
+        //     menuid: this.gs.MENU_WH_INWARD,
+        //     menu_param: '',
+        //     origin: 'wh-inward-page',
+        //     rnd: this.gs.getRandomInt()
+        // };
+        // this.gs.AutoReloadReturn(prm);
+
+        this.location.back();
     }
-
-
-    AddCntrRow() {
-        var rec = <Tbl_wh_container>{};
-        rec.cntr_pkid = this.gs.getGuid();
-        rec.cntr_parent_id = this.pkid.toString();
-        rec.cntr_no = "";
-        rec.cntr_type = "";
-        rec.cntr_sealno = '';
-        rec.cntr_packages_uom = '';
-        rec.cntr_packages = 0;
-        rec.cntr_weight = 0;
-        rec.cntr_cbm = 0;
-        rec.cntr_weight_uom = '';
-        rec.cntr_order = 1;
-        rec.cntr_pallets = 0;
-        this.cntrrecords.push(rec);
-
-        this.cntr_no_field.changes
-            .subscribe((queryChanges) => {
-                this.cntr_no_field.last.nativeElement.focus();
-            });
-    }
-
+ 
     AddDetRow() {
 
-        var rec = <Tbl_wh_inwardd>{};
+        var rec = <Tbl_cargo_whstock>{};
         rec.ind_pkid = this.gs.getGuid();
         rec.ind_parent_id = this.pkid;
         rec.ind_code_id = '';
@@ -558,65 +316,7 @@ export class WhInwardEditComponent implements OnInit {
     }
 
     LovSelected(_Record: SearchTable, idx: number = 0) {
-
-        if (_Record.controlname == "CUSTOMER") {
-            this.record.inm_cust_id = _Record.id;
-
-            this.record.inm_cust_name = _Record.name;
-            if (_Record.col8 != "")
-                this.record.inm_cust_name = _Record.col8;
-
-            this.record.inm_cust_add1 = _Record.col1;
-            this.record.inm_cust_add2 = _Record.col2;
-            this.record.inm_cust_add3 = _Record.col3;
-            this.record.inm_cust_add4 = this.gs.GetTelFax(_Record.col6.toString(), _Record.col7.toString());
-            // this.mbl_cargo_locname_field.nativeElement.focus();
-        }
-
-        if (_Record.controlname == "SUPPLIER") {
-            this.record.inm_supplier_id = _Record.id;
-
-            this.record.inm_supplier_name = _Record.name;
-            if (_Record.col8 != "")
-                this.record.inm_supplier_name = _Record.col8;
-
-            this.record.inm_supplier_add1 = _Record.col1;
-            this.record.inm_supplier_add2 = _Record.col2;
-            this.record.inm_supplier_add3 = _Record.col3;
-            this.record.inm_supplier_add4 = this.gs.GetTelFax(_Record.col6.toString(), _Record.col7.toString());
-            // this.mbl_devan_locname_field.nativeElement.focus();
-        }
-
-        if (_Record.controlname == "TRANSPORTER") {
-            this.record.inm_transport_id = _Record.id;
-
-            this.record.inm_transport_name = _Record.name;
-            if (_Record.col8 != "")
-                this.record.inm_transport_name = _Record.col8;
-
-            this.record.inm_transport_add1 = _Record.col1;
-            this.record.inm_transport_add2 = _Record.col2;
-            this.record.inm_transport_add3 = _Record.col3;
-            this.record.inm_transport_add4 = this.gs.GetTelFax(_Record.col6.toString(), _Record.col7.toString());
-            // this.mbl_devan_locname_field.nativeElement.focus();
-        }
-        if (_Record.controlname == "WAREHOUSE") {
-            this.record.inm_wh_id = _Record.id;
-            this.record.inm_wh_code = _Record.code;
-            this.record.inm_wh_name = _Record.name;
-        }
-
-        //Container
-        if (_Record.controlname == "CONTAINER TYPE") {
-            this.cntrrecords.forEach(rec => {
-                if (rec.cntr_pkid == _Record.uid) {
-                    rec.cntr_type = _Record.code;
-                    if (idx < this.cntr_sealno_field.toArray().length)
-                        this.cntr_sealno_field.toArray()[idx].nativeElement.focus();
-                }
-            });
-        }
-
+ 
         //Details
         if (_Record.controlname == "PRODUCT") {
             this.detrecords.forEach(rec => {
@@ -682,7 +382,7 @@ export class WhInwardEditComponent implements OnInit {
         }
     }
 
-    onFocusout(field: string, rec: Tbl_wh_inwardd = null, idx: number = 0) {
+    onFocusout(field: string, rec: Tbl_cargo_whstock = null, idx: number = 0) {
 
         switch (field) {
             case 'ind_cqty': {
@@ -755,31 +455,9 @@ export class WhInwardEditComponent implements OnInit {
     }
 
 
-    onBlur(field: string, rec: Tbl_wh_inwardd = null, rec2: Tbl_wh_container = null, idx: number = 0) {
+    onBlur(field: string, rec: Tbl_cargo_whstock = null, idx: number = 0) {
         switch (field) {
-
-            case 'cntr_no': {
-                rec2.cntr_no = rec2.cntr_no.toUpperCase().trim();
-                break;
-            }
-            case 'cntr_type': {
-                rec2.cntr_type = rec2.cntr_type.toUpperCase().trim();
-                break;
-            }
-            case 'cntr_sealno': {
-                rec2.cntr_sealno = rec2.cntr_sealno.toUpperCase().trim();
-                break;
-            }
-            case 'cntr_packages': {
-                rec2.cntr_packages = this.gs.roundNumber(rec2.cntr_packages, 0);
-                break;
-            }
-            case 'cntr_packages_uom': {
-                rec2.cntr_packages_uom = rec2.cntr_packages_uom.toUpperCase().trim();
-                break;
-            }
-
-
+ 
             case 'ind_product': {
                 rec.ind_product = rec.ind_product.toUpperCase().trim();
                 break;
@@ -916,16 +594,8 @@ export class WhInwardEditComponent implements OnInit {
     callbackevent(event: any) {
         this.tab = 'main';
     }
-
-
-    RemoveCntrRow(_rec: Tbl_wh_container) {
-        if (!confirm("Delete Y/N")) {
-            return;
-        }
-        this.cntrrecords.splice(this.cntrrecords.findIndex(rec => rec.cntr_pkid == _rec.cntr_pkid), 1);
-    }
-
-    RemoveDetRow(_rec: Tbl_wh_inwardd) {
+ 
+    RemoveDetRow(_rec: Tbl_cargo_whstock) {
         if (!confirm("Delete Y/N")) {
             return;
         }
@@ -950,7 +620,7 @@ export class WhInwardEditComponent implements OnInit {
                 appid: this.gs.appid,
                 id: this.gs.MENU_WH_INWARD,
                 menuid: this.gs.MENU_WH_INWARD,
-                menu_param: this.mainService.param_type,
+                menu_param: '',
                 origin: 'wh-inward-page',
                 rnd: this.gs.getRandomInt()
             };
