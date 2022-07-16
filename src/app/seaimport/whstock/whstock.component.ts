@@ -184,10 +184,10 @@ export class WhStockComponent implements OnInit {
         if (!this.gs.isBlank(this.detrecords)) {
             this.detrecords.forEach(Rec => {
                 iCtr++;
-                if (this.gs.isBlank(Rec.ind_code_id)) {
-                    bRet = false;
-                    this.errorMessage.push("Code cannot be blank, Row" + iCtr.toString());
-                }
+                // if (this.gs.isBlank(Rec.ind_code_id)) {
+                //     bRet = false;
+                //     this.errorMessage.push("Code cannot be blank, Row" + iCtr.toString());
+                // }
                 if (this.gs.isBlank(Rec.ind_product)) {
                     bRet = false;
                     this.errorMessage.push("Product cannot be blank, Row" + iCtr.toString());
