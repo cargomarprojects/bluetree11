@@ -1009,7 +1009,7 @@ export class SeaImpMasterEditComponent implements OnInit {
         return {
           appid: this.gs.appid,
           menuid: this.gs.MENU_SI_MASTER_DELIVERY_ORDER,
-          pkid: '',
+          pkid: this.pkid,
           type: '',
           origin: 'wh-inward-page',
           mode: 'EDIT'

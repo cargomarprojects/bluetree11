@@ -106,6 +106,7 @@ export class WhStockComponent implements OnInit {
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = [];
         this.LoadCombo();
+        this.GetRecord();
     }
 
     LoadCombo() {
@@ -124,7 +125,7 @@ export class WhStockComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.is_locked = response.islocked;
-                this.detrecords = (response.detrecords == undefined || response.detrecords == null) ? <Tbl_cargo_whstock[]>[] : <Tbl_cargo_whstock[]>response.detrecords;
+                this.detrecords = (response.records == undefined || response.records == null) ? <Tbl_cargo_whstock[]>[] : <Tbl_cargo_whstock[]>response.records;
                 this.mode = 'EDIT';
             }, error => {
                 this.errorMessage.push(this.gs.getError(error));
@@ -141,8 +142,9 @@ export class WhStockComponent implements OnInit {
         this.SaveDetails();
        
         const saveRecord = <vm_tbl_cargo_whstock>{};
-        saveRecord.drecords = this.detrecords;
+        saveRecord.records = this.detrecords;
         saveRecord.mode = this.mode;
+        saveRecord.parentid = this.pkid;
         saveRecord.userinfo = this.gs.UserInfo;
 
         this.mainService.Save(saveRecord)
