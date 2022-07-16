@@ -1002,17 +1002,15 @@ export class SeaImpMasterEditComponent implements OnInit {
           invokefrom: 'MASTER',
           is_locked: this.is_locked
         };
-    } else if (action == "STOCK") {
+    } else if (action == "PRODUCTS") {
       if (_type == "L")
         return '/Silver.SeaImport/WhStockPage';
       if (_type == 'P')
         return {
           appid: this.gs.appid,
-          menuid: this.gs.MENU_SI_MASTER_DELIVERY_ORDER,
+          menuid: this.gs.MENU_SI_MASTER_PRODUCTS,
           pkid: this.pkid,
-          type: '',
-          origin: 'wh-inward-page',
-          mode: 'EDIT'
+          origin: 'seaimp-master-page',
         };
     }
 

@@ -76,15 +76,11 @@ export class WhStockComponent implements OnInit {
         if (this.route.snapshot.queryParams.parameter == null) {
             this.pkid = this.route.snapshot.queryParams.pkid;
             this.menuid = this.route.snapshot.queryParams.menuid;
-            this.mode = this.route.snapshot.queryParams.mode;
-            this.type = this.route.snapshot.queryParams.type;
         }
         else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
             this.pkid = options.pkid;
             this.menuid = options.menuid;
-            this.mode = options.mode;
-            this.type = options.type;
         }
         this.closeCaption = 'Return';
         this.initPage();

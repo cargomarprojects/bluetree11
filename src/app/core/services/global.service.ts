@@ -562,6 +562,7 @@ export class GlobalService {
   public MENU_SI_MASTER_POD = "C4E6A124-41E6-428B-BCF9-9BAD1F34DD29";
   public MENU_SI_MASTER_PROFIT_REPORT = "48D57D23-8812-4AC7-8A6D-15B0AFD75417";
   public MENU_SI_MASTER_DELIVERY_ORDER = "7A38AA74-26B4-47B6-9BBD-467488924D8D";
+  public MENU_SI_MASTER_PRODUCTS = "95A6CF55-71EF-2D5B-58A8-233810481C31";
   public MENU_SI_HOUSE = "1EA0649A-757F-420C-B0D6-D826884A9082";
   public MENU_SI_HOUSE_ARRIVAL_NOTICE = "838700C0-3633-4DF5-9AC1-7E0D44D4AA77";
   public MENU_SI_HOUSE_DELIVERY_ORDER = "A122070B-FDDF-4A67-A500-A64B0FCFA475";
@@ -3591,7 +3592,7 @@ export class GlobalService {
   isValidLooseCqty(_cQty: string, _factor: number) {
     let bOk = true;
 
-    if (_cQty.includes(".")) {
+    if (_cQty.includes(".") && !this.isZero(_factor)) {
       var nStr = _cQty.split('.');
       if (nStr.length > 2)
         bOk = false;
