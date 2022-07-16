@@ -4,8 +4,8 @@ import { Location } from '@angular/common';
 import { GlobalService } from '../../core/services/global.service';
 
 import { WhStockService } from '../services/whstock.service';
- 
-import { Tbl_cargo_whstock,vm_tbl_cargo_whstock } from '../models/tbl_cargo_whstock';
+
+import { Tbl_cargo_whstock, vm_tbl_cargo_whstock } from '../models/tbl_cargo_whstock';
 import { SearchTable } from '../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../shared/date/date.component';
@@ -34,12 +34,12 @@ export class WhStockComponent implements OnInit {
 
     detrecords: Tbl_cargo_whstock[] = [];
     tab: string = 'main';
-     
+
     private pkid: string;
     menuid: string;
     private hbl_pkid: string = '';
     private hbl_mode: string = '';
-     mode: string;
+    mode: string;
     private type: string;
 
     modal: any;
@@ -51,9 +51,9 @@ export class WhStockComponent implements OnInit {
     private isAdmin: boolean;
 
     private cmbList = {};
-     
 
-     
+
+
     is_locked: boolean = false;
     bChanged = false;
 
@@ -76,15 +76,17 @@ export class WhStockComponent implements OnInit {
         if (this.route.snapshot.queryParams.parameter == null) {
             this.pkid = this.route.snapshot.queryParams.pkid;
             this.menuid = this.route.snapshot.queryParams.menuid;
+            this.type = this.route.snapshot.queryParams.type;
         }
         else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
             this.pkid = options.pkid;
             this.menuid = options.menuid;
+            this.type = options.type;
         }
         this.closeCaption = 'Return';
         this.initPage();
-        
+
 
 
         /*     $(document).ready(function() {
@@ -110,9 +112,9 @@ export class WhStockComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-        
+
     }
- 
+
 
     GetRecord() {
         this.errorMessage = [];
@@ -134,9 +136,9 @@ export class WhStockComponent implements OnInit {
         if (!confirm("Save")) {
             return;
         }
-       
+
         this.SaveDetails();
-       
+
         const saveRecord = <vm_tbl_cargo_whstock>{};
         saveRecord.records = this.detrecords;
         saveRecord.mode = this.mode;
@@ -150,7 +152,7 @@ export class WhStockComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
-                     
+
                     this.mode = 'EDIT';
                     alert('Save Complete');
                 }
@@ -160,7 +162,7 @@ export class WhStockComponent implements OnInit {
             });
     }
 
-     
+
     private SaveDetails() {
         let iCtr: number = 0;
         this.detrecords.forEach(Rec => {
@@ -176,7 +178,7 @@ export class WhStockComponent implements OnInit {
         var bRet = true;
         this.errorMessage = [];
 
-        
+
 
         let iCtr: number = 0;
         if (!this.gs.isBlank(this.detrecords)) {
@@ -193,6 +195,10 @@ export class WhStockComponent implements OnInit {
                 if (this.gs.isBlank(Rec.ind_cqty)) {
                     bRet = false;
                     this.errorMessage.push("Qty cannot be blank, Row" + iCtr.toString());
+                }
+                if (this.gs.isZero(Rec.ind_unit_factor)) {
+                    bRet = false;
+                    this.errorMessage.push("Pcs/Carton cannot be Zero, Row" + iCtr.toString());
                 }
 
                 if (!this.gs.isValidCqty(Rec.ind_cqty)) {
@@ -267,7 +273,7 @@ export class WhStockComponent implements OnInit {
 
         this.location.back();
     }
- 
+
     AddDetRow() {
 
         var rec = <Tbl_cargo_whstock>{};
@@ -282,7 +288,7 @@ export class WhStockComponent implements OnInit {
         rec.ind_qty_uom_id = 'CTN';
         rec.ind_qty_uom_code = 'CTN';
         rec.ind_qty_uom_name = '';
-        rec.ind_unit_factor = 0;
+        rec.ind_unit_factor = 1;
         rec.ind_packages = 0;
         rec.ind_packages_uom_id = '';
         rec.ind_packages_uom_code = '';
@@ -314,7 +320,7 @@ export class WhStockComponent implements OnInit {
     }
 
     LovSelected(_Record: SearchTable, idx: number = 0) {
- 
+
         //Details
         if (_Record.controlname == "PRODUCT") {
             this.detrecords.forEach(rec => {
@@ -439,23 +445,18 @@ export class WhStockComponent implements OnInit {
         return false;
     }
 
-    onChange(field: string) {
-        // if (field == 'mbl_pol_etd') {
-        //     this.bChanged = true;
-        // }
-        // if (field == 'mbl_pod_eta') {
-        //     this.bChanged = true;
-        // }
-        // if (field == 'mbl_pofd_eta') {
-        //     this.bChanged = true;
-        // }
 
+    onFocus(field: string) {
+        this.bChanged = false;
     }
 
+    onChange(field: string) {
+        this.bChanged = true;
+    }
 
     onBlur(field: string, rec: Tbl_cargo_whstock = null, idx: number = 0) {
         switch (field) {
- 
+
             case 'ind_product': {
                 rec.ind_product = rec.ind_product.toUpperCase().trim();
                 break;
@@ -469,14 +470,29 @@ export class WhStockComponent implements OnInit {
                 break;
             }
             case 'ind_cqty': {
-                if (!this.gs.isValidCqty(rec.ind_cqty))
-                    alert('Invalid Qty ' + rec.ind_cqty);
-                else
-                    if (!this.gs.isBlank(rec.ind_qty_uom_id)) {
-                        if (!this.gs.isValidLooseCqty(rec.ind_cqty, rec.ind_unit_factor)) {
-                            alert('Loose quantity should be less than ' + rec.ind_unit_factor);
+                if (this.bChanged) {
+                    if (!this.gs.isValidCqty(rec.ind_cqty))
+                        alert('Invalid Qty ' + rec.ind_cqty);
+                    else
+                        if (!this.gs.isBlank(rec.ind_qty_uom_id)) {
+                            if (!this.gs.isValidLooseCqty(rec.ind_cqty, rec.ind_unit_factor)) {
+                                alert('Loose quantity should be less than ' + rec.ind_unit_factor);
+                            }
                         }
-                    }
+                }
+                break;
+            }
+            case 'ind_unit_factor': {
+                if (this.bChanged) {
+                    if (this.gs.isZero(rec.ind_unit_factor))
+                        alert('Pcs/Carton cannot be zero ' );
+                    else
+                        if (!this.gs.isBlank(rec.ind_qty_uom_id)) {
+                            if (!this.gs.isValidLooseCqty(rec.ind_cqty, rec.ind_unit_factor)) {
+                                alert('Loose quantity should be less than ' + rec.ind_unit_factor);
+                            }
+                        }
+                }
                 break;
             }
             // case 'ind_qty_uom': {
@@ -592,7 +608,7 @@ export class WhStockComponent implements OnInit {
     callbackevent(event: any) {
         this.tab = 'main';
     }
- 
+
     RemoveDetRow(_rec: Tbl_cargo_whstock) {
         if (!confirm("Delete Y/N")) {
             return;

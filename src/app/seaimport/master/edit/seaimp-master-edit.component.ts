@@ -1010,6 +1010,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           appid: this.gs.appid,
           menuid: this.gs.MENU_SI_MASTER_PRODUCTS,
           pkid: this.pkid,
+          type:'MBL-OI',
           origin: 'seaimp-master-page',
         };
     }

@@ -62,13 +62,13 @@
 
                             <td class="p-0">
                                 <input #_ind_cqty class="form-control form-control-sm" type="text"
-                                    style="text-align:right;" [(ngModel)]="rec.ind_cqty"
+                                    style="text-align:right;" [(ngModel)]="rec.ind_cqty" (focus)="onFocus('ind_cqty')" (change)="onChange('ind_cqty')" 
                                     (blur)="onBlur('ind_cqty',rec,i)" maxlength="15" />
                             </td>
                             <td class="p-0">
                                 <input #_ind_packages class="form-control form-control-sm" type="number"
-                                    style="text-align:right;" [(ngModel)]="rec.ind_unit_factor"
-                                    (blur)="onBlur('ind_unit_factor',rec)" maxlength="15" />
+                                    style="text-align:right;" [(ngModel)]="rec.ind_unit_factor" (focus)="onFocus('ind_unit_factor')" (change)="onChange('ind_unit_factor')"
+                                    (blur)="onBlur('ind_unit_factor',rec,i)" maxlength="15" />
                             </td>
 
                             <!-- <td class="p-0">
