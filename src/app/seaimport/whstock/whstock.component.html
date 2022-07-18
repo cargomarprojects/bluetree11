@@ -6,78 +6,79 @@
         <label class="text-danger" *ngIf="IsLocked">LOCKED</label> -->
     </div>
 </div>
-<div class="page-body">
-    <div class="row border p-1">
-        <div class="col-md-12 px-1 mx-1">
-            <div class="page-body table-responsive table-bordered">
-                <table class="table  table-hover table-sm">
-                    <thead class="page-body-thead">
-                        <tr>
-                            <th width='8%'>CODE</th>
-                            <th width='13%'>SKU</th>
-                            <th width='15%'>DESCRIPTION</th>
-                            <th width='10%'>REFNO</th>
-                            <th width='6%'>UOM (CARTON)</th>
-                            <th style="text-align:right;" width='7%'>CARTONS</th>
-                            <th style="text-align:right;" width='7%'>PCS/CARTON</th>
-                            <!-- <th width='7%'>PACKAGES</th>
+
+
+<div class="col-md-12 px-0 mx-0">
+    <div class="page-body table-responsive table-bordered cntr">
+        <table class="table  table-hover table-sm">
+            <thead class="page-body-thead">
+                <tr>
+                    <th width='8%'>CODE</th>
+                    <th width='13%'>SKU</th>
+                    <th width='15%'>DESCRIPTION</th>
+                    <th width='10%'>REFNO</th>
+                    <th width='6%'>UOM (CARTON)</th>
+                    <th style="text-align:right;" width='7%'>CARTONS</th>
+                    <th style="text-align:right;" width='7%'>PCS/CARTON</th>
+                    <!-- <th width='7%'>PACKAGES</th>
                                                 <th width='6%'>UOM</th> -->
-                            <th width='6%'>UOM (WEIGHT)</th>
-                            <th style="text-align:right;" width='5%'>WEIGHT</th>
-                            <th width='6%'>UOM (DIMENSION)</th>
-                            <th style="text-align:right;" width='5%'>DIMENSION</th>
-                            <th style="text-align:right;" width='5%'>PALLETS</th>
-                            <th width='2%'></th>
-                        </tr>
-                    </thead>
-                    <tbody class="page-body-tbody" *ngFor="let rec of detrecords; let i = index">
-                        <tr>
-                            <td class="p-0">
+                    <th width='6%'>UOM (WEIGHT)</th>
+                    <th style="text-align:right;" width='5%'>WEIGHT</th>
+                    <th width='6%'>UOM (DIMENSION)</th>
+                    <th style="text-align:right;" width='5%'>DIMENSION</th>
+                    <th style="text-align:right;" width='5%'>TRANSFER CTN</th>
+                    <th width='2%'></th>
+                </tr>
+            </thead>
+            <tbody class="page-body-tbody" *ngFor="let rec of detrecords; let i = index">
+                <tr>
+                    <td class="p-0">
 
-                                <app-autocomplete2 #_ind_code_field [controlname]="'PRODUCT'" [tabletype]="'PRODUCT'"
-                                    [uid]="rec.ind_pkid" [displaycolumn]="'CODE'" [displaydata]="rec.ind_code"
-                                    (ValueChanged)="LovSelected($event,i)">
-                                </app-autocomplete2>
+                        <app-autocomplete2 #_ind_code_field [controlname]="'PRODUCT'" [tabletype]="'PRODUCT'"
+                            [uid]="rec.ind_pkid" [displaycolumn]="'CODE'" [displaydata]="rec.ind_code"
+                            (ValueChanged)="LovSelected($event,i)">
+                        </app-autocomplete2>
 
-                            </td>
-                            <td class="p-0">
-                                <input #_ind_product class="form-control form-control-sm" type="text"
-                                    [(ngModel)]="rec.ind_product" (blur)="onBlur('ind_product',rec)" maxlength="100" />
-                            </td>
+                    </td>
+                    <td class="p-0">
+                        <input #_ind_product class="form-control form-control-sm" type="text"
+                            [(ngModel)]="rec.ind_product" (blur)="onBlur('ind_product',rec)" maxlength="100" />
+                    </td>
 
-                            <td class="p-0">
-                                <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.ind_desc"
-                                    (blur)="onBlur('ind_desc',rec)" maxlength="100" />
-                            </td>
-                            <td class="p-0">
-                                <input #_ind_refno class="form-control form-control-sm" type="text"
-                                    [(ngModel)]="rec.ind_refno" (blur)="onBlur('ind_refno',rec)" maxlength="60" />
-                            </td>
-                            <td class="p-0">
-                                <app-autocomplete2 [controlname]="'QTY-UOM'" [displaycolumn]="'CODE'"
-                                    [tabletype]="'PARAM'" [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
-                                    [displaydata]="rec.ind_qty_uom_code" (ValueChanged)="LovSelected($event,i)">
-                                </app-autocomplete2>
-                            </td>
+                    <td class="p-0">
+                        <input class="form-control form-control-sm" type="text" [(ngModel)]="rec.ind_desc"
+                            (blur)="onBlur('ind_desc',rec)" maxlength="100" />
+                    </td>
+                    <td class="p-0">
+                        <input #_ind_refno class="form-control form-control-sm" type="text" [(ngModel)]="rec.ind_refno"
+                            (blur)="onBlur('ind_refno',rec)" maxlength="60" />
+                    </td>
+                    <td class="p-0">
+                        <app-autocomplete2 [controlname]="'QTY-UOM'" [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                            [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid" [displaydata]="rec.ind_qty_uom_code"
+                            (ValueChanged)="LovSelected($event,i)">
+                        </app-autocomplete2>
+                    </td>
 
-                            <td class="p-0">
-                                <input #_ind_cqty class="form-control form-control-sm" type="text"
-                                    style="text-align:right;" [(ngModel)]="rec.ind_cqty" (focus)="onFocus('ind_cqty')" (change)="onChange('ind_cqty')" 
-                                    (blur)="onBlur('ind_cqty',rec,i)" maxlength="15" />
-                            </td>
-                            <td class="p-0">
-                                <input #_ind_packages class="form-control form-control-sm" type="number"
-                                    style="text-align:right;" [(ngModel)]="rec.ind_unit_factor" (focus)="onFocus('ind_unit_factor')" (change)="onChange('ind_unit_factor')"
-                                    (blur)="onBlur('ind_unit_factor',rec,i)" maxlength="15" />
-                            </td>
+                    <td class="p-0">
+                        <input #_ind_cqty class="form-control form-control-sm" type="text" style="text-align:right;"
+                            [(ngModel)]="rec.ind_cqty" (focus)="onFocus('ind_cqty')" (change)="onChange('ind_cqty')"
+                            (blur)="onBlur('ind_cqty',rec,i)" maxlength="15" />
+                    </td>
+                    <td class="p-0">
+                        <input #_ind_packages class="form-control form-control-sm" type="number"
+                            style="text-align:right;" [(ngModel)]="rec.ind_unit_factor"
+                            (focus)="onFocus('ind_unit_factor')" (change)="onChange('ind_unit_factor')"
+                            (blur)="onBlur('ind_unit_factor',rec,i)" maxlength="15" />
+                    </td>
 
-                            <!-- <td class="p-0">
+                    <!-- <td class="p-0">
                                                     <input #_ind_packages class="form-control form-control-sm"
                                                         type="number" style="text-align:right;"
                                                         [(ngModel)]="rec.ind_packages"
                                                         (blur)="onBlur('ind_packages',rec)" maxlength="15"/>
                                                 </td> -->
-                            <!-- <td class="p-0">
+                    <!-- <td class="p-0">
                                                         <app-autocomplete2 [controlname]="'PACKAGES-UOM'"
                                                         [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
                                                         [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
@@ -85,52 +86,100 @@
                                                         (ValueChanged)="LovSelected($event,i)">
                                                     </app-autocomplete2>
                                                 </td> -->
-                            <td class="p-0">
-                                <app-autocomplete2 [controlname]="'WEIGHT-UOM'" [displaycolumn]="'CODE'"
-                                    [tabletype]="'PARAM'" [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
-                                    [displaydata]="rec.ind_weight_uom_code" (ValueChanged)="LovSelected($event,i)">
-                                </app-autocomplete2>
-                            </td>
-                            <td class="p-0">
-                                <input #_ind_weight class="form-control form-control-sm" type="number"
-                                    style="text-align:right;" [(ngModel)]="rec.ind_weight"
-                                    (blur)="onBlur('ind_weight',rec)" maxlength="15" />
-                            </td>
+                    <td class="p-0">
+                        <app-autocomplete2 [controlname]="'WEIGHT-UOM'" [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                            [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid" [displaydata]="rec.ind_weight_uom_code"
+                            (ValueChanged)="LovSelected($event,i)">
+                        </app-autocomplete2>
+                    </td>
+                    <td class="p-0">
+                        <input #_ind_weight class="form-control form-control-sm" type="number" style="text-align:right;"
+                            [(ngModel)]="rec.ind_weight" (blur)="onBlur('ind_weight',rec)" maxlength="15" />
+                    </td>
 
-                            <td class="p-0">
-                                <app-autocomplete2 [controlname]="'VOLUME-UOM'" [displaycolumn]="'CODE'"
-                                    [tabletype]="'PARAM'" [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid"
-                                    [displaydata]="rec.ind_volume_uom_code" (ValueChanged)="LovSelected($event,i)">
-                                </app-autocomplete2>
-                            </td>
-                            <td class="p-0">
-                                <input #_ind_volume class="form-control form-control-sm" type="text"
-                                    style="text-align:right;" [(ngModel)]="rec.ind_volume"
-                                    (blur)="onBlur('ind_volume',rec)" maxlength="60" />
-                            </td>
-                            <td class="p-0">
-                                <input #_ind_pallets class="form-control form-control-sm" type="number"
-                                    style="text-align:right;" [(ngModel)]="rec.ind_pallets"
-                                    (blur)="onBlur('ind_pallets',rec)" maxlength="15" />
-                            </td>
-                            <td class="p-0">
-                                <a class="btn btn-sm" (click)="RemoveDetRow(rec)">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button #_btn_Add_product class="btn btn-info btn-sm" (click)="AddDetRow()" [disabled]="is_locked">Add
-                    Row</button>
+                    <td class="p-0">
+                        <app-autocomplete2 [controlname]="'VOLUME-UOM'" [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                            [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid" [displaydata]="rec.ind_volume_uom_code"
+                            (ValueChanged)="LovSelected($event,i)">
+                        </app-autocomplete2>
+                    </td>
+                    <td class="p-0">
+                        <input #_ind_volume class="form-control form-control-sm" type="text" style="text-align:right;"
+                            [(ngModel)]="rec.ind_volume" (blur)="onBlur('ind_volume',rec)" maxlength="60" />
+                    </td>
+                    <td class="p-0">
+                        <input #_ind_pallets class="form-control form-control-sm" type="number"
+                            style="text-align:right;" [(ngModel)]="rec.ind_pallets" (blur)="onBlur('ind_pallets',rec)"
+                            maxlength="15" />
+                    </td>
+                    <td class="p-0">
+                        <a class="btn btn-sm" (click)="RemoveDetRow(rec)">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button #_btn_Add_product class="btn btn-info btn-sm" (click)="AddDetRow()" [disabled]="is_locked">Add
+            Row</button>
+    </div>
+</div>
+<div class="page-footer">
+    <div class="row justify-content-center p-0">
+        <button class="btn btn-primary btn-md mr-1" *ngIf="gs.canSave(menuid,mode)" [disabled]="is_locked"
+            (click)="Save()">Save</button>
+    </div>
+</div>
+<br>
+<div class="page-header">
+    <div class="row  align-items-center justify-content-left p-1">
+        <label class="mr-3">Transfer Products</label>
+    </div>
+</div>
+<div class="page-body">
+    <div class="col-md-12 px-0 mx-0">
+        <div class="col-md-4 testbox  px-0 mx-0">
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Customer</label>
+                <div class="col-4">
+                    <app-autocomplete2 #_customer_lov [controlname]="'CUSTOMER'" [tabletype]="'MASTER'"
+                        [displaycolumn]="'CODE'" [displaydata]="inm_cust_code" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+                <div class="col-6 p-0">
+                    <InputBox [(inputModel)]="inm_cust_name" [maxlength]="60" [disabled]="true" [uppercase]="true">
+                    </InputBox>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Warehouse</label>
+                <div class="col-4">
+                    <app-autocomplete2 [controlname]="'WAREHOUSE'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                        [displaydata]="inm_wh_code" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+                <div class="col-6 p-0">
+                    <InputBox [(inputModel)]="inm_wh_name" [maxlength]="60" [disabled]="true" [uppercase]="true">
+                    </InputBox>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Arrival.Date</label>
+                <div class="col-4">
+                    <app-date #_inm_arrival_date [inputdate]="inm_arrival_date"
+                        (ValueChanged)="inm_arrival_date=$event"></app-date>
+                </div>
+                <div class="col-6">
+
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <div class="page-footer">
-    <div class="row justify-content-center p-1">
+    <div class="row justify-content-center p-0">
         <button class="btn btn-primary btn-md mr-1" *ngIf="gs.canSave(menuid,mode)" [disabled]="is_locked"
-            (click)="Save()">Save</button>
+            (click)="Save()">Transfer</button>
     </div>
 </div>

@@ -41,6 +41,13 @@ export class WhStockComponent implements OnInit {
     private hbl_mode: string = '';
     mode: string;
     private type: string;
+    inm_cust_id: string = '';
+    inm_cust_code: string = '';
+    inm_cust_name: string = '';
+    inm_wh_id: string = '';
+    inm_wh_code: string = '';
+    inm_wh_name: string = '';
+    inm_arrival_date: string = '';
 
     modal: any;
     // private errorMessage: string;
@@ -384,6 +391,21 @@ export class WhStockComponent implements OnInit {
                 }
             });
         }
+
+        if (_Record.controlname == "WAREHOUSE") {
+            this.inm_wh_id = _Record.id;
+            this.inm_wh_code = _Record.code;
+            this.inm_wh_name = _Record.name;
+        }
+        if (_Record.controlname == "CUSTOMER") {
+            this.inm_cust_id = _Record.id;
+            this.inm_cust_code = _Record.code;
+            this.inm_cust_name = _Record.name;
+            if (_Record.col8 != "")
+                this.inm_cust_name = _Record.col8;
+
+
+        }
     }
 
     onFocusout(field: string, rec: Tbl_cargo_whstock = null, idx: number = 0) {
@@ -485,7 +507,7 @@ export class WhStockComponent implements OnInit {
             case 'ind_unit_factor': {
                 if (this.bChanged) {
                     if (this.gs.isZero(rec.ind_unit_factor))
-                        alert('Pcs/Carton cannot be zero ' );
+                        alert('Pcs/Carton cannot be zero ');
                     else
                         if (!this.gs.isBlank(rec.ind_qty_uom_id)) {
                             if (!this.gs.isValidLooseCqty(rec.ind_cqty, rec.ind_unit_factor)) {
