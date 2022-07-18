@@ -84,12 +84,18 @@ export class WhStockComponent implements OnInit {
             this.pkid = this.route.snapshot.queryParams.pkid;
             this.menuid = this.route.snapshot.queryParams.menuid;
             this.type = this.route.snapshot.queryParams.type;
+            this.inm_cust_id = this.route.snapshot.queryParams.cust_id;
+            this.inm_cust_code = this.route.snapshot.queryParams.cust_code;
+            this.inm_cust_name = this.route.snapshot.queryParams.cust_name;
         }
         else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
             this.pkid = options.pkid;
             this.menuid = options.menuid;
             this.type = options.type;
+            this.inm_cust_id = options.cust_id;
+            this.inm_cust_code = options.cust_code;
+            this.inm_cust_name = options.cust_name;
         }
         this.closeCaption = 'Return';
         this.initPage();
@@ -107,6 +113,7 @@ export class WhStockComponent implements OnInit {
     }
 
     private initPage() {
+        this.inm_arrival_date = this.gs.defaultValues.today;
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.title = this.gs.getTitle(this.menuid);
         this.errorMessage = [];

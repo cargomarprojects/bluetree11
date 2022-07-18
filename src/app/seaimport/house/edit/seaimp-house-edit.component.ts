@@ -1740,6 +1740,21 @@ export class SeaImpHouseEditComponent implements OnInit {
           is_locked: this.is_locked
         };
     }
+    else if (action == "PRODUCTS") {
+      if (_type == "L")
+        return '/Silver.SeaImport/WhStockPage';
+      if (_type == 'P')
+        return {
+          appid: this.gs.appid,
+          menuid: this.gs.MENU_SI_HOUSE_PRODUCTS,
+          pkid: this.pkid,
+          type: 'HBL-OI',
+          cust_id: this.record.hbl_consignee_id,
+          cust_code:this.record.hbl_consignee_code,
+          cust_name: this.record.hbl_consignee_name,
+          origin: 'seaimp-house-page',
+        };
+    }
   }
 
   BtnNavigation(action: string, attachmodal: any = null) {
