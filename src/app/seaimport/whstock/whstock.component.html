@@ -132,10 +132,7 @@
 </div>
 <br>
 
-<app-whstock-transfer [parent_id]="pkid" [inm_cust_id]="inm_cust_id" [inm_cust_code]="inm_cust_code" [inm_cust_name]="inm_cust_name" (ModifiedRecords)="ModifiedRecords($event)"
-    ></app-whstock-transfer>
-
-<!-- <div class="page-header">
+<div class="page-header">
     <div class="row  align-items-center justify-content-left p-1">
         <label class="mr-3">Transfer Products</label>
     </div>
@@ -184,6 +181,6 @@
 <div class="page-footer">
     <div class="row justify-content-center p-0">
         <button class="btn btn-primary btn-md mr-1" *ngIf="gs.canSave(menuid,mode)" [disabled]="is_locked"
-            (click)="Save()">Transfer</button>
+        (click)="TransferData()">Transfer</button>
     </div>
-</div> -->
+</div>

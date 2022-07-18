@@ -35,7 +35,7 @@ export interface Tbl_cargo_whstock {
 
 export interface vm_tbl_cargo_whstock {
     mode: string;
-    parentid:string;
+    parentid: string;
     records: Tbl_cargo_whstock[];
     userinfo: any,
     filter: any;

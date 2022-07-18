@@ -20,4 +20,8 @@ export class WhStockService {
     Save(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/WhStock/Save', SearchData, this.gs.headerparam2('authorized'));
     }
+
+    TransferData(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Warehouse/Inward/TransferData', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

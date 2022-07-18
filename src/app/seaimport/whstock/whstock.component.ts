@@ -710,13 +710,57 @@ export class WhStockComponent implements OnInit {
             return;
         window.open(_url, "_blank");
     }
+ 
 
-    ModifiedRecords(event: any) {
+    TransferData() {
 
-        if (event.action == 'OK') {
+        let filter: any = {};
+        filter.CUST_ID = this.inm_cust_id;
+        filter.CUST_CODE = this.inm_cust_code;
+        filter.CUST_NAME = this.inm_cust_name;
+        filter.WH_ID = this.inm_wh_id;
+        filter.WH_CODE = this.inm_wh_code;
+        filter.WH_NAME = this.inm_wh_name;
+        filter.ARRIVAL_DATE = this.inm_arrival_date;
+        filter.TODAY_DATE = this.gs.defaultValues.today;
+        filter.WH_INWARD_DOCNO_PREFIX = this.gs.WH_INWARD_DOCNO_PREFIX;
+        filter.WH_INWARD_DOCNO_STARTING_NO = this.gs.WH_INWARD_DOCNO_STARTING_NO;
 
-        }
 
+        const SearchData = <vm_tbl_cargo_whstock>{};
+
+        SearchData.records = this.detrecords;
+        SearchData.parentid = this.pkid;
+        SearchData.userinfo = this.gs.UserInfo;
+        SearchData.filter = filter;
+
+        this.mainService.TransferData(SearchData).subscribe(response => {
+            if (response.retvalue == true) {
+                // if (response.warningmsg.trim().length > 0) {
+                //     if (confirm(response.warningmsg)) {
+                //         this.TransferData(false);
+                //     }
+                // } else {
+                //     if (this.ModifiedRecords != null)
+                //         this.ModifiedRecords.emit({ saction: 'CLOSE' });
+                // }
+
+                let parameter = {
+                    appid: this.gs.appid,
+                    menuid: this.gs.MENU_WH_INWARD,
+                    pkid: response.pkid,
+                    type: "IN",
+                    origin: 'wh-stock-page',
+                    mode: 'EDIT'
+                };
+                this.gs.Naviagete2('warehouse/WhInwardEditPage', parameter);
+                //alert('Transfer Complete');
+            }
+
+        }, error => {
+            this.errorMessage = this.gs.getError(error)
+            alert(this.errorMessage);
+        });
     }
 
 }
