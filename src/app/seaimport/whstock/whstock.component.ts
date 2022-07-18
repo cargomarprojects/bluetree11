@@ -318,6 +318,7 @@ export class WhStockComponent implements OnInit {
         rec.ind_volume_uom_id = '';
         rec.ind_volume_uom_code = '';
         rec.ind_volume_uom_name = '';
+        rec.ind_transfer_cqty = '';
         rec.ind_slno = this.findDetNextCtr();
         this.detrecords.push(rec);
 

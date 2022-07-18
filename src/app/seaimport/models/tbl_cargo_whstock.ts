@@ -31,6 +31,7 @@ export interface Tbl_cargo_whstock {
     ind_req_cqty: string;
     ind_set_qty: number;
     ind_selected: boolean;
+    ind_transfer_cqty: string;
 }
 
 export interface vm_tbl_cargo_whstock {
