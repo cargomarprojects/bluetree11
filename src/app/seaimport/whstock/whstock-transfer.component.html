@@ -1,0 +1,52 @@
+<div class="page-header">
+    <div class="row  align-items-center justify-content-left p-1">
+        <label class="mr-3">Transfer Products</label>
+    </div>
+</div>
+<div class="page-body">
+    <div class="col-md-12 px-0 mx-0">
+        <div class="col-md-4 testbox  px-0 mx-0">
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Customer</label>
+                <div class="col-4">
+                    <app-autocomplete2 #_customer_lov [controlname]="'CUSTOMER'" [tabletype]="'MASTER'"
+                        [displaycolumn]="'CODE'" [displaydata]="inm_cust_code" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+                <div class="col-6 p-0">
+                    <InputBox [(inputModel)]="inm_cust_name" [maxlength]="60" [disabled]="true" [uppercase]="true">
+                    </InputBox>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Warehouse</label>
+                <div class="col-4">
+                    <app-autocomplete2 [controlname]="'WAREHOUSE'" [tabletype]="'MASTER'" [displaycolumn]="'CODE'"
+                        [displaydata]="inm_wh_code" (ValueChanged)="LovSelected($event)">
+                    </app-autocomplete2>
+                </div>
+                <div class="col-6 p-0">
+                    <InputBox [(inputModel)]="inm_wh_name" [maxlength]="60" [disabled]="true" [uppercase]="true">
+                    </InputBox>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Arrival.Date</label>
+                <div class="col-4">
+                    <app-date #_inm_arrival_date [inputdate]="inm_arrival_date"
+                        (ValueChanged)="inm_arrival_date=$event"></app-date>
+                </div>
+                <div class="col-6">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-footer">
+    <div class="row justify-content-center p-0">
+        <button class="btn btn-primary btn-md mr-1"  [disabled]="is_locked"
+            (click)="TransferData()">Transfer</button>
+    </div>
+</div>

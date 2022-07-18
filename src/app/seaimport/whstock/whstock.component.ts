@@ -35,15 +35,15 @@ export class WhStockComponent implements OnInit {
     detrecords: Tbl_cargo_whstock[] = [];
     tab: string = 'main';
 
-    private pkid: string;
+    public pkid: string;
     menuid: string;
     private hbl_pkid: string = '';
     private hbl_mode: string = '';
     mode: string;
     private type: string;
-    inm_cust_id: string = '';
-    inm_cust_code: string = '';
-    inm_cust_name: string = '';
+    public inm_cust_id: string = '';
+    public inm_cust_code: string = '';
+    public inm_cust_name: string = '';
     inm_wh_id: string = '';
     inm_wh_code: string = '';
     inm_wh_name: string = '';
@@ -709,6 +709,13 @@ export class WhStockComponent implements OnInit {
         window.open(_url, "_blank");
     }
 
+    ModifiedRecords(event: any) {
+
+        if (event.action == 'OK') {
+           
+        }
+    
+      }
 
 }
 

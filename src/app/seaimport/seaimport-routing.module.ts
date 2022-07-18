@@ -21,7 +21,7 @@ const routes: Routes = [
   { path : 'RiderPage', component : SeaImpRiderPageComponent }  ,
   { path : 'DevanInstructionPage', component : DevanComponent } ,
   { path : 'CopyCntrPage', component : CopyCntrPageComponent },
-  { path : 'WhStockPage', component : WhStockComponent }
+  { path : 'WhStockPage', component : WhStockComponent } 
 ];
 
 

@@ -20,6 +20,7 @@ import { SeaImpRiderPageComponent } from './riderpage/seaimp-riderpage.component
 import { DevanComponent } from './devan/devan.component';
 import { CopyCntrPageComponent } from './copycntrpage/copycntrpage.component';
 import { WhStockComponent } from './whstock/whstock.component';
+import { WhStockTransferComponent } from './whstock/whstock-transfer.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { WhStockComponent } from './whstock/whstock.component';
     SeaImpRiderPageComponent,
     DevanComponent,
     CopyCntrPageComponent,
-    WhStockComponent
+    WhStockComponent,
+    WhStockTransferComponent
   ],
   imports: [
     SharedModule,    
