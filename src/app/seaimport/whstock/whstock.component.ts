@@ -204,20 +204,20 @@ export class WhStockComponent implements OnInit {
                 // }
                 if (this.gs.isBlank(Rec.ind_product)) {
                     bRet = false;
-                    this.errorMessage.push("Product cannot be blank, Row" + iCtr.toString());
+                    this.errorMessage.push("SKU cannot be blank Row" + iCtr.toString());
                 }
                 if (this.gs.isBlank(Rec.ind_cqty)) {
                     bRet = false;
-                    this.errorMessage.push("Qty cannot be blank, Row" + iCtr.toString());
+                    this.errorMessage.push("Qty cannot be blank [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
                 }
                 if (this.gs.isZero(Rec.ind_unit_factor)) {
                     bRet = false;
-                    this.errorMessage.push("Pcs/Carton cannot be Zero, Row" + iCtr.toString());
+                    this.errorMessage.push("Pcs/Carton cannot be Zero [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
                 }
 
                 if (!this.gs.isValidCqty(Rec.ind_cqty)) {
                     bRet = false;
-                    this.errorMessage.push("Invalid Qty, Row" + iCtr.toString());
+                    this.errorMessage.push("Invalid Qty [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
                 }
                 else
                     if (!this.gs.isBlank(Rec.ind_qty_uom_id)) {
@@ -229,19 +229,19 @@ export class WhStockComponent implements OnInit {
 
                 if (this.gs.isBlank(Rec.ind_qty_uom_id)) {
                     bRet = false;
-                    this.errorMessage.push("Qty Unit cannot be blank, Row" + iCtr.toString());
+                    this.errorMessage.push("Qty Unit cannot be blank [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
                 }
 
                 if (!this.gs.isBlank(Rec.ind_volume) && !this.gs.isBlank(Rec.ind_volume_uom_code)) {
                     if (Rec.ind_volume_uom_code != "CBM") {
                         if (!this.gs.isValidVolume(Rec.ind_volume)) {
                             bRet = false;
-                            this.errorMessage.push('Invalid Volume ' + Rec.ind_volume);
+                            this.errorMessage.push("Invalid Volume [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
                         }
                     } else {
                         if (!this.gs.isValidNumber(Rec.ind_volume)) {
                             bRet = false;
-                            this.errorMessage.push('Invalid Volume ' + Rec.ind_volume);
+                            this.errorMessage.push("Invalid Volume [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
                         }
                     }
                 }
@@ -249,8 +249,10 @@ export class WhStockComponent implements OnInit {
             })
         }
 
-
-
+        if (iCtr == 0) {
+            bRet = false;
+            this.errorMessage.push('List Not Found');
+        }
         if (!bRet) {
             alert(this.errorMessage);
             this.errorMessage = [];
@@ -712,10 +714,10 @@ export class WhStockComponent implements OnInit {
     ModifiedRecords(event: any) {
 
         if (event.action == 'OK') {
-           
+
         }
-    
-      }
+
+    }
 
 }
 
