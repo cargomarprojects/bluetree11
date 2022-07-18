@@ -23,11 +23,11 @@ export class WhStockTransferComponent implements OnInit {
     @Input() set inm_cust_id(value: string) {
         this._inm_cust_id = value;
     }
-    private _inm_cust_code: string;
+    public _inm_cust_code: string;
     @Input() set inm_cust_code(value: string) {
         this._inm_cust_code = value;
     }
-    private _inm_cust_name: string;
+    public _inm_cust_name: string;
     @Input() set inm_cust_name(value: string) {
         this._inm_cust_name = value;
     }
@@ -70,11 +70,11 @@ export class WhStockTransferComponent implements OnInit {
             this.inm_wh_name = _Record.name;
         }
         if (_Record.controlname == "CUSTOMER") {
-            this.inm_cust_id = _Record.id;
-            this.inm_cust_code = _Record.code;
-            this.inm_cust_name = _Record.name;
+            this._inm_cust_id = _Record.id;
+            this._inm_cust_code = _Record.code;
+            this._inm_cust_name = _Record.name;
             if (_Record.col8 != "")
-                this.inm_cust_name = _Record.col8;
+                this._inm_cust_name = _Record.col8;
         }
     }
      

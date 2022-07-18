@@ -10,11 +10,11 @@
                 <label class="col-2 col-form-label col-form-label-sm">Customer</label>
                 <div class="col-4">
                     <app-autocomplete2 #_customer_lov [controlname]="'CUSTOMER'" [tabletype]="'MASTER'"
-                        [displaycolumn]="'CODE'" [displaydata]="inm_cust_code" (ValueChanged)="LovSelected($event)">
+                        [displaycolumn]="'CODE'" [displaydata]="_inm_cust_code" (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
                 </div>
                 <div class="col-6 p-0">
-                    <InputBox [(inputModel)]="inm_cust_name" [maxlength]="60" [disabled]="true" [uppercase]="true">
+                    <InputBox [(inputModel)]="_inm_cust_name" [maxlength]="60" [disabled]="true" [uppercase]="true">
                     </InputBox>
                 </div>
             </div>
