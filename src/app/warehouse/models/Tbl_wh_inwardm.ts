@@ -36,6 +36,7 @@ export interface Tbl_wh_inwardm {
     rec_created_by: string;
     inm_prefix: string;
     inm_startingno: string;
+    inm_master_id: string;
 }
 
 export interface Tbl_wh_container {

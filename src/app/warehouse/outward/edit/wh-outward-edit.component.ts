@@ -198,6 +198,7 @@ export class WhOutwardEditComponent implements OnInit {
         this.record.inm_transport_add2 = '';
         this.record.inm_transport_add3 = '';
         this.record.inm_transport_add4 = '';
+        this.record.inm_master_id = '';
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
         this.record.inm_prefix = this.gs.WH_OUTWARD_DOCNO_PREFIX;

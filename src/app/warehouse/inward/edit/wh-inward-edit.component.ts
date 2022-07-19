@@ -196,6 +196,7 @@ export class WhInwardEditComponent implements OnInit {
         this.record.inm_transport_add2 = '';
         this.record.inm_transport_add3 = '';
         this.record.inm_transport_add4 = '';
+        this.record.inm_master_id = '';
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
         this.record.inm_prefix = this.gs.WH_INWARD_DOCNO_PREFIX;
@@ -371,15 +372,15 @@ export class WhInwardEditComponent implements OnInit {
             bRet = false;
             this.errorMessage.push("Customer cannot be blank");
         }
-        if (this.gs.isBlank(this.record.inm_supplier_id)) {
-            bRet = false;
-            this.errorMessage.push("Supplier cannot be blank");
-        }
+        // if (this.gs.isBlank(this.record.inm_supplier_id)) {
+        //     bRet = false;
+        //     this.errorMessage.push("Supplier cannot be blank");
+        // }
 
-        if (this.gs.isBlank(this.record.inm_transport_id)) {
-            bRet = false;
-            this.errorMessage.push("Transporter cannot be blank");
-        }
+        // if (this.gs.isBlank(this.record.inm_transport_id)) {
+        //     bRet = false;
+        //     this.errorMessage.push("Transporter cannot be blank");
+        // }
 
 
         if (!this.gs.isBlank(this.cntrrecords)) {
