@@ -745,7 +745,7 @@ export class WhStockComponent implements OnInit {
                             alert("Invalid Transfer Qty [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
                         } else if (!this.gs.isValidLooseCqty(Rec.ind_transfer_cqty, Rec.ind_unit_factor)) {
                             bRet = false;
-                            alert("Loose quantity should be less than " + Rec.ind_unit_factor+" [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
+                            alert("Loose quantity should be less than " + Rec.ind_unit_factor + " [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
                         }
                         else {
                             LooseQty = this.gs.convertToPieces(Rec.ind_cqty, Rec.ind_unit_factor);
@@ -774,6 +774,9 @@ export class WhStockComponent implements OnInit {
             alert("Warehouse cannot be blank");
             return;
         }
+
+        if (!bRet)
+            return;
 
         if (!confirm("Transfer Products Y/N")) {
             return;
