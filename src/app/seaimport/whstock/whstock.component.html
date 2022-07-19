@@ -9,25 +9,25 @@
 
 
 <div class="col-md-12 px-0 mx-0">
-    <div class="page-body table-responsive table-bordered cntr">
+    <div class="page-body table-responsive table-bordered">
         <table class="table  table-hover table-sm">
             <thead class="page-body-thead">
                 <tr>
-                    <th width='8%'>CODE</th>
-                    <th width='13%'>SKU</th>
-                    <th width='15%'>DESCRIPTION</th>
-                    <th width='10%'>REFNO</th>
-                    <th width='6%'>UOM (CARTON)</th>
-                    <th style="text-align:right;" width='7%'>CARTONS</th>
-                    <th style="text-align:right;" width='7%'>PCS/CARTON</th>
-                    <!-- <th width='7%'>PACKAGES</th>
-                                                <th width='6%'>UOM</th> -->
-                    <th width='6%'>UOM (WEIGHT)</th>
-                    <th style="text-align:right;" width='5%'>WEIGHT</th>
-                    <th width='6%'>UOM (DIMENSION)</th>
-                    <th style="text-align:right;" width='5%'>DIMENSION</th>
-                    <th style="text-align:right;" width='5%'>TRANSFER CTN</th>
-                    <th width='2%'></th>
+                    <th>CODE</th>
+                    <th>SKU</th>
+                    <th>DESCRIPTION</th>
+                    <th>REFNO</th>
+                    <th>UOM (CARTON)</th>
+                    <th>CARTONS</th>
+                    <th>PCS/CARTON</th>
+                    <th>UOM (WEIGHT)</th>
+                    <th>WEIGHT</th>
+                    <th>UOM (DIMENSION)</th>
+                    <th>DIMENSION</th>
+                    <th>OUT</th>
+                    <th>BALANCE</th>
+                    <th>TRANSFER CTN</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody" *ngFor="let rec of detrecords; let i = index">
@@ -107,6 +107,13 @@
                         <input #_ind_volume class="form-control form-control-sm" type="text" style="text-align:right;"
                             [(ngModel)]="rec.ind_volume" (blur)="onBlur('ind_volume',rec)" maxlength="60" />
                     </td>
+
+                    <td class="p-0">
+                        <input #_ind_out_qty disabled class="form-control form-control-sm" type="text"
+                            style="text-align:right;" [(ngModel)]="rec.ind_out_cqty" maxlength="60" />
+                    </td>
+                    <td class="p-0"><input #_ind_bal_qty disabled class="form-control form-control-sm" type="text"
+                            style="text-align:right;" [(ngModel)]="rec.ind_bal_cqty" maxlength="60" /></td>
                     <td class="p-0">
                         <input #_ind_pallets class="form-control form-control-sm" type="text" style="text-align:right;"
                             [(ngModel)]="rec.ind_transfer_cqty" (focus)="onFocus('ind_transfer_cqty')"
