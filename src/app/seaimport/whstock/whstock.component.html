@@ -173,18 +173,19 @@
                         <app-date #_inm_arrival_date [inputdate]="inm_arrival_date"
                             (ValueChanged)="inm_arrival_date=$event"></app-date>
                     </div>
-                    <div class="col-6">
-
+                    <div class="col-6  p-0">
+                        <button class="btn btn-primary btn-sm mt-1 mr-1 " [disabled]="is_locked"
+                            (click)="TransferData()">Transfer</button>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 testbox  px-0 mx-0">
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                     <div class="col-12 mt-2">
                         <button class="btn btn-primary btn-md mt-5 mr-1 " [disabled]="is_locked"
                             (click)="TransferData()">Transfer</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
