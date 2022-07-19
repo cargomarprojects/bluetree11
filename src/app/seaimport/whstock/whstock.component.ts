@@ -487,6 +487,8 @@ export class WhStockComponent implements OnInit {
     }
 
     onBlur(field: string, rec: Tbl_cargo_whstock = null, idx: number = 0) {
+        let LooseQty = 0;
+        let LooseTrnsfrQty = 0;
         switch (field) {
 
             case 'ind_product': {
@@ -565,6 +567,19 @@ export class WhStockComponent implements OnInit {
             //     rec.ind_volume_uom = rec.ind_volume_uom.toUpperCase().trim();
             //     break;
             // }
+            case 'ind_transfer_cqty': {
+                if (this.bChanged) {
+                    if (this.gs.isValidCqty(rec.ind_transfer_cqty)) {
+                        LooseQty = this.gs.convertToPieces(rec.ind_cqty, rec.ind_unit_factor);
+                        LooseTrnsfrQty = this.gs.convertToPieces(rec.ind_transfer_cqty, rec.ind_unit_factor);
+                        if (LooseTrnsfrQty > LooseQty) {
+                            alert("Insufficient Quantity " + rec.ind_product);
+                        }
+                    }
+
+                }
+                break;
+            }
         }
     }
 
@@ -711,10 +726,58 @@ export class WhStockComponent implements OnInit {
             return;
         window.open(_url, "_blank");
     }
- 
+
 
     TransferData() {
 
+        let LooseQty = 0;
+        let LooseTrnsfrQty = 0;
+        let tottransfrqty = 0;
+        let iCtr: number = 0;
+        let bRet: boolean = true;
+        if (!this.gs.isBlank(this.detrecords)) {
+            this.detrecords.forEach(Rec => {
+                iCtr++;
+                if (bRet) {
+                    if (!this.gs.isBlank(Rec.ind_transfer_cqty)) {
+                        if (!this.gs.isValidCqty(Rec.ind_transfer_cqty)) {
+                            bRet = false;
+                            alert("Invalid Transfer Qty [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
+                        } else if (!this.gs.isValidLooseCqty(Rec.ind_transfer_cqty, Rec.ind_unit_factor)) {
+                            bRet = false;
+                            alert("Loose quantity should be less than " + Rec.ind_unit_factor+" [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
+                        }
+                        else {
+                            LooseQty = this.gs.convertToPieces(Rec.ind_cqty, Rec.ind_unit_factor);
+                            LooseTrnsfrQty = this.gs.convertToPieces(Rec.ind_transfer_cqty, Rec.ind_unit_factor);
+                            tottransfrqty += LooseTrnsfrQty;
+                            if (LooseTrnsfrQty > LooseQty) {
+                                bRet = false;
+                                alert("Insufficient Quantity [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
+                            }
+                        }
+                    }
+                }
+            })
+        }
+
+        if (tottransfrqty == 0 && bRet == true) {
+            alert("Transfer Qty Not Found");
+            return;
+        }
+
+        if (this.gs.isBlank(this.inm_cust_id) && bRet == true) {
+            alert("Customer cannot be blank");
+            return;
+        }
+        if (this.gs.isBlank(this.inm_wh_id) && bRet == true) {
+            alert("Warehouse cannot be blank");
+            return;
+        }
+
+        if (!confirm("Transfer Products Y/N")) {
+            return;
+        }
         let filter: any = {};
         filter.CUST_ID = this.inm_cust_id;
         filter.CUST_CODE = this.inm_cust_code;
