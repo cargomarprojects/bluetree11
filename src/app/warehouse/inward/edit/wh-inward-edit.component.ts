@@ -61,6 +61,7 @@ export class WhInwardEditComponent implements OnInit {
 
 
     showPayReq: boolean = false;
+    prod_pkid:string ='';
     private pkid: string;
     private menuid: string;
     private hbl_pkid: string = '';
@@ -996,7 +997,15 @@ export class WhInwardEditComponent implements OnInit {
             return;
         window.open(_url, "_blank");
     }
-
+    AddProduct(editmodal: any = null)
+    {if (!this.gs.canEdit(this.gs.MENU_WH_PROD_MASTER)) {
+        alert('Insufficient User Rights')
+        return;
+      }
+        
+        this.prod_pkid =  this.gs.getGuid();
+        this.modal = this.modalservice.open(editmodal, { centered: true });
+    }
 
 }
 
