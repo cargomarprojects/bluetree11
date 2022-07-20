@@ -168,6 +168,9 @@ export class WhStockComponent implements OnInit {
                 else {
 
                     this.mode = 'EDIT';
+                    this.detrecords.forEach(Rec => {
+                        Rec.ind_can_transfer = true;
+                    })
                     alert('Save Complete');
                 }
             }, error => {
@@ -319,8 +322,11 @@ export class WhStockComponent implements OnInit {
         rec.ind_volume_uom_code = '';
         rec.ind_volume_uom_name = '';
         rec.ind_transfer_cqty = '';
-        rec.ind_out_cqty='';
-        rec.ind_bal_cqty='';
+        rec.ind_out_cqty = '';
+        rec.ind_out_qty = 0;
+        rec.ind_bal_cqty = '';
+        rec.ind_bal_qty = 0;
+        rec.ind_can_transfer = false;
         rec.ind_slno = this.findDetNextCtr();
         this.detrecords.push(rec);
 

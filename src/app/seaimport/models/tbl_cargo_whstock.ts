@@ -34,7 +34,10 @@ export interface Tbl_cargo_whstock {
     ind_transfer_cqty: string;
     ind_transfer_qty: number;
     ind_out_cqty: string;
+    ind_out_qty: Number;
     ind_bal_cqty: string;
+    ind_bal_qty: Number;
+    ind_can_transfer: boolean;
 }
 
 export interface vm_tbl_cargo_whstock {

@@ -54,19 +54,19 @@
                             (blur)="onBlur('ind_refno',rec)" maxlength="60" />
                     </td>
                     <td class="p-0">
-                        <app-autocomplete2 [controlname]="'QTY-UOM'" [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
+                        <app-autocomplete2 [disabled]="rec.ind_out_qty>0" [controlname]="'QTY-UOM'" [displaycolumn]="'CODE'" [tabletype]="'PARAM'"
                             [subtype]="'UNIT MASTER'" [uid]="rec.ind_pkid" [displaydata]="rec.ind_qty_uom_code"
                             (ValueChanged)="LovSelected($event,i)">
                         </app-autocomplete2>
                     </td>
 
                     <td class="p-0">
-                        <input #_ind_cqty class="form-control form-control-sm" type="text" style="text-align:right;"
+                        <input #_ind_cqty [disabled]="rec.ind_out_qty>0" class="form-control form-control-sm" type="text" style="text-align:right;"
                             [(ngModel)]="rec.ind_cqty" (focus)="onFocus('ind_cqty')" (change)="onChange('ind_cqty')"
                             (blur)="onBlur('ind_cqty',rec,i)" maxlength="15" />
                     </td>
                     <td class="p-0">
-                        <input #_ind_packages class="form-control form-control-sm" type="number"
+                        <input #_ind_packages [disabled]="rec.ind_out_qty>0" class="form-control form-control-sm" type="number"
                             style="text-align:right;" [(ngModel)]="rec.ind_unit_factor"
                             (focus)="onFocus('ind_unit_factor')" (change)="onChange('ind_unit_factor')"
                             (blur)="onBlur('ind_unit_factor',rec,i)" maxlength="15" />
@@ -115,7 +115,7 @@
                     <td class="p-0"><input #_ind_bal_qty disabled class="form-control form-control-sm" type="text"
                             style="text-align:right;" [(ngModel)]="rec.ind_bal_cqty" maxlength="60" /></td>
                     <td class="p-0">
-                        <input #_ind_pallets class="form-control form-control-sm" type="text" style="text-align:right;"
+                        <input #_ind_pallets [disabled]="!rec.ind_can_transfer"  class="form-control form-control-sm" type="text" style="text-align:right;"
                             [(ngModel)]="rec.ind_transfer_cqty" (focus)="onFocus('ind_transfer_cqty')"
                             (change)="onChange('ind_transfer_cqty')" (blur)="onBlur('ind_transfer_cqty',rec)"
                             maxlength="15" />
