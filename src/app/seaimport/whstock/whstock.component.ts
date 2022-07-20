@@ -495,7 +495,7 @@ export class WhStockComponent implements OnInit {
     }
 
     onBlur(field: string, rec: Tbl_cargo_whstock = null, idx: number = 0) {
-        let LooseQty = 0;
+        let LooseBalQty = 0;
         let LooseTrnsfrQty = 0;
         switch (field) {
 
@@ -578,9 +578,9 @@ export class WhStockComponent implements OnInit {
             case 'ind_transfer_cqty': {
                 if (this.bChanged) {
                     if (this.gs.isValidCqty(rec.ind_transfer_cqty)) {
-                        LooseQty = this.gs.convertToPieces(rec.ind_cqty, rec.ind_unit_factor);
+                        LooseBalQty = this.gs.convertToPieces(rec.ind_bal_cqty, rec.ind_unit_factor);
                         LooseTrnsfrQty = this.gs.convertToPieces(rec.ind_transfer_cqty, rec.ind_unit_factor);
-                        if (LooseTrnsfrQty > LooseQty) {
+                        if (LooseTrnsfrQty > LooseBalQty) {
                             alert("Insufficient Quantity " + rec.ind_product);
                         }
                     }
@@ -738,7 +738,7 @@ export class WhStockComponent implements OnInit {
 
     TransferData() {
 
-        let LooseQty = 0;
+        let LooseBalQty = 0;
         let LooseTrnsfrQty = 0;
         let tottransfrqty = 0;
         let iCtr: number = 0;
@@ -756,10 +756,10 @@ export class WhStockComponent implements OnInit {
                             alert("Loose quantity should be less than " + Rec.ind_unit_factor + " [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
                         }
                         else {
-                            LooseQty = this.gs.convertToPieces(Rec.ind_cqty, Rec.ind_unit_factor);
+                            LooseBalQty = this.gs.convertToPieces(Rec.ind_bal_cqty, Rec.ind_unit_factor);
                             LooseTrnsfrQty = this.gs.convertToPieces(Rec.ind_transfer_cqty, Rec.ind_unit_factor);
                             tottransfrqty += LooseTrnsfrQty;
-                            if (LooseTrnsfrQty > LooseQty) {
+                            if (LooseTrnsfrQty > LooseBalQty) {
                                 bRet = false;
                                 alert("Insufficient Quantity [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
                             }
