@@ -234,7 +234,8 @@ export class BranchSettingsComponent implements OnInit {
   Txt_AN_RO_Comments = '';
   chk_AN_Guarantee_Ltr_Attached_id = '';
   chk_AN_Guarantee_Ltr_Attached = 'N';
-
+  chk_AN_Validate_Sent_Status_id = '';
+  chk_AN_Validate_Sent_Status = 'N';
 
   constructor(
     private router: Router,
@@ -713,6 +714,10 @@ export class BranchSettingsComponent implements OnInit {
         this.chk_AN_Guarantee_Ltr_Attached_id = Rec.param_name2;
         this.chk_AN_Guarantee_Ltr_Attached = Rec.param_name3;
       }
+      else if (Rec.param_name1 == "AN-VALIDATE-SENT-STATUS") {
+        this.chk_AN_Validate_Sent_Status_id = Rec.param_name2;
+        this.chk_AN_Validate_Sent_Status = Rec.param_name3;
+      }
       else if (Rec.param_name1 == "SHIPMENT-LOCKED-DATE") {
         this.Dt_Locked = Rec.param_name3;
         /*if (Rec.param_name3 != "") {
@@ -975,6 +980,11 @@ export class BranchSettingsComponent implements OnInit {
       this.saveList.push(this.AddRecord("AN-GUARANTEE-LTR-ATTACHED", this.gs.branch_pkid, "Y"));
     else
       this.saveList.push(this.AddRecord("AN-GUARANTEE-LTR-ATTACHED", this.gs.branch_pkid, "N"));
+
+    if (this.chk_AN_Validate_Sent_Status == 'Y')
+      this.saveList.push(this.AddRecord("AN-VALIDATE-SENT-STATUS", this.gs.branch_pkid, "Y"));
+    else
+      this.saveList.push(this.AddRecord("AN-VALIDATE-SENT-STATUS", this.gs.branch_pkid, "N"));
 
     this.saveList.push(this.AddRecord("DOC-FOOTER1", this.gs.branch_pkid, this.Txt_Terms1));
     this.saveList.push(this.AddRecord("DOC-FOOTER2", this.gs.branch_pkid, this.Txt_Terms2));
