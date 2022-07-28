@@ -128,7 +128,8 @@ export class UserEditComponent implements OnInit {
         this.record.usr_disable_timer = 'N';
         this.record.usr_timeout = 15;
         this.record.usr_an_common_mail = 'N';
-
+        this.record.usr_validate_an = 'N';
+        
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
 
