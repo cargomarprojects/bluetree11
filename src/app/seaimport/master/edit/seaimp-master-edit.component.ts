@@ -747,8 +747,11 @@ export class SeaImpMasterEditComponent implements OnInit {
       this.bChanged = true;
     }
     if (field == 'mbl_shipment_stage') {
-      if (this.mode == 'EDIT' && this.record.mbl_shipment_stage == 'STAGE3' && this.gs.company_code == 'MNYC')
-        this.ValidateAN();
+      if (this.mode == 'EDIT' && this.record.mbl_shipment_stage == 'STAGE3' && this.gs.company_code == 'MNYC') {
+        if (this.gs.user_validate_an == 'Y' || this.gs.AN_VALIDATE_SENT_STATUS == 'Y') {
+          this.ValidateAN();
+        }
+      }
     }
   }
 
@@ -861,20 +864,18 @@ export class SeaImpMasterEditComponent implements OnInit {
   }
 
   ValidateAN() {
-    if (this.gs.user_validate_an == 'Y' || this.gs.AN_VALIDATE_SENT_STATUS == 'Y') {
-      let bMsg: boolean = false;
-      if (this.gs.isBlank(this.hrecords))
-        bMsg = true;
-      if (!bMsg) {
-        this.hrecords.forEach(Rec => {
-          if (this.gs.isBlank(Rec.hbl_an_sent) || Rec.hbl_an_sent == 'N') {
-            bMsg = true;
-          }
-        })
-      }
-      if (bMsg)
-        alert('Error in Changing Stage, Pending A/N Found');
+    let bMsg: boolean = false;
+    if (this.gs.isBlank(this.hrecords))
+      bMsg = true;
+    if (!bMsg) {
+      this.hrecords.forEach(Rec => {
+        if (this.gs.isBlank(Rec.hbl_an_sent) || Rec.hbl_an_sent == 'N') {
+          bMsg = true;
+        }
+      })
     }
+    if (bMsg)
+      alert('Error in Changing Stage, Pending A/N Found');
   }
   AddHouse() {
     if (!this.gs.canAdd(this.gs.MENU_SI_HOUSE)) {
