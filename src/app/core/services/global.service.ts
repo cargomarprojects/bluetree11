@@ -144,6 +144,7 @@ export class GlobalService {
   public user_disable_timer = "N";
   public user_timeout: number = 0;
   public user_an_common_mail: string = 'N';
+  public user_validate_an: string = 'N';
 
   public USER_DISABLE_EDIT_SI_MBLSTATUS: string = '';
 
@@ -413,6 +414,8 @@ export class GlobalService {
   public HBL_INSTR1 = "";
   public HBL_INSTR2 = "";
   public AN_RO_COMMENTS = "";
+  public AN_VALIDATE_SENT_STATUS = "N";
+
 
   public SEA_EXPORT_HOUSE_PREFIX = "";
   public SEA_EXPORT_HOUSE_PREFIX_POL = "N";
@@ -777,6 +780,7 @@ export class GlobalService {
     this.company_sow = this.UserRecord.comp_sow;
     this.user_timeout = this.UserRecord.usr_timeout;
     this.user_an_common_mail = this.UserRecord.usr_an_common_mail;
+    this.user_validate_an = this.UserRecord.usr_validate_an;
     this.branch_pkid = "";
     this.InitUserInfo();
   }
@@ -1297,6 +1301,8 @@ export class GlobalService {
         }
         else if (Rec.param_name1 == "AN-RO-COMMENTS")
           this.AN_RO_COMMENTS = Rec.param_name3;
+        else if (Rec.param_name1 == "AN-VALIDATE-SENT-STATUS")
+          this.AN_VALIDATE_SENT_STATUS = Rec.param_name3;
       }
       else if (Rec.param_type == "GLOBAL SETTINGS") {
         if (Rec.param_name1 == "SOFTWARE VERSION")
