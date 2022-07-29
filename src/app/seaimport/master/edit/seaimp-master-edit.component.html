@@ -68,7 +68,7 @@
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Stage</label>
                   <div class="col-9">
-                    <select class="form-control form-control-sm" [(ngModel)]="record.mbl_shipment_stage">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.mbl_shipment_stage" (change)="onChange('mbl_shipment_stage')">
                       <option *ngFor="let rec of gs.SHIPMENT_STAGE_OI" [value]="rec.code">{{rec.name}}</option>
                     </select>
                   </div>

@@ -310,7 +310,7 @@ export class SeaImpMasterEditComponent implements OnInit {
   }
 
 
-  Save() {  
+  Save() {
     if (!this.Allvalid())
       return;
     if (!confirm("Save")) {
@@ -746,9 +746,11 @@ export class SeaImpMasterEditComponent implements OnInit {
     if (field == 'mbl_pofd_eta') {
       this.bChanged = true;
     }
-
+    if (field == 'mbl_shipment_stage') {
+      if (this.mode == 'EDIT' && this.record.mbl_shipment_stage == 'STAGE3' && this.gs.company_code == 'MNYC')
+        this.ValidateAN();
+    }
   }
-
 
   onBlur(field: string, rec: Tbl_cargo_imp_container) {
     switch (field) {
@@ -858,6 +860,22 @@ export class SeaImpMasterEditComponent implements OnInit {
     }
   }
 
+  ValidateAN() {
+    if (this.gs.user_validate_an == 'Y' || this.gs.AN_VALIDATE_SENT_STATUS == 'Y') {
+      let bMsg: boolean = false;
+      if (this.gs.isBlank(this.hrecords))
+        bMsg = true;
+      if (!bMsg) {
+        this.hrecords.forEach(Rec => {
+          if (this.gs.isBlank(Rec.hbl_an_sent) || Rec.hbl_an_sent == 'N') {
+            bMsg = true;
+          }
+        })
+      }
+      if (bMsg)
+        alert('Error in Changing Stage, Pending A/N Found');
+    }
+  }
   AddHouse() {
     if (!this.gs.canAdd(this.gs.MENU_SI_HOUSE)) {
       alert('Insufficient User Rights')
@@ -1010,7 +1028,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           appid: this.gs.appid,
           menuid: this.gs.MENU_SI_MASTER_PRODUCTS,
           pkid: this.pkid,
-          type:'MBL-OI',
+          type: 'MBL-OI',
           cust_id: '',
           cust_code: '',
           cust_name: '',
