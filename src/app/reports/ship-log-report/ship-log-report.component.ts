@@ -83,6 +83,8 @@ export class ShipmentLogReportComponent implements OnInit {
   sortCol = '';
   sortOrder = true;
 
+  DateBasedList: any[] = [{ "id": "REF. DATE", "name": "Ref. Date" }, { "id": "ETD", "name": "ETD" }, { "id": "ETA", "name": "ETA" }];
+
   page_count: number = 0;
   page_current: number = 0;
   page_rows: number = 0;
