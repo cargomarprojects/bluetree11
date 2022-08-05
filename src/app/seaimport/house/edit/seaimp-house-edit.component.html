@@ -430,7 +430,7 @@
                 </div> -->
               </div>
               <div class="col-md-6 testbox  px-0 mx-0">
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Pkgs#</label>
                   <div class="col-3">
                     <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_packages')"
@@ -441,9 +441,22 @@
                     <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_uom')"
                       [(ngModel)]="record.hbl_uom" maxlength="4" #hbl_uom />
                   </div>
-                </div>
+                </div> -->
 
                 <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">Pkgs#</label>
+                  <div class="col-4">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_packages')"
+                      [(ngModel)]="record.hbl_packages" maxlength="15" #hbl_packages />
+                  </div>
+                  <div class="col-5  input-group input-group-sm">
+                    <label class="col-form-label col-form-label-sm mr-1">Unit</label>
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('hbl_uom')"
+                      [(ngModel)]="record.hbl_uom" maxlength="4" #hbl_uom />
+                  </div>
+                </div>
+
+                <!-- <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">KG</label>
                   <div class="col-3 input-group input-group-sm">
                     <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_weight')"
@@ -456,8 +469,22 @@
                       [(ngModel)]="record.hbl_lbs" maxlength="15" #hbl_lbs />
                     <button class="btn btn-info btn-sm" (click)="FindWeight('Lbs2Kgs')"><span>&lt;</span> </button>
                   </div>
-                </div>
+                </div> -->
                 <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">KG</label>
+                  <div class="col-4 input-group input-group-sm">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_weight')"
+                      [(ngModel)]="record.hbl_weight" maxlength="15" #hbl_weight />
+                    <button class="btn btn-info btn-sm" (click)="FindWeight('Kgs2Lbs')"><span>&gt;</span></button>
+                  </div>
+                  <div class="col-5 input-group input-group-sm">
+                    <label class="col-form-label col-form-label-sm mr-2">LBS</label>
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_lbs')"
+                      [(ngModel)]="record.hbl_lbs" maxlength="15" #hbl_lbs />
+                    <button class="btn btn-info btn-sm" (click)="FindWeight('Lbs2Kgs')"><span>&lt;</span> </button>
+                  </div>
+                </div>
+                <!-- <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">CBM</label>
                   <div class="col-3 input-group input-group-sm">
                     <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_cbm')"
@@ -466,6 +493,20 @@
                   </div>
                   <label class="col-3 col-form-label col-form-label-sm">CFT</label>
                   <div class="col-3 input-group input-group-sm">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_cft')"
+                      [(ngModel)]="record.hbl_cft" maxlength="15" #hbl_cft />
+                    <button class="btn btn-info btn-sm" (click)="FindWeight('Cft2Cbm')"><span>&lt;</span> </button>
+                  </div>
+                </div> -->
+                <div class="form-group row">
+                  <label class="col-3 col-form-label col-form-label-sm">CBM</label>
+                  <div class="col-4 input-group input-group-sm">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_cbm')"
+                      [(ngModel)]="record.hbl_cbm" maxlength="15" #hbl_cbm />
+                    <button class="btn btn-info btn-sm" (click)="FindWeight('Cbm2Cft')"><span>&gt;</span></button>
+                  </div>
+                  <div class="col-5 input-group input-group-sm">
+                    <label class="col-form-label col-form-label-sm mr-2">CFT</label>
                     <input class="form-control form-control-sm" type="number" (blur)="onBlur('hbl_cft')"
                       [(ngModel)]="record.hbl_cft" maxlength="15" #hbl_cft />
                     <button class="btn btn-info btn-sm" (click)="FindWeight('Cft2Cbm')"><span>&lt;</span> </button>
