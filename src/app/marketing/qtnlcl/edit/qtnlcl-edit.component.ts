@@ -258,7 +258,7 @@ export class QtnLclEditComponent implements OnInit {
                         this.record.qtnm_no = response.code;
                     this.mode = 'EDIT';
                     this.mainService.RefreshList(this.record);
-                    this.errorMessage.push('Save Complete');
+                    // this.errorMessage.push('Save Complete');
                     alert('Save Complete');
                 }
 
