@@ -54,10 +54,10 @@ export class GlobalService {
 
   public tab = ' 	';
 
-  public software_version_string = '1.182';
+  public software_version_string = '1.183';
 
-  public baseUrl: string = "http://localhost:5000";
-  //public baseUrl: string = "";
+  //public baseUrl: string = "http://localhost:5000";
+  public baseUrl: string = "";
   // change this is false in production and update
 
   public isolderror: boolean = false;
