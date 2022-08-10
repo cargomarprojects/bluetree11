@@ -577,7 +577,7 @@ export class WhStockComponent implements OnInit {
             // }
             case 'ind_transfer_cqty': {
                 if (this.bChanged) {
-                    if (this.gs.isValidCqty(rec.ind_transfer_cqty)) {
+                    if (this.gs.isValidCqty(rec.ind_transfer_cqty) && rec.ind_out_qty > 0) {
                         LooseBalQty = this.gs.convertToPieces(rec.ind_bal_cqty, rec.ind_unit_factor);
                         LooseTrnsfrQty = this.gs.convertToPieces(rec.ind_transfer_cqty, rec.ind_unit_factor);
                         if (LooseTrnsfrQty > LooseBalQty) {
@@ -756,12 +756,14 @@ export class WhStockComponent implements OnInit {
                             alert("Loose quantity should be less than " + Rec.ind_unit_factor + " [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
                         }
                         else {
-                            LooseBalQty = this.gs.convertToPieces(Rec.ind_bal_cqty, Rec.ind_unit_factor);
-                            LooseTrnsfrQty = this.gs.convertToPieces(Rec.ind_transfer_cqty, Rec.ind_unit_factor);
-                            tottransfrqty += LooseTrnsfrQty;
-                            if (LooseTrnsfrQty > LooseBalQty) {
-                                bRet = false;
-                                alert("Insufficient Quantity [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
+                            if (Rec.ind_out_qty > 0) {
+                                LooseBalQty = this.gs.convertToPieces(Rec.ind_bal_cqty, Rec.ind_unit_factor);
+                                LooseTrnsfrQty = this.gs.convertToPieces(Rec.ind_transfer_cqty, Rec.ind_unit_factor);
+                                tottransfrqty += LooseTrnsfrQty;
+                                if (LooseTrnsfrQty > LooseBalQty) {
+                                    bRet = false;
+                                    alert("Insufficient Quantity [Row" + iCtr.toString() + "," + Rec.ind_product + "]");
+                                }
                             }
                         }
                     }
@@ -769,10 +771,10 @@ export class WhStockComponent implements OnInit {
             })
         }
 
-        if (tottransfrqty == 0 && bRet == true) {
-            alert("Transfer Qty Not Found");
-            return;
-        }
+        // if (tottransfrqty == 0 && bRet == true) {
+        //     alert("Transfer Qty Not Found");
+        //     return;
+        // }
 
         if (this.gs.isBlank(this.inm_cust_id) && bRet == true) {
             alert("Customer cannot be blank");
