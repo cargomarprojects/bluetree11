@@ -32,6 +32,7 @@ export class FollowupComponent implements OnInit {
   cf_assigned_id = '';
   cf_assigned_code = '';
   cf_assigned_name = '';
+  cf_handled_name = '';
 
   pkid: string;
   mode: string;
@@ -105,6 +106,7 @@ export class FollowupComponent implements OnInit {
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
 
+        this.cf_handled_name = response.handledname;
         this.cf_assigned_id = response.assignedid;
         this.cf_assigned_code = response.assignedcode;
         this.cf_assigned_name = response.assignedname;
@@ -359,9 +361,11 @@ export class FollowupComponent implements OnInit {
   }
 
   AssignHandlingPerson() {
-    this.record.cf_assigned_id = this.cf_assigned_id;
-    this.record.cf_assigned_code = this.cf_assigned_code;
-    this.record.cf_assigned_name = this.cf_assigned_name;
+    if (!this.gs.isBlank(this.cf_handled_name)) {
+      this.record.cf_assigned_id = this.cf_assigned_id;
+      this.record.cf_assigned_code = this.cf_assigned_code;
+      this.record.cf_assigned_name = this.cf_assigned_name;
+    }
   }
 }
 
