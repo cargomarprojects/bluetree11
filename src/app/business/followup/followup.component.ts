@@ -28,6 +28,11 @@ export class FollowupComponent implements OnInit {
   cf_masterid: string;
   cf_refno: string;
   cf_refdate: string;
+
+  cf_assigned_id = '';
+  cf_assigned_code = '';
+  cf_assigned_name = '';
+
   pkid: string;
   mode: string;
   title: string = '';
@@ -73,7 +78,7 @@ export class FollowupComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.title = 'Tracking';
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.errorMessage = '';
@@ -95,10 +100,16 @@ export class FollowupComponent implements OnInit {
     this.errorMessage = '';
     var SearchData = this.gs.UserInfo;
     SearchData.pkid = this.cf_masterid;
+    SearchData.origin = this.origin;
 
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
-        this.records = (response.records == undefined || response.records == null) ? <Table_Cargo_Followup[]>[]:<Table_Cargo_Followup[]>response.records;
+
+        this.cf_assigned_id = response.assignedid;
+        this.cf_assigned_code = response.assignedcode;
+        this.cf_assigned_name = response.assignedname;
+
+        this.records = (response.records == undefined || response.records == null) ? <Table_Cargo_Followup[]>[] : <Table_Cargo_Followup[]>response.records;
         this.NewRecord();
       }, error => {
         this.errorMessage = this.gs.getError(error);
@@ -217,8 +228,8 @@ export class FollowupComponent implements OnInit {
     if (!this.Allvalid())
       return;
 
-      if (!confirm("Save")) {
-        return;
+    if (!confirm("Save")) {
+      return;
     }
 
     const saveRecord = <vm_Table_Cargo_Followup>{};
@@ -282,7 +293,7 @@ export class FollowupComponent implements OnInit {
     // if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
     //   this.gs.LinkReturn(this.origin, this.cf_masterid, '');
     // else
-      this.location.back();
+    this.location.back();
   }
 
   RemoveRow(_rec: Table_Cargo_Followup) {
@@ -345,6 +356,12 @@ export class FollowupComponent implements OnInit {
     if (event.key === 'Enter') {
       this.EditRow(_rec);
     }
+  }
+
+  AssignHandlingPerson() {
+    this.record.cf_assigned_id = this.cf_assigned_id;
+    this.record.cf_assigned_code = this.cf_assigned_code;
+    this.record.cf_assigned_name = this.cf_assigned_name;
   }
 }
 
