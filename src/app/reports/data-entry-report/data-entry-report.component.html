@@ -67,7 +67,12 @@
           <td>{{rec.de_branch}}</td>
           <td>{{rec.de_category}}</td>
           <td>{{rec.de_type}}</td>
-          <td>{{rec.de_refno}}</td>
+          <td *ngIf="rec.de_branch==gs.branch_code">
+            <a class="hlink"
+              [routerLink]="gs.Link2Page('REFNO', rec.de_type, rec.de_refno, rec.de_mbl_id,'','', 'L',rec.de_branch)"
+              [queryParams]="gs.Link2Page('REFNO', rec.de_type, rec.de_refno, rec.de_mbl_id,'','', 'P',rec.de_branch)">{{rec.de_refno}}</a>
+          </td>
+          <td *ngIf="rec.de_branch!=gs.branch_code">{{rec.de_refno}}</td>
           <td>{{rec.de_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.de_mbl_no}}</td>
           <td>{{rec.de_mbl_house_nos}}</td>

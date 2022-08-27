@@ -24,6 +24,7 @@ export class Tbl_Data_Entry_Report {
     de_inv_no: string;
     de_remarks: string;
     de_mbl_no: string;
+    de_mbl_id: string;
     de_mbl_house_nos: string;
     de_mbl_house_tot: number;
     de_created_date: string;
