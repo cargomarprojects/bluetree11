@@ -230,6 +230,10 @@ export class ShipmentLogReportComponent implements OnInit {
 
     });
     // this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
+    if (this.gs.company_code == "MNYC")
+      this.DateBasedList = [{ "id": "REF. DATE", "name": "Ref. Date" }, { "id": "ETD", "name": "ETD" }, { "id": "ETA", "name": "ETA" }, { "id": "CARR-AN-RECVD", "name": "Carrier AN Received" }];
+    else
+      this.DateBasedList = [{ "id": "REF. DATE", "name": "Ref. Date" }, { "id": "ETD", "name": "ETD" }, { "id": "ETA", "name": "ETA" }];
   }
 
   ngOnInit() {
