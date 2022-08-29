@@ -83,7 +83,7 @@ export class ShipmentLogReportComponent implements OnInit {
   sortCol = '';
   sortOrder = true;
 
-  DateBasedList: any[] = [{ "id": "REF. DATE", "name": "Ref. Date" }, { "id": "ETD", "name": "ETD" }, { "id": "ETA", "name": "ETA" }, { "id": "CARR-AN-RECVD", "name": "Carrier AN Received" }];
+  DateBasedList: any[] = [{ "id": "REF. DATE", "name": "Ref. Date" }, { "id": "ETD", "name": "ETD" }, { "id": "ETA", "name": "ETA" }];
 
   page_count: number = 0;
   page_current: number = 0;
@@ -230,9 +230,9 @@ export class ShipmentLogReportComponent implements OnInit {
 
     });
     // this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
-    if (this.gs.company_code == "MNYC")
-      this.DateBasedList = [{ "id": "REF. DATE", "name": "Ref. Date" }, { "id": "ETD", "name": "ETD" }, { "id": "ETA", "name": "ETA" }, { "id": "CARR-AN-RECVD", "name": "Carrier AN Received" }];
-    else
+    // if (this.gs.company_code == "MNYC")
+    //   this.DateBasedList = [{ "id": "REF. DATE", "name": "Ref. Date" }, { "id": "ETD", "name": "ETD" }, { "id": "ETA", "name": "ETA" }, { "id": "CARR-AN-RECVD", "name": "Carrier AN Received" }];
+    // else
       this.DateBasedList = [{ "id": "REF. DATE", "name": "Ref. Date" }, { "id": "ETD", "name": "ETD" }, { "id": "ETA", "name": "ETA" }];
   }
 
