@@ -150,7 +150,7 @@ export interface Tbl_cargo_general {
     mbl_bo_attended_code: string;
     mbl_incoterm: string;
     mbl_carrier_an_recd_dt:string;
-    
+    mbl_an_sent_dt:string;
     mbl_cargo_loccode: string;
     mbl_cargo_locname: string;
     mbl_cargo_locaddr1: string;

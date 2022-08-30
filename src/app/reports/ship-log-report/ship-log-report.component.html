@@ -283,7 +283,8 @@
                                     <option [value]="'mbl_pod_eta'">ETA</option>
                                     <option [value]="'hbl_paid_status'">CLIENT PAID</option>
                                     <option [value]="'hbl_place_final'">FINAL DESTINATION</option>
-                                    <option [value]="'mbl_carrier_an_recd_dt,mbl_pod_eta'">CARRIER AN RECEIVED</option>
+                                    <option [value]="'mbl_carrier_an_recd_dt,mbl_pod_eta'">A/N RECEIVED</option>
+                                    <option [value]="'mbl_an_sent_dt,mbl_pod_eta'">A/N SENT</option>
                                 </select>
                             </div>
                         </div>
@@ -375,8 +376,10 @@
                                 [ngClass]="getIcon('mbl_cargo_loc_firmcode')"></i> </th>
                         <th (click)="sort('hbl_is_itshipment')"> IT.SHIPMENT &nbsp;<i
                                 [ngClass]="getIcon('hbl_is_itshipment')"></i> </th>
-                        <th *ngIf="gs.company_code=='MNYC'" (click)="sort('mbl_carrier_an_recd_dt')"> CARRIER.AN.RECVD &nbsp;<i
-                                [ngClass]="getIcon('mbl_carrier_an_recd_dt')"></i> </th>
+                        <th *ngIf="gs.company_code=='MNYC'" (click)="sort('mbl_carrier_an_recd_dt')"> A/N RECEIVED
+                            &nbsp;<i [ngClass]="getIcon('mbl_carrier_an_recd_dt')"></i> </th>
+                            <th *ngIf="gs.company_code=='MNYC'" (click)="sort('mbl_an_sent_dt')"> A/N SENT
+                                &nbsp;<i [ngClass]="getIcon('mbl_an_sent_dt')"></i> </th>
                         <th (click)="sort('mbl_bo_status')"> STATUS &nbsp;<i [ngClass]="getIcon('mbl_bo_status')"></i>
                         </th>
                         <th (click)="sort('mbl_bo_attended_code')"> BY &nbsp;<i
@@ -413,7 +416,10 @@
                         <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT}}</td>
                         <td>{{rec.mbl_cargo_loc_firmcode}}</td>
                         <td>{{rec.hbl_is_itshipment}}</td>
-                        <td *ngIf="gs.company_code=='MNYC'">{{rec.mbl_carrier_an_recd_dt | date : gs.date_display_fmt_with_time}}</td>
+                        <td *ngIf="gs.company_code=='MNYC'">{{rec.mbl_carrier_an_recd_dt | date :
+                            gs.date_display_fmt_with_time}}</td>
+                        <td *ngIf="gs.company_code=='MNYC'">{{rec.mbl_an_sent_dt | date :
+                            gs.date_display_fmt_with_time}}</td>
                         <td>{{rec.mbl_bo_status}}</td>
                         <td>{{rec.mbl_bo_attended_code}}</td>
                         <!-- <td>{{rec.mbl_inv_stage_a}}</td>
