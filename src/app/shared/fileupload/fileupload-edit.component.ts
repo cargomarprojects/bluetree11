@@ -21,6 +21,8 @@ export class FileUploadEditComponent implements OnInit {
 
     errorMessage: string = '';
     txt_fileDocType: string = "";
+    txt_file_desc: string = "";
+    txt_files_ref_no: string = "";
     loading = false;
 
     constructor(
@@ -35,6 +37,8 @@ export class FileUploadEditComponent implements OnInit {
     // Init Will be called After executing Constructor
     ngOnInit() {
         this.gs.checkAppVersion();
+        this.txt_file_desc = this.record.file_desc;
+        this.txt_files_ref_no = this.record.files_ref_no; 
         if (!this.gs.isBlank(this.Files_TypeList)) {
             var Rec = this.Files_TypeList.find(rec => rec.name == this.record.files_type);
             if (Rec != null) {
@@ -54,7 +58,7 @@ export class FileUploadEditComponent implements OnInit {
     Save() {
 
         this.errorMessage = '';
-        if (this.gs.isBlank(this.record.file_desc)) {
+        if (this.gs.isBlank(this.txt_file_desc)) {
             this.errorMessage = 'Name Cannot be blank';
             return;
         }
@@ -64,6 +68,8 @@ export class FileUploadEditComponent implements OnInit {
             return;
         }
 
+        this.record.file_desc = this.txt_file_desc;
+        this.record.files_ref_no = this.txt_files_ref_no;
         this.record.files_type = this.txt_fileDocType;
         const saveRecord = <vm_table_mast_files>{};
         saveRecord.record = this.record;
@@ -100,11 +106,11 @@ export class FileUploadEditComponent implements OnInit {
     onBlur(field: string) {
         switch (field) {
             case 'file_desc': {
-                this.record.file_desc = this.record.file_desc.toUpperCase();
+                this.txt_file_desc = this.txt_file_desc.toUpperCase();
                 break;
             }
             case 'files_ref_no': {
-                this.record.files_ref_no = this.record.files_ref_no.toUpperCase();
+                this.txt_files_ref_no = this.txt_files_ref_no.toUpperCase();
                 break;
             }
         }
