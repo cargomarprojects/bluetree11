@@ -103,6 +103,10 @@ export class FileUploadEditComponent implements OnInit {
                 this.record.file_desc = this.record.file_desc.toUpperCase();
                 break;
             }
+            case 'files_ref_no': {
+                this.record.files_ref_no = this.record.files_ref_no.toUpperCase();
+                break;
+            }
         }
     }
 
