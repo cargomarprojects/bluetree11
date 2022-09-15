@@ -631,4 +631,45 @@ export class ShipmentLogReportComponent implements OnInit {
       this.store.dispatch(new myActions.UpdateETA({ id: this.urlid, pkid: event.pkid, updateETA: event.eta }))
     }
   }
+
+  ANPendingList() {
+    this.errorMessage = "";
+    this.report_searchdata.pkid = '';
+    this.report_searchdata = this.gs.UserInfo;
+    this.report_searchdata.SHOWSTAGES = this.GetStages();
+    this.report_searchdata.SORT = this.sort_order.replace("mbl_no", "hbl_houseno"); //In gridlist filed hbl_houseno is used for both houseno and masterno;
+    this.report_searchdata.HANDLED_TYPE = this.handled_basedon;
+    this.report_searchdata.HANDLED_ID = this.handled_id;
+    this.report_searchdata.MASTER_AGENT_ID = this.agent_id;
+    this.report_searchdata.CONSIGNEE_ID = this.consignee_id;
+    this.report_searchdata.SHIPPER_ID = this.shipper_id;
+    if (this.job_mode == "OTHER OPERATION")
+      this.report_searchdata.SMODE = 'OTHERS';
+    else
+      this.report_searchdata.SMODE = this.job_mode;
+    this.report_searchdata.MASTER_WISE = this.report_masterwise == true ? "Y" : "N";
+    this.report_searchdata.HOUSE_WISE = this.report_housewise == true ? "Y" : "N";
+    this.report_searchdata.OVERRIDE_ETA = this.gs.SEA_IMP_OVERRIDE_POD_ETA;
+    this.report_searchdata.DATE_TYPE = this.date_basedon;
+    this.report_searchdata.SDATE = this.sdate;
+    this.report_searchdata.EDATE = this.edate;
+    this.report_searchdata.FORMAT_TYPE = this.format_type;
+    this.report_searchdata.PRINTER_FRIENDLY = this.printer_friendly == true ? "Y" : "N";
+    this.report_searchdata.SHIPPER_NAME = this.shipper_name;
+    this.report_searchdata.CONSIGNEE_NAME = this.consignee_name;
+    this.report_searchdata.AGENT_NAME = this.agent_name;
+    this.report_searchdata.HANDLED_NAME = this.handled_name;
+    this.report_searchdata.WITHIN_ETA = this.within_eta;
+    this.report_searchdata.INCO_TERM = this.inco_term;
+    this.report_searchdata.COMP_NAME = this.gs.branch_name;
+
+
+    this.mainservice.ANPendingList(this.report_searchdata)
+      .subscribe(response => {
+        this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+      }, error => {
+        this.errorMessage = this.gs.getError(error);
+        alert(this.errorMessage);
+      });
+  }
 }

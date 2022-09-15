@@ -96,6 +96,10 @@ export class ReportService {
     ShipmentLogPrint(SearchData: any) {
       return this.http2.post<any>(this.gs.baseUrl + "/api/Other/Report/ShipmentLogPrint", SearchData, this.gs.headerparam2('authorized'));
     }
+    
+    ANPendingList(SearchData: any) {
+      return this.http2.post<any>(this.gs.baseUrl + "/api/Other/Report/ANPendingList", SearchData, this.gs.headerparam2('authorized'));
+    }
 }
 
 

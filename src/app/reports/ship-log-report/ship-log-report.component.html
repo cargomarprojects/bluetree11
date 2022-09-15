@@ -333,7 +333,9 @@
                                 <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="Print('PDF')"
                                     class="btn btn-primary btn-sm mr-1">Print</button>
                                 <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="Print('EXCEL')"
-                                    class="btn btn-primary btn-sm">Excel</button>
+                                    class="btn btn-primary btn-sm mr-1">Excel</button>
+                                <button [disabled]="loading" (click)="ANPendingList()"
+                                    class="btn btn-primary btn-sm">Pending A/N</button>
                             </div>
                         </div>
                     </div>
@@ -378,8 +380,8 @@
                                 [ngClass]="getIcon('hbl_is_itshipment')"></i> </th>
                         <th *ngIf="gs.company_code=='MNYC'" (click)="sort('mbl_carrier_an_recd_dt')"> A/N RECEIVED
                             &nbsp;<i [ngClass]="getIcon('mbl_carrier_an_recd_dt')"></i> </th>
-                            <th *ngIf="gs.company_code=='MNYC'" (click)="sort('mbl_an_sent_dt')"> A/N SENT
-                                &nbsp;<i [ngClass]="getIcon('mbl_an_sent_dt')"></i> </th>
+                        <th *ngIf="gs.company_code=='MNYC'" (click)="sort('mbl_an_sent_dt')"> A/N SENT
+                            &nbsp;<i [ngClass]="getIcon('mbl_an_sent_dt')"></i> </th>
                         <th (click)="sort('mbl_bo_status')"> STATUS &nbsp;<i [ngClass]="getIcon('mbl_bo_status')"></i>
                         </th>
                         <th (click)="sort('mbl_bo_attended_code')"> BY &nbsp;<i
@@ -661,8 +663,8 @@
 
     <br />
 
-    <div *ngIf="ErrorMessage" class="alert alert-danger">
-        {{ErrorMessage}}
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{errorMessage}}
     </div>
 
 </div>
