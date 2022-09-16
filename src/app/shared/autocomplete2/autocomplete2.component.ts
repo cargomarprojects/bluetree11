@@ -330,6 +330,10 @@ export class AutoComplete2Component {
     this.showDiv = false;
     this.ValueChanged.emit(this.inputdata);
     this.RecList = [];
+
+    if (this.inputdata.col9 == "Y" && (this._tabletype == 'MASTER' || this._tabletype == 'OVERSEAAGENT' || this._tabletype == 'PARTY_OVERSEAAGENT')) {
+      this.gs.ShowAccAlert(this.inputdata.id);
+    }
   }
 
   onfocus() {
