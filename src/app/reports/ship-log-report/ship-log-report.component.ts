@@ -633,6 +633,11 @@ export class ShipmentLogReportComponent implements OnInit {
   }
 
   ANPendingList() {
+
+    if (this.job_mode != "OCEAN IMPORT" && this.job_mode != "AIR IMPORT") {
+      alert('Please select Mode as OCEAN IMPORT or AIR IMPORT and continue.....');
+      return;
+    }
     this.errorMessage = "";
     this.report_searchdata.pkid = '';
     this.report_searchdata = this.gs.UserInfo;
@@ -643,10 +648,7 @@ export class ShipmentLogReportComponent implements OnInit {
     this.report_searchdata.MASTER_AGENT_ID = this.agent_id;
     this.report_searchdata.CONSIGNEE_ID = this.consignee_id;
     this.report_searchdata.SHIPPER_ID = this.shipper_id;
-    if (this.job_mode == "OTHER OPERATION")
-      this.report_searchdata.SMODE = 'OTHERS';
-    else
-      this.report_searchdata.SMODE = this.job_mode;
+    this.report_searchdata.SMODE = this.job_mode;
     this.report_searchdata.MASTER_WISE = this.report_masterwise == true ? "Y" : "N";
     this.report_searchdata.HOUSE_WISE = this.report_housewise == true ? "Y" : "N";
     this.report_searchdata.OVERRIDE_ETA = this.gs.SEA_IMP_OVERRIDE_POD_ETA;
