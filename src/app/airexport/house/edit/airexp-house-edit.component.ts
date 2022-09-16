@@ -964,9 +964,9 @@ export class AirExpHouseEditComponent implements OnInit {
       this.record.hbl_by1 = this.gs.ADDRESS_LINE1 + " AS AGENT FOR ";     //Agnt_for_Shipper                  
       this.record.hbl_by2 = this.record.hbl_shipper_name;     //Agnt_for_Shipper2  
 
-      if (rec.col9 == "Y") {
-        this.gs.ShowAccAlert(this.record.hbl_shipper_id);
-      }
+      // if (rec.col9 == "Y") {
+      //   this.gs.ShowAccAlert(this.record.hbl_shipper_id);
+      // }
       if (!this.gs.isBlank(this.hbl_shipper_name_ctrl))
         this.hbl_shipper_name_ctrl.focus();
 
@@ -988,9 +988,9 @@ export class AirExpHouseEditComponent implements OnInit {
       else
         this.record.hbl_bltype = "FREEHAND";
 
-      if (rec.col9 == "Y") {
-        this.gs.ShowAccAlert(this.record.hbl_consignee_id);
-      }
+      // if (rec.col9 == "Y") {
+      //   this.gs.ShowAccAlert(this.record.hbl_consignee_id);
+      // }
       if (!this.gs.isBlank(this.hbl_consigned_to1_ctrl))
         this.hbl_consigned_to1_ctrl.focus();
 

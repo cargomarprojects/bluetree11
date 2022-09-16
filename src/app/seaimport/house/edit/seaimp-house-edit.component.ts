@@ -927,20 +927,10 @@ export class SeaImpHouseEditComponent implements OnInit {
       this.record.hbl_shipper_add3 = _Record.col3;
       this.record.hbl_shipper_add4 = this.gs.GetAttention(_Record.col5.toString());
       this.record.hbl_shipper_add5 = this.gs.GetTelFax(_Record.col6.toString(), _Record.col7.toString());
-      if (_Record.col9 == "Y") {
-        // MsgAlertBox mPage = new MsgAlertBox();
-        // mPage.PKID = Txt_Shipper_Code.PKID;
-        // mPage.SOURCE = "ACCOUNTING-ALERT";
-        // mPage.parentpage += delegate(object sender2, string objectName2)
-        // {
-        //     Dispatcher.BeginInvoke(() => { Txt_Shipper_Name.Focus(); });
-        // };
-        // mPage.Show();
-
-        // this.SearchRecord("MsgAlertBox", this.record.hbl_shipper_id);
-
-        this.gs.ShowAccAlert(this.record.hbl_shipper_id);
-      }
+      // if (_Record.col9 == "Y") {
+      //   // this.SearchRecord("MsgAlertBox", this.record.hbl_shipper_id);
+      //   this.gs.ShowAccAlert(this.record.hbl_shipper_id);
+      // }
       this.hbl_shipper_name_field.nativeElement.focus();
     }
 

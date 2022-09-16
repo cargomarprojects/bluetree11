@@ -598,9 +598,9 @@ export class AirImpHouseEditComponent implements OnInit {
       this.record.hbl_shipper_add3 = _Record.col3;
       this.record.hbl_shipper_add4 = this.gs.GetAttention(_Record.col5.toString());
       this.record.hbl_shipper_add5 = this.gs.GetTelFax(_Record.col6.toString(), _Record.col7.toString());
-      if (_Record.col9 == "Y") {
-        this.gs.ShowAccAlert(this.record.hbl_shipper_id);
-      }
+      // if (_Record.col9 == "Y") {
+      //   this.gs.ShowAccAlert(this.record.hbl_shipper_id);
+      // }
       if (!this.gs.isBlank(this.hbl_shipper_name_field))
         this.hbl_shipper_name_field.focus();
     }
@@ -627,9 +627,9 @@ export class AirImpHouseEditComponent implements OnInit {
             this.record.hbl_bltype = "FREEHAND";
         }
 
-      if (_Record.col9 == "Y") {
-        this.gs.ShowAccAlert(this.record.hbl_consignee_id);
-      }
+      // if (_Record.col9 == "Y") {
+      //   this.gs.ShowAccAlert(this.record.hbl_consignee_id);
+      // }
       this.LoadCHA();
     }
 

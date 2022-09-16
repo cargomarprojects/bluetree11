@@ -640,9 +640,9 @@ export class MawbPageComponent implements OnInit {
         this.record.mbld_by1 = "";
         this.record.mbld_by2 = this.record.mbld_shipper_name;
       }
-      if (rec.col9 == "Y") {
-        this.gs.ShowAccAlert(this.record.mbld_shipper_id);
-      }
+      // if (rec.col9 == "Y") {
+      //   this.gs.ShowAccAlert(this.record.mbld_shipper_id);
+      // }
       if (!this.gs.isBlank(this.mbld_shipper_name_ctrl))
         this.mbld_shipper_name_ctrl.focus();
     }
@@ -658,9 +658,9 @@ export class MawbPageComponent implements OnInit {
       this.record.mbld_consigned_to5 = this.gs.GetTelFax(rec.col6, rec.col7);
       this.record.mbld_consigned_to6 = this.gs.GetAttention(rec.col5);
 
-      if (rec.col9 == "Y") {
-        this.gs.ShowAccAlert(this.record.mbld_consignee_id);
-      }
+      // if (rec.col9 == "Y") {
+      //   this.gs.ShowAccAlert(this.record.mbld_consignee_id);
+      // }
       if (!this.gs.isBlank(this.mbld_consigned_to1_ctrl))
         this.mbld_consigned_to1_ctrl.focus();
     }

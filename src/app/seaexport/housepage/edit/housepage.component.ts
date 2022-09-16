@@ -783,9 +783,9 @@ export class HousePageComponent implements OnInit {
       this.record.hbl_shipper_add2 = rec.col2;
       this.record.hbl_shipper_add3 = rec.col3;
       this.record.hbl_shipper_add4 = this.gs.GetTelFax(rec.col6, rec.col7);
-      if (rec.col9 == "Y") {
-        this.gs.ShowAccAlert(this.record.hbl_shipper_id);
-      }
+      // if (rec.col9 == "Y") {
+      //   this.gs.ShowAccAlert(this.record.hbl_shipper_id);
+      // }
       if (!this.gs.isBlank(this.hbl_shipper_name_ctrl))
         this.hbl_shipper_name_ctrl.focus();
     }
@@ -806,9 +806,9 @@ export class HousePageComponent implements OnInit {
       else
         this.record.hbl_bltype = "FREEHAND";
 
-      if (rec.col9 == "Y") {
-        this.gs.ShowAccAlert(this.record.hbl_consignee_id);
-      }
+      // if (rec.col9 == "Y") {
+      //   this.gs.ShowAccAlert(this.record.hbl_consignee_id);
+      // }
       if (!this.gs.isBlank(this.hbl_consigned_to1_ctrl))
         this.hbl_consigned_to1_ctrl.focus();
     }
@@ -823,9 +823,9 @@ export class HousePageComponent implements OnInit {
       this.record.hbl_notify_add2 = rec.col2;
       this.record.hbl_notify_add3 = rec.col3;
       this.record.hbl_notify_add4 = this.gs.GetTelFax(rec.col6, rec.col7);
-      if (rec.col9 == "Y") {
-        this.gs.ShowAccAlert(this.record.hbl_notify_id);
-      }
+      // if (rec.col9 == "Y") {
+      //   this.gs.ShowAccAlert(this.record.hbl_notify_id);
+      // }
       if (!this.gs.isBlank(this.hbl_notify_name_ctrl))
         this.hbl_notify_name_ctrl.focus();
     }
