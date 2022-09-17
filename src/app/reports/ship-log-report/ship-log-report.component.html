@@ -334,8 +334,15 @@
                                     class="btn btn-primary btn-sm mr-1">Print</button>
                                 <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="Print('EXCEL')"
                                     class="btn btn-primary btn-sm mr-1">Excel</button>
-                                <button [disabled]="loading" *ngIf="job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT'" (click)="ANPendingList()"
-                                    class="btn btn-primary btn-sm">Pending A/N</button>
+                                <button [disabled]="loading" *ngIf="job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT'"
+                                    (click)="ANPendingList('PRINT')" class="btn btn-primary btn-sm">Pending A/N</button>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-4 col-form-label col-form-label-sm"></label>
+                            <div class="col-8">
+                                <button [disabled]="loading" *ngIf="job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT'" (click)="ANPendingList('MAIL')"
+                                    class="btn btn-primary btn-sm mr-1">Create Mail</button>                          
                             </div>
                         </div>
                     </div>

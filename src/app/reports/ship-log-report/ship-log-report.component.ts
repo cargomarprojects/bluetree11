@@ -632,12 +632,19 @@ export class ShipmentLogReportComponent implements OnInit {
     }
   }
 
-  ANPendingList() {
+  ANPendingList(_type: string) {
 
     if (this.job_mode != "OCEAN IMPORT" && this.job_mode != "AIR IMPORT") {
       alert('Please select Mode as OCEAN IMPORT or AIR IMPORT and continue.....');
       return;
     }
+
+    if (_type == 'MAIL') {
+      if (!confirm("Create Mail Y/N")) {
+        return;
+      }
+    }
+
     this.errorMessage = "";
     this.report_searchdata.pkid = '';
     this.report_searchdata = this.gs.UserInfo;
@@ -664,14 +671,18 @@ export class ShipmentLogReportComponent implements OnInit {
     this.report_searchdata.WITHIN_ETA = this.within_eta;
     this.report_searchdata.INCO_TERM = this.inco_term;
     this.report_searchdata.COMP_NAME = this.gs.branch_name;
-
+    this.report_searchdata.PROCESS_TYPE = _type;
 
     this.mainservice.ANPendingList(this.report_searchdata)
       .subscribe(response => {
-        this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+        if (_type == 'PRINT')
+          this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+        else if (_type == 'MAIL')
+          alert('Created Successfully')
       }, error => {
         this.errorMessage = this.gs.getError(error);
         alert(this.errorMessage);
       });
   }
+
 }

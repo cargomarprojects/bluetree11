@@ -100,6 +100,7 @@ export class ReportService {
     ANPendingList(SearchData: any) {
       return this.http2.post<any>(this.gs.baseUrl + "/api/Other/Report/ANPendingList", SearchData, this.gs.headerparam2('authorized'));
     }
+
 }
 
 
