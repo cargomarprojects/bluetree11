@@ -26,6 +26,7 @@ import { DataEntryReportComponent } from './data-entry-report/data-entry-report.
 import { UserActiveComponent } from './user-active/useractive.component';
 import { UserActiveDetComponent } from './user-active/useractivedet.component';
 import { InvoiceReportComponent } from './invoice-report/invoice-report.component';
+import { EmailReportComponent } from './email-report/email-report.component';
 
 const routes: Routes = [
    { path :'ShipmentHandledReport', component : ShipHandReportComponent },
@@ -50,7 +51,8 @@ const routes: Routes = [
    { path :'DataEntryReport', component : DataEntryReportComponent }, 
    { path :'UserActive', component : UserActiveComponent }, 
    { path :'UserActiveDet', component : UserActiveDetComponent }, 
-   { path :'InvoiceListPage', component : InvoiceReportComponent },     
+   { path :'InvoiceListPage', component : InvoiceReportComponent },  
+   { path :'EmailReport', component : EmailReportComponent },      
 ];
 
 @NgModule({

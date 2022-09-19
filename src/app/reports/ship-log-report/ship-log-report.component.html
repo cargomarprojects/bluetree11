@@ -341,8 +341,8 @@
                         <div class="form-group row">
                             <label class="col-4 col-form-label col-form-label-sm"></label>
                             <div class="col-8">
-                                <button [disabled]="loading" *ngIf="job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT'" (click)="ANPendingList('MAIL')"
-                                    class="btn btn-primary btn-sm mr-1">Create Mail</button>                          
+                                <button [disabled]="loading" *ngIf="gs.user_code=='ADMIN' && (job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT')" (click)="ANPendingList('MAIL')"
+                                    class="btn btn-primary btn-sm mr-1">Mail Pending A/N</button>                          
                             </div>
                         </div>
                     </div>

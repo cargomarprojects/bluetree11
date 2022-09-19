@@ -57,6 +57,9 @@ import { UserActiveDetHeaderComponent } from './user-active/useractivedet-header
 import { InvoiceReportComponent } from './invoice-report/invoice-report.component';
 import { InvoiceReportHeaderComponent} from './invoice-report/invoice-report-header.component';
 
+import { EmailReportHeaderComponent } from './email-report/email-report-header.component';
+import { EmailReportComponent } from './email-report/email-report.component';
+
 @NgModule({
     declarations :[
     ShipHandReportComponent,
@@ -91,7 +94,9 @@ import { InvoiceReportHeaderComponent} from './invoice-report/invoice-report-hea
     UserActiveDetComponent,
     UserActiveDetHeaderComponent,
     InvoiceReportComponent,
-    InvoiceReportHeaderComponent
+    InvoiceReportHeaderComponent,
+    EmailReportHeaderComponent,
+    EmailReportComponent
   ],
   imports: [
     SharedModule,
