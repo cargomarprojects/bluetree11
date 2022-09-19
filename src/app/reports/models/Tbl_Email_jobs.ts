@@ -18,7 +18,8 @@ export class Tbl_Email_jobs{
 	mail_status: string;
 	error_msg: string;
 	remarks: string;
-
+    file_name:string;
+    
     row_color: string;
 }
 

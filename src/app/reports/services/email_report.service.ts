@@ -138,6 +138,8 @@ export class EmailReportService {
         SearchData.page_count = 0;
         SearchData.page_rows = 30;
         SearchData.page_current = -1;
+        SearchData.MAIL_STATUS = this.record.searchQuery.searchString;
+        SearchData.REPORT_FOLDER = this.gs.GLOBAL_REPORT_FOLDER;
 
         if (type == 'PAGE') {
             SearchData.action = this.record.pageQuery.action;

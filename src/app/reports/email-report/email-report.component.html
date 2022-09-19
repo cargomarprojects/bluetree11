@@ -33,18 +33,18 @@
       </thead>
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of records$ | async"
-          (mousedown)="mainservice.selectRowId(rec.user_username)"
-          [class.selected]="rec.user_username == mainservice.getRowId()">
+          (mousedown)="mainservice.selectRowId(rec.pkid)"
+          [class.selected]="rec.pkid == mainservice.getRowId()">
           <td>{{rec.from_id}}</td>
           <td>{{rec.to_id}}</td>
           <td>{{rec.cc_id}}</td>
           <td>{{rec.bcc_id}}</td>
           <td>{{rec.mail_subject}}</td>
           <td>{{rec.mail_message}}</td>
-          <td></td>
-          <td>{{rec.scheduled_on}}</td>
+          <td>{{rec.file_name}}</td>
+          <td>{{rec.scheduled_on | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.mail_status}}</td>
-          <td>{{rec.send_date}}</td>
+          <td>{{rec.send_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.error_msg}}</td>
         </tr>
       </tbody>
