@@ -1,5 +1,5 @@
 import { PageQuery } from '../../shared/models/pageQuery';
-
+import { Tbl_File_Details } from '../../Ai/models/Tbl_mast_filesm';
 export interface SearchQuery {
     searchString: string;
 }
@@ -18,8 +18,7 @@ export class Tbl_Email_jobs{
 	mail_status: string;
 	error_msg: string;
 	remarks: string;
-    file_name:string;
-    
+    FileList: Tbl_File_Details[] = []; 
     row_color: string;
 }
 

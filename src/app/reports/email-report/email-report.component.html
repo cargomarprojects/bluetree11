@@ -1,56 +1,61 @@
 <div class="page-header">
-    <div class="col">
-      <label class="mr-1">{{mainservice.title}}</label>
-      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-    </div>
+  <div class="col">
+    <label class="mr-1">{{mainservice.title}}</label>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
   </div>
-  
-  <div *ngIf="errorMessage$ | async" class="alert alert-danger">
-    {{errorMessage$ | async}}
-  </div>
-  
-  <app-email-report-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)"></app-email-report-header>
-  
-  
-  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
-  
-  <div class="page-body table-responsive table-bordered">
-    <table class="table  table-hover table-sm">
-      <thead class="page-body-thead">
-        <tr>
-          <th>FROM</th>
-          <th>TO</th>
-          <th>CC</th>
-          <th>BCC</th>
-          <th>SUBJECT</th>
-          <th>MESSAGE</th>
-          <th>ATTACHMENT</th>
-          <th>SCHEDULED ON</th>
-          <th>STATUS</th>
-          <th>SENT ON</th>
-          <th>ERROR</th>
-        </tr>
-      </thead>
-      <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of records$ | async"
-          (mousedown)="mainservice.selectRowId(rec.pkid)"
-          [class.selected]="rec.pkid == mainservice.getRowId()">
-          <td>{{rec.from_id}}</td>
-          <td>{{rec.to_id}}</td>
-          <td>{{rec.cc_id}}</td>
-          <td>{{rec.bcc_id}}</td>
-          <td>{{rec.mail_subject}}</td>
-          <td>{{rec.mail_message}}</td>
-          <td>{{rec.file_name}}</td>
-          <td>{{rec.scheduled_on | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td>{{rec.mail_status}}</td>
-          <td>{{rec.send_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td>{{rec.error_msg}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
-  
-  <br />
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+  {{errorMessage$ | async}}
+</div>
+
+<app-email-report-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+</app-email-report-header>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive table-bordered">
+  <table class="table  table-hover table-sm">
+    <thead class="page-body-thead">
+      <tr>
+        <th>FROM</th>
+        <th>TO</th>
+        <th>CC</th>
+        <th>BCC</th>
+        <th>SUBJECT</th>
+        <th>MESSAGE</th>
+        <th>ATTACHMENT</th>
+        <th>SCHEDULED ON</th>
+        <th>STATUS</th>
+        <th>SENT ON</th>
+        <th>ERROR</th>
+      </tr>
+    </thead>
+    <tbody class="page-body-tbody">
+      <tr *ngFor="let rec of records$ | async" (mousedown)="mainservice.selectRowId(rec.pkid)"
+        [class.selected]="rec.pkid == mainservice.getRowId()">
+        <td>{{rec.from_id}}</td>
+        <td>{{rec.to_id}}</td>
+        <td>{{rec.cc_id}}</td>
+        <td>{{rec.bcc_id}}</td>
+        <td>{{rec.mail_subject}}</td>
+        <td>{{rec.mail_message}}</td>
+        <!-- <td>{{rec.file_name}}</td> -->
+        <td class="pt-0 pb-0"><label class="my-0" *ngFor="let rec2 of rec.FileList; let i = index">
+            <span *ngIf="i>0">&nbsp;|&nbsp;</span>
+            <label (click)="Downloadfile(rec2.filename,rec2.filetype,rec2.filedisplayname)"
+              class="hlink2">{{rec2.filedisplayname}}</label>
+          </label></td>
+        <td>{{rec.scheduled_on | date : gs.FRONTEND_DATEFORMAT }}</td>
+        <td>{{rec.mail_status}}</td>
+        <td>{{rec.send_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+        <td>{{rec.error_msg}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />
