@@ -182,9 +182,9 @@ export class EmailReportService {
             alert('Processed Successfully');
           },
             error => {
-                this.record.errormessage = this.gs.getError(error);
-                this.mdata$.next(this.record);
-                alert(this.record.errormessage);
+                // this.record.errormessage = this.gs.getError(error);
+                // this.mdata$.next(this.record);
+                alert(this.gs.getError(error));
             });
       }
 
