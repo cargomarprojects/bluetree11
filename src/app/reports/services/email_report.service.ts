@@ -164,6 +164,30 @@ export class EmailReportService {
         });
     }
 
+    ScheduleMail(_id: string) {
+        
+        if (!confirm("Process mail Y/N")) {
+            return;
+        }
+
+        let SearchData = {
+          table: 'schedule_mail',
+          pkid: _id,
+          company_code: this.gs.company_code,
+          branch_code: this.gs.branch_code,
+          report_folder:this.gs.GLOBAL_REPORT_FOLDER
+        };
+        this.gs.SearchRecord(SearchData)
+          .subscribe(response => {
+            alert('Processed Successfully');
+          },
+            error => {
+                this.record.errormessage = this.gs.getError(error);
+                this.mdata$.next(this.record);
+                alert(this.record.errormessage);
+            });
+      }
+
 
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Report/EmailReport', SearchData, this.gs.headerparam2('authorized'));

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/Tbl_Email_jobs';
+import { EmailReportService } from '../services/email_report.service';
 
 @Component({
     selector: 'app-email-report-header',
@@ -15,7 +16,8 @@ export class EmailReportHeaderComponent implements OnInit {
     }
     @Output() searchEvents = new EventEmitter<any>();
 
-    constructor(public gs: GlobalService
+    constructor(public gs: GlobalService,
+        public mainservice: EmailReportService
     ) { }
 
     ngOnInit() {
@@ -35,4 +37,5 @@ export class EmailReportHeaderComponent implements OnInit {
 
     onChange(_field: string) {
     }
+
 }

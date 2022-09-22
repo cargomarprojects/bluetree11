@@ -19,6 +19,7 @@
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
+        <th>MAIL</th>
         <th>FROM</th>
         <th>TO</th>
         <th>CC</th>
@@ -35,6 +36,7 @@
     <tbody class="page-body-tbody">
       <tr *ngFor="let rec of records$ | async" (mousedown)="mainservice.selectRowId(rec.pkid)"
         [class.selected]="rec.pkid == mainservice.getRowId()">
+        <td class="hlink2" (click)="mainservice.ScheduleMail(rec.pkid)">SEND</td>
         <td>{{rec.from_id}}</td>
         <td>{{rec.to_id}}</td>
         <td>{{rec.cc_id}}</td>
