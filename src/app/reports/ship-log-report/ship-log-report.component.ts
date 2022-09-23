@@ -672,11 +672,18 @@ export class ShipmentLogReportComponent implements OnInit {
     this.report_searchdata.INCO_TERM = this.inco_term;
     this.report_searchdata.COMP_NAME = this.gs.branch_name;
     this.report_searchdata.PROCESS_TYPE = _type;
+    this.report_searchdata.HANDLEDBY_GROUP = 'Y';
 
     this.mainservice.ANPendingList(this.report_searchdata)
       .subscribe(response => {
-        if (_type == 'PRINT')
-          this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+        if (_type == 'PRINT') {
+          if (this.report_searchdata.HANDLEDBY_GROUP == "Y") {
+            for (let rec of response.flist) {
+              this.Downloadfile(rec.filename, rec.filetype, rec.filedisplayname);
+            }
+          } else
+            this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+        }
         else if (_type == 'MAIL')
           alert('Created Successfully')
       }, error => {

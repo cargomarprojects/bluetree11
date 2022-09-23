@@ -81,7 +81,7 @@ export class EmailReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: 'WAITING'},
+            searchQuery: <SearchQuery>{ searchString: 'WAITING' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 30 }
         };
         this.mdata$.next(this.record);
@@ -105,7 +105,7 @@ export class EmailReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: 'WAITING'},
+            searchQuery: <SearchQuery>{ searchString: 'WAITING' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 30 }
         };
 
@@ -165,28 +165,42 @@ export class EmailReportService {
     }
 
     ScheduleMail(_id: string) {
-        
+
         if (!confirm("Process mail Y/N")) {
             return;
         }
 
         let SearchData = {
-          table: 'schedule_mail',
-          pkid: _id,
-          company_code: this.gs.company_code,
-          branch_code: this.gs.branch_code,
-          report_folder:this.gs.GLOBAL_REPORT_FOLDER
+            table: 'schedule_mail',
+            pkid: _id,
+            company_code: this.gs.company_code,
+            branch_code: this.gs.branch_code,
+            report_folder: this.gs.GLOBAL_REPORT_FOLDER
         };
         this.gs.SearchRecord(SearchData)
-          .subscribe(response => {
-            alert('Processed Successfully');
-          },
-            error => {
-                // this.record.errormessage = this.gs.getError(error);
-                // this.mdata$.next(this.record);
-                alert(this.gs.getError(error));
-            });
-      }
+            .subscribe(response => {
+                alert('Processed Successfully');
+
+                if (this.gs.isBlank(_id)) {
+                    let _searchdata = {
+                        searchQuery: <SearchQuery>{ searchString: 'WAITING' },
+                    };
+                    this.Search(_searchdata, 'SEARCH');
+                } else {
+                    var REC = this.record.records.find(rec => rec.pkid == _id);
+                    if (REC != null) {
+                        REC.mail_status = response.status;
+                        REC.send_date = response.senddate;
+                        REC.error_msg = response.errmsg;
+                    }
+                }
+            },
+                error => {
+                    // this.record.errormessage = this.gs.getError(error);
+                    // this.mdata$.next(this.record);
+                    alert(this.gs.getError(error));
+                });
+    }
 
 
     List(SearchData: any) {
