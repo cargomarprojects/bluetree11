@@ -78,6 +78,7 @@ export class ShipmentLogReportComponent implements OnInit {
   within_eta: number = 0;
   reportformat: string = '';
   inco_term: string = 'ALL';
+  handled_group: boolean = false;
 
   selectedId = '';
   sortCol = '';
@@ -672,8 +673,8 @@ export class ShipmentLogReportComponent implements OnInit {
     this.report_searchdata.INCO_TERM = this.inco_term;
     this.report_searchdata.COMP_NAME = this.gs.branch_name;
     this.report_searchdata.PROCESS_TYPE = _type;
-    this.report_searchdata.HANDLEDBY_GROUP = 'Y';
-
+    this.report_searchdata.HANDLEDBY_GROUP = this.handled_group == true ? "Y" : "N";;
+    this.report_searchdata.RPT_PATH = this.gs.GLOBAL_REPORT_FOLDER; 
     this.mainservice.ANPendingList(this.report_searchdata)
       .subscribe(response => {
         if (_type == 'PRINT') {
