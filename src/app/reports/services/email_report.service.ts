@@ -174,8 +174,7 @@ export class EmailReportService {
             table: 'schedule_mail',
             pkid: _id,
             company_code: this.gs.company_code,
-            branch_code: this.gs.branch_code,
-            report_folder: this.gs.GLOBAL_REPORT_FOLDER
+            branch_code: this.gs.branch_code
         };
         this.gs.SearchRecord(SearchData)
             .subscribe(response => {

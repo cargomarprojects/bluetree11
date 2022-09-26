@@ -675,6 +675,32 @@ export class ShipmentLogReportComponent implements OnInit {
     this.report_searchdata.PROCESS_TYPE = _type;
     this.report_searchdata.HANDLEDBY_GROUP = this.handled_group == true ? "Y" : "N";;
     this.report_searchdata.RPT_PATH = this.gs.GLOBAL_REPORT_FOLDER; 
+    this.report_searchdata.COMPANY_CODE = this.gs.company_code;
+    this.report_searchdata.BRANCH_CODE = this.gs.branch_code;
+    this.report_searchdata.USER_CODE = this.gs.user_code;
+    this.mainservice.ANPendingList(this.report_searchdata)
+      .subscribe(response => {
+        if (_type == 'PRINT') {
+          if (this.report_searchdata.HANDLEDBY_GROUP == "Y") {
+            for (let rec of response.flist) {
+              this.Downloadfile(rec.filename, rec.filetype, rec.filedisplayname);
+            }
+          } else
+            this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+        }
+        else if (_type == 'MAIL')
+          alert('Created Successfully')
+      }, error => {
+        this.errorMessage = this.gs.getError(error);
+        alert(this.errorMessage);
+      });
+  }
+
+  ANPendingList2(_type: string) {
+    this.report_searchdata.PROCESS_TYPE = "MAIL";
+    this.report_searchdata.HANDLEDBY_GROUP =  "Y";
+    this.report_searchdata.COMPANY_CODE = this.gs.company_code;
+    this.report_searchdata.BRANCH_CODE = this.gs.branch_code;
     this.mainservice.ANPendingList(this.report_searchdata)
       .subscribe(response => {
         if (_type == 'PRINT') {
