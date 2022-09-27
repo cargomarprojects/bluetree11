@@ -338,7 +338,7 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-4 col-form-label col-form-label-sm"></label>
-                            <div *ngIf="gs.user_code=='ADMIN' && (job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT')" class="col-8">
+                            <div *ngIf="job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT'" class="col-8">
                                 <input type="checkbox" class="form-check-input ml-1" [(ngModel)]="handled_group" />
                                 <span class="ml-4">Handled By Wise</span>
                             </div>
@@ -348,17 +348,10 @@
                             <div class="col-8">
                                 <button [disabled]="loading" *ngIf="job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT'"
                                 (click)="ANPendingList('PRINT')" class="btn btn-primary btn-sm mr-1">Pending A/N</button>
-                                <button [disabled]="loading" *ngIf="gs.user_code=='ADMIN' && (job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT')" (click)="ANPendingList('MAIL')"
-                                    class="btn btn-primary btn-sm mr-1">Mail Pending A/N</button>                          
+                                <!-- <button [disabled]="loading" *ngIf="gs.user_code=='ADMIN' && (job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT')" (click)="ANPendingList('MAIL')"
+                                    class="btn btn-primary btn-sm mr-1">Mail Pending A/N</button>                           -->
                             </div>
                         </div>
-                        <!-- <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm"></label>
-                            <div class="col-8">
-                                <button [disabled]="loading" *ngIf="gs.user_code=='ADMIN' && (job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT')" (click)="ANPendingList2('MAIL')"
-                                    class="btn btn-primary btn-sm mr-1">Test Mail Pending A/N</button>                          
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
