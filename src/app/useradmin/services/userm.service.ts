@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { GlobalService } from '../../core/services/global.service';
-import { vm_Tbl_User_Userm,User_Userm_Model, Tbl_User_Userm }  from '../models/Tbl_User_Userm';
+import { vm_Tbl_User_Userm, User_Userm_Model, Tbl_User_Userm } from '../models/Tbl_User_Userm';
 import { SearchQuery } from '../models/Tbl_User_Userm';
 import { PageQuery } from '../../shared/models/pageQuery';
 
@@ -29,9 +29,10 @@ export class UserService {
     public canAdd: boolean;
     public canEdit: boolean;
     public canSave: boolean;
+    public canDelete: boolean;
 
     public initlialized: boolean;
-    private appid =''
+    private appid = ''
 
     constructor(
         private http2: HttpClient,
@@ -42,7 +43,7 @@ export class UserService {
         this.record = <User_Userm_Model>{
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '' , deleted : false },
+            searchQuery: <SearchQuery>{ searchString: '', deleted: false , locked: false},
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -62,7 +63,7 @@ export class UserService {
         this.record = <User_Userm_Model>{
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '' , deleted : false },
+            searchQuery: <SearchQuery>{ searchString: '', deleted: false, locked: false },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -73,12 +74,12 @@ export class UserService {
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
-
+        this.canDelete = this.gs.canDelete(this.menuid);
         this.initlialized = true;
 
     }
 
-    Search(_searchdata: any, type: string = '' ) {
+    Search(_searchdata: any, type: string = '') {
 
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
@@ -87,7 +88,7 @@ export class UserService {
             this.record.pageQuery = _searchdata.pageQuery;
         }
 
-        var SearchData = { ...this.gs.UserInfo};
+        var SearchData = { ...this.gs.UserInfo };
         SearchData.outputformat = 'SCREEN';
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
@@ -95,7 +96,8 @@ export class UserService {
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.CODE = this.record.searchQuery.searchString;
         SearchData.REC_DELETED = (this.record.searchQuery.deleted) ? "Y" : "N";
-        SearchData.ISADMIN =  (this.isAdmin) ? "Y" : "N";
+        SearchData.USR_LOCKED = (this.record.searchQuery.locked) ? "Y" : "N";
+        SearchData.ISADMIN = (this.isAdmin) ? "Y" : "N";
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
@@ -126,17 +128,49 @@ export class UserService {
         if (REC == null) {
             this.record.records.push(_rec);
         }
-        else
-        {
+        else {
             REC.usr_code = _rec.usr_code;
             REC.usr_name = _rec.usr_name;
-            REC.usr_islocked = _rec.usr_islocked  ;
+            REC.usr_islocked = _rec.usr_islocked;
             REC.usr_tel = _rec.usr_tel;
             REC.usr_mobile = _rec.usr_mobile;
             REC.usr_email = _rec.usr_email;
         }
     }
-    
+
+    DeleteRow(_rec: Tbl_User_Userm) {
+
+        if (_rec.rec_deleted == "Y") {
+            alert("Already Deleted")
+            return;
+        }
+
+        if (!confirm("DELETE " + _rec.usr_name)) {
+            return;
+        }
+
+        this.record.errormessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = _rec.usr_pkid;
+        SearchData.remarks = _rec.usr_name;
+
+        this.DeleteRecord(SearchData)
+            .subscribe(response => {
+                if (response.retval == false) {
+                    this.record.errormessage = response.error;
+                    alert(this.record.errormessage);
+                }
+                else {
+                    this.record.records.splice(this.record.records.findIndex(rec => rec.usr_pkid == _rec.usr_pkid), 1);
+                }
+                this.mdata$.next(this.record);
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+                alert(this.record.errormessage);
+                this.mdata$.next(this.record);
+            });
+    }
+
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Userm/List', SearchData, this.gs.headerparam2('authorized'));
     }
@@ -156,5 +190,8 @@ export class UserService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Userm/getServerList', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    DeleteRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Userm/Delete', SearchData, this.gs.headerparam2('authorized'));
+    }
 }
 

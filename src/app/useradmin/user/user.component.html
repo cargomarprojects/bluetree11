@@ -25,7 +25,8 @@
         <th>TEL</th>
         <th>MOBILE</th>
         <th>EMAIL</th>
-        <th>TIME ZONE</th>        
+        <th>TIME ZONE</th>
+        <th *ngIf="mainservice.canDelete" class='text-center'>DELETE</th>          
       </tr>
     </thead>
     <tbody class="page-body-tbody">
@@ -36,7 +37,9 @@
         <td>{{rec.usr_tel}}</td>        
         <td>{{rec.usr_mobile}}</td>
         <td>{{rec.usr_email}}</td>                
-        <td>{{rec.usr_timezone}}</td>  
+        <td>{{rec.usr_timezone}}</td> 
+        <td *ngIf="mainservice.canDelete" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+          (click)="mainservice.DeleteRow(rec)"></i></td> 
       </tr>
     </tbody>
   </table>

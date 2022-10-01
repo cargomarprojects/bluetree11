@@ -129,7 +129,7 @@ export class UserEditComponent implements OnInit {
         this.record.usr_timeout = 15;
         this.record.usr_an_common_mail = 'N';
         this.record.usr_validate_an = 'N';
-        
+        this.record.rec_deleted = 'N';
         this.record.rec_created_by = this.gs.user_code;
         this.record.rec_created_date = this.gs.defaultValues.today;
 
@@ -229,6 +229,13 @@ export class UserEditComponent implements OnInit {
         if (this.gs.isBlank(this.record.usr_pwd)) {
             bRet = false;
             this.errorMessage = "Password Cannot be blank";
+            alert(this.errorMessage);
+            return bRet;
+        }
+        
+        if (this.record.rec_deleted == "Y") {
+            bRet = false;
+            this.errorMessage = "This User was Deleted";
             alert(this.errorMessage);
             return bRet;
         }

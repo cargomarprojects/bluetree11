@@ -3,6 +3,7 @@ import { PageQuery } from '../../shared/models/pageQuery';
 export interface SearchQuery {
     searchString: string;
     deleted : boolean;
+    locked : boolean;
 }
 
 export class Tbl_User_Userm {
@@ -42,6 +43,7 @@ export class Tbl_User_Userm {
     rec_created_by: string;
     rec_created_date: string;
     rec_closed: string;
+    rec_deleted:string;
 }
 
 export interface User_Userm_Model {
