@@ -21,7 +21,8 @@
       <tr>
         <th>CODE</th>
         <th>NAME</th>
-        <th>LOCKED</th>
+        <th *ngIf="mainservice.isAdmin">LOCKED</th>
+        <th *ngIf="mainservice.isAdmin">DELETED</th>
         <th>TEL</th>
         <th>MOBILE</th>
         <th>EMAIL</th>
@@ -33,7 +34,8 @@
       <tr *ngFor="let rec of records$ | async">
         <td class='hlink2' (click)="edit(rec)">{{rec.usr_code}}</td>
         <td>{{rec.usr_name}}</td>
-        <td>{{rec.usr_islocked}}</td>
+        <td *ngIf="mainservice.isAdmin">{{rec.usr_islocked}}</td>
+        <td *ngIf="mainservice.isAdmin">{{rec.rec_deleted}}</td>
         <td>{{rec.usr_tel}}</td>        
         <td>{{rec.usr_mobile}}</td>
         <td>{{rec.usr_email}}</td>                

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/Tbl_User_Userm';
+import { UserService } from '../services/userm.service';
 
 @Component({
     selector: 'app-user-header',
@@ -15,7 +16,8 @@ export class UserHeaderComponent implements OnInit {
     }
     @Output() searchEvents = new EventEmitter<any>();
 
-    constructor(public gs: GlobalService
+    constructor(public gs: GlobalService,
+        public mainservice: UserService
     ) { }
 
     ngOnInit() {
