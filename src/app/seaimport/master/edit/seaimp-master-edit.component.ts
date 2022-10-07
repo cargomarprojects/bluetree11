@@ -147,11 +147,11 @@ export class SeaImpMasterEditComponent implements OnInit {
 
   LoadCombo() {
 
-    if (this.gs.company_name == "MOTHERLINES INC USA") {
+    if (this.gs.company_code == "MNYC") {
       this.MblStatusList = [{ "name": "NIL" }
         , { "name": "OMBL WITH ACCOUNTING" }, { "name": "OMBL SENT TO CARRIER" }
         , { "name": "OMBL WITH LAX OFFICE" }, { "name": "OMBL SENT BY LAX OFFICE" }, { "name": "OMBL WITH NYC OFFICE" }
-        , { "name": "OMBL SENT BY NYC OFFICE" }, { "name": "PAPERLESS" }, { "name": "SURRENDERED ONLINE" }];
+        , { "name": "OMBL SENT BY NYC OFFICE" }, { "name": "PAPERLESS" }, { "name": "PAPERLESS WITH LAX OFFICE" }, { "name": "PAPERLESS WITH NYC OFFICE" }, { "name": "SURRENDERED ONLINE" }];
     } else {
       this.MblStatusList = [{ "name": "NIL" }, { "name": "OMBL WITH OPERATION" },
       { "name": "OMBL WITH ACCOUNTING" }, { "name": "OMBL SENT TO CARRIER" }, { "name": "PAPERLESS" }, { "name": "SURRENDERED ONLINE" }];
