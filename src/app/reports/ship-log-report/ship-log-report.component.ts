@@ -78,7 +78,7 @@ export class ShipmentLogReportComponent implements OnInit {
   within_eta: number = 0;
   reportformat: string = '';
   inco_term: string = 'ALL';
-  handled_group: boolean = false;
+  handled_group: boolean = true;
 
   selectedId = '';
   sortCol = '';
