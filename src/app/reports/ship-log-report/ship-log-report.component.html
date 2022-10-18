@@ -348,8 +348,8 @@
                             <div class="col-8">
                                 <button [disabled]="loading" *ngIf="job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT'"
                                 (click)="ANPendingList('PRINT')" class="btn btn-primary btn-sm mr-1">Pending A/N</button>
-                                <!-- <button [disabled]="loading" *ngIf="gs.user_code=='ADMIN' && (job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT')" (click)="ANPendingList('MAIL')"
-                                    class="btn btn-primary btn-sm mr-1">Mail Pending A/N</button>                           -->
+                                <button [disabled]="loading" *ngIf="gs.user_code=='ADMIN' && (job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT')" (click)="ANPendingList('MAIL')"
+                                    class="btn btn-primary btn-sm mr-1">Mail Pending A/N</button>                          
                             </div>
                         </div>
                     </div>
