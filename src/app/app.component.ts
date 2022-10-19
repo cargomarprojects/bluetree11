@@ -45,8 +45,8 @@ export class AppComponent {
 
     this.gs.RemoveLocalStorage();
 
-
-    this.startTimer();
+    //Active user log stop
+    // this.startTimer();
 
     this.sub = this.router.events.subscribe((event) => {
       if (this.gs.IsAuthenticated) {
@@ -161,12 +161,12 @@ export class AppComponent {
 */
 
   startTimer() {
-    
+
     this.interval = setInterval(() => {
 
       if (this.gs.IsLoginSuccess) {
 
-        this.loginservice.SaveActiveUser(this.isActive,'ACTIVE');
+        this.loginservice.SaveActiveUser(this.isActive, 'ACTIVE');
         this.isActive = "N";
 
         if (this.gs.user_disable_timer == "N") {
@@ -216,7 +216,7 @@ export class AppComponent {
 
   ShowValidateUser() {
     this.stopTimer();
-    this.loginservice.SaveActiveUser(this.isActive,'LOGOUT');
+    this.loginservice.SaveActiveUser(this.isActive, 'LOGOUT');
     this.modalconfig.backdrop = 'static'; //true/false/static
     this.modalconfig.keyboard = false;
     this.modal = this.modalservice.open(this.pwdmodal_Cntrl, { centered: true });
@@ -229,7 +229,7 @@ export class AppComponent {
     SearchData.user_pwd = this.password.toString().toUpperCase();
     SearchData.user_pkid = this.gs.user_pkid;
     SearchData.appid = this.gs.appid;
-   
+
     this.loginservice.ValidUser(SearchData)
       .subscribe(response => {
         if (response.blogin) {
