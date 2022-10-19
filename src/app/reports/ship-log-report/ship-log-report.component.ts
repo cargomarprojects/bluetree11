@@ -127,6 +127,7 @@ export class ShipmentLogReportComponent implements OnInit {
 
     this.storesub = this.store.select(myReducer.getState(this.urlid)).subscribe(rec => {
       this.initLov();
+      this.sdate = this.gs.getPreviousDate(120);
       if (rec) {
         this.isRecStored = true;
         this.MainList = rec.records;
@@ -198,7 +199,7 @@ export class ShipmentLogReportComponent implements OnInit {
 
         this.job_mode = 'OCEAN IMPORT';
         this.date_basedon = 'REF. DATE';
-        this.sdate = '';
+        this.sdate = this.gs.getPreviousDate(120);
         this.edate = this.gs.defaultValues.today;
         this.shipper_id = '';
         this.shipper_name = '';
@@ -230,7 +231,7 @@ export class ShipmentLogReportComponent implements OnInit {
       }
 
     });
-    this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
+    //this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
     if (this.gs.company_code == "MNYC")
       this.DateBasedList = [{ "id": "REF. DATE", "name": "Ref. Date" }, { "id": "ETD", "name": "ETD" }, { "id": "ETA", "name": "ETA" }, { "id": "CARR-AN-RECVD", "name": "A/N Received" }, { "id": "AN-SENT", "name": "A/N Sent" }];
     else
