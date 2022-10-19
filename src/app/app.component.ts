@@ -95,7 +95,7 @@ export class AppComponent {
 
   ngOnDestroy() {
     this.sub.unsusbscribe();
-    this.stopTimer();
+    // this.stopTimer();
   }
 
 
