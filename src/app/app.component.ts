@@ -46,7 +46,7 @@ export class AppComponent {
     this.gs.RemoveLocalStorage();
 
     //Active user log stop
-    // this.startTimer();
+     this.startTimer();
 
     this.sub = this.router.events.subscribe((event) => {
       if (this.gs.IsAuthenticated) {
@@ -95,7 +95,7 @@ export class AppComponent {
 
   ngOnDestroy() {
     this.sub.unsusbscribe();
-    // this.stopTimer();
+     this.stopTimer();
   }
 
 
@@ -166,7 +166,7 @@ export class AppComponent {
 
       if (this.gs.IsLoginSuccess) {
 
-        this.loginservice.SaveActiveUser(this.isActive, 'ACTIVE');
+        // this.loginservice.SaveActiveUser(this.isActive, 'ACTIVE');
         this.isActive = "N";
 
         if (this.gs.user_disable_timer == "N") {
