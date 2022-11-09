@@ -47,7 +47,7 @@
           <th (click)="mainservice.sort('rec_created_by')">CREATED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
           <th (click)="mainservice.sort('rec_created_date')">CREATE-DT&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
           <th (click)="mainservice.sort('rec_closed')">CLOSED&nbsp;<i [ngClass]="mainservice.getIcon('rec_closed')"></i></th>
-          <th>DELETE</th>
+          <th *ngIf="mainservice.canDelete">DELETE</th>
         </tr>
       </thead>
       <tbody class="page-body-tbody">
