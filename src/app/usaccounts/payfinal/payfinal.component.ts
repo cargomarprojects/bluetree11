@@ -674,15 +674,22 @@ export class PayFinalComponent implements OnInit {
         }
 
         /*
-        if (MessageBox.Show("Save Payment", "Save", MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
-            return false;
+                if (!confirm("Save Payment")) {
+                    return false;
+                }
+        
+                this.Save();
         */
 
-        if (!confirm("Save Payment")) {
-            return false;
-        }
+        if (this.paymode != "CHECK" && !this.gs.isBlank(this.Txt_ChqNo)) {
+            this.CheckNoDupliation(this.Txt_ChqNo);
+        } else {
 
-        this.Save();
+            if (!confirm("Save Payment")) {
+                return false;
+            }
+            this.Save();
+        }
 
         return bRet;
 
@@ -913,6 +920,7 @@ export class PayFinalComponent implements OnInit {
 
 
     LoadNextChqNo() {
+        this.errorMessage = '';
         let sType = "";
         if (this.TOT_DIFF > 0)
             sType = "RECEIPT";
@@ -1130,4 +1138,33 @@ export class PayFinalComponent implements OnInit {
         }
 
     }
+
+    CheckNoDupliation(_chqno: string) {
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.paydate = this.sdate;
+        SearchData.paymode = this.paymode;
+        SearchData.chqno = _chqno;
+        SearchData.company_code = this.gs.company_code;
+        SearchData.branch_code = this.gs.branch_code;
+
+        this.mainService.CheckNoDupliation(SearchData)
+            .subscribe(response => {
+                if (response.retvalue) {
+                    this.errorMessage = response.retstring;
+                    alert(this.errorMessage);
+                } else {
+
+                    if (!confirm("Save Payment")) {
+                        return;
+                    }
+                    this.Save();
+                }
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+            });
+
+    }
+
 }
