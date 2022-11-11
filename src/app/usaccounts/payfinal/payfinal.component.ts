@@ -673,14 +673,13 @@ export class PayFinalComponent implements OnInit {
             }
         }
 
-        /*
-                if (!confirm("Save Payment")) {
-                    return false;
-                }
-        
-                this.Save();
-        */
+        if (!confirm("Save Payment")) {
+            return false;
+        }
 
+        this.Save();
+
+        /*
         if (this.paymode != "CHECK" && !this.gs.isBlank(this.Txt_ChqNo)) {
             this.CheckNoDupliation(this.Txt_ChqNo);
         } else {
@@ -691,6 +690,8 @@ export class PayFinalComponent implements OnInit {
             this.Save();
         }
 
+        */
+       
         return bRet;
 
     }
