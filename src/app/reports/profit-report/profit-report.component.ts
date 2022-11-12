@@ -120,15 +120,15 @@ export class ProfitReportComponent implements OnInit {
 
   init() {
 
+    this.isAdmin = false;
+    if (this.gs.user_isadmin == 'Y')
+      this.isAdmin = true;
+
     if (this.menu_current = this.gs.getMenuById(this.menuid)) {
       if (this.menu_current.rights_admin == 'Y')
         this.isAdmin = true;
       this.title = this.menu_current.menu_name;
     }
-
-    this.isAdmin = false;
-    if (this.gs.user_isadmin == 'Y')
-      this.isAdmin = true;
 
     this.showStages = false;
     if (this.gs.GENERAL_BRANCH_CODE == "MFDR")// MFORWARDER USA
