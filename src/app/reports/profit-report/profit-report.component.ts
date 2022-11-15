@@ -342,7 +342,7 @@ export class ProfitReportComponent implements OnInit {
 
   PageEvents(actions) {
     //GOTOCHANGE2
-    if( actions.action == 'GOTO')
+    if (actions.action == 'GOTO')
       this.page_current = actions.page_current;
     this.List(actions.outputformat, actions.action);
   }
@@ -352,6 +352,14 @@ export class ProfitReportComponent implements OnInit {
     this.errorMessage = "";
     if (this._report_category == "PARTY")
       this.report_type = "MASTER";
+    if (this.report_type == "MASTER" && this.mode == "ADMIN EXPENSE")
+      this.mode = '';
+
+    if (this.gs.isBlank(this.mode)) {
+      this.errorMessage = "Group Cannot be Blank";
+      alert(this.errorMessage);
+      return;
+    }
 
     if (_outputformat == "PRINT") {
       if (this.MainList.length <= 0) {
@@ -516,12 +524,12 @@ export class ProfitReportComponent implements OnInit {
   private selectRowId(rowid: string) {
     this.store.dispatch(new myActions.SelectRow({ id: this.urlid, selecteId: rowid }))
   }
-  
+
   public getRowId() {
     return this.selectedId;
   }
 
-  
+
 
   public getIcon(col: string) {
     if (col == this.sortCol) {
