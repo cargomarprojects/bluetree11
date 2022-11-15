@@ -52,7 +52,8 @@
                   <option [value]="'AIR IMPORT'">AIR IMPORT</option>
                   <option [value]="'OTHERS'">OTHERS</option>
                   <option [value]="'EXTRA'" *ngIf="this.gs.SHOW_EXTRA_OPERATION == 'Y'">EXTRA</option>
-                  <option [value]="'ADMIN EXPENSE'" *ngIf="isAdmin && report_type != 'MASTER'">ADMIN EXPENSE</option>
+                  <option [value]="'ADMIN EXPENSE'" *ngIf="isAdmin">ADMIN EXPENSE</option>
+                  <!-- <option [value]="'ADMIN EXPENSE'" *ngIf="isAdmin && report_type != 'MASTER'">ADMIN EXPENSE</option> -->
                 </select>
               </div>
             </div>
@@ -144,11 +145,11 @@
                 <div class="col-6">
                   <select class="form-control form-control-sm" [(ngModel)]="report_criteria">
                     <option [value]="'NIL'">NIL</option>
-                    <option [value]="'PROFIT ='">PROFIT =</option>
+                    <option [value]="'PROFIT ='">PROFIT = </option>
                     <option [value]="'PROFIT <'">PROFIT < </option>
-                    <option [value]="'PROFIT >'">PROFIT ></option>
-                    <option [value]="'PROFIT PER ='">PROFIT PER =</option>
-                    <option [value]="'PROFIT PER <'">PROFIT PER << /option>
+                    <option [value]="'PROFIT >'">PROFIT > </option>
+                    <option [value]="'PROFIT PER ='">PROFIT PER = </option>
+                    <option [value]="'PROFIT PER <'">PROFIT PER < </option>
                     <option [value]="'PROFIT PER >'">PROFIT PER >
                     </option>
                   </select>
