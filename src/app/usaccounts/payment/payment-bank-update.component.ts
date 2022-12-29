@@ -70,6 +70,7 @@ export class PaymentBankUpdateComponent implements OnInit {
         var searchData = this.gs.UserInfo;
         searchData.TYPE = "PAY_BANK";
         searchData.PAY_PKID = this.record.pay_pkid;
+        searchData.PAY_BANK_OLD_ID = this.record.pay_acc_id;
         searchData.PAY_BANK_ID = this.Txt_Bank_Id;
         searchData.company_code = this.gs.company_code;
         searchData.branch_code = this.gs.branch_code;
@@ -78,6 +79,7 @@ export class PaymentBankUpdateComponent implements OnInit {
             .subscribe(response => {
                 if (response.retvalue) {
                     this.record.pay_acc_id = this.Txt_Bank_Id;
+                    this.record.pay_acc_code = this.Txt_Bank_Code;
                     this.record.pay_acc_name = this.Txt_Bank_Name;
                     this.modal.close();
                 }

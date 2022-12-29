@@ -217,5 +217,8 @@ export class PaymentComponent implements OnInit {
 
   }
 
+  paybankupdatecallbackevent(event: any) {
+
+  }
 
 }
