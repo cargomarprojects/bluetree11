@@ -66,7 +66,10 @@
           <td>{{rec.pay_rp}} </td>
           <td class='text-right'>{{rec.pay_ar_total | number : '1.2-2'}} </td>
           <td class='text-right'>{{rec.pay_ap_total | number : '1.2-2'}} </td>
-          <td>{{rec.pay_acc_name}} </td>
+          
+          <td *ngIf="!mainservice.isAdmin">{{rec.pay_acc_name}} </td>
+          <td *ngIf="mainservice.isAdmin" class='hlink2' ><app-payment-bank-update [record]="rec"  (callbackevent)="paybankupdatecallbackevent($event)"></app-payment-bank-update></td>
+
           <td class='text-right'>{{rec.pay_diff | number : '1.2-2'}} </td>          
           <td  *ngIf="!gs.IS_SINGLE_CURRENCY" >{{rec.pay_bank_charges | number : '1.2-2'}} </td>          
           <td  *ngIf="!gs.IS_SINGLE_CURRENCY" >{{rec.pay_exchange_diff | number : '1.2-2'}} </td>          
