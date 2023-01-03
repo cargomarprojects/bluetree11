@@ -71,7 +71,9 @@ export class PaymentBankUpdateComponent implements OnInit {
         searchData.TYPE = "PAY_BANK";
         searchData.PAY_PKID = this.record.pay_pkid;
         searchData.PAY_BANK_OLD_ID = this.record.pay_acc_id;
+        searchData.PAY_BANK_OLD_NAME = this.record.pay_acc_name;
         searchData.PAY_BANK_ID = this.Txt_Bank_Id;
+        searchData.PAY_BANK_NAME = this.Txt_Bank_Name;
         searchData.company_code = this.gs.company_code;
         searchData.branch_code = this.gs.branch_code;
 

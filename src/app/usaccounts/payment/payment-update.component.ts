@@ -63,6 +63,7 @@ export class PaymentUpdateComponent implements OnInit {
         searchData.TYPE = "PAY_CHQNO";
         searchData.PAY_PKID = this.record.pay_pkid;
         searchData.PAY_CHQNO = this.Txt_ChqNo;
+        searchData.PAY_CHQNO_OLD = this.record.pay_chqno;
         searchData.company_code = this.gs.company_code;
         searchData.branch_code = this.gs.branch_code;
 

@@ -66,6 +66,7 @@ export class PaymentDateUpdateComponent implements OnInit {
         searchData.TYPE = "PAY_DATE";
         searchData.PAY_PKID = this.record.pay_pkid;
         searchData.PAY_DATE = this.sdate;
+        searchData.PAY_DATE_OLD = this.record.pay_date;
         searchData.company_code = this.gs.company_code;
         searchData.branch_code = this.gs.branch_code;
 
