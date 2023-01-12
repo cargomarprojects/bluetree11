@@ -331,6 +331,49 @@ export class LockUnlockService {
         });
     }
 
+    Reset_Lock(_searchdata: any) {
+        var bRet = true;
+        if (this.gs.isBlank(this.record.searchQuery.branch)) {
+            bRet = false;
+            this.record.errormessage = "Branch cannot be null";
+        }
+        if (bRet == false) {
+            this.mdata$.next(this.record);
+            return bRet;
+        }
+
+        let Msg: string = "";
+        Msg = "THIS WILL RESET " + this.record.searchQuery.mode + " LOCKED TRANSACTIONS WITHIN UNLOCK DAYS";
+        if (!confirm(Msg))
+            return;
+
+        this.record.errormessage = '';
+        this.record.searchQuery = _searchdata.searchQuery;
+
+        var SearchData = this.gs.UserInfo;
+        SearchData.MODE = this.record.searchQuery.mode;
+        SearchData.COMP_TYPE = this.record.searchQuery.branch;
+        if (this.record.searchQuery.branch === 'ALL') {
+            SearchData.COMP_CODE = this.gs.branch_codes;
+        } else {
+            SearchData.COMP_CODE = this.record.searchQuery.branch;
+        }
+
+        this.ResetLock(SearchData).subscribe(response => {
+            if (response.retvalue == false) {
+                this.record.errormessage = response.error;
+                this.mdata$.next(this.record);
+            }
+
+        }, error => {
+            this.record = <OthGeneralModel>{
+                records: [],
+                errormessage: this.gs.getError(error),
+            }
+            this.mdata$.next(this.record);
+        });
+    }
+
 
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/LockUnlock/List', SearchData, this.gs.headerparam2('authorized'));
@@ -339,8 +382,13 @@ export class LockUnlockService {
     Save(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/LockUnlock/Save', SearchData, this.gs.headerparam2('authorized'));
     }
+
     InstantLockUnlock(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/LockUnlock/InstantLockUnlock', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+    ResetLock(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Other/LockUnlock/ResetLock', SearchData, this.gs.headerparam2('authorized'));
     }
 }
 

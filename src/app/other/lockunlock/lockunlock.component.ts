@@ -59,6 +59,9 @@ export class LockUnlockComponent implements OnInit {
     else if (actions.outputformat == 'INSTANT-UNLOCK') {
       this.mainservice.Instant_Lock_Unlock(actions, 'UNLOCK')
     }
+    else if (actions.outputformat == 'RESET-LOCK') {
+      this.mainservice.Reset_Lock(actions)
+    }
     else
       this.mainservice.Search(actions, 'SEARCH');
   }
