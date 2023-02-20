@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { GlobalService } from '../../core/services/global.service';
-import { Tbl_mast_files, ImportHblPageModel } from '../models/tbl_mast_files';
+import { Tbl_mast_files, ImportTrkPageModel } from '../models/tbl_mast_files';
 import { SearchQuery } from '../models/tbl_mast_files';
 import { PageQuery } from '../../shared/models/pageQuery';
 
@@ -13,11 +13,11 @@ import { PageQuery } from '../../shared/models/pageQuery';
 })
 export class ImportTrkPageService {
 
-    private mdata$ = new BehaviorSubject<ImportHblPageModel>(null);
-    get data$(): Observable<ImportHblPageModel> {
+    private mdata$ = new BehaviorSubject<ImportTrkPageModel>(null);
+    get data$(): Observable<ImportTrkPageModel> {
         return this.mdata$.asObservable();
     }
-    private record: ImportHblPageModel;
+    private record: ImportTrkPageModel;
 
     public id: string;
     public menuid: string;
@@ -32,7 +32,7 @@ export class ImportTrkPageService {
 
 
     public initlialized: boolean;
-    private appid  ='';
+    private appid = '';
 
     private ProcessXML: boolean = false;
     public Xml_MainRecIndex: number = 0;
@@ -44,39 +44,37 @@ export class ImportTrkPageService {
         private gs: GlobalService
     ) { }
 
-    public getSortCol(){
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
-    public ClearInit()
-    {
-        this.record = <ImportHblPageModel>{
-            sortcol : 'files_desc',
-            sortorder : true,
+    public ClearInit() {
+        this.record = <ImportTrkPageModel>{
+            sortcol: 'files_desc',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', rdbprocessed: 'NOT-PROCESSED' },
@@ -97,9 +95,9 @@ export class ImportTrkPageService {
         this.menuid = params.id;
         this.param_type = params.param_type;
 
-        this.record = <ImportHblPageModel>{
-            sortcol : 'files_desc',
-            sortorder : true,
+        this.record = <ImportTrkPageModel>{
+            sortcol: 'files_desc',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', rdbprocessed: 'NOT-PROCESSED' },
@@ -142,6 +140,7 @@ export class ImportTrkPageService {
             SearchData.FLAG = 'N';
         else
             SearchData.FLAG = this.record.searchQuery.rdbprocessed == 'PROCESSED' ? 'Y' : 'N';
+        SearchData.FILES_TYPE = 'XML-EDI-TRACKING';
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
@@ -158,7 +157,7 @@ export class ImportTrkPageService {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
             this.mdata$.next(this.record);
-          //  this.ProcessXML = false; // ProcessXML set to true in ProcessFtp() inorder to invoke automatic ImportXmlData
+              this.ProcessXML = false; // ProcessXML set to true in ProcessFtp() inorder to invoke automatic ImportXmlData
             if (this.ProcessXML) {
                 this.ProcessXML = false;
                 this.Xml_MainRecIndex = 0;
@@ -221,11 +220,12 @@ export class ImportTrkPageService {
         var SearchData = this.gs.UserInfo;
         SearchData.APP_FOLDER = this.gs.FS_APP_FOLDER;
         SearchData.FTP_FOLDER = this.gs.GLOBAL_FTP_FOLDER;
+        SearchData.FILES_TYPE = 'XML-EDI-TRACKING';
         this.ProcessXmlFile(SearchData)
             .subscribe(response => {
 
                 this.ProcessXML = true;
-                this.record = <ImportHblPageModel>{
+                this.record = <ImportTrkPageModel>{
                     errormessage: '',
                     records: [],
                     searchQuery: <SearchQuery>{ searchString: '', rdbprocessed: 'NOT-PROCESSED' },

@@ -36,3 +36,12 @@ export interface ImportHblPageModel {
     pageQuery: PageQuery;
     records: Tbl_mast_files[]
 }
+
+export interface ImportTrkPageModel {
+    sortcol : string ;
+    sortorder : boolean;
+    errormessage: string;
+    searchQuery: SearchQuery;
+    pageQuery: PageQuery;
+    records: Tbl_mast_files[]
+}
