@@ -12,6 +12,8 @@ import { SettingPageHeaderComponent } from './importhblpage/settingpage/settingp
 import { TransferPageComponent } from './transferpage/transferpage.component';
 import { LinkPageComponent } from './linkpage/linkpage.component';
 import { LinkPageHeaderComponent } from './linkpage/linkpage-header.component';
+import { ImportTrkPageComponent } from './importtrkpage/importtrkpage.component';
+import { ImportTrkPageHeaderComponent } from './importtrkpage/importtrkpage-header.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { LinkPageHeaderComponent } from './linkpage/linkpage-header.component';
     SettingPageHeaderComponent,
     TransferPageComponent,
     LinkPageComponent,
-    LinkPageHeaderComponent
+    LinkPageHeaderComponent,
+    ImportTrkPageComponent,
+    ImportTrkPageHeaderComponent
   ],
   imports: [
     SharedModule,

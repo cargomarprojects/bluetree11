@@ -2,14 +2,14 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDet
 import { GlobalService } from '../../core/services/global.service';
 import { SearchQuery } from '../models/tbl_mast_files';
 import { SearchTable } from '../../shared/models/searchtable';
-import { ImportTrkPageService } from '../services/importtrkpage.service';
+import { ImportHblPageService } from '../services/importhblpage.service';
 
 @Component({
-  selector: 'app-importhblpage-header',
-  templateUrl: './importhblpage-header.component.html',
+  selector: 'app-importtrkpage-header',
+  templateUrl: './importtrkpage-header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ImportHblPageHeaderComponent implements OnInit {
+export class ImportTrkPageHeaderComponent implements OnInit {
   // Call By Value using Input Parameters
   searchQuery: SearchQuery;
 
@@ -20,7 +20,7 @@ export class ImportHblPageHeaderComponent implements OnInit {
   @Output() searchEvents = new EventEmitter<any>();
 
   constructor(public gs: GlobalService,
-    public mainservice: ImportTrkPageService
+    public mainservice: ImportHblPageService
   ) { }
 
   ngOnInit() {
