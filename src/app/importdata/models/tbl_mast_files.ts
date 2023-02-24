@@ -26,6 +26,7 @@ export interface vm_tbl_mast_files {
 export interface SearchQuery {
     searchString: string;
     rdbprocessed: string;
+    rdtrkprocessed: string;
 }
 
 export interface ImportHblPageModel {
