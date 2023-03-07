@@ -237,6 +237,11 @@ export class BranchSettingsComponent implements OnInit {
   chk_AN_Validate_Sent_Status_id = '';
   chk_AN_Validate_Sent_Status = 'N';
 
+  Txt_Trk_SourceFolder_id = '';
+  Txt_Trk_SourceFolder = '';
+  Txt_Trk_TargetFolder_id = '';
+  Txt_Trk_TargetFolder = '';
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -732,6 +737,12 @@ export class BranchSettingsComponent implements OnInit {
           }
         } */
 
+      }else if (Rec.param_name1 == "TRACKING-SOURCE-FOLDER") {
+        this.Txt_Trk_SourceFolder_id = Rec.param_name2;
+        this.Txt_Trk_SourceFolder = Rec.param_name3;
+      }else if (Rec.param_name1 == "TRACKING-TARGET-FOLDER") {
+        this.Txt_Trk_TargetFolder_id = Rec.param_name2;
+        this.Txt_Trk_TargetFolder = Rec.param_name3;
       }
 
 
@@ -997,7 +1008,8 @@ export class BranchSettingsComponent implements OnInit {
     this.saveList.push(this.AddRecord("AC-REPORT-BASED-ON", this.gs.branch_pkid, this.Cmb_Ac_Rep_Base));
     this.saveList.push(this.AddRecord("FS-APP-FOLDER", this.gs.branch_pkid, this.Txt_RootFolder));
     this.saveList.push(this.AddRecord("GLOBAL-FTP-FOLDER", this.gs.branch_pkid, this.Txt_Ftp_Folder));
-
+    this.saveList.push(this.AddRecord("TRACKING-SOURCE-FOLDER", this.gs.branch_pkid, this.Txt_Trk_SourceFolder));
+    this.saveList.push(this.AddRecord("TRACKING-TARGET-FOLDER", this.gs.branch_pkid, this.Txt_Trk_TargetFolder));
 
     if (this.Chk_SI_OVERRIDE_POD_ETA == 'Y')
       this.saveList.push(this.AddRecord("SEA-IMP-OVERRIDE-POD-ETA", this.gs.branch_pkid, "Y"));
