@@ -242,15 +242,15 @@ export class ImportTrkPageService {
 
 
     List(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importhblpage/List', SearchData, this.gs.headerparam2('authorized'));
+        return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importtrkpage/List', SearchData, this.gs.headerparam2('authorized'));
     }
 
     ImportXmlFileData(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importhblpage/ImportXmlFileData', SearchData, this.gs.headerparam2('authorized'));
+        return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importtrkpage/ImportXmlFileData', SearchData, this.gs.headerparam2('authorized'));
     }
 
     ProcessXmlFile(SearchData: any) {
-        return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importhblpage/ProcessXmlFile', SearchData, this.gs.headerparam2('authorized'));
+        return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importtrkpage/ProcessXmlFile', SearchData, this.gs.headerparam2('authorized'));
     }
 
 }
