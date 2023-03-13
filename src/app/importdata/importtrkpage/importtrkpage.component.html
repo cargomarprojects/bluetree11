@@ -46,7 +46,7 @@
         </thead>
         <tbody class="page-body-tbody">
           <tr *ngFor="let rec of  records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
-            <td class='hlink2' (click)="XmlImportData(rec)">{{rec.files_desc}}</td>
+            <td class='hlink2' (click)="TrackingImportData(rec)">{{rec.files_desc}}</td>
             <td>{{rec.files_processed}}</td>
             <td>{{rec.files_ref_no}}</td>
             <td>{{rec.files_uploaded_date | date : gs.FRONTEND_DATEFORMAT}}</td>
@@ -59,6 +59,6 @@
     <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
   </div>
   <div class="tab-pane fade commonbgcolor2" id="tracking" role="tabpanel" aria-labelledby="tracking-tab">
-
+    <app-trackingpage > </app-trackingpage>
   </div>
 </div>

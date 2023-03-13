@@ -46,3 +46,11 @@ export interface ImportTrkPageModel {
     pageQuery: PageQuery;
     records: Tbl_mast_files[]
 }
+export interface TrackingPageModel {
+    sortcol : string ;
+    sortorder : boolean;
+    errormessage: string;
+    searchQuery: SearchQuery;
+    pageQuery: PageQuery;
+    records: Tbl_mast_files[]
+}

@@ -14,6 +14,8 @@ import { LinkPageComponent } from './linkpage/linkpage.component';
 import { LinkPageHeaderComponent } from './linkpage/linkpage-header.component';
 import { ImportTrkPageComponent } from './importtrkpage/importtrkpage.component';
 import { ImportTrkPageHeaderComponent } from './importtrkpage/importtrkpage-header.component';
+import { TrackingPageComponent } from './importtrkpage/trackingpage/trackingpage.component';
+import { TrackingPageHeaderComponent } from './importtrkpage/trackingpage/trackingpage-header.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ImportTrkPageHeaderComponent } from './importtrkpage/importtrkpage-head
     LinkPageComponent,
     LinkPageHeaderComponent,
     ImportTrkPageComponent,
-    ImportTrkPageHeaderComponent
+    ImportTrkPageHeaderComponent,
+    TrackingPageComponent,
+    TrackingPageHeaderComponent
   ],
   imports: [
     SharedModule,
