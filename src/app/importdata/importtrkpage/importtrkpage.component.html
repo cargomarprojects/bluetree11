@@ -1,42 +1,64 @@
 <div class="page-header">
-    <div class="col">
-      <label class="mr-1">EDI-Tracking</label>
-      <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-      <!-- <a class="btn btn-primary btn-sm mr-1"  [routerLink]="ShipData('L')" [queryParams]="ShipData('P')">Shipment Data</a>
+  <div class="col">
+    <label class="mr-1">EDI-Tracking</label>
+    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    <!-- <a class="btn btn-primary btn-sm mr-1"  [routerLink]="ShipData('L')" [queryParams]="ShipData('P')">Shipment Data</a>
       <a class="btn btn-primary btn-sm mr-1"  [routerLink]="MissingData('L')" [queryParams]="MissingData('P')">Missing Data</a>
       <a class="btn btn-primary btn-sm mr-1"  [routerLink]="SettingPage('L')" [queryParams]="SettingPage('P')">Settings</a> -->
+  </div>
+</div>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="header-tab" data-toggle="tab" href="#header" role="tab" aria-controls="header"
+      aria-selected="true">Header List</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="tracking-tab" data-toggle="tab" href="#tracking" role="tab" aria-controls="tracking"
+      aria-selected="false">Tracking List</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active commonbgcolor2" id="header" role="tabpanel" aria-labelledby="header-tab">
+
+    <div *ngIf="errorMessage$ | async" class="alert alert-danger">
+      {{errorMessage$ | async}}
     </div>
+    <app-importtrkpage-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+    </app-importtrkpage-header>
+
+    <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+    <div class="page-body table-responsive table-bordered">
+      <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+          <tr>
+            <th (click)="mainservice.sort('files_desc')">FILE-NAME&nbsp;<i
+                [ngClass]="mainservice.getIcon('files_desc')"></i></th>
+            <th (click)="mainservice.sort('files_processed')">PROCESSED&nbsp;<i
+                [ngClass]="mainservice.getIcon('files_processed')"></i></th>
+            <th (click)="mainservice.sort('files_ref_no')">REFNO&nbsp;<i
+                [ngClass]="mainservice.getIcon('files_ref_no')"></i></th>
+            <th (click)="mainservice.sort('files_uploaded_date')">UPLOADED-&nbsp;<i
+                [ngClass]="mainservice.getIcon('files_uploaded_date')"></i></th>
+            <th (click)="mainservice.sort('files_created_date')">CREATED-DT&nbsp;<i
+                [ngClass]="mainservice.getIcon('files_created_date')"></i></th>
+          </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+          <tr *ngFor="let rec of  records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+            <td class='hlink2' (click)="XmlImportData(rec)">{{rec.files_desc}}</td>
+            <td>{{rec.files_processed}}</td>
+            <td>{{rec.files_ref_no}}</td>
+            <td>{{rec.files_uploaded_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+            <td>{{rec.files_created_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
   </div>
-  <div *ngIf="errorMessage$ | async" class="alert alert-danger">
-    {{errorMessage$ | async}}
+  <div class="tab-pane fade commonbgcolor2" id="tracking" role="tabpanel" aria-labelledby="tracking-tab">
+
   </div>
-  <app-importtrkpage-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
-  </app-importtrkpage-header>
-  
-  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
-  
-  <div class="page-body table-responsive table-bordered">
-    <table class="table  table-hover table-sm">
-      <thead class="page-body-thead">
-        <tr>
-          <th (click)="mainservice.sort('files_desc')">FILE-NAME&nbsp;<i [ngClass]="mainservice.getIcon('files_desc')"></i></th>
-          <th (click)="mainservice.sort('files_processed')">PROCESSED&nbsp;<i [ngClass]="mainservice.getIcon('files_processed')"></i></th>
-          <th (click)="mainservice.sort('files_ref_no')">REFNO&nbsp;<i [ngClass]="mainservice.getIcon('files_ref_no')"></i></th>
-          <th (click)="mainservice.sort('files_uploaded_date')">UPLOADED-&nbsp;<i [ngClass]="mainservice.getIcon('files_uploaded_date')"></i></th>
-          <th (click)="mainservice.sort('files_created_date')">CREATED-DT&nbsp;<i [ngClass]="mainservice.getIcon('files_created_date')"></i></th>
-        </tr>
-      </thead>
-      <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of  records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
-          <td class='hlink2' (click)="XmlImportData(rec)">{{rec.files_desc}}</td>
-          <td>{{rec.files_processed}}</td>
-          <td>{{rec.files_ref_no}}</td>
-          <td>{{rec.files_uploaded_date | date : gs.FRONTEND_DATEFORMAT}}</td>
-          <td>{{rec.files_created_date | date : gs.FRONTEND_DATEFORMAT}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
-  
+</div>
