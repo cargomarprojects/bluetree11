@@ -152,7 +152,7 @@ export interface Tbl_cargo_imp_housem {
     hbl_paid_remarks: string;
     hbl_delivery_date: string;
     hbl_incoterm:string;
-
+    hbl_invoiceno: string;
 }
 
 export interface Table_Address {

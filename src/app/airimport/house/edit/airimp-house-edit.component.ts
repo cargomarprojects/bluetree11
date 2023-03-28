@@ -246,6 +246,7 @@ export class AirImpHouseEditComponent implements OnInit {
     this.record.hbl_chwt_lbs = 0;
     this.record.hbl_pcs = 0;
     this.record.hbl_pono = '';
+    this.record.hbl_invoiceno = '';
     this.record.hbl_place_final = '';
     this.record.hbl_plf_eta = '';
     this.record.hbl_remark1 = '';

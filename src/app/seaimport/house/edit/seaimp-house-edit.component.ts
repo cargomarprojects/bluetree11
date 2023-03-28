@@ -335,6 +335,7 @@ export class SeaImpHouseEditComponent implements OnInit {
     this.record.hbl_custom_clear_date = '';
     this.record.hbl_incoterm = 'NA';
     this.record.rec_history_id = this.gs.getGuid();
+    this.record.hbl_invoiceno = '';
   }
 
   LoadData() {
@@ -1650,6 +1651,10 @@ export class SeaImpHouseEditComponent implements OnInit {
       }
       case 'cntr_tare_weight': {
         rec.cntr_tare_weight = this.gs.roundNumber(rec.cntr_tare_weight, 0);
+        break;
+      }
+      case 'hbl_invoiceno': {
+        this.record.hbl_invoiceno = this.record.hbl_invoiceno.toUpperCase().trim();
         break;
       }
 

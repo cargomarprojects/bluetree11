@@ -2,7 +2,7 @@
   <div class="page-header">
     <div class="col">
       <label class="mr-3">{{title}} ({{mode}})</label>
-      <button  #_btnret class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+      <button #_btnret class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
       <!-- <a #_btnret class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('LIST')" [queryParams]="getParam('LIST')">Return</a> -->
       <label class="text-danger" *ngIf="is_locked">LOCKED</label>
     </div>
@@ -355,32 +355,32 @@
             <div class="col-md-6 testbox  px-0 mx-0">
 
               <div class="form-group row">
-                <label class="col-3 col-form-label col-form-label-sm">Description</label>
-                <div class="col-9">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Description</label>
+                <div class="col-sm-9">
                   <InputBox [(inputModel)]="record.hbl_commodity" [maxlength]="100" [uppercase]="true" #commodity>
                   </InputBox>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-3 col-form-label col-form-label-sm">Frt.Status</label>
-                <div class="col-9">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Frt.Status</label>
+                <div class="col-sm-3">
                   <select class="form-control form-control-sm" [(ngModel)]="record.hbl_frt_status"
                     (change)="OnChange('hbl_frt_status')" #frt_status>
                     <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.code">{{rec.code}}</option>
                   </select>
                 </div>
-              </div>
-
-              <div class="form-group row">
-                <label class="col-3 col-form-label col-form-label-sm">Nomination</label>
-                <div class="col-3">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Nomination</label>
+                <div class="col-sm-3">
                   <select class="form-control form-control-sm" [(ngModel)]="record.hbl_bltype" #bltype>
                     <option *ngFor="let rec of gs.PARAM_NOMINATION" [value]="rec.name">{{rec.name}}</option>
                   </select>
                 </div>
-                <label class="col-3 col-form-label col-form-label-sm">Inco Term</label>
-                <div class="col-3">
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Inco Term</label>
+                <div class="col-sm-3">
                   <select class="form-control form-control-sm" [(ngModel)]="record.hbl_incoterm">
                     <option [value]="'NA'">NA</option>
                     <option [value]="'CUSTOMS ONLY'">CUSTOMS ONLY</option>
@@ -389,25 +389,29 @@
                     <option [value]="'DDU'">DDU</option>
                   </select>
                 </div>
-              </div>
-           
-
-              <div class="form-group row">
-                <label class="col-3 col-form-label col-form-label-sm">Pickup Date</label>
-                <div class="col-9">
-                  <app-date [inputdate]="record.hbl_pickup_date" (ValueChanged)="record.hbl_pickup_date=$event"></app-date>
+                <label class="col-sm-3 col-form-label col-form-label-sm">Pickup Date</label>
+                <div class="col-sm-3">
+                  <app-date [inputdate]="record.hbl_pickup_date"
+                    (ValueChanged)="record.hbl_pickup_date=$event"></app-date>
                 </div>
               </div>
+               
               <div *ngIf="gs.BOE_IMPORT_REQUIRED=='Y'" class="form-group row">
-                <label class="col-3 col-form-label col-form-label-sm">BOE#</label>
-                <div class="col-9">
+                <label class="col-sm-3 col-form-label col-form-label-sm">BOE#</label>
+                <div class="col-sm-9">
                   <InputBox [(inputModel)]="record.hbl_boeno" [maxlength]="60" [uppercase]="true" #boeno></InputBox>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-3 col-form-label col-form-label-sm">PO#</label>
-                <div class="col-9">
+                <label class="col-sm-3 col-form-label col-form-label-sm">PO#</label>
+                <div class="col-sm-9">
                   <InputBox [(inputModel)]="record.hbl_pono" [maxlength]="100" [uppercase]="true" #pono></InputBox>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label col-form-label-sm">Invoice#</label>
+                <div class="col-sm-9">
+                  <InputBox [(inputModel)]="record.hbl_invoiceno" [maxlength]="60" [uppercase]="true" #invno></InputBox>
                 </div>
               </div>
             </div>
@@ -682,9 +686,10 @@
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_AI_HOUSE_DELIVERY_ORDER)" (click)="BtnNavigation('CARGOPICKUP')">Delivery
               Order</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_HOUSE_DELIVERY_ORDER)" 
-                            [routerLink]="BtnNavigation2('CARGOPICKUP','L')" [queryParams]="BtnNavigation2('CARGOPICKUP','P')">Delivery
-                            Order</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_AI_HOUSE_DELIVERY_ORDER)" [routerLink]="BtnNavigation2('CARGOPICKUP','L')"
+              [queryParams]="BtnNavigation2('CARGOPICKUP','P')">Delivery
+              Order</a>
           </div>
 
           <div class="form-group row">
@@ -704,14 +709,14 @@
               *ngIf="gs.screenExists(gs.MENU_AI_SHIPMENT_MOVEMENT)" (click)="BtnNavigation('SHIPMOVEMENT')">House
               Internal
               Memo</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_SHIPMENT_MOVEMENT)" 
-                            [routerLink]="BtnNavigation2('SHIPMOVEMENT','L')" [queryParams]="BtnNavigation2('SHIPMOVEMENT','P')">House
-                            Internal
-                            Memo</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AI_SHIPMENT_MOVEMENT)"
+              [routerLink]="BtnNavigation2('SHIPMOVEMENT','L')" [queryParams]="BtnNavigation2('SHIPMOVEMENT','P')">House
+              Internal
+              Memo</a>
           </div>
           <div class="form-group row">
-              <button class="col-12 btn btn-info btn-sm text-uppercase" [disabled]="is_locked" *ngIf="gs.canSave(menuid,mode)"
-              (click)="Save()">Save</button>
+            <button class="col-12 btn btn-info btn-sm text-uppercase" [disabled]="is_locked"
+              *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
           </div>
 
         </div>

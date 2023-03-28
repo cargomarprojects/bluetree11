@@ -157,6 +157,7 @@ export interface Tbl_cargo_imp_housem {
     hbl_an_sent: string;
     hbl_an_sent_by: string;
     hbl_an_sent_date: string;
+    hbl_invoiceno: string;
 }
 export interface Tbl_desc {
 
