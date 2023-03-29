@@ -56,9 +56,10 @@ import { UserActiveDetComponent } from './user-active/useractivedet.component';
 import { UserActiveDetHeaderComponent } from './user-active/useractivedet-header.component';
 import { InvoiceReportComponent } from './invoice-report/invoice-report.component';
 import { InvoiceReportHeaderComponent} from './invoice-report/invoice-report-header.component';
-
 import { EmailReportHeaderComponent } from './email-report/email-report-header.component';
 import { EmailReportComponent } from './email-report/email-report.component';
+import { DailyShipReportHeaderComponent } from './daily-ship-report/daily-ship-report-header.component';
+import { DailyShipReportComponent } from './daily-ship-report/daily-ship-report.component';
 
 @NgModule({
     declarations :[
@@ -96,7 +97,9 @@ import { EmailReportComponent } from './email-report/email-report.component';
     InvoiceReportComponent,
     InvoiceReportHeaderComponent,
     EmailReportHeaderComponent,
-    EmailReportComponent
+    EmailReportComponent,
+    DailyShipReportHeaderComponent,
+    DailyShipReportComponent
   ],
   imports: [
     SharedModule,

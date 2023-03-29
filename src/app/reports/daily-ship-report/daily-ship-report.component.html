@@ -1,0 +1,66 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-1">{{mainservice.title}}</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage$ | async}}
+</div>
+
+<app-daily-ship-report-header [_query]="searchQuery$ | async" (searchEvents)="searchEvents($event)">
+</app-daily-ship-report-header>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th>SHIPPER</th>
+                <th>CONSIGNEE</th>
+                <th>PO NUMBER</th>
+                <th>INVOICE NO</th>
+                <th>INCOTERM</th>
+                <th>CONTAINER TYPE</th>
+                <th>CONTAINER NUMBER</th>
+                <th>BOOKING NO</th>
+                <th>CARRIER</th>
+                <th>BL NUMBER</th>
+                <th>ETD</th>
+                <th>ETA</th>
+                <th>REF#</th>
+                <th>REF DATE</th>
+                <th>HOUSE#</th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records$ | async" (mousedown)="mainservice.selectRowId(rec.dsr_refno)"
+                [class.selected]="rec.dsr_refno == mainservice.getRowId()">
+                <td>{{rec.dsr_shipper}}</td>
+                <td>{{rec.dsr_consignee}}</td>
+                <td>{{rec.dsr_pono}}</td>              
+                <td>{{rec.dsr_invoiceno}}</td>
+                <td>{{rec.dsr_incoterm}}</td>
+                <td>{{rec.dsr_cntrtype}}</td>
+                <td>{{rec.dsr_cntrno}}</td>
+                <td>{{rec.dsr_bookingno}}</td>
+                <td>{{rec.dsr_carrier}}</td>
+                <td>{{rec.dsr_blno}}</td>
+                <td>{{rec.dsr_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.dsr_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td *ngIf="rec.dsr_branch_code==gs.branch_code">
+                    <a class="hlink"
+                        [routerLink]="gs.Link2Page('REFNO', rec.dsr_mbl_mode, rec.dsr_refno, rec.dsr_mbl_id,'','', 'L',rec.dsr_branch_code)"
+                        [queryParams]="gs.Link2Page('REFNO', rec.dsr_mbl_mode, rec.dsr_refno, rec.dsr_mbl_id,'','', 'P',rec.dsr_branch_code)">{{rec.dsr_refno}}</a>
+                </td>
+                <td *ngIf="rec.dsr_branch_code!=gs.branch_code">{{rec.dsr_refno}}</td>
+                <td>{{rec.dsr_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.dsr_houseno}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>

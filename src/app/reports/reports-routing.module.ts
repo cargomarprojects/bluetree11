@@ -27,6 +27,8 @@ import { UserActiveComponent } from './user-active/useractive.component';
 import { UserActiveDetComponent } from './user-active/useractivedet.component';
 import { InvoiceReportComponent } from './invoice-report/invoice-report.component';
 import { EmailReportComponent } from './email-report/email-report.component';
+import { DailyShipReportComponent } from './daily-ship-report/daily-ship-report.component';
+
 
 const routes: Routes = [
    { path :'ShipmentHandledReport', component : ShipHandReportComponent },
@@ -52,7 +54,8 @@ const routes: Routes = [
    { path :'UserActive', component : UserActiveComponent }, 
    { path :'UserActiveDet', component : UserActiveDetComponent }, 
    { path :'InvoiceListPage', component : InvoiceReportComponent },  
-   { path :'EmailReport', component : EmailReportComponent },      
+   { path :'EmailReport', component : EmailReportComponent },  
+   { path :'DailyShipReport', component : DailyShipReportComponent }    
 ];
 
 @NgModule({
