@@ -1,6 +1,6 @@
 <div class="page-list">
     <div class="page-search">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-3">
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">From</label>
@@ -22,7 +22,6 @@
                     <label class="col-4 col-form-label col-form-label-sm">Category</label>
                     <div class="col-8">
                         <select class="form-control form-control-sm" [(ngModel)]="searchQuery.category">
-                            <!-- <option [value]="'ALL'"> ALL </option> -->
                             <option [value]="'AN-SENT'"> AN SENT </option>
                             <option [value]="'INVOICE'"> AR/AP </option>
                             <option [value]="'SHIPMENTS'"> SHIPMENTS </option>
@@ -76,6 +75,86 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-3">
+              <div class="form-group row">
+                <div class="col-4">
+                  <select class="form-control form-control-sm" [(ngModel)]="searchQuery.datetype">
+                    <option [value]="'ETA-DATE'">ETA</option>
+                    <option [value]="'ETD-DATE'">ETD</option>
+                    <!-- <option [value]="'INV-DATE'">Inv-Date</option> -->
+                    <option [value]="'REF-DATE'">Ref-Date</option>
+                  </select>
+                </div>
+                <div class="col-8">
+                  <app-date [inputdate]="searchQuery.fromdate" (ValueChanged)="searchQuery.fromdate=$event"></app-date>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">To</label>
+                <div class="col-8">
+                  <app-date [inputdate]="searchQuery.todate" (ValueChanged)="searchQuery.todate=$event"></app-date>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+    
+              <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Group</label>
+                <div class="col-8">
+                  <select class="form-control form-control-sm" [(ngModel)]="searchQuery.type">
+                    <option [value]="'ALL'">ALL</option>
+                    <option [value]="'OCEAN EXPORT'">OCEAN EXPORT</option>
+                    <option [value]="'OCEAN IMPORT'">OCEAN IMPORT</option>
+                    <option [value]="'AIR EXPORT'">AIR EXPORT</option>
+                    <option [value]="'AIR IMPORT'">AIR IMPORT</option>
+                  </select>
+                </div>
+              </div>
+    
+              <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Branch</label>
+                <div class="col-8">
+                  <select class="form-control form-control-sm" [(ngModel)]="searchQuery.compCode">
+                    <option *ngFor="let rec of gs.CompanyList" [value]="rec.comp_code">{{rec.comp_name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+    
+              <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Parent</label>
+                <div class="col-8">
+                  <app-autocomplete2 [controlname]="'PARENT'" [tabletype]="'OVERSEAAGENT'" [displaycolumn]="'NAME'"
+                    [displaydata]="searchQuery.cust_parent_name" (ValueChanged)="LovSelected($event)">
+                  </app-autocomplete2>
+                </div>
+              </div>
+    
+              <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Customer</label>
+                <div class="col-8">
+                  <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                    [displaydata]="searchQuery.cust_name" (ValueChanged)="LovSelected($event)">
+                  </app-autocomplete2>
+                </div>
+              </div>
+    
+            </div>
+            <div class="col-md-3">
+              <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm"></label>
+                <div class="col-8">
+                  <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+                  <button  *ngIf="mainservice.canPrint" (click)="List('PRINT')" class="btn btn-primary btn-sm">Print</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
     </div>
 </div>

@@ -27,8 +27,7 @@ export class DailyShipReportService {
     public canEdit: boolean;
     public canSave: boolean;
     public canPrint: boolean;
-    public isDetail: boolean;
-
+    
     public initlialized: boolean;
     private appid = '';
     public tab: string = 'main';
@@ -85,7 +84,7 @@ export class DailyShipReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', category: 'SHIPMENTS', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL', isDetail: false },
+            searchQuery: <SearchQuery>{ datetype: 'REF-DATE', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL',cust_parent_id:'',cust_parent_name:'',cust_id:'',cust_name:''  },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -109,7 +108,7 @@ export class DailyShipReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', category: 'SHIPMENTS', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL', isDetail: false },
+            searchQuery: <SearchQuery>{ datetype: 'REF-DATE', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL',cust_parent_id:'',cust_parent_name:'',cust_id:'',cust_name:''  },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -121,7 +120,6 @@ export class DailyShipReportService {
         this.canPrint = this.gs.canPrint(this.menuid);
         this.canSave = this.canAdd || this.canEdit;
         this.initlialized = true;
-        this.isDetail = false;
     }
 
     Search(_searchdata: any, type: string = '') {
@@ -135,21 +133,21 @@ export class DailyShipReportService {
             this.record.pageQuery = _searchdata.pageQuery;
         }
 
-        this.isDetail = this.record.searchQuery.isDetail;
-
         var SearchData = this.gs.UserInfo;
         SearchData.outputformat = _searchdata.outputformat;
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
-        SearchData.CATEGORY = this.record.searchQuery.category;
         SearchData.TYPE = this.record.searchQuery.type;
+        SearchData.DATETYPE = this.record.searchQuery.datetype;
         SearchData.SDATE = this.record.searchQuery.fromdate;
         SearchData.EDATE = this.record.searchQuery.todate;
-        SearchData.SDATA = this.record.searchQuery.searchString;
         SearchData.COMP_CODE = this.record.searchQuery.compCode;
-        SearchData.IS_DETAIL = this.record.searchQuery.isDetail == true ? 'Y' : 'N';
         SearchData.COMP_NAME = this.GetCompName(this.record.searchQuery.compCode);
+        SearchData.CUST_PARENT_ID = this.record.searchQuery.cust_parent_id;
+        SearchData.CUST_PARENT_NAME = this.record.searchQuery.cust_parent_name;
+        SearchData.CUST_ID = this.record.searchQuery.cust_id;
+        SearchData.CUST_NAME = this.record.searchQuery.cust_name;
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;

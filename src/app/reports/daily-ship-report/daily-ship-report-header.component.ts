@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ChangeDetectionStrategy } from '@angular/core';
 import { now } from 'lodash';
 import { GlobalService } from '../../core/services/global.service';
-import { SearchQuery } from '../models/tbl_data_entry_report';
+import { SearchQuery } from '../models/tbl_daily_ship_report';
 import { DailyShipReportService } from '../services/daily_ship_report.service';
- 
+import { SearchTable } from '../../shared/models/searchtable';
+
 @Component({
     selector: 'app-daily-ship-report-header',
     templateUrl: './daily-ship-report-header.component.html',
@@ -29,10 +30,21 @@ export class DailyShipReportHeaderComponent implements OnInit {
 
     onBlur(field: string) {
         switch (field) {
-            case 'searchString': {
-                this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase();
-                break;
-            }
+            // case 'searchString': {
+            //     this.searchQuery.searchString = this.searchQuery.searchString.toUpperCase();
+            //     break;
+            // }
+        }
+    }
+
+    LovSelected(_Record: SearchTable) {
+        if (_Record.controlname === 'CUSTOMER') {
+            this.searchQuery.cust_id = _Record.id;
+            this.searchQuery.cust_name = _Record.name;
+        }
+        if (_Record.controlname === 'PARENT') {
+            this.searchQuery.cust_parent_id = _Record.id;
+            this.searchQuery.cust_parent_name = _Record.name;
         }
     }
 

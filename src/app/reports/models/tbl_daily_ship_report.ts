@@ -1,13 +1,15 @@
 import { PageQuery } from '../../shared/models/pageQuery';
 
 export interface SearchQuery {
-    searchString: string;
-    category: string;
+    datetype: string;
     type: string;
     fromdate: string;
     todate: string;
     compCode: string;
-    isDetail: boolean;
+    cust_parent_id: string;
+    cust_parent_name: string;
+    cust_id: string;
+    cust_name: string;
 }
 
 export class Tbl_Daily_Ship_Report {

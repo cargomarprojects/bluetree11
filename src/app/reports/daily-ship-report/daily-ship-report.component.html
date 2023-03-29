@@ -19,6 +19,9 @@
     <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
+                <th>REF#</th>
+                <th>REF DATE</th>
+                <th>HOUSE#</th>
                 <th>SHIPPER</th>
                 <th>CONSIGNEE</th>
                 <th>PO NUMBER</th>
@@ -31,14 +34,19 @@
                 <th>BL NUMBER</th>
                 <th>ETD</th>
                 <th>ETA</th>
-                <th>REF#</th>
-                <th>REF DATE</th>
-                <th>HOUSE#</th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
             <tr *ngFor="let rec of records$ | async" (mousedown)="mainservice.selectRowId(rec.dsr_refno)"
                 [class.selected]="rec.dsr_refno == mainservice.getRowId()">
+                <td *ngIf="rec.dsr_branch_code==gs.branch_code">
+                    <a class="hlink"
+                        [routerLink]="gs.Link2Page('REFNO', rec.dsr_mbl_mode, rec.dsr_refno, rec.dsr_mbl_id,'','', 'L',rec.dsr_branch_code)"
+                        [queryParams]="gs.Link2Page('REFNO', rec.dsr_mbl_mode, rec.dsr_refno, rec.dsr_mbl_id,'','', 'P',rec.dsr_branch_code)">{{rec.dsr_refno}}</a>
+                </td>
+                <td *ngIf="rec.dsr_branch_code!=gs.branch_code">{{rec.dsr_refno}}</td>
+                <td>{{rec.dsr_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.dsr_houseno}}</td>
                 <td>{{rec.dsr_shipper}}</td>
                 <td>{{rec.dsr_consignee}}</td>
                 <td>{{rec.dsr_pono}}</td>              
@@ -51,14 +59,6 @@
                 <td>{{rec.dsr_blno}}</td>
                 <td>{{rec.dsr_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.dsr_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
-                <td *ngIf="rec.dsr_branch_code==gs.branch_code">
-                    <a class="hlink"
-                        [routerLink]="gs.Link2Page('REFNO', rec.dsr_mbl_mode, rec.dsr_refno, rec.dsr_mbl_id,'','', 'L',rec.dsr_branch_code)"
-                        [queryParams]="gs.Link2Page('REFNO', rec.dsr_mbl_mode, rec.dsr_refno, rec.dsr_mbl_id,'','', 'P',rec.dsr_branch_code)">{{rec.dsr_refno}}</a>
-                </td>
-                <td *ngIf="rec.dsr_branch_code!=gs.branch_code">{{rec.dsr_refno}}</td>
-                <td>{{rec.dsr_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
-                <td>{{rec.dsr_houseno}}</td>
             </tr>
         </tbody>
     </table>
