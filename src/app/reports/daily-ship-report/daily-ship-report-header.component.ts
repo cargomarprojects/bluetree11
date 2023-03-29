@@ -8,7 +8,7 @@ import { SearchTable } from '../../shared/models/searchtable';
 @Component({
     selector: 'app-daily-ship-report-header',
     templateUrl: './daily-ship-report-header.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DailyShipReportHeaderComponent implements OnInit {
     // Call By Value using Input Parameters
