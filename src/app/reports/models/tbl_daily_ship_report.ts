@@ -14,7 +14,6 @@ export interface SearchQuery {
 
 export class Tbl_Daily_Ship_Report {
     row_type: string;
-
     dsr_shipper: string;
     dsr_consignee: string;
     dsr_pono: string;
