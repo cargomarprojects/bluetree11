@@ -54,7 +54,7 @@ export class GlobalService {
 
   public tab = ' 	';
 
-  public software_version_string = '1.196';
+  public software_version_string = '1.197';
 
   public baseUrl: string = "http://localhost:5000";
   //public baseUrl: string = "";
@@ -239,7 +239,7 @@ export class GlobalService {
   public BACKEND_DATEFORMAT = "YYYY/MM/DD";
   public FRONTEND_DATEFORMAT = "MM/dd/yyyy";
   //public date_display_fmt = "MM/dd/yyyy";
-  public date_display_fmt: string = ""; // System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern.ToString(); 
+  public date_display_fmt: string = ""; // System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern.ToString();
   public date_display_fmt_with_time = "MM/dd/yyyy HH:mm:ss";
 
   public date_display_fmt_with_month_time = "dd-MMMM-yyyy HH:mm:ss";
@@ -378,7 +378,7 @@ export class GlobalService {
   public VAT_PER = 0;
 
 
-  // RETAINED PROFIT 
+  // RETAINED PROFIT
   public RETAINED_PROFIT_ID = "";
   public RETAINED_PROFIT_CODE = "";
   public RETAINED_PROFIT_NAME = "";
@@ -459,7 +459,7 @@ export class GlobalService {
   public WH_OUTWARD_DOCNO_STARTING_NO = "1001";
 
 
-  //EXTRA 
+  //EXTRA
   public EXTRA_OPERATION_REFNO_PREFIX = "EX";
   public EXTRA_OPERATION_REFNO_STARTING_NO = "1001";
   public SHOW_EXTRA_OPERATION = "N";
@@ -711,7 +711,7 @@ export class GlobalService {
     this.BACKEND_DATEFORMAT = "YYYY/MM/DD";
     this.FRONTEND_DATEFORMAT = "YYYY/MM/DD";
 
-    this.date_display_fmt = '';//System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern.ToString(); 
+    this.date_display_fmt = '';//System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern.ToString();
 
     this.user_pkid = this.UserRecord.usr_pkid;
     this.user_code = this.UserRecord.usr_code;
