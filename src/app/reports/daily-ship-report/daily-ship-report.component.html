@@ -21,19 +21,19 @@
             <tr>
                 <th>REF#</th>
                 <th>REF DATE</th>
+                <th>CARRIER</th>
+                <th>BL#</th>
+                <th>CONTAINER#</th>
+                <th>CONTAINER TYPE</th>
+                <th>ETD</th>
+                <th>ETA</th>
                 <th>HOUSE#</th>
                 <th>SHIPPER</th>
                 <th>CONSIGNEE</th>
-                <th>PO NUMBER</th>
-                <th>INVOICE NO</th>
+                <th>BOOKING#</th>
+                <th>PO#</th>
+                <th>INVOICE#</th>
                 <th>INCOTERM</th>
-                <th>CONTAINER TYPE</th>
-                <th>CONTAINER NUMBER</th>
-                <th>BOOKING NO</th>
-                <th>CARRIER</th>
-                <th>BL NUMBER</th>
-                <th>ETD</th>
-                <th>ETA</th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
@@ -46,19 +46,19 @@
                 </td>
                 <td *ngIf="rec.dsr_branch_code!=gs.branch_code">{{rec.dsr_refno}}</td>
                 <td>{{rec.dsr_refdate | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.dsr_carrier}}</td>
+                <td>{{rec.dsr_blno}}</td>
+                <td>{{rec.dsr_cntrno}}</td>
+                <td>{{rec.dsr_cntrtype}}</td>
+                <td>{{rec.dsr_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td>{{rec.dsr_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.dsr_houseno}}</td>
                 <td>{{rec.dsr_shipper}}</td>
                 <td>{{rec.dsr_consignee}}</td>
+                <td>{{rec.dsr_bookingno}}</td>
                 <td>{{rec.dsr_pono}}</td>              
                 <td>{{rec.dsr_invoiceno}}</td>
                 <td>{{rec.dsr_incoterm}}</td>
-                <td>{{rec.dsr_cntrtype}}</td>
-                <td>{{rec.dsr_cntrno}}</td>
-                <td>{{rec.dsr_bookingno}}</td>
-                <td>{{rec.dsr_carrier}}</td>
-                <td>{{rec.dsr_blno}}</td>
-                <td>{{rec.dsr_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
-                <td>{{rec.dsr_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
             </tr>
         </tbody>
     </table>
