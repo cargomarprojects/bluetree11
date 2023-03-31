@@ -25,7 +25,7 @@ export class OthTrackingPageComponent implements OnInit {
   trackrecords: Tbl_Cargo_Tracking_Status[] = [];
   trackmemorecord: Tbl_Cargo_Tracking_Status = <Tbl_Cargo_Tracking_Status>{};
   trackmemorecords: Tbl_Cargo_Tracking_Status[] = [];
-  // 15-07-2019 Created By Ajith  
+  // 15-07-2019 Created By Ajith
 
   parentTypememo: string;
   pkid: string;
@@ -160,7 +160,7 @@ export class OthTrackingPageComponent implements OnInit {
         }
         else
             LBL_LOCK.Content = "UNLOCKED";
-    
+
     */
   }
 
