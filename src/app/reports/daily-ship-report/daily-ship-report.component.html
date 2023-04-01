@@ -16,7 +16,7 @@
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
 <div class="page-body table-responsive table-bordered">
-    <table class="table  table-hover table-sm">
+    <table class="table  table-hover table-sm ">
         <thead class="page-body-thead">
             <tr>
                 <th>REF#</th>
@@ -24,7 +24,7 @@
                 <th>CARRIER</th>
                 <th>BL#</th>
                 <th>CONTAINER#</th>
-                <th>CONTAINER TYPE</th>
+                <!-- <th>CONTAINER TYPE</th> -->
                 <th>ETD</th>
                 <th>ETA</th>
                 <th>HOUSE#</th>
@@ -34,6 +34,7 @@
                 <th>PO#</th>
                 <th>INVOICE#</th>
                 <th>INCOTERM</th>
+                <th>BILL#</th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
@@ -49,7 +50,7 @@
                 <td>{{rec.dsr_carrier}}</td>
                 <td>{{rec.dsr_blno}}</td>
                 <td>{{rec.dsr_cntrno}}</td>
-                <td>{{rec.dsr_cntrtype}}</td>
+                <!-- <td>{{rec.dsr_cntrtype}}</td> -->
                 <td>{{rec.dsr_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.dsr_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.dsr_houseno}}</td>
@@ -59,6 +60,7 @@
                 <td>{{rec.dsr_pono}}</td>              
                 <td>{{rec.dsr_invoiceno}}</td>
                 <td>{{rec.dsr_incoterm}}</td>
+                <td>{{rec.dsr_our_invno}}</td>
             </tr>
         </tbody>
     </table>

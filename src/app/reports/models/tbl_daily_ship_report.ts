@@ -33,6 +33,7 @@ export class Tbl_Daily_Ship_Report {
     dsr_branch_code: string;
     dsr_mbl_id: string;
     dsr_hbl_id: string;
+    dsr_our_invno: string;
 }
 
 export interface Daily_Ship_Report_Model {
