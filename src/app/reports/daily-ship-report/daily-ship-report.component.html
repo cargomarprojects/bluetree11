@@ -25,6 +25,8 @@
                 <th>BL#</th>
                 <th>CONTAINER#</th>
                 <!-- <th>CONTAINER TYPE</th> -->
+                <th>POL</th>
+                <th>POD</th>
                 <th>ETD</th>
                 <th>ETA</th>
                 <th>HOUSE#</th>
@@ -51,6 +53,8 @@
                 <td>{{rec.dsr_blno}}</td>
                 <td>{{rec.dsr_cntrno}}</td>
                 <!-- <td>{{rec.dsr_cntrtype}}</td> -->
+                <td>{{rec.dsr_pol_name}}</td>
+                <td>{{rec.dsr_pod_name}}</td>
                 <td>{{rec.dsr_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.dsr_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
                 <td>{{rec.dsr_houseno}}</td>
