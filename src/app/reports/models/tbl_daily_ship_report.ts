@@ -36,6 +36,9 @@ export class Tbl_Daily_Ship_Report {
     dsr_our_invno: string;
     dsr_pol_name: string;
     dsr_pod_name: string;
+    dsr_inv_no: string;
+    dsr_inv_date: string;
+    dsr_inv_amt: number;
 }
 
 export interface Daily_Ship_Report_Model {

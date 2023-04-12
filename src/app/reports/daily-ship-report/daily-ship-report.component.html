@@ -36,7 +36,9 @@
                 <th>PO#</th>
                 <th>INVOICE#</th>
                 <th>INCOTERM</th>
-                <th>AR/AP</th>
+                <th>AR.INV#</th>
+                <th>AR.INV.DATE</th>
+                <th class='text-right'>AR.INV.AMT</th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
@@ -64,7 +66,9 @@
                 <td>{{rec.dsr_pono}}</td>              
                 <td>{{rec.dsr_invoiceno}}</td>
                 <td>{{rec.dsr_incoterm}}</td>
-                <td>{{rec.dsr_our_invno}}</td>
+                <td>{{rec.dsr_inv_no}}</td>
+                <td>{{rec.dsr_inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                <td class='text-right'>{{rec.dsr_inv_amt | number : '1.2-2'}}</td>
             </tr>
         </tbody>
     </table>
