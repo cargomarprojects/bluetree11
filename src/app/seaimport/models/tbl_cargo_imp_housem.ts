@@ -140,7 +140,7 @@ export interface Tbl_cargo_imp_housem {
     hbl_country_origin: string;
     rec_files_attached: string;
     hbl_is_itshipment: boolean;
-    hbl_book_slno: number;
+    hbl_book_slno: string;
     hbl_isf_attached: string;
     hbl_is_pl: boolean;
     hbl_is_ci: boolean;

@@ -319,7 +319,7 @@ export class SeaImpHouseEditComponent implements OnInit {
     this.record.hbl_cargo_release_status = 'NIL';
     this.record.hbl_shipment_stage = 'NIL';
     this.record.hbl_is_itshipment = false;
-    this.record.hbl_book_slno = 0;
+    this.record.hbl_book_slno = '';
     this.record.hbl_isf_attached = '';
     this.record.hbl_is_pl = false;
     this.record.hbl_is_ci = false;
@@ -1655,6 +1655,9 @@ export class SeaImpHouseEditComponent implements OnInit {
       }
       case 'hbl_invoiceno': {
         this.record.hbl_invoiceno = this.record.hbl_invoiceno.toUpperCase().trim();
+        break;
+      }case 'hbl_book_slno': {
+        this.record.hbl_book_slno = this.record.hbl_book_slno.toUpperCase().trim();
         break;
       }
 
