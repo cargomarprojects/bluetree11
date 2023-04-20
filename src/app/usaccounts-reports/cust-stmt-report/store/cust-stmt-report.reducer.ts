@@ -26,6 +26,7 @@ export const initialState: ReportState = {
     bank_name: '',
     radio_cust: 'MASTER',
     showall: false,
+    report_pagewise:true,
     showprofit: false,
     sortname: '',
     hide_payroll: 'N',

@@ -17,6 +17,7 @@ export interface ReportState {
     bank_name: string;
     radio_cust: string;
     showall: boolean;
+    report_pagewise:boolean;
     showprofit: boolean;
     sortname: string;
     hide_payroll: string;

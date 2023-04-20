@@ -111,6 +111,7 @@ export class PayrollMasterEditComponent implements OnInit {
         this.record.A6 = 0;
         this.record.A7 = 0;
         this.record.A8 = 0;
+        this.record.A9 = 0;
 
         this.record.D1 = 0;
         this.record.D2 = 0;
@@ -119,6 +120,7 @@ export class PayrollMasterEditComponent implements OnInit {
         this.record.D5 = 0;
         this.record.D6 = 0;
         this.record.D7 = 0;
+        this.record.D8 = 0;
 
         this.record.DTOT = 0;;
         this.record.ATOT = 0;
@@ -284,6 +286,10 @@ export class PayrollMasterEditComponent implements OnInit {
             this.record.A8 = this.gs.roundNumber(this.record.A8, 2)
             this.FindTotal();
         }
+        if (field == 'A9') {
+            this.record.A9 = this.gs.roundNumber(this.record.A9, 2)
+            this.FindTotal();
+        }
 
         if (field == 'D1') {
             this.record.D1 = this.gs.roundNumber(this.record.D1, 2)
@@ -313,6 +319,10 @@ export class PayrollMasterEditComponent implements OnInit {
             this.record.D7 = this.gs.roundNumber(this.record.D7, 2)
             this.FindTotal();
         }
+        if (field == 'D8') {
+            this.record.D8 = this.gs.roundNumber(this.record.D8, 2)
+            this.FindTotal();
+        }
     }
 
     FindTotal() {
@@ -324,7 +334,7 @@ export class PayrollMasterEditComponent implements OnInit {
         this.record.DTOT = 0;
         this.record.NET = 0;
 
-        this.record.ATOT = this.record.A1;
+        this.record.ATOT = this.record.A1;//Gross
         this.record.ATOT += this.record.A2;
         this.record.ATOT += this.record.A3;
         this.record.ATOT += this.record.A4;
@@ -341,10 +351,19 @@ export class PayrollMasterEditComponent implements OnInit {
         this.record.DTOT += this.record.D6;
         this.record.DTOT += this.record.D7;
 
+        //A9 Gross after medicaal deduction
+        //D8 sed for medical deduction which is not taken for netpay
+
         this.record.ATOT = this.gs.roundNumber(this.record.ATOT, 2);
         this.record.DTOT = this.gs.roundNumber(this.record.DTOT, 2);
 
+        this.record.A9 = this.record.ATOT - this.record.D8;
+        this.record.A9 = this.gs.roundNumber(this.record.A9, 2);
+
+
         this.record.NET = this.record.ATOT - this.record.DTOT;
+        this.record.NET = this.record.A9 - this.record.DTOT;
+
         this.record.NET = this.gs.roundNumber(this.record.NET, 2);
     }
 

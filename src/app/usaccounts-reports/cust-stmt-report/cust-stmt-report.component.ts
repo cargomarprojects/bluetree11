@@ -45,6 +45,7 @@ export class CustStmtReportComponent implements OnInit {
   bank_name: string = '';
   radio_cust: string = 'MASTER';
   showall: boolean = false;
+  report_pagewise:boolean = true;
   showprofit: boolean = false;
   sortname: string = 'inv_date';
   hide_payroll: string = 'N';
@@ -129,6 +130,7 @@ export class CustStmtReportComponent implements OnInit {
         this.bank_name = rec.bank_name;
         this.radio_cust = rec.radio_cust;
         this.showall = rec.showall;
+        this.report_pagewise = rec.report_pagewise;
         this.showprofit = rec.showprofit;
         this.sortname = rec.sortname;
         this.hide_payroll = rec.hide_payroll;
@@ -155,6 +157,7 @@ export class CustStmtReportComponent implements OnInit {
         this.SearchData.DUEDATE = this.ddate;
         this.SearchData.ARAP = 'BOTH';
         this.SearchData.SHOWALL = this.showall == true ? 'Y' : 'N';
+        this.SearchData.REPORT_PAGEWISE = this.report_pagewise == true ? 'Y' : 'N';
         this.SearchData.ISCUSTOMER = this.radio_cust == 'MASTER' ? 'Y' : 'N';
         this.SearchData.GT_UNIQUE_ID = this.GT_UNIQUE_ID;
 
@@ -269,6 +272,7 @@ export class CustStmtReportComponent implements OnInit {
       this.SearchData.DUEDATE = this.ddate;
       this.SearchData.ARAP = 'BOTH';
       this.SearchData.SHOWALL = this.showall == true ? 'Y' : 'N';
+      this.SearchData.REPORT_PAGEWISE = this.report_pagewise == true ? 'Y' : 'N';
       this.SearchData.ISCUSTOMER = this.radio_cust == 'MASTER' ? 'Y' : 'N';
       this.SearchData.GT_UNIQUE_ID = this.GT_UNIQUE_ID;
 
@@ -332,6 +336,7 @@ export class CustStmtReportComponent implements OnInit {
             bank_name: this.SearchData.BANK_NAME,
             radio_cust: this.SearchData.RADIO_CUST,
             showall: this.showall,
+            report_pagewise:this.report_pagewise,
             showprofit: this.showprofit,
             sortname: this.sortname,
             hide_payroll: this.hide_payroll,
