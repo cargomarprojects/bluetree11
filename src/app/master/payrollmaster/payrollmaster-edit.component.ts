@@ -361,7 +361,7 @@ export class PayrollMasterEditComponent implements OnInit {
         this.record.A9 = this.gs.roundNumber(this.record.A9, 2);
 
 
-        this.record.NET = this.record.ATOT - this.record.DTOT;
+       // this.record.NET = this.record.ATOT - this.record.DTOT;
         this.record.NET = this.record.A9 - this.record.DTOT;
 
         this.record.NET = this.gs.roundNumber(this.record.NET, 2);
