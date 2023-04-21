@@ -20,14 +20,16 @@
       <thead class="page-body-thead">
         <tr>
           <th>EMPLOYEE</th>
-          <th>PAYROLL DATE</th>
+          <th>PAYROLL.DATE</th>
           <th>GROSS</th>
+          <th>MEDICAL</th>
+          <th>GR.AFTER.DEDUCT</th>
           <th>FICA</th>
           <th>MEDICARE</th>
           <th>FEDERAL</th>
           <th>STATE</th>
           <th>CITY</th>
-          <th>MEDICAL</th>
+          <th>SUPP.INSURANCE</th>
           <th>IRC</th>
           <th>NET PAY</th>
           <th style="text-align:center">DELETE</th>
@@ -38,6 +40,8 @@
           <td class='hlink2'  (click)="edit(rec)">{{rec.cpd_emp_name}}</td>
           <td>{{rec.cpd_payroll_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.A1 | number : '1.2-2'}} </td>
+          <td>{{rec.D8 | number : '1.2-2'}} </td>
+          <td>{{rec.A9 | number : '1.2-2'}} </td>
           <td>{{rec.D1 | number : '1.2-2'}} </td>
           <td>{{rec.D2 | number : '1.2-2'}} </td>
           <td>{{rec.D3 | number : '1.2-2'}} </td>

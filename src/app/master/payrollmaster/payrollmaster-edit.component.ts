@@ -352,7 +352,7 @@ export class PayrollMasterEditComponent implements OnInit {
         this.record.DTOT += this.record.D7;
 
         //A9 Gross after medicaal deduction
-        //D8 sed for medical deduction which is not taken for netpay
+        //D8 set for medical deduction which is not taken for netpay
 
         this.record.ATOT = this.gs.roundNumber(this.record.ATOT, 2);
         this.record.DTOT = this.gs.roundNumber(this.record.DTOT, 2);
