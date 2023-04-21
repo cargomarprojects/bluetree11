@@ -72,6 +72,7 @@ export interface SearchQuery {
 }
 
 export interface PayrolldetModel {
+    selectedId: string;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
@@ -79,6 +80,7 @@ export interface PayrolldetModel {
 }
 
 export interface PayrollMasterModel {
+    selectedId: string;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

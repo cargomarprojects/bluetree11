@@ -39,8 +39,15 @@ export class PayrollDetService {
         private gs: GlobalService
     ) { }
 
+    public selectRowId(id: string) {
+        this.record.selectedId = id;
+    }
+    public getRowId() {
+        return this.record.selectedId;
+    }
     public ClearInit() {
         this.record = <PayrolldetModel>{
+            selectedId: '',
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', mbl_refno: this.mbl_refno, todate: '', mblid: this.mbl_pkid },
@@ -65,6 +72,7 @@ export class PayrollDetService {
         this.mbl_type = options.mbl_type;
 
         this.record = <PayrolldetModel>{
+            selectedId: '',
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', mbl_refno: this.mbl_refno, todate: '', mblid: this.mbl_pkid },
@@ -88,6 +96,7 @@ export class PayrollDetService {
 
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;

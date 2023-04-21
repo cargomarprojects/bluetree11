@@ -34,7 +34,8 @@
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async">
+      <tr *ngFor="let rec of records$ | async" (mousedown)="mainservice.selectRowId(rec.gen_pkid)" 
+      [class.selected]="rec.gen_pkid == mainservice.getRowId()">
         <td class='hlink2' (click)="edit(rec)">{{rec.gen_code}}</td>
         <td>{{rec.gen_name}}</td>
         <td>{{rec.gen_type2}}</td>

@@ -39,8 +39,16 @@ export class PayrollMasterService {
         private gs: GlobalService
     ) { }
 
+    public selectRowId(id: string) {
+        this.record.selectedId = id;
+    }
+    public getRowId() {
+        return this.record.selectedId;
+    }
+
     public ClearInit() {
         this.record = <PayrollMasterModel>{
+            selectedId: '',
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', mbl_refno: '', todate: '', mblid: '', sort_parameter: 'gen_name' },
@@ -61,6 +69,7 @@ export class PayrollMasterService {
         this.menuid = params.menuid;
 
         this.record = <PayrollMasterModel>{
+            selectedId: '',
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', mbl_refno: '', todate: '', mblid: '', sort_parameter: 'gen_name' },
@@ -86,6 +95,7 @@ export class PayrollMasterService {
             if (this.gs.isBlank(_searchdata.searchQuery.sort_parameter))
                 _searchdata.searchQuery.sort_parameter = "gen_name";
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
