@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { GlobalService } from '../../../core/services/global.service';
-import { Tbl_mast_files } from '../../models/tbl_mast_files';
+import { Tbl_edi_isa } from '../../models/tbl_edi_isa';
 import { SearchQuery } from '../../models/tbl_mast_files';
 import { PageQuery } from '../../../shared/models/pageQuery';
 import { TrackingPageService } from '../../services/trackingpage.service';
@@ -19,7 +19,7 @@ export class TrackingPageComponent implements OnInit {
     routeparams: any;
 
     errorMessage$: Observable<string>;
-    records$: Observable<Tbl_mast_files[]>;
+    records$: Observable<Tbl_edi_isa[]>;
     pageQuery$: Observable<PageQuery>;
     searchQuery$: Observable<SearchQuery>;
 
@@ -57,12 +57,12 @@ export class TrackingPageComponent implements OnInit {
         this.location.back();
     }
 
-    TrackingImportData(_record: Tbl_mast_files) {
-        if (_record.files_status == "Y") {
-            alert('Record is deleted')
-            return;
-        }
-        if (_record.files_processed == "Y") {
+    TrackingImportData(_record: Tbl_edi_isa) {
+        // if (_record.isa_files_status == "Y") {
+        //     alert('Record is deleted')
+        //     return;
+        // }
+        if (_record.isa_files_processed == "Y") {
             alert('Record is already Processed')
             return;
         }
