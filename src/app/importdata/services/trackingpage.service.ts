@@ -140,7 +140,6 @@ export class TrackingPageService {
             SearchData.FLAG = 'N';
         else
             SearchData.FLAG = this.record.searchQuery.rdtrkprocessed == 'PROCESSED' ? 'Y' : 'N';
-        SearchData.FILES_TYPE = 'XML-EDI-TRACKING';
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
@@ -191,21 +190,22 @@ export class TrackingPageService {
     ImportTrackingData() {
         this.record.errormessage = '';
         var SearchData = this.gs.UserInfo;
-        // SearchData.FILES_SLNO = this.Xml_Rec.files_slno.toString();
-        // SearchData.FILES_ID = this.Xml_Rec.files_id;
-        // SearchData.FILES_TYPE = this.Xml_Rec.files_type;
-        // SearchData.FILES_DESC = this.Xml_Rec.files_desc;
-        // SearchData.FILES_ROOT = this.gs.FS_APP_FOLDER;
-        // SearchData.FILES_PATH = this.Xml_Rec.files_path;
-        // SearchData.FILES_REF_NO = this.Xml_Rec.files_ref_no;
+        SearchData.ISA_PKID = this.Xml_Rec.isa_pkid;
+        SearchData.FILES_SLNO = this.Xml_Rec.isa_files_slno.toString();
+        SearchData.FILES_ID = this.Xml_Rec.isa_files_id;
+        SearchData.FILES_TYPE = this.Xml_Rec.isa_files_type;
+        SearchData.FILES_DESC = this.Xml_Rec.isa_files_desc;
+        SearchData.FILES_ROOT = this.gs.FS_APP_FOLDER;
+        SearchData.FILES_PATH = this.Xml_Rec.isa_files_path;
+        SearchData.GRP_FORMAT = this.Xml_Rec.grp_format;
         this.ImportTrackingFileData(SearchData)
             .subscribe(response => {
                 this.Xml_Rec.isa_files_processed = response.IsFileProcessed;
-                // if (this.record.records != null) {
-                //     var REC = this.record.records.find(rec => rec.files_id == this.Xml_Rec.files_id);
-                //     if (REC != null)
-                //         REC.isa_files_processed = this.Xml_Rec.isa_files_processed;
-                // }
+                if (this.record.records != null) {
+                    var REC = this.record.records.find(rec => rec.isa_pkid == this.Xml_Rec.isa_pkid);
+                    if (REC != null)
+                        REC.isa_files_processed = this.Xml_Rec.isa_files_processed;
+                }
                 this.ImportMultipleFiles();
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
@@ -220,7 +220,6 @@ export class TrackingPageService {
         var SearchData = this.gs.UserInfo;
         SearchData.APP_FOLDER = this.gs.FS_APP_FOLDER;
         SearchData.FTP_FOLDER = this.gs.GLOBAL_FTP_FOLDER;
-        SearchData.FILES_TYPE = 'XML-EDI-TRACKING';
         this.ProcessTrackingFile(SearchData)
             .subscribe(response => {
 
