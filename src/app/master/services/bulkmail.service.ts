@@ -447,6 +447,35 @@ export class BulkmailService {
         return sCategorys;
     }
 
+    MailHandled()
+    { 
+    let SearchData = {
+        user_pkid: '',
+        company_code: '',
+        branch_code: '',
+        email_from_id:'',
+        email_from_pwd:'',
+        email_display_name:'',
+        email_cc_id:'',
+        email_bcc_id:'',
+        test_mail:'Y'
+    };
+    this.MailHandledPerson(SearchData)
+        .subscribe(response => {
+            // _rec.bm_failed_seq = response.failseq;
+            // if (!this.gs.isBlank(response.error)) {
+            //     alert("Failed Batches: " + response.error);
+            // }
+            // if (response.retvalue == true && this.gs.isBlank(response.error)) {
+            //     _rec.bm_send_status = "S";
+            //     alert('Mail Sent Successfully');
+            // }
+        }, error => {
+           alert(this.gs.getError(error));
+        });
+
+    }
+
     Downloadfile(filename: string, filetype: string, filedisplayname: string) {
         this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
     }
@@ -467,8 +496,9 @@ export class BulkmailService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/LoginService/Bulkmail/DownloadEmail', SearchData, this.gs.headerparam2('authorized'));
     }
 
-
-
+    MailHandledPerson(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/LoginService/Bulkmail/MailHandledPerson', SearchData, this.gs.headerparam2('authorized'));
+    }
 
 
 }
