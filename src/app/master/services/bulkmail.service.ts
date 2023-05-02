@@ -453,12 +453,15 @@ export class BulkmailService {
         user_pkid: '',
         company_code: '',
         branch_code: '',
-        email_from_id:'',
-        email_from_pwd:'',
-        email_display_name:'',
-        email_cc_id:'',
-        email_bcc_id:'',
-        test_mail:'Y'
+        from_id:'',
+        from_pwd:'',
+        display_name:'',
+        to_ids:'',
+        cc_ids:'',
+        bcc_ids:'',
+        test_mail:'Y',
+        report_folder:''
+        
     };
     this.MailHandledPerson(SearchData)
         .subscribe(response => {
