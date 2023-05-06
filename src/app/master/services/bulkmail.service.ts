@@ -450,17 +450,16 @@ export class BulkmailService {
     MailHandled()
     { 
     let SearchData = {
-        user_pkid: '',
-        company_code: '',
+        company_code: 'MNYC',
         branch_code: '',
-        from_id:'',
-        from_pwd:'',
+        from_id:'softwaresupport@cargomar.in',
+        from_pwd:'SwS!!CMR$777',
         display_name:'',
-        to_ids:'',
+        to_ids:'softwaresupport@cargomar.in',
         cc_ids:'',
         bcc_ids:'',
         test_mail:'Y',
-        report_folder:''
+        report_folder:"d:\\motherlines.us\\ftp\\reports\\"
         
     };
     this.MailHandledPerson(SearchData)
@@ -473,6 +472,8 @@ export class BulkmailService {
             //     _rec.bm_send_status = "S";
             //     alert('Mail Sent Successfully');
             // }
+
+            alert('Created Successfully');
         }, error => {
            alert(this.gs.getError(error));
         });

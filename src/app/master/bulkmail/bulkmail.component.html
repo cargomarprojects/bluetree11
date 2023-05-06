@@ -66,8 +66,8 @@
                                             <button *ngIf="mainservice.isAdmin" class="btn btn-info btn-sm mr-1"
                                                 (click)="mainservice.DownloadEmails()">Download Contacts</button>
                                             <input *ngIf="mainservice.isAdmin" type="checkbox" [(ngModel)]="mainservice.EmailIdsOnly" /><span>Email IDs Only</span>
-                                            <!-- <button *ngIf="mainservice.isAdmin" class="btn btn-info btn-sm mr-1"
-                                            (click)="mainservice.MailHandled()">test Mail</button> -->
+                                            <button *ngIf="mainservice.isAdmin" class="btn btn-info btn-sm mr-1"
+                                            (click)="mainservice.MailHandled()">test Mail</button>
                                         </div>
                                     </div>
                                 </div>
