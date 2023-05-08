@@ -452,9 +452,9 @@ export class BulkmailService {
     let SearchData = {
         company_code: 'MNYC',
         branch_code: '',
-        from_id:'softwaresupport@cargomar.in',
+        from_id:'',
         from_pwd:'SwS!!CMR$777',
-        display_name:'',
+        email_display_name:'Admin',
         to_ids:'softwaresupport@cargomar.in',
         cc_ids:'',
         bcc_ids:'',
@@ -464,7 +464,7 @@ export class BulkmailService {
     };
     this.MailHandledPerson(SearchData)
         .subscribe(response => {
-            // _rec.bm_failed_seq = response.failseq;
+            // _rec.bm_failed_seq = response.failseq;joy@cargomar.in
             // if (!this.gs.isBlank(response.error)) {
             //     alert("Failed Batches: " + response.error);
             // }
