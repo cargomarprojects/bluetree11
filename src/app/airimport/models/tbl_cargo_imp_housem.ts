@@ -151,8 +151,9 @@ export interface Tbl_cargo_imp_housem {
     hbl_lfd_date: string;
     hbl_paid_remarks: string;
     hbl_delivery_date: string;
-    hbl_incoterm:string;
+    hbl_incoterm: string;
     hbl_invoiceno: string;
+    hbl_book_slno: string;
 }
 
 export interface Table_Address {
@@ -187,8 +188,8 @@ export interface vm_tbl_cargo_imp_housem {
 
 
 export interface AirImpHouseModel {
-    sortcol : string ;
-    sortorder : boolean;
+    sortcol: string;
+    sortorder: boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

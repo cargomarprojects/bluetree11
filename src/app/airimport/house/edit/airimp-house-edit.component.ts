@@ -115,7 +115,7 @@ export class AirImpHouseEditComponent implements OnInit {
   }
 
   private initPage() {
-    
+
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
     this.errorMessage = [];
@@ -284,7 +284,8 @@ export class AirImpHouseEditComponent implements OnInit {
     this.record.hbl_lfd_date = '';
     this.record.hbl_paid_remarks = '';
     this.record.hbl_delivery_date = '';
-    this.record.hbl_incoterm = 'NA'
+    this.record.hbl_incoterm = 'NA';
+    this.record.hbl_book_slno = '';
 
     // this.initDesc();
     this.record.rec_created_by = this.gs.user_code;
@@ -324,7 +325,7 @@ export class AirImpHouseEditComponent implements OnInit {
     this.mainService.GetRecord(SearchData)
       .subscribe(response => {
         this.record = <Tbl_cargo_imp_housem>response.record;
-        this.descrecords = (response.descrecords == undefined || response.descrecords == null) ? <Tbl_cargo_imp_desc[]>[]:<Tbl_cargo_imp_desc[]>response.descrecords;
+        this.descrecords = (response.descrecords == undefined || response.descrecords == null) ? <Tbl_cargo_imp_desc[]>[] : <Tbl_cargo_imp_desc[]>response.descrecords;
         this.mode = 'EDIT';
         this.is_locked = this.gs.IsShipmentClosed("AIR IMPORT", this.record.mbl_ref_date, this.record.mbl_lock, this.record.mbl_unlock_date);
 
@@ -393,8 +394,8 @@ export class AirImpHouseEditComponent implements OnInit {
     if (!this.Allvalid())
       return;
 
-      if (!confirm("Save")) {
-        return;
+    if (!confirm("Save")) {
+      return;
     }
 
     //this.SaveDescList();
