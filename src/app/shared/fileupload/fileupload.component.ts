@@ -156,7 +156,7 @@ export class FileUploadComponent implements OnInit {
     private modalconfig: NgbModalConfig,
     private modalservice: NgbModal,
     private gs: GlobalService,
-    private lovService: LovService,
+    public lovService: LovService,
     private http2: HttpClient,
   ) {
     modalconfig.backdrop = 'static'; //true/false/static

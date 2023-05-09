@@ -139,7 +139,7 @@ export class FormsService {
         if (this.param_type == "ADMIN")
             SearchData.GFCATEGORY = 'ADMINFORMS';
         else
-            SearchData.GFCATEGORY = 'FORMS';
+            SearchData.GFCATEGORY = this.param_type;
         if (this.gs.user_isadmin == "Y" || this.isAdmin || this.param_type == "ADMIN")
             SearchData.ISADMIN = 'Y';
         else

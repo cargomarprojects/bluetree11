@@ -9,46 +9,78 @@ import { SearchTable } from '../models/searchtable';
   providedIn: 'root'
 })
 export class LovService {
+
+  public sortcol: string = 'files_created_date';
+  public sortorder: boolean = true;
+
   constructor(
     private http2: HttpClient,
     private gs: GlobalService) { }
 
-    List(SearchData: any) {
-      return this.http2.post<any>(this.gs.baseUrl + '/api/Admin/Lov/List', SearchData, this.gs.headerparam2('authorized'));
-    } 
+  getSortCol() {
+    return this.sortcol;
+  }
+  getSortOrder() {
+    return this.sortorder;
+  }
 
-    FileUpload(SearchData: any) {
-      return this.http2.post<any>(this.gs.baseUrl + '/api/General/UploadFiles', SearchData, this.gs.headerparam2('authorized'));
+  getIcon(col: string) {
+    if (col == this.sortcol) {
+      if (this.sortorder)
+        return 'fa fa-arrow-down';
+      else
+        return 'fa fa-arrow-up';
     }
+    else
+      return null;
+  }
 
-    LoadDefault(SearchData: any) {
-      return this.http2.post<any>(this.gs.baseUrl + '/api/General/LoadDefault', SearchData, this.gs.headerparam2('authorized'));
+  sort(col: string) {
+    if (col == this.sortcol) {
+      this.sortorder = !this.sortorder;
     }
-
-    DocumentList(SearchData: any) {
-      return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/DocumentList', SearchData, this.gs.headerparam2('authorized'));
+    else {
+      this.sortcol = col;
+      this.sortorder = true;
     }
+  }
 
-    DeleteRecord(SearchData: any) {
-      return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/DeleteDocument', SearchData, this.gs.headerparam2('authorized'));
-    }
+  List(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Admin/Lov/List', SearchData, this.gs.headerparam2('authorized'));
+  }
 
-    Save2S3(SearchData: any) {
-      return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/Save2S3', SearchData, this.gs.headerparam2('authorized'));
-    }
+  FileUpload(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/General/UploadFiles', SearchData, this.gs.headerparam2('authorized'));
+  }
 
-    StartExtractDataProcess(SearchData: any) {
-      return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/StartExtractDataProcess', SearchData, this.gs.headerparam2('authorized'));
-    }
+  LoadDefault(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/General/LoadDefault', SearchData, this.gs.headerparam2('authorized'));
+  }
 
-    
-    Save(SearchData: any) {
-      return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/Save', SearchData, this.gs.headerparam2('authorized'));
+  DocumentList(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/DocumentList', SearchData, this.gs.headerparam2('authorized'));
+  }
+
+  DeleteRecord(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/DeleteDocument', SearchData, this.gs.headerparam2('authorized'));
+  }
+
+  Save2S3(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/Save2S3', SearchData, this.gs.headerparam2('authorized'));
+  }
+
+  StartExtractDataProcess(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/StartExtractDataProcess', SearchData, this.gs.headerparam2('authorized'));
+  }
+
+
+  Save(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/Save', SearchData, this.gs.headerparam2('authorized'));
   }
 
   GetEmailIds(SearchData: any) {
-      return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/GetEmailIds', SearchData, this.gs.headerparam2('authorized'));
-    }
+    return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/GetEmailIds', SearchData, this.gs.headerparam2('authorized'));
+  }
 
 
 }

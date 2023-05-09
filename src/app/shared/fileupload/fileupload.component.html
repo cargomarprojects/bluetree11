@@ -76,7 +76,7 @@
             <th class="text-center">OPEN</th>
             <th class="text-center">DOWNLOAD</th>
             <th *ngIf="Files_TypeList.length>1">DOC.TYPE</th>
-            <th>FILE NAME</th>
+            <th (click)="lovService.sort('file_desc')">FILE NAME&nbsp;<i [ngClass]="lovService.getIcon('file_desc')"></i></th>
             <th>SIZE</th>
             <th>REFERENCE #</th>
             <th>UPLOAD BY</th>
@@ -95,7 +95,7 @@
             <th class="text-center">EMAIL</th>
           </tr>
         </thead>
-        <tbody class="page-body-tbody" *ngFor="let rec of RecordList;let i=index">
+        <tbody class="page-body-tbody" *ngFor="let rec of RecordList  |  sortBy: lovService.getSortCol() : lovService.getSortOrder();let i=index">
           <tr [style.color]="rec.files_status=='D'?'Red':'Black'" (mousedown)="selectedRowIndex = i"
             [class.selected]="i == selectedRowIndex">
             <td class="p-0 text-center" (click)="OpenFile(rec)">

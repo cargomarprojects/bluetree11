@@ -54,7 +54,7 @@ export class FormsEditComponent implements OnInit {
     title: string;
     isAdmin: boolean;
     refno: string = "";
-    param_type: string = "";
+    public param_type: string = "";
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -125,7 +125,7 @@ export class FormsEditComponent implements OnInit {
     init() {
 
         this.record.gf_pkid = this.pkid;
-        this.record.gf_type = '';
+        this.record.gf_type = 'DEFAULT';
         this.record.gf_name = '';
         this.record.gf_remarks = '';
         this.record.rec_files_attached = 'N';;
@@ -180,8 +180,8 @@ export class FormsEditComponent implements OnInit {
                         this.record.gf_refno = response.slno;
                     this.mode = 'EDIT';
                     this.mainService.RefreshList(this.record);
-                    this.errorMessage = 'Save Complete';
-                    // alert(this.errorMessage);
+                    // this.errorMessage = 'Save Complete';
+                     alert('Save Complete');
                 }
 
             }, error => {
@@ -196,7 +196,7 @@ export class FormsEditComponent implements OnInit {
             this.record.gf_prefix = this.gs.branch_prefix;
         }
         else {
-            this.record.gf_category = "FORMS";
+            this.record.gf_category = this.param_type;
             this.record.gf_prefix = this.gs.branch_prefix;
         }
     }

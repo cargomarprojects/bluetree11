@@ -24,7 +24,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div *ngIf="param_type!='PRE-BOOKING-DOC'" class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Categories</label>
                     <div class="col-8">
                         <select class="form-control form-control-sm" [(ngModel)]="record.gf_type">

@@ -21,34 +21,30 @@
   <table class="table  table-hover table-sm">
     <thead class="page-body-thead">
       <tr>
-        <!-- <th (click)="mainservice.sort('gf_refno')">SL#&nbsp;<i [ngClass]="mainservice.getIcon('gf_refno')"></i></th>
-          <th (click)="mainservice.sort('gf_type')">CATEGORY&nbsp;<i [ngClass]="mainservice.getIcon('gf_type')"></i></th>
-          <th (click)="mainservice.sort('gf_name')">NAME&nbsp;<i [ngClass]="mainservice.getIcon('gf_name')"></i></th>
-          <th (click)="mainservice.sort('gf_remarks')">REMARKS&nbsp;<i [ngClass]="mainservice.getIcon('gf_remarks')"></i></th>
-          <th (click)="mainservice.sort('gf_file_name')">FILE&nbsp;<i [ngClass]="mainservice.getIcon('gf_file_name')"></i></th>
-          <th (click)="mainservice.sort('rec_created_by')">UPLOADED-BY&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
-          <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('rec_created_date')"></i></th> -->
-        <th>SL#</th>
-        <th>CATEGORY</th>
-        <th>NAME</th>
+        <th (click)="mainservice.sort('gf_refno')">SL#&nbsp;<i [ngClass]="mainservice.getIcon('gf_refno')"></i></th>
+        <th *ngIf="this.mainservice.param_type!='PRE-BOOKING-DOC'" (click)="mainservice.sort('gf_type')">CATEGORY&nbsp;<i [ngClass]="mainservice.getIcon('gf_type')"></i></th>
+        <th (click)="mainservice.sort('gf_name')">NAME&nbsp;<i [ngClass]="mainservice.getIcon('gf_name')"></i></th>
         <th>REMARKS</th>
-        <th>FILE</th>
-        <th>UPLOADED-BY</th>
-        <th>DATE</th>
+        <th (click)="mainservice.sort('gf_file_name')">FILE&nbsp;<i [ngClass]="mainservice.getIcon('gf_file_name')"></i>
+        </th>
+        <th (click)="mainservice.sort('rec_created_by')">UPLOADED-BY&nbsp;<i
+            [ngClass]="mainservice.getIcon('rec_created_by')"></i></th>
+        <th (click)="mainservice.sort('rec_created_date')">DATE&nbsp;<i
+            [ngClass]="mainservice.getIcon('rec_created_date')"></i></th>
         <th class='text-center'>DELETE</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
-      <tr *ngFor="let rec of records$ | async">
+      <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
         <td *ngIf="!this.mainservice.canEdit">{{rec.gf_refno}}</td>
         <td *ngIf="this.mainservice.canEdit">
           <a class="hlink" [routerLink]="getRouteDet('L','EDIT',rec)"
             [queryParams]="getRouteDet('P','EDIT',rec)">{{rec.gf_refno}}</a>
         </td>
-        <td>{{rec.gf_type}} </td>
+        <td *ngIf="this.mainservice.param_type!='PRE-BOOKING-DOC'">{{rec.gf_type}} </td>
         <td>{{rec.gf_name}} </td>
         <td>{{rec.gf_remarks}} </td>
-        <td class="hlink2" (click)="ShowFile(rec)" >{{rec.gf_file_name}} </td>
+        <td class="hlink2" (click)="ShowFile(rec)">{{rec.gf_file_name}} </td>
         <td>{{rec.rec_created_by}} </td>
         <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td *ngIf="mainservice.canDelete" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
