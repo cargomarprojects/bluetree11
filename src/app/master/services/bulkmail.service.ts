@@ -452,14 +452,14 @@ export class BulkmailService {
     let SearchData = {
         company_code: 'MNYC',
         branch_code: '',
-        from_id:'',
+        from_id:'softwaresupport@cargomar.in',
         from_pwd:'SwS!!CMR$777',
-        email_display_name:'Admin',
+        email_display_name:'',
         to_ids:'softwaresupport@cargomar.in',
-        cc_ids:'',
+        cc_ids:'joy@cargomar.in',
         bcc_ids:'',
         test_mail:'Y',
-        report_folder:"d:\\motherlines.us\\ftp\\reports\\"
+        report_folder:"d:\\motherlines.us\\ftp\\reports"
         
     };
     this.MailHandledPerson(SearchData)
@@ -473,7 +473,7 @@ export class BulkmailService {
             //     alert('Mail Sent Successfully');
             // }
 
-            alert('Created Successfully');
+            alert(response.error);
         }, error => {
            alert(this.gs.getError(error));
         });
