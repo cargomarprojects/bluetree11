@@ -456,11 +456,9 @@ export class BulkmailService {
         from_pwd:'SwS!!CMR$777',
         email_display_name:'',
         to_ids:'softwaresupport@cargomar.in',
-        cc_ids:'joy@cargomar.in',
+        cc_ids:'',
         bcc_ids:'',
-        test_mail:'Y',
-        report_folder:"d:\\motherlines.us\\ftp\\reports"
-        
+        test_mail:'Y'        
     };
     this.MailHandledPerson(SearchData)
         .subscribe(response => {

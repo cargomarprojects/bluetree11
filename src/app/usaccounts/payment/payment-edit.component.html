@@ -76,7 +76,8 @@
                 <div class="form-group row pt-1">
                     <div class="col-3">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" [(ngModel)]="ms.showall"><span>Show All</span>
+                            <input type="checkbox" class="form-check-input" [(ngModel)]="ms.showall"><span>Show
+                                All</span>
                         </div>
                     </div>
                     <div class="col-9">
@@ -122,61 +123,70 @@
             </div>
         </div>
     </div>
-    
 
-    
-    <div class="page-body table-responsive">
-        <table class="table table-hover table-sm table-bordered fixed_header">
+
+  <!-- <div class="page-body table-responsive" >
+        <table class="table table-hover table-sm table-bordered fixed_header"> -->
+
+    <div class="page-body table-responsive fixedTableHead" [style.height]="ms.pendingList.length>12?'375px':'auto'"
+        [style.overflow-y]="ms.pendingList.length>12?'scroll':'auto'">
+        <table class="table table-hover table-sm table-bordered">
             <thead class="page-body-thead">
                 <tr>
                     <th (click)="ms.sort('inv_no')">INV-NO&nbsp;<i [ngClass]="ms.getIcon('inv_no')"></i></th>
                     <th (click)="ms.sort('inv_date')">INV-DATE&nbsp;<i [ngClass]="ms.getIcon('inv_date')"></i></th>
-                    <th (click)="ms.sort('inv_cust_name')">CUST-NAME&nbsp;<i [ngClass]="ms.getIcon('inv_cust_name')"></i></th>
-                    <th (click)="ms.sort('inv_mbl_refno')">REFNO&nbsp;<i [ngClass]="ms.getIcon('inv_mbl_refno')"></i></th>
+                    <th (click)="ms.sort('inv_cust_name')">CUST-NAME&nbsp;<i
+                            [ngClass]="ms.getIcon('inv_cust_name')"></i></th>
+                    <th (click)="ms.sort('inv_mbl_refno')">REFNO&nbsp;<i [ngClass]="ms.getIcon('inv_mbl_refno')"></i>
+                    </th>
                     <th>ARAP</th>
                     <th (click)="ms.sort('inv_refno')">CUST-REFNO&nbsp;<i [ngClass]="ms.getIcon('inv_refno')"></i></th>
-                    <th (click)="ms.sort('inv_total')" style="text-align:right">INV-AMT&nbsp;<i [ngClass]="ms.getIcon('inv_total')"></i></th>
-                    <th (click)="ms.sort('inv_ar_total')" style="text-align:right">A/R&nbsp;<i [ngClass]="ms.getIcon('inv_ar_total')"></i></th>
-                    <th (click)="ms.sort('inv_ap_total')" style="text-align:right">A/P&nbsp;<i [ngClass]="ms.getIcon('inv_ap_total')"></i></th>
+                    <th (click)="ms.sort('inv_total')" style="text-align:right">INV-AMT&nbsp;<i
+                            [ngClass]="ms.getIcon('inv_total')"></i></th>
+                    <th (click)="ms.sort('inv_ar_total')" style="text-align:right">A/R&nbsp;<i
+                            [ngClass]="ms.getIcon('inv_ar_total')"></i></th>
+                    <th (click)="ms.sort('inv_ap_total')" style="text-align:right">A/P&nbsp;<i
+                            [ngClass]="ms.getIcon('inv_ap_total')"></i></th>
                     <th style="text-align:center">SELECT</th>
                     <th style="text-align:right">PAY-AMT</th>
                 </tr>
             </thead>
             <tbody class="page-body-tbody">
                 <tr *ngFor="let rec of ms.pendingList  |  sortBy: ms.getSortCol() : ms.getSortOrder(); let i = index"
-                (mousedown)="ms.selectRowId(rec.inv_pkid)" 
-                [class.selected]="rec.inv_pkid == ms.getRowId()"
-                >
-                    
+                    (mousedown)="ms.selectRowId(rec.inv_pkid)" [class.selected]="rec.inv_pkid == ms.getRowId()">
+
                     <!-- <td class='hlink2' (click)="editinvoice(rec)">{{rec.inv_no}}</td> -->
 
-                    <td> <a class="hlink" [routerLink]="gs.Link2Page('INVNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,rec.inv_hbl_id, rec.inv_pkid, 'L',rec.rec_branch_code,'',rec.inv_cust_name, rec.rec_created_by)"
-                        [queryParams]="gs.Link2Page('INVNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,rec.inv_hbl_id, rec.inv_pkid, 'P',rec.rec_branch_code,'',rec.inv_cust_name, rec.rec_created_by)">{{rec.inv_no}}
+                    <td> <a class="hlink"
+                            [routerLink]="gs.Link2Page('INVNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,rec.inv_hbl_id, rec.inv_pkid, 'L',rec.rec_branch_code,'',rec.inv_cust_name, rec.rec_created_by)"
+                            [queryParams]="gs.Link2Page('INVNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,rec.inv_hbl_id, rec.inv_pkid, 'P',rec.rec_branch_code,'',rec.inv_cust_name, rec.rec_created_by)">{{rec.inv_no}}
                         </a>
-                    </td>   
+                    </td>
 
 
                     <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT }}</td>
 
-                    <td >{{rec.inv_cust_name}} </td>
+                    <td>{{rec.inv_cust_name}} </td>
 
                     <!-- <td class='hlink2' (click)="editmaster(rec)">{{rec.inv_mbl_refno}} </td> -->
-                    
-                    <td> <a class="hlink" [routerLink]="gs.Link2Page('REFNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,'','', 'L','','')"
-                        [queryParams]="gs.Link2Page('REFNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,'','', 'P',rec.rec_branch_code,'')">{{rec.inv_mbl_refno}}
+
+                    <td> <a class="hlink"
+                            [routerLink]="gs.Link2Page('REFNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,'','', 'L','','')"
+                            [queryParams]="gs.Link2Page('REFNO', rec.inv_mbl_mode, rec.inv_mbl_refno, rec.inv_mbl_id,'','', 'P',rec.rec_branch_code,'')">{{rec.inv_mbl_refno}}
                         </a>
-                    </td>   
+                    </td>
 
                     <td class='hlink2' (click)="ArApList(rec,arapModalContent)">LIST</td>
-                    <td >{{rec.inv_refno}} </td>
-                    
+                    <td>{{rec.inv_refno}} </td>
+
 
                     <td style="text-align:right">{{rec.inv_total | number : '1.2-2'}} </td>
                     <td style="text-align:right">{{rec.inv_ar_total | number : '1.2-2'}} </td>
                     <td style="text-align:right">{{rec.inv_ap_total | number : '1.2-2'}} </td>
                     <td style="text-align:center" (click)="swapSelection(rec)">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" [disabled]="rec.inv_ar_total ==null && rec.inv_ap_total == null"  #chkbox
+                            <input class="form-check-input" type="checkbox"
+                                [disabled]="rec.inv_ar_total ==null && rec.inv_ap_total == null" #chkbox
                                 [(ngModel)]="rec.inv_flag2">
                         </div>
                     </td>
