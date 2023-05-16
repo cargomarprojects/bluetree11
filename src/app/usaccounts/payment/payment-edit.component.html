@@ -125,15 +125,17 @@
     </div>
 
 
-  <!-- <div class="page-body table-responsive" >
+    <!-- <div class="page-body table-responsive" >
         <table class="table table-hover table-sm table-bordered fixed_header"> -->
 
-    <div class="page-body table-responsive fixedTableHead" [style.height]="ms.pendingList.length>12?'375px':'auto'"
+    <div class="page-body table-responsive fixedTableHead my-0 p-0"
+        [style.height]="ms.pendingList.length>12?'375px':'auto'"
         [style.overflow-y]="ms.pendingList.length>12?'scroll':'auto'">
         <table class="table table-hover table-sm table-bordered">
             <thead class="page-body-thead">
-                <tr>
-                    <th (click)="ms.sort('inv_no')">INV-NO&nbsp;<i [ngClass]="ms.getIcon('inv_no')"></i></th>
+                <tr >
+                    <th (click)="ms.sort('inv_no')">INV-NO&nbsp;<i
+                            [ngClass]="ms.getIcon('inv_no')"></i></th>
                     <th (click)="ms.sort('inv_date')">INV-DATE&nbsp;<i [ngClass]="ms.getIcon('inv_date')"></i></th>
                     <th (click)="ms.sort('inv_cust_name')">CUST-NAME&nbsp;<i
                             [ngClass]="ms.getIcon('inv_cust_name')"></i></th>
