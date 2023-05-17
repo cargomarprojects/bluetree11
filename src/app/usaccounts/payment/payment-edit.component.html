@@ -123,13 +123,12 @@
     </div>
   </div>
 
-
   <!-- <div class="page-body table-responsive" >
         <table class="table table-hover table-sm table-bordered fixed_header"> -->
-
+  
   <div class="page-body table-responsive fixedTableHead my-0 p-0"
-    [style.height]="ms.pendingList?.length>12?'375px':'auto'"
-    [style.overflow-y]="ms.pendingList?.length>12?'scroll':'auto'">
+    [style.height]="ms.pendingList==null||ms.pendingList==undefined?'auto':ms.pendingList.length>12?'375px':'auto'"
+    [style.overflow-y]="ms.pendingList==null||ms.pendingList==undefined?'auto':ms.pendingList.length>12?'scroll':'auto'">
     <table class="table table-hover table-sm table-bordered">
       <thead class="page-body-thead">
         <tr>
