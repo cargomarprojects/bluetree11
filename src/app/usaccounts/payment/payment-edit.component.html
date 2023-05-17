@@ -146,7 +146,7 @@
               [ngClass]="ms.getIcon('inv_ar_total')"></i></th>
           <th (click)="ms.sort('inv_ap_total')" style="text-align:right">A/P&nbsp;<i
               [ngClass]="ms.getIcon('inv_ap_total')"></i></th>
-          <th style="text-align:center">SELECT</th>
+          <th style="text-align:center" style="z-index: 3;">SELECT</th>
           <th style="text-align:right">PAY-AMT</th>
         </tr>
       </thead>
@@ -183,7 +183,7 @@
           <td style="text-align:right">{{rec.inv_ar_total | number : '1.2-2'}} </td>
           <td style="text-align:right">{{rec.inv_ap_total | number : '1.2-2'}} </td>
           <td style="text-align:center" (click)="swapSelection(rec)">
-            <div class="form-check">
+            <div class="form-check" style="z-index: 2;">
               <input class="form-check-input" type="checkbox"
                 [disabled]="rec.inv_ar_total ==null && rec.inv_ap_total == null" #chkbox [(ngModel)]="rec.inv_flag2">
             </div>
