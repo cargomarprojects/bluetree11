@@ -95,6 +95,8 @@
         </th>
         <th (click)="mainservice.sort('cust_email')">EMAIL&nbsp;<i [ngClass]="mainservice.getIcon('cust_email')"></i>
         </th>
+        <th (click)="mainservice.sort('cust_is_splac')">CREDIT/SPECIAL.A/C &nbsp;<i
+          [ngClass]="mainservice.getIcon('cust_is_splac')"></i></th>
         <th (click)="mainservice.sort('cust_creditdays')">CREDIT DAYS&nbsp;<i
             [ngClass]="mainservice.getIcon('cust_creditdays')"></i></th>
         <th (click)="mainservice.sort('cust_splac_memo')">MEMO&nbsp;<i
@@ -118,6 +120,7 @@
         <td>{{rec.cust_telephone}}</td>
         <td>{{rec.cust_mobile}}</td>
         <td>{{rec.cust_email}}</td>
+        <td>{{rec.cust_is_splac}}</td>
         <td>{{rec.cust_creditdays}}</td>
         <td>{{rec.cust_splac_memo}}</td>
       </tr>
