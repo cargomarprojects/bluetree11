@@ -161,6 +161,8 @@ export class CertOrgPageComponent implements OnInit {
         this.record._mbld_is_cntrized = (this.record.mbld_is_cntrized == "Y") ? true : false;
         this.record._mbld_print_kgs = (this.record.mbld_print_kgs == "Y") ? true : false;
         this.record._mbld_print_lbs = (this.record.mbld_print_lbs == "Y") ? true : false;
+        this.record._mbld_print_vsl_voy = (this.record.mbld_print_vsl_voy == "Y") ? true : false;
+
 
         if (!this.gs.isBlank(this.btnretcert_ctrl))
           this.btnretcert_ctrl.nativeElement.focus();
@@ -405,6 +407,7 @@ export class CertOrgPageComponent implements OnInit {
     this.record.mbld_is_cntrized = (this.record._mbld_is_cntrized) ? "Y" : "N";
     this.record.mbld_print_kgs = (this.record._mbld_print_kgs) ? "Y" : "N";
     this.record.mbld_print_lbs = (this.record._mbld_print_lbs) ? "Y" : "N";
+    this.record.mbld_print_vsl_voy = (this.record._mbld_print_vsl_voy) ? "Y" : "N";
 
 
     this.SaveDescList();
@@ -421,8 +424,9 @@ export class CertOrgPageComponent implements OnInit {
 
       if (response.retvalue) {
         this.mode = 'EDIT';
-        this.errorMessage.push('Save Complete');
-        alert(this.errorMessage);
+        // this.errorMessage.push('Save Complete');
+        // alert(this.errorMessage);
+        alert('Save Complete');
       } else {
         this.errorMessage.push(response.error);
         alert(this.errorMessage);
