@@ -63,7 +63,8 @@
       <div class="row">
         <div class="col-md-12 testbox  px-0 mx-0">
           <app-fileupload [title]="'Documents'" [parentid]="attach_parentid"  
-            [type]="'PRE-BOOKING-DOC'"  [modalview]="true"  [uploadfiles]="flase"  (callbackevent)="callbackevent($event)"></app-fileupload>
+            [type]="'GENERAL FILES'"  [modalview]="true"  [uploadfiles]="true"  [tablename]="'cargo_genfiles'"
+            [tablepkcolumn]="'gf_pkid'" [updatecolumn]="'REC_FILES_ATTACHED'" (callbackevent)="callbackevent($event)"></app-fileupload>
         </div>
       </div>
       <div class="page-footer">
