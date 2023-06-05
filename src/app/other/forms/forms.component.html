@@ -44,7 +44,7 @@
         <td *ngIf="this.mainservice.param_type!='PRE-BOOKING-DOC'">{{rec.gf_type}} </td>
         <td>{{rec.gf_name}} </td>
         <td>{{rec.gf_remarks}} </td>
-        <td class="hlink2" (click)="ShowFile(rec)">{{rec.gf_file_name}} </td>
+        <td class="hlink2" (click)="ShowFile(rec,attachmodal)">{{rec.gf_file_name}} </td>
         <td>{{rec.rec_created_by}} </td>
         <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td *ngIf="mainservice.canDelete" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
@@ -57,3 +57,20 @@
 <App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
 
 <br />
+<ng-template #attachmodal let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <div class="page-body">
+      <div class="row">
+        <div class="col-md-12 testbox  px-0 mx-0">
+          <app-fileupload [title]="'Documents'" [parentid]="attach_parentid"  
+            [type]="'PRE-BOOKING-DOC'"  [modalview]="true"  [uploadfiles]="flase"  (callbackevent)="callbackevent($event)"></app-fileupload>
+        </div>
+      </div>
+      <div class="page-footer">
+        <div class="row justify-content-center p-1">
+          <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
