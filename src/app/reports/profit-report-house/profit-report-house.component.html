@@ -14,10 +14,10 @@
 
         <div class="row">
 
-          <div class="col-md-2">
+          <div class="col-sm-2">
             <div class="form-group row">
-              <label class="col-2 col-form-label col-form-label-sm">Format</label>
-              <div class="col-10">
+              <label class="col-sm-3 col-form-label col-form-label-sm">Format</label>
+              <div class="col-sm-9">
                 <select class="form-control form-control-sm" [(ngModel)]="report_category" (change)="onChange('report_category')">
                   <option [value]="'AGENT'">AGENT</option>
                   <option [value]="'SHIPPER'">SHIPPER</option>
@@ -28,37 +28,37 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-2 col-form-label col-form-label-sm">From</label>
-              <div class="col-10">
+              <label class="col-sm-3 col-form-label col-form-label-sm">From</label>
+              <div class="col-sm-9">
                 <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event"></app-date>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-2 col-form-label col-form-label-sm">To</label>
-              <div class="col-10">
+              <label class="col-sm-3 col-form-label col-form-label-sm">To</label>
+              <div class="col-sm-9">
                 <app-date [inputdate]="edate" (ValueChanged)="edate=$event"></app-date>
               </div>
             </div>
           </div>
 
-          <div class="col-md-2">
+          <div class="col-sm-2">
             <div class="form-group row">
-              <label class="col-2 col-form-label col-form-label-sm">Group</label>
-              <div class="col-10">
+              <label class="col-sm-3 col-form-label col-form-label-sm">Group</label>
+              <div class="col-sm-9">
                 <select class="form-control form-control-sm" [(ngModel)]="mode" (change)="onChange('mode')">
                   <option [value]="'ALL'">ALL</option>
                   <option [value]="'OCEAN EXPORT'">OCEAN EXPORT</option>
                   <option [value]="'OCEAN IMPORT'">OCEAN IMPORT</option>
                   <option [value]="'AIR EXPORT'">AIR EXPORT</option>
                   <option [value]="'AIR IMPORT'">AIR IMPORT</option>
-                  <option [value]="'OTHERS'">OTHERS</option>
+                  <option *ngIf="report_category!='NOMINATION'" [value]="'OTHERS'">OTHERS</option>
                 </select>
               </div>
             </div>
 
             <div class="form-group row">
-              <label class="col-2 col-form-label col-form-label-sm">Branch</label>
-              <div class="col-10">
+              <label class="col-sm-3 col-form-label col-form-label-sm">Branch</label>
+              <div class="col-sm-9">
                 <select class="form-control form-control-sm" [(ngModel)]="comp_type">
                   <option *ngFor="let rec of gs.CompanyList" [value]="rec.comp_code">{{rec.comp_name}}</option>
                 </select>
@@ -67,8 +67,8 @@
 
 
             <div class="form-group row">
-              <label class="col-2 col-form-label col-form-label-sm">Type</label>
-              <div class="col-10">
+              <label class="col-sm-3 col-form-label col-form-label-sm">Type</label>
+              <div class="col-sm-9">
                 <select class="form-control form-control-sm" [(ngModel)]="report_type">
                   <option [value]="'SUMMARY'">SUMMARY</option>
                   <option [value]="'DETAIL'">DETAIL</option>
@@ -77,10 +77,10 @@
             </div>
           </div>
 
-          <div *ngIf="showstages" class="col-md-2">
+          <div *ngIf="showstages" class="col-sm-2">
             <div class="form-group row">
-              <label class="col-2 col-form-label col-form-label-sm">Stages</label>
-              <div class="col-10">
+              <label class="col-sm-3 col-form-label col-form-label-sm">Stages</label>
+              <div class="col-sm-9">
                 <div style="height: 80px; overflow-y: scroll;">
                   <div class="page-body table-responsive" style="background-color:white">
                     <table class="table  table-hover table-sm table-borderless">
@@ -100,30 +100,30 @@
             </div>
           </div>
 
-          <div class="col-md-2">
+          <div class="col-sm-2">
 
             <div class="form-group row">
-              <label class="col-2 col-form-label col-form-label-sm">Parent</label>
-              <div class="col-10">
-                <app-autocomplete2 [controlname]="'PARENT'" [tabletype]="'OVERSEAAGENT'" [displaycolumn]="'NAME'"
+              <label class="col-sm-3 col-form-label col-form-label-sm">Parent</label>
+              <div class="col-sm-9">
+                <app-autocomplete2 [controlname]="'PARENT'" [tabletype]="'OVERSEAAGENT'" [displaycolumn]="'NAME'" [disabled]="report_category=='NOMINATION'"
                   [displaydata]="cust_parent_name" (ValueChanged)="LovSelected($event)">
                 </app-autocomplete2>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-2 col-form-label col-form-label-sm">
+              <label class="col-sm-3 col-form-label col-form-label-sm">
               <span *ngIf="report_category=='AGENT'">Agent</span>
               <span *ngIf="report_category=='SHIPPER'">Shipper</span>
               <span *ngIf="report_category=='CONSIGNEE'||report_category=='NOMINATION'">Consignee</span>
               <span *ngIf="report_category=='HANDLED BY'">Handled.By</span>
               </label>
-              <div *ngIf="report_category=='AGENT'||report_category=='SHIPPER'||report_category=='CONSIGNEE'||report_category=='NOMINATION'" class="col-10">
+              <div *ngIf="report_category=='AGENT'||report_category=='SHIPPER'||report_category=='CONSIGNEE'||report_category=='NOMINATION'" class="col-sm-9">
                 <!-- <app-autocomplete [inputdata]="CUSTRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete> -->
-                <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                <app-autocomplete2 [controlname]="'CUSTOMER'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'" [disabled]="report_category=='NOMINATION'"
                 [displaydata]="cust_name" (ValueChanged)="LovSelected($event)">
               </app-autocomplete2>
               </div>
-              <div *ngIf="report_category=='HANDLED BY'" class="col-10">
+              <div *ngIf="report_category=='HANDLED BY'" class="col-sm-9">
                 <!-- <app-autocomplete [inputdata]="HANDRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete> -->
                 <app-autocomplete2 [controlname]="'HANDLED BY'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
                       [displaycolumn]="'NAME'" [displaydata]="cust_name" 
@@ -133,11 +133,11 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-2 col-form-label col-form-label-sm">Salesman</label>
-              <div class="col-10">
+              <label class="col-sm-3 col-form-label col-form-label-sm">Salesman</label>
+              <div class="col-sm-9">
                 <!-- <app-autocomplete [inputdata]="SMANRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete> -->
                 <app-autocomplete2 [controlname]="'SALESMAN'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
-                [displaycolumn]="'NAME'" [displaydata]="sales_name" [where]="sales_where"
+                [displaycolumn]="'NAME'" [displaydata]="sales_name" [where]="sales_where" [disabled]="report_category=='NOMINATION'"
                 (ValueChanged)="LovSelected($event)">
               </app-autocomplete2>
               </div>
@@ -145,10 +145,10 @@
 
           </div>
 
-          <div class="col-md-2">
+          <div class="col-sm-2">
             <div class="form-group row">
-              <label class="col-2 col-form-label col-form-label-sm"></label>
-              <div class="col-10">
+              <label class="col-sm-3 col-form-label col-form-label-sm"></label>
+              <div class="col-sm-9">
                 <button [disabled]="loading" (click)="List('SCREEN')"
                   class="btn btn-primary btn-sm mr-1">Search</button>
                 <!-- <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="Print()" class="btn btn-primary btn-sm">Print</button> -->
