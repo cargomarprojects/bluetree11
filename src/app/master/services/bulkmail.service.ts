@@ -315,7 +315,7 @@ export class BulkmailService {
         SearchData.MSG_BOLD = this.gs.user_email_sign_bold;
         SearchData.PATH = filePath;
         SearchData.INVOKE_FRM_VALIDBTN = InvokType;
-        SearchData.ACTIVE_TAB_ID = this.activeTabId.toUpperCase();
+        SearchData.ACTIVE_TAB = this.activeTabId.toUpperCase();
 
         const mailRecord = <vm_Tbl_Addr_Catgory>{};
         if (this.activeTabId.toUpperCase() == "OTHERS")
