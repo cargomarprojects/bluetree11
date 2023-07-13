@@ -10,6 +10,7 @@ import { Tbl_Addr_Catgory, Tbl_Cargo_BulkMail } from '../models/Tbl_Addr_Catgory
 import { BulkmailService } from '../services/bulkmail.service';
 import { SearchQuery } from '../models/Tbl_Addr_Catgory';
 import { PageQuery } from '../../shared/models/pageQuery';
+declare var $: any;
 
 @Component({
   selector: 'app-bulkmail',
@@ -20,10 +21,11 @@ export class BulkmailComponent implements OnInit {
   // 26-11-2021 Created By Ajith  
   errorMessage$: Observable<string>;
   records$: Observable<Tbl_Addr_Catgory[]>;
+  recordsoth$: Observable<Tbl_Addr_Catgory[]>;
   records2$: Observable<Tbl_Cargo_BulkMail[]>;
   pageQuery$: Observable<PageQuery>;
   searchQuery$: Observable<SearchQuery>;
-   
+
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -40,6 +42,7 @@ export class BulkmailComponent implements OnInit {
   initPage() {
 
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
+    this.recordsoth$ = this.mainservice.data$.pipe(map(res => res.recordsoth));
     this.records2$ = this.mainservice.data$.pipe(map(res => res.records2));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -63,12 +66,31 @@ export class BulkmailComponent implements OnInit {
   }
 
   Valid_Click() {
-    if (!this.mainservice.IscatgorySelect()) {
-      alert("Client Category not selected");
-      return;
+    this.getActiveTabID();
+    if (this.mainservice.activeTabId.toUpperCase() == "OTHERS") {
+      if (!this.mainservice.IstypeSelect()) {
+        alert("Type not selected");
+        return;
+      }
+    } else {
+      if (!this.mainservice.IscatgorySelect()) {
+        alert("Client Category not selected");
+        return;
+      }
     }
+
     this.mainservice.CreateMails("VALIDATION");
   }
-   
-   
+
+  CreateMails() {
+    this.getActiveTabID();
+    this.mainservice.CreateMails('MAIL');
+  }
+
+  getActiveTabID() {
+    var $activeTab = $('.tab-content .tab-pane.active');
+    var activeId = $activeTab.attr('id');
+    this.mainservice.activeTabId = activeId;
+  }
+
 }

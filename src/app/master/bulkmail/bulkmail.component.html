@@ -12,29 +12,67 @@
 <div class="page-body">
     <div class="row">
         <div class="col-md-4 p-1">
-            <div class="page-body table-responsive table-bordered">
-                <table class="table  table-hover table-sm">
-                    <thead class="page-body-thead">
-                        <tr>
-                            <th>
-                                <div class="form-check" (click)="mainservice.SelectDeselect()"> <input type="checkbox"
-                                        class="form-check-input" [(ngModel)]="mainservice.chkall"><span>SELECTED</span>
-                                </div>
-                            </th>
-                            <th>CLIENT CATEGORY</th>
-                        </tr>
-                    </thead>
-                    <tbody class="page-body-tbody">
-                        <tr *ngFor="let rec of records$ | async">
-                            <td (click)="mainservice.ClientCategoryChk_Click(rec)">
-                                <div class="form-check"> <input type="checkbox" class="form-check-input"
-                                        [(ngModel)]="rec.cat_yn_b">
-                                </div>
-                            </td>
-                            <td>{{rec.cat_name}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <ul class="nav nav-tabs" id="myTabFilter" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="default-tab" data-toggle="tab" href="#default" role="tab"
+                        aria-controls="default" aria-selected="true">Default</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="others-tab" data-toggle="tab" href="#others" role="tab"
+                        aria-controls="others" aria-selected="false">Others</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabFilterContent">
+                <div class="tab-pane fade show active commonbgcolor2" id="default" role="tabpanel"
+                    aria-labelledby="default-tab">
+                    <div class="page-body table-responsive table-bordered">
+                        <table class="table  table-hover table-sm">
+                            <thead class="page-body-thead">
+                                <tr>
+                                    <th>
+                                        <div class="form-check" (click)="mainservice.SelectDeselect()"> <input
+                                                type="checkbox" class="form-check-input"
+                                                [(ngModel)]="mainservice.chkall"><span>SELECTED</span>
+                                        </div>
+                                    </th>
+                                    <th>CLIENT CATEGORY</th>
+                                </tr>
+                            </thead>
+                            <tbody class="page-body-tbody">
+                                <tr *ngFor="let rec of records$ | async">
+                                    <td (click)="mainservice.ClientCategoryChk_Click(rec)">
+                                        <div class="form-check"> <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="rec.cat_yn_b">
+                                        </div>
+                                    </td>
+                                    <td>{{rec.cat_name}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade commonbgcolor2" id="others" role="tabpanel" aria-labelledby="others-tab">
+                    <div class="page-body table-responsive table-bordered">
+                        <table class="table  table-hover table-sm">
+                            <thead class="page-body-thead">
+                                <tr>
+                                    <th>SELECT</th>
+                                    <th>TYPE</th>
+                                </tr>
+                            </thead>
+                            <tbody class="page-body-tbody">
+                                <tr *ngFor="let rec of recordsoth$ | async">
+                                    <td (click)="mainservice.ClientCategoryChk_Click(rec)">
+                                        <div class="form-check"> <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="rec.cat_yn_b">
+                                        </div>
+                                    </td>
+                                    <td>{{rec.cat_name}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-8 p-1">
@@ -62,10 +100,11 @@
                                             <button class="btn btn-info btn-sm mr-1" (click)="Valid_Click()">Validate
                                                 IDs</button>
                                             <button class="btn btn-info btn-sm mr-1"
-                                                (click)="mainservice.CreateMails('MAIL')">Create Emails</button>
+                                                (click)="CreateMails()">Create Emails</button>
                                             <button *ngIf="mainservice.isAdmin" class="btn btn-info btn-sm mr-1"
                                                 (click)="mainservice.DownloadEmails()">Download Contacts</button>
-                                            <input *ngIf="mainservice.isAdmin" type="checkbox" [(ngModel)]="mainservice.EmailIdsOnly" /><span>Email IDs Only</span>
+                                            <input *ngIf="mainservice.isAdmin" type="checkbox"
+                                                [(ngModel)]="mainservice.EmailIdsOnly" /><span>Email IDs Only</span>
                                             <!-- <button *ngIf="mainservice.isAdmin" class="btn btn-info btn-sm mr-1"
                                             (click)="mainservice.MailHandled()">test Mail</button> -->
                                         </div>
@@ -165,7 +204,7 @@
                                         <label class="col-3 col-form-label col-form-label-sm"></label>
                                         <div class="col-9">
                                             <button (click)="List('SCREEN')"
-                                            class="btn btn-info btn-sm mr-1">Search</button>
+                                                class="btn btn-info btn-sm mr-1">Search</button>
                                         </div>
                                     </div>
                                 </div>

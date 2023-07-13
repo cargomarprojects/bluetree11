@@ -33,6 +33,7 @@ export interface BulkmailModel {
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
     records: Tbl_Addr_Catgory[];
+    recordsoth: Tbl_Addr_Catgory[];
     records2: Tbl_Cargo_BulkMail[];
 }
 

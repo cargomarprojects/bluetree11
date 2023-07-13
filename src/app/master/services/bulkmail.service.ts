@@ -36,6 +36,7 @@ export class BulkmailService {
     public initlialized: boolean;
     private appid = '';
     MainList: Tbl_Addr_Catgory[] = [];
+    MainListOth: Tbl_Addr_Catgory[] = [];
     public chkall: boolean = true;
     public all: boolean = true;
     public EmailIdsOnly: boolean = false;
@@ -47,6 +48,7 @@ export class BulkmailService {
     public msgFontSize: string = "";
     public msgForeground: string = "";
     public msgFontWeight: string = "";
+    public activeTabId = "DEFAULT";
 
     constructor(
         private http2: HttpClient,
@@ -98,6 +100,7 @@ export class BulkmailService {
             sortorder: true,
             errormessage: '',
             records: [],
+            recordsoth: [],
             records2: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: '', todate: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
@@ -123,6 +126,7 @@ export class BulkmailService {
             sortorder: true,
             errormessage: '',
             records: [],
+            recordsoth: [],
             records2: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: '', todate: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
@@ -174,6 +178,11 @@ export class BulkmailService {
         this.FillMainList("TBD", "TBD (D)");
         this.FillMainList("BANK", "Bank / Financial Institue (K)");
         this.record.records = this.MainList;
+
+        this.MainListOth = new Array<Tbl_Addr_Catgory>();
+        this.FillMainListOth("MARK_IMPORT", "Marketing Import");
+        this.record.recordsoth = this.MainListOth;
+
         this.mdata$.next(this.record);
     }
 
@@ -184,6 +193,15 @@ export class BulkmailService {
         Rec.cat_yn = "Y";
         Rec.cat_yn_b = true;
         this.MainList.push(Rec)
+    }
+
+    FillMainListOth(FldId: string, FldName: string) {
+        let Rec = <Tbl_Addr_Catgory>{};
+        Rec.cat_id = FldId;
+        Rec.cat_name = FldName;
+        Rec.cat_yn = "N";
+        Rec.cat_yn_b = false;
+        this.MainListOth.push(Rec)
     }
 
     SelectDeselect() {
@@ -260,6 +278,22 @@ export class BulkmailService {
         return Iscatgory;
     }
 
+    IstypeSelect() {
+        let Istype = false;
+        try {
+
+            this.record.recordsoth.forEach(Rec => {
+                if (Rec.cat_yn == "Y") {
+                    Istype = true;
+                }
+            })
+        }
+        catch (Exception) {
+            Istype = false;
+        }
+        return Istype;
+    }
+
     CreateMails(InvokType: string) {
         if (InvokType == "MAIL") {
             if (!this.Allvalid())
@@ -281,9 +315,13 @@ export class BulkmailService {
         SearchData.MSG_BOLD = this.gs.user_email_sign_bold;
         SearchData.PATH = filePath;
         SearchData.INVOKE_FRM_VALIDBTN = InvokType;
+        SearchData.ACTIVE_TAB_ID = this.activeTabId.toUpperCase();
 
         const mailRecord = <vm_Tbl_Addr_Catgory>{};
-        mailRecord.records = this.MainList;
+        if (this.activeTabId.toUpperCase() == "OTHERS")
+            mailRecord.records = this.MainListOth;
+        else
+            mailRecord.records = this.MainList;
         mailRecord.userinfo = this.gs.UserInfo;
         mailRecord.filter = SearchData;
 
@@ -304,6 +342,7 @@ export class BulkmailService {
             });
 
     }
+
 
     private Allvalid(): boolean {
         var bRet = true;
@@ -447,34 +486,33 @@ export class BulkmailService {
         return sCategorys;
     }
 
-    MailHandled()
-    { 
-    let SearchData = {
-        company_code: 'MNYC',
-        branch_code: '',
-        from_id:'softwaresupport@cargomar.in',
-        from_pwd:'SwS!!CMR$777',
-        email_display_name:'',
-        to_ids:'softwaresupport@cargomar.in',
-        cc_ids:'',
-        bcc_ids:'',
-        test_mail:'Y'        
-    };
-    this.MailHandledPerson(SearchData)
-        .subscribe(response => {
-            // _rec.bm_failed_seq = response.failseq;joy@cargomar.in
-            // if (!this.gs.isBlank(response.error)) {
-            //     alert("Failed Batches: " + response.error);
-            // }
-            // if (response.retvalue == true && this.gs.isBlank(response.error)) {
-            //     _rec.bm_send_status = "S";
-            //     alert('Mail Sent Successfully');
-            // }
+    MailHandled() {
+        let SearchData = {
+            company_code: 'MNYC',
+            branch_code: '',
+            from_id: 'softwaresupport@cargomar.in',
+            from_pwd: 'SwS!!CMR$777',
+            email_display_name: '',
+            to_ids: 'softwaresupport@cargomar.in',
+            cc_ids: '',
+            bcc_ids: '',
+            test_mail: 'Y'
+        };
+        this.MailHandledPerson(SearchData)
+            .subscribe(response => {
+                // _rec.bm_failed_seq = response.failseq;joy@cargomar.in
+                // if (!this.gs.isBlank(response.error)) {
+                //     alert("Failed Batches: " + response.error);
+                // }
+                // if (response.retvalue == true && this.gs.isBlank(response.error)) {
+                //     _rec.bm_send_status = "S";
+                //     alert('Mail Sent Successfully');
+                // }
 
-            alert(response.error);
-        }, error => {
-           alert(this.gs.getError(error));
-        });
+                alert(response.error);
+            }, error => {
+                alert(this.gs.getError(error));
+            });
 
     }
 
