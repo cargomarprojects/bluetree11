@@ -101,10 +101,10 @@ export class BulkmailComponent implements OnInit {
     //   $(".act span").text(x);
     //   $(".prev span").text(y);
     //   alert(x);
+    // var target = $(e.target).attr("href") // activated tab
+    // alert(target);
     // });
 
-
-    alert(this.mainservice.activeTabId)
   }
 
 }
