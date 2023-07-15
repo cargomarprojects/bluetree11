@@ -90,7 +90,21 @@ export class BulkmailComponent implements OnInit {
   getActiveTabID() {
     var $activeTab = $('.tab-content .tab-pane.active');
     var activeId = $activeTab.attr('id');
-    this.mainservice.activeTabId = activeId;
+    if (activeId == 'default')
+      this.mainservice.activeTabId = 'DEFAULT';
+    if (activeId == 'others')
+      this.mainservice.activeTabId = 'OTHERS';
+    
+      // $('.nav-tabs a').on('shown.bs.tab', function(e){
+    //   var x = $(e.target).text();         // active tab
+    //   var y = $(e.relatedTarget).text();  // previous tab
+    //   $(".act span").text(x);
+    //   $(".prev span").text(y);
+    //   alert(x);
+    // });
+
+
+    alert(this.mainservice.activeTabId)
   }
 
 }
