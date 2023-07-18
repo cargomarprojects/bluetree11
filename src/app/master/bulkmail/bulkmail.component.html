@@ -97,16 +97,20 @@
                                     <div class="form-group row">
                                         <label class="col-2 col-form-label col-form-label-sm"></label>
                                         <div class="col-10">
+
+                                            <input *ngIf="gs.user_code=='ADMIN'" type="checkbox"
+                                                [(ngModel)]="mainservice.TestMail" /><span *ngIf="gs.user_code=='ADMIN'"
+                                                class="mr-1">Test Mail</span>
                                             <button class="btn btn-info btn-sm mr-1" (click)="Valid_Click()">Validate
                                                 IDs</button>
                                             <button class="btn btn-info btn-sm mr-1" (click)="CreateMails()">Create
                                                 Emails</button>
+                                            <input *ngIf="mainservice.isAdmin" type="checkbox"
+                                                [(ngModel)]="mainservice.EmailIdsOnly" /><span class="mr-1">Email IDs
+                                                Only</span>
                                             <button *ngIf="mainservice.isAdmin" class="btn btn-info btn-sm mr-1"
                                                 (click)="mainservice.DownloadEmails()">Download Contacts</button>
-                                            <input *ngIf="mainservice.isAdmin" type="checkbox"
-                                                [(ngModel)]="mainservice.EmailIdsOnly" /><span class="mr-1">Email IDs Only</span>
-                                            <input *ngIf="gs.user_code=='ADMIN'" type="checkbox"
-                                                [(ngModel)]="mainservice.TestMail" /><span *ngIf="gs.user_code=='ADMIN'">Test Mail</span>
+
                                             <!-- <button *ngIf="mainservice.isAdmin" class="btn btn-info btn-sm mr-1"
                                             (click)="mainservice.MailHandled()">test Mail</button> -->
                                         </div>
