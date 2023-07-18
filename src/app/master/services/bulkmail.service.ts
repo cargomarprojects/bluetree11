@@ -318,7 +318,7 @@ export class BulkmailService {
         SearchData.INVOKE_FRM_VALIDBTN = InvokType;
         SearchData.ACTIVE_TAB = this.activeTabId.toUpperCase();
         SearchData.TEST_MAIL = this.TestMail ? 'Y' : 'N';
-        SearchData.TEST_MAIL_IDS ='softwaresupport@cargomar.in,joy@cargomar.in';
+        SearchData.TEST_MAIL_IDS = 'softwaresupport@cargomar.in,joy@cargomar.in';
 
         const mailRecord = <vm_Tbl_Addr_Catgory>{};
         if (this.activeTabId.toUpperCase() == "OTHERS")
@@ -350,9 +350,16 @@ export class BulkmailService {
     private Allvalid(): boolean {
         var bRet = true;
         let str: string = "";
-        if (!this.IscatgorySelect()) {
-            bRet = false;
-            str += " | Client Category not selected";
+        if (this.activeTabId.toUpperCase() == "OTHERS") {
+            if (!this.IstypeSelect()) {
+                bRet = false;
+                str += " | Type not selected";
+            }
+        } else {
+            if (!this.IscatgorySelect()) {
+                bRet = false;
+                str += " | Client Category not selected";
+            }
         }
 
         if (this.gs.isBlank(this.Txt_Subject)) {
