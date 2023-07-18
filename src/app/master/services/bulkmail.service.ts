@@ -40,6 +40,7 @@ export class BulkmailService {
     public chkall: boolean = true;
     public all: boolean = true;
     public EmailIdsOnly: boolean = false;
+    public TestMail: boolean = false;
 
     public Txt_Subject: string = "";
     public Txt_Message: string = "";
@@ -180,7 +181,7 @@ export class BulkmailService {
         this.record.records = this.MainList;
 
         this.MainListOth = new Array<Tbl_Addr_Catgory>();
-        this.FillMainListOth("MARK_IMPORT", "Marketing Import");
+        this.FillMainListOth("MARKETING_IMPORT", "Marketing Import");
         this.record.recordsoth = this.MainListOth;
 
         this.mdata$.next(this.record);
@@ -316,6 +317,8 @@ export class BulkmailService {
         SearchData.PATH = filePath;
         SearchData.INVOKE_FRM_VALIDBTN = InvokType;
         SearchData.ACTIVE_TAB = this.activeTabId.toUpperCase();
+        SearchData.TEST_MAIL = this.TestMail ? 'Y' : 'N';
+        SearchData.TEST_MAIL_IDS ='softwaresupport@cargomar.in,joy@cargomar.in';
 
         const mailRecord = <vm_Tbl_Addr_Catgory>{};
         if (this.activeTabId.toUpperCase() == "OTHERS")

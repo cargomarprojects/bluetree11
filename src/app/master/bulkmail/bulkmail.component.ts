@@ -94,7 +94,7 @@ export class BulkmailComponent implements OnInit {
       this.mainservice.activeTabId = 'DEFAULT';
     if (activeId == 'others')
       this.mainservice.activeTabId = 'OTHERS';
-    
+     
       // $('.nav-tabs a').on('shown.bs.tab', function(e){
     //   var x = $(e.target).text();         // active tab
     //   var y = $(e.relatedTarget).text();  // previous tab
