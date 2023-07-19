@@ -232,6 +232,7 @@
                                     <th>MAIL</th>
                                     <th>SEND DT</th>
                                     <th>FAILED BATCHS</th>
+                                    <!-- <th>REMARKS</th> -->
                                 </tr>
                             </thead>
                             <tbody class="page-body-tbody">
@@ -246,6 +247,7 @@
                                     <td class="hlink2" (click)="mainservice.SendMails(rec)">SEND</td>
                                     <td>{{rec.bm_send_date | date : gs.date_display_fmt_with_time }}</td>
                                     <td>{{rec.bm_failed_seq}}</td>
+                                    <!-- <td>{{rec.bm_desc}}</td> -->
                                 </tr>
                             </tbody>
                         </table>
