@@ -246,7 +246,8 @@ export class PartyEditComponent implements OnInit {
     this.record.gen_handled_loc_id = '';
     this.record.gen_cust_group_id = '';
     this.record.gen_is_acc_alert = 'N';
-    this.record.gen_protected = 'N';
+    this.record.gen_marketing_mail = 'N';
+
     this.gen_branch_b = false;
     this.record.gen_is_importer_b = false;
     this.record.gen_is_exporter_b = false;
@@ -272,6 +273,7 @@ export class PartyEditComponent implements OnInit {
     this.record.gen_poa_customs_yn_b = false;
     this.record.gen_poa_isf_yn_b = false;
     this.record.gen_bond_yn_b = false;
+    this.record.gen_marketing_mail_b = false;
     // this.record.gen_carrier_email = '';
     this.gs.IsAdmin
 
@@ -322,6 +324,7 @@ export class PartyEditComponent implements OnInit {
         this.record.gen_poa_customs_yn_b = (this.record.gen_poa_customs_yn == "Y") ? true : false;
         this.record.gen_poa_isf_yn_b = (this.record.gen_poa_isf_yn == "Y") ? true : false;
         this.record.gen_bond_yn_b = (this.record.gen_bond_yn == "Y") ? true : false;
+        this.record.gen_marketing_mail_b = (this.record.gen_marketing_mail == "Y") ? true : false;
 
         profitamt = +this.record.gen_min_profit;
         if (profitamt <= 0)
@@ -383,6 +386,7 @@ export class PartyEditComponent implements OnInit {
     this.record.gen_poa_customs_yn = this.record.gen_poa_customs_yn_b ? 'Y' : 'N';
     this.record.gen_poa_isf_yn = this.record.gen_poa_isf_yn_b ? 'Y' : 'N';
     this.record.gen_bond_yn = this.record.gen_bond_yn_b ? 'Y' : 'N';
+    this.record.gen_marketing_mail = this.record.gen_marketing_mail_b ? 'Y' : 'N';
 
     if (this.record.gen_is_shipper_b)
       Type2 += "S";

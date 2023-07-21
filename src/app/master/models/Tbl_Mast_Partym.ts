@@ -136,7 +136,8 @@ export interface Tbl_Mast_Partym {
     gen_is_parentmemo: boolean;
     rec_edited_by: string;
     rec_edited_date: string;
-
+    gen_marketing_mail: string;
+    gen_marketing_mail_b: boolean;
 }
 
 export interface vm_Tbl_Mast_Partym {
