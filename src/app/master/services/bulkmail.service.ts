@@ -37,8 +37,8 @@ export class BulkmailService {
     private appid = '';
     MainList: Tbl_Addr_Catgory[] = [];
     MainListOth: Tbl_Addr_Catgory[] = [];
-    public chkall: boolean = true;
-    public all: boolean = true;
+    public chkall: boolean = false;
+    public all: boolean = false;
     public EmailIdsOnly: boolean = false;
     public TestMail: boolean = false;
 
@@ -181,7 +181,7 @@ export class BulkmailService {
         this.record.records = this.MainList;
 
         this.MainListOth = new Array<Tbl_Addr_Catgory>();
-        this.FillMainListOth("MARKETING_IMPORT", "Marketing Import");
+        this.FillMainListOth("OCEAN/AIR IMPORT MARKETING", "Ocean/Air Import Marketing");
         this.record.recordsoth = this.MainListOth;
 
         this.mdata$.next(this.record);
@@ -192,7 +192,7 @@ export class BulkmailService {
         Rec.cat_id = FldId;
         Rec.cat_name = FldName;
         Rec.cat_yn = "Y";
-        Rec.cat_yn_b = true;
+        Rec.cat_yn_b = false;
         this.MainList.push(Rec)
     }
 
