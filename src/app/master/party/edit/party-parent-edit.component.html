@@ -4,8 +4,8 @@
             <label class="mr-3">{{title}} ({{mode}})</label>
             <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)" (click)="NewRecord()">New</button> -->
             <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid)"
-            [routerLink]="['/Silver.Master/PartyParentEditPage']"
-            [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.type,origin: 'partyparent-edit-page',mode: 'ADD'}">New</a>
+                [routerLink]="['/Silver.Master/PartyParentEditPage']"
+                [queryParams]="{appid : gs.appid, menuid: this.menuid,pkid: '',type: this.type,origin: 'partyparent-edit-page',mode: 'ADD'}">New</a>
             <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
         </div>
     </div>
@@ -22,8 +22,8 @@
                 <div class="row">
 
                     <!-- First row -->
-                    <div class="col-md-12 px-0 mx-0">
-                        <div class="row border">
+                    <div class="col-md-12 px-0 py-1  mx-0 border">
+                        <div class="row ">
                             <div class="col-md-6 testbox  px-0 mx-0">
 
                                 <div class="form-group row">
@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
 
-                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'"  class="form-group row">
+                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'" class="form-group row">
                                     <label class="col-2 col-form-label col-form-label-sm">Address</label>
                                     <div class="col-10">
                                         <InputBox [(inputModel)]="record.gen_address1" maxlength="60" [uppercase]="true"
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
 
-                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'"  class="form-group row">
+                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'" class="form-group row">
                                     <label class="col-2 col-form-label col-form-label-sm"></label>
                                     <div class="col-10">
                                         <InputBox [(inputModel)]="record.gen_address2" maxlength="60" [uppercase]="true"
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
 
-                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'"  class="form-group row">
+                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'" class="form-group row">
                                     <label class="col-2 col-form-label col-form-label-sm"></label>
                                     <div class="col-10">
                                         <InputBox [(inputModel)]="record.gen_address3" maxlength="60" [uppercase]="true"
@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
 
-                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'"  class="form-group row">
+                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'" class="form-group row">
                                     <label class="col-2 col-form-label col-form-label-sm">City</label>
                                     <div class="col-10">
                                         <InputBox [(inputModel)]="record.gen_location" maxlength="60" [uppercase]="true"
@@ -87,7 +87,7 @@
                                         </InputBox>
                                     </div>
                                 </div>
-                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'"  class="form-group row">
+                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'" class="form-group row">
                                     <label class="col-2 col-form-label col-form-label-sm">State</label>
                                     <div class="col-10">
                                         <InputBox [(inputModel)]="record.gen_state" maxlength="60" [uppercase]="true"
@@ -95,7 +95,7 @@
                                         </InputBox>
                                     </div>
                                 </div>
-                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'"  class="form-group row">
+                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'" class="form-group row">
                                     <label class="col-2 col-form-label col-form-label-sm">Country</label>
                                     <div class="col-10">
                                         <app-autocomplete2 [controlname]="'COUNTRY'" [tabletype]="'PARAM'"
@@ -105,7 +105,7 @@
                                         </app-autocomplete2>
                                     </div>
                                 </div>
-                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'"  class="form-group row">
+                                <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'" class="form-group row">
                                     <label class="col-2 col-form-label col-form-label-sm">ZipCode</label>
                                     <div class="col-10  input-group input-group-sm">
                                         <!-- <InputBox [(inputModel)]="record.gen_pincode" maxlength="30" [uppercase]="true"
@@ -119,7 +119,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'"  class="col-md-6 testbox  px-0 mx-0">
+                            <div *ngIf="gs.PARENT_ADDRESS_REQUIRED =='Y'" class="col-md-6 testbox  px-0 mx-0">
                                 <div class="form-group row">
                                     <label class="col-2 col-form-label col-form-label-sm">Contact</label>
                                     <div class="col-10">
@@ -230,10 +230,11 @@
 
                 <div class="row">
 
-                    <div class="col-md-12  px-0 mx-0">
+                    <div class="col-md-12  px-1 py-1 mx-0 border">
                         <div class="page-body table-responsive">
                             <div class="form-group row">
-                                <label class="col-12  pr-0 col-form-label col-form-label-sm"><strong>Other Contacts</strong></label>
+                                <label class="col-12  pr-0 col-form-label col-form-label-sm"><strong>Other
+                                        Contacts</strong></label>
                             </div>
                             <table class="table table-hover table-sm cntr">
                                 <thead class="page-body-thead">
@@ -251,23 +252,45 @@
                                 </thead>
                                 <tbody class="page-body-tbody">
                                     <tr *ngFor="let rec of records">
-                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_name" [field]="'cont_name'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
-                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_title" [field]="'cont_title'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
+                                        <td class="p-0">
+                                            <InputBox [(inputModel)]="rec.cont_name" [field]="'cont_name'"
+                                                [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox>
+                                        </td>
+                                        <td class="p-0">
+                                            <InputBox [(inputModel)]="rec.cont_title" [field]="'cont_title'"
+                                                [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox>
+                                        </td>
 
                                         <td class="p-0">
                                             <app-autocomplete2 [controlname]="'CONTACT GROUP'" [tabletype]="'PARAM'"
-                                            [subtype]="'CONTACT GROUP'" [displaycolumn]="'NAME'"
-                                            [displaydata]="rec.cont_group_name"
-                                            (ValueChanged)="LovSelected2($event,rec)">
-                                        </app-autocomplete2>
+                                                [subtype]="'CONTACT GROUP'" [displaycolumn]="'NAME'"
+                                                [displaydata]="rec.cont_group_name"
+                                                (ValueChanged)="LovSelected2($event,rec)">
+                                            </app-autocomplete2>
                                         </td>
-                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_email" [field]="'cont_email'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
-                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_remarks" [field]="'cont_remarks'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
-                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_tel" [field]="'cont_tel'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
-                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_mobile" [field]="'cont_mobile'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
-                                        <td class="p-0"><InputBox [(inputModel)]="rec.cont_oth_messenger" [field]="'cont_oth_messenger'" [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox></td>
-                                        <td class="p-0" style="text-align:center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
-                                            (click)="RemoveRow(rec)"></i></td>
+                                        <td class="p-0">
+                                            <InputBox [(inputModel)]="rec.cont_email" [field]="'cont_email'"
+                                                [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox>
+                                        </td>
+                                        <td class="p-0">
+                                            <InputBox [(inputModel)]="rec.cont_remarks" [field]="'cont_remarks'"
+                                                [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox>
+                                        </td>
+                                        <td class="p-0">
+                                            <InputBox [(inputModel)]="rec.cont_tel" [field]="'cont_tel'"
+                                                [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox>
+                                        </td>
+                                        <td class="p-0">
+                                            <InputBox [(inputModel)]="rec.cont_mobile" [field]="'cont_mobile'"
+                                                [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox>
+                                        </td>
+                                        <td class="p-0">
+                                            <InputBox [(inputModel)]="rec.cont_oth_messenger"
+                                                [field]="'cont_oth_messenger'" [maxlength]="60" [uppercase]="true"
+                                                (blur)="onBlur($event)"></InputBox>
+                                        </td>
+                                        <td class="p-0" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
+                                                aria-hidden="true" (click)="RemoveRow(rec)"></i></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -281,7 +304,7 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-md-12  px-0 mx-0">
+                    <div class="col-md-12 px-1 py-1 mx-0 border">
                         <div class="page-body table-responsive">
                             <table class="table  table-hover table-sm">
                                 <thead class="page-body-thead">
@@ -314,9 +337,10 @@
 
                     <div class="form-group row">
                         <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation2('MEMO')">Memo</button> -->
-                        <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)" 
-                        [style.color]="record.gen_is_parentmemo=='Y'?'red':'white'"
-                        [routerLink]="BtnNavigation2('MEMO','L')" [queryParams]="BtnNavigation2('MEMO','P')">Memo</a>
+                        <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(menuid)"
+                            [style.color]="record.gen_is_parentmemo=='Y'?'red':'white'"
+                            [routerLink]="BtnNavigation2('MEMO','L')"
+                            [queryParams]="BtnNavigation2('MEMO','P')">Memo</a>
                     </div>
 
                     <!-- <div class="form-group row">
@@ -360,14 +384,18 @@
 
                 </div> -->
 
-                <div class="form-group row">
-                    <button class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
-                </div>
+                    <div class="form-group row">
+                        <button class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.canSave(menuid,mode)"
+                            (click)="Save()">Save</button>
+                    </div>
 
+                </div>
             </div>
+
+
+
         </div>
     </div>
-
     <div class="page-footer">
         <div class="row justify-content-center p-1">
             <button class="btn btn-primary btn-md" *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
@@ -381,7 +409,7 @@
             {{record.rec_created_date}} </label>
     </div>
 </div>
-<!-- <div *ngIf="tab=='report'">
+    <!-- <div *ngIf="tab=='report'">
     <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
         (callbackevent)="callbackevent($event)"></app-report>
 </div>
