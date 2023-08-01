@@ -225,7 +225,9 @@ export class PartyParentEditComponent implements OnInit {
     this.record.gen_cust_group_id = '';
     this.record.gen_is_acc_alert = 'N';
     this.record.gen_protected = 'N';
+    this.record.gen_marketing_mail = 'N';
     this.gen_branch_b = false;
+    
 
     this.gs.IsAdmin
 
