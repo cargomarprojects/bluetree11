@@ -374,7 +374,7 @@ export class BulkmailService {
             str += " | Subject cannot be empty";
         }
 
-        if (this.gs.isBlank(this.Txt_Message)) {
+        if (this.gs.isBlank(this.Txt_Message) && !this.Txt_Message_Disable) {
             bRet = false;
             str += " | Message body cannot be empty";
         }
