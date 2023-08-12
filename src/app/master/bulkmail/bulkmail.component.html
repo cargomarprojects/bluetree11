@@ -14,11 +14,11 @@
         <div class="col-md-4 p-1">
             <ul class="nav nav-tabs" id="myTabFilter" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="default-tab" data-toggle="tab" href="#default" role="tab"
+                    <a class="nav-link active" id="default-tab" data-toggle="tab" href="#default" role="tab" (click)="resetControl('default')"
                         aria-controls="default" aria-selected="true">Default</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="others-tab" data-toggle="tab" href="#others" role="tab"
+                    <a class="nav-link" id="others-tab" data-toggle="tab" href="#others" role="tab"  (click)="resetControl('others')"
                         aria-controls="others" aria-selected="false">Others</a>
                 </li>
             </ul>
@@ -133,7 +133,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12">
-                                            <textarea rows="10" [style.font-family]="mainservice.msgFontFamily"
+                                            <textarea rows="10" [disabled]="mainservice.Txt_Message_Disable" [style.font-family]="mainservice.msgFontFamily"
                                                 [style.font-size]="mainservice.msgFontSize"
                                                 [style.color]="mainservice.msgForeground"
                                                 [style.font-weight]="mainservice.msgFontWeight"

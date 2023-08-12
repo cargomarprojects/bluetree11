@@ -42,6 +42,8 @@ export class BulkmailService {
     public EmailIdsOnly: boolean = false;
     public TestMail: boolean = false;
 
+    public Txt_Message_Disable: boolean = false;
+
     public Txt_Subject: string = "";
     public Txt_Message: string = "";
     public Txt_Error: string = "";
@@ -224,6 +226,11 @@ export class BulkmailService {
             _rec.cat_yn = 'Y';
         else
             _rec.cat_yn = 'N';
+        this.Txt_Message_Disable = false;
+        if(_rec.cat_name=='Ocean/Air Import Marketing')
+        {
+            this.Txt_Message_Disable = true;
+        }
     }
 
     Search(_searchdata: any, type: string = '') {

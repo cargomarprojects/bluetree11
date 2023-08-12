@@ -90,12 +90,14 @@ export class BulkmailComponent implements OnInit {
   getActiveTabID() {
     var $activeTab = $('.tab-content .tab-pane.active');
     var activeId = $activeTab.attr('id');
-    if (activeId == 'default')
+    if (activeId == 'default') {
       this.mainservice.activeTabId = 'DEFAULT';
-    if (activeId == 'others')
+    }
+    if (activeId == 'others') {
       this.mainservice.activeTabId = 'OTHERS';
-     
-      // $('.nav-tabs a').on('shown.bs.tab', function(e){
+    }
+
+    // $('.nav-tabs a').on('shown.bs.tab', function(e){
     //   var x = $(e.target).text();         // active tab
     //   var y = $(e.relatedTarget).text();  // previous tab
     //   $(".act span").text(x);
@@ -105,6 +107,13 @@ export class BulkmailComponent implements OnInit {
     // alert(target);
     // });
 
+  }
+
+  resetControl(_type: string) {
+    if (_type == 'default')
+      this.mainservice.Txt_Message_Disable = false;
+    if (_type == 'others')
+      this.mainservice.Txt_Message_Disable = true;
   }
 
 }
