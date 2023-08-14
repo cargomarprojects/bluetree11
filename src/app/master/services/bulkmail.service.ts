@@ -326,6 +326,7 @@ export class BulkmailService {
         SearchData.ACTIVE_TAB = this.activeTabId.toUpperCase();
         SearchData.TEST_MAIL = this.TestMail ? 'Y' : 'N';
         SearchData.TEST_MAIL_IDS = 'softwaresupport@cargomar.in,joy@cargomar.in';
+        SearchData.REPORT_FOLDER = this.gs.GLOBAL_REPORT_FOLDER;
 
         const mailRecord = <vm_Tbl_Addr_Catgory>{};
         if (this.activeTabId.toUpperCase() == "OTHERS")
@@ -349,6 +350,7 @@ export class BulkmailService {
 
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
+                alert(this.record.errormessage);
             });
 
     }
