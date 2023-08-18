@@ -227,8 +227,7 @@ export class BulkmailService {
         else
             _rec.cat_yn = 'N';
         this.Txt_Message_Disable = false;
-        if(_rec.cat_name=='Ocean/Air Import Marketing')
-        {
+        if (_rec.cat_name == 'Ocean/Air Import Marketing') {
             this.Txt_Message_Disable = true;
         }
     }
@@ -411,6 +410,10 @@ export class BulkmailService {
         SearchData.PATH = filePath;
         SearchData.BM_PKID = _rec.bm_pkid;
         SearchData.BM_FILECOUNT = _rec.bm_filecount;
+        if (_rec.bm_desc == "OCEAN/AIR IMPORT MARKETING")
+            SearchData.SIGNATUREIMAGE = this.gs.GLOBAL_REPORT_FOLDER + "\\Images\\email_signature.jpg";
+        else
+            SearchData.SIGNATUREIMAGE = '';
         this.SendMail(SearchData)
             .subscribe(response => {
                 _rec.bm_failed_seq = response.failseq;
