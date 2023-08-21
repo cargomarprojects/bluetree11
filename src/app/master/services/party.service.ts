@@ -112,7 +112,7 @@ export class PartyService {
                 errormessage: '',
                 records: [],
                 searchQuery: <SearchQuery>{
-                    searchString: '', searchSort: 'gen_short_name', searchState: '', searchCity: '', searchTel: '', searchFax: '', searchZip: '', searchBlackAc: false, menuType: this.param_type,
+                    searchString: '', searchSort: 'gen_short_name', searchState: '', searchCity: '', searchTel: '', searchFax: '', searchZip: '', searchBlackAc: false,searchMarketMail:false, menuType: this.param_type,
                     searchDateBasedon: 'NA', searchSdate: '', searchEdate: '', searchCreatedBy: '', searchEditedBy: ''
                 },
                 pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
@@ -163,6 +163,7 @@ export class PartyService {
         SearchData.EDATE = this.record.searchQuery.searchEdate;
         SearchData.CREATED_BY = this.record.searchQuery.searchCreatedBy;
         SearchData.EDITED_BY = this.record.searchQuery.searchEditedBy;
+        SearchData.MARKETING_MAIL = this.record.searchQuery.searchMarketMail == true ? 'Y' : 'N';
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;

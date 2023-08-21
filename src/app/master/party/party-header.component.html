@@ -29,18 +29,20 @@
                         </select>
                     </div>
                     <div class="col-8">
-                        <app-date [inputdate]="searchQuery.searchSdate" (ValueChanged)="searchQuery.searchSdate=$event"></app-date>
+                        <app-date [inputdate]="searchQuery.searchSdate"
+                            (ValueChanged)="searchQuery.searchSdate=$event"></app-date>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">To</label>
                     <div class="col-8">
-                        <app-date [inputdate]="searchQuery.searchEdate" (ValueChanged)="searchQuery.searchEdate=$event"></app-date>
+                        <app-date [inputdate]="searchQuery.searchEdate"
+                            (ValueChanged)="searchQuery.searchEdate=$event"></app-date>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-              
+
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Created By</label>
                     <div class="col-8">
@@ -55,8 +57,8 @@
                         </InputBox>
                     </div>
                 </div>
-              
-              
+
+
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Code/Name/FirmCode</label>
                     <div class="col-8">
@@ -105,7 +107,10 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-4">
+                        <input type="checkbox" class="form-check-input"
+                            [(ngModel)]="searchQuery.searchMarketMail"><span>In Marketing Mail</span>
+                    </div>
                     <div class="col-8 input-group input-group-sm">
                         <div class="form-check mr-1">
                             <input type="checkbox" class="form-check-input"
@@ -113,7 +118,7 @@
                         </div>
                         <button [disabled]="loading" (click)="List('SCREEN')"
                             class="btn btn-primary btn-sm mr-1">Search</button>
-                            <button [disabled]="loading" *ngIf="mainservice.canPrint"  (click)="List('EXCEL')"
+                        <button [disabled]="loading" *ngIf="mainservice.canPrint" (click)="List('EXCEL')"
                             class="btn btn-primary btn-sm mr-1">Excel</button>
                     </div>
                 </div>

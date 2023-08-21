@@ -157,6 +157,7 @@ export interface SearchQuery {
     searchZip: string;
     searchFax: string;
     searchBlackAc: boolean;
+    searchMarketMail: boolean;
     menuType: string;
     searchDateBasedon: string;
     searchSdate: string;
