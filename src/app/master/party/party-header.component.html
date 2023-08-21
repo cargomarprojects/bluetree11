@@ -108,13 +108,13 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <input type="checkbox" class="form-check-input"
-                            [(ngModel)]="searchQuery.searchMarketMail"><span>In Marketing</span>
+                        <input type="checkbox" class="form-check-input ml-1"
+                            [(ngModel)]="searchQuery.searchMarketMail"><span class="ml-4">In.Marketing</span>
                     </div>
                     <div class="col-8 input-group input-group-sm">
                         <div class="form-check mr-1">
                             <input type="checkbox" class="form-check-input"
-                                [(ngModel)]="searchQuery.searchBlackAc"><span>Black Account</span>
+                                [(ngModel)]="searchQuery.searchBlackAc"><span>Black.Account</span>
                         </div>
                         <button [disabled]="loading" (click)="List('SCREEN')"
                             class="btn btn-primary btn-sm mr-1">Search</button>
