@@ -46,10 +46,13 @@ export class DailyShipReportHeaderComponent implements OnInit {
             this.searchQuery.cust_parent_id = _Record.id;
             this.searchQuery.cust_parent_name = _Record.name;
         }
+        if (_Record.controlname === 'SHIPPER') {
+            this.searchQuery.shipper_id = _Record.id;
+            this.searchQuery.shipper_name = _Record.name;
+        }
     }
 
     List(outputformat: string) {
-
         if (this.gs.isBlank(this.searchQuery.fromdate))
             this.searchQuery.fromdate = this.gs.defaultValues.today;
         if (this.gs.isBlank(this.searchQuery.todate))

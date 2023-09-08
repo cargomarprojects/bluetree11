@@ -10,6 +10,8 @@ export interface SearchQuery {
     cust_parent_name: string;
     cust_id: string;
     cust_name: string;
+    shipper_id: string;
+    shipper_name: string;
 }
 
 export class Tbl_Daily_Ship_Report {

@@ -148,6 +148,8 @@ export class DailyShipReportService {
         SearchData.CUST_PARENT_NAME = this.record.searchQuery.cust_parent_name;
         SearchData.CUST_ID = this.record.searchQuery.cust_id;
         SearchData.CUST_NAME = this.record.searchQuery.cust_name;
+        SearchData.SHIPPER_ID = this.record.searchQuery.shipper_id;
+        SearchData.SHIPPER_NAME = this.record.searchQuery.shipper_name;
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
