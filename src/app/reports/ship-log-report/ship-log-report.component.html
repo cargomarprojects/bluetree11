@@ -8,15 +8,13 @@
     </div>
 
     <div *ngIf="currentTab=='LIST'">
-
         <div class="page-list">
             <div class="page-search">
-
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-sm-3 p-0">
                         <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm">Mode</label>
-                            <div class="col-8">
+                            <label class="col-sm-4 col-form-label col-form-label-sm">Mode</label>
+                            <div class="col-sm-8">
                                 <select class="form-control form-control-sm" [(ngModel)]="job_mode"
                                     (change)="OnChange('job_mode')">
                                     <option [value]="'OCEAN EXPORT'">OCEAN EXPORT</option>
@@ -28,7 +26,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-4">
+                            <div class="col-sm-4">
                                 <!-- <select class="form-control form-control-sm" [(ngModel)]="date_basedon">
                                     <option [value]="'REF. DATE'">Ref. Date</option>
                                     <option [value]="'ETD'">ETD</option>
@@ -38,19 +36,19 @@
                                     <option *ngFor="let rec of DateBasedList" [value]="rec.id">{{rec.name}}</option>
                                 </select>
                             </div>
-                            <div class="col-8">
+                            <div class="col-sm-8">
                                 <app-date [inputdate]="sdate" (ValueChanged)="sdate=$event"></app-date>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm">To</label>
-                            <div class="col-8">
+                            <label class="col-sm-4 col-form-label col-form-label-sm">To</label>
+                            <div class="col-sm-8">
                                 <app-date [inputdate]="edate" (ValueChanged)="edate=$event"></app-date>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm">Shipper</label>
-                            <div class="col-8">
+                            <label class="col-sm-4 col-form-label col-form-label-sm">Shipper</label>
+                            <div class="col-sm-8">
                                 <app-autocomplete2 [controlname]="'SHIPPER'" [tabletype]="'MASTER'"
                                     [subtype]="'SHIPPER'" [displaycolumn]="'NAME'" [displaydata]="shipper_name"
                                     (ValueChanged)="LovSelected($event)">
@@ -58,8 +56,8 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm">Consignee</label>
-                            <div class="col-8">
+                            <label class="col-sm-4 col-form-label col-form-label-sm">Consignee</label>
+                            <div class="col-sm-8">
                                 <app-autocomplete2 [controlname]="'CONSIGNEE'" [tabletype]="'MASTER'"
                                     [subtype]="'CONSIGNEE'" [displaycolumn]="'NAME'" [displaydata]="consignee_name"
                                     (ValueChanged)="LovSelected($event)">
@@ -67,24 +65,22 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm">Agent</label>
-                            <div class="col-8">
-
+                            <label class="col-sm-4 col-form-label col-form-label-sm">Agent</label>
+                            <div class="col-sm-8">
                                 <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'MASTER'"
                                     [displaycolumn]="'NAME'" [displaydata]="agent_name"
                                     (ValueChanged)="LovSelected($event)">
                                 </app-autocomplete2>
-
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-4">
+                            <div class="col-sm-4">
                                 <select class="form-control form-control-sm" [(ngModel)]="handled_basedon">
                                     <option [value]="'HANDLED BY'">Handled By</option>
                                     <option [value]="'SALES REP.'">Sales Rep.</option>
                                 </select>
                             </div>
-                            <div class="col-8">
+                            <div class="col-sm-8">
                                 <app-autocomplete2 [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'"
                                     [subtype]="'SALESMAN'" [displaycolumn]="'NAME'" [displaydata]="handled_name"
                                     (ValueChanged)="LovSelected($event)">
@@ -92,8 +88,195 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm">Based On</label>
-                            <div class="col-8">
+                            <label class="col-sm-4 col-form-label col-form-label-sm">Created By</label>
+                            <div class="col-sm-8">
+                                <app-autocomplete2 [controlname]="'USER'" [tabletype]="'USER'" [displaycolumn]="'CODE'"
+                                    [displaydata]="user_code" (ValueChanged)="LovSelected($event)">
+                                </app-autocomplete2>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group row">
+                            <label class="col-sm-4 col-form-label col-form-label-sm">Based On</label>
+                            <div class="col-sm-8">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                        [(ngModel)]="report_masterwise">
+                                    <label class="form-check-label" for="inlineCheckbox1">Master</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2"
+                                        [(ngModel)]="report_housewise">
+                                    <label class="form-check-label" for="inlineCheckbox2">House</label>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="col-sm-3 p-0">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <button class="btn btn-info btn-sm mr-1" (click)="SelectDeselect('SELECT')">Select
+                                    All</button>
+                                <button class="btn btn-info btn-sm mr-1" (click)="SelectDeselect('DESELECT')">Deselect
+                                    All </button>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[0].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[0].ischecked"
+                                        (click)="SelectDeselect2(checkList[0].code,0)"
+                                        #chkbox0><span>{{checkList[0].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[1].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[1].ischecked"
+                                        (click)="SelectDeselect2(checkList[1].code,1)"
+                                        #chkbox1><span>{{checkList[1].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[2].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[2].ischecked"
+                                        (click)="SelectDeselect2(checkList[2].code,2)"
+                                        #chkbox2><span>{{checkList[2].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[3].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[3].ischecked"
+                                        (click)="SelectDeselect2(checkList[3].code,3)"
+                                        #chkbox3><span>{{checkList[3].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[4].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[4].ischecked"
+                                        (click)="SelectDeselect2(checkList[4].code,4)"
+                                        #chkbox4><span>{{checkList[4].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[5].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[5].ischecked"
+                                        (click)="SelectDeselect2(checkList[5].code,5)"
+                                        #chkbox5><span>{{checkList[5].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[6].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[6].ischecked"
+                                        (click)="SelectDeselect2(checkList[6].code,6)"
+                                        #chkbox6><span>{{checkList[6].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[7].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[7].ischecked"
+                                        (click)="SelectDeselect2(checkList[7].code,7)"
+                                        #chkbox7><span>{{checkList[7].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="chklstCol2Visible" class="col-sm-3 p-0">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[8].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[8].ischecked"
+                                        (click)="SelectDeselect2(checkList[8].code,8)"
+                                        #chkbox8><span>{{checkList[8].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[9].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[9].ischecked"
+                                        (click)="SelectDeselect2(checkList[9].code,9)"
+                                        #chkbox9><span>{{checkList[9].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[10].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[10].ischecked"
+                                        (click)="SelectDeselect2(checkList[10].code,10)"
+                                        #chkbox10><span>{{checkList[10].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[11].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[11].ischecked"
+                                        (click)="SelectDeselect2(checkList[11].code,11)"
+                                        #chkbox11><span>{{checkList[11].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[12].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[12].ischecked"
+                                        (click)="SelectDeselect2(checkList[12].code,12)"
+                                        #chkbox12><span>{{checkList[12].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[13].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[13].ischecked"
+                                        (click)="SelectDeselect2(checkList[13].code,13)"
+                                        #chkbox13><span>{{checkList[13].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[14].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[14].ischecked"
+                                        (click)="SelectDeselect2(checkList[14].code,14)"
+                                        #chkbox14><span>{{checkList[14].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div *ngIf="checkList[15].name.length>0" class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                        [(ngModel)]="checkList[15].ischecked"
+                                        (click)="SelectDeselect2(checkList[15].code,15)"
+                                        #chkbox15><span>{{checkList[15].name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 p-0">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label col-form-label-sm">Based On</label>
+                            <div class="col-sm-8">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
                                         [(ngModel)]="report_masterwise">
@@ -106,173 +289,22 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <button class="btn btn-info btn-sm mr-1" (click)="SelectDeselect('SELECT')">Select
-                                    All</button>
-                                <button class="btn btn-info btn-sm mr-1" (click)="SelectDeselect('DESELECT')">Deselect
-                                    All </button>
+                        <div *ngIf="job_mode=='OCEAN IMPORT'" class="form-group row">
+                            <label class="col-sm-4 col-form-label col-form-label-sm">Inco Term</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-control-sm" [(ngModel)]="inco_term">
+                                    <option [value]="'ALL'">ALL</option>
+                                    <option [value]="'NA'">NA</option>
+                                    <option [value]="'CUSTOMS ONLY'">CUSTOMS ONLY</option>
+                                    <option [value]="'DAP'">DAP</option>
+                                    <option [value]="'DDP'">DDP</option>
+                                    <option [value]="'DDU'">DDU</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[0].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[0].ischecked"
-                                        (click)="SelectDeselect2(checkList[0].code,0)"
-                                        #chkbox0><span>{{checkList[0].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[1].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[1].ischecked"
-                                        (click)="SelectDeselect2(checkList[1].code,1)"
-                                        #chkbox1><span>{{checkList[1].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[2].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[2].ischecked"
-                                        (click)="SelectDeselect2(checkList[2].code,2)"
-                                        #chkbox2><span>{{checkList[2].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[3].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[3].ischecked"
-                                        (click)="SelectDeselect2(checkList[3].code,3)"
-                                        #chkbox3><span>{{checkList[3].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[4].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[4].ischecked"
-                                        (click)="SelectDeselect2(checkList[4].code,4)"
-                                        #chkbox4><span>{{checkList[4].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[5].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[5].ischecked"
-                                        (click)="SelectDeselect2(checkList[5].code,5)"
-                                        #chkbox5><span>{{checkList[5].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[6].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[6].ischecked"
-                                        (click)="SelectDeselect2(checkList[6].code,6)"
-                                        #chkbox6><span>{{checkList[6].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[7].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[7].ischecked"
-                                        (click)="SelectDeselect2(checkList[7].code,7)"
-                                        #chkbox7><span>{{checkList[7].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="chklstCol2Visible" class="col-md-3">
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[8].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[8].ischecked"
-                                        (click)="SelectDeselect2(checkList[8].code,8)"
-                                        #chkbox8><span>{{checkList[8].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[9].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input" [(ngModel)]="checkList[9].ischecked"
-                                        (click)="SelectDeselect2(checkList[9].code,9)"
-                                        #chkbox9><span>{{checkList[9].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[10].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input"
-                                        [(ngModel)]="checkList[10].ischecked"
-                                        (click)="SelectDeselect2(checkList[10].code,10)"
-                                        #chkbox10><span>{{checkList[10].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[11].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input"
-                                        [(ngModel)]="checkList[11].ischecked"
-                                        (click)="SelectDeselect2(checkList[11].code,11)"
-                                        #chkbox11><span>{{checkList[11].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[12].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input"
-                                        [(ngModel)]="checkList[12].ischecked"
-                                        (click)="SelectDeselect2(checkList[12].code,12)"
-                                        #chkbox12><span>{{checkList[12].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[13].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input"
-                                        [(ngModel)]="checkList[13].ischecked"
-                                        (click)="SelectDeselect2(checkList[13].code,13)"
-                                        #chkbox13><span>{{checkList[13].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[14].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input"
-                                        [(ngModel)]="checkList[14].ischecked"
-                                        (click)="SelectDeselect2(checkList[14].code,14)"
-                                        #chkbox14><span>{{checkList[14].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-12">
-                                <div *ngIf="checkList[15].name.length>0" class="form-check">
-                                    <input type="checkbox" class="form-check-input"
-                                        [(ngModel)]="checkList[15].ischecked"
-                                        (click)="SelectDeselect2(checkList[15].code,15)"
-                                        #chkbox15><span>{{checkList[15].name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm">Sort Order</label>
-                            <div class="col-8">
+                            <label class="col-sm-4 col-form-label col-form-label-sm">Sort Order</label>
+                            <div class="col-sm-8">
                                 <select class="form-control form-control-sm" [(ngModel)]="sort_order">
                                     <option [value]="'mbl_refno'">REFNO</option>
                                     <option [value]="'mbl_no'">MASTER</option>
@@ -289,28 +321,20 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm">ETA Within</label>
-                            <div class="col-8">
+                            <label class="col-sm-4 col-form-label col-form-label-sm">ETA Within</label>
+                            <div class="col-sm-4">
                                 <input class="form-control form-control-sm" type="number" [(ngModel)]="within_eta"
                                     maxlength="5" />
                             </div>
-                        </div>
-                        <div *ngIf="job_mode=='OCEAN IMPORT'" class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm">Inco Term</label>
-                            <div class="col-8">
-                                <select class="form-control form-control-sm" [(ngModel)]="inco_term">
-                                    <option [value]="'ALL'">ALL</option>
-                                    <option [value]="'NA'">NA</option>
-                                    <option [value]="'CUSTOMS ONLY'">CUSTOMS ONLY</option>
-                                    <option [value]="'DAP'">DAP</option>
-                                    <option [value]="'DDP'">DDP</option>
-                                    <option [value]="'DDU'">DDU</option>
-                                </select>
+                            <div *ngIf="job_mode=='OCEAN IMPORT'" class="col-sm-4 form-check pr-0">
+                                <input type="checkbox" class="form-check-input" [(ngModel)]="pending_ams" />
+                                <span>Pending.AMS</span>
+                                <!-- <span>Pndg.AMS</span> -->
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm">Formats</label>
-                            <div class="col-4">
+                            <label class="col-sm-4 col-form-label col-form-label-sm">Formats</label>
+                            <div class="col-sm-4">
                                 <select class="form-control form-control-sm" [(ngModel)]="format_type">
                                     <option [value]="'FORMAT-1'">FORMAT-1</option>
                                     <option [value]="'FORMAT-2'">FORMAT-2</option>
@@ -319,15 +343,15 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="col-4 form-check">
+                            <div class="col-sm-4 form-check">
                                 <input type="checkbox" class="form-check-input" [(ngModel)]="printer_friendly" />
-                                <span>Printer Friendly</span>
+                                <span>Printer.Friendly</span>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm"></label>
-                            <div class="col-8">
+                            <label class="col-sm-4 col-form-label col-form-label-sm"></label>
+                            <div class="col-sm-8">
                                 <button [disabled]="loading" (click)="List('SCREEN')"
                                     class="btn btn-primary btn-sm mr-1">Search</button>
                                 <button [disabled]="loading" *ngIf="gs.canPrint(menuid)" (click)="Print('PDF')"
@@ -337,19 +361,22 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm"></label>
-                            <div *ngIf="job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT'" class="col-8">
+                            <label class="col-sm-4 col-form-label col-form-label-sm"></label>
+                            <div *ngIf="job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT'" class="col-sm-8">
                                 <input type="checkbox" class="form-check-input ml-1" [(ngModel)]="handled_group" />
                                 <span class="ml-4">Handled By Wise</span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm"></label>
-                            <div class="col-8">
+                            <label class="col-sm-4 col-form-label col-form-label-sm"></label>
+                            <div class="col-sm-8">
                                 <button [disabled]="loading" *ngIf="job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT'"
-                                (click)="ANPendingList('PRINT')" class="btn btn-primary btn-sm mr-1">Pending A/N</button>
-                                <button [disabled]="loading" *ngIf="gs.user_code=='ADMIN' && (job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT')" (click)="ANPendingList('MAIL')"
-                                    class="btn btn-primary btn-sm mr-1">Mail Pending A/N</button>                          
+                                    (click)="ANPendingList('PRINT')" class="btn btn-primary btn-sm mr-1">Pending
+                                    A/N</button>
+                                <button [disabled]="loading"
+                                    *ngIf="gs.user_code=='ADMIN' && (job_mode=='OCEAN IMPORT'||job_mode=='AIR IMPORT')"
+                                    (click)="ANPendingList('MAIL')" class="btn btn-primary btn-sm mr-1">Mail Pending
+                                    A/N</button>
                             </div>
                         </div>
                     </div>
@@ -390,6 +417,8 @@
                         <th (click)="sort('mbl_pod_eta')"> ETA &nbsp;<i [ngClass]="getIcon('mbl_pod_eta')"></i> </th>
                         <th (click)="sort('mbl_cargo_loc_firmcode')"> FIRM.CODE &nbsp;<i
                                 [ngClass]="getIcon('mbl_cargo_loc_firmcode')"></i> </th>
+                        <th (click)="sort('hbl_ams_fileno')"> AMS.FILE# &nbsp;<i
+                                [ngClass]="getIcon('hbl_ams_fileno')"></i> </th>
                         <th (click)="sort('hbl_is_itshipment')"> IT.SHIPMENT &nbsp;<i
                                 [ngClass]="getIcon('hbl_is_itshipment')"></i> </th>
                         <th *ngIf="gs.company_code=='MNYC'" (click)="sort('mbl_carrier_an_recd_dt')"> A/N RECEIVED
@@ -398,8 +427,10 @@
                             &nbsp;<i [ngClass]="getIcon('mbl_an_sent_dt')"></i> </th>
                         <th (click)="sort('mbl_bo_status')"> STATUS &nbsp;<i [ngClass]="getIcon('mbl_bo_status')"></i>
                         </th>
-                        <th (click)="sort('mbl_bo_attended_code')"> BY &nbsp;<i
+                        <th (click)="sort('mbl_bo_attended_code')">STATUS.BY &nbsp;<i
                                 [ngClass]="getIcon('mbl_bo_attended_code')"></i> </th>
+                        <th (click)="sort('rec_created_by')"> CREATED.BY &nbsp;<i
+                                [ngClass]="getIcon('rec_created_by')"></i> </th>
                         <!-- <th> A </th>
                         <th> B </th>
                         <th> C </th>
@@ -431,6 +462,7 @@
                         <!-- <td  class='hlink2'> <app-ship-log-master-update [record]="rec"  (callbackevent)="masterupdatecallbackevent($event)"></app-ship-log-master-update></td> -->
                         <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT}}</td>
                         <td>{{rec.mbl_cargo_loc_firmcode}}</td>
+                        <td>{{rec.hbl_ams_fileno}}</td>
                         <td>{{rec.hbl_is_itshipment}}</td>
                         <td *ngIf="gs.company_code=='MNYC'">{{rec.mbl_carrier_an_recd_dt | date :
                             gs.date_display_fmt_with_time}}</td>
@@ -438,6 +470,7 @@
                             gs.date_display_fmt_with_time}}</td>
                         <td>{{rec.mbl_bo_status}}</td>
                         <td>{{rec.mbl_bo_attended_code}}</td>
+                        <td>{{rec.rec_created_by}}</td>
                         <!-- <td>{{rec.mbl_inv_stage_a}}</td>
                         <td>{{rec.mbl_inv_stage_b}}</td>
                         <td>{{rec.mbl_inv_stage_c}}</td>

@@ -79,6 +79,9 @@ export class ShipmentLogReportComponent implements OnInit {
   reportformat: string = '';
   inco_term: string = 'ALL';
   handled_group: boolean = true;
+  user_code: string = "";
+  user_name: string = "";
+  pending_ams: boolean = false;
 
   selectedId = '';
   sortCol = '';
@@ -159,6 +162,9 @@ export class ShipmentLogReportComponent implements OnInit {
         this.sortOrder = rec.sortorder;
         this.within_eta = rec.within_eta;
         this.inco_term = rec.inco_term;
+        this.user_code = rec.user_code;
+        this.user_name = rec.user_name;
+        this.pending_ams = rec.pending_ams;
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
         this.page_current = rec.page_current;
@@ -187,6 +193,9 @@ export class ShipmentLogReportComponent implements OnInit {
         this.SearchData.PRINTER_FRIENDLY = this.printer_friendly == true ? "Y" : "N";
         this.SearchData.WITHIN_ETA = this.within_eta;
         this.SearchData.INCO_TERM = this.inco_term;
+        this.SearchData.USER_CODE = this.user_code;
+        this.SearchData.USER_NAME = this.user_name;
+        this.SearchData.PENDING_AMS = this.pending_ams == true ? "Y" : "N";
       }
       else {
         this.isRecStored = false;
@@ -227,6 +236,9 @@ export class ShipmentLogReportComponent implements OnInit {
         this.sortOrder = true;
         this.within_eta = 0;
         this.inco_term = 'ALL';
+        this.user_code = '';
+        this.user_name = '';
+        this.pending_ams = false;
         this.SetStages();
       }
 
@@ -304,7 +316,9 @@ export class ShipmentLogReportComponent implements OnInit {
       this.SearchData.PRINTER_FRIENDLY = this.printer_friendly == true ? "Y" : "N";
       this.SearchData.WITHIN_ETA = this.within_eta;
       this.SearchData.INCO_TERM = this.inco_term;
-
+      this.SearchData.USER_CODE = this.user_code;
+      this.SearchData.USER_NAME = this.user_name;
+      this.SearchData.PENDING_AMS = this.pending_ams == true ? "Y" : "N";
       this.reportformat = this.format_type;
       this.selectedId = '';
     }
@@ -354,7 +368,9 @@ export class ShipmentLogReportComponent implements OnInit {
             sortorder: true,
             within_eta: this.within_eta,
             inco_term: this.inco_term,
-
+            user_code: this.SearchData.USER_CODE,
+            user_name: this.SearchData.USER_NAME,
+            pending_ams: this.pending_ams,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -436,7 +452,10 @@ export class ShipmentLogReportComponent implements OnInit {
       this.handled_id = _Record.id;
       this.handled_name = _Record.name;
     }
-
+    if (_Record.controlname == "USER") {
+      this.user_code = _Record.code;
+      this.user_name = _Record.name;
+    }
 
   }
 
@@ -527,6 +546,8 @@ export class ShipmentLogReportComponent implements OnInit {
     this.report_searchdata.WITHIN_ETA = this.within_eta;
     this.report_searchdata.INCO_TERM = this.inco_term;
     this.report_searchdata.PRINT_TYPE = _type;
+    this.report_searchdata.USER_CODE = this.user_code;
+    this.report_searchdata.PENDING_AMS = this.pending_ams == true ? "Y" : "N";
 
     if (_type == 'PDF') {
       this.tab = 'report';
@@ -675,7 +696,7 @@ export class ShipmentLogReportComponent implements OnInit {
     this.report_searchdata.COMP_NAME = this.gs.branch_name;
     this.report_searchdata.PROCESS_TYPE = _type;
     this.report_searchdata.HANDLEDBY_GROUP = this.handled_group == true ? "Y" : "N";;
-    this.report_searchdata.RPT_PATH = this.gs.GLOBAL_REPORT_FOLDER; 
+    this.report_searchdata.RPT_PATH = this.gs.GLOBAL_REPORT_FOLDER;
     this.report_searchdata.COMPANY_CODE = this.gs.company_code;
     this.report_searchdata.BRANCH_CODE = this.gs.branch_code;
     this.report_searchdata.USER_CODE = this.gs.user_code;
@@ -699,7 +720,7 @@ export class ShipmentLogReportComponent implements OnInit {
 
   ANPendingList2(_type: string) {
     this.report_searchdata.PROCESS_TYPE = "MAIL";
-    this.report_searchdata.HANDLEDBY_GROUP =  "Y";
+    this.report_searchdata.HANDLEDBY_GROUP = "Y";
     this.report_searchdata.COMPANY_CODE = this.gs.company_code;
     this.report_searchdata.BRANCH_CODE = this.gs.branch_code;
     this.mainservice.ANPendingList(this.report_searchdata)

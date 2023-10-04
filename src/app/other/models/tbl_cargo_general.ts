@@ -139,7 +139,8 @@ export interface Tbl_cargo_general {
     mbl_inv_stage_e: string;
     mbl_cargo_loc_firmcode: string;
     hbl_is_itshipment: string;
-
+    hbl_ams_fileno:string ;
+    
     mbl_container_tot_old: number;
     mbl_coloader_name: string;
     hbl_custom_clear_date: string;

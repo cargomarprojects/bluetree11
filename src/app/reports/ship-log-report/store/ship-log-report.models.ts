@@ -32,7 +32,10 @@ export interface ReportState {
     sortorder : boolean;    
     within_eta:number;
     inco_term:string;
-    
+    user_code:string;
+    user_name:string;
+    pending_ams:boolean;
+
     page_rows: number;
     page_count: number;
     page_current: number;
