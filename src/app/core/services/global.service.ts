@@ -54,7 +54,7 @@ export class GlobalService {
 
   public tab = ' 	';
 
-  public software_version_string = '1.212';
+  public software_version_string = '1.213';
 
   public baseUrl: string = "http://localhost:5000";
   //public baseUrl: string = "";
