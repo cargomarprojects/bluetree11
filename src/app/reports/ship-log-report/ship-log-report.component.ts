@@ -279,6 +279,11 @@ export class ShipmentLogReportComponent implements OnInit {
       return;
     }
 
+    if (this.job_mode == "OCEAN IMPORT" && this.pending_ams == true && this.report_housewise == false) {
+      this.errorMessage = 'House must be selected';
+      alert(this.errorMessage);
+      return;
+    }
 
     if (this.format_type == "FORMAT-4") {
       this.report_masterwise = false;
