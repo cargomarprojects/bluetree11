@@ -2072,6 +2072,7 @@ export class SeaImpHouseEditComponent implements OnInit {
         this.report_searchdata.UPDATE_REF_TYPE = "ARRIVAL-NOTICE";
         this.report_searchdata.UPDATE_REF_ID = this.pkid;
         this.report_searchdata.CONT_GROUP = this.gs.user_an_common_mail == "Y" ? 'EMAIL-TEMPLATE-AN-COMMON' : 'EMAIL-TEMPLATE-AN';
+        this.report_searchdata.ATTACH_BANKINFO = this.gs.branch_code == "NYC" ? 'Y' : 'N';
         this.report_menuid = this.gs.MENU_SI_HOUSE_ARRIVAL_NOTICE;
         this.tab = 'report';
 

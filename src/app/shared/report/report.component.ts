@@ -226,6 +226,7 @@ export class ReportComponent implements OnInit {
       this.AttachList.push({ filename: this._filename, filetype: this._filetype, filedisplayname: this._filedisplayname, filesize: 0 });
       if (!this.gs.isBlank(this._filename3))
         this.AttachList.push({ filename: this._filename3, filetype: this._filetype3, filedisplayname: this._filedisplayname3, filesize: 0 });
+      this.AttachBankInfo();//While sending AN set Parameter ATTACH_BANKINFO =Y 
       this.modal = this.modalservice.open(emailmodal, { centered: true });
     }
     else if (action == "excel") {
@@ -247,6 +248,19 @@ export class ReportComponent implements OnInit {
     else if (action == "print") {
       this.PrintPdf();
       //var url = this.gs.WWW_ROOT_FILE_FOLDER.replace("Files_Folder", "") + this._filename.replace('d:\\motherlines.us\\', '');
+    }
+  }
+
+  AttachBankInfo() {
+    if (!this.gs.isBlank(this._searchdata)) {
+      if (!this.gs.isBlank(this._searchdata.ATTACH_BANKINFO)) {
+        if (this._searchdata.ATTACH_BANKINFO == "Y") {
+          let _fAttch1 = this.gs.GLOBAL_REPORT_FOLDER + "\\Images\\Chase Bank Info - 9942.pdf";
+          let _fAttch2 = this.gs.GLOBAL_REPORT_FOLDER + "\\Images\\Bank Change Notice - 9942.pdf";
+          this.AttachList.push({ filename: _fAttch1, filetype: 'PDF', filedisplayname: 'Chase Bank Info - 9942.pdf', filesize: 0 });
+          this.AttachList.push({ filename: _fAttch2, filetype: 'PDF', filedisplayname: 'Bank Change Notice - 9942.pdf', filesize: 0 });
+        }
+      }
     }
   }
 
