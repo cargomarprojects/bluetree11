@@ -563,7 +563,7 @@ export class PartyEditComponent implements OnInit {
     let warningMsg: string = "";
     if (this.record.gen_is_consignee_b) {
       if (this.gs.isBlank(this.record.gen_chb_name) || this.gs.isBlank(this.record.gen_chb_add1)) {
-        warningMsg = "CHB is blank. Please check whether CHB exists in the House.";
+        warningMsg = "CHB is blank. Please check House / Notify Party.";
       }
     }
     
