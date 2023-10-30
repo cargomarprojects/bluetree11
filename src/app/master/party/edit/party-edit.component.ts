@@ -561,14 +561,16 @@ export class PartyEditComponent implements OnInit {
 
   private WarningMessage(): string {
     let warningMsg: string = "";
-    if (this.record.gen_is_consignee_b && this.record.gen_country_code == "US") {
-      if (this.gs.isBlank(this.record.gen_chb_name) || this.gs.isBlank(this.record.gen_chb_add1)) {
-        warningMsg = "CHB is blank. Please check House / Notify Party.";
+    if (this.gs.company_code == "MNYC") {
+      if (this.record.gen_is_consignee_b && this.record.gen_country_code == "US") {
+        if (this.gs.isBlank(this.record.gen_chb_name) || this.gs.isBlank(this.record.gen_chb_add1)) {
+          warningMsg = "CHB is blank. Please check House / Notify Party.";
+        }
       }
     }
-
     if (warningMsg)
       warningMsg += "\nDo you want to Save ?";
+
     return warningMsg;
   }
 
