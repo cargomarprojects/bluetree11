@@ -351,11 +351,19 @@ export class PartyEditComponent implements OnInit {
 
   Save() {
     let Type2: string = "";
+    let WarninMsg: string = "";
 
-    if (!this.Allvalid())
+    if (!this.Allvalid()) {
+      if (this.errorMessage)
+        alert(this.errorMessage);
       return;
+    }
 
-    if (!confirm("Save")) {
+    WarninMsg = this.WarningMessage();
+    if (WarninMsg == "")
+      WarninMsg = "Save";
+
+    if (!confirm(WarninMsg)) {
       return;
     }
     this.record.gen_type = this.type;
@@ -551,6 +559,18 @@ export class PartyEditComponent implements OnInit {
     return bRet;
   }
 
+  private WarningMessage(): string {
+    let warningMsg: string = "";
+    if (this.record.gen_is_consignee_b) {
+      if (this.gs.isBlank(this.record.gen_chb_name) || this.gs.isBlank(this.record.gen_chb_add1)) {
+        warningMsg = "CHB is blank. Please check whether CHB exists in the House.";
+      }
+    }
+    
+    if (warningMsg)
+      warningMsg += "\nDo you want to Save ?";
+    return warningMsg;
+  }
 
 
   Close() {
