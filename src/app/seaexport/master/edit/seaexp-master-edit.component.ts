@@ -481,7 +481,7 @@ export class SeaexpMasterEditComponent implements OnInit {
     }
     if (this.gs.isBlank(this.record.mbl_cntr_type)) {
       bRet = false;
-      this.errorMessage.push("Container Type cannot be blank");
+      this.errorMessage.push("Shipping Type cannot be blank");
     }
     if (this.gs.isBlank(this.record.mbl_pol_id)) {
       bRet = false;
