@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GlobalService } from '../../core/services/global.service';
-import { TBL_NOM_LIST, NomReportModel } from '../models/Tbl_Nom_List';
-import { SearchQuery } from '../models/Tbl_Nom_List';
+import { TBL_NOM_LIST, NomReportModel } from '../models/tbl_nom_list';
+import { SearchQuery } from '../models/tbl_nom_list';
 import { PageQuery } from '../../shared/models/pageQuery';
 
 
@@ -33,7 +33,7 @@ export class NomReportService {
     public canPrint: boolean;
 
     public initlialized: boolean;
-    private appid =''
+    private appid = ''
 
     constructor(
         private http2: HttpClient,
@@ -73,7 +73,7 @@ export class NomReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', handled_id: '', handled_name: '', comp_code: this.gs.branch_pkid, comp_type: '' },
+            searchQuery: <SearchQuery>{ searchString: '', handled_id: '', handled_name: '', comp_code: this.gs.branch_pkid, comp_type: '', client_type: 'NOMINATION' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -95,7 +95,7 @@ export class NomReportService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', handled_id: '', handled_name: '', comp_code: this.gs.branch_pkid, comp_type: '' },
+            searchQuery: <SearchQuery>{ searchString: '', handled_id: '', handled_name: '', comp_code: this.gs.branch_pkid, comp_type: '', client_type: 'NOMINATION' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -130,6 +130,7 @@ export class NomReportService {
         SearchData.pkid = this.id;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
         SearchData.HANDLED_ID = this.record.searchQuery.handled_id;
+        SearchData.CLIENT_TYPE = this.record.searchQuery.client_type;
         if (this.record.searchQuery.comp_code == 'ALL') {
             compids = "";
             this.gs.CompanyList.forEach(Rec => {

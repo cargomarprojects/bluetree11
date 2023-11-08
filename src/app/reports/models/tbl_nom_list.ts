@@ -9,7 +9,8 @@ export interface SearchQuery {
     handled_id: string;
     handled_name: string;
     comp_code: string;
-    comp_type: string;
+    comp_type: string; 
+    client_type: string;
 }
 
 export interface NomReportModel {

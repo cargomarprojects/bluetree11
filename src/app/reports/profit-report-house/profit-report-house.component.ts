@@ -345,7 +345,7 @@ export class ProfitReportHouseComponent implements OnInit {
 
     if (this.report_category == "CLIENT TYPE" && this.client_type != "ALL") {
       if (this.mode == "ALL" || this.mode == "OCEAN EXPORT" || this.mode == "AIR EXPORT") {
-        this.errorMessage = "Please select Group as OCEAN IMPORT or AIR IMPORT or OTHERS and continue........";
+        this.errorMessage = "Please select a Group (OCEAN IMPORT/AIR IMPORT/OTHERS)";
         alert(this.errorMessage);
         return;
       }
