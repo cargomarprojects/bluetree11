@@ -1,4 +1,4 @@
-import { TBL_MBL_REPORT } from '../../models/TBL_MBL_REPORT';
+import { TBL_MBL_REPORT } from '../../models/tbl_mbl_report';
 export interface ReportState{ 
 
     pkid : string,    
@@ -28,7 +28,8 @@ export interface ReportState{
     filetype2: string;
     filedisplayname2: string;
     stage:string;
-    
+    client_type:string;
+
     _report_category: string;
     _report_type: string;
 

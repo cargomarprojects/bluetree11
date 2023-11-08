@@ -34,7 +34,8 @@ export const initialState: ReportState = {
     filetype2: '',
     filedisplayname2: '',
     stage: '',
-
+    client_type:'ALL',
+    
     selectedId : '',
 
     _report_category: '',

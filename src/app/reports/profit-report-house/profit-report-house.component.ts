@@ -36,7 +36,7 @@ export class ProfitReportHouseComponent implements OnInit {
   mode: string = '';
   comp_type: string = '';
   report_type: string = '';
-
+  client_type: string = 'ALL';
 
   selectedId = '';
 
@@ -107,7 +107,7 @@ export class ProfitReportHouseComponent implements OnInit {
     this.sub = this.activatedroute.queryParams.subscribe(params => {
 
       this.gs.checkAppVersion();
-      
+
       this.urlid = params.id;
       this.menuid = params.menuid;
       this.InitPage();
@@ -132,8 +132,8 @@ export class ProfitReportHouseComponent implements OnInit {
     this.showStages = false;
     if (this.gs.GENERAL_BRANCH_CODE == "MFDR")// MFORWARDER USA
       this.showStages = true;
-  
-      this.sales_where = "";
+
+    this.sales_where = "";
     if (!this.isAdmin)
       this.sales_where = " param_lookup_id = '" + this.gs.user_pkid + "'";
     this.initLov('');
@@ -163,7 +163,7 @@ export class ProfitReportHouseComponent implements OnInit {
         this.cust_parent_name = rec.cust_parent_name;
         this.sales_id = rec.sales_id;
         this.sales_name = rec.sales_name;
-
+        this.client_type = rec.client_type;
         this.selectedId = rec.selectedId;
 
         this._report_category = rec._report_category;
@@ -209,7 +209,7 @@ export class ProfitReportHouseComponent implements OnInit {
 
         this.SearchData.SALES_ID = this.sales_id;
         this.SearchData.SALES_NAME = this.sales_name;
-
+        this.SearchData.CLIENT_TYPE = this.client_type;
         // this.SMANRECORD.id = this.sales_id;
         // this.SMANRECORD.name = this.sales_name;
         // this.HANDRECORD.id = this.cust_id;
@@ -233,6 +233,7 @@ export class ProfitReportHouseComponent implements OnInit {
         this.mode = 'ALL';
         this.comp_type = this.gs.branch_code;
         this.report_type = "DETAIL";
+        this.client_type = "ALL";
 
         this.selectedId = '';
 
@@ -315,7 +316,7 @@ export class ProfitReportHouseComponent implements OnInit {
 
   PageEvents(actions) {
     //GOTOCHANGE2
-    if( actions.action == 'GOTO')
+    if (actions.action == 'GOTO')
       this.page_current = actions.page_current;
     this.List(actions.outputformat, actions.action);
   }
@@ -337,6 +338,14 @@ export class ProfitReportHouseComponent implements OnInit {
     if (_outputformat == "PRINT") {
       if (this.MainList.length <= 0) {
         this.errorMessage = "List Not Found";
+        alert(this.errorMessage);
+        return;
+      }
+    }
+
+    if (this.report_category == "CLIENT TYPE" && this.client_type != "ALL") {
+      if (this.mode == "ALL" || this.mode == "OCEAN EXPORT" || this.mode == "AIR EXPORT") {
+        this.errorMessage = "Please select Group as OCEAN IMPORT or AIR IMPORT or OTHERS and continue........";
         alert(this.errorMessage);
         return;
       }
@@ -377,7 +386,7 @@ export class ProfitReportHouseComponent implements OnInit {
       this.SearchData.COMP_NAME = this.gs.GetCompanyName(this.comp_type);
 
       this.SearchData.REPORT_TYPE = this.report_type;
-
+      this.SearchData.CLIENT_TYPE = this.client_type;
 
       this.SearchData.BASEDON = '';
       this.SearchData.REPORT_COLUMN = 'REF.DATE';
@@ -430,7 +439,7 @@ export class ProfitReportHouseComponent implements OnInit {
             cust_parent_name: this.SearchData.CUST_PARENT_NAME,
             sales_id: this.SearchData.SALES_ID,
             sales_name: this.SearchData.SALES_NAME,
-
+            client_type: this.SearchData.CLIENT_TYPE,
             selectedId: this.selectedId,
 
             _report_category: this.SearchData.REPORT_CATEGORY,
@@ -470,7 +479,7 @@ export class ProfitReportHouseComponent implements OnInit {
   }
 
   Close() {
-   // this.store.dispatch(new myActions.Delete({ id: this.urlid }));
+    // this.store.dispatch(new myActions.Delete({ id: this.urlid }));
     this.location.back();
   }
 
@@ -586,10 +595,10 @@ export class ProfitReportHouseComponent implements OnInit {
   private selectRowId(rowid: string) {
     this.store.dispatch(new myActions.SelectRow({ id: this.urlid, selecteId: rowid }))
   }
-  
+
   public getRowId() {
     return this.selectedId;
   }
-  
+
 
 }
