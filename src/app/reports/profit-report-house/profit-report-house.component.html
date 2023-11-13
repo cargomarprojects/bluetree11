@@ -24,7 +24,7 @@
                   <option [value]="'CONSIGNEE'">CONSIGNEE</option>
                   <option [value]="'NOMINATION'">CLIENT TYPE (HOUSE)</option>
                   <option [value]="'HANDLED BY'">HANDLED BY</option>
-                  <option [value]="'CLIENT TYPE'">CLIENT TYPE</option>
+                  <option [value]="'CLIENT TYPE'">CLIENT TYPE (ADDRESS BOOK)</option>
                 </select>
               </div>
             </div>
@@ -148,7 +148,7 @@
 
           <div class="col-sm-2">
             <div *ngIf="report_category=='CLIENT TYPE'" class="form-group row">
-              <label class="col-sm-3 col-form-label col-form-label-sm">ClientType</label>
+              <label class="col-sm-3 col-form-label col-form-label-sm">Client.Type</label>
               <div class="col-sm-9">
                   <select class="form-control form-control-sm mr-1"
                       [(ngModel)]="client_type">

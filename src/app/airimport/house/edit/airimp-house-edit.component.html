@@ -370,7 +370,7 @@
                     <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.code">{{rec.code}}</option>
                   </select>
                 </div>
-                <label class="col-sm-3 col-form-label col-form-label-sm">Nomination</label>
+                <label class="col-sm-3 col-form-label col-form-label-sm">Client.Type</label>
                 <div class="col-sm-3">
                   <select class="form-control form-control-sm" [(ngModel)]="record.hbl_bltype" #bltype>
                     <option *ngFor="let rec of gs.PARAM_NOMINATION" [value]="rec.name">{{rec.name}}</option>
