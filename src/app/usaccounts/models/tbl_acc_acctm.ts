@@ -3,7 +3,7 @@ import { PageQuery } from '../../shared/models/pageQuery';
 
 export interface SearchQuery {
      searchString: string;
-     showonlysettings : string
+     showonlysettings: string
 }
 
 export interface Tbl_acc_acctm {
@@ -37,10 +37,12 @@ export interface Tbl_acc_acctm {
      acc_sub_group_name: string;
 
      acc_branch: string;
-
      acc_chq_format_id: string;
-
      acc_budget_id: string;
+
+     acc_ben_name: string;
+     acc_ben_address1: string;
+     acc_ben_address2: string;
 
      rec_created_by: string;
      rec_created_date: string;
@@ -51,20 +53,19 @@ export interface Tbl_acc_acctm {
 
 
 export interface AcctmModel {
-     sortcol : string ;
-     sortorder : boolean;
+     sortcol: string;
+     sortorder: boolean;
      errormessage: string;
      searchQuery: SearchQuery;
      pageQuery: PageQuery;
      records: Tbl_acc_acctm[]
- }
+}
 
 
- export interface vm_tbl_acctm {
+export interface vm_tbl_acctm {
      mode: string;
      pkid: string;
      record: Tbl_acc_acctm;
      userinfo: any,
      filter: any;
- }
- 
+}

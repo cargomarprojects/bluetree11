@@ -147,11 +147,22 @@ export class AcctmService {
         else {
             REC.acc_code = _rec.acc_code;
             REC.acc_name = _rec.acc_name;
-            REC.acc_group_name = _rec.acc_group_name;
+            REC.acc_group_name = this.getGroupName(_rec.acc_group_id);
             REC.acc_type = _rec.acc_type;
             REC.rec_closed = _rec.rec_closed;
-            REC.rec_created_by = _rec.rec_created_by;
+            // REC.rec_created_by = _rec.rec_created_by;
         }
+    }
+
+    getGroupName(_id: string) {
+        let _str = "";
+        if (this.gs.AccGroupList != null) {
+            var REC = this.gs.AccGroupList.find(rec => rec.id == _id);
+            if (REC != null) {
+                _str = REC.name;
+            }
+        }
+        return _str;
     }
 
     List(SearchData: any) {

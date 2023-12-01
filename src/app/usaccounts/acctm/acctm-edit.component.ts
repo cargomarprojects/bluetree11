@@ -97,6 +97,10 @@ export class AcctmEditComponent implements OnInit {
 
         this.record.acc_budget_id = '';
 
+        this.record.acc_ben_name = '';
+        this.record.acc_ben_address1 = '';
+        this.record.acc_ben_address2 = '';
+
         this.record.acc_address1 = '';
         this.record.acc_address2 = '';
         this.record.acc_address3 = '';
@@ -122,6 +126,7 @@ export class AcctmEditComponent implements OnInit {
                     this.record.acc_chq_format_id = 'NIL';
             }, error => {
                 this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
             });
     }
 
@@ -245,6 +250,12 @@ export class AcctmEditComponent implements OnInit {
         if (field === 'acc_short_name')
             this.record.acc_short_name = this.record.acc_short_name.toUpperCase();
 
+        if (field === 'acc_ben_name')
+            this.record.acc_ben_name = this.record.acc_ben_name.toUpperCase();
+        if (field === 'acc_ben_address1')
+            this.record.acc_ben_address1 = this.record.acc_ben_address1.toUpperCase();
+        if (field === 'acc_ben_address2')
+            this.record.acc_ben_address2 = this.record.acc_ben_address2.toUpperCase();
 
         if (field === 'acc_address1')
             this.record.acc_address1 = this.record.acc_address1.toUpperCase();
@@ -258,7 +269,7 @@ export class AcctmEditComponent implements OnInit {
         if (field === 'acc_address4')
             this.record.acc_address4 = this.record.acc_address4.toUpperCase();
 
-        if (field === 'acc_address1')
+        if (field === 'acc_address5')
             this.record.acc_address5 = this.record.acc_address5.toUpperCase();
 
 
