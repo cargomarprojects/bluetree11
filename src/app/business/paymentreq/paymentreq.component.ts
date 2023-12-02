@@ -291,6 +291,8 @@ export class PaymentReqComponent implements OnInit {
       return;
     var REC = this.payrecords.find(rec => rec.cp_pkid == this.payrecord.cp_pkid);
     if (REC == null) {
+      this.payrecord.rec_created_by = this.gs.user_code;
+      this.payrecord.rec_created_date = this.gs.defaultValues.today;
       this.payrecords.push(this.payrecord);
     }
     else {

@@ -120,6 +120,10 @@
               <th>PAYMENT-DATE</th>
               <th>PAYMENT-STATUS</th>
               <th>NOTES</th>
+              <th>CREATED-BY</th>
+              <th>DATE</th>              
+              <th>EDITED-BY</th>
+              <th>DATE</th>              
               <th style="text-align:center">REMOVE</th>
             </tr>
           </thead>
@@ -130,6 +134,10 @@
               <td>{{rec.cp_payment_date | date : gs.FRONTEND_DATEFORMAT }}</td>
               <td>{{rec.cp_pay_status}}</td>
               <td>{{rec.cp_spl_notes}}</td>
+              <td>{{rec.rec_created_by}}</td>
+              <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+              <td>{{rec.rec_edited_by}}</td>
+              <td>{{rec.rec_edited_date | date : gs.FRONTEND_DATEFORMAT }}</td>
               <td align='center'><i class="fa fa-trash  fa-lg pointer" aria-hidden="true" (click)="RemoveRow(rec)"></i>
               </td>
             </tr>
