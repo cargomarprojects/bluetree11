@@ -36,10 +36,10 @@ export class FormsService {
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
-    public selectRowId( id : string){
+    public selectRowId(id: string) {
         this.record.selectedId = id;
     }
-    public getRowId(){
+    public getRowId() {
         return this.record.selectedId;
     }
 
@@ -72,12 +72,12 @@ export class FormsService {
     }
     public ClearInit() {
         this.record = <Tbl_cargo_genfilesModel>{
-            selectedId : '',
+            selectedId: '',
             sortcol: 'gf_refno',
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', accNo: '' },
+            searchQuery: <SearchQuery>{ searchString: '', sdate: '', edate: '', accNo: '' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -98,12 +98,12 @@ export class FormsService {
             this.record = <Tbl_cargo_genfilesModel>this.db[this.param_type];
         else
             this.record = <Tbl_cargo_genfilesModel>{
-                selectedId : '',
+                selectedId: '',
                 sortcol: 'gf_refno',
                 sortorder: true,
                 errormessage: '',
                 records: [],
-                searchQuery: <SearchQuery>{ searchString: '', accNo: '' },
+                searchQuery: <SearchQuery>{ searchString: '', sdate: '', edate: '', accNo: '' },
                 pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
             };
 
@@ -191,21 +191,20 @@ export class FormsService {
     DeleteRow(_rec: Tbl_cargo_genfiles) {
 
         this.record.errormessage = '';
-        if (_rec.gf_slno.toString().trim() == "")
-        {
+        if (_rec.gf_slno.toString().trim() == "") {
             this.record.errormessage = "Invalid Data, Delete";
             this.mdata$.next(this.record);
             return;
         }
 
-        if (!confirm("DELETE "+_rec.gf_refno)) {
+        if (!confirm("DELETE " + _rec.gf_refno)) {
             return;
         }
-         
-        let filepath= "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\Files\\";
+
+        let filepath = "..\\Files_Folder\\" + this.gs.FILES_FOLDER + "\\Files\\";
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = _rec.gf_pkid;
-        SearchData.remarks = "SLNO " +  _rec.gf_slno;
+        SearchData.remarks = "SLNO " + _rec.gf_slno;
         SearchData.filepath = filepath;
 
         this.DeleteRecord(SearchData)
