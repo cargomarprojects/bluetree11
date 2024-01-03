@@ -437,7 +437,7 @@ export class MblPageComponent implements OnInit {
 
       if (response.retvalue) {
         this.mode = 'EDIT';
-        this.errorMessage.push('Save Complete');
+        // this.errorMessage.push('Save Complete');
         alert('Save Complete');
       } else {
         this.errorMessage.push(response.error);
