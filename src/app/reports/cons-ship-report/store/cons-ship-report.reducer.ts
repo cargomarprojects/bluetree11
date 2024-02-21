@@ -33,6 +33,7 @@ export const initialState: ReportState = {
     sortcol: 'mbl_refno',
     sortorder: true,
     selectedId : '',
+    date_basedon: '',
     page_rows: 0,
     page_count: 0,
     page_current: 0,

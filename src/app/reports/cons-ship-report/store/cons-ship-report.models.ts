@@ -1,4 +1,4 @@
-import { TBL_MBL_REPORT } from '../../models/TBL_MBL_REPORT';
+import { TBL_MBL_REPORT } from '../../models/tbl_mbl_report';
 export interface ReportState{ 
 
     pkid : string,    
@@ -23,9 +23,10 @@ export interface ReportState{
     sortcol : string ;
     sortorder : boolean;    
     selectedId : string;
+    date_basedon:string;   
     page_rows :number;
     page_count :number;
     page_current :number;
-    page_rowcount :number;        
-    records : TBL_MBL_REPORT[]
+    page_rowcount :number;     
+    records : TBL_MBL_REPORT[];
 }

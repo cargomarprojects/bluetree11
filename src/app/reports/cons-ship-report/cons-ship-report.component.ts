@@ -62,6 +62,9 @@ export class ConsShipReportComponent implements OnInit {
   sortOrder = true;
 
   selectedId = '';
+  date_basedon: string = "REF. DATE";
+
+  DateBasedList: any[] = [{ "id": "REF. DATE", "name": "Ref. Date" }, { "id": "ETD", "name": "ETD" }, { "id": "ETA", "name": "ETA" }];
 
   Reportstate1: Observable<ReportState>;
 
@@ -117,6 +120,7 @@ export class ConsShipReportComponent implements OnInit {
         this.sortCol = rec.sortcol;
         this.sortOrder = rec.sortorder;
         this.selectedId = rec.selectedId;
+        this.date_basedon = rec.date_basedon;
 
         this.page_rows = rec.page_rows;
         this.page_count = rec.page_count;
@@ -127,6 +131,7 @@ export class ConsShipReportComponent implements OnInit {
         this.SearchData = this.gs.UserInfo;
         this.SearchData.SDATE = this.sdate;
         this.SearchData.EDATE = this.edate;
+        this.SearchData.DATE_TYPE = this.date_basedon;
         this.SearchData.MODE = this.mode;
         this.SearchData.COMP_TYPE = this.comp_type;
         if (this.comp_type === 'ALL') {
@@ -142,7 +147,7 @@ export class ConsShipReportComponent implements OnInit {
         this.SearchData.CONSIGNEE_NAME = this.cons_name;
         this.SearchData.CUST_PARENT_ID = this.cust_parent_id;
         this.SearchData.CUST_PARENT_NAME = this.cust_parent_name;
-
+      
         // this.CONSRECORD.id = this.cons_id;
         // this.CONSRECORD.name = this.cons_name;
 
@@ -155,7 +160,8 @@ export class ConsShipReportComponent implements OnInit {
         this.page_rowcount = 0;
 
         this.currentTab = 'LIST';
-
+        
+        this.date_basedon = 'REF. DATE';
         this.report_category = 'CONSIGNEE SHIPMENT REPORT';
         this.sdate = this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF);
         this.edate = this.gs.defaultValues.today;
@@ -172,13 +178,13 @@ export class ConsShipReportComponent implements OnInit {
         this.filetype = '';
         this.filedisplayname = '';
         this.sortCol = 'mbl_refno';
-        this.selectedId = '';        
+        this.selectedId = '';
         this.sortOrder = true;
         this.SearchData = this.gs.UserInfo;
 
       }
     });
-
+    this.DateBasedList = [{ "id": "REF. DATE", "name": "Ref. Date" }, { "id": "ETD", "name": "ETD" }, { "id": "ETA", "name": "ETA" }];
   }
 
   ngOnInit() {
@@ -191,7 +197,7 @@ export class ConsShipReportComponent implements OnInit {
 
   PageEvents(actions) {
     //GOTOCHANGE2
-    if( actions.action == 'GOTO')
+    if (actions.action == 'GOTO')
       this.page_current = actions.page_current;
     this.List(actions.outputformat, actions.action);
   }
@@ -224,6 +230,7 @@ export class ConsShipReportComponent implements OnInit {
       this.SearchData.REPORT_CATEGORY = this.report_category;
       this.SearchData.SDATE = this.sdate;
       this.SearchData.EDATE = this.edate;
+      this.SearchData.DATE_TYPE = this.date_basedon;
       this.SearchData.MODE = this.mode;
       this.SearchData.COMP_TYPE = this.comp_type;
 
@@ -281,7 +288,8 @@ export class ConsShipReportComponent implements OnInit {
             reportformat: this.reportformat,
             sortcol: 'mbl_refno',
             sortorder: true,
-            selectedId : this.selectedId,
+            selectedId: this.selectedId,
+            date_basedon: this.SearchData.DATE_TYPE,
             page_rows: response.page_rows,
             page_count: response.page_count,
             page_current: response.page_current,
@@ -327,7 +335,7 @@ export class ConsShipReportComponent implements OnInit {
     return this.selectedId;
   }
 
-  
+
 
   public getIcon(col: string) {
     if (col == this.sortCol) {
