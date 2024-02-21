@@ -94,5 +94,6 @@ export class TBL_MBL_REPORT {
     mbl_cntr_return_date: string;
     mbl_cntr_discharge_date: string;
     hbl_custom_clear_date: string;
-    hbl_cntr_pick_date:string;
+    hbl_cntr_pick_date: string;
+    hbl_cntr_lfd: string;
 }

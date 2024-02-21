@@ -26,7 +26,6 @@ export const initialState: ReportState = {
     cons_name: '',
     cust_parent_id: '',
     cust_parent_name: '',
-    reportformat: '',
     filename: '',
     filetype: '',
     filedisplayname: '',

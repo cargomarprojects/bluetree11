@@ -34,7 +34,7 @@ export class ConsShipReportComponent implements OnInit {
   edate: string;
   mode = '';
   comp_type: string = '';
-  report_type: string = '';
+  report_type: string = 'HOUSE WISE';
   report_shptype: string = '';
   filename: string = '';
   filetype: string = '';
@@ -42,7 +42,6 @@ export class ConsShipReportComponent implements OnInit {
 
   cons_id: string;
   cons_name: string;
-  reportformat = '';
   cust_parent_id: string;
   cust_parent_name: string;
 
@@ -113,7 +112,6 @@ export class ConsShipReportComponent implements OnInit {
         this.cons_name = rec.cons_name;
         this.cust_parent_id = rec.cust_parent_id;
         this.cust_parent_name = rec.cust_parent_name;
-        this.reportformat = rec.reportformat;
         this.filename = rec.filename;
         this.filetype = rec.filetype;
         this.filedisplayname = rec.filedisplayname;
@@ -167,13 +165,12 @@ export class ConsShipReportComponent implements OnInit {
         this.edate = this.gs.defaultValues.today;
         this.mode = 'OCEAN IMPORT';
         this.comp_type = this.gs.branch_code;
-        this.report_type = 'DETAIL';
+        this.report_type = 'HOUSE WISE';
         this.report_shptype = 'ALL';
         this.cons_id = '';
         this.cons_name = '';
         this.cust_parent_id = '';
         this.cust_parent_name = '';
-        this.reportformat = 'DETAIL';
         this.filename = '';
         this.filetype = '';
         this.filedisplayname = '';
@@ -248,7 +245,6 @@ export class ConsShipReportComponent implements OnInit {
       this.SearchData.CUST_PARENT_ID = this.cust_parent_id;
       this.SearchData.CUST_PARENT_NAME = this.cust_parent_name;
 
-      this.reportformat = this.report_type;
       this.SearchData.filename = "";
       this.SearchData.filedisplayname = "";
       this.SearchData.filetype = "";
@@ -285,7 +281,6 @@ export class ConsShipReportComponent implements OnInit {
             cons_name: this.SearchData.CONSIGNEE_NAME,
             cust_parent_id: this.SearchData.CUST_PARENT_ID,
             cust_parent_name: this.SearchData.CUST_PARENT_NAME,
-            reportformat: this.reportformat,
             sortcol: 'mbl_refno',
             sortorder: true,
             selectedId: this.selectedId,
@@ -313,7 +308,7 @@ export class ConsShipReportComponent implements OnInit {
         this.loading = false;
       }, error => {
         this.loading = false;
-        this.errorMessage = error.error.error_description;
+        this.errorMessage = this.gs.getError(error);
         alert(this.errorMessage);
       });
   }

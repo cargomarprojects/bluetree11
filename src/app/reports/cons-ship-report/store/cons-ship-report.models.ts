@@ -16,7 +16,6 @@ export interface ReportState{
     cons_name : string ;
     cust_parent_id:string;
     cust_parent_name:string;
-    reportformat : string ;
     filename: string;
     filetype: string;
     filedisplayname: string;
