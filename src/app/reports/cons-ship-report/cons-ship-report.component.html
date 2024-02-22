@@ -167,15 +167,17 @@
           <th (click)="sort('mbl_pod_eta')">ETA &nbsp;<i [ngClass]="getIcon('mbl_pod_eta')"></i></th>
           <th (click)="sort('hbl_delivery_date')">DELIVERY.DATE &nbsp;<i [ngClass]="getIcon('hbl_delivery_date')"></i>
           </th>
-          <th (click)="sort('hbl_cntr_lfd')">LFD &nbsp;<i [ngClass]="getIcon('hbl_cntr_lfd')"></i></th>
-          <th (click)="sort('hbl_cntr_pick_date')">CNTR P/U DATE &nbsp;<i [ngClass]="getIcon('hbl_cntr_pick_date')"></i>
+          <th *ngIf="mode=='AIR EXPORT'||mode=='AIR IMPORT'"  (click)="sort('hbl_lfd_date')">LFD &nbsp;<i [ngClass]="getIcon('hbl_lfd_date')"></i></th>
+          <th *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'" (click)="sort('hbl_cntr_lfd')">LFD &nbsp;<i [ngClass]="getIcon('hbl_cntr_lfd')"></i></th>
+          <th  *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'" (click)="sort('hbl_cntr_pick_date')">CNTR P/U DATE &nbsp;<i [ngClass]="getIcon('hbl_cntr_pick_date')"></i>
           </th>
           <th (click)="sort('hbl_remarks')">REMARKS &nbsp;<i [ngClass]="getIcon('hbl_remarks')"></i></th>
 
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of MainList">
+        <tr *ngFor="let rec of MainList" (click)="selectRowId(rec.mbl_pkid)"
+        [class.selected]="rec.mbl_pkid == getRowId()">
           <td>{{rec.mbl_branch}}</td>
           <td>{{rec.mbl_refno}}</td>
           <td>{{rec.mbl_pol_code}}</td>
@@ -187,8 +189,9 @@
           <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.hbl_delivery_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td>{{rec.hbl_cntr_lfd | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td>{{rec.hbl_cntr_pick_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td *ngIf="mode=='AIR EXPORT'||mode=='AIR IMPORT'">{{rec.hbl_lfd_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'">{{rec.hbl_cntr_lfd | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'">{{rec.hbl_cntr_pick_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.hbl_remarks}}</td>
         </tr>
       </tbody>
