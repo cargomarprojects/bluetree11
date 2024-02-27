@@ -9,7 +9,7 @@ import { Companym } from '../models/company';
 import { logoutAction, AppState } from 'src/app/reducer';
 import { Store } from '@ngrx/store';
 
-import { environment } from  '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 //EDIT JOY 09/11/2021
 
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
 
   CompanyList: Companym[];
-    
+
   Company_Id: string = '';
   Company_Code: string = '';
 
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     public gs: GlobalService,
     public clrservice: ClearService,
     private router: Router,
-    private store : Store<AppState>    
+    private store: Store<AppState>
   ) {
 
     this.gs.UserRecord = null;
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch ( logoutAction() );
+    this.store.dispatch(logoutAction());
   }
 
 
@@ -149,7 +149,7 @@ export class LoginComponent implements OnInit {
 
 
   Cancel() {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.router.navigate(['home'], { replaceUrl: true });
     });
   }
@@ -162,18 +162,18 @@ export class LoginComponent implements OnInit {
       sCompanyId: this.Company_Id,
       sUserId: this.username,
       sPwd: this.password,
-      category : this.gs.User_Category
+      category: this.gs.User_Category
     };
 
 
     this.mainservice.Login1(SearchData)
       .subscribe(response => {
-        
+
         this.gs.UserRecord = response.record;
-        
+
         this.gs.InitLogin();
 
-        setTimeout(()=>{
+        setTimeout(() => {
           this.router.navigate(['login2'], { replaceUrl: true });
         });
 
@@ -184,12 +184,12 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  async loadMenu(){
+  async loadMenu() {
     await this.gs.LoadMenu();
     this.gs.IsAuthenticated = true;
   }
 
-  test(){
+  test() {
     // this function will be called when login button pressed
   }
 
