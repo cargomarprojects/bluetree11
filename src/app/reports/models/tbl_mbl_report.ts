@@ -96,4 +96,8 @@ export class TBL_MBL_REPORT {
     hbl_custom_clear_date: string;
     hbl_cntr_pick_date: string;
     hbl_cntr_lfd: string;
+
+    terminal_name: string;
+    cntr_pickup_status: string;
+    an_sent_status: string;
 }

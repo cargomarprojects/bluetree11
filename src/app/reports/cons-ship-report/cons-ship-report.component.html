@@ -160,38 +160,63 @@
           <th (click)="sort('mbl_pol_code')">ORIGIN &nbsp;<i [ngClass]="getIcon('mbl_pol_code')"></i></th>
           <th (click)="sort('mbl_pod_code')">DESTINATION &nbsp;<i [ngClass]="getIcon('mbl_pod_code')"></i></th>
           <th (click)="sort('hbl_houseno')">B/LNO &nbsp;<i [ngClass]="getIcon('hbl_houseno')"></i></th>
-          <th (click)="sort('hbl_cntr_no')">CONTAINER# &nbsp;<i [ngClass]="getIcon('hbl_cntr_no')"></i></th>
+          <th *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'" (click)="sort('hbl_cntr_no')">CONTAINER# &nbsp;<i
+              [ngClass]="getIcon('hbl_cntr_no')"></i></th>
+          <th (click)="sort('hbl_packages')">PACKAGES &nbsp;<i [ngClass]="getIcon('hbl_packages')"></i></th>
+          <th (click)="sort('hbl_shipper_name')">SHIPPER &nbsp;<i [ngClass]="getIcon('hbl_shipper_name')"></i></th>
+          <th (click)="sort('terminal_name')">TERMINAL &nbsp;<i [ngClass]="getIcon('terminal_name')"></i></th>
+
           <th (click)="sort('mbl_no')">MASTER# &nbsp;<i [ngClass]="getIcon('mbl_no')"></i></th>
           <th (click)="sort('hbl_pono')">PO# &nbsp;<i [ngClass]="getIcon('hbl_pono')"></i></th>
           <th (click)="sort('mbl_pol_etd')">ETD &nbsp;<i [ngClass]="getIcon('mbl_pol_etd')"></i></th>
           <th (click)="sort('mbl_pod_eta')">ETA &nbsp;<i [ngClass]="getIcon('mbl_pod_eta')"></i></th>
           <th (click)="sort('hbl_delivery_date')">DELIVERY.DATE &nbsp;<i [ngClass]="getIcon('hbl_delivery_date')"></i>
           </th>
-          <th *ngIf="mode=='AIR EXPORT'||mode=='AIR IMPORT'"  (click)="sort('hbl_lfd_date')">LFD &nbsp;<i [ngClass]="getIcon('hbl_lfd_date')"></i></th>
-          <th *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'" (click)="sort('hbl_cntr_lfd')">LFD &nbsp;<i [ngClass]="getIcon('hbl_cntr_lfd')"></i></th>
-          <th  *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'" (click)="sort('hbl_cntr_pick_date')">CNTR P/U DATE &nbsp;<i [ngClass]="getIcon('hbl_cntr_pick_date')"></i>
+          <th *ngIf="mode=='AIR EXPORT'||mode=='AIR IMPORT'" (click)="sort('hbl_lfd_date')">LFD &nbsp;<i
+              [ngClass]="getIcon('hbl_lfd_date')"></i></th>
+          <th *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'" (click)="sort('hbl_cntr_lfd')">LFD &nbsp;<i
+              [ngClass]="getIcon('hbl_cntr_lfd')"></i></th>
+          <th *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'" (click)="sort('cntr_pickup_status')">CNTR P/U STATUS
+            &nbsp;<i [ngClass]="getIcon('cntr_pickup_status')"></i>
           </th>
+          <th *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'" (click)="sort('hbl_cntr_pick_date')">CNTR P/U DATE
+            &nbsp;<i [ngClass]="getIcon('hbl_cntr_pick_date')"></i>
+          </th>
+          <th *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'" (click)="sort('mbl_vessel')">VESSEL &nbsp;<i
+              [ngClass]="getIcon('mbl_vessel')"></i></th>
+          <th *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'" (click)="sort('mbl_voyage')">VOYAGE &nbsp;<i
+              [ngClass]="getIcon('mbl_voyage')"></i></th>
+          <th (click)="sort('an_sent_status')">ARRIVAL.NOTICE &nbsp;<i [ngClass]="getIcon('an_sent_status')"></i></th>
           <th (click)="sort('hbl_remarks')">REMARKS &nbsp;<i [ngClass]="getIcon('hbl_remarks')"></i></th>
 
         </tr>
       </thead>
       <tbody class="page-body-tbody">
         <tr *ngFor="let rec of MainList" (click)="selectRowId(rec.mbl_pkid)"
-        [class.selected]="rec.mbl_pkid == getRowId()">
+          [class.selected]="rec.mbl_pkid == getRowId()">
           <td>{{rec.mbl_branch}}</td>
           <td>{{rec.mbl_refno}}</td>
           <td>{{rec.mbl_pol_code}}</td>
           <td>{{rec.mbl_pod_code}}</td>
           <td>{{rec.hbl_houseno}}</td>
-          <td>{{rec.hbl_cntr_no}}</td>
+          <td *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'">{{rec.hbl_cntr_no}}</td>
+          <td>{{rec.hbl_packages}}</td>
+          <td>{{rec.hbl_shipper_name}}</td>
+          <td>{{rec.terminal_name}}</td>
           <td>{{rec.mbl_no}}</td>
           <td>{{rec.hbl_pono}}</td>
           <td>{{rec.mbl_pol_etd | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td>{{rec.hbl_delivery_date | date : gs.FRONTEND_DATEFORMAT }}</td>
           <td *ngIf="mode=='AIR EXPORT'||mode=='AIR IMPORT'">{{rec.hbl_lfd_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'">{{rec.hbl_cntr_lfd | date : gs.FRONTEND_DATEFORMAT }}</td>
-          <td *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'">{{rec.hbl_cntr_pick_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+          <td *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'">{{rec.hbl_cntr_lfd | date : gs.FRONTEND_DATEFORMAT }}
+          </td>
+          <td *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'">{{rec.cntr_pickup_status}}</td>
+          <td *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'">{{rec.hbl_cntr_pick_date | date :
+            gs.FRONTEND_DATEFORMAT }}</td>
+          <td *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'">{{rec.mbl_vessel}}</td>
+          <td *ngIf="mode=='OCEAN EXPORT'||mode=='OCEAN IMPORT'">{{rec.mbl_voyage}}</td>
+          <td>{{rec.an_sent_status}}</td>
           <td>{{rec.hbl_remarks}}</td>
         </tr>
       </tbody>
