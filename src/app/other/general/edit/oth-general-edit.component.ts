@@ -250,7 +250,7 @@ export class OthGeneralEditComponent implements OnInit {
     this.record.hbl_is_carr_an = 'N';
     this.record.hbl_custom_reles_status = 'NA';
     this.record.hbl_is_delivery = 'NA';
-
+    this.record.hbl_bltype = '';
     if (this.OPERATION_MODE.trim() == "EXTRA") {
       this.record.mbl_prefix = this.gs.EXTRA_OPERATION_REFNO_PREFIX;
       this.record.mbl_startingno = this.gs.EXTRA_OPERATION_REFNO_STARTING_NO;
@@ -689,6 +689,14 @@ export class OthGeneralEditComponent implements OnInit {
         // };
         // mPage.Show();
       }
+      if (this.gs.PARAM_NOMINATION != null)
+        if (this.gs.PARAM_NOMINATION.length > 0) {
+          let sNom: string = _Record.type.toString().trim();
+          if (sNom == "NOMINATION" || sNom == "MUTUAL")
+            this.record.hbl_bltype = sNom;
+          else
+            this.record.hbl_bltype = "FREEHAND";
+        }
       if (!this.gs.isBlank(this.hbl_consignee_name_field))
         this.hbl_consignee_name_field.nativeElement.focus();
     }

@@ -383,13 +383,20 @@
                             <div class="col-md-6 testbox  px-0 mx-0">
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Frt.Status</label>
-                                    <div class="col-9">
+                                    <div class="col-4 pr-0">
                                         <select class="form-control form-control-sm"
                                             [(ngModel)]="record.hbl_frt_status">
                                             <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.code">
                                                 {{rec.code}}</option>
                                         </select>
                                     </div>
+                                    <label class="col-2 col-form-label col-form-label-sm pr-0">Client.Type</label>
+                                    <div class="col-3 pl-0">
+                                      <select class="form-control form-control-sm" [(ngModel)]="record.hbl_bltype" #hbl_bltype>
+                                        <option *ngFor="let rec of gs.PARAM_NOMINATION" [value]="rec.name">{{rec.name}}</option>
+                                      </select>
+                                    </div>
+
                                 </div>
 
                                 <div class="form-group row">
