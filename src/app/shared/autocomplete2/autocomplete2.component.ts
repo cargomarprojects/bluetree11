@@ -279,6 +279,7 @@ export class AutoComplete2Component {
       this.inputdata.code = "";
       this.inputdata.name = "";
       this.inputdata.rate = 0;
+      this.inputdata.type = "";
       this.inputdata.subtype = "";
 
       this.inputdata.col1 = '';
@@ -314,7 +315,7 @@ export class AutoComplete2Component {
 
       this._parentid = _Record.parentid;
       this.inputdata.subtype = _Record.subtype;
-
+      this.inputdata.type = _Record.type;
       this.inputdata.col1 = _Record.col1;
       this.inputdata.col2 = _Record.col2;
       this.inputdata.col3 = _Record.col3;
