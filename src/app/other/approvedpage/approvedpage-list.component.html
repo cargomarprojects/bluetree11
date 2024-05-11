@@ -1,83 +1,89 @@
 <div *ngIf="tab == 'main'">
-<div class="page-header">
-    <div class="col">
-        <label class="mr-3">{{title}}</label>
-        <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid) && req_type=='REQUEST'" (click)="NewRecord()">New</button> -->
-        <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid) && req_type=='REQUEST'" [routerLink]="getRouteDet('L','ADD')" [queryParams]="getRouteDet('P','ADD')">New</a>
-        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-    </div>
-</div>
-
-<div *ngIf="errorMessage">
-    <div class="alert alert-primary">
-        {{errorMessage}}
-    </div>
-</div>
-<div class="page-body">
-    <div class="row">
-        <div class="col-md-12  px-0 mx-0">
-            <div class="page-body table-responsive table-bordered">
-                <table class="table  table-hover table-sm">
-                    <thead class="page-body-thead">
-                        <tr>
-                            <th>REQUEST#</th>
-                            <th>REQUEST-BY</th>
-                            <th>REQUEST-DATE</th>
-                            <th>TYPE</th>
-                            <th>REF#</th>
-                            <th>HOUSE#</th>
-                            <th>CONSIGNEE</th>
-                            <th>INVOICE#</th>
-                            <th>CUSOMER</th>
-                            <th class='text-right'>INV.AMT</th>
-                            <th>APRVD.BY</th>
-                            <th>APRVD.DATE</th>
-                            <th>STATUS</th>
-                            <th>REMARKS</th>
-                            <th>OBL.RECVD.DATE</th>
-                            <th>PAY.RECVD.DATE</th>
-                            <th class='text-center'>ATTACHMENTS</th>
-                        </tr>
-                    </thead>
-                    <tbody class="page-body-tbody">
-                        <tr *ngFor="let rec of records">
-                            <!-- <td class="hlink2" (click)="edit(rec)">{{rec.ca_reqno}}</td> -->
-                            <td *ngIf="!this.canEdit">{{rec.ca_reqno}}</td>
-                            <td *ngIf="this.canEdit">
-                               <a class="hlink" [routerLink]="getRouteDet('L','EDIT',rec)" [queryParams]="getRouteDet('P','EDIT',rec)">{{rec.ca_reqno}}</a>
-                            </td>
-                            <td>{{rec.ca_user_name}}</td>
-                            <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT}}</td>
-                            <td>{{rec.ca_type}}</td>
-                            <td>{{rec.ca_ref_no}}</td>
-                            <td>{{rec.ca_hbl_no}}</td>
-                            <td>{{rec.ca_consignee_name}}</td>
-                            <td>{{rec.ca_inv_no}}</td>
-                            <td>{{rec.ca_customer_name}}</td>
-                            <td class='text-right'>{{rec.ca_inv_amt | number : '1.2-2'}}</td>
-                            <td>{{rec.ca_approvedby_name}}</td>
-                            <td>{{rec.ca_approved_date | date : gs.FRONTEND_DATEFORMAT}}</td>
-                            <td>{{rec.ca_is_approved}}</td>
-                            <td>{{rec.ca_remarks}}</td>
-                            <td>{{rec.ca_obl_recvd_date | date : gs.FRONTEND_DATEFORMAT}}</td>
-                            <td>{{rec.ca_payment_recvd_date | date : gs.FRONTEND_DATEFORMAT}}</td>
-                            <td class='text-center'><i class="fa fa-paperclip  fa-lg pointer"
-                                    style="font-size:24px"  [style.color]="rec.rec_files_attached=='Y'?'red':black" aria-hidden="true" (click)="AttachRow(rec)"></i>
-                            </td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <div class="page-header">
+        <div class="col">
+            <label class="mr-3">{{title}}</label>
+            <!-- <button class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid) && req_type=='REQUEST'" (click)="NewRecord()">New</button> -->
+            <a class="btn btn-primary btn-sm mr-1" *ngIf="gs.canAdd(menuid) && req_type=='REQUEST'"
+                [routerLink]="getRouteDet('L','ADD')" [queryParams]="getRouteDet('P','ADD')">New</a>
+            <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
         </div>
-
     </div>
-</div>
+
+    <div *ngIf="errorMessage">
+        <div class="alert alert-primary">
+            {{errorMessage}}
+        </div>
+    </div>
+    <div class="page-body">
+        <div class="row">
+            <div class="col-md-12  px-0 mx-0">
+                <div class="page-body table-responsive table-bordered">
+                    <table class="table  table-hover table-sm">
+                        <thead class="page-body-thead">
+                            <tr>
+                                <th>REQUEST#</th>
+                                <th>REQUEST-BY</th>
+                                <th>REQUEST-DATE</th>
+                                <th>TYPE</th>
+                                <th>REF#</th>
+                                <th>HOUSE#</th>
+                                <th>CONSIGNEE</th>
+                                <th>INVOICE#</th>
+                                <th>CUSOMER</th>
+                                <th class='text-right'>INV.AMT</th>
+                                <th>APRVD.BY</th>
+                                <th>APRVD.DATE</th>
+                                <th>STATUS</th>
+                                <th>REMARKS</th>
+                                <th>OBL.RECVD.DATE</th>
+                                <th>PAY.RECVD.DATE</th>
+                                <th class='text-center'>ATTACHMENTS</th>
+                                <th *ngIf="canDelete"  style="text-align:center">REMOVE</th>
+                            </tr>
+                        </thead>
+                        <tbody class="page-body-tbody">
+                            <tr *ngFor="let rec of records">
+                                <!-- <td class="hlink2" (click)="edit(rec)">{{rec.ca_reqno}}</td> -->
+                                <td *ngIf="!this.canEdit">{{rec.ca_reqno}}</td>
+                                <td *ngIf="this.canEdit">
+                                    <a class="hlink" [routerLink]="getRouteDet('L','EDIT',rec)"
+                                        [queryParams]="getRouteDet('P','EDIT',rec)">{{rec.ca_reqno}}</a>
+                                </td>
+                                <td>{{rec.ca_user_name}}</td>
+                                <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                                <td>{{rec.ca_type}}</td>
+                                <td>{{rec.ca_ref_no}}</td>
+                                <td>{{rec.ca_hbl_no}}</td>
+                                <td>{{rec.ca_consignee_name}}</td>
+                                <td>{{rec.ca_inv_no}}</td>
+                                <td>{{rec.ca_customer_name}}</td>
+                                <td class='text-right'>{{rec.ca_inv_amt | number : '1.2-2'}}</td>
+                                <td>{{rec.ca_approvedby_name}}</td>
+                                <td>{{rec.ca_approved_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                                <td>{{rec.ca_is_approved}}</td>
+                                <td>{{rec.ca_remarks}}</td>
+                                <td>{{rec.ca_obl_recvd_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                                <td>{{rec.ca_payment_recvd_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                                <td class='text-center'><i class="fa fa-paperclip  fa-lg pointer" style="font-size:24px"
+                                        [style.color]="rec.rec_files_attached=='Y'?'red':black" aria-hidden="true"
+                                        (click)="AttachRow(rec)"></i>
+                                </td>
+                                <td *ngIf="canDelete" class='text-center'><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                                        (click)="RemoveRow(rec)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 <div *ngIf="tab=='attachment'">
     <app-fileupload [title]="'File Upload Page'" [parentid]="attach_pkid" [subid]="" [type]="attach_type"
-      [typelist]="attach_typelist" [tablename]="'cargo_approved'" [tablepkcolumn]="'ca_pkid'" [refno]="" [uploadfiles]="flase"
-      [customername]="" [updatecolumn]="'rec_files_attached'" [viewonlysource]="" [viewonlyid]="" [filespath]=""
-      [filespath2]="" (callbackevent)="callbackevent($event)">
+        [typelist]="attach_typelist" [tablename]="'cargo_approved'" [tablepkcolumn]="'ca_pkid'" [refno]=""
+        [uploadfiles]="flase" [customername]="" [updatecolumn]="'rec_files_attached'" [viewonlysource]=""
+        [viewonlyid]="" [filespath]="" [filespath2]="" (callbackevent)="callbackevent($event)">
     </app-fileupload>
-  </div>
+</div>

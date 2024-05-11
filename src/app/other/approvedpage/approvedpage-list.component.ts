@@ -28,6 +28,7 @@ export class ApprovedPageListComponent implements OnInit {
   canEdit: boolean;
   canSave: boolean;
   origin: string;
+  canDelete: boolean;
 
   tab: string = 'main';
   attach_pkid: string = "";
@@ -68,6 +69,7 @@ export class ApprovedPageListComponent implements OnInit {
     this.title = this.gs.getTitle(this.menuid);
     this.canAdd = this.gs.canAdd(this.menuid);
     this.canEdit = this.gs.canEdit(this.menuid);
+    this.canDelete = this.gs.canDelete(this.menuid);
 
     this.List('SCREEN');
   }
@@ -93,7 +95,7 @@ export class ApprovedPageListComponent implements OnInit {
     }
 
     let parameter = {
-      appid:this.gs.appid,
+      appid: this.gs.appid,
       menuid: this.menuid,
       pkid: '',
       mode: 'ADD',
@@ -103,7 +105,7 @@ export class ApprovedPageListComponent implements OnInit {
       req_type: this.req_type,
       is_locked: this.is_locked
     };
-    this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageEdit',  parameter);
+    this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageEdit', parameter);
 
   }
 
@@ -114,7 +116,7 @@ export class ApprovedPageListComponent implements OnInit {
     }
 
     let parameter = {
-      appid:this.gs.appid,
+      appid: this.gs.appid,
       menuid: this.menuid,
       pkid: _record.ca_pkid,
       mode: 'EDIT',
@@ -124,14 +126,14 @@ export class ApprovedPageListComponent implements OnInit {
       req_type: this.req_type,
       is_locked: this.is_locked
     };
-    this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageEdit',  parameter);
+    this.gs.Naviagete2('Silver.Other.Trans/ApprovedPageEdit', parameter);
   }
 
   Close() {
     // if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
     //   this.gs.LinkReturn(this.origin, this.mbl_pkid, '');
     // else
-      this.location.back();
+    this.location.back();
   }
 
   AttachRow(_rec: Tbl_Cargo_Approved) {
@@ -185,6 +187,50 @@ export class ApprovedPageListComponent implements OnInit {
       };
     } else
       return null;
+  }
+
+  RemoveRow(_rec: Tbl_Cargo_Approved) {
+    this.errorMessage = '';
+    let sRemarks: string = '';
+
+    // if (this.is_locked) {
+    //   this.errorMessage = "Cannot Delete, Locked";
+    //   alert(this.errorMessage);
+    //   return;
+    // }
+
+    if (_rec.ca_user_name != this.gs.user_name) {
+      this.errorMessage = "Cannot Delete, Requested by another user";
+      alert(this.errorMessage);
+      return;
+    }
+
+    if (!confirm("DELETE RECORD REQUEST# " + _rec.ca_reqno.toString())) {
+      return;
+    }
+
+    sRemarks = _rec.ca_reqno.toString();
+    if (this.req_type != "REQUEST") {
+      if (!this.gs.isBlank(_rec.ca_approvedby_name))
+        sRemarks += " Approved By " + _rec.ca_approvedby_name;
+    }
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = _rec.ca_pkid;
+    SearchData.reqtype = this.req_type;
+    SearchData.remarks = sRemarks;
+    this.mainservice.DeleteRecord(SearchData)
+      .subscribe(response => {
+        if (response.retvalue == false) {
+          this.errorMessage = response.error;
+          alert(this.errorMessage);
+        }
+        else {
+          this.records.splice(this.records.findIndex(rec => rec.ca_pkid == _rec.ca_pkid), 1);
+          // this.NewRecord();
+        }
+      }, error => {
+        this.errorMessage = this.gs.getError(error);
+      });
   }
 
 }

@@ -258,4 +258,7 @@ export class ApprovedPageService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/ApprovedPage/ShowHideRecord', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    DeleteRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Other/ApprovedPage/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
 }
