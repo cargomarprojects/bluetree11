@@ -199,12 +199,14 @@ export class ApprovedPageListComponent implements OnInit {
     //   return;
     // }
 
-    if (_rec.ca_user_name != this.gs.user_name) {
-      this.errorMessage = "Cannot Delete, Requested by another user";
-      alert(this.errorMessage);
-      return;
+    if (!this.isAdmin) {
+      if (_rec.ca_user_name != this.gs.user_name) {
+        this.errorMessage = "Cannot Delete, Requested by another user";
+        alert(this.errorMessage);
+        return;
+      }
     }
-
+    
     if (!confirm("DELETE RECORD REQUEST# " + _rec.ca_reqno.toString())) {
       return;
     }
