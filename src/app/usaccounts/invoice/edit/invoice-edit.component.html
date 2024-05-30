@@ -9,7 +9,8 @@
                 A/P</button>
 
             <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
-            <label class="text-danger" *ngIf="is_locked">LOCKED</label>
+            <label class="text-danger mr-2" *ngIf="is_locked">LOCKED</label>
+            <label class="text-danger font-weight-bold mr-1" *ngIf="record.rec_deleted=='Y'">DELETED</label>
         </div>
 
     </div>
