@@ -22,6 +22,8 @@
             <tr>
                 <th (click) ="sort('param_code')" >CODE&nbsp;<i [ngClass]="getIcon('param_code')"></i></th>
                 <th (click) ="sort('param_name1')" >NAME&nbsp;<i [ngClass]="getIcon('param_name1')"></i></th>
+                <th *ngIf="menu_param == 'AIR CARRIER'" (click) ="sort('param_name2')" >MASTER PREFIX&nbsp;<i [ngClass]="getIcon('param_name2')"></i></th>
+                <th *ngIf="menu_param == 'AIR CARRIER'" (click) ="sort('param_name3')" >TRACKING WEB&nbsp;<i [ngClass]="getIcon('param_name3')"></i></th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
@@ -34,6 +36,8 @@
                     <a class="hlink" [routerLink]="getRouteDet('L','EDIT',rec)" [queryParams]="getRouteDet('P','EDIT',rec)">{{rec.param_code}}</a> 
                 </td>
                 <td >{{rec.param_name1}}</td>
+                <td  *ngIf="menu_param == 'AIR CARRIER'" >{{rec.param_name2}}</td>
+                <td  *ngIf="menu_param == 'AIR CARRIER'" >{{rec.param_name3}}</td>
             </tr>
         </tbody>
     </table>

@@ -360,14 +360,20 @@ export class ParamDetEditComponent implements OnInit {
 
     }
 
+    // if (this.menu_param == "AIR CARRIER") {
+    //   if (Name2.length != 4) {
+    //     this.errorMessage = "Master Prefix Should be 4 Characters";
+    //     return false;
+    //   }
+    // }
+
     if (this.menu_param == "AIR CARRIER") {
-      if (Name2.length != 4) {
-        this.errorMessage = "Master Prefix Should be 4 Characters";
+      if (Name2.trim().length != 3) {
+        this.errorMessage = "Master Prefix Should be 3 Characters";
         return false;
       }
-
-
     }
+
     return true;
   }
 
