@@ -931,11 +931,10 @@ export class AirImpHouseEditComponent implements OnInit {
     this.record.hbl_cha_attn = "";
     this.record.hbl_cha_tel = "";
     this.record.hbl_cha_fax = "";
-    if (this.gs.GENERAL_BRANCH_CODE == "MFDR") {
-      this.record.hbl_salesman_id = "";
-      this.record.hbl_salesman_code = "";
-      this.record.hbl_salesman_name = "";
-    }
+    this.record.hbl_salesman_id = "";
+    this.record.hbl_salesman_code = "";
+    this.record.hbl_salesman_name = "";
+
 
     if (this.gs.isBlank(this.record.hbl_consignee_id))
       return;
@@ -955,10 +954,8 @@ export class AirImpHouseEditComponent implements OnInit {
           this.record.hbl_cha_attn = charecord.attention;
           this.record.hbl_cha_tel = charecord.telephone;
           this.record.hbl_cha_fax = charecord.fax;
-          if (this.gs.GENERAL_BRANCH_CODE == "MFDR") {
-            this.record.hbl_salesman_id = charecord.sman_id;
-            this.record.hbl_salesman_name = charecord.sman_name;
-          }
+          this.record.hbl_salesman_id = charecord.sman_id;
+          this.record.hbl_salesman_name = charecord.sman_name;
         }
         if (!this.gs.isBlank(this.hbl_consignee_name_field))
           this.hbl_consignee_name_field.focus();
