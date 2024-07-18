@@ -73,7 +73,7 @@ export class ShipDataPageService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', sender: '', chkpending: true, chkcompleted: true, chkdeleted: true, linkType: 'MBL#' },
+            searchQuery: <SearchQuery>{ searchString: '', sender: '', chkpending: true, chkcompleted: true, chkdeleted: false, linkType: 'MBL#', fromdate: this.gs.getPreviousDate(15), todate: this.gs.defaultValues.today },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -97,7 +97,7 @@ export class ShipDataPageService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', sender: '', chkpending: true, chkcompleted: true, chkdeleted: true, linkType: 'MBL#' },
+            searchQuery: <SearchQuery>{ searchString: '', sender: '', chkpending: true, chkcompleted: true, chkdeleted: false, linkType: 'MBL#', fromdate: this.gs.getPreviousDate(15), todate: this.gs.defaultValues.today },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -148,11 +148,12 @@ export class ShipDataPageService {
             SearchData.LINK_TYPE = 'MBL#';
         else
             SearchData.LINK_TYPE = this.record.searchQuery.linkType;
+        SearchData.SDATE = this.record.searchQuery.fromdate;
+        SearchData.EDATE = this.record.searchQuery.todate;
         SearchData.FLAG = sFlag;
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
-
 
         if (type == 'PAGE') {
             SearchData.action = this.record.pageQuery.action;
@@ -163,7 +164,7 @@ export class ShipDataPageService {
 
         this.List(SearchData).subscribe(response => {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
-            this.record.records = (response.list == undefined || response.list == null) ? <Tbl_edi_master[]>[]:  <Tbl_edi_master[]>response.list;
+            this.record.records = (response.list == undefined || response.list == null) ? <Tbl_edi_master[]>[] : <Tbl_edi_master[]>response.list;
             this.record.records.forEach(Rec => {
                 Rec.selected_b = false;
                 Rec.selected = 'N';

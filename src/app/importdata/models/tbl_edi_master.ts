@@ -123,6 +123,8 @@ export interface SearchQuery {
     chkcompleted: boolean;
     chkdeleted: boolean;
     linkType: string;
+    fromdate: string;
+    todate: string;
 }
 
 export interface ShipDataPageModel {
