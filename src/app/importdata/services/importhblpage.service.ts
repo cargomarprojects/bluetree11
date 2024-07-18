@@ -73,7 +73,7 @@ export class ImportHblPageService {
     }
     public ClearInit() {
         this.record = <ImportHblPageModel>{
-            sortcol: 'files_desc',
+            sortcol: 'files_slno',
             sortorder: true,
             errormessage: '',
             records: [],
@@ -96,7 +96,7 @@ export class ImportHblPageService {
         this.param_type = params.param_type;
 
         this.record = <ImportHblPageModel>{
-            sortcol: 'files_desc',
+            sortcol: 'files_slno',
             sortorder: true,
             errormessage: '',
             records: [],
