@@ -28,6 +28,8 @@ export interface SearchQuery {
     searchString: string;
     rdbprocessed: string;
     rdtrkprocessed: string;
+    fromdate: string;
+    todate: string;
 }
 
 

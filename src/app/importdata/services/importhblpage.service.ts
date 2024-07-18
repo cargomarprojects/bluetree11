@@ -77,7 +77,7 @@ export class ImportHblPageService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', rdbprocessed: 'NOT-PROCESSED' },
+            searchQuery: <SearchQuery>{ searchString: '', rdbprocessed: 'NOT-PROCESSED', fromdate: this.gs.getPreviousDate(15), todate: this.gs.defaultValues.today },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -100,7 +100,7 @@ export class ImportHblPageService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', rdbprocessed: 'NOT-PROCESSED' },
+            searchQuery: <SearchQuery>{ searchString: '', rdbprocessed: 'NOT-PROCESSED', fromdate: this.gs.getPreviousDate(15), todate: this.gs.defaultValues.today },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -144,7 +144,8 @@ export class ImportHblPageService {
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
-
+        SearchData.SDATE = this.record.searchQuery.fromdate;
+        SearchData.EDATE = this.record.searchQuery.todate;
 
         if (type == 'PAGE') {
             SearchData.action = this.record.pageQuery.action;
@@ -157,18 +158,11 @@ export class ImportHblPageService {
             this.record.pageQuery = <PageQuery>{ action: 'NEW', page_rows: response.page_rows, page_count: response.page_count, page_current: response.page_current, page_rowcount: response.page_rowcount };
             this.record.records = response.list;
             this.mdata$.next(this.record);
-            //  this.ProcessXML = false; // ProcessXML set to true in ProcessFtp() inorder to invoke automatic ImportXmlData
+
+            this.ProcessXML = false; // ProcessXML set to true in ProcessFtp() inorder to invoke automatic ImportXmlData
             if (this.ProcessXML) {
                 this.ProcessXML = false;
-                this.Xml_MainRecIndex = 0;
-
-                this.Xml_MainRecTot = 0;
-                if (!this.gs.isBlank(this.record.records))
-                    this.Xml_MainRecTot = this.record.records.length;
-
-                if (this.Xml_MainRecTot > 0) {
-                    this.ImportMultipleXmlFiles();
-                }
+                this.ProcessFiles();
             }
 
         }, error => {
@@ -177,6 +171,32 @@ export class ImportHblPageService {
             alert(this.record.errormessage);
         });
     }
+
+    ProcessFiles() {
+
+        this.Xml_MainRecIndex = 0;
+        this.Xml_MainRecTot = 0;
+        if (!this.gs.isBlank(this.record.records))
+            this.Xml_MainRecTot = this.record.records.length;
+
+        if (this.record.searchQuery.rdbprocessed == "PROCESSED") {
+            alert('Please select Not Processed and Search to process file');
+            return;
+        }
+        if (this.Xml_MainRecTot <= 0) {
+            alert('List Not Found');
+            return;
+        }
+
+        if (!confirm("Process Files Y/N")) {
+            return;
+        }
+
+        if (this.Xml_MainRecTot > 0) {
+            this.ImportMultipleXmlFiles();
+        }
+    }
+
 
     ImportMultipleXmlFiles() {
         if (this.Xml_MainRecIndex < this.Xml_MainRecTot) {
@@ -215,6 +235,11 @@ export class ImportHblPageService {
     }
 
     ProcessFtp() {
+
+        if (!confirm("Download Files Y/N")) {
+            return;
+        }
+
         this.ProcessXML = false;
         this.record.errormessage = '';
         var SearchData = this.gs.UserInfo;
@@ -228,7 +253,7 @@ export class ImportHblPageService {
                 this.record = <ImportHblPageModel>{
                     errormessage: '',
                     records: [],
-                    searchQuery: <SearchQuery>{ searchString: '', rdbprocessed: 'NOT-PROCESSED' },
+                    searchQuery: <SearchQuery>{ searchString: '', rdbprocessed: 'NOT-PROCESSED', fromdate: this.gs.getPreviousDate(15), todate: this.gs.defaultValues.today },
                     pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
                 };
                 this.mdata$.next(this.record);

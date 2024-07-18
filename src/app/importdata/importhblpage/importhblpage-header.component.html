@@ -1,42 +1,60 @@
 <div class="page-list">
     <div class="page-search">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-sm-2">
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm"></label>
-                    <div class="col-8">
-                        <button (click)="mainservice.ProcessFtp()" class="btn btn-primary btn-sm mr-1">Process XML</button>
+                    <label class="col-sm-4 col-form-label col-form-label-sm">From</label>
+                    <div class="col-sm-8">
+                        <app-date [inputdate]="searchQuery.fromdate" (ValueChanged)="searchQuery.fromdate=$event">
+                        </app-date>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-2">
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm"></label>
-                    <div class="col-8">
-                        <input type="radio" [(ngModel)]="searchQuery.rdbprocessed" [value]="'PROCESSED'" name="optprocess" />
-                        <span>&nbsp;Processed</span>
+                    <label class="col-sm-4 col-form-label col-form-label-sm">To</label>
+                    <div class="col-sm-8">
+                        <app-date [inputdate]="searchQuery.todate" (ValueChanged)="searchQuery.todate=$event">
+                        </app-date>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-4">
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm"></label>
-                    <div class="col-8">
-                        <input type="radio" [(ngModel)]="searchQuery.rdbprocessed" [value]="'NOT-PROCESSED'" name="optprocess" />
-                        <span>&nbsp;Not Processed</span>
+                    <label class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-sm-4">
+                        <input type="radio" [(ngModel)]="searchQuery.rdbprocessed" [value]="'PROCESSED'"
+                            name="optprocess" id="optprocessed" />
+                        <label for="optprocessed">&nbsp;Processed</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="radio" [(ngModel)]="searchQuery.rdbprocessed" [value]="'NOT-PROCESSED'"
+                            name="optprocess" id="optnprocessed"/>
+                        <label for="optnprocessed">&nbsp;Not Processed</label>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-2">
+            <div class="col-sm-4">
                 <div class="form-group row">
-                    <label class="col-2 col-form-label col-form-label-sm"></label>
-                    <div class="col-8">
+                    <label class="col-sm-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-sm-10">
                         <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
+                        <button (click)="mainservice.ProcessFtp()" class="btn btn-primary btn-sm mr-1">Download
+                            File</button>
+                        <button (click)="mainservice.ProcessFiles()" class="btn btn-primary btn-sm mr-1">Process
+                            File</button>
                     </div>
                 </div>
             </div>
-           
+            <!-- <div class="col-sm-2">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <button (click)="mainservice.ProcessFtp()" class="btn btn-primary btn-sm mr-1">Process
+                            XML</button>
+                    </div>
+                </div>
+            </div> -->
         </div>
     </div>
 </div>
