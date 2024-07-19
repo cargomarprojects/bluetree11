@@ -58,6 +58,13 @@ export class ShipDataPageService {
             return null;
     }
 
+    public selectRowId( id : string){
+        this.record.selectedId = id;
+    }
+    public getRowId(){
+        return this.record.selectedId;
+    }
+
     public sort(col: string) {
         if (col == this.record.sortcol) {
             this.record.sortorder = !this.record.sortorder;
@@ -69,6 +76,7 @@ export class ShipDataPageService {
     }
     public ClearInit() {
         this.record = <ShipDataPageModel>{
+            selectedId : '',
             sortcol: 'mblno',
             sortorder: true,
             errormessage: '',
@@ -93,6 +101,7 @@ export class ShipDataPageService {
         this.selectdeselect = false;
 
         this.record = <ShipDataPageModel>{
+            selectedId : '',
             sortcol: 'mblno',
             sortorder: true,
             errormessage: '',
@@ -118,6 +127,7 @@ export class ShipDataPageService {
         this.record.errormessage = '';
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
+            this.record.selectedId = '';   
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;

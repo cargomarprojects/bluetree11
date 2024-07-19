@@ -27,8 +27,8 @@
                         [ngClass]="mainservice.getIcon('updated_status')"></i></th>
                 <th (click)="mainservice.sort('update_files_desc')">EDIFILE&nbsp;<i
                         [ngClass]="mainservice.getIcon('update_files_desc')"></i></th>
-                <th (click)="mainservice.sort('messagedate')">CREATEDDATE&nbsp;<i
-                        [ngClass]="mainservice.getIcon('messagedate')"></i></th>
+                <th (click)="mainservice.sort('createddate')">CREATEDDATE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('createddate')"></i></th>
                 <th (click)="mainservice.sort('messagesender')">MESSAGEFROM&nbsp;<i
                         [ngClass]="mainservice.getIcon('messagesender')"></i></th>
                 <th (click)="mainservice.sort('messagenumber')">MESSAGE&nbsp;<i
@@ -65,7 +65,8 @@
             </tr>
         </thead>
         <tbody class="page-body-tbody">
-            <tr *ngFor="let rec of  records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+            <tr *ngFor="let rec of  records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()" (mousedown)="mainservice.selectRowId(rec.masterid)" 
+            [class.selected]="rec.masterid == mainservice.getRowId()">
                 <td>
                     <div class="form-check"> <input type="checkbox" class="form-check-input"
                             (click)="mainservice.SelectDeselect(rec)" #chkbox [(ngModel)]="rec.selected_b"><span></span>

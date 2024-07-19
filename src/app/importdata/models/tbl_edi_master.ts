@@ -128,6 +128,7 @@ export interface SearchQuery {
 }
 
 export interface ShipDataPageModel {
+    selectedId : string;
     sortcol: string;
     sortorder: boolean;
     errormessage: string;
