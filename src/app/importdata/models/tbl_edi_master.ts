@@ -44,11 +44,11 @@ export interface Tbl_edi_master {
     consignee_name: string;
     mshipper_name: string;
     agent_branch: string;
-    
+
     update_files_id: string;
     update_files_desc: string;
     update_file_uri: string;
-
+    createddate: string;
     selected_b: boolean;
 }
 
@@ -128,8 +128,8 @@ export interface SearchQuery {
 }
 
 export interface ShipDataPageModel {
-    sortcol : string ;
-    sortorder : boolean;
+    sortcol: string;
+    sortorder: boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
