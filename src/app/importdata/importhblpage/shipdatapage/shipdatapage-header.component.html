@@ -29,12 +29,12 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label col-form-label-sm">Status</label>
                     <div class="col-sm-10">
-                        <input type="checkbox" [(ngModel)]="searchQuery.chkpending" />
-                        <span>&nbsp;Pending&nbsp;&nbsp;</span>
-                        <input type="checkbox" [(ngModel)]="searchQuery.chkcompleted" />
-                        <span>&nbsp;Processed&nbsp;&nbsp;</span>
-                        <input type="checkbox" [(ngModel)]="searchQuery.chkdeleted" />
-                        <span>&nbsp;Deleted</span>
+                        <input type="checkbox" [(ngModel)]="searchQuery.chkpending" id="chkpending" />
+                        <label for="chkpending">&nbsp;Pending&nbsp;&nbsp;</label>
+                        <input type="checkbox" [(ngModel)]="searchQuery.chkcompleted" id="chkprocess" />
+                        <label for="chkprocess">&nbsp;Processed&nbsp;&nbsp;</label>
+                        <input type="checkbox" [(ngModel)]="searchQuery.chkdeleted" id="chkdel" />
+                        <label for="chkdel">&nbsp;Deleted</label>
                     </div>
                 </div>
             </div>
