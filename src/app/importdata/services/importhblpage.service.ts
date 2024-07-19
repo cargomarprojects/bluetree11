@@ -180,7 +180,7 @@ export class ImportHblPageService {
             this.Xml_MainRecTot = this.record.records.length;
 
         if (this.record.searchQuery.rdbprocessed == "PROCESSED") {
-            alert('Please select Not Processed and Search to process file');
+            alert('Please select Not Processed and Search to process Xml');
             return;
         }
         if (this.Xml_MainRecTot <= 0) {
@@ -188,7 +188,7 @@ export class ImportHblPageService {
             return;
         }
 
-        if (!confirm("Process Files Y/N")) {
+        if (!confirm("Process Y/N")) {
             return;
         }
 
@@ -236,7 +236,7 @@ export class ImportHblPageService {
 
     ProcessFtp() {
 
-        if (!confirm("Download Files Y/N")) {
+        if (!confirm("Download Xml Y/N")) {
             return;
         }
 
