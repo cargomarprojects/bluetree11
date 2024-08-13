@@ -265,6 +265,42 @@ export class ImportHblPageService {
             });
     }
 
+    DeleteXmlFile(_searchQuery: SearchQuery) {
+
+        if (this.gs.isBlank(_searchQuery.fromdate)) {
+            alert('From Date Cannot be Blank');
+            return;
+        }
+        if (this.gs.isBlank(_searchQuery.todate)) {
+            alert('To Date Cannot be Blank');
+            return;
+        }
+
+        if (!confirm("Delete files Y/N")) {
+            return;
+        }
+
+        this.record.errormessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.SDATE = _searchQuery.fromdate;
+        SearchData.EDATE = _searchQuery.todate;
+        this.DeleteFiles(SearchData)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.record.errormessage = response.error;
+                    alert(this.record.errormessage);
+                }
+                else {
+                    this.record.records = [];
+                    this.mdata$.next(this.record);
+                }
+
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+                this.mdata$.next(this.record);
+                alert(this.record.errormessage);
+            });
+    }
 
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importhblpage/List', SearchData, this.gs.headerparam2('authorized'));
@@ -276,6 +312,10 @@ export class ImportHblPageService {
 
     ProcessXmlFile(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importhblpage/ProcessXmlFile', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+    DeleteFiles(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importhblpage/DeleteFiles', SearchData, this.gs.headerparam2('authorized'));
     }
 
 }

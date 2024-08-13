@@ -43,6 +43,8 @@
                             Xml</button>
                         <button (click)="mainservice.ProcessFiles()" class="btn btn-primary btn-sm mr-1">Process
                         </button>
+                        <button *ngIf="gs.user_code=='ADMIN'" (click)="mainservice.DeleteXmlFile(searchQuery)" class="btn btn-primary btn-sm mr-1">Delete Files
+                        </button>
                     </div>
                 </div>
             </div>
