@@ -282,6 +282,9 @@ export class ImportHblPageService {
 
         this.record.errormessage = '';
         var SearchData = this.gs.UserInfo;
+        SearchData.APP_FOLDER = this.gs.FS_APP_FOLDER;
+        SearchData.FTP_FOLDER = this.gs.GLOBAL_FTP_FOLDER;
+        SearchData.FILES_TYPE = 'XML-EDI';
         SearchData.SDATE = _searchQuery.fromdate;
         SearchData.EDATE = _searchQuery.todate;
         this.DeleteFiles(SearchData)
