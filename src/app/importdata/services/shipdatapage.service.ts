@@ -58,10 +58,10 @@ export class ShipDataPageService {
             return null;
     }
 
-    public selectRowId( id : string){
+    public selectRowId(id: string) {
         this.record.selectedId = id;
     }
-    public getRowId(){
+    public getRowId() {
         return this.record.selectedId;
     }
 
@@ -76,7 +76,7 @@ export class ShipDataPageService {
     }
     public ClearInit() {
         this.record = <ShipDataPageModel>{
-            selectedId : '',
+            selectedId: '',
             sortcol: 'mblno',
             sortorder: true,
             errormessage: '',
@@ -101,7 +101,7 @@ export class ShipDataPageService {
         this.selectdeselect = false;
 
         this.record = <ShipDataPageModel>{
-            selectedId : '',
+            selectedId: '',
             sortcol: 'mblno',
             sortorder: true,
             errormessage: '',
@@ -127,7 +127,7 @@ export class ShipDataPageService {
         this.record.errormessage = '';
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
-            this.record.selectedId = '';   
+            this.record.selectedId = '';
         }
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
@@ -251,7 +251,7 @@ export class ShipDataPageService {
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = _rec.masterid;
         SearchData.remarks = sRemarks;
-
+        SearchData.type = 'DELETE';
         this.DeleteRecord(SearchData)
             .subscribe(response => {
                 if (response.retvalue == false) {
@@ -265,6 +265,30 @@ export class ShipDataPageService {
                     }
                 }
                 this.mdata$.next(this.record);
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+                this.mdata$.next(this.record);
+                alert(this.record.errormessage);
+            });
+    }
+
+    PermanentDeleteRows(_masterIds: string) {
+        this.record.errormessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = _masterIds;
+        SearchData.type = 'PERMANENT-DELETE';
+        this.DeleteRecord(SearchData)
+            .subscribe(response => {
+                this.record.errormessage = response.error;
+                alert(this.record.errormessage);
+                if (response.retvalue) {
+                    var temparr = _masterIds.split(',');
+                    for (let i = 0; i < temparr.length; i++) {
+                        this.record.records.splice(this.record.records.findIndex(rec => rec.masterid == temparr[i]), 1);
+                    }
+                    this.mdata$.next(this.record);
+                }
+
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
                 this.mdata$.next(this.record);

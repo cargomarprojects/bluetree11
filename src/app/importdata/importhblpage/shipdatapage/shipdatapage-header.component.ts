@@ -110,4 +110,26 @@ export class ShipDataPageHeaderComponent implements OnInit {
 
     this.mainservice.DeleteRow(_rec);
   }
+
+  PermanentDeleteRecord() {
+    let _masterid: string = "";
+    this.mainservice.record.records.forEach(Rec => {
+      if (Rec.selected_b) {
+        if (_masterid != "")
+          _masterid += ",";
+        _masterid += Rec.masterid;
+      }
+    })
+
+    if (this.gs.isBlank(_masterid)) {
+      alert('No Record Selected');
+      return;
+    }
+
+    if (!confirm("DELETE SELECTED RECORDS PERMANENTLY")) {
+      return;
+    }
+
+    this.mainservice.PermanentDeleteRows(_masterid);
+  }
 }
