@@ -276,7 +276,12 @@ export class ImportHblPageService {
             return;
         }
 
-        if (!confirm("Delete files Y/N")) {
+
+        let Msg: string = "";
+        Msg = "THIS WILL DELETE ALL XML FILES FROM ";
+        Msg += this.gs.ConvertDate2DisplayFormat(this.record.searchQuery.fromdate) + " TO ";
+        Msg += this.gs.ConvertDate2DisplayFormat(this.record.searchQuery.todate);
+        if (!confirm(Msg)) {
             return;
         }
 
@@ -289,15 +294,12 @@ export class ImportHblPageService {
         SearchData.EDATE = _searchQuery.todate;
         this.DeleteFiles(SearchData)
             .subscribe(response => {
-                if (response.retvalue == false) {
-                    this.record.errormessage = response.error;
-                    alert(this.record.errormessage);
-                }
-                else {
+                this.record.errormessage = response.error;
+                alert(this.record.errormessage);
+                if (response.retvalue) {
                     this.record.records = [];
                     this.mdata$.next(this.record);
                 }
-
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
                 this.mdata$.next(this.record);
