@@ -747,6 +747,18 @@
 
                     </div>
 
+                    <div class="form-group row">
+                        <a class="col-12 btn btn-info btn-sm text-uppercase"
+                          *ngIf="gs.screenExists(gs.MENU_OT_MBL_INSTRUCTION)" [routerLink]="BtnNavigation2('MBLPAGE','L')"
+                          [queryParams]="BtnNavigation2('MBLPAGE','P')">MBL Instruction</a>
+                      </div>
+            
+                      <div class="form-group row">
+                        <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_OT_DOCK_RECEIPT)"
+                          [routerLink]="BtnNavigation2('DOCKPAGE','L')" [queryParams]="BtnNavigation2('DOCKPAGE','P')">Dock
+                          Receipt</a>
+                      </div>
+
 
                     <div class="form-group row">
 

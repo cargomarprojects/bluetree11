@@ -1042,6 +1042,16 @@ export class OthGeneralEditComponent implements OnInit {
           is_locked: this.is_locked,
           hideTracking: 'Y'
         };
+    } else if (action == "MBLPAGE") {
+      if (_type == "L")
+        return '/Silver.SeaExport.Trans/MBLPage';
+      if (_type == 'P')
+        return { appid: this.gs.appid, menuid: this.gs.MENU_OT_MBL_INSTRUCTION, pkid: this.pkid, origin: 'other-general-page', is_locked: this.is_locked };
+    } else if (action == "DOCKPAGE") {
+      if (_type == "L")
+        return '/Silver.SeaExport.Trans/DockPage';
+      if (_type == 'P')
+        return { appid: this.gs.appid, menuid: this.gs.MENU_OT_DOCK_RECEIPT, pkid: this.pkid, origin: 'other-general-page', is_locked: this.is_locked };
     }
   }
 
