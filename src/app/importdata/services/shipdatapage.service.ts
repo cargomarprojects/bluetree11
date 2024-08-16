@@ -286,8 +286,8 @@ export class ShipDataPageService {
                     for (let i = 0; i < temparr.length; i++) {
                         this.record.records.splice(this.record.records.findIndex(rec => rec.masterid == temparr[i]), 1);
                     }
-                    this.mdata$.next(this.record);
                 }
+                this.mdata$.next(this.record);
 
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
