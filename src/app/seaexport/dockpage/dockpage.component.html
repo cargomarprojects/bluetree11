@@ -884,6 +884,6 @@
 </div>
 
 <div *ngIf="tab == 'report'">
-  <app-report [title]="'Dock Receipt'" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
+  <app-report [title]="title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
     (callbackevent)="callbackevent($event)"></app-report>
 </div>

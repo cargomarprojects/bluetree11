@@ -850,6 +850,6 @@
 </div>
 
 <div *ngIf="tab == 'report'">
-  <app-report [title]="'Ocean Export MBL Instruction'" [url]="report_url" [searchdata]="report_searchdata"
+  <app-report [title]="title" [url]="report_url" [searchdata]="report_searchdata"
     [menuid]="report_menuid" (callbackevent)="callbackevent($event)"></app-report>
 </div>

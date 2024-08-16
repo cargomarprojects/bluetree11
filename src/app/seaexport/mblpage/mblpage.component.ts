@@ -30,7 +30,7 @@ export class MblPageComponent implements OnInit {
   private menuid: string;
   private mode: string = "ADD";
 
-
+  private origin: string = '';
   private errorMessage: string[] = [];
 
   private title: string;
@@ -80,11 +80,13 @@ export class MblPageComponent implements OnInit {
     if (this.route.snapshot.queryParams.parameter == null) {
       this.pkid = this.route.snapshot.queryParams.pkid;
       this.menuid = this.route.snapshot.queryParams.menuid;
+      this.origin = this.route.snapshot.queryParams.origin;
       this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.pkid = options.pkid;
       this.menuid = options.menuid;
+      this.origin = options.origin;
       this.is_locked = options.is_locked;
     }
     this.initPage();
@@ -595,7 +597,7 @@ export class MblPageComponent implements OnInit {
     this.report_searchdata = this.gs.UserInfo;
     this.report_searchdata.pkid = this.pkid;
     this.report_searchdata.dock_type = _type;
-    this.report_menuid = this.gs.MENU_SE_MASTER_MBL_INSTRUCTION;
+    this.report_menuid = this.origin == 'other-general-page' ? this.gs.MENU_OT_MBL_INSTRUCTION : this.gs.MENU_SE_MASTER_MBL_INSTRUCTION;
     this.tab = 'report';
 
   }
@@ -611,10 +613,10 @@ export class MblPageComponent implements OnInit {
   getParam(_mode: string) {
     return {
       appid: this.gs.appid,
-      menuid: this.gs.MENU_SE_MASTER,
+      menuid: this.origin == 'other-general-page' ? this.gs.MENU_OT_OPERATION : this.gs.MENU_SE_MASTER,
       pkid: this.pkid,
       type: '',
-      origin: 'seaexp-master-page',
+      origin: this.origin,
       mode: 'EDIT'
     };
   }
@@ -622,13 +624,13 @@ export class MblPageComponent implements OnInit {
   ShowRiderPage() {
     let prm = {
       appid: this.gs.appid,
-      menuid: this.gs.MENU_SE_MASTER_MBL_INSTRUCTION,
+      menuid: this.origin == 'other-general-page' ? this.gs.MENU_OT_MBL_INSTRUCTION : this.gs.MENU_SE_MASTER_MBL_INSTRUCTION,
       pkid: this.pkid,
       source: 'MBL-RIDER',
       refno: this.record.mbld_refno,
       canPrint: true,
       canCopyMbl: false,
-      origin: 'seaexp-mbl-page',
+      origin: this.origin,
       is_locked: this.is_locked,
       bookno: this.record.mbld_booking_no,
       mbl_pkid: '',
@@ -645,13 +647,13 @@ export class MblPageComponent implements OnInit {
       if (_type == 'P')
         return {
           appid: this.gs.appid,
-          menuid: this.gs.MENU_SE_MASTER_MBL_INSTRUCTION,
+          menuid: this.origin == 'other-general-page' ? this.gs.MENU_OT_MBL_INSTRUCTION : this.gs.MENU_SE_MASTER_MBL_INSTRUCTION,
           pkid: this.pkid,
           source: 'MBL-RIDER',
           refno: this.record.mbld_refno,
           canPrint: true,
           canCopyMbl: false,
-          origin: 'seaexp-mbl-page',
+          origin: this.origin,
           is_locked: this.is_locked,
           bookno: this.record.mbld_booking_no,
           mbl_pkid: '',

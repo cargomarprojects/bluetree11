@@ -20,6 +20,7 @@ export class SeaExpRiderPageComponent implements OnInit {
     @ViewChildren('_cntr_sealno') cntr_sealno_field: QueryList<ElementRef>;
     // 15-07-2019 Created By Ajith  
 
+    origin: string = '';
     pkid: string;
     source: string;
     refno: string = '';
@@ -29,9 +30,9 @@ export class SeaExpRiderPageComponent implements OnInit {
     isAdmin: boolean;
     canPrint: boolean;
     canCopyMbl: boolean;
-    bookno: string ='';
+    bookno: string = '';
     mbl_pkid: string = '';
-    houseno:string ='';
+    houseno: string = '';
 
     errorMessage: string;
     remarks: string;
@@ -63,6 +64,7 @@ export class SeaExpRiderPageComponent implements OnInit {
             this.bookno = this.route.snapshot.queryParams.bookno;
             this.mbl_pkid = this.route.snapshot.queryParams.mbl_pkid;
             this.houseno = this.route.snapshot.queryParams.houseno;
+            this.origin = this.route.snapshot.queryParams.origin;
         } else {
             const options = JSON.parse(this.route.snapshot.queryParams.parameter);
             this.pkid = options.pkid;
@@ -75,6 +77,7 @@ export class SeaExpRiderPageComponent implements OnInit {
             this.bookno = options.bookno;
             this.mbl_pkid = options.mbl_pkid;
             this.houseno = options.houseno;
+            this.origin = options.origin;
         }
         this.initPage();
         this.actionHandler();
@@ -268,7 +271,7 @@ export class SeaExpRiderPageComponent implements OnInit {
         this.report_searchdata.bookno = this.bookno;
         this.report_searchdata.houseno = this.houseno;
         this.report_searchdata.SPATH = sPath;
-        this.report_menuid = this.gs.MENU_SE_MASTER_MBL_INSTRUCTION;
+        this.report_menuid = this.origin == 'other-general-page' ? this.gs.MENU_OT_MBL_INSTRUCTION : this.gs.MENU_SE_MASTER_MBL_INSTRUCTION;
         this.tab = 'report';
     }
     callbackevent(event: any) {
@@ -290,11 +293,11 @@ export class SeaExpRiderPageComponent implements OnInit {
         this.mainService.CopyMbl(SearchData)
             .subscribe(response => {
                 this.remarks = response.remarks;
-               
+
             }, error => {
                 this.errorMessage = this.gs.getError(error);
             });
     }
 
-    
+
 }
