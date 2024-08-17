@@ -369,7 +369,7 @@ export class DockPageComponent implements OnInit {
     this.mainService.Save(saverec).subscribe(response => {
 
       if (this.mode == "ADD" && response.retvalue)
-        this.record.mbld_dockno = response.docno;
+        this.record.mbld_dockno = response.dockno;
 
       if (response.retvalue) {
         this.mode = 'EDIT';
