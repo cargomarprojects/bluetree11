@@ -185,7 +185,7 @@ export interface Tbl_cargo_exp_mbldet {
 
         mbld_print_vsl_voy: string;
         _mbld_print_vsl_voy: boolean;
-
+        mbld_mode: string;
 }
 
 

@@ -30,7 +30,7 @@ export class DockPageComponent implements OnInit {
   private pkid: string;
   private menuid: string;
   private mode: string = "ADD";
-
+  private origin: string = '';
 
   private errorMessage: string[] = [];
 
@@ -83,11 +83,13 @@ export class DockPageComponent implements OnInit {
       this.pkid = this.route.snapshot.queryParams.pkid;
       this.menuid = this.route.snapshot.queryParams.menuid;
       this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
+      this.origin = this.route.snapshot.queryParams.origin;
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.pkid = options.pkid;
       this.menuid = options.menuid;
       this.is_locked = options.is_locked;
+      this.origin = options.origin;
     }
     this.initPage();
     this.actionHandler();
@@ -350,6 +352,9 @@ export class DockPageComponent implements OnInit {
     this.record.mbld_print_kgs = (this.record._mbld_print_kgs) ? "Y" : "N";
     this.record.mbld_print_lbs = (this.record._mbld_print_lbs) ? "Y" : "N";
 
+    this.record.mbld_mode = "SEA EXPORT";
+    if (this.origin == 'other-general-page')
+      this.record.mbld_mode = "OTHERS";
 
     this.SaveDescList();
 
@@ -526,7 +531,7 @@ export class DockPageComponent implements OnInit {
     this.report_searchdata = this.gs.UserInfo;
     this.report_searchdata.pkid = this.pkid;
     this.report_searchdata.dock_type = _type;
-    this.report_menuid = this.gs.MENU_SE_MASTER_MBL_INSTRUCTION;
+    this.report_menuid = this.origin == 'other-general-page' ? this.gs.MENU_OT_DOCK_RECEIPT : this.gs.MENU_SE_MASTER_MBL_INSTRUCTION;
     this.tab = 'report';
 
   }
@@ -543,10 +548,10 @@ export class DockPageComponent implements OnInit {
   getParam(_mode: string) {
     return {
       appid: this.gs.appid,
-      menuid: this.gs.MENU_SE_MASTER,
+      menuid: this.origin == 'other-general-page' ? this.gs.MENU_OT_OPERATION : this.gs.MENU_SE_MASTER,
       pkid: this.pkid,
       type: '',
-      origin: 'seaexp-master-page',
+      origin: this.origin,
       mode: 'EDIT'
     };
   }

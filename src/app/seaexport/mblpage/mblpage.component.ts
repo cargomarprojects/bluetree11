@@ -423,7 +423,9 @@ export class MblPageComponent implements OnInit {
     this.record.mbld_is_cntrized = (this.record._mbld_is_cntrized) ? "Y" : "N";
     this.record.mbld_print_kgs = (this.record._mbld_print_kgs) ? "Y" : "N";
     this.record.mbld_print_lbs = (this.record._mbld_print_lbs) ? "Y" : "N";
-
+    this.record.mbld_mode = "SEA EXPORT";
+    if (this.origin == 'other-general-page')
+      this.record.mbld_mode = "OTHERS";
 
     this.SaveDescList();
 
