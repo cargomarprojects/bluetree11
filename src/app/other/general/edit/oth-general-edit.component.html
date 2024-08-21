@@ -99,7 +99,14 @@
                                             [(ngModel)]="record.mbl_no" maxlength="60" />
                                     </div>
                                 </div>
-
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Booking No</label>
+                                    <div class="col-9">
+                                        <input class="form-control form-control-sm" type="text"
+                                            (blur)="onBlur('mbl_liner_bookingno')"
+                                            [(ngModel)]="record.mbl_liner_bookingno" maxlength="60" />
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Agent</label>
                                     <div class="col-9">
@@ -154,16 +161,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label class="col-3 col-form-label col-form-label-sm">Frt.Status</label>
-                                    <div class="col-9">
-                                        <select #_mbl_frt_status class="form-control form-control-sm"
-                                            [(ngModel)]="record.mbl_frt_status">
-                                            <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.code">
-                                                {{rec.code}}</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                
 
                                 <!-- <div class="form-group row">
                     <label class="col-3 col-form-label col-form-label-sm"></label>
@@ -176,7 +174,16 @@
 
                             </div>
                             <div class="col-md-6 testbox  px-0 mx-0">
-
+                                <div class="form-group row">
+                                    <label class="col-3 col-form-label col-form-label-sm">Frt.Status</label>
+                                    <div class="col-9">
+                                        <select #_mbl_frt_status class="form-control form-control-sm"
+                                            [(ngModel)]="record.mbl_frt_status">
+                                            <option *ngFor="let rec of gs.PARAM_FREIGHT_STATUS" [value]="rec.code">
+                                                {{rec.code}}</option>
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <div class="form-group row">
                                     <label class="col-3 col-form-label col-form-label-sm">Pol</label>

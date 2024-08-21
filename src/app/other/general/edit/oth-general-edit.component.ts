@@ -173,6 +173,7 @@ export class OthGeneralEditComponent implements OnInit {
   init() {
     this.record.mbl_pkid = this.pkid;
     this.record.mbl_no = '';
+    this.record.mbl_liner_bookingno = '';
     this.record.mbl_cfno = 0;
     this.record.mbl_refno = '';
     this.record.mbl_ref_date = this.gs.defaultValues.today;
@@ -755,7 +756,10 @@ export class OthGeneralEditComponent implements OnInit {
         this.record.mbl_no = this.record.mbl_no.toUpperCase().trim();
         break;
       }
-
+      case 'mbl_liner_bookingno': {
+        this.record.mbl_liner_bookingno = this.record.mbl_liner_bookingno.toUpperCase().trim();
+        break;
+      }
       case 'hbl_houseno': {
         this.record.hbl_houseno = this.record.hbl_houseno.toUpperCase().trim();
         break;
