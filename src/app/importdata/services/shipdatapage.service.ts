@@ -81,7 +81,7 @@ export class ShipDataPageService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', sender: '', chkpending: true, chkcompleted: false, chkdeleted: false, linkType: 'MBL#', fromdate: this.gs.getPreviousDate(90), todate: this.gs.defaultValues.today },
+            searchQuery: <SearchQuery>{ searchString: '', sender: '', chkpending: true, chkcompleted: true, chkdeleted: false, linkType: 'MBL#', fromdate: this.gs.getPreviousDate(90), todate: this.gs.defaultValues.today },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -106,7 +106,7 @@ export class ShipDataPageService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', sender: '', chkpending: true, chkcompleted: false, chkdeleted: false, linkType: 'MBL#', fromdate: this.gs.getPreviousDate(90), todate: this.gs.defaultValues.today },
+            searchQuery: <SearchQuery>{ searchString: '', sender: '', chkpending: true, chkcompleted: true, chkdeleted: false, linkType: 'MBL#', fromdate: this.gs.getPreviousDate(90), todate: this.gs.defaultValues.today },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
