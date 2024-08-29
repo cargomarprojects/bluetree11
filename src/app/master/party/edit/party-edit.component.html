@@ -821,7 +821,7 @@
                                 <label class="col-12  pr-0 col-form-label col-form-label-sm"><strong>Other
                                         Contacts</strong></label>
                             </div>
-                            <table class="table table-hover table-sm cntr">
+                            <table class="table table-hover table-sm cntr table-rowmove">
                                 <thead class="page-body-thead">
                                     <tr>
                                         <th>NAME</th>
@@ -836,7 +836,10 @@
                                     </tr>
                                 </thead>
                                 <tbody class="page-body-tbody">
-                                    <tr *ngFor="let rec of records">
+                                    <tr *ngFor="let rec of records; let i = index"
+                                        [class.active]="i == selectedRowIndex" (click)="SetRowIndex(i)"
+                                        (mousedown)="selectRowId(rec.cont_pkid)"
+                                        [class.selected]="rec.cont_pkid == getRowId()">
                                         <td class="p-0">
                                             <InputBox [(inputModel)]="rec.cont_name" [field]="'cont_name'"
                                                 [maxlength]="60" [uppercase]="true" (blur)="onBlur($event)"></InputBox>
@@ -882,6 +885,13 @@
                             <div class="form-group row">
                                 <div class="col-12">
                                     <button class="btn btn-info btn-sm mr-1" (click)="AddRow()">Add Row</button>
+                                    <button class="btn btn-info btn-sm mr-1" (click)="changePosition('UP')"><span
+                                            class="fa fa-arrow-up"></span></button>
+                                    <button class="btn btn-info btn-sm mr-1" (click)="changePosition('DOWN')"><span
+                                            class="fa fa-arrow-down"></span></button>
+                                    <label class="col-form-label col-form-label-sm">Click an item and use arrows to move
+                                        between
+                                        rows</label>
                                 </div>
                             </div>
                         </div>

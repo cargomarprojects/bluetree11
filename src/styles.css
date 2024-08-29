@@ -86,7 +86,11 @@ tr:nth-child(even) {
 tr.selected {
   background-color: var(--custom-selected-row-back-color) !important;
 }
-
+ 
+.table-rowmove tr.selected {
+  /* background-color: #FFC107 !important; */
+  background-color: rgb(179, 172, 172) !important;
+}
 
 .mybody {
   cursor: pointer;

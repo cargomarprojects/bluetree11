@@ -50,6 +50,8 @@ export class PartyEditComponent implements OnInit {
   attach_filespath2: string = '';
 
   SetAddressToLine: string = "";
+  selectedRowIndex: number = -1;
+  selectedId: string = '';
 
   private pkid: string = "";
   private menuid: string;
@@ -1014,6 +1016,40 @@ export class PartyEditComponent implements OnInit {
       }, error => {
         this.errorMessage = this.gs.getError(error);
       });
+  }
+
+  SetRowIndex(_indx: number) {
+    this.selectedRowIndex = _indx;
+  }
+
+  changePosition(thistype: string) {
+    if (this.selectedRowIndex == -1)
+      return;
+    let _newindx: number = this.selectedRowIndex;
+
+    if (thistype == 'UP')
+      _newindx--;
+    if (thistype == 'DOWN')
+      _newindx++;
+
+    if (_newindx >= 0 && _newindx < this.records.length) {
+      this.swapItem(this.selectedRowIndex, _newindx);
+      this.selectedRowIndex = _newindx;
+    }
+  }
+
+
+  swapItem(slot1: number, slot2: number) {
+    var tempVal = this.records[slot2];
+    this.records[slot2] = this.records[slot1];
+    this.records[slot1] = tempVal;
+  }
+
+  public selectRowId(id: string) {
+    this.selectedId = id;
+  }
+  public getRowId() {
+    return this.selectedId;
   }
 
 }
