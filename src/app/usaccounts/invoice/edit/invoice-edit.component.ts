@@ -1062,6 +1062,7 @@ export class InvoiceEditComponent implements OnInit {
     }
   }
 
+  
 
   findRowTotal(field: string, rec: Tbl_Cargo_Invoiced) {
 
@@ -1082,7 +1083,8 @@ export class InvoiceEditComponent implements OnInit {
       }
       nRate = rec.invd_rate;
       if (nQty != 0 && nRate != 0) {
-        nAmt = nQty * nRate;
+        let result =  nQty * nRate; //Changed on 03-Oct-2024,To correct result of multiplication in javascript,eg: 1269.5 * 7.85 = 9965.574999999 by fixed 3 place will get 9965.575
+        nAmt =  +result.toFixed(3);
         nAmt = this.gs.roundNumber(nAmt, 2);
         rec.invd_ftotal = nAmt;
       }
