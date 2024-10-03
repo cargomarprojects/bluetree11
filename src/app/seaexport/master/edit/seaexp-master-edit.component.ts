@@ -525,7 +525,7 @@ export class SeaexpMasterEditComponent implements OnInit {
 
           if (Rec.cntr_no.length != 11) {
             bRet = false;
-            this.errorMessage.push("cntr No cannot be Blank");
+            this.errorMessage.push("Container( " + Rec.cntr_no + " ) Invalid");
           }
           if (Rec.cntr_type.length <= 0) {
             bRet = false;
