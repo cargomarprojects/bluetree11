@@ -1826,7 +1826,7 @@ export class GlobalService {
   }
 
   public isZero(iData: any): boolean {
-    if (iData == null || iData == undefined || iData == 0)
+    if (iData == null || iData == undefined || iData == 0 || Number.isNaN(iData))
       return true;
     else
       return false;
@@ -3659,5 +3659,15 @@ export class GlobalService {
     }
     return bOk;
   }
+
+  public fixDecimalDigits(_number: number, _decimalDigits: number) {
+
+    if (!this.isZero(_number))
+      _number = +_number.toFixed(_decimalDigits);
+
+    return _number;
+  };
+
+
 
 }

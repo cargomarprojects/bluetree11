@@ -349,7 +349,7 @@ export class InvoiceEditComponent implements OnInit {
 
 
   AddRow() {
-
+ 
     this.SetIncomeExpenseCodesForLineItems();
 
     var rec = <Tbl_Cargo_Invoiced>{};
@@ -1062,7 +1062,7 @@ export class InvoiceEditComponent implements OnInit {
     }
   }
 
-  
+
 
   findRowTotal(field: string, rec: Tbl_Cargo_Invoiced) {
 
@@ -1082,9 +1082,9 @@ export class InvoiceEditComponent implements OnInit {
         nQty = 1;
       }
       nRate = rec.invd_rate;
-      if (nQty != 0 && nRate != 0) {
-        let result =  nQty * nRate; //Changed on 03-Oct-2024,To correct result of multiplication in javascript,eg: 1269.5 * 7.85 = 9965.574999999 by fixed 3 place will get 9965.575
-        nAmt =  +result.toFixed(3);
+      if (!this.gs.isZero(nQty) && !this.gs.isZero(nRate)) {
+        nAmt = nQty * nRate;
+        nAmt = this.gs.fixDecimalDigits(nAmt, 3);//Changed on 03-Oct-2024,To correct result of multiplication in javascript,eg: 1269.5 * 7.85 = 9965.574999999 by fixed 3 place will get 9965.575
         nAmt = this.gs.roundNumber(nAmt, 2);
         rec.invd_ftotal = nAmt;
       }
