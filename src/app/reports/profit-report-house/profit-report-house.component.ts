@@ -133,7 +133,7 @@ export class ProfitReportHouseComponent implements OnInit {
     if (this.gs.GENERAL_BRANCH_CODE == "MFDR")// MFORWARDER USA
       this.showStages = true;
 
-    this.sales_where = "";
+    this.sales_where = "ISLOCKED";
     if (!this.isAdmin)
       this.sales_where = " param_lookup_id = '" + this.gs.user_pkid + "'";
     this.initLov('');

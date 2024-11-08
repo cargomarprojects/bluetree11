@@ -127,7 +127,7 @@
               <div *ngIf="report_category=='HANDLED BY'" class="col-sm-9">
                 <!-- <app-autocomplete [inputdata]="HANDRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete> -->
                 <app-autocomplete2 [controlname]="'HANDLED BY'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
-                      [displaycolumn]="'NAME'" [displaydata]="cust_name" 
+                      [displaycolumn]="'NAME'" [displaydata]="cust_name"  [where]="'ISLOCKED'"
                       (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
               </div>

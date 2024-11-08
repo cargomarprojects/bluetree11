@@ -82,7 +82,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <app-autocomplete2 [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'"
-                                    [subtype]="'SALESMAN'" [displaycolumn]="'NAME'" [displaydata]="handled_name"
+                                    [subtype]="'SALESMAN'" [displaycolumn]="'NAME'" [displaydata]="handled_name" [where]="'ISLOCKED'"
                                     (ValueChanged)="LovSelected($event)">
                                 </app-autocomplete2>
                             </div>

@@ -70,7 +70,7 @@
               <label class="col-4 col-form-label col-form-label-sm">Handled-By</label>
               <div class="col-8">
                 <app-autocomplete2 [controlname]="'HANDLEDBY'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
-                      [displaycolumn]="'NAME'" [displaydata]="handled_name"
+                      [displaycolumn]="'NAME'" [displaydata]="handled_name" [where]="'ISLOCKED'"
                       (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
               </div>
