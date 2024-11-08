@@ -55,6 +55,7 @@ export class ParamEditComponent implements OnInit {
   bname5: boolean = false;
   blovName: boolean = false;
   bname6: boolean = false;
+  bshowlocked: boolean = false;
 
   cmbList = {};
 
@@ -72,6 +73,7 @@ export class ParamEditComponent implements OnInit {
     bname5: false,
     name6: '',
     bname6: false,
+    bshowlocked: false
   };
 
   constructor(
@@ -141,7 +143,7 @@ export class ParamEditComponent implements OnInit {
     this.record.rec_history_id = this.gs.getGuid();
     if (this.menu_param == "HBL-FORMAT")
       this.record.param_name6 = 'BLANK';
-
+    this.record.rec_locked = 'N';
   }
 
 
@@ -263,6 +265,7 @@ export class ParamEditComponent implements OnInit {
     this.FilterData.bname5 = this.bname5;
     this.FilterData.name6 = this.name6;
     this.FilterData.bname6 = this.bname6;
+    this.FilterData.bshowlocked = this.bshowlocked;
 
     const saveRecord = <VM_TBL_MAST_PARAM>{};
     saveRecord.record = this.record;
@@ -430,6 +433,7 @@ export class ParamEditComponent implements OnInit {
     this.bname5 = false;
     this.blovName = false;
     this.bname6 = false;
+    this.bshowlocked = false;
 
     this.name1 = 'Name';
 
@@ -459,6 +463,7 @@ export class ParamEditComponent implements OnInit {
       this.lovName = 'User';
       this.blovName = true;
       this.bname2 = true;
+      this.bshowlocked = true;
     }
 
     if (this.menu_param == 'JOB-TYPE') {

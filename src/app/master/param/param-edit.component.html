@@ -81,6 +81,20 @@
         </div>
       </div>
 
+      <div class="form-group row" *ngIf="bshowlocked">
+        <!-- <label class="col-4 col-form-label col-form-label-sm">User</label>
+        <div class="col-8">
+          <app-autocomplete [inputdata]="USERRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
+        </div> -->
+        <label class="col-4 col-form-label col-form-label-sm">Is Locked</label>
+        <div class="col-8">
+            <select class="form-control form-control-sm" [(ngModel)]="record.rec_locked">
+                <option [value]="'Y'">YES</option>
+                <option [value]="'N'">NO</option>
+            </select>
+        </div>
+      </div>
+
     </div>
   </div>
 

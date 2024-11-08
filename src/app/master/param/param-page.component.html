@@ -25,6 +25,7 @@
                 <th (click) ="sort('param_name1')" >NAME&nbsp;<i [ngClass]="getIcon('param_name1')"></i></th>
                 <th *ngIf="menu_param == 'UNIT MASTER'" (click) ="sort('param_name2')" >NAME&nbsp;<i [ngClass]="getIcon('param_name2')"></i></th>
                 <th *ngIf="menu_param == 'UNIT MASTER'" (click) ="sort('param_name3')" >NAME&nbsp;<i [ngClass]="getIcon('param_name3')"></i></th>
+                <th *ngIf="menu_param == 'SALESMAN'" (click) ="sort('rec_locked')" >LOCKED&nbsp;<i [ngClass]="getIcon('rec_locked')"></i></th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
@@ -39,6 +40,7 @@
                 <td >{{rec.param_name1}}</td>
                 <td *ngIf="menu_param == 'UNIT MASTER'" >{{rec.param_name2}}</td>
                 <td *ngIf="menu_param == 'UNIT MASTER'" >{{rec.param_name3}}</td>
+                <td *ngIf="menu_param == 'SALESMAN'" >{{rec.rec_locked}}</td>
             </tr>
         </tbody>
     </table>
