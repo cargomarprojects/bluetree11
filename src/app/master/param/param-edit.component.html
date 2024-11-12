@@ -86,7 +86,7 @@
         <div class="col-8">
           <app-autocomplete [inputdata]="USERRECORD" (ValueChanged)="LovSelected($event)"></app-autocomplete>
         </div> -->
-        <label class="col-4 col-form-label col-form-label-sm">Active</label>
+        <label class="col-4 col-form-label col-form-label-sm">Locked</label>
         <div class="col-8">
             <select class="form-control form-control-sm" [(ngModel)]="record.rec_locked">
                 <option [value]="'Y'">YES</option>
