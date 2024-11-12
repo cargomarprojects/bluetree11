@@ -4,8 +4,7 @@ import { PageQuery } from '../../../shared/models/pageQuery';
 export interface SearchQuery {
   searchString: string;
   menu_param: string;
-  isActive: boolean;
-  isInactive: boolean;
+  isLocked: boolean;
 }
 
 export interface ParamModel {

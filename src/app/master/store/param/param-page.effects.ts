@@ -45,8 +45,7 @@ export class ParamEffects {
 
                 if (action.payload.type == 'SEARCH') {
                     SearchData.CODE = action.payload.Query.searchString;
-                    SearchData.ISACTIVE = action.payload.Query.isActive == true ? "Y" : "N";
-                    SearchData.ISINACTIVE = action.payload.Query.isInactive == true ? "Y" : "N";
+                    SearchData.ISLOCKED = action.payload.Query.isLocked == true ? "Y" : "N";
                     SearchData.page_count = 0;
                     SearchData.page_rows = 0;
                     SearchData.page_current = -1;
@@ -62,8 +61,7 @@ export class ParamEffects {
                 if (action.payload.type == 'PAGE') {
                     SearchData.action = action.payload.Query.action;
                     SearchData.CODE = ent.searchQuery.searchString;
-                    SearchData.ISACTIVE = ent.searchQuery.isActive == true ? "Y" : "N";
-                    SearchData.ISINACTIVE = ent.searchQuery.isInactive == true ? "Y" : "N";
+                    SearchData.ISLOCKED = ent.searchQuery.isLocked == true ? "Y" : "N";
                     SearchData.page_count = action.payload.Query.page_count;
                     SearchData.page_rows = action.payload.Query.page_rows;
                     SearchData.page_current = action.payload.Query.page_current;;

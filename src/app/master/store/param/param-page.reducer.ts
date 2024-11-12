@@ -133,8 +133,7 @@ export const SelectSearchData = createSelector(
       if (state.entities[router.state.queryParams.id])
         return state.entities[router.state.queryParams.id].searchQuery
       else {
-        alert(router.state.queryParams.menu_param);
-        return <SearchQuery>{ searchString: '', isActive: true, isInactive: false, menu_param: router.state.queryParams.menu_param };
+        return <SearchQuery>{ searchString: '', menu_param: router.state.queryParams.menu_param, isLocked: false };
       }
     }
   }

@@ -129,7 +129,7 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     if (actions.outputformat == 'EXCEL') {
       let _code: string = "";
       _code = actions.searchQuery.searchString;
-      this.Print(_code, actions.searchQuery.isActive, actions.searchQuery.isInactive);
+      this.Print(_code, actions.searchQuery.isLocked);
     }
     else
       this.store.dispatch(new fromparamactions.LoadParamRequest({ type: "SEARCH", Query: actions.searchQuery }))
@@ -188,7 +188,7 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     this.sub3.unsubscribe;
   }
 
-  Print(_code: string, _isActive: boolean, _isInactive: boolean) {
+  Print(_code: string, _isLocked: boolean) {
     if (!this.gs.canPrint(this.menuid)) {
       alert('Insufficient User Rights')
       return;
@@ -200,8 +200,7 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     this.report_searchdata.pkid = '';
     this.report_searchdata = this.gs.UserInfo;
     this.report_searchdata.CODE = _code;
-    this.report_searchdata.ISACTIVE = _isActive == true ? "Y" : "N";
-    this.report_searchdata.ISINACTIVE = _isInactive == true ? "Y" : "N";
+    this.report_searchdata.ISLOCKED = _isLocked == true ? "Y" : "N";
     this.report_searchdata.TYPE = this.menu_param;
     this.report_searchdata.STABLE = 'mast_param';
 
