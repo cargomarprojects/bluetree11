@@ -3,6 +3,8 @@ import { PageQuery } from '../../../shared/models/pageQuery';
 
 export interface SearchQuery {
     searchString : string ;
+    isActive: boolean;
+    isInactive: boolean;
 }
 
 export interface ParamModel {

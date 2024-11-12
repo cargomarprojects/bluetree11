@@ -27,33 +27,33 @@ export function ParamReducer(state: ParamState = initialParamState, action: Para
     switch (action.type) {
         case ParamActionTypes.UPDATE_SEARCH: {
             const record: ParamModel = {
-                appid : action.payload.appid,
+                appid: action.payload.appid,
                 id: action.payload.id,
-                menuid :action.payload.menuid,
-                param_type :action.payload.param_type,
-                errormessage : '',
-                selectedId : '',
-                sortcol : '',
-                sortorder: true,                
+                menuid: action.payload.menuid,
+                param_type: action.payload.param_type,
+                errormessage: '',
+                selectedId: '',
+                sortcol: '',
+                sortorder: true,
                 pageQuery: <PageQuery>{ action: 'NEW', page_rows: 0, page_count: 0, page_current: -1, page_rowcount: 0 },
                 searchQuery: action.payload.searchQuery,
                 records: []
             }
             return adapter.upsertOne(record, state);
         }
-        case ParamActionTypes.LOAD_PARAM_SUCCESS : {
+        case ParamActionTypes.LOAD_PARAM_SUCCESS: {
             const st = Object.assign({}, state.entities[action.payload.id]);
             st.pageQuery = action.payload.pageQuery;
             st.records = action.payload.records;
             st.errormessage = '';
-            selectedId : '';
+            selectedId: '';
             st.sortcol = '';
-            st.sortorder = true;            
-            return adapter.upsertOne( st, state);
+            st.sortorder = true;
+            return adapter.upsertOne(st, state);
         }
         case ParamActionTypes.SORT_DATA: {
 
-            if ( state.entities[action.payload.id] == null )
+            if (state.entities[action.payload.id] == null)
                 return state;
 
             const st = Object.assign({}, state.entities[action.payload.id]);
@@ -72,18 +72,18 @@ export function ParamReducer(state: ParamState = initialParamState, action: Para
         }
 
         case ParamActionTypes.SELECT_ROW: {
-            if ( state.entities[action.payload.id] == null )
+            if (state.entities[action.payload.id] == null)
                 return state;
             const st = Object.assign({}, state.entities[action.payload.id]);
             st.selectedId = action.payload.selecteId;
             return adapter.upsertOne(st, state);
         }
         case ParamActionTypes.LOAD_PARAM_FAIL: {
-            const st =  Object.assign({}, 
-                state.entities[action.payload.id], 
-                { errormessage : action.payload.errormessage }
+            const st = Object.assign({},
+                state.entities[action.payload.id],
+                { errormessage: action.payload.errormessage }
             );
-            return adapter.upsertOne( st , state);
+            return adapter.upsertOne(st, state);
         }
         default: {
             return state;
@@ -102,9 +102,9 @@ export const SelectEntity = createSelector(
     SelectParamsState,
     getRouterState,
     (state: ParamState, router) => {
-        if ( state == null || router == null)
+        if (state == null || router == null)
             return null;
-        
+
         if (state.entities[router.state.queryParams.id])
             return state.entities[router.state.queryParams.id];
         else
@@ -120,7 +120,7 @@ export const SelectPageData = createSelector(
             if (state.entities[router.state.queryParams.id])
                 return state.entities[router.state.queryParams.id].pageQuery;
             else
-                return <PageQuery>{action :'NEW', page_count: 0, page_rows: 0, page_current: 0, page_rowcount: 0 };
+                return <PageQuery>{ action: 'NEW', page_count: 0, page_rows: 0, page_current: 0, page_rowcount: 0 };
         }
     }
 );
@@ -133,7 +133,7 @@ export const SelectSearchData = createSelector(
             if (state.entities[router.state.queryParams.id])
                 return state.entities[router.state.queryParams.id].searchQuery
             else
-                return <SearchQuery>{ searchString: '' };
+                return <SearchQuery>{ searchString: '', isActive: true, isInactive: false };
         }
     }
 );

@@ -34,8 +34,8 @@ export class ParamPageComponent implements OnInit, OnDestroy {
   sub3: any;
 
   selectedId = '';
-  sortCol  = '';
-  sortOrder = true;  
+  sortCol = '';
+  sortOrder = true;
 
   title: string;
   isAdmin: boolean;
@@ -74,14 +74,14 @@ export class ParamPageComponent implements OnInit, OnDestroy {
       this.menuid = params.id;
       this.menu_param = params.menu_param;
       this.initPage();
-      
+
     });
 
   }
 
   private initPage() {
-    
-    
+
+
 
     this.isAdmin = this.gs.IsAdmin(this.menuid);
     this.title = this.gs.getTitle(this.menuid);
@@ -93,26 +93,26 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     this.searchQuery$ = this.store.pipe(select(fromparamreducer.SelectSearchData));
     this.errorMessage$ = this.store.pipe(select(fromparamreducer.getErrorMessage));
 
-    
-    this.sub1 = this.store.select(fromparamreducer.getSortCol).subscribe ( data => { this.sortCol = data});
-    this.sub2 = this.store.select(fromparamreducer.getSortOrder).subscribe ( data => { this.sortOrder = data});    
-    this.sub3 = this.store.select(fromparamreducer.getSelectedId).subscribe ( data => { this.selectedId = data});    
-    
-    
+
+    this.sub1 = this.store.select(fromparamreducer.getSortCol).subscribe(data => { this.sortCol = data });
+    this.sub2 = this.store.select(fromparamreducer.getSortOrder).subscribe(data => { this.sortOrder = data });
+    this.sub3 = this.store.select(fromparamreducer.getSelectedId).subscribe(data => { this.selectedId = data });
+
+
   }
 
-  private sort(sortcol : string){
-    this.store.dispatch(new fromparamactions.Sort({ id : this.id, sortcol : sortcol }))
+  private sort(sortcol: string) {
+    this.store.dispatch(new fromparamactions.Sort({ id: this.id, sortcol: sortcol }))
   }
 
-   public getIcon(col : string){
-    if ( col == this.sortCol){
-      if ( this.sortOrder )
+  public getIcon(col: string) {
+    if (col == this.sortCol) {
+      if (this.sortOrder)
         return 'fa fa-arrow-down';
-      else 
+      else
         return 'fa fa-arrow-up';
     }
-    else 
+    else
       return null;
   }
 
@@ -129,7 +129,7 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     if (actions.outputformat == 'EXCEL') {
       let _code: string = "";
       _code = actions.searchQuery.searchString;
-      this.Print(_code);
+      this.Print(_code, actions.searchQuery.isActive, actions.searchQuery.isInactive);
     }
     else
       this.store.dispatch(new fromparamactions.LoadParamRequest({ type: "SEARCH", Query: actions.searchQuery }))
@@ -137,9 +137,6 @@ export class ParamPageComponent implements OnInit, OnDestroy {
 
   pageEvents(actions: any) {
     this.store.dispatch(new fromparamactions.LoadParamRequest({ type: "PAGE", Query: actions.pageQuery }))
-
-    
-
   }
 
 
@@ -150,14 +147,14 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     }
 
     let parameter = {
-      appid:this.gs.appid,
+      appid: this.gs.appid,
       menuid: this.menuid,
       pkid: '',
       type: this.menu_param,
       origin: 'param-page',
       mode: 'ADD'
     };
-    this.gs.Naviagete2('Silver.Master/ParamEdit',  parameter);
+    this.gs.Naviagete2('Silver.Master/ParamEdit', parameter);
   }
 
 
@@ -169,14 +166,14 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     }
 
     let parameter = {
-      appid:this.gs.appid,
+      appid: this.gs.appid,
       menuid: this.menuid,
       pkid: _record.param_pkid,
       type: _record.param_type,
       origin: 'param-page',
       mode: 'EDIT'
     };
-    this.gs.Naviagete2('Silver.Master/ParamEdit',  parameter);
+    this.gs.Naviagete2('Silver.Master/ParamEdit', parameter);
   }
 
 
@@ -187,11 +184,11 @@ export class ParamPageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe;
     this.sub1.unsubscribe;
-    this.sub2.unsubscribe;    
-    this.sub3.unsubscribe;    
+    this.sub2.unsubscribe;
+    this.sub3.unsubscribe;
   }
 
-  Print(_code: string) {
+  Print(_code: string, _isActive: boolean, _isInactive: boolean) {
     if (!this.gs.canPrint(this.menuid)) {
       alert('Insufficient User Rights')
       return;
@@ -203,6 +200,8 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     this.report_searchdata.pkid = '';
     this.report_searchdata = this.gs.UserInfo;
     this.report_searchdata.CODE = _code;
+    this.report_searchdata.ISACTIVE = _isActive == true ? "Y" : "N";
+    this.report_searchdata.ISINACTIVE = _isInactive == true ? "Y" : "N";
     this.report_searchdata.TYPE = this.menu_param;
     this.report_searchdata.STABLE = 'mast_param';
 
