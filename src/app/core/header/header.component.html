@@ -40,12 +40,12 @@
         <a class="nav-link h6 text-white" *ngIf="gs.IsAuthenticated" (click)="changeBranch()">Change Branch</a>
       </li> -->
 
-      <li class="nav-item showelement" *ngIf="gs.User_Category=='EMPLOYEE'">
+      <li class="nav-item showelement mt-0" *ngIf="gs.User_Category=='EMPLOYEE'">
         <!-- <label class="nav-link h6 text-warning"  *ngIf="gs.IsAuthenticated" >{{gs.user_name}}/{{gs.branch_name}}</label> -->
         <div *ngIf="gs.IsAuthenticated" class="d-flex align-items-center">
-          <label class="nav-link h6 mr-2" style="color: greenyellow;">{{gs.user_name }}</label>
-          <label *ngIf="gs.branch_name=='MOTHERLINES - NEW YORK'" class="nav-link h6 text-warning" style="font-size: x-large;">{{ gs.branch_name.replace("MOTHERLINES - ","") }}</label>
-          <label *ngIf="gs.branch_name=='MOTHERLINES - CALIFORNIA'" class="nav-link h6 "  style="font-size: x-large; color: yellow;">{{ gs.branch_name.replace("MOTHERLINES - ","") }}</label>
+          <label class="h6 mr-2" style="color: greenyellow;">{{gs.user_name }}</label>
+          <label *ngIf="gs.branch_name=='MOTHERLINES - NEW YORK'" class="h6 text-warning" style="font-size: x-large;">{{ gs.branch_name.replace("MOTHERLINES - ","") }}</label>
+          <label *ngIf="gs.branch_name=='MOTHERLINES - CALIFORNIA'" class="h6 "  style="font-size: x-large; color: yellow;">{{ gs.branch_name.replace("MOTHERLINES - ","") }}</label>
         </div>
       </li>
       <li class="nav-item showelement" *ngIf="gs.User_Category=='CUSTOMER'">
