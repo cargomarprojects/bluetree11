@@ -45,7 +45,7 @@
         <div *ngIf="gs.IsAuthenticated" class="d-flex align-items-center">
           <label class="h6 mr-2" style="color: greenyellow;">{{gs.user_name }}</label>
           <label *ngIf="gs.branch_name=='MOTHERLINES - NEW YORK'" class="h6 text-warning" style="font-size: x-large;">{{ gs.branch_name.replace("MOTHERLINES - ","") }}</label>
-          <label *ngIf="gs.branch_name=='MOTHERLINES - CALIFORNIA'" class="h6 "  style="font-size: x-large; color: yellow;">{{ gs.branch_name.replace("MOTHERLINES - ","") }}</label>
+          <label *ngIf="gs.branch_name=='MOTHERLINES - CALIFORNIA'" class="h6"  style="font-size: x-large; color: yellow;">{{ gs.branch_name.replace("MOTHERLINES - ","") }}</label>
         </div>
       </li>
       <li class="nav-item showelement" *ngIf="gs.User_Category=='CUSTOMER'">
