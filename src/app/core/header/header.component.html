@@ -11,12 +11,12 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-    <ul class="navbar-nav mr-auto" >
+    <ul class="navbar-nav mr-auto">
 
       <div *ngFor="let rech of gs.Modules">
         <li class="nav-item dropdown" *ngIf="gs.IsAuthenticated">
           <a class="nav-link dropdown-toggle text-white h6" href="#" id="navbarDropdown" role="button"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{rech.module_name}}
           </a>
           <div class="dropdown-menu py-0 border-1 rounded-3 shadow-lg" aria-labelledby="navbarDropdown">
@@ -27,9 +27,7 @@
               <div *ngIf="rech.module_name == rec.module_name && rec.menu_hiden==='N'">
                 <!-- <a class="dropdown-item border-bottom" (click)="LoadPage(rec)">{{rec.menu_name}}</a> -->
                 <!-- <a class="dropdown-item border-bottom"  routerLink="{{getMenu(rec)}}" [queryParams]="{ appid : gs.appid, id: rec.menu_pkid, menuid: rec.menu_pkid, menu_param: rec.menu_param}">{{rec.menu_name}}</a> -->
-                <a class="dropdown-item border-bottom" 
-                  (click)="closeNav()"
-                  [routerLink]="getLink(rec)"
+                <a class="dropdown-item border-bottom" (click)="closeNav()" [routerLink]="getLink(rec)"
                   [queryParams]="getParam(rec)">{{rec.menu_name}}</a>
               </div>
             </div>
@@ -43,17 +41,24 @@
       </li> -->
 
       <li class="nav-item showelement" *ngIf="gs.User_Category=='EMPLOYEE'">
-        <label class="nav-link h6 text-warning"  *ngIf="gs.IsAuthenticated" >{{gs.user_name}}/{{gs.branch_name}}</label>
+        <!-- <label class="nav-link h6 text-warning"  *ngIf="gs.IsAuthenticated" >{{gs.user_name}}/{{gs.branch_name}}</label> -->
+        <div *ngIf="gs.IsAuthenticated" class="d-flex align-items-center">
+          <label class="nav-link h6 mr-2" style="color: greenyellow;">{{gs.user_name }}</label>
+          <label *ngIf="gs.branch_name=='MOTHERLINES - NEW YORK'" class="nav-link h6 text-warning" style="font-size: x-large;">{{ gs.branch_name.replace("MOTHERLINES - ","") }}</label>
+          <label *ngIf="gs.branch_name=='MOTHERLINES - CALIFORNIA'" class="nav-link h6 "  style="font-size: x-large; color: yellow;">{{ gs.branch_name.replace("MOTHERLINES - ","") }}</label>
+        </div>
       </li>
       <li class="nav-item showelement" *ngIf="gs.User_Category=='CUSTOMER'">
-        <label class="nav-link h6 text-warning"  *ngIf="gs.IsAuthenticated" >{{gs.user_name}}</label>
+        <label class="nav-link h6 text-warning" *ngIf="gs.IsAuthenticated">{{gs.user_name}}</label>
       </li>
 
     </ul>
 
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn border border-info ml-1 text-white h6" (click)="login()"  *ngIf="!gs.IsAuthenticated" >Login</button>
-      <button class="btn border border-info ml-1 text-white h6" (click)="Logout()" *ngIf="gs.IsAuthenticated"  >Logout</button>
+      <button class="btn border border-info ml-1 text-white h6" (click)="login()"
+        *ngIf="!gs.IsAuthenticated">Login</button>
+      <button class="btn border border-info ml-1 text-white h6" (click)="Logout()"
+        *ngIf="gs.IsAuthenticated">Logout</button>
     </form>
 
   </div>
