@@ -1,0 +1,81 @@
+<div class="page-list">
+    <div class="page-search">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Group</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchGroup">
+                            <option [value]="'SEA IMPORT'">OCEAN IMPORT</option>
+                            <!-- <option [value]="'SEA EXPORT'">OCEAN EXPORT</option> -->
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">From</label>
+                    <div class="col-8">
+                        <app-date [inputdate]="searchQuery.fromDate" (ValueChanged)="searchQuery.fromDate=$event">
+                        </app-date>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">To</label>
+                    <div class="col-8">
+                        <app-date [inputdate]="searchQuery.toDate" (ValueChanged)="searchQuery.toDate=$event">
+                        </app-date>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Agent</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
+                            [displaydata]="searchQuery.agentName" (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Carrier</label>
+                    <div class="col-8">
+                        <app-autocomplete2 [controlname]="'CARRIER'" [tabletype]="'SEA CARRIER'"
+                            [displaycolumn]="'NAME'" [displaydata]="searchQuery.carrierName"
+                            (ValueChanged)="LovSelected($event)">
+                        </app-autocomplete2>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Shipment Type</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchGroup">
+                            <option [value]="'FCL'">FCL</option>
+                            <option [value]="'LCL'">LCL</option>
+                            <option [value]="'CONSOLE'">CONSOLE</option>
+                            <option [value]="'OTHERS'">OTHERS</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Shipment Container</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchGroup">
+                            <option [value]="'NA'">NA</option>
+                            <option [value]="'SINGLE'">SINGLE</option>
+                            <option [value]="'MULTIPLE'">MULTIPLE</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm"></label>
+                    <div class="col-8">
+                        <button (click)="List('SCREEN')" class="btn btn-info btn-sm mr-1">Search</button>
+                        <button (click)="List('EXCEL')" *ngIf="mainservice.canPrint"
+                            class="btn btn-info btn-sm mr-1">Download</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

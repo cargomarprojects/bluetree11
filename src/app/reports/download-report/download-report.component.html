@@ -1,0 +1,51 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-1">{{mainservice.title}}</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage$ | async}}
+</div>
+
+<app-download-report-header [_query]="searchQuery$ | async"
+    (searchEvents)="searchEvents($event)"></app-download-report-header>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th (click)="mainservice.sort('mbl_refno')">REFNO&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
+                <th (click)="mainservice.sort('mbl_ref_date')">DATE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_ref_date')"></i></th>
+                <th (click)="mainservice.sort('mbl_agent_name')">AGENT&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_agent_name')"></i></th>
+                <th (click)="mainservice.sort('mbl_liner_name')">CARRIER&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_liner_name')"></i></th>
+                <th (click)="mainservice.sort('mbl_cntr_type')">SHIPMENT TYPE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_cntr_type')"></i></th>
+                <th (click)="mainservice.sort('mbl_teu')">TEU&nbsp;<i [ngClass]="mainservice.getIcon('mbl_teu')"></i>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+                <td>{{rec.mbl_refno}}</td>
+                <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                <td>{{rec.mbl_agent_name}}</td>
+                <td>{{rec.mbl_liner_name}}</td>
+                <td>{{rec.mbl_cntr_type}}</td>
+                <td>{{rec.mbl_teu}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />
