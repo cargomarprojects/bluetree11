@@ -44,7 +44,10 @@ export class DownloadReportComponent implements OnInit {
     }
 
     searchEvents(actions: any) {
-        this.mainservice.Search(actions, 'SEARCH');
+        if (actions.outputformat == "DOWNLOAD") {
+            this.mainservice.DownloadDocuments();
+        } else
+            this.mainservice.Search(actions, 'SEARCH');
     }
 
     pageEvents(actions: any) {
@@ -56,6 +59,8 @@ export class DownloadReportComponent implements OnInit {
         this.location.back();
     }
 
-
+    Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+        this.gs.DownloadFile(this.gs.FS_APP_FOLDER, filename, filetype, filedisplayname);
+    }
 
 }

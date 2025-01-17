@@ -133,7 +133,7 @@ export class DownloadReportService {
         SearchData.SDATE = this.record.searchQuery.fromDate;
         SearchData.EDATE = this.record.searchQuery.toDate;
         SearchData.AGENT_ID = this.record.searchQuery.agentId;
-        SearchData.AGENT_NAME = this.record.searchQuery.agentName;    
+        SearchData.AGENT_NAME = this.record.searchQuery.agentName;
         SearchData.CARRIER_ID = this.record.searchQuery.carrierId;
         SearchData.CARRIER_NAME = this.record.searchQuery.carrierName;
         SearchData.SHIPMENT_TYPE = this.record.searchQuery.shipmentType;
@@ -156,15 +156,23 @@ export class DownloadReportService {
                 this.record.errormessage = '';
                 this.mdata$.next(this.record);
             }
-            else if (_searchdata.outputformat == "EXCEL") {
-                this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
-            }
+
         }, error => {
             this.record.errormessage = this.gs.getError(error);
             this.mdata$.next(this.record);
             alert(this.record.errormessage);
         });
     }
+
+
+    DownloadDocuments() {
+        let filename: string = "";
+        this.record.records.forEach(Rec => {
+            filename = this.gs.FS_APP_FOLDER + Rec.files_path + Rec.files_id;
+            this.Downloadfile(filename, "", Rec.files_desc);
+        })
+    }
+
 
     Downloadfile(filename: string, filetype: string, filedisplayname: string) {
         this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);

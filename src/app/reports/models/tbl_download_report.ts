@@ -22,6 +22,11 @@ export class Tbl_Download_Report {
     mbl_cntr_type: string;
     mbl_teu: number;
     mbl_container_tot: number;
+    files_type: string;
+    files_desc: string;
+    files_size: string;
+    files_path: string;
+    files_id: string;
     rec_created_by: string;
     rec_created_date: string;
     rec_closed: string;

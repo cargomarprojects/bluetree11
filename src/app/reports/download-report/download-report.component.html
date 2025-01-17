@@ -31,8 +31,9 @@
                         [ngClass]="mainservice.getIcon('mbl_cntr_type')"></i></th>
                 <th (click)="mainservice.sort('mbl_container_tot')">TOTAL CONTAINER&nbsp;<i
                         [ngClass]="mainservice.getIcon('mbl_container_tot')"></i></th>
-                <th (click)="mainservice.sort('mbl_teu')">TEU&nbsp;<i [ngClass]="mainservice.getIcon('mbl_teu')"></i>
-                </th>
+                <th (click)="mainservice.sort('mbl_teu')">TEU&nbsp;<i [ngClass]="mainservice.getIcon('mbl_teu')"></i></th>
+                <th (click)="mainservice.sort('files_type')">FILE TYPE&nbsp;<i [ngClass]="mainservice.getIcon('files_type')"></i></th>
+                <th (click)="mainservice.sort('files_desc')">FILE DESC&nbsp;<i [ngClass]="mainservice.getIcon('files_desc')"></i></th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
@@ -44,6 +45,8 @@
                 <td>{{rec.mbl_cntr_type}}</td>
                 <td>{{rec.mbl_container_tot}}</td>
                 <td>{{rec.mbl_teu}}</td>
+                <td>{{rec.files_type}}</td>
+                <td>{{rec.files_desc}}</td>
             </tr>
         </tbody>
     </table>
