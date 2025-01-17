@@ -16,7 +16,7 @@ export class DownloadReportHeaderComponent implements OnInit {
         this.searchQuery = Object.assign({}, value);
     }
     @Output() searchEvents = new EventEmitter<any>();
-
+    
     constructor(public gs: GlobalService,
         public mainservice: DownloadReportService
     ) { }

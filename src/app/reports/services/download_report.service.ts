@@ -27,6 +27,8 @@ export class DownloadReportService {
     public canEdit: boolean;
     public canSave: boolean;
     public canPrint: boolean;
+    public modeTransport: string = 'SEA';
+    public TypeList: any[] = [];
 
     public initlialized: boolean;
     private appid = '';
@@ -72,7 +74,7 @@ export class DownloadReportService {
             records: [],
             searchQuery: <SearchQuery>{
                 searchString: '', searchGroup: 'SEA IMPORT', fromDate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), toDate: this.gs.defaultValues.today, agentId: '', agentName: '', carrierId: '', carrierName: '',
-                shipmentCntr: 'NA', shipmentType: 'NA'
+                shipmentCntr: 'NA', shipmentType: 'NA', fileType: 'NA'
             },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
@@ -90,6 +92,7 @@ export class DownloadReportService {
         this.id = params.id;
         this.menuid = params.id;
         this.param_type = params.param_type;
+        this.TypeList = [{ "code": "NA", "name": "NA" }, { "code": "EMAIL", "name": "E-MAIL" }, { "code": "HOUSE", "name": "HOUSE B/L" }, { "code": "MASTER", "name": "MASTER" }, { "code": "PAYMENT SETTLEMENT", "name": "OTHERS (PAYMENT SETTLEMENT)" }];
 
         this.record = <Download_Report_Model>{
             sortcol: 'mbl_refno',
@@ -98,7 +101,7 @@ export class DownloadReportService {
             records: [],
             searchQuery: <SearchQuery>{
                 searchString: '', searchGroup: 'SEA IMPORT', fromDate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), toDate: this.gs.defaultValues.today, agentId: '', agentName: '', carrierId: '', carrierName: '',
-                shipmentCntr: 'NA', shipmentType: 'NA'
+                shipmentCntr: 'NA', shipmentType: 'NA', fileType: 'NA'
             },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
@@ -121,7 +124,10 @@ export class DownloadReportService {
         if (type == 'PAGE') {
             this.record.pageQuery = _searchdata.pageQuery;
         }
-
+        if (this.record.searchQuery.searchGroup.includes("SEA"))
+            this.modeTransport = "SEA";
+        if (this.record.searchQuery.searchGroup.includes("AIR"))
+            this.modeTransport = "AIR";
 
         var SearchData = this.gs.UserInfo;
         SearchData.outputformat = _searchdata.outputformat;
@@ -138,6 +144,7 @@ export class DownloadReportService {
         SearchData.CARRIER_NAME = this.record.searchQuery.carrierName;
         SearchData.SHIPMENT_TYPE = this.record.searchQuery.shipmentType;
         SearchData.SHIPMENT_CNTR = this.record.searchQuery.shipmentCntr;
+        SearchData.FILE_TYPE = this.record.searchQuery.fileType;
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;
@@ -166,6 +173,10 @@ export class DownloadReportService {
 
 
     DownloadDocuments() {
+        if (!confirm("Download Documents ( " + this.record.records.length + " ), Y/N")) {
+            return;
+        }
+
         let filename: string = "";
         this.record.records.forEach(Rec => {
             filename = this.gs.FS_APP_FOLDER + Rec.files_path + Rec.files_id;

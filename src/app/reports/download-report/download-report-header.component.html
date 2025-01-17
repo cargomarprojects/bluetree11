@@ -3,15 +3,6 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm">Group</label>
-                    <div class="col-8">
-                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchGroup">
-                            <option [value]="'SEA IMPORT'">OCEAN IMPORT</option>
-                            <!-- <option [value]="'SEA EXPORT'">OCEAN EXPORT</option> -->
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">From</label>
                     <div class="col-8">
                         <app-date [inputdate]="searchQuery.fromDate" (ValueChanged)="searchQuery.fromDate=$event">
@@ -23,6 +14,17 @@
                     <div class="col-8">
                         <app-date [inputdate]="searchQuery.toDate" (ValueChanged)="searchQuery.toDate=$event">
                         </app-date>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Group</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchGroup">
+                            <option [value]="'AIR IMPORT'">AIR IMPORT</option>
+                            <option [value]="'AIR EXPORT'">AIR EXPORT</option>
+                            <option [value]="'SEA IMPORT'">OCEAN IMPORT</option>
+                            <option [value]="'SEA EXPORT'">OCEAN EXPORT</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -65,6 +67,14 @@
                             <option [value]="'NA'">NA</option>
                             <option [value]="'SINGLE'">SINGLE</option>
                             <option [value]="'MULTIPLE'">MULTIPLE</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">File Type</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.fileType">
+                            <option *ngFor="let rec of mainservice.TypeList" [value]="rec.code">{{rec.name}}</option>
                         </select>
                     </div>
                 </div>

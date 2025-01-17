@@ -11,6 +11,7 @@ export interface SearchQuery {
     carrierName: string;
     shipmentType: string;
     shipmentCntr: string;
+    fileType: string;
 }
 
 export class Tbl_Download_Report {
