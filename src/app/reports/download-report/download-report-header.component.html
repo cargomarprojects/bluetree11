@@ -47,7 +47,8 @@
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Shipment Type</label>
                     <div class="col-8">
-                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchGroup">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.shipmentType">
+                            <option [value]="'NA'">NA</option>
                             <option [value]="'FCL'">FCL</option>
                             <option [value]="'LCL'">LCL</option>
                             <option [value]="'CONSOLE'">CONSOLE</option>
@@ -60,7 +61,7 @@
                 <div class="form-group row">
                     <label class="col-4 col-form-label col-form-label-sm">Shipment Container</label>
                     <div class="col-8">
-                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.searchGroup">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.shipmentCntr">
                             <option [value]="'NA'">NA</option>
                             <option [value]="'SINGLE'">SINGLE</option>
                             <option [value]="'MULTIPLE'">MULTIPLE</option>

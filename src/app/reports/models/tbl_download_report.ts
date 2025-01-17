@@ -21,6 +21,7 @@ export class Tbl_Download_Report {
     mbl_liner_name: string;
     mbl_cntr_type: string;
     mbl_teu: number;
+    mbl_container_tot: number;
     rec_created_by: string;
     rec_created_date: string;
     rec_closed: string;

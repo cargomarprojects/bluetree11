@@ -29,6 +29,8 @@
                         [ngClass]="mainservice.getIcon('mbl_liner_name')"></i></th>
                 <th (click)="mainservice.sort('mbl_cntr_type')">SHIPMENT TYPE&nbsp;<i
                         [ngClass]="mainservice.getIcon('mbl_cntr_type')"></i></th>
+                <th (click)="mainservice.sort('mbl_container_tot')">TOTAL CONTAINER&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_container_tot')"></i></th>
                 <th (click)="mainservice.sort('mbl_teu')">TEU&nbsp;<i [ngClass]="mainservice.getIcon('mbl_teu')"></i>
                 </th>
             </tr>
@@ -40,6 +42,7 @@
                 <td>{{rec.mbl_agent_name}}</td>
                 <td>{{rec.mbl_liner_name}}</td>
                 <td>{{rec.mbl_cntr_type}}</td>
+                <td>{{rec.mbl_container_tot}}</td>
                 <td>{{rec.mbl_teu}}</td>
             </tr>
         </tbody>

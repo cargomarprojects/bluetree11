@@ -72,7 +72,7 @@ export class DownloadReportService {
             records: [],
             searchQuery: <SearchQuery>{
                 searchString: '', searchGroup: 'SEA IMPORT', fromDate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), toDate: this.gs.defaultValues.today, agentId: '', agentName: '', carrierId: '', carrierName: '',
-                shipmentCntr: '', shipmentType: ''
+                shipmentCntr: 'NA', shipmentType: 'NA'
             },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
@@ -98,7 +98,7 @@ export class DownloadReportService {
             records: [],
             searchQuery: <SearchQuery>{
                 searchString: '', searchGroup: 'SEA IMPORT', fromDate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), toDate: this.gs.defaultValues.today, agentId: '', agentName: '', carrierId: '', carrierName: '',
-                shipmentCntr: '', shipmentType: ''
+                shipmentCntr: 'NA', shipmentType: 'NA'
             },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
