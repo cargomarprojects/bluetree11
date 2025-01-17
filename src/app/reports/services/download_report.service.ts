@@ -173,7 +173,12 @@ export class DownloadReportService {
 
 
     DownloadDocuments() {
-        if (!confirm("Download Documents ( " + this.record.records.length + " ), Y/N")) {
+        if (this.gs.isBlank(this.record.records)) {
+            alert('List Not Found.')
+            return;
+        }
+
+        if (!confirm("Download all documents shown in the List ( " + this.record.records.length + " ), Y/N")) {
             return;
         }
 
