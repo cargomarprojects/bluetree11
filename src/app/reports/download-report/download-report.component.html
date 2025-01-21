@@ -23,28 +23,31 @@
                         [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
                 <th (click)="mainservice.sort('mbl_ref_date')">DATE&nbsp;<i
                         [ngClass]="mainservice.getIcon('mbl_ref_date')"></i></th>
-                <th (click)="mainservice.sort('mbl_agent_name')">AGENT&nbsp;<i
-                        [ngClass]="mainservice.getIcon('mbl_agent_name')"></i></th>
                 <th (click)="mainservice.sort('mbl_liner_name')">CARRIER&nbsp;<i
                         [ngClass]="mainservice.getIcon('mbl_liner_name')"></i></th>
-                <th *ngIf="mainservice.modeTransport=='SEA'" (click)="mainservice.sort('mbl_cntr_type')">SHIPMENT TYPE&nbsp;<i
-                        [ngClass]="mainservice.getIcon('mbl_cntr_type')"></i></th>
-                <th *ngIf="mainservice.modeTransport=='SEA'" (click)="mainservice.sort('mbl_container_tot')">TOTAL CONTAINER&nbsp;<i
-                        [ngClass]="mainservice.getIcon('mbl_container_tot')"></i></th>
-                <th *ngIf="mainservice.modeTransport=='SEA'" (click)="mainservice.sort('mbl_teu')">TEU&nbsp;<i [ngClass]="mainservice.getIcon('mbl_teu')"></i></th>
-                <th (click)="mainservice.sort('files_type')">FILE TYPE&nbsp;<i [ngClass]="mainservice.getIcon('files_type')"></i></th>
-                <th (click)="mainservice.sort('files_desc')">FILE DESC&nbsp;<i [ngClass]="mainservice.getIcon('files_desc')"></i></th>
+                <th (click)="mainservice.sort('mbl_agent_name')">AGENT&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_agent_name')"></i></th>
+                <th *ngIf="mainservice.modeTransport=='SEA'" (click)="mainservice.sort('mbl_cntr_type')">SHIPMENT
+                    TYPE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_cntr_type')"></i></th>
+                <th *ngIf="mainservice.modeTransport=='SEA'" (click)="mainservice.sort('mbl_container_tot')">TOTAL
+                    CONTAINER&nbsp;<i [ngClass]="mainservice.getIcon('mbl_container_tot')"></i></th>
+                <th *ngIf="mainservice.modeTransport=='SEA'" (click)="mainservice.sort('mbl_teu')">TEU&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_teu')"></i></th>
+                <th (click)="mainservice.sort('files_type')">FILE TYPE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('files_type')"></i></th>
+                <th (click)="mainservice.sort('files_desc')">FILE DESC&nbsp;<i
+                        [ngClass]="mainservice.getIcon('files_desc')"></i></th>
             </tr>
         </thead>
         <tbody class="page-body-tbody">
             <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
                 <td>{{rec.mbl_refno}}</td>
                 <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT}}</td>
-                <td>{{rec.mbl_agent_name}}</td>
                 <td>{{rec.mbl_liner_name}}</td>
-                <td *ngIf="mainservice.modeTransport=='SEA'" >{{rec.mbl_cntr_type}}</td>
-                <td *ngIf="mainservice.modeTransport=='SEA'" >{{rec.mbl_container_tot}}</td>
-                <td *ngIf="mainservice.modeTransport=='SEA'" >{{rec.mbl_teu}}</td>
+                <td>{{rec.mbl_agent_name}}</td>
+                <td *ngIf="mainservice.modeTransport=='SEA'">{{rec.mbl_cntr_type}}</td>
+                <td *ngIf="mainservice.modeTransport=='SEA'">{{rec.mbl_container_tot}}</td>
+                <td *ngIf="mainservice.modeTransport=='SEA'">{{rec.mbl_teu}}</td>
                 <td>{{rec.files_type}}</td>
                 <td>{{rec.files_desc}}</td>
             </tr>
