@@ -269,10 +269,7 @@ export class PaymentReqComponent implements OnInit {
 
 
   Close() {
-    // if (this.origin == "seaexp-master-page" || this.origin == "seaimp-master-page" || this.origin == "airexp-master-page" || this.origin == "airimp-master-page" || this.origin == "other-general-page")
-    //   this.gs.LinkReturn(this.origin, this.cp_master_id, '');
-    // else
-    this.location.back();
+      this.location.back();
   }
 
   SelectInvoice(_rec: Table_Cargo_Payrequest) {
@@ -280,10 +277,12 @@ export class PaymentReqComponent implements OnInit {
       if (Rec.cp_inv_no != _rec.cp_inv_no)
         Rec.cp_selected = false;
     })
-    this.payrecord.cp_inv_no = _rec.cp_inv_no;
-    this.payrecord.cp_inv_id = _rec.cp_inv_id;
-    this.payrecord.cp_cust_id = _rec.cp_cust_id;
-    this.payrecord.cp_cust_name = _rec.cp_cust_name;
+
+    // this.payrecord.cp_inv_no = _rec.cp_inv_no;
+    // this.payrecord.cp_inv_id = _rec.cp_inv_id;
+    // this.payrecord.cp_cust_id = _rec.cp_cust_id;
+    // this.payrecord.cp_cust_name = _rec.cp_cust_name;
+
   }
 
   RefreshList() {
@@ -301,6 +300,9 @@ export class PaymentReqComponent implements OnInit {
       REC.cp_payment_date = this.payrecord.cp_payment_date;
       REC.cp_pay_status = this.payrecord.cp_pay_status;
       REC.cp_spl_notes = this.payrecord.cp_spl_notes;
+      REC.cp_cust_id = this.payrecord.cp_cust_id;
+      REC.cp_cust_code = this.payrecord.cp_cust_code;
+      REC.cp_cust_name = this.payrecord.cp_cust_name;
     }
   }
 
@@ -339,4 +341,22 @@ export class PaymentReqComponent implements OnInit {
         this.errorMessage = this.gs.getError(error);
       });
   }
+
+  OnChange(field: string, _rec: Table_Cargo_Payrequest = null) {
+
+    if (field == 'cp_selected') {
+      this.payrecord.cp_inv_no = '';
+      this.payrecord.cp_inv_id = '';
+      this.payrecord.cp_cust_id = '';
+      this.payrecord.cp_cust_name = '';
+      if (_rec.cp_selected) {
+        this.payrecord.cp_inv_no = _rec.cp_inv_no;
+        this.payrecord.cp_inv_id = _rec.cp_inv_id;
+        this.payrecord.cp_cust_id = _rec.cp_cust_id;
+        this.payrecord.cp_cust_name = _rec.cp_cust_name;
+      }
+    }
+
+  }
+
 }

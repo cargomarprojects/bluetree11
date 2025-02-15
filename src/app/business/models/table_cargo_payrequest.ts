@@ -17,7 +17,7 @@ export interface Table_Cargo_Payrequest {
     cp_cust_name: string;
     cp_inv_id: string;
     cp_inv_no: string;
-    cp_selected:boolean;
+    cp_selected: boolean;
     rec_created_by: string;
     rec_created_date: string;
     rec_edited_by: string;
