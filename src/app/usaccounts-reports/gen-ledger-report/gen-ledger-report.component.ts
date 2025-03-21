@@ -232,15 +232,16 @@ export class GenLedgerReportComponent implements OnInit {
     this.SearchData.page_rows = this.page_rows;
     this.SearchData.page_rowcount = this.page_rowcount;
 
+    this.SearchData.JV_ACC_NAME = this.cust_name;
+    this.SearchData.COMP_NAME = this.comp_name;
+    
     if (_outputformat === 'SCREEN' && _action === 'NEW') {
       this.SearchData.JV_ACC_ID = this.cust_id;
-      this.SearchData.JV_ACC_NAME = this.cust_name;
       this.SearchData.JV_YEAR = this.gs.year_code;
       this.SearchData.FDATE = this.fdate;
       this.SearchData.TDATE = this.tdate;
       this.SearchData.OPDATE = this.fdate;
       this.SearchData.BRCODE = this.comp_code;
-      this.SearchData.COMP_NAME = this.comp_name;
       this.SearchData.ISLEDGER = this.is_ledger;
       this.SearchData.RETAINED_PROFIT = this.gs.RETAINED_PROFIT_ID;
       this.SearchData.ACC_PARENT_CODE = this.acc_parent_code;
