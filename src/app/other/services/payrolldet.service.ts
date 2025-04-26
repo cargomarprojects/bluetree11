@@ -32,8 +32,8 @@ export class PayrollDetService {
     public canDelete: boolean;
 
     public initlialized: boolean;
-    private appid =''
-    
+    private appid = ''
+
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
@@ -55,7 +55,7 @@ export class PayrollDetService {
         };
         this.mdata$.next(this.record);
     }
-    
+
     public init(params: any) {
         //this is invoke from list so every time refresh
         // if (this.appid != this.gs.appid) {
@@ -93,7 +93,8 @@ export class PayrollDetService {
     }
 
     Search(_searchdata: any, type: string = '') {
-
+        this.record.errormessage = '';
+        
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
             this.record.selectedId = '';

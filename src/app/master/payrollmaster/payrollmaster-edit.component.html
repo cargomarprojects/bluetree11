@@ -85,6 +85,13 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">CA SDI</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="number" (blur)="onBlur('D9')"
+                        (change)="onChange('D9')" (focus)="onFocus('D9')" [(ngModel)]="record.D9" maxlength="15" />
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Supplement Insurance</label>
                 <div class="col-4">
                     <input class="form-control form-control-sm" type="number" (blur)="onBlur('D6')"

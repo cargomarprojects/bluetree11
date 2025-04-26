@@ -121,6 +121,7 @@ export class PayrollDetEditComponent implements OnInit {
         this.record.D6 = 0;
         this.record.D7 = 0;
         this.record.D8 = 0;
+        this.record.D9 = 0;
 
         this.record.DTOT = 0;;
         this.record.ATOT = 0;
@@ -314,6 +315,10 @@ export class PayrollDetEditComponent implements OnInit {
             this.record.D8 = this.gs.roundNumber(this.record.D8, 2)
             this.FindTotal();
         }
+        if (field == 'D9') {
+            this.record.D9 = this.gs.roundNumber(this.record.D9, 2)
+            this.FindTotal();
+        }
     }
 
     FindTotal() {
@@ -341,6 +346,7 @@ export class PayrollDetEditComponent implements OnInit {
         this.record.DTOT += this.record.D5;
         this.record.DTOT += this.record.D6;
         this.record.DTOT += this.record.D7;
+        this.record.DTOT += this.record.D9;
 
         //A9 Gross after medicaal deduction
         //D8 set for medical deduction which is not taken for netpay
