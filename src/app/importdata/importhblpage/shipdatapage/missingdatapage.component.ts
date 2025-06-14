@@ -23,7 +23,9 @@ export class MissingDataPageComponent implements OnInit {
     mbl_pkid: string;
     mbl_refno: string;
     mbl_mode: string;
+    searchSender: string;
     searchString: string;
+    chkall: boolean = false;
     origin: string;
 
     menuid: string;
@@ -70,7 +72,7 @@ export class MissingDataPageComponent implements OnInit {
         this.canAdd = this.gs.canAdd(this.menuid);
         this.canEdit = this.gs.canEdit(this.menuid);
         this.title = "Missing Data";
-
+        this.chkall = false;
 
 
         if (!this.gs.isBlank(this.searchstring_ctrl))
@@ -87,10 +89,16 @@ export class MissingDataPageComponent implements OnInit {
 
     List(action: string = '') {
         var SearchData = this.gs.UserInfo;
-        if (this.gs.isBlank(this.searchString))
+        if (this.gs.isBlank(this.searchSender))
             SearchData.SENDER = '';
         else
-            SearchData.SENDER = this.searchString;
+            SearchData.SENDER = this.searchSender;
+        if (this.gs.isBlank(this.searchString))
+            SearchData.SEARCHSTRING = '';
+        else
+            SearchData.SEARCHSTRING = this.searchString;
+        SearchData.CHKALL = this.chkall ? "Y" : "N";
+
         if (this.gs.isBlank(this.mbl_pkid) || action == "VALIDATE")
             SearchData.MASTERID = '';
         else

@@ -17,15 +17,28 @@
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">Sender</label>
                     <div class="col-8">
-                            <InputBox [(inputModel)]="searchString" [maxlength]="600" [uppercase]="true" #_searchstring>
-                            </InputBox>
+                        <InputBox [(inputModel)]="searchSender" [maxlength]="600" [uppercase]="true" #_searchstring>
+                        </InputBox>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-2 col-form-label col-form-label-sm">Search</label>
+                    <div class="col-8">
+                        <InputBox [(inputModel)]="searchString" [maxlength]="600" [uppercase]="true" #_searchstring2>
+                        </InputBox>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm"></label>
-                    <div class="col-8">
+                    <div class="col-2">
+                        <input type="checkbox" [(ngModel)]="chkall" id="_chkall" />
+                        <label for="_chkall">All</label>
+                    </div>
+                    <div class="col-4">
                         <button (click)="List('VALIDATE')" class="btn btn-primary btn-sm mr-1">Find</button>
                     </div>
                 </div>
@@ -63,7 +76,7 @@
                             <td>{{rec.link_source_add4}}</td>
                             <td>{{rec.link_source_add5}}</td>
                             <td>{{rec.link_status}}</td>
-                            <td class="hlink2" (click)="addtomaster(rec)" >Add To Master</td>
+                            <td class="hlink2" (click)="addtomaster(rec)">Add To Master</td>
                         </tr>
                     </tbody>
                 </table>
