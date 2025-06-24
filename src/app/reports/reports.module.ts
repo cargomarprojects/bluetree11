@@ -62,6 +62,8 @@ import { DailyShipReportHeaderComponent } from './daily-ship-report/daily-ship-r
 import { DailyShipReportComponent } from './daily-ship-report/daily-ship-report.component';
 import { DownloadReportHeaderComponent } from './download-report/download-report-header.component';
 import { DownloadReportComponent } from './download-report/download-report.component';
+import { InvoiceHistoryHeaderComponent } from './invoice-history/invoice-history-header.component';
+import { InvoiceHistoryComponent } from './invoice-history/invoice-history.component';
 
 @NgModule({
     declarations :[
@@ -103,7 +105,9 @@ import { DownloadReportComponent } from './download-report/download-report.compo
     DailyShipReportHeaderComponent,
     DailyShipReportComponent,
     DownloadReportHeaderComponent,
-    DownloadReportComponent
+    DownloadReportComponent,
+    InvoiceHistoryHeaderComponent,
+    InvoiceHistoryComponent
   ],
   imports: [
     SharedModule,

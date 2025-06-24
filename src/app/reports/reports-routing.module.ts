@@ -29,7 +29,7 @@ import { InvoiceReportComponent } from './invoice-report/invoice-report.componen
 import { EmailReportComponent } from './email-report/email-report.component';
 import { DailyShipReportComponent } from './daily-ship-report/daily-ship-report.component';
 import { DownloadReportComponent } from './download-report/download-report.component';
-
+import { InvoiceHistoryComponent } from './invoice-history/invoice-history.component';
 const routes: Routes = [
    { path :'ShipmentHandledReport', component : ShipHandReportComponent },
    { path :'TeuReport', component : TeuReportComponent },
@@ -56,6 +56,7 @@ const routes: Routes = [
    { path :'InvoiceListPage', component : InvoiceReportComponent },  
    { path :'EmailReport', component : EmailReportComponent },  
    { path :'DownloadReport', component : DownloadReportComponent },   
+   { path :'InvoiceHistory', component : InvoiceHistoryComponent },   
    { path :'DailyShipReport', component : DailyShipReportComponent }    
 ];
 

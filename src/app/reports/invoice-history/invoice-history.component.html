@@ -1,0 +1,67 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-1">{{mainservice.title}}</label>
+        <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    </div>
+</div>
+
+<div *ngIf="errorMessage$ | async" class="alert alert-danger">
+    {{errorMessage$ | async}}
+</div>
+
+<app-invoice-history-header [_query]="searchQuery$ | async"
+    (searchEvents)="searchEvents($event)"></app-invoice-history-header>
+
+
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<div class="page-body table-responsive table-bordered">
+    <table class="table  table-hover table-sm">
+        <thead class="page-body-thead">
+            <tr>
+                <th (click)="mainservice.sort('rec_branch_code')">BRANCH&nbsp;<i
+                        [ngClass]="mainservice.getIcon('rec_branch_code')"></i></th>
+                <th (click)="mainservice.sort('mbl_refno')">REF#&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
+                <th (click)="mainservice.sort('mbl_ref_date')">REF-DATE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('mbl_ref_date')"></i></th>
+                <th (click)="mainservice.sort('inv_no')">INV#&nbsp;<i
+                        [ngClass]="mainservice.getIcon('inv_no')"></i></th>
+                <th (click)="mainservice.sort('inv_date')">INV-DATE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('inv_date')"></i></th>
+                <th (click)="mainservice.sort('log_cust_name')">CUSTOMER&nbsp;<i
+                        [ngClass]="mainservice.getIcon('log_cust_name')"></i></th>
+                <th (click)="mainservice.sort('log_type')">ACTION&nbsp;<i
+                        [ngClass]="mainservice.getIcon('log_type')"></i></th>
+                <th (click)="mainservice.sort('log_date')">DATE&nbsp;<i
+                        [ngClass]="mainservice.getIcon('log_date')"></i></th>
+                <th (click)="mainservice.sort('log_from_amt')">AMT.FROM&nbsp;<i
+                        [ngClass]="mainservice.getIcon('log_from_amt')"></i></th>
+                <th (click)="mainservice.sort('log_to_amt')">AMT.TO&nbsp;<i
+                        [ngClass]="mainservice.getIcon('log_to_amt')"></i>
+                </th>
+                <th (click)="mainservice.sort('log_user_code')">USER&nbsp;<i
+                        [ngClass]="mainservice.getIcon('log_user_code')"></i>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+                <td>{{rec.rec_branch_code}}</td>
+                <td>{{rec.mbl_refno}}</td>
+                <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                <td>{{rec.inv_no}}</td>
+                <td>{{rec.inv_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                <td>{{rec.log_cust_name}}</td>
+                <td>{{rec.log_type}}</td>
+                <td>{{rec.log_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+                <td>{{rec.log_from_amt}}</td>
+                <td>{{rec.log_to_amt}}</td>
+                <td>{{rec.log_user_code}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<App-Page2 [_pageQuery]="pageQuery$ | async" (pageEvents)="pageEvents($event)"></App-Page2>
+
+<br />
