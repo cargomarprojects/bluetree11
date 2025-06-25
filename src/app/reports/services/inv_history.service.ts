@@ -36,6 +36,13 @@ export class InvHistoryService {
         private gs: GlobalService
     ) { }
 
+    public selectRowId(id: string) {
+        this.record.selectedId = id;
+    }
+    public getRowId() {
+        return this.record.selectedId;
+    }
+
     public getSortCol() {
         return this.record.sortcol;
     }
@@ -66,7 +73,8 @@ export class InvHistoryService {
 
     public ClearInit() {
         this.record = <Inv_History_Model>{
-            sortcol: 'rec_created_date',
+            selectedId : '',
+            sortcol: '',
             sortorder: true,
             errormessage: '',
             records: [],
@@ -89,11 +97,12 @@ export class InvHistoryService {
         this.param_type = params.param_type;
 
         this.record = <Inv_History_Model>{
-            sortcol: 'rec_created_date',
+            selectedId : '',
+            sortcol: '',
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchMode: 'SEA IMPORT', fromdate:  this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today },
+            searchQuery: <SearchQuery>{ searchString: '', searchMode: 'SEA IMPORT', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
