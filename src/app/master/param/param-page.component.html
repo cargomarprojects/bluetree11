@@ -26,6 +26,7 @@
                 <th *ngIf="menu_param == 'UNIT MASTER'" (click) ="sort('param_name2')" >NAME&nbsp;<i [ngClass]="getIcon('param_name2')"></i></th>
                 <th *ngIf="menu_param == 'UNIT MASTER'" (click) ="sort('param_name3')" >NAME&nbsp;<i [ngClass]="getIcon('param_name3')"></i></th>
                 <th *ngIf="menu_param == 'SALESMAN'" (click) ="sort('rec_locked')" >LOCKED&nbsp;<i [ngClass]="getIcon('rec_locked')"></i></th>
+                <th *ngIf="menu_param == 'INVOICE-DESCRIPTION'&&gs.canDelete(menuid)" class='text-center'>DELETE</th>  
             </tr>
         </thead>
         <tbody class="page-body-tbody">
@@ -41,6 +42,8 @@
                 <td *ngIf="menu_param == 'UNIT MASTER'" >{{rec.param_name2}}</td>
                 <td *ngIf="menu_param == 'UNIT MASTER'" >{{rec.param_name3}}</td>
                 <td *ngIf="menu_param == 'SALESMAN'" >{{rec.rec_locked}}</td>
+                <td *ngIf="menu_param == 'INVOICE-DESCRIPTION'&&gs.canDelete(menuid)" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                    (click)="DeleteRow(rec)"></i></td>
             </tr>
         </tbody>
     </table>

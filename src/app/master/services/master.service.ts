@@ -24,6 +24,10 @@ export class ParamService {
         return this.http2.post<any>(this.gs.baseUrl + "/api/Master/Param/Save", SearchData, this.gs.headerparam2('authorized'));
     }
 
+    DeleteRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/Param/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
+
 }
 
 

@@ -14,7 +14,7 @@ import { PageQuery } from '../../shared/models/pageQuery';
 
 import * as fromparamactions from '../store/param/param-page.actions';
 import * as fromparamreducer from '../store/param/param-page.reducer';
-
+import { ParamService } from '../services/master.service';
 
 @Component({
   selector: 'app-param-page',
@@ -60,6 +60,7 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
+    private mainService: ParamService,
     private store: Store<fromparamreducer.ParamState>,
     public gs: GlobalService,
   ) { }
@@ -245,4 +246,30 @@ export class ParamPageComponent implements OnInit, OnDestroy {
     } else
       return null;
   }
+
+  DeleteRow(_rec: TBL_MAST_PARAM) {
+
+    if (!confirm("DELETE " + _rec.param_name1)) {
+      return;
+    }
+
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = _rec.param_pkid;
+    SearchData.remarks = _rec.param_type + " (" + _rec.param_code + "-" + _rec.param_name1 + ")";
+    SearchData.type = _rec.param_type;
+
+    this.mainService.DeleteRecord(SearchData)
+      .subscribe(response => {
+        if (response.retvalue == false) {
+          alert(response.error);
+        }
+        else {
+          this.store.dispatch(new fromparamactions.Delete({ id: this.id }))
+        }
+
+      }, error => {
+        alert(this.gs.getError(error));
+      });
+  }
+
 }
