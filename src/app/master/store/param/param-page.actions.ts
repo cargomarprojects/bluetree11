@@ -11,7 +11,7 @@ export enum ParamActionTypes {
     UPDATE_SEARCH = '[PARAM PAGE ] UPDATE SEARCH',
     SORT_DATA = '[PARAM PAGE] SORT DATA',
     SELECT_ROW = '[Pay-Req-Report-new] Select Row',
-    DELETE = '[PARAM PAGE] DELETE RECORD',
+    DELETE = '[PARAM PAGE] DELETE',
 }
 
 export class LoadParamRequest implements Action {
@@ -45,7 +45,7 @@ export class SelectRow implements Action {
 
 export class Delete implements Action {
     readonly type = ParamActionTypes.DELETE;
-    constructor(public payload: { id: string }) { }
+    constructor(public payload: { id: string, rowid: string }) { }
 }
 
 export type ParamActions = LoadParamRequest | UpdateSearch | LoadParamSucces | LoadParamFail | Sort | SelectRow | Delete;

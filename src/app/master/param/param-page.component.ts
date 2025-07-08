@@ -255,6 +255,8 @@ export class ParamPageComponent implements OnInit, OnDestroy {
 
     var SearchData = this.gs.UserInfo;
     SearchData.pkid = _rec.param_pkid;
+    SearchData.code = _rec.param_code;
+    SearchData.name = _rec.param_name1;
     SearchData.remarks = _rec.param_type + " (" + _rec.param_code + "-" + _rec.param_name1 + ")";
     SearchData.type = _rec.param_type;
 
@@ -264,7 +266,7 @@ export class ParamPageComponent implements OnInit, OnDestroy {
           alert(response.error);
         }
         else {
-          this.store.dispatch(new fromparamactions.Delete({ id: this.id }))
+          this.store.dispatch(new fromparamactions.Delete({ id:  this.id, rowid: _rec.param_pkid }))
         }
 
       }, error => {

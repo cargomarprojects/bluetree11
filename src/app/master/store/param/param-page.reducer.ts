@@ -87,9 +87,10 @@ export function ParamReducer(state: ParamState = initialParamState, action: Para
     }
 
     case ParamActionTypes.DELETE: {
+      if (state.entities[action.payload.id] == null)
+        return state;
       const st = Object.assign({}, state.entities[action.payload.id]);
-      if (!st) return state;
-      st.records = st.records.filter(rec => rec.param_pkid !== action.payload.id);
+      st.records = st.records.filter(rec => rec.param_pkid != action.payload.rowid);
       return adapter.upsertOne(st, state);
     }
 
