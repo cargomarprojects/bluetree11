@@ -2033,7 +2033,7 @@ export class SeaImpHouseEditComponent implements OnInit {
 
   GetArrivalNotice(_type: string) {
 
-    if (this.gs.isBlank(this.record.hbl_ams_fileno) || this.record.hbl_ams_fileno == "TBA") {
+    if (this.gs.isBlank(this.record.hbl_ams_fileno) || this.record.hbl_ams_fileno == "TBA" || this.record.hbl_ams_fileno == "N/A") {
       alert('AMS file number is missing.');
     }
 
