@@ -307,6 +307,31 @@ export class ImportHblPageService {
             });
     }
 
+
+    TestDocaiXmlFile() {
+
+        let SearchData = {
+            "~REC_COMPANY_CODE": 'MNYC',
+            "~REC_BRANCH_CODE": "NYC",
+            "~USR_CODE": "ADMIN",
+            "~USR_NAME": "ADMIN",
+            "~USR_PKID": "B989DBFF-EEF7-49D3-BFD8-EC998479379A",
+            "FTP_SENDER": "DOCAI",
+            "FTP_FILENAME": "BLMESSAGE-25080609541157.XML",
+            "MESSAGE_NUMBER": "25080609541157",
+            "HANDLED_ID": "C89B0321-4EC3-4395-BE36-B831581DB3E0",
+            "PROCESS_TRANSFER": "Y"
+        };
+
+        this.DownloadProcessXmlFile(SearchData)
+            .subscribe(response => {
+                alert(response.error);
+            }, error => {
+                alert(this.gs.getError(error));
+            });
+    }
+
+
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importhblpage/List', SearchData, this.gs.headerparam2('authorized'));
     }
@@ -323,4 +348,8 @@ export class ImportHblPageService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importhblpage/DeleteFiles', SearchData, this.gs.headerparam2('authorized'));
     }
 
+
+    DownloadProcessXmlFile(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importhblpage/DownloadProcessXmlFile', SearchData, this.gs.headerparam2('authorized'));
+    }
 }
