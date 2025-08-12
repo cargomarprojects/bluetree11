@@ -2084,6 +2084,27 @@ export class SeaImpHouseEditComponent implements OnInit {
       });
   }
 
+  MailEmptyReturn() {
+
+    if (!confirm("Mail Container Empty Return? (Y/N)"))
+      return;
+
+    this.errorMessage = [];
+    let SearchData = {
+      "company_code": "MNYC",
+      "test_mail": "Y",
+      "show_signature": "Y",
+      "mblid": this.record.hbl_mbl_id
+    };
+
+    this.mainService.MailEmptyCntrReturn(SearchData)
+      .subscribe(response => {
+        if (response.error)
+          alert(response.error);
+      }, error => {
+        alert(this.gs.getError(error));
+      });
+  }
   /*
   Downloadfile(filename: string, filetype: string, filedisplayname: string) {
     this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);

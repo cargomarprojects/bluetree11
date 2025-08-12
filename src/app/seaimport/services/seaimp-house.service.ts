@@ -264,6 +264,10 @@ export class SeaImpHouseService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/House/GetArrivalNotice', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    MailEmptyCntrReturn(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/LoginService/Bulkmail/MailEmptyCntrReturn', SearchData, this.gs.headerparam2('authorized'));
+    }
+
     // GetPreAlertReport(SearchData: any) {
     //     return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/House/GetPreAlertReport', SearchData, this.gs.headerparam2('authorized'));
     // }
