@@ -2086,7 +2086,7 @@ export class SeaImpHouseEditComponent implements OnInit {
 
   MailEmptyReturn() {
 
-    if (!confirm("Mail Container Empty Return? (Y/N)"))
+    if (!confirm("Mail Empty Container Return? (Y/N)"))
       return;
 
     this.errorMessage = [];
