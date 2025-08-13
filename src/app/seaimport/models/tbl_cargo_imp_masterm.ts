@@ -95,13 +95,13 @@ export interface Tbl_cargo_imp_masterm {
     mbl_ombl_sent_ampm: string;
     mbl_ismemo_attached: string;
     mbl_cntr_desc: string;
-    mbl_of_sent_on:string;
-    mbl_coloader_id:string;
-    mbl_coloader_name:string;
-    mbl_coloader_code:string;
-    mbl_incoterm:string;
-    mbl_liner_web:string;
-    rec_history_id:string;
+    mbl_of_sent_on: string;
+    mbl_coloader_id: string;
+    mbl_coloader_name: string;
+    mbl_coloader_code: string;
+    mbl_incoterm: string;
+    mbl_liner_web: string;
+    rec_history_id: string;
 }
 
 export interface Tbl_cargo_imp_container {
@@ -125,13 +125,13 @@ export interface Tbl_cargo_imp_container {
     cntr_tare_weight: number;
     cntr_pick_date: string;
     cntr_return_date: string;
-    cntr_selected:boolean;
-    cntr_lfd:string;
-    cntr_discharge_date:string;
+    cntr_selected: boolean;
+    cntr_lfd: string;
+    cntr_discharge_date: string;
 }
 
 export interface Tbl_cargo_imp_housem {
-     
+
     hbl_pkid: string;
     mbl_no: string;
     mbl_refno: string;
@@ -143,12 +143,12 @@ export interface Tbl_cargo_imp_housem {
     hbl_shipper_name: string;
     hbl_consignee_name: string;
     hbl_handled_name: string;
-    hbl_ship_term:string;
-    hbl_frt_status:string;
+    hbl_ship_term: string;
+    hbl_frt_status: string;
     rec_created_by: string;
     rec_created_date: string;
     hbl_packages: number;
-    hbl_consignee_category:string;
+    hbl_consignee_category: string;
     hbl_an_sent: string;
     hbl_an_sent_by: string;
     hbl_an_sent_date: string;
@@ -156,8 +156,9 @@ export interface Tbl_cargo_imp_housem {
 
 export interface vm_tbl_cargo_imp_masterm {
     mode: string;
+    mblid: string;
     record: Tbl_cargo_imp_masterm;
-    cntrs: Tbl_cargo_imp_container[]; 
+    cntrs: Tbl_cargo_imp_container[];
     userinfo: any,
     filter: any;
 }
@@ -169,9 +170,9 @@ export interface SearchQuery {
 }
 
 export interface SeaImpMasterModel {
-    selectedId : string;    
-    sortcol : string ;
-    sortorder : boolean;
+    selectedId: string;
+    sortcol: string;
+    sortorder: boolean;
     errormessage: string;
     searchQuery: SearchQuery;
     pageQuery: PageQuery;

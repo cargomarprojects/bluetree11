@@ -2013,6 +2013,7 @@ export class SeaImpHouseEditComponent implements OnInit {
     updateRecord.empty_ret_date = this.record.hbl_empty_ret_date;
     updateRecord.pickup_date = this.record.hbl_pickup_date;
     updateRecord.rec_history_id = this.record.rec_history_id;
+    updateRecord.mblid = this.record.hbl_mbl_id;
     this.mainService.UpdatePuEr(updateRecord)
       .subscribe(response => {
         if (response.retvalue == false) {

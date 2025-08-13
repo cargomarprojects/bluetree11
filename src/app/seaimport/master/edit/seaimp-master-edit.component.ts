@@ -1320,6 +1320,7 @@ export class SeaImpMasterEditComponent implements OnInit {
     const updateRecord = <vm_tbl_cargo_imp_masterm>{};
     updateRecord.cntrs = this.records;
     updateRecord.userinfo = this.gs.UserInfo;
+    updateRecord.mblid = this.record.mbl_pkid;
     this.mainService.UpdatePuEr(updateRecord)
       .subscribe(response => {
         if (response.retvalue == false) {

@@ -246,6 +246,7 @@ export interface Tbl_cargo_imp_desc {
 export interface vm_tbl_cargo_imp_housem {
     pkid: string;
     mode: string;
+    mblid: string;
     record: Tbl_cargo_imp_housem;
     cntrs: Tbl_cargo_imp_container[];
     desc: Tbl_cargo_imp_desc[];
