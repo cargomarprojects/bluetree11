@@ -2092,8 +2092,8 @@ export class SeaImpHouseEditComponent implements OnInit {
 
     this.errorMessage = [];
     let SearchData = {
-      "company_code": "MNYC",
-      "test_mail": "Y",
+      "company_code": this.gs.company_code,
+      "test_mail": "H",
       "show_signature": "Y",
       "mblid": this.record.hbl_mbl_id
     };
