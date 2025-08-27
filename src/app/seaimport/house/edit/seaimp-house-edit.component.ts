@@ -1033,6 +1033,7 @@ export class SeaImpHouseEditComponent implements OnInit {
     }
     if (_Record.controlname == "AGENT") {
       this.record.hbl_agent_id = _Record.id;
+      this.record.hbl_agent_code = _Record.code;
       this.record.hbl_agent_name = _Record.name;
       this.hbl_cha_code_field.Focus();
     }
