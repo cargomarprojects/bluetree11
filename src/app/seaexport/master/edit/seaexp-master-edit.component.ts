@@ -583,6 +583,7 @@ export class SeaexpMasterEditComponent implements OnInit {
 
     if (_Record.controlname == "AGENT") {
       this.record.mbl_agent_id = _Record.id;
+      this.record.mbl_agent_code = _Record.code;
       this.record.mbl_agent_name = _Record.name;
       if (!this.gs.isBlank(this.mbl_liner_name_field))
         this.mbl_liner_name_field.Focus();

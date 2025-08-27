@@ -833,6 +833,8 @@ export class HousePageComponent implements OnInit {
 
     if (rec.controlname == "AGENT") {
       this.record.hbl_agent_id = rec.id;
+      this.record.hbl_agent_code = rec.code;
+      this.record.hbl_agent_name = rec.name;
       if (!this.gs.isBlank(this.hbl_origin_ctrl))
         this.hbl_origin_ctrl.focus();
     }

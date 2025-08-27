@@ -277,10 +277,12 @@
 
               <div class="form-group row">
                 <label class="col-4 col-form-label col-form-label-sm">Agent</label>
-                <div class="col-8">
+                <div class="col-8 input-group input-group-sm">
                   <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
-                    [displaydata]="record.hbl_agent_name" (ValueChanged)="LovSelected($event)">
+                    [displaydata]="record.hbl_agent_name" style="width:75%;" (ValueChanged)="LovSelected($event)">
                   </app-autocomplete2>
+                  <input class="form-control form-control-sm" type="text" style="width:25%;"
+                    [(ngModel)]="record.hbl_agent_code" disabled />
                 </div>
               </div>
 

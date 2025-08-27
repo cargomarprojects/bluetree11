@@ -436,6 +436,8 @@ export class DockPageComponent implements OnInit {
 
     if (rec.controlname == "AGENT") {
       this.record.mbld_agent_id = rec.id;
+      this.record.mbld_agent_code = rec.code;
+      this.record.mbld_agent_name = rec.name;
       if (!this.gs.isBlank(this.mbld_origin_ctrl))
         this.mbld_origin_ctrl.focus();
     }
