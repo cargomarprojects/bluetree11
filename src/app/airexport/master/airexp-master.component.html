@@ -24,6 +24,7 @@
         <th (click)="mainservice.sort('mbl_refno')">REF.NO&nbsp;<i [ngClass]="mainservice.getIcon('mbl_refno')"></i></th>
         <th (click)="mainservice.sort('mbl_ref_date')">DATE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_ref_date')"></i></th>
         <th (click)="mainservice.sort('mbl_no')">MAWB&nbsp;<i [ngClass]="mainservice.getIcon('mbl_no')"></i></th>
+        <th (click)="mainservice.sort('mbl_agent_code')">AGENT-CODE&nbsp;<i [ngClass]="mainservice.getIcon('mbl_agent_code')"></i></th>
         <th (click)="mainservice.sort('mbl_agent_name')">AGENT&nbsp;<i [ngClass]="mainservice.getIcon('mbl_agent_name')"></i></th>
         <th (click)="mainservice.sort('mbl_liner_name')">CARRIER&nbsp;<i [ngClass]="mainservice.getIcon('mbl_liner_name')"></i></th>
         <th (click)="mainservice.sort('mbl_pol_name')">POL&nbsp;<i [ngClass]="mainservice.getIcon('mbl_pol_name')"></i></th>
@@ -48,6 +49,7 @@
         </td>
         <td>{{rec.mbl_ref_date | date : gs.FRONTEND_DATEFORMAT }}</td>
         <td>{{rec.mbl_no}}</td>
+        <td>{{rec.mbl_agent_code}}</td>
         <td>{{rec.mbl_agent_name}}</td>
         <td>{{rec.mbl_liner_name}}</td>
         <td>{{rec.mbl_pol_name}}</td>

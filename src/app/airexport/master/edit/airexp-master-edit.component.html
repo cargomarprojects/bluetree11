@@ -1,9 +1,9 @@
-
 <div *ngIf="tab=='main'">
   <div class="page-header">
     <div class="col">
       <label class="mr-3">{{title}} ({{mode}})</label>
-      <a   *ngIf="gs.canAdd(menuid)" class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('ADD')" [queryParams]="getParam('ADD')">New</a>
+      <a *ngIf="gs.canAdd(menuid)" class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('ADD')"
+        [queryParams]="getParam('ADD')">New</a>
       <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
       <!-- <a class="btn btn-primary btn-sm mr-1" [routerLink]="getLink('LIST')" [queryParams]="getParam('LIST')">Return</a> -->
       <label class="text-danger" *ngIf="is_locked">LOCKED</label>
@@ -49,7 +49,8 @@
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Ref Date</label>
                   <div class="col-9">
-                    <app-date #_mbl_ref_date [inputdate]="record.mbl_ref_date" (ValueChanged)="record.mbl_ref_date=$event"></app-date>
+                    <app-date #_mbl_ref_date [inputdate]="record.mbl_ref_date"
+                      (ValueChanged)="record.mbl_ref_date=$event"></app-date>
                   </div>
                 </div>
               </div>
@@ -89,12 +90,12 @@
 
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Master Agent</label>
-                  <div class="col-9">
-
+                  <div class="col-9 input-group input-group-sm">
                     <app-autocomplete2 [controlname]="'AGENT'" [tabletype]="'MASTER'" [displaycolumn]="'NAME'"
-                      [displaydata]="record.mbl_agent_name" (ValueChanged)="LovSelected($event)">
+                      [displaydata]="record.mbl_agent_name" style="width:75%;" (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
-
+                    <input class="form-control form-control-sm" type="text" style="width:25%;"
+                      [(ngModel)]="record.mbl_agent_code" disabled />
                   </div>
                 </div>
 
@@ -116,7 +117,8 @@
                   </div>
                   <label class="col-1 col-form-label col-form-label-sm m-0 pr-0">ETD</label>
                   <div class="col-3 pl-0 m-0">
-                    <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd" (ValueChanged)="record.mbl_pol_etd=$event"></app-date>
+                    <app-date #_mbl_pol_etd [inputdate]="record.mbl_pol_etd"
+                      (ValueChanged)="record.mbl_pol_etd=$event"></app-date>
                   </div>
                 </div>
 
@@ -137,7 +139,8 @@
                   </div>
                   <label class="col-1 col-form-label col-form-label-sm m-0 pr-0">ETA</label>
                   <div class="col-3 pl-0 m-0">
-                    <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta" (ValueChanged)="record.mbl_pod_eta=$event"></app-date>
+                    <app-date #_mbl_pod_eta [inputdate]="record.mbl_pod_eta"
+                      (ValueChanged)="record.mbl_pod_eta=$event"></app-date>
                   </div>
                 </div>
 
@@ -166,8 +169,9 @@
                   <label class="col-3 col-form-label col-form-label-sm">Carrier</label>
                   <div class="col-9">
 
-                    <app-autocomplete2 #_mbl_liner_name [controlname]="'CARRIER'" [tabletype]="'AIR CARRIER'" [displaycolumn]="'NAME'"
-                      [displaydata]="record.mbl_liner_name" (ValueChanged)="LovSelected($event)">
+                    <app-autocomplete2 #_mbl_liner_name [controlname]="'CARRIER'" [tabletype]="'AIR CARRIER'"
+                      [displaycolumn]="'NAME'" [displaydata]="record.mbl_liner_name"
+                      (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
 
                   </div>
@@ -179,8 +183,8 @@
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">To</label>
                   <div class="col-3 pr-0">
-                    <input #_mbl_to_port1 class="form-control form-control-sm" type="text" (blur)="onBlur('mbl_to_port1')"
-                      [(ngModel)]="record.mbl_to_port1" maxlength="3" />
+                    <input #_mbl_to_port1 class="form-control form-control-sm" type="text"
+                      (blur)="onBlur('mbl_to_port1')" [(ngModel)]="record.mbl_to_port1" maxlength="3" />
                   </div>
                   <label class="col-2 col-form-label col-form-label-sm pr-0">By</label>
                   <div class="col-4 pl-0">
@@ -245,8 +249,8 @@
                   </div>
                   <label class="col-2 col-form-label col-form-label-sm">Sales.Rep</label>
                   <div class="col-4 pl-0">
-                    <app-autocomplete2 #_mbl_salesman_name [controlname]="'SALESMAN'" [tabletype]="'PARAM'" [subtype]="'SALESMAN'"
-                      [displaycolumn]="'NAME'" [displaydata]="record.mbl_salesman_name"
+                    <app-autocomplete2 #_mbl_salesman_name [controlname]="'SALESMAN'" [tabletype]="'PARAM'"
+                      [subtype]="'SALESMAN'" [displaycolumn]="'NAME'" [displaydata]="record.mbl_salesman_name"
                       (ValueChanged)="LovSelected($event)">
                     </app-autocomplete2>
                   </div>
@@ -265,8 +269,8 @@
                 <div class="form-group row">
                   <label class="col-3 col-form-label col-form-label-sm">Mawb GrWt</label>
                   <div class="col-3 pr-0">
-                    <input #_mbl_mawb_weight class="form-control form-control-sm" type="number" (blur)="onBlur('mbl_mawb_weight')"
-                      [(ngModel)]="record.mbl_mawb_weight" maxlength="15" />
+                    <input #_mbl_mawb_weight class="form-control form-control-sm" type="number"
+                      (blur)="onBlur('mbl_mawb_weight')" [(ngModel)]="record.mbl_mawb_weight" maxlength="15" />
                   </div>
                   <label class="col-2 col-form-label col-form-label-sm pr-0">Mawb ChWt</label>
                   <div class="col-4 pl-0">
@@ -282,7 +286,7 @@
                   </div>
                   <label class="col-2 col-form-label col-form-label-sm"></label>
                   <div class="col-4 pl-0">
-                    <input type="checkbox" [(ngModel)]="record.mbl_direct_bool" (change)="DirectAgent()"/>
+                    <input type="checkbox" [(ngModel)]="record.mbl_direct_bool" (change)="DirectAgent()" />
                     <span>&nbsp;Direct Shipment</span>
                   </div>
                 </div>
@@ -323,7 +327,7 @@
                     <td *ngIf="!gs.canEdit(this.gs.MENU_AE_HOUSE)">{{rec.hbl_houseno}}</td>
                     <td *ngIf="gs.canEdit(this.gs.MENU_AE_HOUSE)">
                       <a class='hlink' [routerLink]="['/Silver.AirExport.Trans/AirExpHouseEditPage']"
-                      [queryParams]="{appid : this.gs.appid ,menuid: this.gs.MENU_AE_HOUSE,parentid:this.pkid,pkid: rec.hbl_pkid,refno: this.record.mbl_refno ,type: 'AIR EXPORT',origin: 'airexp-master-page',mode: 'EDIT'}">{{rec.hbl_houseno}}</a>
+                        [queryParams]="{appid : this.gs.appid ,menuid: this.gs.MENU_AE_HOUSE,parentid:this.pkid,pkid: rec.hbl_pkid,refno: this.record.mbl_refno ,type: 'AIR EXPORT',origin: 'airexp-master-page',mode: 'EDIT'}">{{rec.hbl_houseno}}</a>
                     </td>
                     <td>{{rec.hbl_shipper_name}}</td>
                     <td>{{rec.hbl_consignee_name}}</td>
@@ -333,8 +337,8 @@
                     <td>{{rec.mbl_pod_eta | date : gs.FRONTEND_DATEFORMAT }}</td>
                     <td>{{rec.rec_created_by}}</td>
                     <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-                    <td *ngIf="gs.canDelete(this.gs.MENU_AE_HOUSE)" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
-                      aria-hidden="true" (click)="DeleteHouseRow(rec)"></i></td>
+                    <td *ngIf="gs.canDelete(this.gs.MENU_AE_HOUSE)" class="p-0 text-center"><i
+                        class="fa fa-trash  fa-lg pointer" aria-hidden="true" (click)="DeleteHouseRow(rec)"></i></td>
                   </tr>
                 </tbody>
               </table>
@@ -342,8 +346,8 @@
                 <div class="col-12">
                   <!-- <button class="btn btn-info btn-sm mr-1" *ngIf="!is_locked && gs.screenExists(gs.MENU_AE_HOUSE)"
                     (click)="AddHouse()">Add House</button> -->
-                    <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_AE_HOUSE)" [class.disabled]="is_locked"
-                    [routerLink]="['/Silver.AirExport.Trans/AirExpHouseEditPage']"
+                  <a class="btn btn-info btn-sm mr-1" *ngIf="gs.screenExists(gs.MENU_AE_HOUSE)"
+                    [class.disabled]="is_locked" [routerLink]="['/Silver.AirExport.Trans/AirExpHouseEditPage']"
                     [queryParams]="{appid : gs.appid, menuid: this.gs.MENU_AE_HOUSE, parentid:this.pkid, pkid: '',refno: this.record.mbl_refno ,type: 'AIR EXPORT',origin: 'airexp-master-page',mode: 'ADD'}">Add
                     House</a>
                 </div>
@@ -361,20 +365,22 @@
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_PRINT_MAWB)"
               (click)="BtnNavigation('MAWBPAGE')">Print MAWB</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_PRINT_MAWB)" 
-              [routerLink]="BtnNavigation2('MAWBPAGE','L')" [queryParams]="BtnNavigation2('MAWBPAGE','P')">Print MAWB</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_PRINT_MAWB)"
+              [routerLink]="BtnNavigation2('MAWBPAGE','L')" [queryParams]="BtnNavigation2('MAWBPAGE','P')">Print
+              MAWB</a>
           </div>
 
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_MANIFEST)"
               (click)="BtnNavigation('MANIFESTPAGE')">Manifest</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_MANIFEST)" 
-              [routerLink]="BtnNavigation2('MANIFESTPAGE','L')" [queryParams]="BtnNavigation2('MANIFESTPAGE','P')">Manifest</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_MANIFEST)"
+              [routerLink]="BtnNavigation2('MANIFESTPAGE','L')"
+              [queryParams]="BtnNavigation2('MANIFESTPAGE','P')">Manifest</a>
           </div>
 
           <div class="form-group row">
 
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_ARAP)" 
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_ARAP)"
               [routerLink]="BtnNavigation2('ARAP','L')" [queryParams]="BtnNavigation2('ARAP','P')">AR & AP</a>
 
           </div>
@@ -382,8 +388,9 @@
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_PROFIT_REPORT)"
               (click)="BtnNavigation('PROFITREPORT')">Profit Report</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_PROFIT_REPORT)" 
-              [routerLink]="BtnNavigation2('PROFITREPORT','L')" [queryParams]="BtnNavigation2('PROFITREPORT','P')">Profit Report</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_AE_MASTER_PROFIT_REPORT)" [routerLink]="BtnNavigation2('PROFITREPORT','L')"
+              [queryParams]="BtnNavigation2('PROFITREPORT','P')">Profit Report</a>
           </div>
 
           <div class="form-group row">
@@ -394,16 +401,18 @@
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MESSENGER_SLIP)"
               (click)="BtnNavigation('MESSENGER-SLIP')">Messenger Slip</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MESSENGER_SLIP)" 
-              [routerLink]="BtnNavigation2('MESSENGER-SLIP','L')" [queryParams]="BtnNavigation2('MESSENGER-SLIP','P')">Messenger Slip</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MESSENGER_SLIP)"
+              [routerLink]="BtnNavigation2('MESSENGER-SLIP','L')"
+              [queryParams]="BtnNavigation2('MESSENGER-SLIP','P')">Messenger Slip</a>
           </div>
 
 
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_PAYMENT_REQUEST)"
               (click)="BtnNavigation('PAYMENT-REQUEST')">Payment Request</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_PAYMENT_REQUEST)" 
-              [routerLink]="BtnNavigation2('PAYMENT-REQUEST','L')" [queryParams]="BtnNavigation2('PAYMENT-REQUEST','P')">Payment Request</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_PAYMENT_REQUEST)"
+              [routerLink]="BtnNavigation2('PAYMENT-REQUEST','L')"
+              [queryParams]="BtnNavigation2('PAYMENT-REQUEST','P')">Payment Request</a>
           </div>
 
           <div class="form-group row">
@@ -415,27 +424,32 @@
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER)"
               (click)="BtnNavigation('FOLLOWUP')">Add To Follow Up</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER)" 
-              [routerLink]="BtnNavigation2('FOLLOWUP','L')" [queryParams]="BtnNavigation2('FOLLOWUP','P')">Add To Follow Up</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER)"
+              [routerLink]="BtnNavigation2('FOLLOWUP','L')" [queryParams]="BtnNavigation2('FOLLOWUP','P')">Add To Follow
+              Up</a>
           </div>
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_INTERNAL_MEMO)"
               [style.color]="record.mbl_ismemo_attached=='Y'?'red':black"
               (click)="BtnNavigation('INERNALMEMO')">Internal Memo</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_INTERNAL_MEMO)" 
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_AE_MASTER_INTERNAL_MEMO)"
               [style.color]="record.mbl_ismemo_attached=='Y'?'red':'white'"
-              [routerLink]="BtnNavigation2('INERNALMEMO','L')" [queryParams]="BtnNavigation2('INERNALMEMO','P')">Internal Memo</a>
+              [routerLink]="BtnNavigation2('INERNALMEMO','L')"
+              [queryParams]="BtnNavigation2('INERNALMEMO','P')">Internal Memo</a>
           </div>
           <div class="form-group row">
             <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_REQUEST_APPROVAL)"
               (click)="BtnNavigation('REQUEST-APPROVAL')">Request For Approval</button> -->
-              <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="gs.screenExists(gs.MENU_AE_MASTER_REQUEST_APPROVAL)" 
-              [routerLink]="BtnNavigation2('REQUEST-APPROVAL','L')" [queryParams]="BtnNavigation2('REQUEST-APPROVAL','P')">Request For Approval</a>
+            <a class="col-12 btn btn-info btn-sm text-uppercase"
+              *ngIf="gs.screenExists(gs.MENU_AE_MASTER_REQUEST_APPROVAL)"
+              [routerLink]="BtnNavigation2('REQUEST-APPROVAL','L')"
+              [queryParams]="BtnNavigation2('REQUEST-APPROVAL','P')">Request For Approval</a>
           </div>
 
           <div class="form-group row">
-              <button class="col-12 btn btn-info btn-sm  text-uppercase" [disabled]="is_locked" *ngIf="gs.canSave(menuid,mode)"
-              (click)="Save()">Save</button>
+            <button class="col-12 btn btn-info btn-sm  text-uppercase" [disabled]="is_locked"
+              *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
           </div>
 
         </div>
@@ -453,7 +467,7 @@
   </div>
 
 
-  <div  class="page-footer">
+  <div class="page-footer">
     <label class="col-form-label col-form-label-sm" *ngIf="record.rec_created_by"> CREATED BY: {{record.rec_created_by}}
       /
       {{record.rec_created_date}} </label>
