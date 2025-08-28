@@ -5,8 +5,32 @@
                 <div class="form-group row">
                     <label class="col-2 col-form-label col-form-label-sm">SearchString</label>
                     <div class="col-8">
-                            <InputBox [(inputModel)]="searchQuery.searchString" [maxlength]="1000" [uppercase]="true" #_searchstring>
-                            </InputBox>
+                        <InputBox [(inputModel)]="searchQuery.searchString" [maxlength]="1000" [uppercase]="true"
+                            #_searchstring>
+                        </InputBox>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group row">
+                    <label class="col-4 col-form-label col-form-label-sm">Category</label>
+                    <div class="col-8">
+                        <select class="form-control form-control-sm" [(ngModel)]="searchQuery.subcategory">
+                            <option [value]="'AGENT'">AGENT</option>
+                            <option [value]="'BRANCH'">BRANCH</option>
+                            <option [value]="'CARGO MOVEMENT'">CARGO MOVEMENT</option>
+                            <option [value]="'CONSIGNEE'">CONSIGNEE</option>
+                            <option [value]="'CONTAINER TYPE'">CONTAINER TYPE</option>
+                            <option [value]="'COUNTRY'">COUNTRY</option>
+                            <option [value]="'FREIGHT STATUS'">FREIGHT STATUS</option>
+                            <option [value]="'NOMINATION'">NOMINATION</option>
+                            <option [value]="'NOTIFY'">NOTIFY</option>
+                            <option [value]="'SEA CARRIER'">SEA CARRIER</option>
+                            <option [value]="'SEA PORT'">SEA PORT</option>
+                            <option [value]="'SHIPMENT TYPE'">SHIPMENT TYPE</option>
+                            <option [value]="'SHIPPER'">SHIPPER</option>
+                            <option [value]="'UNIT'">UNIT</option>
+                        </select>
                     </div>
                 </div>
             </div>

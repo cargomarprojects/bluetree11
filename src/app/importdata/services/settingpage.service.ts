@@ -42,7 +42,7 @@ export class SettingPageService {
         this.record = <SettingPageModel>{
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '' },
+            searchQuery: <SearchQuery>{ searchString: '', subcategory:'AGENT'},
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -63,7 +63,7 @@ export class SettingPageService {
         this.record = <SettingPageModel>{
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '' },
+            searchQuery: <SearchQuery>{ searchString: '', subcategory:'AGENT' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -99,6 +99,10 @@ export class SettingPageService {
             SearchData.SEARCHSTRING = '';
         else
             SearchData.SEARCHSTRING = this.record.searchQuery.searchString;
+        if (this.gs.isBlank(this.record.searchQuery.subcategory))
+            SearchData.SUBCATEGORY = '';
+        else
+            SearchData.SUBCATEGORY = this.record.searchQuery.subcategory;
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
         SearchData.page_current = -1;

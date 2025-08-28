@@ -25,6 +25,7 @@ export class MissingDataPageComponent implements OnInit {
     mbl_mode: string;
     searchSender: string;
     searchString: string;
+    searchCategory: string = 'NA';
     chkall: boolean = false;
     origin: string;
 
@@ -97,6 +98,12 @@ export class MissingDataPageComponent implements OnInit {
             SearchData.SEARCHSTRING = '';
         else
             SearchData.SEARCHSTRING = this.searchString;
+
+         if (this.gs.isBlank(this.searchCategory))
+            SearchData.CATEGORY = '';
+        else
+            SearchData.CATEGORY = this.searchCategory;
+
         SearchData.CHKALL = this.chkall ? "Y" : "N";
 
         if (this.gs.isBlank(this.mbl_pkid) || action == "VALIDATE")
