@@ -55,7 +55,7 @@ export class GlobalService {
 
   public tab = ' 	';
 
-  public software_version_string = '1.252';
+  public software_version_string = '1.253';
 
   public baseUrl: string = "http://localhost:5000";
   //public baseUrl: string = "";
@@ -1349,7 +1349,7 @@ export class GlobalService {
     // }).forEach(a => {
     //   this.SHIPMENT_STAGE_OI.push({ "code": a.param_name4, "name": a.param_name3 })
     // });
-    
+
     this.SHIPMENT_STAGE_OE = [{ "code": "NIL", "name": "NIL" }];
     this.MainList.filter(a => a.param_type == 'GLOBAL SETTINGS' && a.param_code == 'OE').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
