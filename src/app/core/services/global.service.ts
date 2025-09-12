@@ -1337,7 +1337,6 @@ export class GlobalService {
     this.WWW_FILES_URL = this.WWW_ROOT_FILE_FOLDER + "/" + this.FILES_FOLDER + "/Files";
 
 
-
     this.SHIPMENT_STAGE_OI = [{ "code": "NIL", "name": "NIL" }];
     this.MainList.filter(a => a.param_type == 'GLOBAL SETTINGS' && a.param_code == 'OI').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
@@ -1345,6 +1344,12 @@ export class GlobalService {
       this.SHIPMENT_STAGE_OI.push({ "code": a.param_name4, "name": a.param_name3 })
     });
 
+    // this.MainList.filter(a => a.param_type == 'GLOBAL SETTINGS' && a.param_code == 'OI').sort(function (a, b) {
+    //   return b.param_value1 < a.param_value1 ? 1 : -1;
+    // }).forEach(a => {
+    //   this.SHIPMENT_STAGE_OI.push({ "code": a.param_name4, "name": a.param_name3 })
+    // });
+    
     this.SHIPMENT_STAGE_OE = [{ "code": "NIL", "name": "NIL" }];
     this.MainList.filter(a => a.param_type == 'GLOBAL SETTINGS' && a.param_code == 'OE').sort(function (a, b) {
       return b.param_name4 < a.param_name4 ? 1 : -1;
