@@ -53,6 +53,7 @@ export class MailComponent implements OnInit {
   default_cc_id: string = '';
   default_subject: string = '';
   presetmessage: string = '';
+  Chk_Thankyou_mail_Button: String = 'N';
 
   msgFontFamily: string = '';
   msgFontSize: string = '';
@@ -517,7 +518,9 @@ export class MailComponent implements OnInit {
       table: '',
       cont_group: '',
       pkid: '',
-      file_name: ''
+      file_name: '',
+      update_ref_type: this._maildata.update_ref_type,
+      update_ref_id: this._maildata.update_ref_id
     };
 
     SearchData2.table = "EMAIL-PRESETMESSAGE";
@@ -534,7 +537,7 @@ export class MailComponent implements OnInit {
 
         if (!this.gs.isBlank(response.presetmessage)) {
           if (this._maildata.cont_group == 'EMAIL-TEMPLATE-AN-COMMON')
-            this.message = response.presetmessage ;
+            this.message = response.presetmessage;
           else
             this.message = response.presetmessage + '\n' + this.gs.user_email_signature.toString();
         }
@@ -545,5 +548,9 @@ export class MailComponent implements OnInit {
           let err = this.gs.getError(error);
           alert(err);
         });
+  }
+
+  AN_ThankyouMail() {
+    this.Chk_Thankyou_mail_Button = this.Chk_Thankyou_mail_Button == 'Y' ? 'N' : 'Y';
   }
 }
