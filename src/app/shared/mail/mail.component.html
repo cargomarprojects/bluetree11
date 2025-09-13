@@ -1,32 +1,16 @@
 <div class="page-header">
   <div class="row align-items-center justify-content-left p-1">
-    <div class="col-4">
+    <div class="col-6">
       <label class="mr-3">Mail</label>
       <button *ngIf="!ismodal" class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
     </div>
-    <div class="col-8">
-      <div class="row p-1">
-        <div class="ml-auto d-flex pr-4">
-
-          <div class="form-group row">
-            <label class="col col-form-label col-form-label-sm">
-
-              <!-- A/N Sent On:15-JUL-2025 E/R: DISABLED A/N Thank Mail: N -->
-               
-                <span class="text-dark">A/N Sent On:</span>
-                <span class="text-primary ">15-JUL-2025</span> &nbsp;
-
-                <span class="text-dark">E/R:</span>
-                <span class="text-danger">DISABLED</span> &nbsp;
-
-                <span class="text-dark">A/N Thank Mail:</span>
-                <!-- <span class="text-success font-weight-bold">N</span> -->
-              
-
-            </label>
-            <button class="btn {{Chk_Thankyou_mail_Button =='Y'?'btn-success':'btn-danger'}} btn-sm"
-              (click)="AN_ThankyouMail()">{{Chk_Thankyou_mail_Button}}</button>
-          </div>
+    <div class="col-6">
+      <div class="row">
+        <div *ngIf="_maildata.update_ref_type == 'ARRIVAL-NOTICE' && ErStatus=='ENABLED'" class="form-group row">
+          <span class="text-success">A/N Sent on {{AnSentDate}} </span> &nbsp;
+          <span class="text-success">E/R Tracking Started</span> &nbsp;
+          <button class="btn btn-info btn-sm" (click)="ChangeANThankMailStatus()">Thank you email</button>
+          <span class="text-success">&nbsp;{{Chk_Thankyou_mail_Button=="Y"?'Enabled':''}}</span>
         </div>
       </div>
     </div>

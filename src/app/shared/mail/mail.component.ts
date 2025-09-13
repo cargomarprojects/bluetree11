@@ -25,7 +25,7 @@ export class MailComponent implements OnInit {
     this.ismodal = value;
   }
 
-  private _maildata: any;
+  public _maildata: any;
   @Input() set maildata(value: any) {
     this._maildata = value;
   }
@@ -53,7 +53,11 @@ export class MailComponent implements OnInit {
   default_cc_id: string = '';
   default_subject: string = '';
   presetmessage: string = '';
-  Chk_Thankyou_mail_Button: String = 'N';
+
+  Chk_Thankyou_mail_Button: string = "N";
+  Chk_Thankyou_mail_Id: string = "";
+  AnSentDate: string = "";
+  ErStatus: string = "DISABLED";
 
   msgFontFamily: string = '';
   msgFontSize: string = '';
@@ -283,6 +287,11 @@ export class MailComponent implements OnInit {
       .subscribe(response => {
         if (_type == "MAIL") {
           this.errorMessage.push(response.message);
+          if (this._maildata.update_ref_type == 'ARRIVAL-NOTICE') {
+            this.AnSentDate = response.ansentdate;
+            this.ErStatus = response.erstatus;
+            this.Chk_Thankyou_mail_Id = response.thankmailid;
+          }
         }
       },
         error => {
@@ -541,6 +550,12 @@ export class MailComponent implements OnInit {
           else
             this.message = response.presetmessage + '\n' + this.gs.user_email_signature.toString();
         }
+        if (this._maildata.update_ref_type == 'ARRIVAL-NOTICE') {
+          this.AnSentDate = response.ansentdate;
+          this.ErStatus = response.erstatus;
+          this.Chk_Thankyou_mail_Button = response.isthankmail;
+          this.Chk_Thankyou_mail_Id = response.thankmailid;
+        }
 
         this.GetTotfilesize();
       },
@@ -550,7 +565,26 @@ export class MailComponent implements OnInit {
         });
   }
 
-  AN_ThankyouMail() {
-    this.Chk_Thankyou_mail_Button = this.Chk_Thankyou_mail_Button == 'Y' ? 'N' : 'Y';
+  ChangeANThankMailStatus() {
+
+    let SearchData2 = {
+      company_code: this.gs.company_code,
+      table: '',
+      pkid: '',
+      status: ''
+    };
+
+    SearchData2.table = "UPDATE-AN-DAILYEMAIL";
+    SearchData2.pkid = this.Chk_Thankyou_mail_Id;
+    SearchData2.status = this.Chk_Thankyou_mail_Button;
+
+    this.gs.SearchRecord(SearchData2)
+      .subscribe(response => {
+        this.Chk_Thankyou_mail_Button = response.status;
+      },
+        error => {
+          let err = this.gs.getError(error);
+          alert(err);
+        });
   }
 }
