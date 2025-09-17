@@ -144,6 +144,7 @@ export class AirImpMasterEditComponent implements OnInit {
   }
 
   init() {
+    
     this.record.mbl_pkid = this.pkid;
     this.record.rec_created_by = this.gs.user_code;
     this.record.rec_created_date = this.gs.defaultValues.today;
@@ -200,6 +201,7 @@ export class AirImpMasterEditComponent implements OnInit {
     // this.record.mbl_3rdparty = 'N';
     // this.record.mbl_3rdparty_bool = false;
     this.record.mbl_incoterm = 'NA';
+    this.record.rec_history_id = this.gs.getGuid();
     if (this.gs.JOB_TYPE_AI.length > 0) {
       this.record.mbl_jobtype_id = this.gs.JOB_TYPE_AI[0].code;
       this.record.mbl_jobtype_name = this.gs.JOB_TYPE_AI[0].name;

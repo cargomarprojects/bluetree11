@@ -286,7 +286,7 @@ export class AirImpHouseEditComponent implements OnInit {
     this.record.hbl_delivery_date = '';
     this.record.hbl_incoterm = 'NA';
     this.record.hbl_book_slno = '';
-
+    this.record.rec_history_id = this.gs.getGuid();
     // this.initDesc();
     this.record.rec_created_by = this.gs.user_code;
     this.record.rec_created_date = this.gs.defaultValues.today;

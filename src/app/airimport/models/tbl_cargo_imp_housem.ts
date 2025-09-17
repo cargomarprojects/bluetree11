@@ -154,6 +154,7 @@ export interface Tbl_cargo_imp_housem {
     hbl_incoterm: string;
     hbl_invoiceno: string;
     hbl_book_slno: string;
+    rec_history_id: string;
 }
 
 export interface Table_Address {
@@ -184,6 +185,7 @@ export interface vm_tbl_cargo_imp_housem {
     hbls: Tbl_cargo_imp_housem[];
     userinfo: any,
     filter: any;
+    rec_history_id: string;
 }
 
 
