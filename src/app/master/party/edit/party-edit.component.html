@@ -580,15 +580,15 @@
                                     <label class="col-2 col-form-label col-form-label-sm"></label>
                                     <div class="col-5">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input"
-                                                [(ngModel)]="record.gen_marketing_mail_b"><span>Include in Marketing
-                                                Mail</span>
+                                            <input type="checkbox" class="form-check-input" id="markmail"
+                                                [(ngModel)]="record.gen_marketing_mail_b"><label for="markmail">Include in Marketing
+                                                Mail</label>
                                         </div>
                                     </div>
                                     <div class="col-5">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input"
-                                                [(ngModel)]="record.gen_show_cg_b"><span>Invoice Footer (Comp. Gen.)</span>
+                                            <input type="checkbox" class="form-check-input" id="showcg"
+                                                [(ngModel)]="record.gen_show_cg_b"><label for="showcg">Print Comp. Gen. (Invoice)</label>
                                         </div>
                                     </div>
                                 </div>
