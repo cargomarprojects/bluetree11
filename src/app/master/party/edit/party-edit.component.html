@@ -578,14 +578,19 @@
                                 <div class="form-group row">
 
                                     <label class="col-2 col-form-label col-form-label-sm"></label>
-                                    <div class="col-10">
+                                    <div class="col-5">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input"
                                                 [(ngModel)]="record.gen_marketing_mail_b"><span>Include in Marketing
                                                 Mail</span>
                                         </div>
                                     </div>
-
+                                    <div class="col-5">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input"
+                                                [(ngModel)]="record.gen_show_cg_b"><span>Invoice Footer (Comp. Gen.)</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -885,11 +890,12 @@
                             <div class="form-group row">
                                 <div class="col-12">
                                     <button class="btn btn-info btn-sm mr-1" (click)="AddRow()">Add Row</button>
-                                    <button *ngIf="records.length" class="btn btn-info btn-sm mr-1" (click)="changePosition('UP')"><span
-                                            class="fa fa-arrow-up"></span></button>
-                                    <button *ngIf="records.length" class="btn btn-info btn-sm mr-1" (click)="changePosition('DOWN')"><span
-                                            class="fa fa-arrow-down"></span></button>
-                                    <label *ngIf="records.length" class="col-form-label col-form-label-sm">Click an item and use arrows to move
+                                    <button *ngIf="records.length" class="btn btn-info btn-sm mr-1"
+                                        (click)="changePosition('UP')"><span class="fa fa-arrow-up"></span></button>
+                                    <button *ngIf="records.length" class="btn btn-info btn-sm mr-1"
+                                        (click)="changePosition('DOWN')"><span class="fa fa-arrow-down"></span></button>
+                                    <label *ngIf="records.length" class="col-form-label col-form-label-sm">Click an item
+                                        and use arrows to move
                                         between
                                         rows</label>
                                 </div>

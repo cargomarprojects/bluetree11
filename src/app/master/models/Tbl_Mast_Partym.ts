@@ -104,6 +104,7 @@ export interface Tbl_Mast_Partym {
     gen_is_splac: string;
     gen_splac_memo: string;
     gen_is_blackac: string;
+    gen_show_cg: string;
     // gen_carrier_email: string;
 
     gen_is_shipper_b: boolean;
@@ -138,6 +139,7 @@ export interface Tbl_Mast_Partym {
     rec_edited_date: string;
     gen_marketing_mail: string;
     gen_marketing_mail_b: boolean;
+    gen_show_cg_b:boolean;
 }
 
 export interface vm_Tbl_Mast_Partym {
