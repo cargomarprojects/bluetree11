@@ -12,6 +12,7 @@ export interface SearchQuery {
     cust_name: string;
     shipper_id: string;
     shipper_name: string;
+    printtype: string;
 }
 
 export class Tbl_Daily_Ship_Report {

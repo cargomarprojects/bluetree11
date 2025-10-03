@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GlobalService } from '../../core/services/global.service';
-import { Daily_Ship_Report_Model , Tbl_Daily_Ship_Report } from '../models/tbl_daily_ship_report';
+import { Daily_Ship_Report_Model, Tbl_Daily_Ship_Report } from '../models/tbl_daily_ship_report';
 import { SearchQuery } from '../models/tbl_daily_ship_report';
 import { PageQuery } from '../../shared/models/pageQuery';
 
@@ -27,7 +27,7 @@ export class DailyShipReportService {
     public canEdit: boolean;
     public canSave: boolean;
     public canPrint: boolean;
-    
+
     public initlialized: boolean;
     private appid = '';
     public tab: string = 'main';
@@ -43,10 +43,10 @@ export class DailyShipReportService {
         private gs: GlobalService
     ) { }
 
-    public selectRowId( id : string){
+    public selectRowId(id: string) {
         this.record.selectedId = id;
     }
-    public getRowId(){
+    public getRowId() {
         return this.record.selectedId;
     }
     public getSortCol() {
@@ -79,12 +79,12 @@ export class DailyShipReportService {
 
     public ClearInit() {
         this.record = <Daily_Ship_Report_Model>{
-            selectedId : '',
+            selectedId: '',
             sortcol: '',
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ datetype: 'REF-DATE', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL',cust_parent_id:'',cust_parent_name:'',cust_id:'',cust_name:''  },
+            searchQuery: <SearchQuery>{ datetype: 'REF-DATE', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL', cust_parent_id: '', cust_parent_name: '', cust_id: '', cust_name: '', printtype: 'SUMMARY' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -103,12 +103,12 @@ export class DailyShipReportService {
         this.param_type = params.param_type;
 
         this.record = <Daily_Ship_Report_Model>{
-            selectedId : '',
+            selectedId: '',
             sortcol: '',
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ datetype: 'REF-DATE', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL',cust_parent_id:'',cust_parent_name:'',cust_id:'',cust_name:''  },
+            searchQuery: <SearchQuery>{ datetype: 'REF-DATE', type: 'ALL', fromdate: this.gs.defaultValues.today, todate: this.gs.defaultValues.today, compCode: 'ALL', cust_parent_id: '', cust_parent_name: '', cust_id: '', cust_name: '', printtype: 'SUMMARY' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -126,7 +126,7 @@ export class DailyShipReportService {
 
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
-            this.record.selectedId = '';        
+            this.record.selectedId = '';
         }
 
         if (type == 'PAGE') {
@@ -150,6 +150,7 @@ export class DailyShipReportService {
         SearchData.CUST_NAME = this.record.searchQuery.cust_name;
         SearchData.SHIPPER_ID = this.record.searchQuery.shipper_id;
         SearchData.SHIPPER_NAME = this.record.searchQuery.shipper_name;
+        SearchData.PRINTTYPE = this.record.searchQuery.printtype;
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
@@ -178,7 +179,7 @@ export class DailyShipReportService {
                 // this.filetype2 = response.filetype2;
                 // this.filedisplayname2 = response.filedisplayname2;
                 // this.tab = 'report';
-                 this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+                this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
             }
         }, error => {
             this.record.errormessage = this.gs.getError(error);
