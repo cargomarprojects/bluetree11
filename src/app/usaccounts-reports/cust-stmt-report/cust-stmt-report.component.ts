@@ -45,7 +45,7 @@ export class CustStmtReportComponent implements OnInit {
   bank_name: string = '';
   radio_cust: string = 'MASTER';
   showall: boolean = false;
-  report_pagewise:boolean = true;
+  report_pagewise: boolean = true;
   showprofit: boolean = false;
   sortname: string = 'inv_date';
   hide_payroll: string = 'N';
@@ -252,6 +252,17 @@ export class CustStmtReportComponent implements OnInit {
       this.adate = this.gs.defaultValues.today;
     }
 
+    let selectedids: string = "";
+    if (_outputformat == "PRINT") {
+      this.MainList.forEach(Rec => {
+        if (Rec.inv_flag_b) {
+          if (selectedids != "")
+            selectedids += ',';
+          selectedids += Rec.inv_pkid;
+        }
+      })
+    }
+
     this.SearchData.outputformat = _outputformat;
     this.SearchData.pkid = this.urlid;
     this.SearchData.action = _action;
@@ -259,6 +270,7 @@ export class CustStmtReportComponent implements OnInit {
     this.SearchData.page_current = this.page_current;
     this.SearchData.page_rows = this.page_rows;
     this.SearchData.page_rowcount = this.page_rowcount;
+    this.SearchData.SELECTED_IDS = selectedids;
 
     if (_outputformat === 'SCREEN' && _action === 'NEW') {
 
@@ -336,7 +348,7 @@ export class CustStmtReportComponent implements OnInit {
             bank_name: this.SearchData.BANK_NAME,
             radio_cust: this.SearchData.RADIO_CUST,
             showall: this.showall,
-            report_pagewise:this.report_pagewise,
+            report_pagewise: this.report_pagewise,
             showprofit: this.showprofit,
             sortname: this.sortname,
             hide_payroll: this.hide_payroll,
@@ -494,7 +506,7 @@ export class CustStmtReportComponent implements OnInit {
   IsChkChecked(_rec: Tbl_OS_REPORT) {
     _rec.inv_flag_b = !_rec.inv_flag_b;
   }
-  
+
   editmaster(_record: Tbl_OS_REPORT) {
 
     let sID: string = (_record.inv_mbl_id != null) ? _record.inv_mbl_id.toString() : "";
