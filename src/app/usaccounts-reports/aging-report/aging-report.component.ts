@@ -170,7 +170,7 @@ export class AgingReportComponent implements OnInit {
                 this.SearchData.BASEDON = this.basedon;
                 this.SearchData.radio_cust = this.radio_cust;
                 this.SearchData.radio_days = this.radio_days;
-                
+
                 this.SearchData.HIDE_PAYROLL = this.gs.user_hide_payroll;
 
                 if (this.currency == undefined || this.currency === '')
@@ -235,6 +235,8 @@ export class AgingReportComponent implements OnInit {
     }
 
     PageEvents(actions) {
+        //GOTOCHANGE2
+        this.page_current = actions.page_current;
         this.List(actions.outputformat, actions.action);
     }
 
@@ -264,7 +266,7 @@ export class AgingReportComponent implements OnInit {
         this.SearchData.page_rowcount = this.page_rowcount;
 
         if (_outputformat == "SCREEN" && _action == 'NEW') {
-
+            this.SearchData.page_current = -1;
             this.SearchData.JV_YEAR = this.gs.year_code;
             this.SearchData.EDATE = this.edate;
             this.SearchData.COMP_TYPE = this.comp_type;
