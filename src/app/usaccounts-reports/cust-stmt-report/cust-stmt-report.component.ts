@@ -252,15 +252,29 @@ export class CustStmtReportComponent implements OnInit {
       this.adate = this.gs.defaultValues.today;
     }
 
-    let selectedids: string = "";
+    let inv_ids: string = "";
     if (_outputformat == "PRINT") {
+
+      let selectedids = "";
       this.MainList.forEach(Rec => {
         if (Rec.inv_flag_b) {
-          if (selectedids != "")
-            selectedids += ',';
-          selectedids += Rec.inv_pkid;
+          if (Rec.inv_pkid) {
+            if (selectedids != "")
+              selectedids += ',';
+            selectedids += Rec.inv_pkid;
+          }
         }
       })
+
+      let unselectedids = "";
+      for (let sids of Object.values(this.invpkids)) {
+        if (!selectedids.includes(sids)) {
+          if (unselectedids != "")
+            unselectedids += ",";
+          unselectedids += sids;
+        }
+      }
+      inv_ids = unselectedids;
     }
 
     this.SearchData.outputformat = _outputformat;
@@ -270,7 +284,7 @@ export class CustStmtReportComponent implements OnInit {
     this.SearchData.page_current = this.page_current;
     this.SearchData.page_rows = this.page_rows;
     this.SearchData.page_rowcount = this.page_rowcount;
-    this.SearchData.SELECTED_IDS = selectedids;
+    this.SearchData.INV_IDS = inv_ids;
 
     if (_outputformat === 'SCREEN' && _action === 'NEW') {
 
@@ -469,10 +483,11 @@ export class CustStmtReportComponent implements OnInit {
 
       unselectedids = "";
       for (let sids of Object.values(this.invpkids)) {
-        if (unselectedids != "")
-          unselectedids += ",";
-        if (!selectedids.includes(sids))
+        if (!selectedids.includes(sids)) {
+          if (unselectedids != "")
+            unselectedids += ",";
           unselectedids += sids;
+        }
       }
     }
     this.report_title = 'OS Invoice Details';
