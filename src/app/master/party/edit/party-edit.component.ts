@@ -329,6 +329,8 @@ export class PartyEditComponent implements OnInit {
         this.record.gen_bond_yn_b = (this.record.gen_bond_yn == "Y") ? true : false;
         this.record.gen_marketing_mail_b = (this.record.gen_marketing_mail == "Y") ? true : false;
         this.record.gen_show_cg_b = (this.record.gen_show_cg == "Y") ? true : false;
+        this.record.gen_no_er_email_b = (this.record.gen_no_er_email == "Y") ? true : false;
+        this.record.gen_no_thank_email_b = (this.record.gen_no_thank_email == "Y") ? true : false;
 
         profitamt = +this.record.gen_min_profit;
         if (profitamt <= 0)
@@ -400,6 +402,8 @@ export class PartyEditComponent implements OnInit {
     this.record.gen_bond_yn = this.record.gen_bond_yn_b ? 'Y' : 'N';
     this.record.gen_marketing_mail = this.record.gen_marketing_mail_b ? 'Y' : 'N';
     this.record.gen_show_cg = this.record.gen_show_cg_b ? 'Y' : 'N';
+    this.record.gen_no_er_email = this.record.gen_no_er_email_b ? 'Y' : 'N';
+    this.record.gen_no_thank_email = this.record.gen_no_thank_email_b ? 'Y' : 'N';
 
     if (this.record.gen_is_shipper_b)
       Type2 += "S";

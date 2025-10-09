@@ -139,7 +139,12 @@ export interface Tbl_Mast_Partym {
     rec_edited_date: string;
     gen_marketing_mail: string;
     gen_marketing_mail_b: boolean;
-    gen_show_cg_b:boolean;
+    gen_show_cg_b: boolean;
+    gen_no_er_email: string;
+    gen_no_thank_email: string;
+    gen_no_er_email_b: boolean;
+    gen_no_thank_email_b: boolean;
+
 }
 
 export interface vm_Tbl_Mast_Partym {

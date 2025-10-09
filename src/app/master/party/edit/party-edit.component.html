@@ -581,14 +581,16 @@
                                     <div class="col-5">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="markmail"
-                                                [(ngModel)]="record.gen_marketing_mail_b"><label for="markmail">Include in Marketing
+                                                [(ngModel)]="record.gen_marketing_mail_b"><label for="markmail">Include
+                                                in Marketing
                                                 Mail</label>
                                         </div>
                                     </div>
                                     <div class="col-5">
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="showcg"
-                                                [(ngModel)]="record.gen_show_cg_b"><label for="showcg">Print Comp. Gen. (Invoice)</label>
+                                                [(ngModel)]="record.gen_show_cg_b"><label for="showcg">Print Comp. Gen.
+                                                (Invoice)</label>
                                         </div>
                                     </div>
                                 </div>
@@ -757,6 +759,18 @@
                                         <app-date [inputdate]="record.gen_bond_expdt"
                                             (ValueChanged)="record.gen_bond_expdt=$event"></app-date>
                                     </div>
+
+                                    <div class="col-6 input-group input-group-sm">
+                                        <div class="form-check mr-2">
+                                            <input type="checkbox" class="form-check-input" id="noeremail"
+                                                [(ngModel)]="record.gen_no_er_email_b"><label for="noeremail">No E/R Email</label>
+                                        </div>
+                                         <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="nothankemail"
+                                                [(ngModel)]="record.gen_no_thank_email_b"><label for="nothankemail">No Thank Email</label>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
