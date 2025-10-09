@@ -349,7 +349,7 @@ export class InvoiceEditComponent implements OnInit {
 
 
   AddRow() {
- 
+
     this.SetIncomeExpenseCodesForLineItems();
 
     var rec = <Tbl_Cargo_Invoiced>{};
@@ -464,7 +464,7 @@ export class InvoiceEditComponent implements OnInit {
     this.record.inv_remarks = '';
     this.record.inv_remarks2 = '';
     this.record.inv_remarks3 = '';
-
+    this.record.inv_is_dnd_b = false;
     this.inv_house_id = '';
 
     this.isConfirmed = true;
@@ -529,7 +529,7 @@ export class InvoiceEditComponent implements OnInit {
 
       this.old_amt = this.record.inv_total;
       this.old_inv_date = this.record.inv_date;
-
+      this.record.inv_is_dnd_b = this.record.inv_is_dnd == "Y" ? true : false;
 
       this.InitCommonValues();
 
@@ -564,6 +564,7 @@ export class InvoiceEditComponent implements OnInit {
   SaveParent() {
     this.record.inv_confirmed = 'N';
     this.record.inv_stage = "N";
+    this.record.inv_is_dnd = this.record.inv_is_dnd_b ? 'Y' : 'N';
 
     if (this.isVat) {
       this.record.inv_vat_per = this.gs.VAT_PER;
@@ -576,6 +577,7 @@ export class InvoiceEditComponent implements OnInit {
 
     if (this.isConfirmed)
       this.record.inv_confirmed = 'Y';
+
 
     let Jv_Narration = "";
     if (this.record.inv_arap == "AR")

@@ -189,6 +189,8 @@ export interface Tbl_cargo_invoicem {
     inv_hbl_consignee_id: string;
     inv_hbl_incoterm: string;
     inv_hbl_mode: string;
+    inv_is_dnd_b: boolean;
+    inv_is_dnd: string;
 }
 
 
