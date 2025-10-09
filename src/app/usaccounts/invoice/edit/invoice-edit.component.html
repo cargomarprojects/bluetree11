@@ -152,9 +152,9 @@
 
                         <div class="form-group row">
                             <label class="col-4 col-form-label col-form-label-sm"></label>
-                            <div class="col-8">
+                            <div *ngIf="mbl_type == 'NOT123'"  class="col-8">
                                 <input type="checkbox" [(ngModel)]="record.inv_is_dnd_b" id="danddinv" />
-                                <label class="ml-1" for="danddinv">Detention and Demurrage Invoice</label>
+                                <label class="ml-1" for="danddinv">D&D Invoice</label>
                             </div>
                         </div>
 
