@@ -14,12 +14,12 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group row">
-                <label class="col-2 col-form-label col-form-label-sm">Inv#</label>
+                <label class="col-2 col-form-label col-form-label-sm">Invoice#</label>
                 <div class="col-4">
                     <InputBox [style.color]="'red'" [(inputModel)]="inv_no" [disabled]="true" maxlength="100" #irminv_no>
                     </InputBox>
                 </div>
-                <label class="col-2 col-form-label col-form-label-sm">Ref#</label>
+                <label class="col-2 col-form-label col-form-label-sm">Reference#</label>
                 <div class="col-4">
                     <InputBox [(inputModel)]="inv_ref_no" [disabled]="true" maxlength="25" #irmref_no></InputBox>
                 </div>
@@ -31,14 +31,14 @@
     <div class="row border">
         <div style="padding-top: 4px;padding-bottom: 4px;" class="col-md-6">
             <div class="form-group row">
-                <label class="col-2 col-form-label col-form-label-sm">Container#</label>
-                <div class="col-10">
+                <label class="col-6 col-form-label col-form-label-sm">Container#</label>
+                <div class="col-6">
                     <InputBox [(inputModel)]="record.irm_cntr_no" maxlength="11" #irm_cntr_no></InputBox>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-2 col-form-label col-form-label-sm">Invoice Due Date</label>
-                <div class="col-10">
+                <label class="col-6 col-form-label col-form-label-sm">Invoice Due Date</label>
+                <div class="col-6">
                     <select class="form-control form-control-sm" [(ngModel)]="record.irm_inv_due_dt" #invduedt>
                         <option [value]="'Payment due same day as Invoice Date'">Payment due same day as Invoice Date
                         </option>
@@ -47,8 +47,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-2 col-form-label col-form-label-sm">Container Available Date</label>
-                <div class="col-10">
+                <label class="col-6 col-form-label col-form-label-sm">Container Available Date</label>
+                <div class="col-6">
                     <app-date [inputdate]="record.irm_cntr_avlb_dt" (ValueChanged)="record.irm_cntr_avlb_dt=$event"
                         #payment_date>
                     </app-date>
@@ -59,8 +59,8 @@
     <div class="row border">
         <div style="padding-top: 4px;padding-bottom: 4px;" class="col-md-6">
             <div class="form-group row">
-                <label class="col-2 col-form-label col-form-label-sm"></label>
-                <div class="col-10">
+                <label class="col-6 col-form-label col-form-label-sm"></label>
+                <div class="col-6">
                     <button class="btn btn-primary btn-md mr-1" (click)="Save()">Save</button>
                     <button class="btn btn-primary btn-md mr-1" (click)="NewRecord()">New</button>
                 </div>
