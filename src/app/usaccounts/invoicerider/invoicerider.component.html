@@ -1,0 +1,120 @@
+<div class="page-header">
+    <div class="col">
+        <label class="mr-3">Invoice Rider</label>
+    </div>
+</div>
+
+<div *ngIf="errorMessage">
+    <div class="alert alert-primary">
+        {{errorMessage}}
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Inv#</label>
+                <div class="col-4">
+                    <InputBox [style.color]="'red'" [(inputModel)]="inv_no" [disabled]="true" maxlength="100" #irminv_no>
+                    </InputBox>
+                </div>
+                <label class="col-2 col-form-label col-form-label-sm">Ref#</label>
+                <div class="col-4">
+                    <InputBox [(inputModel)]="inv_ref_no" [disabled]="true" maxlength="25" #irmref_no></InputBox>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-body">
+    <div class="row border">
+        <div style="padding-top: 4px;padding-bottom: 4px;" class="col-md-6">
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Container#</label>
+                <div class="col-10">
+                    <InputBox [(inputModel)]="record.irm_cntr_no" maxlength="11" #irm_cntr_no></InputBox>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Invoice Due Date</label>
+                <div class="col-10">
+                    <select class="form-control form-control-sm" [(ngModel)]="record.irm_inv_due_dt" #invduedt>
+                        <option [value]="'Payment due same day as Invoice Date'">Payment due same day as Invoice Date
+                        </option>
+                        <option [value]="'Due Upon Receipt'">Due Upon Receipt</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm">Container Available Date</label>
+                <div class="col-10">
+                    <app-date [inputdate]="record.irm_cntr_avlb_dt" (ValueChanged)="record.irm_cntr_avlb_dt=$event"
+                        #payment_date>
+                    </app-date>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row border">
+        <div style="padding-top: 4px;padding-bottom: 4px;" class="col-md-6">
+            <div class="form-group row">
+                <label class="col-2 col-form-label col-form-label-sm"></label>
+                <div class="col-10">
+                    <button class="btn btn-primary btn-md mr-1" (click)="Save()">Save</button>
+                    <button class="btn btn-primary btn-md mr-1" (click)="NewRecord()">New</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="page-body">
+    <div class="row">
+        <div class="col-md-12 px-0 mx-0 ">
+            <div class="page-body table-responsive table-bordered">
+                <table class="table  table-hover table-sm">
+                    <thead class="page-body-thead">
+                        <tr>
+                            <th>CONTAINER#</th>
+                            <th>FREE-DAYS</th>
+                            <th>FREE-DT-FROM</th>
+                            <th>FREE-DT-TO</th>
+                            <th>D&D-RULE</th>
+                            <th>CHARGED-FROM</th>
+                            <th>CHARGED-TO</th>
+                            <th>AMOUNT</th>
+                            <th>CREATED-BY</th>
+                            <th>DATE</th>
+                            <th>EDITED-BY</th>
+                            <th>DATE</th>
+                            <th style="text-align:center">REMOVE</th>
+                        </tr>
+                    </thead>
+                    <tbody class="page-body-tbody">
+                        <tr *ngFor="let rec of records">
+                            <td class="hlink2" (click)="EditRecord(rec)">{{rec.irm_cntr_no}}</td>
+                            <td>{{rec.irm_allowed_free_days}}</td>
+                            <td>{{rec.irm_free_dt_start | date : gs.FRONTEND_DATEFORMAT }}</td>
+                            <td>{{rec.irm_free_dt_end | date : gs.FRONTEND_DATEFORMAT }}</td>
+                            <td>{{rec.irm_dnd_rule}}</td>
+                            <td>{{rec.irm_charged_dt_from | date : gs.FRONTEND_DATEFORMAT }}</td>
+                            <td>{{rec.irm_charged_dt_to | date : gs.FRONTEND_DATEFORMAT }}</td>
+                            <td>{{rec.irm_tot_amt}}</td>
+                            <td>{{rec.rec_created_by}}</td>
+                            <td>{{rec.rec_created_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                            <td>{{rec.rec_edited_by}}</td>
+                            <td>{{rec.rec_edited_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                            <td align='center'><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                                    (click)="RemoveRow(rec)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

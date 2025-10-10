@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
-
 import { BusinessModule } from '../business/business.module';
-
 import { USAccountsRoutingModule } from './usaccounts-routing.module';
 
 import { InvoiceComponent } from './invoice/invoice.component';
@@ -38,6 +36,7 @@ import { PayrollComponent } from './invoice/payroll/payroll.component';
 import { PaymentUpdateComponent } from './payment/payment-update.component';
 import { PaymentDateUpdateComponent } from './payment/payment-date-update.component';
 import { PaymentBankUpdateComponent } from './payment/payment-bank-update.component';
+import { InvoiceRiderComponent } from './invoicerider/invoicerider.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +72,8 @@ import { PaymentBankUpdateComponent } from './payment/payment-bank-update.compon
   PayrollComponent,
   PaymentUpdateComponent,
   PaymentDateUpdateComponent,
-  PaymentBankUpdateComponent
+  PaymentBankUpdateComponent,
+  InvoiceRiderComponent
 ],
   imports: [
     SharedModule,

@@ -152,7 +152,7 @@
 
                         <div class="form-group row">
                             <label class="col-4 col-form-label col-form-label-sm"></label>
-                            <div *ngIf="mbl_type == 'NOT123'"  class="col-8">
+                            <div *ngIf="mbl_type == 'NOT123'" class="col-8">
                                 <input type="checkbox" [(ngModel)]="record.inv_is_dnd_b" id="danddinv" />
                                 <label class="ml-1" for="danddinv">D&D Invoice</label>
                             </div>
@@ -525,6 +525,10 @@
                             (click)="BtnNavigation('CHECKCOPYAP',attachmodal)">Check Copy(A/P)</button>
                     </div>
                     <div class="form-group row">
+                        <button class="col-12 btn  btn-info btn-sm text-uppercase"
+                            (click)="BtnNavigation('D-AND-D',ridermodal)">Invoice Rider</button>
+                    </div>
+                    <div class="form-group row">
                         <button class="col-12 btn btn-info btn-sm text-uppercase" [disabled]="is_locked"
                             *ngIf="gs.canSave(menuid,mode)" (click)="Save()">Save</button>
                     </div>
@@ -633,6 +637,24 @@
                         [filespath]="attach_filespath" [filespath2]="attach_filespath2"
                         [uploadfiles]="attach_uploadefiles" [modalview]="true" (callbackevent)="callbackevent($event)">
                     </app-fileupload>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #ridermodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <app-invoicerider [menuid]="menuid" [inv_pkid]="pkid" [inv_no]="record.inv_no"
+                        [inv_ref_no]="mbl_refno"></app-invoicerider>
                 </div>
             </div>
             <div class="page-footer">

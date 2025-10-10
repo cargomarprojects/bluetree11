@@ -1316,7 +1316,11 @@ export class InvoiceEditComponent implements OnInit {
         this.modal = this.modalservice.open(_modal, { centered: true });
         break;
       }
-
+      case 'D-AND-D': {
+        // this.report_title = "History [INVOICE NO : " + this.record.inv_no + "]";
+        this.modal = this.modalservice.open(_modal, { centered: true });
+        break;
+      }
 
 
     }
