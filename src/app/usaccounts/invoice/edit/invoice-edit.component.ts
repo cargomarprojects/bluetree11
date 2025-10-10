@@ -1667,4 +1667,10 @@ export class InvoiceEditComponent implements OnInit {
 
   }
 
+  ridercallbackevent(event: any) {
+    if (event.action == 'CLOSE') {
+      this.CloseModal();
+    }
+
+  }
 }

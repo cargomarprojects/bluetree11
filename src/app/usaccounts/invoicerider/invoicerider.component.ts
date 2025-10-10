@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
@@ -19,6 +19,7 @@ export class InvoiceRiderComponent implements OnInit {
     @Input() public inv_pkid: string = '';
     @Input() public inv_no: string = '';
     @Input() public menuid: string = '';
+    @Output() callbackevent = new EventEmitter<any>();
 
     @ViewChild('irm_cntr_no') irm_cntr_no_field: ElementRef;
     //   @ViewChild('payment_date') payment_date_field: DateComponent;
@@ -70,6 +71,7 @@ export class InvoiceRiderComponent implements OnInit {
     EditRecord(_rec: Tbl_Invoice_Riderm) {
         this.mode = 'EDIT'
         this.pkid = _rec.irm_pkid;
+        this.actionHandler();
         // this.payrecord.cp_pkid = this.pkid;
         // this.payrecord.cp_master_id = this.cp_master_id;
         // this.payrecord.cp_source = this.cp_source;
@@ -99,6 +101,9 @@ export class InvoiceRiderComponent implements OnInit {
             this.pkid = this.gs.getGuid();
             this.init();
         }
+        if (this.mode == 'EDIT') {
+            this.GetRecord();
+        }
     }
 
     init() {
@@ -120,6 +125,19 @@ export class InvoiceRiderComponent implements OnInit {
         //   this.paytype_needed_field.nativeElement.focus();
     }
 
+    GetRecord() {
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = this.pkid;
+        this.mainService.GetRecord(SearchData)
+            .subscribe(response => {
+                this.record = <Tbl_Invoice_Riderm>response.record;
+                this.mode = 'EDIT';
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+            });
+    }
 
     List(_type: string) {
 
@@ -255,4 +273,13 @@ export class InvoiceRiderComponent implements OnInit {
         }
     }
 
+    CloseModal() {
+        if (this.callbackevent != null) {
+            let data = {
+                action: 'CLOSE',
+                pkid: this.inv_pkid
+            }
+            this.callbackevent.emit(data);
+        }
+    }
 }

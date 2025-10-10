@@ -16,6 +16,9 @@ export class InvoiceRiderService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/USAccounts/InvoiceRiderPage/List', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    GetRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/USAccounts/InvoiceRiderPage/GetRecord', SearchData, this.gs.headerparam2('authorized'));
+    }
 
     Save(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/USAccounts/InvoiceRiderPage/Save', SearchData, this.gs.headerparam2('authorized'));

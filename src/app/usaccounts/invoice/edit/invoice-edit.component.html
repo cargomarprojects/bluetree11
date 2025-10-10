@@ -654,12 +654,7 @@
             <div class="row">
                 <div class="col-md-12 testbox  px-0 mx-0">
                     <app-invoicerider [menuid]="menuid" [inv_pkid]="pkid" [inv_no]="record.inv_no"
-                        [inv_ref_no]="mbl_refno"></app-invoicerider>
-                </div>
-            </div>
-            <div class="page-footer">
-                <div class="row justify-content-center p-1">
-                    <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+                        [inv_ref_no]="mbl_refno" (callbackevent)="ridercallbackevent($event)"></app-invoicerider>
                 </div>
             </div>
         </div>
