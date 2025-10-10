@@ -21,7 +21,7 @@ export class InvoiceRiderComponent implements OnInit {
     @Input() public menuid: string = '';
     @Output() callbackevent = new EventEmitter<any>();
 
-    @ViewChild('irm_cntr_no') irm_cntr_no_field: ElementRef;
+    @ViewChild('irm_cntr_no') irm_cntr_no_field: InputBoxComponent;
     //   @ViewChild('payment_date') payment_date_field: DateComponent;
 
     record: Tbl_Invoice_Riderm = <Tbl_Invoice_Riderm>{};
@@ -72,26 +72,6 @@ export class InvoiceRiderComponent implements OnInit {
         this.mode = 'EDIT'
         this.pkid = _rec.irm_pkid;
         this.actionHandler();
-        // this.payrecord.cp_pkid = this.pkid;
-        // this.payrecord.cp_master_id = this.cp_master_id;
-        // this.payrecord.cp_source = this.cp_source;
-        // this.payrecord.cp_mode = this.cp_mode;
-        // this.payrecord.cp_pay_status = _rec.cp_pay_status;
-        // this.payrecord.cp_paytype_needed = _rec.cp_paytype_needed;
-        // this.payrecord.cp_spl_notes = _rec.cp_spl_notes;
-        // this.payrecord.cp_payment_date = _rec.cp_payment_date;
-        // this.payrecord.cp_cust_name = _rec.cp_cust_name;
-        // this.payrecord.cp_cust_id = _rec.cp_cust_id;
-        // this.payrecord.cp_inv_no = _rec.cp_inv_no
-        // this.payrecord.cp_inv_id = _rec.cp_inv_id;
-        // this.invrecords.forEach(Rec => {
-        //   if (_rec.cp_inv_no == Rec.cp_inv_no)
-        //     Rec.cp_selected = true;
-        //   else
-        //     Rec.cp_selected = false;
-        // })
-        // if (!this.gs.isBlank(this.paytype_needed_field))
-        //   this.paytype_needed_field.nativeElement.focus();
     }
 
     actionHandler() {
@@ -108,21 +88,20 @@ export class InvoiceRiderComponent implements OnInit {
 
     init() {
         this.record.irm_pkid = this.pkid;
+        this.record.irm_inv_id = this.inv_pkid;
         this.record.irm_cntr_no = '';
+        this.record.irm_inv_due_dt = 'Payment due same day as Invoice Date';
+        this.record.irm_allowed_free_days = 0;
+        this.record.irm_cntr_avlb_dt = ''
+        this.record.irm_free_dt_start = '';
+        this.record.irm_free_dt_end = '';
+        this.record.irm_dnd_rule = '';
+        this.record.irm_charged_dt_from = '';
+        this.record.irm_charged_dt_to = '';
+        this.record.irm_tot_amt = 0;
 
-        // // this.payrecord.cp_paytype_needed = 'PAYMENT NEEDED ONLY';
-        // this.payrecord.cp_paytype_needed = '';
-        // this.payrecord.cp_spl_notes = '';
-        // this.payrecord.cp_payment_date = '';
-        // this.payrecord.cp_cust_name = '';
-        // this.payrecord.cp_cust_id = '';
-        // this.payrecord.cp_inv_no = '';
-        // this.payrecord.cp_inv_id = '';
-        // this.invrecords.forEach(Rec => {
-        //   Rec.cp_selected = false;
-        // })
-        // if (!this.gs.isBlank(this.paytype_needed_field))
-        //   this.paytype_needed_field.nativeElement.focus();
+        if (!this.gs.isBlank(this.irm_cntr_no_field))
+            this.irm_cntr_no_field.focus();
     }
 
     GetRecord() {
@@ -133,6 +112,8 @@ export class InvoiceRiderComponent implements OnInit {
             .subscribe(response => {
                 this.record = <Tbl_Invoice_Riderm>response.record;
                 this.mode = 'EDIT';
+                if (!this.gs.isBlank(this.irm_cntr_no_field))
+                    this.irm_cntr_no_field.focus();
             }, error => {
                 this.errorMessage = this.gs.getError(error);
                 alert(this.errorMessage);
@@ -148,7 +129,7 @@ export class InvoiceRiderComponent implements OnInit {
             .subscribe(response => {
                 this.records = (response.records == undefined || response.records == null) ? <Tbl_Invoice_Riderm[]>[] : <Tbl_Invoice_Riderm[]>response.records;
                 if (!this.gs.isBlank(this.irm_cntr_no_field))
-                    this.irm_cntr_no_field.nativeElement.focus();
+                    this.irm_cntr_no_field.focus();
             },
                 error => {
                     this.errorMessage = this.gs.getError(error);
@@ -234,12 +215,12 @@ export class InvoiceRiderComponent implements OnInit {
         else {
             REC.irm_cntr_no = this.record.irm_cntr_no;
             REC.irm_allowed_free_days = this.record.irm_allowed_free_days;
-            // REC.cp_payment_date = this.payrecord.cp_payment_date;
-            // REC.cp_pay_status = this.payrecord.cp_pay_status;
-            // REC.cp_spl_notes = this.payrecord.cp_spl_notes;
-            // REC.cp_cust_id = this.payrecord.cp_cust_id;
-            // REC.cp_cust_code = this.payrecord.cp_cust_code;
-            // REC.cp_cust_name = this.payrecord.cp_cust_name;
+            REC.irm_free_dt_start = this.record.irm_free_dt_start;
+            REC.irm_free_dt_end = this.record.irm_free_dt_end;
+            REC.irm_dnd_rule = this.record.irm_dnd_rule;
+            REC.irm_charged_dt_from = this.record.irm_charged_dt_from;
+            REC.irm_charged_dt_to = this.record.irm_charged_dt_to;
+            REC.irm_tot_amt = this.record.irm_tot_amt;
         }
     }
 

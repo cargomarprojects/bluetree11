@@ -16,7 +16,8 @@
             <div class="form-group row">
                 <label class="col-2 col-form-label col-form-label-sm">Invoice#</label>
                 <div class="col-4">
-                    <InputBox [style.color]="'red'" [(inputModel)]="inv_no" [disabled]="true" maxlength="100" #irminv_no>
+                    <InputBox [style.color]="'red'" [(inputModel)]="inv_no" [disabled]="true" maxlength="100"
+                        #irminv_no>
                     </InputBox>
                 </div>
                 <label class="col-2 col-form-label col-form-label-sm">Reference#</label>
@@ -80,7 +81,8 @@
             <div class="form-group row">
                 <label class="col-6 col-form-label col-form-label-sm">Container#</label>
                 <div class="col-6">
-                    <InputBox [(inputModel)]="record.irm_cntr_no" [uppercase]="true" maxlength="11" #irm_cntr_no></InputBox>
+                    <InputBox [(inputModel)]="record.irm_cntr_no" [uppercase]="true" maxlength="11" #irm_cntr_no>
+                    </InputBox>
                 </div>
             </div>
             <div class="form-group row">
@@ -94,10 +96,56 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label class="col-6 col-form-label col-form-label-sm">Allowed Free Time Days</label>
+                <div class="col-6">
+                    <InputBoxNumber [(inputModel)]="record.irm_allowed_free_days" [maxlength]="15" [dec]="0" #freedays>
+                    </InputBoxNumber>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-6 col-form-label col-form-label-sm">Container Available Date</label>
                 <div class="col-6">
                     <app-date [inputdate]="record.irm_cntr_avlb_dt" (ValueChanged)="record.irm_cntr_avlb_dt=$event"
-                        #payment_date>
+                        #_irm_cntr_avlb_dt>
+                    </app-date>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-6 col-form-label col-form-label-sm">Start of Free Time</label>
+                <div class="col-6">
+                    <app-date [inputdate]="record.irm_free_dt_start" (ValueChanged)="record.irm_free_dt_start=$event"
+                        #_irm_free_dt_start>
+                    </app-date>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-6 col-form-label col-form-label-sm">End of Free Time</label>
+                <div class="col-6">
+                    <app-date [inputdate]="record.irm_free_dt_end" (ValueChanged)="record.irm_free_dt_end=$event"
+                        #_irm_free_dt_end>
+                    </app-date>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-6 col-form-label col-form-label-sm">Applied Demurrage or Detention Rule</label>
+                <div class="col-6">
+                    <InputBox [(inputModel)]="record.irm_dnd_rule" [uppercase]="true" maxlength="100" #irm_cntr_no>
+                    </InputBox>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-6 col-form-label col-form-label-sm">Charged From Date</label>
+                <div class="col-6">
+                    <app-date [inputdate]="record.irm_charged_dt_from" (ValueChanged)="record.irm_charged_dt_from=$event"
+                        #_irm_charged_dt_from>
+                    </app-date>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-6 col-form-label col-form-label-sm">Charged To Date</label>
+                <div class="col-6">
+                    <app-date [inputdate]="record.irm_charged_dt_to" (ValueChanged)="record.irm_charged_dt_to=$event"
+                        #_irm_charged_dt_to>
                     </app-date>
                 </div>
             </div>
