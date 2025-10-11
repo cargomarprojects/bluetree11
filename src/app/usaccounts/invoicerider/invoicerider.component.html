@@ -1,6 +1,6 @@
 <div class="page-header">
     <div class="col">
-        <label class="mr-3">INVOICE RIDER</label>
+        <label class="mr-3">D&D INFO - [ {{inv_no}} ]</label>
     </div>
 </div>
 
@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="page-body">
+<!-- <div class="page-body">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group row">
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="page-body">
     <div class="row">
@@ -81,7 +81,7 @@
             <div class="form-group row">
                 <label class="col-6 col-form-label col-form-label-sm">Container#</label>
                 <div class="col-6">
-                    <InputBox [(inputModel)]="record.irm_cntr_no" [uppercase]="true" maxlength="11" #irm_cntr_no>
+                    <InputBox [(inputModel)]="record.irm_cntr_no" [uppercase]="true" maxlength="11" #_irm_cntr_no>
                     </InputBox>
                 </div>
             </div>
@@ -89,9 +89,9 @@
                 <label class="col-6 col-form-label col-form-label-sm">Invoice Due Date</label>
                 <div class="col-6">
                     <select class="form-control form-control-sm" [(ngModel)]="record.irm_inv_due_dt" #invduedt>
-                        <option [value]="'Payment due same day as Invoice Date'">Payment due same day as Invoice Date
+                        <option [value]="'Payment due same day as Invoice Date'">INVOICE DATE
                         </option>
-                        <option [value]="'Due Upon Receipt'">Due Upon Receipt</option>
+                        <option [value]="'Due Upon Receipt'">DUE UPON RECEIPT</option>
                     </select>
                 </div>
             </div>
@@ -136,8 +136,8 @@
             <div class="form-group row">
                 <label class="col-6 col-form-label col-form-label-sm">Charged From Date</label>
                 <div class="col-6">
-                    <app-date [inputdate]="record.irm_charged_dt_from" (ValueChanged)="record.irm_charged_dt_from=$event"
-                        #_irm_charged_dt_from>
+                    <app-date [inputdate]="record.irm_charged_dt_from"
+                        (ValueChanged)="record.irm_charged_dt_from=$event" #_irm_charged_dt_from>
                     </app-date>
                 </div>
             </div>
@@ -148,6 +148,63 @@
                         #_irm_charged_dt_to>
                     </app-date>
                 </div>
+            </div>
+        </div>
+        <div style="padding-top: 4px;padding-bottom: 4px;" class="col-md-6">
+            <div class="page-body table-responsive table-bordered" [style.height]="detrecords.length>6?'255px':'auto'"
+                [style.overflow-y]="detrecords.length>6?'scroll':'auto'">
+                <table class="table  table-hover table-sm">
+                    <thead class="page-body-thead">
+                        <tr>
+                            <th width='40%'>TIER</th>
+                            <th width='19%'>RATE</th>
+                            <th width='19%'>QTY</th>
+                            <th width='19%'>AMOUNT</th>
+                            <th width='3%'></th>
+                        </tr>
+                    </thead>
+                    <tbody class="page-body-tbody" *ngFor="let rec of detrecords; let i = index">
+                        <tr>
+                            <td class="p-0"> <input disabled class="form-control form-control-sm" type="number"
+                                    style="text-align:left;" [(ngModel)]="rec.ird_slno" />
+                            </td>
+                            <td class="p-0">
+                                <input #_ird_rate class="form-control form-control-sm" type="number"
+                                    style="text-align:right;" [(ngModel)]="rec.ird_rate"
+                                    (blur)="OnBlur('ird_rate',rec)" />
+                            </td>
+                            <td class="p-0">
+                                <input #_invd_qty class="form-control form-control-sm" type="number"
+                                    style="text-align:right;" [(ngModel)]="rec.ird_qty"
+                                    (blur)="OnBlur('ird_qty',rec)" />
+                            </td>
+                            <td class="p-0">
+                                <input disabled class="form-control form-control-sm" type="number"
+                                    style="text-align:right;" [(ngModel)]="rec.ird_amt" />
+                            </td>
+                            <td class="p-0">
+                                <a class="btn btn-sm" (click)="removeDetRow(rec)">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-between mt-2" style="width: 100%;">
+                    <div>
+                        <button class="btn btn-info btn-sm" (click)="AddDetRow()">Add Row</button>
+                    </div>
+                    <div style="text-align: right; flex: 1;">
+                        <label *ngIf="record.irm_tot_amt!=0" class="col-form-label col-form-label-sm mb-0 pr-4">Total:
+                            {{record.irm_tot_amt}}&nbsp;&nbsp;</label>
+                    </div>
+                </div>
+                <!-- <div class="d-flex justify-content-between align-items-center mt-2">
+                    <button class="btn btn-info btn-sm" (click)="AddDetRow()">Add Row</button>
+                    <label class="col col-form-label col-form-label-sm mb-0">Total: 560.00</label>
+                </div> -->
             </div>
         </div>
     </div>

@@ -1,5 +1,4 @@
 export interface Tbl_Invoice_Riderm {
-
     irm_pkid: string;
     irm_inv_id: string;
     irm_cntr_no: string;
@@ -19,10 +18,19 @@ export interface Tbl_Invoice_Riderm {
     rec_edited_date: string;
 }
 
+export interface Tbl_Invoice_Riderd {
+    ird_pkid: string;
+    ird_parent_id: string;
+    ird_slno: number;
+    ird_rate: number;
+    ird_qty: number;
+    ird_amt: number;
+}
 
 export interface vm_Tbl_Invoice_Riderm {
     mode: string;
     record: Tbl_Invoice_Riderm;
+    detrecords: Tbl_Invoice_Riderd[];
     pkid: string;
     userinfo: any;
     filter: any;

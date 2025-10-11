@@ -1,10 +1,10 @@
-import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { InputBoxComponent } from '../../shared/input/inputbox.component';
 import { GlobalService } from '../../core/services/global.service';
 import { SearchTable } from '../../shared/models/searchtable';
-import { Tbl_Invoice_Riderm, vm_Tbl_Invoice_Riderm } from '../models/Tbl_Invoice_Rider';
+import { Tbl_Invoice_Riderm, Tbl_Invoice_Riderd, vm_Tbl_Invoice_Riderm } from '../models/Tbl_Invoice_Rider';
 import { InvoiceRiderService } from '../services/invoicerider.service';
 import { DateComponent } from '../../shared/date/date.component';
 
@@ -21,12 +21,13 @@ export class InvoiceRiderComponent implements OnInit {
     @Input() public menuid: string = '';
     @Output() callbackevent = new EventEmitter<any>();
 
-    @ViewChild('irm_cntr_no') irm_cntr_no_field: InputBoxComponent;
+    @ViewChild('_irm_cntr_no') irm_cntr_no_field: InputBoxComponent;
+    @ViewChildren('_ird_rate') ird_rate_field: QueryList<ElementRef>;
     //   @ViewChild('payment_date') payment_date_field: DateComponent;
 
-    record: Tbl_Invoice_Riderm = <Tbl_Invoice_Riderm>{};
-    records: Tbl_Invoice_Riderm[] = [];
-
+    public record: Tbl_Invoice_Riderm = <Tbl_Invoice_Riderm>{};
+    public records: Tbl_Invoice_Riderm[] = [];
+    public detrecords: Tbl_Invoice_Riderd[] = [];
     pkid: string;
     mode: string;
     title: string = '';
@@ -78,6 +79,7 @@ export class InvoiceRiderComponent implements OnInit {
         this.errorMessage = '';
         if (this.mode == 'ADD') {
             this.record = <Tbl_Invoice_Riderm>{};
+            this.detrecords = <Tbl_Invoice_Riderd[]>[];
             this.pkid = this.gs.getGuid();
             this.init();
         }
@@ -111,6 +113,7 @@ export class InvoiceRiderComponent implements OnInit {
         this.mainService.GetRecord(SearchData)
             .subscribe(response => {
                 this.record = <Tbl_Invoice_Riderm>response.record;
+                this.detrecords = <Tbl_Invoice_Riderd[]>response.detrecords;
                 this.mode = 'EDIT';
                 if (!this.gs.isBlank(this.irm_cntr_no_field))
                     this.irm_cntr_no_field.focus();
@@ -147,7 +150,7 @@ export class InvoiceRiderComponent implements OnInit {
     }
 
     Save() {
-
+        this.FindGrandTotal();
         if (!this.Allvalid())
             return;
         if (!confirm("Save")) {
@@ -157,6 +160,7 @@ export class InvoiceRiderComponent implements OnInit {
         const saveRecord = <vm_Tbl_Invoice_Riderm>{};
         saveRecord.userinfo = this.gs.UserInfo;
         saveRecord.record = this.record;
+        saveRecord.detrecords = this.detrecords;
         saveRecord.mode = this.mode;
 
         this.mainService.Save(saveRecord)
@@ -195,6 +199,40 @@ export class InvoiceRiderComponent implements OnInit {
             alert(this.errorMessage);
             return bRet;
         }
+
+        let iCtr = 0;
+        this.detrecords.forEach(Rec => {
+            iCtr++;
+            Rec.ird_slno = iCtr;
+
+            if (this.gs.isZero(Rec.ird_qty)) {
+                bRet = false;
+                this.errorMessage = "Invalid Qty";
+                alert(this.errorMessage);
+                return bRet;
+            }
+            if (this.gs.isZero(Rec.ird_rate)) {
+                bRet = false;
+                this.errorMessage = "Invalid Rate";
+                alert(this.errorMessage);
+                return bRet;
+            }
+
+            if (this.gs.isZero(Rec.ird_amt)) {
+                bRet = false;
+                this.errorMessage = "Invalid Amount";
+                alert(this.errorMessage);
+                return bRet;
+            }
+        });
+
+        if (iCtr == 0) {
+            bRet = false;
+            this.errorMessage = "No Detail Rows To Save";
+            alert(this.errorMessage);
+            return bRet;
+        }
+
         return bRet;
     }
 
@@ -253,6 +291,20 @@ export class InvoiceRiderComponent implements OnInit {
 
         }
     }
+    OnBlur(field: string, rec: Tbl_Invoice_Riderd = null) {
+        switch (field) {
+            case 'ird_rate': {
+                rec.ird_rate = this.gs.roundNumber(rec.ird_rate, 2);
+                this.findRowTotal(rec);
+                break;
+            }
+            case 'ird_qty': {
+                rec.ird_qty = this.gs.roundNumber(rec.ird_qty, 3);
+                this.findRowTotal(rec);
+                break;
+            }
+        }
+    }
 
     CloseModal() {
         if (this.callbackevent != null) {
@@ -262,5 +314,67 @@ export class InvoiceRiderComponent implements OnInit {
             }
             this.callbackevent.emit(data);
         }
+    }
+
+    AddDetRow() {
+
+        var rec = <Tbl_Invoice_Riderd>{};
+        rec.ird_pkid = this.gs.getGuid();
+        rec.ird_parent_id = this.pkid;
+        rec.ird_slno = this.detrecords.length + 1;
+        rec.ird_rate = 0;
+        rec.ird_qty = 1;
+        rec.ird_amt = 0;
+        this.detrecords.push(rec);
+
+        this.ird_rate_field.changes
+            .subscribe((queryChanges) => {
+                this.ird_rate_field.last.nativeElement.focus();
+            });
+    }
+
+    removeDetRow(_rec: Tbl_Invoice_Riderd) {
+
+        if (!confirm('Remove Line Item Y/N'))
+            return;
+        this.detrecords.forEach((rec, index) => {
+            if (rec == _rec) {
+                this.detrecords.splice(index, 1);
+            }
+        });
+        this.FindGrandTotal();
+    }
+
+    findRowTotal(rec: Tbl_Invoice_Riderd) {
+
+        let nQty = rec.ird_qty;
+        let nRate = rec.ird_rate;
+        let nAmt = rec.ird_amt;
+        nQty = rec.ird_qty;
+        if (nQty == 0) {
+            nQty = 1;
+        }
+        nRate = rec.ird_rate;
+        if (!this.gs.isZero(nRate)) {
+            nAmt = nQty * nRate;
+            nAmt = this.gs.fixDecimalDigits(nAmt, 3);
+            nAmt = this.gs.roundNumber(nAmt, 2);
+            rec.ird_amt = nAmt;
+        }
+
+        this.FindGrandTotal();
+    }
+
+    FindGrandTotal() {
+        let nTot = 0;
+        let iCtr = 0;
+        this.detrecords.forEach(Rec => {
+            iCtr++;
+            Rec.ird_slno = iCtr;
+            nTot += Rec.ird_amt;
+        });
+
+        nTot = this.gs.roundNumber(nTot, 2);
+        this.record.irm_tot_amt = nTot;
     }
 }
