@@ -92,7 +92,7 @@ export class InvoiceRiderComponent implements OnInit {
         this.record.irm_pkid = this.pkid;
         this.record.irm_inv_id = this.inv_pkid;
         this.record.irm_cntr_no = '';
-        this.record.irm_inv_due_dt = 'Payment due same day as Invoice Date';
+        this.record.irm_inv_due_dt = 'INVOICE DATE';
         this.record.irm_allowed_free_days = 0;
         this.record.irm_cntr_avlb_dt = ''
         this.record.irm_free_dt_start = '';
@@ -171,8 +171,8 @@ export class InvoiceRiderComponent implements OnInit {
                 }
                 else {
                     this.RefreshList();
-                    this.errorMessage = 'Save Complete';
-                    alert(this.errorMessage);
+                    // this.errorMessage = 'Save Complete';
+                    // alert(this.errorMessage);
                     this.NewRecord();
                 }
             }, error => {
