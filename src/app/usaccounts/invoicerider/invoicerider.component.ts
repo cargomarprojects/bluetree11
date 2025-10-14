@@ -23,8 +23,7 @@ export class InvoiceRiderComponent implements OnInit {
 
     @ViewChild('_irm_cntr_no') irm_cntr_no_field: InputBoxComponent;
     @ViewChildren('_ird_rate') ird_rate_field: QueryList<ElementRef>;
-    //   @ViewChild('payment_date') payment_date_field: DateComponent;
-
+    
     public record: Tbl_Invoice_Riderm = <Tbl_Invoice_Riderm>{};
     public records: Tbl_Invoice_Riderm[] = [];
     public detrecords: Tbl_Invoice_Riderd[] = [];
@@ -52,7 +51,7 @@ export class InvoiceRiderComponent implements OnInit {
     }
 
     private initPage() {
-        this.title = 'Invoice Rider';
+        this.title = 'D&D INFO';
         this.isAdmin = this.gs.IsAdmin(this.menuid);
         this.errorMessage = '';
         this.LoadCombo();
