@@ -27,4 +27,8 @@ export class InvoiceRiderService {
     DeleteRecord(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/USAccounts/InvoiceRiderPage/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
+
+    LoadMblContainer(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/USAccounts/InvoiceRiderPage/LoadMblContainer', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

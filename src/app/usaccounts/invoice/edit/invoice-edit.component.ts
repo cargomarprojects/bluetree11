@@ -444,7 +444,7 @@ export class InvoiceEditComponent implements OnInit {
     this.record.inv_mbl_refno = this.mbl_refno;
 
     this.record.inv_arrnotice = 'N';
-
+    this.record.inv_is_dnd = 'N';
     this.record.inv_paid = 0;
 
     this.record.inv_curr_code = this.gs.base_cur_code;
@@ -529,7 +529,7 @@ export class InvoiceEditComponent implements OnInit {
 
       this.old_amt = this.record.inv_total;
       this.old_inv_date = this.record.inv_date;
-      this.record.inv_is_dnd_b = this.record.inv_is_dnd == "Y" ? true : false;
+      // this.record.inv_is_dnd_b = this.record.inv_is_dnd == "Y" ? true : false;
 
       this.InitCommonValues();
 
@@ -564,7 +564,7 @@ export class InvoiceEditComponent implements OnInit {
   SaveParent() {
     this.record.inv_confirmed = 'N';
     this.record.inv_stage = "N";
-    this.record.inv_is_dnd = this.record.inv_is_dnd_b ? 'Y' : 'N';
+    // this.record.inv_is_dnd = this.record.inv_is_dnd_b ? 'Y' : 'N';
 
     if (this.isVat) {
       this.record.inv_vat_per = this.gs.VAT_PER;
@@ -1317,7 +1317,6 @@ export class InvoiceEditComponent implements OnInit {
         break;
       }
       case 'D-AND-D': {
-        // this.report_title = "History [INVOICE NO : " + this.record.inv_no + "]";
         this.modal = this.modalservice.open(_modal, { centered: true });
         break;
       }

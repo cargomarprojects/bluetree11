@@ -4,6 +4,7 @@ export interface Tbl_Invoice_Riderm {
     irm_cntr_no: string;
     irm_inv_due_dt: string;
     irm_allowed_free_days: number;
+    irm_allowed_days_type:string;
     irm_cntr_avlb_dt: string;
     irm_free_dt_start: string;
     irm_free_dt_end: string;

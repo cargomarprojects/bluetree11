@@ -151,10 +151,15 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-4 col-form-label col-form-label-sm"></label>
-                            <div class="col-8">
-                                <input type="checkbox" [(ngModel)]="record.inv_is_dnd_b" id="danddinv" />
-                                <label class="ml-1" for="danddinv">D&D Invoice</label>
+                            <label class="col-4 col-form-label col-form-label-sm">D&D Invoice</label>
+                            <div class="col-4">
+                                <select class="form-control form-control-sm" [(ngModel)]="record.inv_is_dnd" #danddinv>
+                                    <option [value]="'N'">NA </option>
+                                    <option [value]="'D'">DETENTION CHARGES</option>
+                                    <option [value]="'M'">DEMURRAGE CHARGES</option>
+                                </select>
+                                <!-- <input type="checkbox" [(ngModel)]="record.inv_is_dnd_b" id="danddinv" />
+                                <label class="ml-1" for="danddinv">D&D Invoice</label> -->
                             </div>
                         </div>
 
@@ -653,7 +658,7 @@
         <div class="page-body">
             <div class="row">
                 <div class="col-md-12 testbox  px-0 mx-0">
-                    <app-invoicerider [menuid]="menuid" [inv_pkid]="pkid" [inv_no]="record.inv_no"
+                    <app-invoicerider [menuid]="menuid" [inv_pkid]="pkid" [inv_no]="record.inv_no" [inv_mbl_id]="record.inv_mbl_id"
                         [inv_ref_no]="mbl_refno" (callbackevent)="ridercallbackevent($event)"></app-invoicerider>
                 </div>
             </div>

@@ -18,15 +18,17 @@ export class InvoiceRiderComponent implements OnInit {
     @Input() public inv_ref_no: string = '';
     @Input() public inv_pkid: string = '';
     @Input() public inv_no: string = '';
+    @Input() public inv_mbl_id: string = '';
     @Input() public menuid: string = '';
     @Output() callbackevent = new EventEmitter<any>();
 
     @ViewChild('_irm_cntr_no') irm_cntr_no_field: InputBoxComponent;
     @ViewChildren('_ird_rate') ird_rate_field: QueryList<ElementRef>;
-    
+
     public record: Tbl_Invoice_Riderm = <Tbl_Invoice_Riderm>{};
     public records: Tbl_Invoice_Riderm[] = [];
     public detrecords: Tbl_Invoice_Riderd[] = [];
+    public ContainerList: Tbl_Invoice_Riderm[];
     pkid: string;
     mode: string;
     title: string = '';
@@ -59,7 +61,22 @@ export class InvoiceRiderComponent implements OnInit {
     }
 
     LoadCombo() {
-
+        let SearchData = {
+            mbl_id: this.inv_mbl_id
+        };
+        this.mainService.LoadMblContainer(SearchData)
+            .subscribe(response => {
+                this.ContainerList = response.list;
+                response.list.forEach(a => {
+                    if (this.gs.isBlank(this.record.irm_cntr_no))
+                        this.record.irm_cntr_no = a.irm_cntr_no;
+                })
+                if (!this.gs.isBlank(this.irm_cntr_no_field))
+                    this.irm_cntr_no_field.focus();
+            }, error => {
+                this.errorMessage = error.message;
+                alert(this.errorMessage);
+            });
     }
 
 
@@ -93,6 +110,7 @@ export class InvoiceRiderComponent implements OnInit {
         this.record.irm_cntr_no = '';
         this.record.irm_inv_due_dt = 'INVOICE DATE';
         this.record.irm_allowed_free_days = 0;
+        this.record.irm_allowed_days_type = 'WORKING DAYS';
         this.record.irm_cntr_avlb_dt = ''
         this.record.irm_free_dt_start = '';
         this.record.irm_free_dt_end = '';
@@ -100,7 +118,12 @@ export class InvoiceRiderComponent implements OnInit {
         this.record.irm_charged_dt_from = '';
         this.record.irm_charged_dt_to = '';
         this.record.irm_tot_amt = 0;
-
+        if (!this.gs.isBlank(this.ContainerList)) {
+            this.ContainerList.forEach(a => {
+                if (this.gs.isBlank(this.record.irm_cntr_no))
+                    this.record.irm_cntr_no = a.irm_cntr_no;
+            })
+        }
         if (!this.gs.isBlank(this.irm_cntr_no_field))
             this.irm_cntr_no_field.focus();
     }
@@ -252,6 +275,7 @@ export class InvoiceRiderComponent implements OnInit {
         else {
             REC.irm_cntr_no = this.record.irm_cntr_no;
             REC.irm_allowed_free_days = this.record.irm_allowed_free_days;
+            REC.irm_allowed_days_type = this.record.irm_allowed_days_type;
             REC.irm_free_dt_start = this.record.irm_free_dt_start;
             REC.irm_free_dt_end = this.record.irm_free_dt_end;
             REC.irm_dnd_rule = this.record.irm_dnd_rule;
