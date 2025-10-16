@@ -66,7 +66,7 @@ export class PreSetMsgService {
     }
     public ClearInit() {
         this.record = <Table_Cargo_RemarksModel>{
-            sortcol : 'source',
+            sortcol : '',
             sortorder : true,
             errormessage: '',
             records: [],
@@ -88,7 +88,7 @@ export class PreSetMsgService {
         this.param_type = params.param_type;
 
         this.record = <Table_Cargo_RemarksModel>{
-            sortcol : 'source',
+            sortcol : '',
             sortorder : true,
             errormessage: '',
             records: [],
