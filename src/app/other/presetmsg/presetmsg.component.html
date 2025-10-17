@@ -20,6 +20,7 @@
     <table class="table  table-hover table-sm">
         <thead class="page-body-thead">
             <tr>
+                <th (click)="mainservice.sort('ctr')">SLNO&nbsp;<i [ngClass]="mainservice.getIcon('ctr')"></i></th>
                 <th (click)="mainservice.sort('mu_agent_name')">TYPE&nbsp;<i
                         [ngClass]="mainservice.getIcon('mu_agent_name')"></i></th>
                 <th (click)="mainservice.sort('mu_bl_start_no')">REMARKS&nbsp;<i
@@ -29,6 +30,7 @@
         </thead>
         <tbody class="page-body-tbody">
             <tr *ngFor="let rec of records$ | async | sortBy: mainservice.getSortCol() : mainservice.getSortOrder()">
+                <td>{{rec.ctr}} </td>
                 <td>{{rec.source}} </td>
                 <td *ngIf="!this.mainservice.canEdit">{{rec.remarks}}</td>
                 <td *ngIf="this.mainservice.canEdit">
