@@ -6,15 +6,17 @@
     </div>
     <div class="col-6">
       <div class="row">
+        <div *ngIf="_maildata.update_ref_type == 'ARRIVAL-NOTICE' && ErStatus!='ENABLED'" class="form-group row">
+          <label *ngIf="PreAnSentDate&&gs.isBlank(Chk_Thankyou_mail_Id)"><span style="color:magenta"> Previous A/N sent : {{PreAnSentBy}}/{{PreAnSentDate}}.</span></label>
+        </div>
         <div *ngIf="_maildata.update_ref_type == 'ARRIVAL-NOTICE' && ErStatus=='ENABLED'" class="form-group row">
-          <span class="text-success">A/N Sent on {{AnSentDate}} </span> &nbsp;
-          <span class="text-success">E/R Tracking Started</span> &nbsp;
+          <span style="color:magenta">A/N Sent on {{AnSentDate}} </span> &nbsp;
+          <span style="color:magenta">E/R Tracking Started</span> &nbsp;
           <button class="btn btn-info btn-sm" (click)="ChangeANThankMailStatus()">Thank you email</button>
           <span class="text-success">&nbsp;{{Chk_Thankyou_mail_Button=="Y"?'Enabled':''}}</span>
         </div>
       </div>
     </div>
-
   </div>
 </div>
 <div *ngIf="errorMessage.length >0">

@@ -58,6 +58,8 @@ export class MailComponent implements OnInit {
   Chk_Thankyou_mail_Id: string = "";
   AnSentDate: string = "";
   ErStatus: string = "DISABLED";
+  PreAnSentDate: string = "";
+  PreAnSentBy: string = "";
 
   msgFontFamily: string = '';
   msgFontSize: string = '';
@@ -260,7 +262,8 @@ export class MailComponent implements OnInit {
       delivery_receipt: this.chkDelivReceipt ? "YES" : "NO",
       update_ref_type: this._maildata.update_ref_type,
       update_ref_id: this._maildata.update_ref_id,
-      customer_name: this._maildata.customer_name
+      customer_name: this._maildata.customer_name,
+      customer_id: this._maildata.customer_id
     };
 
     SearchData = this.gs.UserInfo;
@@ -282,6 +285,7 @@ export class MailComponent implements OnInit {
     SearchData.update_ref_type = this._maildata.update_ref_type;
     SearchData.update_ref_id = this._maildata.update_ref_id;
     SearchData.customer_name = this._maildata.customer_name;
+    SearchData.customer_id = this._maildata.customer_id;
 
     this.gs.SearchRecord(SearchData)
       .subscribe(response => {
@@ -529,7 +533,9 @@ export class MailComponent implements OnInit {
       pkid: '',
       file_name: '',
       update_ref_type: this._maildata.update_ref_type,
-      update_ref_id: this._maildata.update_ref_id
+      update_ref_id: this._maildata.update_ref_id,
+      customer_name: this._maildata.customer_name,
+      customer_id: this._maildata.customer_id
     };
 
     SearchData2.table = "EMAIL-PRESETMESSAGE";
@@ -555,6 +561,8 @@ export class MailComponent implements OnInit {
           this.ErStatus = response.erstatus;
           this.Chk_Thankyou_mail_Button = response.isthankmail;
           this.Chk_Thankyou_mail_Id = response.thankmailid;
+          this.PreAnSentDate = response.preansentdate;
+          this.PreAnSentBy = response.preansentby;
         }
 
         this.GetTotfilesize();
