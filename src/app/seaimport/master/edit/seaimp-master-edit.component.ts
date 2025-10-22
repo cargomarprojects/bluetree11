@@ -1000,14 +1000,15 @@ export class SeaImpMasterEditComponent implements OnInit {
         return {
           appid: this.gs.appid,
           menuid: this.gs.MENU_SI_MASTER_INTERNAL_MEMO,
-          refno: "REF : " + this.record.mbl_refno,
+          refno: this.record.mbl_refno,
           pkid: this.pkid,
           origin: 'seaimp-master-page',
           oprgrp: 'SEA IMPORT',
           parentType: 'SEAIMP-CNTR',
           paramType: 'CNTR-MOVE-STATUS',
           hideTracking: 'Y',
-          is_locked: this.is_locked
+          is_locked: this.is_locked,
+          houseno: ''
         };
     } else if (action == "CARGOPICKUP") {
       if (_type == "L")

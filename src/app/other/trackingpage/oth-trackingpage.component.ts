@@ -53,6 +53,7 @@ export class OthTrackingPageComponent implements OnInit {
   origin: string;
   parentid: string;
   invokefrom: string;
+  houseno: string = "";
 
   constructor(
     private modalconfig: NgbModalConfig,
@@ -81,6 +82,7 @@ export class OthTrackingPageComponent implements OnInit {
       this.is_locked = JSON.parse(this.route.snapshot.queryParams.is_locked);
       this.parentid = this.route.snapshot.queryParams.parentid;
       this.invokefrom = this.route.snapshot.queryParams.invokefrom;
+      this.houseno = this.route.snapshot.queryParams.houseno;
     } else {
       const options = JSON.parse(this.route.snapshot.queryParams.parameter);
       this.pkid = options.pkid;
@@ -94,6 +96,7 @@ export class OthTrackingPageComponent implements OnInit {
       this.is_locked = options.is_locked;
       this.parentid = options.parentid;
       this.invokefrom = options.invokefrom;
+      this.houseno = options.houseno;
     }
     // this.mode = 'ADD';
     this.parentTypememo = this.parentType + "-MEMO";
@@ -312,6 +315,7 @@ export class OthTrackingPageComponent implements OnInit {
   //   }
 
   NewRecord(_stype: string = '') {
+    this.errorMessage = '';
     this.Memo_Mode = "ADD";
     this.Memo_Id = this.gs.getGuid();
     this.trackmemorecord = <Tbl_Cargo_Tracking_Status>{};
@@ -324,6 +328,7 @@ export class OthTrackingPageComponent implements OnInit {
   }
 
   EditRow(_rec: Tbl_Cargo_Tracking_Status) {
+    this.errorMessage = '';
     //Dt_Date.IsEnabled = false;
     this.Memo_Id = _rec.param_id.toString();
     this.Memo_Mode = "EDIT";

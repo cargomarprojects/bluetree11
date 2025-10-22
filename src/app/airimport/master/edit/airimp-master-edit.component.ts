@@ -144,7 +144,7 @@ export class AirImpMasterEditComponent implements OnInit {
   }
 
   init() {
-    
+
     this.record.mbl_pkid = this.pkid;
     this.record.rec_created_by = this.gs.user_code;
     this.record.rec_created_date = this.gs.defaultValues.today;
@@ -282,8 +282,8 @@ export class AirImpMasterEditComponent implements OnInit {
     if (!this.Allvalid())
       return;
 
-      if (!confirm("Save")) {
-        return;
+    if (!confirm("Save")) {
+      return;
     }
     // this.record.mbl_direct = this.record.mbl_direct_bool ? 'Y' : 'N';
     // this.record.mbl_3rdparty = this.record.mbl_3rdparty_bool ? 'Y' : 'N';
@@ -720,14 +720,15 @@ export class AirImpMasterEditComponent implements OnInit {
         return {
           appid: this.gs.appid,
           menuid: this.gs.MENU_AI_MASTER_INTERNAL_MEMO,
-          refno: "REF : " + this.record.mbl_refno,
+          refno: this.record.mbl_refno,
           pkid: this.pkid,
           origin: 'airimp-master-page',
           oprgrp: 'AIR IMPORT',
           parentType: 'AIRIMP-CNTR',
           paramType: 'AIRIMP-CNTR-MOVE-STATUS',
           is_locked: this.is_locked,
-          hideTracking: 'Y'
+          hideTracking: 'Y',
+          houseno: ''
         };
     }
   }
@@ -854,14 +855,15 @@ export class AirImpMasterEditComponent implements OnInit {
         let prm = {
           appid: this.gs.appid,
           menuid: this.gs.MENU_AI_MASTER_INTERNAL_MEMO,
-          refno: "REF : " + this.record.mbl_refno,
+          refno: this.record.mbl_refno,
           pkid: this.pkid,
           origin: 'airimp-master-page',
           oprgrp: 'AIR IMPORT',
           parentType: 'AIRIMP-CNTR',
           paramType: 'AIRIMP-CNTR-MOVE-STATUS',
           is_locked: this.is_locked,
-          hideTracking: 'Y'
+          hideTracking: 'Y',
+          houseno: ''
         };
         this.gs.Naviagete2('Silver.Other.Trans/TrackingPage', prm);
         break;

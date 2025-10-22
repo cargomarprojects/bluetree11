@@ -1712,7 +1712,7 @@ export class SeaImpHouseEditComponent implements OnInit {
         return {
           appid: this.gs.appid,
           menuid: this.gs.MENU_SI_SHIPMENT_MOVEMENT,
-          refno: "REF : " + this.record.mbl_refno + "  HBL : " + this.record.hbl_houseno,
+          refno: this.record.mbl_refno,
           pkid: this.pkid,
           parentid: this.parentid,
           origin: 'seaimp-house-page',
@@ -1721,7 +1721,8 @@ export class SeaImpHouseEditComponent implements OnInit {
           paramType: 'SHIP-MOVE-STATUS',
           hideTracking: 'Y',
           invokefrom: this.invokefrom,
-          is_locked: this.is_locked
+          is_locked: this.is_locked,
+          houseno: this.record.hbl_houseno
         };
     } else if (action == "HOUSE-DEVAN") {
       if (_type == "L")

@@ -1038,14 +1038,15 @@ export class OthGeneralEditComponent implements OnInit {
         return {
           appid: this.gs.appid,
           menuid: this.gs.MENU_OT_MASTER_INTERNAL_MEMO,
-          refno: "REF : " + this.record.mbl_refno,
+          refno: this.record.mbl_refno,
           pkid: this.pkid,
           origin: 'other-general-page',
           oprgrp: 'OTHERS',
           parentType: 'OTH-CNTR',
           paramType: 'OTH-CNTR-MOVE-STATUS',
           is_locked: this.is_locked,
-          hideTracking: 'Y'
+          hideTracking: 'Y',
+          houseno: this.record.hbl_houseno
         };
     } else if (action == "MBLPAGE") {
       if (_type == "L")

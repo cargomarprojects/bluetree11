@@ -810,7 +810,7 @@ export class SeaexpMasterEditComponent implements OnInit {
       if (_type == "L")
         return '/Silver.Other.Trans/TrackingPage';
       if (_type == 'P')
-        return { appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER_INTERNAL_MEMO, refno: "REF : " + this.record.mbl_refno, pkid: this.pkid, origin: 'seaexp-master-page', oprgrp: 'SEA EXPORT', parentType: 'SEAEXP-CNTR', paramType: 'CNTR-MOVE-STATUS', hideTracking: 'Y', is_locked: this.is_locked };
+        return { appid: this.gs.appid, menuid: this.gs.MENU_SE_MASTER_INTERNAL_MEMO, refno: this.record.mbl_refno, pkid: this.pkid, origin: 'seaexp-master-page', oprgrp: 'SEA EXPORT', parentType: 'SEAEXP-CNTR', paramType: 'CNTR-MOVE-STATUS', hideTracking: 'Y', is_locked: this.is_locked, houseno: '' };
     } else if (action == "CERTIFICATE-ORIGIN") {
       if (_type == "L")
         return '/Silver.SeaExport.Trans/CertOriginPage';

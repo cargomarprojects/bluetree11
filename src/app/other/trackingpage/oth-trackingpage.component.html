@@ -12,14 +12,38 @@
             {{errorMessage}}
         </div>
     </div>
-
+    <div class="page-body">
+        <div class="row border">
+            <div style="padding-top: 4px;padding-bottom: 4px;" class="col-md-6">
+                <div *ngIf="gs.isBlank(houseno)" class="form-group row">
+                    <label class="col-1 col-form-label col-form-label-sm">Ref#</label>
+                    <div class="col-7">
+                        <input disabled class="form-control form-control-sm" type="text" [(ngModel)]="refno"
+                            maxlength="500" (blur)="onBlur('refno',null)" />
+                    </div>
+                </div>
+                <div *ngIf="!gs.isBlank(houseno)" class="form-group row">
+                    <label class="col-1 col-form-label col-form-label-sm">Ref#</label>
+                    <div class="col-3">
+                        <input disabled class="form-control form-control-sm" type="text" [(ngModel)]="refno"
+                            maxlength="500" (blur)="onBlur('refno',null)" />
+                    </div>
+                    <label class="col-1 col-form-label col-form-label-sm">Hbl#</label>
+                    <div class="col-3">
+                        <input disabled class="form-control form-control-sm" type="text" [(ngModel)]="houseno"
+                            maxlength="500" (blur)="onBlur('houseno',null)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div *ngIf="hideTracking=='N'">
         <div class="page-body">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row pt-2">
                         <!-- First row -->
-                        <div class="col-md-12 px-0 mx-0">
+                        <!-- <div class="col-md-12 px-0 mx-0">
                             <div class="row">
                                 <div class="col-md-6 testbox  px-0 mx-0">
                                     <div class="form-group row">
@@ -33,7 +57,7 @@
                             </div>
                             <hr>
                         </div>
-                        <hr>
+                        <hr> -->
                         <!-- Second row -->
                         <div class="col-md-12 px-0 mx-0">
                             <div class="row">
@@ -89,101 +113,85 @@
         </div>
     </div>
     <div class="page-body">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row pt-2">
-                    <!-- First row -->
-                    <div class="col-md-12 px-0 mx-0">
-                        <div class="row">
-                            <div class="col-md-6 testbox  px-0 mx-0">
-                                <div class="form-group row">
-                                    <label class="col-1 col-form-label col-form-label-sm">Date</label>
-                                    <div class="col-7">
-                                        <app-date disabled [inputdate]="trackmemorecord.date"
-                                            (ValueChanged)="trackmemorecord.date=$event">
-                                        </app-date>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-1 col-form-label col-form-label-sm">*Memo</label>
-                                    <div class="col-7">
-                                        <select #_cmb_notes class="form-control form-control-sm" [(ngModel)]="cmbNotes"
-                                            (change)="OnChange('cmbNotes')">
-                                            <option *ngFor="let rec of MemoList" [value]="rec.name">{{rec.name}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-1 col-form-label col-form-label-sm"></label>
-                                    <div class="col-7">
-                                        <textarea rows="5" class="form-control form-control-sm"
-                                            [(ngModel)]="trackmemorecord.remarks" (blur)="onBlur('trackremarks')"
-                                            required maxlength="500"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="offset-1 col-7 col-form-label col-form-label-sm">*Memo (Press ENTER
-                                        Key to
-                                        Add a New Line.)</label>
-                                    <div class="col-4 p-0">
-                                        <div class="row row justify-content-center p-1">
-                                            <!-- <button class="btn btn-primary btn-md mr-1" [disabled]="is_locked"
-                                                (click)="SaveMemo()">{{lblSaveMemo}}</button> -->
-                                            <button class="btn btn-primary btn-md mr-1"
-                                                (click)="SaveMemo()">{{lblSaveMemo}}</button>
-                                            <button class="btn btn-primary btn-md mr-1"
-                                                (click)="NewRecord('MEMO')">New</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
+        <div class="row border">
+            <div style="padding-top: 4px;padding-bottom: 4px;" class="col-md-6">
+                <div class="form-group row">
+                    <label class="col-1 col-form-label col-form-label-sm">Date</label>
+                    <div class="col-7">
+                        <app-date disabled [inputdate]="trackmemorecord.date"
+                            (ValueChanged)="trackmemorecord.date=$event">
+                        </app-date>
                     </div>
-                    <hr>
-                    <!-- Second row -->
-                    <div class="col-md-12 px-0 mx-0">
-                        <div class="row">
-                            <div class="col-md-12 testbox  px-0 mx-0">
-                                <div class="page-list">
-                                    <div class="page-body table-responsive table-bordered">
-                                        <table class="table  table-hover table-sm">
-                                            <thead class="page-body-thead">
-                                                <tr>
-                                                    <th>CREATED-BY</th>
-                                                    <th>DATE </th>
-                                                    <th>MEMO</th>
-                                                    <th class='text-center'>ATTACHMENTS</th>
-                                                    <th class='text-center'>REMOVE</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="page-body-tbody">
-                                                <tr *ngFor="let rec of trackmemorecords; let i = index"
-                                                    [class.active]="i == selectedRowIndex" (click)="SetRowIndex(i)">
-                                                    <td class="p-0">{{rec.rec_created_by}} </td>
-                                                    <td class="p-0">{{rec.date | date : gs.date_display_fmt_with_time}}
-                                                    </td>
-                                                    <td class="hlink2 p-0" (blur)="onBlur('remarks',rec)"
-                                                        (click)="EditRow(rec)">
-                                                        {{rec.remarks}}</td>
-                                                    <td class='p-0 text-center'><i
-                                                            class="fa fa-paperclip  fa-lg pointer"
-                                                            style="font-size:24px"
-                                                            [style.color]="rec.rec_files_attached=='Y'?'red':black"
-                                                            aria-hidden="true" (click)="AttachRow(rec,attachmodal)"></i>
-                                                    </td>
-                                                    <td class='p-0 text-center'><i class="fa fa-trash  fa-lg pointer"
-                                                            aria-hidden="true" (click)="RemoveRow(rec)"></i></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
+                </div>
+                <div class="form-group row">
+                    <label class="col-1 col-form-label col-form-label-sm">*Memo</label>
+                    <div class="col-7">
+                        <select #_cmb_notes class="form-control form-control-sm" [(ngModel)]="cmbNotes"
+                            (change)="OnChange('cmbNotes')">
+                            <option *ngFor="let rec of MemoList" [value]="rec.name">{{rec.name}}
+                            </option>
+                        </select>
                     </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-1 col-form-label col-form-label-sm"></label>
+                    <div class="col-7">
+                        <textarea rows="5" class="form-control form-control-sm" [(ngModel)]="trackmemorecord.remarks"
+                            (blur)="onBlur('trackremarks')" required maxlength="500"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="offset-1 col-7 col-form-label col-form-label-sm">*Memo (Press ENTER
+                        Key to
+                        Add a New Line.)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row border">
+            <div style="padding-top: 4px;padding-bottom: 4px;" class="col-md-6">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <div class="row row justify-content-center p-1">
+                            <button class="btn btn-primary btn-md mr-1" (click)="SaveMemo()">{{lblSaveMemo}}</button>
+                            <button class="btn btn-primary btn-md mr-1" (click)="NewRecord('MEMO')">New</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="row border">
+            <div class="col-md-12  px-0 mx-0">
+                <div class="page-body table-responsive table-bordered">
+                    <table class="table  table-hover table-sm">
+                        <thead class="page-body-thead">
+                            <tr>
+                                <th>CREATED-BY</th>
+                                <th>DATE </th>
+                                <th>MEMO</th>
+                                <th class='text-center'>ATTACHMENTS</th>
+                                <th class='text-center'>REMOVE</th>
+                            </tr>
+                        </thead>
+                        <tbody class="page-body-tbody">
+                            <tr *ngFor="let rec of trackmemorecords; let i = index"
+                                [class.active]="i == selectedRowIndex" (click)="SetRowIndex(i)">
+                                <td class="p-0">{{rec.rec_created_by}} </td>
+                                <td class="p-0">{{rec.date | date : gs.date_display_fmt_with_time}}
+                                </td>
+                                <td class="hlink2 p-0" (blur)="onBlur('remarks',rec)" (click)="EditRow(rec)">
+                                    {{rec.remarks}}</td>
+                                <td class='p-0 text-center'><i class="fa fa-paperclip  fa-lg pointer"
+                                        style="font-size:24px" [style.color]="rec.rec_files_attached=='Y'?'red':black"
+                                        aria-hidden="true" (click)="AttachRow(rec,attachmodal)"></i>
+                                </td>
+                                <td class='p-0 text-center'><i class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                                        (click)="RemoveRow(rec)"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

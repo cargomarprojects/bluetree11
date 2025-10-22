@@ -773,14 +773,15 @@ export class AirImpHouseEditComponent implements OnInit {
         return {
           appid: this.gs.appid,
           menuid: this.gs.MENU_AI_SHIPMENT_MOVEMENT,
-          refno: "REF : " + this.record.mbl_refno + "  HBL : " + this.record.hbl_houseno,
+          refno: this.record.mbl_refno,
           pkid: this.pkid,
           origin: 'airimp-House-page',
           oprgrp: 'AIR IMPORT',
           parentType: 'AIRIMP-SHIP',
           paramType: 'SHIP-MOVE-STATUS',
           hideTracking: 'Y',
-          is_locked: this.is_locked
+          is_locked: this.is_locked,
+          houseno: this.record.hbl_houseno
         };
     }
   }
@@ -827,14 +828,15 @@ export class AirImpHouseEditComponent implements OnInit {
         let prm = {
           appid: this.gs.appid,
           menuid: this.gs.MENU_AI_SHIPMENT_MOVEMENT,
-          refno: "REF : " + this.record.mbl_refno + "  HBL : " + this.record.hbl_houseno,
+          refno: this.record.mbl_refno,
           pkid: this.pkid,
           origin: 'airimp-House-page',
           oprgrp: 'AIR IMPORT',
           parentType: 'AIRIMP-SHIP',
           paramType: 'SHIP-MOVE-STATUS',
           hideTracking: 'Y',
-          is_locked: this.is_locked
+          is_locked: this.is_locked,
+          houseno: this.record.hbl_houseno
         };
         this.gs.Naviagete2('Silver.Other.Trans/TrackingPage', prm);
         break;
