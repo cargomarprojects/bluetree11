@@ -22,7 +22,7 @@ export class InvoiceRiderComponent implements OnInit {
     @Input() public menuid: string = '';
     @Output() callbackevent = new EventEmitter<any>();
 
-    @ViewChild('_irm_cntr_no') irm_cntr_no_field: InputBoxComponent;
+    @ViewChild('_irm_cntr_no') irm_cntr_no_field: ElementRef;
     @ViewChildren('_ird_rate') ird_rate_field: QueryList<ElementRef>;
 
     public record: Tbl_Invoice_Riderm = <Tbl_Invoice_Riderm>{};
@@ -79,7 +79,7 @@ export class InvoiceRiderComponent implements OnInit {
                     if (this.ContainerList.length > 0)
                         this.is_CntrExist = true;
                     if (!this.gs.isBlank(this.irm_cntr_no_field))
-                        this.irm_cntr_no_field.focus();
+                        this.irm_cntr_no_field.nativeElement.focus();
                 }
 
             }, error => {
@@ -134,7 +134,7 @@ export class InvoiceRiderComponent implements OnInit {
             })
         }
         if (!this.gs.isBlank(this.irm_cntr_no_field))
-            this.irm_cntr_no_field.focus();
+            this.irm_cntr_no_field.nativeElement.focus();
     }
 
     GetRecord() {
@@ -147,7 +147,7 @@ export class InvoiceRiderComponent implements OnInit {
                 this.detrecords = <Tbl_Invoice_Riderd[]>response.detrecords;
                 this.mode = 'EDIT';
                 if (!this.gs.isBlank(this.irm_cntr_no_field))
-                    this.irm_cntr_no_field.focus();
+                    this.irm_cntr_no_field.nativeElement.focus();
             }, error => {
                 this.errorMessage = this.gs.getError(error);
                 alert(this.errorMessage);
@@ -163,7 +163,7 @@ export class InvoiceRiderComponent implements OnInit {
             .subscribe(response => {
                 this.records = (response.records == undefined || response.records == null) ? <Tbl_Invoice_Riderm[]>[] : <Tbl_Invoice_Riderm[]>response.records;
                 if (!this.gs.isBlank(this.irm_cntr_no_field))
-                    this.irm_cntr_no_field.focus();
+                    this.irm_cntr_no_field.nativeElement.focus();
             },
                 error => {
                     this.errorMessage = this.gs.getError(error);
