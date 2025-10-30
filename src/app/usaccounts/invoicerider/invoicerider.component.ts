@@ -34,6 +34,7 @@ export class InvoiceRiderComponent implements OnInit {
     title: string = '';
     isAdmin: boolean;
     errorMessage: string;
+    is_CntrExist: boolean = true;
     //is_locked: boolean = false;
     //origin: string;
 
@@ -67,12 +68,20 @@ export class InvoiceRiderComponent implements OnInit {
         this.mainService.LoadMblContainer(SearchData)
             .subscribe(response => {
                 this.ContainerList = response.list;
-                response.list.forEach(a => {
-                    if (this.gs.isBlank(this.record.irm_cntr_no))
-                        this.record.irm_cntr_no = a.irm_cntr_no;
-                })
-                if (!this.gs.isBlank(this.irm_cntr_no_field))
-                    this.irm_cntr_no_field.focus();
+
+                this.is_CntrExist = false;
+                if (!this.gs.isBlank(this.ContainerList)) {
+                    this.ContainerList.forEach(a => {
+                        if (this.gs.isBlank(this.record.irm_cntr_no))
+                            this.record.irm_cntr_no = a.irm_cntr_no;
+                    })
+
+                    if (this.ContainerList.length > 0)
+                        this.is_CntrExist = true;
+                    if (!this.gs.isBlank(this.irm_cntr_no_field))
+                        this.irm_cntr_no_field.focus();
+                }
+
             }, error => {
                 this.errorMessage = error.message;
                 alert(this.errorMessage);

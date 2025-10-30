@@ -62,11 +62,12 @@
             <div class="form-group row">
                 <label class="col-6 col-form-label col-form-label-sm">Container#</label>
                 <div class="col-6">
-                    <select class="form-control form-control-sm" [(ngModel)]="record.irm_cntr_no">
+                    <select *ngIf="is_CntrExist" class="form-control form-control-sm" [(ngModel)]="record.irm_cntr_no" #_irm_cntr_no>
                         <option *ngFor="let rec of ContainerList" [value]="rec.irm_cntr_no">{{rec.irm_cntr_no}}</option>
                     </select>
-                    <!-- <InputBox [(inputModel)]="record.irm_cntr_no" [uppercase]="true" maxlength="11" #_irm_cntr_no>
-                    </InputBox> -->
+                    <InputBox *ngIf="!is_CntrExist" [(inputModel)]="record.irm_cntr_no" [uppercase]="true"
+                        maxlength="11" #_irm_cntr_no1>
+                    </InputBox>
                 </div>
             </div>
             <div class="form-group row">
