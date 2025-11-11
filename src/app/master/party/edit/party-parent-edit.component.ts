@@ -230,6 +230,7 @@ export class PartyParentEditComponent implements OnInit {
     this.record.gen_show_cg_b = false;
     this.record.gen_no_er_email_b = false;
     this.record.gen_no_thank_email_b = false;
+    this.record.gen_show_cg = 'N';
     this.record.gen_no_er_email = 'N';
     this.record.gen_no_thank_email = 'N';
 
