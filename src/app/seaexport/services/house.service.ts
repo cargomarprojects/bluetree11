@@ -30,46 +30,44 @@ export class HouseService {
     public canDelete: boolean;
 
     public initlialized: boolean;
-    private appid =''
+    private appid = ''
 
     constructor(
         private http2: HttpClient,
         private gs: GlobalService
     ) { }
 
-    public getSortCol(){
+    public getSortCol() {
         return this.record.sortcol;
     }
-    public getSortOrder(){
+    public getSortOrder() {
         return this.record.sortorder;
     }
 
-    public getIcon(col : string){
-        if ( col == this.record.sortcol){
-          if ( this.record.sortorder )
-            return 'fa fa-arrow-down';
-          else 
-            return 'fa fa-arrow-up';
+    public getIcon(col: string) {
+        if (col == this.record.sortcol) {
+            if (this.record.sortorder)
+                return 'fa fa-arrow-down';
+            else
+                return 'fa fa-arrow-up';
         }
-        else 
-          return null;
+        else
+            return null;
     }
-    
-    public  sort(col : string){
-        if ( col == this.record.sortcol){
-          this.record.sortorder = !this.record.sortorder;
+
+    public sort(col: string) {
+        if (col == this.record.sortcol) {
+            this.record.sortorder = !this.record.sortorder;
         }
-        else 
-        {
-          this.record.sortcol = col;
-          this.record.sortorder = true;
+        else {
+            this.record.sortcol = col;
+            this.record.sortorder = true;
         }
     }
-    public ClearInit()
-    {
+    public ClearInit() {
         this.record = <SeaExpHouseModel>{
-            sortcol : 'mbl_refno',
-            sortorder : true,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, mblid: '' },
@@ -90,8 +88,8 @@ export class HouseService {
         this.menuid = params.id;
         this.param_type = params.menu_param;
         this.record = <SeaExpHouseModel>{
-            sortcol : 'mbl_refno',
-            sortorder : true,
+            sortcol: 'mbl_refno',
+            sortorder: true,
             errormessage: '',
             records: [],
             searchQuery: <SearchQuery>{ searchString: '', fromdate: this.gs.getPreviousDate(this.gs.SEARCH_DATE_DIFF), todate: this.gs.defaultValues.today, mblid: '' },
@@ -124,7 +122,7 @@ export class HouseService {
         SearchData.pkid = this.id;
         SearchData.TYPE = this.param_type;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
-        SearchData.CODE = this.record.searchQuery.searchString;
+        SearchData.CODE = this.gs.removeUnicodeCharacters(this.record.searchQuery.searchString);
         SearchData.SDATE = this.record.searchQuery.fromdate;
         SearchData.EDATE = this.record.searchQuery.todate;
         SearchData.PARENT_ID = '';
@@ -152,13 +150,13 @@ export class HouseService {
 
     RefreshList(_rec: Tbl_cargo_exp_housem) {
         if (this.gs.isBlank(this.record))
-        return;
+            return;
 
         if (this.gs.isBlank(this.record.records))
             return;
         var REC = this.record.records.find(rec => rec.hbl_pkid == _rec.hbl_pkid);
         if (REC == null) {
-             this.record.records.push(_rec);
+            this.record.records.push(_rec);
         }
         else {
             REC.mbl_refno = _rec.mbl_refno;
