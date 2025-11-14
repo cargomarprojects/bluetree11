@@ -139,7 +139,7 @@ export class AirExpMasterService {
         SearchData.pkid = this.id;
         SearchData.TYPE = this.param_type;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
-        SearchData.CODE = this.record.searchQuery.searchString;
+        SearchData.CODE = this.gs.removeUnicodeCharacters(this.record.searchQuery.searchString);
         SearchData.SDATE = this.record.searchQuery.fromdate;
         SearchData.EDATE = this.record.searchQuery.todate;
         SearchData.SEARCH_TYPE = this.record.searchQuery.searchtype;

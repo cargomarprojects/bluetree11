@@ -3676,6 +3676,13 @@ export class GlobalService {
     return _number;
   };
 
+  public removeUnicodeCharacters(input: string): string {
 
+    if (!input)
+      return input;
+
+    const pattern = /[\u202A\u202B\u202C\u202D\u202E\u2066\u2067\u2068\u2069\u200E\u200F\uFEFF]/g;
+    return input.replace(pattern, '');
+  }
 
 }
