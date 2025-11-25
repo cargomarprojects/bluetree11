@@ -390,8 +390,25 @@ export class CertOrgPageComponent implements OnInit {
 
   onBlur(field: string) {
 
+    switch (field) {
+      case 'mbld_weight': {
+        this.record.mbld_weight = this.gs.roundNumber(this.record.mbld_weight, 3);
+        break;
+      }
+      case 'mbld_lbs': {
+        this.record.mbld_lbs = this.gs.roundNumber(this.record.mbld_lbs, 3);
+        break;
+      }
+      case 'mbld_cbm': {
+        this.record.mbld_cbm = this.gs.roundNumber(this.record.mbld_cbm, 3);
+        break;
+      }
+      case 'mbld_cft': {
+        this.record.mbld_cft = this.gs.roundNumber(this.record.mbld_cft, 3);
+        break;
+      }
+    }
   }
-
 
 
   Save() {
