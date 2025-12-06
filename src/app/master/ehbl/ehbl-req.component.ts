@@ -68,6 +68,7 @@ export class EhblReqComponent implements OnInit {
     now_printing_no: string = '';
     print_caption: string = 'Print BL';
     pending_nos: string = '';
+    show_non_negotiable: string = 'N';
     pageQuery: PageQuery;
 
     constructor(
@@ -501,6 +502,7 @@ export class EhblReqComponent implements OnInit {
         SearchData.agentid = _agentid;
         this.mainService.GetBalanceBL(SearchData)
             .subscribe(response => {
+                this.show_non_negotiable = 'N';
                 if (response.retvalue == false) {
                     this.errorMessage = response.error;
                     alert(this.errorMessage);
@@ -512,6 +514,7 @@ export class EhblReqComponent implements OnInit {
                     this.balance_no = response.balance_no;
                     this.pending_nos = response.pending_nos;
                     this.download_req_nos = response.download_req_nos;
+                    this.show_non_negotiable = response.show_non_negotiable;
                 }
 
             }, error => {
@@ -539,6 +542,27 @@ export class EhblReqComponent implements OnInit {
         var SearchData = this.gs.UserInfo;
         SearchData.pkid = this.gs.getGuid();
         this.mainService.GetBLBackside(SearchData)
+            .subscribe(response => {
+                this.filename = response.filename;
+                this.filetype = response.filetype;
+                this.filedisplayname = response.filedisplayname;
+                this.now_printing_no = "";
+                this.tab = 'report2';
+                // this.PrintPdf();
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+
+            });
+
+    }
+
+    GetBLNonNegotiable() {
+        this.print_caption = 'Print Non-Negotiable';
+        this.errorMessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = this.gs.getGuid();
+        this.mainService.GetBLNonNegotiable(SearchData)
             .subscribe(response => {
                 this.filename = response.filename;
                 this.filetype = response.filetype;

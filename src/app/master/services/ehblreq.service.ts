@@ -53,4 +53,8 @@ export class EhblReqService {
     GetBLPending(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Master/EhblReq/GetBLPending', SearchData, this.gs.headerparam2('authorized'));
     }
+
+    GetBLNonNegotiable(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Master/EhblReq/GetBLNonNegotiable', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

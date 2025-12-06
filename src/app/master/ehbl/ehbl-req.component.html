@@ -21,7 +21,7 @@
         {{errorMessage}}
       </div>
     </div>
-    <div >
+    <div>
       <div class="page-list">
         <div class="page-search">
           <div class="row">
@@ -84,9 +84,9 @@
 
       </div>
     </div>
-    <h6  class="mt-2" style=" border-bottom: solid; border-width: thin; border-color:black; "></h6>
-    <h6  class="mt-2" style=" border-bottom: solid; border-width: thin; border-color:black; ">BL REQUEST</h6>
-    <div >
+    <h6 class="mt-2" style=" border-bottom: solid; border-width: thin; border-color:black; "></h6>
+    <h6 class="mt-2" style=" border-bottom: solid; border-width: thin; border-color:black; ">BL REQUEST</h6>
+    <div>
       <div class="page-body mx-0 px-0">
         <div class="row">
           <div class="col-sm-4">
@@ -123,7 +123,7 @@
         </div>
       </div>
     </div>
-    <h6  class="mt-1" style=" border-bottom: solid; border-width: thin; border-color:black; "></h6>
+    <h6 class="mt-1" style=" border-bottom: solid; border-width: thin; border-color:black; "></h6>
   </div>
   <div class="tab-pane fade commonbgcolor2" id="bldownload" role="tabpanel" aria-labelledby="bldownload-tab">
     <div class="page-body">
@@ -178,6 +178,8 @@
             <div class="col-7">
               <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
                 (click)="GenerateValid()">Generate</button>
+              <button *ngIf="tab=='main'&&show_non_negotiable=='Y'" class="btn btn-primary btn-sm mr-1"
+                [disabled]="tab == 'report2'" (click)="GetBLNonNegotiable()">Non-Negotiable</button>
               <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
                 (click)="GetBLBackside()">Backside</button>
               <button *ngIf="tab=='main'&&pending_nos!=''" class="btn btn-primary btn-sm mr-1"

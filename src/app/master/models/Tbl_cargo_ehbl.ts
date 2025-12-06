@@ -10,6 +10,7 @@ export interface Tbl_cargo_ehbl {
     ebl_ending_no: number;
     ebl_color: boolean;
     ebl_pending_nos: string;
+    ebl_show_non_negotiable: string;
 
     rec_mode: string;
     rec_locked: string;
@@ -30,8 +31,8 @@ export interface Tbl_cargo_ehbld {
     ebld_approved: boolean;
     ebld_approved_by: string;
     ebld_approved_date: string;
-    ebld_req_completed:string;
-    
+    ebld_req_completed: string;
+
     rec_mode: string;
     rec_created_by: string;
     rec_created_date: string;

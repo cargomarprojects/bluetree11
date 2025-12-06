@@ -117,6 +117,7 @@ export class EhblComponent implements OnInit {
         this.record.ebl_download_max_no = 0;
         this.record.ebl_start_no = 0;
         this.record.ebl_pending_nos = '';
+        this.record.ebl_show_non_negotiable = 'N';
         this.record.rec_mode = this.mode;
         if (!this.gs.isBlank(this.agent_lov_ctrl))
             this.agent_lov_ctrl.Focus();
