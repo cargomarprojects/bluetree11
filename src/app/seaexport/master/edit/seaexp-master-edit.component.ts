@@ -7,7 +7,7 @@ import { seaexpMasterService } from '../../services/seaexp-master.service';
 import { User_Menu } from '../../../core/models/menum';
 import { Tbl_cargo_exp_masterm, Tbl_cargo_exp_container, vm_tbl_cargo_exp_masterm } from '../../models/tbl_cargo_exp_masterm';
 
-import { Tbl_cargo_exp_housem } from '../../models/Tbl_cargo_exp_housem';
+import { Tbl_cargo_exp_housem } from '../../models/tbl_cargo_exp_housem';
 
 import { SearchTable } from '../../../shared/models/searchtable';
 
@@ -17,6 +17,8 @@ import { InputBoxNumberComponent } from '../../../shared/inputnumber/inputboxnum
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
+import { AccAlertComponent } from '../../../shared/accalert/accalert.component';
+import { Table_Cargo_Remarks } from '../../../shared/models/table_cargo_remarks';
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-18-10-2021
 //EDIT-AJITH-23-10-2021
@@ -41,6 +43,7 @@ export class SeaexpMasterEditComponent implements OnInit {
   @ViewChild('_mbl_vessel') mbl_vessel_field: InputBoxComponent;
   @ViewChildren('_cntr_no') cntr_no_field: QueryList<InputBoxComponent>;
   @ViewChildren('_cntr_sealno') cntr_sealno_field: QueryList<InputBoxComponent>;
+  @ViewChild('_acc_alert') acc_alert_field: AccAlertComponent;
 
   tab: string = 'main';
   report_title: string = '';
@@ -69,6 +72,7 @@ export class SeaexpMasterEditComponent implements OnInit {
 
   hrecords: Tbl_cargo_exp_housem[] = [];
 
+  alertrecords: Table_Cargo_Remarks[] = [];
   // 24-05-2019 Created By Joy  
 
   private pkid: string;
@@ -252,6 +256,7 @@ export class SeaexpMasterEditComponent implements OnInit {
         this.record = <Tbl_cargo_exp_masterm>response.record;
         this.records = <Tbl_cargo_exp_container[]>response.records;
         this.hrecords = <Tbl_cargo_exp_housem[]>response.hrecords;
+        this.alertrecords = (response.alertrecords == undefined || response.alertrecords == null) ? <Table_Cargo_Remarks[]>[] : <Table_Cargo_Remarks[]>response.alertrecords;
         if (this.records == null)
           this.records = <Tbl_cargo_exp_container[]>[];
         if (this.hrecords == null)
@@ -261,6 +266,11 @@ export class SeaexpMasterEditComponent implements OnInit {
         this.is_locked = this.gs.IsShipmentClosed("SEA EXPORT", this.record.mbl_ref_date, this.record.mbl_lock, this.record.mbl_unlock_date);
         if (!this.gs.isBlank(this.mbl_ref_date_field))
           this.mbl_ref_date_field.Focus();
+
+        if (!this.gs.isBlank(this.acc_alert_field)) {
+          if (!this.gs.isBlank(this.alertrecords))
+            this.acc_alert_field.show(this.alertrecords);
+        }
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
       });
