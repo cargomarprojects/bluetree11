@@ -62,6 +62,7 @@ import { ResizableComponent } from './directive/resizable.component';
 import { Report2Component } from './report2/report2.component';
 import { GenRemarkComponent } from './genrem/genrem.component';
 import { UserEditHistoryComponent } from './edithistory/edithistory.component';
+import { AccAlertComponent } from './accalert/accalert.component';
 
 @NgModule({
   imports: [
@@ -105,7 +106,8 @@ import { UserEditHistoryComponent } from './edithistory/edithistory.component';
     ResizableDirective,
     Report2Component,
     GenRemarkComponent,
-    UserEditHistoryComponent
+    UserEditHistoryComponent,
+    AccAlertComponent
   ],
   exports: [
     CommonModule,
@@ -145,7 +147,8 @@ import { UserEditHistoryComponent } from './edithistory/edithistory.component';
     ResizableDirective,
     Report2Component,
     GenRemarkComponent,
-    UserEditHistoryComponent
+    UserEditHistoryComponent,
+    AccAlertComponent
   ]
 
 })

@@ -10,6 +10,8 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
+import { AccAlertComponent } from '../../../shared/accalert/accalert.component';
+import { Table_Cargo_Remarks } from '../../../shared/models/table_cargo_remarks';
 
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-07-10-2021
@@ -41,10 +43,12 @@ export class SeaImpMasterEditComponent implements OnInit {
   @ViewChild('_mbl_devan_locname') mbl_devan_locname_field: ElementRef;
   @ViewChildren('_cntr_no') cntr_no_field: QueryList<ElementRef>;
   @ViewChildren('_cntr_sealno') cntr_sealno_field: QueryList<ElementRef>;
+  @ViewChild('_acc_alert') acc_alert_field: AccAlertComponent;
 
   record: Tbl_cargo_imp_masterm = <Tbl_cargo_imp_masterm>{};
   hrecords: Tbl_cargo_imp_housem[] = [];
   records: Tbl_cargo_imp_container[] = [];
+  alertrecords: Table_Cargo_Remarks[] = [];
 
   // 24-05-2019 Created By Joy  
   tab: string = 'main';
@@ -268,10 +272,18 @@ export class SeaImpMasterEditComponent implements OnInit {
         this.record = <Tbl_cargo_imp_masterm>response.record;
         this.records = (response.records == undefined || response.records == null) ? <Tbl_cargo_imp_container[]>[] : <Tbl_cargo_imp_container[]>response.records;
         this.hrecords = (response.hrecords == undefined || response.hrecords == null) ? <Tbl_cargo_imp_housem[]>[] : <Tbl_cargo_imp_housem[]>response.hrecords;
+        this.alertrecords = (response.alertrecords == undefined || response.alertrecords == null) ? <Table_Cargo_Remarks[]>[] : <Table_Cargo_Remarks[]>response.alertrecords;
+
         this.mode = 'EDIT';
         this.is_locked = this.gs.IsShipmentClosed("SEA IMPORT", this.record.mbl_ref_date, this.record.mbl_lock, this.record.mbl_unlock_date);
         if (!this.gs.isBlank(this.mbl_ref_date_field))
           this.mbl_ref_date_field.Focus();
+
+        if (!this.gs.isBlank(this.acc_alert_field)) {
+          if (!this.gs.isBlank(this.alertrecords))
+            this.acc_alert_field.show(this.alertrecords);
+        }
+
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
       });
