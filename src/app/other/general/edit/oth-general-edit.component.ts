@@ -13,6 +13,8 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
+import { AccAlertComponent } from '../../../shared/accalert/accalert.component';
+import { Table_Cargo_Remarks } from '../../../shared/models/table_cargo_remarks';
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-30-10-2021
 //EDIT-AJITH-20-11-2021
@@ -38,10 +40,11 @@ export class OthGeneralEditComponent implements OnInit {
   @ViewChildren('_cntr_no') cntr_no_field: QueryList<ElementRef>;
   @ViewChildren('_cntr_sealno') cntr_sealno_field: QueryList<ElementRef>;
   @ViewChild('_mbl_cargo_locname') mbl_cargo_locname_field: ElementRef;
+  @ViewChild('_acc_alert') acc_alert_field: AccAlertComponent;
 
   record: Tbl_cargo_general = <Tbl_cargo_general>{};
   records: Tbl_cargo_container[] = [];
-
+  alertrecords: Table_Cargo_Remarks[] = [];
   // 24-05-2019 Created By Joy  
 
   tab: string = 'main';
@@ -289,10 +292,15 @@ export class OthGeneralEditComponent implements OnInit {
         this.record.hbl_is_ci_bool = this.record.hbl_is_ci == "Y" ? true : false;
         this.record.hbl_is_carr_an_bool = this.record.hbl_is_carr_an == "Y" ? true : false;
         this.records = <Tbl_cargo_container[]>response.records;
+        this.alertrecords = (response.alertrecords == undefined || response.alertrecords == null) ? <Table_Cargo_Remarks[]>[] : <Table_Cargo_Remarks[]>response.alertrecords;
         this.mode = 'EDIT';
         this.is_locked = this.gs.IsShipmentClosed(this.OPERATION_MODE, this.record.mbl_ref_date, this.record.mbl_lock, this.record.mbl_unlock_date);
         if (!this.gs.isBlank(this.mbl_ref_date_field))
           this.mbl_ref_date_field.Focus();
+
+        if (!this.gs.isBlank(this.acc_alert_field)) {
+          this.acc_alert_field.show(this.alertrecords);
+        }
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
         alert(this.errorMessage);
