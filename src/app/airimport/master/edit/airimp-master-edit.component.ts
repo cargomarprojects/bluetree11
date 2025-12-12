@@ -14,6 +14,8 @@ import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
 import { InputBoxNumberComponent } from '../../../shared/inputnumber/inputboxnumber.component';
 import { InputBoxComponent } from '../../../shared/input/inputbox.component';
+import { AccAlertComponent } from '../../../shared/accalert/accalert.component';
+import { Table_Cargo_Remarks } from '../../../shared/models/table_cargo_remarks';
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-18-10-2021
 //EDIT-AJITH-30-10-2021
@@ -34,9 +36,11 @@ export class AirImpMasterEditComponent implements OnInit {
   @ViewChild('_mbl_salesman_name') mbl_salesman_name_field: AutoComplete2Component;
   @ViewChild('_mbl_cargo_locname') mbl_cargo_locname_field: ElementRef;
   @ViewChild('_mbl_cargo_loccode') mbl_cargo_loccode_field: AutoComplete2Component;
+  @ViewChild('_acc_alert') acc_alert_field: AccAlertComponent;
 
   record: Tbl_cargo_imp_masterm = <Tbl_cargo_imp_masterm>{};
   hrecords: Tbl_cargo_imp_housem[] = [];
+  alertrecords: Table_Cargo_Remarks[] = [];
   /*
     01-07-2019 Created By Ajith  
   */
@@ -223,8 +227,13 @@ export class AirImpMasterEditComponent implements OnInit {
       .subscribe(response => {
         this.record = <Tbl_cargo_imp_masterm>response.record;
         this.hrecords = (response.hrecords == undefined || response.hrecords == null) ? <Tbl_cargo_imp_housem[]>[] : <Tbl_cargo_imp_housem[]>response.hrecords;
+        this.alertrecords = (response.alertrecords == undefined || response.alertrecords == null) ? <Table_Cargo_Remarks[]>[] : <Table_Cargo_Remarks[]>response.alertrecords;
         this.mode = 'EDIT';
         this.is_locked = this.gs.IsShipmentClosed("AIR IMPORT", this.record.mbl_ref_date, this.record.mbl_lock, this.record.mbl_unlock_date);
+
+        if (!this.gs.isBlank(this.acc_alert_field)) {
+            this.acc_alert_field.show(this.alertrecords);
+        }
         // this.CheckData();
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
