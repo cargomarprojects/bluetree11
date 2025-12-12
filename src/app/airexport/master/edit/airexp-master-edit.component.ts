@@ -12,7 +12,8 @@ import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
-
+import { AccAlertComponent } from '../../../shared/accalert/accalert.component';
+import { Table_Cargo_Remarks } from '../../../shared/models/table_cargo_remarks';
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-18-10-2021
 
@@ -31,10 +32,11 @@ export class AirExpMasterEditComponent implements OnInit {
   @ViewChild('_mbl_to_port1') mbl_to_port1_field: ElementRef;
   @ViewChild('_mbl_salesman_name') mbl_salesman_name_field: AutoComplete2Component;
   @ViewChild('_mbl_mawb_weight') mbl_mawb_weight_field: ElementRef;
-
+  @ViewChild('_acc_alert') acc_alert_field: AccAlertComponent;
 
   record: Tbl_cargo_exp_masterm = <Tbl_cargo_exp_masterm>{};
   hrecords: Tbl_cargo_exp_housem[] = [];
+  alertrecords: Table_Cargo_Remarks[] = [];
   /*
     01-07-2019 Created By Ajith  
   */
@@ -220,10 +222,15 @@ export class AirExpMasterEditComponent implements OnInit {
       .subscribe(response => {
         this.record = <Tbl_cargo_exp_masterm>response.record;
         this.hrecords = (response.hrecords == undefined || response.hrecords == null) ? <Tbl_cargo_exp_housem[]>[] : <Tbl_cargo_exp_housem[]>response.hrecords;
+        this.alertrecords = (response.alertrecords == undefined || response.alertrecords == null) ? <Table_Cargo_Remarks[]>[] : <Table_Cargo_Remarks[]>response.alertrecords;
         this.record.mbl_direct_bool = this.record.mbl_direct === "Y" ? true : false;
         this.record.mbl_3rdparty_bool = this.record.mbl_3rdparty === "Y" ? true : false;
         this.mode = 'EDIT';
         this.is_locked = this.gs.IsShipmentClosed("AIR EXPORT", this.record.mbl_ref_date, this.record.mbl_lock, this.record.mbl_unlock_date);
+
+        if (!this.gs.isBlank(this.acc_alert_field)) {
+            this.acc_alert_field.show(this.alertrecords);
+        }
         // this.CheckData();
       }, error => {
         this.errorMessage.push(this.gs.getError(error));

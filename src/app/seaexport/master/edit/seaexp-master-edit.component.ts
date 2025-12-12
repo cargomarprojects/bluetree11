@@ -268,7 +268,6 @@ export class SeaexpMasterEditComponent implements OnInit {
           this.mbl_ref_date_field.Focus();
 
         if (!this.gs.isBlank(this.acc_alert_field)) {
-          if (!this.gs.isBlank(this.alertrecords))
             this.acc_alert_field.show(this.alertrecords);
         }
       }, error => {
