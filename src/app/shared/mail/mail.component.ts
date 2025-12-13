@@ -60,6 +60,7 @@ export class MailComponent implements OnInit {
   ErStatus: string = "DISABLED";
   PreAnSentDate: string = "";
   PreAnSentBy: string = "";
+  PreThankSentDate: string = "";
 
   msgFontFamily: string = '';
   msgFontSize: string = '';
@@ -563,6 +564,7 @@ export class MailComponent implements OnInit {
           this.Chk_Thankyou_mail_Id = response.thankmailid;
           this.PreAnSentDate = response.preansentdate;
           this.PreAnSentBy = response.preansentby;
+          this.PreThankSentDate = response.prethanksentdate;
         }
 
         this.GetTotfilesize();
