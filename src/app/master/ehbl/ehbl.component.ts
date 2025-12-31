@@ -198,6 +198,8 @@ export class EhblComponent implements OnInit {
                     alert(this.errorMessage);
                 }
                 else {
+                    if (this.mode == "ADD")
+                        this.record.ebl_start_no = response.startno;
                     this.mode = 'EDIT';
                     this.errorMessage = 'Save Complete';
                     alert(this.errorMessage);
@@ -221,13 +223,13 @@ export class EhblComponent implements OnInit {
         }
 
 
-        if (this.gs.isZero(this.record.ebl_start_no)) {
-            bRet = false;
-            this.errorMessage = "Invalid Starting Number";
-            alert(this.errorMessage);
-            //  this.request_to_code_ctrl.Focus();
-            return bRet;
-        }
+        // if (this.gs.isZero(this.record.ebl_start_no)) {
+        //     bRet = false;
+        //     this.errorMessage = "Invalid Starting Number";
+        //     alert(this.errorMessage);
+        //     //  this.request_to_code_ctrl.Focus();
+        //     return bRet;
+        // }
         if (this.gs.isZero(this.record.ebl_download_max_no)) {
             bRet = false;
             this.errorMessage = "Invalid MaxDownload Number";
