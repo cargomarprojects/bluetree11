@@ -185,7 +185,7 @@
                 (click)="GetBLBackside()">Backside</button>
               <button *ngIf="tab=='main'&&pending_nos!=''" class="btn btn-primary btn-sm mr-1"
                 [disabled]="tab == 'report2'" (click)="GetBLPending()">Pending</button>
-              <button class="btn btn-primary btn-sm mr-1" (click)="Return2List()">Return</button>
+              <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" (click)="Return2List()">Return</button>
             </div>
           </div>
         </div>
