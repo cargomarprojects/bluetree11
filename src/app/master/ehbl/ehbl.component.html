@@ -1,9 +1,10 @@
 <div class="page-header">
   <div class="row  align-items-center justify-content-left p-1">
     <label class="mr-3">{{title}}</label>
-    <button (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm mr-1">List</button>
+    <button *ngIf="mode==''" (click)="actionHandler('LIST','')" class="btn btn-primary btn-sm mr-1">List</button>
     <button (click)="actionHandler('ADD','')" class="btn btn-primary btn-sm mr-1">New</button>
-    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    <button *ngIf="mode==''" class="btn btn-primary btn-sm mr-1" (click)="Close()">Return</button>
+    <button *ngIf="mode!=''" class="btn btn-primary btn-sm mr-1" (click)="actionHandler('LIST','')">Return</button>
   </div>
 </div>
 
@@ -47,7 +48,8 @@
         </tr>
       </thead>
       <tbody class="page-body-tbody">
-        <tr *ngFor="let rec of records;  let i = index">
+        <tr *ngFor="let rec of records;  let i = index" (mousedown)="selectRowId(rec.ebl_pkid)"
+          [class.selected]="rec.ebl_pkid == getRowId()">
           <td class="hlink2" (click)="actionHandler('EDIT',rec.ebl_pkid, i)">{{rec.ebl_agent_name}}</td>
           <td>{{rec.ebl_start_no}}</td>
           <td>{{rec.ebl_running_no}}</td>
@@ -79,8 +81,8 @@
       <div class="form-group row">
         <label class="col-5 col-form-label  col-form-label-sm">Starting#</label>
         <div class="col-7">
-          <input type="number" disabled #_start_no class="form-control form-control-sm" [(ngModel)]="record.ebl_start_no"
-            required maxlength="10" />
+          <input type="number" disabled #_start_no class="form-control form-control-sm"
+            [(ngModel)]="record.ebl_start_no" required maxlength="10" />
         </div>
       </div>
 

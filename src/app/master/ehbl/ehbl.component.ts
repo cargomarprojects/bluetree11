@@ -31,10 +31,11 @@ export class EhblComponent implements OnInit {
     currentTab = 'LIST';
     private pkid: string;
     private menuid: string;
-    private mode: string = '';
+    public mode: string = '';
     public title: string = '';
     public isAdmin: boolean;
-
+    public selectedId: string = '';
+    
     errorMessage: string;
     id: string;
     param_type: string;
@@ -334,5 +335,12 @@ export class EhblComponent implements OnInit {
                 this.errorMessage = this.gs.getError(error);
                 alert(this.errorMessage);
             });
+    }
+
+    public selectRowId(id: string) {
+        this.selectedId = id;
+    }
+    public getRowId() {
+        return this.selectedId;
     }
 }

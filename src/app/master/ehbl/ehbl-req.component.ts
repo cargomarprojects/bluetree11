@@ -50,6 +50,7 @@ export class EhblReqComponent implements OnInit {
     public isAdmin: boolean;
     public canDelete: boolean;
     public canPrint: boolean;
+    public selectedId: string = '';
     errorMessage: string;
 
     filename: string = '';
@@ -624,6 +625,17 @@ export class EhblReqComponent implements OnInit {
         this.download_agent_code = _rec.ebld_agent_code;
         this.GetBalanceBL(this.download_agent_id)
         $('#myTab a[href="#bldownload"]').tab('show');
+    }
+
+    public selectRowId(id: string) {
+        this.selectedId = id;
+    }
+    public getRowId() {
+        return this.selectedId;
+    }
+
+    Return2List() {
+        $('#myTab a[href="#blrequest"]').tab('show');
     }
 }
 

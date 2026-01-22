@@ -58,7 +58,8 @@
               </tr>
             </thead>
             <tbody class="page-body-tbody">
-              <tr *ngFor="let rec of records;  let i = index">
+              <tr *ngFor="let rec of records;  let i = index" (mousedown)="selectRowId(rec.ebld_pkid)"
+                [class.selected]="rec.ebld_pkid == getRowId()">
                 <td class="hlink2" (click)="actionHandler('EDIT',rec.ebld_pkid, i)">{{rec.ebld_agent_name}}</td>
                 <td class="hlink2" (click)="ShowDownload(rec)">
                   <span *ngIf="rec.ebld_approved"> GENERATE BL </span>
@@ -184,6 +185,7 @@
                 (click)="GetBLBackside()">Backside</button>
               <button *ngIf="tab=='main'&&pending_nos!=''" class="btn btn-primary btn-sm mr-1"
                 [disabled]="tab == 'report2'" (click)="GetBLPending()">Pending</button>
+              <button class="btn btn-primary btn-sm mr-1" (click)="Return2List()">Return</button>
             </div>
           </div>
         </div>
