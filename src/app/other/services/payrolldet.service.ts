@@ -33,6 +33,7 @@ export class PayrollDetService {
 
     public initlialized: boolean;
     private appid = ''
+    private refid = ''
 
     constructor(
         private http2: HttpClient,
@@ -57,14 +58,17 @@ export class PayrollDetService {
     }
 
     public init(params: any) {
-        //this is invoke from list so every time refresh
-        // if (this.appid != this.gs.appid) {
-        //     this.appid = this.gs.appid;
-        //     this.initlialized = false;
-        // }
-        // if (this.initlialized)
-        //     return;
+
         const options = params;
+         //this is invoke from list so every time when mbl reference change, initialize prms and records (refresh)
+        if (this.appid != this.gs.appid || this.refid != options.mbl_pkid) {
+            this.appid = this.gs.appid;
+            this.refid = options.mbl_pkid;
+            this.initlialized = false;
+        }
+        if (this.initlialized)
+            return;
+
         this.id = options.menuid;
         this.menuid = options.menuid;
         this.mbl_pkid = options.mbl_pkid;
@@ -94,7 +98,7 @@ export class PayrollDetService {
 
     Search(_searchdata: any, type: string = '') {
         this.record.errormessage = '';
-        
+
         if (type == 'SEARCH') {
             this.record.searchQuery = _searchdata.searchQuery;
             this.record.selectedId = '';
