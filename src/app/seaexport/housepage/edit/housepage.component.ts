@@ -254,7 +254,7 @@ export class HousePageComponent implements OnInit {
           this.is_stage_locked = true;
         }
         if (rec.mbl_cntr_type == "FCL") {
-          this.record.desc1 = "SHIPPERS'S LOAD, COUNT, AND SEALED";
+          this.record.desc1 = "SHIPPER'S LOAD, COUNT, AND SEALED";
           this.record.desc2 = "SAID TO CONTAIN";
         }
         else if (rec.mbl_cntr_type == "LCL" || rec.mbl_cntr_type == "CONSOLE") {

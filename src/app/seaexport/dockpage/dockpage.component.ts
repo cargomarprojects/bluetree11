@@ -141,7 +141,7 @@ export class DockPageComponent implements OnInit {
           this.record.mbld_print_lbs = "N";
 
           if (this.record.mbld_cntr_type == "FCL" || this.record.mbld_cntr_type == "CONSOLE") {
-            this.record.desc1 = "SHIPPERS'S LOAD, COUNT, AND SEALED";
+            this.record.desc1 = "SHIPPER'S LOAD, COUNT, AND SEALED";
             this.record.desc2 = "SAID TO CONTAIN";
           }
           else if (this.record.mbld_cntr_type == "LCL") {
