@@ -52,13 +52,13 @@ export class GlobalService {
   mRec: Modulem = null;
 
   public appid = '';
-
+  s
   public tab = ' 	';
 
   public software_version_string = '1.280';
 
-  //public baseUrl: string = "http://localhost:5000";
-  public baseUrl: string = "";
+  public baseUrl: string = "http://localhost:5000";
+  //public baseUrl: string = "";
   // change this is false in production and update
 
   public isolderror: boolean = false;
