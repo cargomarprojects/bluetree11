@@ -127,6 +127,7 @@ export class InvoiceRiderComponent implements OnInit {
         this.record.irm_charged_dt_from = '';
         this.record.irm_charged_dt_to = '';
         this.record.irm_tot_amt = 0;
+        this.record.irm_remarks = '';
         if (!this.gs.isBlank(this.ContainerList)) {
             this.ContainerList.forEach(a => {
                 if (this.gs.isBlank(this.record.irm_cntr_no))
@@ -259,7 +260,7 @@ export class InvoiceRiderComponent implements OnInit {
 
         if (iCtr == 0) {
             bRet = false;
-            this.errorMessage = "No Detail Rows To Save";
+            this.errorMessage = "No Detail Rows(Amount) To Save";
             alert(this.errorMessage);
             return bRet;
         }
@@ -333,6 +334,10 @@ export class InvoiceRiderComponent implements OnInit {
             case 'ird_qty': {
                 rec.ird_qty = this.gs.roundNumber(rec.ird_qty, 3);
                 this.findRowTotal(rec);
+                break;
+            }
+            case 'irm_remarks': {
+                this.record.irm_remarks = this.record.irm_remarks.toUpperCase();
                 break;
             }
         }
