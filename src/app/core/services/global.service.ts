@@ -52,7 +52,7 @@ export class GlobalService {
   mRec: Modulem = null;
 
   public appid = '';
-  s
+
   public tab = ' 	';
 
   public software_version_string = '1.282';
