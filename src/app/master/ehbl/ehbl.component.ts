@@ -35,7 +35,7 @@ export class EhblComponent implements OnInit {
     public title: string = '';
     public isAdmin: boolean;
     public selectedId: string = '';
-    
+
     errorMessage: string;
     id: string;
     param_type: string;
@@ -119,6 +119,7 @@ export class EhblComponent implements OnInit {
         this.record.ebl_start_no = 0;
         this.record.ebl_pending_nos = '';
         this.record.ebl_show_non_negotiable = 'N';
+        this.record.ebl_originals = 1;
         this.record.rec_mode = this.mode;
         if (!this.gs.isBlank(this.agent_lov_ctrl))
             this.agent_lov_ctrl.Focus();
@@ -239,6 +240,12 @@ export class EhblComponent implements OnInit {
             return bRet;
         }
 
+        if (this.gs.isZero(this.record.ebl_originals)) {
+            bRet = false;
+            this.errorMessage = "Number of originals cannot be zero";
+            alert(this.errorMessage);
+            return bRet;
+        }
         // if (this.record.ebl_download_max_no<this.record.ebl_start_no) {
         //     bRet = false;
         //     this.errorMessage = "Invalid Starting Number";

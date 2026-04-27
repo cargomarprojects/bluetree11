@@ -11,6 +11,7 @@ export interface Tbl_cargo_ehbl {
     ebl_color: boolean;
     ebl_pending_nos: string;
     ebl_show_non_negotiable: string;
+    ebl_originals: number;
 
     rec_mode: string;
     rec_locked: string;
