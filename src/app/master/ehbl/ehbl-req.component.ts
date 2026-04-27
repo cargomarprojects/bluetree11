@@ -644,6 +644,9 @@ export class EhblReqComponent implements OnInit {
 
     ResetBl() {
 
+        if (!confirm("Do you want to Reset BL")) {
+            return;
+        }
         this.errorMessage = '';
         if (this.gs.isBlank(this.download_agent_id)) {
             alert('Agent cannot be blank');
