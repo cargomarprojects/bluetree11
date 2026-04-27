@@ -617,6 +617,10 @@ export class EhblReqComponent implements OnInit {
 
     }
 
+    DownloadPdf() {
+        this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, this.filename, this.filetype, this.filedisplayname);
+    }
+
     ShowDownload(_rec: Tbl_cargo_ehbld) {
         if (!_rec.ebld_approved)
             return;
@@ -636,6 +640,38 @@ export class EhblReqComponent implements OnInit {
 
     Return2List() {
         $('#myTab a[href="#blrequest"]').tab('show');
+    }
+
+    ResetBl() {
+
+        this.errorMessage = '';
+        if (this.gs.isBlank(this.download_agent_id)) {
+            alert('Agent cannot be blank');
+            return;
+        }
+        if (this.gs.isZero(this.download_req_nos) || this.download_req_nos < 0) {
+            alert('Invalid, No. of BLs to Reset');
+            return;
+        }
+
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = this.gs.getGuid();
+        SearchData.download_agent_id = this.download_agent_id;
+        SearchData.download_req_nos = this.download_req_nos;
+        this.mainService.ResetBl(SearchData)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    alert(response.error);
+                } else {
+                    this.GetBalanceBL(this.download_agent_id);
+                    alert('Successfully Reset')
+
+                }
+            }, error => {
+                this.errorMessage = this.gs.getError(error);
+                alert(this.errorMessage);
+
+            });
     }
 }
 

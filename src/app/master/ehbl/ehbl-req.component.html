@@ -186,6 +186,8 @@
               <button *ngIf="tab=='main'&&pending_nos!=''" class="btn btn-primary btn-sm mr-1"
                 [disabled]="tab == 'report2'" (click)="GetBLPending()">Pending</button>
               <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" (click)="Return2List()">Return</button>
+              <button *ngIf="tab=='main'&&gs.user_code=='ADMIN'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"
+                (click)="ResetBl()">Reset BL#</button>
             </div>
           </div>
         </div>
@@ -212,6 +214,8 @@
             <div class="col-12 ">
               <button *ngIf="tab=='report2' && canPrint" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
                 (click)="PrintPdf()">{{print_caption}}</button>
+              <!-- <button *ngIf="tab=='report2' && canPrint && gs.user_code=='ADMIN'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
+                (click)="DownloadPdf()">Download</button> -->
               <button *ngIf="tab=='report2'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'main'"
                 (click)="Cancel()">Return</button>
             </div>
