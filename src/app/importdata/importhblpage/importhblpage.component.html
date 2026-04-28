@@ -32,8 +32,9 @@
             [ngClass]="mainservice.getIcon('files_ref_no')"></i></th>
         <th (click)="mainservice.sort('files_uploaded_date')">UPLOADED-DT&nbsp;<i
             [ngClass]="mainservice.getIcon('files_uploaded_date')"></i></th>
-            <th (click)="mainservice.sort('files_created_date')">CREATED-DT&nbsp;<i
-              [ngClass]="mainservice.getIcon('files_created_date')"></i></th>
+        <th (click)="mainservice.sort('files_created_date')">CREATED-DT&nbsp;<i
+            [ngClass]="mainservice.getIcon('files_created_date')"></i></th>
+        <th *ngIf="gs.user_code=='ADMIN'" class='text-center'>DELETE</th>
       </tr>
     </thead>
     <tbody class="page-body-tbody">
@@ -43,6 +44,8 @@
         <td>{{rec.files_ref_no}}</td>
         <td>{{rec.files_uploaded_date | date : gs.FRONTEND_DATEFORMAT}}</td>
         <td>{{rec.files_created_date | date : gs.FRONTEND_DATEFORMAT}}</td>
+        <td *ngIf="gs.user_code=='ADMIN'" class="p-0 text-center"><i class="fa fa-trash  fa-lg pointer"
+            aria-hidden="true" (click)="mainservice.DeleteRow(rec)"></i></td>
       </tr>
     </tbody>
   </table>

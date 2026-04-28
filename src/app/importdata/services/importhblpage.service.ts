@@ -251,6 +251,8 @@ export class ImportHblPageService {
 
                 this.ProcessXML = true;
                 this.record = <ImportHblPageModel>{
+                    sortcol: 'files_slno',
+                    sortorder: true,
                     errormessage: '',
                     records: [],
                     searchQuery: <SearchQuery>{ searchString: '', rdbprocessed: 'NOT-PROCESSED', fromdate: this.gs.getPreviousDate(15), todate: this.gs.defaultValues.today },
@@ -307,6 +309,36 @@ export class ImportHblPageService {
             });
     }
 
+    DeleteRow(_rec: Tbl_mast_files) {
+        if (this.gs.isBlank(_rec.files_id) || this.gs.isBlank(_rec.files_desc)) {
+            this.record.errormessage = "Cannot Delete, ID Not Found";
+            alert(this.record.errormessage);
+            this.mdata$.next(this.record);
+            return;
+        }
+        if (!confirm("DELETE " + _rec.files_desc)) {
+            return;
+        }
+        this.record.errormessage = '';
+        var SearchData = this.gs.UserInfo;
+        SearchData.pkid = _rec.files_id;
+        SearchData.remarks = "Sender:" + _rec.files_ref_no + ", ID:" + _rec.files_desc;
+        this.DeleteRecord(SearchData)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    this.record.errormessage = response.error;
+                    alert(this.record.errormessage);
+                }
+                else {
+                    this.record.records.splice(this.record.records.findIndex(rec => rec.files_id == _rec.files_id), 1);
+                }
+                this.mdata$.next(this.record);
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+                alert(this.record.errormessage);
+                this.mdata$.next(this.record);
+            });
+    }
 
     TestDocaiXmlFile() {
 
@@ -351,5 +383,9 @@ export class ImportHblPageService {
 
     DownloadProcessXmlFile(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importhblpage/DownloadProcessXmlFile', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+    DeleteRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/ImportData/importhblpage/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
 }
