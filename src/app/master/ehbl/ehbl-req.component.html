@@ -169,12 +169,21 @@
               </app-autocomplete2>
             </div>
           </div>
-
-          <div class="form-group row">
+          <div *ngIf="tab=='main'" class="form-group row">
             <label *ngIf="tab=='main'" class="col-3 col-form-label  col-form-label-sm">No of BLs to Generate</label>
             <div class="col-2">
               <input *ngIf="tab=='main'" type="number" [disabled]="tab == 'report2'"
                 class="form-control form-control-sm" [(ngModel)]="download_req_nos" required maxlength="10" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label *ngIf="tab=='main'" class="col-3 col-form-label  col-form-label-sm">Include Backside</label>
+            <div class="col-2">
+              <select *ngIf="tab=='main'" class="form-control form-control-sm" [disabled]="tab == 'report2'"
+                [(ngModel)]="include_backside">
+                <option [value]="'N'">NO</option>
+                <option [value]="'Y'">YES</option>
+              </select>
             </div>
             <div class="col-7">
               <button *ngIf="tab=='main'" class="btn btn-primary btn-sm mr-1" [disabled]="tab == 'report2'"

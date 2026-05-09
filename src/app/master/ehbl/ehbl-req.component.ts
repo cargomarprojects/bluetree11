@@ -59,7 +59,8 @@ export class EhblReqComponent implements OnInit {
     filename2: string = '';
     filetype2: string = '';
     filedisplayname2: string = '';
-
+     
+    include_backside: string = "N";
     is_locked: boolean = false;
     searchstring: string = '';
     starting_no: number = 0;
@@ -466,6 +467,7 @@ export class EhblReqComponent implements OnInit {
         SearchData.download_agent_id = this.download_agent_id;
         SearchData.download_req_nos = this.download_req_nos;
         SearchData.remarks = remarks;
+        SearchData.include_backside = this.include_backside;
         this.mainService.GetBlankBLReport(SearchData)
             .subscribe(response => {
                 this.filename = response.filename;
