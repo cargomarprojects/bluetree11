@@ -11,16 +11,17 @@ export interface Table_Mast_Files {
     files_sizewithunit: string;
     files_path: string;
     files_editrow: boolean;
-    files_aws_bucket : string ;
-    files_aws_job_id : string ;
-    files_aws_job_status : string ;
-    files_width : number;
-    files_height : number;
-    files_status:string;
-    files_created_by:string;
-    files_deleted_date:string;
-    files_deleted_by:string;
-    files_parent_id:string;
+    files_aws_bucket: string;
+    files_aws_job_id: string;
+    files_aws_job_status: string;
+    files_width: number;
+    files_height: number;
+    files_status: string;
+    files_created_by: string;
+    files_deleted_date: string;
+    files_deleted_by: string;
+    files_parent_id: string;
+    files_doc_date: string;
 }
 
 export interface vm_table_mast_files {

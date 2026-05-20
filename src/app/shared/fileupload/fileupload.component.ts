@@ -139,7 +139,7 @@ export class FileUploadComponent implements OnInit {
   private fileSize: number = 0;
   private fileCreateDate: string = "";
 
-  private showDocDate: boolean = false;
+  public showDocDate: boolean = false;
 
   DefaultFilename: string = "";
 
