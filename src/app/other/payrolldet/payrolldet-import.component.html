@@ -1,0 +1,98 @@
+<button class="btn btn-primary btn-sm" (click)="ImportPayroll(paymodal)">Import Payroll</button>
+<ng-template #paymodal let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <div class="page-body">
+            <div class="row">
+                <div class="col-md-12 testbox  px-0 mx-0">
+                    <div class="page-header">
+                        <div class="row align-items-center justify-content-left p-1">
+                            <label class="mr-3">{{_title}}</label>
+                        </div>
+                    </div>
+                    <div class="page-body">
+                        <div class="row border">
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                                <app-report2 [title]="" [url]="" [searchdata]="" [menuid]="_menuid"
+                                    [filename]="filename" [filetype]="filetype" [filedisplayname]="filedisplayname"
+                                    [filename2]="" [filetype2]="" [filedisplayname2]=""
+                                    (callbackevent)="callbackevent($event)"></app-report2>
+                            </div>
+                            <div class="col-md-6 testbox  px-0 mx-0">
+                               <div class="page-body table-responsive"  style="height: calc(100vh - 188px);">
+                                <table class="table  table-hover table-sm">
+                                    <thead class="page-body-thead">
+                                        <tr>
+                                            <th>EMPLOYEE</th>
+                                            <th>PAYROLL.DATE</th>
+                                            <th>GROSS</th>
+                                            <th>MEDICAL</th>
+                                            <th>GR.AFTER.DEDUCT</th>
+                                            <th>FICA</th>
+                                            <th>MEDICARE</th>
+                                            <th>FEDERAL</th>
+                                            <th>STATE</th>
+                                            <th>CITY</th>
+                                            <th>CA.SDI</th>
+                                            <th>SUPP.INSURANCE</th>
+                                            <th>IRC</th>
+                                            <th>NET PAY</th>
+                                            <th style="text-align:center">DELETE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="page-body-tbody">
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <!-- <tr *ngFor="let rec of records$ | async"
+                                            (mousedown)="mainservice.selectRowId(rec.cpd_pkid)"
+                                            [class.selected]="rec.cpd_pkid == mainservice.getRowId()">
+                                            <td class='hlink2' (click)="edit(rec)">{{rec.cpd_emp_name}}</td>
+                                            <td>{{rec.cpd_payroll_date | date : gs.FRONTEND_DATEFORMAT }}</td>
+                                            <td>{{rec.A1 | number : '1.2-2'}} </td>
+                                            <td>{{rec.D8 | number : '1.2-2'}} </td>
+                                            <td>{{rec.A9 | number : '1.2-2'}} </td>
+                                            <td>{{rec.D1 | number : '1.2-2'}} </td>
+                                            <td>{{rec.D2 | number : '1.2-2'}} </td>
+                                            <td>{{rec.D3 | number : '1.2-2'}} </td>
+                                            <td>{{rec.D4 | number : '1.2-2'}} </td>
+                                            <td>{{rec.D5 | number : '1.2-2'}} </td>
+                                            <td>{{rec.D9 | number : '1.2-2'}} </td>
+                                            <td>{{rec.D6 | number : '1.2-2'}}</td>
+                                            <td>{{rec.D7 | number : '1.2-2'}}</td>
+                                            <td>{{rec.NET | number : '1.2-2'}}</td>
+                                            <td *ngIf="mainservice.canDelete" style="text-align:center"><i
+                                                    class="fa fa-trash  fa-lg pointer" aria-hidden="true"
+                                                    (click)="mainservice.DeleteRow(rec)"></i></td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-footer">
+            <div class="row justify-content-center p-1">
+                <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
+                <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Close</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</ng-template>

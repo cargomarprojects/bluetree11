@@ -48,9 +48,10 @@ import { GenFileUploadComponent } from './genfileupload/genfileupload.component'
 import { GenFileUploadHeaderComponent } from './genfileupload/genfileupload-header.component';
 import { GenFileUploadEditComponent } from './genfileupload/genfileupload-edit.component';
 
-import {  PayrollDetComponent } from './payrolldet/payrolldet.component';
+import { PayrollDetComponent } from './payrolldet/payrolldet.component';
 import { PayrollDetEditComponent } from './payrolldet/payrolldet-edit.component';
 import { PayrollDetHeaderComponent } from './payrolldet/payrolldet-header.component';
+import { PayrolldetImportComponent } from './payrolldet/payrolldet-import.component';
 
 import { PreSetMsgComponent } from './presetmsg/presetmsg.component';
 import { PreSetMsgHeaderComponent } from './presetmsg/presetmsg-header.component';
@@ -110,7 +111,8 @@ import { FormsEditComponent } from './forms/edit/forms-edit.component';
     WireTransferedBankComponent,
     FormsComponent,
     FormsHeaderComponent,
-    FormsEditComponent
+    FormsEditComponent,
+    PayrolldetImportComponent
   ],
   imports: [
     SharedModule,    

@@ -233,4 +233,7 @@ export class PayrollDetService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/PayrollDet/GenerateRecord', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    ImportPayroll(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Other/PayrollDet/ImportPayroll', SearchData, this.gs.headerparam2('authorized'));
+    }
 }
