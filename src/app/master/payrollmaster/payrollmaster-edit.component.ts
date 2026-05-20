@@ -103,6 +103,7 @@ export class PayrollMasterEditComponent implements OnInit {
     init() {
 
         this.record.cpd_pkid = this.pkid;
+        this.record.cpd_emp_acno = '';
         this.record.A1 = 0;
         this.record.A2 = 0;
         this.record.A3 = 0;
@@ -249,12 +250,9 @@ export class PayrollMasterEditComponent implements OnInit {
     }
 
     onBlur(field: string) {
-        // if (field == 'obl_refno') {
-        //     if (this.record.obl_refno != this.oldrefno) {
-        //         this.oldrefno = this.record.obl_refno;
-        //         this.GetHouseDetails();
-        //     }
-        // }
+        if (field == 'cpd_emp_acno') {
+            this.record.cpd_emp_acno = this.record.cpd_emp_acno.toUpperCase();
+        }
         if (field == 'A1') {
             this.record.A1 = this.gs.roundNumber(this.record.A1, 2)
             this.FindTotal();
@@ -367,7 +365,7 @@ export class PayrollMasterEditComponent implements OnInit {
         this.record.A9 = this.gs.roundNumber(this.record.A9, 2);
 
 
-       // this.record.NET = this.record.ATOT - this.record.DTOT;
+        // this.record.NET = this.record.ATOT - this.record.DTOT;
         this.record.NET = this.record.A9 - this.record.DTOT;
 
         this.record.NET = this.gs.roundNumber(this.record.NET, 2);

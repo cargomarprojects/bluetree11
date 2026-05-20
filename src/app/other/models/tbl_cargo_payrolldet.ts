@@ -5,6 +5,7 @@ export interface Tbl_Cargo_Payrolldet {
     cpd_pkid: string;
     cpd_emp_id: string;
     cpd_emp_name: string;
+    cpd_emp_acno: string;
     cpd_mbl_id: string;
     cpd_desc_id: string;
     cpd_desc_code: string;
