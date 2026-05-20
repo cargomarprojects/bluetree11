@@ -29,13 +29,27 @@
           </div>
         </div>
 
-        <div class="form-group row">
+        <div *ngIf="!showDocDate" class="form-group row">
           <label class="col-2 col-form-label col-form-label-sm">Ref# </label>
           <div class="col-10">
             <input class="form-control form-control-sm" type="text" (blur)="onBlur('txt_fileRefno')"
               [(ngModel)]="txt_fileRefno" maxlength="50" />
           </div>
         </div>
+
+        <div *ngIf="showDocDate" class="form-group row">
+          <label class="col-2 col-form-label col-form-label-sm">Ref# </label>
+          <div class="col-4">
+            <input class="form-control form-control-sm" type="text" (blur)="onBlur('txt_fileRefno')"
+              [(ngModel)]="txt_fileRefno" maxlength="50" />
+          </div>
+          <label class="col-2 col-form-label col-form-label-sm">Doc. Date</label>
+          <div class="col-4">
+            <app-date #_doc_date [inputdate]="txt_fileDocDate" (ValueChanged)="txt_fileDocDate=$event">
+            </app-date>
+          </div>
+        </div>
+
 
         <div *ngIf="Files_TypeList.length>1" class="form-group row">
           <label class="col-2 col-form-label col-form-label-sm">DocType</label>
@@ -76,7 +90,8 @@
             <th class="text-center">OPEN</th>
             <th class="text-center">DOWNLOAD</th>
             <th *ngIf="Files_TypeList.length>1">DOC.TYPE</th>
-            <th (click)="lovService.sort('file_desc')">FILE NAME&nbsp;<i [ngClass]="lovService.getIcon('file_desc')"></i></th>
+            <th (click)="lovService.sort('file_desc')">FILE NAME&nbsp;<i
+                [ngClass]="lovService.getIcon('file_desc')"></i></th>
             <th>SIZE</th>
             <th>REFERENCE #</th>
             <th>UPLOAD BY</th>
@@ -95,7 +110,8 @@
             <th class="text-center">EMAIL</th>
           </tr>
         </thead>
-        <tbody class="page-body-tbody" *ngFor="let rec of RecordList  |  sortBy: lovService.getSortCol() : lovService.getSortOrder();let i=index">
+        <tbody class="page-body-tbody"
+          *ngFor="let rec of RecordList  |  sortBy: lovService.getSortCol() : lovService.getSortOrder();let i=index">
           <tr [style.color]="rec.files_status=='D'?'Red':'Black'" (mousedown)="selectedRowIndex = i"
             [class.selected]="i == selectedRowIndex">
             <td class="p-0 text-center" (click)="OpenFile(rec)">

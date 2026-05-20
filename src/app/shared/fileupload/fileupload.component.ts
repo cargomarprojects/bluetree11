@@ -132,11 +132,14 @@ export class FileUploadComponent implements OnInit {
   txt_fileName: string = "";
   txt_fileRefno: string = "";
   txt_fileDocType: string = "";
+  txt_fileDocDate: string = "";
 
   private fileName: string = "";
   private fileDesc: string = "";
   private fileSize: number = 0;
   private fileCreateDate: string = "";
+
+  private showDocDate: boolean = false;
 
   DefaultFilename: string = "";
 
@@ -173,6 +176,10 @@ export class FileUploadComponent implements OnInit {
     this.gs.checkAppVersion();
     this.txt_fileDocType = this.Files_Type;
     this.txt_fileRefno = this.Files_Ref_No;
+    this.txt_fileDocDate = "";
+    this.showDocDate = false;
+    if (this.Files_Type == "GE-PR")
+      this.showDocDate = true;
     this.SetDefault();
     this.LoadCombo();
     this.List();
@@ -281,6 +288,12 @@ export class FileUploadComponent implements OnInit {
       return;
     }
 
+    if (this.Files_Type == "GE-PR") {
+      if (this.gs.isBlank(this.txt_fileDocDate)) {
+        alert("Doc. date cannot be Empty");
+        return;
+      }
+    }
 
     this.Files_Type = this.txt_fileDocType;
     this.fileDesc = this.gs.ProperFileName(this.txt_fileName);
@@ -315,6 +328,7 @@ export class FileUploadComponent implements OnInit {
     frmData.append("user_name", this.gs.user_name);
     frmData.append("instance_id", this.gs.INSTANCE_ID);
     frmData.append("files_default_name", this.DefaultFilename);
+    frmData.append("files_doc_date", this.txt_fileDocDate);
 
     for (var i = 0; i < this.myFiles.length; i++) {
       frmData.append("fileUpload", this.myFiles[i]);
