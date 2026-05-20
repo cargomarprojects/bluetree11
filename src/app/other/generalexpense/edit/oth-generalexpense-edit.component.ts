@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { GlobalService } from '../../../core/services/global.service';
-
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OthGeneralExpenseService } from '../../services/oth-generalexpense.service';
 import { User_Menu } from '../../../core/models/menum';
 import { Tbl_cargo_general, Tbl_cargo_container, vm_tbl_cargo_general } from '../../models/tbl_cargo_general';
@@ -28,12 +28,28 @@ export class OthGeneralExpenseEditComponent implements OnInit {
 
   pkid: string;
   menuid: string;
+  modal: any;
 
   mode: string;
   FALockStatus: string = "";
   errorMessage: string[] = [];
 
   closeCaption: string = 'Return';
+
+  attach_title: string = '';
+  attach_parentid: string = '';
+  attach_subid: string = '';
+  attach_type: string = '';
+  attach_typelist: any = {};
+  attach_tablename: string = '';
+  attach_tablepkcolumn: string = '';
+  attach_refno: string = '';
+  attach_customername: string = '';
+  attach_updatecolumn: string = '';
+  attach_viewonlysource: string = '';
+  attach_viewonlyid: string = '';
+  attach_filespath: string = '';
+  attach_filespath2: string = '';
 
   title: string;
   isAdmin: boolean;
@@ -53,12 +69,17 @@ export class OthGeneralExpenseEditComponent implements OnInit {
   is_locked: boolean = false;
 
   constructor(
+    private modalconfig: NgbModalConfig,
+    private modalservice: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
     public gs: GlobalService,
     private mainService: OthGeneralExpenseService,
-  ) { }
+  ) {
+    modalconfig.backdrop = 'static'; //true/false/static
+    modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
+  }
 
   ngOnInit() {
     this.gs.checkAppVersion();
@@ -542,7 +563,7 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           mbl_type: this.EXPTYPE,
           origin: 'other-generalexpense-page',
         };
-    }else if (action == "PAYMENT-REQUEST") {
+    } else if (action == "PAYMENT-REQUEST") {
       if (_type == "L")
         return '/Silver.BusinessModule/PaymentRequestPage';
       if (_type == 'P')
@@ -556,7 +577,26 @@ export class OthGeneralExpenseEditComponent implements OnInit {
           is_locked: this.is_locked,
           origin: 'other-generalexpense-page'
         };
+    } else if (action == "ATTACHMENT") {
+      let TypeList: any[] = [];
+        // TypeList = [{ "code": "GE-PR", "name": "PAYROLL" }];
+      this.attach_title = 'Documents';
+      this.attach_parentid = this.pkid;
+      this.attach_subid = '';
+      this.attach_type = 'GE-' + this.EXPTYPE;
+      this.attach_typelist = TypeList;
+      this.attach_tablename = 'cargo_masterm';
+      this.attach_tablepkcolumn = 'mbl_pkid';
+      this.attach_refno = this.record.mbl_refno;
+      this.attach_customername = '';
+      this.attach_updatecolumn = 'REC_FILES_ATTACHED';
+      this.attach_viewonlysource = '';
+      this.attach_viewonlyid = '';
+      this.attach_filespath = '';
+      this.attach_filespath2 = '';
+      this.modal = this.modalservice.open(attachmodal, { centered: true });
     }
+
   }
 
 
@@ -644,5 +684,10 @@ export class OthGeneralExpenseEditComponent implements OnInit {
     }
   }
 
-
+  CloseModal() {
+    this.modal.close();
+  }
+  callbackevent(event: any) {
+    // this.tab = 'main';
+  }
 }

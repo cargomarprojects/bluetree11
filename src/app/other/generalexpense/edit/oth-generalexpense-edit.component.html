@@ -84,31 +84,39 @@
 
             </div>
         </div>
-        <div *ngIf="mode=='EDIT'" class="col-md-2  p-1 testbox">
-            <div class="col-md-12 p-2 border">
-                <div class="form-group row">
-                    <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanArAp"
-                        [routerLink]="BtnNavigation2('ARAP','L')" [queryParams]="BtnNavigation2('ARAP','P')">AR & AP</a>
+        <div *ngIf="mode=='EDIT'" class="col-md-4  p-1 testbox">
+            <div class="row">
+                <div class="col-md-6 p-2 border">
+                    <div class="form-group row">
+                        <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanArAp"
+                            [routerLink]="BtnNavigation2('ARAP','L')" [queryParams]="BtnNavigation2('ARAP','P')">AR &
+                            AP</a>
+                    </div>
+                    <div class="form-group row">
+                        <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanProfitReport"
+                            [routerLink]="BtnNavigation2('PROFITREPORT','L')"
+                            [queryParams]="BtnNavigation2('PROFITREPORT','P')">Profit Report</a>
+                    </div>
+                    <div class="form-group row">
+                       <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            [style.color]="record.rec_files_attached=='Y'?'red':'white'"
+                            (click)="BtnNavigation2('ATTACHMENT','',attachmodal)">Attachments</button>
+                    </div>
                 </div>
-
-                <div class="form-group row">
-                    <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanProfitReport" (click)="BtnNavigation('PROFITREPORT')">Profit Report</button> -->
-                    <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanProfitReport"
-                        [routerLink]="BtnNavigation2('PROFITREPORT','L')"
-                        [queryParams]="BtnNavigation2('PROFITREPORT','P')">Profit Report</a>
-                </div>
-                <div class="form-group row">
-                    <a class="col-12 btn btn-info btn-sm text-uppercase"
-                        *ngIf="CanPaymentRequest"
-                        [routerLink]="BtnNavigation2('PAYMENT-REQUEST','L')"
-                        [queryParams]="BtnNavigation2('PAYMENT-REQUEST','P')">Payment
-                        Request</a>
-                </div>
-                <div *ngIf="gs.PAYROLL_ENABLED == 'Y' && EXPTYPE == 'PR'" class="form-group row">
-                    <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanPayroll" (click)="BtnNavigation('PAYROLLDET')">Payroll</button> -->
-                    <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanPayroll"
-                        [routerLink]="BtnNavigation2('PAYROLLDET','L')"
-                        [queryParams]="BtnNavigation2('PAYROLLDET','P')">Payroll</a>
+                <div *ngIf="CanPaymentRequest||(gs.PAYROLL_ENABLED == 'Y' && EXPTYPE == 'PR')"
+                    class="col-md-6 p-2 border">
+                    <div class="form-group row">
+                        <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanPaymentRequest"
+                            [routerLink]="BtnNavigation2('PAYMENT-REQUEST','L')"
+                            [queryParams]="BtnNavigation2('PAYMENT-REQUEST','P')">Payment
+                            Request</a>
+                    </div>
+                    <div *ngIf="gs.PAYROLL_ENABLED == 'Y' && EXPTYPE == 'PR'" class="form-group row">
+                        <!-- <button class=" col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanPayroll" (click)="BtnNavigation('PAYROLLDET')">Payroll</button> -->
+                        <a class="col-12 btn btn-info btn-sm text-uppercase" *ngIf="CanPayroll"
+                            [routerLink]="BtnNavigation2('PAYROLLDET','L')"
+                            [queryParams]="BtnNavigation2('PAYROLLDET','P')">Payroll</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,3 +136,25 @@
         /
         {{record.rec_created_date}} </label>
 </div>
+
+<ng-template #attachmodal let-c="close" let-d="dismiss">
+  <div class="modal-body">
+    <div class="page-body">
+      <div class="row">
+        <div class="col-md-12 testbox  px-0 mx-0">
+          <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid"
+            [type]="attach_type" [typelist]="attach_typelist" [tablename]="attach_tablename"
+            [tablepkcolumn]="attach_tablepkcolumn" [refno]="attach_refno" [customername]="attach_customername"
+            [updatecolumn]="attach_updatecolumn" [viewonlysource]="attach_viewonlysource"
+            [viewonlyid]="attach_viewonlyid" [filespath]="attach_filespath" [filespath2]="attach_filespath2"
+            [modalview]="true" (callbackevent)="callbackevent($event)"></app-fileupload>
+        </div>
+      </div>
+      <div class="page-footer">
+        <div class="row justify-content-center p-1">
+          <button class="btn btn-primary btn-md" (click)="CloseModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
