@@ -35,8 +35,8 @@
                     <div class="col-8">
                         <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
                         <button (click)="List('GENERATE')" class="btn btn-primary btn-sm mr-1">Generate</button>
-                        <!-- <app-payrolldet-import [menuid]="''" [title]="'Import Payroll'" [refid]="searchQuery.mbl_refno" [refno]="searchQuery.mbl_refno"
-                            [refdate]="searchQuery.mbl_refno"></app-payrolldet-import> -->
+                        <app-payrolldet-import [menuid]="''" [title]="'IMPORT PAYROLL'" [refid]="searchQuery.mblid" [refno]="searchQuery.mbl_refno"
+                            [refdate]="searchQuery.todate"></app-payrolldet-import>
                     </div>
                 </div>
             </div>

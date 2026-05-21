@@ -13,26 +13,26 @@ export class PayrolldetImportComponent implements OnInit {
     public errorMessage: string = '';
     public tab: string = 'main';
 
-    private _title: string = '';
+    public _title: string = '';
     @Input() set title(value: string) {
         this._title = value;
     }
-    private _menuid: string = '';
+    public _menuid: string = '';
     @Input() set menuid(value: string) {
         this._menuid = value;
     }
 
-    private _refid: string = '';
+    public _refid: string = '';
     @Input() set refid(value: string) {
         this._refid = value;
     }
 
-    private _refdate: string = '';
+    public _refdate: string = '';
     @Input() set refdate(value: string) {
         this._refdate = value;
     }
 
-    private _refno: string = '';
+    public _refno: string = '';
     @Input() set refno(value: string) {
         this._refno = value;
     }
@@ -40,7 +40,7 @@ export class PayrolldetImportComponent implements OnInit {
     @Output() callbackevent = new EventEmitter<any>();
 
     modal: any;
-    filename: string = 'D:\\motherlines.us\\Files_Folder\\NewYork\\Files\\5EB04B048CF6B42B446E2F1B3C50ED6C.PDF';
+    filename: string = '';
     filetype: string = 'PDF';
     filedisplayname: string = 'Payroll.pdf';
 
@@ -66,22 +66,23 @@ export class PayrolldetImportComponent implements OnInit {
             return;
         }
         if (this.gs.isBlank(this._refdate)) {
-            alert('Invalid Ref Date');
+            alert('Invalid Payroll Date');
             return;
         }
 
-        this.modal = this.modalservice.open(payrollmodal, { centered: true });
+        var SearchData = this.gs.UserInfo;
+        SearchData.MBL_ID = this._refid;
+        SearchData.PAYROLL_DATE = this._refdate;
+        this.mainservice.ImportPayroll(SearchData).subscribe(response => {
 
-        // var SearchData = this.gs.UserInfo;
-        // SearchData.REF_ID = this._refid;
-        // SearchData.REF_DATE = this._refdate;
-        // this.mainservice.ImportPayroll(SearchData).subscribe(response => {
-             
+            this.filename = this.gs.FS_APP_FOLDER + response.files_path + response.files_id;
+            this.filetype = response.filestype;
+            this.filedisplayname = response.files_desc;
 
-        //     this.modal = this.modalservice.open(payrollmodal, { centered: true });
-        // }, error => {
-        //     alert(this.gs.getError(error));
-        // });
+            this.modal = this.modalservice.open(payrollmodal, { centered: true });
+        }, error => {
+            alert(this.gs.getError(error));
+        });
 
     }
 
@@ -93,7 +94,7 @@ export class PayrolldetImportComponent implements OnInit {
 
     Save() {
 
-         
+
 
     }
 
@@ -105,4 +106,7 @@ export class PayrolldetImportComponent implements OnInit {
         this.modal.close();
     }
 
+    getDisplayDate(_dt: string) {
+        return this.gs.ConvertDate2DisplayFormat(_dt);
+    }
 }
