@@ -60,7 +60,7 @@ export class PayrollDetService {
     public init(params: any) {
 
         const options = params;
-         //this is invoke from list so every time when mbl reference change, initialize prms and records (refresh)
+        //this is invoke from list so every time when mbl reference change, initialize prms and records (refresh)
         if (this.appid != this.gs.appid || this.refid != options.mbl_pkid) {
             this.appid = this.gs.appid;
             this.refid = options.mbl_pkid;
@@ -236,4 +236,9 @@ export class PayrollDetService {
     ImportPayroll(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/PayrollDet/ImportPayroll', SearchData, this.gs.headerparam2('authorized'));
     }
+
+    ExtractData(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Other/PayrollDet/ExtractData', SearchData, this.gs.headerparam2('authorized'));
+    }
+
 }

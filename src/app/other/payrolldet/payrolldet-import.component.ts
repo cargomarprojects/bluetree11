@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { GlobalService } from '../../core/services/global.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PayrollDetService } from '../services/payrolldet.service';
+import { Tbl_IraContribution } from '../models/tbl_iracontribution';
 
 @Component({
     selector: 'app-payrolldet-import',
@@ -39,6 +40,7 @@ export class PayrolldetImportComponent implements OnInit {
 
     @Output() callbackevent = new EventEmitter<any>();
 
+    RecordList: Tbl_IraContribution[] = [];
     modal: any;
     filename: string = '';
     filetype: string = 'PDF';
@@ -74,12 +76,15 @@ export class PayrolldetImportComponent implements OnInit {
         SearchData.MBL_ID = this._refid;
         SearchData.PAYROLL_DATE = this._refdate;
         this.mainservice.ImportPayroll(SearchData).subscribe(response => {
-
-            this.filename = this.gs.FS_APP_FOLDER + response.files_path + response.files_id;
-            this.filetype = response.filestype;
-            this.filedisplayname = response.files_desc;
-
-            this.modal = this.modalservice.open(payrollmodal, { centered: true });
+            this.filename = '';
+            this.filetype = '';
+            this.filedisplayname = '';
+            if (response.files_id) {
+                this.filename = this.gs.FS_APP_FOLDER + response.files_path + response.files_id;
+                this.filetype = response.filestype;
+                this.filedisplayname = response.files_desc;
+            }
+            this.modal = this.modalservice.open(payrollmodal, {  windowClass: 'payroll-modal',centered: true });
         }, error => {
             alert(this.gs.getError(error));
         });
@@ -108,5 +113,17 @@ export class PayrolldetImportComponent implements OnInit {
 
     getDisplayDate(_dt: string) {
         return this.gs.ConvertDate2DisplayFormat(_dt);
+    }
+
+
+    ExtractData() {
+        var SearchData = this.gs.UserInfo;
+        SearchData.FILES_NAME = this.filename;
+        this.mainservice.ExtractData(SearchData)
+            .subscribe(response => {
+                this.RecordList = <Tbl_IraContribution[]>response.list;
+            }, error => {
+                alert(this.gs.getError(error));
+            });
     }
 }

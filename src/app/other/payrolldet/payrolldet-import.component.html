@@ -6,7 +6,11 @@
                 <div class="col-md-12 testbox  px-0 mx-0">
                     <div class="page-header">
                         <div class="row align-items-center justify-content-left p-1">
-                            <label class="mr-3">{{_title}}&nbsp;[&nbsp;<span style="color:green">REF#:&nbsp;</span><span style="color:red"> {{_refno}}</span>&nbsp;&nbsp;<span style="color:green">PAYROLL DATE:&nbsp;</span><span style="color:red">{{getDisplayDate(_refdate)}}</span>&nbsp;]</label>
+                            <label class="mr-3">{{_title}}&nbsp;[&nbsp;<span style="color:green">REF#:&nbsp;</span><span
+                                    style="color:red">
+                                    {{_refno}}</span>&nbsp;&nbsp;<span style="color:green">PAYROLL
+                                    DATE:&nbsp;</span><span
+                                    style="color:red">{{getDisplayDate(_refdate)}}</span>&nbsp;]</label>
                         </div>
                     </div>
                     <div class="page-body">
@@ -18,46 +22,38 @@
                                     (callbackevent)="callbackevent($event)"></app-report2>
                             </div>
                             <div class="col-md-6 testbox  px-0 mx-0">
-                               <div class="page-body table-responsive"  style="height: calc(100vh - 188px);">
-                                <table class="table  table-hover table-sm">
-                                    <thead class="page-body-thead">
-                                        <tr>
-                                            <th>EMPLOYEE</th>
-                                            <th>PAYROLL.DATE</th>
-                                            <th>GROSS</th>
-                                            <th>IRC</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody class="page-body-tbody">
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <!-- <tr *ngFor="let rec of records$ | async"
-                                            (mousedown)="mainservice.selectRowId(rec.cpd_pkid)"
-                                            [class.selected]="rec.cpd_pkid == mainservice.getRowId()">
-                                            <td class='hlink2' (click)="edit(rec)">{{rec.cpd_emp_name}}</td>
-                                            <td>{{rec.cpd_payroll_date | date : gs.FRONTEND_DATEFORMAT }}</td>
-                                            <td>{{rec.A1 | number : '1.2-2'}} </td>
-                                            <td>{{rec.D8 | number : '1.2-2'}} </td>
-                                        </tr> -->
-                                    </tbody>
-                                </table>
-                            </div>
+                                <div class="page-body table-responsive" style="height: calc(100vh - 188px);">
+                                    <table class="table  table-hover table-sm">
+                                        <thead class="page-body-thead">
+                                            <tr>
+                                                <th>PAYROLL.EMP.NAME</th>
+                                                <th>DOC.EMP.NAME</th>
+                                                <th>EMPLY.CONTRIBUTION</th>
+                                                <th>EMPLR.CONTRIBUTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="page-body-tbody">
+                                            <tr *ngFor="let rec of RecordList">
+                                                <td>{{rec.EmployeeName}}</td>
+                                                <td>{{rec.EmployeeName}}</td>
+                                                <td>{{rec.EmployeeContribution | number : '1.2-2'}} </td>
+                                                <td>{{rec.EmployerContribution | number : '1.2-2'}} </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="page-footer">
-            <div class="row justify-content-center p-1">
-                <button class="btn btn-primary btn-sm mr-1" (click)="Save()">Save</button>
-                <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Close</button>
+            <div class="page-footer">
+                <div class="row justify-content-center p-1">
+                    <button class="btn btn-primary btn-sm mr-1" (click)="ExtractData()">Extract Data</button>
+                    <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Close</button>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </ng-template>
