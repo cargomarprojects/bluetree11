@@ -22,22 +22,25 @@
                                     (callbackevent)="callbackevent($event)"></app-report2>
                             </div>
                             <div class="col-md-6 testbox  px-0 mx-0">
-                                <div class="page-body table-responsive" style="height: calc(100vh - 188px);">
-                                    <table class="table  table-hover table-sm">
+                                <div class="page-body table-responsive  fixedTableHead my-0 p-0"
+                                    style="height: calc(100vh - 188px);">
+                                    <table class="table  table-hover table-sm  table-bordered">
                                         <thead class="page-body-thead">
                                             <tr>
-                                                <th>PAYROLL.NAME</th>
                                                 <th>NAME</th>
                                                 <th>EMPLOYEE</th>
                                                 <th>EMPLOYER</th>
+                                                <th>PAYROLL.NAME</th>
                                             </tr>
                                         </thead>
                                         <tbody class="page-body-tbody">
-                                            <tr *ngFor="let rec of RecordList">
-                                                <td>{{rec.EmployeeName}}</td>
-                                                <td>{{rec.EmployeeName}}</td>
-                                                <td>{{rec.EmployeeContribution | number : '1.2-2'}} </td>
-                                                <td>{{rec.EmployerContribution | number : '1.2-2'}} </td>
+                                            <tr *ngFor="let rec of RecordList"
+                                                (mousedown)="mainservice.selectRowId(rec.cpd_emp_doc_name)"
+                                                [class.selected]="rec.cpd_emp_doc_name == mainservice.getRowId()">
+                                                <td>{{rec.cpd_emp_doc_name}}</td>
+                                                <td>{{rec.EMPLY_CONTRIBUTION | number : '1.2-2'}} </td>
+                                                <td>{{rec.EMPLR_CONTRIBUTION | number : '1.2-2'}} </td>
+                                                 <td>{{rec.cpd_emp_name}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -51,6 +54,7 @@
             <div class="page-footer">
                 <div class="row justify-content-center p-1">
                     <button class="btn btn-primary btn-sm mr-1" (click)="ExtractData()">Extract Data</button>
+                    <button class="btn btn-primary btn-sm mr-1" (click)="Generate()">Generate</button>
                     <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Close</button>
                 </div>
             </div>

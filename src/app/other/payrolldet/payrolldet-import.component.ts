@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { GlobalService } from '../../core/services/global.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PayrollDetService } from '../services/payrolldet.service';
-import { Tbl_IraContribution } from '../models/tbl_iracontribution';
+import { Tbl_Cargo_Payrolldet } from '../models/tbl_cargo_payrolldet';
 
 @Component({
     selector: 'app-payrolldet-import',
@@ -40,7 +40,7 @@ export class PayrolldetImportComponent implements OnInit {
 
     @Output() callbackevent = new EventEmitter<any>();
 
-    RecordList: Tbl_IraContribution[] = [];
+    RecordList: Tbl_Cargo_Payrolldet[] = [];
     modal: any;
     filename: string = '';
     filetype: string = 'PDF';
@@ -59,10 +59,13 @@ export class PayrolldetImportComponent implements OnInit {
 
     ngOnInit() {
         this.gs.checkAppVersion();
+        this.init();
     }
 
+    private init() {
+        this.RecordList = <Tbl_Cargo_Payrolldet[]>[];
+    }
     ImportPayroll(payrollmodal: any = null) {
-
         if (this.gs.isBlank(this._refid)) {
             alert('Invalid Ref ID');
             return;
@@ -71,7 +74,7 @@ export class PayrolldetImportComponent implements OnInit {
             alert('Invalid Payroll Date');
             return;
         }
-
+        this.init();
         var SearchData = this.gs.UserInfo;
         SearchData.MBL_ID = this._refid;
         SearchData.PAYROLL_DATE = this._refdate;
@@ -84,7 +87,7 @@ export class PayrolldetImportComponent implements OnInit {
                 this.filetype = response.filestype;
                 this.filedisplayname = response.files_desc;
             }
-            this.modal = this.modalservice.open(payrollmodal, {  windowClass: 'large-modal',centered: true });
+            this.modal = this.modalservice.open(payrollmodal, { windowClass: 'large-modal', centered: true });
         }, error => {
             alert(this.gs.getError(error));
         });
@@ -121,9 +124,16 @@ export class PayrolldetImportComponent implements OnInit {
         SearchData.FILES_NAME = this.filename;
         this.mainservice.ExtractData(SearchData)
             .subscribe(response => {
-                this.RecordList = <Tbl_IraContribution[]>response.list;
+                this.RecordList = <Tbl_Cargo_Payrolldet[]>response.list;
             }, error => {
                 alert(this.gs.getError(error));
             });
+    }
+
+    Generate() {
+        if (this.callbackevent) {
+            this.callbackevent.emit({ action: 'GENERATE', extractlist: this.RecordList });
+            // this.modal.close();
+        }
     }
 }

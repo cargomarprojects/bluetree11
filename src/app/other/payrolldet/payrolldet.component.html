@@ -33,6 +33,7 @@
           <th>SUPP.INSURANCE</th>
           <th>IRC</th>
           <th>NET PAY</th>
+          <th>EMPLR.CONTRIBUTION</th>
           <th style="text-align:center">DELETE</th>
         </tr>
       </thead>
@@ -53,6 +54,7 @@
           <td>{{rec.D6 | number : '1.2-2'}}</td>
           <td>{{rec.D7 | number : '1.2-2'}}</td>
           <td>{{rec.NET | number : '1.2-2'}}</td>
+          <td>{{rec.EMPLR_CONTRIBUTION | number : '1.2-2'}}</td>
           <td *ngIf="mainservice.canDelete" style="text-align:center"><i class="fa fa-trash  fa-lg pointer"
             aria-hidden="true" (click)="mainservice.DeleteRow(rec)"></i></td>
         </tr>

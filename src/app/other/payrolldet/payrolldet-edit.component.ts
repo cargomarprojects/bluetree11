@@ -126,6 +126,7 @@ export class PayrollDetEditComponent implements OnInit {
         this.record.DTOT = 0;;
         this.record.ATOT = 0;
         this.record.NET = 0;
+        this.record.EMPLR_CONTRIBUTION = 0;
     }
 
     GetRecord() {
@@ -151,7 +152,7 @@ export class PayrollDetEditComponent implements OnInit {
         if (!confirm("Save")) {
             return;
         }
-        
+
         const saveRecord = <vm_Tbl_Cargo_Payrolldet>{};
         saveRecord.record = this.record;
         saveRecord.pkid = this.pkid;
@@ -319,6 +320,10 @@ export class PayrollDetEditComponent implements OnInit {
             this.record.D9 = this.gs.roundNumber(this.record.D9, 2)
             this.FindTotal();
         }
+        if (field == 'EMPLR_CONTRIBUTION') {
+            this.record.EMPLR_CONTRIBUTION = this.gs.roundNumber(this.record.EMPLR_CONTRIBUTION, 2)
+        }
+
     }
 
     FindTotal() {
@@ -359,9 +364,9 @@ export class PayrollDetEditComponent implements OnInit {
         this.record.A9 = this.gs.roundNumber(this.record.A9, 2);
 
 
-       // this.record.NET = this.record.ATOT - this.record.DTOT;
+        // this.record.NET = this.record.ATOT - this.record.DTOT;
         this.record.NET = this.record.A9 - this.record.DTOT;
-        
+
         this.record.NET = this.gs.roundNumber(this.record.NET, 2);
     }
 

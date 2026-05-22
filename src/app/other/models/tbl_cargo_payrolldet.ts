@@ -1,5 +1,5 @@
 import { PageQuery } from '../../shared/models/pageQuery';
-import {Tbl_Mast_Partym } from '../../master/models/Tbl_Mast_Partym';
+import { Tbl_Mast_Partym } from '../../master/models/Tbl_Mast_Partym';
 
 export interface Tbl_Cargo_Payrolldet {
     cpd_pkid: string;
@@ -15,8 +15,13 @@ export interface Tbl_Cargo_Payrolldet {
     cpd_acc_name: string;
     cpd_amt: number;
     cpd_order: number;
-
+ 
+    cpd_emp_doc_name: string;
     cpd_payroll_date: string;
+
+    EMPLY_CONTRIBUTION: number;
+    EMPLR_CONTRIBUTION: number;
+
     A1: number;
     A2: number;
     A3: number;
@@ -69,7 +74,7 @@ export interface SearchQuery {
     mbl_refno: string;
     todate: string;
     mblid: string;
-    sort_parameter:string;
+    sort_parameter: string;
 }
 
 export interface PayrolldetModel {
@@ -86,4 +91,12 @@ export interface PayrollMasterModel {
     searchQuery: SearchQuery;
     pageQuery: PageQuery;
     records: Tbl_Mast_Partym[]
+}
+
+export interface vm_Generate_Payrolldet {
+    mblid: string;
+    pdate: string;
+    precords: Tbl_Cargo_Payrolldet[];
+    userinfo: any,
+    filter: any;
 }

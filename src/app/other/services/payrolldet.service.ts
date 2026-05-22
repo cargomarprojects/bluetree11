@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GlobalService } from '../../core/services/global.service';
-import { Tbl_Cargo_Payrolldet, PayrolldetModel } from '../models/tbl_cargo_payrolldet';
+import { Tbl_Cargo_Payrolldet, PayrolldetModel, vm_Generate_Payrolldet } from '../models/tbl_cargo_payrolldet';
 import { SearchQuery } from '../models/tbl_cargo_payrolldet';
 import { PageQuery } from '../../shared/models/pageQuery';
 
@@ -194,10 +194,19 @@ export class PayrollDetService {
             return;
         }
 
-        var SearchData = this.gs.UserInfo;
-        SearchData.MBL_ID = this.mbl_pkid;
-        SearchData.PDATE = _searchdata.searchQuery.todate;
-        this.GenerateRecord(SearchData)
+        // var SearchData = this.gs.UserInfo;
+        // SearchData.MBL_ID = this.mbl_pkid;
+        // SearchData.PDATE = _searchdata.searchQuery.todate;
+        // SearchData.PLIST = _searchdata.extractList;
+
+        const saveRecord = <vm_Generate_Payrolldet>{};
+        saveRecord.mblid = this.mbl_pkid;
+        saveRecord.pdate = _searchdata.searchQuery.todate;
+        saveRecord.precords = _searchdata.extractList;
+        saveRecord.userinfo = this.gs.UserInfo;
+
+
+        this.GenerateRecord(saveRecord)
             .subscribe(response => {
                 if (response.retvalue == false) {
                     this.record.errormessage = response.error;
