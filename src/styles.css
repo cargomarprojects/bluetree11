@@ -509,7 +509,7 @@ hr {
   max-width: 1200px !important;
 }
 
-.payroll-modal .modal-dialog {
+.large-modal .modal-dialog {
   max-width: 95vw !important;
   margin: 10px auto;
 }

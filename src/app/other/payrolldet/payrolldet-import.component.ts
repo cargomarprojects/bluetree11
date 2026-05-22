@@ -84,7 +84,7 @@ export class PayrolldetImportComponent implements OnInit {
                 this.filetype = response.filestype;
                 this.filedisplayname = response.files_desc;
             }
-            this.modal = this.modalservice.open(payrollmodal, {  windowClass: 'payroll-modal',centered: true });
+            this.modal = this.modalservice.open(payrollmodal, {  windowClass: 'large-modal',centered: true });
         }, error => {
             alert(this.gs.getError(error));
         });
