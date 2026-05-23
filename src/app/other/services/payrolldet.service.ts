@@ -209,8 +209,8 @@ export class PayrollDetService {
         this.GenerateRecord(saveRecord)
             .subscribe(response => {
                 if (response.retvalue == false) {
-                    this.record.errormessage = response.error;
-                    alert(this.record.errormessage);
+                    // this.record.errormessage = response.error;
+                    alert(response.error);
                 }
                 else {
                     this.Search(_searchdata, 'SEARCH');

@@ -133,7 +133,7 @@ export class PayrolldetImportComponent implements OnInit {
     Generate() {
         if (this.callbackevent) {
             this.callbackevent.emit({ action: 'GENERATE', extractlist: this.RecordList });
-            // this.modal.close();
+            this.modal.close();
         }
     }
 }
