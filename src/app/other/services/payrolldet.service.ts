@@ -221,6 +221,35 @@ export class PayrollDetService {
             });
     }
 
+
+    PrintIraForm(_searchdata: any) {
+
+        this.record.errormessage = '';
+        this.mdata$.next(this.record);
+        if (this.gs.isBlank(_searchdata.searchQuery.todate)) {
+            this.record.errormessage = 'Payroll Date cannot be blank';
+            this.mdata$.next(this.record);
+            return;
+        }
+
+        var SearchData = this.gs.UserInfo;
+        SearchData.MBL_ID = this.mbl_pkid;
+        SearchData.PDATE = _searchdata.searchQuery.todate;
+
+        this.GenerateIraForm(SearchData)
+            .subscribe(response => {
+                this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
+                //alert('complete');
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+                alert(this.record.errormessage);
+            });
+    }
+
+    Downloadfile(filename: string, filetype: string, filedisplayname: string) {
+        this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
+    }
+
     List(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/PayrollDet/List', SearchData, this.gs.headerparam2('authorized'));
     }
@@ -250,4 +279,7 @@ export class PayrollDetService {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/PayrollDet/ExtractData', SearchData, this.gs.headerparam2('authorized'));
     }
 
+    GenerateIraForm(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/Other/PayrollDet/GenerateIraForm', SearchData, this.gs.headerparam2('authorized'));
+    }
 }

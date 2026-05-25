@@ -45,8 +45,8 @@ export class PayrolldetImportComponent implements OnInit {
     filename: string = '';
     filetype: string = 'PDF';
     filedisplayname: string = 'Payroll.pdf';
-
-
+    missingnames: string = '';
+    
     constructor(
         private modalconfig: NgbModalConfig,
         private modalservice: NgbModal,
@@ -64,6 +64,7 @@ export class PayrolldetImportComponent implements OnInit {
 
     private init() {
         this.RecordList = <Tbl_Cargo_Payrolldet[]>[];
+        this.missingnames='';
     }
     ImportPayroll(payrollmodal: any = null) {
         if (this.gs.isBlank(this._refid)) {
@@ -125,6 +126,7 @@ export class PayrolldetImportComponent implements OnInit {
         this.mainservice.ExtractData(SearchData)
             .subscribe(response => {
                 this.RecordList = <Tbl_Cargo_Payrolldet[]>response.list;
+                this.missingnames = response.missingnames;
             }, error => {
                 alert(this.gs.getError(error));
             });

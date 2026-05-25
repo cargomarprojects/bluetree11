@@ -1,4 +1,4 @@
-<button class="btn btn-primary btn-sm" (click)="ImportPayroll(paymodal)">Import Payroll</button>
+<button class="btn btn-primary btn-sm mr-1" (click)="ImportPayroll(paymodal)">Import Payroll</button>
 <ng-template #paymodal let-c="close" let-d="dismiss">
     <div class="modal-body">
         <div class="page-body">
@@ -23,7 +23,7 @@
                             </div>
                             <div class="col-md-6 testbox  px-0 mx-0">
                                 <div class="page-body table-responsive  fixedTableHead my-0 p-0"
-                                    style="height: calc(100vh - 188px);">
+                                    style="height: calc(100vh - 288px);">
                                     <table class="table  table-hover table-sm  table-bordered">
                                         <thead class="page-body-thead">
                                             <tr>
@@ -40,12 +40,17 @@
                                                 <td>{{rec.cpd_emp_doc_name}}</td>
                                                 <td>{{rec.EMPLY_CONTRIBUTION | number : '1.2-2'}} </td>
                                                 <td>{{rec.EMPLR_CONTRIBUTION | number : '1.2-2'}} </td>
-                                                 <td>{{rec.cpd_emp_name}}</td>
+                                                <td>{{rec.cpd_emp_name}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-
+                                <div *ngIf="missingnames" class="form-group row">
+                                    <label class="col-2 col-form-label col-form-label-sm"><span style="color:black">No
+                                            Data Found For :</span></label>
+                                    <label class="col-10 col-form-label col-form-label-sm"><span style="color:green">
+                                            {{missingnames}}</span></label>
+                                </div>
                             </div>
                         </div>
                     </div>

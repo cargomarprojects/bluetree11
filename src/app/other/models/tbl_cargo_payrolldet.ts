@@ -75,6 +75,7 @@ export interface SearchQuery {
     todate: string;
     mblid: string;
     sort_parameter: string;
+    searchPayrollOnly: boolean;
 }
 
 export interface PayrolldetModel {

@@ -32,7 +32,7 @@ export class PayrollMasterService {
     public canDelete: boolean;
 
     public initlialized: boolean;
-    private appid ='';
+    private appid = '';
 
     constructor(
         private http2: HttpClient,
@@ -51,7 +51,7 @@ export class PayrollMasterService {
             selectedId: '',
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', mbl_refno: '', todate: '', mblid: '', sort_parameter: 'gen_name' },
+            searchQuery: <SearchQuery>{ searchString: '', mbl_refno: '', todate: '', mblid: '', sort_parameter: 'gen_name', searchPayrollOnly: true },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -72,7 +72,7 @@ export class PayrollMasterService {
             selectedId: '',
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', mbl_refno: '', todate: '', mblid: '', sort_parameter: 'gen_name' },
+            searchQuery: <SearchQuery>{ searchString: '', mbl_refno: '', todate: '', mblid: '', sort_parameter: 'gen_name', searchPayrollOnly: true },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -109,6 +109,7 @@ export class PayrollMasterService {
         SearchData.CODE = this.record.searchQuery.searchString;
         SearchData.TYPE = 'PARTYS';
         SearchData.SORT = this.record.searchQuery.sort_parameter;
+        SearchData.PAYROLL_ONLY = this.record.searchQuery.searchPayrollOnly?'Y':'N';
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;

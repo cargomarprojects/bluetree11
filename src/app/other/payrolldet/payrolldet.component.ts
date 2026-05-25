@@ -50,6 +50,8 @@ export class PayrollDetComponent implements OnInit {
   searchEvents(actions: any) {
     if (actions.outputformat == 'GENERATE')
       this.mainservice.Generate(actions)
+    else if (actions.outputformat == 'TRANSMITTAL-FORM')
+      this.mainservice.PrintIraForm(actions)
     else
       this.mainservice.Search(actions, 'SEARCH');
   }

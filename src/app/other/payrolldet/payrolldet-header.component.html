@@ -29,14 +29,16 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-group row">
-                    <label class="col-4 col-form-label col-form-label-sm"></label>
-                    <div class="col-8">
+                    <!-- <label class="col-4 col-form-label col-form-label-sm"></label> -->
+                    <div class="col-12 input-group input-group-sm">
                         <button (click)="List('SCREEN')" class="btn btn-primary btn-sm mr-1">Search</button>
                         <!-- <button (click)="List('GENERATE')" class="btn btn-primary btn-sm mr-1">Generate</button> -->
-                        <app-payrolldet-import [menuid]="''" [title]="'IMPORT PAYROLL'" [refid]="searchQuery.mblid" [refno]="searchQuery.mbl_refno"
-                            [refdate]="searchQuery.todate" (callbackevent)="callbackevent($event)" ></app-payrolldet-import>
+                        <app-payrolldet-import [menuid]="''" [title]="'IMPORT PAYROLL'" [refid]="searchQuery.mblid"
+                            [refno]="searchQuery.mbl_refno" [refdate]="searchQuery.todate"
+                            (callbackevent)="callbackevent($event)"></app-payrolldet-import>
+                        <button (click)="List('TRANSMITTAL-FORM')" class="btn btn-primary btn-sm mr-1">IRA Form</button>
                     </div>
                 </div>
             </div>
