@@ -191,9 +191,9 @@ export class PayrollDetService {
             return;
         }
 
-        if (!confirm("Generate Records...")) {
-            return;
-        }
+        // if (!confirm("Generate Records...")) {
+        //     return;
+        // }
 
         // var SearchData = this.gs.UserInfo;
         // SearchData.MBL_ID = this.mbl_pkid;
