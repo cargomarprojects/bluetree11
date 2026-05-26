@@ -72,7 +72,7 @@ export class PayrolldetImportComponent implements OnInit {
             return;
         }
         if (this.gs.isBlank(this._refdate)) {
-            alert('Invalid Payroll Date');
+            alert('Payroll Date cannot be blank');
             return;
         }
         this.init();

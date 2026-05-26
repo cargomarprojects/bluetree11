@@ -185,8 +185,9 @@ export class PayrollDetService {
         this.record.errormessage = '';
         this.mdata$.next(this.record);
         if (this.gs.isBlank(_searchdata.searchQuery.todate)) {
-            this.record.errormessage = 'Payroll Date cannot be blank';
-            this.mdata$.next(this.record);
+            // this.record.errormessage = 'Payroll Date cannot be blank';
+            // this.mdata$.next(this.record);
+            alert('Payroll Date cannot be blank');
             return;
         }
 
@@ -227,8 +228,9 @@ export class PayrollDetService {
         this.record.errormessage = '';
         this.mdata$.next(this.record);
         if (this.gs.isBlank(_searchdata.searchQuery.todate)) {
-            this.record.errormessage = 'Payroll Date cannot be blank';
-            this.mdata$.next(this.record);
+            // this.record.errormessage = 'Payroll Date cannot be blank';
+            // this.mdata$.next(this.record);
+            alert('Payroll Date cannot be blank');
             return;
         }
 
