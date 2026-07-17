@@ -930,7 +930,7 @@ export class SeaexpMasterEditComponent implements OnInit {
       }
       case 'ATTACHMENT': {
         let TypeList: any[] = [];
-        TypeList = [{ "code": "EMAIL", "name": "E-MAIL" }, { "code": "HOUSEBL", "name": "HOUSE B/L" }, { "code": "MASTER", "name": "MASTER" }, { "code": "PAYMENT SETTLEMENT", "name": "OTHERS" }];
+        TypeList = [{ "code": "AR/AP", "name": "AR/AP" },{ "code": "EMAIL", "name": "E-MAIL" }, { "code": "HOUSEBL", "name": "HOUSE B/L" }, { "code": "MASTER", "name": "MASTER" }, { "code": "PAYMENT SETTLEMENT", "name": "OTHERS" }];
         this.attach_title = 'Documents';
         this.attach_parentid = this.pkid;
         this.attach_subid = '';
