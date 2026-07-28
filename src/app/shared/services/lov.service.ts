@@ -73,6 +73,14 @@ export class LovService {
     return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/StartExtractDataProcess', SearchData, this.gs.headerparam2('authorized'));
   }
 
+  MigrateBatchToS3(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/MigrateBatchToS3', SearchData, this.gs.headerparam2('authorized'));
+  }
+
+  GetS3Url(SearchData: any) {
+    return this.http2.post<any>(this.gs.baseUrl + '/api/AwsAiDocs/GetS3Url', SearchData, this.gs.headerparam2('authorized'));
+  }
+
 
   Save(SearchData: any) {
     return this.http2.post<any>(this.gs.baseUrl + '/api/Auth/Save', SearchData, this.gs.headerparam2('authorized'));

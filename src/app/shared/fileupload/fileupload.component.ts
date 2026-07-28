@@ -350,6 +350,74 @@ export class FileUploadComponent implements OnInit {
       );
   }
 
+  uploadFilesToS3() {
+
+    if (!this.filesSelected) {
+      alert('No File Selected');
+      return;
+    }
+
+    if (this.gs.isBlank(this.txt_fileName)) {
+      alert("File Name cannot be Empty");
+      return;
+    }
+
+    if (this.gs.isBlank(this.txt_fileDocType)) {
+      alert("Doc. Type cannot be Empty");
+      return;
+    }
+
+    if (this.Files_Type == "GE-PR") {
+      if (this.gs.isBlank(this.txt_fileDocDate)) {
+        alert("Doc. date cannot be Empty");
+        return;
+      }
+    }
+
+    this.Files_Type = this.txt_fileDocType;
+    this.fileDesc = this.gs.ProperFileName(this.txt_fileName);
+
+    this.loading = true;
+
+    let frmData: FormData = new FormData();
+
+    frmData.append("files_id", this.fileName);
+    frmData.append("files_type", this.Files_Type);
+    frmData.append("table_name", this.table_name);
+    frmData.append("table_pk_column", this.table_pk_column);
+    frmData.append("files_parent_id", this.Files_Parent_Id);
+    frmData.append("files_sub_id", this.Files_Sub_Id);
+    frmData.append("comp_code", this.gs.company_code);
+    frmData.append("branch_code", this.gs.branch_code);
+    frmData.append("files_ref_no", this.txt_fileRefno);
+    frmData.append("updatecolumn", this.UpdateColumn);
+    frmData.append("files_size", this.fileSize.toString());
+    frmData.append("files_desc", this.fileDesc);
+    frmData.append("files_created_by", this.gs.user_code);
+    frmData.append("files_doc_date", this.txt_fileDocDate);
+
+    for (var i = 0; i < this.myFiles.length; i++) {
+      frmData.append("fileUpload", this.myFiles[i]);
+    }
+
+    this.http2.post<any>(
+      this.gs.baseUrl + '/api/AwsAiDocs/UploadFilesToS3', frmData, this.gs.headerparam2('authorized-fileupload')).subscribe(
+        data => {
+          this.loading = false;
+          this.filesSelected = false;
+          this.fileinput.nativeElement.value = '';
+          this.List();
+          alert('Upload to S3 Complete');
+          if (data.errors && data.errors.length > 0)
+            alert(data.errors.join('\n'));
+        },
+        error => {
+          this.loading = false;
+          alert('Failed');
+        }
+      );
+  }
+
 
   List(_type: string = "") {
     let fTypeName: string = "";
@@ -432,12 +500,22 @@ export class FileUploadComponent implements OnInit {
 
   OpenFile(_rec: Table_Mast_Files) {
 
+    if (_rec.files_aws_bucket) {
+      this.OpenFromS3(_rec);
+      return;
+    }
+
     window.open(_rec.file_uri, '_blank');
 
   }
 
 
   ShowFile(_rec: Table_Mast_Files) {
+
+    if (_rec.files_aws_bucket) {
+      this.DownloadFromS3(_rec);
+      return;
+    }
 
     let filename: string = "";
     let filedisplayname: string = "";
@@ -446,8 +524,64 @@ export class FileUploadComponent implements OnInit {
     this.Downloadfile(filename, "", filedisplayname);
   }
 
+  OpenFromS3(_rec: Table_Mast_Files) {
+    this.lovService.GetS3Url({ fileid: _rec.file_id, bucket: _rec.files_aws_bucket })
+      .subscribe(response => {
+        if (response.retvalue == false) {
+          this.errorMessage = response.error;
+          alert(this.errorMessage);
+        } else {
+          window.open(response.url, '_blank');
+        }
+      }, error => {
+        this.errorMessage = this.gs.getError(error);
+      });
+  }
+
+  DownloadFromS3(_rec: Table_Mast_Files) {
+    this.lovService.GetS3Url({ fileid: _rec.file_id, bucket: _rec.files_aws_bucket, downloadfilename: _rec.file_desc })
+      .subscribe(response => {
+        if (response.retvalue == false) {
+          this.errorMessage = response.error;
+          alert(this.errorMessage);
+        } else {
+          window.open(response.url, '_blank');
+        }
+      }, error => {
+        this.errorMessage = this.gs.getError(error);
+      });
+  }
+
   Downloadfile(filename: string, filetype: string, filedisplayname: string) {
     this.gs.DownloadFile(this.gs.FS_APP_FOLDER, filename, filetype, filedisplayname);
+  }
+
+  migrateBatchToS3() {
+
+    let pendingCount = this.RecordList.filter(rec => !rec.files_aws_bucket).length;
+    if (pendingCount == 0) {
+      alert('No files pending migration to S3');
+      return;
+    }
+
+    if (!confirm("Migrate " + pendingCount + " file(s) to S3?")) {
+      return;
+    }
+
+    this.loading = true;
+    this.errorMessage = '';
+
+    this.lovService.MigrateBatchToS3({ files_parent_id: this.Files_Parent_Id })
+      .subscribe(response => {
+        this.loading = false;
+        alert('Migration complete. Migrated: ' + response.migrated + ', Failed: ' + response.failed +
+          (response.failed > 0 ? ('\n' + response.errors.join('\n')) : ''));
+        this.List();
+      }, error => {
+        this.loading = false;
+        this.errorMessage = this.gs.getError(error);
+        alert(this.errorMessage);
+      });
   }
 
   Sendmail(_rec: Table_Mast_Files, emailmodal: any = null) {

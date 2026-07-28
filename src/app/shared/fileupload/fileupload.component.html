@@ -63,10 +63,13 @@
           <label class="col-2 col-form-label col-form-label-sm"></label>
           <div class="col-10">
             <!-- <button (click)="uploadFiles()">Upload</button> -->
-            <button class="btn btn-info btn-sm mr-4" (click)="uploadFiles()">Upload</button>
+            <button class="btn btn-info btn-sm mr-4" [disabled]="loading" (click)="uploadFiles()">Upload</button>
+            <button class="btn btn-info btn-sm mr-4" [disabled]="loading" (click)="uploadFilesToS3()">Upload to S3</button>
+            <span *ngIf="loading" class="mr-4"><i class="fa fa-spinner fa-spin"></i> Processing...</span>
             <input type="checkbox" class="form-check-input  mt-2 ml-2 mr-2" [(ngModel)]="isDeleted" #is_deleted />
             <span class="mt-2 ml-4 mr-2">Deleted</span>
             <button class="btn btn-info btn-sm ml-2" (click)="List()">Refresh</button>
+            <button class="btn btn-info btn-sm ml-2" [disabled]="loading" (click)="migrateBatchToS3()">Migrate to S3</button>
           </div>
         </div>
 
