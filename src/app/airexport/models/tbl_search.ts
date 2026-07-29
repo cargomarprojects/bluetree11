@@ -70,6 +70,9 @@ export interface SearchQuery {
     searchType: string;
     isParentChecked: boolean;
     isHouseChecked: boolean;
+    fromDate: string;
+    toDate: string;
+    searchMode: string;
 }
 
 export interface SearchPageModel {

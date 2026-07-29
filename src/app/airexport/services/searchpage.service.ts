@@ -78,7 +78,7 @@ export class SearchPageService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchType: 'CONTAINER', isParentChecked: false, isHouseChecked: false },
+            searchQuery: <SearchQuery>{ searchString: '', searchType: 'CONTAINER', isParentChecked: false, isHouseChecked: false, fromDate: '', toDate: '', searchMode: 'ALL' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
         this.mdata$.next(this.record);
@@ -101,7 +101,7 @@ export class SearchPageService {
             sortorder: true,
             errormessage: '',
             records: [],
-            searchQuery: <SearchQuery>{ searchString: '', searchType: 'CONTAINER', isParentChecked: false, isHouseChecked: false },
+            searchQuery: <SearchQuery>{ searchString: '', searchType: 'CONTAINER', isParentChecked: false, isHouseChecked: false, fromDate: '', toDate: '', searchMode: 'ALL' },
             pageQuery: <PageQuery>{ action: 'NEW', page_count: 0, page_current: -1, page_rowcount: 0, page_rows: 0 }
         };
 
@@ -134,7 +134,7 @@ export class SearchPageService {
         if (this.gs.isBlank(this.record.searchQuery.searchString)) {
             // this.record.errormessage = 'Search String Not Found';
             // this.mdata$.next(this.record);
-            alert('Search String Not Found');
+            alert('Search Value Not Found');
             return;
         }
         var SearchData = this.gs.UserInfo;
@@ -152,6 +152,9 @@ export class SearchPageService {
         SearchData.IS_1099 = this.gs.CAN_ACCESS_1099_EXPENSE;
         SearchData.IS_PAYROLL = this.gs.CAN_ACCESS_PAYROLL_EXPENSE;
         SearchData.IS_IPS = this.gs.CAN_ACCESS_INTERNAL_PAYMENT_SETTLEMENT;
+        SearchData.FDATE = this.record.searchQuery.fromDate;
+        SearchData.TDATE = this.record.searchQuery.toDate;
+        SearchData.SMODE = this.record.searchQuery.searchMode;
 
         SearchData.page_count = 0;
         SearchData.page_rows = 0;
