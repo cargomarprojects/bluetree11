@@ -113,7 +113,15 @@ export class TransferPageComponent implements OnInit {
 
     TransferData(chkMblDup: boolean) {
 
-        var SearchData = this.gs.UserInfo;
+        // var SearchData = this.gs.UserInfo;
+        const SearchData = {
+            ...this.gs.UserInfo
+        };
+
+        if (this.mrecord.messagesender == 'DOCAI')
+            SearchData["~USR_CODE"] = 'DOCAI+';
+        else
+            SearchData["~USR_CODE"] = 'EDI';
         if (this.gs.isBlank(this.mrecord.masterid))
             SearchData.MASTERID = '';
         else
