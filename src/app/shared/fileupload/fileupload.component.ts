@@ -525,7 +525,8 @@ export class FileUploadComponent implements OnInit {
   }
 
   OpenFromS3(_rec: Table_Mast_Files) {
-    this.lovService.GetS3Url({ fileid: _rec.file_id, bucket: _rec.files_aws_bucket })
+    //this.lovService.GetS3Url({ fileid: _rec.file_id, bucket: _rec.files_aws_bucket })
+    this.lovService.GetS3Url({ fileid: _rec.file_id, bucket: _rec.files_aws_bucket, downloadfilename: _rec.file_desc, disposition: 'inline' })
       .subscribe(response => {
         if (response.retvalue == false) {
           this.errorMessage = response.error;
