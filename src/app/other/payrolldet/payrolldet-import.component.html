@@ -28,8 +28,16 @@
                                         <thead class="page-body-thead">
                                             <tr>
                                                 <th>NAME</th>
-                                                <th>EMPLOYEE</th>
-                                                <th>EMPLOYER</th>
+                                                <th>MEDICAL</th>
+                                                <th>FICA</th>
+                                                <th>MEDICARE</th>
+                                                <th>FEDERAL</th>
+                                                <th>STATE</th>
+                                                <th>CITY</th>
+                                                <th>CA.SDI</th>
+                                                <th>SUPP.INSURANCE</th>
+                                                <th>IRC</th>
+                                                <th>IRA</th>
                                                 <th>PAYROLL.NAME</th>
                                             </tr>
                                         </thead>
@@ -38,6 +46,14 @@
                                                 (mousedown)="mainservice.selectRowId(rec.cpd_emp_doc_name)"
                                                 [class.selected]="rec.cpd_emp_doc_name == mainservice.getRowId()">
                                                 <td>{{rec.cpd_emp_doc_name}}</td>
+                                                <td>{{rec.cpl_medical | number : '1.2-2'}} </td>
+                                                <td>{{rec.cpl_fica | number : '1.2-2'}} </td>
+                                                <td>{{rec.cpl_medicare | number : '1.2-2'}} </td>
+                                                <td>{{rec.cpl_federal | number : '1.2-2'}} </td>
+                                                <td>{{rec.cpl_state | number : '1.2-2'}} </td>
+                                                <td>{{rec.cpl_city | number : '1.2-2'}} </td>
+                                                <td>{{rec.cpl_casdi | number : '1.2-2'}} </td>
+                                                <td>{{rec.cpl_supp_insurance | number : '1.2-2'}} </td>
                                                 <td>{{rec.EMPLY_CONTRIBUTION | number : '1.2-2'}} </td>
                                                 <td>{{rec.EMPLR_CONTRIBUTION | number : '1.2-2'}} </td>
                                                 <td>{{rec.cpd_emp_name}}</td>

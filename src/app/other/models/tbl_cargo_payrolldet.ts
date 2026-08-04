@@ -15,12 +15,9 @@ export interface Tbl_Cargo_Payrolldet {
     cpd_acc_name: string;
     cpd_amt: number;
     cpd_order: number;
- 
+
     cpd_emp_doc_name: string;
     cpd_payroll_date: string;
-
-    EMPLY_CONTRIBUTION: number;
-    EMPLR_CONTRIBUTION: number;
 
     A1: number;
     A2: number;
@@ -59,6 +56,21 @@ export interface Tbl_Cargo_Payrolldet {
     NET: number;
     cpd_include_payroll: string;
     cpd_include_payroll_b: boolean;
+
+    EMPLY_CONTRIBUTION: number;
+    EMPLR_CONTRIBUTION: number;
+
+    cpl_date: string;
+    cpl_irc: number;
+    cpl_ira: number;
+    cpl_fica: number;
+    cpl_medicare: number;
+    cpl_federal: number;
+    cpl_state: number;
+    cpl_city: number;
+    cpl_casdi: number;
+    cpl_medical: number;
+    cpl_supp_insurance: number;
 }
 
 export interface vm_Tbl_Cargo_Payrolldet {
