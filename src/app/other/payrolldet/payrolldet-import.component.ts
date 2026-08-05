@@ -46,7 +46,7 @@ export class PayrolldetImportComponent implements OnInit {
     filetype: string = 'PDF';
     filedisplayname: string = 'Payroll.pdf';
     missingnames: string = '';
-    
+
     constructor(
         private modalconfig: NgbModalConfig,
         private modalservice: NgbModal,
@@ -64,7 +64,7 @@ export class PayrolldetImportComponent implements OnInit {
 
     private init() {
         this.RecordList = <Tbl_Cargo_Payrolldet[]>[];
-        this.missingnames='';
+        this.missingnames = '';
     }
     ImportPayroll(payrollmodal: any = null) {
         if (this.gs.isBlank(this._refid)) {
@@ -88,6 +88,10 @@ export class PayrolldetImportComponent implements OnInit {
                 this.filetype = response.filestype;
                 this.filedisplayname = response.files_desc;
             }
+            
+            this.RecordList = <Tbl_Cargo_Payrolldet[]>response.list;
+            this.missingnames = response.missingnames;
+
             this.modal = this.modalservice.open(payrollmodal, { windowClass: 'large-modal', centered: true });
         }, error => {
             alert(this.gs.getError(error));
@@ -123,6 +127,7 @@ export class PayrolldetImportComponent implements OnInit {
     ExtractData() {
         var SearchData = this.gs.UserInfo;
         SearchData.FILES_NAME = this.filename;
+        SearchData.PAYROLL_DATE = this._refdate;
         this.mainservice.ExtractData(SearchData)
             .subscribe(response => {
                 this.RecordList = <Tbl_Cargo_Payrolldet[]>response.list;
@@ -134,10 +139,10 @@ export class PayrolldetImportComponent implements OnInit {
 
     Generate() {
 
-         if (!confirm("Generate Records...")) {
+        if (!confirm("Generate Records...")) {
             return;
         }
-        
+
         if (this.callbackevent) {
             this.callbackevent.emit({ action: 'GENERATE', extractlist: this.RecordList });
             this.modal.close();
