@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 import { HttpClient } from '@angular/common/http';
 import { GlobalService } from '../../core/services/global.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LovService } from '../services/lov.service';
 
 @Component({
   selector: 'app-report2',
@@ -80,6 +81,7 @@ export class Report2Component implements OnInit {
   constructor(
     private modalconfig: NgbModalConfig,
     private modalservice: NgbModal,
+    public lovService: LovService,
     private http2: HttpClient,
     private gs: GlobalService) {
       modalconfig.backdrop = 'static'; //true/false/static
@@ -132,6 +134,19 @@ export class Report2Component implements OnInit {
 
 
   AutoLoad() {
+
+    // this.lovService.GetS3Url({ fileid: 'E607782B4C3B17AF554B655F5EF4B1C1.PDF', bucket: 'bluetree', downloadfilename: 'MOTHERLINES-INC-PAYROLL-021526.PDF', disposition: 'inline' })
+    //   .subscribe(response => {
+    //     if (response.retvalue == false) {
+    //       this.errorMessage = response.error;
+    //       alert(this.errorMessage);
+    //     } else {
+    //        this.pdfViewerAutoLoad.pdfSrc = response.url;
+    //       this.pdfViewerAutoLoad.refresh();
+    //     }
+    //   }, error => {
+    //     this.errorMessage = this.gs.getError(error);
+    //   });
 
     this.gs.getFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname).subscribe(response => {
 

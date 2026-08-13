@@ -15,8 +15,8 @@
                     </div>
                     <div class="page-body">
                         <div class="row border">
-                            <div *ngIf="filename" class="col-md-6 testbox  px-0 mx-0">
-                                <app-report2 [title]="" [url]="" [searchdata]="" [menuid]="_menuid"
+                            <div  class="col-md-6 testbox  px-0 mx-0">
+                                <app-report2 *ngIf="filename" [title]="" [url]="" [searchdata]="" [menuid]="_menuid"
                                     [filename]="filename" [filetype]="filetype" [filedisplayname]="filedisplayname"
                                     [filename2]="" [filetype2]="" [filedisplayname2]=""
                                     (callbackevent)="callbackevent($event)"></app-report2>
