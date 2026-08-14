@@ -42,10 +42,13 @@ export class PayrolldetImportComponent implements OnInit {
 
     RecordList: Tbl_Cargo_Payrolldet[] = [];
     modal: any;
+    fileid: string = '';
     filename: string = '';
     filetype: string = 'PDF';
     filedisplayname: string = 'Payroll.pdf';
+    bucketname: string = '';
     missingnames: string = '';
+    base64Pdf: string = '';
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -65,6 +68,7 @@ export class PayrolldetImportComponent implements OnInit {
     private init() {
         this.RecordList = <Tbl_Cargo_Payrolldet[]>[];
         this.missingnames = '';
+        this.base64Pdf = '';
     }
     ImportPayroll(payrollmodal: any = null) {
         if (this.gs.isBlank(this._refid)) {
@@ -80,15 +84,19 @@ export class PayrolldetImportComponent implements OnInit {
         SearchData.MBL_ID = this._refid;
         SearchData.PAYROLL_DATE = this._refdate;
         this.mainservice.ImportPayroll(SearchData).subscribe(response => {
+            this.fileid = '';
             this.filename = '';
             this.filetype = '';
             this.filedisplayname = '';
+            this.bucketname = '';
             if (response.files_id) {
                 this.filename = this.gs.FS_APP_FOLDER + response.files_path + response.files_id;
                 this.filetype = response.filestype;
                 this.filedisplayname = response.files_desc;
+                this.fileid = response.files_id;
+                this.bucketname = response.bucketname;
             }
-            
+
             this.RecordList = <Tbl_Cargo_Payrolldet[]>response.list;
             this.missingnames = response.missingnames;
 
@@ -127,7 +135,10 @@ export class PayrolldetImportComponent implements OnInit {
     ExtractData() {
         var SearchData = this.gs.UserInfo;
         SearchData.FILES_NAME = this.filename;
+        SearchData.FILES_ID = this.fileid;
         SearchData.PAYROLL_DATE = this._refdate;
+        SearchData.BASE64PDF = this.base64Pdf;
+        SearchData.FILES_DISP_NAME = this.filedisplayname;
         this.mainservice.ExtractData(SearchData)
             .subscribe(response => {
                 this.RecordList = <Tbl_Cargo_Payrolldet[]>response.list;
@@ -148,4 +159,11 @@ export class PayrolldetImportComponent implements OnInit {
             this.modal.close();
         }
     }
+
+    callbackparent(params: any) {
+        if (!this.gs.isBlank(params)) {
+            this.base64Pdf = params.base64Pdf;
+        }
+    }
+
 }

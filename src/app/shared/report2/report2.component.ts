@@ -72,6 +72,16 @@ export class Report2Component implements OnInit {
   @Input() set filedisplayname2(value: any) {
     this._filedisplayname2 = value;
   }
+
+  private _fileid: string = '';
+  @Input() set fileid(value: any) {
+    this._fileid = value;
+  }
+  private _bucketname: string = '';
+  @Input() set bucketname(value: any) {
+    this._bucketname = value;
+  }
+
   @Output() callbackevent = new EventEmitter<any>();
 
   Mail_Pkid: string = '';
@@ -84,8 +94,8 @@ export class Report2Component implements OnInit {
     public lovService: LovService,
     private http2: HttpClient,
     private gs: GlobalService) {
-      modalconfig.backdrop = 'static'; //true/false/static
-      modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
+    modalconfig.backdrop = 'static'; //true/false/static
+    modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
   }
 
   ngOnInit() {
@@ -135,40 +145,70 @@ export class Report2Component implements OnInit {
 
   AutoLoad() {
 
-    // this.lovService.GetS3Url({ fileid: 'E607782B4C3B17AF554B655F5EF4B1C1.PDF', bucket: 'bluetree', downloadfilename: 'MOTHERLINES-INC-PAYROLL-021526.PDF', disposition: 'inline' })
-    //   .subscribe(response => {
-    //     if (response.retvalue == false) {
-    //       this.errorMessage = response.error;
-    //       alert(this.errorMessage);
-    //     } else {
-    //        this.pdfViewerAutoLoad.pdfSrc = response.url;
-    //       this.pdfViewerAutoLoad.refresh();
-    //     }
-    //   }, error => {
-    //     this.errorMessage = this.gs.getError(error);
-    //   });
+    if (this._bucketname) {
 
-    this.gs.getFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname).subscribe(response => {
+      this.lovService.GetS3Url({ fileid: this._fileid, bucket: this._bucketname, downloadfilename: this.filedisplayname, disposition: 'inline', pdfbytes: 'Y' })
+        .subscribe(response => {
+          if (response.retvalue == false) {
+            this.errorMessage = response.error;
+            alert(this.errorMessage);
+          } else {
+            this.showPdf(response.pdf);
+          }
+        }, error => {
+          this.errorMessage = this.gs.getError(error);
+        });
 
-      this.pdfViewerAutoLoad.pdfSrc = response;
-      this.pdfViewerAutoLoad.refresh();
+    } else {
 
-    }, error => {
-      this.errorMessage = this.gs.getError(error);
-      alert(this.errorMessage);
-    });
+      this.gs.getFile(this.gs.GLOBAL_REPORT_FOLDER, this._filename, this._filetype, this._filedisplayname).subscribe(response => {
+        this.pdfViewerAutoLoad.pdfSrc = response;
+        this.pdfViewerAutoLoad.refresh();
+      }, error => {
+        this.errorMessage = this.gs.getError(error);
+        alert(this.errorMessage);
+      });
+    }
+  }
 
+  showPdf(base64Pdf: string) {
+
+    const binaryString = window.atob(base64Pdf);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    const header = String.fromCharCode(
+      bytes[0],
+      bytes[1],
+      bytes[2],
+      bytes[3],
+      bytes[4]
+    );
+    const blob = new Blob(
+      [bytes],
+      { type: "application/pdf" }
+    );
+
+    const pdfUrl =
+      URL.createObjectURL(blob);
+    this.pdfViewerAutoLoad.pdfSrc = pdfUrl;
+    this.pdfViewerAutoLoad.refresh();
+    
+    if (this.callbackevent) {
+      this.callbackevent.emit({ action: 'PDF', base64Pdf: base64Pdf });
+    }
   }
 
   report(action: string, emailmodal: any = null) {
-   
+
   }
 
   mailcallbackevent(event: any) {
     // this.modal.close();
     // this.AutoLoad();
   }
-   
-  
+
+
 
 }
