@@ -15,11 +15,11 @@
                     </div>
                     <div class="page-body">
                         <div class="row border">
-                            <div class="col-md-6 testbox  px-0 mx-0">
+                            <div  class="col-md-6 testbox  px-0 mx-0">
                                 <app-report2 *ngIf="filename" [title]="" [url]="" [searchdata]="" [menuid]="_menuid"
-                                    [filename]="filename" [filetype]="filetype" [filedisplayname]="filedisplayname"
-                                    [bucketname]="bucketname" [fileid]="fileid" [filename2]="" [filetype2]=""
-                                    [filedisplayname2]="" (callbackevent)="callbackparent($event)"></app-report2>
+                                    [filename]="filename" [filetype]="filetype" [filedisplayname]="filedisplayname" [bucketname]="bucketname" [fileid]="fileid"
+                                    [filename2]="" [filetype2]="" [filedisplayname2]=""
+                                    (callbackevent)="callbackparent($event)"></app-report2>
                             </div>
                             <div class="col-md-6 testbox  px-0 mx-0">
                                 <div class="page-body table-responsive  fixedTableHead my-0 p-0"
@@ -75,7 +75,7 @@
             <div class="page-footer">
                 <div class="row justify-content-center p-1">
                     <button class="btn btn-primary btn-sm mr-1" (click)="ExtractData()">Extract Data</button>
-                    <button class="btn btn-primary btn-sm mr-1" (click)="Generate()">{{generateBtnCaption}}</button>
+                    <button class="btn btn-primary btn-sm mr-1" (click)="Generate()">Generate</button>
                     <button class="btn btn-primary btn-sm mr-1" (click)="Close()">Close</button>
                 </div>
             </div>

@@ -49,7 +49,6 @@ export class PayrolldetImportComponent implements OnInit {
     bucketname: string = '';
     missingnames: string = '';
     base64Pdf: string = '';
-    generateBtnCaption: string = 'Generate';
 
     constructor(
         private modalconfig: NgbModalConfig,
@@ -90,10 +89,6 @@ export class PayrolldetImportComponent implements OnInit {
             this.filetype = '';
             this.filedisplayname = '';
             this.bucketname = '';
-
-            this.generateBtnCaption = response.generatecaption;
-            if (this.gs.isBlank(this.generateBtnCaption))
-                this.generateBtnCaption = 'Generate';
             
             if (response.files_id) {
                 this.filename = this.gs.FS_APP_FOLDER + response.files_path + response.files_id;
