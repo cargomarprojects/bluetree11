@@ -18,6 +18,7 @@ export interface Tbl_Cargo_Payrolldet {
 
     cpd_emp_doc_name: string;
     cpd_payroll_date: string;
+    cpd_remarks: string;
 
     A1: number;
     A2: number;
@@ -71,6 +72,7 @@ export interface Tbl_Cargo_Payrolldet {
     cpl_casdi: number;
     cpl_medical: number;
     cpl_supp_insurance: number;
+    cpl_net_pay: number;
 }
 
 export interface vm_Tbl_Cargo_Payrolldet {
