@@ -143,15 +143,20 @@ export class PayrollDetService {
             this.record.records.push(_rec);
         }
         else {
-            // REC.obl_slno = _rec.obl_slno;
-            // REC.obl_date = _rec.obl_date;
-            // REC.obl_refno = _rec.obl_refno;
-            // REC.obl_houseno = _rec.obl_houseno;
-            // REC.obl_consignee_name = _rec.obl_consignee_name;
-            // REC.obl_handled_name = _rec.obl_handled_name;
-            // REC.obl_remark = _rec.obl_remark;
-            // REC.rec_created_by = _rec.rec_created_by;
-            // REC.rec_created_date = _rec.rec_created_date;
+            REC.A1 = _rec.A1;
+            REC.D8 = _rec.D8;
+            REC.A9 = _rec.A9;
+            REC.D1 = _rec.D1;
+            REC.D2 = _rec.D2;
+            REC.D3 = _rec.D3;
+            REC.D4 = _rec.D4;
+            REC.D5 = _rec.D5
+            REC.D9 = _rec.D9;
+            REC.D6 = _rec.D6;
+            REC.D7 = _rec.D7;
+            REC.NET = _rec.NET;
+            REC.EMPLR_CONTRIBUTION = _rec.EMPLR_CONTRIBUTION;
+            REC.cpd_remarks = _rec.cpd_remarks;
         }
     }
 

@@ -127,6 +127,7 @@ export class PayrollDetEditComponent implements OnInit {
         this.record.ATOT = 0;
         this.record.NET = 0;
         this.record.EMPLR_CONTRIBUTION = 0;
+        this.record.cpd_remarks = '';
     }
 
     GetRecord() {
@@ -323,7 +324,9 @@ export class PayrollDetEditComponent implements OnInit {
         if (field == 'EMPLR_CONTRIBUTION') {
             this.record.EMPLR_CONTRIBUTION = this.gs.roundNumber(this.record.EMPLR_CONTRIBUTION, 2)
         }
-
+        if (field == 'cpd_remarks') {
+            this.record.cpd_remarks = this.record.cpd_remarks.toUpperCase()
+        }
     }
 
     FindTotal() {
@@ -369,11 +372,4 @@ export class PayrollDetEditComponent implements OnInit {
 
         this.record.NET = this.gs.roundNumber(this.record.NET, 2);
     }
-
-
-
-
-
-
-
 }

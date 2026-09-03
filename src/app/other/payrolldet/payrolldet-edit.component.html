@@ -42,7 +42,8 @@
                 <label class="col-4 col-form-label col-form-label-sm pr-0">Gross after medical deductions</label>
                 <div class="col-4">
                     <input class="form-control form-control-sm" type="number" (blur)="onBlur('A9')"
-                        (change)="onChange('A9')" (focus)="onFocus('A9')" [(ngModel)]="record.A9"  disabled maxlength="15" />
+                        (change)="onChange('A9')" (focus)="onFocus('A9')" [(ngModel)]="record.A9" disabled
+                        maxlength="15" />
                 </div>
             </div>
             <div class="form-group row">
@@ -117,7 +118,13 @@
                         [(ngModel)]="record.EMPLR_CONTRIBUTION" maxlength="15" />
                 </div>
             </div>
-
+            <div class="form-group row">
+                <label class="col-4 col-form-label col-form-label-sm">Remarks</label>
+                <div class="col-4">
+                    <input class="form-control form-control-sm" type="text" (blur)="onBlur('cpd_remarks')"
+                        [(ngModel)]="record.cpd_remarks" maxlength="100" />
+                </div>
+            </div>
         </div>
 
         <div class="col-md-6 testbox  px-0 mx-0">
