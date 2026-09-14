@@ -66,7 +66,7 @@
 
             <button class="btn btn-info btn-sm mr-4" [disabled]="loading" (click)="uploadFilesToS3()">Upload
               (S3)</button>
-            <button class="btn btn-info btn-sm mr-4" [disabled]="loading" (click)="uploadFiles()">Upload</button>
+            <!-- <button class="btn btn-info btn-sm mr-4" [disabled]="loading" (click)="uploadFiles()">Upload</button> -->
             <span *ngIf="loading" class="mr-4"><i class="fa fa-spinner fa-spin"></i> Processing...</span>
             <input type="checkbox" class="form-check-input  mt-2 ml-2 mr-2" [(ngModel)]="isDeleted" #is_deleted />
             <span class="mt-2 ml-4 mr-2">Deleted</span>
