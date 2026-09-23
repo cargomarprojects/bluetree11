@@ -130,7 +130,8 @@ export class ShipmentLogReportComponent implements OnInit {
 
     this.storesub = this.store.select(myReducer.getState(this.urlid)).subscribe(rec => {
       this.initLov();
-      this.sdate = this.gs.getPreviousDate(120);
+      //this.sdate = this.gs.getPreviousDate(120);
+      this.sdate = '';
       if (rec) {
         this.isRecStored = true;
         this.MainList = rec.records;
@@ -208,7 +209,7 @@ export class ShipmentLogReportComponent implements OnInit {
 
         this.job_mode = 'OCEAN IMPORT';
         this.date_basedon = 'REF. DATE';
-        this.sdate = this.gs.getPreviousDate(120);
+        this.sdate = '';//this.gs.getPreviousDate(120);
         this.edate = this.gs.defaultValues.today;
         this.shipper_id = '';
         this.shipper_name = '';
