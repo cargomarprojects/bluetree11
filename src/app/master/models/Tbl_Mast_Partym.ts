@@ -144,7 +144,7 @@ export interface Tbl_Mast_Partym {
     gen_no_thank_email: string;
     gen_no_er_email_b: boolean;
     gen_no_thank_email_b: boolean;
-
+    gen_protected_b: boolean;
 }
 
 export interface vm_Tbl_Mast_Partym {
