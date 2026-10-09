@@ -63,6 +63,7 @@ import { Report2Component } from './report2/report2.component';
 import { GenRemarkComponent } from './genrem/genrem.component';
 import { UserEditHistoryComponent } from './edithistory/edithistory.component';
 import { AccAlertComponent } from './accalert/accalert.component';
+import { WarningAlertComponent } from './warningalert/warningalert.component';
 
 @NgModule({
   imports: [
@@ -107,7 +108,8 @@ import { AccAlertComponent } from './accalert/accalert.component';
     Report2Component,
     GenRemarkComponent,
     UserEditHistoryComponent,
-    AccAlertComponent
+    AccAlertComponent,
+    WarningAlertComponent
   ],
   exports: [
     CommonModule,
@@ -148,7 +150,8 @@ import { AccAlertComponent } from './accalert/accalert.component';
     Report2Component,
     GenRemarkComponent,
     UserEditHistoryComponent,
-    AccAlertComponent
+    AccAlertComponent,
+    WarningAlertComponent
   ]
 
 })
