@@ -9,6 +9,7 @@ import { User_Menu } from '../../../core/models/menum';
 import { vm_tbl_cargo_imp_housem, Tbl_cargo_imp_container, Tbl_cargo_imp_desc, Tbl_cargo_imp_housem, Table_Address, Tbl_desc } from '../../models/tbl_cargo_imp_housem';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { Tbl_cargo_imp_masterm } from '../../models/tbl_cargo_imp_masterm';
+import { WarningAlertComponent } from '../../../shared/warningalert/warningalert.component';
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-07-10-2021
 //EDIT-AJITH-30-10-2021
@@ -50,6 +51,8 @@ export class SeaImpHouseEditComponent implements OnInit {
 
   @ViewChildren('_cntr_no') cntr_no_field: QueryList<ElementRef>;
   @ViewChildren('_cntr_sealno') cntr_sealno_field: QueryList<ElementRef>;
+  @ViewChild('WarnMsg') private _WarnMsg: WarningAlertComponent;
+
 
   mblrecord: Tbl_cargo_imp_masterm = <Tbl_cargo_imp_masterm>{};
   record: Tbl_cargo_imp_housem = <Tbl_cargo_imp_housem>{};
@@ -2034,6 +2037,35 @@ export class SeaImpHouseEditComponent implements OnInit {
     this.modal.close();
   }
 
+
+  GetWarningMsg(_type: string) {
+
+    this.errorMessage = [];
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = this.pkid;
+    SearchData.type = _type;
+    SearchData.mblid = this.record.hbl_mbl_id;
+    this.mainService.GetWarningMsg(SearchData)
+      .subscribe(response => {
+
+        if (!response.bwarningmsg) {
+          this.GetArrivalNotice(_type);
+          return;
+        }
+
+        this._WarnMsg.showConfirm(response.list).then(confirmed => {
+          if (confirmed) {
+            this.GetArrivalNotice(_type);
+          }
+        });
+
+      }, error => {
+        this.errorMessage.push(this.gs.getError(error));
+        alert(this.errorMessage);
+      });
+  }
+
+
   GetArrivalNotice(_type: string) {
 
     if (this.gs.isBlank(this.record.hbl_ams_fileno) || this.record.hbl_ams_fileno == "TBA" || this.record.hbl_ams_fileno == "N/A") {
@@ -2044,6 +2076,7 @@ export class SeaImpHouseEditComponent implements OnInit {
     var SearchData = this.gs.UserInfo;
     SearchData.pkid = this.pkid;
     SearchData.type = _type;
+    SearchData.mblid = this.record.hbl_mbl_id;
 
     this.mainService.GetArrivalNotice(SearchData)
       .subscribe(response => {

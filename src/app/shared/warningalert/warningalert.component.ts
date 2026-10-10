@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
 import { SearchTable } from '../../shared/models/searchtable';
 import { WarningMsg } from '../../shared/models/warningmsg';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-warningalert',
@@ -18,11 +18,13 @@ export class WarningAlertComponent {
     modal: any;
 
     constructor(
+        private modalconfig: NgbModalConfig,
         private modalService: NgbModal,
         private route: ActivatedRoute,
         private gs: GlobalService
     ) {
-
+        modalconfig.backdrop = 'static'; //true/false/static
+        modalconfig.keyboard = true; //true Closes the modal when escape key is pressed
     }
 
     // Init Will be called After executing Constructor
@@ -36,8 +38,15 @@ export class WarningAlertComponent {
     }
 
     open(content: any) {
-        this.modal = this.modalService.open(content, { size: "sm", backdrop: 'static', keyboard: true, windowClass: 'modal-custom' });
+        this.modal = this.modalService.open(content, {
+            centered: true,
+            size: 'sm',
+            backdrop: 'static',
+            keyboard: true,
+            windowClass: 'modal-custom-centered'
+        });
     }
+
 
     OnBlur(field: string) {
 
@@ -66,6 +75,7 @@ export class WarningAlertComponent {
     public showConfirm(_warningRecords: WarningMsg[]): Promise<boolean> {
         this.RecordList = _warningRecords;
         this.modal = this.modalService.open(this.warningModal, {
+            centered: true,
             size: "sm",
             backdrop: 'static',
             keyboard: true,

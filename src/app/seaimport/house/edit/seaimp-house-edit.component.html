@@ -1241,7 +1241,7 @@
           <div class="form-group row">
             <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_ARRIVAL_NOTICE)"
-              (click)="GetArrivalNotice('ARRIVAL NOTICE')">Arrival
+              (click)="GetWarningMsg('ARRIVAL NOTICE')">Arrival
               Notice</button>
           </div>
           <!-- <div class="form-group row">
@@ -1253,7 +1253,7 @@
           <div class="form-group row">
             <button class=" col-12 btn btn-info btn-sm text-uppercase"
               *ngIf="gs.screenExists(gs.MENU_SI_HOUSE_ARRIVAL_NOTICE)"
-              (click)="GetArrivalNotice('FREIGHT INVOICE')">Arrival Notice(Frt
+              (click)="GetWarningMsg('FREIGHT INVOICE')">Arrival Notice(Frt
               Invoice)</button>
           </div>
           <div class="form-group row">
@@ -1388,3 +1388,4 @@
     </div>
   </div>
 </ng-template>
+<app-warningalert #WarnMsg [showYesNo]="true"></app-warningalert>

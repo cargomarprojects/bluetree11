@@ -2,6 +2,7 @@
 import { GlobalVariables } from '../../core/models/globalvariables';
 
 export class WarningMsg {
+    rowcolor:string;
     pkid: string;
     source: string;
     name: string;
