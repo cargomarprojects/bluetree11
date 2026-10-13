@@ -15,6 +15,8 @@ export class WarningAlertComponent {
     @Input() showYesNo: boolean = false;
     @ViewChild('warningmodal') warningModal: any;
     RecordList: WarningMsg[] = [];
+    selectedId: string = '1';
+    
     modal: any;
 
     constructor(
@@ -86,6 +88,13 @@ export class WarningAlertComponent {
             (result) => result === 'confirm',
             (reason) => false // dismissed
         );
+    }
+
+    public selectRowId(id: string) {
+        this.selectedId = id;
+    }
+    public getRowId() {
+        return this.selectedId;
     }
 
 }

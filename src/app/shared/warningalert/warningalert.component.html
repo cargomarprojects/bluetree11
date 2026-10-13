@@ -8,9 +8,9 @@
     </div>
     <div class="modal-body">
         <div class="page-body">
-            <div [style.height]="RecordList.length>5?'250px':'auto'"
-                [style.overflow-y]="RecordList.length>5?'scroll':'auto'">
-                <div class="page-body table-responsive">
+            <div [style.height]="RecordList.length>5?'300px':'auto'"
+                [style.overflow-y]="RecordList.length>10?'scroll':'auto'">
+                <div class="table-responsive">
                     <table class="table table-hover table-sm table-bordered table-striped">
                         <thead class="page-body-thead">
                             <tr>
@@ -21,7 +21,8 @@
                             </tr>
                         </thead>
                         <tbody class="page-body-tbody">
-                            <tr *ngFor="let rec of RecordList">
+                            <tr *ngFor="let rec of RecordList" (mousedown)="selectRowId(rec.name)"
+                                [class.selected]="rec.name == getRowId()">
                                 <!-- <td>{{rec.category}}</td> -->
                                 <td>{{rec.name}}</td>
                                 <!-- <td>{{rec.message_type}}</td> -->
@@ -39,26 +40,20 @@
         <button *ngIf="showYesNo" type="button" class="btn btn-outline-dark mr-1" (click)="d('cancel')">No</button>
     </div> -->
     <div class="modal-footer justify-content-center" *ngIf="showYesNo">
-    <span class="mr-3 font-weight-bold">Continue</span>
+        <span class="mr-3 font-weight-bold">Continue</span>
 
-    <button type="button"
-            class="btn btn-outline-dark mr-2"
-            (click)="c('confirm')">
-        Yes
-    </button>
+        <button type="button" class="btn btn-outline-dark mr-2" (click)="c('confirm')">
+            Yes
+        </button>
 
-    <button type="button"
-            class="btn btn-outline-dark"
-            (click)="d('cancel')">
-        No
-    </button>
-</div>
+        <button type="button" class="btn btn-outline-dark" (click)="d('cancel')">
+            No
+        </button>
+    </div>
 
-<div class="modal-footer justify-content-center" *ngIf="!showYesNo">
-    <button type="button"
-            class="btn btn-outline-dark"
-            (click)="d('N')">
-        Ok
-    </button>
-</div>
+    <div class="modal-footer justify-content-center" *ngIf="!showYesNo">
+        <button type="button" class="btn btn-outline-dark" (click)="d('N')">
+            Ok
+        </button>
+    </div>
 </ng-template>
