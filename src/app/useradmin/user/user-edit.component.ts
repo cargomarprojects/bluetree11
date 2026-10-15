@@ -232,13 +232,23 @@ export class UserEditComponent implements OnInit {
             alert(this.errorMessage);
             return bRet;
         }
-        
+
         if (this.record.rec_deleted == "Y") {
             bRet = false;
             this.errorMessage = "This User was Deleted";
             alert(this.errorMessage);
             return bRet;
         }
+
+        if (!this.gs.isBlank(this.record.usr_pwd)) {
+            if (/['%-/]/.test(this.record.usr_pwd)) {
+                bRet = false;
+                this.errorMessage = "Password cannot contain the following characters: ' % - /";
+                alert(this.errorMessage);
+                return bRet;
+            }
+        }
+
         return bRet;
     }
 
