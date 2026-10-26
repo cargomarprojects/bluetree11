@@ -155,6 +155,9 @@ export class FileUploadComponent implements OnInit {
   selectedRowIndex = -1;
   showDeleted: boolean = false;
   isDeleted: boolean = false;
+  uploadFileName: string = '';
+  bDragged: boolean = false;
+
   constructor(
     private modalconfig: NgbModalConfig,
     private modalservice: NgbModal,
@@ -211,7 +214,8 @@ export class FileUploadComponent implements OnInit {
       }
     }
   }
-  getFileDetails(e: any) {
+
+  OldgetFileDetails(e: any) {
 
     this.MultiFilesList = <Table_Mast_Files[]>[];
     let mFiles = <Table_Mast_Files>{};
@@ -265,6 +269,70 @@ export class FileUploadComponent implements OnInit {
         this.txt_fileName = strMultiplefname;
   }
 
+  getFileDetails(e: any) {
+    this.getFileList(e.target.files);
+  }
+
+  getFileList(_files: any[] = []) {
+    if (this.gs.isBlank(_files)) {
+      return;
+    }
+
+    this.uploadFileName = '';
+    this.MultiFilesList = <Table_Mast_Files[]>[];
+    let mFiles = <Table_Mast_Files>{};
+
+    let fileExtn: string = "";
+    let fileDefaultFilename = "";
+
+
+    let strDfname: string = "";
+    let strMultiplefname: string = '';
+
+    let isValidFile = true;
+    this.filesSelected = false;
+    this.myFiles = [];
+    for (var i = 0; i < _files.length; i++) {
+      this.filesSelected = true;
+      if (strMultiplefname != '')
+        strMultiplefname += ",";
+      strMultiplefname += _files[i].name;
+
+      fileExtn = this.getExtension(_files[i].name);
+      fileDefaultFilename = this.DefaultFilename;
+
+      this.fileName = this.gs.getGuid().toString().replace("-", "") + fileExtn;
+      this.fileName = this.fileName.toUpperCase();
+      this.fileDesc = _files[i].name;
+      this.fileDesc = this.fileDesc.toUpperCase();
+      this.fileSize = _files[i].size;
+
+      if (fileDefaultFilename.trim() != "")
+        strDfname = fileDefaultFilename + fileExtn.toUpperCase();
+      if (strDfname.length > 50) {
+        fileDefaultFilename = fileDefaultFilename.substring(0, 50 - fileExtn.length);
+        strDfname = fileDefaultFilename + fileExtn.toUpperCase();
+      }
+
+      if (this.fileDesc.length > 50)
+        this.fileDesc = this.fileDesc.substring(0, 50 - fileExtn.length) + fileExtn.toUpperCase();
+
+      this.txt_fileName = strDfname;
+      if (this.txt_fileName.trim().length <= 0)
+        this.txt_fileName = this.fileDesc;
+      this.txt_fileName = this.gs.ProperFileName(this.txt_fileName);
+      this.fileCreateDate = this.gs.defaultValues.today;
+      this.uploadFileName = this.txt_fileName;
+      this.myFiles.push(_files[i]);
+
+    }
+
+    if (this.filesSelected)
+      if (this.myFiles.length > 1) {
+        this.txt_fileName = strMultiplefname;
+        this.uploadFileName = this.myFiles.length.toString() + ' files';
+      }
+  }
 
   getExtension(_fName: string) {
     var temparr = _fName.split('.');
@@ -340,6 +408,8 @@ export class FileUploadComponent implements OnInit {
           this.loading = false;
           this.filesSelected = false;
           this.fileinput.nativeElement.value = '';
+          this.uploadFileName = '';
+          this.bDragged = false;
           this.List();
           alert('Upload Complete');
         },
@@ -737,4 +807,33 @@ export class FileUploadComponent implements OnInit {
     this.bshow = !this.bshow;
   }
 
+  onDragOver(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    const dropArea = event.currentTarget as HTMLElement;
+    dropArea.classList.add('drag-over');
+    this.bDragged = true;
+  }
+
+  onDragLeave(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    const dropArea = event.currentTarget as HTMLElement;
+    dropArea.classList.remove('drag-over');
+    this.bDragged = false;
+  }
+
+  onDrop(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    const dropArea = event.currentTarget as HTMLElement;
+    dropArea.classList.remove('drag-over');
+    // if (event.dataTransfer.files.length > 1) {
+    //   alert('Multiple files not allowed');
+    //   this.bDragged = false;
+    //   return;
+    // }
+    this.getFileList(event.dataTransfer.files);
+    this.bDragged = false;
+  }
 }

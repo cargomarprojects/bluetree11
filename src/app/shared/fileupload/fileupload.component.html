@@ -8,17 +8,19 @@
 <div class="page-body" *ngIf="canupload">
   <div class="row border">
     <div class="col-md-6 testbox  px-0 mx-0">
-      <div *ngIf="bshow">
-        <div class="form-group row">
+      <div *ngIf="bshow" class="mt-1">
+        <div class="form-group row mb-0">
           <label class="col-2 col-form-label col-form-label-sm">File</label>
           <div class="col-10">
-            <input type="file" id="file" multiple style="width: 600px" #fileinput (change)="getFileDetails($event)">
-            <!-- <input type="file" id="file"  style="width: 600px" #fileinput (change)="getFileDetails($event)"> -->
-            <!-- <label class="input-group-btn sm">
-            <span class="btn btn-info sm"> Choose File
-              <input type="file" id="file" style="display: none;" #fileinput (change)="getFileDetails($event)">
-            </span>{{txt_fileName}}
-          </label> -->
+            <!-- <input type="file" id="file" multiple style="width: 600px" #fileinput (change)="getFileDetails($event)" [style.background-color]="bDragged?'#45a049':''"> -->
+            <input type="file" id="customfileInput" multiple style="width: 600px;display: none;" #fileinput
+              (change)="getFileDetails($event)">
+            <label for="customfileInput" class="custom-file-upload" style="margin-bottom:2px;" (dragover)="onDragOver($event)"
+              (dragleave)="onDragLeave($event)" (drop)="onDrop($event)"
+              [style.background-color]="bDragged?'#45a049':''">
+              Choose files or drag it here
+            </label>
+            <span class="ml-1">{{uploadFileName?uploadFileName: 'No file chosen'}}</span>
           </div>
         </div>
         <div class="form-group row">
@@ -76,7 +78,8 @@
         </div>
 
         <div class="form-group row">
-          <label class="col-12 col-form-label col-form-label-sm">Pls click the button upload(S3) to upload files </label>
+          <label class="col-12 col-form-label col-form-label-sm">Pls click the button upload(S3) to upload files
+          </label>
         </div>
 
       </div>

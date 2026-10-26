@@ -1015,6 +1015,29 @@ br {
   overflow-x: hidden;
 }
 
+
+.custom-file-upload {
+  border: 1px solid #413f3f;
+  display: inline-block;
+  padding: 4px 8px;
+  cursor: pointer;
+  background-color: #e5e5e5;
+  color: black;
+  border-radius: 2px;
+}
+
+.custom-file-upload:hover {
+  background-color: #ebebeb;
+}
+
+.drag-drop-area {
+  border: 1px solid black;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .cntr th {
   min-width: 120px;
 }
