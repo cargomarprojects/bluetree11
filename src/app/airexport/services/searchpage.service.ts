@@ -138,7 +138,7 @@ export class SearchPageService {
             return;
         }
         var SearchData = this.gs.UserInfo;
-        SearchData.outputformat = 'SCREEN';
+        SearchData.outputformat = _searchdata.outputformat;
         SearchData.action = 'NEW';
         SearchData.pkid = this.id;
         SearchData.page_rowcount = this.gs.ROWS_TO_DISPLAY;
