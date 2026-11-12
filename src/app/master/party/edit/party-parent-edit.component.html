@@ -333,7 +333,11 @@
                         <button class=" col-12 btn btn-info btn-sm"
                             (click)="BtnNavigation('ATTACHMENT')">Attachments</button>
                     </div> -->
-
+                    <div class="form-group row">
+                        <button class=" col-12 btn btn-info btn-sm text-uppercase"
+                            [style.color]="record.rec_files_attached=='Y'?'red':'white'"
+                            (click)="BtnNavigation('ATTACHMENT')">Attachments</button>
+                    </div>
 
                     <div class="form-group row">
                         <!-- <button class=" col-12 btn btn-info btn-sm" (click)="BtnNavigation2('MEMO')">Memo</button> -->
@@ -409,14 +413,14 @@
             {{record.rec_created_date}} </label>
     </div>
 </div>
-    <!-- <div *ngIf="tab=='report'">
+<!-- <div *ngIf="tab=='report'">
     <app-report [title]="report_title" [url]="report_url" [searchdata]="report_searchdata" [menuid]="report_menuid"
         (callbackevent)="callbackevent($event)"></app-report>
-</div>
+</div> -->
 <div *ngIf="tab=='attachment'">
     <app-fileupload [title]="attach_title" [parentid]="attach_parentid" [subid]="attach_subid" [type]="attach_type"
         [typelist]="attach_typelist" [tablename]="attach_tablename" [tablepkcolumn]="attach_tablepkcolumn"
         [refno]="attach_refno" [customername]="attach_customername" [updatecolumn]="attach_updatecolumn"
         [viewonlysource]="attach_viewonlysource" [viewonlyid]="attach_viewonlyid" [filespath]="attach_filespath"
         [filespath2]="attach_filespath2" (callbackevent)="callbackevent($event)"></app-fileupload>
-</div> -->
+</div>

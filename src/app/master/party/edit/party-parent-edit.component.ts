@@ -593,7 +593,7 @@ export class PartyParentEditComponent implements OnInit {
         this.attach_title = 'Documents';
         this.attach_parentid = this.pkid;
         this.attach_subid = '';
-        this.attach_type = 'PARTYS';
+        this.attach_type = 'OVERSEAAGENT';
         this.attach_typelist = TypeList;
         this.attach_tablename = 'mast_partysm';
         this.attach_tablepkcolumn = 'gen_pkid';
