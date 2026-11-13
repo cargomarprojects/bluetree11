@@ -50,7 +50,7 @@ export class SeaImpMasterEditComponent implements OnInit {
   records: Tbl_cargo_imp_container[] = [];
   alertrecords: Table_Cargo_Remarks[] = [];
 
-  // 24-05-2019 Created By Joy  
+  // 24-05-2019 Created By Joy
   tab: string = 'main';
   report_title: string = '';
   report_url: string = '';
@@ -280,7 +280,7 @@ export class SeaImpMasterEditComponent implements OnInit {
           this.mbl_ref_date_field.Focus();
 
         if (!this.gs.isBlank(this.acc_alert_field)) {
-            this.acc_alert_field.show(this.alertrecords);
+          this.acc_alert_field.show(this.alertrecords);
         }
 
       }, error => {
@@ -359,6 +359,45 @@ export class SeaImpMasterEditComponent implements OnInit {
           this.mainService.RefreshList(this.record);
           // this.errorMessage.push('Save Complete');
           alert('Save Complete');
+        }
+      }, error => {
+        this.errorMessage.push(this.gs.getError(error));
+        alert(this.errorMessage);
+      });
+  }
+
+  TrackShipment() {
+    this.errorMessage = [];
+    if (this.gs.isBlank(this.record.mbl_no) || this.gs.isBlank(this.record.mbl_refno)) {
+      alert("Master BL# and Ref# are required to track shipment");
+      return;
+    }
+    if (!confirm("Track Shipment")) {
+      return;
+    }
+    const trackRecord = {
+      mblid: this.record.mbl_pkid,
+      record: {
+        Mbl_pkid: this.record.mbl_pkid,
+        Mbl: this.record.mbl_no,
+        UserId: this.gs.user_code,
+        LocationCode: this.gs.branch_code,
+        RefNo: this.record.mbl_refno,
+        Notes: '',
+        ScacCode: ''
+      },
+      userInfo: this.gs.UserInfo
+    };
+
+    this.mainService.TrackShipment(trackRecord)
+      .subscribe(response => {
+        if (response.error && response.error != '') {
+          this.errorMessage.push(response.error);
+          alert(this.errorMessage);
+        }
+        else {
+          this.record.mbl_track_shipment = "Y";
+          alert('Shipment Tracking Enabled');
         }
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
@@ -1236,7 +1275,7 @@ export class SeaImpMasterEditComponent implements OnInit {
       }
       case 'ATTACHMENT': {
         let TypeList: any[] = [];
-        TypeList = [{ "code": "AR/AP", "name": "AR/AP" },{ "code": "EMAIL", "name": "E-MAIL" }, { "code": "HOUSEBL", "name": "HOUSE B/L" }, { "code": "MASTER", "name": "MASTER" }, { "code": "PAYMENT SETTLEMENT", "name": "OTHERS" }];
+        TypeList = [{ "code": "AR/AP", "name": "AR/AP" }, { "code": "EMAIL", "name": "E-MAIL" }, { "code": "HOUSEBL", "name": "HOUSE B/L" }, { "code": "MASTER", "name": "MASTER" }, { "code": "PAYMENT SETTLEMENT", "name": "OTHERS" }];
         this.attach_title = 'Documents';
         this.attach_parentid = this.pkid;
         this.attach_subid = '';
@@ -1353,17 +1392,17 @@ export class SeaImpMasterEditComponent implements OnInit {
       this.errorMessage = '';
       var SearchData = this.gs.UserInfo;
       SearchData.pkid = this.pkid;
-          
+
       this.mainService.GetPODSeaImpRpt(SearchData)
         .subscribe(response => {
-          
+
           this.Downloadfile(response.filename, response.filetype, response.filedisplayname);
-          
+
         }, error => {
           this.errorMessage = this.gs.getError(error);
         });
     }
-    
+
     Downloadfile(filename: string, filetype: string, filedisplayname: string) {
       this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
     }

@@ -243,6 +243,10 @@ export class SeaImpMasterService {
     UpdatePuEr(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/Master/UpdatePuEr', SearchData, this.gs.headerparam2('authorized'));
     }
+    TrackShipment(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/Master/TrackShipment', SearchData, this.gs.headerparam2('authorized'));
+    }
+
     DeleteRecord(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/SeaImport/Master/DeleteRecord', SearchData, this.gs.headerparam2('authorized'));
     }
