@@ -3685,4 +3685,22 @@ export class GlobalService {
     return input.replace(pattern, '');
   }
 
+
+  /**
+ * Opens the Shipment Tracker in a new tab, signed in as `userId`, with the list filtered to `mblNo`.
+ */
+  public openTracker(
+    baseUrl: string,    // 'https://tracking.divitsoftlabs.com' or 'http://localhost:4200'
+    companyId: string,  // 'MOTHERLINES'
+    userId: string,     // tracker user ID (non-admin)
+    apiKey: string,     // tracker import API key
+    mblNo?: string      // optional MBL to filter to
+  ): void {
+    const params = new URLSearchParams({ company: companyId, user: userId, key: apiKey });
+    if (mblNo?.trim()) params.set('mbl', mblNo.trim().toUpperCase());
+
+    const url = `${baseUrl.replace(/\/+$/, '')}/sso#${params.toString()}`;
+    if (!window.open(url, '_blank')) window.location.href = url;   // popup blocked: use this tab
+  }
+
 }
