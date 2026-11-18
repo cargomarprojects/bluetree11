@@ -369,7 +369,9 @@ export class SeaImpMasterEditComponent implements OnInit {
   TrackShipment() {
 
     if (this.record.mbl_track_shipment == 'Y') {
-      this.gs.openTracker('https://tracking.divitsoftlabs.com', 'MOTHERLINES', 'user1', 'stk_UUD36VTyUgFIPNm4fBpbPonAXvOeP9uewOclXbeXVPk', this.record.mbl_no);
+      let _host = 'https://tracking.divitsoftlabs.com'
+      //_host = 'http://localhost:4200';
+      this.gs.openTracker(_host, 'MOTHERLINES', 'user1', 'stk_UUD36VTyUgFIPNm4fBpbPonAXvOeP9uewOclXbeXVPk', this.record.mbl_no);
       return;
     }
 
