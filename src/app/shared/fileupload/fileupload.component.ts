@@ -590,7 +590,7 @@ export class FileUploadComponent implements OnInit {
     let filename: string = "";
     let filedisplayname: string = "";
     filename = this.gs.FS_APP_FOLDER + _rec.files_path + _rec.file_id;
-    filedisplayname = _rec.file_desc;
+    filedisplayname = this.gs.ProperFileName(_rec.file_desc);
     this.Downloadfile(filename, "", filedisplayname);
   }
 
