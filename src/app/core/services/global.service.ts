@@ -2526,26 +2526,42 @@ export class GlobalService {
     return str;
   }
 
-  public ProperFileName(str: string) {
-    let sRet: string = str;
+  // public ProperFileName(str: string) {
+  //   let sRet: string = str;
+  //   try {
+  //     sRet = sRet.replace("\\", "");
+  //     sRet = sRet.replace("/", "");
+  //     sRet = sRet.replace(":", "");
+  //     sRet = sRet.replace("*", "");
+  //     sRet = sRet.replace("?", "");
+  //     sRet = sRet.replace("<", "");
+  //     sRet = sRet.replace(">", "");
+  //     sRet = sRet.replace("|", "");
+  //     sRet = sRet.replace("'", "");
+  //     sRet = sRet.replace("#", "");
+  //     sRet = sRet.replace("&", "");
+  //     sRet = sRet.replace("%", "");
+  //   }
+  //   catch (Exception) {
+  //   }
+  //   return sRet;
+
+  // }
+
+  public ProperFileName(str: string): string {
+    let sRet: string = str || "";
+
     try {
-      sRet = sRet.replace("\\", "");
-      sRet = sRet.replace("/", "");
-      sRet = sRet.replace(":", "");
-      sRet = sRet.replace("*", "");
-      sRet = sRet.replace("?", "");
-      sRet = sRet.replace("<", "");
-      sRet = sRet.replace(">", "");
-      sRet = sRet.replace("|", "");
-      sRet = sRet.replace("'", "");
-      sRet = sRet.replace("#", "");
-      sRet = sRet.replace("&", "");
-      sRet = sRet.replace("%", "");
+      // Remove non-ASCII characters
+      sRet = sRet.replace(/[^\x00-\x7F]/g, "");
+
+      // Remove invalid filename characters
+      sRet = sRet.replace(/[\\/:*?"<>|'#&%]/g, "");
     }
     catch (Exception) {
     }
-    return sRet;
 
+    return sRet;
   }
 
   public LinkPage(INVOKETYPE: string = "", MBLMODE: string = "", REFNO: string = "", MBLID: string = "", HBLID: string = "", INVID: string = "",) {
