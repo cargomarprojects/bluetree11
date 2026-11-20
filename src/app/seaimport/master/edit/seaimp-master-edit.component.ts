@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { GlobalService } from '../../../core/services/global.service';
 
 import { SeaImpMasterService } from '../../services/seaimp-master.service';
-import { User_Menu } from '../../../core/models/menum';
+
 import { Tbl_cargo_imp_masterm, Tbl_cargo_imp_container, Tbl_cargo_imp_housem, vm_tbl_cargo_imp_masterm } from '../../models/tbl_cargo_imp_masterm';
 import { SearchTable } from '../../../shared/models/searchtable';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,7 @@ import { DateComponent } from '../../../shared/date/date.component';
 import { AutoComplete2Component } from '../../../shared/autocomplete2/autocomplete2.component';
 import { AccAlertComponent } from '../../../shared/accalert/accalert.component';
 import { Table_Cargo_Remarks } from '../../../shared/models/table_cargo_remarks';
+import { tbl_trk_summary_container } from '../../models/tbl_trk_summary';
 
 //EDIT-AJITH-06-09-2021
 //EDIT-AJITH-07-10-2021
@@ -49,6 +50,8 @@ export class SeaImpMasterEditComponent implements OnInit {
   hrecords: Tbl_cargo_imp_housem[] = [];
   records: Tbl_cargo_imp_container[] = [];
   alertrecords: Table_Cargo_Remarks[] = [];
+
+  trk_record: tbl_trk_summary_container[] = [];
 
   // 24-05-2019 Created By Joy
   tab: string = 'main';
@@ -183,6 +186,8 @@ export class SeaImpMasterEditComponent implements OnInit {
       this.record = <Tbl_cargo_imp_masterm>{};
       this.records = <Tbl_cargo_imp_container[]>[];
       this.hrecords = <Tbl_cargo_imp_housem[]>[];
+      this.trk_record = <tbl_trk_summary_container[]>[];
+
       this.pkid = this.gs.getGuid();
       this.init();
     }
@@ -283,6 +288,27 @@ export class SeaImpMasterEditComponent implements OnInit {
           this.acc_alert_field.show(this.alertrecords);
         }
 
+        if (this.record.mbl_track_shipment == 'Y') {
+          this.getContainerTracking();
+        }
+
+      }, error => {
+        this.errorMessage.push(this.gs.getError(error));
+      });
+  }
+
+  RefreshTracking() {
+    this.getContainerTracking();
+  }
+  getContainerTracking() {
+
+    this.errorMessage = [];
+    var SearchData = this.gs.UserInfo;
+    SearchData.pkid = this.pkid;
+
+    this.mainService.GetContainerTracking(SearchData)
+      .subscribe(response => {
+        this.trk_record = <tbl_trk_summary_container[]>response.tracking_records;
       }, error => {
         this.errorMessage.push(this.gs.getError(error));
       });
@@ -369,8 +395,10 @@ export class SeaImpMasterEditComponent implements OnInit {
   TrackShipment() {
 
     if (this.record.mbl_track_shipment == 'Y') {
-      let _host = 'https://tracking.divitsoftlabs.com'
-      //_host = 'http://localhost:4200';
+      let _host = ''
+      //_host = 'https://tracking.divitsoftlabs.com'
+      //_hiost = 'http://localhost:4200';
+      _host = this.gs.TRACKING_FRONT_END;
       this.gs.openTracker(_host, 'MOTHERLINES', 'user1', 'stk_UUD36VTyUgFIPNm4fBpbPonAXvOeP9uewOclXbeXVPk', this.record.mbl_no);
       return;
     }
@@ -1524,6 +1552,11 @@ export class SeaImpMasterEditComponent implements OnInit {
       return;
     window.open(_url, "_blank");
   }
+
+  isEmpty(obj: any): boolean {
+    return !obj || Object.keys(obj).length === 0;
+  }
+
 
 }
 

@@ -17,7 +17,7 @@ export class GlobalSettingsComponent implements OnInit {
   records: TBL_MAST_PARAM[] = [];
   saveList: TBL_MAST_PARAM[] = [];
   sortedList: TBL_MAST_PARAM[] = [];
-  // 15-04-2021 Created By Joy  
+  // 15-04-2021 Created By Joy
 
   stagesRecords: TBL_MAST_PARAM[] = [];
 
@@ -60,6 +60,10 @@ export class GlobalSettingsComponent implements OnInit {
   Txt_Idle_Time = '';
   Txt_AN_Email = '';
   Txt_AN_Password = '';
+
+  Txt_Tracking_BackEnd = '';
+  Txt_Tracking_FrontEnd = '';
+
 
   LBL_STAGES_ID = '';
   LBL_STAGES = '';
@@ -218,6 +222,11 @@ export class GlobalSettingsComponent implements OnInit {
       if (Rec.param_name1 == "AN_EMAIL_PWD")
         this.Txt_AN_Password = Rec.param_name3;
 
+      if (Rec.param_name1 == "TRACKING_BACK_END")
+        this.Txt_Tracking_BackEnd = Rec.param_name3;
+      if (Rec.param_name1 == "TRACKING_FRONT_END")
+        this.Txt_Tracking_FrontEnd = Rec.param_name3;
+
 
     });
   }
@@ -279,6 +288,9 @@ export class GlobalSettingsComponent implements OnInit {
     this.saveList.push(this.AddRecord("GENERAL_BRANCH_CODE", this.gs.branch_pkid, this.Txt_Branch_Code));
     this.saveList.push(this.AddRecord("AN_EMAIL_ID", this.gs.branch_pkid, this.Txt_AN_Email));
     this.saveList.push(this.AddRecord("AN_EMAIL_PWD", this.gs.branch_pkid, this.Txt_AN_Password));
+
+    this.saveList.push(this.AddRecord("TRACKING_BACK_END", this.gs.branch_pkid, this.Txt_Tracking_BackEnd));
+    this.saveList.push(this.AddRecord("TRACKING_FRONT_END", this.gs.branch_pkid, this.Txt_Tracking_FrontEnd));
 
     const saveRecord = <VM_TBL_MAST_SETTINGS>{};
     saveRecord.userinfo = this.gs.UserInfo;

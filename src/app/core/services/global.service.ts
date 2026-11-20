@@ -102,6 +102,10 @@ export class GlobalService {
 
   public GLOBAL_REPORT_FOLDER = "D://motherlines.us//ftp//reports";
 
+  public TRACKING_BACK_END = "";
+  public TRACKING_FRONT_END = "";
+
+
   public SEARCH_DATE_DIFF = 60;
   public SEARCH_DATE_DIFF_15 = 15;
   public SEARCH_DATE_DIFF_30 = 30;
@@ -833,6 +837,10 @@ export class GlobalService {
       "~SOFTWARE_NAME": this.SOFTWARE_NAME,
       "~BASE_CUR_CODE": this.base_cur_code,
 
+      "~TRACKING_BACK_END": this.TRACKING_BACK_END,
+      "~TRACKING_FRONT_END": this.TRACKING_FRONT_END,
+
+
       "~SOFTWARE_VERSION_ANGULAR": this.software_version_string,
 
       "~ADDRESS_LINE1": this.ADDRESS_LINE1,
@@ -1324,6 +1332,10 @@ export class GlobalService {
             tim = 30;
           this.TIMEOUT_IN_MINUTES = tim * 60;
         }
+        if (Rec.param_name1 == "TRACKING_BACK_END")
+          this.TRACKING_BACK_END = Rec.param_name3;
+        if (Rec.param_name1 == "TRACKING_FRONT_END")
+          this.TRACKING_FRONT_END = Rec.param_name3;
       }
     });
 

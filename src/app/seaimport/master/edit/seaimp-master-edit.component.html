@@ -633,6 +633,9 @@
 
             </div>
 
+
+
+
           </div>
 
         </div>
@@ -724,16 +727,88 @@
           </div>
         </div>
       </div>
+
     </div>
+
+
+
+
   </div>
 
 
-  <div class="page-footer">
+  <!-- <div class="page-footer">
     <div class="row justify-content-center p-1">
       <button class="btn btn-primary btn-md" *ngIf="gs.canSave(menuid,mode)" [disabled]="is_locked"
         (click)="Save()">Save</button>
     </div>
+  </div> -->
+
+
+  <div class="row">
+    <div class="col-md-10 px-0 mx-0 text-center">
+      <div class="page-body">
+        <button class="btn btn-primary btn-md" *ngIf="gs.canSave(menuid,mode)" [disabled]="is_locked"
+          (click)="Save()">Save</button>
+      </div>
+    </div>
   </div>
+
+
+  <div *ngIf="mode=='EDIT' && record.mbl_track_shipment == 'Y' " class="row ml-2">
+    Container Tracking
+  </div>
+
+  <div *ngIf="mode=='EDIT' && record.mbl_track_shipment == 'Y' " class="row">
+
+    <div class="col-md-10 px-0 mx-0">
+      <div class="page-body table-responsive">
+        <table class="table table-bordered table-hover table-sm">
+          <thead class="page-body-thead">
+            <tr>
+              <th>CNTR.NO</th>
+              <th>VESSEL</th>
+              <th>VOYAGE</th>
+              <th>ETD</th>
+              <th>ETA</th>
+              <th>CONS.PICKUP</th>
+              <th>EMPTY.RETURN</th>
+              <th>DEM.LFD</th>
+              <th>DET.LFD</th>
+              <th>TRACKED-AT</th>
+            </tr>
+          </thead>
+          <tbody class="page-body-tbody">
+            <tr *ngFor="let rec of trk_record">
+              <td>{{rec.container_no}}</td>
+              <td>{{rec.vessel}}</td>
+              <td>{{rec.voyage}}</td>
+              <td>{{rec.etd}}</td>
+              <td>{{rec.eta}}</td>
+              <td>{{rec.cons_pickup}}</td>
+              <td>{{rec.empty_return}}</td>
+              <td>{{rec.dem_lfd}}</td>
+              <td>{{rec.det_lfd}}</td>
+              <td>{{rec.tracked_at}}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="10" class="text-center">
+                <i class="fa fa-refresh text-primary" style="cursor:pointer; font-size:18px;" title="Refresh Tracking"
+                  (click)="RefreshTracking()">
+                </i>
+              </td>
+            </tr>
+          </tfoot>
+
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+
+
 
   <div class="page-footer">
     <label class="col-form-label col-form-label-sm" *ngIf="record.rec_created_by"> CREATED BY: {{record.rec_created_by}}
