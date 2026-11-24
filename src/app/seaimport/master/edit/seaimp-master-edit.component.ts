@@ -414,11 +414,11 @@ export class SeaImpMasterEditComponent implements OnInit {
     const trackRecord = {
       mblid: this.record.mbl_pkid,
       record: {
-        Mbl_pkid: this.record.mbl_pkid,
         Mbl: this.record.mbl_no,
         UserId: this.gs.user_code,
         LocationCode: this.gs.branch_code,
         RefNo: this.record.mbl_refno,
+        RefId: this.record.mbl_pkid,
         Notes: '',
         ScacCode: ''
       },
