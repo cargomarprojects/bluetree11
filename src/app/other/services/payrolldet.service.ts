@@ -253,6 +253,58 @@ export class PayrollDetService {
             });
     }
 
+    GenerateARAP(_searchdata: any) {
+
+        this.record.errormessage = '';
+        this.mdata$.next(this.record);
+
+        if (this.gs.isBlank(_searchdata.searchQuery.todate)) {
+            alert('Payroll Date cannot be blank');
+            return;
+        }
+
+        if (this.gs.isBlank(this.record.records)) {
+            alert('Payroll list not found');
+            return;
+        }
+
+        const todate = _searchdata.searchQuery.todate;
+        if (!this.record.records.every((item: any) => item.cpd_payroll_date === todate)) {
+            alert('Payroll list contains records with different payroll date');
+            return;
+        }
+
+        if (!confirm("Generate AR/AP Records...")) {
+            return;
+        }
+
+        // this.inv_verson
+        var SearchData = this.gs.UserInfo;
+        SearchData.IS_SINGLE_CURRENCY = (this.gs.IS_SINGLE_CURRENCY) ? "Y" : "N";
+        SearchData.BASE_CURRENCY_CODE = this.gs.base_cur_code;
+        SearchData.FOREIGN_CURRENCY_CODE = this.gs.foreign_cur_code;
+        SearchData.VERSION = "9";
+
+        const saveRecord = <vm_Generate_Payrolldet>{};
+        saveRecord.mblid = this.mbl_pkid;
+        saveRecord.pdate = _searchdata.searchQuery.todate;
+        saveRecord.precords = this.record.records;
+        saveRecord.userinfo = SearchData;
+
+        this.GenerateARAPRecord(saveRecord)
+            .subscribe(response => {
+                if (response.retvalue == false) {
+                    // this.record.errormessage = response.error;
+                    alert(response.error);
+                } else
+                    alert("AR/AP has been Generated successfully");
+
+            }, error => {
+                this.record.errormessage = this.gs.getError(error);
+                alert(this.record.errormessage);
+            });
+    }
+
     Downloadfile(filename: string, filetype: string, filedisplayname: string) {
         this.gs.DownloadFile(this.gs.GLOBAL_REPORT_FOLDER, filename, filetype, filedisplayname);
     }
@@ -288,5 +340,9 @@ export class PayrollDetService {
 
     GenerateIraForm(SearchData: any) {
         return this.http2.post<any>(this.gs.baseUrl + '/api/Other/PayrollDet/GenerateIraForm', SearchData, this.gs.headerparam2('authorized'));
+    }
+
+    GenerateARAPRecord(SearchData: any) {
+        return this.http2.post<any>(this.gs.baseUrl + '/api/USAccounts/Invoice/GenerateARAPRecord', SearchData, this.gs.headerparam2('authorized'));
     }
 }

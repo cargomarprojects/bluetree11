@@ -39,7 +39,7 @@ export class PayrollDetComponent implements OnInit {
   }
 
   initPage() {
-    
+
     this.records$ = this.mainservice.data$.pipe(map(res => res.records));
     this.searchQuery$ = this.mainservice.data$.pipe(map(res => res.searchQuery));
     this.pageQuery$ = this.mainservice.data$.pipe(map(res => res.pageQuery));
@@ -52,6 +52,8 @@ export class PayrollDetComponent implements OnInit {
       this.mainservice.Generate(actions)
     else if (actions.outputformat == 'TRANSMITTAL-FORM')
       this.mainservice.PrintIraForm(actions)
+    else if (actions.outputformat == 'GENERATE-ARAP')
+      this.mainservice.GenerateARAP(actions)
     else
       this.mainservice.Search(actions, 'SEARCH');
   }
@@ -67,14 +69,14 @@ export class PayrollDetComponent implements OnInit {
     }
 
     let parameter = {
-      appid:this.gs.appid,
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: '',
       mode: 'ADD',
       emp_name: '',
       origin: 'payrolldet-page'
     };
-    this.gs.Naviagete2('Silver.Other.Trans/PayrollEditPage',  parameter);
+    this.gs.Naviagete2('Silver.Other.Trans/PayrollEditPage', parameter);
 
   }
   edit(_record: Tbl_Cargo_Payrolldet) {
@@ -84,14 +86,14 @@ export class PayrollDetComponent implements OnInit {
     }
 
     let parameter = {
-      appid:this.gs.appid,
+      appid: this.gs.appid,
       menuid: this.mainservice.menuid,
       pkid: _record.cpd_pkid,
       mode: 'EDIT',
       emp_name: _record.cpd_emp_name,
       origin: 'payrolldet-page'
     };
-    this.gs.Naviagete2('Silver.Other.Trans/PayrollEditPage',  parameter);
+    this.gs.Naviagete2('Silver.Other.Trans/PayrollEditPage', parameter);
   }
 
   Close() {

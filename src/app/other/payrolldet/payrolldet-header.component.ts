@@ -10,6 +10,7 @@ import { SearchQuery } from '../models/tbl_cargo_payrolldet';
 export class PayrollDetHeaderComponent implements OnInit {
   // Call By Value using Input Parameters
   searchQuery: SearchQuery;
+  CanArAp: boolean = false;
   @Input() set _query(value: SearchQuery) {
     this.searchQuery = Object.assign({}, value);
   }
@@ -20,6 +21,9 @@ export class PayrollDetHeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.CanArAp = false;
+    if (this.gs.screenExists(this.gs.MENU_PAYROLL_EXPENSE_ARAP))
+      this.CanArAp = true;
   }
 
   ngOnChanges(changes: SimpleChange) {
