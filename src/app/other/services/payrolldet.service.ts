@@ -284,13 +284,22 @@ export class PayrollDetService {
         SearchData.BASE_CURRENCY_CODE = this.gs.base_cur_code;
         SearchData.FOREIGN_CURRENCY_CODE = this.gs.foreign_cur_code;
         SearchData.VERSION = "9";
+        SearchData.AR_INVOICE_PREFIX = this.gs.AR_INVOICE_PREFIX;
+        SearchData.AR_INVOICE_STARTING_NO = this.gs.AR_INVOICE_STARTING_NO;
+        SearchData.SETTINGS_AC_RECEIVABLE = this.gs.SETTINGS_AC_RECEIVABLE;
+        SearchData.SETTINGS_AC_RECEIVABLE_NAME = this.gs.SETTINGS_AC_RECEIVABLE_NAME;
+        SearchData.AP_INVOICE_PREFIX = this.gs.AP_INVOICE_PREFIX;
+        SearchData.AP_INVOICE_STARTING_NO = this.gs.AP_INVOICE_STARTING_NO;
+        SearchData.SETTINGS_AC_PAYABLE = this.gs.SETTINGS_AC_PAYABLE;
+        SearchData.SETTINGS_AC_PAYABLE_NAME = this.gs.SETTINGS_AC_PAYABLE_NAME;
 
         const saveRecord = <vm_Generate_Payrolldet>{};
         saveRecord.mblid = this.mbl_pkid;
         saveRecord.pdate = _searchdata.searchQuery.todate;
         saveRecord.precords = this.record.records;
         saveRecord.userinfo = SearchData;
-
+        saveRecord.mblrefno = this.mbl_refno;
+        saveRecord.mbltype = this.mbl_type;
         this.GenerateARAPRecord(saveRecord)
             .subscribe(response => {
                 if (response.retvalue == false) {

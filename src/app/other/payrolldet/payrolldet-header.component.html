@@ -39,7 +39,7 @@
                             [refno]="searchQuery.mbl_refno" [refdate]="searchQuery.todate"
                             (callbackevent)="callbackevent($event)"></app-payrolldet-import>
                         <button (click)="List('TRANSMITTAL-FORM')" class="btn btn-primary btn-sm mr-1">IRA Form</button>
-                        <!-- <button *ngIf="CanArAp" (click)="List('GENERATE-ARAP')" class="btn btn-primary btn-sm mr-1">Generate AR/AP</button> -->
+                        <button *ngIf="CanArAp" (click)="List('GENERATE-ARAP')" class="btn btn-primary btn-sm mr-1">Generate AR/AP</button>
                     </div>
                 </div>
             </div>

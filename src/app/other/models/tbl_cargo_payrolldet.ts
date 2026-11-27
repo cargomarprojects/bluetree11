@@ -4,6 +4,7 @@ import { Tbl_Mast_Partym } from '../../master/models/Tbl_Mast_Partym';
 export interface Tbl_Cargo_Payrolldet {
     cpd_pkid: string;
     cpd_emp_id: string;
+    cpd_emp_code: string;
     cpd_emp_name: string;
     cpd_emp_acno: string;
     cpd_mbl_id: string;
@@ -114,4 +115,6 @@ export interface vm_Generate_Payrolldet {
     precords: Tbl_Cargo_Payrolldet[];
     userinfo: any,
     filter: any;
+    mblrefno: string;
+    mbltype: string;
 }
