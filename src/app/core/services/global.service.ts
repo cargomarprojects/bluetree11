@@ -3578,9 +3578,9 @@ export class GlobalService {
       let dtday: string = strdt[2];
 
       if (this.DateFormat() == 'dd')
-        retdate = dtday + '-' + dtmonth + '-' + dtyear;
+        retdate = (dtday.length == 1 ? '0' + dtday : dtday) + '-' + (dtmonth.length == 1 ? '0' + dtmonth : dtmonth) + '-' + dtyear;
       if (this.DateFormat() == 'mm')
-        retdate = dtmonth + '-' + dtday + '-' + dtyear;
+        retdate = (dtmonth.length == 1 ? '0' + dtmonth : dtmonth) + '-' + (dtday.length == 1 ? '0' + dtday : dtday) + '-' + dtyear;
     } else
       retdate = _strdate;
 

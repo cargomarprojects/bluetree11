@@ -20,7 +20,9 @@ export interface Tbl_Cargo_Payrolldet {
     cpd_emp_doc_name: string;
     cpd_payroll_date: string;
     cpd_remarks: string;
-
+    cpd_inv_id: string;
+    cpd_inv_no: string;
+    
     A1: number;
     A2: number;
     A3: number;

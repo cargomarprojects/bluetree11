@@ -268,13 +268,35 @@ export class PayrollDetService {
             return;
         }
 
-        const todate = _searchdata.searchQuery.todate;
-        if (!this.record.records.every((item: any) => item.cpd_payroll_date === todate)) {
+
+        let totalRecords = this.record.records.length;
+        let newRecords = 0;
+
+        let _dtMismatch = false;
+        const todate = this.gs.ConvertDate2DisplayFormat(_searchdata.searchQuery.todate);
+        this.record.records.forEach(Rec => {
+            const payrollDate = this.gs.ConvertDate2DisplayFormat(Rec.cpd_payroll_date);
+            if (payrollDate != todate) {
+                _dtMismatch = true;
+            }
+            if (this.gs.isBlank(Rec.cpd_inv_no))
+                newRecords++;
+        })
+
+        if (_dtMismatch) {
             alert('Payroll list contains records with different payroll date');
             return;
         }
 
-        if (!confirm("Generate AR/AP Records...")) {
+        let editRecords = totalRecords - newRecords;
+        let _msg = "Generate Invoices?\n";
+        if (newRecords > 0)
+            _msg += "Adding "+  newRecords.toString() + " Records\n";
+        if (editRecords > 0)
+            _msg += "Modifying "+ editRecords.toString() +" Records\n";
+        // _msg += "Do you want to continue?";
+
+        if (!confirm(_msg)) {
             return;
         }
 
@@ -302,11 +324,12 @@ export class PayrollDetService {
         saveRecord.mbltype = this.mbl_type;
         this.GenerateARAPRecord(saveRecord)
             .subscribe(response => {
-                if (response.retvalue == false) {
-                    // this.record.errormessage = response.error;
-                    alert(response.error);
-                } else
-                    alert("AR/AP has been Generated successfully");
+                if (response.errormessage) {
+                    alert(response.errormessage);
+                } else {
+                    this.Search(_searchdata, 'SEARCH');
+                }
+                // alert("AR/AP has been Generated successfully");
 
             }, error => {
                 this.record.errormessage = this.gs.getError(error);
